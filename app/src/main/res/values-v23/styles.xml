@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#f2f2f2</item>
+        <item name="colorPrimaryDark">#f2f2f2</item>
+        <item name="colorAccent">#f2f2f2</item>
+        <item name="android:windowBackground">@drawable/backgradient</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
