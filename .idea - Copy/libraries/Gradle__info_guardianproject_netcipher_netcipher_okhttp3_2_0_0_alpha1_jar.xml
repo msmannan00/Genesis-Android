@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: info.guardianproject.netcipher:netcipher-okhttp3:2.0.0-alpha1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/info.guardianproject.netcipher/netcipher-okhttp3/2.0.0-alpha1/40120ab7198a682cf12b8cc60373e914b7a84e81/netcipher-okhttp3-2.0.0-alpha1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/info.guardianproject.netcipher/netcipher-okhttp3/2.0.0-alpha1/db0d340380e38ea1dab5c783ccec176c63d04a28/netcipher-okhttp3-2.0.0-alpha1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
