@@ -5,6 +5,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven'
 
+ext {
+    geckoviewChannel = "nightly"
+    geckoviewVersion = "64.0.20180927100037"
+}
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -15,6 +19,21 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    flavorDimensions "abi"
+    // Note: compileOptions is only required for minSdkVersion < 24
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+        x86     { dimension "abi" }
+        x86_64  { dimension "abi" }
+        arm     { dimension "abi" }
+        aarch64 { dimension "abi" }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -37,6 +56,11 @@ dependencies {
     implementation 'info.guardianproject.netcipher:netcipher-okhttp3:2.0.0-alpha1'
     implementation 'com.squareup.okhttp3:okhttp:3.4.2'
     implementation 'org.apache.httpcomponents:httpcore:4.4.1'
+    x86Implementation     "org.mozilla.geckoview:geckoview-${geckoviewChannel}-x86:${geckoviewVersion}"
+    x86_64Implementation  "org.mozilla.geckoview:geckoview-${geckoviewChannel}-x86_64:${geckoviewVersion}"
+    armImplementation     "org.mozilla.geckoview:geckoview-${geckoviewChannel}-armeabi-v7a:${geckoviewVersion}"
+    aarch64Implementation "org.mozilla.geckoview:geckoview-${geckoviewChannel}-arm64-v8a:${geckoviewVersion}"
+    implementation 'com.yarolegovich:lovely-dialog:1.1.0'
 }
 
 apply plugin: 'com.android.application'
