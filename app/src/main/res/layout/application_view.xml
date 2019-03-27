@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".applicationController">
+        tools:context=".application_controller">
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -63,6 +63,7 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
         <Button
                 android:text="Reload"
+                android:onClick="onReloadButtonPressed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/reloadButton"
@@ -119,6 +120,7 @@
                     android:topLeftRadius="3dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/homeicon"
+                    android:onClick="onHomeButtonPressed"
                     android:background="@drawable/pressedcolor"
                     android:topRightRadius="3dp"/>
             <EditText

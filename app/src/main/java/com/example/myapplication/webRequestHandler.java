@@ -1,55 +1,50 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.Proxy;
+import java.net.URL;
+import java.net.URLConnection;
 
 import android.os.Handler;
-import cz.msebera.android.httpclient.HttpHost;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
-import cz.msebera.android.httpclient.conn.params.ConnRoutePNames;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import info.guardianproject.netcipher.NetCipher;
 import info.guardianproject.netcipher.client.StrongBuilder;
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 
-import javax.net.ssl.HttpsURLConnection;
-
 public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
 {
     private static final webRequestHandler ourInstance = new webRequestHandler();
-    private WebView[] view = new WebView[2];;
+    private WebView[] view = new WebView[2];
+    private ProgressBar progressBar;
+    private EditText searchbar;
+    private ConstraintLayout requestFailure;
+
+    public boolean isReloadedUrl = false;
     private int viewIndex = 1;
     private int currentViewIndex = 0;
     private String html = "";
     private String baseURL = "";
-    private Boolean isLoading = false;
-    private ProgressBar progressBar;
-    private EditText searchbar;
     private Thread clientThread = null;
-    private ConstraintLayout requestFailure;
     HttpGet request = null;
+    private Handler updateUIHandler = null;
 
-    // test the local device proxy provided by Orbot/Tor
-    private final static String PROXY_HOST = "127.0.0.1";
-    private final static int PROXY_HTTP_PORT = 8118; // default for Orbot/Tor
-    private final static int PROXY_SOCKS_PORT = 9050; // default for Orbot/Tor
-    private Proxy.Type mProxyType = null;
+    private final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
+    private final static int INTERNET_ERROR =2;
 
     public static webRequestHandler getInstance() {
         return ourInstance;
@@ -70,80 +65,80 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
         createUpdateUiHandler();
     }
 
-    public boolean isReloadedUrl = false;
     public void loadURL(final String url)
     {
-        Log.d("ME HERE 1 : ","SUPER WOW");
+
         try
         {
-            if(!datamodel.getInstance().getIsLoadingURL())
-            {
-                datamodel.getInstance().setIsLoadingURL(true);
-            }
-            else
-            {
-                request.abort();
-                isReloadedUrl = true;
-                clientThread.stop();
-                searchbar.setText(url.replace("http://boogle.store","http://genesis.onion"));
-            }
-            progressBar.animate().alpha(0f);
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.animate().setDuration(300).alpha(1f);
-
+            preInitialization(url);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Log.d("ERROR : ","SUPER WOW");
+            e.printStackTrace();
         }
-        clientThread = new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                try
+        clientThread = new Thread(() -> {
+            try
+            {
+                if(url.contains("boogle.store"))
                 {
-                    if(url.contains("boogle.store"))
-                    {
-                        HttpClient client = new DefaultHttpClient();
-                        request = new HttpGet(url);
-                        baseURL = url;
-                        HttpResponse response = client.execute(request);
-                        InputStream in = response.getEntity().getContent();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                        StringBuilder str = new StringBuilder();
-                        String line = null;
-
-                        while((line = reader.readLine()) != null)
-                        {
-                            str.append(line);
-                        }
-                        in.close();
-
-                        html = str.toString();
-                        Message message = new Message();
-                        message.what = MESSAGE_UPDATE_TEXT_CHILD_THREAD;
-                        updateUIHandler.sendMessage(message);
-                    }
-                    else
-                    {
-                        proxyConnection(url);
-                    }
+                    nonProxyConnection(url);
                 }
-                catch (Exception e)
+                else
                 {
-                    if(!isReloadedUrl)
-                    {
-                        Message message = new Message();
-                        message.what = INTERNET_ERROR;
-                        updateUIHandler.sendMessage(message);
-                        Log.d("ERROR : ","SUPER WOW");
-                        e.printStackTrace();
-                    }
-                    isReloadedUrl = false;
+                    proxyConnection(url);
                 }
+            }
+            catch (Exception e)
+            {
+                onError();
+                e.printStackTrace();
             }
         });
         clientThread.start();
+    }
+
+    public void preInitialization(String url)
+    {
+        if(!datamodel.getInstance().getIsLoadingURL())
+        {
+            datamodel.getInstance().setIsLoadingURL(true);
+        }
+        else
+        {
+            request.abort();
+            isReloadedUrl = true;
+            if(clientThread!=null)
+            clientThread.stop();
+            clientThread = null;
+            searchbar.setText(url.replace("http://boogle.store","http://genesis.onion"));
+        }
+        progressBar.animate().alpha(0f);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.animate().setDuration(300).alpha(1f);
+
+    }
+
+    public void nonProxyConnection(String url) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        request = new HttpGet(url);
+        baseURL = url;
+        HttpResponse response = client.execute(request);
+        InputStream in = response.getEntity().getContent();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        StringBuilder str = new StringBuilder();
+        String line = null;
+
+        while((line = reader.readLine()) != null)
+        {
+            str.append(line);
+        }
+        in.close();
+
+        html = str.toString();
+        Message message = new Message();
+        message.what = MESSAGE_UPDATE_TEXT_CHILD_THREAD;
+        updateUIHandler.sendMessage(message);
     }
 
     public void proxyConnection(String url) throws Exception {
@@ -152,16 +147,6 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
         connection.setRequestProperty("User-Agent","Mozilla/5.0 ( compatible ) ");
         connection.setRequestProperty("Accept","*/*");
         connection.connect();
-        int status = connection.getResponseCode();
-
-        int responseCode = connection.getResponseCode(); //can call this instead of con.connect()
-        InputStream in;
-        if (responseCode >= 400 && responseCode <= 499) {
-            throw new Exception("Bad authentication status: " + responseCode); //provide a more meaningful exception message
-        }
-        else {
-            in = connection.getInputStream();
-        }
 
         BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
         StringBuilder sb = new StringBuilder();
@@ -176,15 +161,18 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
         updateUIHandler.sendMessage(message);
     }
 
-    private Handler updateUIHandler = null;
-    private final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
-    private final static int INTERNET_ERROR =2;
-
-    public WebView getView()
+    public void onError()
     {
-        return view[currentViewIndex];
+        if(!isReloadedUrl)
+        {
+            Message message = new Message();
+            message.what = INTERNET_ERROR;
+            updateUIHandler.sendMessage(message);
+        }
+        isReloadedUrl = false;
     }
 
+    @SuppressLint("HandlerLeak")
     private void createUpdateUiHandler()
     {
 
@@ -194,7 +182,6 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
             {
                 @Override
                 public void handleMessage(Message msg) {
-                    Log.i("APPLYING : ","SUCCESS : APPLYING");
                     if(msg.what == MESSAGE_UPDATE_TEXT_CHILD_THREAD)
                     {
                         view[viewIndex].animate().setDuration(0).alpha(0f);
@@ -211,11 +198,7 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
                             viewIndex = 1;
                             currentViewIndex=0;
                         }
-                        view[currentViewIndex].animate().setDuration(0).alpha(0f).withEndAction((new Runnable() {
-                            @Override
-                            public void run()
-                            {
-                            }
+                        view[currentViewIndex].animate().setDuration(0).alpha(0f).withEndAction((() -> {
                         }));
                     }
                     else if (msg.what == INTERNET_ERROR)
@@ -223,12 +206,8 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
                         datamodel.getInstance().setIsLoadingURL(false);
                         progressBar.animate().alpha(0f);
                         requestFailure.setVisibility(View.VISIBLE);
-                        requestFailure.animate().alpha(1f).setDuration(300).withEndAction((new Runnable() {
-                            @Override
-                            public void run()
-                            {
-                            }
-                        }));;
+                        requestFailure.animate().alpha(1f).setDuration(300).withEndAction((() -> {
+                        }));
                     }
                 }
             };
@@ -252,5 +231,38 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
     @Override
     public void onInvalid() {
 
+    }
+
+    public void getVersion(Context applicationContext)
+    {
+        new Thread()
+        {
+            public void run()
+            {
+                try
+                {
+                    String webPage = "http://boogle.store/version";
+                    URL url = new URL(webPage);
+                    URLConnection urlConnection = null;
+                    urlConnection = url.openConnection();
+                    InputStream is = urlConnection.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+
+                    int numCharsRead;
+                    char[] charArray = new char[1024];
+                    StringBuffer sb = new StringBuffer();
+                    while ((numCharsRead = isr.read(charArray)) > 0) {
+                        sb.append(charArray, 0, numCharsRead);
+                    }
+                    String result = sb.toString();
+                    preference_manager.getInstance().saveString("version",result,applicationContext);
+
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }.start();
     }
 }
