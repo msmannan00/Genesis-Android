@@ -27,6 +27,16 @@ public class message_manager {
                 .show();
     }
 
+    public void URLNotFoundError(Context application_context)
+    {
+        new LovelyInfoDialog(application_context)
+                .setTopColorRes(R.color.header)
+                .setIcon(R.drawable.logo)
+                .setTitle("URL Temporarily Unavailable")
+                .setMessage("Site is Down or temporarily Unavailabe. Try again after a while")
+                .show();
+    }
+
     public void startingOrbotInfo(Context application_context)
     {
         new LovelyInfoDialog(application_context)

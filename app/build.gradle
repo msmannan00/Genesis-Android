@@ -4,7 +4,7 @@ apply plugin: 'maven'
 
 ext {
     geckoviewChannel = "nightly"
-    geckoviewVersion = "64.0.20180927100037"
+    geckoviewVersion = "66.0.20181225095124"
 }
 android {
     compileSdkVersion 28

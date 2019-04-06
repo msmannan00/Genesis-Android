@@ -135,13 +135,13 @@
                     android:background="@drawable/searchbar"
                     android:textCursorDrawable="@drawable/cursorcolor"
                     android:hint="Search or type web address"
-                    android:text="http://genesis.onion"
+                    android:text="https://genesis.onion"
                     android:ems="10"
                     android:layout_marginTop="8dp"
+                    android:inputType="textNoSuggestions"
                     android:layout_marginBottom="8dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="5dp"
-                    android:inputType="text"
                     android:maxLines="1"
                     android:id="@+id/search" android:layout_weight="1"/>
 

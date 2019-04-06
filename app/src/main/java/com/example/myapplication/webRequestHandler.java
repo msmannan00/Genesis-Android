@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -39,9 +40,11 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
     private int currentViewIndex = 0;
     private String html = "";
     private String baseURL = "";
-    private Thread clientThread = null;
+    public Thread clientThread = null;
     HttpGet request = null;
     private Handler updateUIHandler = null;
+    public boolean isUrlStoped = false;
+    private String currenturl = "";
 
     private final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
     private final static int INTERNET_ERROR =2;
@@ -70,7 +73,18 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
 
         try
         {
-            preInitialization(url);
+            if(!currenturl.equals(url))
+            {
+                currenturl = url;
+                preInitialization(url);
+            }
+            else
+            {
+                //progressBar.animate().setDuration(0).alpha(0f).withEndAction((() -> {
+                //    progressBar.setVisibility(View.INVISIBLE);
+                //}));
+                return;
+            }
         }
         catch (Exception e)
         {
@@ -80,6 +94,7 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
         clientThread = new Thread(() -> {
             try
             {
+                currenturl = url;
                 if(url.contains("boogle.store"))
                 {
                     nonProxyConnection(url);
@@ -91,8 +106,12 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
             }
             catch (Exception e)
             {
-                onError();
-                e.printStackTrace();
+                if(!isUrlStoped)
+                {
+                    Log.i("SUP3",e.getMessage()+"");
+                    //onError();
+                    e.printStackTrace();
+                }
             }
         });
         clientThread.start();
@@ -120,6 +139,8 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
     }
 
     public void nonProxyConnection(String url) throws IOException {
+        url = url.replace("http://boogle","https://boogle");
+
         HttpClient client = new DefaultHttpClient();
         request = new HttpGet(url);
         baseURL = url;
@@ -139,6 +160,7 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
         Message message = new Message();
         message.what = MESSAGE_UPDATE_TEXT_CHILD_THREAD;
         updateUIHandler.sendMessage(message);
+
     }
 
     public void proxyConnection(String url) throws Exception {
@@ -241,7 +263,7 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
             {
                 try
                 {
-                    String webPage = "http://boogle.store/version";
+                    String webPage = "https://boogle.store/version";
                     URL url = new URL(webPage);
                     URLConnection urlConnection = null;
                     urlConnection = url.openConnection();
