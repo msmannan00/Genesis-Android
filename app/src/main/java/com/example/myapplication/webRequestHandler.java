@@ -45,9 +45,10 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
     private Handler updateUIHandler = null;
     public boolean isUrlStoped = false;
     private String currenturl = "";
-
-    private final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
+    private ConstraintLayout splash;
     private final static int INTERNET_ERROR =2;
+    private final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
+    private final static int RELOAD_ERROR =3;
 
     public static webRequestHandler getInstance() {
         return ourInstance;
@@ -57,8 +58,9 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
     {
     }
 
-    public void initialization(WebView view1, WebView view2, ProgressBar progressBar, EditText searchbar, ConstraintLayout requestFailure, Context applicationContext)
+    public void initialization(WebView view1, WebView view2, ProgressBar progressBar, EditText searchbar, ConstraintLayout requestFailure, Context applicationContext,ConstraintLayout splash)
     {
+        this.splash =  splash;
         this.view[0] = view1;
         this.view[1] = view2;
         this.progressBar = progressBar;
@@ -73,16 +75,19 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
 
         try
         {
-            if(!currenturl.equals(url))
+            Log.i("WOW MAN 0","WOW MAN 2 : " + currenturl + "----" + url);
+            if(!currenturl.equals(url) || isReloadedUrl)
             {
+                Log.i("WOW MAN 1","WOW MAN 2");
+                isReloadedUrl = false;
                 currenturl = url;
                 preInitialization(url);
             }
             else
             {
-                //progressBar.animate().setDuration(0).alpha(0f).withEndAction((() -> {
-                //    progressBar.setVisibility(View.INVISIBLE);
-                //}));
+                Message message = new Message();
+                message.what = RELOAD_ERROR;
+                updateUIHandler.sendMessage(message);
                 return;
             }
         }
@@ -106,10 +111,10 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
             }
             catch (Exception e)
             {
-                if(!isUrlStoped)
+                if(!e.getMessage().contains("failed to respond"))
                 {
                     Log.i("SUP3",e.getMessage()+"");
-                    //onError();
+                    onError();
                     e.printStackTrace();
                 }
             }
@@ -132,9 +137,9 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
             clientThread = null;
             searchbar.setText(url.replace("http://boogle.store","http://genesis.onion"));
         }
-        progressBar.animate().alpha(0f);
+        progressBar.animate().setDuration(150).alpha(0f);
         progressBar.setVisibility(View.VISIBLE);
-        progressBar.animate().setDuration(300).alpha(1f);
+        progressBar.animate().setDuration(150).alpha(1f);
 
     }
 
@@ -225,11 +230,23 @@ public class webRequestHandler implements StrongBuilder.Callback<HttpClient>
                     }
                     else if (msg.what == INTERNET_ERROR)
                     {
+                        splash.animate().setStartDelay(2000).alpha(0);
                         datamodel.getInstance().setIsLoadingURL(false);
-                        progressBar.animate().alpha(0f);
+                        progressBar.animate().setDuration(150).alpha(0f);
                         requestFailure.setVisibility(View.VISIBLE);
                         requestFailure.animate().alpha(1f).setDuration(300).withEndAction((() -> {
                         }));
+                    }
+                    else if (msg.what == RELOAD_ERROR)
+                    {
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.animate().setDuration(150).alpha(0f);
+                            }
+                        }, 1000);
+
                     }
                 }
             };

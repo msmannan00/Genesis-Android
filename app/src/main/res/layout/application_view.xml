@@ -115,14 +115,15 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10.5dp"
                     android:id="@+id/home"
-                    android:bottomRightRadius="3dp"
-                    android:bottomLeftRadius="3dp"
-                    android:topLeftRadius="3dp"
+                    android:bottomRightRadius="13dp"
+                    android:bottomLeftRadius="13dp"
+                    android:topLeftRadius="13dp"
+                    android:topRightRadius="13dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/homeicon"
                     android:onClick="onHomeButtonPressed"
                     android:background="@drawable/pressedcolor"
-                    android:topRightRadius="3dp"/>
+                    />
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

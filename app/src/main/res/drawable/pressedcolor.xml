@@ -10,7 +10,7 @@
                android:shape="rectangle" android:padding="10dp" >
             <!-- you can use any color you want I used here gray color-->
             <solid android:color="#d9d9d9"/>
-            <corners android:radius="25dp"/>
+            <corners android:radius="125dp"/>
         </shape>
 
     </item>
@@ -24,7 +24,7 @@
                android:shape="rectangle" android:padding="10dp" >
             <!-- you can use any color you want I used here gray color-->
             <solid android:color="#d9d9d9"/>
-            <corners android:radius="25dp"/>
+            <corners android:radius="125dp"/>
         </shape>
     </item>
     <!-- focused state -->
@@ -37,7 +37,7 @@
                android:shape="rectangle" android:padding="10dp" >
             <!-- you can use any color you want I used here gray color-->
             <solid android:color="#d9d9d9"/>
-            <corners android:radius="25dp"/>
+            <corners android:radius="125dp"/>
         </shape>
     </item>
     <!-- enabled state / default state-->
@@ -49,7 +49,7 @@
                android:shape="rectangle" android:padding="10dp" >
             <!-- you can use any color you want I used here gray color-->
             <solid android:color="#d9d9d9"/>
-            <corners android:radius="25dp"/>
+            <corners android:radius="125dp"/>
         </shape>
     </item>
 </selector>

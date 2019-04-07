@@ -20,9 +20,9 @@ public class admanager {
 
     public void initialize(Context applicationContext)
     {
-        MobileAds.initialize(applicationContext, "ca-app-pub-5074525529134731~2926711128");
+        MobileAds.initialize(applicationContext, "ca-app-pub-5074525529134731~2926711128 ");
         mInterstitialAd = new InterstitialAd(applicationContext);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-5074525529134731/8478420705");
         implementListeners();
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
