@@ -1,5 +1,6 @@
-package com.example.myapplication;
+package com.darkweb.genesissearchengine;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -22,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Stack;
 
+import com.example.myapplication.R;
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 import org.mozilla.gecko.PrefsHelper;
 import org.mozilla.geckoview.GeckoRuntime;
@@ -47,7 +49,7 @@ public class application_controller extends AppCompatActivity
     private LinearLayout topbar;
     private GeckoSession session1;
     private GeckoRuntime runtime1;
-    private String version_code = "1.0";
+    private String version_code = "3.0";
     private boolean wasBackPressed = false;
     private boolean isLoadedUrlSet = false;
     private boolean isOnnionUrlHalted = false;
@@ -147,12 +149,26 @@ public class application_controller extends AppCompatActivity
         webView1.bringToFront();
         progressBar.animate().setDuration(150).alpha(0f);
 
-        session1 = new GeckoSession();
-        runtime1 = GeckoRuntime.create(this);
-        session1.open(runtime1);
-        webLoader.setSession(session1);
-        session1.setProgressDelegate(new progressDelegate());
-        webLoader.setVisibility(View.INVISIBLE);
+        new Thread()
+        {
+            public void run()
+            {
+                try
+                {
+                    session1 = new GeckoSession();
+                    runtime1 = GeckoRuntime.create(application_controller.this);
+                    session1.open(runtime1);
+                    webLoader.setSession(session1);
+                    session1.setProgressDelegate(new progressDelegate());
+                    webLoader.setVisibility(View.INVISIBLE);
+                    sleep(2000);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     /*Initialization*/
@@ -202,16 +218,15 @@ public class application_controller extends AppCompatActivity
                     return true;
                 }
 
-                searchbar.setText(url.replaceAll("boogle.store","genesis.onion"));
-                KeyboardUtils.hideKeyboard(application_controller.this);
-
                 if(!url.toString().contains("boogle"))
                 {
-                    admanager.getInstance().showAd();
-
                     boolean init_status=orbot_manager.getInstance().reinitOrbot(application_controller.this);
-                    if(!init_status)
+                    if(init_status)
                     {
+                        searchbar.setText(url.replaceAll("boogle.store","genesis.onion"));
+                        KeyboardUtils.hideKeyboard(application_controller.this);
+                        admanager.getInstance().showAd();
+
                         progressBar.setAlpha(0);
                         progressBar.setVisibility(View.VISIBLE);
                         progressBar.animate().setDuration(150).setDuration(300).alpha(1f);
@@ -231,10 +246,16 @@ public class application_controller extends AppCompatActivity
                 }
                 else
                 {
+                    searchbar.setText(url.replaceAll("boogle.store","genesis.onion"));
+                    KeyboardUtils.hideKeyboard(application_controller.this);
                     if(traceUrlList.size()==0 || !status.currentURL.equals(traceUrlList.peek()))
                     {
                         traceUrlList.add(status.currentURL);
                         status.currentURL = url;
+                    }
+                    if(url.contains("?"))
+                    {
+                        url = url+"&savesearch=on";
                     }
                     loadURLAnimate(url);
                     return true;
@@ -319,6 +340,13 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     @Override
     public void onPageStart(GeckoSession session, String url)
     {
+        if(!orbot_manager.getInstance().reinitOrbot(application_controller.this))
+        {
+            session1.stop();
+            session1.close();
+            return;
+        }
+
         if(isOnnionUrlHalted)
         {
             return;
@@ -450,7 +478,6 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     public void onBackPressed()
     {
         session1.stop();
-        orbot_manager.getInstance().reinitOrbot(this);
         if(traceUrlList.size()>0)
         {
             searchbar.setText(traceUrlList.peek().toString().replaceAll("boogle.store","genesis.onion"));

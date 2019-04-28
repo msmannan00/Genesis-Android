@@ -1,9 +1,10 @@
-package com.example.myapplication;
+package com.darkweb.genesissearchengine;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import com.example.myapplication.R;
 import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 

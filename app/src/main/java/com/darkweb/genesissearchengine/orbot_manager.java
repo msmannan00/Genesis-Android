@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.darkweb.genesissearchengine;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
+import com.example.myapplication.R;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 
@@ -67,15 +68,15 @@ public class orbot_manager {
                     })
                     .setNegativeButton(android.R.string.no, null)
                     .show();
-            return true;
+            return false;
         }
         if(!isOrbotRunning)
         {
             OrbotHelper.get(application_context).init();
             message_manager.getInstance().startingOrbotInfo(application_context);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
 }

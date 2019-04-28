@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Genesis</string>
+    <string name="SearchHint">Search or type web address</string>
+    <string name="homeUrl">https://genesis.onion</string>
+    <string name="errorTiyle">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
+    <string name="todo">TODO</string>
+    <string name="projectName">Genesis Search Engine</string>
+    <string name="loadingText">Loading Please Wait</string>
+    <string name="reload">Reload</string>
+    <string name="internetErrorMessage">These might be the problems you are facing \n\n• Webpage or Website might be down \n•
+        Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall
+    </string>
 </resources>

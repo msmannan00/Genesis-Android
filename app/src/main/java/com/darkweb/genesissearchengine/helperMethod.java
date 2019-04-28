@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.darkweb.genesissearchengine;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -9,11 +9,11 @@ ext {
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.darkweb.genesissearchengine"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 61
+        versionName "61.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 

@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="74dp"
                 app:layout_constraintEnd_toEndOf="parent" tools:ignore="TextViewEdits"/>
         <Button
-                android:text="@string/reload"
+                android:text="Reload"
                 android:onClick="onReloadButtonPressed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:layout_marginBottom="36dp" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent"/>
         <TextView
-                android:text="@string/internetErrorMessage"
+                android:text="These might be the problems you are facing\n\n\u2022  Webpage or Website might be down\n\u2022  Your Internet connection might be poor\n\u2022  You might be using a proxy\n\u2022  Website might be blocked by firewall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_constraintBottom_toTopOf="@+id/reloadButton" android:layout_marginBottom="35dp"
-                android:layout_marginTop="35dp" android:contentDescription="@string/todo"/>
+                android:layout_marginTop="35dp"/>
     </android.support.constraint.ConstraintLayout>
     <FrameLayout
             android:layout_width="match_parent"
@@ -108,12 +108,11 @@
                 android:elevation="10dp"
                 android:background="@drawable/border"
                 android:gravity="left" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="RtlHardcoded,UselessParent">
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
             <ImageButton
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="10.5dp"
                     android:id="@+id/home"
                     android:bottomRightRadius="13dp"
@@ -124,7 +123,7 @@
                     android:src="@drawable/homeicon"
                     android:onClick="onHomeButtonPressed"
                     android:background="@drawable/pressedcolor"
-                    android:contentDescription="@string/todo"/>
+                    />
             <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -145,8 +144,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="5dp"
                     android:maxLines="1"
-                    android:id="@+id/search" android:layout_weight="1" android:importantForAutofill="no"
-                    tools:targetApi="o"/>
+                    android:id="@+id/search" android:layout_weight="1" android:importantForAutofill="no"/>
 
         </LinearLayout>
     </FrameLayout>
@@ -175,7 +173,7 @@
                     android:id="@+id/imageView_loading_back" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="80dp" android:contentDescription="@string/todo"/>
+                    android:layout_marginBottom="80dp"/>
             <ProgressBar
                     style="?android:attr/progressBarStyle"
                     android:layout_width="95dp"
@@ -191,7 +189,7 @@
                     android:id="@+id/imageView_loading" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="80dp" android:contentDescription="@string/todo"/>
+                    android:layout_marginBottom="80dp"/>
             <TextView
                     android:text="@string/projectName"
                     android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.darkweb.genesissearchengine;
 
 import android.app.Activity;
 import android.content.Context;
