@@ -37,7 +37,7 @@ public class admanager {
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
             }
 
             @Override
@@ -59,6 +59,7 @@ public class admanager {
     public void showAd()
     {
         mInterstitialAd.show();
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
 }

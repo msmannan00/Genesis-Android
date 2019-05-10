@@ -1,31 +1,34 @@
 package com.darkweb.genesissearchengine;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.*;
 import android.widget.*;
-
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Stack;
 
 import com.example.myapplication.R;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
-import org.mozilla.gecko.PrefsHelper;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
@@ -37,12 +40,13 @@ public class application_controller extends AppCompatActivity
 {
 
     /*View Objects*/
-    private WebView webView1;
-    private WebView webView2;
+    public WebView webView1;
+    public WebView webView2;
     private GeckoView webLoader;
     private ProgressBar progressBar;
     private ConstraintLayout requestFailure;
     private ConstraintLayout splashScreen;
+    private FloatingActionButton floatingButton;
     private Button reloadButton;
     private ImageButton homeButton;
     private EditText searchbar;
@@ -52,26 +56,61 @@ public class application_controller extends AppCompatActivity
     private String version_code = "3.0";
     private boolean wasBackPressed = false;
     private boolean isLoadedUrlSet = false;
+    private boolean isGeckoURLLoadded = false;
     private boolean isOnnionUrlHalted = false;
     Handler handler = null;
     Runnable geckoRunnable = null;
     boolean isBlackPage = false;
+    int startPage=0;
+    Handler geckoHandler = null;
+    Runnable geckoRunnableError = null;
     /*helper Variables*/
     Stack traceUrlList = new Stack<String>();
+    boolean isTutorialPopupShown = false;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        //initializeCrashlytics();
+        initializeBackgroundColor();
+        //setOrientation();
         setContentView(R.layout.application_view);
+        orbot_manager.getInstance().initializeTorClient(this);
+        initializeStatus();
         initializeRunnable();
-        initializeProxy();
         initializeConnections();
-        initializeOrbot();
         initializeWebViews();
         initializeView();
         initializeAds();
+        checkSSLTextColor();
+    }
+
+    public void setOrientation()
+    {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    public void initializeBackgroundColor()
+    {
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            getWindow().setBackgroundDrawableResource(R.drawable.backgradientwhite);
+        } else{
+            getWindow().setBackgroundDrawableResource(R.drawable.backgradientblack);
+        }
+    }
+
+    public void initializeStatus()
+    {
+        helperMethod.setPlaystoreStatus(this);
+    }
+
+    public void initializeCrashlytics()
+    {
+        Fabric.with(this, new Crashlytics());
+        analyticmanager.getInstance().setDeviceID(this);
+        analyticmanager.getInstance().logUser();
     }
 
     public void versionChecker()
@@ -92,10 +131,11 @@ public class application_controller extends AppCompatActivity
         Runnable my_runnable = new Runnable() {
             @Override
             public void run() {
-                if(!isBlackPage)
+                if(!isBlackPage || startPage>1)
                 {
-                    Log.i("SHIT1 : ",status.currentURL);
+                    Log.i("PROBLEM24","");
                     progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
+                    Log.i("SHIT1 : ",status.currentURL);
                     datamodel.getInstance().setIsLoadingURL(false);
                     message_manager.getInstance().URLNotFoundError(application_controller.this);
                 }
@@ -108,67 +148,39 @@ public class application_controller extends AppCompatActivity
         admanager.getInstance().initialize(this);
     }
 
-    public void initializeProxy()
-    {
-        PrefsHelper.setPref("network.proxy.type",1); //manual proxy settings
-        PrefsHelper.setPref("network.proxy.socks","127.0.0.1"); //manual proxy settings
-        PrefsHelper.setPref("network.proxy.socks_port",9050); //manual proxy settings
-        PrefsHelper.setPref("network.proxy.socks_version",5); //manual proxy settings
-        PrefsHelper.setPref("network.proxy.socks_remote_dns",true); //manual proxy settings
-        PrefsHelper.setPref("browser.cache.disk.enable",false);
-        PrefsHelper.setPref("browser.cache.memory.enable",false);
-        PrefsHelper.setPref("general.useragent.override", "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0");
-        PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
-        PrefsHelper.setPref("privacy.donottrackheader.value",1);
-    }
-
     public void initializeConnections()
     {
-        webView1 = findViewById(R.id.pageLoader1);
-        webView2 = findViewById(R.id.pageLoader2);
-        progressBar = findViewById(R.id.progressBar);
-        requestFailure = findViewById(R.id.requestFailure);
-        splashScreen = findViewById(R.id.splashScreen);
-        reloadButton = findViewById(R.id.reloadButton);
-        homeButton = findViewById(R.id.home);
-        searchbar = findViewById(R.id.search);
-        topbar = findViewById(R.id.topbar);
-        webLoader = findViewById(R.id.webLoader);
-    }
-
-    public void initializeOrbot()
-    {
-        Intent orbot = OrbotHelper.getOrbotStartIntent(getApplicationContext());
-        getApplicationContext().registerReceiver(orbot_manager.getInstance().orbotStatusReceiver,new IntentFilter(OrbotHelper.ACTION_STATUS));
-        getApplicationContext().sendBroadcast(orbot);
+        webView1 = (WebView) findViewById(R.id.pageLoader1);
+        webView2 = (WebView) findViewById(R.id.pageLoader2);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        requestFailure = (ConstraintLayout) findViewById(R.id.requestFailure);
+        splashScreen = (ConstraintLayout) findViewById(R.id.splashScreen);
+        reloadButton = (Button) findViewById(R.id.reloadButton);
+        homeButton = (ImageButton) findViewById(R.id.home);
+        searchbar = (EditText) findViewById(R.id.search);
+        floatingButton = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
+        topbar = (LinearLayout) findViewById(R.id.topbar);
+        webLoader = (GeckoView) findViewById(R.id.webLoader);
     }
 
     public void initializeWebViews()
     {
-        webRequestHandler.getInstance().initialization(webView1,webView2,progressBar,searchbar,requestFailure,this,splashScreen);
+        webRequestHandler.getInstance().initialization(webView1,webView2,progressBar,searchbar,requestFailure,this,splashScreen,this);
         webView1.bringToFront();
+        Log.i("PROBLEM25","");
         progressBar.animate().setDuration(150).alpha(0f);
+        //floatingButton.setAlpha(0);
 
-        new Thread()
+        session1 = new GeckoSession();
+        runtime1 = GeckoRuntime.getDefault(application_controller.this);
+        session1.open(runtime1);
+        if(session1.isOpen())
         {
-            public void run()
-            {
-                try
-                {
-                    session1 = new GeckoSession();
-                    runtime1 = GeckoRuntime.create(application_controller.this);
-                    session1.open(runtime1);
-                    webLoader.setSession(session1);
-                    session1.setProgressDelegate(new progressDelegate());
-                    webLoader.setVisibility(View.INVISIBLE);
-                    sleep(2000);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+            webLoader.releaseSession();
+        }
+        webLoader.setSession(session1);
+        session1.setProgressDelegate(new progressDelegate());
+        webLoader.setVisibility(View.INVISIBLE);
     }
 
     /*Initialization*/
@@ -179,16 +191,19 @@ public class application_controller extends AppCompatActivity
         webView1.setWebViewClient(loadWebViewClient());
         webView1.getSettings().setJavaScriptEnabled(true);
         webView1.getSettings().setUseWideViewPort(true);
+        webView1.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         webView2.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView2.setBackgroundColor(Color.WHITE);
         webView2.setWebViewClient(loadWebViewClient());
         webView2.getSettings().setJavaScriptEnabled(true);
         webView2.getSettings().setUseWideViewPort(true);
+        webView2.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         webView2.animate().setDuration(0).alpha(0f);
         progressBar.setVisibility(View.INVISIBLE);
         requestFailure.animate().setDuration(0).alpha(0.0f);
+        Log.i("PROBLEM26","");
         progressBar.animate().setDuration(150).alpha(0f);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -199,11 +214,56 @@ public class application_controller extends AppCompatActivity
     private void initializeViewClients()
     {
         searchbar.setOnEditorActionListener((v, actionId, event) -> {
-            return onEditorClicked(v, actionId, event);
+            Log.i("1actionId : ",actionId+"");
+            if (actionId == 5)
+            {
+                return onEditorClicked(v, actionId, event);
+            }
+            else
+            {
+                return false;
+            }
+        });
+
+        floatingButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                message_manager.getInstance().reportURL(application_controller.this,searchbar.getText().toString());
+            }
         });
     }
 
     /*-------------------------------------------------------WEBVIEW LISTENERS-------------------------------------------------------*/
+
+    public void loadGeckoURL(String url)
+    {
+
+        boolean init_status=orbot_manager.getInstance().reinitOrbot(application_controller.this);
+        if(init_status)
+        {
+            searchbar.setText(url.replaceAll("boogle.store","genesis.onion"));
+            checkSSLTextColor();
+            KeyboardUtils.hideKeyboard(application_controller.this);
+
+            progressBar.setAlpha(0);
+            progressBar.setVisibility(View.VISIBLE);
+            Log.i("PROBLEM11","");
+            progressBar.animate().setDuration(150).setDuration(300).alpha(1f);
+
+            isOnnionUrlHalted = false;
+            session1.stop();
+            session1.close();
+            webLoader.releaseSession();
+            session1 = new GeckoSession();
+            session1.open(runtime1);
+            session1.setProgressDelegate(new progressDelegate());
+            webLoader.setSession(session1);
+
+            session1.loadUri(url);
+        }
+    }
 
     private WebViewClient loadWebViewClient()
     {
@@ -220,33 +280,26 @@ public class application_controller extends AppCompatActivity
 
                 if(!url.toString().contains("boogle"))
                 {
-                    boolean init_status=orbot_manager.getInstance().reinitOrbot(application_controller.this);
-                    if(init_status)
+                    try
                     {
-                        searchbar.setText(url.replaceAll("boogle.store","genesis.onion"));
-                        KeyboardUtils.hideKeyboard(application_controller.this);
-                        admanager.getInstance().showAd();
-
-                        progressBar.setAlpha(0);
-                        progressBar.setVisibility(View.VISIBLE);
-                        progressBar.animate().setDuration(150).setDuration(300).alpha(1f);
-
-                        isOnnionUrlHalted = false;
-                        session1.stop();
-                        session1.close();
-                        webLoader.releaseSession();
-                        session1 = new GeckoSession();
-                        session1.open(runtime1);
-                        session1.setProgressDelegate(new progressDelegate());
-                        webLoader.setSession(session1);
-
-                        session1.loadUri(url);
+                        if(orbot_manager.getInstance().reinitOrbot(application_controller.this))
+                        {
+                            loadGeckoURL(url);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.printStackTrace();
                     }
                     return true;
                 }
                 else
                 {
+                    session1.stop();
+                    session1.close();
+
                     searchbar.setText(url.replaceAll("boogle.store","genesis.onion"));
+                    checkSSLTextColor();
                     KeyboardUtils.hideKeyboard(application_controller.this);
                     if(traceUrlList.size()==0 || !status.currentURL.equals(traceUrlList.peek()))
                     {
@@ -266,34 +319,68 @@ public class application_controller extends AppCompatActivity
             {
                 super.onPageFinished(view, url);
 
-                webView1.stopLoading();
-                webView2.stopLoading();
-                webView1.animate().setDuration(250).alpha(1f);
-                webView2.animate().setDuration(250).alpha(1f).withEndAction((() -> {
-                    datamodel.getInstance().setIsLoadingURL(false);
-                    requestFailure.animate().alpha(0f).setDuration(300).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));;
-
-                }));;
-
-                progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
-
-                if(!status.hasApplicationLoaded)
+                handler = new Handler();
+                int delay = 800;
+                if(startPage>2)
                 {
-                    try
-                    {
-                        sleep(2000);
-                    }
-                    catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    status.hasApplicationLoaded = true;
-                    splashScreen.animate().alpha(0.0f).setDuration(300).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
-                    versionChecker();
+                    delay = 0;
                 }
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView1.stopLoading();
+                        webView2.stopLoading();
+                        if(webView1.getAlpha()==0)
+                        {
+                            webView1.animate().setDuration(250).alpha(1f);
+                        }
+                        else
+                        {
+                            webView2.animate().setDuration(250).alpha(1f);
+                        }
+                        //.withEndAction((() -> {
 
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(searchbar.getWindowToken(), 0);
+                        //}));;
+                        datamodel.getInstance().setIsLoadingURL(false);
+                        requestFailure.animate().alpha(0f).setDuration(300).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));;
+                        Log.i("PROBLEM12","");
+
+                        if(searchbar.getText().toString().contains("genesis.onion"))
+                        {
+                            progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
+                        }
+
+                        if(!status.hasApplicationLoaded)
+                        {
+                            status.hasApplicationLoaded = true;
+                            handler = new Handler();
+
+                            splashScreen.animate().alpha(0.0f).setStartDelay(500).setDuration(300).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
+                            versionChecker();
+
+
+                        }
+
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(searchbar.getWindowToken(), 0);
+
+                    }
+                }, delay);
+
+
+
+                Handler popuphandler = new Handler();
+
+                popuphandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(status.hasApplicationLoaded && !isTutorialPopupShown)
+                        {
+                            message_manager.getInstance().welcomeMessage(application_controller.this,application_controller.this);
+                            isTutorialPopupShown = true;
+                        }
+                    }
+                }, 2000);
             }
 
             @Override
@@ -303,11 +390,13 @@ public class application_controller extends AppCompatActivity
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        Log.i("PROBLEM13","");
                         progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
                         datamodel.getInstance().setIsLoadingURL(false);
                         splashScreen.animate().alpha(0);
                         requestFailure.setVisibility(View.VISIBLE);
                         requestFailure.animate().alpha(1.0f);
+                        status.isTorInitialized = false;
                     }
                 }, 3000);
 
@@ -328,6 +417,7 @@ public class application_controller extends AppCompatActivity
 
             requestFailure.setVisibility(View.VISIBLE);
             requestFailure.animate().alpha(1.0f);
+            status.isTorInitialized = false;
             loadErrorPage();
         }
 
@@ -340,7 +430,9 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     @Override
     public void onPageStart(GeckoSession session, String url)
     {
-        if(!orbot_manager.getInstance().reinitOrbot(application_controller.this))
+        isGeckoURLLoadded = false;
+        isBlackPage = url.equals("about:blank");
+        if(!isBlackPage && !orbot_manager.getInstance().reinitOrbot(application_controller.this))
         {
             session1.stop();
             session1.close();
@@ -371,10 +463,12 @@ class progressDelegate implements GeckoSession.ProgressDelegate
         }
 
         datamodel.getInstance().setIsLoadingURL(true);
-        isBlackPage = url.equals("about:blank");
         if(!isBlackPage)
         {
+            Log.i("HUTEES : 1","11");
             searchbar.setText(url);
+            checkSSLTextColor();
+            //initGeckoFailureHandler();
         }
         if(!isBlackPage && progressBar.getVisibility() == View.INVISIBLE)
         {
@@ -386,43 +480,67 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     @Override
     public void onPageStop(GeckoSession session, boolean success)
     {
+        Log.i("STATUS-- : ",success+"");
         if(!success)
         {
-            handler.postDelayed(geckoRunnable, 15000);
+            initGeckoFailureHandler(isGeckoURLLoadded);
+            isGeckoURLLoadded = false;
+        }
+        if(success)
+        {
+            Log.i("PROBLEM14","");
+            isGeckoURLLoadded = false;
         }
     }
 
     @Override
     public void onProgressChange(GeckoSession session, int progress)
     {
+        if(geckoHandler!=null)
+        {
+            geckoHandler.removeCallbacks(geckoRunnableError);
+            geckoHandler = null;
+            Log.i("HUTEES : 4","11");
+        }
         if(progress>=100)
         {
+            isGeckoURLLoadded = true;
+            floatingButton.animate().alpha(1);
+
+            if(status.currentURL.contains("://boogle.store"))
+            {
+                admanager.getInstance().showAd();
+            }
             if(!isLoadedUrlSet &&!isOnnionUrlHalted)
             {
                 webLoader.bringToFront();
                 webLoader.animate().setDuration(100).alpha(1);
                 webLoader.setVisibility(View.VISIBLE);
                 requestFailure.animate().alpha(0f).setDuration(300).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));;
-
                 String url = searchbar.getText().toString();
                 boolean isBlackPage = url.equals("about:blank");
                 if(!isBlackPage && !wasBackPressed)
                 {
-                    Log.i("SHIT2 : ",status.currentURL);
                     traceUrlList.add(status.currentURL);
                     searchbar.setText(url);
+                    checkSSLTextColor();
                     status.currentURL = url;
                 }
+                wasBackPressed=false;
             }
+            progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
             isLoadedUrlSet = true;
+        }
+        else if(progress<100)
+        {
+            //Log.i("HUTEES : 3","11");
+            //initGeckoFailureHandler();
         }
         if(progress>=100)
         {
-            progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
             datamodel.getInstance().setIsLoadingURL(false);
         }
-
-        handler.removeCallbacks(geckoRunnable);
+        //handler.removeCallbacks(geckoRunnable);
     }
 
     @Override
@@ -430,6 +548,42 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     {
     }
 }
+    public void initGeckoFailureHandler(boolean hasURLLoaded)
+    {
+        int delay = 15000;
+        if(!helperMethod.isNetworkAvailable(application_controller.this) || hasURLLoaded)
+        {
+            delay=0;
+        }
+
+        if(geckoHandler == null)
+        {
+            geckoHandler = new Handler();
+            geckoRunnableError = new Runnable() {
+                @Override
+                public void run() {
+                    floatingButton.animate().alpha(0);
+                    Log.i("PROBLEM15","");
+                    datamodel.getInstance().setIsLoadingURL(false);
+                    requestFailure.setAlpha(0.0f);
+                    requestFailure.setVisibility(View.VISIBLE);
+                    requestFailure.animate().alpha(1.0f);
+                    Log.i("PROBLEM16","");
+                    progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
+                    geckoHandler = null;
+
+                    if(!helperMethod.isNetworkAvailable(application_controller.this))
+                    {
+                        orbot_manager.getInstance().restartOrbot(application_controller.this);
+                    }
+                    wasBackPressed=false;
+
+                }
+            };
+            geckoHandler.postDelayed(geckoRunnableError, delay);
+        }
+    }
+
     /*-------------------------------------------------------Helper Method-------------------------------------------------------*/
 
     public void loadErrorPage()
@@ -441,19 +595,33 @@ class progressDelegate implements GeckoSession.ProgressDelegate
 
     public void loadURLAnimate(String url)
     {
+        floatingButton.animate().alpha(0);
         webRequestHandler.getInstance().loadURL(url);
     }
 
     /*-------------------------------------------------------EVENT LISTENERS-------------------------------------------------------*/
 
+    public void initializePopupView(String url)
+    {
+        searchbar.setText(url.replaceAll("boogle.store","genesis.onion"));
+        checkSSLTextColor();
+        traceUrlList.add(status.currentURL);
+        status.currentURL=url;
+        progressBar.setAlpha(0f);
+        progressBar.setVisibility(View.VISIBLE);
+        Log.i("PROBLEM17","");
+        progressBar.animate().setDuration(150).alpha(1f);
+    }
+
     public void onHomeButtonPressed(View view)
     {
         webRequestHandler.getInstance().isUrlStoped=true;
         searchbar.setText("https://genesis.onion");
-
+        checkSSLTextColor();
         status.currentURL="https://boogle.store";
         progressBar.setAlpha(0f);
         progressBar.setVisibility(View.VISIBLE);
+        Log.i("PROBLEM18","");
         progressBar.animate().setDuration(150).alpha(1f);
         loadURLAnimate("https://boogle.store");
         webView1.stopLoading();
@@ -468,39 +636,99 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     public void onReloadButtonPressed(View view)
     {
         webRequestHandler.getInstance().isReloadedUrl = true;
+        Log.i("PROBLEM19","");
         progressBar.animate().setDuration(150).alpha(0f);
         progressBar.setVisibility(View.VISIBLE);
-        progressBar.animate().setDuration(150).alpha(1f);
-        loadURLAnimate(status.currentURL);
+        if(searchbar.getText().toString().contains("://genesis.onion"))
+        {
+            Log.i("PROBLEM20","");
+            progressBar.animate().setDuration(150).alpha(1f);
+            loadURLAnimate(status.currentURL);
+        }
+        else
+        {
+            if(status.isTorInitialized)
+            {
+                Log.i("PROBLEM21","");
+                progressBar.animate().setDuration(150).alpha(1f);
+                wasBackPressed = true;
+                loadGeckoURL(searchbar.getText().toString());
+            }
+            else
+            {
+                orbot_manager.getInstance().reinitOrbot(application_controller.this);
+            }
+        }
     }
 
-    @Override
-    public void onBackPressed()
+    public void checkSSLTextColor()
     {
-        session1.stop();
+        if(searchbar==null)
+        {
+            return;
+        }
+
+        if(searchbar.getText().toString().contains("https://"))
+        {
+            SpannableString ss = new SpannableString(searchbar.getText());
+            ss.setSpan(new ForegroundColorSpan(Color.argb(255,0,123,43)),0,5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(Color.GRAY),5,8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            searchbar.setText(ss);
+        }
+        else if(searchbar.getText().toString().contains("http://"))
+        {
+            SpannableString ss = new SpannableString(searchbar.getText());
+            ss.setSpan(new ForegroundColorSpan(Color.argb(255,0,128,43)),0,4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(Color.GRAY),4,7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            searchbar.setText(ss);
+        }
+        else
+        {
+            SpannableString ss = new SpannableString(searchbar.getText());
+            ss.setSpan(new ForegroundColorSpan(Color.BLACK),0,searchbar.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            searchbar.setText(ss);
+        }
+    }
+
+    public void backPressed()
+    {
         if(traceUrlList.size()>0)
         {
-            searchbar.setText(traceUrlList.peek().toString().replaceAll("boogle.store","genesis.onion"));
             if(traceUrlList.peek().toString().contains("boogle.store"))
             {
+                session1.stop();
+                session1.close();
                 if(!status.currentURL.contains("boogle.store"))
                 {
-                    Log.i("FITS4 : " , "");
+                    searchbar.setText(traceUrlList.peek().toString().replaceAll("boogle.store","genesis.onion"));
                     isOnnionUrlHalted=true;
                     session1.stop();
                     session1.close();
                     webLoader.releaseSession();
+                    webLoader.releaseSession();
                     status.currentURL = traceUrlList.pop().toString();
-                    progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
+                    Log.i("PROBLEM22","");
                     webLoader.animate().alpha(0f).withEndAction((() -> webLoader.setVisibility(View.INVISIBLE)));;
-                    isOnnionUrlHalted = true;
-                    wasBackPressed = false;
+                    //isOnnionUrlHalted = true;
                     KeyboardUtils.hideKeyboard(application_controller.this);
+                    if(requestFailure.getAlpha()==1)
+                    {
+                        requestFailure.animate().alpha(0f).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));;
+                    }
+                    else
+                    {
+                        progressBar.animate().alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
+                    }
+                    floatingButton.animate().alpha(0);
                 }
                 else
                 {
+                    //if(progressBar.getAlpha()==0)
+                    //{
+                    //progressBar.animate().setDuration(150).setDuration(300).alpha(1f);
+                    Log.i("1LOG3","LOG1");
+                    searchbar.setText(traceUrlList.peek().toString().replaceAll("boogle.store","genesis.onion"));
                     session1.close();
-                    Log.i("FITS3 : " , "");
                     loadURLAnimate(traceUrlList.pop().toString());
                     if(traceUrlList.size()<=0)
                     {
@@ -510,49 +738,71 @@ class progressDelegate implements GeckoSession.ProgressDelegate
                     {
                         status.currentURL = traceUrlList.peek().toString();
                     }
+                    floatingButton.animate().alpha(0);
+                    //}
                 }
             }
             else
             {
                 if(traceUrlList.size()<=0 || traceUrlList.peek().toString().contains("boogle.store"))
                 {
-                    Log.i("FITS2 : " , "");
+                    session1.stop();
+                    session1.close();
+
+                    searchbar.setText(traceUrlList.peek().toString().replaceAll("boogle.store","genesis.onion"));
                     status.currentURL = "https://boogle.store";
                     webLoader.animate().setDuration(250).alpha(0);
                     traceUrlList.pop();
                     wasBackPressed = false;
                     session1.close();
+                    floatingButton.animate().alpha(0);
                 }
                 else
                 {
-                    webLoader.animate().setDuration(250).alpha(1);
-                    status.currentURL = traceUrlList.peek().toString();
-                    String prevURL = traceUrlList.pop().toString();
-                    Log.i("FITS : " , prevURL);
-                    session1.goBack();
-                    wasBackPressed = true;
+                    if(orbot_manager.getInstance().reinitOrbot(this))
+                    {
+                        searchbar.setText(traceUrlList.peek().toString().replaceAll("boogle.store","genesis.onion"));
+                        status.currentURL = traceUrlList.peek().toString();
+                        String prevURL = traceUrlList.pop().toString();
+                        boolean init_status=orbot_manager.getInstance().reinitOrbot(application_controller.this);
+                        //isOnnionUrlHalted = true;
+                        if(init_status)
+                        {
+                            searchbar.setText(status.currentURL.replaceAll("boogle.store","genesis.onion"));
+                            KeyboardUtils.hideKeyboard(application_controller.this);
+                            progressBar.animate().alpha(1);
+                            progressBar.setVisibility(View.VISIBLE);
+                            wasBackPressed = true;
+                            requestFailure.animate().alpha(0);
+                            session1.goBack();
+                        }
+                        else
+                        {
+                            session1.stop();
+                            session1.close();
+                            orbot_manager.getInstance().reinitOrbot(application_controller.this);
+                        }
+                    }
                 }
             }
             if(traceUrlList.size()==0)
             {
                 searchbar.setText("https://genesis.onion/");
             }
+            checkSSLTextColor();
         }
     }
 
-    public void loadGeckoUrl(String url)
+    @Override
+    public void onBackPressed()
     {
-        session1.close();
-        session1 = new GeckoSession();
-        session1.open(runtime1);
-        session1.setProgressDelegate(new application_controller.progressDelegate());
-        webLoader.releaseSession();
-        webLoader.setSession(session1);
-        session1.loadUri(url);
+        backPressed();
     }
 
     public boolean onEditorClicked(TextView v, int actionId, KeyEvent event)
     {
+        KeyboardUtils.hideKeyboard(application_controller.this);
+        Log.i("FUCKOFF : ",actionId+"");
         try
         {
             session1.stop();
@@ -570,21 +820,34 @@ class progressDelegate implements GeckoSession.ProgressDelegate
 
             boolean isUrlValid = Patterns.WEB_URL.matcher(url).matches();
 
+            url = url.replace("genesis.onion","boogle.store");
             URL host = new URL(url);
             if(isUrlValid && host.getHost().replace("www.","").contains("."))
             {
                 if(host.getHost().contains(constants.backendUrlHost)||host.getHost().contains(constants.frontEndUrlHost))
                 {
-                    loadURLAnimate(v.getText().toString());
+                    floatingButton.animate().alpha(0);
+                    loadURLAnimate(url);
                     return true;
                 }
                 else if(host.getHost().contains(constants.allowedHost))
                 {
-                    if(!orbot_manager.getInstance().reinitOrbot(this))
+                    if(!url.contains("://boogle.store"))
+                    {
+                        orbot_manager.getInstance().reinitOrbot(this);
+                    }
+
+                    if(status.isTorInitialized)
                     {
                         session1.stop();
                         session1.loadUri(url);
                     }
+                    else
+                    {
+                        orbot_manager.getInstance().reinitOrbot(application_controller.this);
+                        message_manager.getInstance().startingOrbotInfo(this);
+                    }
+
                     return true;
                 }
                 else
@@ -597,7 +860,6 @@ class progressDelegate implements GeckoSession.ProgressDelegate
             {
                 loadURLAnimate("https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all");
             }
-            orbot_manager.getInstance().reinitOrbot(this);
 
         }
         catch (IOException e)

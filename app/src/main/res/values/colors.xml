@@ -3,7 +3,7 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
-    <color name="blue">#0066ff</color>
+    <color name="blue">#0066FF</color>
     <color name="holo_gray">#b3b3b3</color>
-    <color name="header">#009933</color>
+    <color name="header">#212f45</color>
 </resources>

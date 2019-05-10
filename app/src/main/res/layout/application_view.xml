@@ -132,7 +132,8 @@
                     android:textColor="#333333"
                     android:selectAllOnFocus="true"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:drawableLeft="@drawable/lockstyle"
+                    android:paddingRight="15dp"
                     android:textColorHighlight="#b3d1ff"
                     android:background="@drawable/searchbar"
                     android:textCursorDrawable="@drawable/cursorcolor"
@@ -159,6 +160,7 @@
                 android:layout_height="108dp"
                 android:indeterminateTint="#0047b3"
                 android:id="@+id/progressBar"
+                android:indeterminateTintMode="src_in"
                 android:indeterminateOnly="true"
                 android:progress="50" app:layout_constraintTop_toTopOf="parent"
         />
@@ -180,7 +182,8 @@
                     style="?android:attr/progressBarStyle"
                     android:layout_width="95dp"
                     android:layout_height="95dp"
-                    android:indeterminateTint="#455265"
+                    android:indeterminateTintMode="src_in"
+                    android:indeterminateTint="#414e62"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="80dp"/>
@@ -216,4 +219,16 @@
         </android.support.constraint.ConstraintLayout>
 
     </FrameLayout>
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:src="@drawable/ban"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            app:borderWidth="0dp"
+            app:elevation="10dp"
+            android:backgroundTint="#ffffff"
+            android:clickable="true" app:srcCompat="?attr/actionModeSelectAllDrawable"
+            android:id="@+id/floatingActionButton3" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"/>
 </android.support.constraint.ConstraintLayout>

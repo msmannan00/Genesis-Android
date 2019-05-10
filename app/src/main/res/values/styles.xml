@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">#f9f9f9</item>
         <item name="colorAccent">#f9f9f9</item>
         <item name="android:windowBackground">@drawable/backgradient</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#000000</item>
     </style>
 
 
