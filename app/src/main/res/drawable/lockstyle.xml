@@ -3,8 +3,8 @@
 
     <item
             android:drawable="@drawable/lock"
-            android:width="26dp"
-            android:height="16dp"
+            android:width="5dp"
+            android:height="5dp"
     />
 
 </layer-list >

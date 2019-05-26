@@ -21,12 +21,12 @@ public class message_manager {
         {
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
-                    .setTitle("DeepWeb Gateway | Welcome")
+                    .setTitle("Welcome | Deep Web Gateway")
                     .setBackgroundColor(Color.argb(230,33,45,69))
                     .setTextColor(Color.argb(255,0,38,77))
-                    .setMessage("\nWelcome to DeepWeb | Darkweb Gateway. This application provide you a platform to Search and Open DarkWeb urls.\n\nYou cannot open any url related to normal internet as its not the intended purpose. You can check out following urls to get yourself started\n\nHere are few Suggestions\n")
+                    .setMessage("\nWelcome to Deep Web | Dark Web Gateway. This application provide you a platform to Search and Open Dark Web urls.\n\nYou cannot open any url related to normal internet as its not the intended purpose. You can check out following urls to get yourself started\n\nHere are few Suggestions\n")
 
-                    .addButton("DeepWeb Online Market", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
+                    .addButton("Deep Web Online Market", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
                         controller.initializePopupView("https://boogle.store/search?q=black+market&p_num=1&s_type=all");
                         controller.loadURLAnimate("https://boogle.store/search?q=black+market&p_num=1&s_type=all");
@@ -36,7 +36,7 @@ public class message_manager {
                         controller.initializePopupView("https://boogle.store/search?q=leaked+document&p_num=1&s_type=all&p_num=1&s_type=all");
                         controller.loadURLAnimate("https://boogle.store/search?q=leaked+document&p_num=1&s_type=all&p_num=1&s_type=all");
                     })
-                    .addButton("Darkweb News and Articles", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
+                    .addButton("Dark Web News and Articles", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
                         controller.initializePopupView("https://boogle.store/search?q=latest%20news&p_num=1&s_type=news");
                         controller.loadURLAnimate("https://boogle.store/search?q=latest%20news&p_num=1&s_type=news");
@@ -76,7 +76,7 @@ public class message_manager {
     {
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle("Darkweb URL | Invalid URL")
+                .setTitle("Dark Web URL | Invalid URL")
                 .setBackgroundColor(Color.argb(230,33,45,69))
                 .setTextColor(Color.argb(255,255,255,255))
                 .setMessage("This software can only be used to access hidden web such as \"Onion\" and \"I2P\" \n\nFor accessing Surface Web use Google or Bing\n")
@@ -110,7 +110,7 @@ public class message_manager {
     {
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle("Darkweb URL | Invalid")
+                .setTitle("Dark Web URL | Invalid")
                 .setBackgroundColor(Color.argb(230,33,45,69))
                 .setTextColor(Color.argb(255,255,255,255))
                 .setMessage("This software can only be used to access hidden web such as \"Onion\" and \"I2P\" \n\nFor accessing Surface Web use Google or Bing\n")
@@ -128,7 +128,7 @@ public class message_manager {
                 .setTitle("URL Reported Successfully")
                 .setBackgroundColor(Color.argb(230,33,45,69))
                 .setTextColor(Color.argb(255,255,255,255))
-                .setMessage("URL has been succuessfully repotorted. It will take about a week to completely remove this website from our server\n")
+                .setMessage("URL has been successfully reported. It will take about a week to completely remove this website from our servers\n")
                 .addButton("Dismiss", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
                     dialog.dismiss();
                 });
@@ -140,7 +140,7 @@ public class message_manager {
     {
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle("Report URL | "+status.currentURL.substring(0,status.currentURL.indexOf(".onion")))
+                .setTitle("Report This Website")
                 .setBackgroundColor(Color.argb(230,33,45,69))
                 .setTextColor(Color.argb(255,255,255,255))
                 .setMessage("If you think url is illegal or disturbing report us so that we can update our database\n")
@@ -162,7 +162,7 @@ public class message_manager {
     {
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle("Initializing Darkweb")
+                .setTitle("Initializing Dark Web")
                 .setBackgroundColor(Color.argb(230,33,45,69))
                 .setTextColor(Color.argb(255,255,255,255))
                 .setMessage("Please wait! While we connect you to hidden web. This might take few seconds\n")

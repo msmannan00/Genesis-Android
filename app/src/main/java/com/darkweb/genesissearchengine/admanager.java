@@ -13,7 +13,7 @@ public class admanager {
         return ourInstance;
     }
     private InterstitialAd mInterstitialAd;
-
+    int adCount = 0;
 
     private admanager() {
     }
@@ -56,10 +56,41 @@ public class admanager {
         });
     }
 
-    public void showAd()
+    public void showAd(boolean isAdForced)
     {
-        mInterstitialAd.show();
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        if(!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded())
+        {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            if(isAdForced || adCount==0 || adCount%3==0)
+            {
+                adCount = 0;
+            }
+            else
+            {
+                adCount+=1;
+            }
+        }
+        else
+        {
+            if(mInterstitialAd.isLoaded())
+            {
+                if(isAdForced)
+                {
+                    mInterstitialAd.show();
+                    adCount = 1;
+                }
+                else
+                {
+                    if(adCount%3==0)
+                    {
+                        mInterstitialAd.show();
+                    }
+                    adCount += 1;
+                }
+            }
+        }
+
     }
 
 }

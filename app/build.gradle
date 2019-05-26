@@ -44,23 +44,23 @@ android {
 
     productFlavors {
         arm {
-            versionCode 131
-            versionName "131"
+            versionCode 149
+            versionName "145"
             dimension "abi"
         }
         aarch64 {
-            versionCode 132
-            versionName "132"
-            dimension "abi"
+           versionCode 150
+           versionName "146"
+           dimension "abi"
         }
         x86_64 {
-            versionCode 135
-            versionName "135"
+            versionCode 151
+            versionName "147"
             dimension "abi"
         }
         x86 {
-            versionCode 134
-            versionName "134"
+            versionCode 148
+            versionName "148"
             dimension "abi"
         }
     }
@@ -77,10 +77,9 @@ android {
                 enable true
                 reset()
                 include 'arm64-v8a'
-                //include 'x86'
-                //include 'armeabi-v7a'
-                //include 'x86_64'
-                //include 'armeabi'
+                include 'x86'
+                include 'armeabi-v7a'
+                include 'x86_64'
 
                 universalApk true
             }
@@ -105,9 +104,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:17.1.1'
     implementation "cz.msebera.android:httpclient:4.4.1.2"
 
-    //x86Implementation     "org.mozilla.geckoview:geckoview-nightly-x86:68.0.20190405111221"
-    //x86_64Implementation  "org.mozilla.geckoview:geckoview-nightly-x86_64:68.0.20190405111221"
-    //armImplementation     "org.mozilla.geckoview:geckoview-nightly-armeabi-v7a:68.0.20190405111221"
+    x86Implementation     "org.mozilla.geckoview:geckoview-nightly-x86:68.0.20190405111221"
+    x86_64Implementation  "org.mozilla.geckoview:geckoview-nightly-x86_64:68.0.20190405111221"
+    armImplementation     "org.mozilla.geckoview:geckoview-nightly-armeabi-v7a:68.0.20190405111221"
     aarch64Implementation "org.mozilla.geckoview:geckoview-nightly-arm64-v8a:68.0.20190405111221"
 
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'

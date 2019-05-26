@@ -1,8 +1,11 @@
 package com.darkweb.genesissearchengine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -77,7 +80,7 @@ public class application_controller extends AppCompatActivity
         initializeBackgroundColor();
         //setOrientation();
         setContentView(R.layout.application_view);
-        orbot_manager.getInstance().initializeTorClient(this);
+        //orbot_manager.getInstance().initializeTorClient(this);
         initializeStatus();
         initializeRunnable();
         initializeConnections();
@@ -150,17 +153,17 @@ public class application_controller extends AppCompatActivity
 
     public void initializeConnections()
     {
-        webView1 = (WebView) findViewById(R.id.pageLoader1);
-        webView2 = (WebView) findViewById(R.id.pageLoader2);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        requestFailure = (ConstraintLayout) findViewById(R.id.requestFailure);
-        splashScreen = (ConstraintLayout) findViewById(R.id.splashScreen);
-        reloadButton = (Button) findViewById(R.id.reloadButton);
-        homeButton = (ImageButton) findViewById(R.id.home);
-        searchbar = (EditText) findViewById(R.id.search);
-        floatingButton = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
-        topbar = (LinearLayout) findViewById(R.id.topbar);
-        webLoader = (GeckoView) findViewById(R.id.webLoader);
+        webView1 = findViewById(R.id.pageLoader1);
+        webView2 = findViewById(R.id.pageLoader2);
+        progressBar = findViewById(R.id.progressBar);
+        requestFailure = findViewById(R.id.requestFailure);
+        splashScreen = findViewById(R.id.splashScreen);
+        reloadButton = findViewById(R.id.reloadButton);
+        homeButton = findViewById(R.id.home);
+        searchbar = findViewById(R.id.search);
+        floatingButton = findViewById(R.id.floatingActionButton3);
+        topbar = findViewById(R.id.topbar);
+        webLoader = findViewById(R.id.webLoader);
     }
 
     public void initializeWebViews()
@@ -181,6 +184,12 @@ public class application_controller extends AppCompatActivity
         webLoader.setSession(session1);
         session1.setProgressDelegate(new progressDelegate());
         webLoader.setVisibility(View.INVISIBLE);
+
+        Drawable img = getResources().getDrawable( R.drawable.lock );
+        searchbar.measure(0, 0);
+        img.setBounds( 0, (int)(searchbar.getMeasuredHeight()*0.00), (int)(searchbar.getMeasuredHeight()*1.10), (int)(searchbar.getMeasuredHeight()*0.69) );
+        //img.setBounds( 0, 0, 50, 31 );
+        searchbar.setCompoundDrawables( img, null, null, null );
     }
 
     /*Initialization*/
@@ -203,8 +212,10 @@ public class application_controller extends AppCompatActivity
         webView2.animate().setDuration(0).alpha(0f);
         progressBar.setVisibility(View.INVISIBLE);
         requestFailure.animate().setDuration(0).alpha(0.0f);
-        Log.i("PROBLEM26","");
         progressBar.animate().setDuration(150).alpha(0f);
+
+        webView1.loadUrl(constants.backendUrl);
+        try {Thread.sleep(100);} catch (Exception e) {}
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         loadURLAnimate(constants.backendUrl);
@@ -272,6 +283,22 @@ public class application_controller extends AppCompatActivity
             @Override
             public boolean shouldOverrideUrlLoading(WebView  view, String  url)
             {
+                URL host = null;
+                try
+                {
+                    host = new URL(url);
+                    if(host.getHost().contains("play.google.com"))
+                    {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine"));
+                        startActivity(browserIntent);
+                        return true;
+                    }
+                }
+                catch (MalformedURLException e)
+                {
+                    e.printStackTrace();
+                }
+
                 if(url.equals(searchbar.getText().toString()))
                 {
                     view.stopLoading();
@@ -463,12 +490,10 @@ class progressDelegate implements GeckoSession.ProgressDelegate
         }
 
         datamodel.getInstance().setIsLoadingURL(true);
-        if(!isBlackPage)
+        if(!isBlackPage && !wasBackPressed)
         {
-            Log.i("HUTEES : 1","11");
             searchbar.setText(url);
             checkSSLTextColor();
-            //initGeckoFailureHandler();
         }
         if(!isBlackPage && progressBar.getVisibility() == View.INVISIBLE)
         {
@@ -480,7 +505,6 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     @Override
     public void onPageStop(GeckoSession session, boolean success)
     {
-        Log.i("STATUS-- : ",success+"");
         if(!success)
         {
             initGeckoFailureHandler(isGeckoURLLoadded);
@@ -488,7 +512,6 @@ class progressDelegate implements GeckoSession.ProgressDelegate
         }
         if(success)
         {
-            Log.i("PROBLEM14","");
             isGeckoURLLoadded = false;
         }
     }
@@ -500,17 +523,12 @@ class progressDelegate implements GeckoSession.ProgressDelegate
         {
             geckoHandler.removeCallbacks(geckoRunnableError);
             geckoHandler = null;
-            Log.i("HUTEES : 4","11");
         }
         if(progress>=100)
         {
             isGeckoURLLoadded = true;
             floatingButton.animate().alpha(1);
 
-            if(status.currentURL.contains("://boogle.store"))
-            {
-                admanager.getInstance().showAd();
-            }
             if(!isLoadedUrlSet &&!isOnnionUrlHalted)
             {
                 webLoader.bringToFront();
@@ -521,9 +539,16 @@ class progressDelegate implements GeckoSession.ProgressDelegate
                 boolean isBlackPage = url.equals("about:blank");
                 if(!isBlackPage && !wasBackPressed)
                 {
-                    traceUrlList.add(status.currentURL);
-                    searchbar.setText(url);
                     checkSSLTextColor();
+                    traceUrlList.add(status.currentURL);
+                    if(status.currentURL.contains("boogle.store"))
+                    {
+                        admanager.getInstance().showAd(true);
+                    }
+                    else
+                    {
+                        admanager.getInstance().showAd(false);
+                    }
                     status.currentURL = url;
                 }
                 wasBackPressed=false;
@@ -531,16 +556,10 @@ class progressDelegate implements GeckoSession.ProgressDelegate
             progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
             isLoadedUrlSet = true;
         }
-        else if(progress<100)
-        {
-            //Log.i("HUTEES : 3","11");
-            //initGeckoFailureHandler();
-        }
         if(progress>=100)
         {
             datamodel.getInstance().setIsLoadingURL(false);
         }
-        //handler.removeCallbacks(geckoRunnable);
     }
 
     @Override
@@ -619,6 +638,7 @@ class progressDelegate implements GeckoSession.ProgressDelegate
         searchbar.setText("https://genesis.onion");
         checkSSLTextColor();
         status.currentURL="https://boogle.store";
+        traceUrlList.clear();
         progressBar.setAlpha(0f);
         progressBar.setVisibility(View.VISIBLE);
         Log.i("PROBLEM18","");
@@ -759,13 +779,11 @@ class progressDelegate implements GeckoSession.ProgressDelegate
                 }
                 else
                 {
-                    if(orbot_manager.getInstance().reinitOrbot(this))
+                    if(orbot_manager.getInstance().reinitOrbot(this) && progressBar.getAlpha()==0)
                     {
-                        searchbar.setText(traceUrlList.peek().toString().replaceAll("boogle.store","genesis.onion"));
                         status.currentURL = traceUrlList.peek().toString();
-                        String prevURL = traceUrlList.pop().toString();
+                        traceUrlList.pop().toString();
                         boolean init_status=orbot_manager.getInstance().reinitOrbot(application_controller.this);
-                        //isOnnionUrlHalted = true;
                         if(init_status)
                         {
                             searchbar.setText(status.currentURL.replaceAll("boogle.store","genesis.onion"));
@@ -774,13 +792,7 @@ class progressDelegate implements GeckoSession.ProgressDelegate
                             progressBar.setVisibility(View.VISIBLE);
                             wasBackPressed = true;
                             requestFailure.animate().alpha(0);
-                            session1.goBack();
-                        }
-                        else
-                        {
-                            session1.stop();
-                            session1.close();
-                            orbot_manager.getInstance().reinitOrbot(application_controller.this);
+                            session1.loadUri(status.currentURL);
                         }
                     }
                 }

@@ -13,6 +13,7 @@ public class orbot_manager {
     boolean isOrbotRunning = false;
     boolean isLoading = false;
     OnionProxyManager onionProxyManager = null;
+    Context applicationContext = null;
 
     public static orbot_manager getInstance() {
         return ourInstance;
@@ -37,6 +38,7 @@ public class orbot_manager {
 
     public void restartOrbot(Context applicationContext)
     {
+        this.applicationContext = applicationContext;
         isOrbotRunning = false;
         status.isTorInitialized = false;
         if(onionProxyManager!=null)
@@ -132,6 +134,7 @@ public class orbot_manager {
         PrefsHelper.setPref("general.useragent.override", "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0");
         PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
         PrefsHelper.setPref("privacy.donottrackheader.value",1);
+        ProxySettings.setProxy(applicationContext, "127.0.0.1", status.port);
     }
 
 

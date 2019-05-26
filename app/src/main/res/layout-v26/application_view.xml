@@ -132,7 +132,6 @@
                     android:textColor="#333333"
                     android:selectAllOnFocus="true"
                     android:paddingLeft="10dp"
-                    android:drawableLeft="@drawable/lockstyle"
                     android:paddingRight="15dp"
                     android:textColorHighlight="#b3d1ff"
                     android:background="@drawable/searchbar"
