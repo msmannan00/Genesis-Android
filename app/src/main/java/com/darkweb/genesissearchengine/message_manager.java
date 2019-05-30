@@ -2,7 +2,10 @@ package com.darkweb.genesissearchengine;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
 public class message_manager {
@@ -17,8 +20,6 @@ public class message_manager {
 
     public void welcomeMessage(Context application_context, application_controller controller)
     {
-        if(!helperMethod.readPrefs("FirstTimeLoaded",application_context))
-        {
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
                     .setTitle("Welcome | Deep Web Gateway")
@@ -51,7 +52,6 @@ public class message_manager {
                         helperMethod.savePrefs("FirstTimeLoaded",true,application_context);
                     });
             builder.show();
-        }
 
 
         // Create Alert using Builder
@@ -82,6 +82,32 @@ public class message_manager {
                 .setMessage("This software can only be used to access hidden web such as \"Onion\" and \"I2P\" \n\nFor accessing Surface Web use Google or Bing\n")
                 .addButton("Dismiss", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, (dialog, which) -> {
                     dialog.dismiss();
+                });
+
+        builder.show();
+    }
+
+    public void abiError(Context application_context,String currentAbi)
+    {
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle("Invalid Setup File")
+                .setBackgroundColor(Color.argb(230,33,45,69))
+                .setTextColor(Color.argb(255,255,255,255))
+                .onDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        abiError(application_context,currentAbi);
+                    }
+                })
+                .setMessage("Looks like you messed up the installation. Either Install it from playstore or follow the link")
+                .addButton("Local Upgrade", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://boogle.store/manual?abi="+currentAbi));
+                    application_context.startActivity(browserIntent);
+                })
+                .addButton("Playstore Upgrade", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine"));
+                    application_context.startActivity(browserIntent);
                 });
 
         builder.show();
@@ -173,26 +199,20 @@ public class message_manager {
         builder.show();
     }
 
-    public void versionWarning(Context application_context)
-    {/*
-        new LovelyStandardDialog(application_context)
-                .setTopColorRes(R.color.header)
-                .setIcon(R.drawable.logo)
-                .setTitle("Update Application")
-                .setMessage("A newer version is availabe please install to get better experience")
-                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        String url = "http://boogle.store/android";
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        application_context.startActivity(i);
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .show();
-        */
+    public void versionWarning(Context application_context,String currentAbi)
+    {
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle("Update Pending")
+                .setBackgroundColor(Color.argb(230,33,45,69))
+                .setTextColor(Color.argb(255,255,255,255))
+                .setMessage("You have not updated this app for a while please update it to get best performance\n")
+                .addButton("Update", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, (dialog, which) -> {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://boogle.store/manual?abi="+currentAbi));
+                    application_context.startActivity(browserIntent);
+                });
+
+        builder.show();
     }
 
 }

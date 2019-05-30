@@ -8,8 +8,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 
+import java.io.*;
 import java.util.List;
 import java.util.UUID;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class helperMethod
 {
@@ -54,6 +57,22 @@ public class helperMethod
                 break;
             }
         }
+    }
+
+    public static String readInternalHTML(Context applicationContext)
+    {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(applicationContext);
+        return prefs.getString("internalhtml","");
+    }
+
+    public static void setInternalHTML(String html,Context applicationContext)
+    {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(applicationContext);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString("internalhtml", html);
+        edit.commit();
 
     }
 

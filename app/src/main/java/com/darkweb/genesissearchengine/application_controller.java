@@ -3,7 +3,10 @@ package com.darkweb.genesissearchengine;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -17,14 +20,15 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.*;
 import android.widget.*;
 import com.crashlytics.android.Crashlytics;
+import com.example.myapplication.BuildConfig;
 import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -37,6 +41,7 @@ import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static java.lang.Thread.sleep;
 
 public class application_controller extends AppCompatActivity
@@ -48,7 +53,7 @@ public class application_controller extends AppCompatActivity
     private GeckoView webLoader;
     private ProgressBar progressBar;
     private ConstraintLayout requestFailure;
-    private ConstraintLayout splashScreen;
+    private FrameLayout splashScreen;
     private FloatingActionButton floatingButton;
     private Button reloadButton;
     private ImageButton homeButton;
@@ -56,7 +61,7 @@ public class application_controller extends AppCompatActivity
     private LinearLayout topbar;
     private GeckoSession session1;
     private GeckoRuntime runtime1;
-    private String version_code = "3.0";
+    private String version_code = "5.0";
     private boolean wasBackPressed = false;
     private boolean isLoadedUrlSet = false;
     private boolean isGeckoURLLoadded = false;
@@ -76,23 +81,67 @@ public class application_controller extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //initializeCrashlytics();
-        initializeBackgroundColor();
-        //setOrientation();
-        setContentView(R.layout.application_view);
-        //orbot_manager.getInstance().initializeTorClient(this);
-        initializeStatus();
-        initializeRunnable();
-        initializeConnections();
-        initializeWebViews();
-        initializeView();
-        initializeAds();
-        checkSSLTextColor();
+
+        if(BuildConfig.FLAVOR.equals("aarch64")&&Build.SUPPORTED_ABIS[0].equals("arm64-v8a") || BuildConfig.FLAVOR.equals("arm")&&Build.SUPPORTED_ABIS[0].equals("armeabi-v7a") || BuildConfig.FLAVOR.equals("x86")&&Build.SUPPORTED_ABIS[0].equals("x86") || BuildConfig.FLAVOR.equals("x86_64")&&Build.SUPPORTED_ABIS[0].equals("x86_64"))
+        {
+            //initializeCrashlytics();
+            initializeBackgroundColor();
+            setContentView(R.layout.application_view);
+            orbot_manager.getInstance().initializeTorClient(this, webView1, webView2);
+            initializeStatus();
+            initializeRunnable();
+            initializeConnections();
+            initializeWebViews();
+            initializeView();
+            initializeAds();
+            checkSSLTextColor();
+            initSplashScreen();
+        }
+        else
+        {
+            setContentView(R.layout.invalid_setup);
+            message_manager.getInstance().abiError(this,Build.SUPPORTED_ABIS[0]);
+        }
     }
 
     public void setOrientation()
     {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    public void initSplashScreen()
+    {
+        ImageView view = findViewById(R.id.imageView_loading_back);
+        RotateAnimation rotate = new RotateAnimation(0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+
+        rotate.setDuration(2000);
+        rotate.setRepeatCount(Animation.INFINITE);
+        view.setAnimation(rotate);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        float width_x = size.x;
+        float height_y = size.y;
+
+        ImageView splashlogo = findViewById(R.id.backsplash);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) splashlogo.getLayoutParams();
+        //int height = Resources.getSystem().getDisplayMetrics().heightPixels+getStatusBarHeight(this);
+        //splashlogo.getLayoutParams().height = splashlogo.getLayoutParams().height-300;
+
+        params.topMargin = getStatusBarHeight(this)/2;
+        splashlogo.setLayoutParams(params);
+    }
+
+    public int getStatusBarHeight(Context c) {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 
     public void initializeBackgroundColor()
@@ -121,7 +170,7 @@ public class application_controller extends AppCompatActivity
         String version = preference_manager.getInstance().getString("version","none",this);
         if(!version.equals(version_code) && !version.equals("none"))
         {
-            message_manager.getInstance().versionWarning(this);
+            message_manager.getInstance().versionWarning(this,Build.SUPPORTED_ABIS[0]);
         }
         webRequestHandler.getInstance().getVersion(this);
     }
@@ -168,7 +217,7 @@ public class application_controller extends AppCompatActivity
 
     public void initializeWebViews()
     {
-        webRequestHandler.getInstance().initialization(webView1,webView2,progressBar,searchbar,requestFailure,this,splashScreen,this);
+        webRequestHandler.getInstance().initialization(webView1,webView2,progressBar,searchbar, splashScreen,this, requestFailure,this);
         webView1.bringToFront();
         Log.i("PROBLEM25","");
         progressBar.animate().setDuration(150).alpha(0f);
@@ -213,9 +262,6 @@ public class application_controller extends AppCompatActivity
         progressBar.setVisibility(View.INVISIBLE);
         requestFailure.animate().setDuration(0).alpha(0.0f);
         progressBar.animate().setDuration(150).alpha(0f);
-
-        webView1.loadUrl(constants.backendUrl);
-        try {Thread.sleep(100);} catch (Exception e) {}
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         loadURLAnimate(constants.backendUrl);
@@ -347,7 +393,7 @@ public class application_controller extends AppCompatActivity
                 super.onPageFinished(view, url);
 
                 handler = new Handler();
-                int delay = 800;
+                int delay = 200;
                 if(startPage>2)
                 {
                     delay = 0;
@@ -382,9 +428,26 @@ public class application_controller extends AppCompatActivity
                             status.hasApplicationLoaded = true;
                             handler = new Handler();
 
-                            splashScreen.animate().alpha(0.0f).setStartDelay(500).setDuration(300).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
-                            versionChecker();
+                            splashScreen.animate().alpha(0.0f).setStartDelay(100).setDuration(300).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
 
+                            Handler popuphandler = new Handler();
+
+                            popuphandler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(status.hasApplicationLoaded && !isTutorialPopupShown)
+                                    {
+                                        if(!helperMethod.readPrefs("FirstTimeLoaded",application_controller.this)) {
+                                            message_manager.getInstance().welcomeMessage(application_controller.this, application_controller.this);
+                                            isTutorialPopupShown = true;
+                                        }
+                                        else if(buildconstants.build_type.equals("local"))
+                                        {
+                                            versionChecker();
+                                        }
+                                    }
+                                }
+                            }, 2000);
 
                         }
 
@@ -393,21 +456,6 @@ public class application_controller extends AppCompatActivity
 
                     }
                 }, delay);
-
-
-
-                Handler popuphandler = new Handler();
-
-                popuphandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(status.hasApplicationLoaded && !isTutorialPopupShown)
-                        {
-                            message_manager.getInstance().welcomeMessage(application_controller.this,application_controller.this);
-                            isTutorialPopupShown = true;
-                        }
-                    }
-                }, 2000);
             }
 
             @Override
@@ -814,7 +862,6 @@ class progressDelegate implements GeckoSession.ProgressDelegate
     public boolean onEditorClicked(TextView v, int actionId, KeyEvent event)
     {
         KeyboardUtils.hideKeyboard(application_controller.this);
-        Log.i("FUCKOFF : ",actionId+"");
         try
         {
             session1.stop();
@@ -870,16 +917,24 @@ class progressDelegate implements GeckoSession.ProgressDelegate
             }
             else
             {
-                loadURLAnimate("https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all");
+                String editedURL = "https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all";
+                status.currentURL = editedURL;
+                searchbar.setText(editedURL.replace("boogle.store","genesis.onion"));
+                searchbar.clearFocus();
+                loadURLAnimate(editedURL);
             }
 
         }
         catch (IOException e)
         {
-            loadURLAnimate("https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all");
+            String editedURL = "https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all";
+            status.currentURL = editedURL;
+            searchbar.clearFocus();
+            searchbar.setText(editedURL.replace("boogle.store","genesis.onion"));
+            loadURLAnimate(editedURL);
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
 

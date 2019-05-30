@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine;
 
 import android.content.Context;
 import android.util.Log;
+import android.webkit.WebView;
 import com.msopentech.thali.android.toronionproxy.AndroidOnionProxyManager;
 import com.msopentech.thali.toronionproxy.OnionProxyManager;
 import org.mozilla.gecko.PrefsHelper;
@@ -14,6 +15,8 @@ public class orbot_manager {
     boolean isLoading = false;
     OnionProxyManager onionProxyManager = null;
     Context applicationContext = null;
+    WebView view1=null;
+    WebView view2=null;
 
     public static orbot_manager getInstance() {
         return ourInstance;
@@ -27,7 +30,7 @@ public class orbot_manager {
         if(!status.isTorInitialized)
         {
             message_manager.getInstance().startingOrbotInfo(application_context);
-            initializeTorClient(application_context);
+            initializeTorClient(application_context,view1,view2);
             return false;
         }
         else
@@ -61,8 +64,13 @@ public class orbot_manager {
         }
     }
 
-    public void initializeTorClient(Context applicationContext)
+    public void initializeTorClient(Context applicationContext,WebView view1,WebView view2)
     {
+        if(view1==null)
+        {
+            this.view1 = view1;
+            this.view2 = view2;
+        }
         if(isLoading)
         {
            return;
@@ -71,53 +79,50 @@ public class orbot_manager {
         {
             public void run()
             {
-                try
-                {
-                    isLoading = true;
-                    String fileStorageLocation = "torfiles";
-                    onionProxyManager = new AndroidOnionProxyManager(applicationContext, fileStorageLocation);
-                    int totalSecondsPerTorStartup = 4 * 60;
-                    int totalTriesPerTorStartup = 5;
-                    try {
-                        boolean ok = onionProxyManager.startWithRepeat(totalSecondsPerTorStartup, totalTriesPerTorStartup);
-                        if (!ok) {
-                            Log.i("TorTest", "Couldn't start Tor!");
-                            return;
-                        }
-                        else
+                    while (true)
+                    {
+                        try
                         {
-                            if(onionProxyManager.isRunning()) {
-                                Log.i("My App", "Tor initialized on port " + onionProxyManager.getIPv4LocalHostSocksPort());
+                            isLoading = true;
+                            String fileStorageLocation = "torfiles";
+
+                            if(onionProxyManager!=null && onionProxyManager.isRunning())
+                            {
+                                break;
                             }
+                            onionProxyManager = new AndroidOnionProxyManager(applicationContext, fileStorageLocation);
+
+                            int totalSecondsPerTorStartup = 4 * 60;
+                            int totalTriesPerTorStartup = 5;
+                                boolean ok = onionProxyManager.startWithRepeat(totalSecondsPerTorStartup, totalTriesPerTorStartup);
+                                if (!ok) {
+                                    Log.i("TorTest", "Couldn't start Tor!");
+                                    return;
+                                } else {
+                                    if (onionProxyManager.isRunning()) {
+                                        Log.i("My App", "Tor initialized on port " + onionProxyManager.getIPv4LocalHostSocksPort());
+                                    }
+                                }
+
+                            while (!onionProxyManager.isRunning()) {
+                                sleep(1000);
+                            }
+                            if (onionProxyManager.isRunning()) {
+                                Log.i("My App", "Tor initialized on port " + onionProxyManager.getIPv4LocalHostSocksPort());
+                                status.port = onionProxyManager.getIPv4LocalHostSocksPort();
+                                initializeProxy();
+                                sleep(1500);
+                                status.isTorInitialized = true;
+                                break;
+                            }
+                            isLoading = false;
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            continue;
                         }
                     }
-                    catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                }
 
-                    while (!onionProxyManager.isRunning())
-                    {
-                        sleep(1000);
-                    }
-                    if(onionProxyManager.isRunning())
-                    {
-                        Log.i("My App", "Tor initialized on port " + onionProxyManager.getIPv4LocalHostSocksPort());
-                        status.port = onionProxyManager.getIPv4LocalHostSocksPort();
-                        initializeProxy();
-                        sleep(1500);
-                        status.isTorInitialized = true;
-                    }
-                    isLoading = false;
-                }
-                catch (InterruptedException e)
-                {
-                    isLoading = false;
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    isLoading = false;
-                    e.printStackTrace();
-                }
-            }
         }.start();
     }
 
@@ -134,8 +139,8 @@ public class orbot_manager {
         PrefsHelper.setPref("general.useragent.override", "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0");
         PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
         PrefsHelper.setPref("privacy.donottrackheader.value",1);
-        ProxySettings.setProxy(applicationContext, "127.0.0.1", status.port);
     }
+
 
 
 }

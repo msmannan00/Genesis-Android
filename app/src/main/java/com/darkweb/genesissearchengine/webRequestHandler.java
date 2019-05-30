@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 
@@ -40,7 +41,7 @@ public class webRequestHandler
     private WebView[] view = new WebView[2];
     private ProgressBar progressBar;
     private EditText searchbar;
-    private ConstraintLayout requestFailure;
+    private FrameLayout requestFailure;
 
     public boolean reloadError=false;
     public boolean isReloadedUrl = false;
@@ -58,6 +59,7 @@ public class webRequestHandler
     private final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
     private final static int RELOAD_ERROR =3;
     private application_controller controller;
+    private Context applictionContext;
 
     public static webRequestHandler getInstance() {
         return ourInstance;
@@ -67,8 +69,9 @@ public class webRequestHandler
     {
     }
 
-    public void initialization(WebView view1, WebView view2, ProgressBar progressBar, EditText searchbar, ConstraintLayout requestFailure, Context applicationContext,ConstraintLayout splash,application_controller controller)
+    public void initialization(WebView view1, WebView view2, ProgressBar progressBar, EditText searchbar, FrameLayout requestFailure, Context applicationContext,ConstraintLayout splash,application_controller controller)
     {
+        this.applictionContext = applicationContext;
         this.controller = controller;
         this.splash =  splash;
         this.view[0] = view1;
@@ -108,6 +111,7 @@ public class webRequestHandler
         }
 
         clientThread = new Thread(() -> {
+            String errorMessage = "";
             try
             {
                 Log.i("STEST : 5","1");
@@ -125,7 +129,8 @@ public class webRequestHandler
             }
             catch (Exception e)
             {
-                Log.i("STEST : 8","1");
+                Log.i("STEST : 8","1 : " + e.getMessage());
+                errorMessage = e.getMessage();
                 if(!e.getMessage().contains("Socket closed") && !e.getMessage().contains("failed to respond") && e.getMessage().contains("Unable to resolve host \"boogle.store\""))
                 {
                     Log.i("STEST99 : 9","1 : "+e.getMessage());
@@ -134,6 +139,8 @@ public class webRequestHandler
                     e.printStackTrace();
                 }
             }
+
+
         });
         clientThread.start();
     }
@@ -161,8 +168,26 @@ public class webRequestHandler
         }
     }
 
-    public void nonProxyConnection(String url) throws IOException {
+    public void nonProxyConnection(String url) throws IOException
+    {
         url = url.replace("http://boogle","https://boogle");
+
+        Log.i("SHITS","fizza " + url);
+        if(url.equals("https://boogle.store"))
+        {
+            String html_local = helperMethod.readInternalHTML(applictionContext);
+            Log.i("SHITS","fizza1 " + html_local);
+            if(html_local.length()>1)
+            {
+                Log.i("SHITS","fizza2 " + url);
+                html = html_local;
+                Message message = new Message();
+                message.what = MESSAGE_UPDATE_TEXT_CHILD_THREAD;
+                updateUIHandler.sendMessage(message);
+                return;
+            }
+        }
+
         HttpClient client=new DefaultHttpClient();;
         try {
                     SSLConnectionSocketFactory scsf = new SSLConnectionSocketFactory(
@@ -193,10 +218,16 @@ public class webRequestHandler
         in.close();
 
         html = str.toString();
+        if(url.equals("https://boogle.store"))
+        {
+            html = html.replace("/privacy","https://boogle.store/privacy").replace("/about","https://boogle.store/about").replace("/reportus","https://boogle.store/reportus").replace("/search?q=random&p_num=1&s_type=image","https://boogle.store/search?q=random&p_num=1&s_type=image");
+            Log.i("SHITS","fizza3 " + html);
+            helperMethod.setInternalHTML(html,applictionContext);
+        }
+
         Message message = new Message();
         message.what = MESSAGE_UPDATE_TEXT_CHILD_THREAD;
         updateUIHandler.sendMessage(message);
-
     }
 
     public void reportURL(String url)

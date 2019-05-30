@@ -4,7 +4,7 @@ apply plugin: 'maven'
 apply plugin: 'io.fabric'
 
 ext {
-    geckoviewChannel = "nightly"
+    geckoviewChannel = ""
     geckoviewVersion = "64.0.20180927100037"
 }
 
@@ -43,26 +43,31 @@ android {
     flavorDimensions "abi"
 
     productFlavors {
-        arm {
-            versionCode 149
-            versionName "145"
+        /*arm {
+            versionCode 152
+            versionName "152"
             dimension "abi"
-        }
+            buildConfigField "String", "VARIANT", "\"arm\""
+        }*/
         aarch64 {
-           versionCode 150
-           versionName "146"
+           versionCode 153
+           versionName "153"
            dimension "abi"
+           buildConfigField "String", "VARIANT", "\"aarch64\""
         }
-        x86_64 {
-            versionCode 151
-            versionName "147"
-            dimension "abi"
-        }
+        /*
         x86 {
-            versionCode 148
-            versionName "148"
+            versionCode 154
+            versionName "154"
             dimension "abi"
+            buildConfigField "String", "VARIANT", "\"i686\""
         }
+        /*x86_64 {
+            versionCode 155
+            versionName "155"
+            dimension "abi"
+            buildConfigField "String", "VARIANT", "\"x86_64\""
+        }*/
     }
 
 
@@ -104,10 +109,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:17.1.1'
     implementation "cz.msebera.android:httpclient:4.4.1.2"
 
-    x86Implementation     "org.mozilla.geckoview:geckoview-nightly-x86:68.0.20190405111221"
-    x86_64Implementation  "org.mozilla.geckoview:geckoview-nightly-x86_64:68.0.20190405111221"
-    armImplementation     "org.mozilla.geckoview:geckoview-nightly-armeabi-v7a:68.0.20190405111221"
-    aarch64Implementation "org.mozilla.geckoview:geckoview-nightly-arm64-v8a:68.0.20190405111221"
+    //x86Implementation     "org.mozilla.geckoview:geckoview-x86:67.0.20190521210220"
+    //x86_64Implementation  "org.mozilla.geckoview:geckoview-x86_64:67.0.20190521210220"
+    //armImplementation     "org.mozilla.geckoview:geckoview-armeabi-v7a:67.0.20190521210220"
+    aarch64Implementation "org.mozilla.geckoview:geckoview-arm64-v8a:67.0.20190521210220"
 
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
     implementation 'com.crowdfire.cfalertdialog:cfalertdialog:1.1.0'

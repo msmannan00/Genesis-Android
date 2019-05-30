@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine;
 
 import android.content.Context;
+import android.util.Log;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -59,31 +60,40 @@ public class admanager {
     public void showAd(boolean isAdForced)
     {
 
+        Log.i("SHITSS","SHITSS 1" + " --- " + mInterstitialAd.isLoading() + " --- " + mInterstitialAd.isLoaded());
         if(!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded())
         {
+            Log.i("SHITSS","SHITSS 2");
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
             if(isAdForced || adCount==0 || adCount%3==0)
             {
+                Log.i("SHITSS","SHITSS 3");
                 adCount = 0;
             }
             else
             {
+                Log.i("SHITSS","SHITSS 4");
                 adCount+=1;
             }
         }
         else
         {
+            Log.i("SHITSS","SHITSS 5");
             if(mInterstitialAd.isLoaded())
             {
+                Log.i("SHITSS","SHITSS 6");
                 if(isAdForced)
                 {
+                    Log.i("SHITSS","SHITSS 7");
                     mInterstitialAd.show();
                     adCount = 1;
                 }
                 else
                 {
+                    Log.i("SHITSS","SHITSS 8");
                     if(adCount%3==0)
                     {
+                        Log.i("SHITSS","SHITSS 9");
                         mInterstitialAd.show();
                     }
                     adCount += 1;
