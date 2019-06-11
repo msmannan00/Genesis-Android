@@ -41,10 +41,11 @@ public class webRequestHandler
     private WebView[] view = new WebView[2];
     private ProgressBar progressBar;
     private EditText searchbar;
-    private FrameLayout requestFailure;
+    private ConstraintLayout requestFailure;
 
     public boolean reloadError=false;
     public boolean isReloadedUrl = false;
+    public boolean isHomeCacheUpdated = false;
     private int viewIndex = 1;
     private int currentViewIndex = 0;
     private String html = "";
@@ -69,7 +70,7 @@ public class webRequestHandler
     {
     }
 
-    public void initialization(WebView view1, WebView view2, ProgressBar progressBar, EditText searchbar, FrameLayout requestFailure, Context applicationContext,ConstraintLayout splash,application_controller controller)
+    public void initialization(WebView view1, WebView view2, ProgressBar progressBar, EditText searchbar, ConstraintLayout splash, Context applicationContext,ConstraintLayout requestFailure,application_controller controller)
     {
         this.applictionContext = applicationContext;
         this.controller = controller;
@@ -184,6 +185,7 @@ public class webRequestHandler
                 Message message = new Message();
                 message.what = MESSAGE_UPDATE_TEXT_CHILD_THREAD;
                 updateUIHandler.sendMessage(message);
+                updateHomePageCache();
                 return;
             }
         }
@@ -220,7 +222,7 @@ public class webRequestHandler
         html = str.toString();
         if(url.equals("https://boogle.store"))
         {
-            html = html.replace("/privacy","https://boogle.store/privacy").replace("/about","https://boogle.store/about").replace("/reportus","https://boogle.store/reportus").replace("/search?q=random&p_num=1&s_type=image","https://boogle.store/search?q=random&p_num=1&s_type=image");
+            html = html.replace("/privacy","https://boogle.store/privacy").replace("/about","https://boogle.store/about").replace("/reportus","https://boogle.store/reportus").replace("\"search\"","https://boogle.store/search").replace("/create","https://boogle.store/create");
             Log.i("SHITS","fizza3 " + html);
             helperMethod.setInternalHTML(html,applictionContext);
         }
@@ -368,7 +370,52 @@ public class webRequestHandler
     }
 
     /*****--------------------ASYNC TASK--------------------******/
+    public void updateHomePageCache()
+    {
+        if(!isHomeCacheUpdated)
+        {
+            isHomeCacheUpdated = true;
+            String url = "https://boogle.store";
+            try
+            {
+                HttpClient client=new DefaultHttpClient();;
+                try {
+                    SSLConnectionSocketFactory scsf = new SSLConnectionSocketFactory(
+                            SSLContexts.custom().loadTrustMaterial(null, new TrustSelfSignedStrategy()).build(),
+                            NoopHostnameVerifier.INSTANCE);
+                    client = HttpClients.custom().setSSLSocketFactory(scsf).build();
 
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (KeyManagementException e) {
+                    e.printStackTrace();
+                } catch (KeyStoreException e) {
+                    e.printStackTrace();
+                }
+
+                request = new HttpGet(url);
+                baseURL = url;
+                HttpResponse response = client.execute(request);
+                InputStream in = response.getEntity().getContent();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder str = new StringBuilder();
+                String line = null;
+
+                while((line = reader.readLine()) != null)
+                {
+                    str.append(line);
+                }
+                in.close();
+
+                html = str.toString();
+                helperMethod.setInternalHTML(html,applictionContext);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+    }
 
 
 }

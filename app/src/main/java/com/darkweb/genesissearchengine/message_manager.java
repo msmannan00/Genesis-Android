@@ -188,10 +188,10 @@ public class message_manager {
     {
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle("Initializing Dark Web")
+                .setTitle("Initializing")
                 .setBackgroundColor(Color.argb(230,33,45,69))
                 .setTextColor(Color.argb(255,255,255,255))
-                .setMessage("Please wait! While we connect you to hidden web. This might take few seconds\n")
+                .setMessage("Please wait! While we connect you to hidden web. This might take few minutes\n")
                 .addButton("Dismiss", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, (dialog, which) -> {
                     dialog.dismiss();
                 });

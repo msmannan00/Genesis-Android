@@ -13,11 +13,13 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.os.Bundle;
+import android.support.constraint.ConstraintSet;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.*;
@@ -53,7 +55,7 @@ public class application_controller extends AppCompatActivity
     private GeckoView webLoader;
     private ProgressBar progressBar;
     private ConstraintLayout requestFailure;
-    private FrameLayout splashScreen;
+    private ConstraintLayout splashScreen;
     private FloatingActionButton floatingButton;
     private Button reloadButton;
     private ImageButton homeButton;
@@ -81,10 +83,10 @@ public class application_controller extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.application_view);
         if(BuildConfig.FLAVOR.equals("aarch64")&&Build.SUPPORTED_ABIS[0].equals("arm64-v8a") || BuildConfig.FLAVOR.equals("arm")&&Build.SUPPORTED_ABIS[0].equals("armeabi-v7a") || BuildConfig.FLAVOR.equals("x86")&&Build.SUPPORTED_ABIS[0].equals("x86") || BuildConfig.FLAVOR.equals("x86_64")&&Build.SUPPORTED_ABIS[0].equals("x86_64"))
         {
-            //initializeCrashlytics();
+            initializeCrashlytics();
             initializeBackgroundColor();
             setContentView(R.layout.application_view);
             orbot_manager.getInstance().initializeTorClient(this, webView1, webView2);
@@ -102,6 +104,7 @@ public class application_controller extends AppCompatActivity
             setContentView(R.layout.invalid_setup);
             message_manager.getInstance().abiError(this,Build.SUPPORTED_ABIS[0]);
         }
+
     }
 
     public void setOrientation()
@@ -112,27 +115,56 @@ public class application_controller extends AppCompatActivity
     public void initSplashScreen()
     {
         ImageView view = findViewById(R.id.imageView_loading_back);
-        RotateAnimation rotate = new RotateAnimation(0, 360,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f);
+        RotateAnimation rotate = new RotateAnimation(0, 360,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
 
         rotate.setDuration(2000);
         rotate.setRepeatCount(Animation.INFINITE);
         view.setAnimation(rotate);
-
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        float width_x = size.x;
-        float height_y = size.y;
 
         ImageView splashlogo = findViewById(R.id.backsplash);
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) splashlogo.getLayoutParams();
-        //int height = Resources.getSystem().getDisplayMetrics().heightPixels+getStatusBarHeight(this);
-        //splashlogo.getLayoutParams().height = splashlogo.getLayoutParams().height-300;
+        int height = screenHeight();
+        splashlogo.getLayoutParams().height = height;
 
-        params.topMargin = getStatusBarHeight(this)/2;
-        splashlogo.setLayoutParams(params);
+        ImageView loading = findViewById(R.id.imageView_loading_back);
+        double heightloader = Resources.getSystem().getDisplayMetrics().heightPixels*0.78;
+        ViewGroup.MarginLayoutParams params_loading = (ViewGroup.MarginLayoutParams) loading.getLayoutParams();
+        params_loading.topMargin = (int)(heightloader);
+        loading.setLayoutParams(params_loading);
+    }
+
+    public int screenHeight()
+    {
+        if(!hasSoftKeys(this.getWindowManager()))
+        {
+            return (int)(Resources.getSystem().getDisplayMetrics().heightPixels)-(getNavigationBarHeight(this));
+        }
+        else
+        {
+            return (int)(Resources.getSystem().getDisplayMetrics().heightPixels);
+        }
+    }
+
+    public boolean hasSoftKeys(WindowManager windowManager)
+    {
+        Display d = windowManager.getDefaultDisplay();
+
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        d.getRealMetrics(realDisplayMetrics);
+
+        int realHeight = realDisplayMetrics.heightPixels;
+        int realWidth = realDisplayMetrics.widthPixels;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        d.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
     }
 
     public int getStatusBarHeight(Context c) {
@@ -143,6 +175,16 @@ public class application_controller extends AppCompatActivity
         }
         return result;
     }
+
+    public int getNavigationBarHeight(Context c) {
+        Resources resources = c.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+
 
     public void initializeBackgroundColor()
     {
@@ -219,9 +261,7 @@ public class application_controller extends AppCompatActivity
     {
         webRequestHandler.getInstance().initialization(webView1,webView2,progressBar,searchbar, splashScreen,this, requestFailure,this);
         webView1.bringToFront();
-        Log.i("PROBLEM25","");
         progressBar.animate().setDuration(150).alpha(0f);
-        //floatingButton.setAlpha(0);
 
         session1 = new GeckoSession();
         runtime1 = GeckoRuntime.getDefault(application_controller.this);
@@ -237,7 +277,6 @@ public class application_controller extends AppCompatActivity
         Drawable img = getResources().getDrawable( R.drawable.lock );
         searchbar.measure(0, 0);
         img.setBounds( 0, (int)(searchbar.getMeasuredHeight()*0.00), (int)(searchbar.getMeasuredHeight()*1.10), (int)(searchbar.getMeasuredHeight()*0.69) );
-        //img.setBounds( 0, 0, 50, 31 );
         searchbar.setCompoundDrawables( img, null, null, null );
     }
 
@@ -393,7 +432,7 @@ public class application_controller extends AppCompatActivity
                 super.onPageFinished(view, url);
 
                 handler = new Handler();
-                int delay = 200;
+                int delay = 150;
                 if(startPage>2)
                 {
                     delay = 0;
@@ -423,12 +462,11 @@ public class application_controller extends AppCompatActivity
                             progressBar.animate().setDuration(150).alpha(0f).withEndAction((() -> progressBar.setVisibility(View.INVISIBLE)));;
                         }
 
+                        splashScreen.animate().alpha(0.0f).setStartDelay(150).setDuration(200).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
                         if(!status.hasApplicationLoaded)
                         {
                             status.hasApplicationLoaded = true;
                             handler = new Handler();
-
-                            splashScreen.animate().alpha(0.0f).setStartDelay(100).setDuration(300).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
 
                             Handler popuphandler = new Handler();
 
@@ -447,7 +485,7 @@ public class application_controller extends AppCompatActivity
                                         }
                                     }
                                 }
-                            }, 2000);
+                            }, 1000);
 
                         }
 
@@ -917,7 +955,7 @@ class progressDelegate implements GeckoSession.ProgressDelegate
             }
             else
             {
-                String editedURL = "https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all";
+                String editedURL = "https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all&savesearch=on";
                 status.currentURL = editedURL;
                 searchbar.setText(editedURL.replace("boogle.store","genesis.onion"));
                 searchbar.clearFocus();
@@ -927,7 +965,7 @@ class progressDelegate implements GeckoSession.ProgressDelegate
         }
         catch (IOException e)
         {
-            String editedURL = "https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all";
+            String editedURL = "https://boogle.store/search?q="+v.getText().toString().replaceAll(" ","+")+"&p_num=1&s_type=all&savesearch=on";
             status.currentURL = editedURL;
             searchbar.clearFocus();
             searchbar.setText(editedURL.replace("boogle.store","genesis.onion"));

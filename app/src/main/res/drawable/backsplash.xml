@@ -2,4 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:drawable="@color/splashblue"/>
+    <item>
+        <bitmap
+                android:gravity="center"
+                android:src="@mipmap/splashlogoclip"/>
+    </item>
 </layer-list>

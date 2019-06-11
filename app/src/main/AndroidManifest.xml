@@ -27,7 +27,7 @@
         </activity>
         <meta-data
                 android:name="io.fabric.ApiKey"
-                android:value="be76c64dae2519d4ab8daaed88298da14c7c294f"
+                android:value="be76c64dae2519d4ab8daaed88298da14c7candroid:largeScreens294f"
         />
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
