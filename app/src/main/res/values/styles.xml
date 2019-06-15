@@ -6,7 +6,7 @@
         <item name="colorPrimary">#f9f9f9</item>
         <item name="colorPrimaryDark">#f9f9f9</item>
         <item name="colorAccent">#f9f9f9</item>
-        <item name="android:windowBackground">@drawable/backsplash</item>
+        <item name="android:windowBackground">@xml/splash_gradient</item>
         <item name="android:statusBarColor">#000000</item>
     </style>
 

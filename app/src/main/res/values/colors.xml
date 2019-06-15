@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#000000</color>
     <color name="blue">#0066FF</color>
-    <color name="splashblue">#4d88ff</color>
+    <color name="ease_blue">#4d88ff</color>
+    <color name="cursor_blue">#3385ff</color>
+    <color name="text_color_highlight_v1">#b3d1ff</color>
+    <color name="blue_dark">#00264d</color>
+    <color name="blue_dark_v1">#212d45</color>
+
+    <color name="black">#000000</color>
+    <color name="headerblack">#212f45</color>
+    <color name="text_color_v1">#4d4d4d</color>
+    <color name="text_color_v2">#333333</color>
+
     <color name="holo_gray">#b3b3b3</color>
-    <color name="header">#212f45</color>
+    <color name="float_white">#bfbfbf</color>
+    <color name="button_gray">#d9d9d9</color>
+    <color name="white_darker">#f8f8f8</color>
+    <color name="white_dark">#f2f2f2</color>
+    <color name="white">#ffffff</color>
+
+    <color name="progress_tint">#f32323</color>
 </resources>

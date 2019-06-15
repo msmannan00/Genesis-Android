@@ -2,23 +2,20 @@ package com.darkweb.genesissearchengine;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-
-import java.io.*;
-import java.util.List;
-import java.util.UUID;
-
-import static android.content.Context.MODE_PRIVATE;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import com.darkweb.genesissearchengine.appManager.app_model;
+import com.darkweb.genesissearchengine.constants.keys;
 
 public class helperMethod
 {
-    public static boolean isNetworkAvailable(Context application_context)
+    /*Helper Methods*/
+    public static boolean isNetworkAvailable()
     {
-        ConnectivityManager cm = (ConnectivityManager)  application_context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager)  app_model.getInstance().getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected())
         {
@@ -27,53 +24,29 @@ public class helperMethod
         return false;
     }
 
-    public static boolean readPrefs(String valueKey,Context applicationContext) {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(applicationContext);
-        return prefs.getBoolean(valueKey,false);
+    public static String readHomepageHTML(Context applicationContext)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        return prefs.getString(keys.homepage_html_key,"");
     }
 
-    public static void savePrefs(String valueKey, boolean value,Context applicationContext) {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(applicationContext);
+    public static void setHomepageHTML(String html, Context applicationContext)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         SharedPreferences.Editor edit = prefs.edit();
-        edit.putBoolean(valueKey, value);
+        edit.putString(keys.homepage_html_key, html);
         edit.commit();
+
     }
 
-    public static void setPlaystoreStatus(Context context) {
-
-        String GooglePlayStorePackageNameOld = "com.google.market";
-        String GooglePlayStorePackageNameNew = "com.android.vending";
-
-        PackageManager packageManager = context.getPackageManager();
-        List<PackageInfo> packages = packageManager.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES);
-
-        for (PackageInfo packageInfo : packages)
+    public static void hideKeyboard()
+    {
+        View view = app_model.getInstance().getAppInstance().findViewById(android.R.id.content);
+        if (view != null)
         {
-            if (packageInfo.packageName.equals(GooglePlayStorePackageNameOld) ||
-                    packageInfo.packageName.equals(GooglePlayStorePackageNameNew)) {
-                status.isPlayStoreInstalled = true;
-                break;
-            }
+            InputMethodManager imm = (InputMethodManager) app_model.getInstance().getAppInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
-
-    public static String readInternalHTML(Context applicationContext)
-    {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("internalhtml","");
-    }
-
-    public static void setInternalHTML(String html,Context applicationContext)
-    {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(applicationContext);
-        SharedPreferences.Editor edit = prefs.edit();
-        edit.putString("internalhtml", html);
-        edit.commit();
-
     }
 
 }

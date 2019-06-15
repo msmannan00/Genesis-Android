@@ -17,7 +17,7 @@
         <uses-library
                 android:name="org.apache.http.legacy"
                 android:required="false" />
-        <activity android:name="com.darkweb.genesissearchengine.application_controller"
+        <activity android:name="com.darkweb.genesissearchengine.appManager.application_controller"
                   android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -27,7 +27,7 @@
         </activity>
         <meta-data
                 android:name="io.fabric.ApiKey"
-                android:value="be76c64dae2519d4ab8daaed88298da14c7candroid:largeScreens294f"
+                android:value="be76c64dae2519d4ab8daaed88298da14c7c294f"
         />
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
