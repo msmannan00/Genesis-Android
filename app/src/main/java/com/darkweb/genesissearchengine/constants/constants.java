@@ -14,6 +14,7 @@ public class constants
     public static String backendUrlSlashed = "https://boogle.store/";
     public static String frontUrlSlashed = "https://genesis.onion/";
     public static String frontEndUrlHost = "genesis.store";
+    public static String frontEndUrlHost_v1 = "genesis.onion";
     public static String allowedHost = ".onion";
     public static String reportUrl = "https://boogle.store/reportus?r_key=";
     public static String updateUrl = "https://boogle.store/manual?abi=";

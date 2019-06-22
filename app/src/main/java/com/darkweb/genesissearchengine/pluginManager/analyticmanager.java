@@ -3,6 +3,8 @@ package com.darkweb.genesissearchengine.pluginManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 
 import java.util.UUID;
 
@@ -46,6 +48,13 @@ public class analyticmanager
         Crashlytics.setUserIdentifier(uniqueID);
         Crashlytics.setUserEmail("user@fabric.io");
         Crashlytics.setUserName(uniqueID);
+    }
+
+    public void sendEvent(String value)
+    {
+        Answers.getInstance().logCustom(new CustomEvent(value)
+                .putCustomAttribute(analyticmanager.getInstance().uniqueID,value));
+
     }
 
 }

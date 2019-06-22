@@ -9,34 +9,41 @@
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+        <org.mozilla.geckoview.GeckoView
+                android:id="@+id/webLoader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="1"
+                android:layout_marginTop="55dp"
+                tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp">
+        </org.mozilla.geckoview.GeckoView>
+        <!-- <ImageView
+                android:id="@+id/pageLoader2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:alpha="1"
+                android:clickable="false"
+                android:layout_marginTop="55dp"
+                tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="0dp">
+        </ImageView> -->
         <WebView
                 android:id="@+id/pageLoader1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="55dp"
+                android:alpha="1"
+                android:background="@color/white"
                 tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="0dp">
         </WebView>
-        <WebView
-                android:id="@+id/pageLoader2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="55dp"
-                tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="0dp">
-        </WebView>
-        <org.mozilla.geckoview.GeckoView
-                android:id="@+id/webLoader"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0"
-                android:layout_marginTop="55dp"
-                tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp">
-        </org.mozilla.geckoview.GeckoView>
     </FrameLayout>
 
     <android.support.constraint.ConstraintLayout
             android:id="@+id/requestFailure"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:alpha="0"
+            android:visibility="invisible"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
@@ -97,33 +104,41 @@
     </android.support.constraint.ConstraintLayout>
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="71dp"
+            android:background="#00000000"
             app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="65dp"
                 android:id="@+id/topbar"
+                android:orientation="vertical"
+                android:background="#00000000"
+                android:gravity="left" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="RtlHardcoded,UselessParent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
                 android:orientation="horizontal"
-                android:elevation="10dp"
+                android:elevation="7dp"
                 android:background="@xml/floating_button_border"
                 android:gravity="left" app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="RtlHardcoded,UselessParent">
             <ImageButton
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10.5dp"
+                    android:tint="@color/black"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="0dp"
                     android:id="@+id/home"
-                    android:bottomRightRadius="13dp"
-                    android:bottomLeftRadius="13dp"
-                    android:topLeftRadius="13dp"
-                    android:topRightRadius="13dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_homeicon"
                     android:onClick="onHomeButtonPressed"
-                    android:background="@xml/home_pressed_state"
+                    android:src="@drawable/icon_homeicon"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/todo"/>
             <EditText
                     android:layout_width="0dp"
@@ -131,7 +146,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/text_color_v2"
                     android:selectAllOnFocus="true"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="12dp"
                     android:paddingRight="15dp"
                     android:textColorHighlight="@color/text_color_highlight_v1"
                     android:background="@xml/search_back_default"
@@ -143,10 +158,12 @@
                     android:inputType="textNoSuggestions"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="10dp"
                     android:maxLines="1"
                     android:id="@+id/search" android:layout_weight="1" android:importantForAutofill="no"
                     tools:targetApi="o"/>
+
+        </LinearLayout>
 
         </LinearLayout>
     </FrameLayout>
@@ -156,10 +173,11 @@
         <ProgressBar
                 style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="108dp"
+                android:layout_height="112dp"
                 android:progressBackgroundTint="@color/white"
                 android:id="@+id/progressBar"
-                android:scaleY="0.6"
+                android:alpha="0"
+                android:scaleY="0.7"
                 android:progressTint="@color/progress_tint"
                 android:progress="50" app:layout_constraintTop_toTopOf="parent"
         />
@@ -189,6 +207,7 @@
             android:src="@drawable/icon_ban"
             android:layout_height="wrap_content"
             android:alpha="0"
+            android:onClick="onFloatingButtonPressed"
             app:borderWidth="0dp"
             app:elevation="10dp"
             android:backgroundTint="@color/white"

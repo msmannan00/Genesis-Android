@@ -7,7 +7,7 @@ public class app_model
     /*Data Objects*/
     private static String currentURL = "http://boogle.store/";
     private static int port = 9150;
-    private boolean isLoadingURL = false;
+    private boolean isURLLoading = true;
     private Context appContext;
     private application_controller appInstance;
 
@@ -21,16 +21,6 @@ public class app_model
 
 
     /*Getters Setters*/
-    public boolean getIsLoadingURL()
-    {
-        return isLoadingURL;
-    }
-
-    public void setIsLoadingURL(boolean status)
-    {
-        isLoadingURL = status;
-    }
-
     public int getPort()
     {
         return port;
@@ -39,16 +29,6 @@ public class app_model
     public void setPort(int port)
     {
         this.port = port;
-    }
-
-    public String getCurrentURL()
-    {
-        return currentURL;
-    }
-
-    public void setCurrentURL(String currentURL)
-    {
-        this.currentURL = currentURL;
     }
 
     public Context getAppContext()

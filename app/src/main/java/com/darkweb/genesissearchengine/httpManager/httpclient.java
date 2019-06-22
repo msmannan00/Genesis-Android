@@ -33,7 +33,7 @@ public class httpclient
             {
                 try
                 {
-                    String c_url = url.replace("http://boogle","https://boogle");
+                    String c_url = url.replace("http://boogle","https://boogle").replaceAll("genesis.onion","boogle.store").replaceAll("genesis.store","boogle.store");
 
                     HttpClient client=new DefaultHttpClient();;
                     SSLConnectionSocketFactory scsf = new SSLConnectionSocketFactory(
@@ -55,15 +55,6 @@ public class httpclient
                     in.close();
 
                     html = str.toString();
-                    if(c_url.equals(constants.backendUrlSlashed))
-                    {
-                        html = html.replace("/privacy","https://boogle.store/privacy").replace("/about","https://boogle.store/about").replace("/reportus","https://boogle.store/reportus").replace("\"search\"","https://boogle.store/search").replace("/create","https://boogle.store/create");
-                        helperMethod.setHomepageHTML(html, app_model.getInstance().getAppContext());
-                    }
-                    if(!isCachedRequest)
-                    {
-                        startPostTask(messages.MESSAGE_UPDATE_TEXT_CHILD_THREAD,updateUIHandler);
-                    }
                 }
                 catch (Exception e)
                 {

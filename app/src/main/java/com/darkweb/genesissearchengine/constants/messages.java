@@ -6,5 +6,5 @@ public class messages
     public final static int LOCAL_HOMEPAGE_CACHED =3;
     public final static int INTERNET_ERROR =2;
     public final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
-
+    public final static int LOAD_WEBVIEW_BACKGROUND = 2;
 }

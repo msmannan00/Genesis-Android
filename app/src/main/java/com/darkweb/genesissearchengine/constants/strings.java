@@ -27,6 +27,7 @@ public class strings
     public static String orbot_init_title = "Initializing";
     public static String orbot_init_desc = "Please wait! While we connect you to hidden web. This might take few minutes\n";
     public static String orbot_init_bt1 = "Dismiss";
+    public static String orbot_init_bt2 = "Try Again";
 
     public static String version_title = "Update Pending";
     public static String version_desc = "You have not updated this app for a while please update it to get best performance\n";

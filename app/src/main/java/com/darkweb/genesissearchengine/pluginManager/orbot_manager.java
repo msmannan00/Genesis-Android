@@ -1,13 +1,17 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.util.Log;
 import com.darkweb.genesissearchengine.appManager.app_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperMethod;
 import com.msopentech.thali.android.toronionproxy.AndroidOnionProxyManager;
 import com.msopentech.thali.toronionproxy.OnionProxyManager;
 import org.mozilla.gecko.PrefsHelper;
+
+import java.io.IOException;
 
 public class orbot_manager {
 
@@ -28,18 +32,48 @@ public class orbot_manager {
     }
 
     /*Orbot Initialization*/
-    public boolean initOrbot()
+    public boolean initOrbot(String url)
     {
         if(!status.isTorInitialized)
         {
-            message_manager.getInstance().startingOrbotInfo();
-            initializeTorClient();
+            message_manager.getInstance().startingOrbotInfo(url);
             return false;
         }
         else
         {
             return true;
         }
+    }
+
+    public void reinitOrbot()
+    {
+        new Thread()
+        {
+            public void run()
+            {
+                try
+                {
+                    while (true)
+                    {
+                        if(!isLoading && (onionProxyManager == null || !onionProxyManager.isRunning()))
+                        {
+                            if(onionProxyManager != null)
+                            {
+                                onionProxyManager.stop();
+                            }
+                            isLoading = false;
+                            status.isTorInitialized = false;
+                            initializeTorClient();
+                        }
+                        sleep(1000);
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     public void initializeTorClient()
@@ -61,29 +95,27 @@ public class orbot_manager {
                             {
                                 break;
                             }
+
                             onionProxyManager = new AndroidOnionProxyManager(app_model.getInstance().getAppContext(), fileStorageLocation);
 
                             int totalSecondsPerTorStartup = 4 * 60;
                             int totalTriesPerTorStartup = 5;
+
                             boolean ok = onionProxyManager.startWithRepeat(totalSecondsPerTorStartup, totalTriesPerTorStartup);
-                            if (!ok) {
-                                return;
-                            } else {
-                                if (onionProxyManager.isRunning()) {
-                                }
+
+                            if (!ok)
+                            {
+                                continue;
                             }
 
-                            while (!onionProxyManager.isRunning()) {
-                                sleep(1000);
-                            }
                             if (onionProxyManager.isRunning()) {
                                 app_model.getInstance().setPort(onionProxyManager.getIPv4LocalHostSocksPort());
                                 initializeProxy();
-                                sleep(1500);
+                                //sleep(1500);
                                 status.isTorInitialized = true;
+                                isLoading = false;
                                 break;
                             }
-                            isLoading = false;
                         } catch (Exception ex) {
                             ex.printStackTrace();
                             continue;
@@ -103,8 +135,8 @@ public class orbot_manager {
         PrefsHelper.setPref(keys.proxy_socks_port, app_model.getInstance().getPort()); //manual proxy settings
         PrefsHelper.setPref(keys.proxy_socks_version,constants.proxy_socks_version); //manual proxy settings
         PrefsHelper.setPref(keys.proxy_socks_remote_dns,constants.proxy_socks_remote_dns); //manual proxy settings
-        //PrefsHelper.setPref(keys.proxy_cache,constants.proxy_cache);
-        //PrefsHelper.setPref(keys.proxy_memory,constants.proxy_memory);
+        PrefsHelper.setPref(keys.proxy_cache,constants.proxy_cache);
+        PrefsHelper.setPref(keys.proxy_memory,constants.proxy_memory);
         PrefsHelper.setPref(keys.proxy_useragent_override, constants.proxy_useragent_override);
         PrefsHelper.setPref(keys.proxy_donottrackheader_enabled,constants.proxy_donottrackheader_enabled);
         PrefsHelper.setPref(keys.proxy_donottrackheader_value,constants.proxy_donottrackheader_value);

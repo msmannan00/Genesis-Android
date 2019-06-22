@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.httpManager;
 
 import android.content.Context;
-import com.darkweb.genesissearchengine.pluginManager.preference_manager;
+import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
@@ -70,6 +70,16 @@ public class serverRequestManager
             }
 
         }.start();
+    }
+
+    public void versionChecker()
+    {
+        /*String version = preference_manager.getInstance().getString("version","none",this);
+        if(!version.equals(version_code) && !version.equals("none"))
+        {
+            message_manager.getInstance().versionWarning(this,Build.SUPPORTED_ABIS[0]);
+        }
+        webRequestHandler.getInstance().getVersion(this);*/
     }
 
 }
