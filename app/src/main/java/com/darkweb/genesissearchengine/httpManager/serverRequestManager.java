@@ -61,7 +61,7 @@ public class serverRequestManager
                         sb.append(charArray, 0, numCharsRead);
                     }
                     String result = sb.toString();
-                    preference_manager.getInstance().saveString("version",result);
+                    preference_manager.getInstance().setString("version",result);
 
                 }
                 catch (IOException e) {

@@ -24,21 +24,22 @@ public class admanager
 
     public void initialize()
     {
-        MobileAds.initialize(app_model.getInstance().getAppContext(), "ca-app-pub-5074525529134731~2926711128 ");
+        /*
+        MobileAds.initialize(app_model.getInstance().getAppContext(), "ca-app-pub-5074525529134731~2926711128");
         mInterstitialAd = new InterstitialAd(app_model.getInstance().getAppContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-5074525529134731/8478420705");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());*/
     }
 
     /*Helper Methods*/
 
     public void showAd(boolean isAdForced)
     {
-
+        /*
         if(!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded())
         {
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            if(isAdForced || adCount==0 || adCount%3==0)
+            if(isAdForced || adCount==0 || adCount%5==0)
             {
                 adCount = 0;
             }
@@ -65,6 +66,6 @@ public class admanager
                     adCount += 1;
                 }
             }
-        }
+        }*/
     }
 }

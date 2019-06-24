@@ -27,6 +27,7 @@ public class webviewClient
                 }
                 if(!url.contains("boogle"))
                 {
+                    app_model.getInstance().getAppInstance().stopHiddenView();
                     fabricManager.getInstance().sendEvent("BASE SIMPLE SEARCHED : " + url);
                     isGeckoView = true;
                     if(orbot_manager.getInstance().initOrbot(url))

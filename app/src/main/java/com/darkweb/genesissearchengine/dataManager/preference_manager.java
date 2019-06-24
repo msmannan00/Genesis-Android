@@ -28,13 +28,13 @@ public class preference_manager
     }
 
     /*Saving Preferences*/
-    public void saveString(String valueKey, String value)
+    public void setString(String valueKey, String value)
     {
         edit.putString(valueKey, value);
         edit.commit();
     }
 
-    public void saveBool(String valueKey, boolean value)
+    public void setBool(String valueKey, boolean value)
     {
         edit.putBoolean(valueKey, value);
         edit.commit();
@@ -50,4 +50,5 @@ public class preference_manager
     {
         return prefs.getBoolean(valueKey, valueDefault);
     }
+
 }

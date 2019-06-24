@@ -17,7 +17,7 @@ public class orbot_manager {
 
     /*Private Variables*/
     private boolean isLoading = false;
-
+    private int threadCounter = 100;
     /*Local Initialization*/
     private static final orbot_manager ourInstance = new orbot_manager();
     private OnionProxyManager onionProxyManager = null;
@@ -36,6 +36,7 @@ public class orbot_manager {
     {
         if(!status.isTorInitialized)
         {
+            fabricManager.getInstance().sendEvent("TOR NOT INITIALIZED : " + url);
             message_manager.getInstance().startingOrbotInfo(url);
             return false;
         }
@@ -51,29 +52,56 @@ public class orbot_manager {
         {
             public void run()
             {
-                try
+                while (true)
                 {
-                    while (true)
+                    try
                     {
-                        if(!isLoading && (onionProxyManager == null || !onionProxyManager.isRunning()))
+                        if(onionProxyManager!=null)
                         {
-                            if(onionProxyManager != null)
+                            if(onionProxyManager.isRunning())
                             {
-                                onionProxyManager.stop();
+                                status.isTorInitialized = true;
+                                threadCounter = 5000;
+                            }
+                        }
+                        if(!isLoading && !status.isTorInitialized)
+                        {
+                            if(onionProxyManager == null)
+                            {
+                                onionProxyManager = new AndroidOnionProxyManager(app_model.getInstance().getAppContext(), strings.torfolder);
                             }
                             isLoading = false;
                             status.isTorInitialized = false;
                             initializeTorClient();
                         }
-                        sleep(1000);
+                        else
+                        {
+                            sleep(threadCounter);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
                     }
                 }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+
             }
         }.start();
+    }
+
+    public String getLogs()
+    {
+        if(onionProxyManager!=null)
+        {
+            String Logs = onionProxyManager.getLastLog();
+            if(Logs.equals(""))
+            {
+                return "Loading Please Wait";
+            }
+            Logs=Logs.replace("FAILED","Securing");
+            return Logs;
+        }
+        return "Loading Please Wait";
     }
 
     public void initializeTorClient()
@@ -89,14 +117,6 @@ public class orbot_manager {
                         try
                         {
                             isLoading = true;
-                            String fileStorageLocation = strings.torfolder;
-
-                            if(onionProxyManager!=null && onionProxyManager.isRunning())
-                            {
-                                break;
-                            }
-
-                            onionProxyManager = new AndroidOnionProxyManager(app_model.getInstance().getAppContext(), fileStorageLocation);
 
                             int totalSecondsPerTorStartup = 4 * 60;
                             int totalTriesPerTorStartup = 5;
@@ -108,14 +128,12 @@ public class orbot_manager {
                                 continue;
                             }
 
-                            if (onionProxyManager.isRunning()) {
-                                app_model.getInstance().setPort(onionProxyManager.getIPv4LocalHostSocksPort());
-                                initializeProxy();
-                                //sleep(1500);
-                                status.isTorInitialized = true;
-                                isLoading = false;
-                                break;
-                            }
+                            app_model.getInstance().setPort(onionProxyManager.getIPv4LocalHostSocksPort());
+                            initializeProxy();
+                            status.isTorInitialized = true;
+                            isLoading = false;
+                            break;
+
                         } catch (Exception ex) {
                             ex.printStackTrace();
                             continue;

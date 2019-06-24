@@ -52,8 +52,8 @@ public class analyticmanager
 
     public void sendEvent(String value)
     {
-        Answers.getInstance().logCustom(new CustomEvent(value)
-                .putCustomAttribute(analyticmanager.getInstance().uniqueID,value));
+        firebase.getInstance().logEvent(value,uniqueID);
+        Answers.getInstance().logCustom(new CustomEvent(value));
 
     }
 

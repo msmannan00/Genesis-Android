@@ -19,5 +19,6 @@ public class keys
     public static String proxy_useragent_override  = "general.useragent.override";
     public static String proxy_donottrackheader_enabled  = "privacy.donottrackheader.enabled";
     public static String proxy_donottrackheader_value  = "privacy.donottrackheader.value";
+    public static String hasOrbotInstalled  = "hasOrbotInstalled";
 
 }

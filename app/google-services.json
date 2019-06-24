@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "891955481900",
+    "firebase_url": "https://genesis-app-a512d.firebaseio.com",
+    "project_id": "genesis-app-a512d",
+    "storage_bucket": "genesis-app-a512d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891955481900:android:360c1798435c303f",
+        "android_client_info": {
+          "package_name": "com.darkweb.genesissearchengine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891955481900-20ves4hv1nujrthcs2u75to1gn6c3v59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.darkweb.genesissearchengine",
+            "certificate_hash": "fc03dc31bd3710e568f8a20d1818adc49af8d139"
+          }
+        },
+        {
+          "client_id": "891955481900-94h8etf05qautcg9ue2vfc4ct2oikr3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwvxQTaK8F6nevbWkL2t1TTEljQNZeKXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891955481900-94h8etf05qautcg9ue2vfc4ct2oikr3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

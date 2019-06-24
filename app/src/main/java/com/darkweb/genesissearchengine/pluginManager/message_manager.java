@@ -12,7 +12,6 @@ import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
-import com.darkweb.genesissearchengine.httpManager.serverRequestManager;
 import com.example.myapplication.R;
 
 public class message_manager
@@ -65,7 +64,7 @@ public class message_manager
                     })
                     .addButton(strings.welcome_message_bt5, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
-                        preference_manager.getInstance().saveBool(keys.first_time_loaded,true);
+                        preference_manager.getInstance().setBool(keys.first_time_loaded,true);
                     });
             builder.show();
 

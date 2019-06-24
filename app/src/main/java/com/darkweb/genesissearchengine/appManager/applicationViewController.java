@@ -1,10 +1,11 @@
 package com.darkweb.genesissearchengine.appManager;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
+import android.os.Looper;
+import android.os.Message;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -15,15 +16,21 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.messages;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.httpManager.serverRequestManager;
 import com.darkweb.genesissearchengine.pluginManager.message_manager;
+import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 import com.example.myapplication.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 
 public class applicationViewController
 {
@@ -36,7 +43,12 @@ public class applicationViewController
     private FloatingActionButton floatingButton;
     private ImageView loading;
     private ImageView splashlogo;
+    private TextView loadingText;
+
+    /*Private Variables*/
     private boolean pageLoadedSuccessfully = true;
+    private boolean isSplashLoading = false;
+    private Handler updateUIHandler = null;
 
     /*ProgressBar Delayed Updater*/
     Handler progressBarHandler = null;
@@ -53,7 +65,7 @@ public class applicationViewController
     {
     }
 
-    public void initialization(WebView webView1, ProgressBar progressBar, EditText searchbar, ConstraintLayout splashScreen, ConstraintLayout requestFailure, FloatingActionButton floatingButton, ImageView loading, ImageView splashlogo)
+    public void initialization(WebView webView1, TextView loadingText, ProgressBar progressBar, EditText searchbar, ConstraintLayout splashScreen, ConstraintLayout requestFailure, FloatingActionButton floatingButton, ImageView loading, ImageView splashlogo)
     {
         this.webView = webView1;
         this.progressBar = progressBar;
@@ -63,12 +75,14 @@ public class applicationViewController
         this.floatingButton = floatingButton;
         this.loading = loading;
         this.splashlogo = splashlogo;
+        this.loadingText = loadingText;
 
         app_model.getInstance().getAppInstance().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         checkSSLTextColor();
         initSplashScreen();
         initLock();
         initViews();
+        createUpdateUiHandler();
     }
 
     public boolean isHiddenView()
@@ -107,19 +121,85 @@ public class applicationViewController
     /*Helper Methods*/
     public void onInternetError()
     {
-        splashScreen.animate().setStartDelay(2000).alpha(0);
+        disableSplashScreen();
         requestFailure.setVisibility(View.VISIBLE);
         webView.setAlpha(0);
         requestFailure.animate().alpha(1f).setDuration(150);
         pageLoadedSuccessfully = false;
-        Log.i("jhgjhg",0+"");
         onClearSearchBarCursor();
         onProgressBarUpdate(0);
+        disableFloatingView();
     }
 
-    public void onDisableInternetError()
+    public void disableSplashScreen()
     {
-        requestFailure.animate().alpha(0f).setDuration(150).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));;
+        if(!isSplashLoading)
+        {
+            isSplashLoading = true;
+            new Thread()
+            {
+                public void run()
+                {
+                    try
+                    {
+                        boolean isFirstInstall = preference_manager.getInstance().getBool(keys.hasOrbotInstalled,true);
+                        while (!status.isTorInitialized && isFirstInstall)
+                        {
+                            startPostTask(messages.UPDATE_LOADING_TEXT);
+                            sleep(100);
+                        }
+                        preference_manager.getInstance().setBool(keys.hasOrbotInstalled,false);
+                        startPostTask(messages.DISABLE_SPLASH_SCREEN);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.i("Fizza",ex.getMessage());
+                    }
+                }
+            }.start();
+        }
+    }
+
+    public void startPostTask(int m_id)
+    {
+        Message message = new Message();
+        message.what = m_id;
+        updateUIHandler.sendMessage(message);
+    }
+
+    @SuppressLint("HandlerLeak")
+    private void createUpdateUiHandler()
+    {
+                updateUIHandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                if(msg.what == messages.UPDATE_LOADING_TEXT)
+                {
+                    loadingText.setText(orbot_manager.getInstance().getLogs());
+                }
+                if(msg.what == messages.DISABLE_SPLASH_SCREEN)
+                {
+                    status.isApplicationLoaded = true;
+                    splashScreen.animate().alpha(0.0f).setDuration(200).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
+                    onWelcomeMessageCheck();
+                }
+            }
+        };
+    }
+
+    public boolean onDisableInternetError()
+    {
+        if(requestFailure.getAlpha()==1)
+        {
+            requestFailure.animate().alpha(0f).setDuration(150).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void onPageFinished(boolean status)
@@ -135,9 +215,8 @@ public class applicationViewController
                 onUpdateView(true);
             }
             //onUpdateSearchBar(webView.getUrl());
-            splashScreen.animate().alpha(0.0f).setStartDelay(150).setDuration(200).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
+            disableSplashScreen();
             floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));;
-            onWelcomeMessageCheck();
 
             app_model.getInstance().getAppInstance().stopHiddenView();
         }
@@ -252,14 +331,11 @@ public class applicationViewController
 
     public void onWelcomeMessageCheck()
     {
-        if(!status.isApplicationLoaded)
+        if(!preference_manager.getInstance().getBool("FirstTimeLoaded",false))
         {
-            if(!preference_manager.getInstance().getBool("FirstTimeLoaded",false))
-            {
-                message_manager.getInstance().welcomeMessage();
-            }
-            serverRequestManager.getInstance().versionChecker();
+            message_manager.getInstance().welcomeMessage();
         }
+        serverRequestManager.getInstance().versionChecker();
     }
 
     public void onReload()

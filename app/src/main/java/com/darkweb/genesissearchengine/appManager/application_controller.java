@@ -1,22 +1,19 @@
 package com.darkweb.genesissearchengine.appManager;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
-import android.support.constraint.ConstraintLayout;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.*;
 import android.webkit.*;
 import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.darkweb.genesissearchengine.*;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.pluginManager.*;
 
 import com.example.myapplication.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.mozilla.geckoview.GeckoView;
 
 
@@ -34,6 +31,7 @@ public class application_controller extends AppCompatActivity
     private FloatingActionButton floatingButton;
     private ImageView loadingIcon;
     private ImageView splashlogo;
+    private TextView loadingText;
 
     /*Redirection Objects*/
     private geckoClients geckoclient = null;
@@ -58,7 +56,8 @@ public class application_controller extends AppCompatActivity
             preference_manager.getInstance().initialize();
             orbot_manager.getInstance().reinitOrbot();
             admanager.getInstance().initialize();
-            applicationViewController.getInstance().initialization(webView,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
+            applicationViewController.getInstance().initialization(webView,loadingText,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
+            firebase.getInstance().initialize();
             geckoclient.initialize(geckoView);
 
             startApplication();
@@ -96,6 +95,7 @@ public class application_controller extends AppCompatActivity
         loadingIcon = findViewById(R.id.imageView_loading_back);
         splashlogo = findViewById(R.id.backsplash);
         geckoView = findViewById(R.id.webLoader);
+        loadingText = findViewById(R.id.loadingText);
 
         webviewclient = new webviewClient();
         geckoclient = new geckoClients();
@@ -116,6 +116,7 @@ public class application_controller extends AppCompatActivity
     public void setWebViewSettings(WebView view)
     {
         view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        view.getSettings().setJavaScriptEnabled(true);
         view.getSettings().setUseWideViewPort(true);
     }
 
@@ -186,9 +187,9 @@ public class application_controller extends AppCompatActivity
         applicationViewController.getInstance().disableFloatingView();
     }
 
-    public void onDisableInternetError()
+    public boolean onDisableInternetError()
     {
-        applicationViewController.getInstance().onDisableInternetError();
+       return applicationViewController.getInstance().onDisableInternetError();
     }
 
     public void onProgressBarUpdateView(int progress)
