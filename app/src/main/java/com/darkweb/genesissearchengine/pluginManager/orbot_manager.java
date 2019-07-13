@@ -1,17 +1,13 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import android.util.Log;
-import com.darkweb.genesissearchengine.appManager.app_model;
+import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.helperMethod;
 import com.msopentech.thali.android.toronionproxy.AndroidOnionProxyManager;
 import com.msopentech.thali.toronionproxy.OnionProxyManager;
 import org.mozilla.gecko.PrefsHelper;
-
-import java.io.IOException;
 
 public class orbot_manager {
 

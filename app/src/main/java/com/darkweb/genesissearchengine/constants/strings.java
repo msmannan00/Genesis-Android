@@ -2,6 +2,8 @@ package com.darkweb.genesissearchengine.constants;
 
 public class strings
 {
+    public static String torfolder = "torfiles";
+
     public static String welcome_message_title = "Welcome | Deep Web Gateway";
     public static String welcome_message_desc = "\nWelcome to Deep Web | Dark Web Gateway. This application provide you a platform to Search and Open Dark Web urls.\n\nYou cannot open any url related to normal internet as its not the intended purpose. You can check out following urls to get yourself started\n\nHere are few Suggestions\n";
     public static String welcome_message_bt1 = "Deep Web Online Market";
@@ -37,7 +39,27 @@ public class strings
     public static String report_success_desc = "URL has been successfully reported. It will take about a week to completely remove this website from our servers\n";
     public static String report_success_bt1 = "Dismiss";
 
-    public static String torfolder = "torfiles";
+    public static String rate_title = "Rate US";
+    public static String rate_message = "We dont take donations or earn money from this app. We are trying to make a private anonymous internet \n\nIf you think this app works please rate us it gives us hope and strength to continue";
+    public static String rate_positive = "Like This App";
+    public static String rate_negative = "Don't Like This App";
+
+    public static String rate_success_title = "Sorry To Hear That!";
+    public static String rate_success_desc = "If you are having any trouble and want to contact us please email us at gamesolstudios@gmail.com \n\nWe will try to solve your problem as soon as possible";
+    public static String rate_success_bt1 = "Dismiss";
+
+    public static String bookmark_url_title = "Bookmark This Page";
+    public static String bookmark_url_desc = "Bookmark this URL To Restore It Again Afterward\n";
+    public static String bookmark_url_bt1 = "Bookmark";
+    public static String bookmark_url_bt2 = "Dismiss";
+
+    public static String clear_title = "Warning | Clearing Data";
+    public static String clear_desc = "You are about to clear your data if you are sure please continue\n";
+    public static String clear_bt1 = "Clear Data";
+    public static String clear_bt2 = "Dismiss";
+
+    public static String darkweb = "Darkweb";
+
 
 }
 

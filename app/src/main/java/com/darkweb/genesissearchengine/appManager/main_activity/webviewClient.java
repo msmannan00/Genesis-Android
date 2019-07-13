@@ -1,9 +1,9 @@
-package com.darkweb.genesissearchengine.appManager;
+package com.darkweb.genesissearchengine.appManager.main_activity;
 
-import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.pluginManager.fabricManager;
 import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
@@ -25,19 +25,20 @@ public class webviewClient
                     app_model.getInstance().getAppInstance().onProgressBarUpdateView(0);
                     return true;
                 }
-                if(!url.contains("boogle"))
+                if(!url.contains("boogle") && !url.equals(constants.backendGoogle) && !url.equals(constants.backendBing))
                 {
                     app_model.getInstance().getAppInstance().stopHiddenView();
                     fabricManager.getInstance().sendEvent("BASE SIMPLE SEARCHED : " + url);
                     isGeckoView = true;
                     if(orbot_manager.getInstance().initOrbot(url))
                     {
-                        app_model.getInstance().getAppInstance().onloadURL(url,true);
+                        app_model.getInstance().getAppInstance().onloadURL(url,true,true);
                     }
                     return true;
                 }
                 else
                 {
+                    app_model.getInstance().addHistory(url);
                     fabricManager.getInstance().sendEvent("BASE ONION SEARCHED : " + url);
                     app_model.getInstance().getAppInstance().onRequestTriggered(false,url);
                     return false;

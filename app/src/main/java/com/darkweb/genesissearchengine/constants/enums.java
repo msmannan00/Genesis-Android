@@ -5,5 +5,6 @@ public class enums
     /*Web Request*/
     public enum webRequestStatus{notRunning,running,repeat;}
 
+    public enum searchEngine{Darkweb,Bing,Google}
 
 }

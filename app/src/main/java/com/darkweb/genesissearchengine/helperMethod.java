@@ -1,12 +1,14 @@
 package com.darkweb.genesissearchengine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
@@ -17,9 +19,16 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
-import com.darkweb.genesissearchengine.appManager.app_model;
+import androidx.core.app.ShareCompat;
+import com.darkweb.genesissearchengine.appManager.list_activity.list_controller;
+import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.example.myapplication.BuildConfig;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class helperMethod
 {
@@ -35,20 +44,6 @@ public class helperMethod
         return false;
     }
 
-    public static String readHomepageHTML(Context applicationContext)
-    {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString(keys.homepage_html_key,"");
-    }
-
-    public static void setHomepageHTML(String html, Context applicationContext)
-    {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        SharedPreferences.Editor edit = prefs.edit();
-        edit.putString(keys.homepage_html_key, html);
-        edit.commit();
-
-    }
 
     public static String completeURL(String url)
     {
@@ -83,6 +78,11 @@ public class helperMethod
         }
     }
 
+    public static int screenWidth()
+    {
+        return (int)(Resources.getSystem().getDisplayMetrics().widthPixels);
+    }
+
     public static int getNavigationBarHeight() {
         Resources resources = app_model.getInstance().getAppContext().getResources();
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
@@ -98,14 +98,6 @@ public class helperMethod
         rotate.setDuration(2000);
         rotate.setRepeatCount(Animation.INFINITE);
         return rotate;
-    }
-
-    public static Bitmap screenShot(View view)
-    {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-        return bitmap;
     }
 
     public static ViewGroup.MarginLayoutParams getCenterScreenPoint(ViewGroup.LayoutParams itemLayoutParams)
@@ -147,6 +139,45 @@ public class helperMethod
             return false;
         }
 
+    }
+
+    public static void rateApp()
+    {
+        preference_manager.getInstance().setBool(keys.isAppRated,true);
+        app_model.getInstance().getAppInstance().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
+    }
+
+    public static void shareApp()
+    {
+        ShareCompat.IntentBuilder.from(app_model.getInstance().getAppInstance())
+                .setType("text/plain")
+                .setChooserTitle("Genesis | Onion Search")
+                .setText("http://play.google.com/store/apps/details?id=" + app_model.getInstance().getAppInstance().getPackageName())
+                .startChooser();
+    }
+
+    public static String getHost(String link)
+    {
+        URL url = null;
+        try
+        {
+            url = new URL(link);
+            String host = url.getHost();
+            return host;
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+            return "";
+        }
+
+    }
+
+    public static void openActivity( Class<?> cls,int type)
+    {
+        Intent myIntent = new Intent(app_model.getInstance().getAppInstance(), cls);
+        myIntent.putExtra(keys.list_type, type);
+        app_model.getInstance().getAppInstance().startActivity(myIntent);
     }
 
 }

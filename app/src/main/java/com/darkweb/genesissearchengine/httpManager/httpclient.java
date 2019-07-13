@@ -2,10 +2,7 @@ package com.darkweb.genesissearchengine.httpManager;
 
 import android.os.Handler;
 import android.os.Message;
-import com.darkweb.genesissearchengine.appManager.app_model;
-import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.messages;
-import com.darkweb.genesissearchengine.helperMethod;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.methods.HttpGet;

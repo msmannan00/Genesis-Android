@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager;
+package com.darkweb.genesissearchengine.appManager.main_activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.darkweb.genesissearchengine.*;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.pluginManager.*;
 
@@ -27,7 +29,7 @@ public class application_controller extends AppCompatActivity
     private ProgressBar progressBar;
     private ConstraintLayout requestFailure;
     private ConstraintLayout splashScreen;
-    private EditText searchbar;
+    private AutoCompleteTextView searchbar;
     private FloatingActionButton floatingButton;
     private ImageView loadingIcon;
     private ImageView splashlogo;
@@ -43,24 +45,27 @@ public class application_controller extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.application_view);
+        setContentView(R.layout.home_view);
 
         if(helperMethod.isBuildValid())
         {
             initializeAppModel();
+            preference_manager.getInstance().initialize();
+
+            status.initStatus();
             initializeCrashlytics();
             initializeConnections();
             initializeWebView();
             initializeLocalEventHandlers();
+            initAdManager();
 
-            preference_manager.getInstance().initialize();
             orbot_manager.getInstance().reinitOrbot();
-            admanager.getInstance().initialize();
             applicationViewController.getInstance().initialization(webView,loadingText,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
             firebase.getInstance().initialize();
             geckoclient.initialize(geckoView);
+            app_model.getInstance().initialization();
 
-            startApplication();
+            initSearchEngine();
         }
         else
         {
@@ -70,10 +75,26 @@ public class application_controller extends AppCompatActivity
 
     }
 
-    public void startApplication()
+    public void initAdManager()
+    {
+        admanager.getInstance().initialize();
+    }
+
+    public void initSearchEngine()
     {
         fabricManager.getInstance().sendEvent("HOME PAGE LOADING : " );
-        webView.loadUrl(constants.backendUrl);
+        if(status.search_status.equals(enums.searchEngine.Google.toString()))
+        {
+            webView.loadUrl(constants.backendGoogle);
+        }
+        else if(status.search_status.equals(enums.searchEngine.Bing.toString()))
+        {
+            webView.loadUrl(constants.backendBing);
+        }
+        else
+        {
+            webView.loadUrl(constants.backendGenesis);
+        }
     }
 
     public void initializeAppModel()
@@ -104,7 +125,7 @@ public class application_controller extends AppCompatActivity
 
     public void initializeCrashlytics()
     {
-        fabricManager.getInstance().init();
+        //fabricManager.getInstance().init();
     }
 
     public void initializeWebView()
@@ -116,14 +137,13 @@ public class application_controller extends AppCompatActivity
     public void setWebViewSettings(WebView view)
     {
         view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        view.getSettings().setJavaScriptEnabled(true);
+        view.getSettings().setJavaScriptEnabled(false);
         view.getSettings().setUseWideViewPort(true);
     }
 
     /*------------------------------------------------------- Event Handler ----------------------------------------------------*/
 
-    private void initializeLocalEventHandlers()
-    {
+    private void initializeLocalEventHandlers() {
         searchbar.setOnEditorActionListener((v, actionId, event) ->
         {
             return eventhandler.onEditorClicked(v,actionId,event);
@@ -151,13 +171,17 @@ public class application_controller extends AppCompatActivity
         eventhandler.onHomeButtonPressed();
     }
 
+    public void onMenuButtonPressed(View view)
+    {
+        eventhandler.onMenuButtonPressed(view);
+    }
+
     /*-------------------------------------------------------Helper Method In UI Redirection----------------------------------------------------*/
 
-    public void onloadURL(String url,boolean isHiddenWeb)
-    {
+    public void onloadURL(String url,boolean isHiddenWeb,boolean isUrlSavable) {
         if(isHiddenWeb)
         {
-            geckoclient.loadGeckoURL(url,geckoView);
+            geckoclient.loadGeckoURL(url,geckoView,isUrlSavable);
         }
         else
         {
@@ -166,8 +190,7 @@ public class application_controller extends AppCompatActivity
         }
     }
 
-    public void onRequestTriggered(boolean isHiddenWeb,String url)
-    {
+    public void onRequestTriggered(boolean isHiddenWeb,String url) {
         applicationViewController.getInstance().onRequestTriggered(isHiddenWeb,url);
     }
 
@@ -181,8 +204,7 @@ public class application_controller extends AppCompatActivity
         applicationViewController.getInstance().onUpdateSearchBar(url);
     }
 
-    public void onInternetErrorView()
-    {
+    public void onInternetErrorView() {
         applicationViewController.getInstance().onInternetError();
         applicationViewController.getInstance().disableFloatingView();
     }
@@ -192,8 +214,7 @@ public class application_controller extends AppCompatActivity
        return applicationViewController.getInstance().onDisableInternetError();
     }
 
-    public void onProgressBarUpdateView(int progress)
-    {
+    public void onProgressBarUpdateView(int progress) {
         applicationViewController.getInstance().onProgressBarUpdate(progress);
     }
 
@@ -217,17 +238,39 @@ public class application_controller extends AppCompatActivity
         applicationViewController.getInstance().onReload();
     }
 
+    public void onShowAds()
+    {
+        applicationViewController.getInstance().onShowAds();
+    }
+
+    public void openMenu(View view) {
+        applicationViewController.getInstance().openMenu(view);
+    }
+
+    public void reInitializeSuggestion()   {
+        applicationViewController.getInstance().reInitializeSuggestion();
+    }
 
     /*-------------------------------------------------------Helper Method Out UI Redirection----------------------------------------------------*/
+
+    public String getSearchBarUrl()
+    {
+         return applicationViewController.getInstance().getSearchBarUrl();
+    }
+
+    public void onReInitGeckoView() {
+        geckoclient.initialize(geckoView);
+        geckoclient.onReloadHiddenView();
+    }
 
     public void onHiddenGoBack()
     {
         geckoclient.onHiddenGoBack(geckoView);
     }
 
-    public void stopHiddenView()
-    {
+    public void stopHiddenView() {
         geckoclient.stopHiddenView(geckoView);
+        geckoclient.removeHistory();
     }
 
     public void onReloadHiddenView()
@@ -240,13 +283,17 @@ public class application_controller extends AppCompatActivity
        return geckoclient.isGeckoViewRunning();
     }
 
-    public void forcedCachePatch()
-    {
-    }
-
     public boolean isInternetErrorOpened()
     {
         return requestFailure.getAlpha()==1;
+    }
+
+    /*-------------------------------------------------------Menu Handler----------------------------------------------------*/
+
+    public boolean onMenuOptionSelected(MenuItem item) {
+
+        eventhandler.onMenuPressed(item.getItemId());
+        return super.onOptionsItemSelected(item);
     }
 
 }

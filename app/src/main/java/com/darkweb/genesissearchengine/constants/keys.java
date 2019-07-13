@@ -20,5 +20,12 @@ public class keys
     public static String proxy_donottrackheader_enabled  = "privacy.donottrackheader.enabled";
     public static String proxy_donottrackheader_value  = "privacy.donottrackheader.value";
     public static String hasOrbotInstalled  = "hasOrbotInstalled";
+    public static String isAppRated  = "isAppRated";
+    public static String list_type  = "list_type";
+
+    /*Settings*/
+    public static String search_engine  = "search_engine";
+    public static String java_script  = "java_script";
+    public static String history_clear  = "history_clear";
 
 }

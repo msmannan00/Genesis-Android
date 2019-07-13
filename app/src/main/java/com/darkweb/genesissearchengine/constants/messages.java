@@ -9,4 +9,5 @@ public class messages
     public final static int LOAD_WEBVIEW_BACKGROUND = 2;
     public final static int DISABLE_SPLASH_SCREEN =3;
     public final static int UPDATE_LOADING_TEXT =5;
+    public final static int SHOW_ADS =6;
 }

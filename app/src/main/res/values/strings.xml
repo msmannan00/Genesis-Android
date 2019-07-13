@@ -1,13 +1,47 @@
 <resources>
+
+    <!-- Application Strings -->
     <string name="app_name">Genesis</string>
-    <string name="SearchHint">Search or type web address</string>
+    <string name="SearchHint">Search History</string>
     <string name="homeUrl">https://genesis.onion</string>
     <string name="errorTiyle">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
     <string name="todo">TODO</string>
     <string name="projectName">Genesis Search Engine</string>
     <string name="loadingText">Online Freedom</string>
     <string name="reload">Reload</string>
-    <string name="internetErrorMessage">These might be the problems you are facing \n\n• Webpage or Website might be down \n•
-        Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall
-    </string>
+    <string name="internetErrorMessage">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
+    <string name="title_activity_list_manager">list_manager</string>
+    <string name="title_activity_setting_controller">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Settings -->
+    <string name="settings_header">Settings</string>
+    <string name="settings_search_engine">Search Engine</string>
+    <string name="settings_javascript">Javascript</string>
+    <string name="settings_clear_history">Auto Clear History</string>
+
+    <string-array name="search_engines">
+        <item>Darkweb</item>
+        <item>Google</item>
+        <item>Bing</item>
+    </string-array>
+
+    <string-array name="boolean_option">
+        <item>Enabled</item>
+        <item>Disabled</item>
+    </string-array>
+
 </resources>

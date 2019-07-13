@@ -9,7 +9,9 @@ public class constants
     public static String softwares = "https://boogle.store/search?q=softwares+tools&p_num=1&s_type=all&p_num=1&s_type=all";
 
     /*URL CONSTANTS*/
-    public static String backendUrl = "https://boogle.store";
+    public static String backendGenesis = "https://boogle.store";
+    public static String backendGoogle = "https://www.google.com/";
+    public static String backendBing = "https://www.bing.com/";
     public static String backendUrlHost = "boogle.store";
     public static String backendUrlSlashed = "https://boogle.store/";
     public static String frontUrlSlashed = "https://genesis.onion/";
@@ -31,7 +33,16 @@ public class constants
     public static boolean proxy_socks_remote_dns  = true;
     public static boolean proxy_cache  = false;
     public static boolean proxy_memory  = false;
-    public static String proxy_useragent_override  = "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0";
+    public static String proxy_useragent_override  = "Mozilla/5.0 (Android 9; Mobile; rv:67.0) Gecko/67.0 Firefox/67.0";
     public static boolean proxy_donottrackheader_enabled  = false;
     public static int proxy_donottrackheader_value  = 1;
+
+    public static int list_history  = 1;
+    public static int list_bookmark  = 2;
+
+    public static String databae_name="genesis.db";
+    public static int databae_version=1;
+
+    public static int max_history_size=3;
+    public static int max_bookmark_size=3;
 }

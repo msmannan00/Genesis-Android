@@ -1,23 +1,21 @@
-package com.darkweb.genesissearchengine.appManager;
+package com.darkweb.genesissearchengine.appManager.main_activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.MenuCompat;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.messages;
@@ -25,6 +23,7 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.httpManager.serverRequestManager;
+import com.darkweb.genesissearchengine.pluginManager.admanager;
 import com.darkweb.genesissearchengine.pluginManager.message_manager;
 import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 import com.example.myapplication.R;
@@ -37,7 +36,7 @@ public class applicationViewController
     /*ViewControllers*/
     private WebView webView;
     private ProgressBar progressBar;
-    private EditText searchbar;
+    private AutoCompleteTextView searchbar;
     private ConstraintLayout splashScreen;
     private ConstraintLayout requestFailure;
     private FloatingActionButton floatingButton;
@@ -49,6 +48,7 @@ public class applicationViewController
     private boolean pageLoadedSuccessfully = true;
     private boolean isSplashLoading = false;
     private Handler updateUIHandler = null;
+    private AutoCompleteAdapter suggestionAdapter;
 
     /*ProgressBar Delayed Updater*/
     Handler progressBarHandler = null;
@@ -65,7 +65,7 @@ public class applicationViewController
     {
     }
 
-    public void initialization(WebView webView1, TextView loadingText, ProgressBar progressBar, EditText searchbar, ConstraintLayout splashScreen, ConstraintLayout requestFailure, FloatingActionButton floatingButton, ImageView loading, ImageView splashlogo)
+    public void initialization(WebView webView1, TextView loadingText, ProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ConstraintLayout requestFailure, FloatingActionButton floatingButton, ImageView loading, ImageView splashlogo)
     {
         this.webView = webView1;
         this.progressBar = progressBar;
@@ -83,6 +83,26 @@ public class applicationViewController
         initLock();
         initViews();
         createUpdateUiHandler();
+        initializeSuggestionView();
+    }
+
+    private void initializeSuggestionView()
+    {
+        suggestionAdapter = new AutoCompleteAdapter(app_model.getInstance().getAppInstance(), R.layout.hint_completion_layout, R.id.hintCompletionText,app_model.getInstance().getSuggestions());
+
+        searchbar.setThreshold(2);
+        searchbar.setAdapter(suggestionAdapter);
+        searchbar.setDropDownVerticalOffset(27);
+        searchbar.setDropDownWidth(helperMethod.screenWidth()-80);
+        searchbar.setDropDownHorizontalOffset(-88);
+        searchbar.setDropDownHeight(Math.round(helperMethod.screenHeight(false)*0.35f));
+        searchbar.setDropDownBackgroundDrawable(app_model.getInstance().getAppInstance().getResources().getDrawable(R.drawable.rouned_corner));
+
+    }
+
+    public void reInitializeSuggestion()
+    {
+        initializeSuggestionView();
     }
 
     public boolean isHiddenView()
@@ -143,11 +163,11 @@ public class applicationViewController
                     try
                     {
                         boolean isFirstInstall = preference_manager.getInstance().getBool(keys.hasOrbotInstalled,true);
-                        while (!status.isTorInitialized && isFirstInstall)
-                        {
-                            startPostTask(messages.UPDATE_LOADING_TEXT);
-                            sleep(100);
-                        }
+                        //while (!status.isTorInitialized && isFirstInstall)
+                        //{
+                        //    startPostTask(messages.UPDATE_LOADING_TEXT);
+                        //    sleep(100);
+                        //}
                         preference_manager.getInstance().setBool(keys.hasOrbotInstalled,false);
                         startPostTask(messages.DISABLE_SPLASH_SCREEN);
                     }
@@ -179,11 +199,16 @@ public class applicationViewController
                 {
                     loadingText.setText(orbot_manager.getInstance().getLogs());
                 }
-                if(msg.what == messages.DISABLE_SPLASH_SCREEN)
+                else if(msg.what == messages.DISABLE_SPLASH_SCREEN)
                 {
                     status.isApplicationLoaded = true;
                     splashScreen.animate().alpha(0.0f).setDuration(200).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
                     onWelcomeMessageCheck();
+                    //app_model.getInstance().getAppInstance().initAdManager();
+                }
+                else if(msg.what == messages.SHOW_ADS)
+                {
+                    admanager.getInstance().showAd(true);
                 }
             }
         };
@@ -202,6 +227,7 @@ public class applicationViewController
         }
     }
 
+    @SuppressLint("RestrictedApi")
     public void onPageFinished(boolean status)
     {
         helperMethod.hideKeyboard();
@@ -338,6 +364,20 @@ public class applicationViewController
         serverRequestManager.getInstance().versionChecker();
     }
 
+    public void onShowAds()
+    {
+        startPostTask(messages.SHOW_ADS);
+    }
+
+    public void openMenu(View view)
+    {
+        PopupMenu popup = new PopupMenu(app_model.getInstance().getAppInstance(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_main, popup.getMenu());
+        MenuCompat.setGroupDividerEnabled(popup.getMenu(), true);
+        popup.show();
+    }
+
     public void onReload()
     {
         if(!isHiddenView())
@@ -351,5 +391,9 @@ public class applicationViewController
         }
     }
 
+    public String getSearchBarUrl()
+    {
+        return searchbar.getText().toString();
+    }
 
 }

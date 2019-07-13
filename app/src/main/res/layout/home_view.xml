@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.darkweb.genesissearchengine.appManager.application_controller">
+        android:background="@color/white"
+        tools:context="com.darkweb.genesissearchengine.appManager.main_activity.application_controller">
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -129,19 +130,19 @@
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="RtlHardcoded,UselessParent">
             <ImageButton
-                    android:tint="@color/black"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="0dp"
                     android:id="@+id/home"
-                    android:scaleType="fitCenter"
                     android:onClick="onHomeButtonPressed"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/black"
                     android:src="@drawable/icon_homeicon"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/todo"/>
-            <EditText
+            <AutoCompleteTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:textSize="16sp"
@@ -158,14 +159,28 @@
                     android:layout_marginTop="8dp"
                     android:inputType="textNoSuggestions"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="10dp"
+                    android:completionHintView="@layout/hint_completion_layout"
+                    android:layout_marginEnd="0dp"
                     android:layout_marginStart="10dp"
                     android:maxLines="1"
                     android:id="@+id/search" android:layout_weight="1" android:importantForAutofill="no"
                     tools:targetApi="o"/>
+            <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
+                    android:layout_marginEnd="0dp"
+                    android:id="@+id/menu"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/menu_item"
+                    android:onClick="onMenuButtonPressed"
+                    android:background="@color/white"
+                    android:contentDescription="@string/todo"/>
 
         </LinearLayout>
-
         </LinearLayout>
     </FrameLayout>
     <FrameLayout
@@ -231,4 +246,8 @@
             android:id="@+id/floatingActionButton3" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="24dp"
             android:layout_marginEnd="24dp"/>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

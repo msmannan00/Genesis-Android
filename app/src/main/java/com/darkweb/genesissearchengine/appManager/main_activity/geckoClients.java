@@ -1,10 +1,13 @@
-package com.darkweb.genesissearchengine.appManager;
+package com.darkweb.genesissearchengine.appManager.main_activity;
 
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import com.darkweb.genesissearchengine.pluginManager.admanager;
+import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.pluginManager.fabricManager;
+import com.darkweb.genesissearchengine.pluginManager.message_manager;
 import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoSession;
@@ -28,13 +31,22 @@ public class geckoClients
     private boolean loadingCompeleted = false;
     private String currentURL = "";
     private boolean wasBackPressed = false;
+    private boolean isUrlSavable = true;
 
-    public void loadGeckoURL(String url,GeckoView geckoView)
+    private int urlRequestCount = 0;
+    private boolean isAppRated = false;
+
+    public geckoClients()
+    {
+        isAppRated = preference_manager.getInstance().getBool(keys.isAppRated,false);
+    }
+
+    public void loadGeckoURL(String url,GeckoView geckoView,boolean isUrlSavable)
     {
         boolean init_status = orbot_manager.getInstance().initOrbot(url);
         if (init_status)
         {
-            urlList.clear();
+            this.isUrlSavable = isUrlSavable;
             navigatedURL = "";
             loadingCompeleted = false;
             initialize(geckoView);
@@ -42,20 +54,28 @@ public class geckoClients
             app_model.getInstance().getAppInstance().onRequestTriggered(true,url);
             app_model.getInstance().getAppInstance().onProgressBarUpdateView(4);
             isFirstTimeLoad = true;
+            if(isUrlSavable)
+            {
+                urlList.clear();
+            }
         }
     }
 
     public void initialize(GeckoView geckoView)
     {
-        session1 = new GeckoSession();
-        runtime1 = GeckoRuntime.getDefault(app_model.getInstance().getAppContext());
-        session1.open(runtime1);
-        geckoView.releaseSession();
-        geckoView.setSession(session1);
-        session1.setProgressDelegate(new progressDelegate());
-        session1.setNavigationDelegate(new navigationDelegate());
-        geckoView.setVisibility(View.VISIBLE);
-        geckoView.setAlpha(1);
+        if(urlList.size()<=0)
+        {
+            session1 = new GeckoSession();
+            runtime1 = GeckoRuntime.getDefault(app_model.getInstance().getAppContext());
+            runtime1.getSettings().setJavaScriptEnabled(status.java_status);
+            session1.open(runtime1);
+            geckoView.releaseSession();
+            geckoView.setSession(session1);
+            session1.setProgressDelegate(new progressDelegate());
+            session1.setNavigationDelegate(new navigationDelegate());
+            geckoView.setVisibility(View.VISIBLE);
+            geckoView.setAlpha(1);
+        }
     }
 
     class navigationDelegate implements GeckoSession.NavigationDelegate
@@ -119,19 +139,38 @@ public class geckoClients
                         {
                             if(isFirstTimeLoad)
                             {
-                                admanager.getInstance().showAd(true);
+                                //admanager.getInstance().showAd(true);
                                 isFirstTimeLoad = false;
                             }
 
-                            if((urlList.size()==0 || urlList.size()>0 && !urlList.get(urlList.size()-1).equals(navigatedURL))&&!wasBackPressed)
+                            if((urlList.size()==0 || urlList.size()>0 && !urlList.get(urlList.size()-1).equals(navigatedURL))&& !wasBackPressed)
                             {
                                 urlList.add(navigatedURL);
                             }
 
                             if(urlList.size()>0)
                             {
-                                admanager.getInstance().showAd(false);
+                                //admanager.getInstance().showAd(false);
                             }
+                            urlRequestCount++;
+                                if(urlRequestCount==5)
+                            {
+                                if(!isAppRated)
+                                {
+                                    isAppRated = true;
+                                    message_manager.getInstance().rateApp();
+                                }
+                            }
+                            else if(urlRequestCount>=4 && isAppRated)
+                            {
+                                app_model.getInstance().getAppInstance().onShowAds();
+                            }
+
+                            if(isUrlSavable && !urlList.get(urlList.size()-1).equals("navigatedURL"))
+                            {
+                                app_model.getInstance().addHistory(navigatedURL);
+                            }
+                            isUrlSavable = true;
                             app_model.getInstance().getAppInstance().onDisableInternetError();
                             app_model.getInstance().getAppInstance().onProgressBarUpdateView(0);
                             fabricManager.getInstance().sendEvent("ONION GECKO_CLIENT URL SUCCESS : " + success + "--" + isContentLoading);
@@ -209,6 +248,11 @@ public class geckoClients
 
     }
 
+    public void removeHistory()
+    {
+        urlList.clear();
+    }
+
     public boolean isGeckoViewRunning()
     {
         return isRunning;
@@ -216,8 +260,11 @@ public class geckoClients
 
     public void onReloadHiddenView()
     {
-        wasBackPressed = true;
-        session1.stop();
-        session1.loadUri(navigatedURL);
+        if(urlList.size()>0)
+        {
+            wasBackPressed = true;
+            session1.stop();
+            session1.loadUri(navigatedURL);
+        }
     }
 }

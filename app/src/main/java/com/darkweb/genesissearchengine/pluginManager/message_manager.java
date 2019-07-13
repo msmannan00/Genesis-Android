@@ -1,13 +1,19 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.text.InputType;
+import android.widget.EditText;
+import androidx.core.content.ContextCompat;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
-import com.darkweb.genesissearchengine.appManager.app_model;
-import com.darkweb.genesissearchengine.appManager.application_controller;
+import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.main_activity.application_controller;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.strings;
@@ -44,23 +50,23 @@ public class message_manager
                     .setMessage(strings.welcome_message_desc)
                     .addButton(strings.welcome_message_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
-                        controller.onloadURL(constants.blackMarket,false);
-                        controller.onloadURL(constants.blackMarket,false);
+                        controller.onloadURL(constants.blackMarket,false,true);
+                        controller.onloadURL(constants.blackMarket,false,true);
                     })
                     .addButton(strings.welcome_message_bt2, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
-                        controller.onloadURL(constants.leakedDocument,false);
-                        controller.onloadURL(constants.leakedDocument,false);
+                        controller.onloadURL(constants.leakedDocument,false,true);
+                        controller.onloadURL(constants.leakedDocument,false,true);
                     })
                     .addButton(strings.welcome_message_bt3, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
-                        controller.onloadURL(constants.news,false);
-                        controller.onloadURL(constants.news,false);
+                        controller.onloadURL(constants.news,false,true);
+                        controller.onloadURL(constants.news,false,true);
                     })
                     .addButton(strings.welcome_message_bt4, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
-                        controller.onloadURL(constants.softwares,false);
-                        controller.onloadURL(constants.softwares,false);
+                        controller.onloadURL(constants.softwares,false,true);
+                        controller.onloadURL(constants.softwares,false,true);
                     })
                     .addButton(strings.welcome_message_bt5, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED   , (dialog, which) -> {
                         dialog.dismiss();
@@ -114,21 +120,91 @@ public class message_manager
         builder.show();
     }
 
-    public void reportedSuccessfully()
+    public void ratedSuccessfully()
     {
         Context application_context = app_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle(strings.report_success_title)
+                .setTitle(strings.rate_success_title)
                 .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
                 .setTextColor(application_context.getResources().getColor(R.color.black))
-                .setMessage(strings.report_success_desc)
+                .setMessage(strings.rate_success_desc)
+                .addButton(strings.rate_success_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    dialog.dismiss();
+                });
+
+        builder.show();
+    }
+
+    public void reportedSuccessfully(String title,String desc)
+    {
+        Context application_context = app_model.getInstance().getAppContext();
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle(title)
+                .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
+                .setTextColor(application_context.getResources().getColor(R.color.black))
+                .setMessage(desc)
                 .addButton(strings.report_success_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
                     dialog.dismiss();
                 });
 
         builder.show();
     }
+
+    @SuppressLint("ResourceType")
+    public void bookmark(String url)
+    {
+
+        final EditText input = new EditText(app_model.getInstance().getAppInstance());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setText("");
+        input.setBackground(ContextCompat.getDrawable(app_model.getInstance().getAppContext(), R.xml.search_back_default));
+        input.setPadding(40,15,40,15);
+        input.setHeight(80);
+        input.setTextSize(17);
+        input.setHint("Enter Bookmark Title");
+
+        Context application_context = app_model.getInstance().getAppContext();
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
+                .setTextColor(application_context.getResources().getColor(R.color.black))
+                //.setTitle(strings.bookmark_url_title)
+                .setHeaderView(input)
+                .setMessage("Bookmark URL | " + url + "\n")
+                .addButton(strings.bookmark_url_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    app_model.getInstance().addBookmark(url.replace("genesis.onion","boogle.store"),input.getText().toString());
+                    dialog.dismiss();
+                })
+                .addButton(strings.bookmark_url_bt2, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    dialog.dismiss();
+                });
+
+        builder.show();
+
+    }
+
+    public void clearData()
+    {
+        Context application_context = app_model.getInstance().getListContext();
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(app_model.getInstance().getListContext())
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle(strings.clear_title)
+                .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
+                .setTextColor(application_context.getResources().getColor(R.color.black))
+                .setMessage(strings.clear_desc)
+                .addButton(strings.clear_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    app_model.getInstance().getListInstance().clearAll();
+                    dialog.dismiss();
+                })
+                .addButton(strings.clear_bt2, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    dialog.dismiss();
+                });
+
+        builder.show();
+    }
+
 
     public void reportURL()
     {
@@ -140,14 +216,34 @@ public class message_manager
                 .setTextColor(application_context.getResources().getColor(R.color.black))
                 .setMessage(strings.report_url_desc)
                 .addButton(strings.report_url_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
-
-                    //String reportURL = constants.reportUrl+URL;
-                    //serverRequestManager.getInstance().reportURL(reportURL);
                     dialog.dismiss();
-                    reportedSuccessfully();
+                    reportedSuccessfully(strings.report_success_title,strings.report_success_desc);
                 })
                 .addButton(strings.report_url_bt2, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
                     dialog.dismiss();
+                });
+
+        builder.show();
+    }
+
+    public void rateApp()
+    {
+        Context application_context = app_model.getInstance().getAppContext();
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                .setTitle(strings.rate_title)
+                .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
+                .setTextColor(application_context.getResources().getColor(R.color.black))
+                .setMessage(strings.rate_message)
+                .addButton(strings.rate_positive, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    preference_manager.getInstance().setBool(keys.isAppRated,true);
+                    app_model.getInstance().getAppInstance().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
+                    dialog.dismiss();
+                })
+                .addButton(strings.rate_negative, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    preference_manager.getInstance().setBool(keys.isAppRated,true);
+                    dialog.dismiss();
+                    ratedSuccessfully();
                 });
 
         builder.show();
@@ -185,7 +281,7 @@ public class message_manager
                             {
                                 if(!url.equals(""))
                                 {
-                                    app_model.getInstance().getAppInstance().onloadURL(url,true);
+                                    app_model.getInstance().getAppInstance().onloadURL(url,true,true);
                                 }
                                 else
                                 {
