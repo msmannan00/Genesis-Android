@@ -210,10 +210,6 @@ public class viewController
                         hideSplashScreen();
                     }
                 }
-                else if(msg.what == messages.SHOW_ADS)
-                {
-                    admanager.getInstance().showAd(true);
-                }
             }
         };
     }
