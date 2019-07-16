@@ -3,7 +3,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:paddingRight="15dp"
-              android:layout_marginTop="60dp"
               android:paddingLeft="15dp"
               android:paddingBottom="-35dp"
               android:background="@color/white"
@@ -11,19 +10,22 @@
               android:orientation="vertical">
 
     <TextView
-            android:id="@+id/hintCompletionText"
+            android:id="@+id/hintCompletionHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="0dp"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textColor="@color/holo_gray"
-            android:textSize="15.5sp"
-            android:textStyle="bold" />
+            android:textColor="@color/text_color_v1"
+            android:textSize="15.5sp"/>
 
     <View
             android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
             android:layout_height="1dp"
             android:background="@color/white_dark" />
 

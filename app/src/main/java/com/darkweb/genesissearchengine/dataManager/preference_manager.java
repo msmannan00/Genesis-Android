@@ -2,7 +2,7 @@ package com.darkweb.genesissearchengine.dataManager;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 
 public class preference_manager
 {

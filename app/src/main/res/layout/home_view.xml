@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="com.darkweb.genesissearchengine.appManager.main_activity.application_controller">
+        tools:context="com.darkweb.genesissearchengine.appManager.home_activity.application_controller">
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -153,14 +153,16 @@
                     android:textColorHighlight="@color/text_color_highlight_v1"
                     android:background="@xml/search_back_default"
                     android:textCursorDrawable="@xml/search_cursor_state"
-                    android:hint="@string/SearchHint"
+                    android:hint="@string/SearchHintMain"
                     android:text="@string/homeUrl"
                     android:ems="10"
                     android:layout_marginTop="8dp"
+                    android:dropDownHeight="220dp"
                     android:inputType="textNoSuggestions"
                     android:layout_marginBottom="8dp"
-                    android:completionHintView="@layout/hint_completion_layout"
+                    android:completionHintView="@layout/hint_view"
                     android:layout_marginEnd="0dp"
+                    android:dropDownSelector="@xml/rouned_corner"
                     android:layout_marginStart="10dp"
                     android:maxLines="1"
                     android:id="@+id/search" android:layout_weight="1" android:importantForAutofill="no"

@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.main_activity;
+package com.darkweb.genesissearchengine.appManager.home_activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -45,10 +45,10 @@ public class application_controller extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_view);
 
         if(helperMethod.isBuildValid())
         {
+            setContentView(R.layout.home_view);
             initializeAppModel();
             preference_manager.getInstance().initialize();
 
@@ -60,16 +60,16 @@ public class application_controller extends AppCompatActivity
             initAdManager();
 
             orbot_manager.getInstance().reinitOrbot();
-            applicationViewController.getInstance().initialization(webView,loadingText,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
+            viewController.getInstance().initialization(webView,loadingText,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
             firebase.getInstance().initialize();
-            geckoclient.initialize(geckoView);
+            geckoclient.initialize(geckoView,false);
             app_model.getInstance().initialization();
-
-            initSearchEngine();
+            initBoogle();
         }
         else
         {
-            setContentView(R.layout.invalid_setup);
+            initializeAppModel();
+            setContentView(R.layout.invalid_setup_view);
             message_manager.getInstance().abiError(Build.SUPPORTED_ABIS[0]);
         }
 
@@ -80,20 +80,31 @@ public class application_controller extends AppCompatActivity
         admanager.getInstance().initialize();
     }
 
-    public void initSearchEngine()
+    public void initBoogle()
     {
-        fabricManager.getInstance().sendEvent("HOME PAGE LOADING : " );
-        if(status.search_status.equals(enums.searchEngine.Google.toString()))
+        onloadURL(constants.backendGenesis,false,false);
+    }
+
+    public Boolean initSearchEngine()
+    {
+        if(status.search_status.equals(enums.searchEngine.Bing.toString()))
         {
-            webView.loadUrl(constants.backendGoogle);
+            geckoclient.setRootEngine(constants.backendBing);
+            webView.stopLoading();
+            onloadURL(constants.backendBing,true,false);
+            return false;
         }
-        else if(status.search_status.equals(enums.searchEngine.Bing.toString()))
+        else if(status.search_status.equals(enums.searchEngine.Google.toString()))
         {
-            webView.loadUrl(constants.backendBing);
+            geckoclient.setRootEngine(constants.backendGoogle);
+            webView.stopLoading();
+            onloadURL(constants.backendGoogle,true,false);
+            return false;
         }
         else
         {
-            webView.loadUrl(constants.backendGenesis);
+            onloadURL(constants.backendGenesis,false,false);
+            return true;
         }
     }
 
@@ -137,7 +148,7 @@ public class application_controller extends AppCompatActivity
     public void setWebViewSettings(WebView view)
     {
         view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        view.getSettings().setJavaScriptEnabled(false);
+        view.getSettings().setJavaScriptEnabled(status.java_status);
         view.getSettings().setUseWideViewPort(true);
     }
 
@@ -183,7 +194,7 @@ public class application_controller extends AppCompatActivity
         {
             geckoclient.loadGeckoURL(url,geckoView,isUrlSavable);
         }
-        else
+        else if(!app_model.getInstance().isUrlRepeatable(url,webView.getUrl()) || webView.getVisibility() == View.GONE)
         {
             webView.loadUrl(url);
             onRequestTriggered(isHiddenWeb,url);
@@ -191,76 +202,84 @@ public class application_controller extends AppCompatActivity
     }
 
     public void onRequestTriggered(boolean isHiddenWeb,String url) {
-        applicationViewController.getInstance().onRequestTriggered(isHiddenWeb,url);
+        viewController.getInstance().onRequestTriggered(isHiddenWeb,url);
     }
 
     public void onClearSearchBarCursorView()
     {
-        applicationViewController.getInstance().onClearSearchBarCursor();
+        viewController.getInstance().onClearSearchBarCursor();
     }
 
     public void onUpdateSearchBarView(String url)
     {
-        applicationViewController.getInstance().onUpdateSearchBar(url);
+        viewController.getInstance().onUpdateSearchBar(url);
     }
 
     public void onInternetErrorView() {
-        applicationViewController.getInstance().onInternetError();
-        applicationViewController.getInstance().disableFloatingView();
+        viewController.getInstance().onInternetError();
+        viewController.getInstance().disableFloatingView();
     }
 
     public boolean onDisableInternetError()
     {
-       return applicationViewController.getInstance().onDisableInternetError();
+       return viewController.getInstance().onDisableInternetError();
     }
 
     public void onProgressBarUpdateView(int progress) {
-        applicationViewController.getInstance().onProgressBarUpdate(progress);
+        viewController.getInstance().onProgressBarUpdate(progress);
     }
 
     public void onBackPressedView()
     {
-        applicationViewController.getInstance().onBackPressed();
+        viewController.getInstance().onBackPressed();
     }
 
     public void onPageFinished(boolean isHidden)
     {
-        applicationViewController.getInstance().onPageFinished(isHidden);
+        viewController.getInstance().onPageFinished(isHidden);
     }
 
     public void onUpdateView(boolean status)
     {
-        applicationViewController.getInstance().onUpdateView(status);
+        viewController.getInstance().onUpdateView(status);
     }
 
     public void onReload()
     {
-        applicationViewController.getInstance().onReload();
+        viewController.getInstance().onReload();
     }
 
-    public void onShowAds()
+    public void onShowAd(enums.adID id)
     {
-        applicationViewController.getInstance().onShowAds();
+        admanager.getInstance().showAd(id);
     }
 
     public void openMenu(View view) {
-        applicationViewController.getInstance().openMenu(view);
+
+        viewController.getInstance().openMenu(view);
     }
 
     public void reInitializeSuggestion()   {
-        applicationViewController.getInstance().reInitializeSuggestion();
+        viewController.getInstance().reInitializeSuggestion();
+    }
+
+    public void hideSplashScreen(){
+        viewController.getInstance().hideSplashScreen();
     }
 
     /*-------------------------------------------------------Helper Method Out UI Redirection----------------------------------------------------*/
 
     public String getSearchBarUrl()
     {
-         return applicationViewController.getInstance().getSearchBarUrl();
+         return viewController.getInstance().getSearchBarUrl();
     }
 
     public void onReInitGeckoView() {
-        geckoclient.initialize(geckoView);
-        geckoclient.onReloadHiddenView();
+        geckoclient.initialize(geckoView,true);
+        if(webView.getVisibility() != View.VISIBLE)
+        {
+            geckoclient.onReloadHiddenView();
+        }
     }
 
     public void onHiddenGoBack()
@@ -268,9 +287,14 @@ public class application_controller extends AppCompatActivity
         geckoclient.onHiddenGoBack(geckoView);
     }
 
-    public void stopHiddenView() {
-        geckoclient.stopHiddenView(geckoView);
-        geckoclient.removeHistory();
+    public int getHiddenQueueLength()
+    {
+        return geckoclient.getHiddenQueueLength();
+    }
+
+    public void stopHiddenView(boolean releaseView) {
+        geckoclient.stopHiddenView(geckoView,releaseView);
+        //geckoclient.removeHistory();
     }
 
     public void onReloadHiddenView()

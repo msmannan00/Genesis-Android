@@ -4,42 +4,34 @@
       tools:context="example.javatpoint.com.optionmenu.MainActivity">
 
     <item  android:id="@+id/menu1"
-           android:onClick="onMenuOptionSelected"
            android:title="History"
            app:showAsAction="always"
            android:icon="@android:drawable/btn_star"/>
     <item  android:id="@+id/menu2"
-           android:onClick="onMenuOptionSelected"
            android:title="Manager Search Engine"
            app:showAsAction="always"
            android:icon="@android:drawable/btn_star"/>
     <item  android:id="@+id/menu3"
-           android:onClick="onMenuOptionSelected"
            android:title="Settings"
            app:showAsAction="always"
            android:icon="@android:drawable/btn_star"/>
     <group android:id="@+id/group_1" >
         <item  android:id="@+id/menu4"
-               android:onClick="onMenuOptionSelected"
                android:title="Bookmark This Page"
                app:showAsAction="always"
                android:icon="@android:drawable/btn_star"/>
         <item  android:id="@+id/menu5"
-               android:onClick="onMenuOptionSelected"
                android:title="Open Bookmarks"
                app:showAsAction="ifRoom"
                android:icon="@android:drawable/btn_plus"/>
     </group>
     <group android:id="@+id/group_2" >
         <item  android:id="@+id/menu6"
-               android:onClick="onMenuOptionSelected"
                android:title="Report Website"/>
         <item  android:id="@+id/menu7"
-               android:onClick="onMenuOptionSelected"
                android:title="Rate This App"
                app:showAsAction="withText"/>
         <item  android:id="@+id/menu8"
-               android:onClick="onMenuOptionSelected"
                android:title="Share"
                app:showAsAction="withText"/>
     </group>

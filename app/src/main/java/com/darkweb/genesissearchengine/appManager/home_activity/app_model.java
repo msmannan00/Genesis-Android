@@ -1,11 +1,10 @@
-package com.darkweb.genesissearchengine.appManager.main_activity;
+package com.darkweb.genesissearchengine.appManager.home_activity;
 
 import android.content.Context;
 import android.net.Uri;
-import com.darkweb.genesissearchengine.appManager.data_helper.database_controller;
-import com.darkweb.genesissearchengine.appManager.list_activity.list_controller;
-import com.darkweb.genesissearchengine.appManager.list_activity.list_model;
-import com.darkweb.genesissearchengine.appManager.list_activity.list_row_model;
+import com.darkweb.genesissearchengine.appManager.database_manager.database_controller;
+import com.darkweb.genesissearchengine.appManager.list_manager.list_controller;
+import com.darkweb.genesissearchengine.appManager.list_manager.list_row_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperMethod;
@@ -23,9 +22,6 @@ public class app_model
 
     private Context appContext;
     private application_controller appInstance;
-
-    private Context listContext;
-    private list_controller listInstance;
 
     /*Initializations*/
     public void initialization()
@@ -50,7 +46,7 @@ public class app_model
     }
     public void setPort(int port)
     {
-        this.port = port;
+        app_model.port = port;
     }
 
 
@@ -100,7 +96,7 @@ public class app_model
         }
 
         addSuggestions(url);
-        SimpleDateFormat d_form = new SimpleDateFormat("yyyy-MM-dd | HH-mm-ss");
+        SimpleDateFormat d_form = new SimpleDateFormat("dd MMMM | hh:mm a");
         String date = d_form.format(new Date());
         database_controller.getInstance().execSQL("INSERT INTO history(id,date,url) VALUES("+autoval+",'"+date+"','"+url+"');");
         history.add(0,new list_row_model(url,date,autoval));
@@ -139,7 +135,7 @@ public class app_model
 
 
     public void initSuggestions(String url) {
-        suggestions.add(url);
+        suggestions.add(url.replace("https://","").replace("http://",""));
     }
     public void addSuggestions(String url) {
         if(url.contains("boogle.store"))
@@ -148,7 +144,7 @@ public class app_model
             String actual_url = uri.getQueryParameter("q");
             suggestions.add(actual_url);
         }
-        suggestions.add(url);
+        suggestions.add(url.replace("https://","").replace("http://",""));
         app_model.getInstance().getAppInstance().reInitializeSuggestion();
     }
     public ArrayList<String> getSuggestions() {
@@ -156,19 +152,10 @@ public class app_model
     }
 
 
-    public void setListInstance(list_controller listInstance){
-        this.listInstance = listInstance;
-    }
-    public list_controller getListInstance(){
-        return listInstance;
-    }
+    /*Helper Method*/
+    public boolean isUrlRepeatable(String url,String viewUrl){
+        return url.equals(viewUrl) && !app_model.getInstance().getAppInstance().isInternetErrorOpened() || url.contains("https://boogle.store/search?q=&");
 
-
-    public void setListContext(Context listContext) {
-        this.listContext = listContext;
-    }
-    public Context getListContext(){
-        return listContext;
     }
 
 }

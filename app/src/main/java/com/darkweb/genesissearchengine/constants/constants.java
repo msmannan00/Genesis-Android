@@ -3,13 +3,15 @@ package com.darkweb.genesissearchengine.constants;
 public class constants
 {
     /*LOCAL URL CONSTANTS*/
+
     public static String blackMarket = "https://boogle.store/search?q=black+market&p_num=1&s_type=all";
     public static String leakedDocument = "https://boogle.store/search?q=leaked+document&p_num=1&s_type=all&p_num=1&s_type=all";
     public static String news = "https://boogle.store/search?q=latest%20news&p_num=1&s_type=news";
     public static String softwares = "https://boogle.store/search?q=softwares+tools&p_num=1&s_type=all&p_num=1&s_type=all";
 
     /*URL CONSTANTS*/
-    public static String backendGenesis = "https://boogle.store";
+
+    public static String backendGenesis = "https://boogle.store/";
     public static String backendGoogle = "https://www.google.com/";
     public static String backendBing = "https://www.bing.com/";
     public static String backendUrlHost = "boogle.store";
@@ -23,10 +25,12 @@ public class constants
     public static String playstoreUrl = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
 
     /*BUILD CONSTANTS*/
+
     public static String build_type = "playstore";
     //public static String build_type = "local";
 
-    /*BUILD PROXY*/
+    /*PROXY CONSTANTS*/
+
     public static int proxy_type = 1;
     public static String proxy_socks = "127.0.0.1";
     public static int proxy_socks_version  = 5;
@@ -37,12 +41,15 @@ public class constants
     public static boolean proxy_donottrackheader_enabled  = false;
     public static int proxy_donottrackheader_value  = 1;
 
+    /*MENU CONSTANTS*/
+
     public static int list_history  = 1;
     public static int list_bookmark  = 2;
 
-    public static String databae_name="genesis.db";
-    public static int databae_version=1;
+    /*SETTINGS CONSTANTS*/
 
-    public static int max_history_size=3;
-    public static int max_bookmark_size=3;
+    public static int max_history_size=500;
+    public static int max_bookmark_size=500;
+    public static String databae_name="genesis_dbase";
+
 }

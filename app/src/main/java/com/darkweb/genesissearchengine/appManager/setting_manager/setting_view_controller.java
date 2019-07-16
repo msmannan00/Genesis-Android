@@ -2,7 +2,9 @@ package com.darkweb.genesissearchengine.appManager.setting_manager;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 
@@ -22,12 +24,20 @@ class setting_view_controller
     setting_view_controller(Spinner search, Spinner javascript, Spinner history)
     {
         this.search = search;
-        this.search = javascript;
-        this.search = history;
+        this.javascript = javascript;
+        this.history = history;
 
+        initViews();
         initJavascript();
         initHistory();
         initSearchEngine();
+    }
+
+    private void initViews()
+    {
+        search.setDropDownVerticalOffset(15);
+        javascript.setDropDownVerticalOffset(15);
+        history.setDropDownVerticalOffset(15);
     }
 
     private void initJavascript()
@@ -67,6 +77,20 @@ class setting_view_controller
 
     void closeView()
     {
+
+        if(status.search_status != setting_model.getInstance().search_status)
+        {
+            status.search_status = setting_model.getInstance().search_status;
+            app_model.getInstance().getAppInstance().initSearchEngine();
+        }
+        else if(status.java_status != setting_model.getInstance().java_status)
+        {
+            status.java_status = setting_model.getInstance().java_status;
+            app_model.getInstance().getAppInstance().onReInitGeckoView();
+        }
+
+        status.history_status = setting_model.getInstance().history_status;
+
         setting_model.getInstance().getSettingInstance().finish();
     }
 

@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.main_activity;
+package com.darkweb.genesissearchengine.appManager.home_activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
+import com.darkweb.genesissearchengine.appManager.list_manager.list_model;
+import com.example.myapplication.R;
 
 public class AutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
 

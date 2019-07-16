@@ -2,7 +2,11 @@ package com.darkweb.genesissearchengine.constants;
 
 public class strings
 {
+    /*Orbot Manager*/
+
     public static String torfolder = "torfiles";
+
+    /*Messsage Manager*/
 
     public static String welcome_message_title = "Welcome | Deep Web Gateway";
     public static String welcome_message_desc = "\nWelcome to Deep Web | Dark Web Gateway. This application provide you a platform to Search and Open Dark Web urls.\n\nYou cannot open any url related to normal internet as its not the intended purpose. You can check out following urls to get yourself started\n\nHere are few Suggestions\n";
@@ -58,7 +62,17 @@ public class strings
     public static String clear_bt1 = "Clear Data";
     public static String clear_bt2 = "Dismiss";
 
+
+    /*Text Manager*/
+
     public static String darkweb = "Darkweb";
+    public static String emptyStr = "";
+    public static String bookmark_text = "bookmark";
+    public static String history_text = "history";
+    public static String bing_text = "Bing";
+    public static String google_text = "Google";
+
+
 
 
 }

@@ -1,14 +1,11 @@
-package com.darkweb.genesissearchengine.appManager.data_helper;
+package com.darkweb.genesissearchengine.appManager.database_manager;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import com.darkweb.genesissearchengine.appManager.list_activity.list_row_model;
-import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.list_manager.list_row_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.helperMethod;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -32,7 +29,7 @@ public class database_controller
     {
         try
         {
-            database_instance = app_model.getInstance().getAppInstance().openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
+            database_instance = app_model.getInstance().getAppInstance().openOrCreateDatabase(constants.databae_name, MODE_PRIVATE, null);
             database_instance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id INT(4),date VARCHAR,url VARCHAR);");
             database_instance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4),title VARCHAR,url VARCHAR);");
 
@@ -51,7 +48,7 @@ public class database_controller
 
     public ArrayList<list_row_model> selectHistory()
     {
-        ArrayList<list_row_model> tempmodel = new ArrayList<list_row_model>();
+        ArrayList<list_row_model> tempmodel = new ArrayList<>();
         Cursor c = database_instance.rawQuery("SELECT * FROM history ORDER BY id DESC ", null);
         if (c.moveToFirst()){
             do {
@@ -66,7 +63,7 @@ public class database_controller
 
     public ArrayList<list_row_model> selectBookmark()
     {
-        ArrayList<list_row_model> tempmodel = new ArrayList<list_row_model>();
+        ArrayList<list_row_model> tempmodel = new ArrayList<>();
         Cursor c = database_instance.rawQuery("SELECT * FROM bookmark ORDER BY id DESC ", null);
 
         if (c.moveToFirst()){

@@ -1,6 +1,6 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;

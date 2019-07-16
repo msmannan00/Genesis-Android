@@ -5,7 +5,7 @@ import android.os.Message;
 
 
 import android.os.Handler;
-import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 import com.darkweb.genesissearchengine.constants.messages;
 
 public class webRequestHandler

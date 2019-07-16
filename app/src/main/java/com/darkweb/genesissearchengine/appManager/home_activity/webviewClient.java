@@ -1,9 +1,10 @@
-package com.darkweb.genesissearchengine.appManager.main_activity;
+package com.darkweb.genesissearchengine.appManager.home_activity;
 
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.pluginManager.fabricManager;
 import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
@@ -20,14 +21,14 @@ public class webviewClient
             public boolean shouldOverrideUrlLoading(WebView  view, String  url)
             {
                 isGeckoView = false;
-                if(url.equals(view.getUrl()) && !app_model.getInstance().getAppInstance().isInternetErrorOpened() || url.contains("https://boogle.store/search?q=&"))
+                if(app_model.getInstance().isUrlRepeatable(url,view.getUrl()))
                 {
                     app_model.getInstance().getAppInstance().onProgressBarUpdateView(0);
                     return true;
                 }
-                if(!url.contains("boogle") && !url.equals(constants.backendGoogle) && !url.equals(constants.backendBing))
+                if(!url.contains("boogle"))
                 {
-                    app_model.getInstance().getAppInstance().stopHiddenView();
+                    app_model.getInstance().getAppInstance().stopHiddenView(false);
                     fabricManager.getInstance().sendEvent("BASE SIMPLE SEARCHED : " + url);
                     isGeckoView = true;
                     if(orbot_manager.getInstance().initOrbot(url))

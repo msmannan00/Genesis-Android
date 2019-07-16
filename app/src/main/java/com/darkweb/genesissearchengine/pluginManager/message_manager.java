@@ -6,14 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.text.InputType;
 import android.widget.EditText;
 import androidx.core.content.ContextCompat;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
-import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
-import com.darkweb.genesissearchengine.appManager.main_activity.application_controller;
+import com.darkweb.genesissearchengine.appManager.list_manager.list_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.application_controller;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.strings;
@@ -187,15 +186,15 @@ public class message_manager
 
     public void clearData()
     {
-        Context application_context = app_model.getInstance().getListContext();
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(app_model.getInstance().getListContext())
+        Context application_context = list_model.getInstance().getListContext();
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(list_model.getInstance().getListContext())
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setTitle(strings.clear_title)
                 .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
                 .setTextColor(application_context.getResources().getColor(R.color.black))
                 .setMessage(strings.clear_desc)
                 .addButton(strings.clear_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
-                    app_model.getInstance().getListInstance().clearAll();
+                    list_model.getInstance().getListInstance().onClearAll();
                     dialog.dismiss();
                 })
                 .addButton(strings.clear_bt2, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {

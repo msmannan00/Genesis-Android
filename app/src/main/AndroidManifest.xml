@@ -22,7 +22,7 @@
                 android:windowSoftInputMode="adjustNothing"
                 android:label="@string/title_activity_setting_controller">
         </activity>
-        <activity android:name="com.darkweb.genesissearchengine.appManager.list_activity.list_controller"
+        <activity android:name="com.darkweb.genesissearchengine.appManager.list_manager.list_controller"
                   android:windowSoftInputMode="adjustNothing">
         </activity>
 
@@ -31,7 +31,7 @@
                 android:required="false"/>
 
         <activity
-                android:name="com.darkweb.genesissearchengine.appManager.main_activity.application_controller"
+                android:name="com.darkweb.genesissearchengine.appManager.home_activity.application_controller"
                 android:windowSoftInputMode="adjustNothing"
                 android:screenOrientation="portrait">
             <intent-filter>

@@ -30,7 +30,7 @@ public class serverRequestManager
         try
         {
             HttpGet reportrequest = new HttpGet(url);
-            HttpClient client=new DefaultHttpClient();;
+            HttpClient client=new DefaultHttpClient();
             client.execute(reportrequest);
         }
         catch (Exception ex)

@@ -22,8 +22,9 @@ public class setting_controller extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.settings_view);
 
+        setting_model.getInstance().init_status();
         viewsInitializations();
         listenersInitializations();
         initializeModel();
@@ -63,6 +64,11 @@ public class setting_controller extends AppCompatActivity
     }
 
     /*View Handlers*/
+
+    @Override
+    public void onBackPressed(){
+        closeView();
+    }
 
     public void closeView()
     {

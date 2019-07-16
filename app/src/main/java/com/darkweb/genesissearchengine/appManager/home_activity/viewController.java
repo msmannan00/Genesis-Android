@@ -1,6 +1,7 @@
-package com.darkweb.genesissearchengine.appManager.main_activity;
+package com.darkweb.genesissearchengine.appManager.home_activity;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -9,17 +10,12 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.WindowManager;
+import android.view.*;
 import android.webkit.WebView;
 import android.widget.*;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.MenuCompat;
-import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.keys;
-import com.darkweb.genesissearchengine.constants.messages;
-import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.httpManager.serverRequestManager;
@@ -29,9 +25,7 @@ import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
-public class applicationViewController
+public class viewController
 {
     /*ViewControllers*/
     private WebView webView;
@@ -54,14 +48,14 @@ public class applicationViewController
     Handler progressBarHandler = null;
 
     /*Initializations*/
-    private static final applicationViewController ourInstance = new applicationViewController();
+    private static final viewController ourInstance = new viewController();
 
-    public static applicationViewController getInstance()
+    public static viewController getInstance()
     {
         return ourInstance;
     }
 
-    private applicationViewController()
+    private viewController()
     {
     }
 
@@ -88,15 +82,23 @@ public class applicationViewController
 
     private void initializeSuggestionView()
     {
-        suggestionAdapter = new AutoCompleteAdapter(app_model.getInstance().getAppInstance(), R.layout.hint_completion_layout, R.id.hintCompletionText,app_model.getInstance().getSuggestions());
+        suggestionAdapter = new AutoCompleteAdapter(app_model.getInstance().getAppInstance(), R.layout.hint_view, R.id.hintCompletionHeader,app_model.getInstance().getSuggestions());
 
+        int width = Math.round(helperMethod.screenWidth());
         searchbar.setThreshold(2);
         searchbar.setAdapter(suggestionAdapter);
-        searchbar.setDropDownVerticalOffset(27);
-        searchbar.setDropDownWidth(helperMethod.screenWidth()-80);
-        searchbar.setDropDownHorizontalOffset(-88);
-        searchbar.setDropDownHeight(Math.round(helperMethod.screenHeight(false)*0.35f));
-        searchbar.setDropDownBackgroundDrawable(app_model.getInstance().getAppInstance().getResources().getDrawable(R.drawable.rouned_corner));
+        searchbar.setDropDownVerticalOffset(22);
+        searchbar.setDropDownWidth(Math.round(width*0.95f));
+        searchbar.setDropDownHorizontalOffset(Math.round(width*0.114f)*-1);
+
+        Drawable drawable;
+        Resources res = app_model.getInstance().getAppInstance().getResources();
+        try {
+            drawable = Drawable.createFromXml(res, res.getXml(R.xml.rouned_corner));
+            searchbar.setDropDownBackgroundDrawable(drawable);
+        } catch (Exception ex) {
+            Log.i("sdfsdf", ex.getMessage());
+        }
 
     }
 
@@ -163,11 +165,11 @@ public class applicationViewController
                     try
                     {
                         boolean isFirstInstall = preference_manager.getInstance().getBool(keys.hasOrbotInstalled,true);
-                        //while (!status.isTorInitialized && isFirstInstall)
-                        //{
-                        //    startPostTask(messages.UPDATE_LOADING_TEXT);
-                        //    sleep(100);
-                        //}
+                        while (!status.isTorInitialized && (isFirstInstall || status.search_status.equals(enums.searchEngine.Google.toString()) || status.search_status.equals(enums.searchEngine.Bing.toString())))
+                        {
+                            startPostTask(messages.UPDATE_LOADING_TEXT);
+                            sleep(100);
+                        }
                         preference_manager.getInstance().setBool(keys.hasOrbotInstalled,false);
                         startPostTask(messages.DISABLE_SPLASH_SCREEN);
                     }
@@ -201,10 +203,12 @@ public class applicationViewController
                 }
                 else if(msg.what == messages.DISABLE_SPLASH_SCREEN)
                 {
-                    status.isApplicationLoaded = true;
-                    splashScreen.animate().alpha(0.0f).setDuration(200).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
-                    onWelcomeMessageCheck();
-                    //app_model.getInstance().getAppInstance().initAdManager();
+                    boolean e_status = app_model.getInstance().getAppInstance().initSearchEngine();
+
+                    if(e_status)
+                    {
+                        hideSplashScreen();
+                    }
                 }
                 else if(msg.what == messages.SHOW_ADS)
                 {
@@ -214,11 +218,18 @@ public class applicationViewController
         };
     }
 
+    public void hideSplashScreen()
+    {
+        status.isApplicationLoaded = true;
+        splashScreen.animate().alpha(0.0f).setDuration(200).setListener(null).withEndAction((() -> splashScreen.setVisibility(View.GONE)));
+        onWelcomeMessageCheck();
+    }
+
     public boolean onDisableInternetError()
     {
         if(requestFailure.getAlpha()==1)
         {
-            requestFailure.animate().alpha(0f).setDuration(150).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));;
+            requestFailure.animate().alpha(0f).setDuration(150).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));
             return true;
         }
         else
@@ -242,14 +253,14 @@ public class applicationViewController
             }
             //onUpdateSearchBar(webView.getUrl());
             disableSplashScreen();
-            floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));;
+            floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));
 
-            app_model.getInstance().getAppInstance().stopHiddenView();
+            app_model.getInstance().getAppInstance().stopHiddenView(false);
         }
         else
         {
             onUpdateView(false);
-            floatingButton.animate().alpha(1).withEndAction((() -> floatingButton.setVisibility(View.VISIBLE)));;
+            floatingButton.animate().alpha(1).withEndAction((() -> floatingButton.setVisibility(View.VISIBLE)));
         }
     }
 
@@ -287,7 +298,7 @@ public class applicationViewController
 
     public void disableFloatingView()
     {
-        floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));;
+        floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));
 
     }
 
@@ -309,28 +320,49 @@ public class applicationViewController
 
     public void onProgressBarUpdate(int progress)
     {
-        progressBar.setVisibility(View.VISIBLE);
         if(progress==0)
         {
             progressBar.animate().alpha(0).withEndAction((() -> progressBar.setProgress(progress)));
         }
-        else
+        else if(splashScreen.getVisibility() == View.GONE)
         {
-            progressBar.setProgress(progress);
+            if(progressBar.getVisibility()==View.INVISIBLE)
+            {
+                progressBar.setProgress(4);
+            }
+            else
+            {
+                progressBar.setProgress(progress);
+            }
+            progressBar.setVisibility(View.VISIBLE);
             progressBar.setAlpha(1);
         }
     }
 
     public void onBackPressed()
     {
-        if(!isHiddenView())
+        if(webView.getVisibility() == View.VISIBLE)
         {
-            webView.goBack();
-            webView.bringToFront();
-            webView.setAlpha(1);
-            webView.setVisibility(View.VISIBLE);
-            requestFailure.animate().alpha(0f).setDuration(200).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));
-            onUpdateSearchBar(webView.getUrl());
+            if(!webView.canGoBack())
+            {
+                if(app_model.getInstance().getAppInstance().getHiddenQueueLength()>0)
+                {
+                    onUpdateView(false);
+                }
+                else
+                {
+                    helperMethod.onMinimizeApp();
+                }
+            }
+            else
+            {
+                webView.goBack();
+                webView.bringToFront();
+                webView.setAlpha(1);
+                webView.setVisibility(View.VISIBLE);
+                requestFailure.animate().alpha(0f).setDuration(200).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));
+                onUpdateSearchBar(webView.getUrl());
+            }
         }
         else
         {
@@ -342,7 +374,7 @@ public class applicationViewController
     {
         if(status)
         {
-            floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));;
+            floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));
             webView.setAlpha(1);
             webView.setVisibility(View.VISIBLE);
             webView.bringToFront();
@@ -371,11 +403,19 @@ public class applicationViewController
 
     public void openMenu(View view)
     {
-        PopupMenu popup = new PopupMenu(app_model.getInstance().getAppInstance(), view);
+        LinearLayout parentView = (LinearLayout)view.getParent();
+
+        PopupMenu popup = new PopupMenu(app_model.getInstance().getAppInstance(), parentView,Gravity.RIGHT);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_main, popup.getMenu());
         MenuCompat.setGroupDividerEnabled(popup.getMenu(), true);
+        popup.setOnMenuItemClickListener(item ->
+        {
+            app_model.getInstance().getAppInstance().onMenuOptionSelected(item);
+            return true;
+        });
         popup.show();
+        view.bringToFront();
     }
 
     public void onReload()

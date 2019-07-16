@@ -2,15 +2,15 @@ package com.darkweb.genesissearchengine;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.preference.PreferenceManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -20,15 +20,15 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import androidx.core.app.ShareCompat;
-import com.darkweb.genesissearchengine.appManager.list_activity.list_controller;
-import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
-import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.example.myapplication.BuildConfig;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Normalizer;
+import java.util.Locale;
 
 public class helperMethod
 {
@@ -37,11 +37,7 @@ public class helperMethod
     {
         ConnectivityManager cm = (ConnectivityManager)  app_model.getInstance().getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-        {
-            return true;
-        }
-        return false;
+        return networkInfo != null && networkInfo.isConnected();
     }
 
 
@@ -70,17 +66,17 @@ public class helperMethod
     {
         if(!hasSoftKeys)
         {
-            return (int)(Resources.getSystem().getDisplayMetrics().heightPixels)-(helperMethod.getNavigationBarHeight());
+            return Resources.getSystem().getDisplayMetrics().heightPixels -(helperMethod.getNavigationBarHeight());
         }
         else
         {
-            return (int)(Resources.getSystem().getDisplayMetrics().heightPixels);
+            return (Resources.getSystem().getDisplayMetrics().heightPixels);
         }
     }
 
     public static int screenWidth()
     {
-        return (int)(Resources.getSystem().getDisplayMetrics().widthPixels);
+        return (Resources.getSystem().getDisplayMetrics().widthPixels);
     }
 
     public static int getNavigationBarHeight() {
@@ -130,14 +126,7 @@ public class helperMethod
 
     public static boolean isBuildValid ()
     {
-        if(BuildConfig.FLAVOR.equals("aarch64")&& Build.SUPPORTED_ABIS[0].equals("arm64-v8a") || BuildConfig.FLAVOR.equals("arm")&&Build.SUPPORTED_ABIS[0].equals("armeabi-v7a") || BuildConfig.FLAVOR.equals("x86")&&Build.SUPPORTED_ABIS[0].equals("x86") || BuildConfig.FLAVOR.equals("x86_64")&&Build.SUPPORTED_ABIS[0].equals("x86_64"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return BuildConfig.FLAVOR.equals("aarch64") && Build.SUPPORTED_ABIS[0].equals("arm64-v8a") || BuildConfig.FLAVOR.equals("arm") && Build.SUPPORTED_ABIS[0].equals("armeabi-v7a") || BuildConfig.FLAVOR.equals("x86") && Build.SUPPORTED_ABIS[0].equals("x86") || BuildConfig.FLAVOR.equals("x86_64") && Build.SUPPORTED_ABIS[0].equals("x86_64");
 
     }
 
@@ -151,8 +140,9 @@ public class helperMethod
     {
         ShareCompat.IntentBuilder.from(app_model.getInstance().getAppInstance())
                 .setType("text/plain")
-                .setChooserTitle("Genesis | Onion Search")
-                .setText("http://play.google.com/store/apps/details?id=" + app_model.getInstance().getAppInstance().getPackageName())
+                .setChooserTitle("Hi! Check out this Awesome App")
+                .setSubject("Hi! Check out this Awesome App")
+                .setText("Genesis | Onion Search | http://play.google.com/store/apps/details?id=" + app_model.getInstance().getAppInstance().getPackageName())
                 .startChooser();
     }
 
@@ -178,6 +168,45 @@ public class helperMethod
         Intent myIntent = new Intent(app_model.getInstance().getAppInstance(), cls);
         myIntent.putExtra(keys.list_type, type);
         app_model.getInstance().getAppInstance().startActivity(myIntent);
+    }
+
+    public static CharSequence highlight(String search, String originalText) {
+        // ignore case and accents
+        // the same thing should have been done for the search text
+        String normalizedText = Normalizer
+                .normalize(originalText, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .toLowerCase(Locale.ENGLISH);
+
+        int start = normalizedText.indexOf(search.toLowerCase(Locale.ENGLISH));
+        if (start < 0) {
+            // not found, nothing to to
+            return originalText;
+        } else {
+            // highlight each appearance in the original text
+            // while searching in normalized text
+            Spannable highlighted = new SpannableString(originalText);
+            while (start >= 0) {
+                int spanStart = Math.min(start, originalText.length());
+                int spanEnd = Math.min(start + search.length(),
+                        originalText.length());
+
+                highlighted.setSpan(new ForegroundColorSpan(Color.BLUE),
+                        spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                start = normalizedText.indexOf(search, spanEnd);
+            }
+
+            return highlighted;
+        }
+    }
+
+    public static void onMinimizeApp()
+    {
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        app_model.getInstance().getAppInstance().startActivity(startMain);
     }
 
 }

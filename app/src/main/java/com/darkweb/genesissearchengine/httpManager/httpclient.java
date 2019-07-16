@@ -32,7 +32,7 @@ public class httpclient
                 {
                     String c_url = url.replace("http://boogle","https://boogle").replaceAll("genesis.onion","boogle.store").replaceAll("genesis.store","boogle.store");
 
-                    HttpClient client=new DefaultHttpClient();;
+                    HttpClient client=new DefaultHttpClient();
                     SSLConnectionSocketFactory scsf = new SSLConnectionSocketFactory(
                             SSLContexts.custom().loadTrustMaterial(null, new TrustSelfSignedStrategy()).build(),
                             NoopHostnameVerifier.INSTANCE);

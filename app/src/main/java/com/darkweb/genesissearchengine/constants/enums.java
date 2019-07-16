@@ -2,9 +2,9 @@ package com.darkweb.genesissearchengine.constants;
 
 public class enums
 {
-    /*Web Request*/
-    public enum webRequestStatus{notRunning,running,repeat;}
+    /*SETTINGS*/
 
     public enum searchEngine{Darkweb,Bing,Google}
+    public enum adID{hidden, internal}
 
 }

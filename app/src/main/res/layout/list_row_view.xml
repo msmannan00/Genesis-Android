@@ -11,9 +11,9 @@
     <LinearLayout
             android:layout_width="0dp"
             android:orientation="vertical"
-            android:layout_marginLeft="45px"
+            android:layout_marginStart="20dp"
             android:id="@+id/item_container"
-            android:paddingRight="8px"
+            android:paddingEnd="8dp"
             android:layout_weight="4"
             android:layout_height="wrap_content">
 
@@ -21,6 +21,7 @@
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:singleLine="true"
         />
 
@@ -29,8 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:layout_marginTop="2dp"
                 android:ellipsize="end"
-                android:textColor="@color/ease_blue"
+                android:textSize="12sp"
+                android:textColor="@color/holo_dark_gray"
         />
     </LinearLayout>
 
@@ -38,7 +41,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:id="@+id/message_button"
             android:onClick="onHomeButtonPressed"
             android:scaleType="fitCenter"

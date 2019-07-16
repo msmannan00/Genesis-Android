@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.constants;
 
+import android.util.Log;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 
 public class status
@@ -11,7 +12,7 @@ public class status
     public static String version_code = "6.0";
 
     /*Settings Level*/
-    public static String search_status = "";
+    public static String search_status = strings.emptyStr;
     public static boolean java_status = false;
     public static boolean history_status = true;
 

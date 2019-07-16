@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="com.darkweb.genesissearchengine.appManager.list_activity.list_controller">
+        tools:context="com.darkweb.genesissearchengine.appManager.list_manager.list_controller">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textColor="@color/text_color_v2"
                 android:selectAllOnFocus="true"
                 android:paddingLeft="18dp"
@@ -51,25 +51,18 @@
                 android:maxLines="1"
                 android:id="@+id/search" android:layout_weight="1" android:importantForAutofill="no"
                 tools:targetApi="o"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_marginStart="0dp"
-                android:paddingBottom="19dp"
-                android:paddingTop="19dp"
-                android:layout_marginEnd="0dp"
+        <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:id="@+id/menu"
-                android:onClick="clearHistory"
+                android:onClick="onClearHistory"
                 android:scaleType="fitCenter"
-                android:text="Clear"
-
-                android:bottomRightRadius="15dp"
-                android:bottomLeftRadius="15dp"
-                android:topLeftRadius="15dp"
-                android:topRightRadius="15dp"
-
+                android:src="@drawable/dustbin"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/todo"/>
 
     </LinearLayout>
@@ -89,5 +82,5 @@
                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
                app:layout_constraintBottom_toBottomOf="parent"
-    />
+               android:contentDescription="@string/todo"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

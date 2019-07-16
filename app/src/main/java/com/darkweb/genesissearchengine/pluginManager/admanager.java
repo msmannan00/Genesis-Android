@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import com.darkweb.genesissearchengine.appManager.main_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
@@ -10,7 +11,8 @@ public class admanager
 
     /*Private Variables*/
     private static final admanager ourInstance = new admanager();
-    private InterstitialAd mInterstitialAd;
+    private InterstitialAd mInterstitialHidden;
+    private InterstitialAd mInterstitialInternal;
     private int adCount = 0;
     boolean isAdShown = false;
 
@@ -26,51 +28,31 @@ public class admanager
     public void initialize()
     {
         MobileAds.initialize(app_model.getInstance().getAppInstance(), "ca-app-pub-5074525529134731~2926711128");
-        mInterstitialAd = new InterstitialAd(app_model.getInstance().getAppInstance());
-        mInterstitialAd.setAdUnitId("ca-app-pub-5074525529134731/8478420705");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        initAd(mInterstitialHidden,"ca-app-pub-5074525529134731/4332539288");
+        initAd(mInterstitialInternal,"ca-app-pub-5074525529134731/8478420705");
+    }
+
+    public void initAd(InterstitialAd adInstance,String id)
+    {
+        adInstance = new InterstitialAd(app_model.getInstance().getAppInstance());
+
+        adInstance.setAdUnitId(id);
+        adInstance.loadAd(new AdRequest.Builder().build());
     }
 
     /*Helper Methods*/
 
-    public void showAd(boolean isAdForced)
+    public void showAd(enums.adID id)
     {
-        if(isAdShown)
+        if(id.equals(enums.adID.hidden))
         {
-            return;
-        }
-
-        if(!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded())
-        {
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            if(isAdForced || adCount==0 || adCount%3==0)
-            {
-                adCount = 0;
-            }
-            else
-            {
-                adCount+=1;
-            }
+            mInterstitialHidden.show();
+            mInterstitialHidden.loadAd(new AdRequest.Builder().build());
         }
         else
         {
-            if(mInterstitialAd.isLoaded())
-            {
-                if(isAdForced)
-                {
-                    isAdShown = true;
-                    mInterstitialAd.show();
-                    adCount = 1;
-                }
-                else
-                {
-                    if(adCount%3==0)
-                    {
-                        mInterstitialAd.show();
-                    }
-                    adCount += 1;
-                }
-            }
+            mInterstitialInternal.show();
+            mInterstitialInternal.loadAd(new AdRequest.Builder().build());
         }
     }
 }

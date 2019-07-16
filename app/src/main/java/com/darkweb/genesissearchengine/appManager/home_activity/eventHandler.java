@@ -1,11 +1,12 @@
-package com.darkweb.genesissearchengine.appManager.main_activity;
+package com.darkweb.genesissearchengine.appManager.home_activity;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
-import com.darkweb.genesissearchengine.appManager.list_activity.list_controller;
+import com.darkweb.genesissearchengine.appManager.list_manager.list_controller;
 import com.darkweb.genesissearchengine.appManager.setting_manager.setting_controller;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -100,12 +101,11 @@ public class eventHandler
 
     public void onHomeButtonPressed()
     {
-        appContoller.stopHiddenView();
+        appContoller.stopHiddenView(true);
         fabricManager.getInstance().sendEvent("HOME BUTTON PRESSSED : ");
-        applicationViewController.getInstance().checkSSLTextColor();
+        viewController.getInstance().checkSSLTextColor();
         appContoller.initSearchEngine();
         helperMethod.hideKeyboard();
-        appContoller.onUpdateSearchBarView(constants.frontUrlSlashed);
     }
 
     public void onFloatingButtonPressed()
