@@ -12,16 +12,15 @@ public class constants
     /*URL CONSTANTS*/
 
     public static String backendGenesis = "https://boogle.store/";
-    public static String backendGoogle = "https://www.google.com/";
-    public static String backendBing = "https://www.bing.com/";
     public static String backendUrlHost = "boogle.store";
-    public static String backendUrlSlashed = "https://boogle.store/";
-    public static String frontUrlSlashed = "https://genesis.onion/";
+    public static String updateUrl = "https://boogle.store/manual?abi=";
+
     public static String frontEndUrlHost = "genesis.store";
     public static String frontEndUrlHost_v1 = "genesis.onion";
+
+    public static String backendGoogle = "https://www.google.com/";
+    public static String backendBing = "https://www.bing.com/";
     public static String allowedHost = ".onion";
-    public static String reportUrl = "https://boogle.store/reportus?r_key=";
-    public static String updateUrl = "https://boogle.store/manual?abi=";
     public static String playstoreUrl = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
 
     /*BUILD CONSTANTS*/

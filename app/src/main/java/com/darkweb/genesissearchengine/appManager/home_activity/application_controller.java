@@ -38,7 +38,7 @@ public class application_controller extends AppCompatActivity
     /*Redirection Objects*/
     private geckoClients geckoclient = null;
     private webviewClient webviewclient = null;
-    private eventHandler eventhandler = null;
+    private home_ehandler eventhandler = null;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
     @Override
@@ -62,7 +62,7 @@ public class application_controller extends AppCompatActivity
             orbot_manager.getInstance().reinitOrbot();
             viewController.getInstance().initialization(webView,loadingText,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
             firebase.getInstance().initialize();
-            geckoclient.initialize(geckoView,false);
+            geckoclient.initialize(geckoView);
             app_model.getInstance().initialization();
             initBoogle();
         }
@@ -89,21 +89,43 @@ public class application_controller extends AppCompatActivity
     {
         if(status.search_status.equals(enums.searchEngine.Bing.toString()))
         {
-            geckoclient.setRootEngine(constants.backendBing);
             webView.stopLoading();
             onloadURL(constants.backendBing,true,false);
+            if(app_model.getInstance().getNavigation().size()!=1)
+            {
+                app_model.getInstance().addNavigation(constants.backendBing,enums.navigationType.onion);
+            }
+            if(app_model.getInstance().getNavigation().size()>0)
+            {
+                app_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendBing,enums.navigationType.onion));
+            }
             return false;
         }
         else if(status.search_status.equals(enums.searchEngine.Google.toString()))
         {
-            geckoclient.setRootEngine(constants.backendGoogle);
             webView.stopLoading();
             onloadURL(constants.backendGoogle,true,false);
+            if(app_model.getInstance().getNavigation().size()!=1)
+            {
+                app_model.getInstance().addNavigation(constants.backendGoogle,enums.navigationType.onion);
+            }
+            if(app_model.getInstance().getNavigation().size()>0)
+            {
+                app_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendGoogle,enums.navigationType.onion));
+            }
             return false;
         }
         else
         {
             onloadURL(constants.backendGenesis,false,false);
+            if(app_model.getInstance().getNavigation().size()!=1)
+            {
+                app_model.getInstance().addNavigation(constants.backendGenesis,enums.navigationType.base);
+            }
+            if(app_model.getInstance().getNavigation().size()>0)
+            {
+                app_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendGenesis,enums.navigationType.base));
+            }
             return true;
         }
     }
@@ -131,12 +153,12 @@ public class application_controller extends AppCompatActivity
 
         webviewclient = new webviewClient();
         geckoclient = new geckoClients();
-        eventhandler = new eventHandler();
+        eventhandler = new home_ehandler();
     }
 
     public void initializeCrashlytics()
     {
-        //fabricManager.getInstance().init();
+        fabricManager.getInstance().init();
     }
 
     public void initializeWebView()
@@ -275,7 +297,7 @@ public class application_controller extends AppCompatActivity
     }
 
     public void onReInitGeckoView() {
-        geckoclient.initialize(geckoView,true);
+        geckoclient.initialize(geckoView);
         if(webView.getVisibility() != View.VISIBLE)
         {
             geckoclient.onReloadHiddenView();
@@ -287,13 +309,13 @@ public class application_controller extends AppCompatActivity
         geckoclient.onHiddenGoBack(geckoView);
     }
 
-    public int getHiddenQueueLength()
+    public void releaseSession()
     {
-        return geckoclient.getHiddenQueueLength();
+        geckoclient.releaseSession(geckoView);
     }
 
-    public void stopHiddenView(boolean releaseView) {
-        geckoclient.stopHiddenView(geckoView,releaseView);
+    public void stopHiddenView(boolean releaseView,boolean backPressed) {
+        geckoclient.stopHiddenView(geckoView,releaseView,backPressed);
         //geckoclient.removeHistory();
     }
 

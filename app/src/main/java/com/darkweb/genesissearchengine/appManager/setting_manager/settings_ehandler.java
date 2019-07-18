@@ -30,12 +30,12 @@ public class settings_ehandler
 
     private void onJavaScriptListener(int position)
     {
-        if(position==1 && java_status)
+        if(position==1 && setting_model.getInstance().java_status)
         {
             setting_model.getInstance().java_status = false;
             preference_manager.getInstance().setBool(keys.java_script, false);
         }
-        else if(!java_status)
+        else if(!setting_model.getInstance().java_status)
         {
             setting_model.getInstance().java_status = true;
             preference_manager.getInstance().setBool(keys.java_script, true);
@@ -44,7 +44,7 @@ public class settings_ehandler
 
     private void onSearchListner(AdapterView<?> parentView,int position)
     {
-        if(!search_status.equals(parentView.getItemAtPosition(position).toString()))
+        if(!setting_model.getInstance().search_status.equals(parentView.getItemAtPosition(position).toString()))
         {
             setting_model.getInstance().search_status = parentView.getItemAtPosition(position).toString();
             preference_manager.getInstance().setString(keys.search_engine, setting_model.getInstance().search_status);
@@ -53,12 +53,12 @@ public class settings_ehandler
 
     private void onHistoryListener(int position)
     {
-        if(position==1 && history_status)
+        if(position==1 && setting_model.getInstance().history_status)
         {
             setting_model.getInstance().history_status = false;
             preference_manager.getInstance().setBool(keys.history_clear, false);
         }
-        else if(!java_status)
+        else if(!setting_model.getInstance().history_status)
         {
             setting_model.getInstance().history_status = true;
             preference_manager.getInstance().setBool(keys.history_clear, true);

@@ -19,11 +19,11 @@ import com.example.myapplication.R;
 import java.io.IOException;
 import java.net.URL;
 
-public class eventHandler
+public class home_ehandler
 {
     application_controller appContoller;
 
-    public eventHandler()
+    public home_ehandler()
     {
         appContoller = app_model.getInstance().getAppInstance();
     }
@@ -101,7 +101,7 @@ public class eventHandler
 
     public void onHomeButtonPressed()
     {
-        appContoller.stopHiddenView(true);
+        appContoller.stopHiddenView(true,false);
         fabricManager.getInstance().sendEvent("HOME BUTTON PRESSSED : ");
         viewController.getInstance().checkSSLTextColor();
         appContoller.initSearchEngine();

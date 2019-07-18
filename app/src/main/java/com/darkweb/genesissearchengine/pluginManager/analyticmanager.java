@@ -11,6 +11,7 @@ import java.util.UUID;
 public class analyticmanager
 {
     /*Private Variables*/
+
     private static final analyticmanager ourInstance = new analyticmanager();
     private String uniqueID = null;
 
@@ -19,6 +20,7 @@ public class analyticmanager
     }
 
     /*Initializations*/
+
     private analyticmanager()
     {
     }

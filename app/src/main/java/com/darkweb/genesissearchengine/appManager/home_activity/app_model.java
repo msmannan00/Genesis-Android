@@ -6,6 +6,7 @@ import com.darkweb.genesissearchengine.appManager.database_manager.database_cont
 import com.darkweb.genesissearchengine.appManager.list_manager.list_controller;
 import com.darkweb.genesissearchengine.appManager.list_manager.list_row_model;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperMethod;
 
@@ -17,6 +18,7 @@ public class app_model
     /*Data Objects*/
     private ArrayList<list_row_model> history = new ArrayList<list_row_model>();
     private ArrayList<list_row_model> bookmarks = new ArrayList<list_row_model>();
+    private ArrayList<navigation_model> navigation = new ArrayList<navigation_model>();
     private HashSet<String> suggestions = new HashSet<String>();
     private static int port = 9150;
 
@@ -24,8 +26,7 @@ public class app_model
     private application_controller appInstance;
 
     /*Initializations*/
-    public void initialization()
-    {
+    public void initialization(){
         database_controller.getInstance().initialize();
         initializeHistory();
         initializeBookmarks();
@@ -151,6 +152,14 @@ public class app_model
         return new ArrayList<String>(suggestions);
     }
 
+    /*Navigation*/
+
+    public void addNavigation(String url,enums.navigationType type) {
+        navigation.add(new navigation_model(url,type));
+    }
+    public ArrayList<navigation_model> getNavigation() {
+        return navigation;
+    }
 
     /*Helper Method*/
     public boolean isUrlRepeatable(String url,String viewUrl){

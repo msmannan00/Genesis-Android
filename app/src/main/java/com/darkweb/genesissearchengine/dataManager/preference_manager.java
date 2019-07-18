@@ -7,6 +7,7 @@ import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 public class preference_manager
 {
     /*Private Declarations*/
+
     private static final preference_manager ourInstance = new preference_manager();
     private SharedPreferences prefs;
     private SharedPreferences.Editor edit;
@@ -17,6 +18,7 @@ public class preference_manager
     }
 
     /*Initializations*/
+
     private preference_manager()
     {
     }
@@ -28,6 +30,7 @@ public class preference_manager
     }
 
     /*Saving Preferences*/
+
     public void setString(String valueKey, String value)
     {
         edit.putString(valueKey, value);
@@ -41,6 +44,7 @@ public class preference_manager
     }
 
     /*Recieving Preferences*/
+
     public String getString(String valueKey, String valueDefault)
     {
         return prefs.getString(valueKey, valueDefault);

@@ -5,6 +5,7 @@ import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperMethod;
 import com.msopentech.thali.android.toronionproxy.AndroidOnionProxyManager;
 import com.msopentech.thali.toronionproxy.OnionProxyManager;
 import org.mozilla.gecko.PrefsHelper;
@@ -12,11 +13,14 @@ import org.mozilla.gecko.PrefsHelper;
 public class orbot_manager {
 
     /*Private Variables*/
+
     private boolean isLoading = false;
     private int threadCounter = 100;
-    /*Local Initialization*/
-    private static final orbot_manager ourInstance = new orbot_manager();
     private OnionProxyManager onionProxyManager = null;
+
+    /*Local Initialization*/
+
+    private static final orbot_manager ourInstance = new orbot_manager();
 
     public static orbot_manager getInstance()
     {
@@ -28,6 +32,7 @@ public class orbot_manager {
     }
 
     /*Orbot Initialization*/
+
     public boolean initOrbot(String url)
     {
         if(!status.isTorInitialized)
@@ -59,16 +64,23 @@ public class orbot_manager {
                                 status.isTorInitialized = true;
                                 threadCounter = 5000;
                             }
+                            else
+                            {
+                                status.isTorInitialized = false;
+                            }
                         }
                         if(!isLoading && !status.isTorInitialized)
                         {
-                            if(onionProxyManager == null)
+                            if(helperMethod.isNetworkAvailable())
                             {
-                                onionProxyManager = new AndroidOnionProxyManager(app_model.getInstance().getAppContext(), strings.torfolder);
+                                if(onionProxyManager == null)
+                                {
+                                    onionProxyManager = new AndroidOnionProxyManager(app_model.getInstance().getAppContext(), strings.torfolder);
+                                }
+                                isLoading = false;
+                                status.isTorInitialized = false;
+                                initializeTorClient();
                             }
-                            isLoading = false;
-                            status.isTorInitialized = false;
-                            initializeTorClient();
                         }
                         else
                         {
@@ -83,21 +95,6 @@ public class orbot_manager {
 
             }
         }.start();
-    }
-
-    public String getLogs()
-    {
-        if(onionProxyManager!=null)
-        {
-            String Logs = onionProxyManager.getLastLog();
-            if(Logs.equals(""))
-            {
-                return "Loading Please Wait";
-            }
-            Logs=Logs.replace("FAILED","Securing");
-            return Logs;
-        }
-        return "Loading Please Wait";
     }
 
     public void initializeTorClient()
@@ -142,13 +139,14 @@ public class orbot_manager {
     }
 
     /*Proxy Initialization*/
+
     public void initializeProxy()
     {
-        PrefsHelper.setPref(keys.proxy_type, constants.proxy_type); //manual proxy settings
-        PrefsHelper.setPref(keys.proxy_socks,constants.proxy_socks); //manual proxy settings
-        PrefsHelper.setPref(keys.proxy_socks_port, app_model.getInstance().getPort()); //manual proxy settings
-        PrefsHelper.setPref(keys.proxy_socks_version,constants.proxy_socks_version); //manual proxy settings
-        PrefsHelper.setPref(keys.proxy_socks_remote_dns,constants.proxy_socks_remote_dns); //manual proxy settings
+        PrefsHelper.setPref(keys.proxy_type, constants.proxy_type);
+        PrefsHelper.setPref(keys.proxy_socks,constants.proxy_socks);
+        PrefsHelper.setPref(keys.proxy_socks_port, app_model.getInstance().getPort());
+        PrefsHelper.setPref(keys.proxy_socks_version,constants.proxy_socks_version);
+        PrefsHelper.setPref(keys.proxy_socks_remote_dns,constants.proxy_socks_remote_dns);
         PrefsHelper.setPref(keys.proxy_cache,constants.proxy_cache);
         PrefsHelper.setPref(keys.proxy_memory,constants.proxy_memory);
         PrefsHelper.setPref(keys.proxy_useragent_override, constants.proxy_useragent_override);
@@ -156,6 +154,21 @@ public class orbot_manager {
         PrefsHelper.setPref(keys.proxy_donottrackheader_value,constants.proxy_donottrackheader_value);
     }
 
+    /*Helper Methods*/
 
+    public String getLogs()
+    {
+        if(onionProxyManager!=null)
+        {
+            String Logs = onionProxyManager.getLastLog();
+            if(Logs.equals(""))
+            {
+                return "Loading Please Wait";
+            }
+            Logs=Logs.replace("FAILED","Securing");
+            return Logs;
+        }
+        return "Loading Please Wait";
+    }
 
 }

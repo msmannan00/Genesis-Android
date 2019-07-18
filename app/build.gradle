@@ -45,7 +45,7 @@ android {
             versionCode project.ext.arm_vcode
             versionName project.ext.arm_vname
             dimension project.ext.dimen
-       }
+        }
         aarch64 {
             versionCode project.ext.aarch_vcode
             versionName project.ext.aarch_vname
@@ -71,7 +71,6 @@ android {
         }
     }
 }
-
 dependencies {
 
     /*Default Libraries*/

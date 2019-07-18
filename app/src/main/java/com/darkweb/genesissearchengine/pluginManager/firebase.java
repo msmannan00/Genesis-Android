@@ -4,7 +4,11 @@ package com.darkweb.genesissearchengine.pluginManager;
 
 public class firebase
 {
+    /*Private Variables*/
+
     private static final firebase ourInstance = new firebase();
+
+    /*Initializations*/
 
     public static firebase getInstance()
     {
@@ -17,6 +21,8 @@ public class firebase
     {
         //mFirebaseAnalytics = FirebaseAnalytics.getInstance(app_model.getInstance().getAppContext());
     }
+
+    /*Helper Methods*/
 
     public void logEvent(String value,String id)
     {

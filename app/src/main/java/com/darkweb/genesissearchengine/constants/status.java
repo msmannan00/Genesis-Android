@@ -6,12 +6,14 @@ import com.darkweb.genesissearchengine.dataManager.preference_manager;
 public class status
 {
     /*App Level*/
+
     public static boolean isApplicationLoaded = false;
     public static boolean isPlayStoreInstalled = true;
     public static boolean isTorInitialized = false;
-    public static String version_code = "6.0";
+    public static String version_code = "7.0";
 
     /*Settings Level*/
+
     public static String search_status = strings.emptyStr;
     public static boolean java_status = false;
     public static boolean history_status = true;

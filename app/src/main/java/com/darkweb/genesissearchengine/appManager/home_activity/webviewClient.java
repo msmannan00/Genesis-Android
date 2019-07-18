@@ -28,7 +28,7 @@ public class webviewClient
                 }
                 if(!url.contains("boogle"))
                 {
-                    app_model.getInstance().getAppInstance().stopHiddenView(false);
+                    app_model.getInstance().getAppInstance().stopHiddenView(false,false);
                     fabricManager.getInstance().sendEvent("BASE SIMPLE SEARCHED : " + url);
                     isGeckoView = true;
                     if(orbot_manager.getInstance().initOrbot(url))
@@ -39,6 +39,7 @@ public class webviewClient
                 }
                 else
                 {
+                    app_model.getInstance().addNavigation(url,enums.navigationType.base);
                     app_model.getInstance().addHistory(url);
                     fabricManager.getInstance().sendEvent("BASE ONION SEARCHED : " + url);
                     app_model.getInstance().getAppInstance().onRequestTriggered(false,url);

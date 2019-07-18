@@ -36,8 +36,11 @@ class setting_view_controller
     private void initViews()
     {
         search.setDropDownVerticalOffset(15);
+        search.setDropDownHorizontalOffset(-15);
         javascript.setDropDownVerticalOffset(15);
+        javascript.setDropDownHorizontalOffset(-15);
         history.setDropDownVerticalOffset(15);
+        history.setDropDownHorizontalOffset(-15);
     }
 
     private void initJavascript()

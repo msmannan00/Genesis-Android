@@ -3,12 +3,15 @@ package com.darkweb.genesissearchengine.constants;
 public class keys
 {
     /*Welcome Message Prefs*/
+
     public static String first_time_loaded = "FirstTimeLoaded";
 
     /*Home page*/
+
     public static String homepage_html_key = "internalhtml";
 
     /*Proxy Manager*/
+
     public static String proxy_type  = "network.proxy.type";
     public static String proxy_socks = "network.proxy.socks";
     public static String proxy_socks_port  = "network.proxy.socks_port";
@@ -24,6 +27,7 @@ public class keys
     public static String list_type  = "list_type";
 
     /*Settings*/
+
     public static String search_engine  = "search_engine";
     public static String java_script  = "java_script";
     public static String history_clear  = "history_clear";

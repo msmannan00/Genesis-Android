@@ -12,18 +12,22 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class database_controller
 {
+
+    /*Private Variables*/
+
     private static final database_controller ourInstance = new database_controller();
+    private SQLiteDatabase database_instance;
 
     public static database_controller getInstance()
     {
         return ourInstance;
     }
 
-    private SQLiteDatabase database_instance;
-
     private database_controller()
     {
     }
+
+    /*Initializations*/
 
     public void initialize()
     {
@@ -41,13 +45,14 @@ public class database_controller
 
     }
 
+    /*Helper Methods*/
+
     public void execSQL(String query)
     {
         database_instance.execSQL(query);
     }
 
-    public ArrayList<list_row_model> selectHistory()
-    {
+    public ArrayList<list_row_model> selectHistory(){
         ArrayList<list_row_model> tempmodel = new ArrayList<>();
         Cursor c = database_instance.rawQuery("SELECT * FROM history ORDER BY id DESC ", null);
         if (c.moveToFirst()){
@@ -61,8 +66,7 @@ public class database_controller
         return  tempmodel;
     }
 
-    public ArrayList<list_row_model> selectBookmark()
-    {
+    public ArrayList<list_row_model> selectBookmark(){
         ArrayList<list_row_model> tempmodel = new ArrayList<>();
         Cursor c = database_instance.rawQuery("SELECT * FROM bookmark ORDER BY id DESC ", null);
 
