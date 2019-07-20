@@ -204,7 +204,6 @@ public class message_manager
         builder.show();
     }
 
-
     public void reportURL()
     {
         Context application_context = app_model.getInstance().getAppContext();

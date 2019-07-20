@@ -30,8 +30,8 @@ public class admanager
     {
         MobileAds.initialize(app_model.getInstance().getAppInstance(), "ca-app-pub-5074525529134731~2926711128");
         mInterstitialHidden_base = initAd("ca-app-pub-5074525529134731/1637043432");
-        mInterstitialHidden_onion = initAd("ca-app-pub-5074525529134731/4332539288");
-        mInterstitialInternal = initAd("ca-app-pub-5074525529134731/8478420705");
+        //mInterstitialHidden_onion = initAd("ca-app-pub-5074525529134731/4332539288");
+        //mInterstitialInternal = initAd("ca-app-pub-5074525529134731/8478420705");
     }
 
     public InterstitialAd initAd(String id)
@@ -47,12 +47,12 @@ public class admanager
 
     public void showAd(enums.adID id)
     {
-        if(id.equals(enums.adID.hidden_base))
+        if(id.equals(enums.adID.hidden_onion_start))
         {
             mInterstitialHidden_base.show();
             mInterstitialHidden_base.loadAd(new AdRequest.Builder().build());
         }
-        else if(id.equals(enums.adID.hidden_onion))
+        /*else if(id.equals(enums.adID.hidden_onion))
         {
             mInterstitialHidden_onion.show();
             mInterstitialHidden_onion.loadAd(new AdRequest.Builder().build());
@@ -61,6 +61,6 @@ public class admanager
         {
             mInterstitialInternal.show();
             mInterstitialInternal.loadAd(new AdRequest.Builder().build());
-        }
+        }*/
     }
 }

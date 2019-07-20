@@ -65,6 +65,7 @@ public class application_controller extends AppCompatActivity
             geckoclient.initialize(geckoView);
             app_model.getInstance().initialization();
             initBoogle();
+            downloadManager.getInstance().initialize();
         }
         else
         {
@@ -214,7 +215,7 @@ public class application_controller extends AppCompatActivity
     public void onloadURL(String url,boolean isHiddenWeb,boolean isUrlSavable) {
         if(isHiddenWeb)
         {
-            geckoclient.loadGeckoURL(url,geckoView,isUrlSavable);
+            geckoclient.loadGeckoURL(url,geckoView,isUrlSavable,webView.getVisibility()==View.VISIBLE);
         }
         else if(!app_model.getInstance().isUrlRepeatable(url,webView.getUrl()) || webView.getVisibility() == View.GONE)
         {

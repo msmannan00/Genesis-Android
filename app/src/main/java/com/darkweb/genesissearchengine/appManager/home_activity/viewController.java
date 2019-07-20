@@ -356,17 +356,21 @@ public class viewController
                 {
                     onProgressBarUpdate(4);
                     webView.goBack();
-                    app_model.getInstance().getNavigation().remove(app_model.getInstance().getNavigation().size()-1);
                 }
                 else
                 {
                     onProgressBarUpdate(0);
                 }
+
+                /*CHANGED BUT NOT TESTED*/
+                app_model.getInstance().getNavigation().remove(app_model.getInstance().getNavigation().size()-1);
+
                 webView.bringToFront();
                 webView.setAlpha(1);
                 webView.setVisibility(View.VISIBLE);
                 requestFailure.animate().alpha(0f).setDuration(200).withEndAction((() -> requestFailure.setVisibility(View.INVISIBLE)));
                 onUpdateSearchBar(webView.getUrl());
+                floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));
             }
             else
             {

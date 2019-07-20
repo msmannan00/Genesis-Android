@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 import com.example.myapplication.R;
@@ -74,6 +75,8 @@ public class list_ehandler
     void onUrlClick(String url)
     {
         String url_temp = helperMethod.completeURL(url);
+
+        app_model.getInstance().addNavigation(url, enums.navigationType.onion);
 
         if(!url_temp.contains("boogle") && !url_temp.equals(constants.backendGoogle) && !url_temp.equals(constants.backendBing))
         {

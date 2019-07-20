@@ -155,7 +155,10 @@ public class app_model
     /*Navigation*/
 
     public void addNavigation(String url,enums.navigationType type) {
-        navigation.add(new navigation_model(url,type));
+        if(navigation.size()==0 || !navigation.get(navigation.size()-1).getURL().equals(url))
+        {
+            navigation.add(new navigation_model(url,type));
+        }
     }
     public ArrayList<navigation_model> getNavigation() {
         return navigation;
