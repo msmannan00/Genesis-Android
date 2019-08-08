@@ -142,6 +142,15 @@ public class application_controller extends AppCompatActivity
         webView = findViewById(R.id.pageLoader1);
         geckoView = findViewById(R.id.webLoader);
 
+
+        geckoView.Browser browser = mGeckoView.getCurrentBrowser();
+        if (browser == null) {
+            browser = mGeckoView.addBrowser(text.getText().toString());
+        } else {
+            browser.loadUrl(text.getText().toString());
+        }
+
+
         progressBar = findViewById(R.id.progressBar);
         requestFailure = findViewById(R.id.requestFailure);
         splashScreen = findViewById(R.id.splashScreen);
@@ -149,7 +158,6 @@ public class application_controller extends AppCompatActivity
         floatingButton = findViewById(R.id.floatingActionButton3);
         loadingIcon = findViewById(R.id.imageView_loading_back);
         splashlogo = findViewById(R.id.backsplash);
-        geckoView = findViewById(R.id.webLoader);
         loadingText = findViewById(R.id.loadingText);
 
         webviewclient = new webviewClient();

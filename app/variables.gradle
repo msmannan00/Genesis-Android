@@ -1,18 +1,18 @@
 /*arm versions*/
-    project.ext.arm_vname = '196'
-    project.ext.arm_vcode = 196
+    project.ext.arm_vname = '200'
+    project.ext.arm_vcode = 200
 
 /*aarch versions*/
-    project.ext.aarch_vname = '197'
-    project.ext.aarch_vcode = 197
+    project.ext.aarch_vname = '201'
+    project.ext.aarch_vcode = 201
 
 /*x86 versions*/
-    project.ext.x86_vname = '198'
-    project.ext.x86_vcode = 198
+    project.ext.x86_vname = '202'
+    project.ext.x86_vcode = 202
 
 /*x64 versions*/
-    project.ext.x64_vname = '199'
-    project.ext.x64_vcode = 199
+    project.ext.x64_vname = '203'
+    project.ext.x64_vcode = 203
 
 /*dimension*/
     project.ext.dimen = 'abi'
@@ -22,9 +22,9 @@
     project.ext.firefox_channel = ""
 
 /*Application Preferences*/
-    project.ext.compileSdkVersion = 28
+    project.ext.compileSdkVersion = 29
     project.ext.minSdkVersion = 21
-    project.ext.targetSdkVersion = 28
+    project.ext.targetSdkVersion = 29
     project.ext.versionCode = 126
     project.ext.versionName = "126.0"
     project.ext.applicationId = "com.darkweb.genesissearchengine"

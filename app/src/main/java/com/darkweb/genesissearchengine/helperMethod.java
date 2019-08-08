@@ -167,4 +167,11 @@ public class helperMethod
 
     }
 
+    public static void openPlayStore(String packageName)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id="+packageName));
+        app_model.getInstance().getAppInstance().startActivity(intent);
+    }
+
 }

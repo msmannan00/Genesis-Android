@@ -6,6 +6,7 @@ import android.webkit.WebViewClient;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.fabricManager;
 import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 
@@ -28,6 +29,11 @@ public class webviewClient
                 }
                 if(!url.contains("boogle"))
                 {
+                    if(url.startsWith("advert"))
+                    {
+                        helperMethod.openPlayStore(url.split("__")[1]);
+                        return true;
+                    }
                     app_model.getInstance().getAppInstance().stopHiddenView(false,false);
                     fabricManager.getInstance().sendEvent("BASE SIMPLE SEARCHED : " + url);
                     isGeckoView = true;
