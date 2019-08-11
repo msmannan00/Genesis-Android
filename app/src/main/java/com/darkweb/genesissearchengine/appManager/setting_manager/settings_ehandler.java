@@ -26,11 +26,11 @@ public class settings_ehandler
 
     private void onJavaScriptListener(int position)
     {
-        if(position==0 && setting_model.getInstance().java_status)
+        if(position==1 && setting_model.getInstance().java_status)
         {
             setting_model.getInstance().java_status = false;
         }
-        else if(!setting_model.getInstance().java_status)
+        else if(position==0 && !setting_model.getInstance().java_status)
         {
             setting_model.getInstance().java_status = true;
         }
@@ -46,11 +46,11 @@ public class settings_ehandler
 
     private void onHistoryListener(int position)
     {
-        if(position==0 && setting_model.getInstance().history_status)
+        if(position==1 && setting_model.getInstance().history_status)
         {
             setting_model.getInstance().history_status = false;
         }
-        else if(!setting_model.getInstance().history_status)
+        else if(position==0 && !setting_model.getInstance().history_status)
         {
             setting_model.getInstance().history_status = true;
         }

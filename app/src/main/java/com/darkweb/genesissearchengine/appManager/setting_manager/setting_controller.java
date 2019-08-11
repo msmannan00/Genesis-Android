@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
+import com.darkweb.genesissearchengine.constants.status;
 import com.example.myapplication.R;
+
+import static com.darkweb.genesissearchengine.constants.status.history_status;
+import static com.darkweb.genesissearchengine.constants.status.java_status;
 
 public class setting_controller extends AppCompatActivity
 {
@@ -28,6 +32,10 @@ public class setting_controller extends AppCompatActivity
         viewsInitializations();
         listenersInitializations();
         initializeModel();
+
+        setting_model.getInstance().java_status = java_status;
+        setting_model.getInstance().history_status = history_status;
+        setting_model.getInstance().search_status = status.search_status;
     }
 
     public void viewsInitializations()
