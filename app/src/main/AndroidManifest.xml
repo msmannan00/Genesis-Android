@@ -4,6 +4,7 @@
           package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -20,9 +21,11 @@
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.setting_manager.setting_controller"
                 android:windowSoftInputMode="adjustNothing"
+                android:screenOrientation="portrait"
                 android:label="@string/title_activity_setting_controller">
         </activity>
         <activity android:name="com.darkweb.genesissearchengine.appManager.list_manager.list_controller"
+                  android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustNothing">
         </activity>
 

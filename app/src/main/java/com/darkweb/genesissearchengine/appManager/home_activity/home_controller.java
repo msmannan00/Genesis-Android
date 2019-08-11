@@ -51,9 +51,9 @@ public class home_controller extends AppCompatActivity
             setContentView(R.layout.home_view);
             initializeAppModel();
             preference_manager.getInstance().initialize();
+            initializeCrashlytics();
 
             status.initStatus();
-            initializeCrashlytics();
             initializeConnections();
             initializeWebView();
             initializeLocalEventHandlers();
@@ -70,6 +70,7 @@ public class home_controller extends AppCompatActivity
         }
         else
         {
+            //initializeCrashlytics();
             initializeAppModel();
             setContentView(R.layout.invalid_setup_view);
             message_manager.getInstance().abiError(Build.SUPPORTED_ABIS[0]);
@@ -160,7 +161,7 @@ public class home_controller extends AppCompatActivity
 
     public void initializeCrashlytics()
     {
-        fabricManager.getInstance().init();
+        fabricManager.getInstance().init(this);
     }
 
     public void initializeWebView()

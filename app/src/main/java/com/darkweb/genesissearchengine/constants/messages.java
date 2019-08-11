@@ -10,4 +10,6 @@ public class messages
     public final static int UPDATE_LOADING_TEXT =5;
     public final static int SHOW_ADS =6;
     public final static int DOWNLOAD_NOTIFICATION =7;
+    public final static int INSTALL_COMPLETED =8;
+    public final static int LOAD_COMPLETED =9;
 }

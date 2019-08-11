@@ -2,17 +2,22 @@ package com.darkweb.genesissearchengine.appManager.home_activity;
 
 import android.util.Patterns;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import com.darkweb.genesissearchengine.appManager.list_manager.list_controller;
 import com.darkweb.genesissearchengine.appManager.setting_manager.setting_controller;
+import com.darkweb.genesissearchengine.appManager.setting_manager.setting_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.fabricManager;
 import com.darkweb.genesissearchengine.pluginManager.message_manager;
+import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 import com.example.myapplication.R;
 
 import java.io.IOException;
@@ -93,12 +98,12 @@ public class home_ehandler
         appContoller.onReload();
     }
 
-    public void onMenuButtonPressed(View view)
+    void onMenuButtonPressed(View view)
     {
         appContoller.openMenu(view);
     }
 
-    public void onHomeButtonPressed()
+    void onHomeButtonPressed()
     {
         appContoller.stopHiddenView(true,false);
         fabricManager.getInstance().sendEvent("HOME BUTTON PRESSSED : ");
@@ -107,25 +112,25 @@ public class home_ehandler
         helperMethod.hideKeyboard();
     }
 
-    public void onFloatingButtonPressed()
+    void onFloatingButtonPressed()
     {
         fabricManager.getInstance().sendEvent("FLOATING BUTTON PRESSSED : ");
         message_manager.getInstance().reportURL();
     }
 
-    public void onBackPressed()
+    void onBackPressed()
     {
         fabricManager.getInstance().sendEvent("BACK BUTTON PRESSSED : ");
         appContoller.onBackPressedView();
     }
 
-    public void onMenuPressed(int menuId)
+    void onMenuPressed(int menuId)
     {
         if (menuId == R.id.menu1) {
             helperMethod.openActivity(list_controller.class,constants.list_history);
         }
         else if (menuId == R.id.menu2) {
-            helperMethod.openActivity(setting_controller.class,constants.list_history);
+            switchSearchEngine();
         }
         else if (menuId == R.id.menu3) {
             helperMethod.openActivity(setting_controller.class,constants.list_history);
@@ -153,6 +158,30 @@ public class home_ehandler
         else if (menuId == R.id.menu0)
         {
             helperMethod.openDownloadFolder();
+        }
+
+    }
+
+    private void switchSearchEngine()
+    {
+        setting_model.getInstance().search_status = "Google";
+        preference_manager.getInstance().setString(keys.search_engine, setting_model.getInstance().search_status);
+
+
+        if(status.search_status.equals("Google"))
+        {
+            preference_manager.getInstance().setString(keys.search_engine,"Darkweb");
+            status.search_status = "Darkweb";
+            home_model.getInstance().getHomeInstance().initSearchEngine();
+        }
+        else
+        {
+            if(orbot_manager.getInstance().initOrbot("https://google.com"))
+            {
+                preference_manager.getInstance().setString(keys.search_engine,"Google");
+                status.search_status = "Google";
+                home_model.getInstance().getHomeInstance().initSearchEngine();
+            }
         }
 
     }

@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.home_activity;
 
 import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,7 @@ import android.webkit.WebView;
 import android.widget.*;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.MenuCompat;
+import com.darkweb.genesissearchengine.appManager.setting_manager.setting_model;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.helperMethod;
@@ -164,10 +166,22 @@ public class viewController
                     try
                     {
                         boolean isFirstInstall = preference_manager.getInstance().getBool(keys.hasOrbotInstalled,true);
+                        boolean isHidden = (status.search_status.equals(enums.searchEngine.Google.toString()) || status.search_status.equals(enums.searchEngine.Bing.toString()));
                         while (!status.isTorInitialized && (isFirstInstall || status.search_status.equals(enums.searchEngine.Google.toString()) || status.search_status.equals(enums.searchEngine.Bing.toString())))
                         {
                             startPostTask(messages.UPDATE_LOADING_TEXT);
                             sleep(100);
+                        }
+                        if(isHidden)
+                        {
+                            if(!isFirstInstall)
+                            {
+                                startPostTask(messages.LOAD_COMPLETED);
+                            }
+                            else
+                            {
+                                startPostTask(messages.INSTALL_COMPLETED);
+                            }
                         }
                         preference_manager.getInstance().setBool(keys.hasOrbotInstalled,false);
                         startPostTask(messages.DISABLE_SPLASH_SCREEN);
@@ -196,7 +210,15 @@ public class viewController
             @Override
             public void handleMessage(Message msg)
             {
-                if(msg.what == messages.UPDATE_LOADING_TEXT)
+                if(msg.what == messages.INSTALL_COMPLETED)
+                {
+                    loadingText.setText("Installed Successfully | Starting Search");
+                }
+                else if(msg.what == messages.LOAD_COMPLETED)
+                {
+                    loadingText.setText("Loading Successfully | Starting Search");
+                }
+                else if(msg.what == messages.UPDATE_LOADING_TEXT)
                 {
                     loadingText.setText(orbot_manager.getInstance().getLogs());
                 }
@@ -436,6 +458,17 @@ public class viewController
             home_model.getInstance().getHomeInstance().onMenuOptionSelected(item);
             return true;
         });
+        MenuItem item = popup.getMenu().findItem(R.id.menu2);
+
+        if(status.search_status.equals("Google"))
+        {
+            item.setTitle("Switch | Secure Darkweb");
+        }
+        else
+        {
+            item.setTitle("Switch | Secure Google");
+        }
+
         popup.show();
         view.bringToFront();
     }

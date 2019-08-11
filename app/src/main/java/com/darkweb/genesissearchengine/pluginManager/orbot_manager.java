@@ -166,7 +166,7 @@ public class orbot_manager {
                 return "Loading Please Wait";
             }
             Logs=Logs.replace("FAILED","Securing");
-            return Logs;
+            return "Installing | " + Logs;
         }
         return "Loading Please Wait";
     }

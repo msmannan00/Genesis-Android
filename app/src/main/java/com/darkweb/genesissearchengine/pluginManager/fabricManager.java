@@ -1,5 +1,10 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.content.Context;
+import com.crashlytics.android.Crashlytics;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
+import io.fabric.sdk.android.Fabric;
+
 public class fabricManager
 {
     /*Private Variables*/
@@ -17,17 +22,17 @@ public class fabricManager
     {
     }
 
-    public void init()
+    public void init(Context context)
     {
-        //Fabric.with(home_model.getInstance().getAppContext(), new Crashlytics());
-        //analyticmanager.getInstance().initialize(home_model.getInstance().getAppContext());
-        //analyticmanager.getInstance().logUser();
+        Fabric.with(context, new Crashlytics());
+        analyticmanager.getInstance().initialize(home_model.getInstance().getAppContext());
+        analyticmanager.getInstance().logUser();
     }
 
     /*Helper Methods*/
 
     public void sendEvent(String value)
     {
-        analyticmanager.getInstance().sendEvent(value);
+        //analyticmanager.getInstance().sendEvent(value);
     }
 }

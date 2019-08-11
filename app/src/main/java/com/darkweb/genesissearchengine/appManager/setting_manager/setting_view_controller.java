@@ -45,6 +45,7 @@ class setting_view_controller
 
     private void initJavascript()
     {
+        setting_model.getInstance().java_status = java_status;
         if (java_status)
         {
             javascript.setSelection(0);
@@ -57,6 +58,7 @@ class setting_view_controller
 
     private void initHistory()
     {
+        setting_model.getInstance().history_status = history_status;
         if (history_status)
         {
             history.setSelection(0);
@@ -71,6 +73,8 @@ class setting_view_controller
     private void initSearchEngine()
     {
         String myString = preference_manager.getInstance().getString(keys.search_engine, strings.darkweb);
+        setting_model.getInstance().search_status = myString;
+
         ArrayAdapter myAdap = (ArrayAdapter) search.getAdapter();
         int spinnerPosition = myAdap.getPosition(myString);
         search.setSelection(spinnerPosition);
@@ -85,14 +89,17 @@ class setting_view_controller
         {
             status.search_status = setting_model.getInstance().search_status;
             home_model.getInstance().getHomeInstance().initSearchEngine();
+            preference_manager.getInstance().setString(keys.search_engine, setting_model.getInstance().search_status);
         }
         else if(status.java_status != setting_model.getInstance().java_status)
         {
             status.java_status = setting_model.getInstance().java_status;
             home_model.getInstance().getHomeInstance().onReInitGeckoView();
+            preference_manager.getInstance().setBool(keys.java_script, status.java_status);
         }
 
         status.history_status = setting_model.getInstance().history_status;
+        preference_manager.getInstance().setBool(keys.history_clear, status.history_status);
 
         setting_model.getInstance().getSettingInstance().finish();
     }

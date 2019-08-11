@@ -3,16 +3,18 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="example.javatpoint.com.optionmenu.MainActivity">
 
+    <group android:id="@+id/group_0" >
+    <item  android:id="@+id/menu2"
+           android:title="Switch | Secure Google"
+           app:showAsAction="always"
+           android:icon="@android:drawable/btn_star"/>
+    </group>
     <item  android:id="@+id/menu0"
            android:title="Downloads"
            app:showAsAction="always"
            android:icon="@android:drawable/btn_star"/>
     <item  android:id="@+id/menu1"
            android:title="History"
-           app:showAsAction="always"
-           android:icon="@android:drawable/btn_star"/>
-    <item  android:id="@+id/menu2"
-           android:title="Manager Search Engine"
            app:showAsAction="always"
            android:icon="@android:drawable/btn_star"/>
     <item  android:id="@+id/menu3"
