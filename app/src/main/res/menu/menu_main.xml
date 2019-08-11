@@ -3,6 +3,10 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="example.javatpoint.com.optionmenu.MainActivity">
 
+    <item  android:id="@+id/menu0"
+           android:title="Downloads"
+           app:showAsAction="always"
+           android:icon="@android:drawable/btn_star"/>
     <item  android:id="@+id/menu1"
            android:title="History"
            app:showAsAction="always"

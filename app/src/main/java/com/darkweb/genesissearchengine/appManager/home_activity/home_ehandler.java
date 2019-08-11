@@ -1,6 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.home_activity;
 
-import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,11 +20,11 @@ import java.net.URL;
 
 public class home_ehandler
 {
-    application_controller appContoller;
+    home_controller appContoller;
 
     public home_ehandler()
     {
-        appContoller = app_model.getInstance().getAppInstance();
+        appContoller = home_model.getInstance().getHomeInstance();
     }
 
     public boolean onEditorClicked(TextView v, int actionId, KeyEvent event)
@@ -54,7 +53,7 @@ public class home_ehandler
                 else
                 {
                     fabricManager.getInstance().sendEvent("EDITOR ONION URL REQUEST : " + url);
-                    app_model.getInstance().getAppInstance().onloadURL(url,true,true);
+                    home_model.getInstance().getHomeInstance().onloadURL(url,true,true);
                     return true;
                 }
             }
@@ -63,7 +62,7 @@ public class home_ehandler
         catch (IOException e){}
 
         String editedURL = getSearchEngine(v.getText().toString().replaceAll(" ","+"));
-        app_model.getInstance().addHistory(editedURL);
+        home_model.getInstance().addHistory(editedURL);
         appContoller.onloadURL(editedURL,false,true);
         appContoller.onClearSearchBarCursorView();
         fabricManager.getInstance().sendEvent("EDITOR SEARCHED : " + editedURL);
@@ -133,7 +132,7 @@ public class home_ehandler
         }
         else if (menuId == R.id.menu4)
         {
-            message_manager.getInstance().bookmark(app_model.getInstance().getAppInstance().getSearchBarUrl());
+            message_manager.getInstance().bookmark(home_model.getInstance().getHomeInstance().getSearchBarUrl());
         }
         else if (menuId == R.id.menu5)
         {
@@ -150,6 +149,10 @@ public class home_ehandler
         else if (menuId == R.id.menu8)
         {
             helperMethod.shareApp();
+        }
+        else if (menuId == R.id.menu0)
+        {
+            helperMethod.openDownloadFolder();
         }
 
     }

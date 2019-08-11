@@ -3,13 +3,9 @@ package com.darkweb.genesissearchengine.appManager.setting_manager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.example.myapplication.R;
-
-import static com.darkweb.genesissearchengine.constants.status.*;
-import static com.darkweb.genesissearchengine.constants.status.search_status;
 
 public class settings_ehandler
 {

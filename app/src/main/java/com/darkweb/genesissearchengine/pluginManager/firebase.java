@@ -19,7 +19,7 @@ public class firebase
 
     public void initialize()
     {
-        //mFirebaseAnalytics = FirebaseAnalytics.getInstance(app_model.getInstance().getAppContext());
+        //mFirebaseAnalytics = FirebaseAnalytics.getInstance(home_model.getInstance().getAppContext());
     }
 
     /*Helper Methods*/

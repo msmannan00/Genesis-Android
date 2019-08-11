@@ -3,12 +3,11 @@ package com.darkweb.genesissearchengine.appManager.list_manager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.example.myapplication.R;
@@ -47,12 +46,12 @@ public class list_controller extends AppCompatActivity
         if(Objects.requireNonNull(bundle).getInt(keys.list_type)==constants.list_bookmark)
         {
             list_model.getInstance().setType(constants.list_bookmark);
-            list_model.getInstance().setMainList(app_model.getInstance().getBookmark());
+            list_model.getInstance().setMainList(home_model.getInstance().getBookmark());
         }
         else
         {
             list_model.getInstance().setType(constants.list_history);
-            list_model.getInstance().setMainList(app_model.getInstance().getHistory());
+            list_model.getInstance().setMainList(home_model.getInstance().getHistory());
         }
     }
     public void initializeViews(){

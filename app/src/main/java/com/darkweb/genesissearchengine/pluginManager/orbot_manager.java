@@ -1,6 +1,6 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -75,7 +75,7 @@ public class orbot_manager {
                             {
                                 if(onionProxyManager == null)
                                 {
-                                    onionProxyManager = new AndroidOnionProxyManager(app_model.getInstance().getAppContext(), strings.torfolder);
+                                    onionProxyManager = new AndroidOnionProxyManager(home_model.getInstance().getAppContext(), strings.torfolder);
                                 }
                                 isLoading = false;
                                 status.isTorInitialized = false;
@@ -121,7 +121,7 @@ public class orbot_manager {
                                 continue;
                             }
 
-                            app_model.getInstance().setPort(onionProxyManager.getIPv4LocalHostSocksPort());
+                            home_model.getInstance().setPort(onionProxyManager.getIPv4LocalHostSocksPort());
                             initializeProxy();
                             status.isTorInitialized = true;
                             isLoading = false;
@@ -144,7 +144,7 @@ public class orbot_manager {
     {
         PrefsHelper.setPref(keys.proxy_type, constants.proxy_type);
         PrefsHelper.setPref(keys.proxy_socks,constants.proxy_socks);
-        PrefsHelper.setPref(keys.proxy_socks_port, app_model.getInstance().getPort());
+        PrefsHelper.setPref(keys.proxy_socks_port, home_model.getInstance().getPort());
         PrefsHelper.setPref(keys.proxy_socks_version,constants.proxy_socks_version);
         PrefsHelper.setPref(keys.proxy_socks_remote_dns,constants.proxy_socks_remote_dns);
         PrefsHelper.setPref(keys.proxy_cache,constants.proxy_cache);

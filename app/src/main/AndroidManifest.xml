@@ -31,7 +31,7 @@
                 android:required="false"/>
 
         <activity
-                android:name="com.darkweb.genesissearchengine.appManager.home_activity.application_controller"
+                android:name="com.darkweb.genesissearchengine.appManager.home_activity.home_controller"
                 android:windowSoftInputMode="adjustNothing"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -48,6 +48,12 @@
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value="ca-app-pub-5074525529134731~2926711128"/>
+
+        <service
+                android:name="com.darkweb.genesissearchengine.appManager.home_activity.DownloadFileService"
+                android:enabled="true"
+                android:exported="false" />
+
     </application>
 
 </manifest>

@@ -3,7 +3,6 @@ package com.darkweb.genesissearchengine.appManager.home_activity;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperMethod;
@@ -21,34 +20,36 @@ public class webviewClient
             @Override
             public boolean shouldOverrideUrlLoading(WebView  view, String  url)
             {
-                isGeckoView = false;
-                if(app_model.getInstance().isUrlRepeatable(url,view.getUrl()))
+                if(url.contains("advert"))
                 {
-                    app_model.getInstance().getAppInstance().onProgressBarUpdateView(0);
+                    home_model.getInstance().getHomeInstance().onProgressBarUpdateView(0);
+                    helperMethod.openPlayStore(url.split("__")[1]);
+                    return true;
+                }
+
+                isGeckoView = false;
+                if(home_model.getInstance().isUrlRepeatable(url,view.getUrl()))
+                {
+                    home_model.getInstance().getHomeInstance().onProgressBarUpdateView(0);
                     return true;
                 }
                 if(!url.contains("boogle"))
                 {
-                    if(url.startsWith("advert"))
-                    {
-                        helperMethod.openPlayStore(url.split("__")[1]);
-                        return true;
-                    }
-                    app_model.getInstance().getAppInstance().stopHiddenView(false,false);
+                    home_model.getInstance().getHomeInstance().stopHiddenView(false,false);
                     fabricManager.getInstance().sendEvent("BASE SIMPLE SEARCHED : " + url);
                     isGeckoView = true;
                     if(orbot_manager.getInstance().initOrbot(url))
                     {
-                        app_model.getInstance().getAppInstance().onloadURL(url,true,true);
+                        home_model.getInstance().getHomeInstance().onloadURL(url,true,true);
                     }
                     return true;
                 }
                 else
                 {
-                    app_model.getInstance().addNavigation(url,enums.navigationType.base);
-                    app_model.getInstance().addHistory(url);
+                    home_model.getInstance().addNavigation(url,enums.navigationType.base);
+                    home_model.getInstance().addHistory(url);
                     fabricManager.getInstance().sendEvent("BASE ONION SEARCHED : " + url);
-                    app_model.getInstance().getAppInstance().onRequestTriggered(false,url);
+                    home_model.getInstance().getHomeInstance().onRequestTriggered(false,url);
                     return false;
                 }
             }
@@ -56,9 +57,9 @@ public class webviewClient
             public void onPageFinished(WebView  view, String  url)
             {
                 super.onPageFinished(view, url);
-                app_model.getInstance().getAppInstance().onPageFinished(false);
-                app_model.getInstance().getAppInstance().onUpdateSearchBarView(url);
-                app_model.getInstance().getAppInstance().onProgressBarUpdateView(0);
+                home_model.getInstance().getHomeInstance().onPageFinished(false);
+                home_model.getInstance().getHomeInstance().onUpdateSearchBarView(url);
+                home_model.getInstance().getHomeInstance().onProgressBarUpdateView(0);
                 status.isApplicationLoaded = true;
                 fabricManager.getInstance().sendEvent("BASE SUCCESSFULLY LOADED : " + url);
             }
@@ -67,7 +68,7 @@ public class webviewClient
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
             {
                 fabricManager.getInstance().sendEvent("BASE URL ERROR : " + failingUrl + "--" + description);
-                app_model.getInstance().getAppInstance().onInternetErrorView();
+                home_model.getInstance().getHomeInstance().onInternetErrorView();
             }
         };
 
@@ -81,11 +82,11 @@ public class webviewClient
                 {
                     if(newProgress<95 && newProgress>5)
                     {
-                        app_model.getInstance().getAppInstance().onProgressBarUpdateView(newProgress);
+                        home_model.getInstance().getHomeInstance().onProgressBarUpdateView(newProgress);
                     }
                     else if(newProgress<=5)
                     {
-                        app_model.getInstance().getAppInstance().onProgressBarUpdateView(4);
+                        home_model.getInstance().getHomeInstance().onProgressBarUpdateView(4);
                     }
                 }
             }

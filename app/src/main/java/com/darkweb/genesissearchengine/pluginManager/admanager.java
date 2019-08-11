@@ -1,6 +1,6 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -28,7 +28,7 @@ public class admanager
 
     public void initialize()
     {
-        MobileAds.initialize(app_model.getInstance().getAppInstance(), "ca-app-pub-5074525529134731~2926711128");
+        MobileAds.initialize(home_model.getInstance().getHomeInstance(), "ca-app-pub-5074525529134731~2926711128");
         mInterstitialHidden_base = initAd("ca-app-pub-5074525529134731/1637043432");
         //mInterstitialHidden_onion = initAd("ca-app-pub-5074525529134731/4332539288");
         //mInterstitialInternal = initAd("ca-app-pub-5074525529134731/8478420705");
@@ -36,7 +36,7 @@ public class admanager
 
     public InterstitialAd initAd(String id)
     {
-        InterstitialAd adInstance = new InterstitialAd(app_model.getInstance().getAppInstance());
+        InterstitialAd adInstance = new InterstitialAd(home_model.getInstance().getHomeInstance());
         adInstance.setAdUnitId(id);
         adInstance.loadAd(new AdRequest.Builder().build());
 

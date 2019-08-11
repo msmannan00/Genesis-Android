@@ -3,17 +3,15 @@ package com.darkweb.genesissearchengine.appManager.home_activity;
 import android.content.Context;
 import android.net.Uri;
 import com.darkweb.genesissearchengine.appManager.database_manager.database_controller;
-import com.darkweb.genesissearchengine.appManager.list_manager.list_controller;
 import com.darkweb.genesissearchengine.appManager.list_manager.list_row_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperMethod;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class app_model
+public class home_model
 {
     /*Data Objects*/
     private ArrayList<list_row_model> history = new ArrayList<list_row_model>();
@@ -23,7 +21,7 @@ public class app_model
     private static int port = 9150;
 
     private Context appContext;
-    private application_controller appInstance;
+    private home_controller appInstance;
 
     /*Initializations*/
     public void initialization(){
@@ -33,8 +31,8 @@ public class app_model
     }
 
     /*Setter Getter Initializations*/
-    private static final app_model ourInstance = new app_model();
-    public static app_model getInstance()
+    private static final home_model ourInstance = new home_model();
+    public static home_model getInstance()
     {
         return ourInstance;
     }
@@ -47,7 +45,7 @@ public class app_model
     }
     public void setPort(int port)
     {
-        app_model.port = port;
+        home_model.port = port;
     }
 
 
@@ -61,11 +59,11 @@ public class app_model
     }
 
 
-    public application_controller getAppInstance()
+    public home_controller getHomeInstance()
     {
         return appInstance;
     }
-    public void setAppInstance(application_controller appInstance)
+    public void setAppInstance(home_controller appInstance)
     {
         this.appInstance = appInstance;
     }
@@ -80,7 +78,7 @@ public class app_model
         {
             database_controller.getInstance().execSQL("delete from history where 1");
         }
-        app_model.getInstance().getAppInstance().reInitializeSuggestion();
+        home_model.getInstance().getHomeInstance().reInitializeSuggestion();
     }
     public void addHistory(String url) {
 
@@ -146,7 +144,7 @@ public class app_model
             suggestions.add(actual_url);
         }
         suggestions.add(url.replace("https://","").replace("http://",""));
-        app_model.getInstance().getAppInstance().reInitializeSuggestion();
+        home_model.getInstance().getHomeInstance().reInitializeSuggestion();
     }
     public ArrayList<String> getSuggestions() {
         return new ArrayList<String>(suggestions);
@@ -166,7 +164,7 @@ public class app_model
 
     /*Helper Method*/
     public boolean isUrlRepeatable(String url,String viewUrl){
-        return url.equals(viewUrl) && !app_model.getInstance().getAppInstance().isInternetErrorOpened() || url.contains("https://boogle.store/search?q=&");
+        return url.equals(viewUrl) && !home_model.getInstance().getHomeInstance().isInternetErrorOpened() || url.contains("https://boogle.store/search?q=&");
 
     }
 

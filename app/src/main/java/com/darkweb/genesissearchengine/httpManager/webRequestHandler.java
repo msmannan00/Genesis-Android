@@ -5,7 +5,7 @@ import android.os.Message;
 
 
 import android.os.Handler;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.messages;
 
 public class webRequestHandler
@@ -63,11 +63,11 @@ public class webRequestHandler
             {
                 if(msg.what == messages.MESSAGE_UPDATE_TEXT_CHILD_THREAD)
                 {
-                    //app_model.getInstance().getAppInstance().onloadURL(client.getHtmlResponse());
+                    //home_model.getInstance().getHomeInstance().onloadURL(client.getHtmlResponse());
                 }
                 else if (msg.what ==  messages.INTERNET_ERROR)
                 {
-                    app_model.getInstance().getAppInstance().onInternetErrorView();
+                    home_model.getInstance().getHomeInstance().onInternetErrorView();
                 }
             }
         };

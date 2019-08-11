@@ -1,16 +1,13 @@
 package com.darkweb.genesissearchengine;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -20,22 +17,20 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import androidx.core.app.ShareCompat;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.example.myapplication.BuildConfig;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.Normalizer;
-import java.util.Locale;
 
 public class helperMethod
 {
     /*Helper Methods*/
 
     public static boolean isNetworkAvailable(){
-        ConnectivityManager cm = (ConnectivityManager)  app_model.getInstance().getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager)  home_model.getInstance().getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }
@@ -51,27 +46,33 @@ public class helperMethod
     }
 
     public static void hideKeyboard() {
-        View view = app_model.getInstance().getAppInstance().findViewById(android.R.id.content);
+        View view = home_model.getInstance().getHomeInstance().findViewById(android.R.id.content);
         if (view != null)
         {
-            InputMethodManager imm = (InputMethodManager) app_model.getInstance().getAppInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) home_model.getInstance().getHomeInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
     public static void rateApp(){
         preference_manager.getInstance().setBool(keys.isAppRated,true);
-        app_model.getInstance().getAppInstance().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
+        home_model.getInstance().getHomeInstance().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
     }
 
     public static void shareApp() {
-        ShareCompat.IntentBuilder.from(app_model.getInstance().getAppInstance())
+        ShareCompat.IntentBuilder.from(home_model.getInstance().getHomeInstance())
                 .setType("text/plain")
                 .setChooserTitle("Hi! Check out this Awesome App")
                 .setSubject("Hi! Check out this Awesome App")
-                .setText("Genesis | Onion Search | http://play.google.com/store/apps/details?id=" + app_model.getInstance().getAppInstance().getPackageName())
+                .setText("Genesis | Onion Search | http://play.google.com/store/apps/details?id=" + home_model.getInstance().getHomeInstance().getPackageName())
                 .startChooser();
     }
+
+    public static void openDownloadFolder()
+    {
+        home_model.getInstance().getHomeInstance().startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+    }
+
 
     public static String getHost(String link){
         URL url = null;
@@ -90,16 +91,16 @@ public class helperMethod
     }
 
     public static void openActivity( Class<?> cls,int type){
-        Intent myIntent = new Intent(app_model.getInstance().getAppInstance(), cls);
+        Intent myIntent = new Intent(home_model.getInstance().getHomeInstance(), cls);
         myIntent.putExtra(keys.list_type, type);
-        app_model.getInstance().getAppInstance().startActivity(myIntent);
+        home_model.getInstance().getHomeInstance().startActivity(myIntent);
     }
 
     public static void onMinimizeApp(){
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        app_model.getInstance().getAppInstance().startActivity(startMain);
+        home_model.getInstance().getHomeInstance().startActivity(startMain);
     }
 
     /*Splash Screen Initializations*/
@@ -121,7 +122,7 @@ public class helperMethod
     }
 
     public static int getNavigationBarHeight() {
-        Resources resources = app_model.getInstance().getAppContext().getResources();
+        Resources resources = home_model.getInstance().getAppContext().getResources();
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
             return resources.getDimensionPixelSize(resourceId);
@@ -171,7 +172,6 @@ public class helperMethod
     {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id="+packageName));
-        app_model.getInstance().getAppInstance().startActivity(intent);
+        home_model.getInstance().getHomeInstance().startActivity(intent);
     }
-
 }

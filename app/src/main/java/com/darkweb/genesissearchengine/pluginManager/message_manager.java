@@ -10,9 +10,9 @@ import android.text.InputType;
 import android.widget.EditText;
 import androidx.core.content.ContextCompat;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.appManager.list_manager.list_model;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
-import com.darkweb.genesissearchengine.appManager.home_activity.application_controller;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_controller;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.strings;
@@ -38,8 +38,8 @@ public class message_manager
     /*Helper Methods*/
     public void welcomeMessage()
     {
-        Context application_context = app_model.getInstance().getAppContext();
-        application_controller controller = app_model.getInstance().getAppInstance();
+        Context application_context = home_model.getInstance().getAppContext();
+        home_controller controller = home_model.getInstance().getHomeInstance();
 
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
@@ -78,7 +78,7 @@ public class message_manager
 
     public void baseURLError()
     {
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setTitle(strings.base_error_title)
@@ -94,7 +94,7 @@ public class message_manager
 
     public void abiError(String currentAbi)
     {
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setTitle(strings.abi_error_title)
@@ -121,7 +121,7 @@ public class message_manager
 
     public void ratedSuccessfully()
     {
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setTitle(strings.rate_success_title)
@@ -137,7 +137,7 @@ public class message_manager
 
     public void reportedSuccessfully(String title,String desc)
     {
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setTitle(title)
@@ -155,16 +155,16 @@ public class message_manager
     public void bookmark(String url)
     {
 
-        final EditText input = new EditText(app_model.getInstance().getAppInstance());
+        final EditText input = new EditText(home_model.getInstance().getHomeInstance());
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setText("");
-        input.setBackground(ContextCompat.getDrawable(app_model.getInstance().getAppContext(), R.xml.search_back_default));
+        input.setBackground(ContextCompat.getDrawable(home_model.getInstance().getAppContext(), R.xml.search_back_default));
         input.setPadding(40,15,40,15);
         input.setHeight(80);
         input.setTextSize(17);
         input.setHint("Enter Bookmark Title");
 
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
                 .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
@@ -173,7 +173,7 @@ public class message_manager
                 .setHeaderView(input)
                 .setMessage("Bookmark URL | " + url + "\n")
                 .addButton(strings.bookmark_url_bt1, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
-                    app_model.getInstance().addBookmark(url.replace("genesis.onion","boogle.store"),input.getText().toString());
+                    home_model.getInstance().addBookmark(url.replace("genesis.onion","boogle.store"),input.getText().toString());
                     dialog.dismiss();
                 })
                 .addButton(strings.bookmark_url_bt2, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
@@ -206,7 +206,7 @@ public class message_manager
 
     public void reportURL()
     {
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setTitle(strings.report_url_title)
@@ -226,7 +226,7 @@ public class message_manager
 
     public void rateApp()
     {
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
                 .setTitle(strings.rate_title)
@@ -235,7 +235,7 @@ public class message_manager
                 .setMessage(strings.rate_message)
                 .addButton(strings.rate_positive, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
                     preference_manager.getInstance().setBool(keys.isAppRated,true);
-                    app_model.getInstance().getAppInstance().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
+                    home_model.getInstance().getHomeInstance().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
                     dialog.dismiss();
                 })
                 .addButton(strings.rate_negative, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
@@ -247,12 +247,32 @@ public class message_manager
         builder.show();
     }
 
+    public void downloadFile(String filename)
+    {
+        Context application_context = home_model.getInstance().getAppContext();
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle(strings.download_title)
+                .setBackgroundColor(application_context.getResources().getColor(R.color.blue_dark_v2))
+                .setTextColor(application_context.getResources().getColor(R.color.black))
+                .setMessage(strings.download_message + filename)
+                .addButton(strings.download_positive, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    home_model.getInstance().getHomeInstance().downloadFile();
+                    dialog.dismiss();
+                })
+                .addButton(strings.download_negative, -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (dialog, which) -> {
+                    dialog.dismiss();
+                });
+
+        builder.show();
+    }
+
     public void startingOrbotInfo(String url)
     {
         if(!isPopupOn)
         {
             isPopupOn = true;
-            Context application_context = app_model.getInstance().getAppContext();
+            Context application_context = home_model.getInstance().getAppContext();
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                     .setTitle(strings.orbot_init_title)
@@ -279,11 +299,11 @@ public class message_manager
                             {
                                 if(!url.equals(""))
                                 {
-                                    app_model.getInstance().getAppInstance().onloadURL(url,true,true);
+                                    home_model.getInstance().getHomeInstance().onloadURL(url,true,true);
                                 }
                                 else
                                 {
-                                    app_model.getInstance().getAppInstance().onReload();
+                                    home_model.getInstance().getHomeInstance().onReload();
                                 }
                             }
                         }, 500);
@@ -296,7 +316,7 @@ public class message_manager
 
     public void versionWarning(String currentAbi)
     {
-        Context application_context = app_model.getInstance().getAppContext();
+        Context application_context = home_model.getInstance().getAppContext();
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(application_context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setTitle(strings.version_title)

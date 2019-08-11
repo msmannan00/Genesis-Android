@@ -2,7 +2,7 @@ package com.darkweb.genesissearchengine.dataManager;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 
 public class preference_manager
 {
@@ -25,7 +25,7 @@ public class preference_manager
 
     public void initialize()
     {
-        prefs = PreferenceManager.getDefaultSharedPreferences(app_model.getInstance().getAppContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(home_model.getInstance().getAppContext());
         edit = prefs.edit();
     }
 

@@ -19,7 +19,6 @@ import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.httpManager.serverRequestManager;
-import com.darkweb.genesissearchengine.pluginManager.admanager;
 import com.darkweb.genesissearchengine.pluginManager.message_manager;
 import com.darkweb.genesissearchengine.pluginManager.orbot_manager;
 import com.example.myapplication.R;
@@ -70,7 +69,7 @@ public class viewController
         this.splashlogo = splashlogo;
         this.loadingText = loadingText;
 
-        app_model.getInstance().getAppInstance().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        home_model.getInstance().getHomeInstance().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         checkSSLTextColor();
         initSplashScreen();
         initLock();
@@ -81,7 +80,7 @@ public class viewController
 
     private void initializeSuggestionView()
     {
-        AutoCompleteAdapter suggestionAdapter = new AutoCompleteAdapter(app_model.getInstance().getAppInstance(), R.layout.hint_view, R.id.hintCompletionHeader, app_model.getInstance().getSuggestions());
+        AutoCompleteAdapter suggestionAdapter = new AutoCompleteAdapter(home_model.getInstance().getHomeInstance(), R.layout.hint_view, R.id.hintCompletionHeader, home_model.getInstance().getSuggestions());
 
         int width = Math.round(helperMethod.screenWidth());
         searchbar.setThreshold(2);
@@ -91,7 +90,7 @@ public class viewController
         searchbar.setDropDownHorizontalOffset(Math.round(width*0.114f)*-1);
 
         Drawable drawable;
-        Resources res = app_model.getInstance().getAppInstance().getResources();
+        Resources res = home_model.getInstance().getHomeInstance().getResources();
         try {
             drawable = Drawable.createFromXml(res, res.getXml(R.xml.rouned_corner));
             searchbar.setDropDownBackgroundDrawable(drawable);
@@ -108,7 +107,7 @@ public class viewController
 
     private boolean isHiddenView()
     {
-        return app_model.getInstance().getAppInstance().isGeckoViewRunning();
+        return home_model.getInstance().getHomeInstance().isGeckoViewRunning();
     }
 
     private void initViews()
@@ -118,7 +117,7 @@ public class viewController
 
     private void initLock()
     {
-        Drawable img = app_model.getInstance().getAppInstance().getResources().getDrawable( R.drawable.icon_lock);
+        Drawable img = home_model.getInstance().getHomeInstance().getResources().getDrawable( R.drawable.icon_lock);
         searchbar.measure(0, 0);
         img.setBounds( 0, (int)(searchbar.getMeasuredHeight()*0.00), (int)(searchbar.getMeasuredHeight()*1.10), (int)(searchbar.getMeasuredHeight()*0.69) );
         searchbar.setCompoundDrawables( img, null, null, null );
@@ -150,7 +149,7 @@ public class viewController
         onClearSearchBarCursor();
         onProgressBarUpdate(0);
         disableFloatingView();
-        app_model.getInstance().getAppInstance().releaseSession();
+        home_model.getInstance().getHomeInstance().releaseSession();
     }
 
     private void disableSplashScreen()
@@ -203,7 +202,7 @@ public class viewController
                 }
                 else if(msg.what == messages.DISABLE_SPLASH_SCREEN)
                 {
-                    boolean e_status = app_model.getInstance().getAppInstance().initSearchEngine();
+                    boolean e_status = home_model.getInstance().getHomeInstance().initSearchEngine();
 
                     if(e_status)
                     {
@@ -255,7 +254,7 @@ public class viewController
             disableSplashScreen();
             floatingButton.animate().alpha(0).withEndAction((() -> floatingButton.setVisibility(View.GONE)));
 
-            app_model.getInstance().getAppInstance().stopHiddenView(false,false);
+            home_model.getInstance().getHomeInstance().stopHiddenView(false,false);
         }
         else
         {
@@ -304,13 +303,17 @@ public class viewController
 
     void onUpdateSearchBar(String url)
     {
-        searchbar.setText(url.replace(constants.backendUrlHost,constants.frontEndUrlHost_v1));
-        checkSSLTextColor();
+        if(!url.equals("about:blank"))
+        {
+            searchbar.setText(url.replace(constants.backendUrlHost,constants.frontEndUrlHost_v1));
+            checkSSLTextColor();
+        }
+
     }
 
     private void initSplashScreen()
     {
-        boolean hasSoftKey = helperMethod.hasSoftKeys(app_model.getInstance().getAppInstance().getWindowManager());
+        boolean hasSoftKey = helperMethod.hasSoftKeys(home_model.getInstance().getHomeInstance().getWindowManager());
         int height = helperMethod.screenHeight(hasSoftKey);
 
         splashlogo.getLayoutParams().height = height;
@@ -341,17 +344,17 @@ public class viewController
 
     void onBackPressed()
     {
-        if(app_model.getInstance().getNavigation().size()>0)
+        if(home_model.getInstance().getNavigation().size()>0)
         {
-            if(app_model.getInstance().getNavigation().size()==1)
+            if(home_model.getInstance().getNavigation().size()==1)
             {
                 onProgressBarUpdate(0);
                 helperMethod.onMinimizeApp();
                 return;
             }
-            else if(app_model.getInstance().getNavigation().get(app_model.getInstance().getNavigation().size()-2).type().equals(enums.navigationType.base))
+            else if(home_model.getInstance().getNavigation().get(home_model.getInstance().getNavigation().size()-2).type().equals(enums.navigationType.base))
             {
-                app_model.getInstance().getAppInstance().stopHiddenView(true,true);
+                home_model.getInstance().getHomeInstance().stopHiddenView(true,true);
                 if(webView.getVisibility()==View.VISIBLE)
                 {
                     onProgressBarUpdate(4);
@@ -363,7 +366,7 @@ public class viewController
                 }
 
                 /*CHANGED BUT NOT TESTED*/
-                app_model.getInstance().getNavigation().remove(app_model.getInstance().getNavigation().size()-1);
+                home_model.getInstance().getNavigation().remove(home_model.getInstance().getNavigation().size()-1);
 
                 webView.bringToFront();
                 webView.setAlpha(1);
@@ -374,16 +377,16 @@ public class viewController
             }
             else
             {
-                app_model.getInstance().getAppInstance().stopHiddenView(true,true);
-                app_model.getInstance().getNavigation().remove(app_model.getInstance().getNavigation().size()-1);
+                home_model.getInstance().getHomeInstance().stopHiddenView(true,true);
+                home_model.getInstance().getNavigation().remove(home_model.getInstance().getNavigation().size()-1);
                 if(webView.getVisibility()==View.VISIBLE)
                 {
-                    app_model.getInstance().getAppInstance().onReInitGeckoView();
-                    app_model.getInstance().getAppInstance().onReloadHiddenView();
+                    home_model.getInstance().getHomeInstance().onReInitGeckoView();
+                    home_model.getInstance().getHomeInstance().onReloadHiddenView();
                 }
                 else
                 {
-                    app_model.getInstance().getAppInstance().onHiddenGoBack();
+                    home_model.getInstance().getHomeInstance().onHiddenGoBack();
                 }
             }
         }
@@ -424,13 +427,13 @@ public class viewController
     {
         LinearLayout parentView = (LinearLayout)view.getParent();
 
-        PopupMenu popup = new PopupMenu(app_model.getInstance().getAppInstance(), parentView,Gravity.RIGHT);
+        PopupMenu popup = new PopupMenu(home_model.getInstance().getHomeInstance(), parentView,Gravity.RIGHT);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_main, popup.getMenu());
         MenuCompat.setGroupDividerEnabled(popup.getMenu(), true);
         popup.setOnMenuItemClickListener(item ->
         {
-            app_model.getInstance().getAppInstance().onMenuOptionSelected(item);
+            home_model.getInstance().getHomeInstance().onMenuOptionSelected(item);
             return true;
         });
         popup.show();
@@ -439,14 +442,14 @@ public class viewController
 
     void onReload()
     {
-        if(app_model.getInstance().getNavigation().get(app_model.getInstance().getNavigation().size()-1).type()==enums.navigationType.base)
+        if(home_model.getInstance().getNavigation().get(home_model.getInstance().getNavigation().size()-1).type()==enums.navigationType.base)
         {
             onRequestTriggered(false,webView.getUrl());
             webView.reload();
         }
         else
         {
-            app_model.getInstance().getAppInstance().onReloadHiddenView();
+            home_model.getInstance().getHomeInstance().onReloadHiddenView();
         }
     }
 

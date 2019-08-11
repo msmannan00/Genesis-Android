@@ -62,6 +62,10 @@ public class strings
     public static String clear_bt1 = "Clear Data";
     public static String clear_bt2 = "Dismiss";
 
+    public static String download_title = "Download Notification";
+    public static String download_message = "Download File | ";
+    public static String download_positive = "Download";
+    public static String download_negative = "Dismiss";
 
     /*Text Manager*/
 
@@ -71,6 +75,7 @@ public class strings
     public static String history_text = "history";
     public static String bing_text = "Bing";
     public static String google_text = "Google";
+
 
 
 

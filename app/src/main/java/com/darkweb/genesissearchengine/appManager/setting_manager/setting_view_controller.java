@@ -2,7 +2,7 @@ package com.darkweb.genesissearchengine.appManager.setting_manager;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
@@ -84,12 +84,12 @@ class setting_view_controller
         if(status.search_status != setting_model.getInstance().search_status)
         {
             status.search_status = setting_model.getInstance().search_status;
-            app_model.getInstance().getAppInstance().initSearchEngine();
+            home_model.getInstance().getHomeInstance().initSearchEngine();
         }
         else if(status.java_status != setting_model.getInstance().java_status)
         {
             status.java_status = setting_model.getInstance().java_status;
-            app_model.getInstance().getAppInstance().onReInitGeckoView();
+            home_model.getInstance().getHomeInstance().onReInitGeckoView();
         }
 
         status.history_status = setting_model.getInstance().history_status;

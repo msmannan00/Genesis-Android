@@ -1,16 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.list_manager;
 
-import android.graphics.Color;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.database_manager.database_controller;
-import com.darkweb.genesissearchengine.appManager.home_activity.app_model;
+import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.pluginManager.message_manager;
@@ -39,7 +34,7 @@ class list_view_controller
 
     void onClearHistory()
     {
-        if(app_model.getInstance().getHistory().size()>0)
+        if(home_model.getInstance().getHistory().size()>0)
         {
             message_manager.getInstance().clearData();
         }
@@ -49,7 +44,7 @@ class list_view_controller
     {
         list_model.getInstance().getModel().clear();
         list_model.getInstance().getMainList().clear();
-        app_model.getInstance().getSuggestions().clear();
+        home_model.getInstance().getSuggestions().clear();
 
         emptyListNotifier.setAlpha(0f);
         emptyListNotifier.setVisibility(View.VISIBLE);

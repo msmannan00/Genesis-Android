@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.mozilla.geckoview.GeckoView;
 
 
-public class application_controller extends AppCompatActivity
+public class home_controller extends AppCompatActivity
 {
     /*View Webviews*/
     private WebView webView;
@@ -63,9 +63,10 @@ public class application_controller extends AppCompatActivity
             viewController.getInstance().initialization(webView,loadingText,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
             firebase.getInstance().initialize();
             geckoclient.initialize(geckoView);
-            app_model.getInstance().initialization();
+            home_model.getInstance().initialization();
             initBoogle();
-            downloadManager.getInstance().initialize();
+
+
         }
         else
         {
@@ -92,13 +93,13 @@ public class application_controller extends AppCompatActivity
         {
             webView.stopLoading();
             onloadURL(constants.backendBing,true,false);
-            if(app_model.getInstance().getNavigation().size()!=1)
+            if(home_model.getInstance().getNavigation().size()!=1)
             {
-                app_model.getInstance().addNavigation(constants.backendBing,enums.navigationType.onion);
+                home_model.getInstance().addNavigation(constants.backendBing,enums.navigationType.onion);
             }
-            if(app_model.getInstance().getNavigation().size()>0)
+            if(home_model.getInstance().getNavigation().size()>0)
             {
-                app_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendBing,enums.navigationType.onion));
+                home_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendBing,enums.navigationType.onion));
             }
             return false;
         }
@@ -106,26 +107,26 @@ public class application_controller extends AppCompatActivity
         {
             webView.stopLoading();
             onloadURL(constants.backendGoogle,true,false);
-            if(app_model.getInstance().getNavigation().size()!=1)
+            if(home_model.getInstance().getNavigation().size()!=1)
             {
-                app_model.getInstance().addNavigation(constants.backendGoogle,enums.navigationType.onion);
+                home_model.getInstance().addNavigation(constants.backendGoogle,enums.navigationType.onion);
             }
-            if(app_model.getInstance().getNavigation().size()>0)
+            if(home_model.getInstance().getNavigation().size()>0)
             {
-                app_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendGoogle,enums.navigationType.onion));
+                home_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendGoogle,enums.navigationType.onion));
             }
             return false;
         }
         else
         {
             onloadURL(constants.backendGenesis,false,false);
-            if(app_model.getInstance().getNavigation().size()!=1)
+            if(home_model.getInstance().getNavigation().size()!=1)
             {
-                app_model.getInstance().addNavigation(constants.backendGenesis,enums.navigationType.base);
+                home_model.getInstance().addNavigation(constants.backendGenesis,enums.navigationType.base);
             }
-            if(app_model.getInstance().getNavigation().size()>0)
+            if(home_model.getInstance().getNavigation().size()>0)
             {
-                app_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendGenesis,enums.navigationType.base));
+                home_model.getInstance().getNavigation().set(0,new navigation_model(constants.backendGenesis,enums.navigationType.base));
             }
             return true;
         }
@@ -133,22 +134,14 @@ public class application_controller extends AppCompatActivity
 
     public void initializeAppModel()
     {
-        app_model.getInstance().setAppContext(this);
-        app_model.getInstance().setAppInstance(this);
+        home_model.getInstance().setAppContext(this);
+        home_model.getInstance().setAppInstance(this);
     }
 
     public void initializeConnections()
     {
         webView = findViewById(R.id.pageLoader1);
         geckoView = findViewById(R.id.webLoader);
-
-
-        geckoView.Browser browser = mGeckoView.getCurrentBrowser();
-        if (browser == null) {
-            browser = mGeckoView.addBrowser(text.getText().toString());
-        } else {
-            browser.loadUrl(text.getText().toString());
-        }
 
 
         progressBar = findViewById(R.id.progressBar);
@@ -225,7 +218,7 @@ public class application_controller extends AppCompatActivity
         {
             geckoclient.loadGeckoURL(url,geckoView,isUrlSavable,webView.getVisibility()==View.VISIBLE);
         }
-        else if(!app_model.getInstance().isUrlRepeatable(url,webView.getUrl()) || webView.getVisibility() == View.GONE)
+        else if(!home_model.getInstance().isUrlRepeatable(url,webView.getUrl()) || webView.getVisibility() == View.GONE)
         {
             webView.loadUrl(url);
             onRequestTriggered(isHiddenWeb,url);
@@ -343,6 +336,11 @@ public class application_controller extends AppCompatActivity
         return requestFailure.getAlpha()==1;
     }
 
+    public void downloadFile()
+    {
+        geckoclient.downloadFile();
+    }
+
     /*-------------------------------------------------------Menu Handler----------------------------------------------------*/
 
     public boolean onMenuOptionSelected(MenuItem item) {
@@ -350,6 +348,8 @@ public class application_controller extends AppCompatActivity
         eventhandler.onMenuPressed(item.getItemId());
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
 
