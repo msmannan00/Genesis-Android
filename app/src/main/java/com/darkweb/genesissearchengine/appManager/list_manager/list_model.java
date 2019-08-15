@@ -101,7 +101,7 @@ public class list_model
         {
             table = strings.history_text;
         }
-        database_controller.getInstance().execSQL("delete from "+table+" where id="+index);
+        database_controller.getInstance().execSQL("delete from "+table+" where id="+index,null);
     }
 
 

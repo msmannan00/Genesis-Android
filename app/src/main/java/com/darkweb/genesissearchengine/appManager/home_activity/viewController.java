@@ -462,7 +462,7 @@ public class viewController
 
         if(status.search_status.equals("Google"))
         {
-            item.setTitle("Switch | Secure Darkweb");
+            item.setTitle("Switch | Secure Hidden Web");
         }
         else
         {
@@ -489,6 +489,15 @@ public class viewController
     String getSearchBarUrl()
     {
         return searchbar.getText().toString();
+    }
+
+    public void lowMemoryError()
+    {
+        if(preference_manager.getInstance().getBool(keys.low_memory,false))
+        {
+            preference_manager.getInstance().setBool(keys.low_memory,false);
+            helperMethod.showToast("App Closed Due To Low Memory");
+        }
     }
 
 }

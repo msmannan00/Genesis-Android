@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 import androidx.core.app.ShareCompat;
 import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -173,5 +174,10 @@ public class helperMethod
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id="+packageName));
         home_model.getInstance().getHomeInstance().startActivity(intent);
+    }
+
+    public static void showToast(String messaage)
+    {
+        Toast.makeText(home_model.getInstance().getHomeInstance().getApplicationContext(),messaage,Toast.LENGTH_SHORT).show();
     }
 }

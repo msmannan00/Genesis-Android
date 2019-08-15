@@ -69,7 +69,7 @@ public class strings
 
     /*Text Manager*/
 
-    public static String darkweb = "Darkweb";
+    public static String darkweb = "Hidden Web";
     public static String emptyStr = "";
     public static String bookmark_text = "bookmark";
     public static String history_text = "history";

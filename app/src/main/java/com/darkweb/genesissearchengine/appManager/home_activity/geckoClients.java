@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
+import com.darkweb.genesissearchengine.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.fabricManager;
 import com.darkweb.genesissearchengine.pluginManager.localNotification;
 import com.darkweb.genesissearchengine.pluginManager.message_manager;
@@ -27,7 +28,7 @@ import static com.google.ads.AdRequest.LOGTAG;
 
 class geckoClients
 {
-    private GeckoSession session1 = null;
+    public GeckoSession session1 = null;
     private GeckoRuntime runtime1 = null;
     private final Handler internetErrorHandler = new Handler();
 
@@ -42,6 +43,7 @@ class geckoClients
 
     private int urlRequestCount = 0;
     private boolean isAppRated = false;
+    private boolean canAdBeShown = false;
 
     geckoClients()
     {
@@ -51,6 +53,8 @@ class geckoClients
     void loadGeckoURL(String url,GeckoView geckoView,boolean isUrlSavable,boolean reinit)
     {
         boolean init_status = orbot_manager.getInstance().initOrbot(url);
+        canAdBeShown = true;
+
         if (init_status)
         {
             if(reinit)
@@ -163,9 +167,11 @@ class geckoClients
                                     //message_manager.getInstance().rateApp();
                                 }
                             }
-                            else if(isAppRated || 1==1)
+                            else if(helperMethod.getHost(navigatedURL).contains(".onion"))
                             {
-                                if(isFirstTimeLoad && navigatedURL.contains(".onion"))
+                                home_model.getInstance().getHomeInstance().onShowAd(enums.adID.hidden_onion_start);
+                                canAdBeShown = false;
+                                /*if(isFirstTimeLoad && navigatedURL.contains(".onion"))
                                 {
                                     home_model.getInstance().getHomeInstance().onShowAd(enums.adID.hidden_onion_start);
                                 }
@@ -176,7 +182,11 @@ class geckoClients
                                 else if(!isFirstTimeLoad && !navigatedURL.contains(".onion"))
                                 {
                                     home_model.getInstance().getHomeInstance().onShowAd(enums.adID.hidden_base);
-                                }
+                                }*/
+                            }
+                            else
+                            {
+                                canAdBeShown = true;
                             }
 
                             home_model.getInstance().getHomeInstance().onDisableInternetError();

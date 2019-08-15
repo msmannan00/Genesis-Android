@@ -76,7 +76,7 @@ public class home_model
         }
         else
         {
-            database_controller.getInstance().execSQL("delete from history where 1");
+            database_controller.getInstance().execSQL("delete from history where 1",null);
         }
         home_model.getInstance().getHomeInstance().reInitializeSuggestion();
     }
@@ -84,7 +84,7 @@ public class home_model
 
         if(history.size()> constants.max_history_size)
         {
-            database_controller.getInstance().execSQL("delete from history where id="+history.get(history.size()-1).getId());
+            database_controller.getInstance().execSQL("delete from history where id="+history.get(history.size()-1).getId(),null);
             history.remove(history.size()-1);
         }
 
@@ -97,7 +97,11 @@ public class home_model
         addSuggestions(url);
         SimpleDateFormat d_form = new SimpleDateFormat("dd MMMM | hh:mm a");
         String date = d_form.format(new Date());
-        database_controller.getInstance().execSQL("INSERT INTO history(id,date,url) VALUES("+autoval+",'"+date+"','"+url+"');");
+
+        String[] params = new String[1];
+        params[0] = url;
+
+        database_controller.getInstance().execSQL("INSERT INTO history(id,date,url) VALUES("+autoval+",'"+date+"',?);",params);
         history.add(0,new list_row_model(url,date,autoval));
     }
     public ArrayList<list_row_model> getHistory() {
@@ -105,14 +109,14 @@ public class home_model
     }
 
 
-    public void initializeBookmarks(){
+    private void initializeBookmarks(){
         bookmarks = database_controller.getInstance().selectBookmark();
     }
     public void addBookmark(String url,String title){
         int autoval = 0;
         if(bookmarks.size()> constants.max_bookmark_size)
         {
-            database_controller.getInstance().execSQL("delete from bookmark where id="+bookmarks.get(bookmarks.size()-1).getId());
+            database_controller.getInstance().execSQL("delete from bookmark where id="+bookmarks.get(bookmarks.size()-1).getId(),null);
             bookmarks.remove(history.size()-1);
         }
 
@@ -125,7 +129,12 @@ public class home_model
         {
             title = "New_Bookmark"+autoval;
         }
-        database_controller.getInstance().execSQL("INSERT INTO bookmark(id,title,url) VALUES("+autoval+",'"+title+"','"+url+"');");
+
+        String[] params = new String[2];
+        params[0] = title;
+        params[1] = url;
+
+        database_controller.getInstance().execSQL("INSERT INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params);
         bookmarks.add(0,new list_row_model(url,title,autoval));
     }
     public ArrayList<list_row_model> getBookmark(){

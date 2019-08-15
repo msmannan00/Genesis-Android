@@ -18,6 +18,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <service android:name="com.darkweb.genesissearchengine.pluginManager.exitManager" android:stopWithTask="false" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.setting_manager.setting_controller"
                 android:windowSoftInputMode="adjustNothing"

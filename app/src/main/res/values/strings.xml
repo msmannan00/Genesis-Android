@@ -39,7 +39,7 @@
     <string name="listview_clear">Clear</string>
 
     <string-array name="search_engines">
-        <item>Darkweb</item>
+        <item>Hidden Web</item>
         <item>Google</item>
         <item>Bing</item>
     </string-array>

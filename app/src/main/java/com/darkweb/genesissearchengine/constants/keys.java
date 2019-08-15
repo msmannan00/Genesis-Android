@@ -9,6 +9,7 @@ public class keys
     /*Home page*/
 
     public static String homepage_html_key = "internalhtml";
+    public static String low_memory = "low_memory";
 
     /*Proxy Manager*/
 

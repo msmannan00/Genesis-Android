@@ -8,6 +8,10 @@
            android:title="Switch | Secure Google"
            app:showAsAction="always"
            android:icon="@android:drawable/btn_star"/>
+    <item  android:id="@+id/menu9"
+           android:title="Manage Search Engine"
+           app:showAsAction="always"
+           android:icon="@android:drawable/btn_star"/>
     </group>
     <item  android:id="@+id/menu0"
            android:title="Downloads"

@@ -159,6 +159,10 @@ public class home_ehandler
         {
             helperMethod.openDownloadFolder();
         }
+        else if (menuId == R.id.menu9)
+        {
+            helperMethod.openActivity(setting_controller.class,constants.list_history);
+        }
 
     }
 
@@ -170,8 +174,8 @@ public class home_ehandler
 
         if(status.search_status.equals("Google"))
         {
-            preference_manager.getInstance().setString(keys.search_engine,"Darkweb");
-            status.search_status = "Darkweb";
+            preference_manager.getInstance().setString(keys.search_engine,"Hidden Web");
+            status.search_status = "Hidden Web";
             home_model.getInstance().getHomeInstance().initSearchEngine();
         }
         else

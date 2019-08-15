@@ -47,9 +47,16 @@ public class database_controller
 
     /*Helper Methods*/
 
-    public void execSQL(String query)
+    public void execSQL(String query,String[] params)
     {
-        database_instance.execSQL(query);
+        if(params==null)
+        {
+            database_instance.execSQL(query);
+        }
+        else
+        {
+            database_instance.execSQL(query,params);
+        }
     }
 
     public ArrayList<list_row_model> selectHistory(){

@@ -1,7 +1,10 @@
 package com.darkweb.genesissearchengine.appManager.home_activity;
 
+import android.content.ComponentCallbacks2;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.webkit.*;
 import android.widget.*;
@@ -10,20 +13,22 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.darkweb.genesissearchengine.*;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.preference_manager;
 import com.darkweb.genesissearchengine.pluginManager.*;
 
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 
 
-public class home_controller extends AppCompatActivity
+public class home_controller extends AppCompatActivity implements ComponentCallbacks2
 {
     /*View Webviews*/
     private WebView webView;
-    private GeckoView geckoView;
+    private GeckoView geckoView = null;
 
     /*View Objects*/
     private ProgressBar progressBar;
@@ -58,6 +63,7 @@ public class home_controller extends AppCompatActivity
             initializeWebView();
             initializeLocalEventHandlers();
             initAdManager();
+            initExitService();
 
             orbot_manager.getInstance().reinitOrbot();
             viewController.getInstance().initialization(webView,loadingText,progressBar,searchbar,splashScreen,requestFailure,floatingButton, loadingIcon,splashlogo);
@@ -65,12 +71,9 @@ public class home_controller extends AppCompatActivity
             geckoclient.initialize(geckoView);
             home_model.getInstance().initialization();
             initBoogle();
-
-
         }
         else
         {
-            //initializeCrashlytics();
             initializeAppModel();
             setContentView(R.layout.invalid_setup_view);
             message_manager.getInstance().abiError(Build.SUPPORTED_ABIS[0]);
@@ -78,9 +81,41 @@ public class home_controller extends AppCompatActivity
 
     }
 
+    public void initExitService()
+    {
+        startService(new Intent(getBaseContext(), exitManager.class));
+    }
+
+    public void lowMemoryError()
+    {
+        viewController.getInstance().lowMemoryError();
+    }
+
     public void initAdManager()
     {
-        admanager.getInstance().initialize();
+    }
+
+    @Override
+    public void onTrimMemory(int level)
+    {
+        if(level==80)
+        {
+           preference_manager.getInstance().setBool(keys.low_memory,true);
+           finish();
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        lowMemoryError();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
     }
 
     public void initBoogle()

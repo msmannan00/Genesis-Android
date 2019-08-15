@@ -56,7 +56,7 @@ class list_view_controller
         {
             table = strings.history_text;
         }
-        database_controller.getInstance().execSQL("delete from "+table+" where 1");
+        database_controller.getInstance().execSQL("delete from "+table+" where 1",null);
         list_model.getInstance().getListInstance().initializeList();
     }
 

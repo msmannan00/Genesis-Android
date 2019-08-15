@@ -252,7 +252,4 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="24dp"
             android:layout_marginEnd="24dp"/>
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
