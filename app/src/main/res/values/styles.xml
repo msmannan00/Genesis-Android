@@ -3,27 +3,41 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#f9f9f9</item>
-        <item name="colorPrimaryDark">#f9f9f9</item>
-        <item name="colorAccent">#f9f9f9</item>
-        <item name="android:windowBackground">@xml/splash_gradient</item>
-        <item name="android:statusBarColor">#000000</item>
+        <item name="colorPrimary">@color/ease_blue</item>
+        <item name="colorPrimaryDark">@color/ease_blue</item>
+        <item name="colorAccent">@color/ease_blue</item>
+        <item name="android:windowBackground">@xml/sc_splash_gradient</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:popupAnimationStyle">@null</item>
+    </style>
+
+    <style name="noAnimTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:popupAnimationStyle">@null</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="android:popupAnimationStyle">@null</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:paddingRight">24dp</item>
+        <item name="android:popupAnimationStyle">@null</item>
    </style>
 
     <style name="AppTheme.popupMenuStyle" parent="Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground" >@android:color/white</item>
         <item name="android:layout_marginTop" >1000dp</item>
+        <item name="android:popupAnimationStyle">@null</item>
     </style>
 
+    <style name="popup_window_animation">
+        <item name="android:windowEnterAnimation">@anim/popup_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_anim_out</item>
+    </style>
 </resources>

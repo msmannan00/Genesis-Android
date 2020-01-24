@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <objectAnimator
+                    android:duration="@android:integer/config_shortAnimTime"
+                    android:propertyName="translationZ"
+                    android:valueTo="0dp" />
+        </set>
+    </item>
+</selector>

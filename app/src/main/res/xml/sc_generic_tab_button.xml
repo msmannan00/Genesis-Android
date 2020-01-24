@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+          android:top="60dp">
+        <shape
+                android:shape="rectangle" android:padding="5dp" >
+            <!-- you can use any color you want I used here gray color-->
+            <solid android:color="@color/holo_light"/>
+            <corners android:radius="4dp"/>
+            <stroke
+                    android:width="2dp"
+                    android:color="@color/text_color_v1" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="false"
+          android:top="60dp">
+        <shape
+                android:shape="rectangle" android:padding="5dp">
+            <!-- you can use any color you want I used here gray color-->
+            <solid android:color="@color/clear_alpha"/>
+            <corners android:radius="4dp"/>
+            <stroke
+                    android:width="2dp"
+                    android:color="@color/text_color_v1" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+</selector>
+
+
+

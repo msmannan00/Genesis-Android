@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="blue">#0066FF</color>
+
+    4d88ff
+    <color name="ease_blue_light">#fdfeff</color>
     <color name="ease_blue">#4d88ff</color>
     <color name="cursor_blue">#3385ff</color>
     <color name="text_color_highlight_v1">#b3d1ff</color>
     <color name="blue_dark">#00264d</color>
     <color name="blue_dark_v1">#212d45</color>
-    <color name="blue_dark_v2">#CC212d45</color>
+    <color name="blue_dark_v2">#55212d45</color>
 
+    <color name="black_blue">#99bbff</color>
+    <color name="black_blue_dark">#e6eeff</color>
     <color name="black">#000000</color>
     <color name="headerblack">#212f45</color>
     <color name="text_color_v1">#4d4d4d</color>
     <color name="text_color_v2">#333333</color>
 
+    <color name="clear_alpha_white">#E6FFFFFF</color>
+    <color name="clear_alpha">#00000000 </color>
+    <color name="holo_dark_gray_alpha">#33000000</color>
+    <color name="holo_dark_gray_alpha_v1">#99000000</color>
     <color name="holo_dark_gray">#737373</color>
     <color name="holo_gray">#b3b3b3</color>
     <color name="float_white">#bfbfbf</color>
     <color name="button_gray">#d9d9d9</color>
+    <color name="holo_light">#e6e6e6</color>
     <color name="white_darker">#f8f8f8</color>
     <color name="white_dark">#f2f2f2</color>
     <color name="white">#ffffff</color>
 
     <color name="progress_tint">#f32323</color>
-
     <color name="green_dark">#196619</color>
-
     <color name="dark_purple">#CC212d45</color>
+    <color name="warning">#ffc107</color>
+    <color name="colorProgressGradientStart">#00d9ff</color>
+    <color name="colorProgressGradientEnd">#00a4fd</color>
+
 </resources>

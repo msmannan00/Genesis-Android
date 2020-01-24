@@ -4,81 +4,135 @@ public class strings
 {
     /*Orbot Manager*/
 
-    public static String torfolder = "torfiles";
+    public static final String WELCOME_MESSAGE_TITLE = "Welcome | Hidden  Web Gateway";
+    public static final String WELCOME_MESSAGE_DESC = "This application provide you a platform to Search and Open Hidden Web urls.Here are few Suggestions\n";
+    public static final String WELCOME_MESSAGE_BT_1 = "Deep Web Online Market";
+    public static final String WELCOME_MESSAGE_BT_2 = "Leaked Documents and Books";
+    public static final String WELCOME_MESSAGE_BT_3 = "Dark Web News and Articles";
+    public static final String WELCOME_MESSAGE_BT_4 = "Secret Softwares and Hacking Tools";
+    public static final String WELCOME_MESSAGE_BT_5 = "Don't Show Again";
 
-    /*Messsage Manager*/
+    public static final String ABI_ERROR_TITLE = "Invalid Setup File";
+    public static final String ABI_ERROR_DESC = "Looks like you messed up the installation. Either Install it from playstore or follow the link";
+    public static final String ABI_ERROR_BT_1 = "Local Upgrade";
+    public static final String ABI_ERROR_BT_2 = "Playstore Upgrade";
+    public static final String ABI_ERROR_BT_3 = "Continue Anyway";
 
-    public static String welcome_message_title = "Welcome | Deep Web Gateway";
-    public static String welcome_message_desc = "\nWelcome to Deep Web | Dark Web Gateway. This application provide you a platform to Search and Open Dark Web urls.\n\nYou cannot open any url related to normal internet as its not the intended purpose. You can check out following urls to get yourself started\n\nHere are few Suggestions\n";
-    public static String welcome_message_bt1 = "Deep Web Online Market";
-    public static String welcome_message_bt2 = "Leaked Documents and Books";
-    public static String welcome_message_bt3 = "Dark Web News and Articles";
-    public static String welcome_message_bt4 = "Secret Softwares and Hacking Tools";
-    public static String welcome_message_bt5 = "Don't Show Again";
+    public static final String REPORT_URL_TITLE = "Report This Website";
+    public static final String REPORT_URL_DESC = "If you think url is illegal or disturbing report us so that we can update our database\n";
+    public static final String REPORT_URL_BT_1 = "Report";
+    public static final String REPORT_URL_BT_2 = "Dismiss";
 
-    public static String base_error_title = "Dark Web URL | Invalid URL";
-    public static String base_error_desc = "This software can only be used to access hidden web such as \"Onion\" and \"I2P\" \n\nFor accessing Surface Web use Google or Bing\n";
-    public static String base_error_bt1 = "Dismiss";
+    public static final String ORBOT_INIT_TITLE = "Initializing";
+    public static final String ORBOT_INIT_DESC = "Please wait! While we connect you to hidden web. This might take few minutes\n";
+    public static final String ORBOT_INIT_BT_1 = "Dismiss";
+    public static final String ORBOT_INIT_BT_2 = "Try Again";
 
-    public static String abi_error_title = "Invalid Setup File";
-    public static String abi_error_desc = "Looks like you messed up the installation. Either Install it from playstore or follow the link";
-    public static String abi_error_bt1 = "Local Upgrade";
-    public static String abi_error_bt2 = "Playstore Upgrade";
+    public static final String VERSION_TITLE = "Update Pending";
+    public static final String VERSION_DESC = "You have not updated this app for a while please update it to get best performance\n";
+    public static final String VERSION_BT_1 = "Update";
 
-    public static String report_url_title = "Report This Website";
-    public static String report_url_desc = "If you think url is illegal or disturbing report us so that we can update our database\n";
-    public static String report_url_bt1 = "Report";
-    public static String report_url_bt2 = "Dismiss";
+    public static final String REPORT_SUCCESS_TITLE = "URL Reported Successfully";
+    public static final String REPORT_SUCCESS_DESC = "URL has been successfully reported. It will take about a week to completely remove this website from our servers\n";
+    public static final String REPORT_SUCCESS_BT_1 = "Dismiss";
 
-    public static String orbot_init_title = "Initializing";
-    public static String orbot_init_desc = "Please wait! While we connect you to hidden web. This might take few minutes\n";
-    public static String orbot_init_bt1 = "Dismiss";
-    public static String orbot_init_bt2 = "Try Again";
+    public static final String RATE_TITLE = "Rate US";
+    public static final String RATE_MESSAGE = "We dont take donations or earn money from this app. We are trying to make a private anonymous internet \n\nIf you think this app works please rate us it gives us hope and strength to continue";
+    public static final String RATE_POSITIVE = "Like This App";
+    public static final String RATE_NEGATIVE = "Don't Like This App";
 
-    public static String version_title = "Update Pending";
-    public static String version_desc = "You have not updated this app for a while please update it to get best performance\n";
-    public static String version_bt1 = "Update";
+    public static final String RATE_SUCCESS_TITLE = "Sorry To Hear That!";
+    public static final String RATE_SUCCESS_DESC = "If you are having any trouble and want to contact us please email us at gamesolstudios@gmail.com We will try to solve your problem as soon as possible";
+    public static final String RATE_SUCCESS_BT_1 = "Send Mail";
 
-    public static String report_success_title = "URL Reported Successfully";
-    public static String report_success_desc = "URL has been successfully reported. It will take about a week to completely remove this website from our servers\n";
-    public static String report_success_bt1 = "Dismiss";
+    public static final String BOOKMARK_URL_BT_1 = "Bookmark";
+    public static final String BOOKMARK_URL_BT_2 = "Dismiss";
 
-    public static String rate_title = "Rate US";
-    public static String rate_message = "We dont take donations or earn money from this app. We are trying to make a private anonymous internet \n\nIf you think this app works please rate us it gives us hope and strength to continue";
-    public static String rate_positive = "Like This App";
-    public static String rate_negative = "Don't Like This App";
+    public static final String CLEAR_HISTORY_TITLE = "Clear site storage?";
+    public static final String CLEAR_HISTORY_DESC = "This will clear data for all sites";
+    public static final String CLEAR_HISTORY_BT_1 = "Clear";
+    public static final String CLEAR_HISTORY_BT_2 = "Dismiss";
 
-    public static String rate_success_title = "Sorry To Hear That!";
-    public static String rate_success_desc = "If you are having any trouble and want to contact us please email us at gamesolstudios@gmail.com \n\nWe will try to solve your problem as soon as possible";
-    public static String rate_success_bt1 = "Dismiss";
+    public static final String CLEAR_TAB_TITLE = "Clear open tabs?";
+    public static final String CLEAR_TAB_DESC = "This will clear all stored tabs";
+    public static final String CLEAR_TAB_BT_1 = "Clear";
 
-    public static String bookmark_url_title = "Bookmark This Page";
-    public static String bookmark_url_desc = "Bookmark this URL To Restore It Again Afterward\n";
-    public static String bookmark_url_bt1 = "Bookmark";
-    public static String bookmark_url_bt2 = "Dismiss";
+    public static final String clear_bookmark_title = "Clear site bookmark?";
+    public static final String clear_bookmark_desc = "This will clear data for all saved sites\n";
+    public static final String clear_bookmark_bt1 = "Clear";
+    public static final String clear_bookmark_bt2 = "Dismiss";
 
-    public static String clear_title = "Warning | Clearing Data";
-    public static String clear_desc = "You are about to clear your data if you are sure please continue\n";
-    public static String clear_bt1 = "Clear Data";
-    public static String clear_bt2 = "Dismiss";
+    public static final String DOWNLOAD_TITLE = "Download Notification";
+    public static final String DOWNLOAD_LONG_PRESS_TITLE = "File Notification";
+    public static final String DOWNLOAD_LONG_PRESS_MESSAGE = "File | ";
+    public static final String DOWNLOAD_MESSAGE = "Download File | ";
+    public static final String DOWNLOAD_POSITIVE = "Download";
+    public static final String DOWNLOAD_NEGATIVE = "Dismiss";
 
-    public static String download_title = "Download Notification";
-    public static String download_message = "Download File | ";
-    public static String download_positive = "Download";
-    public static String download_negative = "Dismiss";
+    public static final String LONG_URL_TITLE = "URL Notification";
+    public static final String LONG_URL_MESSAGE = "";
+    public static final String LONG_URL_OPTION_1 = "Open In New Tab";
+    public static final String LONG_URL_OPTION_2 = "Open In Current Tab";
+    public static final String LONG_URL_OPTION_3 = "Copy to Clipboard";
+    public static final String LONG_URL_OPTION_4 = "Download this file";
+
+    public static final String LONG_URL_FULL_MESSAGE = "URL Description";
+    public static final String LONG_URL_FULL_OPTION_1 = "Open url in new tab";
+    public static final String LONG_URL_FULL_OPTION_2 = "Open url in current tab";
+    public static final String LONG_URL_FULL_OPTION_3 = "Copy url to clipboard";
+    public static final String LONG_URL_FULL_OPTION_4 = "Open image in new tab";
+    public static final String LONG_URL_FULL_OPTION_5 = "Open image current tab";
+    public static final String LONG_URL_FULL_OPTION_6 = "Copy image to clipboard";
+    public static final String LONG_URL_FULL_OPTION_7 = "Download image file";
+
+    public static final String BANNED_TITLE = "Is Tor Bannned In Your Country?";
+    public static final String BANNED_DESC = "Enable free GATEWAY to tunnel through banned configuration | Use it only if tor is banned in your country";
+
+    /*Tab Manager*/
+
+    public static final String CLEAR_TABS = "CLEAR TABS";
 
     /*Text Manager*/
 
-    public static String darkweb = "Hidden Web";
-    public static String emptyStr = "";
-    public static String bookmark_text = "bookmark";
-    public static String history_text = "history";
-    public static String bing_text = "Bing";
-    public static String google_text = "Google";
+    public static final String DARK_WEB = "Hidden Web";
+    public static final String EMPTY_STR = "";
+    public static final String EMPTY_SPACE = " ";
 
+    /*Settings Manager*/
 
+    public static final String CUSTOM_FONTS = "Custom Font";
+    public static final String PERCENT_SIGN = "%";
 
+    /*Bookmark Manager*/
 
+    public static final String CLEAR_BOOKMARK = "CLEAR BOOKMARK";
 
+    /*Home Manager*/
+
+    public static final String BLANK_PAGE = "about:blank";
+
+    /*Events*/
+
+    public static final String APP_STARTED = "APP_STARTED";
+    public static final String PROXY_CHANGED = "PROXY_CHANGED";
+    public static final String APP_RESTARTED = "APP_RESTARTED";
+    public static final String APP_FINISHED = "APP_FINISHED";
+    public static final String SEARCH_SWITCH = "SEARCH_SWITCH";
+    public static final String SETTINGS_OPENED = "SETTINGS_OPENED";
+    public static final String URL_BOOKMARKED = "URL_BOOKMARKED";
+    public static final String BOOKMARK_OPENED = "BOOKMARK_OPENED";
+    public static final String TAB_OPENED = "TAB_OPENED";
+    public static final String GATEWAY_OPENED = "GATEWAY_OPENED";
+    public static final String HISTORY_OPENED = "HISTORY_OPENED";
+    public static final String HISTORY_TRIGGERED = "HISTORY_TRIGGERED";
+    public static final String BOOKMARK_TRIGGERED = "BOOKMARK_TRIGGERED";
+    public static final String TAB_TRIGGERED = "TAB_TRIGGERED";
+    public static final String URL_ERROR = "URL_ERROR";
+    public static final String URL_ERROR_NOT_LOADED = "URL_ERROR_NOT_LOADED";
+    public static final String PAGE_OPENED_SUCCESS = "PAGE_OPENED_SUCCESS";
+    public static final String HOME_INVOKED = "HOME_INVOKED";
+    public static final String SEARCH_INVOKED = "SEARCH_INVOKED";
+    public static final String MENU_INVOKED = "MENU_INVOKED";
+    public static final String ON_BACK = "ON_BACK";
 }
 

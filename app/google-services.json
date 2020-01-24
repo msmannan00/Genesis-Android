@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "891955481900",
-    "firebase_url": "https://genesis-app-a512d.firebaseio.com",
-    "project_id": "genesis-app-a512d",
-    "storage_bucket": "genesis-app-a512d.appspot.com"
+    "project_number": "1026582312920",
+    "firebase_url": "https://genesis-5cc48.firebaseio.com",
+    "project_id": "genesis-5cc48",
+    "storage_bucket": "genesis-5cc48.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:891955481900:android:360c1798435c303f",
+        "mobilesdk_app_id": "1:1026582312920:android:056aacc3b6f0c3b3f164ad",
         "android_client_info": {
           "package_name": "com.darkweb.genesissearchengine"
         }
       },
       "oauth_client": [
         {
-          "client_id": "891955481900-20ves4hv1nujrthcs2u75to1gn6c3v59.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.darkweb.genesissearchengine",
-            "certificate_hash": "fc03dc31bd3710e568f8a20d1818adc49af8d139"
-          }
-        },
-        {
-          "client_id": "891955481900-94h8etf05qautcg9ue2vfc4ct2oikr3e.apps.googleusercontent.com",
+          "client_id": "1026582312920-ciidt1n08e3fh9akdrn38ph6on2c7d95.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCwvxQTaK8F6nevbWkL2t1TTEljQNZeKXc"
+          "current_key": "AIzaSyBMzD4SV_-2_2tG9E5a475k5OkwP9V-Naw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "891955481900-94h8etf05qautcg9ue2vfc4ct2oikr3e.apps.googleusercontent.com",
+              "client_id": "1026582312920-ciidt1n08e3fh9akdrn38ph6on2c7d95.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

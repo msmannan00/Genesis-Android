@@ -2,51 +2,111 @@
 
     <!-- Application Strings -->
     <string name="app_name">Genesis</string>
-    <string name="SearchHint">Search History</string>
-    <string name="SearchHintMain">Search or type web address</string>
-    <string name="homeUrl">https://genesis.onion</string>
-    <string name="errorTiyle">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
-    <string name="todo">TODO</string>
-    <string name="projectName">Genesis Search Engine</string>
-    <string name="loadingText">Online Freedom</string>
-    <string name="reload">Reload</string>
-    <string name="internetErrorMessage">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
-    <string name="title_activity_list_manager">list_manager</string>
-    <string name="title_activity_setting_controller">Settings</string>
+    <string name="SearchHint" translatable="false">Search History</string>
+    <string name="SearchHintMain" translatable="false">Search or type web address</string>
+    <string name="homeUrl" translatable="false">https://genesis.onion</string>
+    <string name="errorTiyle" translatable="false">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="projectName" translatable="false">Genesis Search Engine</string>
+    <string name="loadingText" translatable="false">Online Freedom</string>
+    <string name="reload" translatable="false">Reload</string>
+    <string name="internetErrorMessage" translatable="false">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
+    <string name="title_activity_list_manager" translatable="false">list_manager</string>
+    <string name="title_activity_setting_controller" translatable="false">Settings</string>
+    <string name="file_provider_authority" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="preferences_messages_header" translatable="false">Messages</string>
+    <string name="preferences_sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="messages_signature_title" translatable="false">Your signature</string>
+    <string name="messages_reply_title" translatable="false">Default reply action</string>
 
     <!-- Settings -->
-    <string name="basic_settings">Basic Settings</string>
-    <string name="settings_header">Settings</string>
-    <string name="settings_search_engine">Search Engine</string>
-    <string name="settings_javascript">Javascript</string>
-    <string name="settings_clear_history">Auto Clear History</string>
+    <string name="settings_basic_settings" translatable="false">Basic Settings</string>
+    <string name="settings_header" translatable="false">Settings</string>
+    <string name="settings_search_engine" translatable="false">Search Engine</string>
+    <string name="settings_javascript" translatable="false">Javascript</string>
+    <string name="settings_clear_history" translatable="false">Auto Clear History</string>
+    <string name="settings_font_title" translatable="false">Font Settings</string>
+    <string name="settings_adjust_font" translatable="false">Customized Font</string>
+    <string name="settings_manual_font" translatable="false">Auto Adjust Font</string>
+    <string name="settings_cookies" translatable="false">Cookie Settings</string>
+    <string name="settings_cookie" translatable="false">Cookies</string>
+    <string name="settings_notification" translatable="false">Manage Notification</string>
 
     <!-- List View -->
-    <string name="listview_clear">Clear</string>
+    <string name="listview_clear" translatable="false">Clear</string>
+
+    <!-- Orbot Settings -->
+    <string name="orbot_settings_warning" translatable="false">⚠️ Warning</string>
+    <string name="orbot_settings_bridges" translatable="false">Enable Bridges</string>
+
+    <!-- Orbot View -->
+    <string name="orbot_header" translatable="false">Proxy Settings</string>
+    <string name="orbot_desc" translatable="false">Genesis Browser connects you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
+    <string name="orbot_option_title" translatable="false">Internet is censored here</string>
+    <string name="orbot_option_desc" translatable="false">Bypass Firewall</string>
+    <string name="orbot_option_warning_slow_speed" translatable="false">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
+
+    <!-- Splash -->
+    <string name="gateway_info" translatable="false">Enable Gateway</string>
+    <string name="gateway_button" translatable="false">Enable Gateway</string>
+    <string name="gateway_loading_please_wait" translatable="false">Loading Please Wait</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark_clear_history" translatable="false">Clear History</string>
+
+    <!-- Hint View -->
+    <string name="hint_default_suggession" translatable="false">BBC | Israel Strikes Again</string>
+
+    <!-- Notification Menu -->
+    <string name="notification_default_label" translatable="false">default.jpg</string>
+    <string name="notification_open_text" translatable="false">Open</string>
+
+    <!-- Tab View -->
+    <string name="tab_view_increment" translatable="false">+1</string>
+    <string name="tab_view_search_tab" translatable="false">Search Tabs</string>
+
+    <!-- Home View -->
+    <string name="home_tab_text" translatable="false">1</string>
+    <string name="home_connect" translatable="false">Connect</string>
+    <string name="home_loading" translatable="false">Loading Please Wait</string>
+
+    <string-array name="fonts">
+        <item>55 Percent</item>
+        <item>70 Percent</item>
+        <item>85 Percent</item>
+        <item>100 Percent</item>
+        <item>115 Percent</item>
+        <item>130 Percent</item>
+        <item>145 Percent</item>
+    </string-array>
 
     <string-array name="search_engines">
         <item>Hidden Web</item>
         <item>Google</item>
-        <item>Bing</item>
+        <item>Duck Duck Go</item>
     </string-array>
 
     <string-array name="boolean_option">
         <item>Enabled</item>
         <item>Disabled</item>
+    </string-array>
+
+    <string-array name="notification">
+        <item>Enable All</item>
+        <item>Disable All</item>
+        <item>No Bandwidth</item>
+    </string-array>
+
+    <string-array name="cookies">
+        <item>Allow All</item>
+        <item>Allow Trusted</item>
+        <item>Allow None</item>
+        <item>Allow Visited</item>
+        <item>Allow Non Tracker</item>
     </string-array>
 
 </resources>

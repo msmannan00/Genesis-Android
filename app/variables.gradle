@@ -1,30 +1,41 @@
 /*arm versions*/
-    project.ext.arm_vname = '225'
-    project.ext.arm_vcode = 225
+    project.ext.arm_vname = '520'
+    project.ext.arm_vcode = 520
 
 /*aarch versions*/
-    project.ext.aarch_vname = '226'
-    project.ext.aarch_vcode = 226
+    project.ext.aarch_vname = '521'
+    project.ext.aarch_vcode = 521
 
 /*x86 versions*/
-    project.ext.x86_vname = '227'
-    project.ext.x86_vcode = 227
+    project.ext.x86_vname = '522'
+    project.ext.x86_vcode = 522
 
 /*x64 versions*/
-    project.ext.x64_vname = '228'
-    project.ext.x64_vcode = 228
+    project.ext.x64_vname = '523'
+    project.ext.x64_vcode = 523
 
 /*dimension*/
     project.ext.dimen = 'abi'
 
 /*firefox version*/
-    project.ext.firefox_version = "70.0.20190814094216"
+    project.ext.firefox_version = "73.0.20191220095035"
     project.ext.firefox_channel = "nightly"
 
 /*Application Preferences*/
-    project.ext.compileSdkVersion = 29
+    project.ext.compileSdkVersion = 28
     project.ext.minSdkVersion = 21
     project.ext.targetSdkVersion = 29
-    project.ext.versionCode = 126
-    project.ext.versionName = "126.0"
+    project.ext.versionCode = 130
+    project.ext.versionName = "130.0"
     project.ext.applicationId = "com.darkweb.genesissearchengine"
+
+
+/*test*/
+    project.ext.architecture_components_version = '2.1.0'
+    project.ext.support_libraries_version = '1.0.0'
+    project.ext.espresso_version = '3.1.0-alpha4'
+    project.ext.kotlin_version = '1.3.50'
+    project.ext.coroutines_version = '1.3.0'
+    project.ext.spotbugs_version = '3.1.4'
+    project.ext.mozilla_components_version = '12.0.0'
+    project.ext.gecko_nightly_version = '72.0.20200107212822'

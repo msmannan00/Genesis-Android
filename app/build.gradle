@@ -4,7 +4,6 @@ apply from: 'variables.gradle'
 apply plugin: 'maven'
 apply plugin: 'io.fabric'
 
-
 ext {
     geckoviewChannel = project.ext.firefox_channel
     geckoviewVersion = project.ext.firefox_version
@@ -21,24 +20,52 @@ repositories {
     }
 }
 
-
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
     defaultConfig {
         applicationId project.ext.applicationId
-        minSdkVersion project.ext.minSdkVersion
-        targetSdkVersion project.ext.targetSdkVersion
+        minSdkVersion 21
         versionCode project.ext.versionCode
         versionName project.ext.versionName
-    }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    flavorDimensions "abi"
+        multiDexEnabled true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    dexOptions {
+        preDexLibraries true
+    }
+
+    lintOptions {
+        lintConfig file("lint.xml")
+    }
+
+    // We have a three dimensional build configuration:
+    // BUILD TYPE (debug, release) X PRODUCT FLAVOR (focus, klar) X ARCHITECTURE (x86, arm, aarch64)
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        splits {
+            abi {
+                enable true
+                reset()
+                include 'arm64-v8a'
+                include 'x86'
+                include 'armeabi-v7a'
+                include 'x86_64'
+                universalApk false
+            }
+        }
+    }
 
     flavorDimensions project.ext.dimen
 
@@ -66,62 +93,53 @@ android {
     }
 
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        splits {
-            abi {
-                enable true
-                reset()
-                include 'arm64-v8a'
-                include 'x86'
-                include 'armeabi-v7a'
-                include 'x86_64'
-
-                universalApk false
+    sourceSets {
+        test {
+            resources {
+                srcDir "${projectDir}/src/main/assets/"
             }
         }
+
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-v4:26.1.0' // the lib is old dependencies version;
     }
 }
+
 dependencies {
 
     /*Default Libraries*/
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support.constraint:constraint-layout:2.0.0-beta2'
-    implementation 'cz.msebera.android:httpclient:4.5.8'
-    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
-    implementation 'com.google.android.material:material:1.1.0-alpha09'
-    implementation 'androidx.preference:preference:1.1.0-rc01'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
     /*Firefox ABI Splits*/
-    x86Implementation     "org.mozilla.geckoview:geckoview-${geckoviewChannel}:${geckoviewVersion}"
-    x86_64Implementation  "org.mozilla.geckoview:geckoview-${geckoviewChannel}:${geckoviewVersion}"
-    armImplementation     "org.mozilla.geckoview:geckoview-${geckoviewChannel}:${geckoviewVersion}"
-    aarch64Implementation "org.mozilla.geckoview:geckoview-${geckoviewChannel}:${geckoviewVersion}"
+    implementation "org.mozilla.components:browser-engine-gecko:$mozilla_components_version"
+    implementation "org.mozilla.geckoview:geckoview:$gecko_nightly_version"
 
     /*Alert Dialog*/
     implementation 'com.crowdfire.cfalertdialog:cfalertdialog:1.1.0'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
-        transitive = true;
-    }
-
-    /*Onion Proxy*/
-    implementation 'com.github.jehy:Tor-Onion-Proxy-Library:0.0.7'
-    implementation 'org.slf4j:slf4j-api:2.0.0-alpha0'
-    implementation 'org.slf4j:slf4j-android:1.7.26'
 
     /*Ads Manager*/
-    implementation 'com.google.android.gms:play-services-ads:18.1.1'
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
+
 
     /*Crashlytics*/
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar')
+    implementation 'com.flurry.android:analytics:12.1.0@aar'
+
+    /*View Animator*/
+    implementation 'com.daimajia.easing:library:2.1@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+
+    /*Orbot Service*/
+    implementation project(path: ':orbotservice')
 
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'

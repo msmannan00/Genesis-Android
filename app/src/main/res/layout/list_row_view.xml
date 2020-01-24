@@ -1,38 +1,44 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="15dp"
         android:paddingBottom="16dp"
-        android:background="@xml/border_set"
+        android:background="@xml/sc_border"
 >
 
     <LinearLayout
             android:layout_width="0dp"
             android:orientation="vertical"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="0dp"
             android:id="@+id/item_container"
             android:paddingEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="4"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:ignore="RtlSymmetry">
 
         <TextView
-                android:id="@+id/header"
+                android:id="@+id/mHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:singleLine="true"
+                android:textSize="14.5sp"
+                android:layout_marginStart="20dp"
         />
 
         <TextView
-                android:id="@+id/description"
+                android:layout_marginStart="20dp"
+                android:id="@+id/mDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:ellipsize="end"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textColor="@color/holo_dark_gray"
         />
     </LinearLayout>
@@ -40,14 +46,19 @@
     <ImageButton
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingEnd="3dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/message_button"
             android:onClick="onHomeButtonPressed"
             android:scaleType="fitCenter"
+            android:tint="@color/black"
             android:src="@drawable/cancel"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/todo"/>
+            android:contentDescription="@string/todo"
+            tools:ignore="RtlSymmetry" />
 
 
 

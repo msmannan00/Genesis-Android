@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:background="@xml/sc_side_menu"
+        android:layout_gravity="top"
+        android:layout_height="wrap_content">
+
+    <ScrollView
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                    android:layout_width="259dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@color/white_darker"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                        android:id="@+id/menu24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:background="@xml/sc_side_item"
+                        android:onClick="onMenuItemInvoked"
+                        android:src="@xml/ic_home" />
+
+                <ImageButton
+                        android:id="@+id/menu23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:background="@xml/sc_side_item"
+                        android:onClick="onMenuItemInvoked"
+                        android:src="@xml/ic_arrow_back" />
+
+                <ImageButton
+                        android:id="@+id/menu22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:background="@xml/sc_side_item"
+                        android:onClick="onMenuItemInvoked"
+                        android:src="@xml/ic_arrow_right" />
+
+                <ImageButton
+                        android:id="@+id/menu21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:background="@xml/sc_side_item"
+                        android:onClick="onMenuItemInvoked"
+                        android:src="@xml/ic_refresh" />
+
+                <ImageButton
+                        android:id="@+id/menu20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@xml/sc_side_item"
+                        android:onClick="onMenuItemInvoked"
+                        android:src="@xml/ic_close" />
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/menu11"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="New Tabs"
+                    android:textSize="14dp" />
+
+            <Button
+                    android:id="@+id/menu10"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Close Tab"
+                    android:textSize="14dp" />
+
+            <Button
+                    android:id="@+id/menu9"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Open Recent Tabs"
+                    android:textSize="14dp" />
+
+            <View
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+            <Button
+                    android:id="@+id/menu8"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Downloads"
+                    android:textSize="14dp" />
+
+            <Button
+                    android:id="@+id/menu7"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="History"
+                    android:textSize="14dp" />
+
+            <Button
+                    android:id="@+id/menu6"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Settings"
+                    android:textSize="14dp" />
+
+            <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+            <Button
+                    android:id="@+id/menu5"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Bookmark This Page"
+                    android:textSize="14dp" />
+
+            <Button
+                    android:id="@+id/menu4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Open Bookmarks"
+                    android:textSize="14dp" />
+
+            <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+            <Button
+                    android:id="@+id/menu3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Report Website"
+                    android:textSize="14dp" />
+
+            <Button
+                    android:id="@+id/menu2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Rate This App"
+                    android:textSize="14dp" />
+
+            <Button
+                    android:id="@+id/menu1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item_popup"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="Share"
+                    android:textSize="14dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

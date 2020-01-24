@@ -1,38 +1,29 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import android.content.Context;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.crashlytics.android.Crashlytics;
-import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
+import com.darkweb.genesissearchengine.helperManager.eventObserver;
+
 import io.fabric.sdk.android.Fabric;
 
-public class fabricManager
+class fabricManager
 {
     /*Private Variables*/
 
-    private static final fabricManager ourInstance = new fabricManager();
+    private AppCompatActivity mAppContext;
+    private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    public static fabricManager getInstance()
-    {
-        return ourInstance;
+    fabricManager(AppCompatActivity mAppContext, eventObserver.eventListener mEvent){
+        this.mAppContext = mAppContext;
+        this.mEvent = mEvent;
+        initialize();
     }
 
-    private fabricManager()
-    {
-    }
-
-    public void init(Context context)
-    {
-        Fabric.with(context, new Crashlytics());
-        analyticmanager.getInstance().initialize(home_model.getInstance().getAppContext());
-        analyticmanager.getInstance().logUser();
-    }
-
-    /*Helper Methods*/
-
-    public void sendEvent(String value)
-    {
-        //analyticmanager.getInstance().sendEvent(value);
+    private void initialize(){
+        Fabric.with(mAppContext, new Crashlytics());
+        mEvent.invokeObserver(null,null);
     }
 }

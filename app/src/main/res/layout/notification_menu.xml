@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@xml/sc_notification_shadow"
+            app:layout_constraintStart_toStartOf="parent"
+            android:baselineAligned="false">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="RtlHardcoded">
+
+
+            <ImageView
+                    android:id="@+id/notification_header"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:tint="#33cc33"
+                    android:src="@xml/ic_check"
+                    android:contentDescription="@string/todo" />
+
+            <TextView
+                    android:id="@+id/notification_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/notification_default_label" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:gravity="right"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="RtlHardcoded">
+
+            <Button
+                    android:id="@+id/notification_event"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/clear_alpha"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/ease_blue"
+                    android:layout_gravity="center_vertical"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:text="@string/notification_open_text" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
