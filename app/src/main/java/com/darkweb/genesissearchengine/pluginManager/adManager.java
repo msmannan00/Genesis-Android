@@ -58,7 +58,7 @@ class adManager
 
                 @Override
                 public void onAdFailedToLoad(int errorCode) {
-                    Log.i("Failure___",""+errorCode);
+                    //Log.i("Failure___",""+errorCode);
                 }
 
                 @Override

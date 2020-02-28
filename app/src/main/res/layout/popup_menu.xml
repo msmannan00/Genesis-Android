@@ -87,7 +87,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="New Tabs"
+                    android:text="@string/popup_new_tabs"
                     android:textSize="14dp" />
 
             <Button
@@ -98,7 +98,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Close Tab"
+                    android:text="@string/popup_close_tabs"
                     android:textSize="14dp" />
 
             <Button
@@ -109,11 +109,28 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Open Recent Tabs"
+                    android:text="@string/popup_open_Recent_tab"
                     android:textSize="14dp" />
 
             <View
                     android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+            <Button
+                    android:id="@+id/menu6"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@xml/sc_side_item"
+                    android:gravity="left|center_vertical"
+                    android:onClick="onMenuItemInvoked"
+                    android:paddingLeft="15dp"
+                    android:text="@string/popup_settings"
+                    android:textSize="14dp" />
+
+            <View
+                    android:id="@+id/divider4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?android:attr/listDivider" />
@@ -126,7 +143,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Downloads"
+                    android:text="@string/popup_download"
                     android:textSize="14dp" />
 
             <Button
@@ -137,20 +154,56 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="History"
+                    android:text="@string/popup_history"
                     android:textSize="14dp" />
 
             <Button
-                    android:id="@+id/menu6"
+                    android:id="@+id/menu25"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@xml/sc_side_item"
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Settings"
+                    android:text="@string/popup_languages"
                     android:textSize="14dp" />
 
+            <LinearLayout
+                    android:id="@+id/menu26"
+                    android:background="@xml/sc_side_item"
+                    android:layout_width="259dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:orientation="horizontal"
+                    android:onClick="onMenuItemInvoked"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                <Button
+                        android:id="@+id/menu28"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="50dp"
+                        android:background="@xml/sc_side_item"
+                        android:gravity="left|center_vertical"
+                        android:clickable="false"
+                        android:onClick="onMenuItemInvoked"
+                        android:paddingLeft="15dp"
+                        android:text="@string/popup_desktop"
+                        android:textSize="14dp" />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/menu27"
+                        android:clickable="false"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:onClick="onMenuItemInvoked"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="15dp"
+                        android:textSize="14dp" />
+            </LinearLayout>
             <View
                     android:id="@+id/divider2"
                     android:layout_width="match_parent"
@@ -165,7 +218,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Bookmark This Page"
+                    android:text="@string/popup_bookmark_page"
                     android:textSize="14dp" />
 
             <Button
@@ -176,7 +229,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Open Bookmarks"
+                    android:text="@string/popup_open_bookmark"
                     android:textSize="14dp" />
 
             <View
@@ -193,7 +246,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Report Website"
+                    android:text="@string/popup_report"
                     android:textSize="14dp" />
 
             <Button
@@ -204,7 +257,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Rate This App"
+                    android:text="@string/popup_rate"
                     android:textSize="14dp" />
 
             <Button
@@ -215,7 +268,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="Share"
+                    android:text="@string/popup_share"
                     android:textSize="14dp" />
         </LinearLayout>
     </ScrollView>

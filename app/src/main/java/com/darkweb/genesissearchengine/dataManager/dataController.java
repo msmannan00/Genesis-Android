@@ -11,6 +11,7 @@ import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class dataController
         mPreferencesModel.setHistorySize(databaseController.getInstance().getLargestHistoryID());
     }
     public void initializeListData(){
+        mPreferencesModel.initSuggestions();
         if(!status.sHistoryStatus)
         {
             mPreferencesModel.initializeHistory(databaseController.getInstance().selectHistory(0,constants.START_LIST_SIZE));
@@ -47,7 +49,6 @@ public class dataController
         {
             databaseController.getInstance().execSQL("delete from history where 1",null);
         }
-        mPreferencesModel.initSuggestions();
     }
 
     /*Saving Preferences*/
@@ -93,11 +94,13 @@ public class dataController
         activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
     }
     public void updateSuggestionURL(String url,String title) {
-        mPreferencesModel.updateSuggestionURL(url,title);
+        url = helperMethod.removeLastSlash(url);
+        mPreferencesModel.updateSuggestionURL(url,title,false);
         activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
     }
     public void addSuggesion(String url,String title) {
-        mPreferencesModel.addSuggenstions(url,title);
+        url = helperMethod.removeLastSlash(url);
+        mPreferencesModel.addSuggenstions(url,title,false);
         activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
     }
     public void removeHistory(String url){

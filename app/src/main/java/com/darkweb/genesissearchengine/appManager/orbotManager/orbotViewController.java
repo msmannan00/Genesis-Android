@@ -46,8 +46,8 @@ class orbotViewController
     }
 
 
-    private void initViews(){
-        mBridgeSwitch.setChecked(status.sGateway);
+    public void initViews(){
+        mBridgeSwitch.setChecked(status.sGatewayAuto || status.sGatewayManual);
     }
 
 

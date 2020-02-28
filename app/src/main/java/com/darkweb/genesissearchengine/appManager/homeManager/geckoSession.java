@@ -25,7 +25,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperManager.AdBlocker;
 import com.darkweb.genesissearchengine.helperManager.JavaScriptInterface;
 import com.darkweb.genesissearchengine.helperManager.downloadFileService;
 import com.darkweb.genesissearchengine.helperManager.errorHandler;
@@ -45,6 +47,9 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
+import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
+
 public class geckoSession extends GeckoSession implements GeckoSession.PermissionDelegate,GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate,GeckoSession.NavigationDelegate,GeckoSession.ContentDelegate
 {
     private eventObserver.eventListener event;
@@ -55,7 +60,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     private boolean mFullScreen = false;
     private boolean isPageLoading = false;
     private int mProgress = 0;
-    private String mCurrentTitle = strings.EMPTY_STR;
+    private String mCurrentTitle = "loading";
     private String mCurrentURL = "about:blank";
     private Uri mUriPermission = null;
     private AppCompatActivity mContext;
@@ -103,10 +108,10 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
         if(!isPageLoading){
-            mCurrentURL = "about:blank";
+            mCurrentTitle = "loading";
         }
         isPageLoading = true;
-        if(!var2.equals("about:blank")){
+        if(!var2.equals("about:blank") && !mCurrentTitle.equals("loading")){
             mProgress = 5;
         }
 
@@ -155,8 +160,8 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     public void onLocationChange(@NonNull GeckoSession var1, @Nullable String var2) {
 
         String newUrl = var2.split("#")[0];
-        if(!mCurrentURL.equals("about:blank")){
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,newUrl), enums.etype.on_update_suggestion_url);
+        if(!mCurrentTitle.equals("loading")){
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.on_update_suggestion_url);
         }
         mCurrentURL = newUrl;
 
@@ -224,7 +229,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
     @UiThread
     public void onTitleChange(@NonNull GeckoSession var1, @Nullable String var2) {
-        if(var2!=null && !var2.equals(strings.EMPTY_STR) && var2.length()>2 && !mCurrentURL.equals("about:blank")){
+        if(var2!=null && !var2.equals(strings.EMPTY_STR) && var2.length()>2 && !var2.equals("about:blank")){
             mCurrentTitle = var2;
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.on_update_suggestion);
         }
@@ -470,6 +475,19 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     }
 
     /*Helper Methods*/
+
+    void toogleUserAgent(){
+        if(getSettings().getUserAgentMode()==USER_AGENT_MODE_DESKTOP){
+            getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
+        }else {
+            getSettings().setUserAgentMode(USER_AGENT_MODE_DESKTOP);
+        }
+
+    }
+
+    int getUserAgentMode(){
+        return getSettings().getUserAgentMode();
+    }
 
     public String getCurrentURL(){
         return mCurrentURL;

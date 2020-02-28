@@ -303,7 +303,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
             intent.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
 
 
-            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(orbotLocalConstants.sHomeContext.get(), 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
 
             if(pendingIntentNewNym==null){
                 return;
@@ -362,7 +362,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
      */
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Log.i("FUCK YOU ALL1","FUCK YOU ALL");
+        //Log.i("FUCK YOU ALL1","FUCK YOU ALL");
         self = this;
 
         try{
@@ -419,7 +419,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
 
     @Override
     public void onTaskRemoved(Intent rootIntent){
-        Log.i("FUCK YOU ALL2","FUCK YOU ALL");
+        //Log.i("FUCK YOU ALL2","FUCK YOU ALL");
 
         /*Intent restartServiceIntent = new Intent(getApplicationContext(), this.getClass());
         restartServiceIntent.setPackage(getPackageName());
@@ -459,7 +459,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
     }
 
     private void stopTorAsync () {
-        Log.i("TorService", "stopTor");
+        //Log.i("TorService", "stopTor");
         try {
             sendCallbackStatus(STATUS_STOPPING);
             sendCallbackLogMessage(getString(R.string.status_shutting_down));
@@ -621,7 +621,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
             logNotice("There was an error installing Orbot binaries");
         }
 
-        Log.i("TorService", "onCreate end");
+        //Log.i("TorService", "onCreate end");
     }
 
     protected String getCurrentStatus ()
@@ -1111,7 +1111,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
 
         if (conn != null)
         {
-            logNotice( "SUCCESS connected to Tor control port.");
+            logNotice( "Starting Bootstrap Please Wait.");
 
             File fileCookie = new File(appCacheHome, TOR_CONTROL_COOKIE);
 
@@ -1487,7 +1487,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
     private void sendCallbackLogMessage (String logMessage)
     {
 
-        Log.i("FUCK","FUCK:"+logMessage);
+        //Log.i("FUCK","FUCK:"+logMessage);
         Intent intent = new Intent(LOCAL_ACTION_LOG);
         // You can also include some extra data.
         intent.putExtra(LOCAL_EXTRA_LOG, logMessage);
@@ -1518,11 +1518,11 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
 
     protected void sendCallbackStatus(String currentStatus) {
 
-        Log.i("MFUCKER","MFUCKER : " + currentStatus);
+        //Log.i("MFUCKER","MFUCKER : " + currentStatus);
         if(currentStatus.equals("ON")){
             orbotLocalConstants.sIsTorInitialized = true;
         }
-        Log.i("FUCKSS","FUCKSS:"+currentStatus);
+        //Log.i("FUCKSS","FUCKSS:"+currentStatus);
         mCurrentStatus = currentStatus;
         Intent intent = getActionStatusIntent(currentStatus);
         // send for Orbot internals, using secure local broadcast
@@ -1582,6 +1582,7 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
 
             if (newConnectivityState != mConnectivity) {
                 mConnectivity = newConnectivityState;
+                orbotLocalConstants.sNetworkState = mConnectivity;
 
                 if (mConnectivity)
                     newIdentity();
@@ -1692,6 +1693,8 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
                 //    extraLines.append("UpdateBridgesFromAuthority 1").append('\n');
 
                 String bridgeList = Prefs.getBridgesList();
+                bridgeList = orbotLocalConstants.bridges;
+
                 boolean obfs3Bridges = bridgeList.contains("obfs3");
                 boolean obfs4Bridges =  bridgeList.contains("obfs4");
                 boolean meekBridges = bridgeList.contains("meek");
@@ -1741,7 +1744,8 @@ public class TorService extends Service implements   TorServiceConstants, OrbotC
             }
             else
             {
-                throw new IOException("Bridge binary does not exist: " + fileObfsclient.getCanonicalPath());
+                orbotLocalConstants.tor_logs_status = "Bridge binary does not exist";
+            throw new IOException("Bridge binary does not exist: " + fileObfsclient.getCanonicalPath());
             }
         }
 

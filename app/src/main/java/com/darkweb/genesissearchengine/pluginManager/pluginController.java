@@ -202,7 +202,7 @@ public class pluginController
                 dataController.getInstance().setBool(keys.IS_WELCOME_ENABLED,false);
             }
             else if(event_type.equals(enums.etype.ignore_abi)){
-                mHomeController.ignoreAbiError();
+                //mHomeController.ignoreAbiError();
             }
             else if(event_type.equals(enums.etype.reload)){
                 if(orbotManager.getInstance().isOrbotRunning())
@@ -215,7 +215,6 @@ public class pluginController
             }
             else if(event_type.equals(enums.etype.clear_history)){
                 dataController.getInstance().clearHistory();
-                dataController.getInstance().clearSuggestions();
                 mContextManager.getHistoryController().onclearData();
                 mHomeController.onClearSession();
                 dataController.getInstance().clearTabs();

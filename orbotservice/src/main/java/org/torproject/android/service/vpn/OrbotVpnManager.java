@@ -415,7 +415,7 @@ public class OrbotVpnManager implements Handler.Callback {
 		Process proc = pb.start();
 		try { proc.waitFor();} catch (Exception e){}
 
-        Log.i(TAG,"PDNSD: " + proc.exitValue());
+        //Log.i(TAG,"PDNSD: " + proc.exitValue());
 
         if (proc.exitValue() != 0)
         {

@@ -12,6 +12,10 @@ import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,52 +83,71 @@ class dataModel
 
     void initializeHistory(ArrayList<historyRowModel> history){
         this.mHistory = history;
-        initializeCache(history);
-        Log.i("","");
+        if(!status.sHistoryStatus){
+            initializeCache(history);
+        }else {
+            clearHistory();
+        }
     }
     private void initializeCache(ArrayList<historyRowModel> history){
         for(int count=0;count<=history.size()-1;count++){
+
             mHistoryCache.put(history.get(count).getmHeader(),true);
             historyRowModel tempSuggestion = new historyRowModel(history.get(count).getTitle(),history.get(count).getmHeader(),-1);
-            mSuggestions.add(tempSuggestion);
-            mSuggestionCache.put(history.get(count).getmHeader(),tempSuggestion);
+
+            tempSuggestion.updateTitle(tempSuggestion.getmHeader());
+            tempSuggestion.updateURL(history.get(count).getmHeader());
+            addSuggenstions(tempSuggestion.getmHeader(),tempSuggestion.getTitle(),true);
+            mSuggestionCache.put(helperMethod.removeLastSlash(history.get(count).getmHeader()),tempSuggestion);
+
         }
     }
-    void updateSuggestionURL(String url, String newURL){
+
+
+    void updateSuggestionURL(String url, String newURL,boolean isLoading){
         if(url.length()>1500){
             return;
         }
+        url = helperMethod.removeLastSlash(url);
+        url = helperMethod.urlWithoutPrefix(url);
         historyRowModel model = mSuggestionCache.get(url);
         if(model!=null){
             mSuggestionCache.remove(url);
-            model.updateURL(newURL);
-            mSuggestionCache.put(newURL,model);
+            if(!newURL.equals("loading"))
+                model.updateHeader(newURL);
+            model.updateTitle(model.getmHeader());
+            mSuggestionCache.put(url,model);
         }
 
+        String[] params = new String[2];
+        params[0] = newURL;
+        params[1] = url;
+        if(newURL.length()>0 && !isLoading){
+            databaseController.getInstance().execSQL("UPDATE history SET title = ? , date = DateTime('now') WHERE url = ?",params);
+        }
     }
-    void addSuggenstions(String url, String title){
-        if(url.length()>1500){
+    void addSuggenstions(String url, String title,boolean isLoading){
+        if(url.length()>1500 || title.equals("$TITLE") || title.equals("loading")){
             return;
         }
 
+        url = helperMethod.removeLastSlash(url);
+        url = helperMethod.urlWithoutPrefix(url);
         historyRowModel tempModel = mSuggestionCache.get(url);
 
         if(tempModel==null){
             historyRowModel model = new historyRowModel(title,url,-1);
-            mSuggestions.add(0,model);
             mSuggestionCache.put(url,model);
+            mSuggestions.add(0,mSuggestionCache.get(url));
         }
         else {
-            historyRowModel model = mSuggestionCache.get(url);
-            if(model!=null){
-                model.updateTitle(title);
-            }
+            updateSuggestionURL(url,title,isLoading);
         }
 
         String[] params = new String[2];
         params[0] = title;
         params[1] = url;
-        if(title.length()>0){
+        if(title.length()>0 && !isLoading){
             databaseController.getInstance().execSQL("UPDATE history SET title = ? , date = DateTime('now') WHERE url = ?",params);
         }
     }
@@ -133,6 +156,9 @@ class dataModel
         if(url.length()>1500){
             return;
         }
+        url = helperMethod.removeLastSlash(url);
+        url = helperMethod.urlWithoutPrefix(url);
+
         @SuppressLint("SimpleDateFormat") SimpleDateFormat d_form = new SimpleDateFormat("dd MMMM | hh:mm a");
         String date = d_form.format(new Date());
 
@@ -150,10 +176,15 @@ class dataModel
 
             historyRowModel model = mSuggestionCache.get(url);
             if(model!=null){
-                Log.i("ERERER3",mSuggestions.size()+"");
-                mSuggestions.remove(model);
+                for(int e=0;e<mSuggestions.size();e++){
+                    String temp_url = helperMethod.removeLastSlash(model.getmHeader());
+                    temp_url = helperMethod.urlWithoutPrefix(temp_url);
+
+                    if(temp_url.equals(mSuggestions.get(e).getmDescription())){
+                        mSuggestions.remove(e);
+                    }
+                }
                 mSuggestions.add(0,model);
-                Log.i("ERERER4",mSuggestions.size()+"");
             }
 
             return;
@@ -191,9 +222,7 @@ class dataModel
         mHistory.clear();
         mHistoryCache.clear();
         mSuggestionCache.clear();
-        Log.i("ERERER5",mSuggestions.size()+"");
         mSuggestions.clear();
-        Log.i("ERERER6",mSuggestions.size()+"");
         initSuggestions();
     }
     void loadMoreHistory(ArrayList<historyRowModel> history){
@@ -263,7 +292,7 @@ class dataModel
             mTabs.remove(0);
         }
         if(mTabs.size()>0){
-            Log.i("FUCKERRROR125:","_FERROR_");
+            //Log.i("FUCKERRROR125:","_FERROR_");
             mTabs.get(0).getSession().closeSession();
         }
     }
@@ -318,111 +347,109 @@ class dataModel
     }
     void initSuggestions(){
 
-        Log.i("ERERER9",mSuggestions.size()+"");
-        mSuggestions.add(new historyRowModel("Youtube","https://youtube.com",-1));
-        mSuggestions.add(new historyRowModel("Facebook","https://facebook.com",-1));
-        mSuggestions.add(new historyRowModel("Twitter","https://twitter.com",-1));
-        mSuggestions.add(new historyRowModel("Amazon","https://amazon.com",-1));
-        mSuggestions.add(new historyRowModel("IMDB","https://imdb.com",-1));
-        mSuggestions.add(new historyRowModel("Reddit","https://reddit.com",-1));
-        mSuggestions.add(new historyRowModel("Pinterest","https://pinterest.com",-1));
-        mSuggestions.add(new historyRowModel("EBay","https://ebay.com",-1));
-        mSuggestions.add(new historyRowModel("Trip Advisor","https://tripadvisor.com",-1));
-        mSuggestions.add(new historyRowModel("Craigslist","https://craigslist.org",-1));
-        mSuggestions.add(new historyRowModel("Walmart","https://walmart.com",-1));
-        mSuggestions.add(new historyRowModel("Instagram","https://instagram.com",-1));
-        mSuggestions.add(new historyRowModel("Google","https://google.com",-1));
-        mSuggestions.add(new historyRowModel("NY Times","https://nytimes.com",-1));
-        mSuggestions.add(new historyRowModel("Apple","https://apple.com",-1));
-        mSuggestions.add(new historyRowModel("Linkedin","https://linkedin.com",-1));
-        mSuggestions.add(new historyRowModel("Indeed","https://indeed.com",-1));
-        mSuggestions.add(new historyRowModel("Play.Google","https://play.google.com",-1));
-        mSuggestions.add(new historyRowModel("ESPN","https://espn.com",-1));
-        mSuggestions.add(new historyRowModel("Webmd","https://webmd.com",-1));
-        mSuggestions.add(new historyRowModel("CNN","https://cnn.com",-1));
-        mSuggestions.add(new historyRowModel("Homedepot","https://homedepot.com",-1));
-        mSuggestions.add(new historyRowModel("ETSY","https://etsy.com",-1));
-        mSuggestions.add(new historyRowModel("Netflix","https://netflix.com",-1));
-        mSuggestions.add(new historyRowModel("Quora","https://quora.com",-1));
-        mSuggestions.add(new historyRowModel("Microsoft","https://microsoft.com",-1));
-        mSuggestions.add(new historyRowModel("Target","https://target.com",-1));
-        mSuggestions.add(new historyRowModel("Merriam Webster","https://merriam-webster.com",-1));
-        mSuggestions.add(new historyRowModel("Forbes","https://forbes.com",-1));
-        mSuggestions.add(new historyRowModel("Mapquest","https://mapquest.com",-1));
-        mSuggestions.add(new historyRowModel("NIH","https://nih.gov",-1));
-        mSuggestions.add(new historyRowModel("Gamepedia","https://gamepedia.com",-1));
-        mSuggestions.add(new historyRowModel("Yahoo","https://yahoo.com",-1));
-        mSuggestions.add(new historyRowModel("Healthline","https://healthline.com",-1));
-        mSuggestions.add(new historyRowModel("Foxnews","https://foxnews.com",-1));
-        mSuggestions.add(new historyRowModel("All Recipes","https://allrecipes.com",-1));
-        mSuggestions.add(new historyRowModel("Quizlet","https://quizlet.com",-1));
-        mSuggestions.add(new historyRowModel("Weather","https://weather.com",-1));
-        mSuggestions.add(new historyRowModel("Bestbuy","https://bestbuy.com",-1));
-        mSuggestions.add(new historyRowModel("Urbandictionary","https://urbandictionary.com",-1));
-        mSuggestions.add(new historyRowModel("Mayoclinic","https://mayoclinic.org",-1));
-        mSuggestions.add(new historyRowModel("AOL","https://aol.com",-1));
-        mSuggestions.add(new historyRowModel("Genius","https://genius.com",-1));
-        mSuggestions.add(new historyRowModel("Zillow","https://zillow.com",-1));
-        mSuggestions.add(new historyRowModel("Usatoday","https://usatoday.com",-1));
-        mSuggestions.add(new historyRowModel("Glassdoor","https://glassdoor.com",-1));
-        mSuggestions.add(new historyRowModel("MSN","https://msn.com",-1));
-        mSuggestions.add(new historyRowModel("Rotten Tomatoes","https://rottentomatoes.com",-1));
-        mSuggestions.add(new historyRowModel("Lowes","https://lowes.com",-1));
-        mSuggestions.add(new historyRowModel("Dictionary","https://dictionary.com",-1));
-        mSuggestions.add(new historyRowModel("Business Insider","https://businessinsider.com",-1));
-        mSuggestions.add(new historyRowModel("US News","https://usnews.com",-1));
-        mSuggestions.add(new historyRowModel("Medical News Today","https://medicalnewstoday.com",-1));
-        mSuggestions.add(new historyRowModel("Britannica","https://britannica.com",-1));
-        mSuggestions.add(new historyRowModel("Washington Post","https://washingtonpost.com",-1));
-        mSuggestions.add(new historyRowModel("USPS","https://usps.com",-1));
-        mSuggestions.add(new historyRowModel("Finance Yahoo","https://finance.yahoo.com",-1));
-        mSuggestions.add(new historyRowModel("IRS","https://irs.gov",-1));
-        mSuggestions.add(new historyRowModel("Yellow Pages","https://yellowpages.com",-1));
-        mSuggestions.add(new historyRowModel("Chase","https://chase.com",-1));
-        mSuggestions.add(new historyRowModel("Retail Menot","https://retailmenot.com",-1));
-        mSuggestions.add(new historyRowModel("Accuweather","https://accuweather.com",-1));
-        mSuggestions.add(new historyRowModel("Way Fair","https://wayfair.com",-1));
-        mSuggestions.add(new historyRowModel("GO","https://go.com",-1));
-        mSuggestions.add(new historyRowModel("Live","https://live.com",-1));
-        mSuggestions.add(new historyRowModel("Login Yahoo","https://login.yahoo.com",-1));
-        mSuggestions.add(new historyRowModel("Steam Community","https://steamcommunity.com",-1));
-        mSuggestions.add(new historyRowModel("XFinity","https://xfinity.com",-1));
-        mSuggestions.add(new historyRowModel("CNET","https://cnet.com",-1));
-        mSuggestions.add(new historyRowModel("IGN","https://ign.com",-1));
-        mSuggestions.add(new historyRowModel("Steam Powered","https://steampowered.com",-1));
-        mSuggestions.add(new historyRowModel("Macys","https://macys.com",-1));
-        mSuggestions.add(new historyRowModel("Wikihow","https://wikihow.com",-1));
-        mSuggestions.add(new historyRowModel("Mail Yahoo","https://mail.yahoo.com",-1));
-        mSuggestions.add(new historyRowModel("Wiktionary","wiktionary.org",-1));
-        mSuggestions.add(new historyRowModel("Cbssports","https://cbssports.com",-1));
-        mSuggestions.add(new historyRowModel("CNBC","https://cnbc.com",-1));
-        mSuggestions.add(new historyRowModel("Bank Of America","https://bankofamerica.com",-1));
-        mSuggestions.add(new historyRowModel("Expedia","https://expedia.com",-1));
-        mSuggestions.add(new historyRowModel("Wellsfargo","https://wellsfargo.com",-1));
-        mSuggestions.add(new historyRowModel("Groupon","https://groupon.com",-1));
-        mSuggestions.add(new historyRowModel("Twitch","https://twitch.tv",-1));
-        mSuggestions.add(new historyRowModel("Khan Academy","https://khanacademy.org",-1));
-        mSuggestions.add(new historyRowModel("The Guardian","https://theguardian.com",-1));
-        mSuggestions.add(new historyRowModel("Paypal","https://paypal.com",-1));
-        mSuggestions.add(new historyRowModel("Spotify","https://spotify.com",-1));
-        mSuggestions.add(new historyRowModel("ATT","https://att.com",-1));
-        mSuggestions.add(new historyRowModel("NFL","https://nfl.com",-1));
-        mSuggestions.add(new historyRowModel("Realtor","https://realtor.com",-1));
-        mSuggestions.add(new historyRowModel("CA Gov","https://ca.gov",-1));
-        mSuggestions.add(new historyRowModel("Good Reads","https://goodreads.com",-1));
-        mSuggestions.add(new historyRowModel("Office","https://office.com",-1));
-        mSuggestions.add(new historyRowModel("UFL","https://ufl.edu",-1));
-        mSuggestions.add(new historyRowModel("MLB","https://mlb.com",-1));
-        mSuggestions.add(new historyRowModel("Food Network","https://foodnetwork.com",-1));
-        mSuggestions.add(new historyRowModel("BBC","https://bbc.com",-1));
-        mSuggestions.add(new historyRowModel("Apartments","https://apartments.com",-1));
-        mSuggestions.add(new historyRowModel("NPR","https://npr.org",-1));
-        mSuggestions.add(new historyRowModel("Wow Head","https://wowhead.com",-1));
-        mSuggestions.add(new historyRowModel("Duckduckgo","https://duckduckgo.com",-1));
-        mSuggestions.add(new historyRowModel("Bing","https://bing.com",-1));
-        mSuggestions.add(new historyRowModel("Google","https://google.com",-1));
-        mSuggestions.add(new historyRowModel("Genesis Search","https://boogle.store",-1));
-        Log.i("ERERER10",mSuggestions.size()+"");
+        addSuggenstions("https://duckduckgo.com","Duckduckgo",true);
+        addSuggenstions("https://bbc.com","BBC",true);
+        addSuggenstions("https://youtube.com","Youtube",true);
+        addSuggenstions("https://facebook.com","Facebook",true);
+        addSuggenstions("https://twitter.com","Twitter",true);
+        addSuggenstions("https://amazon.com","Amazon",true);
+        addSuggenstions("https://imdb.com","IMDB",true);
+        addSuggenstions("https://reddit.com","Reddit",true);
+        addSuggenstions("https://pinterest.com","Pinterest",true);
+        addSuggenstions("https://ebay.com","EBay",true);
+        addSuggenstions("https://tripadvisor.com","Trip Advisor",true);
+        addSuggenstions("https://craigslist.org","Craigslist",true);
+        addSuggenstions("https://walmart.com","Walmart",true);
+        addSuggenstions("https://instagram.com","Instagram",true);
+        addSuggenstions("https://google.com","Google",true);
+        addSuggenstions("https://nytimes.com","NY Times",true);
+        addSuggenstions("https://apple.com","Apple",true);
+        addSuggenstions("https://linkedin.com","Linkedin",true);
+        addSuggenstions("https://indeed.com","Indeed",true);
+        addSuggenstions("https://play.google.com","Play.Google",true);
+        addSuggenstions("https://espn.com","ESPN",true);
+        addSuggenstions("https://webmd.com","Webmd",true);
+        addSuggenstions("https://cnn.com","CNN",true);
+        addSuggenstions("https://homedepot.com","Homedepot",true);
+        addSuggenstions("https://etsy.com","ETSY",true);
+        addSuggenstions("https://netflix.com","Netflix",true);
+        addSuggenstions("https://quora.com","Quora",true);
+        addSuggenstions("https://microsoft.com","Microsoft",true);
+        addSuggenstions("https://target.com","Target",true);
+        addSuggenstions("https://merriam-webster.com","Merriam Webster",true);
+        addSuggenstions("https://forbes.com","Forbes",true);
+        addSuggenstions("https://mapquest.com","Mapquest",true);
+        addSuggenstions("https://nih.gov","NIH",true);
+        addSuggenstions("https://gamepedia.com","Gamepedia",true);
+        addSuggenstions("https://yahoo.com","Yahoo",true);
+        addSuggenstions("https://healthline.com","Healthline",true);
+        addSuggenstions("https://foxnews.com","Foxnews",true);
+        addSuggenstions("https://allrecipes.com","All Recipes",true);
+        addSuggenstions("https://quizlet.com","Quizlet",true);
+        addSuggenstions("https://weather.com","Weather",true);
+        addSuggenstions("https://bestbuy.com","Bestbuy",true);
+        addSuggenstions("https://urbandictionary.com","Urbandictionary",true);
+        addSuggenstions("https://mayoclinic.org","Mayoclinic",true);
+        addSuggenstions("https://aol.com" ,"AOL",true);
+        addSuggenstions("https://genius.com","Genius",true);
+        addSuggenstions("https://zillow.com","Zillow",true);
+        addSuggenstions("https://usatoday.com","Usatoday",true);
+        addSuggenstions("https://glassdoor.com","Glassdoor",true);
+        addSuggenstions("https://msn.com","MSN",true);
+        addSuggenstions("https://rottentomatoes.com","Rotten Tomatoes",true);
+        addSuggenstions("https://lowes.com","Lowes",true);
+        addSuggenstions("https://dictionary.com","Dictionary",true);
+        addSuggenstions("https://businessinsider.com","Business Insider",true);
+        addSuggenstions("https://usnews.com","US News",true);
+        addSuggenstions("https://medicalnewstoday.com","Medical News Today",true);
+        addSuggenstions("https://britannica.com","Britannica",true);
+        addSuggenstions("https://washingtonpost.com","Washington Post",true);
+        addSuggenstions("https://usps.com","USPS",true);
+        addSuggenstions("https://finance.yahoo.com","Finance Yahoo",true);
+        addSuggenstions("https://irs.gov","IRS",true);
+        addSuggenstions("https://yellowpages.com","Yellow Pages",true);
+        addSuggenstions("https://chase.com","Chase",true);
+        addSuggenstions("https://retailmenot.com","Retail Menot",true);
+        addSuggenstions("https://accuweather.com","Accuweather",true);
+        addSuggenstions("https://wayfair.com","Way Fair",true);
+        addSuggenstions("https://go.com","GO",true);
+        addSuggenstions("https://live.com","Live",true);
+        addSuggenstions("https://login.yahoo.com","Login Yahoo",true);
+        addSuggenstions("https://steamcommunity.com","Steam Community",true);
+        addSuggenstions("https://xfinity.com","XFinity",true);
+        addSuggenstions("https://cnet.com","CNET",true);
+        addSuggenstions("https://ign.com","IGN",true);
+        addSuggenstions("https://steampowered.com","Steam Powered",true);
+        addSuggenstions("https://macys.com","Macys",true);
+        addSuggenstions("https://wikihow.com","Wikihow",true);
+        addSuggenstions("https://mail.yahoo.com","Mail Yahoo",true);
+        addSuggenstions("wiktionary.org","Wiktionary",true);
+        addSuggenstions("https://cbssports.com","Cbssports",true);
+        addSuggenstions("https://cnbc.com","CNBC",true);
+        addSuggenstions("https://bankofamerica.com","Bank Of America",true);
+        addSuggenstions("https://expedia.com","Expedia",true);
+        addSuggenstions("https://wellsfargo.com","Wellsfargo",true);
+        addSuggenstions("https://groupon.com","Groupon",true);
+        addSuggenstions("https://twitch.tv","Twitch",true);
+        addSuggenstions("https://khanacademy.org","Khan Academy",true);
+        addSuggenstions("https://theguardian.com","The Guardian",true);
+        addSuggenstions("https://paypal.com","Paypal",true);
+        addSuggenstions("https://spotify.com","Spotify",true);
+        addSuggenstions("https://att.com","ATT",true);
+        addSuggenstions("https://nfl.com","NFL",true);
+        addSuggenstions("https://realtor.com","Realtor",true);
+        addSuggenstions("https://ca.gov","CA Gov",true);
+        addSuggenstions("https://goodreads.com","Good Reads",true);
+        addSuggenstions("https://office.com","Office",true);
+        addSuggenstions("https://ufl.edu","UFL",true);
+        addSuggenstions("https://mlb.com","MLB",true);
+        addSuggenstions("https://foodnetwork.com","Food Network",true);
+        addSuggenstions("https://apartments.com","Apartments",true);
+        addSuggenstions("https://npr.org","NPR",true);
+        addSuggenstions("https://wowhead.com","Wow Head",true);
+        addSuggenstions("https://bing.com","Bing",true);
+        addSuggenstions("https://google.com","Google",true);
+        addSuggenstions("https://boogle.store","Genesis Search",true);
     }
 
 }

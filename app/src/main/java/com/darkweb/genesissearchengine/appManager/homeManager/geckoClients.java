@@ -3,6 +3,7 @@ package com.darkweb.genesissearchengine.appManager.homeManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +13,14 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.io.File;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
+import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
+import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.ALL;
+
+import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoSession;
+import org.mozilla.geckoview.GeckoSessionSettings;
 import org.mozilla.geckoview.GeckoView;
 
 
@@ -44,16 +50,26 @@ class geckoClients
         }
         else {
             geckoView.releaseSession();
+            Log.i("GCHECKS:","GCHECKS:"+mGlobalSessionCounter);
             mSession = new geckoSession(new geckoViewClientCallback(),mGlobalSessionCounter,context);
             mSession.open(mRuntime);
             mSession.getSettings().setUseTrackingProtection(true);
+            mSession.getSettings().setFullAccessibilityTree(true);
+            mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
             mSession.getSettings().setAllowJavascript(status.sJavaStatus);
             geckoView.releaseSession();
             geckoView.setSession(mSession);
 
         }
         onUpdateFont();
+    }
 
+    void toogleUserAgent(){
+        mSession.toogleUserAgent();
+    }
+
+    int getUserAgent(){
+        return mSession.getUserAgentMode();
     }
 
     private void runtimeSettings(AppCompatActivity context){
@@ -61,6 +77,8 @@ class geckoClients
             mRuntime = GeckoRuntime.getDefault(context);
             mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sFontAdjustable);
+            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
+            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
         }
     }
 
@@ -77,8 +95,8 @@ class geckoClients
     }
 
     void initSession(geckoSession mSession){
-        this.mSession = mSession;
         mSessionID = mSession.getSessionID();
+        this.mSession = mSession;
     }
 
     geckoSession getSession(){
@@ -148,6 +166,7 @@ class geckoClients
         }
     }
 
+
     void onStop(){
         mSession.stop();
     }
@@ -193,7 +212,7 @@ class geckoClients
         @Override
         public void invokeObserver(List<Object> data, enums.etype e_type)
         {
-            if (mSessionID == (int)data.get(1))
+            if (mSessionID == (int)data.get(1) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
             {
                 if (e_type.equals(on_handle_external_intent))
                 {

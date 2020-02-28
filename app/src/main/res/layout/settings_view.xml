@@ -51,16 +51,16 @@
                 <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@color/white_dark" />
 
                 <!-- Title Header -->
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginBottom="25dp"
                         android:orientation="horizontal"
-                        android:layout_height="65dp">
+                        android:layout_height="wrap_content">
                     <TextView
                             android:textColor="@color/cursor_blue"
                             android:textSize="17.5sp"
@@ -68,7 +68,7 @@
                             android:textStyle="bold"
                             android:layout_height="wrap_content"
                             android:layout_weight="40"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="00dp"
                             android:layout_marginStart="20dp"
                             android:text="@string/settings_basic_settings"
                             />
@@ -76,15 +76,16 @@
 
                 <!-- Title Search Engine -->
                 <LinearLayout
-                        android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginTop="7dp"
+                        android:layout_width="match_parent"
                         android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
                         android:layout_height="wrap_content">
                     <TextView
                             android:textSize="16sp"
+                            android:layout_gravity="top"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="40"
                             android:layout_marginStart="20dp"
                             android:text="@string/settings_search_engine"
@@ -93,6 +94,7 @@
                             android:id="@+id/search_manager"
                             android:textSize="12sp"
                             android:layout_width="150dp"
+                            android:paddingEnd="20dp"
                             android:layout_height="40dp"
                             android:paddingRight="30dp"
                             android:paddingLeft="30dp"
@@ -100,15 +102,13 @@
                             android:background="@xml/sc_spinner_style_background"
                             android:drawSelectorOnTop="true"
                             android:entries="@array/search_engines"
-                            android:layout_marginTop="1dp"
-
                             style="@style/Widget.AppCompat.DropDownItem.Spinner"
                             android:dropDownWidth="160dp"
                             android:popupBackground="@android:color/white"
+                            android:layout_marginTop="1dp"
                             android:overlapAnchor="false"
                             android:popupTheme="@style/AppTheme.PopupOverlay"
                             android:popupElevation="3dp"
-
                             />
                     <ImageView android:layout_width="15dp" android:layout_height="15dp"
                             android:layout_marginEnd="35dp"
@@ -121,15 +121,15 @@
                 <!-- Title Enable Javascript -->
                 <LinearLayout
                         android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                     <TextView
                             android:textSize="16sp"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="40"
+                            android:layout_gravity="top"
                             android:layout_marginStart="20dp"
                             android:text="@string/settings_javascript"
                             />
@@ -137,6 +137,7 @@
                             android:id="@+id/javascript_manager"
                             android:textSize="12sp"
                             android:layout_width="150dp"
+                            android:paddingEnd="20dp"
                             android:layout_height="40dp"
                             android:layout_marginTop="1dp"
                             android:paddingRight="30dp"
@@ -165,13 +166,13 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                     <TextView
                             android:textSize="16sp"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="40"
                             android:layout_marginStart="20dp"
                             android:text="@string/settings_clear_history"
@@ -180,6 +181,7 @@
                             android:id="@+id/history_manager"
                             android:textSize="12sp"
                             android:layout_width="150dp"
+                            android:paddingEnd="20dp"
                             android:layout_height="40dp"
                             android:layout_marginTop="1dp"
                             android:paddingRight="30dp"
@@ -208,21 +210,23 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                     <TextView
                             android:textSize="16sp"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="40"
                             android:layout_marginStart="20dp"
+                            android:layout_gravity="top"
                             android:text="@string/settings_notification"
                             />
                     <Spinner
                             android:id="@+id/notification_manager"
                             android:textSize="12sp"
                             android:layout_width="150dp"
+                            android:paddingEnd="20dp"
                             android:layout_height="40dp"
                             android:layout_marginTop="1dp"
                             android:paddingRight="30dp"
@@ -248,14 +252,18 @@
                 </LinearLayout>
 
                 <!-- Title Header -->
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="0dp"
+                        android:background="@color/white_dark" />
                 <!-- Title Header -->
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginBottom="0dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="25dp"
                         android:orientation="horizontal"
-                        android:layout_height="65dp">
+                        android:layout_height="wrap_content">
                     <TextView
                             android:textColor="@color/cursor_blue"
                             android:textSize="17.5sp"
@@ -279,10 +287,10 @@
                             android:id="@+id/font_size_percentage"
                             android:textSize="16sp"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="40"
-                            android:layout_marginTop="10dp"
                             android:layout_marginStart="20dp"
+                            android:layout_gravity="top"
                             android:text="@string/settings_adjust_font"
                             />
                     <SeekBar
@@ -292,7 +300,7 @@
                             android:ems="10"
                             android:progress="100"
                             android:max="200"
-                            android:layout_marginTop="-5dp"
+                            android:layout_marginTop="-15dp"
                             android:layout_marginEnd="18dp"
                             android:layout_weight="1"
                             android:paddingRight="30dp"
@@ -304,20 +312,22 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                     <TextView
                             android:textSize="16sp"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="40"
                             android:layout_marginStart="20dp"
+                            android:layout_gravity="top"
                             android:text="@string/settings_manual_font"
                             />
                     <Spinner
                             android:id="@+id/font_adjustable"
                             android:textSize="12sp"
+                            android:paddingEnd="20dp"
                             android:layout_width="150dp"
                             android:layout_height="40dp"
                             android:layout_marginTop="1dp"
@@ -343,13 +353,18 @@
                             android:contentDescription="@string/todo"/>
                 </LinearLayout>
 
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/white_dark" />
+
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginBottom="0dp"
-                        android:layout_marginTop="20dp"
                         android:orientation="horizontal"
-                        android:layout_height="65dp">
+                        android:layout_marginBottom="25dp"
+                        android:layout_height="wrap_content">
                     <TextView
                             android:textColor="@color/cursor_blue"
                             android:textSize="17.5sp"
@@ -357,7 +372,6 @@
                             android:textStyle="bold"
                             android:layout_height="wrap_content"
                             android:layout_weight="40"
-                            android:layout_marginTop="10dp"
                             android:layout_marginStart="20dp"
                             android:text="@string/settings_cookies"
                             />
@@ -367,21 +381,22 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginTop="10dp"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                     <TextView
                             android:textSize="16sp"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="40"
                             android:layout_marginStart="20dp"
+                            android:layout_gravity="top"
                             android:text="@string/settings_cookie"
                             />
                     <Spinner
                             android:id="@+id/cookies_manager"
                             android:textSize="12sp"
                             android:layout_width="200dp"
+                            android:paddingEnd="20dp"
                             android:layout_height="40dp"
                             android:layout_marginTop="1dp"
                             android:paddingRight="10dp"

@@ -1,68 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.myapplication">
-
-    <!-- Permissions-->
-
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.example.myapplication">
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_CLIPBOARD" />
 
     <application
-        android:allowBackup="true"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:launchMode="singleTask"
-        android:fullBackupContent="false"
-        android:networkSecurityConfig="@xml/ex_network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-
-        <!-- Activities-->
-
-        <activity android:name="com.darkweb.genesissearchengine.appManager.orbotManager.orbotController"
-                  android:launchMode= "singleTop"
-                />
-
-        <activity
-            android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingController"
+            android:allowBackup="true"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_setting_controller"
-            android:windowSoftInputMode="adjustNothing" />
-
+            android:fullBackupContent="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:networkSecurityConfig="@xml/ex_network_security_config"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true">
+        <!-- Activities -->
         <activity
-            android:name="com.darkweb.genesissearchengine.appManager.historyManager.historyController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustNothing" />
-
+                android:name="com.darkweb.genesissearchengine.appManager.orbotManager.orbotController"
+                android:launchMode="singleTop" />
+        <activity
+                android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingController"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:label="@string/title_activity_setting_controller"
+                android:windowSoftInputMode="adjustNothing" />
+        <activity
+                android:name="com.darkweb.genesissearchengine.appManager.historyManager.historyController"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="adjustNothing" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
                 android:windowSoftInputMode="adjustNothing" />
-
+        <activity
+                android:name="com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="adjustResize" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustNothing" />
-
+        <activity
+                android:name="com.darkweb.genesissearchengine.appManager.landingManager.landingController"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="adjustNothing" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -81,51 +83,72 @@
 
                 <action android:name="org.torproject.android.START_TOR" />
             </intent-filter>
-        </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-        <!-- Services & Settings-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:mimeType="text/html" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/xhtml+xml" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:host="content"
+                        android:scheme="rocket" />
+            </intent-filter>
+        </activity> <!-- Services & Settings -->
         <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
+                android:name="org.apache.http.legacy"
+                android:required="false" />
 
         <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="be76c64dae2519d4ab8daaed88298da14c7c294f" />
-
+                android:name="io.fabric.ApiKey"
+                android:value="be76c64dae2519d4ab8daaed88298da14c7c294f" />
         <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5074525529134731~2926711128" />
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-5074525529134731~2926711128" />
 
         <service
                 android:name="com.darkweb.genesissearchengine.pluginManager.exitManager"
                 android:stopWithTask="false" />
-
         <service
-            android:name="com.darkweb.genesissearchengine.helperManager.downloadFileService"
-            android:enabled="true"
-            android:stopWithTask="true"
-            android:exported="false" />
-
+                android:name="com.darkweb.genesissearchengine.helperManager.downloadFileService"
+                android:enabled="true"
+                android:exported="false"
+                android:stopWithTask="true" />
         <service
                 android:name="org.torproject.android.service.TorService"
                 android:enabled="true"
-                android:stopWithTask="true"
-                android:exported="false"/>
-
-
+                android:exported="false"
+                android:stopWithTask="true" />
 
         <receiver
                 android:name="org.torproject.android.service.StartTorReceiver"
                 android:exported="true"
-                android:stopWithTask="true"
-                android:permission="TODO">
+                android:permission="TODO"
+                android:stopWithTask="true">
             <intent-filter>
                 <action android:name="org.torproject.android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
-
     </application>
 
 </manifest>

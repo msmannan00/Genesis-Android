@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine.helperManager;
 
 import java.util.ArrayList;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,11 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
     Filter nameFilter = new Filter() {
         @Override
         public String convertResultToString(Object resultValue) {
-            String str = ((historyRowModel)(resultValue)).getmHeader();
+            if(resultValue==null){
+                return strings.EMPTY_STR;
+            }
+            historyRowModel model = (historyRowModel)(resultValue);
+            String str = model.getmHeader();
             return str;
         }
         @Override
@@ -70,8 +75,15 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
                     if(suggestions.size()>10){
                         break;
                     }
-                    if(customer.getmHeader().length()>2 && customer.getmDescription().toLowerCase().length()>2 && (customer.getmHeader().toLowerCase().contains(constraint.toString().toLowerCase()) || customer.getmDescription().toLowerCase().contains(constraint.toString().toLowerCase()))){
-                        suggestions.add(customer);
+
+
+                    if(!customer.getTitle().equals("$TITLE") && customer.getmHeader().length()>2 && customer.getmDescription().toLowerCase().length()>2 && (customer.getmHeader().toLowerCase().contains(constraint.toString().toLowerCase()) || customer.getmDescription().toLowerCase().contains(constraint.toString().toLowerCase()))){
+                        Log.i("memememe:","memememe:"+constraint.toString().toLowerCase().replace("https://","").replace("http://",""));
+                        Log.i("memememe1:","memememe2:"+customer.getmDescription().replace("https://","").replace("http://",""));
+
+                        if(!constraint.toString().toLowerCase().replace("https://","").replace("http://","").equals(customer.getmDescription().replace("https://","").replace("http://",""))){
+                            suggestions.add(customer);
+                        }
                     }
                 }
                 FilterResults filterResults = new FilterResults();

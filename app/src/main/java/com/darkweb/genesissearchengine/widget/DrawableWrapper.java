@@ -7,16 +7,15 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-
-import androidx.annotation.IntRange;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * DrawableWrapper was added since API Level 23. But in v7 support library, it has annotation
@@ -48,7 +47,7 @@ public class DrawableWrapper extends Drawable {
   }
 
   @Override
-  public ConstantState getConstantState() {
+  public Drawable.ConstantState getConstantState() {
     return mWrapped.getConstantState();
   }
 
@@ -99,7 +98,7 @@ public class DrawableWrapper extends Drawable {
 
   @Override
   public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs)
-      throws XmlPullParserException, IOException {
+          throws XmlPullParserException, IOException {
     mWrapped.inflate(r, parser, attrs);
   }
 

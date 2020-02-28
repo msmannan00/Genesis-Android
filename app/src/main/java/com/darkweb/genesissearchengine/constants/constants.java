@@ -27,6 +27,7 @@ public class constants
     public static final boolean PROXY_MEMORY = true;
     public static final int DISK_CAPACITY = 10000;
     public static final String PROXY_USER_AGENT_OVERRIDE = "Mozilla/5.0 (Android 9; Mobile; rv:67.0) Gecko/67.0 Firefox/67.0";
+    public static final String PROXY_USER_AGENT_OVERRIDE_DESKTOP = "Mozilla/5.0 (X11; Linux x86_64:68.0) Gecko/20100101 Firefox/68.0";
     public static final boolean PROXY_DO_NOT_TRACK_HEADER_ENABLED = false;
     public static final int PROXY_DO_NOT_TRACK_HEADER_VALUE = 1;
 

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string name="app_name">Orbot</string>
+    <string name="app_description">Orbot ist eine kostenlose Proxy-App, die es anderen Apps ermöglicht, das Internet sicherer zu nutzen. Orbot verwendet Tor, um Ihren Internetverkehr zu verschlüsseln und versteckt ihn dann, indem er durch eine Reihe von Computern auf der ganzen Welt springt. Tor ist freie Software und ein offenes Netzwerk, das Ihnen hilft, sich gegen eine Form der Netzwerküberwachung zu verteidigen, die persönliche Freiheit und Privatsphäre, vertrauliche Geschäftsaktivitäten und Beziehungen sowie die staatliche Sicherheit, die als Verkehrsanalyse bezeichnet wird, bedroht.</string>
+    <string name="status_starting_up">Orbot startet …</string>
+    <string name="status_activated">Verbunden mit dem Tor-Netzwerk</string>
+    <string name="status_disabled">Orbot ist Deaktiviert</string>
+    <string name="status_shutting_down">TorService wird heruntergefahren</string>
+    <string name="tor_process_starting">Tor-Programm wird gestartet …</string>
+    <string name="tor_process_complete">abgeschlossen.</string>
+    <string name="couldn_t_start_tor_process_">Tor-Prozess konnte nicht gestartet werden:</string>
+    <string name="your_reachableaddresses_settings_caused_an_exception_">Ihre eingestellten ErreichbarenAdressen haben einen Ausnahmefehler verursacht!</string>
+    <string name="your_relay_settings_caused_an_exception_">Ihre Relais-Einstellungen haben einen Ausnahmefehler verursacht!</string>
+    <string name="found_existing_tor_process">bestehenden Tor-Prozess gefunden …</string>
+    <string name="something_bad_happened">Etwas ist schief gelaufen. Bitte Protokoll überprüfen</string>
+    <string name="unable_to_read_hidden_service_name">Name des versteckten Dienstes kann nicht gelesen werden</string>
+    <string name="unable_to_start_tor">Tor kann nicht gestartet werden:</string>
+    <string name="no_internet_connection_tor">Keine Internetverbindung; Tor ist in Bereitschaft...</string>
+    <string name="newnym">Sie haben zu einer Neuen Tor-Identität gewechselt!</string>
+    <string name="no_network_connectivity_putting_tor_to_sleep_">Keine Netzwerk-Verbindung. Tor wird in den Ruhezustand versetzt…</string>
+    <string name="network_connectivity_is_good_waking_tor_up_">Netzwerk-Verbindung ist Gut. Tor wird aktiviert …</string>
+    <string name="updating_settings_in_tor_service">Aktualisiere Einstellungen für den Tor-Dienst</string>
+</resources>

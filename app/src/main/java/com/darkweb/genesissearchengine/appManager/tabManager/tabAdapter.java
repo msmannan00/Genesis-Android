@@ -124,7 +124,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             descriptionText = itemView.findViewById(R.id.mDescription);
             itemContainer = itemView.findViewById(R.id.item_container);
 
-            if(model.getSession().getTitle().equals("")){
+            if(model.getSession().getTitle().equals("") || model.getSession().getTitle().equals("loading")){
                 heaaderText.setText(helperMethod.getDomainName(model.getSession().getCurrentURL()));
             }
             else {

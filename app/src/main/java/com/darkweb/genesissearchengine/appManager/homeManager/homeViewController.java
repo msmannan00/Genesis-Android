@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine.appManager.homeManager;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -14,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.transition.Explode;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -23,7 +25,9 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
@@ -51,6 +55,7 @@ import java.util.Objects;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static androidx.appcompat.widget.ListPopupWindow.WRAP_CONTENT;
+import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 
 class homeViewController
 {
@@ -108,11 +113,6 @@ class homeViewController
         initLock();
         initSearchImage();
         createUpdateUiHandler();
-        initSearchButtonAnimation(is_triggered);
-        initTopBar();
-    }
-
-    private void initTopBar(){
     }
 
     private void initSearchImage(){
@@ -139,33 +139,12 @@ class homeViewController
                 .playOn(mNewTab);
     }
 
-    private void initSearchButtonAnimation(boolean is_triggered){
-        if(!is_triggered){
-            //mEngineAnimator = ValueAnimator.ofFloat(0.3f, 1);
-            //mEngineAnimator.addUpdateListener(animation -> mSwitchEngineBack.setAlpha((Float) animation.getAnimatedValue()));
-            //mEngineAnimator.setDuration(1000);
-            //mEngineAnimator.setRepeatCount(ValueAnimator.INFINITE);
-            //mEngineAnimator.setRepeatMode(ValueAnimator.REVERSE);
-            //mEngineAnimator.start();
-        }
-    }
-
-    void stopSearchButtonAnimation(){
-        if(mEngineAnimator !=null){
-            //mEngineAnimator.end();
-            //TypedValue outValue = new TypedValue();
-            //mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, outValue, true);
-            //mEngineLogo.setBackgroundResource(outValue.resourceId);
-            //mEngineAnimator = null;
-        }
-    }
-
     private void initPostUI(boolean isSplash){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             if(isSplash){
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.ease_blue));
+                window.setStatusBarColor(mContext.getResources().getColor(R.color.landing_ease_blue));
             }
             else{
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
@@ -178,15 +157,14 @@ class homeViewController
         }
     }
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void initStatusBarColor() {
-        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.ease_blue), ContextCompat.getColor(mContext, R.color.black_blue));
-        animatedColor twoToThree = new animatedColor(ContextCompat.getColor(mContext, R.color.ease_blue), ContextCompat.getColor(mContext, R.color.ease_blue_light));
-        animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.ease_blue_light), ContextCompat.getColor(mContext, R.color.white));
+        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.landing_ease_blue_light_1));
+        animatedColor twoToThree = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue_light_1), ContextCompat.getColor(mContext, R.color.white));
+        animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.white), ContextCompat.getColor(mContext, R.color.white));
 
         ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f).setDuration(0);
+        animator.setStartDelay(600);
         animator.addUpdateListener(animation ->
         {
             float v = (float) animation.getAnimatedValue();
@@ -225,13 +203,12 @@ class homeViewController
             }
         });
         animator.start();
-
     }
 
     private void initLock(){
         Drawable img = mContext.getResources().getDrawable( R.drawable.icon_lock);
         mSearchbar.measure(0, 0);
-        img.setBounds( 0, (int)(mSearchbar.getMeasuredHeight()*0.00), (int)(mSearchbar.getMeasuredHeight()*1.10), (int)(mSearchbar.getMeasuredHeight()*0.69) );
+        img.setBounds( -10, (int)(mSearchbar.getMeasuredHeight()*0.00), (int)(mSearchbar.getMeasuredHeight()*1.10)-10, (int)(mSearchbar.getMeasuredHeight()*0.69) );
         mSearchbar.setCompoundDrawables( img, null, null, null );
     }
 
@@ -294,6 +271,8 @@ class homeViewController
 
         View root = mSearchbar.getRootView();
         root.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dark_purple));
+        mGeckoView.setBackgroundResource( R.color.dark_purple);
+
     }
 
     void initProxyLoading(Callable<String> logs){
@@ -303,7 +282,7 @@ class homeViewController
             new Thread(){
                 public void run(){
                     AppCompatActivity temp_context = mContext;
-                    while (!orbotLocalConstants.sIsTorInitialized){
+                    while (!orbotLocalConstants.sIsTorInitialized || !orbotLocalConstants.sNetworkState){
                         try
                         {
                             sleep(1000);
@@ -329,7 +308,7 @@ class homeViewController
     void onPageFinished(){
         mSearchbar.setEnabled(true);
         mProgressBar.bringToFront();
-
+        mSplashScreen.bringToFront();
         if(mSplashScreen.getVisibility()!=View.GONE){
             mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);//Set Portrait
         }
@@ -340,15 +319,22 @@ class homeViewController
         if(mSplashScreen.getAlpha()>=1)
         {
             disableSplash = true;
-            mSplashScreen.animate().setDuration(300).alpha(0).withEndAction((() -> mSplashScreen.setVisibility(View.GONE)));
-            mProgressBar.animate().setStartDelay(250).alpha(1);
+            mSplashScreen.animate().setDuration(300).setStartDelay(500).alpha(0).withEndAction((() -> triggerPostUI()));
             initPostUI(false);
+        }
+    }
+
+    private void triggerPostUI(){
+        mSplashScreen.setVisibility(View.GONE);
+
+        if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<10000){
+            mProgressBar.animate().setStartDelay(0).alpha(1);
         }
     }
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
-    void onOpenMenu(View view,boolean canGoForward,boolean canGoBack,boolean isLoading){
+    void onOpenMenu(View view,boolean canGoForward,boolean canGoBack,boolean isLoading,int userAgent){
 
         if(popupWindow!=null){
             popupWindow.dismiss();
@@ -383,6 +369,8 @@ class homeViewController
         ImageButton back = popupView.findViewById(R.id.menu22);
         ImageButton forward = popupView.findViewById(R.id.menu23);
         ImageButton close = popupView.findViewById(R.id.menu20);
+        CheckBox desktop = popupView.findViewById(R.id.menu27);
+        desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
 
         if(!canGoForward){
            forward.setColorFilter(Color.argb(255, 191, 191, 191));
@@ -452,9 +440,16 @@ class homeViewController
     void onSetBannerAdMargin(boolean status,boolean isAdLoaded){
         if(isAdLoaded){
             if(status && !isLandscape){
-                mWebviewContainer.setPadding(0,AdSize.SMART_BANNER.getHeightInPixels(mContext),0,0);
                 mBannerAds.setVisibility(View.VISIBLE);
-                mBannerAds.animate().setDuration(500).alpha(1f);
+                mBannerAds.setAlpha(1f);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(() ->
+                {
+                    mWebviewContainer.clearAnimation();
+                    mWebviewContainer.setPadding(0,AdSize.SMART_BANNER.getHeightInPixels(mContext)+1,0,0);
+                    mProgressBar.bringToFront();
+                }, 250);
             }else{
                 mWebviewContainer.setPadding(0,0,0,0);
                 mBannerAds.setVisibility(View.GONE);
@@ -462,11 +457,35 @@ class homeViewController
         }
     }
 
-    void onUpdateSearchBar(String url){
+    private Handler searchBarUpdateHandler = new Handler();
+    private String handlerLocalUrl = "";
+    void onUpdateSearchBar(String url,boolean showProtocol){
+        int delay = 50;
+        handlerLocalUrl = url;
 
-        if (mSearchbar == null || mSearchbar.isFocused() || url==null)
+        if(searchBarUpdateHandler.hasMessages(100)){
+            delay=0;
+            return;
+        }
+
+        searchBarUpdateHandler.sendEmptyMessage(100);
+        searchBarUpdateHandler.postDelayed(() ->
+        {
+            searchBarUpdateHandler.removeMessages(100);
+            triggerUpdateSearchBar(handlerLocalUrl,showProtocol);
+
+        }, delay);
+    }
+
+    private void triggerUpdateSearchBar(String url, boolean showProtocol){
+        if (mSearchbar == null || url==null)
         {
             return;
+        }
+
+        if(!showProtocol){
+            url=url.replace("https://","");
+            url=url.replace("http://","");
         }
 
         url = url.replace("boogle.store","genesis.onion");
@@ -476,7 +495,9 @@ class homeViewController
             isTextSelected = true;
         }
 
+
         if(url.length()<=300){
+            url = removeEndingSlash(url);
             mSearchbar.setText(helperMethod.urlDesigner(url));
             mSearchbar.selectAll();
 
@@ -485,11 +506,23 @@ class homeViewController
             }
 
             mSearchbar.setSelection(0);
+        }else {
+            url = removeEndingSlash(url);
+            mSearchbar.setText(url);
+        }
+
+        if(mSearchbar.isFocused()){
+            mSearchbar.setSelection(mSearchbar.getText().length());
+            mSearchbar.selectAll();
         }
     }
 
+    private String removeEndingSlash(String url){
+        return helperMethod.removeLastSlash(url);
+    }
+
     void onNewTab(boolean keyboard,boolean isKeyboardOpen){
-        mSearchbar.setText(strings.BLANK_PAGE);
+        onUpdateSearchBar(strings.BLANK_PAGE,false);
         if(keyboard){
 
             if(!isKeyboardOpen){
@@ -512,8 +545,10 @@ class homeViewController
         mProgressBar.setProgress(5);
         mProgressBar.setVisibility(View.INVISIBLE);
     }
-
     void onProgressBarUpdate(int value){
+        if(mSplashScreen.getAlpha()>0){
+            mProgressBar.setProgress(value*100);
+        }
         if(value==100){
             mProgressBar.setAlpha(1f);
             mProgressBar.animate().setStartDelay(200).alpha(0);
@@ -641,7 +676,11 @@ class homeViewController
             {
                 if(msg.what == messages.ON_URL_LOAD)
                 {
-                    mEvent.invokeObserver(Collections.singletonList(status.sSearchStatus), enums.etype.on_url_load);
+                    if(status.sRedirectStatus.equals(strings.EMPTY_STR)){
+                        mEvent.invokeObserver(Collections.singletonList(status.sSearchStatus), enums.etype.on_url_load);
+                    }else {
+                        mEvent.invokeObserver(Collections.singletonList(status.sRedirectStatus), enums.etype.on_url_load);
+                    }
                 }
                 if(msg.what == messages.UPDATE_LOADING_TEXT)
                 {

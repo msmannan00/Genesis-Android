@@ -1,78 +1,293 @@
 <resources>
 
     <!-- Application Strings -->
-    <string name="app_name">Genesis</string>
-    <string name="SearchHint" translatable="false">Search History</string>
-    <string name="SearchHintMain" translatable="false">Search or type web address</string>
+    <string name="app_name" translatable="false">Genesis</string>
+    <string name="SearchHint">Search History</string>
+    <string name="SearchHintMain">Search or type web address</string>
     <string name="homeUrl" translatable="false">https://genesis.onion</string>
-    <string name="errorTiyle" translatable="false">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
-    <string name="todo" translatable="false">TODO</string>
-    <string name="projectName" translatable="false">Genesis Search Engine</string>
-    <string name="loadingText" translatable="false">Online Freedom</string>
-    <string name="reload" translatable="false">Reload</string>
-    <string name="internetErrorMessage" translatable="false">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
-    <string name="title_activity_list_manager" translatable="false">list_manager</string>
-    <string name="title_activity_setting_controller" translatable="false">Settings</string>
-    <string name="file_provider_authority" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
+    <string name="errorTiyle">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
+    <string name="todo">TODO</string>
+    <string name="projectName">Genesis Search Engine</string>
+    <string name="loadingText">Online Freedom</string>
+    <string name="reload">Reload</string>
+    <string name="internetErrorMessage">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
+    <string name="title_activity_list_manager">list_manager</string>
+    <string name="title_activity_setting_controller">Settings</string>
+    <string name="file_provider_authority">com.darkweb.genesissearchengine.fileprovider</string>
 
     <!-- Preference Titles -->
-    <string name="preferences_messages_header" translatable="false">Messages</string>
-    <string name="preferences_sync_header" translatable="false">Sync</string>
+    <string name="preferences_messages_header">Messages</string>
+    <string name="preferences_sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="messages_signature_title" translatable="false">Your signature</string>
-    <string name="messages_reply_title" translatable="false">Default reply action</string>
+    <string name="messages_signature_title">Your signature</string>
+    <string name="messages_reply_title">Default reply action</string>
 
     <!-- Settings -->
-    <string name="settings_basic_settings" translatable="false">Basic Settings</string>
-    <string name="settings_header" translatable="false">Settings</string>
-    <string name="settings_search_engine" translatable="false">Search Engine</string>
-    <string name="settings_javascript" translatable="false">Javascript</string>
-    <string name="settings_clear_history" translatable="false">Auto Clear History</string>
-    <string name="settings_font_title" translatable="false">Font Settings</string>
-    <string name="settings_adjust_font" translatable="false">Customized Font</string>
-    <string name="settings_manual_font" translatable="false">Auto Adjust Font</string>
-    <string name="settings_cookies" translatable="false">Cookie Settings</string>
-    <string name="settings_cookie" translatable="false">Cookies</string>
-    <string name="settings_notification" translatable="false">Manage Notification</string>
+    <string name="settings_basic_settings">Basic Settings</string>
+    <string name="settings_header">Settings</string>
+    <string name="settings_search_engine">Search Engine</string>
+    <string name="settings_javascript">Javascript</string>
+    <string name="settings_clear_history">Auto Clear History</string>
+    <string name="settings_font_title">Font Settings</string>
+    <string name="settings_adjust_font">Customized Font</string>
+    <string name="settings_manual_font">Auto Adjust Font</string>
+    <string name="settings_cookies">Cookie Settings</string>
+    <string name="settings_cookie">Cookies</string>
+    <string name="settings_notification">Manage Notification</string>
+
+    <!-- Bridge Settings -->
+    <string name="bridge_basic_settings">Basic Settings</string>
+    <string name="bridge_Automatid_title">Create Automatically</string>
+    <string name="bridge_Manual_desc">Provide a Bridge I know</string>
+    <string name="bridge_Auto_switch">Auto</string>
+    <string name="bridge_Manual_switch">Manual</string>
+    <string name="bridge_port_hint">address:port Single Line</string>
+    <string name="bridge_header">Bridge Settings</string>
+    <string name="bridge_desc">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
+    <string name="bridge_default_title">Select Default Bridge</string>
+    <string name="bridge_request" translatable="false">Request Bridge</string>
+
+    <!-- Message Manager -->
+    <string name="WELCOME_MESSAGE_TITLE">Welcome | Hidden  Web Gateway</string>
+    <string name="WELCOME_MESSAGE_DESC">This application provide you a platform to Search and Open Hidden Web urls.Here are few Suggestions\n</string>
+    <string name="WELCOME_MESSAGE_BT_1">Deep Web Online Market</string>
+    <string name="WELCOME_MESSAGE_BT_2">Leaked Documents and Books</string>
+    <string name="WELCOME_MESSAGE_BT_3">Dark Web News and Articles</string>
+    <string name="WELCOME_MESSAGE_BT_4">Secret Softwares and Hacking Tools</string>
+    <string name="WELCOME_MESSAGE_BT_5">Don\'t Show Again</string>
+    <string name="ABI_ERROR_TITLE">Invalid Setup File</string>
+    <string name="ABI_ERROR_DESC">Looks like you messed up the installation. Either Install it from playstore or follow the link</string>
+    <string name="ABI_ERROR_BT_1">Local Upgrade</string>
+    <string name="ABI_ERROR_BT_2">Playstore Upgrade</string>
+    <string name="ABI_ERROR_BT_3">Continue Anyway</string>
+    <string name="REPORT_URL_TITLE">Report This Website</string>
+    <string name="REPORT_URL_DESC">If you think url is illegal or disturbing report us so that we can update our database\n</string>
+    <string name="REPORT_URL_BT_1">Report</string>
+    <string name="REPORT_URL_BT_2">Dismiss</string>
+    <string name="ORBOT_INIT_TITLE">Initializing</string>
+    <string name="ORBOT_INIT_DESC">Please wait! While we connect you to hidden web. This might take few minutes\n</string>
+    <string name="ORBOT_INIT_BT_1">Dismiss</string>
+    <string name="ORBOT_INIT_BT_2">Try Again</string>
+    <string name="ORBOT_CLEAR_TITLE">Data Cleared</string>
+    <string name="ORBOT_CLEAR_DESC">Genesis data has been cleared. Please try to start application from Homepage\n</string>
+    <string name="ORBOT_CLEAR_BT_1">Dismiss</string>
+    <string name="VERSION_TITLE">Update Pending</string>
+    <string name="VERSION_DESC">You have not updated this app for a while please update it to get best performance\n</string>
+    <string name="VERSION_BT_1">Update</string>
+    <string name="REPORT_SUCCESS_TITLE">URL Reported Successfully</string>
+    <string name="REPORT_SUCCESS_DESC">URL has been successfully reported. It will take about a week to completely remove this website from our servers\n</string>
+    <string name="REPORT_SUCCESS_BT_1">Dismiss</string>
+    <string name="NOT_SUPPORTED_TITLE">Action not Supported</string>
+    <string name="NOT_SUPPORTED_MESSAGE">No application found to handle email</string>
+    <string name="NOT_SUPPORTED_BT_1">Dismiss</string>
+    <string name="RATE_TITLE">Rate US</string>
+    <string name="RATE_MESSAGE">We don\'t take donations or earn money from this app. We are trying to make a private anonymous internet \n\nIf you think this app works please rate us it gives us hope and strength to continue</string>
+    <string name="RATE_POSITIVE">Like This App</string>
+    <string name="RATE_NEGATIVE">Don\'t Like This App</string>
+    <string name="RATE_SUCCESS_TITLE">Sorry To Hear That!</string>
+    <string name="RATE_SUCCESS_DESC">If you are having any trouble and want to contact us please email us at gamesolstudios@gmail.com We will try to solve your problem as soon as possible</string>
+    <string name="RATE_SUCCESS_BT_1">Send Mail</string>
+    <string name="BOOKMARK_URL_BT_1">Bookmark</string>
+    <string name="BOOKMARK_URL_BT_2">Dismiss</string>
+    <string name="CLEAR_HISTORY_TITLE">Clear site storage?</string>
+    <string name="CLEAR_HISTORY_DESC">This will clear data for all sites</string>
+    <string name="CLEAR_HISTORY_BT_1">Clear</string>
+    <string name="CLEAR_HISTORY_BT_2">Dismiss</string>
+    <string name="CLEAR_TAB_TITLE">Clear open tabs?</string>
+    <string name="CLEAR_TAB_DESC">This will clear all stored tabs</string>
+    <string name="CLEAR_TAB_BT_1">Clear</string>
+    <string name="clear_bookmark_title">Clear site bookmark?</string>
+    <string name="clear_bookmark_desc">This will clear data for all saved sites\n</string>
+    <string name="clear_bookmark_bt1">Clear</string>
+    <string name="clear_bookmark_bt2">Dismiss</string>
+    <string name="DOWNLOAD_TITLE">Download Notification</string>
+    <string name="DOWNLOAD_MESSAGE">Download File | </string>
+    <string name="DOWNLOAD_POSITIVE">Download</string>
+    <string name="BRIDGE_MAIL_TITLE">Request New Bridge</string>
+    <string name="BRIDGE_MAIL_MESSAGE">You can get a bridge address through email, the web or by scanning a bridge QR code. Select \'Email\' below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start.</string>
+    <string name="BRIDGE_MAIL_POSITIVE">EMAIL</string>
+    <string name="LONG_URL_TITLE">URL Notification</string>
+    <string name="LONG_URL_MESSAGE"></string>
+    <string name="LONG_URL_OPTION_1">Open In New Tab</string>
+    <string name="LONG_URL_OPTION_2">Open In Current Tab</string>
+    <string name="LONG_URL_OPTION_3">Copy to Clipboard</string>
+    <string name="LONG_URL_OPTION_4">Download this file</string>
+    <string name="LONG_URL_FULL_MESSAGE">URL Description</string>
+    <string name="LONG_URL_FULL_OPTION_1">Open url in new tab</string>
+    <string name="LONG_URL_FULL_OPTION_2">Open url in current tab</string>
+    <string name="LONG_URL_FULL_OPTION_3">Copy url to clipboard</string>
+    <string name="LONG_URL_FULL_OPTION_4">Open image in new tab</string>
+    <string name="LONG_URL_FULL_OPTION_5">Open image current tab</string>
+    <string name="LONG_URL_FULL_OPTION_6">Copy image to clipboard</string>
+    <string name="LONG_URL_FULL_OPTION_7">Download image file</string>
+    <string name="BANNED_TITLE">Is Tor Bannned In Your Country?</string>
+    <string name="BANNED_DESC">Enable free GATEWAY to tunnel through banned configuration | Use it only if tor is banned in your country</string>
+
+    /*Tab Manager*/
+
+    public
+    <string name="CLEAR_TABS">CLEAR TABS</string>
+
+    /*Bridge Manager*/
+
+    public
+    <string name="CUSTOM_BRIDGE">obfs4</string>
+
+    /*Text Manager*/
+
+    public
+    <string name="DARK_WEB">Hidden Web</string>
+    public
+    <string name="EMPTY_STR"></string>
+    public
+    <string name="EMPTY_SPACE"> </string>
+
+    /*Settings Manager*/
+
+    public
+    <string name="CUSTOM_FONTS">Custom Font</string>
+    public
+    <string name="PERCENT_SIGN">%</string>
+    public
+    <string name="DEFAULT_LANGUAGE">ru</string>
+
+    /*Bookmark Manager*/
+
+    public
+    <string name="CLEAR_BOOKMARK">CLEAR BOOKMARK</string>
+
+    /*Home Manager*/
+
+    public
+    <string name="BLANK_PAGE">about:blank</string>
+
+    /*Events*/
+
+    public
+    <string name="APP_STARTED">APP_STARTED</string>
+    public
+    <string name="PROXY_CHANGED">PROXY_CHANGED</string>
+    public
+    <string name="APP_RESTARTED">APP_RESTARTED</string>
+    public
+    <string name="APP_FINISHED">APP_FINISHED</string>
+    public
+    <string name="SEARCH_SWITCH">SEARCH_SWITCH</string>
+    public
+    <string name="SETTINGS_OPENED">SETTINGS_OPENED</string>
+    public
+    <string name="URL_BOOKMARKED">URL_BOOKMARKED</string>
+    public
+    <string name="BOOKMARK_OPENED" translatable="false">BOOKMARK_OPENED</string>
+    public
+    <string name="TAB_OPENED">TAB_OPENED</string>
+    public
+    <string name="GATEWAY_OPENED">GATEWAY_OPENED</string>
+    public
+    <string name="HISTORY_OPENED">HISTORY_OPENED</string>
+    public
+    <string name="HISTORY_TRIGGERED">HISTORY_TRIGGERED</string>
+    public
+    <string name="BOOKMARK_TRIGGERED">BOOKMARK_TRIGGERED</string>
+    public
+    <string name="TAB_TRIGGERED">TAB_TRIGGERED</string>
+    public
+    <string name="URL_ERROR">URL_ERROR</string>
+    public
+    <string name="URL_ERROR_NOT_LOADED">URL_ERROR_NOT_LOADED</string>
+    public
+    <string name="PAGE_OPENED_SUCCESS">PAGE_OPENED_SUCCESS</string>
+    public
+    <string name="HOME_INVOKED">HOME_INVOKED</string>
+    public
+    <string name="SEARCH_INVOKED">SEARCH_INVOKED</string>
+    public
+    <string name="MENU_INVOKED">MENU_INVOKED</string>
+    public
+    <string name="ON_BACK">ON_BACK</string>
+
+    <!-- Landing View -->
+    <string name="landing_next_page">Next</string>
 
     <!-- List View -->
-    <string name="listview_clear" translatable="false">Clear</string>
+    <string name="listview_clear">Clear</string>
+
+    <!-- Popup Menu -->
+    <string name="popup_new_tabs">New Tabs</string>
+    <string name="popup_close_tabs">Close Tab</string>
+    <string name="popup_open_Recent_tab">Open Recent Tabs</string>
+    <string name="popup_languages">Language</string>
+    <string name="popup_download">Downloads</string>
+    <string name="popup_history">History</string>
+    <string name="popup_settings">Settings</string>
+    <string name="popup_desktop">Desktop Site</string>
+    <string name="popup_bookmark_page">Bookmark This Page</string>
+    <string name="popup_open_bookmark">Open Bookmarks</string>
+    <string name="popup_report">Report Website</string>
+    <string name="popup_rate">Rate This App</string>
+    <string name="popup_share">Share</string>
+
 
     <!-- Orbot Settings -->
-    <string name="orbot_settings_warning" translatable="false">⚠️ Warning</string>
-    <string name="orbot_settings_bridges" translatable="false">Enable Bridges</string>
+    <string name="orbot_settings_warning">⚠️ Warning</string>
+    <string name="orbot_settings_bridges">Enable Bridges</string>
+    <string name="gateway_info">Enable Gateway</string>
+    <string name="gateway_button">Enable Gateway</string>
+    <string name="loading_please_wait">Loading Please Wait</string>
+    <string name="orbot_option_title_reset">App Stuck in loading</string>
+    <string name="orbot_option_desc_reset">Clear Storage</string>
+    <string name="orbot_option_desc_reset_button">Open Settings</string>
 
     <!-- Orbot View -->
-    <string name="orbot_header" translatable="false">Proxy Settings</string>
-    <string name="orbot_desc" translatable="false">Genesis Browser connects you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
-    <string name="orbot_option_title" translatable="false">Internet is censored here</string>
-    <string name="orbot_option_desc" translatable="false">Bypass Firewall</string>
-    <string name="orbot_option_warning_slow_speed" translatable="false">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
+    <string name="orbot_header">Proxy Settings</string>
+    <string name="orbot_desc">Genesis Browser connects you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
+    <string name="orbot_option_title">Internet is censored here</string>
+    <string name="orbot_option_desc">Bypass Firewall</string>
+    <string name="orbot_option_warning_slow_speed">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
 
     <!-- Splash -->
-    <string name="gateway_info" translatable="false">Enable Gateway</string>
-    <string name="gateway_button" translatable="false">Enable Gateway</string>
-    <string name="gateway_loading_please_wait" translatable="false">Loading Please Wait</string>
 
     <!-- Bookmark -->
-    <string name="bookmark_clear_history" translatable="false">Clear History</string>
+    <string name="bookmark_clear_history">Clear History</string>
+    <string name="tab_view_clear_bookmark">Clear Bookmark</string>
 
     <!-- Hint View -->
-    <string name="hint_default_suggession" translatable="false">BBC | Israel Strikes Again</string>
+    <string name="hint_default_suggession">BBC | Israel Strikes Again</string>
 
     <!-- Notification Menu -->
-    <string name="notification_default_label" translatable="false">default.jpg</string>
-    <string name="notification_open_text" translatable="false">Open</string>
+    <string name="notification_default_label">default.jpg</string>
+    <string name="notification_open_text">Open</string>
 
     <!-- Tab View -->
-    <string name="tab_view_increment" translatable="false">+1</string>
-    <string name="tab_view_search_tab" translatable="false">Search Tabs</string>
+    <string name="tab_view_increment">+1</string>
+    <string name="tab_view_search_tab">Search Tabs</string>
+    <string name="tab_view_clear_tab">Clear Tab</string>
 
     <!-- Home View -->
-    <string name="home_tab_text" translatable="false">1</string>
-    <string name="home_connect" translatable="false">Connect</string>
-    <string name="home_loading" translatable="false">Loading Please Wait</string>
+    <string name="home_tab_text">1</string>
+    <string name="home_connect">Connect</string>
+    <string name="home_loading">Loading Please Wait</string>
+
+    <!-- Landing Page -->
+    <string name="bridges_sometimes">"Sometimes you need a bridge to get to Tor."</string>
+    <string name="action_more">"TELL ME MORE"</string>
+    <string name="vpn_setup">"You can enable any app to go through Tor using our built-in VPN."</string>
+    <string name="vpn_setup_sub">"This won\'t make you anonymous, but it will help get through firewalls."</string>
+    <string name="action_vpn_choose">"CHOOSE APPS"</string>
+    <string name="hello">"Hello"</string>
+    <string name="welcome">"Welcome to Tor on mobile."</string>
+    <string name="browser_the_internet">"Browse the internet how you expect you should."</string>
+    <string name="no_tracking">"No tracking. No censorship."</string>
+
+    <!-- Error Page -->
+    <string name="error_m1">This site can\'t be reached</string>
+    <string name="error_m2">An error occurred during a connection</string>
+    <string name="error_m3">The page you are trying to view cannot be shown because the authenticity of the received data could not be verified</string>
+    <string name="error_m4">The page is currently not live or down due to some reason</string>
+    <string name="error_m5">Please contact the website owners to inform them of this problem.</string>
+    <string name="error_m6">Reload</string>
+
 
     <string-array name="fonts">
         <item>55 Percent</item>

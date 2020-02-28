@@ -25,6 +25,9 @@ public class historyRowModel
     public void updateTitle(String mTitle){
         this.mTitle = mTitle;
     }
+    public void updateHeader(String mHeader){
+        this.mHeader = mHeader;
+    }
     public void updateURL(String url){
         this.mHeader = url;
     }

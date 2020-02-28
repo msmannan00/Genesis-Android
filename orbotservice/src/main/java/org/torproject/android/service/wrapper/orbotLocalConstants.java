@@ -13,4 +13,7 @@ public class orbotLocalConstants
     public static boolean sIsTorInitialized = false;
     public static int sNotificationStatus = 0;
     public static WeakReference<Context> sHomeContext;
+    public static String bridges = "";
+    public static boolean sIsManualBridge = false;
+    public static boolean sNetworkState = true;
 }

@@ -6,11 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 
 public class ShiftDrawable extends DrawableWrapper {
 
@@ -104,7 +103,7 @@ public class ShiftDrawable extends DrawableWrapper {
   private void updateBounds() {
     final Rect b = getBounds();
     final int width = (int) ((float) b.width() * getLevel() / MAX_LEVEL);
-    final float radius = b.height() / 2.5f;
+    final float radius = b.height() / 2f;
     mVisibleRect.set(b.left, b.top, b.left + width, b.height());
 
     // draw round to head of progressbar. I know it looks stupid, don't blame me now.

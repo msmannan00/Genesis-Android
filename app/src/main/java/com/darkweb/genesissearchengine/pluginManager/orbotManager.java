@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
 import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.service.TorService;
 import org.torproject.android.service.util.Prefs;
@@ -35,8 +37,10 @@ class orbotManager
     }
 
     void startOrbot(Context context){
+        orbotLocalConstants.bridges = status.sCustomBridge;
+        orbotLocalConstants.sIsManualBridge = status.sGatewayManual;
         this.mAppContext = context;
-        Prefs.putBridgesEnabled(status.sGateway);
+        Prefs.putBridgesEnabled(status.sGatewayManual|status.sGatewayAuto);
         Intent mServiceIntent = new Intent(context, TorService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -67,14 +71,6 @@ class orbotManager
     }
 
     /*------------------------------------------------------- POST TASK HANDLER -------------------------------------------------------*/
-
-    void onClose(){
-        if(mAppContext!=null){
-            disableTorNotification();
-            //Intent intent = new Intent(orbotLocalConstants.sHomeContext, TorService.class);
-            //mAppContext.getApplicationContext().stopService(intent);
-        }
-    }
 
     void setProxy(String url){
         if(url.contains("boogle.store")){
@@ -109,7 +105,6 @@ class orbotManager
 
         PrefsHelper.setPref(keys.PROXY_CACHE,constants.PROXY_CACHE);
         PrefsHelper.setPref(keys.PROXY_MEMORY,constants.PROXY_MEMORY);
-        PrefsHelper.setPref(keys.PROXY_USER_AGENT_OVERRIDE, constants.PROXY_USER_AGENT_OVERRIDE);
         PrefsHelper.setPref(keys.PROXY_DO_NOT_TRACK_HEADER_ENABLED,constants.PROXY_DO_NOT_TRACK_HEADER_ENABLED);
         PrefsHelper.setPref(keys.PROXY_DO_NOT_TRACK_HEADER_VALUE,constants.PROXY_DO_NOT_TRACK_HEADER_VALUE);
 
@@ -124,8 +119,8 @@ class orbotManager
     {
         PrefsHelper.setPref("browser.cache.disk.enable",false);
         PrefsHelper.setPref("browser.cache.memory.enable",true);
-        PrefsHelper.setPref(keys.PROXY_USER_AGENT_OVERRIDE, constants.PROXY_USER_AGENT_OVERRIDE);
         PrefsHelper.setPref("browser.cache.disk.capacity",0);
+        PrefsHelper.setPref("privacy.resistFingerprinting",true);
         PrefsHelper.setPref("privacy.clearOnShutdown.cache",status.sHistoryStatus);
         PrefsHelper.setPref("privacy.clearOnShutdown.downloads",status.sHistoryStatus);
         PrefsHelper.setPref("privacy.clearOnShutdown.formdata",status.sHistoryStatus);
@@ -153,7 +148,9 @@ class orbotManager
             mLogsStarted = true;
         }
         else {
-            logs = logs.replace("(","").replace(":","_FERROR_").replace("NOTICE","").replace(")","");
+            logs = logs.replaceAll("[^a-zA-Z0-9%\\s+]", "");
+            logs = helperMethod.capitalizeString(logs);
+            logs = logs.replace("(","").replace(":","_FERROR_").replace("NOTICE","").replace(")","").replace("_FERROR_","");
         }
 
 

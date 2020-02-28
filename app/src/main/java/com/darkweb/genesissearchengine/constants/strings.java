@@ -28,6 +28,10 @@ public class strings
     public static final String ORBOT_INIT_BT_1 = "Dismiss";
     public static final String ORBOT_INIT_BT_2 = "Try Again";
 
+    public static final String ORBOT_CLEAR_TITLE = "Data Cleared";
+    public static final String ORBOT_CLEAR_DESC = "Genesis data has been cleared. Please try to start application from Homepage\n";
+    public static final String ORBOT_CLEAR_BT_1 = "Dismiss";
+
     public static final String VERSION_TITLE = "Update Pending";
     public static final String VERSION_DESC = "You have not updated this app for a while please update it to get best performance\n";
     public static final String VERSION_BT_1 = "Update";
@@ -63,11 +67,12 @@ public class strings
     public static final String clear_bookmark_bt2 = "Dismiss";
 
     public static final String DOWNLOAD_TITLE = "Download Notification";
-    public static final String DOWNLOAD_LONG_PRESS_TITLE = "File Notification";
-    public static final String DOWNLOAD_LONG_PRESS_MESSAGE = "File | ";
     public static final String DOWNLOAD_MESSAGE = "Download File | ";
     public static final String DOWNLOAD_POSITIVE = "Download";
-    public static final String DOWNLOAD_NEGATIVE = "Dismiss";
+
+    public static final String BRIDGE_MAIL_TITLE = "Request New Bridge";
+    public static final String BRIDGE_MAIL_MESSAGE = "You can get a bridge address through email, the web or by scanning a bridge QR code. Select 'Email' below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start.";
+    public static final String BRIDGE_MAIL_POSITIVE = "EMAIL";
 
     public static final String LONG_URL_TITLE = "URL Notification";
     public static final String LONG_URL_MESSAGE = "";
@@ -92,6 +97,10 @@ public class strings
 
     public static final String CLEAR_TABS = "CLEAR TABS";
 
+    /*Bridge Manager*/
+
+    public static final String CUSTOM_BRIDGE = "obfs4";
+
     /*Text Manager*/
 
     public static final String DARK_WEB = "Hidden Web";
@@ -102,6 +111,7 @@ public class strings
 
     public static final String CUSTOM_FONTS = "Custom Font";
     public static final String PERCENT_SIGN = "%";
+    public static final String DEFAULT_LANGUAGE = "ru";
 
     /*Bookmark Manager*/
 

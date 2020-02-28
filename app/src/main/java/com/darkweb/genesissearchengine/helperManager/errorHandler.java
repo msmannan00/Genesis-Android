@@ -5,6 +5,7 @@ import android.webkit.URLUtil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.darkweb.genesissearchengine.constants.strings;
+import com.example.myapplication.R;
 
 import org.mozilla.geckoview.WebRequestError;
 
@@ -47,14 +48,41 @@ public class errorHandler
                 if (reader != null) {
                     try {
                         reader.close();
-                    } catch (IOException e) {
+                    } catch (IOException ignored) {
                     }
                 }
             }
         }
-
         String title = helperMethod.getHost(url);
-        return createErrorPage("CODE : " + categoryToString(category) + " <br>TYPE : " + errorToString(error)).replace("$URL",url).replace("$TITLE",title);
+
+        if(url==null){
+            url = "Hidden Error";
+        }
+        if(title==null){
+            title = "Hidden Error";
+        }
+
+        String replaceUrl = errorToString(error).replace("$URL",url);
+        // String replaceUrl = errorToString(error).replace("$URL",url);
+        // if(replaceUrl==null){
+        //     replaceUrl = "Hidden Error";
+        // }
+
+        String errorPage = createErrorPage("CODE : " + categoryToString(category) + " <br>TYPE : " + replaceUrl.replace("$TITLE",title),url);
+        errorPage = translateMessage(errorPage,"CODE : " + categoryToString(category));
+        return errorPage;
+    }
+
+    private String translateMessage(String message,String error){
+        message = message.replace("$ERROR_M1",mContext.getString(R.string.error_m1));
+        message = message.replace("$ERROR_M2",mContext.getString(R.string.error_m2));
+        message = message.replace("$ERROR_M3",mContext.getString(R.string.error_m3));
+        message = message.replace("$ERROR_M4",mContext.getString(R.string.error_m4));
+        message = message.replace("$ERROR_M5",mContext.getString(R.string.error_m5));
+        message = message.replace("$ERROR_M6",mContext.getString(R.string.error_m6));
+        message = message.replace("$ERROR", error);
+
+        return message;
     }
 
     private String errorToString(final int error) {
@@ -137,7 +165,7 @@ public class errorHandler
                 return "UNKNOWN";
         }
     }
-    private String createErrorPage(final String error) {
+    private String createErrorPage(final String error,String url) {
         if(error==null){
             return strings.EMPTY_STR;
         }
@@ -175,8 +203,9 @@ public class errorHandler
                 }
             }
         }
+        String replaceUrl = mErrorTemplate.replace("$URL",url);
 
-        return mErrorTemplate.replace("$ERROR", error);
+        return replaceUrl;
     }
 
 }

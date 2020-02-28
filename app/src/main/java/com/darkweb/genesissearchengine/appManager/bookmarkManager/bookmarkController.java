@@ -68,7 +68,7 @@ public class bookmarkController extends AppCompatActivity
         mListView = findViewById(R.id.listview);
         mClearButton = findViewById(R.id.clearButton);
         mBookmarkViewController = new bookmarkViewController(mEmptyListNotifier, mSearchBar, mListView, mClearButton,this);
-        mClearButton.setText(strings.CLEAR_BOOKMARK);
+        mClearButton.setText(R.string.tab_view_clear_bookmark);
     }
     public void initializeList(){
         bookmarkAdapter adapter = new bookmarkAdapter(mListModel.getList(),new adapterCallback());

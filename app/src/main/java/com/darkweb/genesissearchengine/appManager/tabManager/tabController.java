@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -68,7 +71,7 @@ public class tabController extends AppCompatActivity
         mListView = findViewById(R.id.listview);
         mClearButton = findViewById(R.id.clearButton);
         mtabViewController = new tabViewController(mEmptyListNotifier, mListView, mClearButton,this);
-        mClearButton.setText(strings.CLEAR_TABS);
+        mClearButton.setText(R.string.tab_view_clear_tab);
     }
     public void initializeList(){
         tabAdapter adapter = new tabAdapter(mListModel.getList(),new adapterCallback());
@@ -186,7 +189,7 @@ public class tabController extends AppCompatActivity
                 tabRowModel model = (tabRowModel)data.get(0);
                 pluginController.getInstance().logEvent(strings.TAB_TRIGGERED);
                 mHomeController.onLoadTab(model.getSession(),false);
-                finish();
+                tabController.this.finish();
             }
             else if(e_type.equals(enums.etype.url_clear)){
                 mListModel.onManualClear((int)data.get(0));

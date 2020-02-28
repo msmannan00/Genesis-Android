@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="blue">#0066FF</color>
-
-    4d88ff
-    <color name="ease_blue_light">#fdfeff</color>
+   <color name="ease_blue_light">#fdfeff</color>
     <color name="ease_blue">#4d88ff</color>
+    <color name="landing_ease_blue">#212d45</color>
+    <color name="landing_ease_blue_light_1">#eef1f7</color>
+    <color name="landing_ease_blue_light_2">#eef1f7</color>
     <color name="cursor_blue">#3385ff</color>
     <color name="text_color_highlight_v1">#b3d1ff</color>
-    <color name="blue_dark">#00264d</color>
+    <color name="blue_dark">#212d45</color>
     <color name="blue_dark_v1">#212d45</color>
     <color name="blue_dark_v2">#55212d45</color>
 
@@ -32,7 +33,7 @@
     <color name="white">#ffffff</color>
 
     <color name="progress_tint">#f32323</color>
-    <color name="green_dark">#196619</color>
+    <color name="green_dark">#212d45</color>
     <color name="dark_purple">#CC212d45</color>
     <color name="warning">#ffc107</color>
     <color name="colorProgressGradientStart">#00d9ff</color>

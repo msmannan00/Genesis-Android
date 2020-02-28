@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.helperManager;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -10,11 +11,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -33,6 +36,7 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.example.myapplication.BuildConfig;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -117,6 +121,16 @@ public class helperMethod
         }
     }
 
+    public static void sendBridgeEmail(Context context){
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        String aEmailList[] = { "bridges@torproject.org"};
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "get transport");
+        emailIntent.setType("plain/text");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "get transport");
+        context.startActivity(emailIntent);
+    }
+
     public static void hideKeyboard(AppCompatActivity context) {
         View view = context.findViewById(android.R.id.content);
         if (view != null)
@@ -152,6 +166,10 @@ public class helperMethod
         }
     }
 
+    public static void openLocaleSettings(Context context){
+        Intent i = new Intent(android.provider.Settings.ACTION_LOCALE_SETTINGS);
+        context.startActivity(i);
+    }
 
     static String getHost(String link){
         URL url;
@@ -166,6 +184,38 @@ public class helperMethod
             return "";
         }
 
+    }
+
+    public static String capitalizeString(String string) {
+        char[] chars = string.toLowerCase().toCharArray();
+        boolean found = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (!found && Character.isLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                found = true;
+            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+                found = false;
+            }
+        }
+        return String.valueOf(chars);
+    }
+
+    public static String removeLastSlash(String url){
+        if(url.length()>2){
+            if(url.charAt(url.length()-1)=='/'){
+                return url.substring(0,url.length()-1);
+            }
+        }
+        return url;
+    }
+
+    public static String urlWithoutPrefix(String url){
+        try{
+            url = url.substring(url.indexOf(getHost(url)),url.length()).replace("www.","").replace("m.","");
+            return url;
+        }catch (Exception ex){
+            return url;
+        }
     }
 
     public static void openActivity( Class<?> cls,int type,AppCompatActivity context,boolean animation){
@@ -260,6 +310,7 @@ public class helperMethod
 
 
     public static void copyURL(String url,Context context){
+
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("link", url);
         clipboard.setPrimaryClip(clip);
@@ -295,4 +346,9 @@ public class helperMethod
         return true;
     }
 
+    public static void clearAppData(Context context) {
+        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + context.getPackageName()));
+        context.startActivity(intent);
+    }
 }

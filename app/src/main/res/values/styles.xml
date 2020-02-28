@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/ease_blue</item>
-        <item name="colorPrimaryDark">@color/ease_blue</item>
+        <item name="colorPrimaryDark">@color/landing_ease_blue</item>
         <item name="colorAccent">@color/ease_blue</item>
         <item name="android:windowBackground">@xml/sc_splash_gradient</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
