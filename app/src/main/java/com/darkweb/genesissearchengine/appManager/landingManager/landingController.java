@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.View;
 
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import com.github.paolorotolo.appintro.AppIntro;
 
@@ -17,6 +18,7 @@ public class landingController extends AppIntro {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
 
         // Instead of fragments, you can also use our default slide

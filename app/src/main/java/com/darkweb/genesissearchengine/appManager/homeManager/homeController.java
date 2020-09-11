@@ -32,6 +32,7 @@ import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkContro
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
 import com.darkweb.genesissearchengine.appManager.landingManager.landingController;
+import com.darkweb.genesissearchengine.appManager.languageManager.languageController;
 import com.darkweb.genesissearchengine.appManager.settingManager.settingController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
@@ -101,15 +102,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.home_view);
-            initPreFixes();
             pluginController.getInstance().preInitialize(this);
             databaseController.getInstance().initialize(this);
             dataController.getInstance().initialize(this);
+            status.initStatus();
+            pluginController.getInstance().onCreate(this);
+
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.home_view);
+            initPreFixes();
             activityContextManager.getInstance().setHomeController(this);
             pluginController.getInstance().initializeAllServices(this);
-            status.initStatus();
             dataController.getInstance().initializeListData();
             initializeAppModel();
             initializeAppModel();
@@ -416,10 +419,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onOpenMenuItem(View view){
+        pluginController.getInstance().setLanguage(this);
         pluginController.getInstance().logEvent(strings.MENU_INVOKED);
         status.sIsAppStarted = true;
         pluginController.getInstance().onResetMessage();
         initLocalLanguage();
+        pluginController.getInstance().onCreate(this);
 
 
         mHomeViewController.onOpenMenu(view,mGeckoClient.canGoBack(),mGeckoClient.canGoForward(),!(mProgressBar.getAlpha()<=0 || mProgressBar.getVisibility() ==View.INVISIBLE),mGeckoClient.getUserAgent());
@@ -524,11 +529,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onResume(this);
         activityContextManager.getInstance().setCurrentActivity(this);
         if (mGeckoClient!=null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mGeckoClient.getUriPermission()!=null) {
             this.revokeUriPermission(mGeckoClient.getUriPermission(), Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
-
         super.onResume();
     }
 
@@ -706,6 +711,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mGeckoClient.toogleUserAgent();
                 mGeckoClient.onReload();
             }
+            if(menuId == R.id.menu25){
+                helperMethod.openActivity(languageController.class, constants.LIST_HISTORY, homeController.this,true);
+            }
         }
         mHomeViewController.closeMenu();
     }
@@ -814,6 +822,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }
             }
             else if(e_type.equals(enums.etype.on_load_error)){
+                pluginController.getInstance().setLanguage(homeController.this);
                 initLocalLanguage();
                 mHomeViewController.onPageFinished();
                 mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false);

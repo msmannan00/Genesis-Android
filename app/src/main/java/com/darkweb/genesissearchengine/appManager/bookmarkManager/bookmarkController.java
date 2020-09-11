@@ -46,6 +46,7 @@ public class bookmarkController extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmark_view);
         initializeListModel();

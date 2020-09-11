@@ -45,6 +45,7 @@ public class bridgeController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bridge_settings_view);
 
@@ -132,9 +133,11 @@ public class bridgeController extends AppCompatActivity {
     protected void onPause()
     {
         super.onPause();
-        dataController.getInstance().setString(keys.CUSTOM_BRIDGE_1,status.sCustomBridge);
-        dataController.getInstance().setBool(keys.GATEWAY_AUTO,status.sGatewayAuto);
-        dataController.getInstance().setBool(keys.GATEWAY_MANUAL,status.sGatewayManual);
+        if(dataController.getInstance()!=null){
+            dataController.getInstance().setString(keys.CUSTOM_BRIDGE_1,status.sCustomBridge);
+            dataController.getInstance().setBool(keys.GATEWAY_AUTO,status.sGatewayAuto);
+            dataController.getInstance().setBool(keys.GATEWAY_MANUAL,status.sGatewayManual);
+        }
     }
 
     @Override

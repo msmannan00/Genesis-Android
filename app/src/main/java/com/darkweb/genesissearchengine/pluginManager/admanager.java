@@ -1,79 +1,93 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import com.darkweb.genesissearchengine.appManager.home_activity.home_model;
-import com.darkweb.genesissearchengine.constants.enums;
-import com.example.myapplication.R;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+import android.util.Log;
 
-public class admanager
+import androidx.appcompat.app.AppCompatActivity;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.google.android.gms.ads.*;
+
+import static com.darkweb.genesissearchengine.constants.status.paid_status;
+
+class adManager
 {
 
     /*Private Variables*/
-    private static final admanager ourInstance = new admanager();
-    private InterstitialAd mInterstitialHidden_onion;
-    private InterstitialAd mInterstitialInternal;
-    private InterstitialAd mInterstitialHidden_base;
-    private int adCount = 0;
-    boolean isAdShown = false;
-    private AdView bannerAds = null;
+
+    private AppCompatActivity mAppContext;
+    private eventObserver.eventListener mEvent;
+    private AdView mBannerAds;
+    private boolean bannerAdsLoading = false;
+    private boolean bannerAdsLoaded = false;
 
     /*Initializations*/
 
-    public static admanager getInstance() {
-        return ourInstance;
+    adManager(AppCompatActivity app_context, eventObserver.eventListener event, AdView banner_ads) {
+        this.mAppContext = app_context;
+        this.mEvent = event;
+        mBannerAds = banner_ads;
     }
 
-    private admanager() {
-    }
-
-    public void initialize()
-    {
-        MobileAds.initialize(home_model.getInstance().getHomeInstance(), "ca-app-pub-5074525529134731~2926711128");
-        mInterstitialHidden_base = initAd("ca-app-pub-5074525529134731/1637043432");
-        // initBannerAds();
-        // mInterstitialHidden_onion = initAd("ca-app-pub-5074525529134731/4332539288");
-        // mInterstitialInternal = initAd("ca-app-pub-5074525529134731/8478420705");
-    }
-
-    public InterstitialAd initAd(String id)
-    {
-        InterstitialAd adInstance = new InterstitialAd(home_model.getInstance().getHomeInstance());
-        adInstance.setAdUnitId(id);
-        adInstance.loadAd(new AdRequest.Builder().addTestDevice("5AAFC2DFAE5C3906292EB576F0822FD7").build());
-
-        return adInstance;
-    }
-
-    private void initBannerAds()
-    {
-        // bannerAds = home_model.getInstance().getHomeInstance().findViewById(R.id.adView);
-        // AdRequest request = new AdRequest.Builder()
-        //         .addTestDevice("5AAFC2DFAE5C3906292EB576F0822FD7")
-        //         .build();
-        // bannerAds.loadAd(request );
-    }
-
-    /*Helper Methods*/
-
-    public void showAd(enums.adID id)
-    {
-        if(id.equals(enums.adID.hidden_onion_start))
+    void loadAds(){
+        if(!paid_status)
         {
-            mInterstitialHidden_base.show();
-            mInterstitialHidden_base.loadAd(new AdRequest.Builder().addTestDevice("5AAFC2DFAE5C3906292EB576F0822FD7").build());
+            if (!bannerAdsLoading)
+            {
+                bannerAdsLoading = true;
+                MobileAds.initialize(mAppContext, constants.ADMOB_KEY);
+                mBannerAds.setAlpha(0f);
+                initializeBannerAds();
+            }
         }
-        /*else if(id.equals(enums.adID.hidden_onion))
-        {
-            mInterstitialHidden_onion.show();
-            mInterstitialHidden_onion.loadAd(new AdRequest.Builder().build());
-        }
-        else
-        {
-            mInterstitialInternal.show();
-            mInterstitialInternal.loadAd(new AdRequest.Builder().build());
-        }*/
     }
+
+    boolean isAdvertLoaded(){
+        return bannerAdsLoaded;
+    }
+
+    /*Local Helper Methods*/
+
+    private void admobListeners(){
+        if(!paid_status){
+            mBannerAds.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    bannerAdsLoaded = true;
+                    mEvent.invokeObserver(null,null);
+                }
+
+                @Override
+                public void onAdFailedToLoad(int errorCode) {
+                    //Log.i("Failure___",""+errorCode);
+                }
+
+                @Override
+                public void onAdOpened() {
+                }
+
+                @Override
+                public void onAdClicked() {
+                }
+
+                @Override
+                public void onAdLeftApplication() {
+                }
+
+                @Override
+                public void onAdClosed() {
+                }
+            });
+        }
+    }
+
+    /*External Helper Methods*/
+
+    private void initializeBannerAds(){
+        if(!paid_status){
+            AdRequest request = new AdRequest.Builder().addTestDevice("E731DE5933CDC0E42B335787CE3E23EF").build();
+            mBannerAds.loadAd(request);
+            admobListeners();
+        }
+    }
+
 }

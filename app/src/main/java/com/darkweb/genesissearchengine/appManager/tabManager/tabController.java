@@ -49,6 +49,7 @@ public class tabController extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_view);
         initializeListModel();

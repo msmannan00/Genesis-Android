@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
@@ -16,6 +18,7 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class pluginController
 {
@@ -28,6 +31,7 @@ public class pluginController
     private messageManager mMessageManager;
     private activityContextManager mContextManager;
     private boolean mIsInitialized = false;
+    private langManager mLangManager;
     private boolean mIsServiceInitialized = false;
 
     /*Private Variables*/
@@ -53,6 +57,9 @@ public class pluginController
     }
 
     public void preInitialize(homeController context){
+        mLangManager = new langManager(context,new langCallback());
+        mLangManager.setDefaultLanguage(new Locale(status.sLanguage));
+
         mFabricManager = new fabricManager(context,new fabricCallback());
     }
 
@@ -180,6 +187,14 @@ public class pluginController
         }
     }
 
+    /*Lang Manager*/
+    private class langCallback implements eventObserver.eventListener{
+        @Override
+        public void invokeObserver(List<Object> data, enums.etype event_type)
+        {
+        }
+    }
+
     /*Onion Proxy Manager*/
     private class orbotCallback implements eventObserver.eventListener{
         @Override
@@ -187,6 +202,17 @@ public class pluginController
         {
 
         }
+    }
+
+    /*Lang Manager*/
+    public void setLanguage(AppCompatActivity context){
+        mLangManager.setDefaultLanguage(new Locale(status.sLanguage));
+    }
+    public void onCreate(Activity activity) {
+        mLangManager.onCreate(activity);
+    }
+    public void onResume(Activity activity) {
+        mLangManager.onResume(activity);
     }
 
     /*Message Manager*/

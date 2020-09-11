@@ -2,61 +2,60 @@ package com.darkweb.genesissearchengine.pluginManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import androidx.appcompat.app.AppCompatActivity;
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.helperManager.eventObserver;
 
 import java.util.UUID;
 
-public class analyticmanager
+class analyticManager
 {
     /*Private Variables*/
 
-    private static final analyticmanager ourInstance = new analyticmanager();
-    private String uniqueID = null;
-
-    public static analyticmanager getInstance() {
-        return ourInstance;
-    }
+    private AppCompatActivity mAppContext;
+    private String mUniqueID = null;
 
     /*Initializations*/
 
-    private analyticmanager()
-    {
+    analyticManager(AppCompatActivity app_context, eventObserver.eventListener event){
+        this.mAppContext = app_context;
+        initialize();
     }
 
-    public void initialize(Context context)
-    {
-        final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
+    private void initialize(){
+        final String PREF_UNIQUE_ID = constants.UNIQUE_KEY_ID;
 
-        if (uniqueID == null)
+        if (mUniqueID == null)
         {
-            SharedPreferences sharedPrefs = context.getSharedPreferences(
+            SharedPreferences sharedPrefs = mAppContext.getSharedPreferences(
                     PREF_UNIQUE_ID, Context.MODE_PRIVATE);
-            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
-            if (uniqueID == null) {
-                uniqueID = UUID.randomUUID().toString();
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(PREF_UNIQUE_ID, uniqueID);
-                editor.commit();
+            mUniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+            if (mUniqueID == null) {
+
+                new Thread(){
+                    public void run(){
+                        try{
+                            mUniqueID = UUID.randomUUID().toString();
+                        }catch (Exception ex){
+                            mUniqueID = UUID.randomUUID().toString();
+                        }
+
+                        SharedPreferences.Editor editor = sharedPrefs.edit();
+                        editor.putString(PREF_UNIQUE_ID, mUniqueID);
+                        editor.apply();
+                    }
+                }.start();
             }
         }
     }
 
     /*Helper Methods*/
 
-    public void logUser()
-    {
-        Crashlytics.setUserIdentifier(uniqueID);
-        Crashlytics.setUserEmail("user@fabric.io");
-        Crashlytics.setUserName(uniqueID);
-    }
-
-    public void sendEvent(String value)
-    {
-        //firebase.getInstance().logEvent(value,uniqueID);
-        //Answers.getInstance().logCustom(new CustomEvent(value));
-
+    void logUser(){
+        Crashlytics.setUserIdentifier(mUniqueID);
+        Crashlytics.setUserEmail(constants.USER_EMAIL);
+        Crashlytics.setUserName(mUniqueID);
     }
 
 }

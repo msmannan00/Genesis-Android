@@ -67,7 +67,10 @@ class orbotManager
     }
 
     void enableTorNotificationNoBandwidth(){
-        TorService.getServiceObject().enableTorNotificationNoBandwidth();
+        TorService service = TorService.getServiceObject();
+        if(service!=null){
+            TorService.getServiceObject().enableTorNotificationNoBandwidth();
+        }
     }
 
     /*------------------------------------------------------- POST TASK HANDLER -------------------------------------------------------*/

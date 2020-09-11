@@ -27,6 +27,7 @@ public class orbotController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_settings_view);
 

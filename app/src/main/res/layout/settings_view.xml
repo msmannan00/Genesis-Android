@@ -282,6 +282,7 @@
                         android:layout_width="match_parent"
                         android:background="@color/white"
                         android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
                         android:layout_height="wrap_content">
                     <TextView
                             android:id="@+id/font_size_percentage"
@@ -296,11 +297,12 @@
                     <SeekBar
                             android:id="@+id/font_size"
                             android:layout_width="158dp"
-                            android:layout_height="55dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
                             android:ems="10"
                             android:progress="100"
                             android:max="200"
-                            android:layout_marginTop="-15dp"
                             android:layout_marginEnd="18dp"
                             android:layout_weight="1"
                             android:paddingRight="30dp"

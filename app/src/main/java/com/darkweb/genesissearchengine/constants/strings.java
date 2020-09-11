@@ -111,7 +111,7 @@ public class strings
 
     public static final String CUSTOM_FONTS = "Custom Font";
     public static final String PERCENT_SIGN = "%";
-    public static final String DEFAULT_LANGUAGE = "ru";
+    public static final String DEFAULT_LANGUAGE = "en";
 
     /*Bookmark Manager*/
 

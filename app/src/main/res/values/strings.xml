@@ -7,13 +7,13 @@
     <string name="homeUrl" translatable="false">https://genesis.onion</string>
     <string name="errorTiyle">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
     <string name="todo">TODO</string>
-    <string name="projectName">Genesis Search Engine</string>
+    <string name="projectName" translatable="false">Genesis Search Engine</string>
     <string name="loadingText">Online Freedom</string>
     <string name="reload">Reload</string>
     <string name="internetErrorMessage">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
     <string name="title_activity_list_manager">list_manager</string>
     <string name="title_activity_setting_controller">Settings</string>
-    <string name="file_provider_authority">com.darkweb.genesissearchengine.fileprovider</string>
+    <string name="file_provider_authority" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
 
     <!-- Preference Titles -->
     <string name="preferences_messages_header">Messages</string>
@@ -39,12 +39,12 @@
     <!-- Bridge Settings -->
     <string name="bridge_basic_settings">Basic Settings</string>
     <string name="bridge_Automatid_title">Create Automatically</string>
-    <string name="bridge_Manual_desc">Provide a Bridge I know</string>
+    <string name="bridge_Manual_desc" translatable="false">Provide a Bridge I know</string>
     <string name="bridge_Auto_switch">Auto</string>
     <string name="bridge_Manual_switch">Manual</string>
     <string name="bridge_port_hint">address:port Single Line</string>
-    <string name="bridge_header">Bridge Settings</string>
-    <string name="bridge_desc">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
+    <string name="bridge_header" translatable="false">Bridge Settings</string>
+    <string name="bridge_desc" translatable="false">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
     <string name="bridge_default_title">Select Default Bridge</string>
     <string name="bridge_request" translatable="false">Request Bridge</string>
 
@@ -78,9 +78,9 @@
     <string name="REPORT_SUCCESS_TITLE">URL Reported Successfully</string>
     <string name="REPORT_SUCCESS_DESC">URL has been successfully reported. It will take about a week to completely remove this website from our servers\n</string>
     <string name="REPORT_SUCCESS_BT_1">Dismiss</string>
-    <string name="NOT_SUPPORTED_TITLE">Action not Supported</string>
-    <string name="NOT_SUPPORTED_MESSAGE">No application found to handle email</string>
-    <string name="NOT_SUPPORTED_BT_1">Dismiss</string>
+    <string name="NOT_SUPPORTED_TITLE" translatable="false">Action not Supported</string>
+    <string name="NOT_SUPPORTED_MESSAGE" translatable="false">No application found to handle email</string>
+    <string name="NOT_SUPPORTED_BT_1" translatable="false">Dismiss</string>
     <string name="RATE_TITLE">Rate US</string>
     <string name="RATE_MESSAGE">We don\'t take donations or earn money from this app. We are trying to make a private anonymous internet \n\nIf you think this app works please rate us it gives us hope and strength to continue</string>
     <string name="RATE_POSITIVE">Like This App</string>
@@ -108,7 +108,7 @@
     <string name="BRIDGE_MAIL_MESSAGE">You can get a bridge address through email, the web or by scanning a bridge QR code. Select \'Email\' below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start.</string>
     <string name="BRIDGE_MAIL_POSITIVE">EMAIL</string>
     <string name="LONG_URL_TITLE">URL Notification</string>
-    <string name="LONG_URL_MESSAGE"></string>
+    <string name="LONG_URL_MESSAGE" />
     <string name="LONG_URL_OPTION_1">Open In New Tab</string>
     <string name="LONG_URL_OPTION_2">Open In Current Tab</string>
     <string name="LONG_URL_OPTION_3">Copy to Clipboard</string>
@@ -137,9 +137,9 @@
     /*Text Manager*/
 
     public
-    <string name="DARK_WEB">Hidden Web</string>
+    <string name="DARK_WEB" translatable="false">Hidden Web</string>
     public
-    <string name="EMPTY_STR"></string>
+    <string name="EMPTY_STR" />
     public
     <string name="EMPTY_SPACE"> </string>
 
@@ -221,19 +221,30 @@
     <string name="popup_download">Downloads</string>
     <string name="popup_history">History</string>
     <string name="popup_settings">Settings</string>
-    <string name="popup_desktop">Desktop Site</string>
+    <string name="popup_desktop" translatable="false">Desktop Site</string>
     <string name="popup_bookmark_page">Bookmark This Page</string>
     <string name="popup_open_bookmark">Open Bookmarks</string>
     <string name="popup_report">Report Website</string>
     <string name="popup_rate">Rate This App</string>
     <string name="popup_share">Share</string>
 
+    <!-- Language Manager Manager -->
+    <string name="LANGUAGE_HEADER" translatable="false">Language</string>
+    <string name="LANGUAGE_MESSAGE_TITLE" translatable="false">Change Language</string>
+    <string name="LANGUAGE_MESSAGE_DESC" translatable="false">We currently support the following langugage would be adding more soon\n</string>
+    <string name="LANGUAGE_MESSAGE_BT_DEFAULT" translatable="false">English (United States)</string>
+    <string name="LANGUAGE_MESSAGE_BT_1" translatable="false">German (Germany)</string>
+    <string name="LANGUAGE_MESSAGE_BT_2" translatable="false">Italian (Italy)</string>
+    <string name="LANGUAGE_MESSAGE_BT_3" translatable="false">Portuguese (Brazil)</string>
+    <string name="LANGUAGE_MESSAGE_BT_4" translatable="false">Russian (Russia)</string>
+    <string name="LANGUAGE_MESSAGE_BT_5" translatable="false">Ukrainian (Ukraine)</string>
+    <string name="LANGUAGE_MESSAGE_BT_6" translatable="false">Chinese Simplified (Mainland China)</string>
 
     <!-- Orbot Settings -->
     <string name="orbot_settings_warning">⚠️ Warning</string>
-    <string name="orbot_settings_bridges">Enable Bridges</string>
-    <string name="gateway_info">Enable Gateway</string>
-    <string name="gateway_button">Enable Gateway</string>
+    <string name="orbot_settings_bridges" translatable="false">Enable Bridges</string>
+    <string name="gateway_info" translatable="false">Enable Gateway</string>
+    <string name="gateway_button" translatable="false">Enable Gateway</string>
     <string name="loading_please_wait">Loading Please Wait</string>
     <string name="orbot_option_title_reset">App Stuck in loading</string>
     <string name="orbot_option_desc_reset">Clear Storage</string>
@@ -241,10 +252,10 @@
 
     <!-- Orbot View -->
     <string name="orbot_header">Proxy Settings</string>
-    <string name="orbot_desc">Genesis Browser connects you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
+    <string name="orbot_desc">We connect you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
     <string name="orbot_option_title">Internet is censored here</string>
     <string name="orbot_option_desc">Bypass Firewall</string>
-    <string name="orbot_option_warning_slow_speed">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
+    <string name="orbot_option_warning_slow_speed" translatable="false">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
 
     <!-- Splash -->
 
@@ -266,11 +277,11 @@
 
     <!-- Home View -->
     <string name="home_tab_text">1</string>
-    <string name="home_connect">Connect</string>
-    <string name="home_loading">Loading Please Wait</string>
+    <string name="home_connect" translatable="false">Connect</string>
+    <string name="home_loading" translatable="false">Loading Please Wait</string>
 
     <!-- Landing Page -->
-    <string name="bridges_sometimes">"Sometimes you need a bridge to get to Tor."</string>
+    <string name="bridges_sometimes" translatable="false">"Sometimes you need a bridge to get to Tor."</string>
     <string name="action_more">"TELL ME MORE"</string>
     <string name="vpn_setup">"You can enable any app to go through Tor using our built-in VPN."</string>
     <string name="vpn_setup_sub">"This won\'t make you anonymous, but it will help get through firewalls."</string>
@@ -288,6 +299,8 @@
     <string name="error_m5">Please contact the website owners to inform them of this problem.</string>
     <string name="error_m6">Reload</string>
 
+    <!-- Others -->
+    <string name="PREF_LANGUAGE" translatable="false">pref_language</string>
 
     <string-array name="fonts">
         <item>55 Percent</item>

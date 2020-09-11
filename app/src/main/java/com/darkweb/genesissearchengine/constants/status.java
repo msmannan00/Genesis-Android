@@ -25,7 +25,7 @@ public class status
     public static boolean sDesktopSite = false;
     public static int sCookieStatus = ACCEPT_FIRST_PARTY;
     public static float sFontSize = 1;
-    public static String sLanguage = "ru";
+    public static String sLanguage = "en";
 
     /*Bridge Status*/
 

@@ -53,6 +53,7 @@ public class settingController extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_view);
 
@@ -145,6 +146,10 @@ public class settingController extends AppCompatActivity
                 }
                 else if(parentView.getId()== R.id.font_adjustable)
                 {
+                    if(position==0){
+                        mSettingModel.setFontSize(100);
+                    }
+                    mSettingViewController.setFontSizeAdjustable(position==0);
                     mSettingModel.setAdjustableStatus(position==0);
                 }
                 else if(parentView.getId()== R.id.cookies_manager)
@@ -170,6 +175,8 @@ public class settingController extends AppCompatActivity
                 float cur_progress = seekBar.getProgress();
                 mSettingModel.setFontSize((cur_progress));
                 mSettingViewController.updatePercentage(mFontSize.getProgress());
+                mSettingViewController.setFontSize(b);
+                mSettingModel.setAdjustableStatus(b);
                 if(cur_progress<1){
                     mFontSize.setProgress(1);
                 }

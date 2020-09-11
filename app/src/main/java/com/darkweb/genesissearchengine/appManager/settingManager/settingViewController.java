@@ -144,6 +144,18 @@ class settingViewController
         updatePercentage(mFontSize.getProgress());
     }
 
+    void setFontSize(boolean status){
+        if(status){
+            mFontAdjustable.setSelection(1);
+        }
+    }
+
+    void setFontSizeAdjustable(boolean status){
+        if(status){
+            mFontSize.setProgress(100);
+        }
+    }
+
     private void initSearchEngine()
     {
         mSearch.setSelection(getEngineIndex());
