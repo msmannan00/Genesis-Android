@@ -39,7 +39,7 @@
     <string name="settings_notification">Gestisci notifica</string>
 
 
-    <string name="bridge_basic_settings">Impostazioni di base</string>
+    <string name="security_basic_settings">Impostazioni di base</string>
     <string name="bridge_Automatid_title">Crea automaticamente</string>
     <string name="bridge_Manual_desc">Fornire un ponte che conosco</string>
     <string name="bridge_Auto_switch">Auto</string>

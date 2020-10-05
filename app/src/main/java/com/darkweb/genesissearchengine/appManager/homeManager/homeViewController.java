@@ -72,7 +72,6 @@ class homeViewController
     private TextView mLoadingText;
     private AdView mBannerAds = null;
     private Handler mUpdateUIHandler = null;
-    private ImageView mEngineLogo;
     private ImageButton mSwitchEngineBack;
     private ImageButton mGatewaySplash;
     private LinearLayout mTopBar;
@@ -88,7 +87,7 @@ class homeViewController
     private boolean isLandscape = false;
     private boolean disableSplash = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageView engineLogo, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, boolean is_triggered, Button connect_button, ImageButton switch_engine_back){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, boolean is_triggered, Button connect_button, ImageButton switch_engine_back){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -98,7 +97,6 @@ class homeViewController
         this.mWebviewContainer = webviewContainer;
         this.mBannerAds = banner_ads;
         this.mEvent = event;
-        this.mEngineLogo = engineLogo;
         this.mGatewaySplash = gateway_splash;
         this.mTopBar = top_bar;
         this.mGeckoView = gecko_view;
@@ -116,18 +114,6 @@ class homeViewController
     }
 
     private void initSearchImage(){
-        if(status.sSearchStatus.equals(constants.BACKEND_GENESIS_URL))
-        {
-            mEngineLogo.setImageResource(R.drawable.duck_logo);
-        }
-        else if(status.sSearchStatus.equals(constants.BACKEND_DUCK_DUCK_GO_URL))
-        {
-            mEngineLogo.setImageResource(R.drawable.google_logo);
-        }
-        else
-        {
-            mEngineLogo.setImageResource(R.drawable.genesis_logo);
-        }
     }
 
     void initTab(int count){
@@ -588,12 +574,26 @@ class homeViewController
         }
     }
 
+    private void disableEnableControls(boolean enable, ViewGroup vg){
+        vg.setEnabled(enable); // the point that I was missing
+        for (int i = 0; i < vg.getChildCount(); i++){
+            View child = vg.getChildAt(i);
+            child.setEnabled(enable);
+            child.setClickable(enable);
+            if (child instanceof ViewGroup){
+                disableEnableControls(enable, (ViewGroup)child);
+            }
+        }
+    }
+
     private int defaultFlag = 0;
     void onFullScreenUpdate(boolean status){
         int value = !status ? 1 : 0;
 
         mTopBar.setClickable(!status);
+        disableEnableControls(!status, mTopBar);
         mTopBar.setAlpha(value);
+        mBannerAds.setVisibility(View.GONE);
 
         if(status){
             mWebviewContainer.setPadding(0,0,0,0);
@@ -647,15 +647,6 @@ class homeViewController
 
         switch (status.sSearchStatus)
         {
-            case constants.BACKEND_GOOGLE_URL:
-                mEngineLogo.setImageResource(R.drawable.genesis_logo);
-                break;
-            case constants.BACKEND_GENESIS_URL:
-                mEngineLogo.setImageResource(R.drawable.duck_logo);
-                break;
-            case constants.BACKEND_DUCK_DUCK_GO_URL:
-                mEngineLogo.setImageResource(R.drawable.google_logo);
-                break;
         }
     }
 

@@ -7,7 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class databaseController
@@ -66,12 +71,22 @@ public class databaseController
 
     public ArrayList<historyRowModel> selectHistory(int startIndex,int endIndex){
         ArrayList<historyRowModel> tempmodel = new ArrayList<>();
-        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM history ORDER BY date DESC LIMIT "+endIndex+" OFFSET "+startIndex, null);
+
+        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM history ORDER BY date ASC LIMIT "+endIndex+" OFFSET "+startIndex, null);
         if (c.moveToFirst()){
             do {
-                historyRowModel model = new historyRowModel(c.getString(2), c.getString(1),Integer.parseInt(c.getString(0)));
-                tempmodel.add(model);
-                model.updateTitle(c.getString(3));
+                historyRowModel model = new historyRowModel(c.getString(3), c.getString(2),Integer.parseInt(c.getString(0)));
+                try {
+                    Date m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).parse(c.getString(1));
+                    model.setDate(m_date);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(Calendar.getInstance().getTime().getTime() < model.getDate().getTime()){
+                    tempmodel.add(model);
+                }else {
+                    tempmodel.add(0, model);
+                }
             } while(c.moveToNext());
         }
         c.close();
@@ -87,9 +102,9 @@ public class databaseController
             do {
                 if(c.getString(0)==null){
                     break;
+                }else {
+                    id = Integer.parseInt(c.getString(0));
                 }
-                id = Integer.parseInt(c.getString(0));
-                break;
             } while(c.moveToNext());
         }
         c.close();

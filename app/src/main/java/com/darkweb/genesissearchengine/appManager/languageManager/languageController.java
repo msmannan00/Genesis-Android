@@ -8,10 +8,12 @@ import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,15 +48,16 @@ public class languageController extends AppCompatActivity {
     public class languageViewCallback implements eventObserver.eventListener{
 
         @Override
-        public void invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
 
+            return null;
         }
     }
 
     public void changeLanguage(Locale language){
         status.sLanguage = language.getLanguage();
-        dataController.getInstance().setString(keys.LANGUAGE,language.getLanguage());
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.LANGUAGE,language.getLanguage()));
         pluginController.getInstance().setLanguage(this);
     }
 

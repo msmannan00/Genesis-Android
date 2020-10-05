@@ -25,14 +25,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.helperManager.AdBlocker;
 import com.darkweb.genesissearchengine.helperManager.JavaScriptInterface;
 import com.darkweb.genesissearchengine.helperManager.downloadFileService;
 import com.darkweb.genesissearchengine.helperManager.errorHandler;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import org.mozilla.gecko.GeckoSystemStateListener;
 import org.mozilla.gecko.GeckoThread;
@@ -69,6 +66,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     /*Temp Variables*/
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
     private int rateCount=0;
+    private int m_current_url_id = -1;
 
     geckoSession(eventObserver.eventListener event,int mSessionID,AppCompatActivity mContext){
 
@@ -80,7 +78,6 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         setContentDelegate(this);
         mDownloadManager = new geckoDownloadManager();
         setPromptDelegate(new geckoPromptView(mContext));
-
         this.event = event;
     }
 
@@ -101,6 +98,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
             mProgress = 5;
             event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update);
         }
+        m_current_url_id = -1;
     }
 
     /*Progress Delegate*/
@@ -109,6 +107,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
         if(!isPageLoading){
             mCurrentTitle = "loading";
+            m_current_url_id = -1;
         }
         isPageLoading = true;
         if(!var2.equals("about:blank") && !mCurrentTitle.equals("loading")){
@@ -125,6 +124,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
     @UiThread
     public void onPageStop(@NonNull GeckoSession var1, boolean var2) {
+
     }
 
     @Override
@@ -145,7 +145,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     public GeckoResult<Boolean> onVisited(@NonNull GeckoSession var1, @NonNull String var2, @Nullable String var3, int var4) {
         if(var4==3 || var4==5 || var4==1){
             event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_url_load);
-            event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle), enums.etype.on_request_completed);
+            m_current_url_id = (int)event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
             isPageLoading = false;
         }
         return null;
@@ -161,7 +161,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
         String newUrl = var2.split("#")[0];
         if(!mCurrentTitle.equals("loading")){
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.on_update_suggestion_url);
+            m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
         }
         mCurrentURL = newUrl;
 
@@ -231,7 +231,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     public void onTitleChange(@NonNull GeckoSession var1, @Nullable String var2) {
         if(var2!=null && !var2.equals(strings.EMPTY_STR) && var2.length()>2 && !var2.equals("about:blank")){
             mCurrentTitle = var2;
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.on_update_suggestion);
+            m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
         }
     }
 

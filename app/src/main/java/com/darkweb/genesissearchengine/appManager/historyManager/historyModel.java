@@ -8,16 +8,13 @@ class historyModel
 
     private ArrayList<historyRowModel> mModelList = new ArrayList<>();
 
-    /*Initializations*/
+    /*Helper Methods*/
 
     void setList(ArrayList<historyRowModel> model)
     {
         mModelList = model;
     }
-    ArrayList<historyRowModel> getList()
-    {
-        return mModelList;
-    }
+
     private void removeFromMainList(int index)
     {
         mModelList.remove(index);
@@ -31,6 +28,9 @@ class historyModel
         mModelList.clear();
     }
 
-
+    ArrayList<historyRowModel> getList()
+    {
+        return mModelList;
+    }
 
 }

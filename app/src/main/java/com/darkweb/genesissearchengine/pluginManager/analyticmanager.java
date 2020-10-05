@@ -3,7 +3,6 @@ package com.darkweb.genesissearchengine.pluginManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
-import com.crashlytics.android.Crashlytics;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 
@@ -53,9 +52,6 @@ class analyticManager
     /*Helper Methods*/
 
     void logUser(){
-        Crashlytics.setUserIdentifier(mUniqueID);
-        Crashlytics.setUserEmail(constants.USER_EMAIL);
-        Crashlytics.setUserName(mUniqueID);
     }
 
 }

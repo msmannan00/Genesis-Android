@@ -19,10 +19,13 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -64,10 +67,10 @@ public class bookmarkController extends AppCompatActivity
         pluginController.getInstance().logEvent(strings.BOOKMARK_OPENED);
     }
     public void initializeViews(){
-        mEmptyListNotifier = findViewById(R.id.empty_list);
-        mSearchBar = findViewById(R.id.search);
-        mListView = findViewById(R.id.listview);
-        mClearButton = findViewById(R.id.clearButton);
+        mEmptyListNotifier = findViewById(R.id.p_empty_list);
+        mSearchBar = findViewById(R.id.p_search);
+        mListView = findViewById(R.id.p_listview);
+        mClearButton = findViewById(R.id.p_clearButton);
         mBookmarkViewController = new bookmarkViewController(mEmptyListNotifier, mSearchBar, mListView, mClearButton,this);
         mClearButton.setText(R.string.tab_view_clear_bookmark);
     }
@@ -131,7 +134,7 @@ public class bookmarkController extends AppCompatActivity
     {
         if(status.sIsAppPaused && (level==80 || level==15))
         {
-            dataController.getInstance().setBool(keys.LOW_MEMORY,true);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.LOW_MEMORY,true));
             finish();
         }
     }
@@ -156,7 +159,7 @@ public class bookmarkController extends AppCompatActivity
     public class adapterCallback implements eventObserver.eventListener{
 
         @Override
-        public void invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
             if(e_type.equals(enums.etype.url_triggered)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
@@ -174,6 +177,7 @@ public class bookmarkController extends AppCompatActivity
             else if(e_type.equals(enums.etype.remove_from_database)){
                 databaseController.getInstance().deleteFromList((int)data.get(0),"bookmark");
             }
+            return null;
         }
 
     }

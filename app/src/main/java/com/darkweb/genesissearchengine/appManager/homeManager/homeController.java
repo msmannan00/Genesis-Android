@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -25,7 +24,6 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
@@ -43,8 +41,8 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.appManager.orbotManager.orbotController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.KeyboardUtils;
-import com.darkweb.genesissearchengine.helperManager.LocaleUtils;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
@@ -157,7 +155,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(status.sFirstStart){
             helperMethod.openActivity(landingController.class, constants.LIST_HISTORY, homeController.this,false);
             status.sFirstStart = false;
-            dataController.getInstance().setBool(keys.FIRST_INSTALLED,false);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.FIRST_INSTALLED,false));
         }
     }
 
@@ -173,12 +171,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mProgressBar = findViewById(R.id.progressBar);
         mSplashScreen = findViewById(R.id.splashScreen);
-        mSearchbar = findViewById(R.id.search);
+        mSearchbar = findViewById(R.id.p_search);
         mLoadingIcon = findViewById(R.id.imageView_loading_back);
         mLoadingText = findViewById(R.id.loadingText);
         mWebViewContainer = findViewById(R.id.webviewContainer);
         mBannerAds = findViewById(R.id.adView);
-        mEngineLogo = findViewById(R.id.switchEngine);
         mGatewaySplash = findViewById(R.id.gateway_splash);
         mTopBar = findViewById(R.id.topbar);
         mBackSplash = findViewById(R.id.backsplash);
@@ -189,9 +186,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setSaveFromParentEnabled(false);
 
         mGeckoClient = new geckoClients();
-        boolean is_engine_switched = dataController.getInstance().getBool(keys.ENGINE_SWITCHED,false);
+        boolean is_engine_switched = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.ENGINE_SWITCHED,false));
 
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,dataController.getInstance().getSuggestions(), mEngineLogo, mGatewaySplash, mTopBar, mGeckoView, mBackSplash,is_engine_switched, mConnectButton, mSwitchEngineBack);
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,dataController.getInstance().getSuggestions(), mGatewaySplash, mTopBar, mGeckoView, mBackSplash,is_engine_switched, mConnectButton, mSwitchEngineBack);
     }
 
     public void initPreFixes() {
@@ -410,7 +407,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onSessionChanged();
     }
 
-    public void onOpenTabView(View view){
+    public void onOpenTabViewBoundary(View view){
+        mNewTab.setPressed(true);
         helperMethod.openActivity(tabController.class, constants.LIST_HISTORY, homeController.this,true);
     }
 
@@ -444,14 +442,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onSwitchSearch(View view){
-        dataController.getInstance().setBool(keys.ENGINE_SWITCHED,true);
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.ENGINE_SWITCHED,true));
         pluginController.getInstance().logEvent(strings.SEARCH_SWITCH);
 
         if(status.sSearchStatus.equals(constants.BACKEND_GOOGLE_URL))
         {
             status.sSearchStatus = constants.BACKEND_GENESIS_URL;
             mHomeViewController.onUpdateLogo();
-            dataController.getInstance().setString(keys.SEARCH_ENGINE,constants.BACKEND_GENESIS_URL);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_GENESIS_URL));
             onHomeButton(null);
         }
         else if(status.sSearchStatus.equals(constants.BACKEND_GENESIS_URL))
@@ -460,7 +458,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(pluginController.getInstance().isOrbotRunning())
             {
                 mHomeViewController.onUpdateLogo();
-                dataController.getInstance().setString(keys.SEARCH_ENGINE,constants.BACKEND_DUCK_DUCK_GO_URL);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_DUCK_DUCK_GO_URL));
                 onHomeButton(null);
             }
             else {
@@ -473,7 +471,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(pluginController.getInstance().isOrbotRunning())
             {
                 mHomeViewController.onUpdateLogo();
-                dataController.getInstance().setString(keys.SEARCH_ENGINE,constants.BACKEND_GOOGLE_URL);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_GOOGLE_URL));
                 onHomeButton(null);
             }
             else {
@@ -684,7 +682,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if (menuId == R.id.menu2)
             {
-                dataController.getInstance().setBool(keys.IS_APP_RATED,true);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
                 status.sIsAppRated = true;
                 pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.EMPTY_STR), enums.etype.rate_app);
             }
@@ -721,7 +719,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public class homeViewCallback implements eventObserver.eventListener{
 
         @Override
-        public void invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
            if(e_type.equals(enums.etype.download_folder))
            {
@@ -738,7 +736,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            else if(e_type.equals(enums.etype.recheck_orbot)){
                pluginController.getInstance().isOrbotRunning();
            }
-
+            return null;
         }
     }
 
@@ -764,7 +762,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public class geckoViewCallback implements eventObserver.eventListener{
 
         @Override
-        public void invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
             if(e_type.equals(enums.etype.progress_update)){
                 mHomeViewController.onProgressBarUpdate((int)data.get(0));
@@ -784,16 +782,15 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(enums.etype.start_proxy)){
                 pluginController.getInstance().setProxy(dataToStr(data.get(0)));
             }
-            else if(e_type.equals(enums.etype.on_request_completed)){
-                Log.i("RUQUEST_SEND","REQUREST_SEND"+data.get(0));
-                dataController.getInstance().addHistory(data.get(0).toString(),data.get(2).toString());
+            else if(e_type.equals(enums.etype.on_update_history)){
+                return dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_ADD_HISTORY ,data);
             }
             else if(e_type.equals(enums.etype.on_update_suggestion)){
                 dataController.getInstance().addSuggesion(data.get(0).toString(),data.get(2).toString());
             }
             else if(e_type.equals(enums.etype.on_page_loaded)){
                 pluginController.getInstance().logEvent(strings.PAGE_OPENED_SUCCESS);
-                dataController.getInstance().setBool(keys.IS_BOOTSTRAPPED,true);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_BOOTSTRAPPED,true));
                 mHomeViewController.onPageFinished();
                 if(status.sIsWelcomeEnabled && !status.sIsAppStarted){
                     final Handler handler = new Handler();
@@ -816,7 +813,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if(e_type.equals(enums.etype.rate_application)){
                 if(!status.sIsAppRated){
-                    dataController.getInstance().setBool(keys.IS_APP_RATED,true);
+                    dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
                     status.sIsAppRated = true;
                     pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.EMPTY_STR), enums.etype.rate_app);
                 }
@@ -836,6 +833,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(enums.etype.on_full_screen)){
                 boolean status = (Boolean)data.get(0);
                 mHomeViewController.onFullScreenUpdate(status);
+            }
+            else if(e_type.equals(enums.etype.on_update_favicon)){
+                boolean status = (Boolean)data.get(0);
+                dataController.getInstance().invokeImageCache(dataEnums.eImageCacheCommands.M_SET_IMAGE ,data);
             }
             else if(e_type.equals(enums.etype.on_long_press_with_link)){
                  pluginController.getInstance().MessageManagerHandler(homeController.this, Arrays.asList(dataToStr(data.get(0)),dataToStr(data.get(2)),dataToStr(data.get(3))),enums.etype.on_long_press_with_link);
@@ -860,6 +861,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(enums.etype.on_update_suggestion_url)){
                 dataController.getInstance().updateSuggestionURL(dataToStr(data.get(0)),dataToStr(data.get(2)));
             }
+            return null;
         }
     }
 }

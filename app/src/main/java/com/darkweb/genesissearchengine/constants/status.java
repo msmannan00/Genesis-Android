@@ -1,6 +1,10 @@
 package com.darkweb.genesissearchengine.constants;
 
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
+
+import java.util.Arrays;
+
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
 public class status
@@ -31,24 +35,30 @@ public class status
 
     public static boolean sGatewayAuto = false;
     public static boolean sGatewayManual = false;
-    public static String sCustomBridge = strings.CUSTOM_BRIDGE;
+    public static boolean sVPNStatus = false;
+    public static boolean sBridgeStatus = false;
+    public static String sCustomBridge = strings.CUSTOM_BRIDGE_OBFS4;
 
 
     public static void initStatus()
     {
-        status.sJavaStatus = dataController.getInstance().getBool(keys.JAVA_SCRIPT,true);
-        status.sHistoryStatus = dataController.getInstance().getBool(keys.HISTORY_CLEAR,true);
-        status.sSearchStatus = dataController.getInstance().getString(keys.SEARCH_ENGINE,constants.BACKEND_GENESIS_URL);
-        status.sGatewayAuto = dataController.getInstance().getBool(keys.GATEWAY_AUTO,false);
-        status.sGatewayManual = dataController.getInstance().getBool(keys.GATEWAY_MANUAL,false);
-        status.sIsWelcomeEnabled = dataController.getInstance().getBool(keys.IS_WELCOME_ENABLED,true);
-        status.sIsAppRated = dataController.getInstance().getBool(keys.IS_APP_RATED,false);
-        status.sFontSize = dataController.getInstance().getFloat(keys.FONT_SIZE,100);
-        status.sFontAdjustable = dataController.getInstance().getBool(keys.FONT_ADJUSTABLE,true);
-        status.sCookieStatus = dataController.getInstance().getInt(keys.COOKIE_ADJUSTABLE,ACCEPT_FIRST_PARTY);
-        status.sCustomBridge = dataController.getInstance().getString(keys.CUSTOM_BRIDGE_1,strings.CUSTOM_BRIDGE);
-        status.sFirstStart = dataController.getInstance().getBool(keys.FIRST_INSTALLED,true);
-        status.sLanguage = dataController.getInstance().getString(keys.LANGUAGE,strings.DEFAULT_LANGUAGE);
+        status.sJavaStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.JAVA_SCRIPT,true));
+        status.sHistoryStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.HISTORY_CLEAR,true));
+        status.sGatewayAuto = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.GATEWAY_AUTO,true));
+        status.sGatewayManual = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.GATEWAY_MANUAL,false));
+        status.sIsWelcomeEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.IS_WELCOME_ENABLED,true));
+        status.sIsAppRated = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.IS_APP_RATED,false));
+        status.sVPNStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.S_VPN_ENABLED,false));
+        status.sBridgeStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.S_BRIDGE_ENABLES,true));
+        status.sFontAdjustable = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.FONT_ADJUSTABLE,true));
+        status.sFirstStart = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.FIRST_INSTALLED,true));
+
+        status.sCookieStatus = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.COOKIE_ADJUSTABLE,ACCEPT_FIRST_PARTY));
+        status.sFontSize = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_FLOAT, Arrays.asList(keys.FONT_SIZE,100));
+
+        status.sLanguage = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.LANGUAGE,strings.DEFAULT_LANGUAGE));
+        status.sSearchStatus = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_GENESIS_URL));
+        status.sCustomBridge = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.CUSTOM_BRIDGE_1,strings.CUSTOM_BRIDGE_OBFS4));
     }
 
 }

@@ -15,9 +15,12 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
+
+import java.util.Arrays;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.status.sCookieStatus;
 import static com.darkweb.genesissearchengine.constants.status.sHistoryStatus;
@@ -103,7 +106,7 @@ public class settingController extends AppCompatActivity
     {
         if(status.sIsAppPaused && (level==80 || level==15))
         {
-            dataController.getInstance().setBool(keys.LOW_MEMORY,true);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.LOW_MEMORY,true));
             finish();
         }
     }
@@ -202,34 +205,34 @@ public class settingController extends AppCompatActivity
     public class settingViewCallback implements eventObserver.eventListener{
 
         @Override
-        public void invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
-
+            return null;
         }
     }
 
     public class settingModelCallback implements eventObserver.eventListener{
 
         @Override
-        public void invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
             if(e_type == enums.etype.update_searcn){
                 status.sSearchStatus = (String)data.get(0);
                 mHomeController.onHomeButton(null);
-                dataController.getInstance().setString(keys.SEARCH_ENGINE, mSettingModel.getSearchStatus());
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE, mSettingModel.getSearchStatus()));
             }
             else if(e_type == enums.etype.update_javascript){
                 status.sJavaStatus = (boolean)data.get(0);
                 mHomeController.onUpdateJavascript();
-                dataController.getInstance().setBool(keys.JAVA_SCRIPT, status.sJavaStatus);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.JAVA_SCRIPT, status.sJavaStatus));
             }
             else if(e_type == enums.etype.update_history){
                 sHistoryStatus = (boolean)data.get(0);
-                dataController.getInstance().setBool(keys.HISTORY_CLEAR, sHistoryStatus);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HISTORY_CLEAR, sHistoryStatus));
             }
             else if(e_type == enums.etype.update_notification){
                 pluginController.getInstance().setNotificationStatus((int)data.get(0));
-                dataController.getInstance().setInt(keys.NOTIFICATION_STATUS, pluginController.getInstance().getNotificationStatus());
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.NOTIFICATION_STATUS, pluginController.getInstance().getNotificationStatus()));
 
                 int notificationStatus = pluginController.getInstance().getNotificationStatus();
                 if(notificationStatus==0){
@@ -246,13 +249,15 @@ public class settingController extends AppCompatActivity
             }
             else if(e_type == enums.etype.update_cookies){
                 sCookieStatus = (int)data.get(0);
-                dataController.getInstance().setInt(keys.COOKIE_ADJUSTABLE, sCookieStatus);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.COOKIE_ADJUSTABLE, sCookieStatus));
                 mHomeController.onUpdateCookies();
                 pluginController.getInstance().updateCookiesStatus();
             }
             else if(e_type == enums.etype.close_view){
                 finish();
+
             }
+            return null;
         }
     }
 

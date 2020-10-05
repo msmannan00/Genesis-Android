@@ -1,48 +1,58 @@
 package com.darkweb.genesissearchengine.appManager.historyManager;
 
-import com.darkweb.genesissearchengine.constants.strings;
+import android.widget.ImageView;
+import java.util.Calendar;
+import java.util.Date;
 
 public class historyRowModel
 {
     /*Private Variables*/
 
-    private int mId;
-    private String mTitle;
-    private String mHeader;
-    private String mDescription;
+    private int m_id;
+    private String m_header;
+    private String m_description;
+    private Date m_date;
+    private ImageView m_logo;
 
     /*Initializations*/
 
-    public historyRowModel(String mHeader, String mDescription,int mId) {
-        this.mId = mId;
-        this.mHeader = mHeader;
-        this.mDescription = mDescription;
-        this.mTitle = strings.EMPTY_STR;
+    public historyRowModel(String p_header, String p_description,int p_id) {
+        this.m_id = p_id;
+        this.m_header = p_header;
+        this.m_description = p_description;
+        m_date = Calendar.getInstance().getTime();
+    }
+
+    /*Variable Setters*/
+
+    public void setHeader(String p_header){
+        this.m_header = p_header;
+    }
+    public void setURL(String p_url){
+        this.m_description = p_url;
+    }
+    public void setLogo(ImageView p_logo){
+        this.m_logo = p_logo;
+    }
+    public void setDate(Date p_date) {
+        m_date = p_date;
     }
 
     /*Variable Getters*/
 
-    public void updateTitle(String mTitle){
-        this.mTitle = mTitle;
+    public String getHeader() {
+        return m_header;
     }
-    public void updateHeader(String mHeader){
-        this.mHeader = mHeader;
+    public String getDescription() {
+        return m_description;
     }
-    public void updateURL(String url){
-        this.mHeader = url;
+    public int getID() {
+        return m_id;
     }
-
-    public String getTitle(){
-        return mTitle;
+    public ImageView getLogo() {
+        return m_logo;
     }
-
-    public String getmHeader() {
-        return mHeader;
-    }
-    public String getmDescription() {
-        return mDescription;
-    }
-    public int getmId() {
-        return mId;
+    public Date getDate() {
+        return m_date;
     }
 }

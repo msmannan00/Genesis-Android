@@ -22,7 +22,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            android:usesCleartextTraffic="true">
+            android:usesCleartextTraffic="true"
+        tools:targetApi="n">
         <!-- Activities -->
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.orbotManager.orbotController"
@@ -48,6 +49,7 @@
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:launchMode="singleTop"
                 android:windowSoftInputMode="adjustResize" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
@@ -132,15 +134,12 @@
                 android:value="ca-app-pub-5074525529134731~2926711128" />
 
         <service
-                android:name="com.darkweb.genesissearchengine.pluginManager.exitManager"
-                android:stopWithTask="false" />
-        <service
                 android:name="com.darkweb.genesissearchengine.helperManager.downloadFileService"
                 android:enabled="true"
                 android:exported="false"
                 android:stopWithTask="true" />
         <service
-                android:name="org.torproject.android.service.TorService"
+                android:name="org.torproject.android.service.OrbotService"
                 android:enabled="true"
                 android:exported="false"
                 android:stopWithTask="true" />
@@ -149,7 +148,8 @@
                 android:name="org.torproject.android.service.StartTorReceiver"
                 android:exported="true"
                 android:permission="TODO"
-                android:stopWithTask="true">
+                android:stopWithTask="true"
+                tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="org.torproject.android.intent.action.USER_PRESENT" />
             </intent-filter>

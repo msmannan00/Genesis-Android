@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '29.0.2'
 
     sourceSets {
@@ -11,29 +11,17 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 16111000
-        versionName '16.1.1-BETA-2-tor-0.4.1-5-rc-orbotservice'
-        archivesBaseName = "OrbotService-$versionName"
-
+        minSdkVersion 21
+        targetSdkVersion 30
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        splits {
-            abi {
-                enable true
-                reset()
-                include 'arm64-v8a'
-                include 'x86'
-                include 'armeabi-v7a'
-                include 'x86_64'
-
-                universalApk false
-            }
         }
     }
 
@@ -43,10 +31,6 @@ android {
 
     lintOptions {
         abortOnError false
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     packagingOptions {
@@ -59,17 +43,18 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'org.torproject:tor-android-binary:0.4.1.6-dev'
-    implementation 'info.pluggabletransports.aptds:apt-dispatch-library:1.0.7'
-    implementation 'info.pluggabletransports.aptds:apt-meek-obfs4-legacy:1.0.7'
+    implementation 'org.torproject:tor-android-binary:0.4.3.6-actual'
+
+    implementation 'info.pluggabletransports.aptds:apt-dispatch-library:1.0.9'
+    implementation 'info.pluggabletransports.aptds:apt-meek-obfs4-legacy:1.0.9'
     implementation 'info.pluggabletransports.aptds:jsocksAndroid:1.0.4'
 
     implementation 'com.jaredrummler:android-shell:1.0.0'
     implementation fileTree(dir: 'libs', include: ['.so'])
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 
     implementation 'com.offbynull.portmapper:portmapper:2.0.5'
 
-    implementation 'org.briarproject:jtorctl:0.3'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'info.guardianproject:jtorctl:0.4'
+
 }

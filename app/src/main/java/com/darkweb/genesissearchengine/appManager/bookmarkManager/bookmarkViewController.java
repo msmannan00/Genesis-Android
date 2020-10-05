@@ -60,10 +60,6 @@ class bookmarkViewController
             mEmptyListNotifier.animate().setDuration(duration).alpha(0f);
             mClearButton.animate().setDuration(duration).alpha(1f);
         }
-        else {
-            mEmptyListNotifier.animate().setDuration(duration).alpha(1f);
-            mClearButton.animate().setDuration(duration).alpha(0f);
-        }
     }
 
     void removeFromList(int index)

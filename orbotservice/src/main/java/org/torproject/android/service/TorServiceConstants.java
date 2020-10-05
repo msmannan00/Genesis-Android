@@ -7,10 +7,10 @@ import android.content.Intent;
 
 public interface TorServiceConstants {
 
-
-    String DIRECTORY_TOR_DATA = "data";
+    String DIRECTORY_TOR_DATA = "tordata";
 
     String TOR_CONTROL_PORT_FILE = "control.txt";
+    String TOR_PID_FILE = "torpid";
 
     //torrc (tor config file)
     String TORRC_ASSET_KEY = "torrc";
@@ -37,6 +37,15 @@ public interface TorServiceConstants {
      * A request to Orbot to transparently start Tor services
      */
     String ACTION_START = "org.torproject.android.intent.action.START";
+    String ACTION_STOP = "org.torproject.android.intent.action.STOP";
+
+    String ACTION_START_VPN = "org.torproject.android.intent.action.START_VPN";
+    String ACTION_STOP_VPN = "org.torproject.android.intent.action.STOP_VPN";
+
+    String ACTION_START_ON_BOOT = "org.torproject.android.intent.action.START_BOOT";
+
+    int REQUEST_VPN = 7777;
+
     /**
      * {@link Intent} send by Orbot with {@code ON/OFF/STARTING/STOPPING} status
      */
@@ -95,6 +104,7 @@ public interface TorServiceConstants {
     String CMD_SIGNAL_HUP = "signal_hup";
     String CMD_NEWNYM = "newnym";
     String CMD_SET_EXIT = "setexit";
+    String CMD_ACTIVE = "ACTIVE";
 
     String PREF_BINARY_TOR_VERSION_INSTALLED = "BINARY_TOR_VERSION_INSTALLED";
 

@@ -35,7 +35,7 @@
                 android:tint="@color/black" />
 
         <EditText
-                android:id="@+id/search"
+                android:id="@+id/p_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -60,7 +60,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listview"
+            android:id="@+id/p_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="0dp"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-            android:id="@+id/empty_list"
+            android:id="@+id/p_empty_list"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:contentDescription="@string/todo"
@@ -91,7 +91,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_height="48dp">
         <Button
-                android:id="@+id/clearButton"
+                android:id="@+id/p_clearButton"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:textStyle="bold"

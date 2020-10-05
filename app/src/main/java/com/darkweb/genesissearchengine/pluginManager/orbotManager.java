@@ -7,13 +7,17 @@ import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
 import org.mozilla.gecko.PrefsHelper;
-import org.torproject.android.service.TorService;
+import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
+
+import java.util.Arrays;
+
 import static org.torproject.android.service.TorServiceConstants.ACTION_START;
 
 class orbotManager
@@ -33,7 +37,7 @@ class orbotManager
     }
 
     public void initialize(AppCompatActivity app_context, eventObserver.eventListener event){
-        initNotification(dataController.getInstance().getInt(keys.NOTIFICATION_STATUS,1));
+        initNotification((Integer) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.NOTIFICATION_STATUS,1)));
     }
 
     void startOrbot(Context context){
@@ -41,7 +45,7 @@ class orbotManager
         orbotLocalConstants.sIsManualBridge = status.sGatewayManual;
         this.mAppContext = context;
         Prefs.putBridgesEnabled(status.sGatewayManual|status.sGatewayAuto);
-        Intent mServiceIntent = new Intent(context, TorService.class);
+        Intent mServiceIntent = new Intent(context, OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(mServiceIntent);
@@ -60,17 +64,24 @@ class orbotManager
         orbotLocalConstants.sNotificationStatus = status;
     }
     void enableTorNotification(){
-        TorService.getServiceObject().enableNotification();
+        OrbotService.getServiceObject().enableNotification();
     }
     void disableTorNotification(){
-        TorService.getServiceObject().disableNotification();
+        OrbotService.getServiceObject().disableNotification();
     }
 
     void enableTorNotificationNoBandwidth(){
-        TorService service = TorService.getServiceObject();
+        OrbotService service = OrbotService.getServiceObject();
         if(service!=null){
-            TorService.getServiceObject().enableTorNotificationNoBandwidth();
+            OrbotService.getServiceObject().enableTorNotificationNoBandwidth();
         }
+    }
+
+    public void updateBridges(boolean p_status){
+        Prefs.putBridgesEnabled(p_status);
+    }
+    public void updateVPN(boolean p_status){
+        Prefs.putUseVpn(p_status);
     }
 
     /*------------------------------------------------------- POST TASK HANDLER -------------------------------------------------------*/

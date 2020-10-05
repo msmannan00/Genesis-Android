@@ -1,7 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -19,13 +18,13 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -67,10 +66,10 @@ public class tabController extends AppCompatActivity
         pluginController.getInstance().logEvent(strings.TAB_OPENED);
     }
     public void initializeViews(){
-        mEmptyListNotifier = findViewById(R.id.empty_list);
-        mSearchBar = findViewById(R.id.search);
-        mListView = findViewById(R.id.listview);
-        mClearButton = findViewById(R.id.clearButton);
+        mEmptyListNotifier = findViewById(R.id.p_empty_list);
+        mSearchBar = findViewById(R.id.p_search);
+        mListView = findViewById(R.id.p_listview);
+        mClearButton = findViewById(R.id.p_clearButton);
         mtabViewController = new tabViewController(mEmptyListNotifier, mListView, mClearButton,this);
         mClearButton.setText(R.string.tab_view_clear_tab);
     }
@@ -145,7 +144,7 @@ public class tabController extends AppCompatActivity
     {
         if(status.sIsAppPaused && (level==80 || level==15))
         {
-            dataController.getInstance().setBool(keys.LOW_MEMORY,true);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.LOW_MEMORY,true));
             finish();
         }
     }
@@ -181,7 +180,7 @@ public class tabController extends AppCompatActivity
     public class adapterCallback implements eventObserver.eventListener{
 
         @Override
-        public void invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
             if(e_type.equals(enums.etype.clear_recycler)){
                 mListView.getRecycledViewPool().clear();
@@ -209,6 +208,7 @@ public class tabController extends AppCompatActivity
                 }
                 mHomeController.initTabCount();
             }
+            return null;
         }
 
     }

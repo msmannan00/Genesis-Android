@@ -2,9 +2,6 @@
 /* See LICENSE for licensing information */
 package org.torproject.android.service.util;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import org.torproject.android.service.OrbotConstants;
 import org.torproject.android.service.TorServiceConstants;
 
 import java.net.ConnectException;
@@ -19,14 +16,10 @@ public class TorServiceUtils implements TorServiceConstants {
             socket.connect(new InetSocketAddress(ip, port), timeout);
             socket.close();
             return true;
-        } 
-
-        catch(ConnectException ce){
+        } catch (ConnectException ce) {
             //ce.printStackTrace();
             return false;
-        }
-
-        catch (Exception ex) {
+        } catch (Exception ex) {
             //ex.printStackTrace();
             return false;
         }

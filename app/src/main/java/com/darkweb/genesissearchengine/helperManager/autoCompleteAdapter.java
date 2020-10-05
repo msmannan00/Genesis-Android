@@ -41,12 +41,12 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
             TextView myTv = v.findViewById( R.id.hintCompletionUrl);
 
             if (customerNameLabel != null) {
-                if(customer.getTitle().equals(strings.EMPTY_STR)){
-                    customerNameLabel.setText(customer.getmHeader() );
+                if(customer.getHeader().equals(strings.EMPTY_STR)){
+                    customerNameLabel.setText(customer.getHeader() );
                 }else {
-                    customerNameLabel.setText(customer.getTitle());
+                    customerNameLabel.setText(customer.getHeader());
                 }
-                myTv.setText(customer.getmDescription());
+                myTv.setText(customer.getDescription());
             }
         }
         return v;
@@ -64,7 +64,7 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
                 return strings.EMPTY_STR;
             }
             historyRowModel model = (historyRowModel)(resultValue);
-            String str = model.getmHeader();
+            String str = model.getHeader();
             return str;
         }
         @Override
@@ -77,11 +77,11 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
                     }
 
 
-                    if(!customer.getTitle().equals("$TITLE") && customer.getmHeader().length()>2 && customer.getmDescription().toLowerCase().length()>2 && (customer.getmHeader().toLowerCase().contains(constraint.toString().toLowerCase()) || customer.getmDescription().toLowerCase().contains(constraint.toString().toLowerCase()))){
+                    if(!customer.getHeader().equals("$TITLE") && customer.getHeader().length()>2 && customer.getDescription().toLowerCase().length()>2 && (customer.getHeader().toLowerCase().contains(constraint.toString().toLowerCase()) || customer.getDescription().toLowerCase().contains(constraint.toString().toLowerCase()))){
                         Log.i("memememe:","memememe:"+constraint.toString().toLowerCase().replace("https://","").replace("http://",""));
-                        Log.i("memememe1:","memememe2:"+customer.getmDescription().replace("https://","").replace("http://",""));
+                        Log.i("memememe1:","memememe2:"+customer.getDescription().replace("https://","").replace("http://",""));
 
-                        if(!constraint.toString().toLowerCase().replace("https://","").replace("http://","").equals(customer.getmDescription().replace("https://","").replace("http://",""))){
+                        if(!constraint.toString().toLowerCase().replace("https://","").replace("http://","").equals(customer.getDescription().replace("https://","").replace("http://",""))){
                             suggestions.add(customer);
                         }
                     }

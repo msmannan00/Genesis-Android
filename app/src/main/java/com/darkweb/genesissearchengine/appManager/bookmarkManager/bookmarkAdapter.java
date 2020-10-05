@@ -112,16 +112,16 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
 
         void bindListView(bookmarkRowModel model) {
 
-            heaaderText = itemView.findViewById(R.id.mHeader);
-            descriptionText = itemView.findViewById(R.id.mDescription);
-            itemContainer = itemView.findViewById(R.id.item_container);
+            heaaderText = itemView.findViewById(R.id.p_header);
+            descriptionText = itemView.findViewById(R.id.p_description);
+            itemContainer = itemView.findViewById(R.id.p_item_container);
 
             String header = model.getmHeader();
 
             descriptionText.setText(model.getmHeader());
             heaaderText.setText(model.getmDescription());
-            messageButton = itemView.findViewById(R.id.message_button);
-            empty_message = itemView.findViewById(R.id.empty_list);
+            // messageButton = itemView.findViewById(R.id.message_button);
+            empty_message = itemView.findViewById(R.id.p_empty_list);
 
             setItemViewOnClickListener(itemContainer,header);
         }

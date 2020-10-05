@@ -40,7 +40,7 @@ public class constants
 
     public static final int MAX_LIST_DATA_SIZE =5000;
     public static final int MAX_LIST_SIZE =5000;
-    public static final int START_LIST_SIZE =100;
+    public static final int FETCHABLE_LIST_SIZE =100;
     public static final String DATABASE_NAME ="genesis_dbase";
 
     /*ADMOB CONSTANTS*/

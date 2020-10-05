@@ -39,7 +39,7 @@
     <string name="settings_notification">Управління сповіщенням</string>
 
 
-    <string name="bridge_basic_settings">Основні налаштування</string>
+    <string name="security_basic_settings">Основні налаштування</string>
     <string name="bridge_Automatid_title">Створюйте автоматично</string>
     <string name="bridge_Manual_desc">Забезпечте міст, який я знаю</string>
     <string name="bridge_Auto_switch">Авто</string>

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import net.freehaven.tor.control.EventHandler;
 
+import org.torproject.android.service.util.ExternalIPFetcher;
 import org.torproject.android.service.util.Prefs;
 
 import java.text.NumberFormat;
@@ -17,115 +18,101 @@ import java.util.StringTokenizer;
  */
 public class TorEventHandler implements EventHandler, TorServiceConstants {
 
-    private TorService mService;
-
-
+    private final static int BW_THRESDHOLD = 10000;
+    private OrbotService mService;
     private long lastRead = -1;
     private long lastWritten = -1;
     private long mTotalTrafficWritten = 0;
     private long mTotalTrafficRead = 0;
+    private NumberFormat mNumberFormat;
+    private HashMap<String, Node> hmBuiltNodes = new HashMap<>();
 
-    private NumberFormat mNumberFormat = null;
-
-
-    private HashMap<String,Node> hmBuiltNodes = new HashMap<String,Node>();
-
-    public class Node
-    {
-        String status;
-        String id;
-        String name;
-        String ipAddress;
-        String country;
-        String organization;
-    }
-
-    public HashMap<String,Node> getNodes ()
-    {
-        return hmBuiltNodes;
-    }
-
-    public TorEventHandler (TorService service)
-    {
+    public TorEventHandler(OrbotService service) {
         mService = service;
         mNumberFormat = NumberFormat.getInstance(Locale.getDefault()); //localized numbers!
 
     }
 
+    public HashMap<String, Node> getNodes() {
+        return hmBuiltNodes;
+    }
+
     @Override
     public void message(String severity, String msg) {
-        mService.logNotice(severity + ": " + msg);
+
+        if (severity.equalsIgnoreCase("debug"))
+            mService.debug(severity + ": " + msg);
+        else
+            mService.logNotice(severity + ": " + msg);
     }
 
     @Override
     public void newDescriptors(List<String> orList) {
+
+        for (String desc : orList)
+            mService.debug("descriptors: " + desc);
+
     }
 
     @Override
     public void orConnStatus(String status, String orName) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("orConnStatus (");
-        sb.append(parseNodeName(orName) );
-        sb.append("): ");
-        sb.append(status);
-
-        mService.debug(sb.toString());
+        String sb = "orConnStatus (" +
+                parseNodeName(orName) +
+                "): " +
+                status;
+        mService.debug(sb);
     }
 
     @Override
     public void streamStatus(String status, String streamID, String target) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("StreamStatus (");
-        sb.append((streamID));
-        sb.append("): ");
-        sb.append(status);
-
-        mService.logNotice(sb.toString());
+        String sb = "StreamStatus (" +
+                (streamID) +
+                "): " +
+                status;
+        mService.debug(sb);
     }
 
     @Override
     public void unrecognized(String type, String msg) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Message (");
-        sb.append(type);
-        sb.append("): ");
-        sb.append(msg);
-
-        mService.logNotice(sb.toString());
+        String sb = "Message (" +
+                type +
+                "): " +
+                msg;
+        mService.logNotice(sb);
     }
 
     @Override
     public void bandwidthUsed(long read, long written) {
 
-        if (read != lastRead || written != lastWritten)
-        {
-            /**
-            StringBuilder sb = new StringBuilder();
-            sb.append(formatCount(read));
-            sb.append(" \u2193");
-            sb.append(" / ");
-            sb.append(formatCount(written));
-            sb.append(" \u2191");
+        if (lastWritten > BW_THRESDHOLD || lastRead > BW_THRESDHOLD) {
 
             int iconId = R.drawable.ic_stat_tor;
 
             if (read > 0 || written > 0)
                 iconId = R.drawable.ic_stat_tor_xfer;
 
-            mService.showToolbarNotification(sb.toString(), mService.getNotifyId(), iconId);
-             **/
+            String sb = formatCount(read) +
+                    " \u2193" +
+                    " / " +
+                    formatCount(written) +
+                    " \u2191";
+            mService.showToolbarNotification(sb, mService.getNotifyId(), iconId);
 
             mTotalTrafficWritten += written;
             mTotalTrafficRead += read;
+
+            mService.sendCallbackBandwidth(lastWritten, lastRead, mTotalTrafficWritten, mTotalTrafficRead);
+
+            lastWritten = 0;
+            lastRead = 0;
         }
 
-        lastWritten = written;
-        lastRead = read;
+        lastWritten += written;
+        lastRead += read;
 
-        mService.sendCallbackBandwidth(lastWritten, lastRead, mTotalTrafficWritten, mTotalTrafficRead);
     }
 
     private String formatCount(long count) {
@@ -135,9 +122,9 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
         // Over 2Mb, returns "xxx.xxMb"
         if (mNumberFormat != null)
             if (count < 1e6)
-                return mNumberFormat.format(Math.round((float)((int)(count*10/1024))/10)) + "kbps";
+                return mNumberFormat.format(Math.round((float) ((int) (count * 10 / 1024)) / 10)) + "kbps";
             else
-                return mNumberFormat.format(Math.round((float)((int)(count*100/1024/1024))/100)) + "mbps";
+                return mNumberFormat.format(Math.round((float) ((int) (count * 100 / 1024 / 1024)) / 100)) + "mbps";
         else
             return "";
 
@@ -159,11 +146,14 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
             sb.append(": ");
 
             StringTokenizer st = new StringTokenizer(path, ",");
-            Node node = null;
+            Node node;
+
+            boolean isFirstNode = true;
+            int nodeCount = st.countTokens();
 
             while (st.hasMoreTokens()) {
                 String nodePath = st.nextToken();
-                node = new Node();
+                String nodeId = null, nodeName = null;
 
                 String[] nodeParts;
 
@@ -173,141 +163,81 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
                     nodeParts = nodePath.split("~");
 
                 if (nodeParts.length == 1) {
-                    node.id = nodeParts[0].substring(1);
-                    node.name = node.id;
+                    nodeId = nodeParts[0].substring(1);
+                    nodeName = nodeId;
                 } else if (nodeParts.length == 2) {
-                    node.id = nodeParts[0].substring(1);
-                    node.name = nodeParts[1];
+                    nodeId = nodeParts[0].substring(1);
+                    nodeName = nodeParts[1];
+                }
+
+                if (nodeId == null)
+                    continue;
+
+                node = hmBuiltNodes.get(nodeId);
+
+                if (node == null) {
+                    node = new Node();
+                    node.id = nodeId;
+                    node.name = nodeName;
                 }
 
                 node.status = status;
 
                 sb.append(node.name);
 
+                if (!TextUtils.isEmpty(node.ipAddress))
+                    sb.append("(").append(node.ipAddress).append(")");
+
                 if (st.hasMoreTokens())
                     sb.append(" > ");
-            }
 
-            if (Prefs.useDebugLogging())
-                mService.debug(sb.toString());
-            else if (status.equals("BUILT"))
-                mService.logNotice(sb.toString());
-            else if (status.equals("CLOSED"))
-                mService.logNotice(sb.toString());
+                if (status.equals("EXTENDED")) {
 
-            if (Prefs.expandedNotifications()) {
-                //get IP from last nodename
-                if (status.equals("BUILT")) {
+                    if (isFirstNode) {
+                        hmBuiltNodes.put(node.id, node);
 
-                    // if (node.ipAddress == null)
-                    //   mService.exec(new ExternalIPFetcher(node));
+                        if (node.ipAddress == null && (!node.isFetchingInfo) && Prefs.useDebugLogging()) {
+                            node.isFetchingInfo = true;
+                            mService.exec(new ExternalIPFetcher(mService, node, OrbotService.mPortHTTP));
+                        }
 
-                    hmBuiltNodes.put(circID, node);
+                        isFirstNode = false;
+                    }
+                } else if (status.equals("BUILT")) {
+                    //   mService.logNotice(sb.toString());
+
+                    if (Prefs.useDebugLogging() && nodeCount > 3)
+                        mService.debug(sb.toString());
+                } else if (status.equals("CLOSED")) {
+                    //  mService.logNotice(sb.toString());
+                    hmBuiltNodes.remove(node.id);
                 }
 
-                if (status.equals("CLOSED")) {
-                    hmBuiltNodes.remove(circID);
-
-                }
             }
+
+
         }
+
 
     }
 
-    /**
-    private class ExternalIPFetcher implements Runnable {
-
-        private Node mNode;
-        private int MAX_ATTEMPTS = 3;
-        private final static String ONIONOO_BASE_URL = "https://onionoo.torproject.org/details?fields=country_name,as_name,or_addresses&lookup=";
-
-        public ExternalIPFetcher (Node node)
-        {
-            mNode = node;
-        }
-
-        public void run ()
-        {
-
-            for (int i = 0; i < MAX_ATTEMPTS; i++)
-            {
-                if (mService.getControlConnection() != null)
-                {
-                    try {
-
-                        URLConnection conn = null;
-
-                        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8118));
-                        conn = new URL(ONIONOO_BASE_URL + mNode.id).openConnection(proxy);
-
-                        conn.setRequestProperty("Connection","Close");
-                        conn.setConnectTimeout(60000);
-                        conn.setReadTimeout(60000);
-
-                        InputStream is = conn.getInputStream();
-
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-                        // getting JSON string from URL
-
-                        StringBuffer json = new StringBuffer();
-                        String line = null;
-
-                        while ((line = reader.readLine())!=null)
-                            json.append(line);
-
-                        JSONObject jsonNodeInfo = new org.json.JSONObject(json.toString());
-
-                        JSONArray jsonRelays = jsonNodeInfo.getJSONArray("relays");
-
-                        if (jsonRelays.length() > 0)
-                        {
-                            mNode.ipAddress = jsonRelays.getJSONObject(0).getJSONArray("or_addresses").getString(0).split(":")[0];
-                            mNode.country = jsonRelays.getJSONObject(0).getString("country_name");
-                            mNode.organization = jsonRelays.getJSONObject(0).getString("as_name");
-
-                            StringBuffer sbInfo = new StringBuffer();
-                            sbInfo.append(mNode.ipAddress);
-
-                            if (mNode.country != null)
-                                sbInfo.append(' ').append(mNode.country);
-
-                            if (mNode.organization != null)
-                                sbInfo.append(" (").append(mNode.organization).append(')');
-
-                            mService.logNotice(sbInfo.toString());
-
-                        }
-
-                        reader.close();
-                        is.close();
-
-                        break;
-
-                    } catch (Exception e) {
-
-                        mService.debug ("Error getting node details from onionoo: " + e.getMessage());
-
-
-                    }
-                }
-            }
-        }
-
-
-    }**/
-
-    private String parseNodeName(String node)
-    {
-        if (node.indexOf('=')!=-1)
-        {
-            return (node.substring(node.indexOf("=")+1));
-        }
-        else if (node.indexOf('~')!=-1)
-        {
-            return (node.substring(node.indexOf("~")+1));
-        }
-        else
+    private String parseNodeName(String node) {
+        if (node.indexOf('=') != -1) {
+            return (node.substring(node.indexOf("=") + 1));
+        } else if (node.indexOf('~') != -1) {
+            return (node.substring(node.indexOf("~") + 1));
+        } else
             return node;
+    }
+
+    public static class Node {
+        public String status;
+        public String id;
+        public String name;
+        public String ipAddress;
+        public String country;
+        public String organization;
+
+        public boolean isFetchingInfo = false;
     }
 }

@@ -34,6 +34,7 @@ import androidx.core.content.ContextCompat;
 
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.example.myapplication.BuildConfig;
 
 import java.io.File;
@@ -45,6 +46,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -142,7 +144,7 @@ public class helperMethod
     }
 
     public static void rateApp(AppCompatActivity context){
-        dataController.getInstance().setBool(keys.IS_APP_RATED,true);
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
     }
 
@@ -152,6 +154,24 @@ public class helperMethod
                 .setChooserTitle("Hi! Check out this Awesome App")
                 .setSubject("Hi! Check out this Awesome App")
                 .setText("Genesis | Onion Search | http://play.google.com/store/apps/details?id=" + context.getPackageName())
+                .startChooser();
+    }
+
+    public static void shareApp(AppCompatActivity context, String p_share, String p_title) {
+        ShareCompat.IntentBuilder.from(context)
+                .setType("text/plain")
+                .setChooserTitle("Hi! Check out this Awesome URL | " + p_title)
+                .setSubject("Hi! Check out this Awesome URL | " + p_title)
+                .setText("Website URL | " + p_share)
+                .startChooser();
+    }
+
+    public static void shareURL(AppCompatActivity context, String p_share) {
+        ShareCompat.IntentBuilder.from(context)
+                .setType("text/plain")
+                .setChooserTitle("Hi! Check out these Awesome URLS")
+                .setSubject("Hi! Check out these Awesome URL")
+                .setText("Website URL | " + p_share)
                 .startChooser();
     }
 

@@ -61,25 +61,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="RtlHardcoded,UselessParent">
 
-                <ImageButton
-                        android:id="@+id/switchEngine"
-                        android:layout_width="39dp"
-                        android:layout_height="39dp"
-                        android:layout_marginStart="9dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="0dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/todo"
-                        android:onClick="onSwitchSearch"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/genesis_logo" />
-
                 <AutoCompleteTextView
-                        android:id="@+id/search"
+                        android:id="@+id/p_search"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -92,7 +78,7 @@
                         android:inputType="textNoSuggestions"
                         android:importantForAutofill="no"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:selectAllOnFocus="true"
                         android:text="@string/homeUrl"
@@ -102,20 +88,28 @@
                         android:textSize="16sp"
                         tools:targetApi="o" />
 
-                <Button
-                        android:id="@+id/newButtonInvoke"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/home_tab_text"
-                        android:textSize="12.5sp"
-                        android:layout_marginBottom="0dp"
-                        android:background="@xml/sc_generic_tab_button"
-                        android:contentDescription="@string/todo"
-                        android:scaleType="fitCenter"
-                        android:onClick="onOpenTabView"
-                        android:tint="@color/black" />
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:onClick="onOpenTabViewBoundary"
+                        android:paddingBottom="1dp">
+                        <Button
+                            android:id="@+id/newButtonInvoke"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginTop="17dp"
+                            android:text="@string/home_tab_text"
+                            android:clickable="false"
+                            android:textSize="12.5sp"
+                            android:layout_marginBottom="0dp"
+                            android:background="@xml/sc_generic_tab_button"
+                            android:contentDescription="@string/todo"
+                            android:scaleType="fitCenter"
+                            android:tint="@color/black" />
+                    </LinearLayout>
 
                 <ImageButton
                         android:id="@+id/menu"
@@ -199,7 +193,6 @@
                     android:onClick="onLoadProxy"
                     android:src="@xml/ic_gateway_splash"
                     android:tint="@color/black"
-
                     app:layout_constraintBottom_toTopOf="@+id/loadingText"
                     app:layout_constraintEnd_toStartOf="@+id/Connect"
                     android:contentDescription="@string/todo" />

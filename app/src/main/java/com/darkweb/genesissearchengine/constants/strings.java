@@ -93,13 +93,19 @@ public class strings
     public static final String BANNED_TITLE = "Is Tor Bannned In Your Country?";
     public static final String BANNED_DESC = "Enable free GATEWAY to tunnel through banned configuration | Use it only if tor is banned in your country";
 
+    /*History Manager*/
+    public static final String H_HISTORY_TITLE = "history";
+
+
     /*Tab Manager*/
 
     public static final String CLEAR_TABS = "CLEAR TABS";
 
     /*Bridge Manager*/
 
-    public static final String CUSTOM_BRIDGE = "obfs4";
+    public static final String CUSTOM_BRIDGE_OBFS4 = "obfs4";
+    public static final String CUSTOM_BRIDGE_MEEK = "meek";
+    public static final String CUSTOM_BRIDGE_CUSTOM = "custom";
 
     /*Text Manager*/
 

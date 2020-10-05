@@ -1,11 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.crashlytics.android.Crashlytics;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-
-import io.fabric.sdk.android.Fabric;
 
 class fabricManager
 {
@@ -23,7 +19,5 @@ class fabricManager
     }
 
     private void initialize(){
-        Fabric.with(mAppContext, new Crashlytics());
-        mEvent.invokeObserver(null,null);
     }
 }

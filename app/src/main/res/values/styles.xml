@@ -40,4 +40,40 @@
         <item name="android:windowEnterAnimation">@anim/popup_anim_in</item>
         <item name="android:windowExitAnimation">@anim/popup_anim_out</item>
     </style>
+
+    <style name="CFDialog.Title">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/cfdialog_title_font_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="CFDialog.Message">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/cfdialog_desc_font_color</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="CFDialog.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
 </resources>

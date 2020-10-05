@@ -6,16 +6,14 @@
     <ScrollView
             android:layout_width="match_parent"
             android:isScrollContainer="true"
-            android:id="@+id/scollview"
+            android:id="@+id/p_scollview"
             android:layout_height="match_parent">
-
         <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingBottom="50dp"
                 android:layout_height="wrap_content">
-
             <!-- Title Header -->
             <LinearLayout
                     android:layout_width="match_parent"
@@ -24,35 +22,35 @@
                     android:orientation="horizontal"
                     android:layout_height="52dp">
                 <ImageButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginBottom="0dp"
-                        android:layout_marginTop="12dp"
-                        android:id="@+id/newButton"
-                        android:onClick="onClose"
-                        android:scaleType="fitCenter"
-                        android:tint="@color/black"
-                        android:src="@drawable/back_arrow"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/todo"/>
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:onClick="onClose"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="2.5"
+                    android:tint="@color/black"
+                    android:src="@xml/ic_arrow_back"
+                    android:background="@xml/sc_ripple_default_round"
+                    android:contentDescription="@string/todo"/>
                 <TextView
-                        android:textColor="@color/text_color_v1"
-                        android:textSize="19sp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="12dp"
-                        android:textStyle="bold"
-                        android:layout_marginStart="30dp"
-                        android:text="@string/bridge_header"
-                        />
+                    android:textColor="@color/text_color_v1"
+                    android:onClick="onClose"
+                    android:textSize="17sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="40"
+                    android:layout_marginTop="-3dp"
+                    android:gravity="center_vertical|start"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/bridge_header"
+                    />
             </LinearLayout>
 
             <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/white_dark" />
 
             <!-- Title Header -->
@@ -61,10 +59,10 @@
                     android:background="@color/white"
                     android:layout_marginBottom="0dp"
                     android:orientation="horizontal"
-                    android:layout_height="65dp">
+                    android:layout_height="40dp">
                 <TextView
                         android:textColor="@color/cursor_blue"
-                        android:textSize="17.5sp"
+                        android:textSize="16sp"
                         android:layout_width="0dp"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
@@ -83,7 +81,7 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                 <TextView
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:layout_width="0dp"
                         android:paddingBottom="30dp"
                         android:layout_height="wrap_content"
@@ -103,7 +101,7 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                 <TextView
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
@@ -124,20 +122,13 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content"
                     tools:ignore="RtlSymmetry">
-                <Switch
-                        android:id="@+id/bridgeSwitchAuto"
-                        android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/orbot_settings_bridges" />
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/topPanel"
+                    android:id="@+id/p_top_panel"
                     android:layout_width="match_parent"
-                    android:background="@xml/sc_rounded_corner_bridge"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd = "20dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd = "00dp"
                     android:paddingEnd="10dp"
                     android:layout_marginBottom="0dp"
                     android:layout_marginTop="-8dp"
@@ -149,109 +140,119 @@
                 <RadioGroup
                         android:layout_width="match_parent"
                         android:orientation="vertical"
-                        android:id="@+id/proxyGroup"
+                        android:id="@+id/p_proxyGroup"
                         android:paddingStart="10dp"
                         android:layout_height="match_parent" >
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white_dark" />
                     <RadioButton
-                            android:id="@+id/bridge_obfs"
+                            android:id="@+id/p_bridge_obfs"
                             android:layout_width="match_parent"
                             android:checked="true"
+                            android:textSize="14sp"
+                            android:paddingTop="15dp"
+                        android:buttonTint="@color/colorProgressGradientEnd"
+                            android:paddingBottom="15dp"
                             android:onClick="onObfsChecked"
                             android:layout_height="wrap_content"
-                            android:text="obfs4 (Recommended)" />
+                            android:text="@string/bridge_type_obfs4" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white_dark" />
                     <RadioButton
-                            android:id="@+id/bridge_china"
-                            android:layout_width="match_parent"
-                            android:onClick="onMeekChecked"
-                            android:checked="false"
-                            android:layout_height="wrap_content"
-                            android:text="Meek-azure (China)" />
+                        android:id="@+id/p_bridge_china"
+                        android:layout_width="match_parent"
+                        android:onClick="onMeekChecked"
+                        android:checked="false"
+                        android:textSize="14sp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorProgressGradientEnd"
+                        android:text="@string/bridge_type_meek" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white_dark" />
+                    <RadioButton
+                        android:id="@+id/p_custom_bridge"
+                        android:layout_width="match_parent"
+                        android:onClick="onCustomChecked"
+                        android:checked="false"
+                        android:textSize="14sp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorProgressGradientEnd"
+                        android:text="@string/bridge_Manual_desc" />
                 </RadioGroup>
-            </LinearLayout>
 
-
-            <LinearLayout
+                <LinearLayout
+                    android:id="@+id/p_bottom_panel"
                     android:layout_width="match_parent"
-                    android:layout_marginEnd = "20dp"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-                <TextView
-                        android:textSize="16sp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginStart="20dp"
-                        android:textStyle="bold"
-                        android:text="@string/bridge_Manual_desc"
-                        />
-            </LinearLayout>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginEnd = "10dp"
-                    android:paddingEnd="10dp"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginTop="-12dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    tools:ignore="RtlSymmetry">
-                <Switch
-                        android:id="@+id/bridgeSwitchManual"
-                        android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/orbot_settings_bridges" />
-            </LinearLayout>
-            <LinearLayout
-                    android:id="@+id/bottomPanel"
-                    android:layout_width="match_parent"
-                    android:background="@xml/sc_rounded_corner_bridge"
-                    android:paddingEnd="10dp"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginTop="-8dp"
+                    android:paddingEnd="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="0dp"
+                    android:onClick="onCustomChecked"
                     android:paddingTop="10dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd = "20dp"
                     android:paddingBottom="10dp"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
+                    android:weightSum="15"
                     tools:ignore="RtlSymmetry">
-                <EditText
+                    <EditText
                         android:background="@xml/sc_generic_input"
                         android:textColorHighlight="@color/text_color_highlight_v1"
                         android:textCursorDrawable="@xml/sc_search_cursor_state"
-                        android:id="@+id/port1"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
+                        android:id="@+id/p_port_1"
+                        android:layout_width="0dp"
+                        android:layout_weight="11"
+                        android:layout_height="35dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
                         android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
                         android:ems="10"
-                        android:inputType="text"
                         android:maxLines="1"
                         android:hint="@string/bridge_port_hint"
                         android:textSize="14.5sp"
-                        android:text="" />
-                <Button
-                        android:layout_marginTop="15dp"
-                        android:id="@+id/bridgeButton"
+                        android:text=""
+                        android:autofillHints=""
+                        android:inputType="text" />
+                    <Button
+                        android:layout_marginTop="-1dp"
+                        android:id="@+id/p_bridge_button"
                         android:textSize="13sp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
                         android:textColor="@color/white"
-                        android:paddingLeft="9dp"
                         android:onClick="requestBridges"
-                        android:paddingRight="9dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:background="@xml/sc_rounded_corner_suggestion_settings"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="5dp"
                         android:text="@string/bridge_request" />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:id="@+id/p_custom_bridge_blocker"
+                    android:onClick="onCustomChecked"
+                    android:layout_height="63dp"
+                    android:layout_marginTop="-63dp"
+                    android:contentDescription="@string/todo">
+
+                </ImageView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/white_dark" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

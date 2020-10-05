@@ -5,7 +5,10 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+
+import java.util.Arrays;
 import java.util.Collections;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
@@ -102,8 +105,8 @@ class settingModel
         }
         if(status.sFontAdjustable != mFontAdjustable)
         {
-            dataController.getInstance().setBool(keys.FONT_ADJUSTABLE, mFontAdjustable);
-            dataController.getInstance().setInt(keys.FONT_SIZE,100);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.COOKIE_ADJUSTABLE,mFontAdjustable));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.FONT_SIZE,100));
 
             status.sFontAdjustable = mFontAdjustable;
             status.sFontSize = 100;
@@ -117,8 +120,8 @@ class settingModel
                 mFontSize = 1;
             }
 
-            dataController.getInstance().setInt(keys.FONT_SIZE,(int) mFontSize);
-            dataController.getInstance().setBool(keys.FONT_ADJUSTABLE,false);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.FONT_SIZE,mFontSize));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.FONT_ADJUSTABLE,false));
 
             status.sFontSize = mFontSize;
             status.sFontAdjustable = false;
@@ -129,7 +132,7 @@ class settingModel
         if(status.sCookieStatus != mCookieStatus)
         {
             status.sCookieStatus = mCookieStatus;
-            dataController.getInstance().setInt(keys.COOKIE_ADJUSTABLE,status.sCookieStatus);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.COOKIE_ADJUSTABLE,status.sCookieStatus));
             mEvent.invokeObserver(Collections.singletonList(mCookieStatus), enums.etype.update_cookies);
         }
         mEvent.invokeObserver(Collections.singletonList(mHistoryStatus), enums.etype.close_view);

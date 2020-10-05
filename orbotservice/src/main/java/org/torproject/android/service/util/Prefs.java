@@ -1,11 +1,9 @@
 
 package org.torproject.android.service.util;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import org.torproject.android.service.OrbotConstants;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.util.Locale;

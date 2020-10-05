@@ -13,7 +13,7 @@
     <color name="blue_dark_v2">#55212d45</color>
 
     <color name="black_blue">#99bbff</color>
-    <color name="black_blue_dark">#e6eeff</color>
+    <color name="black_blue_dark">#ccdcff</color>
     <color name="black">#000000</color>
     <color name="headerblack">#212f45</color>
     <color name="text_color_v1">#4d4d4d</color>
@@ -21,9 +21,9 @@
 
     <color name="clear_alpha_white">#E6FFFFFF</color>
     <color name="clear_alpha">#00000000 </color>
-    <color name="holo_dark_gray_alpha">#33000000</color>
+    <color name="holo_dark_gray_alpha">#88000000</color>
     <color name="holo_dark_gray_alpha_v1">#99000000</color>
-    <color name="holo_dark_gray">#737373</color>
+    <color name="holo_dark_gray">#999999</color>
     <color name="holo_gray">#b3b3b3</color>
     <color name="float_white">#bfbfbf</color>
     <color name="button_gray">#d9d9d9</color>

@@ -39,7 +39,7 @@
     <string name="settings_notification">管理通知</string>
 
 
-    <string name="bridge_basic_settings">基本设置</string>
+    <string name="security_basic_settings">基本设置</string>
     <string name="bridge_Automatid_title">自动创建</string>
     <string name="bridge_Manual_desc">提供我知道的桥梁</string>
     <string name="bridge_Auto_switch">汽车</string>

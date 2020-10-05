@@ -2,7 +2,7 @@
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
-    <string name="SearchHint">Search History</string>
+    <string name="SearchHint">Search ...</string>
     <string name="SearchHintMain">Search or type web address</string>
     <string name="homeUrl" translatable="false">https://genesis.onion</string>
     <string name="errorTiyle">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
@@ -37,16 +37,20 @@
     <string name="settings_notification">Manage Notification</string>
 
     <!-- Bridge Settings -->
-    <string name="bridge_basic_settings">Basic Settings</string>
+    <string name="security_basic_settings">Security Settings</string>
+    <string name="bridge_basic_settings">Bridge Settings</string>
     <string name="bridge_Automatid_title">Create Automatically</string>
     <string name="bridge_Manual_desc" translatable="false">Provide a Bridge I know</string>
     <string name="bridge_Auto_switch">Auto</string>
     <string name="bridge_Manual_switch">Manual</string>
     <string name="bridge_port_hint">address:port Single Line</string>
-    <string name="bridge_header" translatable="false">Bridge Settings</string>
+    <string name="bridge_header" translatable="false">Proxy Settings | Bridges</string>
     <string name="bridge_desc" translatable="false">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
     <string name="bridge_default_title">Select Default Bridge</string>
-    <string name="bridge_request" translatable="false">Request Bridge</string>
+    <string name="bridge_request" translatable="false">Request</string>
+    <string name="bridge_type_obfs4" translatable="false">obfs4 (Recommended)</string>
+    <string name="bridge_type_meek" translatable="false">Meek-azure (China)</string>
+
 
     <!-- Message Manager -->
     <string name="WELCOME_MESSAGE_TITLE">Welcome | Hidden  Web Gateway</string>
@@ -106,7 +110,7 @@
     <string name="DOWNLOAD_POSITIVE">Download</string>
     <string name="BRIDGE_MAIL_TITLE">Request New Bridge</string>
     <string name="BRIDGE_MAIL_MESSAGE">You can get a bridge address through email, the web or by scanning a bridge QR code. Select \'Email\' below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start.</string>
-    <string name="BRIDGE_MAIL_POSITIVE">EMAIL</string>
+    <string name="BRIDGE_MAIL_POSITIVE">Send Email</string>
     <string name="LONG_URL_TITLE">URL Notification</string>
     <string name="LONG_URL_MESSAGE" />
     <string name="LONG_URL_OPTION_1">Open In New Tab</string>
@@ -228,6 +232,17 @@
     <string name="popup_rate">Rate This App</string>
     <string name="popup_share">Share</string>
 
+    <!-- History Popup Menu -->
+    <string name="HP_OPEN">Open Tabs</string>
+    <string name="HP_COPY">Copy</string>
+    <string name="HP_SHARE">Share</string>
+    <string name="HP_CLEAR_LONG_PRESS">Clear Selection</string>
+    <string name="HP_OPEN_CURRENT_TAB">Open in current tab</string>
+    <string name="HP_OPEN_NEW_TAB">Open in new tab</string>
+    <string name="HP_DELETE">Delete</string>
+    <string name="HP_SELECT_MULTUPLE_HEADER">History</string>
+    <string name="HP_CLEAR_HISTORY">Clear</string>
+
     <!-- Language Manager Manager -->
     <string name="LANGUAGE_HEADER" translatable="false">Language</string>
     <string name="LANGUAGE_MESSAGE_TITLE" translatable="false">Change Language</string>
@@ -242,18 +257,20 @@
 
     <!-- Orbot Settings -->
     <string name="orbot_settings_warning">⚠️ Warning</string>
+    <string name="orbot_customizes_bridges" translatable="false">Customize Bridges</string>
     <string name="orbot_settings_bridges" translatable="false">Enable Bridges</string>
-    <string name="gateway_info" translatable="false">Enable Gateway</string>
+    <string name="orbot_vpn_bridges" translatable="false">Enable VPN Serivce</string>
+    <string name="gateway_info" translatable="false">Enable Bridge Gateway</string>
     <string name="gateway_button" translatable="false">Enable Gateway</string>
     <string name="loading_please_wait">Loading Please Wait</string>
     <string name="orbot_option_title_reset">App Stuck in loading</string>
     <string name="orbot_option_desc_reset">Clear Storage</string>
-    <string name="orbot_option_desc_reset_button">Open Settings</string>
+    <string name="orbot_option_desc_reset_button">Settings</string>
 
     <!-- Orbot View -->
     <string name="orbot_header">Proxy Settings</string>
     <string name="orbot_desc">We connect you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
-    <string name="orbot_option_title">Internet is censored here</string>
+    <string name="orbot_option_title">Internet is censored here (Bypass Firewall)</string>
     <string name="orbot_option_desc">Bypass Firewall</string>
     <string name="orbot_option_warning_slow_speed" translatable="false">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
 

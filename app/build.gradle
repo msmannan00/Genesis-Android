@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: 'variables.gradle'
 
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'io.fabric'
 
 ext {
@@ -109,7 +109,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.preference:preference:1.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
@@ -130,6 +130,7 @@ dependencies {
 
     /*Firefox ABI Splits*/
     implementation "org.mozilla.components:browser-engine-gecko:$mozilla_components_version"
+    implementation "org.mozilla.components:browser-icons:$mozilla_components_icon_version"
     implementation "org.mozilla.geckoview:geckoview:$gecko_nightly_version"
 
     /*Alert Dialog*/
@@ -140,18 +141,19 @@ dependencies {
 
 
     /*Crashlytics*/
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.flurry.android:analytics:12.4.0@aar'
 
     /*View Animator*/
-    implementation 'com.daimajia.easing:library:2.1@aar'
-    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation 'com.daimajia.easing:library:2.4@aar'
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
 
     /*Orbot Service*/
     implementation project(path: ':orbotservice')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.apl-devs:appintro:v4.2.2'
 
+    /*Helper Libraries*/
+    implementation 'com.chauthai.overscroll:overscroll-bouncy:0.1.1'
 }
 
 apply plugin: 'com.android.application'

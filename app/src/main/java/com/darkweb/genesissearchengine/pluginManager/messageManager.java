@@ -559,42 +559,6 @@ class messageManager
                 });
     }
 
-    private void torBanned()
-    {
-        /*isDialogDismissed = true;
-
-        popup_instance.setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle(app_context.getString(R.string.BANNED_TITLE)
-                .setBackgroundColor(app_context.getResources().getColor(R.color.holo_dark_gray_alpha))
-                .setTextColor(app_context.getResources().getColor(R.color.black))
-                .setMessage(app_context.getString(R.string.BANNED_DESC)
-                .onDismissListener(dialog -> is_popup_open = false)
-                .onDismissListener(dialog -> startHome());
-
-                String btn_text;
-
-                if(status.sGateway){
-                    btn_text = "Disable Tor Gateway";
-                }
-                else {
-                    btn_text = "Enable Tor Gateway";
-                }
-
-                popup_instance.addButton(btn_text, -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, (tempDialog, which) ->
-                {
-                    isDialogDismissed = false;
-                    onFinish();
-                    event.invokeObserver(Collections.singletonList(!status.sGateway), enums.etype.connect_vpn);
-                });*/
-    }
-
-    private void startHome(){
-        if(!isDialogDismissed && data.get(0)==null){
-            event.invokeObserver(null, enums.etype.start_home);
-        }
-        is_popup_open = false;
-    }
-
     void onReset(){
         onFinish();
         dialog_main = null;
@@ -670,10 +634,6 @@ class messageManager
 
                 case version_warning:
                     versionWarning();
-                    break;
-
-                case tor_banned:
-                    torBanned();
                     break;
 
                 case download_file_long_press:

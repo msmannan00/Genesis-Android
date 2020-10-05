@@ -1,8 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
@@ -11,11 +10,12 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 //import org.torproject.android.service.wrapper.orbotLocalConstants;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -150,57 +150,68 @@ public class pluginController
     }
     public void updateCookiesStatus(){
     }
+    public void updateBridges(boolean p_status){
+        orbotManager.getInstance().updateBridges(p_status);
+    }
+    public void updateVPN(boolean p_status){
+        orbotManager.getInstance().updateVPN(p_status);
+    }
 
     /*------------------------------------------------ CALLBACK LISTENERS------------------------------------------------------------*/
 
     /*Ad Manager*/
     private class admobCallback implements eventObserver.eventListener{
         @Override
-        public void invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, enums.etype event_type)
         {
             mHomeController.onSetBannerAdMargin();
+            return null;
         }
     }
 
     /*Analytics Manager*/
     private class analyticCallback implements eventObserver.eventListener{
         @Override
-        public void invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, enums.etype event_type)
         {
             mAnalyticManager.logUser();
+            return null;
         }
     }
 
     /*Fabric Manager*/
     private class fabricCallback implements eventObserver.eventListener{
         @Override
-        public void invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, enums.etype event_type)
         {
+            return null;
         }
     }
 
     /*Firebase Manager*/
     private class firebaseCallback implements eventObserver.eventListener{
         @Override
-        public void invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, enums.etype event_type)
         {
+            return null;
         }
     }
 
     /*Lang Manager*/
     private class langCallback implements eventObserver.eventListener{
         @Override
-        public void invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, enums.etype event_type)
         {
+            return null;
         }
     }
 
     /*Onion Proxy Manager*/
     private class orbotCallback implements eventObserver.eventListener{
         @Override
-        public void invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, enums.etype event_type)
         {
-
+            return null;
         }
     }
 
@@ -218,14 +229,14 @@ public class pluginController
     /*Message Manager*/
     private class messageCallback implements eventObserver.eventListener{
         @Override
-        public void invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, enums.etype event_type)
         {
             if(event_type.equals(enums.etype.welcome))
             {
                 mHomeController.onLoadURL(data.get(0).toString());
             }
             else if(event_type.equals(enums.etype.cancel_welcome)){
-                dataController.getInstance().setBool(keys.IS_WELCOME_ENABLED,false);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_WELCOME_ENABLED,false));
             }
             else if(event_type.equals(enums.etype.ignore_abi)){
                 //mHomeController.ignoreAbiError();
@@ -240,7 +251,7 @@ public class pluginController
                 }
             }
             else if(event_type.equals(enums.etype.clear_history)){
-                dataController.getInstance().clearHistory();
+                dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
                 mContextManager.getHistoryController().onclearData();
                 mHomeController.onClearSession();
                 dataController.getInstance().clearTabs();
@@ -260,7 +271,7 @@ public class pluginController
                 }
             }
             else if(event_type.equals(enums.etype.app_rated)){
-                dataController.getInstance().setBool(keys.IS_APP_RATED,true);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
             }
             else if(event_type.equals(enums.etype.download_file)){
                 mHomeController.onDownloadFile();
@@ -285,6 +296,7 @@ public class pluginController
                 mHomeController.initTab();
                 activityContextManager.getInstance().getTabController().finish();
             }
+            return null;
         }
     }
 }
