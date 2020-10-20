@@ -10,7 +10,7 @@ import java.util.UUID;
 
 class analyticManager
 {
-    /*Private Variables*/
+    /*Private Variables */
 
     private AppCompatActivity mAppContext;
     private String mUniqueID = null;

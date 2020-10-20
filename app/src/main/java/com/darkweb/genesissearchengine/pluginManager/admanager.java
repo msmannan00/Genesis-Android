@@ -10,7 +10,7 @@ import static com.darkweb.genesissearchengine.constants.status.sPaidStatus;
 class adManager
 {
 
-    /*Private Variables*/
+    /*Private Variables */
 
     private AppCompatActivity mAppContext;
     private eventObserver.eventListener mEvent;
