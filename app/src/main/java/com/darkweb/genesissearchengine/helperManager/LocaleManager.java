@@ -4,7 +4,6 @@ package com.darkweb.genesissearchengine.helperManager;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -55,7 +54,7 @@ public class LocaleManager {
 
     private static void setContextLocale(Context context, Locale selectedLocale) {
         Configuration configuration = context.getResources().getConfiguration();
-        configuration.locale = new Locale(status.sLanguage);
+        configuration.locale = new Locale(status.sSettingLanguage);
         context.getResources().updateConfiguration(
                 configuration,
                 context.getResources().getDisplayMetrics()

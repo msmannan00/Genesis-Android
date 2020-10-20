@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.dataManager;
 
 import android.annotation.SuppressLint;
-import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
+
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
@@ -15,7 +15,6 @@ import java.util.Map;
 @SuppressLint("CommitPrefEdits")
 class dataModel
 {
-    private ArrayList<bookmarkRowModel> mBookmarks = new ArrayList<>();
     private ArrayList<tabRowModel> mTabs = new ArrayList<>();
     private ArrayList<historyRowModel> mSuggestions = new ArrayList<>();
     private Map<String, historyRowModel> mSuggestionCache = new HashMap<>();
@@ -70,44 +69,6 @@ class dataModel
         }
     }
 
-    /*List Bookmark*/
-
-    void initializeBookmarks(){
-        mBookmarks = databaseController.getInstance().selectBookmark();
-    }
-    void addBookmark(String url, String title){
-        if(url.length()>1500){
-            return;
-        }
-        int autoval = 0;
-        if(mBookmarks.size()> constants.MAX_LIST_SIZE)
-        {
-            databaseController.getInstance().execSQL("delete from bookmark where id="+ mBookmarks.get(mBookmarks.size()-1).getmId(),null);
-        }
-
-        if(mBookmarks.size()>0)
-        {
-            autoval = mBookmarks.get(0).getmId()+1;
-        }
-
-        if(title.equals(""))
-        {
-            title = "New_Bookmark"+autoval;
-        }
-
-        String[] params = new String[2];
-        params[0] = title;
-        params[1] = url;
-
-        databaseController.getInstance().execSQL("INSERT INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params);
-        mBookmarks.add(0,new bookmarkRowModel(url,title,autoval));
-    }
-    ArrayList<bookmarkRowModel> getBookmark(){
-        return mBookmarks;
-    }
-    void clearBookmark() {
-        mBookmarks.clear();
-    }
 
     /*List Tabs*/
 

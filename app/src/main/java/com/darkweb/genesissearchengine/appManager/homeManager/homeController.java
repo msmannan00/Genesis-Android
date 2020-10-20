@@ -144,18 +144,18 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         super.onNewIntent(intent);
         Uri data = intent.getData();
         if(data!=null){
-            status.sRedirectStatus = data.toString();
-            if(status.sIsAppStarted){
-                onLoadURL(status.sRedirectStatus);
+            status.sSettingRedirectStatus = data.toString();
+            if(status.sSettingIsAppStarted){
+                onLoadURL(status.sSettingRedirectStatus);
             }
         }
     }
 
     public void initLandingPage(){
-        if(status.sFirstStart){
-            helperMethod.openActivity(landingController.class, constants.LIST_HISTORY, homeController.this,false);
-            status.sFirstStart = false;
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.FIRST_INSTALLED,false));
+        if(status.sSettingFirstStart){
+            helperMethod.openActivity(landingController.class, constants.CONST_LIST_HISTORY, homeController.this,false);
+            status.sSettingFirstStart = false;
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FIRST_INSTALLED,false));
         }
     }
 
@@ -171,7 +171,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mProgressBar = findViewById(R.id.progressBar);
         mSplashScreen = findViewById(R.id.splashScreen);
-        mSearchbar = findViewById(R.id.p_search);
+        mSearchbar = findViewById(R.id.pSearchInput);
         mLoadingIcon = findViewById(R.id.imageView_loading_back);
         mLoadingText = findViewById(R.id.loadingText);
         mWebViewContainer = findViewById(R.id.webviewContainer);
@@ -186,7 +186,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setSaveFromParentEnabled(false);
 
         mGeckoClient = new geckoClients();
-        boolean is_engine_switched = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.ENGINE_SWITCHED,false));
+        boolean is_engine_switched = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_ENGINE_SWITCHED,false));
 
         mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,dataController.getInstance().getSuggestions(), mGatewaySplash, mTopBar, mGeckoView, mBackSplash,is_engine_switched, mConnectButton, mSwitchEngineBack);
     }
@@ -215,8 +215,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.initTab(dataController.getInstance().getTotalTabs());
     }
 
-    public void initTab(){
-        onNewTab(false);
+    public void initTab(boolean isKeyboardOpened){
+        onNewTab(isKeyboardOpened, false);
         mHomeViewController.initTab(dataController.getInstance().getTotalTabs());
     }
 
@@ -237,8 +237,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onLoadProxy(View view){
         if(pluginController.getInstance().isInitialized() && !mPageClosed){
-            pluginController.getInstance().logEvent(strings.GATEWAY_OPENED);
-            helperMethod.openActivity(orbotController.class, constants.LIST_HISTORY, homeController.this,true);
+            pluginController.getInstance().logEvent(strings.EVENT_GATEWAY_OPENED);
+            helperMethod.openActivity(orbotController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
         }
     }
 
@@ -316,7 +316,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 final Handler handler = new Handler();
                 handler.postDelayed(() ->
                 {
-                    pluginController.getInstance().logEvent(strings.SEARCH_INVOKED);
+                    pluginController.getInstance().logEvent(strings.EVENT_SEARCH_INVOKED);
                     onSearchBarInvoked(v);
                     mGeckoView.clearFocus();
                 }, 500);
@@ -337,7 +337,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(hasFocus)
             {
                 helperMethod.hideKeyboard(homeController.this);
-                status.sIsAppStarted = true;
+                status.sSettingIsAppStarted = true;
                 pluginController.getInstance().onResetMessage();
                 mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false);
             }
@@ -371,7 +371,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),true);
             }
         });
-        pluginController.getInstance().logEvent(strings.APP_STARTED);
+        pluginController.getInstance().logEvent(strings.EVENT_APP_STARTED);
 
         KeyboardUtils.addKeyboardToggleListener(this, isVisible -> isKeyboardOpened = isVisible);
     }
@@ -394,22 +394,22 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onHomeButton(View view){
-        pluginController.getInstance().logEvent(strings.HOME_INVOKED);
+        pluginController.getInstance().logEvent(strings.EVENT_HOME_INVOKED);
         onLoadURL(mHomeModel.getSearchEngine());
         mHomeViewController.onUpdateLogo();
     }
 
-    public void onNewTab(boolean isKeyboardOpenedTemp){
+    public void onNewTab(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened){
         initializeGeckoView(true);
         onLoadURL("about:blank");
         mHomeViewController.progressBarReset();
-        mHomeViewController.onNewTab(true,isKeyboardOpenedTemp);
+        mHomeViewController.onNewTab(isKeyboardOpened,isKeyboardOpenedTemp);
         mHomeViewController.onSessionChanged();
     }
 
     public void onOpenTabViewBoundary(View view){
         mNewTab.setPressed(true);
-        helperMethod.openActivity(tabController.class, constants.LIST_HISTORY, homeController.this,true);
+        helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
     }
 
     public void onNotificationInvoked(String message,enums.etype e_type){
@@ -418,8 +418,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onOpenMenuItem(View view){
         pluginController.getInstance().setLanguage(this);
-        pluginController.getInstance().logEvent(strings.MENU_INVOKED);
-        status.sIsAppStarted = true;
+        pluginController.getInstance().logEvent(strings.EVENT_MENU_INVOKED);
+        status.sSettingIsAppStarted = true;
         pluginController.getInstance().onResetMessage();
         initLocalLanguage();
         pluginController.getInstance().onCreate(this);
@@ -430,7 +430,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     @Override
     public void onBackPressed(){
-        pluginController.getInstance().logEvent(strings.ON_BACK);
+        pluginController.getInstance().logEvent(strings.EVENT_ON_BACK);
         mSearchbar.clearFocus();
         if(mGeckoClient.getFullScreenStatus()){
             mGeckoClient.onBackPressed(true);
@@ -442,40 +442,40 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onSwitchSearch(View view){
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.ENGINE_SWITCHED,true));
-        pluginController.getInstance().logEvent(strings.SEARCH_SWITCH);
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ENGINE_SWITCHED,true));
+        pluginController.getInstance().logEvent(strings.EVENT_SEARCH_SWITCH);
 
-        if(status.sSearchStatus.equals(constants.BACKEND_GOOGLE_URL))
+        if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GOOGLE_URL))
         {
-            status.sSearchStatus = constants.BACKEND_GENESIS_URL;
+            status.sSettingSearchStatus = constants.CONST_BACKEND_GENESIS_URL;
             mHomeViewController.onUpdateLogo();
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_GENESIS_URL));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
             onHomeButton(null);
         }
-        else if(status.sSearchStatus.equals(constants.BACKEND_GENESIS_URL))
+        else if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GENESIS_URL))
         {
-            status.sSearchStatus = constants.BACKEND_DUCK_DUCK_GO_URL;
+            status.sSettingSearchStatus = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
             if(pluginController.getInstance().isOrbotRunning())
             {
                 mHomeViewController.onUpdateLogo();
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_DUCK_DUCK_GO_URL));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_DUCK_DUCK_GO_URL));
                 onHomeButton(null);
             }
             else {
-                pluginController.getInstance().MessageManagerHandler(homeController.this, Collections.singletonList(constants.BACKEND_DUCK_DUCK_GO_URL),enums.etype.start_orbot);
+                pluginController.getInstance().MessageManagerHandler(homeController.this, Collections.singletonList(constants.CONST_BACKEND_DUCK_DUCK_GO_URL),enums.etype.start_orbot);
             }
         }
         else
         {
-            status.sSearchStatus = constants.BACKEND_GOOGLE_URL;
+            status.sSettingSearchStatus = constants.CONST_BACKEND_GOOGLE_URL;
             if(pluginController.getInstance().isOrbotRunning())
             {
                 mHomeViewController.onUpdateLogo();
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_GOOGLE_URL));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GOOGLE_URL));
                 onHomeButton(null);
             }
             else {
-                pluginController.getInstance().MessageManagerHandler(homeController.this,Collections.singletonList(constants.BACKEND_GOOGLE_URL),enums.etype.start_orbot);
+                pluginController.getInstance().MessageManagerHandler(homeController.this,Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL),enums.etype.start_orbot);
             }
         }
     }
@@ -584,7 +584,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
          Callable<String> callable = () -> {
             mHomeViewController.onUpdateLogs(pluginController.getInstance().orbotLogs());
-            return strings.EMPTY_STR;
+            return strings.GENERIC_EMPTY_STR;
         };
 
         mHomeViewController.initProxyLoading(callable);
@@ -645,72 +645,86 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onMenuItemInvoked(View view){
         int menuId = view.getId();
         if (menuId == R.id.menu11) {
-            onNewTab(isKeyboardOpened);
+            onNewTab(true, isKeyboardOpened);
         }
         else if (menuId == R.id.menu10) {
             if(!onCloseCurrentTab(mGeckoClient.getSession())){
-                onNewTab(isKeyboardOpened);
+                onNewTab(true, isKeyboardOpened);
             }
         }
         else {
-            helperMethod.hideKeyboard(this);
             mSearchbar.clearFocus();
             if (menuId == R.id.menu9) {
-                helperMethod.openActivity(tabController.class, constants.LIST_HISTORY, homeController.this,true);
+                helperMethod.hideKeyboard(this);
+                helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
             }
             else if (menuId == R.id.menu8) {
+                helperMethod.hideKeyboard(this);
                 onOpenDownloadFolder(null);
             }
             else if (menuId == R.id.menu7) {
-                helperMethod.openActivity(historyController.class, constants.LIST_HISTORY, homeController.this,true);
+                helperMethod.hideKeyboard(this);
+                helperMethod.openActivity(historyController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
             }
             else if (menuId == R.id.menu6)
             {
-                helperMethod.openActivity(settingController.class,constants.LIST_HISTORY, homeController.this,true);
+                helperMethod.hideKeyboard(this);
+                helperMethod.openActivity(settingController.class,constants.CONST_LIST_HISTORY, homeController.this,true);
             }
-            else if (menuId == R.id.menu5)
+            else if (menuId == R.id.pMenuDelete)
             {
                 pluginController.getInstance().MessageManagerHandler(homeController.this, Collections.singletonList(mGeckoClient.getSession().getCurrentURL()),enums.etype.bookmark);
             }
-            else if (menuId == R.id.menu4)
+            else if (menuId == R.id.pMenuOpenNewTab)
             {
-                helperMethod.openActivity(bookmarkController.class,constants.LIST_BOOKMARK, homeController.this,true);
+                helperMethod.hideKeyboard(this);
+                helperMethod.openActivity(bookmarkController.class,constants.CONST_LIST_BOOKMARK, homeController.this,true);
             }
-            else if (menuId == R.id.menu3)
+            else if (menuId == R.id.pMenuOpenCurrentTab)
             {
+                helperMethod.hideKeyboard(this);
                 pluginController.getInstance().MessageManagerHandler(homeController.this,null,enums.etype.report_url);
             }
-            else if (menuId == R.id.menu2)
+            else if (menuId == R.id.pMenuShare)
             {
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
-                status.sIsAppRated = true;
-                pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.EMPTY_STR), enums.etype.rate_app);
+                helperMethod.hideKeyboard(this);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
+                status.sSettingIsAppRated = true;
+                pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.rate_app);
             }
-            else if (menuId == R.id.menu1)
+            else if (menuId == R.id.pMenuCopy)
             {
+                helperMethod.hideKeyboard(this);
                 helperMethod.shareApp(homeController.this);
             }
             if (menuId == R.id.menu20) {
+                helperMethod.hideKeyboard(this);
                 mGeckoClient.onStop();
             }
             if (menuId == R.id.menu21) {
+                helperMethod.hideKeyboard(this);
                 mGeckoClient.onReload();
             }
             if (menuId == R.id.menu22) {
+                helperMethod.hideKeyboard(this);
                 mGeckoClient.onForwardPressed();
             }
             if (menuId == R.id.menu23) {
+                helperMethod.hideKeyboard(this);
                 mGeckoClient.onBackPressed(false);
             }
             if (menuId == R.id.menu24) {
+                helperMethod.hideKeyboard(this);
                 onHomeButton(view);
             }
             if (menuId == R.id.menu26 || menuId == R.id.menu27 || menuId == R.id.menu28) {
+                helperMethod.hideKeyboard(this);
                 mGeckoClient.toogleUserAgent();
                 mGeckoClient.onReload();
             }
             if(menuId == R.id.menu25){
-                helperMethod.openActivity(languageController.class, constants.LIST_HISTORY, homeController.this,true);
+                helperMethod.hideKeyboard(this);
+                helperMethod.openActivity(languageController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
             }
         }
         mHomeViewController.closeMenu();
@@ -751,7 +765,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     String dataToStr(Object data){
         if(data==null){
-            return strings.EMPTY_STR;
+            return strings.GENERIC_EMPTY_STR;
         }
         else {
             return data.toString();
@@ -773,7 +787,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(enums.etype.back_list_empty)){
                 if(dataController.getInstance().getTotalTabs()>1){
                     if(!onCloseCurrentTab(mGeckoClient.getSession())){
-                        onNewTab(false);
+                        onNewTab(true,false);
                     }
                 }else {
                     helperMethod.onMinimizeApp(homeController.this);
@@ -789,17 +803,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 dataController.getInstance().addSuggesion(data.get(0).toString(),data.get(2).toString());
             }
             else if(e_type.equals(enums.etype.on_page_loaded)){
-                pluginController.getInstance().logEvent(strings.PAGE_OPENED_SUCCESS);
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_BOOTSTRAPPED,true));
+                pluginController.getInstance().logEvent(strings.EVENT_PAGE_OPENED_SUCCESS);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_BOOTSTRAPPED,true));
                 mHomeViewController.onPageFinished();
-                if(status.sIsWelcomeEnabled && !status.sIsAppStarted){
+                if(status.sSettingIsWelcomeEnabled && !status.sSettingIsAppStarted){
                     final Handler handler = new Handler();
                     Runnable runnable = () ->
                     {
-                        if(!status.sIsAppStarted){
-                            pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.EMPTY_STR), enums.etype.welcome);
+                        if(!status.sSettingIsAppStarted){
+                            pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.welcome);
                         }
-                        status.sIsAppStarted = true;
+                        status.sSettingIsAppStarted = true;
                     };
                     handler.postDelayed(runnable, 1300);
                 }else {
@@ -812,10 +826,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }
             }
             else if(e_type.equals(enums.etype.rate_application)){
-                if(!status.sIsAppRated){
-                    dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
-                    status.sIsAppRated = true;
-                    pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.EMPTY_STR), enums.etype.rate_app);
+                if(!status.sSettingIsAppRated){
+                    dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
+                    status.sSettingIsAppRated = true;
+                    pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHomeController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.rate_app);
                 }
             }
             else if(e_type.equals(enums.etype.on_load_error)){
@@ -852,7 +866,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if(e_type.equals(enums.etype.on_close_sesson)){
                 if(!onCloseCurrentTab(mGeckoClient.getSession())){
-                    onNewTab(false);
+                    onNewTab(true,false);
                 }
             }
             else if(e_type.equals(enums.etype.on_playstore_load)){

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController">
+
+
+    <FrameLayout
+            android:id="@+id/webviewContainer"
+            android:layout_width="match_parent"
+            android:layout_marginTop="55dp"
+            android:background="@color/white"
+            android:layout_height="match_parent">
+
+        <org.mozilla.geckoview.GeckoView
+                android:id="@+id/webLoader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:background="@color/white"
+                android:alpha="1"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp" >
+
+        </org.mozilla.geckoview.GeckoView>
+
+
+    </FrameLayout>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:background="#00000000"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+                android:id="@+id/topbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:elevation="7dp"
+                android:background="@xml/ic_secondary_gradinet"
+                android:gravity="left"
+                android:paddingBottom="1dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlHardcoded,UselessParent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="7dp"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlHardcoded,UselessParent">
+
+                <AutoCompleteTextView
+                        android:id="@+id/pSearchInput"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:background="@xml/gx_generic_input"
+                        android:completionHintView="@layout/hint_view"
+                        android:ems="10"
+                        android:popupElevation="5dp"
+                        android:hint="@string/SearchHintMain"
+                        android:inputType="textNoSuggestions"
+                        android:importantForAutofill="no"
+                        android:maxLines="1"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:selectAllOnFocus="true"
+                        android:text="@string/homeUrl"
+                        android:textColor="@color/text_color_v2"
+                        android:textColorHighlight="@color/text_color_highlight_v1"
+                        android:textCursorDrawable="@xml/gx_search_cursor_state"
+                        android:textSize="16sp"
+                        tools:targetApi="o" />
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:onClick="onOpenTabViewBoundary"
+                        android:paddingBottom="1dp">
+                        <Button
+                            android:id="@+id/newButtonInvoke"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginTop="17dp"
+                            android:text="@string/home_tab_text"
+                            android:clickable="false"
+                            android:textSize="12.5sp"
+                            android:layout_marginBottom="0dp"
+                            android:background="@xml/gx_generic_tab_button"
+                            android:contentDescription="@string/todo"
+                            android:scaleType="fitCenter"
+                            android:tint="@color/black" />
+                    </LinearLayout>
+
+                <ImageButton
+                        android:id="@+id/menu"
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:background="@xml/hox_menu_button"
+                        android:contentDescription="@string/todo"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="19dp"
+                        android:onClick="onOpenMenuItem"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="19dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/menu_item" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <com.darkweb.genesissearchengine.widget.AnimatedProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:alpha="0"
+                android:progressDrawable="@xml/hox_photon_progress"
+                app:shiftDuration="@integer/progress_shift_duration"
+                app:wrapShiftDrawable="true"
+                android:layout_marginTop="51.9dp"
+                android:progress="0"
+                android:max="10000"
+                android:scaleY="0.7"
+                tools:progress="0"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/splashScreen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/landing_ease_blue"
+                android:clickable="true"
+                android:focusable="true">
+
+            <ImageView
+                    android:id="@+id/backsplash"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@xml/hox_splash_gradient"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/todo" />
+
+            <Button
+                    android:id="@+id/Connect"
+                    android:layout_width="110dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="53dp"
+                    android:background="@xml/hox_rounded_corner"
+                    android:onClick="onStartApplication"
+                    android:text="@string/home_connect"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView_loading_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                    android:id="@+id/gateway_splash"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="25dp"
+                    android:elevation="2dp"
+                    android:background="@xml/hox_rounded_corner"
+                    android:onClick="onLoadProxy"
+                    android:src="@xml/ic_gateway_splash"
+                    android:tint="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/loadingText"
+                    app:layout_constraintEnd_toStartOf="@+id/Connect"
+                    android:contentDescription="@string/todo" />
+
+            <TextView
+                    android:id="@+id/loadingText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="37dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/home_loading"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textFontWeight="5"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="UnusedAttribute" />
+
+            <ImageView
+                    android:id="@+id/imageView_loading_back"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="25dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/loadingText"
+                    app:layout_constraintEnd_toStartOf="@+id/backsplash"
+                    app:layout_constraintStart_toEndOf="@+id/backsplash"
+                    app:srcCompat="@drawable/icon_loading"
+                    android:contentDescription="@string/todo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:src="@drawable/icon_ban"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            app:borderWidth="0dp"
+            app:elevation="10dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true" app:srcCompat="?attr/actionModeSelectAllDrawable"
+            android:id="@+id/floatingActionButton3" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:focusable="true" />
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="395dp"
+            android:background="@color/holo_dark_gray"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="54.9dp"
+            android:alpha="0"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-5074525529134731/7816565677"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintHorizontal_bias="0.5"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

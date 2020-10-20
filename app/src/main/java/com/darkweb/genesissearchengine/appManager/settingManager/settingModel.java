@@ -18,7 +18,7 @@ class settingModel
 
     private eventObserver.eventListener mEvent;
 
-    private String mSearchStatus = strings.EMPTY_STR;
+    private String mSearchStatus = strings.GENERIC_EMPTY_STR;
     private int mCookieStatus = ACCEPT_FIRST_PARTY;
     private int mNotificationStatus = 0;
     private boolean mJavaStatus = false;
@@ -38,10 +38,10 @@ class settingModel
 
     private void init_status()
     {
-        mSearchStatus = status.sSearchStatus;
-        mHistoryStatus = status.sHistoryStatus;
-        mJavaStatus = status.sJavaStatus;
-        mCookieStatus = status.sCookieStatus;
+        mSearchStatus = status.sSettingSearchStatus;
+        mHistoryStatus = status.sSettingHistoryStatus;
+        mJavaStatus = status.sSettingJavaStatus;
+        mCookieStatus = status.sSettingCookieStatus;
     }
 
     void initNotification(int notificationStatus){
@@ -86,11 +86,11 @@ class settingModel
 
     void onCloseView()
     {
-        if(!status.sSearchStatus.equals(mSearchStatus))
+        if(!status.sSettingSearchStatus.equals(mSearchStatus))
         {
             mEvent.invokeObserver(Collections.singletonList(mSearchStatus), enums.etype.update_searcn);
         }
-        if(status.sJavaStatus != mJavaStatus)
+        if(status.sSettingJavaStatus != mJavaStatus)
         {
             mEvent.invokeObserver(Collections.singletonList(mJavaStatus), enums.etype.update_javascript);
         }
@@ -98,41 +98,41 @@ class settingModel
         {
             mEvent.invokeObserver(Collections.singletonList(mNotificationStatus), enums.etype.update_notification);
         }
-        if(status.sHistoryStatus != mHistoryStatus)
+        if(status.sSettingHistoryStatus != mHistoryStatus)
         {
-            status.sHistoryStatus = mHistoryStatus;
+            status.sSettingHistoryStatus = mHistoryStatus;
             mEvent.invokeObserver(Collections.singletonList(mHistoryStatus), enums.etype.update_history);
         }
-        if(status.sFontAdjustable != mFontAdjustable)
+        if(status.sSettingFontAdjustable != mFontAdjustable)
         {
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.COOKIE_ADJUSTABLE,mFontAdjustable));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.FONT_SIZE,100));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,mFontAdjustable));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_FONT_SIZE,100));
 
-            status.sFontAdjustable = mFontAdjustable;
-            status.sFontSize = 100;
+            status.sSettingFontAdjustable = mFontAdjustable;
+            status.sSettingFontSize = 100;
             mFontSize = 100;
 
             mEvent.invokeObserver(Collections.singletonList(mFontSize), enums.etype.update_font_adjustable);
         }
-        if(status.sFontSize != mFontSize)
+        if(status.sSettingFontSize != mFontSize)
         {
             if(mFontSize <=0){
                 mFontSize = 1;
             }
 
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.FONT_SIZE,mFontSize));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.FONT_ADJUSTABLE,false));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_FONT_SIZE,mFontSize));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE,false));
 
-            status.sFontSize = mFontSize;
-            status.sFontAdjustable = false;
+            status.sSettingFontSize = mFontSize;
+            status.sSettingFontAdjustable = false;
             mFontAdjustable = false;
 
             mEvent.invokeObserver(Collections.singletonList(mFontSize), enums.etype.update_font_size);
         }
-        if(status.sCookieStatus != mCookieStatus)
+        if(status.sSettingCookieStatus != mCookieStatus)
         {
-            status.sCookieStatus = mCookieStatus;
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.COOKIE_ADJUSTABLE,status.sCookieStatus));
+            status.sSettingCookieStatus = mCookieStatus;
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,status.sSettingCookieStatus));
             mEvent.invokeObserver(Collections.singletonList(mCookieStatus), enums.etype.update_cookies);
         }
         mEvent.invokeObserver(Collections.singletonList(mHistoryStatus), enums.etype.close_view);

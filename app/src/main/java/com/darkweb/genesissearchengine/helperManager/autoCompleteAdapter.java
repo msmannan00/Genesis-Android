@@ -41,7 +41,7 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
             TextView myTv = v.findViewById( R.id.hintCompletionUrl);
 
             if (customerNameLabel != null) {
-                if(customer.getHeader().equals(strings.EMPTY_STR)){
+                if(customer.getHeader().equals(strings.GENERIC_EMPTY_STR)){
                     customerNameLabel.setText(customer.getHeader() );
                 }else {
                     customerNameLabel.setText(customer.getHeader());
@@ -61,7 +61,7 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
         @Override
         public String convertResultToString(Object resultValue) {
             if(resultValue==null){
-                return strings.EMPTY_STR;
+                return strings.GENERIC_EMPTY_STR;
             }
             historyRowModel model = (historyRowModel)(resultValue);
             String str = model.getHeader();

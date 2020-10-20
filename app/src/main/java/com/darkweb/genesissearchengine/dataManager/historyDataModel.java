@@ -8,7 +8,6 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +29,7 @@ public class historyDataModel {
         m_max_history_Id = pMaxHistoryId;
         m_history_size = pHistorySize;
         this.m_history = history;
-        if(!status.sHistoryStatus){
+        if(!status.sSettingHistoryStatus){
             initializeCache(history);
         }else {
             clearHistory();
@@ -101,9 +100,9 @@ public class historyDataModel {
             databaseController.getInstance().execSQL("UPDATE history SET date = '" + m_date + "' , url = ? , title = ? WHERE id="+p_id,params);
             return p_id;
         }else {
-            if(m_history_size > constants.MAX_LIST_DATA_SIZE)
+            if(m_history_size > constants.CONST_MAX_LIST_DATA_SIZE)
             {
-                databaseController.getInstance().execSQL("DELETE FROM history WHERE id IN (SELECT id FROM History ORDER BY id ASC LIMIT "+(constants.MAX_LIST_DATA_SIZE /2)+")",null);
+                databaseController.getInstance().execSQL("DELETE FROM history WHERE id IN (SELECT id FROM History ORDER BY id ASC LIMIT "+(constants.CONST_MAX_LIST_DATA_SIZE /2)+")",null);
             }
 
             if(p_header.equals("loading")){
@@ -127,7 +126,7 @@ public class historyDataModel {
     }
     private void removeHistory(int p_id){
         databaseController.getInstance().execSQL("DELETE FROM history WHERE id = "+p_id,null);
-        databaseController.getInstance().selectHistory(0,constants.FETCHABLE_LIST_SIZE);
+        databaseController.getInstance().selectHistory(0,constants.CONST_FETCHABLE_LIST_SIZE);
         m_history_cache.remove(p_id);
         m_history_size -= 1;
     }

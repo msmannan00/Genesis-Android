@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
@@ -38,7 +39,7 @@ public class databaseController
     {
         try
         {
-            mDatabaseInstance = app_context.openOrCreateDatabase(constants.DATABASE_NAME, MODE_PRIVATE, null);
+            mDatabaseInstance = app_context.openOrCreateDatabase(constants.CONST_DATABASE_NAME, MODE_PRIVATE, null);
 
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
             try {
@@ -118,7 +119,7 @@ public class databaseController
 
         if (c.moveToFirst()){
             do {
-                tempmodel.add(new bookmarkRowModel(c.getString(2), c.getString(1),Integer.parseInt(c.getString(0))));
+                tempmodel.add(new bookmarkRowModel(c.getString(1), c.getString(2),Integer.parseInt(c.getString(0))));
             } while(c.moveToNext());
         }
         c.close();

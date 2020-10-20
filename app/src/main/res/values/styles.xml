@@ -6,9 +6,14 @@
         <item name="colorPrimary">@color/ease_blue</item>
         <item name="colorPrimaryDark">@color/landing_ease_blue</item>
         <item name="colorAccent">@color/ease_blue</item>
-        <item name="android:windowBackground">@xml/sc_splash_gradient</item>
+        <item name="android:windowBackground">@xml/hox_splash_gradient</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:popupAnimationStyle">@null</item>
+    </style>
+
+    <style name="dialiog_animation">
+        <item name="android:windowEnterAnimation">@anim/popup_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_anim_out</item>
     </style>
 
     <style name="noAnimTheme" parent="android:Theme">

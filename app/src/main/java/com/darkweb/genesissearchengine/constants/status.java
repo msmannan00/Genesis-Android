@@ -11,54 +11,54 @@ public class status
 {
     /*App Status*/
 
-    public static String current_ABI = "7.0";
-    public static boolean paid_status = false;
+    public static String sAppCurrentABI = "7.0";
+    public static boolean sPaidStatus = false;
 
     /*Settings Status*/
 
-    public static String sSearchStatus = constants.BACKEND_GENESIS_URL;
-    public static String sRedirectStatus = strings.EMPTY_STR;
-    public static boolean sJavaStatus = true;
-    public static boolean sHistoryStatus = true;
-    public static boolean sIsAppPaused = false;
-    public static boolean sIsWelcomeEnabled = true;
-    public static boolean sIsAppStarted = false;
-    public static boolean sIsAppRated = false;
-    public static boolean sFontAdjustable = true;
-    public static boolean sFirstStart = true;
-    public static boolean sDesktopSite = false;
-    public static int sCookieStatus = ACCEPT_FIRST_PARTY;
-    public static float sFontSize = 1;
-    public static String sLanguage = "en";
+    public static String sSettingSearchStatus = constants.CONST_BACKEND_GENESIS_URL;
+    public static String sSettingRedirectStatus = strings.GENERIC_EMPTY_STR;
+    public static boolean sSettingJavaStatus = true;
+    public static boolean sSettingHistoryStatus = true;
+    public static boolean sSettingIsAppPaused = false;
+    public static boolean sSettingIsWelcomeEnabled = true;
+    public static boolean sSettingIsAppStarted = false;
+    public static boolean sSettingIsAppRated = false;
+    public static boolean sSettingFontAdjustable = true;
+    public static boolean sSettingFirstStart = true;
+    public static boolean sSettingDesktopSite = false;
+    public static int sSettingCookieStatus = ACCEPT_FIRST_PARTY;
+    public static float sSettingFontSize = 1;
+    public static String sSettingLanguage = "en";
 
     /*Bridge Status*/
 
-    public static boolean sGatewayAuto = false;
-    public static boolean sGatewayManual = false;
-    public static boolean sVPNStatus = false;
+    public static boolean sBridgeGatewayAuto = false;
+    public static boolean sBridgeGatewayManual = false;
+    public static boolean sBridgeVPNStatus = false;
     public static boolean sBridgeStatus = false;
-    public static String sCustomBridge = strings.CUSTOM_BRIDGE_OBFS4;
+    public static String sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_OBFS4;
 
 
     public static void initStatus()
     {
-        status.sJavaStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.JAVA_SCRIPT,true));
-        status.sHistoryStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.HISTORY_CLEAR,true));
-        status.sGatewayAuto = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.GATEWAY_AUTO,true));
-        status.sGatewayManual = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.GATEWAY_MANUAL,false));
-        status.sIsWelcomeEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.IS_WELCOME_ENABLED,true));
-        status.sIsAppRated = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.IS_APP_RATED,false));
-        status.sVPNStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.S_VPN_ENABLED,false));
-        status.sBridgeStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.S_BRIDGE_ENABLES,true));
-        status.sFontAdjustable = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.FONT_ADJUSTABLE,true));
-        status.sFirstStart = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.FIRST_INSTALLED,true));
+        status.sSettingJavaStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));
+        status.sSettingHistoryStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR,true));
+        status.sBridgeGatewayAuto = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_AUTO,true));
+        status.sBridgeGatewayManual = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,false));
+        status.sSettingIsWelcomeEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED,true));
+        status.sSettingIsAppRated = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,false));
+        status.sBridgeVPNStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED,false));
+        status.sBridgeStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.BRIDGE_BRIDGE_ENABLES,true));
+        status.sSettingFontAdjustable = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE,true));
+        status.sSettingFirstStart = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FIRST_INSTALLED,true));
 
-        status.sCookieStatus = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.COOKIE_ADJUSTABLE,ACCEPT_FIRST_PARTY));
-        status.sFontSize = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_FLOAT, Arrays.asList(keys.FONT_SIZE,100));
+        status.sSettingCookieStatus = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,ACCEPT_FIRST_PARTY));
+        status.sSettingFontSize = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_FLOAT, Arrays.asList(keys.SETTING_FONT_SIZE,100));
 
-        status.sLanguage = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.LANGUAGE,strings.DEFAULT_LANGUAGE));
-        status.sSearchStatus = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SEARCH_ENGINE,constants.BACKEND_GENESIS_URL));
-        status.sCustomBridge = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.CUSTOM_BRIDGE_1,strings.CUSTOM_BRIDGE_OBFS4));
+        status.sSettingLanguage = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,strings.SETTING_DEFAULT_LANGUAGE));
+        status.sSettingSearchStatus = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
+        status.sBridgeCustomBridge = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
     }
 
 }

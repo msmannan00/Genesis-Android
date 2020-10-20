@@ -63,13 +63,13 @@ public class tabController extends AppCompatActivity
         mContextManager = activityContextManager.getInstance();
         mHomeController = activityContextManager.getInstance().getHomeController();
         mContextManager.setTabController(this);
-        pluginController.getInstance().logEvent(strings.TAB_OPENED);
+        pluginController.getInstance().logEvent(strings.EVENT_TAB_OPENED);
     }
     public void initializeViews(){
-        mEmptyListNotifier = findViewById(R.id.p_empty_list);
-        mSearchBar = findViewById(R.id.p_search);
-        mListView = findViewById(R.id.p_listview);
-        mClearButton = findViewById(R.id.p_clearButton);
+        mEmptyListNotifier = findViewById(R.id.pEmptyListNotification);
+        mSearchBar = findViewById(R.id.pSearchInput);
+        mListView = findViewById(R.id.pRecycleView);
+        mClearButton = findViewById(R.id.pClearButton);
         mtabViewController = new tabViewController(mEmptyListNotifier, mListView, mClearButton,this);
         mClearButton.setText(R.string.tab_view_clear_tab);
     }
@@ -136,22 +136,22 @@ public class tabController extends AppCompatActivity
     }
 
     public void onclearDataTrigger(View view){
-        pluginController.getInstance().MessageManagerHandler(this, Collections.singletonList(strings.EMPTY_STR),enums.etype.clear_tab);
+        pluginController.getInstance().MessageManagerHandler(this, Collections.singletonList(strings.GENERIC_EMPTY_STR),enums.etype.clear_tab);
     }
 
     @Override
     public void onTrimMemory(int level)
     {
-        if(status.sIsAppPaused && (level==80 || level==15))
+        if(status.sSettingIsAppPaused && (level==80 || level==15))
         {
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.LOW_MEMORY,true));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY,true));
             finish();
         }
     }
 
     public void onNewTabInvoked(View view)
     {
-        mHomeController.onNewTab(false);
+        mHomeController.onNewTab(true,false);
         finish();
     }
 
@@ -159,7 +159,7 @@ public class tabController extends AppCompatActivity
     public void onResume()
     {
         activityContextManager.getInstance().setCurrentActivity(this);
-        status.sIsAppPaused = false;
+        status.sSettingIsAppPaused = false;
         super.onResume();
     }
 
@@ -171,7 +171,7 @@ public class tabController extends AppCompatActivity
     @Override
     public void onPause()
     {
-        status.sIsAppPaused = true;
+        status.sSettingIsAppPaused = true;
         super.onPause();
     }
 
@@ -187,7 +187,7 @@ public class tabController extends AppCompatActivity
             }
             if(e_type.equals(enums.etype.url_triggered)){
                 tabRowModel model = (tabRowModel)data.get(0);
-                pluginController.getInstance().logEvent(strings.TAB_TRIGGERED);
+                pluginController.getInstance().logEvent(strings.EVENT_TAB_TRIGGERED);
                 mHomeController.onLoadTab(model.getSession(),false);
                 tabController.this.finish();
             }
@@ -201,7 +201,7 @@ public class tabController extends AppCompatActivity
                 mtabViewController.updateIfListEmpty(mListModel.getList().size(),300);
                 mHomeController.releaseSession();
                 if(dataController.getInstance().getTotalTabs()<1){
-                    mHomeController.onNewTab(false);
+                    mHomeController.onNewTab(true,false);
                     finish();
                 }else {
                     mHomeController.loadExistingTab();

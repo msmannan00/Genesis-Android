@@ -23,7 +23,7 @@ class analyticManager
     }
 
     private void initialize(){
-        final String PREF_UNIQUE_ID = constants.UNIQUE_KEY_ID;
+        final String PREF_UNIQUE_ID = constants.CONST_UNIQUE_KEY_ID;
 
         if (mUniqueID == null)
         {

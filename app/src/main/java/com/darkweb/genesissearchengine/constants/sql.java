@@ -4,7 +4,8 @@ public class sql
 {
     /*HISTORY*/
 
-    public static final String H_CLEAR_DATA = "delete from history where 1";
+    public static final String SQL_CLEAR_HISTORY = "delete from history where 1";
+    public static final String SQL_CLEAR_BOOKMARK = "delete from bookmark where 1";
 
 
 }

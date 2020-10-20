@@ -15,8 +15,8 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
-import static com.darkweb.genesissearchengine.constants.status.sHistoryStatus;
-import static com.darkweb.genesissearchengine.constants.status.sJavaStatus;
+import static com.darkweb.genesissearchengine.constants.status.sSettingHistoryStatus;
+import static com.darkweb.genesissearchengine.constants.status.sSettingJavaStatus;
 
 class settingViewController
 {
@@ -94,7 +94,7 @@ class settingViewController
 
     private void initJavascript()
     {
-        if (sJavaStatus)
+        if (sSettingJavaStatus)
         {
             mJavaScript.setSelection(0);
         }
@@ -111,7 +111,7 @@ class settingViewController
 
     private void initHistory()
     {
-        if (sHistoryStatus)
+        if (sSettingHistoryStatus)
         {
             mHistory.setSelection(0);
         }
@@ -123,12 +123,12 @@ class settingViewController
 
     private void initCookies()
     {
-        mCookies.setSelection(status.sCookieStatus);
+        mCookies.setSelection(status.sSettingCookieStatus);
     }
 
     private void initFontAdjustable()
     {
-        if (status.sFontAdjustable)
+        if (status.sSettingFontAdjustable)
         {
             mFontAdjustable.setSelection(0);
         }
@@ -140,7 +140,7 @@ class settingViewController
 
     private void initFontSize()
     {
-        mFontSize.setProgress((int)status.sFontSize);
+        mFontSize.setProgress((int)status.sSettingFontSize);
         updatePercentage(mFontSize.getProgress());
     }
 
@@ -164,10 +164,10 @@ class settingViewController
     /*External Helper Methods*/
 
     private int getEngineIndex(){
-        if(status.sSearchStatus.equals(constants.BACKEND_GENESIS_URL)){
+        if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GENESIS_URL)){
             return 0;
         }
-        else if(status.sSearchStatus.equals(constants.BACKEND_GOOGLE_URL)){
+        else if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GOOGLE_URL)){
             return 1;
         }
         else
@@ -177,6 +177,6 @@ class settingViewController
     @SuppressLint("SetTextI18n")
     void updatePercentage(int font_size){
 
-        mFontSizePercentage.setText(strings.CUSTOM_FONTS + strings.EMPTY_SPACE + font_size +strings.PERCENT_SIGN);
+        mFontSizePercentage.setText(strings.SETTING_CUSTOM_FONTS + strings.GENERIC_EMPTY_SPACE + font_size +strings.SETTING_PERCENT_SIGN);
     }
 }

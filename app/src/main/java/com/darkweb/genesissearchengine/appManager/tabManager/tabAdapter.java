@@ -24,7 +24,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     private ArrayList<tabRowModel> mModelList;
     private ArrayList<tabRowModel> mTempModelList;
     private eventObserver.eventListener mEvent;
-    private String filter = strings.EMPTY_STR;
+    private String filter = strings.GENERIC_EMPTY_STR;
     private boolean isClosing = false;
 
     tabAdapter(ArrayList<tabRowModel> model_list, eventObserver.eventListener event) {
@@ -38,7 +38,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     @NonNull
     @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row, parent, false);
         return new listViewHolder(view);
     }
 
@@ -120,9 +120,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
         void bindListView(tabRowModel model) {
 
-            heaaderText = itemView.findViewById(R.id.p_header);
-            descriptionText = itemView.findViewById(R.id.p_description);
-            itemContainer = itemView.findViewById(R.id.p_item_container);
+            heaaderText = itemView.findViewById(R.id.pHeader);
+            descriptionText = itemView.findViewById(R.id.pDescription);
+            //itemContainer = itemView.findViewById(R.id.pRowContainer);
 
             if(model.getSession().getTitle().equals("") || model.getSession().getTitle().equals("loading")){
                 heaaderText.setText(helperMethod.getDomainName(model.getSession().getCurrentURL()));
@@ -139,7 +139,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
             descriptionText.setText(url);
             // messageButton = itemView.findViewById(R.id.message_button);
-            empty_message = itemView.findViewById(R.id.p_empty_list);
+            empty_message = itemView.findViewById(R.id.pEmptyListNotification);
             data_model = model;
         }
     }

@@ -58,7 +58,7 @@ public class pluginController
 
     public void preInitialize(homeController context){
         mLangManager = new langManager(context,new langCallback());
-        mLangManager.setDefaultLanguage(new Locale(status.sLanguage));
+        mLangManager.setDefaultLanguage(new Locale(status.sSettingLanguage));
 
         mFabricManager = new fabricManager(context,new fabricCallback());
     }
@@ -217,7 +217,7 @@ public class pluginController
 
     /*Lang Manager*/
     public void setLanguage(AppCompatActivity context){
-        mLangManager.setDefaultLanguage(new Locale(status.sLanguage));
+        mLangManager.setDefaultLanguage(new Locale(status.sSettingLanguage));
     }
     public void onCreate(Activity activity) {
         mLangManager.onCreate(activity);
@@ -236,7 +236,7 @@ public class pluginController
                 mHomeController.onLoadURL(data.get(0).toString());
             }
             else if(event_type.equals(enums.etype.cancel_welcome)){
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_WELCOME_ENABLED,false));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED,false));
             }
             else if(event_type.equals(enums.etype.ignore_abi)){
                 //mHomeController.ignoreAbiError();
@@ -255,23 +255,23 @@ public class pluginController
                 mContextManager.getHistoryController().onclearData();
                 mHomeController.onClearSession();
                 dataController.getInstance().clearTabs();
-                mHomeController.initTab();
+                mHomeController.initTab(false);
             }
             else if(event_type.equals(enums.etype.clear_bookmark)){
-                dataController.getInstance().clearBookmark();
+                dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,data);
                 mContextManager.getBookmarkController().onclearData();
             }
             else if(event_type.equals(enums.etype.bookmark)){
                 String [] dataParser = data.get(0).toString().split("split");
                 if(dataParser.length>1){
-                    logEvent(strings.URL_BOOKMARKED);
-                    dataController.getInstance().addBookmark(dataParser[0],dataParser[1]);
+                    logEvent(strings.EVENT_URL_BOOKMARKED);
+                    dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_ADD_BOOKMARK ,Arrays.asList(dataParser[0],dataParser[1]));
                 }else {
-                    dataController.getInstance().addBookmark(dataParser[0],"");
+                    dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_ADD_BOOKMARK ,Arrays.asList(dataParser[0],""));
                 }
             }
             else if(event_type.equals(enums.etype.app_rated)){
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
             }
             else if(event_type.equals(enums.etype.download_file)){
                 mHomeController.onDownloadFile();
@@ -293,7 +293,7 @@ public class pluginController
             }
             else if(event_type.equals(enums.etype.clear_tab)){
                 dataController.getInstance().clearTabs();
-                mHomeController.initTab();
+                mHomeController.initTab(true);
                 activityContextManager.getInstance().getTabController().finish();
             }
             return null;

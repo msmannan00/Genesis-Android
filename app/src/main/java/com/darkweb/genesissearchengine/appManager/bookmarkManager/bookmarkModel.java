@@ -8,16 +8,13 @@ class bookmarkModel
 
     private ArrayList<bookmarkRowModel> mModelList = new ArrayList<>();
 
-    /*Initializations*/
+    /*Helper Methods*/
 
     void setList(ArrayList<bookmarkRowModel> model)
     {
         mModelList = model;
     }
-    ArrayList<bookmarkRowModel> getList()
-    {
-        return mModelList;
-    }
+
     private void removeFromMainList(int index)
     {
         mModelList.remove(index);
@@ -31,6 +28,9 @@ class bookmarkModel
         mModelList.clear();
     }
 
-
+    ArrayList<bookmarkRowModel> getList()
+    {
+        return mModelList;
+    }
 
 }

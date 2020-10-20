@@ -1,16 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.historyManager;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,187 +15,190 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import java.util.List;
 import java.util.Objects;
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 class historyViewController
 {
     /*Private Variables*/
-    private AppCompatActivity m_context;
+    private AppCompatActivity mContext;
 
-    private ImageView m_empty_list;
-    private EditText m_search;
-    private RecyclerView m_listview;
-    private Button m_clearButton;
-    private ImageButton m_menu_button;
-    private ImageButton m_search_button;
+    private ImageView mEmptyListNotification;
+    private EditText mSearchInput;
+    private RecyclerView mRecycleView;
+    private Button mClearButton;
+    private ImageButton mMenuButton;
+    private ImageButton mSearchButton;
+
+    private PopupWindow mPopupWindow = null;
 
     /*Initializations*/
 
-    historyViewController(ImageView p_empty_list, EditText p_search, RecyclerView p_listview, Button p_clearButton,AppCompatActivity p_context,ImageButton p_menu_button,ImageButton p_search_button)
+    historyViewController(ImageView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton,AppCompatActivity pContext,ImageButton pMenuButton,ImageButton pSearchButton)
     {
-        this.m_empty_list = p_empty_list;
-        this.m_search = p_search;
-        this.m_listview = p_listview;
-        this.m_clearButton = p_clearButton;
-        this.m_context = p_context;
-        this.m_menu_button = p_menu_button;
-        this.m_search_button = p_search_button;
+        this.mEmptyListNotification = pEmptyListNotification;
+        this.mSearchInput = pSearchInput;
+        this.mRecycleView = pRecycleView;
+        this.mClearButton = pClearButton;
+        this.mContext = pContext;
+        this.mMenuButton = pMenuButton;
+        this.mSearchButton = pSearchButton;
 
         initPostUI();
     }
 
     private void initPostUI(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = m_context.getWindow();
+            Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(m_context.getResources().getColor(R.color.blue_dark));
+                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             }
             else {
-                m_context.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
-                m_context.getWindow().setStatusBarColor(ContextCompat.getColor(m_context, R.color.white));
+                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.white));
             }
         }
     }
 
-    private void updateIfListEmpty(int size,int duration){
-        if(size>0){
-            m_empty_list.animate().setDuration(duration).alpha(0f);
-            // m_clearButton.animate().setDuration(duration).alpha(1f);
-            m_clearButton.setText("CLEAR HISTORY");
-            m_clearButton.setClickable(true);
+    private void updateIfListEmpty(int pSize,int pDuration){
+        if(pSize>0){
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+            mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
+            mClearButton.setText(strings.HISTORY_CLEAR_HISTORY);
+            mClearButton.setClickable(true);
         }
         else {
-            m_empty_list.animate().setDuration(duration).alpha(1f);
-            // m_clearButton.animate().setDuration(duration).alpha(0f);
-            m_clearButton.setText("NO HISTORY FOUND");
-            m_clearButton.setClickable(false);
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mEmptyListNotification.animate().setDuration(pDuration).alpha(1f);
+
+            mClearButton.animate().setDuration(pDuration).alpha(0.4f);
+            mSearchButton.animate().setDuration(pDuration).alpha(0f);
+            mMenuButton.animate().setDuration(pDuration).alpha(0f);
+
+            mClearButton.setEnabled(false);
+            mSearchButton.setClickable(false);
+            mMenuButton.setClickable(false);
+
+            mClearButton.setText(strings.HISTORY_NO_HISTORY_FOUND);
+            mClearButton.setClickable(false);
         }
     }
 
-    public void onCloseMenu(){
-        if(popupWindow!=null && popupWindow.isShowing()){
-            popupWindow.dismiss();
+    private void onCloseMenu(){
+        if(mPopupWindow !=null && mPopupWindow.isShowing()){
+            mPopupWindow.dismiss();
         }
     }
 
-    private void onSelectionMenu(boolean p_status){
-        if(!p_status){
-            m_clearButton.setClickable(false);
-            m_clearButton.setTextColor(m_context.getApplication().getResources().getColor(R.color.float_white));
-            m_menu_button.setVisibility(View.VISIBLE);
-            m_search_button.setVisibility(View.GONE);
-            if (m_search.getVisibility() == View.VISIBLE){
-                m_search.animate().cancel();
-                m_search.animate().alpha(0).setDuration(150).withEndAction(() -> {
-                    m_search.getText().clear();
-                    m_search.setVisibility(View.GONE);
-                });
-                m_search.setClickable(false);
+    private void onSelectionMenu(boolean pStatus){
+        if(!pStatus){
+            mClearButton.setClickable(false);
+            mClearButton.animate().cancel();
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mClearButton.animate().setDuration(150).alpha(0.4f);
+            mMenuButton.setVisibility(View.VISIBLE);
+            mSearchButton.setVisibility(View.GONE);
+            if (mSearchInput.getVisibility() == View.VISIBLE){
+                onHideSearch();
             }
         }else {
-            if (m_search.getVisibility() != View.VISIBLE) {
-                m_clearButton.setClickable(true);
-                m_clearButton.setTextColor(m_context.getApplication().getResources().getColor(R.color.blue));
+            if (mSearchInput.getVisibility() != View.VISIBLE) {
+                mClearButton.setClickable(true);
+                mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+                mClearButton.animate().cancel();
+                mClearButton.animate().setDuration(150).alpha(1);
             }
-            m_menu_button.setVisibility(View.GONE);
-            m_search_button.setVisibility(View.VISIBLE);
+            mMenuButton.setVisibility(View.GONE);
+            mSearchButton.setVisibility(View.VISIBLE);
 
         }
 
     }
 
     private void updateList(){
-        int index = Objects.requireNonNull(m_listview.getAdapter()).getItemCount()-1;
-        m_listview.getAdapter().notifyDataSetChanged();
-        m_listview.scrollToPosition(index);
+        int index = Objects.requireNonNull(mRecycleView.getAdapter()).getItemCount()-1;
+        mRecycleView.getAdapter().notifyDataSetChanged();
     }
 
-    private void removeFromList(int index)
+    private void removeFromList(int pIndex)
     {
-        Objects.requireNonNull(m_listview.getAdapter()).notifyItemRemoved(index);
-        m_listview.getAdapter().notifyItemRangeChanged(index, m_listview.getAdapter().getItemCount());
+        Objects.requireNonNull(mRecycleView.getAdapter()).notifyItemRemoved(pIndex);
+        mRecycleView.getAdapter().notifyItemRangeChanged(pIndex, mRecycleView.getAdapter().getItemCount());
     }
 
     private void clearList(){
-        Objects.requireNonNull(m_listview.getAdapter()).notifyDataSetChanged();
-        updateIfListEmpty(m_listview.getAdapter().getItemCount(),300);
-        m_search.clearFocus();
-        m_search.setText(strings.EMPTY_STR);
+        Objects.requireNonNull(mRecycleView.getAdapter()).notifyDataSetChanged();
+        updateIfListEmpty(mRecycleView.getAdapter().getItemCount(),300);
+        mSearchInput.clearFocus();
+        mSearchInput.setText(strings.GENERIC_EMPTY_STR);
     }
 
-    public void onTrigger(historyEnums.eHistoryViewCommands p_commands, List<Object> p_data){
-        if(p_commands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY){
-            updateIfListEmpty((int)p_data.get(0), (int)p_data.get(1));
-        }
-        else if(p_commands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST){
-            updateList();
-        }
-        else if(p_commands == historyEnums.eHistoryViewCommands.M_REMOVE_FROM_LIST){
-            removeFromList((int)p_data.get(0));
-        }
-        else if(p_commands == historyEnums.eHistoryViewCommands.M_CLEAR_LIST){
-            clearList();
-        }
-        else if(p_commands == historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU){
-            onSelectionMenu((boolean)p_data.get(0));
-        }
-    }
-
-    public boolean onHideSearch() {
-        if(m_search.getVisibility() == View.VISIBLE){
-            m_search.animate().cancel();
-            m_search.animate().alpha(0).setDuration(150).withEndAction(() -> {
-                m_search.setVisibility(View.GONE);
-                m_search.setText(strings.EMPTY_STR);
+    private boolean onHideSearch() {
+        if(mSearchInput.getVisibility() == View.VISIBLE){
+            mSearchInput.animate().cancel();
+            mSearchInput.animate().alpha(0).setDuration(150).withEndAction(() -> {
+                mSearchInput.getText().clear();
+                mSearchInput.setVisibility(View.GONE);
+                mSearchInput.setText(strings.GENERIC_EMPTY_STR);
             });
-            m_search.setText(strings.EMPTY_STR);
-            m_search.setClickable(false);
-            m_clearButton.setClickable(true);
-            m_clearButton.setTextColor(m_context.getApplication().getResources().getColor(R.color.blue));
+            mSearchInput.setText(strings.GENERIC_EMPTY_STR);
+            mSearchInput.setClickable(false);
+            mClearButton.setClickable(true);
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+            mClearButton.animate().cancel();
+            mClearButton.animate().setDuration(150).alpha(1f);
             return false;
         }else {
-            m_search.animate().cancel();
-            m_search.setAlpha(0f);
-            m_search.animate().setDuration(150).alpha(1);
-            m_search.setVisibility(View.VISIBLE);
-            m_search.setClickable(true);
-            m_clearButton.setClickable(false);
-            m_clearButton.setTextColor(m_context.getApplication().getResources().getColor(R.color.float_white));
-            m_search.requestFocus();
-            InputMethodManager imm = (InputMethodManager) m_context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            mSearchInput.animate().cancel();
+            mSearchInput.setAlpha(0f);
+            mSearchInput.animate().setDuration(150).alpha(1);
+            mSearchInput.setVisibility(View.VISIBLE);
+            mSearchInput.setClickable(true);
+            mClearButton.setClickable(false);
+            mSearchInput.requestFocus();
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mClearButton.animate().cancel();
+            mClearButton.animate().setDuration(150).alpha(0.4f);
+            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
             return true;
         }
     }
 
-    private PopupWindow popupWindow = null;
-    public void onLongPressMenu(View view) {
-
-        if(popupWindow!=null){
-            popupWindow.dismiss();
-        }
-
-        LayoutInflater layoutInflater
-                = (LayoutInflater) view.getContext()
-                .getSystemService(LAYOUT_INFLATER_SERVICE);
-        final View popupView = layoutInflater.inflate(R.layout.history_choose_popup_menu, null);
-
-
-        popupWindow = new PopupWindow(
-                popupView,
-                ActionMenuView.LayoutParams.WRAP_CONTENT,
-                ActionMenuView.LayoutParams.WRAP_CONTENT, true);
-
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setFocusable(true);
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        popupWindow.setAnimationStyle(R.style.popup_window_animation);
-        popupWindow.showAtLocation(view, Gravity.TOP|Gravity.END,0,0);
-        popupWindow.setElevation(7);
+    private void onLongPressMenu(View pView) {
+        mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.recyclerview__menu);
     }
+
+    public Object onTrigger(historyEnums.eHistoryViewCommands pCommands, List<Object> pData){
+        if(pCommands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY){
+            updateIfListEmpty((int)pData.get(0), (int)pData.get(1));
+        }
+        else if(pCommands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST){
+            updateList();
+        }
+        else if(pCommands == historyEnums.eHistoryViewCommands.M_REMOVE_FROM_LIST){
+            removeFromList((int)pData.get(0));
+        }
+        else if(pCommands == historyEnums.eHistoryViewCommands.M_CLEAR_LIST){
+            clearList();
+        }
+        else if(pCommands == historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU){
+            onSelectionMenu((boolean)pData.get(0));
+        }
+        else if(pCommands == historyEnums.eHistoryViewCommands.M_HIDE_SEARCH){
+            return onHideSearch();
+        }
+        else if(pCommands == historyEnums.eHistoryViewCommands.M_CLOSE_MENU){
+            onCloseMenu();
+        }
+        else if(pCommands == historyEnums.eHistoryViewCommands.M_LONG_PRESS_MENU){
+            onLongPressMenu((View) pData.get(0));
+        }
+        return null;
+    }
+
 }

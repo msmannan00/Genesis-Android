@@ -229,7 +229,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
     @UiThread
     public void onTitleChange(@NonNull GeckoSession var1, @Nullable String var2) {
-        if(var2!=null && !var2.equals(strings.EMPTY_STR) && var2.length()>2 && !var2.equals("about:blank")){
+        if(var2!=null && !var2.equals(strings.GENERIC_EMPTY_STR) && var2.length()>2 && !var2.equals("about:blank")){
             mCurrentTitle = var2;
             m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
         }
@@ -243,7 +243,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
     public void onContextMenu(@NonNull GeckoSession var1, int var2, int var3, @NonNull GeckoSession.ContentDelegate.ContextElement var4) {
 
-        String title = strings.EMPTY_STR;
+        String title = strings.GENERIC_EMPTY_STR;
         if(var4.title!=null){
             title = var4.title;
         }

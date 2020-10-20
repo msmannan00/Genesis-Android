@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.darkweb.genesissearchengine.appManager.historyManager.historyController">
+
+    <LinearLayout
+        android:id="@+id/pHeaderContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clickable="true"
+        android:elevation="7dp"
+        android:focusable="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/pHeaderContainerTop"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:paddingEnd="7dp"
+            android:paddingStart="5dp"
+            android:focusable="true"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry">
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/todo"
+                android:onClick="onBackPressed"
+                android:src="@xml/ic_arrow_back"
+                android:tint="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-3dp"
+                android:layout_weight="40"
+                android:gravity="center_vertical|start"
+                android:text="@string/HP_TITLE"
+                android:textColor="@color/text_color_v1"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/pSearchButton"
+                android:layout_width="30dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="2.5"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/todo"
+                android:onClick="onHideSearch"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:scaleType="fitCenter"
+                android:src="@xml/ic_search"
+                android:tint="@color/black" />
+
+            <ImageButton
+                android:id="@+id/pMenuButton"
+                android:layout_width="30dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="2.5"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/todo"
+                android:onClick="onLongPressMenu"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/menu_item"
+                android:tint="@color/black" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_dark"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    <LinearLayout
+        android:id="@+id/pHeaderContainerBottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/pClearButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="17"
+            android:background="@xml/gx_ripple_blue"
+            android:paddingStart="20dp"
+            android:stateListAnimator="@null"
+            android:text="@string/HP_CLEAR"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue"
+
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:id="@+id/pSearchInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_weight="30"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@xml/gx_generic_input"
+            android:ems="10"
+            android:hint="@string/HP_SEARCH_HINT"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/text_color_v2"
+            android:textColorHighlight="@color/text_color_highlight_v1"
+            android:textCursorDrawable="@xml/gx_search_cursor_state"
+            android:textSize="15sp"
+            android:visibility="gone"
+            tools:targetApi="o" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="97dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer" />
+
+    <ImageView
+        android:id="@+id/pEmptyListNotification"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:alpha="0"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/empty_history"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

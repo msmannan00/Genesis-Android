@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.darkweb.genesissearchengine.appManager.languageManager.languageController">
+
+        <!-- Title Header -->
+        <LinearLayout
+            android:id="@+id/pHeaderContainerTop"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:elevation="7dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="7dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry">
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/todo"
+                android:onClick="onClose"
+                android:src="@xml/ic_arrow_back"
+                android:tint="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-3dp"
+                android:layout_weight="40"
+                android:gravity="center_vertical|start"
+                android:text="@string/LP_TITLE"
+                android:textColor="@color/text_color_v1"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainerTop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingBottom="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/langEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:onClick="onMenuItemInvoked"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/LP_LANGUAGE_MESSAGE_BT_DEFAULT"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white_dark" />
+
+            <Button
+                android:id="@+id/pLangGerman"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:onClick="onMenuItemInvoked"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/LP_LANGUAGE_MESSAGE_BT_1"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white_dark" />
+
+            <Button
+                android:id="@+id/pLangItalian"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:onClick="onMenuItemInvoked"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/LP_LANGUAGE_MESSAGE_BT_2"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white_dark" />
+
+            <Button
+                android:id="@+id/pLangPorteguse"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:onClick="onMenuItemInvoked"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/LP_LANGUAGE_MESSAGE_BT_3"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white_dark" />
+
+            <Button
+                android:id="@+id/pLangRussian"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:onClick="onMenuItemInvoked"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/LP_LANGUAGE_MESSAGE_BT_4"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white_dark" />
+
+            <Button
+                android:id="@+id/pLangUkarian"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:onClick="onMenuItemInvoked"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/LP_LANGUAGE_MESSAGE_BT_5"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white_dark" />
+
+            <Button
+                android:id="@+id/pLangChinese"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:onClick="onMenuItemInvoked"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/LP_LANGUAGE_MESSAGE_BT_6"
+                android:textSize="14sp" />
+            <!-- Title Header -->
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.homeManager;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -15,9 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.transition.Explode;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +21,7 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
@@ -117,7 +111,7 @@ class homeViewController
     }
 
     void initTab(int count){
-        mNewTab.setText(count+strings.EMPTY_STR);
+        mNewTab.setText(count+strings.GENERIC_EMPTY_STR);
 
         YoYo.with(Techniques.FlipInX)
                 .duration(450)
@@ -217,7 +211,7 @@ class homeViewController
         Drawable drawable;
         Resources res = mContext.getResources();
         try {
-            drawable = Drawable.createFromXml(res, res.getXml(R.xml.sc_rounded_corner_suggestion));
+            drawable = Drawable.createFromXml(res, res.getXml(R.xml.hox_rounded_corner_suggestion));
             mSearchbar.setDropDownBackgroundDrawable(drawable);
             mSearchbar.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
             mSearchbar.setClipToOutline(true);
@@ -272,18 +266,18 @@ class homeViewController
                         try
                         {
                             sleep(1000);
-                            mEvent.invokeObserver(Collections.singletonList(status.sSearchStatus), enums.etype.recheck_orbot);
+                            mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.recheck_orbot);
                             if(temp_context.isDestroyed()){
                                 return;
                             }
-                            startPostTask(messages.UPDATE_LOADING_TEXT);
+                            startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                         }
                         catch (Exception e)
                         {
                             e.printStackTrace();
                         }
                     }
-                    startPostTask(messages.ON_URL_LOAD);
+                    startPostTask(messages.MESSAGE_ON_URL_LOAD);
                 }
             }.start();
         }
@@ -406,7 +400,7 @@ class homeViewController
         Button btn = popupView.findViewById(R.id.notification_event);
         btn.setOnClickListener(v ->
         {
-            mEvent.invokeObserver(Collections.singletonList(status.sSearchStatus), e_type);
+            mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), e_type);
             popupWindow.dismiss();
         });
 
@@ -508,7 +502,7 @@ class homeViewController
     }
 
     void onNewTab(boolean keyboard,boolean isKeyboardOpen){
-        onUpdateSearchBar(strings.BLANK_PAGE,false);
+        onUpdateSearchBar(strings.HOME_BLANK_PAGE,false);
         if(keyboard){
 
             if(!isKeyboardOpen){
@@ -645,7 +639,7 @@ class homeViewController
 
     void onUpdateLogo(){
 
-        switch (status.sSearchStatus)
+        switch (status.sSettingSearchStatus)
         {
         }
     }
@@ -665,15 +659,15 @@ class homeViewController
             @Override
             public void handleMessage(Message msg)
             {
-                if(msg.what == messages.ON_URL_LOAD)
+                if(msg.what == messages.MESSAGE_ON_URL_LOAD)
                 {
-                    if(status.sRedirectStatus.equals(strings.EMPTY_STR)){
-                        mEvent.invokeObserver(Collections.singletonList(status.sSearchStatus), enums.etype.on_url_load);
+                    if(status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)){
+                        mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.on_url_load);
                     }else {
-                        mEvent.invokeObserver(Collections.singletonList(status.sRedirectStatus), enums.etype.on_url_load);
+                        mEvent.invokeObserver(Collections.singletonList(status.sSettingRedirectStatus), enums.etype.on_url_load);
                     }
                 }
-                if(msg.what == messages.UPDATE_LOADING_TEXT)
+                if(msg.what == messages.MESSAGE_UPDATE_LOADING_TEXT)
                 {
                     if(mLogs !=null)
                     {

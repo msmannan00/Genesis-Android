@@ -56,14 +56,14 @@ public class languageController extends AppCompatActivity {
     }
 
     public void changeLanguage(Locale language){
-        status.sLanguage = language.getLanguage();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.LANGUAGE,language.getLanguage()));
+        status.sSettingLanguage = language.getLanguage();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,language.getLanguage()));
         pluginController.getInstance().setLanguage(this);
     }
 
     /*-------------------------------------------------------CALLBACKS-------------------------------------------------------*/
 
-    public void onNavigationBackPressed(View view) {
+    public void onClose(View view) {
         finish();
     }
 
@@ -72,22 +72,22 @@ public class languageController extends AppCompatActivity {
         if (menuId == R.id.langEnglish) {
             changeLanguage(Locale.ENGLISH);
         }
-        else if (menuId == R.id.langGerman) {
+        else if (menuId == R.id.pLangGerman) {
             changeLanguage(new Locale("de"));
         }
-        else if (menuId == R.id.langItalian) {
+        else if (menuId == R.id.pLangItalian) {
             changeLanguage(new Locale("it"));
         }
-        else if (menuId == R.id.langPorteguse) {
+        else if (menuId == R.id.pLangPorteguse) {
             changeLanguage(new Locale("pt"));
         }
-        else if (menuId == R.id.langRussian) {
+        else if (menuId == R.id.pLangRussian) {
             changeLanguage(new Locale("ru"));
         }
-        else if (menuId == R.id.langUkarian) {
+        else if (menuId == R.id.pLangUkarian) {
             changeLanguage(new Locale("uk"));
         }
-        else if (menuId == R.id.langChinese) {
+        else if (menuId == R.id.pLangChinese) {
             changeLanguage(new Locale("zh"));
         }
         finish();

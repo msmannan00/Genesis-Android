@@ -15,7 +15,7 @@ import java.util.Arrays;
 class geckoDownloadManager
 {
     private Uri downloadURL;
-    private String downloadFile = strings.EMPTY_STR;
+    private String downloadFile = strings.GENERIC_EMPTY_STR;
 
     geckoDownloadManager(){
 

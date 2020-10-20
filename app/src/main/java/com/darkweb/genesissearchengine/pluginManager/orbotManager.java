@@ -37,14 +37,14 @@ class orbotManager
     }
 
     public void initialize(AppCompatActivity app_context, eventObserver.eventListener event){
-        initNotification((Integer) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.NOTIFICATION_STATUS,1)));
+        initNotification((Integer) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS,1)));
     }
 
     void startOrbot(Context context){
-        orbotLocalConstants.bridges = status.sCustomBridge;
-        orbotLocalConstants.sIsManualBridge = status.sGatewayManual;
+        orbotLocalConstants.bridges = status.sBridgeCustomBridge;
+        orbotLocalConstants.sIsManualBridge = status.sBridgeGatewayManual;
         this.mAppContext = context;
-        Prefs.putBridgesEnabled(status.sGatewayManual|status.sGatewayAuto);
+        Prefs.putBridgesEnabled(status.sBridgeGatewayManual |status.sBridgeGatewayAuto);
         Intent mServiceIntent = new Intent(context, OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -96,10 +96,10 @@ class orbotManager
         }
         else {
             PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-            PrefsHelper.setPref(keys.PROXY_SOCKS,constants.PROXY_SOCKS);
+            PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
             PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.PROXY_SOCKS_VERSION);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.PROXY_SOCKS_REMOTE_DNS);
+            PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
+            PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
         }
     }
 
@@ -112,15 +112,15 @@ class orbotManager
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,null);
 
         PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-        PrefsHelper.setPref(keys.PROXY_SOCKS,constants.PROXY_SOCKS);
+        PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
         PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.PROXY_SOCKS_VERSION);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.PROXY_SOCKS_REMOTE_DNS);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
 
-        PrefsHelper.setPref(keys.PROXY_CACHE,constants.PROXY_CACHE);
-        PrefsHelper.setPref(keys.PROXY_MEMORY,constants.PROXY_MEMORY);
-        PrefsHelper.setPref(keys.PROXY_DO_NOT_TRACK_HEADER_ENABLED,constants.PROXY_DO_NOT_TRACK_HEADER_ENABLED);
-        PrefsHelper.setPref(keys.PROXY_DO_NOT_TRACK_HEADER_VALUE,constants.PROXY_DO_NOT_TRACK_HEADER_VALUE);
+        PrefsHelper.setPref(keys.PROXY_CACHE,constants.CONST_PROXY_CACHE);
+        PrefsHelper.setPref(keys.PROXY_MEMORY,constants.CONST_PROXY_MEMORY);
+        PrefsHelper.setPref(keys.PROXY_DO_NOT_TRACK_HEADER_ENABLED,constants.CONST_PROXY_DO_NOT_TRACK_HEADER_ENABLED);
+        PrefsHelper.setPref(keys.PROXY_DO_NOT_TRACK_HEADER_VALUE,constants.CONST_PROXY_DO_NOT_TRACK_HEADER_VALUE);
 
         PrefsHelper.setPref("browser.cache.disk.enable",true);
         PrefsHelper.setPref("browser.cache.memory.enable",true);
@@ -135,14 +135,14 @@ class orbotManager
         PrefsHelper.setPref("browser.cache.memory.enable",true);
         PrefsHelper.setPref("browser.cache.disk.capacity",0);
         PrefsHelper.setPref("privacy.resistFingerprinting",true);
-        PrefsHelper.setPref("privacy.clearOnShutdown.cache",status.sHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.downloads",status.sHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.formdata",status.sHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.history",status.sHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.offlineApps",status.sHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.passwords",status.sHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.sessions",status.sHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.siteSettings",status.sHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.cache",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.downloads",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.formdata",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.history",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.offlineApps",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.passwords",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.sessions",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.siteSettings",status.sSettingHistoryStatus);
         PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
         PrefsHelper.setPref("privacy.donottrackheader.value",1);
         PrefsHelper.setPref("network.http.sendRefererHeader", 0);
@@ -168,7 +168,7 @@ class orbotManager
         }
 
 
-        if(!logs.equals(strings.EMPTY_STR))
+        if(!logs.equals(strings.GENERIC_EMPTY_STR))
         {
             String Logs = logs;
             Logs="Installing | " + Logs.replace("FAILED","Securing");

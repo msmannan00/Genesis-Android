@@ -22,9 +22,9 @@ import com.example.myapplication.R;
 
 import java.util.Arrays;
 import java.util.List;
-import static com.darkweb.genesissearchengine.constants.status.sCookieStatus;
-import static com.darkweb.genesissearchengine.constants.status.sHistoryStatus;
-import static com.darkweb.genesissearchengine.constants.status.sJavaStatus;
+import static com.darkweb.genesissearchengine.constants.status.sSettingCookieStatus;
+import static com.darkweb.genesissearchengine.constants.status.sSettingHistoryStatus;
+import static com.darkweb.genesissearchengine.constants.status.sSettingJavaStatus;
 
 public class settingController extends AppCompatActivity
 {
@@ -67,11 +67,11 @@ public class settingController extends AppCompatActivity
     }
 
     public void modelInitialization(){
-        mSettingModel.setJavaStatus(sJavaStatus);
-        mSettingModel.setHistoryStatus(sHistoryStatus);
-        mSettingModel.setSearchStatus(status.sSearchStatus);
-        mSettingModel.setAdjustableStatus(status.sFontAdjustable);
-        mSettingModel.setFontSize(status.sFontSize);
+        mSettingModel.setJavaStatus(sSettingJavaStatus);
+        mSettingModel.setHistoryStatus(sSettingHistoryStatus);
+        mSettingModel.setSearchStatus(status.sSettingSearchStatus);
+        mSettingModel.setAdjustableStatus(status.sSettingFontAdjustable);
+        mSettingModel.setFontSize(status.sSettingFontSize);
     }
 
     public void viewsInitializations()
@@ -96,7 +96,7 @@ public class settingController extends AppCompatActivity
         initializeItemSelectedListener(mHistory);
         initializeItemSelectedListener(mFontAdjustable);
         initializeItemSelectedListener(mCookies);
-        pluginController.getInstance().logEvent(strings.SETTINGS_OPENED);
+        pluginController.getInstance().logEvent(strings.EVENT_SETTINGS_OPENED);
     }
 
     /*Event Handlers*/
@@ -104,9 +104,9 @@ public class settingController extends AppCompatActivity
     @Override
     public void onTrimMemory(int level)
     {
-        if(status.sIsAppPaused && (level==80 || level==15))
+        if(status.sSettingIsAppPaused && (level==80 || level==15))
         {
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.LOW_MEMORY,true));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY,true));
             finish();
         }
     }
@@ -115,7 +115,7 @@ public class settingController extends AppCompatActivity
     public void onResume()
     {
         activityContextManager.getInstance().setCurrentActivity(this);
-        status.sIsAppPaused = false;
+        status.sSettingIsAppPaused = false;
         super.onResume();
     }
 
@@ -217,22 +217,22 @@ public class settingController extends AppCompatActivity
         public Object invokeObserver(List<Object> data, enums.etype e_type)
         {
             if(e_type == enums.etype.update_searcn){
-                status.sSearchStatus = (String)data.get(0);
+                status.sSettingSearchStatus = (String)data.get(0);
                 mHomeController.onHomeButton(null);
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SEARCH_ENGINE, mSettingModel.getSearchStatus()));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, mSettingModel.getSearchStatus()));
             }
             else if(e_type == enums.etype.update_javascript){
-                status.sJavaStatus = (boolean)data.get(0);
+                status.sSettingJavaStatus = (boolean)data.get(0);
                 mHomeController.onUpdateJavascript();
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.JAVA_SCRIPT, status.sJavaStatus));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT, status.sSettingJavaStatus));
             }
             else if(e_type == enums.etype.update_history){
-                sHistoryStatus = (boolean)data.get(0);
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HISTORY_CLEAR, sHistoryStatus));
+                sSettingHistoryStatus = (boolean)data.get(0);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR, sSettingHistoryStatus));
             }
             else if(e_type == enums.etype.update_notification){
                 pluginController.getInstance().setNotificationStatus((int)data.get(0));
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.NOTIFICATION_STATUS, pluginController.getInstance().getNotificationStatus()));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, pluginController.getInstance().getNotificationStatus()));
 
                 int notificationStatus = pluginController.getInstance().getNotificationStatus();
                 if(notificationStatus==0){
@@ -248,8 +248,8 @@ public class settingController extends AppCompatActivity
                 mHomeController.onLoadFont();
             }
             else if(e_type == enums.etype.update_cookies){
-                sCookieStatus = (int)data.get(0);
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.COOKIE_ADJUSTABLE, sCookieStatus));
+                sSettingCookieStatus = (int)data.get(0);
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE, sSettingCookieStatus));
                 mHomeController.onUpdateCookies();
                 pluginController.getInstance().updateCookiesStatus();
             }
@@ -267,15 +267,15 @@ public class settingController extends AppCompatActivity
 
         if (index == 0)
         {
-            return constants.BACKEND_GENESIS_URL;
+            return constants.CONST_BACKEND_GENESIS_URL;
         }
         else if (index == 1)
         {
-            return constants.BACKEND_GOOGLE_URL;
+            return constants.CONST_BACKEND_GOOGLE_URL;
         }
         else
         {
-            return constants.BACKEND_DUCK_DUCK_GO_URL;
+            return constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
         }
     }
 

@@ -1,20 +1,25 @@
 package com.darkweb.genesissearchengine.appManager.bookmarkManager;
 
+import android.content.Context;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-
+import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.darkweb.genesissearchengine.appManager.historyManager.bookmarkEnums;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
-
+import java.util.List;
 import java.util.Objects;
 
 class bookmarkViewController
@@ -22,20 +27,26 @@ class bookmarkViewController
     /*Private Variables*/
     private AppCompatActivity mContext;
 
-    private ImageView mEmptyListNotifier;
-    private EditText mSearchBar;
-    private RecyclerView mListView;
+    private ImageView mEmptyListNotification;
+    private EditText mSearchInput;
+    private RecyclerView mRecycleView;
     private Button mClearButton;
+    private ImageButton mMenuButton;
+    private ImageButton mSearchButton;
+
+    private PopupWindow mPopupWindow = null;
 
     /*Initializations*/
 
-    bookmarkViewController(ImageView mEmptyListNotifier, EditText mSearchBar, RecyclerView mListView, Button mClearButton,AppCompatActivity mContext)
+    bookmarkViewController(ImageView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton,AppCompatActivity pContext,ImageButton pMenuButton,ImageButton pSearchButton)
     {
-        this.mContext = mContext;
-        this.mEmptyListNotifier = mEmptyListNotifier;
-        this.mSearchBar = mSearchBar;
-        this.mListView = mListView;
-        this.mClearButton = mClearButton;
+        this.mEmptyListNotification = pEmptyListNotification;
+        this.mSearchInput = pSearchInput;
+        this.mRecycleView = pRecycleView;
+        this.mClearButton = pClearButton;
+        this.mContext = pContext;
+        this.mMenuButton = pMenuButton;
+        this.mSearchButton = pSearchButton;
 
         initPostUI();
     }
@@ -55,24 +66,142 @@ class bookmarkViewController
         }
     }
 
-    void updateIfListEmpty(int size,int duration){
-        if(size>0){
-            mEmptyListNotifier.animate().setDuration(duration).alpha(0f);
-            mClearButton.animate().setDuration(duration).alpha(1f);
+    private void updateIfListEmpty(int pSize,int pDuration){
+        if(pSize>0){
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+            mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
+            mClearButton.setText(strings.BOOKMARK_CLEAR_BOOKMARK);
+            mClearButton.setClickable(true);
+        }
+        else {
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mEmptyListNotification.animate().setDuration(pDuration).alpha(1f);
+
+            mClearButton.animate().setDuration(pDuration).alpha(0.4f);
+            mSearchButton.animate().setDuration(pDuration).alpha(0f);
+            mMenuButton.animate().setDuration(pDuration).alpha(0f);
+
+            mClearButton.setEnabled(false);
+            mClearButton.setClickable(false);
+            mSearchButton.setClickable(false);
+            mMenuButton.setClickable(false);
+
+            mClearButton.setText(strings.BOOKMARK_NO_BOOKMARK_FOUND);
+            mClearButton.setClickable(false);
         }
     }
 
-    void removeFromList(int index)
-    {
-        Objects.requireNonNull(mListView.getAdapter()).notifyItemRemoved(index);
-        mListView.getAdapter().notifyItemRangeChanged(index, mListView.getAdapter().getItemCount());
+    private void onCloseMenu(){
+        if(mPopupWindow !=null && mPopupWindow.isShowing()){
+            mPopupWindow.dismiss();
+        }
     }
 
-    void clearList(){
-        Objects.requireNonNull(mListView.getAdapter()).notifyDataSetChanged();
-        updateIfListEmpty(mListView.getAdapter().getItemCount(),300);
-        mSearchBar.clearFocus();
-        mSearchBar.setText(strings.EMPTY_STR);
+    private void onSelectionMenu(boolean pStatus){
+        if(!pStatus){
+            mClearButton.setClickable(false);
+            mClearButton.animate().cancel();
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mClearButton.animate().setDuration(150).alpha(0.4f);
+            mMenuButton.setVisibility(View.VISIBLE);
+            mSearchButton.setVisibility(View.GONE);
+            if (mSearchInput.getVisibility() == View.VISIBLE){
+                onHideSearch();
+            }
+        }else {
+            if (mSearchInput.getVisibility() != View.VISIBLE) {
+                mClearButton.setClickable(true);
+                mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+                mClearButton.animate().cancel();
+                mClearButton.animate().setDuration(150).alpha(1);
+            }
+            mMenuButton.setVisibility(View.GONE);
+            mSearchButton.setVisibility(View.VISIBLE);
+
+        }
+
+    }
+
+    private void updateList(){
+        int index = Objects.requireNonNull(mRecycleView.getAdapter()).getItemCount()-1;
+        mRecycleView.getAdapter().notifyDataSetChanged();
+    }
+
+    private void removeFromList(int pIndex)
+    {
+        Objects.requireNonNull(mRecycleView.getAdapter()).notifyItemRemoved(pIndex);
+        mRecycleView.getAdapter().notifyItemRangeChanged(pIndex, mRecycleView.getAdapter().getItemCount());
+    }
+
+    private void clearList(){
+        Objects.requireNonNull(mRecycleView.getAdapter()).notifyDataSetChanged();
+        updateIfListEmpty(mRecycleView.getAdapter().getItemCount(),300);
+        mSearchInput.clearFocus();
+        mSearchInput.setText(strings.GENERIC_EMPTY_STR);
+    }
+
+    private boolean onHideSearch() {
+        if(mSearchInput.getVisibility() == View.VISIBLE){
+            mSearchInput.animate().cancel();
+            mSearchInput.animate().alpha(0).setDuration(150).withEndAction(() -> {
+                mSearchInput.getText().clear();
+                mSearchInput.setVisibility(View.GONE);
+                mSearchInput.setText(strings.GENERIC_EMPTY_STR);
+            });
+            mSearchInput.setText(strings.GENERIC_EMPTY_STR);
+            mSearchInput.setClickable(false);
+            mClearButton.setClickable(true);
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+            mClearButton.animate().cancel();
+            mClearButton.animate().setDuration(150).alpha(1f);
+            return false;
+        }else {
+            mSearchInput.animate().cancel();
+            mSearchInput.setAlpha(0f);
+            mSearchInput.animate().setDuration(150).alpha(1);
+            mSearchInput.setVisibility(View.VISIBLE);
+            mSearchInput.setClickable(true);
+            mClearButton.setClickable(false);
+            mSearchInput.requestFocus();
+            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mClearButton.animate().cancel();
+            mClearButton.animate().setDuration(150).alpha(0.4f);
+            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+            return true;
+        }
+    }
+
+    private void onLongPressMenu(View pView) {
+        mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.recyclerview__menu);
+    }
+
+    public Object onTrigger(bookmarkEnums.eBookmarkViewCommands pCommands, List<Object> pData){
+        if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_UPDATE_LIST_IF_EMPTY){
+            updateIfListEmpty((int)pData.get(0), (int)pData.get(1));
+        }
+        else if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_UPDATE_LIST){
+            updateList();
+        }
+        else if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_REMOVE_FROM_LIST){
+            removeFromList((int)pData.get(0));
+        }
+        else if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_CLEAR_LIST){
+            clearList();
+        }
+        else if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU){
+            onSelectionMenu((boolean)pData.get(0));
+        }
+        else if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_HIDE_SEARCH){
+            return onHideSearch();
+        }
+        else if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_CLOSE_MENU){
+            onCloseMenu();
+        }
+        else if(pCommands == bookmarkEnums.eBookmarkViewCommands.M_LONG_PRESS_MENU){
+            onLongPressMenu((View) pData.get(0));
+        }
+        return null;
     }
 
 }

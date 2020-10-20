@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.helperManager;
 
 import android.Manifest;
-import android.app.ActivityManager;
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -11,20 +11,23 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.net.NetworkInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Vibrator;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ActionMenuView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,13 +39,12 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.example.myapplication.BuildConfig;
+import com.example.myapplication.R;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
@@ -144,7 +147,7 @@ public class helperMethod
     }
 
     public static void rateApp(AppCompatActivity context){
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.IS_APP_RATED,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
     }
 
@@ -164,6 +167,11 @@ public class helperMethod
                 .setSubject("Hi! Check out this Awesome URL | " + p_title)
                 .setText("Website URL | " + p_share)
                 .startChooser();
+    }
+
+    public static void vibrate(AppCompatActivity context) {
+        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(50);
     }
 
     public static void shareURL(AppCompatActivity context, String p_share) {
@@ -240,7 +248,7 @@ public class helperMethod
 
     public static void openActivity( Class<?> cls,int type,AppCompatActivity context,boolean animation){
         Intent myIntent = new Intent(context, cls);
-        myIntent.putExtra(keys.list_type, type);
+        myIntent.putExtra(keys.PROXY_LIST_TYPE, type);
         if(!animation){
             myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
         }
@@ -371,4 +379,32 @@ public class helperMethod
         intent.setData(Uri.parse("package:" + context.getPackageName()));
         context.startActivity(intent);
     }
+
+    public static PopupWindow onCreateMenu(View p_view, int p_layout) {
+        PopupWindow popupWindow = null;
+        if(popupWindow!=null){
+            popupWindow.dismiss();
+        }
+
+        LayoutInflater layoutInflater
+                = (LayoutInflater) p_view.getContext()
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams") final View popupView = layoutInflater.inflate(p_layout, null);
+
+
+        popupWindow = new PopupWindow(
+                popupView,
+                ActionMenuView.LayoutParams.WRAP_CONTENT,
+                ActionMenuView.LayoutParams.WRAP_CONTENT, true);
+
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setAnimationStyle(R.style.popup_window_animation);
+        popupWindow.showAtLocation(p_view, Gravity.TOP|Gravity.END,0,0);
+        popupWindow.setElevation(7);
+
+        return popupWindow;
+    }
+
 }

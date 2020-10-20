@@ -1,7 +1,5 @@
 package com.darkweb.genesissearchengine.helperManager;
 
-import android.webkit.URLUtil;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.darkweb.genesissearchengine.constants.strings;
@@ -167,7 +165,7 @@ public class errorHandler
     }
     private String createErrorPage(final String error,String url) {
         if(error==null){
-            return strings.EMPTY_STR;
+            return strings.GENERIC_EMPTY_STR;
         }
 
         if (mErrorTemplate == null) {

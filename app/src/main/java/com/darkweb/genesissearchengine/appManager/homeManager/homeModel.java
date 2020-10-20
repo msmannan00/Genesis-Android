@@ -12,7 +12,7 @@ class homeModel
 {
 
     String getSearchEngine(){
-        return status.sSearchStatus;
+        return status.sSettingSearchStatus;
     }
 
     String urlComplete(String url){
@@ -31,10 +31,10 @@ class homeModel
             ex.printStackTrace();
         }
 
-        if(status.sSearchStatus.equals(constants.BACKEND_GOOGLE_URL)){
+        if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GOOGLE_URL)){
             return getSearchEngine()+"search?q="+url.replaceAll(" ","+");
         }
-        else if(status.sSearchStatus.equals(constants.BACKEND_GENESIS_URL)){
+        else if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GENESIS_URL)){
             return getSearchEngine()+"/search?s_type=all&p_num=1&q="+url.replaceAll(" ","+");
         }
         else{

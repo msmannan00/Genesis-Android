@@ -27,13 +27,14 @@ public class bridgeController extends AppCompatActivity {
 
     /*Private Variables*/
 
-    private bridgeViewController m_bridge_view_controller;
-    private RadioButton m_bridge_obfs;
-    private RadioButton m_bridge_china;
-    private RadioButton m_bridge_custom;
-    private EditText m_custom_port;
-    private Button m_bridge_button;
-    private ImageView m_custom_bridge_blocker;
+    private bridgeViewController mBridgeViewController;
+    private RadioButton mBridgeObfs;
+    private RadioButton mBridgeChina;
+    private RadioButton mBridgeCustom;
+    private EditText mCustomPort;
+    private Button mBridgeButton;
+    private ImageView mCustomBridgeBlocker;
+
     /*Initializations*/
 
     @Override
@@ -49,25 +50,25 @@ public class bridgeController extends AppCompatActivity {
 
     public void initializeAppModel()
     {
-        m_bridge_view_controller = new bridgeViewController();
+        mBridgeViewController = new bridgeViewController();
     }
 
     public void initializeConnections()
     {
-        m_bridge_obfs = findViewById(R.id.p_bridge_obfs);
-        m_bridge_china = findViewById(R.id.p_bridge_china);
-        m_custom_port = findViewById(R.id.p_port_1);
-        m_bridge_button = findViewById(R.id.p_bridge_button);
-        m_bridge_custom = findViewById(R.id.p_custom_bridge);
-        m_custom_bridge_blocker = findViewById(R.id.p_custom_bridge_blocker);
+        mBridgeObfs = findViewById(R.id.pBridgeObfs);
+        mBridgeChina = findViewById(R.id.pBridgeChina);
+        mCustomPort = findViewById(R.id.pCustomPort);
+        mBridgeButton = findViewById(R.id.pBridgeButton);
+        mBridgeCustom = findViewById(R.id.pBridgeCustom);
+        mCustomBridgeBlocker = findViewById(R.id.pCustomBridgeBlocker);
 
-        m_bridge_view_controller.initialization(m_custom_port, m_bridge_button,this, m_bridge_obfs, m_bridge_china, m_bridge_custom, m_custom_bridge_blocker);
-        m_bridge_view_controller.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sCustomBridge,0));
+        mBridgeViewController.initialization(mCustomPort, mBridgeButton,this, mBridgeObfs, mBridgeChina, mBridgeCustom, mCustomBridgeBlocker);
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.S_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,0));
     }
 
     private void initializeLocalEventHandlers()
     {
-        m_custom_port.addTextChangedListener(new TextWatcher() {
+        mCustomPort.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
             {
@@ -80,7 +81,7 @@ public class bridgeController extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                status.sCustomBridge= m_custom_port.getText().toString();
+                status.sBridgeCustomBridge = mCustomPort.getText().toString();
             }
         });
     }
@@ -90,9 +91,9 @@ public class bridgeController extends AppCompatActivity {
     {
         super.onPause();
         if(dataController.getInstance()!=null){
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.CUSTOM_BRIDGE_1,status.sCustomBridge));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.GATEWAY_AUTO,status.sGatewayAuto));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.GATEWAY_MANUAL,status.sGatewayManual));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_AUTO,status.sBridgeGatewayAuto));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,status.sBridgeGatewayManual));
         }
     }
 
@@ -115,23 +116,23 @@ public class bridgeController extends AppCompatActivity {
     /*Helper Method*/
 
     public void requestBridges(View view){
-        pluginController.getInstance().MessageManagerHandler(this, Collections.singletonList(constants.BACKEND_GOOGLE_URL), enums.etype.on_bridge_mail);
+        pluginController.getInstance().MessageManagerHandler(this, Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL), enums.etype.on_bridge_mail);
     }
 
     public void onCustomChecked(View view){
-        status.sCustomBridge = strings.CUSTOM_BRIDGE_CUSTOM;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.CUSTOM_BRIDGE_1,status.sCustomBridge));
-        m_bridge_view_controller.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sCustomBridge,250));
+        status.sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_CUSTOM;
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.S_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
 
     }
     public void onMeekChecked(View view){
-        status.sCustomBridge = strings.CUSTOM_BRIDGE_OBFS4;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.CUSTOM_BRIDGE_1,status.sCustomBridge));
-        m_bridge_view_controller.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sCustomBridge,250));
+        status.sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_OBFS4;
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.S_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
     }
     public void onObfsChecked(View view){
-        status.sCustomBridge = strings.CUSTOM_BRIDGE_MEEK;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.CUSTOM_BRIDGE_1,status.sCustomBridge));
-        m_bridge_view_controller.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sCustomBridge,250));
+        status.sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_MEEK;
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.S_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
     }
 }

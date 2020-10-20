@@ -4,6 +4,6 @@ public class bridgeEnums
 {
     /*Settings Manager*/
     public enum eBridgeViewCommands {
-        M_INIT_VIEWS
+        S_INIT_VIEWS
     }
 }

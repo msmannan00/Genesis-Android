@@ -4,6 +4,6 @@ public class orbotEnums
 {
     /*Settings Manager*/
     public enum eOrbotViewCommands {
-        M_UPDATE_BRIDGE_SETTINGS_VIEWS, M_INIT_POST_UI, M_INIT_UI
+        S_UPDATE_BRIDGE_SETTINGS_VIEWS, S_INIT_POST_UI, S_INIT_UI
     }
 }

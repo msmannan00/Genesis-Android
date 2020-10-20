@@ -19,9 +19,6 @@ import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 
-import mozilla.components.browser.engine.gecko.GeckoEngine;
-import mozilla.components.browser.icons.*;
-
 
 class geckoClients
 {
@@ -54,7 +51,7 @@ class geckoClients
             mSession.getSettings().setUseTrackingProtection(true);
             mSession.getSettings().setFullAccessibilityTree(true);
             mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
-            mSession.getSettings().setAllowJavascript(status.sJavaStatus);
+            mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
             geckoView.releaseSession();
             geckoView.setSession(mSession);
 
@@ -74,18 +71,18 @@ class geckoClients
         if(mRuntime==null){
             mRuntime = GeckoRuntime.getDefault(context);
             mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
-            mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sFontAdjustable);
+            mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
             mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
             mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
         }
     }
 
     private int getCookiesBehaviour(){
-        return status.sCookieStatus;
+        return status.sSettingCookieStatus;
     }
 
     void updateCookies(){
-        mRuntime.getSettings().getContentBlocking().setCookieBehavior(status.sCookieStatus);
+        mRuntime.getSettings().getContentBlocking().setCookieBehavior(status.sSettingCookieStatus);
         onReload();
     }
 
@@ -102,8 +99,8 @@ class geckoClients
     }
 
     void updateJavascript(){
-        mSession.getSettings().setAllowJavascript(status.sJavaStatus);
-        if(status.sJavaStatus){
+        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        if(status.sSettingJavaStatus){
             mSession.reload();
         }
     }
@@ -198,8 +195,8 @@ class geckoClients
     }
 
     void onUpdateFont(){
-        float font = (status.sFontSize -100)/4+100;
-        mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sFontAdjustable);
+        float font = (status.sSettingFontSize -100)/4+100;
+        mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
         if(!mRuntime.getSettings().getAutomaticFontSizeAdjustment()){
             mRuntime.getSettings().setFontSizeFactor(font/100);
         }
