@@ -26,13 +26,11 @@ public class pluginController
 
     private adManager mAdManager;
     private analyticManager mAnalyticManager;
-    private fabricManager mFabricManager;
     private firebaseManager mFirebaseManager;
     private messageManager mMessageManager;
     private activityContextManager mContextManager;
     private boolean mIsInitialized = false;
     private langManager mLangManager;
-    private boolean mIsServiceInitialized = false;
 
     /*Private Variables*/
 
@@ -51,16 +49,9 @@ public class pluginController
         mIsInitialized = true;
     }
 
-    public void initializeWithAbiError(){
-        mMessageManager = new messageManager(new messageCallback());
-        mIsInitialized = true;
-    }
-
     public void preInitialize(homeController context){
         mLangManager = new langManager(context,new langCallback());
         mLangManager.setDefaultLanguage(new Locale(status.sSettingLanguage));
-
-        mFabricManager = new fabricManager(context,new fabricCallback());
     }
 
     private void instanceObjectInitialization()

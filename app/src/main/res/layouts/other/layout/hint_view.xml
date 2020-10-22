@@ -29,7 +29,7 @@
                 android:singleLine="true"
                 android:textSize="14sp"
                 android:ellipsize="end"
-                android:text="@string/hint_default_suggession" />
+                android:text="@string/GENERAL_DEFAULT_HINT_SUGGESTION" />
 
         <TextView
                 android:id="@+id/hintCompletionUrl"
@@ -43,7 +43,7 @@
                 android:paddingRight="10dp"
                 android:textColor="@color/holo_dark_gray"
                 android:textSize="12.5sp"
-                android:text="@string/hint_default_suggession" />
+                android:text="@string/GENERAL_DEFAULT_HINT_SUGGESTION" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -74,14 +74,14 @@
                         android:completionHintView="@layout/hint_view"
                         android:ems="10"
                         android:popupElevation="5dp"
-                        android:hint="@string/SearchHintMain"
+                        android:hint="@string/GENERAL_SEARCH_HINT"
                         android:inputType="textNoSuggestions"
                         android:importantForAutofill="no"
                         android:maxLines="1"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:selectAllOnFocus="true"
-                        android:text="@string/homeUrl"
+                        android:text="@string/GENERAL_HOME_URL"
                         android:textColor="@color/text_color_v2"
                         android:textColorHighlight="@color/text_color_highlight_v1"
                         android:textCursorDrawable="@xml/gx_search_cursor_state"
@@ -101,12 +101,12 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="5dp"
                             android:layout_marginTop="17dp"
-                            android:text="@string/home_tab_text"
+                            android:text="@string/HOME_TAB_TEXT"
                             android:clickable="false"
                             android:textSize="12.5sp"
                             android:layout_marginBottom="0dp"
                             android:background="@xml/gx_generic_tab_button"
-                            android:contentDescription="@string/todo"
+                            android:contentDescription="@string/GENERAL_TODO"
                             android:scaleType="fitCenter"
                             android:tint="@color/black" />
                     </LinearLayout>
@@ -118,7 +118,7 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:background="@xml/hox_menu_button"
-                        android:contentDescription="@string/todo"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:paddingLeft="8dp"
                         android:paddingTop="19dp"
                         android:onClick="onOpenMenuItem"
@@ -168,7 +168,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             <Button
                     android:id="@+id/Connect"
@@ -177,7 +177,7 @@
                     android:layout_marginStart="53dp"
                     android:background="@xml/hox_rounded_corner"
                     android:onClick="onStartApplication"
-                    android:text="@string/home_connect"
+                    android:text="@string/HOME_CONNECT"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView_loading_back"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -195,7 +195,7 @@
                     android:tint="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/loadingText"
                     app:layout_constraintEnd_toStartOf="@+id/Connect"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             <TextView
                     android:id="@+id/loadingText"
@@ -207,7 +207,7 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="@string/home_loading"
+                    android:text="@string/HOME_LOADING"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textFontWeight="5"
@@ -228,7 +228,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/backsplash"
                     app:layout_constraintStart_toEndOf="@+id/backsplash"
                     app:srcCompat="@drawable/icon_loading"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/GENERAL_TODO" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

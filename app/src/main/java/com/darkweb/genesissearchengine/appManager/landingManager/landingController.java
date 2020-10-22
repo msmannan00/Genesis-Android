@@ -1,6 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.landingManager;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -24,18 +23,18 @@ public class landingController extends AppIntro {
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
         CustomSlideBigText welcome = CustomSlideBigText.newInstance(R.layout.custom_slide_big_text);
-        welcome.setTitle(getString(R.string.hello));
-        welcome.setSubTitle(getString(R.string.welcome));
+        welcome.setTitle(getString(R.string.LANDING_HELLO));
+        welcome.setSubTitle(getString(R.string.LANDING_WELCOME));
         addSlide(welcome);
 
         CustomSlideBigText intro2 = CustomSlideBigText.newInstance(R.layout.custom_slide_big_text);
-        intro2.setTitle(getString(R.string.browser_the_internet));
-        intro2.setSubTitle(getString(R.string.no_tracking));
+        intro2.setTitle(getString(R.string.LANDING_BROWSE_INFO));
+        intro2.setSubTitle(getString(R.string.LANDING_NO_TRACKING));
         addSlide(intro2);
 
         CustomSlideBigText cs2 = CustomSlideBigText.newInstance(R.layout.custom_slide_big_text);
-        cs2.setTitle(getString(R.string.bridges_sometimes));
-        cs2.showButton(getString(R.string.action_more), new View.OnClickListener() {
+        cs2.setTitle(getString(R.string.LANDING_BRIDGES_INFO));
+        cs2.showButton(getString(R.string.LANDING_MORE), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(landingController.this,bridgeController.class));

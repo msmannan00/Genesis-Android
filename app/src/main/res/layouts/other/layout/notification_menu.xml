@@ -38,7 +38,7 @@
                     android:layout_gravity="center_vertical"
                     android:tint="#33cc33"
                     android:src="@xml/ic_check"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             <TextView
                     android:id="@+id/notification_message"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/notification_default_label" />
+                    android:text="@string/NOTIFICATION_DEFAULT_LABEL" />
 
         </LinearLayout>
 
@@ -72,7 +72,7 @@
                     android:textColor="@color/ease_blue"
                     android:layout_gravity="center_vertical"
                     style="?android:attr/borderlessButtonStyle"
-                    android:text="@string/notification_open_text" />
+                    android:text="@string/NOTIFICATION_OPEN_TEXT" />
 
 
         </LinearLayout>

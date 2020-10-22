@@ -50,6 +50,7 @@ public class orbotController extends AppCompatActivity {
 
     /* LISTENERS */
 
+
     public void onBridgeSwitch(View view){
         status.sBridgeStatus = !mBridgeSwitch.isChecked();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_BRIDGE_ENABLES,status.sBridgeStatus));

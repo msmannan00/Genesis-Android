@@ -37,7 +37,7 @@ public class LocaleManager {
     }
 
     private static Locale getSelectedLocale(Context context) {
-        String defaultLanguage = context.getString(R.string.DEFAULT_LANGUAGE);
+        String defaultLanguage = context.getString(R.string.SETTING_DEFAULT_LANGUAGE);
         String selectedLanguage = PreferenceManager.getDefaultSharedPreferences(context).getString(
                 context.getResources().getString(R.string.PREF_LANGUAGE),
                 defaultLanguage

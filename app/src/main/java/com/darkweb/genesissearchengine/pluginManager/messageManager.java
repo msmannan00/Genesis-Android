@@ -3,7 +3,6 @@ package com.darkweb.genesissearchengine.pluginManager;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -11,7 +10,6 @@ import android.os.Handler;
 import android.view.Gravity;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,11 +65,15 @@ class messageManager
             event.invokeObserver(Collections.singletonList(constants.CONST_SOFTWARE_URL), enums.etype.welcome);
             dialog.dismiss();
         });
-        dialog.findViewById(R.id.pOption6).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(constants.CONST_SOFTWARE_URL), enums.etype.welcome);
+        dialog.findViewById(R.id.pOption5).setOnClickListener(v -> {
+            event.invokeObserver(Collections.singletonList(constants.CONST_SOFTWARE_FINANCE), enums.etype.welcome);
             dialog.dismiss();
         });
-        dialog.findViewById(R.id.pOption5).setOnClickListener(v -> {
+        dialog.findViewById(R.id.pOption6).setOnClickListener(v -> {
+            event.invokeObserver(Collections.singletonList(constants.CONST_COMMUNITIES), enums.etype.welcome);
+            dialog.dismiss();
+        });
+        dialog.findViewById(R.id.pDontShowAgain).setOnClickListener(v -> {
             event.invokeObserver(null, enums.etype.cancel_welcome);
             dialog.dismiss();
         });
@@ -115,7 +117,7 @@ class messageManager
                     helperMethod.sendRateEmail(app_context);
                 }
                 catch (Exception ex){
-                    createMessage(app_context,Collections.singletonList(app_context.getString(R.string.NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
+                    createMessage(app_context,Collections.singletonList(app_context.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
                 }
             };
             handler.postDelayed(runnable, 1000);
@@ -237,7 +239,7 @@ class messageManager
     private void downloadFile()
     {
         initializeDialog(R.layout.popup_download_file, Gravity.BOTTOM);
-        ((TextView)dialog.findViewById(R.id.pDescription)).setText((app_context.getString(R.string.DOWNLOAD_MESSAGE) + data.get(0)));
+        ((TextView)dialog.findViewById(R.id.pDescription)).setText((app_context.getString(R.string.ALERT_DOWNLOAD_MESSAGE) + data.get(0)));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
@@ -306,7 +308,7 @@ class messageManager
         String file = data.get(1);
         String title = data.get(2);
 
-        String data_local = app_context.getString(R.string.LONG_URL_MESSAGE);
+        String data_local = app_context.getString(R.string.ALERT_LONG_URL_MESSAGE);
 
         int size = url.length();
         if(size>35){
@@ -378,7 +380,7 @@ class messageManager
                     helperMethod.sendBridgeEmail(app_context);
                 }
                 catch (Exception ex){
-                    createMessage(app_context,Collections.singletonList(app_context.getString(R.string.NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
+                    createMessage(app_context,Collections.singletonList(app_context.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
                 }
             };
             handler.postDelayed(runnable, 1000);

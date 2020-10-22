@@ -59,8 +59,6 @@ public class bookmarkController extends AppCompatActivity
     private ImageButton mSearchButton;
 
     private bookmarkViewController mbookmarkViewController;
-    private boolean isUpdatingRecyclerView = false;
-    private boolean mIsScrollingUp;
 
     /*Initializations*/
 

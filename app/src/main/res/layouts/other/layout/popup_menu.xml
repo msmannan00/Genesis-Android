@@ -87,7 +87,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_new_tabs"
+                    android:text="@string/HOME_MENU__NEW_TABS"
                     android:textSize="14dp" />
 
             <Button
@@ -98,7 +98,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_close_tabs"
+                    android:text="@string/HOME_MENU_CLOSE_TABS"
                     android:textSize="14dp" />
 
             <Button
@@ -109,7 +109,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_open_Recent_tab"
+                    android:text="@string/HOME_MENU_OPEN_RECENT_TABS"
                     android:textSize="14dp" />
 
             <View
@@ -126,7 +126,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_settings"
+                    android:text="@string/HOME_MENU_SETTING"
                     android:textSize="14dp" />
 
             <View
@@ -143,7 +143,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_download"
+                    android:text="@string/HOME_MENU_DOWNLOAD"
                     android:textSize="14dp" />
 
             <Button
@@ -154,7 +154,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_history"
+                    android:text="@string/HOME_MENU_HISTORY"
                     android:textSize="14dp" />
 
             <Button
@@ -165,7 +165,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_languages"
+                    android:text="@string/HOME_MENU_LANGUAGE"
                     android:textSize="14dp" />
 
             <LinearLayout
@@ -190,7 +190,7 @@
                         android:clickable="false"
                         android:onClick="onMenuItemInvoked"
                         android:paddingLeft="15dp"
-                        android:text="@string/popup_desktop"
+                        android:text="@string/HOME_MENU_DESKTOP"
                         android:textSize="14dp" />
                 <com.google.android.material.checkbox.MaterialCheckBox
                         android:id="@+id/menu27"
@@ -218,7 +218,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_bookmark_page"
+                    android:text="@string/HOME_MENU_BOOKMARK"
                     android:textSize="14dp" />
 
             <Button
@@ -229,7 +229,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_open_bookmark"
+                    android:text="@string/HOME_MENU_OPEN_BOOKMARK"
                     android:textSize="14dp" />
 
             <View
@@ -246,7 +246,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_report"
+                    android:text="@string/HOME_MENU_REPORT"
                     android:textSize="14dp" />
 
             <Button
@@ -257,7 +257,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_rate"
+                    android:text="@string/HOME_MENU_RATE"
                     android:textSize="14dp" />
 
             <Button
@@ -268,7 +268,7 @@
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
                     android:paddingLeft="15dp"
-                    android:text="@string/popup_share"
+                    android:text="@string/HOME_MENU_SHARE"
                     android:textSize="14dp" />
         </LinearLayout>
     </ScrollView>

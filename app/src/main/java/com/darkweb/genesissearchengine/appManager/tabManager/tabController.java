@@ -71,7 +71,6 @@ public class tabController extends AppCompatActivity
         mListView = findViewById(R.id.pRecycleView);
         mClearButton = findViewById(R.id.pClearButton);
         mtabViewController = new tabViewController(mEmptyListNotifier, mListView, mClearButton,this);
-        mClearButton.setText(R.string.tab_view_clear_tab);
     }
     public void initializeList(){
         tabAdapter adapter = new tabAdapter(mListModel.getList(),new adapterCallback());

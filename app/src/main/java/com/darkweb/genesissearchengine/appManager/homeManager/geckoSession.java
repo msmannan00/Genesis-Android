@@ -402,7 +402,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
                     intent.setDataAndType(Uri.fromFile(file), (mimetype + "/*"));
                 } else {
                     intent.setAction(android.content.Intent.ACTION_VIEW);
-                    Uri uri_temp = FileProvider.getUriForFile(mContext,mContext.getString(R.string.file_provider_authority), file);
+                    Uri uri_temp = FileProvider.getUriForFile(mContext,mContext.getString(R.string.GENERAL_FILE_PROVIDER_AUTHORITY), file);
                     intent.setDataAndType(uri_temp, (mimetype + "/*"));
 
                     List<ResolveInfo> resInfoList = mContext.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);

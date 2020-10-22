@@ -42,5 +42,6 @@ public class keys
     public static final String BRIDGE_CUSTOM_BRIDGE_1 = "CLEAR_PREFS";
     public static final String BRIDGE_BRIDGE_ENABLES = "S_BRIDGE_ENABLES";
     public static final String BRIDGE_VPN_ENABLED = "S_VPN_ENABLED";
+    public static final String BRIDGE_NOTIFICATION = "BRIDGE_NOTIFICATION";
 
 }

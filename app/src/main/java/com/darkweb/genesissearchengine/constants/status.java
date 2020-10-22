@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine.constants;
 
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
 
 import java.util.Arrays;
 
@@ -26,13 +27,13 @@ public class status
     public static boolean sSettingIsAppRated = false;
     public static boolean sSettingFontAdjustable = true;
     public static boolean sSettingFirstStart = true;
-    public static boolean sSettingDesktopSite = false;
     public static int sSettingCookieStatus = ACCEPT_FIRST_PARTY;
     public static float sSettingFontSize = 1;
     public static String sSettingLanguage = "en";
 
     /*Bridge Status*/
 
+    public static int sBridgeNotificationManual = 0;
     public static boolean sBridgeGatewayAuto = false;
     public static boolean sBridgeGatewayManual = false;
     public static boolean sBridgeVPNStatus = false;
@@ -59,6 +60,7 @@ public class status
         status.sSettingLanguage = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,strings.SETTING_DEFAULT_LANGUAGE));
         status.sSettingSearchStatus = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
         status.sBridgeCustomBridge = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
+        status.sBridgeNotificationManual = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS,0));
     }
 
 }

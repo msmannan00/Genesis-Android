@@ -76,6 +76,7 @@ android {
                             'src/main/res/layouts/history',
                             'src/main/res/layouts/language',
                             'src/main/res/layouts/orbot',
+                            'src/main/res/layouts/setting',
                             'src/main/res/layouts/bridge',
                             'src/main/res/layouts/alert',
                             'src/main/res/layouts/bookmark',

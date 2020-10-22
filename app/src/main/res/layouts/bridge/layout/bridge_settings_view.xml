@@ -31,7 +31,7 @@
                     android:tint="@color/black"
                     android:src="@xml/ic_arrow_back"
                     android:background="@xml/gx_ripple_default_round"
-                    android:contentDescription="@string/todo"/>
+                    android:contentDescription="@string/GENERAL_TODO"/>
                 <TextView
                     android:textColor="@color/text_color_v1"
                     android:onClick="onClose"
@@ -43,7 +43,7 @@
                     android:gravity="center_vertical|start"
                     android:textStyle="bold"
                     android:layout_marginStart="10dp"
-                    android:text="@string/bridge_header"
+                    android:text="@string/BRIDGE_HEADER"
                     />
             </LinearLayout>
 
@@ -69,7 +69,7 @@
                         android:layout_weight="40"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="20dp"
-                        android:text="@string/bridge_basic_settings"
+                        android:text="@string/BRIDGE_SETTING"
                         />
             </LinearLayout>
 
@@ -88,7 +88,7 @@
                         android:layout_weight="40"
                         android:background="@color/clear_alpha"
                         android:layout_marginStart="20dp"
-                        android:text="@string/bridge_desc"
+                        android:text="@string/BRIDGE_DESC"
                         />
             </LinearLayout>
 
@@ -107,7 +107,7 @@
                         android:layout_weight="40"
                         android:layout_marginStart="20dp"
                         android:textStyle="bold"
-                        android:text="@string/bridge_Automatid_title"
+                        android:text="@string/BRIDGE_AUTO"
                         />
             </LinearLayout>
             <LinearLayout
@@ -157,7 +157,7 @@
                             android:paddingBottom="15dp"
                             android:onClick="onObfsChecked"
                             android:layout_height="wrap_content"
-                            android:text="@string/bridge_type_obfs4" />
+                            android:text="@string/BRIDGE_OBFS4" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -172,7 +172,7 @@
                         android:paddingBottom="15dp"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorProgressGradientEnd"
-                        android:text="@string/bridge_type_meek" />
+                        android:text="@string/BRIDGE_MEEK" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -187,7 +187,7 @@
                         android:paddingBottom="15dp"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorProgressGradientEnd"
-                        android:text="@string/bridge_Manual_desc" />
+                        android:text="@string/BRIDGE_MANUAL" />
                 </RadioGroup>
 
                 <LinearLayout
@@ -218,7 +218,7 @@
                         android:layout_marginStart="15dp"
                         android:ems="10"
                         android:maxLines="1"
-                        android:hint="@string/bridge_port_hint"
+                        android:hint="@string/BRIDGE_PORT_HINT"
                         android:textSize="14.5sp"
                         android:text=""
                         android:autofillHints=""
@@ -234,7 +234,7 @@
                         android:layout_height="35dp"
                         android:background="@xml/hox_rounded_corner_suggestion_settings"
                         android:layout_marginStart="5dp"
-                        android:text="@string/bridge_request" />
+                        android:text="@string/BRIDGE_REQUEST" />
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -242,7 +242,7 @@
                     android:onClick="onCustomChecked"
                     android:layout_height="63dp"
                     android:layout_marginTop="-63dp"
-                    android:contentDescription="@string/todo">
+                    android:contentDescription="@string/GENERAL_TODO">
 
                 </ImageView>
 

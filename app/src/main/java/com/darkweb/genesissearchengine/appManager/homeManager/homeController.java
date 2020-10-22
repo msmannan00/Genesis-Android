@@ -31,7 +31,7 @@ import com.darkweb.genesissearchengine.appManager.databaseManager.databaseContro
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
 import com.darkweb.genesissearchengine.appManager.landingManager.landingController;
 import com.darkweb.genesissearchengine.appManager.languageManager.languageController;
-import com.darkweb.genesissearchengine.appManager.settingManager.settingController;
+import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;

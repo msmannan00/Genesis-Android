@@ -25,7 +25,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"
-                    android:text="@string/SRV_COPY"
+                    android:text="@string/SHARED_RECYCLER_VIEW_COPY"
                     android:textSize="14.5sp" />
 
             <Button
@@ -37,7 +37,7 @@
                     android:paddingStart="15dp"
                     android:textAllCaps="false"
                     android:paddingEnd="0dp"
-                    android:text="@string/SRV_SHARE"
+                    android:text="@string/SHARED_RECYCLER_VIEW_SHARE"
                     android:textSize="14.5sp" />
 
                 <Button
@@ -49,7 +49,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"
-                    android:text="@string/SRV_OPEN_CURRENT_TAB"
+                    android:text="@string/SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB"
                     android:textSize="14.5sp" />
 
                 <Button
@@ -61,7 +61,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"
-                    android:text="@string/SRV_OPEN_NEW_TAB"
+                    android:text="@string/SHARED_RECYCLER_VIEW_OPEN_NEW_TAB"
                     android:textSize="14.5sp" />
 
             <View
@@ -80,7 +80,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"
-                    android:text="@string/SRV_DELETE"
+                    android:text="@string/SHARED_RECYCLER_VIEW_DELETE"
                     android:textSize="14.5sp" />
 
         </LinearLayout>

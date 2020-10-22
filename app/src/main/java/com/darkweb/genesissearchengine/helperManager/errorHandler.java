@@ -72,12 +72,12 @@ public class errorHandler
     }
 
     private String translateMessage(String message,String error){
-        message = message.replace("$ERROR_M1",mContext.getString(R.string.error_m1));
-        message = message.replace("$ERROR_M2",mContext.getString(R.string.error_m2));
-        message = message.replace("$ERROR_M3",mContext.getString(R.string.error_m3));
-        message = message.replace("$ERROR_M4",mContext.getString(R.string.error_m4));
-        message = message.replace("$ERROR_M5",mContext.getString(R.string.error_m5));
-        message = message.replace("$ERROR_M6",mContext.getString(R.string.error_m6));
+        message = message.replace("$ERROR_M1",mContext.getString(R.string.ERROR_M1));
+        message = message.replace("$ERROR_M2",mContext.getString(R.string.ERROR_M2));
+        message = message.replace("$ERROR_M3",mContext.getString(R.string.ERROR_M3));
+        message = message.replace("$ERROR_M4",mContext.getString(R.string.ERROR_M4));
+        message = message.replace("$ERROR_M5",mContext.getString(R.string.ERROR_M5));
+        message = message.replace("$ERROR_M6",mContext.getString(R.string.ERROR_M6));
         message = message.replace("$ERROR", error);
 
         return message;

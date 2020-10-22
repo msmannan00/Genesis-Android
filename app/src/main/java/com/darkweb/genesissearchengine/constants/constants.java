@@ -8,6 +8,8 @@ public class constants
     public static final String CONST_LEAKED_DOCUMENT_URL = "https://boogle.store/search?q=leaked+document&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_NEWS_URL = "https://boogle.store/search?q=latest%20news&p_num=1&s_type=news";
     public static final String CONST_SOFTWARE_URL = "https://boogle.store/search?q=softwares+tools&p_num=1&s_type=all&p_num=1&s_type=all";
+    public static final String CONST_SOFTWARE_FINANCE = "https://boogle.store/search?q=finance&p_num=1&s_type=all&p_num=1&s_type=all";
+    public static final String CONST_COMMUNITIES = "https://boogle.store/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
 
     /*URL CONSTANTS*/
 

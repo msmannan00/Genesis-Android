@@ -32,7 +32,7 @@
                     android:tint="@color/black"
                     android:src="@xml/ic_arrow_back"
                     android:background="@xml/gx_ripple_default_round"
-                    android:contentDescription="@string/todo"/>
+                    android:contentDescription="@string/GENERAL_TODO"/>
                 <TextView
                         android:textColor="@color/text_color_v1"
                         android:onClick="onClose"
@@ -44,7 +44,7 @@
                         android:gravity="center_vertical|start"
                         android:textStyle="bold"
                         android:layout_marginStart="10dp"
-                        android:text="@string/orbot_header"
+                        android:text="@string/ORBOT_HEADER"
                         />
             </LinearLayout>
 
@@ -72,7 +72,7 @@
                         android:layout_weight="40"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="20dp"
-                        android:text="@string/security_basic_settings"
+                        android:text="@string/BRIDGE_BASIC_SETTING"
                         />
             </LinearLayout>
 
@@ -90,7 +90,7 @@
                         android:layout_weight="40"
                         android:background="@color/clear_alpha"
                         android:layout_marginStart="20dp"
-                        android:text="@string/orbot_desc"
+                        android:text="@string/ORBOT_DESCRIPTION"
                         />
             </LinearLayout>
 
@@ -109,7 +109,7 @@
                         android:layout_weight="40"
                         android:layout_marginStart="20dp"
                         android:textStyle="bold"
-                        android:text="@string/orbot_option_title"
+                        android:text="@string/ORBOT_TITLE"
                         />
             </LinearLayout>
             <View
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="40"
                     android:layout_marginStart="20dp"
-                    android:text="@string/orbot_vpn_bridges"
+                    android:text="@string/ORBOT_SETTING_ENABLE_VPN"
                     />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="40"
                     android:layout_marginStart="20dp"
-                    android:text="@string/orbot_settings_bridges"
+                    android:text="@string/ORBOT_SETTING_BRIDGE_ENABLE"
                     />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -227,7 +227,7 @@
                         android:scaleType="fitCenter"
                         android:src="@xml/ic_gateway_splash"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/todo"
+                        android:contentDescription="@string/GENERAL_TODO"
                         app:tint="@color/black" />
 
                     <TextView
@@ -236,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginStart="10dp"
-                        android:text="@string/orbot_customizes_bridges"
+                        android:text="@string/ORBOT_SETTING_CUSTOM_BRIDGE"
                         />
 
                     <ImageView
@@ -249,7 +249,7 @@
                         android:scaleType="fitCenter"
                         android:src="@xml/ic_arrow_right"
                         android:layout_marginEnd="12dp"
-                        android:contentDescription="@string/todo"
+                        android:contentDescription="@string/GENERAL_TODO"
                         app:tint="@color/black" />
 
                 </LinearLayout>
@@ -274,7 +274,7 @@
                             android:layout_marginStart="8dp"
                             android:textColor="#595959"
                             android:textStyle="bold"
-                            android:text="@string/orbot_settings_warning"
+                            android:text="@string/ORBOT_SETTING_WARNING"
                             />
                     <TextView
                             android:textSize="14sp"
@@ -284,7 +284,7 @@
                             android:layout_marginTop="8dp"
                             android:textColor="@color/holo_dark_gray"
                             android:paddingEnd="8dp"
-                            android:text="@string/orbot_option_warning_slow_speed"
+                            android:text="@string/ORBOT_BRIDGE_WARNING"
                             tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 

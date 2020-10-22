@@ -47,7 +47,7 @@
                 android:src="@drawable/tick_recycler_view"
                 android:gravity="center_vertical"
                 tools:ignore="RtlCompat"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="@string/GENERAL_TODO" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -94,7 +94,7 @@
                 android:tint="@color/black"
                 android:src="@drawable/menu_item"
                 android:background="@xml/gx_ripple_gray"
-                android:contentDescription="@string/todo"
+                android:contentDescription="@string/GENERAL_TODO"
                 tools:ignore="RtlSymmetry" />
 
         </LinearLayout>

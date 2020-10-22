@@ -3,7 +3,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        tools:context="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -17,35 +18,39 @@
 
                 <!-- Title Header -->
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:layout_marginBottom="0dp"
-                        android:orientation="horizontal"
-                        android:layout_height="52dp">
+                    android:id="@+id/pHeaderContainerTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:paddingEnd="7dp"
+                    android:paddingStart="5dp"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    tools:ignore="RtlSymmetry">
+
                     <ImageButton
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="0dp"
-                            android:layout_marginTop="12dp"
-                            android:id="@+id/newButton"
-                            android:onClick="onClose"
-                            android:scaleType="fitCenter"
-                            android:tint="@color/black"
-                            android:src="@drawable/back_arrow"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="@string/GENERAL_TODO"/>
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="1dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onNavigationBackPressed"
+                        android:src="@xml/ic_arrow_back"
+                        android:tint="@color/black" />
+
                     <TextView
-                            android:textColor="@color/text_color_v1"
-                            android:textSize="19sp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="40"
-                            android:layout_marginTop="12dp"
-                            android:textStyle="bold"
-                            android:layout_marginStart="30dp"
-                            android:text="@string/SETTING_HEADER"
-                            />
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="-3dp"
+                        android:layout_weight="40"
+                        android:gravity="center_vertical|start"
+                        android:text="@string/SETTING_HEADER"
+                        android:textColor="@color/text_color_v1"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <View
@@ -58,24 +63,240 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:background="@color/white"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                     <TextView
                             android:textColor="@color/cursor_blue"
-                            android:textSize="17.5sp"
+                            android:textSize="15sp"
                             android:layout_width="0dp"
                             android:textStyle="bold"
                             android:layout_height="wrap_content"
                             android:layout_weight="40"
                             android:layout_marginTop="00dp"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="15dp"
                             android:text="@string/SETTING_BASIC_SETTING"
                             />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/holo_gray_light"/>
+
+                <LinearLayout
+                    android:id="@+id/pOption2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:onClick="onDefaultBrowser"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:alpha="0.7"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_DEFAULT_BROWSER"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:src="@xml/ic_arrow_right"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/holo_gray_light"/>
+
+                <LinearLayout
+                    android:id="@+id/pOption3"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:onClick="onManageNotification"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_NOTIFICATION"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/blue_dark"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_NOTIFICATION_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/text_color_v3"
+                            android:textSize="12sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:src="@xml/ic_arrow_right"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/holo_gray_light"/>
+
+                <LinearLayout
+                    android:id="@+id/pOption4"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:onClick="onManageSearchEngine"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:clickable="false"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_SEARCH"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/blue_dark"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_SEARCH_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/text_color_v3"
+                            android:textSize="12sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:src="@xml/ic_arrow_right"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/holo_gray_light"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <!-- Title Search Engine -->
                 <LinearLayout
+                    android:layout_marginTop="1000dp"
                         android:background="@color/white"
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
