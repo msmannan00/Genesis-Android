@@ -42,6 +42,8 @@
     <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
     <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
     <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="false">Show search history</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="false">Show search suggestions</string>
 
     <!-- Alerts -->
     <string name="ALERT_CREATE_BOOKMARK" translatable="false">Bookmark Website</string>
