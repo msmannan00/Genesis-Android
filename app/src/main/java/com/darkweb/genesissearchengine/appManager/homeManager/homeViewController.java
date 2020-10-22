@@ -662,9 +662,9 @@ class homeViewController
                 if(msg.what == messages.MESSAGE_ON_URL_LOAD)
                 {
                     if(status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)){
-                        mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.on_url_load);
+                        mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingSearchStatus)), enums.etype.on_url_load);
                     }else {
-                        mEvent.invokeObserver(Collections.singletonList(status.sSettingRedirectStatus), enums.etype.on_url_load);
+                        mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), enums.etype.on_url_load);
                     }
                 }
                 if(msg.what == messages.MESSAGE_UPDATE_LOADING_TEXT)

@@ -441,45 +441,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
     }
 
-    public void onSwitchSearch(View view){
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ENGINE_SWITCHED,true));
-        pluginController.getInstance().logEvent(strings.EVENT_SEARCH_SWITCH);
-
-        if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GOOGLE_URL))
-        {
-            status.sSettingSearchStatus = constants.CONST_BACKEND_GENESIS_URL;
-            mHomeViewController.onUpdateLogo();
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
-            onHomeButton(null);
-        }
-        else if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GENESIS_URL))
-        {
-            status.sSettingSearchStatus = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
-            if(pluginController.getInstance().isOrbotRunning())
-            {
-                mHomeViewController.onUpdateLogo();
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_DUCK_DUCK_GO_URL));
-                onHomeButton(null);
-            }
-            else {
-                pluginController.getInstance().MessageManagerHandler(homeController.this, Collections.singletonList(constants.CONST_BACKEND_DUCK_DUCK_GO_URL),enums.etype.start_orbot);
-            }
-        }
-        else
-        {
-            status.sSettingSearchStatus = constants.CONST_BACKEND_GOOGLE_URL;
-            if(pluginController.getInstance().isOrbotRunning())
-            {
-                mHomeViewController.onUpdateLogo();
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GOOGLE_URL));
-                onHomeButton(null);
-            }
-            else {
-                pluginController.getInstance().MessageManagerHandler(homeController.this,Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL),enums.etype.start_orbot);
-            }
-        }
-    }
-
     /*Activity States*/
 
     public void onReload(View view){

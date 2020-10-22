@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.constants;
 
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.pluginManager.pluginController;
 
 import java.util.Arrays;
 
@@ -19,6 +18,10 @@ public class status
 
     public static String sSettingSearchStatus = constants.CONST_BACKEND_GENESIS_URL;
     public static String sSettingRedirectStatus = strings.GENERIC_EMPTY_STR;
+
+
+    public static boolean sSettingSearchHistory = false;
+    public static boolean getsSettingSearchSuggestion = false;
     public static boolean sSettingJavaStatus = true;
     public static boolean sSettingHistoryStatus = true;
     public static boolean sSettingIsAppPaused = false;
@@ -43,6 +46,8 @@ public class status
 
     public static void initStatus()
     {
+        status.sSettingSearchHistory = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY,true));
+        status.getsSettingSearchSuggestion = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
         status.sSettingJavaStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));
         status.sSettingHistoryStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR,true));
         status.sBridgeGatewayAuto = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_AUTO,true));

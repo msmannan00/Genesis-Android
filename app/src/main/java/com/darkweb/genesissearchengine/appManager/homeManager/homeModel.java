@@ -31,15 +31,7 @@ class homeModel
             ex.printStackTrace();
         }
 
-        if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GOOGLE_URL)){
-            return getSearchEngine()+"search?q="+url.replaceAll(" ","+");
-        }
-        else if(status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GENESIS_URL)){
-            return getSearchEngine()+"/search?s_type=all&p_num=1&q="+url.replaceAll(" ","+");
-        }
-        else{
-            return getSearchEngine()+"?q="+url.replaceAll(" ","+");
-        }
+        return constants.CONST_BACKEND_GOOGLE_URL.replace("$s",url.replaceAll(" ","+"));
     }
 
 

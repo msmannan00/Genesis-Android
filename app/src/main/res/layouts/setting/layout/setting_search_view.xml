@@ -57,7 +57,7 @@
                 <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@color/white_dark" />
 
                 <!-- Title Header -->
@@ -92,6 +92,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
                     android:weightSum="8">
 
@@ -99,13 +101,13 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:src="@drawable/genesis"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
@@ -141,8 +143,10 @@
                     </LinearLayout>
 
                     <RadioButton
+                        android:id="@+id/mRadioSearch_1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:clickable="false"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
@@ -160,6 +164,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
                     android:weightSum="8">
 
@@ -167,14 +173,15 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:clickable="false"
                         android:padding="6dp"
-                        android:src="@drawable/duckduckgo"/>
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/duckduckgologo"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
@@ -212,9 +219,11 @@
                     <RadioButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:id="@+id/mRadioSearch_2"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
@@ -229,6 +238,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
                     android:weightSum="8">
 
@@ -237,13 +248,13 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:padding="3dp"
+                        android:layout_marginStart="5dp"
                         android:src="@drawable/google"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
@@ -281,6 +292,8 @@
                     <RadioButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:id="@+id/mRadioSearch_3"
+                        android:clickable="false"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
@@ -298,6 +311,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
                     android:weightSum="8">
 
@@ -305,13 +320,13 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:src="@drawable/bing"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
@@ -349,9 +364,11 @@
                     <RadioButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:id="@+id/mRadioSearch_4"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
@@ -366,6 +383,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
                     android:weightSum="8">
 
@@ -374,13 +393,13 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
+                        android:layout_marginStart="5dp"
                         android:src="@drawable/wikipedia"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
@@ -418,7 +437,9 @@
                     <RadioButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:id="@+id/mRadioSearch_5"
                         android:layout_weight="1"
+                        android:clickable="false"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -460,6 +481,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="setSearchHistory"
                     android:orientation="horizontal"
                     android:weightSum="7">
 
@@ -467,12 +490,11 @@
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="6dp"
                             android:alpha="0.7"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -484,6 +506,23 @@
                             android:textColor="@color/blue_dark"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_SEARCH_HISTORY_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/text_color_v3"
+                            android:textSize="12sp"
+                            tools:ignore="RtlSymmetry" />
+
                     </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -492,6 +531,8 @@
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:id="@+id/pSearchHistory"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
@@ -506,6 +547,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="setSearchStatus"
                     android:orientation="horizontal"
                     android:weightSum="7">
 
@@ -513,12 +556,11 @@
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="6dp"
                             android:alpha="0.7"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -530,14 +572,32 @@
                             android:textColor="@color/blue_dark"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_SEARCH_SUGGESTION_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/text_color_v3"
+                            android:textSize="12sp"
+                            tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:id="@+id/pSearchSuggestions"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>

@@ -13,11 +13,14 @@ public class constants
 
     /*URL CONSTANTS*/
 
-    public static final String CONST_BACKEND_GENESIS_URL = "http://boogle.store";
     public static final String CONST_GENESIS_UPDATE_URL = "https://boogle.store/manual?abi=";
-    public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/";
-    public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com/";
     public static final String CONST_PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
+
+    public static final String CONST_BACKEND_GENESIS_URL = "http://boogle.store/q=$s";
+    public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/q=$s";
+    public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com/q=$s";
+    public static final String CONST_BACKEND_BING_URL = "https://bing.com/q=$s";
+    public static final String CONST_BACKEND_WIKI_URL = "https://en.wikipedia.org/wiki/$s";
 
     /*PROXY CONSTANTS*/
 

@@ -36,6 +36,8 @@ public class keys
     public static final String SETTING_FONT_ADJUSTABLE = "FONT_ADJUSTABLE";
     public static final String SETTING_COOKIE_ADJUSTABLE = "COOKIE_ADJUSTABLE_NEW";
     public static final String SETTING_NOTIFICATION_STATUS = "NOTIFICATION_STATUS";
+    public static final String SETTING_SEARCH_HISTORY = "SETTING_SEARCH_HISTORY";
+    public static final String SETTING_SEARCH_SUGGESTION = "SETTING_SEARCH_STATUS";
 
     /*Bridge Settings*/
 

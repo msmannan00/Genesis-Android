@@ -44,6 +44,8 @@
     <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
     <string name="SETTING_SEARCH_HISTORY" translatable="false">Show search history</string>
     <string name="SETTING_SEARCH_SUGGESTIONS" translatable="false">Show search suggestions</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="false">Search websites appears when you type in searchbar</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="false">Focused suggestions appears when you type in searchbar</string>
 
     <!-- Alerts -->
     <string name="ALERT_CREATE_BOOKMARK" translatable="false">Bookmark Website</string>
