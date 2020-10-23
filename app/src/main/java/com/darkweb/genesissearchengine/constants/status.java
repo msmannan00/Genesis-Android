@@ -20,6 +20,8 @@ public class status
     public static String sSettingRedirectStatus = strings.GENERIC_EMPTY_STR;
 
 
+    public static boolean sSettingEnableZoom = true;
+    public static boolean sSettingEnableVoiceInput = true;
     public static boolean sSettingSearchHistory = false;
     public static boolean getsSettingSearchSuggestion = false;
     public static boolean sSettingJavaStatus = true;
@@ -58,6 +60,8 @@ public class status
         status.sBridgeStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.BRIDGE_BRIDGE_ENABLES,true));
         status.sSettingFontAdjustable = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE,true));
         status.sSettingFirstStart = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FIRST_INSTALLED,true));
+        status.sSettingEnableZoom = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_ZOOM,true));
+        status.sSettingEnableVoiceInput = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_VOICE_INPUT,true));
 
         status.sSettingCookieStatus = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,ACCEPT_FIRST_PARTY));
         status.sSettingFontSize = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_FLOAT, Arrays.asList(keys.SETTING_FONT_SIZE,100));

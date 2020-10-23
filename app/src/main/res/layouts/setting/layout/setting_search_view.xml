@@ -148,6 +148,7 @@
                         android:layout_height="match_parent"
                         android:clickable="false"
                         android:layout_weight="1"
+                        android:layout_marginStart="50dp"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -222,6 +223,7 @@
                         android:id="@+id/mRadioSearch_2"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
+                        android:layout_marginStart="50dp"
                         android:src="@xml/ic_arrow_right"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -295,6 +297,7 @@
                         android:id="@+id/mRadioSearch_3"
                         android:clickable="false"
                         android:layout_weight="1"
+                        android:layout_marginStart="50dp"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -367,6 +370,7 @@
                         android:id="@+id/mRadioSearch_4"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
+                        android:layout_marginStart="50dp"
                         android:src="@xml/ic_arrow_right"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -440,6 +444,7 @@
                         android:id="@+id/mRadioSearch_5"
                         android:layout_weight="1"
                         android:clickable="false"
+                        android:layout_marginStart="50dp"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />

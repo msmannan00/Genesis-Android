@@ -124,32 +124,6 @@ class settingModel
             status.sSettingHistoryStatus = mHistoryStatus;
             mEvent.invokeObserver(Collections.singletonList(mHistoryStatus), enums.etype.update_history);
         }
-        if(status.sSettingFontAdjustable != mFontAdjustable)
-        {
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE,mFontAdjustable));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_FONT_SIZE,100));
-
-            status.sSettingFontAdjustable = mFontAdjustable;
-            status.sSettingFontSize = 100;
-            mFontSize = 100;
-
-            mEvent.invokeObserver(Collections.singletonList(mFontSize), enums.etype.update_font_adjustable);
-        }
-        if(status.sSettingFontSize != mFontSize)
-        {
-            if(mFontSize <=0){
-                mFontSize = 1;
-            }
-
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_FONT_SIZE,(int)mFontSize));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE,false));
-
-            status.sSettingFontSize = mFontSize;
-            status.sSettingFontAdjustable = false;
-            mFontAdjustable = false;
-
-            mEvent.invokeObserver(Collections.singletonList(mFontSize), enums.etype.update_font_size);
-        }
         if(status.sSettingCookieStatus != mCookieStatus)
         {
             status.sSettingCookieStatus = mCookieStatus;

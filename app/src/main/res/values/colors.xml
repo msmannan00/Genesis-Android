@@ -27,6 +27,7 @@
     <color name="holo_gray">#b3b3b3</color>
     <color name="float_white">#bfbfbf</color>
     <color name="button_gray">#d9d9d9</color>
+    <color name="button_light">#e3e3e3</color>
     <color name="holo_gray_light">#f2f2f2</color>
     <color name="holo_light">#e6e6e6</color>
     <color name="white_darker">#f8f8f8</color>

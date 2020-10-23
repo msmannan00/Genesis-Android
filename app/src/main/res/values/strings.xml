@@ -46,6 +46,18 @@
     <string name="SETTING_SEARCH_SUGGESTIONS" translatable="false">Show search suggestions</string>
     <string name="SETTING_SEARCH_HISTORY_INFO" translatable="false">Search websites appears when you type in searchbar</string>
     <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="false">Focused suggestions appears when you type in searchbar</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="false">Accessiblity</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="false">Text size, zoom, voice input</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="false">Settings | Accessibility</string>
+
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="false">Use system font size</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="false">Scale web content according to system font size</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="false">Enable Zoom</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="false">Enable zoom on all webpages</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="false">Voice input</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="false">Allow voice dictation in the URL bar</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="false">select custom font scale</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="false">Drag the slider until you can read this comfortably. Text should look at least this big after double-tapping on a paragraph</string>
 
     <!-- Alerts -->
     <string name="ALERT_CREATE_BOOKMARK" translatable="false">Bookmark Website</string>

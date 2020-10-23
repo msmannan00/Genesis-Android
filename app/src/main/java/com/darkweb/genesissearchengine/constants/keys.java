@@ -38,6 +38,8 @@ public class keys
     public static final String SETTING_NOTIFICATION_STATUS = "NOTIFICATION_STATUS";
     public static final String SETTING_SEARCH_HISTORY = "SETTING_SEARCH_HISTORY";
     public static final String SETTING_SEARCH_SUGGESTION = "SETTING_SEARCH_STATUS";
+    public static final String SETTING_ZOOM = "SETTING_ZOOM";
+    public static final String SETTING_VOICE_INPUT = "SETTING_VOICE_INPUT";
 
     /*Bridge Settings*/
 

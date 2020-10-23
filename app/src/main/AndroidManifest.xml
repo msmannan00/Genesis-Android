@@ -43,10 +43,15 @@
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
                 android:windowSoftInputMode="adjustNothing" />
         <activity
-                android:name="com.darkweb.genesissearchengine.appManager.languageManager.languageController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-                android:label="@string/SETTING_HEADER"
-                android:windowSoftInputMode="adjustNothing" />
+            android:name="com.darkweb.genesissearchengine.appManager.languageManager.languageController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/SETTING_HEADER"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager.settingAccessibilityController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/SETTING_HEADER"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"

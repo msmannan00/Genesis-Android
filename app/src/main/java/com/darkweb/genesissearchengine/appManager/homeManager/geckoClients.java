@@ -195,7 +195,7 @@ class geckoClients
     }
 
     void onUpdateFont(){
-        float font = (status.sSettingFontSize -100)/4+100;
+        float font = (status.sSettingFontSize -100)/3+100;
         mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
         if(!mRuntime.getSettings().getAutomaticFontSizeAdjustment()){
             mRuntime.getSettings().setFontSizeFactor(font/100);

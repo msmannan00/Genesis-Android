@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController;
 import com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController;
 import com.darkweb.genesissearchengine.constants.constants;
@@ -220,6 +221,10 @@ public class settingController extends AppCompatActivity
 
     public void onManageSearchEngine(View view){
         helperMethod.openActivity(settingSearchController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
+    public void onManageSearchAccessibility(View view) {
+        helperMethod.openActivity(settingAccessibilityController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     /*Event Observer*/
