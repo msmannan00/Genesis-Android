@@ -51,7 +51,7 @@ dependencies {
 
     implementation 'com.jaredrummler:android-shell:1.0.0'
     implementation fileTree(dir: 'libs', include: ['.so'])
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
 
     implementation 'com.offbynull.portmapper:portmapper:2.0.5'
 

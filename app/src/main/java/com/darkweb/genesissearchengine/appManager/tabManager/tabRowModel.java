@@ -2,12 +2,15 @@ package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
 
+import org.mozilla.geckoview.GeckoView;
+
 public class tabRowModel
 {
     /*Private Variables*/
 
     private geckoSession mSession;
     private int mId;
+    private GeckoView mGeckoView = null;
 
     /*Initializations*/
 
@@ -19,6 +22,16 @@ public class tabRowModel
     public geckoSession getSession()
     {
         return mSession;
+    }
+
+    public void setGeckoView(GeckoView pGeckoView){
+        mGeckoView = pGeckoView;
+    }
+
+    public void releaseGeckoView(){
+        if(mGeckoView!=null){
+            mGeckoView.releaseSession();
+        }
     }
 
     public int getmId() {

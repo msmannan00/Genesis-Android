@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -16,8 +16,8 @@ import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class settingAccessibilityController  extends AppCompatActivity {
@@ -27,7 +27,6 @@ public class settingAccessibilityController  extends AppCompatActivity {
     private settingAccessibilityViewController mSettingAccessibilityViewController;
     private SwitchMaterial mZoom;
     private SwitchMaterial mVoiceInput;
-    private SwitchMaterial mFontSizeAdjustable;
     private SeekBar mSeekBar;
     private TextView mSeekBarSample;
     private TextView mScalePercentage;
@@ -45,12 +44,11 @@ public class settingAccessibilityController  extends AppCompatActivity {
     public void viewsInitializations() {
         mZoom = findViewById(R.id.pZoom);
         mVoiceInput = findViewById(R.id.pVoiceInput);
-        mFontSizeAdjustable = findViewById(R.id.pFontSizeAdjustable);
         mSeekBar = findViewById(R.id.pSeekBar);
         mSeekBarSample = findViewById(R.id.pSeekBarSample);
         mScalePercentage = findViewById(R.id.pScalePercentage);
 
-        mSettingAccessibilityViewController = new settingAccessibilityViewController(this, new settingAccessibilityController.settingAccessibilityViewCallback(), mZoom, mVoiceInput, mFontSizeAdjustable, mSeekBar, mSeekBarSample, mScalePercentage);
+        mSettingAccessibilityViewController = new settingAccessibilityViewController(this, new settingAccessibilityController.settingAccessibilityViewCallback(), mZoom, mVoiceInput, mSeekBar, mSeekBarSample, mScalePercentage);
         mSettingAccessibilityModel = new settingAccessibilityModel(new settingAccessibilityController.settingAccessibilityModelCallback());
     }
 
@@ -88,8 +86,9 @@ public class settingAccessibilityController  extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 int percentage = ((progress+5)*10);
-                mSeekBarSample.setTextSize((int)((12.0*percentage)/100));
-                mScalePercentage.setText(percentage+"%");
+                mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_SAMPLE_TEXT, Collections.singletonList((int)((12.0*percentage)/100)));
+                mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_PERCENTAGE, Collections.singletonList((percentage+ constants.CONST_PERCENTAGE_SIGN)));
+
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_FONT_SIZE,percentage));
                 status.sSettingFontSize = percentage;
                 activityContextManager.getInstance().getHomeController().onLoadFont();
@@ -123,25 +122,13 @@ public class settingAccessibilityController  extends AppCompatActivity {
     }
 
     public void onZoomSettingUpdate(View view){
-        mSettingAccessibilityModel.onZoomSettingUpdate(!mZoom.isChecked());
+        mSettingAccessibilityModel.onTrigger(settingAccessibilityEnums.eAccessibilityViewController.M_ZOOM_SETTING, Collections.singletonList(!mZoom.isChecked()));
         mZoom.toggle();
     }
 
     public void onVoiceInputSettingUpdate(View view){
-        mSettingAccessibilityModel.onVoiceInputSettingUpdate(!mVoiceInput.isChecked());
+        mSettingAccessibilityModel.onTrigger(settingAccessibilityEnums.eAccessibilityViewController.M_VOICE_INPUT_SETTING, Collections.singletonList(!mVoiceInput.isChecked()));
         mVoiceInput.toggle();
-    }
-
-    public void onFontSizeAdjustableUpdate(View view){
-        mSettingAccessibilityModel.onFontSizeAdjustableUpdate(!mFontSizeAdjustable.isChecked());
-        mFontSizeAdjustable.toggle();
-
-        if(!mFontSizeAdjustable.isChecked()){
-            mSettingAccessibilityViewController.enableFontManual();
-        }else {
-            mSettingAccessibilityViewController.disableFontManual();
-        }
-        activityContextManager.getInstance().getHomeController().onLoadFont();
     }
 
 }

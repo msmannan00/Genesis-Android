@@ -1,6 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.homeManager;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -16,8 +18,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
+import android.view.autofill.AutofillManager;
+import android.view.autofill.AutofillValue;
 import android.widget.Toast;
-import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -25,17 +28,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.JavaScriptInterface;
 import com.darkweb.genesissearchengine.helperManager.downloadFileService;
 import com.darkweb.genesissearchengine.helperManager.errorHandler;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
-import org.mozilla.gecko.GeckoSystemStateListener;
-import org.mozilla.gecko.GeckoThread;
+import org.mozilla.gecko.util.ThreadUtils;
 import org.mozilla.geckoview.AllowOrDeny;
+import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
+import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.WebRequestError;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,7 +48,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Objects;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
@@ -67,15 +72,19 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
     private int rateCount=0;
     private int m_current_url_id = -1;
+    private GeckoView mGeckoView;
 
-    geckoSession(eventObserver.eventListener event,int mSessionID,AppCompatActivity mContext){
+    geckoSession(eventObserver.eventListener event,int mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
+        this.mGeckoView = pGeckoView;
         this.mContext = mContext;
         this.mSessionID = mSessionID;
         setProgressDelegate(this);
         setHistoryDelegate(this);
         setNavigationDelegate(this);
         setContentDelegate(this);
+        setAutoFillDelegate();
+        setPermissionDelegate(this);
         mDownloadManager = new geckoDownloadManager();
         setPromptDelegate(new geckoPromptView(mContext));
         this.event = event;
@@ -84,7 +93,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     void onFileUploadRequest(int resultCode, Intent data){
 
         geckoPromptView mPromptDelegate = (geckoPromptView)getPromptDelegate();
-        mPromptDelegate.onFileCallbackResult(resultCode,data);
+        Objects.requireNonNull(mPromptDelegate).onFileCallbackResult(resultCode,data);
     }
 
     void initURL(String url){
@@ -93,7 +102,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         mCurrentTitle = mCurrentURL;
 
         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.on_update_suggestion);
-        if(!url.equals("about:blank"))
+        if(!url.equals("about:blank") && !url.equals("about:config"))
         {
             mProgress = 5;
             event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update);
@@ -101,6 +110,69 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         m_current_url_id = -1;
     }
 
+    /*Autofill Delegate*/
+
+    public void setAutoFillDelegate(){
+        this.setAutofillDelegate(new AndroidAutofillDelegate());
+    }
+
+    private class AndroidAutofillDelegate implements Autofill.Delegate {
+
+        private Rect displayRectForId(@NonNull final GeckoSession session,
+                                      @NonNull final Autofill.Node node) {
+            final Matrix matrix = new Matrix();
+            final RectF rectF = new RectF(node.getDimensions());
+            session.getPageToScreenMatrix(matrix);
+            matrix.mapRect(rectF);
+
+            final Rect screenRect = new Rect();
+            rectF.roundOut(screenRect);
+            return screenRect;
+        }
+
+        @Override
+        public void onAutofill(@NonNull final GeckoSession session,
+                               final int notification,
+                               final Autofill.Node node) {
+            ThreadUtils.assertOnUiThread();
+            if (Build.VERSION.SDK_INT < 26) {
+                return;
+            }
+
+            final AutofillManager manager =
+                    mContext.getSystemService(AutofillManager.class);
+            if (manager == null) {
+                return;
+            }
+
+            switch (notification) {
+                case Autofill.Notify.SESSION_STARTED:
+                case Autofill.Notify.SESSION_CANCELED:
+                    manager.cancel();
+                    break;
+                case Autofill.Notify.SESSION_COMMITTED:
+                    manager.commit();
+                    break;
+                case Autofill.Notify.NODE_FOCUSED:
+                    manager.notifyViewEntered(
+                            mGeckoView, node.getId(),
+                            displayRectForId(session, node));
+                    break;
+                case Autofill.Notify.NODE_BLURRED:
+                    manager.notifyViewExited(mGeckoView, node.getId());
+                    break;
+                case Autofill.Notify.NODE_UPDATED:
+                    manager.notifyValueChanged(
+                            mGeckoView,
+                            node.getId(),
+                            AutofillValue.forText(node.getValue()));
+                    break;
+                case Autofill.Notify.NODE_ADDED:
+                case Autofill.Notify.NODE_REMOVED:
+                    break;
+            }
+        }
+    }
     /*Progress Delegate*/
 
     @Override
@@ -114,12 +186,6 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
             mProgress = 5;
         }
 
-    }
-
-    @AnyThread
-    public void shutdown() {
-        GeckoSystemStateListener.getInstance().shutdown();
-        GeckoThread.forceQuit();
     }
 
     @UiThread
@@ -159,13 +225,13 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
     /*Navigation Delegate*/
     public void onLocationChange(@NonNull GeckoSession var1, @Nullable String var2) {
 
-        String newUrl = var2.split("#")[0];
+        String newUrl = Objects.requireNonNull(var2).split("#")[0];
         if(!mCurrentTitle.equals("loading")){
             m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
         }
         mCurrentURL = newUrl;
 
-        if (var2 != null && !var2.equals("about:blank"))
+        if (!var2.equals("about:blank"))
         {
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID), enums.etype.start_proxy);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID), enums.etype.search_update);
@@ -260,6 +326,21 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         }
     }
 
+    /*Permission Delegate*/
+
+    @Override
+    public void onContentPermissionRequest(final GeckoSession session, final String uri,
+                                           final int type, final Callback callback) {
+        if (PERMISSION_AUTOPLAY_AUDIBLE == type || PERMISSION_AUTOPLAY_INAUDIBLE == type) {
+            if (!status.sAutoPlay) {
+                callback.reject();
+            } else {
+                callback.grant();
+            }
+        }else {
+            callback.reject();
+        }
+    }
     /*Download Manager*/
 
     void downloadRequestedFile()
@@ -280,70 +361,6 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         }
     }
 
-    public boolean downloadBlobFile(String url){
-
-        try{
-            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-
-            String filetype = "";
-            String filename = "";
-
-            filetype = url.substring(url.indexOf("/") + 1, url.indexOf(";"));
-            filename = System.currentTimeMillis() + "." + filetype;
-
-            File file = new File(path, filename);
-            try {
-                if(!path.exists())
-                    path.mkdirs();
-                if(!file.exists())
-                    file.createNewFile();
-
-                String base64EncodedString = url.substring(url.indexOf(",") + 1);
-                byte[] decodedBytes = Base64.decode(base64EncodedString, Base64.DEFAULT);
-                OutputStream os = new FileOutputStream(file);
-                os.write(decodedBytes);
-                os.close();
-
-                //Tell the media scanner about the new file so that it is immediately available to the user.
-                MediaScannerConnection.scanFile(mContext,
-                        new String[]{file.toString()}, null,
-                        new MediaScannerConnection.OnScanCompletedListener() {
-                            public void onScanCompleted(String path, Uri uri) {
-                                Log.i("ExternalStorage", "Scanned " + path + ":");
-                                Log.i("ExternalStorage", "-> uri=" + uri);
-                            }
-                        });
-
-                //Set notification after download complete and add "click to view" action to that
-                String mimetype = url.substring(url.indexOf(":") + 1, url.indexOf("/"));
-                Intent intent = new Intent();
-                intent.setAction(android.content.Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(file), (mimetype + "/*"));
-                PendingIntent pIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
-
-                Notification notification = new NotificationCompat.Builder(mContext)
-                        .setSmallIcon(R.xml.ic_download)
-                        .setContentTitle(filename)
-                        .setContentIntent(pIntent)
-                        .build();
-
-                notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                int notificationId = 85851;
-                NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(notificationId, notification);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return true;
-        }
-        catch (Exception ignored){
-
-        }
-
-        return true;
-    }
-
     private boolean createAndSaveFileFromBase64Url(String url) {
 
         if(!url.startsWith("data") && !url.startsWith("blob")){
@@ -361,8 +378,8 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         try{
             File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 
-            String filetype = "";
-            String filename = "";
+            String filetype;
+            String filename;
 
             if(url.startsWith("blob")){
                 loadUri(JavaScriptInterface.getBase64StringFromBlobUrl(url));
@@ -397,49 +414,30 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
                 //Set notification after download complete and add "click to view" action to that
                 String mimetype = url.substring(url.indexOf(":") + 1, url.indexOf("/"));
                 Intent intent = new Intent();
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    intent.setAction(android.content.Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(file), (mimetype + "/*"));
-                } else {
-                    intent.setAction(android.content.Intent.ACTION_VIEW);
-                    Uri uri_temp = FileProvider.getUriForFile(mContext,mContext.getString(R.string.GENERAL_FILE_PROVIDER_AUTHORITY), file);
-                    intent.setDataAndType(uri_temp, (mimetype + "/*"));
+                intent.setAction(android.content.Intent.ACTION_VIEW);
+                Uri uri_temp = FileProvider.getUriForFile(mContext,mContext.getString(R.string.GENERAL_FILE_PROVIDER_AUTHORITY), file);
+                intent.setDataAndType(uri_temp, (mimetype + "/*"));
 
-                    List<ResolveInfo> resInfoList = mContext.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-                    for (ResolveInfo resolveInfo : resInfoList) {
-                        String packageName = resolveInfo.activityInfo.packageName;
-                        mUriPermission = uri_temp;
-                        mContext.grantUriPermission(packageName, uri_temp, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    }
+                List<ResolveInfo> resInfoList = mContext.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                for (ResolveInfo resolveInfo : resInfoList) {
+                    String packageName = resolveInfo.activityInfo.packageName;
+                    mUriPermission = uri_temp;
+                    mContext.grantUriPermission(packageName, uri_temp, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 }
                 PendingIntent pIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
 
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    Notification notification = new NotificationCompat.Builder(mContext)
-                            .setSmallIcon(R.xml.ic_download)
-                            .setContentTitle(filename)
-                            .setContentIntent(pIntent)
-                            .build();
+                String channel_id = createNotificationChannel(mContext);
+                assert channel_id != null;
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, channel_id)
+                        .setSmallIcon(R.xml.ic_download)
+                        .setContentTitle(filename)
+                        .setContentIntent(pIntent);
 
-                    notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                    int notificationId = 85851;
-                    NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                    notificationManager.notify(notificationId, notification);
-                } else {
+                notificationBuilder.setAutoCancel(true);
 
-                    String channel_id = createNotificationChannel(mContext);
-                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, channel_id)
-                            .setSmallIcon(R.xml.ic_download)
-                            .setContentTitle(filename)
-                            .setContentIntent(pIntent);
-
-                    notificationBuilder.setAutoCancel(true);
-
-                    int notificationId = 85851;
-                    NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                    notificationManager.notify(notificationId, notificationBuilder.build());
-                }
-
+                int notificationId = 85851;
+                NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(notificationId, notificationBuilder.build());
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -461,10 +459,9 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
             CharSequence channelName = "Application_name";
             String channelDescription = "Application_name Alert";
             int channelImportance = NotificationManager.IMPORTANCE_DEFAULT;
-            boolean channelEnableVibrate = true;
             NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, channelImportance);
             notificationChannel.setDescription(channelDescription);
-            notificationChannel.enableVibration(channelEnableVibrate);
+            notificationChannel.enableVibration(true);
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             assert notificationManager != null;
             notificationManager.createNotificationChannel(notificationChannel);
@@ -536,11 +533,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
             if(mHistoryList!=null && index>=0 && index<mHistoryList.size()){
                 event.invokeObserver(Arrays.asList(mHistoryList.get(index).getUri(),mSessionID), enums.etype.start_proxy);
-
-                new Handler().postDelayed(() ->
-                {
-                    goBack();
-                }, 100);
+                new Handler().postDelayed(this::goBack, 100);
             }
         }
         else {
@@ -558,11 +551,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
             {
 
                 event.invokeObserver(Arrays.asList(mHistoryList.get(index), mSessionID), enums.etype.start_proxy);
-
-                new Handler().postDelayed(() ->
-                {
-                    goForward();
-                }, 100);
+                new Handler().postDelayed(this::goForward, 100);
             }
         }else {
             goForward();

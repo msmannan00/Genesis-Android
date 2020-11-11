@@ -19,6 +19,7 @@ public class keys
     public static final String PROXY_DO_NOT_TRACK_HEADER_VALUE = "privacy.donottrackheader.value";
     public static final String PROXY_IS_APP_RATED = "IS_APP_RATED";
     public static final String PROXY_LIST_TYPE = "list_type";
+    public static final String PROXY_IMAGE = "permissions.default.image";
 
     /*Settings*/
 
@@ -40,6 +41,16 @@ public class keys
     public static final String SETTING_SEARCH_SUGGESTION = "SETTING_SEARCH_STATUS";
     public static final String SETTING_ZOOM = "SETTING_ZOOM";
     public static final String SETTING_VOICE_INPUT = "SETTING_VOICE_INPUT";
+    public static final String SETTING_TRACKING_PROTECTION = "SETTING_TRACKING_PROTECTION";
+    public static final String SETTING_DONOT_TRACK = "SETTING_DONOT_TRACK";
+    public static final String SETTING_RESTORE_TAB = "SETTING_RESTORE_TAB";
+    public static final String SETTING_CHARACTER_ENCODING = "SETTING_CHARACTER_ENCODING";
+    public static final String SETTING_SHOW_IMAGES = "SETTING_SHOW_IMAGES";
+    public static final String SETTING_SHOW_FONTS = "SETTING_SHOW_FONTS";
+    public static final String SETTING_AUTO_PLAY = "SETTING_AUTO_PLAY";
+    public static final String SETTING_THEME = "SETTING_THEME_LIGHT";
+    public static final String SETTING_FULL_SCREEN_BROWSIING = "SETTING_FULL_SCREEN_BROWSIING";
+    public static final String SETTING_OPEN_URL_IN_NEW_TAB = "SETTING_OPEN_URL_IN_NEW_TAB";
 
     /*Bridge Settings*/
 

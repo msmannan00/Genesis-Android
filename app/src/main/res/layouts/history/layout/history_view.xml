@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/c_background"
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -14,11 +14,11 @@
         android:id="@+id/pHeaderContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:clickable="true"
         android:elevation="7dp"
         android:focusable="true"
         android:orientation="vertical"
+        android:background="@color/c_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,7 +27,6 @@
             android:id="@+id/pHeaderContainerTop"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/white"
             android:clickable="true"
             android:paddingEnd="7dp"
             android:paddingStart="5dp"
@@ -45,19 +44,19 @@
                 android:layout_marginTop="1dp"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:onClick="onBackPressed"
+                android:onClick="onNewTabInvoked"
                 android:src="@xml/ic_arrow_back"
-                android:tint="@color/black" />
+                android:tint="@color/c_navigation_tint" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="-3dp"
                 android:layout_weight="40"
+                android:onClick="onNewTabInvoked"
                 android:gravity="center_vertical|start"
                 android:text="@string/HOME_TITLE"
-                android:textColor="@color/text_color_v1"
+                android:textColor="@color/c_text_v1"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -75,7 +74,7 @@
                 android:paddingBottom="10dp"
                 android:scaleType="fitCenter"
                 android:src="@xml/ic_search"
-                android:tint="@color/black" />
+                android:tint="@color/c_navigation_tint" />
 
             <ImageButton
                 android:id="@+id/pMenuButton"
@@ -91,13 +90,13 @@
                 android:paddingBottom="14dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
-                android:tint="@color/black" />
+                android:tint="@color/c_navigation_tint" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/white_dark"
+            android:background="@color/c_view_divier_background_inner"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
 
@@ -105,7 +104,7 @@
         android:id="@+id/pHeaderContainerBottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="@color/c_background"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal"
@@ -126,7 +125,7 @@
             android:stateListAnimator="@null"
             android:text="@string/HOME_CLEAR"
             android:textAlignment="textStart"
-            android:textColor="@color/blue"
+            android:textColor="@color/c_text_setting_heading"
 
             android:textSize="13sp"
             android:textStyle="bold"
@@ -144,7 +143,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:background="@xml/gx_generic_input"
+            android:background="@xml/gx_generic_input_square"
             android:ems="10"
             android:hint="@string/HOME_SEARCH_HINT"
             android:importantForAutofill="no"
@@ -152,7 +151,8 @@
             android:maxLines="1"
             android:paddingStart="11dp"
             android:paddingEnd="8dp"
-            android:textColor="@color/text_color_v2"
+            android:textColorHint="@color/c_text_v2"
+            android:textColor="@color/c_text_v1"
             android:textColorHighlight="@color/text_color_highlight_v1"
             android:textCursorDrawable="@xml/gx_search_cursor_state"
             android:textSize="15sp"
@@ -174,11 +174,12 @@
 
     <ImageView
         android:id="@+id/pEmptyListNotification"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:alpha="0"
         android:contentDescription="@string/GENERAL_TODO"
         android:src="@drawable/empty_history"
+        app:tint="@color/c_text_v3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -7,25 +7,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
+import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class orbotController extends AppCompatActivity {
 
     /* PRIVATE VARIABLES */
+    private com.darkweb.genesissearchengine.appManager.orbotManager.orbotModel mOrbotModel;
+    private com.darkweb.genesissearchengine.appManager.orbotManager.orbotViewController mOrbotViewController;
 
     private SwitchMaterial mBridgeSwitch;
     private SwitchMaterial mVpnSwitch;
-    private orbotViewController mOrbotViewController;
     private LinearLayout mCustomizableBridgeMenu;
 
     /* INITIALIZATIONS */
@@ -44,18 +44,24 @@ public class orbotController extends AppCompatActivity {
         mVpnSwitch = findViewById(R.id.pVpnSwitch);
         mCustomizableBridgeMenu = findViewById(R.id.pCustomizableBridgeMenu);
 
-        mOrbotViewController = new orbotViewController(mBridgeSwitch, mVpnSwitch, this, mCustomizableBridgeMenu);
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.S_INIT_UI, Arrays.asList(status.sBridgeVPNStatus,status.sBridgeStatus));
+        mOrbotViewController = new com.darkweb.genesissearchengine.appManager.orbotManager.orbotViewController(mBridgeSwitch, mVpnSwitch, this, mCustomizableBridgeMenu);
+        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sBridgeVPNStatus,status.sBridgeStatus));
+        mOrbotModel = new com.darkweb.genesissearchengine.appManager.orbotManager.orbotModel(new orbotModelCallback());
     }
 
     /* LISTENERS */
 
+    public class orbotModelCallback implements eventObserver.eventListener{
+        @Override
+        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        {
+            return null;
+        }
+    }
 
     public void onBridgeSwitch(View view){
-        status.sBridgeStatus = !mBridgeSwitch.isChecked();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_BRIDGE_ENABLES,status.sBridgeStatus));
-        pluginController.getInstance().updateBridges(status.sBridgeStatus);
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.S_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(status.sBridgeStatus));
+        mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH,Collections.singletonList(!mBridgeSwitch.isChecked()));
+        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(status.sBridgeStatus));
     }
 
     public void openBridgeSettings(View view){
@@ -63,10 +69,8 @@ public class orbotController extends AppCompatActivity {
     }
 
     public void onVPNSwitch(View view){
-        status.sBridgeVPNStatus = !mVpnSwitch.isChecked();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED,status.sBridgeVPNStatus));
-        mOrbotViewController.updateVPN(status.sBridgeVPNStatus);
-        pluginController.getInstance().updateVPN(status.sBridgeVPNStatus);
+        mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_VPN_SWITCH,Collections.singletonList(!mVpnSwitch.isChecked()));
+        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_VPN,Collections.singletonList(status.sBridgeVPNStatus));
     }
 
     /* LOCAL OVERRIDES */
@@ -75,7 +79,7 @@ public class orbotController extends AppCompatActivity {
     public void onResume()
     {
         activityContextManager.getInstance().setCurrentActivity(this);
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.S_INIT_POST_UI,null);
+        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_POST_UI,null);
         super.onResume();
     }
 

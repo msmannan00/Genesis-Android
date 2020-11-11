@@ -3,13 +3,8 @@ package com.darkweb.genesissearchengine.dataManager;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
-import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
-import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,11 +13,12 @@ public class dataController
 {
     /*Private Variables*/
 
-    private dataModel mDataModel;
+    private tabDataModel mTabModel;
     private preferenceDataModel mPreferenceModel;
     private historyDataModel mHistoryModel;
     private imageCacheModel mImageCacheModel;
     private bookmarkDataModel mBookMarkDataModel;
+    private suggestionDataModel mSuggestionDataModel;
 
     /*Private Declarations*/
 
@@ -36,15 +32,16 @@ public class dataController
 
     public void initialize(AppCompatActivity app_context){
         mHistoryModel = new historyDataModel();
-        mDataModel = new dataModel();
+        mTabModel = new tabDataModel();
         mPreferenceModel = new preferenceDataModel(app_context);
         mImageCacheModel = new imageCacheModel();
         mBookMarkDataModel = new bookmarkDataModel();
+        mSuggestionDataModel = new suggestionDataModel();
     }
     public void initializeListData(){
-        mDataModel.initSuggestions();
+        invokeSuggestion(dataEnums.eSuggestionCommands.M_INIT_SUGGESTION, null);
         mBookMarkDataModel.initializebookmark(databaseController.getInstance().selectBookmark());
-        if(!status.sSettingHistoryStatus)
+        if(!status.sClearOnExit)
         {
             mHistoryModel.onTrigger(dataEnums.eHistoryCommands.M_INITIALIZE_HISTORY, Arrays.asList(databaseController.getInstance().selectHistory(0,constants.CONST_FETCHABLE_LIST_SIZE), databaseController.getInstance().getLargestHistoryID(),databaseController.getInstance().getLargestHistoryID()));
         }
@@ -74,71 +71,27 @@ public class dataController
         return mPreferenceModel.onTrigger(p_commands, p_data);
     }
 
-
     /*Recieving History*/
     public Object invokeBookmark(dataEnums.eBookmarkCommands p_commands, List<Object> p_data){
         return mBookMarkDataModel.onTrigger(p_commands, p_data);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*Recieving Suggestions*/
-
-    public ArrayList<historyRowModel> getSuggestions(){
-        return mDataModel.getmSuggestions();
+    public Object invokeSuggestion(dataEnums.eSuggestionCommands p_commands, List<Object> p_data){
+        if(dataEnums.eSuggestionCommands.M_UPDATE_SUGGESTION.equals(p_commands)){
+            mSuggestionDataModel.onTrigger(p_commands, p_data);
+            activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
+        }
+        else if(dataEnums.eSuggestionCommands.M_ADD_SUGGESTION.equals(p_commands)){
+            mSuggestionDataModel.onTrigger(p_commands, p_data);
+            activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
+        }else {
+            return mSuggestionDataModel.onTrigger(p_commands, p_data);
+        }
+        return null;
     }
 
-    /*Recieving Tabs*/
-
-    public ArrayList<tabRowModel> getTab(){
-        return mDataModel.getTab();
+    public Object invokeTab(dataEnums.eTabCommands p_commands, List<Object> p_data){
+        return mTabModel.onTrigger(p_commands, p_data);
     }
-    public void addTab(geckoSession mSession,boolean isHardCopy){
-        mDataModel.addTabs(mSession,isHardCopy);
-    }
-    public void clearTabs(){
-        mDataModel.clearTab();
-    }
-    public void closeTab(geckoSession session){
-        mDataModel.closeTab(session);
-    }
-    public void moveTabToTop(geckoSession session){
-        mDataModel.moveTabToTop(session);
-    }
-    public tabRowModel getCurrentTab(){
-        return mDataModel.getCurrentTab();
-    }
-    public int getTotalTabs(){
-        return mDataModel.getTotalTabs();
-    }
-
-    public void updateSuggestionURL(String url,String title) {
-        url = helperMethod.removeLastSlash(url);
-        mDataModel.updateSuggestionURL(url,title,false);
-        activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
-    }
-    public void addSuggesion(String url,String title) {
-        url = helperMethod.removeLastSlash(url);
-        mDataModel.addSuggenstions(url,title,false);
-        activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
-    }
-
-
 }
 

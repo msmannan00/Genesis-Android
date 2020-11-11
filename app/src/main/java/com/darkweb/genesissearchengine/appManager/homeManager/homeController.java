@@ -23,14 +23,18 @@ import android.webkit.URLUtil;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
+import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.appManager.landingManager.landingController;
 import com.darkweb.genesissearchengine.appManager.languageManager.languageController;
+import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
+import com.darkweb.genesissearchengine.appManager.orbotManager.orbotController;
 import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
@@ -40,7 +44,6 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.appManager.orbotManager.orbotController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.KeyboardUtils;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
@@ -57,6 +60,7 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -82,9 +86,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ImageView mLoadingIcon;
     private TextView mLoadingText;
     private AdView mBannerAds = null;
-    private ImageView mEngineLogo;
     private ImageButton mGatewaySplash;
-    private ImageButton mSwitchEngineBack;
     private LinearLayout mTopBar;
     private ImageView mBackSplash;
     private Button mConnectButton;
@@ -94,17 +96,21 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private boolean mPageClosed = false;
     private boolean isKeyboardOpened = false;
     private boolean isSuggestionChanged = false;
+    private boolean isTabMenuOpened = false;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
             pluginController.getInstance().preInitialize(this);
             databaseController.getInstance().initialize(this);
             dataController.getInstance().initialize(this);
+            onChangeTheme();
             status.initStatus();
             pluginController.getInstance().onCreate(this);
+            onInitTheme();
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.home_view);
@@ -121,6 +127,29 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             initLandingPage();
             onNewIntent(getIntent());
             initLocalLanguage();
+    }
+
+    public void onInitTheme(){
+
+        if(status.sTheme == enums.Theme.THEME_DARK){
+            if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }
+        }else if(status.sTheme == enums.Theme.THEME_LIGHT){
+            if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }else {
+            if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_NO){
+                if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }else {
+                if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+            }
+        }
     }
 
     private void initLocalLanguage() {
@@ -167,7 +196,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void initializeConnections()
     {
-        mGeckoView = findViewById(R.id.webLoader);
+        mGeckoView = findViewById(R.id.pWebView);
 
         mProgressBar = findViewById(R.id.progressBar);
         mSplashScreen = findViewById(R.id.splashScreen);
@@ -186,9 +215,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setSaveFromParentEnabled(false);
 
         mGeckoClient = new geckoClients();
-        boolean is_engine_switched = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_ENGINE_SWITCHED,false));
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,(ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null), mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton);
+    }
 
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,dataController.getInstance().getSuggestions(), mGatewaySplash, mTopBar, mGeckoView, mBackSplash,is_engine_switched, mConnectButton, mSwitchEngineBack);
+    public void onChangeTheme(){
+        if(!status.sSettingIsAppStarted){
+            status.sDefaultNightMode = (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+        }
     }
 
     public void initPreFixes() {
@@ -212,18 +245,18 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,isForced);
         //mGeckoClient.loadURL("about:blank");
         onSaveCurrentTab(mGeckoClient.getSession(),false);
-        mHomeViewController.initTab(dataController.getInstance().getTotalTabs());
+        mHomeViewController.initTab((int)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null));
     }
 
     public void initTab(boolean isKeyboardOpened){
         onNewTab(isKeyboardOpened, false);
-        mHomeViewController.initTab(dataController.getInstance().getTotalTabs());
+        mHomeViewController.initTab((int)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null));
     }
 
     @Override
     protected void attachBaseContext(Context base) {
         Prefs.setContext(base);
-        orbotLocalConstants.sHomeContext = new WeakReference<>(base);
+        orbotLocalConstants.mHomeContext = new WeakReference<>(base);
 
         super.attachBaseContext(LocaleHelper.onAttach(base, Prefs.getDefaultLocale()));
     }
@@ -242,14 +275,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
     }
 
-    public void onUpdateJavascript(){
-        mGeckoView.clearFocus();
-        mGeckoClient.updateJavascript();
-    }
 
-    public void onUpdateCookies(){
-        mGeckoView.clearFocus();
-        mGeckoClient.updateCookies();
+    public void initRuntimeSettings()
+    {
+        mGeckoClient.updateSetting();
     }
 
     public void onLoadURL(String url){
@@ -257,9 +286,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.loadURL(url.replace("genesis.onion","boogle.store"));
     }
 
+    public GeckoView getmGeckoView(){
+        return mGeckoView;
+    }
+
     public void onLoadTab(geckoSession mTempSession,boolean isSessionClosed){
         if(!isSessionClosed){
-            dataController.getInstance().moveTabToTop(mTempSession);
+            dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mTempSession));
         }
 
         mGeckoView.releaseSession();
@@ -365,7 +398,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }
                 if(isSuggestionChanged){
                     isSuggestionChanged = false;
-                    mHomeViewController.initializeSuggestionView(dataController.getInstance().getSuggestions());
+                    mHomeViewController.initializeSuggestionView((ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null));
                 }
             }else {
                 mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),true);
@@ -401,7 +434,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onNewTab(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened){
         initializeGeckoView(true);
-        onLoadURL("about:blank");
+        if(status.sOpenURLInNewTab){
+            onLoadURL(helperMethod.getDomainName(status.sSettingSearchStatus));
+            mHomeViewController. onUpdateSearchBar(helperMethod.getDomainName(status.sSettingSearchStatus),false);
+        }else {
+            mGeckoView.releaseSession();
+            onLoadURL("about:blank");
+            mHomeViewController. onUpdateSearchBar(strings.HOME_BLANK_PAGE,false);
+        }
         mHomeViewController.progressBarReset();
         mHomeViewController.onNewTab(isKeyboardOpened,isKeyboardOpenedTemp);
         mHomeViewController.onSessionChanged();
@@ -409,7 +449,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onOpenTabViewBoundary(View view){
         mNewTab.setPressed(true);
+        isTabMenuOpened = true;
         helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
+        overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
     }
 
     public void onNotificationInvoked(String message,enums.etype e_type){
@@ -450,6 +492,19 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onClearSession(){
         mGeckoClient.onClearSession();
     }
+
+    public void onClearSiteData(){
+        mGeckoClient.onClearSiteData();
+    }
+
+    public void onClearCache(){
+        mGeckoClient.onClearCache();
+    }
+
+    public void onClearCookies(){
+        mGeckoClient.onClearCookies();
+    }
+
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
@@ -493,7 +548,21 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (mGeckoClient!=null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mGeckoClient.getUriPermission()!=null) {
             this.revokeUriPermission(mGeckoClient.getUriPermission(), Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
+        if(status.sSettingIsAppStarted){
+            onStartApplication(null);
+        }
         super.onResume();
+    }
+
+    public void onAcquireDisplay(){
+        isTabMenuOpened = false;
+        tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
+        if(model==null){
+            onLoadTab(model.getSession(),true);
+        }else {
+            mGeckoView.releaseSession();
+            mGeckoView.setSession(model.getSession());
+        }
     }
 
     @Override
@@ -514,7 +583,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onSuggestionUpdate(){
         if(!mSearchbar.isFocused()){
-            mHomeViewController.initializeSuggestionView(dataController.getInstance().getSuggestions());
+            mHomeViewController.initializeSuggestionView((ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null));
         }else {
             isSuggestionChanged = true;
         }
@@ -560,37 +629,42 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onSaveCurrentTab(geckoSession session,boolean isHardCopy){
-        dataController.getInstance().addTab(session,isHardCopy);
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_ADD_TAB, Arrays.asList(session,isHardCopy));
     }
 
     public boolean onCloseCurrentTab(geckoSession session){
-        dataController.getInstance().closeTab(session);
-        tabRowModel model = dataController.getInstance().getCurrentTab();
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Collections.singletonList(session));
+        tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
 
         session.stop();
         session.close();
         initTabCount();
 
         if(model!=null){
-            onLoadTab(model.getSession(),true);
+            if(activityContextManager.getInstance().getTabController()==null || activityContextManager.getInstance().getTabController()!=null && (activityContextManager.getInstance().getTabController().isDestroyed())){
+                onLoadTab(model.getSession(),true);
+            }
             return true;
         }
         else {
-            return false;
+            if(activityContextManager.getInstance().getTabController()==null || activityContextManager.getInstance().getTabController()!=null && (activityContextManager.getInstance().getTabController().isDestroyed())){
+                return false;
+            }else {
+                return true;
+            }
         }
     }
 
     public void initTabCount(){
-        mHomeViewController.initTab(dataController.getInstance().getTotalTabs());
+        mHomeViewController.initTab((int)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null));
     }
 
     public void releaseSession(){
         mGeckoView.releaseSession();
     }
 
-    public void loadExistingTab()
-    {
-        tabRowModel model = dataController.getInstance().getCurrentTab();
+    public void loadExistingTab(){
+        tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
         if (model != null)
         {
             onLoadTab(model.getSession(), true);
@@ -615,7 +689,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
         else {
             mSearchbar.clearFocus();
-            if (menuId == R.id.menu9) {
+            if (menuId == R.id.menu12) {
+                helperMethod.hideKeyboard(this);
+                helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
+            }
+            else if (menuId == R.id.menu9) {
                 helperMethod.hideKeyboard(this);
                 helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
             }
@@ -672,7 +750,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             if (menuId == R.id.menu23) {
                 helperMethod.hideKeyboard(this);
-                mGeckoClient.onBackPressed(false);
+                pluginController.getInstance().MessageManagerHandler(homeController.this, Collections.singletonList(mGeckoClient.getSession().getCurrentURL()),enums.etype.bookmark);
             }
             if (menuId == R.id.menu24) {
                 helperMethod.hideKeyboard(this);
@@ -689,6 +767,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
         }
         mHomeViewController.closeMenu();
+    }
+
+    public void onOrbotLog(View view) {
+        helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
     }
 
     public class homeViewCallback implements eventObserver.eventListener{
@@ -746,7 +828,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false);
         }
             else if(e_type.equals(enums.etype.back_list_empty)){
-                if(dataController.getInstance().getTotalTabs()>1){
+                if((int)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null)>1){
                     if(!onCloseCurrentTab(mGeckoClient.getSession())){
                         onNewTab(true,false);
                     }
@@ -758,10 +840,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().setProxy(dataToStr(data.get(0)));
             }
             else if(e_type.equals(enums.etype.on_update_history)){
+                if(activityContextManager.getInstance().getTabController()!=null && !activityContextManager.getInstance().getTabController().isDestroyed() && !activityContextManager.getInstance().getTabController().isFinishing()){
+                    activityContextManager.getInstance().getTabController().onTabRowChanged((int)data.get(1));
+                }
                 return dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_ADD_HISTORY ,data);
             }
             else if(e_type.equals(enums.etype.on_update_suggestion)){
-                dataController.getInstance().addSuggesion(data.get(0).toString(),data.get(2).toString());
+                dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_ADD_SUGGESTION, Arrays.asList(data.get(0).toString(),data.get(2).toString()));
             }
             else if(e_type.equals(enums.etype.on_page_loaded)){
                 pluginController.getInstance().logEvent(strings.EVENT_PAGE_OPENED_SUCCESS);
@@ -779,10 +864,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     handler.postDelayed(runnable, 1300);
                 }else {
                     final Handler handler = new Handler();
-                    Runnable runnable = () ->
-                    {
-                        pluginController.getInstance().initializeBannerAds();
-                    };
+                    Runnable runnable = () -> pluginController.getInstance().initializeBannerAds();
                     handler.postDelayed(runnable, 2000);
                 }
             }
@@ -810,7 +892,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onFullScreenUpdate(status);
             }
             else if(e_type.equals(enums.etype.on_update_favicon)){
-                boolean status = (Boolean)data.get(0);
                 dataController.getInstance().invokeImageCache(dataEnums.eImageCacheCommands.M_SET_IMAGE ,data);
             }
             else if(e_type.equals(enums.etype.on_long_press_with_link)){
@@ -834,7 +915,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 helperMethod.openPlayStore(dataToStr(data.get(0)).split("__")[1],homeController.this);
             }
             else if(e_type.equals(enums.etype.on_update_suggestion_url)){
-                dataController.getInstance().updateSuggestionURL(dataToStr(data.get(0)),dataToStr(data.get(2)));
+                dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_UPDATE_SUGGESTION, Arrays.asList(dataToStr(data.get(0)),dataToStr(data.get(2))));
             }
             return null;
         }

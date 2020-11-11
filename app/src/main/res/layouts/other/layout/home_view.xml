@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/c_background"
         tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController">
 
 
@@ -12,15 +12,15 @@
             android:id="@+id/webviewContainer"
             android:layout_width="match_parent"
             android:layout_marginTop="55dp"
-            android:background="@color/white"
+        android:background="@color/c_background"
             android:layout_height="match_parent">
 
         <org.mozilla.geckoview.GeckoView
-                android:id="@+id/webLoader"
+                android:id="@+id/pWebView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
-                android:background="@color/white"
+                android:background="@color/c_background"
                 android:alpha="1"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="8dp" >
@@ -39,7 +39,7 @@
         <LinearLayout
                 android:id="@+id/topbar"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="60dp"
                 android:elevation="7dp"
                 android:background="@xml/ic_secondary_gradinet"
                 android:gravity="left"
@@ -82,8 +82,9 @@
                         android:paddingRight="15dp"
                         android:selectAllOnFocus="true"
                         android:text="@string/GENERAL_HOME_URL"
-                        android:textColor="@color/text_color_v2"
-                        android:textColorHighlight="@color/text_color_highlight_v1"
+                        android:textColor="@color/c_text_v1"
+                        android:textColorHint="@color/c_text_v1"
+                        android:textColorHighlight="@color/c_alert_background"
                         android:textCursorDrawable="@xml/gx_search_cursor_state"
                         android:textSize="16sp"
                         tools:targetApi="o" />
@@ -98,10 +99,11 @@
                             android:id="@+id/newButtonInvoke"
                             android:layout_width="22dp"
                             android:layout_height="22dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="5dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="13dp"
                             android:layout_marginTop="17dp"
                             android:text="@string/HOME_TAB_TEXT"
+                            android:textColor="@color/c_text_v1"
                             android:clickable="false"
                             android:textSize="12.5sp"
                             android:layout_marginBottom="0dp"
@@ -113,17 +115,18 @@
 
                 <ImageButton
                         android:id="@+id/menu"
-                        android:layout_width="32dp"
+                        android:layout_width="35dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginTop="-4dp"
                         android:layout_marginEnd="0dp"
-                        android:background="@xml/hox_menu_button"
+                        android:background="@xml/gx_ripple_gray"
                         android:contentDescription="@string/GENERAL_TODO"
+                        android:tint="@color/c_navigation_tint"
                         android:paddingLeft="8dp"
-                        android:paddingTop="19dp"
+                        android:paddingTop="15dp"
                         android:onClick="onOpenMenuItem"
                         android:paddingRight="8dp"
-                        android:paddingBottom="19dp"
+                        android:paddingBottom="15dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/menu_item" />
 
@@ -143,7 +146,7 @@
                 android:progressDrawable="@xml/hox_photon_progress"
                 app:shiftDuration="@integer/progress_shift_duration"
                 app:wrapShiftDrawable="true"
-                android:layout_marginTop="51.9dp"
+                android:layout_marginTop="55.9dp"
                 android:progress="0"
                 android:max="10000"
                 android:scaleY="0.7"
@@ -151,84 +154,107 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/splashScreen"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/landing_ease_blue"
-                android:clickable="true"
-                android:focusable="true">
+            android:id="@+id/splashScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/landing_ease_blue"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:background="@xml/hox_rounded_corner_container_bottom"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:translationZ="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/orbot_debug"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@xml/hox_rounded_corner_splash"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:elevation="2dp"
+                    android:onClick="onOrbotLog"
+                    android:src="@xml/ic_baseline_bug"
+                    android:tint="@color/black" />
+
+            </LinearLayout>
 
             <ImageView
-                    android:id="@+id/backsplash"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@xml/hox_splash_gradient"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                android:id="@+id/backsplash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@xml/hox_splash_gradient"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                    android:id="@+id/Connect"
-                    android:layout_width="110dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="53dp"
-                    android:background="@xml/hox_rounded_corner"
-                    android:onClick="onStartApplication"
-                    android:text="@string/HOME_CONNECT"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView_loading_back"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                android:id="@+id/Connect"
+                android:layout_width="120dp"
+                android:layout_height="53dp"
+                android:background="@xml/hox_rounded_corner_splash"
+                android:onClick="onStartApplication"
+                android:text="@string/HOME_CONNECT"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_loading_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.37"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
-                    android:id="@+id/gateway_splash"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_marginBottom="25dp"
-                    android:elevation="2dp"
-                    android:background="@xml/hox_rounded_corner"
-                    android:onClick="onLoadProxy"
-                    android:src="@xml/ic_gateway_splash"
-                    android:tint="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/loadingText"
-                    app:layout_constraintEnd_toStartOf="@+id/Connect"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                android:id="@+id/gateway_splash"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginStart="7dp"
+                android:background="@xml/hox_rounded_corner_splash"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:elevation="2dp"
+                android:onClick="onLoadProxy"
+                android:src="@xml/ic_gateway_splash"
+                android:tint="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/Connect"
+                app:layout_constraintTop_toTopOf="@+id/Connect" />
 
             <TextView
-                    android:id="@+id/loadingText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginEnd="50dp"
-                    android:layout_marginBottom="37dp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="@string/HOME_LOADING"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textFontWeight="5"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="UnusedAttribute" />
+                android:id="@+id/loadingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="37dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/HOME_LOADING"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textFontWeight="5"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="UnusedAttribute" />
 
             <ImageView
-                    android:id="@+id/imageView_loading_back"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginBottom="25dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/loadingText"
-                    app:layout_constraintEnd_toStartOf="@+id/backsplash"
-                    app:layout_constraintStart_toEndOf="@+id/backsplash"
-                    app:srcCompat="@drawable/icon_loading"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                android:id="@+id/imageView_loading_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="25dp"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/loadingText"
+                app:layout_constraintEnd_toStartOf="@+id/backsplash"
+                app:layout_constraintStart_toEndOf="@+id/backsplash"
+                app:srcCompat="@drawable/icon_loading" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

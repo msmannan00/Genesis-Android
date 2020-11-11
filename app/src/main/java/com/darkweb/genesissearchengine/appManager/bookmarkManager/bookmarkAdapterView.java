@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.darkweb.genesissearchengine.appManager.historyManager.bookmarkEnums;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import java.util.List;

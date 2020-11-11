@@ -5,7 +5,7 @@
           android:top="113dp">
         <shape
             android:shape="rectangle" android:padding="10dp" >
-            <solid android:color="@color/button_gray"/>
+            <solid android:color="@color/c_edittext_background"/>
             <corners android:radius="5dp"/>
         </shape>
     </item>
@@ -13,7 +13,7 @@
           android:top="113dp">
         <shape
             android:shape="rectangle" android:padding="10dp">
-            <solid android:color="@color/white_dark"/>
+            <solid android:color="@color/c_edittext_background"/>
             <corners android:radius="5dp"/>
         </shape>
     </item>

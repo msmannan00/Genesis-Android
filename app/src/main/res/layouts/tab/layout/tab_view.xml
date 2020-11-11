@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.darkweb.genesissearchengine.appManager.tabManager.tabController">
+
+    <LinearLayout
+        android:id="@+id/pHeaderContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_background"
+        android:clickable="true"
+        android:elevation="7dp"
+        android:focusable="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/pHeaderContainerTop"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry">
+
+            <ImageButton
+                android:id="@+id/pNewTab"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:onClick="onMenuTrigger"
+                android:src="@xml/ic_baseline_add"
+                android:tint="@color/c_navigation_tint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-3dp"
+                android:layout_weight="40"
+                android:gravity="center_vertical|start"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onBackPressed"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry">
+
+                <Button
+                    android:id="@+id/pTabs"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="0.5dp"
+                    android:background="@xml/gx_generic_tab_button"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:scaleType="fitCenter"
+                    android:text="@string/HOME_TAB_TEXT"
+                    android:textColor="@color/c_text_v5"
+                    android:textSize="12.5sp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/pMenuButton"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_weight="2.5"
+                android:background="@xml/gx_ripple_gray"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:onClick="openTabMenu"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/menu_item"
+                android:tint="@color/c_navigation_tint" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/c_view_divier_background_inner"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="49dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

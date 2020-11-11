@@ -1,16 +1,16 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.notificationManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
+import java.util.Collections;
 import java.util.List;
 
 public class settingNotificationController extends AppCompatActivity {
@@ -90,14 +90,11 @@ public class settingNotificationController extends AppCompatActivity {
     }
 
     public void onOpenNotificationSettings(View view){
-        Intent intent = new Intent();
-        intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
-        intent.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());
-        startActivity(intent);
+        helperMethod.openNotification(this);
     }
 
     public void onSaveLocalNotificationSettings(View view){
-        mSettingNotificationModel.updateLocalNotification(!mNotificationManual.isChecked());
+        mSettingNotificationModel.onTrigger(settingNotificationEnums.eNotificationModel.M_UPDATE_LOCAL_NOTIFICATION, Collections.singletonList(!mNotificationManual.isChecked()));
         mNotificationManual.toggle();
     }
 }

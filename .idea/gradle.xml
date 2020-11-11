@@ -11,7 +11,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Application" />
+            <option value="$PROJECT_DIR$/afservice" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/autofillLib" />
+            <option value="$PROJECT_DIR$/autofillManager" />
+            <option value="$PROJECT_DIR$/autofillServer" />
+            <option value="$PROJECT_DIR$/autofillService" />
+            <option value="$PROJECT_DIR$/autofillServices" />
+            <option value="$PROJECT_DIR$/chromiumTabs" />
             <option value="$PROJECT_DIR$/orbotservice" />
           </set>
         </option>

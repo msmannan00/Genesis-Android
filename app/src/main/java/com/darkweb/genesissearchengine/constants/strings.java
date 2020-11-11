@@ -27,6 +27,7 @@ public class strings
     public static final String SETTING_CUSTOM_FONTS = "Custom Font";
     public static final String SETTING_PERCENT_SIGN = "%";
     public static final String SETTING_DEFAULT_LANGUAGE = "en";
+    public static final String SETTING_DEFAULT_NEW_TAB_URL = "about:blank";
 
     /*Home Manager*/
 

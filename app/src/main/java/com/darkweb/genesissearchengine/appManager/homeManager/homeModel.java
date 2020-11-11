@@ -16,22 +16,26 @@ class homeModel
     }
 
     String urlComplete(String url){
-        try
-        {
-            String updateUrl = helperMethod.completeURL(url);
-            URL host = new URL(updateUrl);
-            boolean isUrlValid = Patterns.WEB_URL.matcher(updateUrl).matches();
-            if(isUrlValid && host.getHost().replace("www.","").contains("."))
+        if(url.equals("about:config")){
+            return url;
+        }else {
+            try
             {
-                return null;
+                String updateUrl = helperMethod.completeURL(url);
+                URL host = new URL(updateUrl);
+                boolean isUrlValid = Patterns.WEB_URL.matcher(updateUrl).matches();
+                if(isUrlValid && host.getHost().replace("www.","").contains("."))
+                {
+                    return null;
+                }
             }
-        }
 
-        catch (Exception ex){
-            ex.printStackTrace();
-        }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
 
-        return constants.CONST_BACKEND_GOOGLE_URL.replace("$s",url.replaceAll(" ","+"));
+            return constants.CONST_BACKEND_GOOGLE_URL.replace("$s",url.replaceAll(" ","+"));
+        }
     }
 
 

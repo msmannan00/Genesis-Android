@@ -1,18 +1,16 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context="com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/c_background"
+    tools:context="com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
 
@@ -22,7 +20,6 @@
                     android:id="@+id/pHeaderContainerTop"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white"
                     android:clickable="true"
                     android:paddingEnd="7dp"
                     android:paddingStart="5dp"
@@ -39,17 +36,19 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:onClick="onClose"
                         android:src="@xml/ic_arrow_back"
-                        android:tint="@color/black" />
+                        android:tint="@color/c_navigation_tint"
+                        />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="onClose"
                         android:layout_marginTop="-3dp"
-                        android:layout_weight="40"
                         android:gravity="center_vertical|start"
                         android:text="@string/SETTING_SEARCH_HEADER"
-                        android:textColor="@color/text_color_v1"
+                        android:textColor="@color/c_text_v1"
                         android:textSize="17sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -58,19 +57,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="10dp"
-                        android:background="@color/white_dark" />
+                        android:background="@color/c_view_divier_background" />
 
                 <!-- Title Header -->
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:textColor="@color/cursor_blue"
+                        android:textColor="@color/c_text_setting_heading"
                         android:textSize="14sp"
                         android:layout_width="0dp"
                         android:textStyle="bold"
@@ -78,14 +76,8 @@
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
                         android:layout_marginStart="15dp"
-                        android:text="@string/SETTING_SEARCH_HEADER_1"
-                        />
+                        android:text="@string/SETTING_SEARCH_HEADER_1"/>
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/white_dark" />
 
                 <LinearLayout
                     android:id="@+id/pOption1"
@@ -93,16 +85,20 @@
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
+                    android:layout_marginStart="5dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:weightSum="8"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:src="@drawable/genesis"/>
+                        android:padding="3dp"
+                        android:src="@drawable/genesis_logo"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -121,7 +117,7 @@
                             android:text="@string/SETTING_SEARCH_GENESIS"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -137,8 +133,8 @@
                             android:text="@string/SETTING_SEARCH_DEFAULT"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
@@ -149,6 +145,7 @@
                         android:clickable="false"
                         android:layout_weight="1"
                         android:layout_marginStart="50dp"
+                        android:buttonTint="@color/c_radio_tint"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -158,7 +155,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption2"
@@ -166,9 +163,11 @@
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
+                    android:layout_marginStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:weightSum="8"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="0dp"
@@ -176,8 +175,9 @@
                         android:layout_height="wrap_content"
                         android:clickable="false"
                         android:padding="6dp"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/duckduckgologo"/>
+                        android:layout_marginStart="7dp"
+                        android:src="@drawable/duckduckgologo"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -196,7 +196,7 @@
                             android:text="@string/SETTING_SEARCH_DUCK"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -212,8 +212,8 @@
                             android:text="@string/SETTING_SEARCH_DUCK"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
@@ -225,6 +225,7 @@
                         android:background="@android:color/transparent"
                         android:layout_marginStart="50dp"
                         android:src="@xml/ic_arrow_right"
+                        android:buttonTint="@color/c_radio_tint"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -233,7 +234,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption3"
@@ -241,17 +242,20 @@
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
+                    android:layout_marginStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:weightSum="8"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:padding="3dp"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/google"/>
+                        android:layout_marginStart="7dp"
+                        android:src="@drawable/google"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -270,7 +274,7 @@
                             android:text="@string/SETTING_SEARCH_GOOGLE"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -286,8 +290,8 @@
                             android:text="@string/SETTING_SEARCH_GOOGLE"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
@@ -298,6 +302,7 @@
                         android:clickable="false"
                         android:layout_weight="1"
                         android:layout_marginStart="50dp"
+                        android:buttonTint="@color/c_radio_tint"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -307,7 +312,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption4"
@@ -315,16 +320,20 @@
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
+                    android:layout_marginStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:weightSum="8"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/bing"/>
+                        android:layout_marginStart="7dp"
+                        android:padding="3dp"
+                        android:src="@drawable/bing"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -343,7 +352,7 @@
                             android:text="@string/SETTING_SEARCH_AMAZON"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -359,8 +368,8 @@
                             android:text="@string/SETTING_SEARCH_AMAZON"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
@@ -371,6 +380,7 @@
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:layout_marginStart="50dp"
+                        android:buttonTint="@color/c_radio_tint"
                         android:src="@xml/ic_arrow_right"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -380,7 +390,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption5"
@@ -388,17 +398,20 @@
                     android:layout_height="55dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
+                    android:layout_marginStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:weightSum="8"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/wikipedia"/>
+                        android:padding="5dp"
+                        android:layout_marginStart="7dp"
+                        android:src="@drawable/wikipedia"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -417,7 +430,7 @@
                             android:text="@string/SETTING_SEARCH_BING"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -433,8 +446,8 @@
                             android:text="@string/SETTING_SEARCH_BING"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
@@ -445,6 +458,7 @@
                         android:layout_weight="1"
                         android:clickable="false"
                         android:layout_marginStart="50dp"
+                        android:buttonTint="@color/c_radio_tint"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -454,17 +468,16 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:textColor="@color/cursor_blue"
+                        android:textColor="@color/c_text_setting_heading"
                         android:textSize="14sp"
                         android:layout_width="0dp"
                         android:textStyle="bold"
@@ -476,25 +489,23 @@
                         />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
-
                 <LinearLayout
                     android:id="@+id/pOption6"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="65dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="setSearchHistory"
                     android:orientation="horizontal"
-                    android:weightSum="7">
+                    android:weightSum="7"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="55dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
@@ -508,7 +519,7 @@
                             android:text="@string/SETTING_SEARCH_HISTORY"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -521,11 +532,12 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:layout_marginEnd="15dp"
                             android:text="@string/SETTING_SEARCH_HISTORY_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
 
                     </LinearLayout>
@@ -537,7 +549,10 @@
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:clickable="false"
+                        android:layout_marginTop="5dp"
+                        android:theme="@style/SCBSwitch"
                         android:id="@+id/pSearchHistory"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
@@ -545,22 +560,25 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption7"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="setSearchStatus"
+                    android:minHeight="65dp"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal"
-                    android:weightSum="7">
+                    android:weightSum="7"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="55dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
@@ -574,7 +592,7 @@
                             android:text="@string/SETTING_SEARCH_SUGGESTIONS"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -586,12 +604,13 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
+                            android:layout_marginEnd="15dp"
                             android:paddingStart="15dp"
                             android:text="@string/SETTING_SEARCH_SUGGESTION_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
@@ -602,7 +621,10 @@
                         android:id="@+id/pSearchSuggestions"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
+                        android:layout_marginTop="5dp"
+                        android:theme="@style/SCBSwitch"
                         android:clickable="false"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
@@ -610,7 +632,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
 
             </LinearLayout>

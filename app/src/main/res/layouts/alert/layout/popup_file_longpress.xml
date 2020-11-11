@@ -7,11 +7,9 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:id="@+id/pMainLayout"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:background="@xml/hox_rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +25,7 @@
             android:paddingStart="15dp"
             android:text="@string/ALERT_LONG_FILE"
             android:textAlignment="textStart"
-            android:textColor="@color/secondary"
+            android:textColor="@color/c_text_setting_heading_v2"
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,14 +35,17 @@
             android:id="@+id/pDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:justificationMode="inter_word"
-            android:textAlignment="textStart"
             android:paddingStart="15dp"
+            android:textColor="@color/c_alert_text"
+            android:alpha="0.6"
             android:paddingEnd="15dp"
+            android:textAlignment="textStart"
             android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:singleLine="true"
+            android:layout_marginRight="20dp"
             app:layout_constraintTop_toBottomOf="@+id/pHeader"
             tools:ignore="SmallSp" />
 
@@ -53,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:background="@color/holo_gray_light"
+            android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -89,7 +90,7 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -98,6 +99,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
 
@@ -106,7 +108,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -134,7 +136,7 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -143,6 +145,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
 
@@ -151,7 +154,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -179,7 +182,7 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -189,6 +192,7 @@
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
+                    app:tint="@color/c_navigation_tint"
                     app:srcCompat="@xml/ic_arrow_right" />
 
             </LinearLayout>
@@ -196,7 +200,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -206,7 +210,7 @@
                 android:layout_height="1dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:background="@color/button_gray"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -220,16 +224,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
-                    android:id="@+id/pDontShowAgain"
+                    android:id="@+id/pDismiss"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="1"
                     android:background="@xml/ax_bottom_rounded_corner_right"
                     android:padding="0dp"
-                    android:text="@string/ALERT_WELCOME_MESSAGE_BT_5"
+                    android:text="@string/ALERT_DISMISS"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="@color/cursor_blue"
+                    android:textColor="@color/c_button_text_v1"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 

@@ -61,12 +61,14 @@ public class helperMethod
 {
     /*Helper Methods General*/
 
-    public static String completeURL(String url){
-
+    public static String completeURL(String pURL){
+        if(pURL.equals("about:blank")){
+            return pURL;
+        }
         URL weburl = null;
         try
         {
-            weburl = new URL(url);
+            weburl = new URL(pURL);
             URLConnection result = weburl.openConnection();
 
             if (result instanceof HttpsURLConnection) {
@@ -83,16 +85,16 @@ public class helperMethod
             e.printStackTrace();
         }
 
-        if(!url.startsWith("www.")&& !url.startsWith("http://")&& !url.startsWith("https://")){
-            url = ""+url;
+        if(!pURL.startsWith("www.")&& !pURL.startsWith("http://")&& !pURL.startsWith("https://")){
+            pURL = ""+pURL;
         }
-        if(!url.startsWith("http://")&&!url.startsWith("https://")){
-            url = "http://"+url;
+        if(!pURL.startsWith("http://")&&!pURL.startsWith("https://")){
+            pURL = "http://"+pURL;
         }
-        return url;
+        return pURL;
     }
 
-    public static SpannableString urlDesigner(String url){
+    public static SpannableString urlDesigner(String url, Context pContext){
 
         if (url.contains("https://"))
         {
@@ -109,7 +111,7 @@ public class helperMethod
         } else
         {
             SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(Color.BLACK), 0, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(pContext.getResources().getColor(R.color.c_text_v1)), 0, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ss;
         }
     }
@@ -255,6 +257,11 @@ public class helperMethod
         context.startActivity(myIntent);
     }
 
+    public static void restartActivity( Intent pIntent, AppCompatActivity pContext){
+        pContext.finish();
+        pContext.startActivity(pIntent);
+    }
+
     public static void onMinimizeApp(AppCompatActivity context){
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
@@ -272,6 +279,23 @@ public class helperMethod
         rotate.setDuration(2000);
         rotate.setRepeatCount(Animation.INFINITE);
         return rotate;
+    }
+
+    public static void openNotification(AppCompatActivity pContext)
+    {
+        Intent intent = new Intent();
+        intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+        intent.putExtra("android.provider.extra.APP_PACKAGE", pContext.getPackageName());
+        pContext.startActivity(intent);
+    }
+
+    public static String ellipsize(String input, int maxLength) {
+        String ellip = "...";
+        if (input == null || input.length() <= maxLength
+                || input.length() < ellip.length()) {
+            return input;
+        }
+        return input.substring(0, maxLength - ellip.length()).concat(ellip);
     }
 
     public static String getDomainName(String url)

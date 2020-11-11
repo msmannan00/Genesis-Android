@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.historyManager;
+package com.darkweb.genesissearchengine.appManager.bookmarkManager;
 
 public class bookmarkEnums
 {

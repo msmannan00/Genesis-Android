@@ -121,6 +121,9 @@ public class pluginController
     public void setProxy(String url){
         orbotManager.getInstance().setProxy(url);
     }
+    public void updatePrivacy(){
+        orbotManager.getInstance().setPrivacyPrefs();
+    }
     public String orbotLogs(){
         return orbotManager.getInstance().getLogs();
     }
@@ -245,7 +248,7 @@ public class pluginController
                 dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
                 mContextManager.getHistoryController().onclearData();
                 mHomeController.onClearSession();
-                dataController.getInstance().clearTabs();
+                dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
                 mHomeController.initTab(false);
             }
             else if(event_type.equals(enums.etype.clear_bookmark)){
@@ -283,7 +286,7 @@ public class pluginController
                 helperMethod.copyURL(data.get(0).toString(),mContextManager.getHomeController());
             }
             else if(event_type.equals(enums.etype.clear_tab)){
-                dataController.getInstance().clearTabs();
+                dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
                 mHomeController.initTab(true);
                 activityContextManager.getInstance().getTabController().finish();
             }

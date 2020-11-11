@@ -1,17 +1,15 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context="com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    tools:context="com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
 
@@ -20,7 +18,6 @@
                     android:id="@+id/pHeaderContainerTop"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white"
                     android:clickable="true"
                     android:paddingEnd="7dp"
                     android:paddingStart="5dp"
@@ -37,17 +34,18 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:onClick="onClose"
                         android:src="@xml/ic_arrow_back"
-                        android:tint="@color/black" />
+                        android:tint="@color/c_navigation_tint" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="onClose"
                         android:layout_marginTop="-3dp"
-                        android:layout_weight="40"
                         android:gravity="center_vertical|start"
                         android:text="@string/SETTING_NOTIFICATION_HEADER"
-                        android:textColor="@color/text_color_v1"
+                        android:textColor="@color/c_text_v1"
                         android:textSize="17sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -55,7 +53,7 @@
                 <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/white_dark" />
+                        android:background="@color/c_view_divier_background" />
 
                 <!-- Title Header -->
 
@@ -80,7 +78,7 @@
                         android:text="@string/SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/blue_dark"
+                        android:textColor="@color/c_text_v1"
                         android:textSize="15sp"
                         tools:ignore="RtlSymmetry" />
 
@@ -90,6 +88,7 @@
                         android:layout_height="match_parent"
                         android:clickable="false"
                         android:layout_marginEnd="10dp"
+                        android:theme="@style/SCBSwitch"
                         android:layout_weight="1"
                         android:background="@android:color/transparent">
                     </com.google.android.material.switchmaterial.SwitchMaterial>
@@ -99,7 +98,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption3"
@@ -122,17 +121,18 @@
                         android:text="@string/SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/blue_dark"
+                        android:textColor="@color/c_text_v1"
                         android:textSize="15sp"
                         tools:ignore="RtlSymmetry" />
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
+                        android:scaleX="1"
+                        android:scaleY="1"
+                        android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -141,7 +141,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
             </LinearLayout>
         </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

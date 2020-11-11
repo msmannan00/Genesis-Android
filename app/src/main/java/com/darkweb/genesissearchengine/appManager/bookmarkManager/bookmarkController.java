@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.appManager.historyManager.bookmarkEnums;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -37,7 +36,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.darkweb.genesissearchengine.appManager.historyManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
 
 
 public class bookmarkController extends AppCompatActivity

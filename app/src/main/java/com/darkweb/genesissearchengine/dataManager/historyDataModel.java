@@ -29,7 +29,7 @@ public class historyDataModel {
         m_max_history_Id = pMaxHistoryId;
         m_history_size = pHistorySize;
         this.m_history = history;
-        if(!status.sSettingHistoryStatus){
+        if(!status.sClearOnExit){
             initializeCache(history);
         }else {
             clearHistory();
@@ -117,7 +117,11 @@ public class historyDataModel {
             m_history_size += 1;
 
             String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
-            databaseController.getInstance().execSQL("INSERT INTO history(id,date,url,title) VALUES("+ m_max_history_Id +",'" + m_date + "',?,?);",params);
+
+            if(!p_header.equals("loading")){
+                databaseController.getInstance().execSQL("INSERT INTO history(id,date,url,title) VALUES("+ m_max_history_Id +",'" + m_date + "',?,?);",params);
+            }
+
             m_history.add(0,new historyRowModel(p_header,p_url, m_max_history_Id));
             m_history_cache.put(m_max_history_Id,m_history.get(0));
             removeDuplicateURLFromHistory(m_max_history_Id, p_url);

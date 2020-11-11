@@ -23,8 +23,10 @@ public class bookmarkDataModel {
         return mBookmarks;
     }
 
-    void addBookmark(String url, String title){
-        if(url.length()>1500){
+    void addBookmark(String pURL, String pTitle){
+        if(pURL.endsWith("about:blank"))
+            pURL = "about:blank";
+        if(pURL.length()>1500){
             return;
         }
         int autoval = 0;
@@ -38,20 +40,26 @@ public class bookmarkDataModel {
             autoval = mBookmarks.get(0).getID()+1;
         }
 
-        if(title.equals(""))
+        if(pTitle.equals(""))
         {
-            title = "New_Bookmark"+autoval;
+            pTitle = "New_Bookmark"+autoval;
         }
 
         String[] params = new String[2];
-        params[0] = title;
-        params[1] = url;
+        params[0] = pTitle;
+        params[1] = pURL;
 
-        databaseController.getInstance().execSQL("INSERT INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params);
-        mBookmarks.add(0,new bookmarkRowModel(title, url,autoval));
+        if(!pTitle.equals("loading")){
+            databaseController.getInstance().execSQL("INSERT INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params);
+        }
+        mBookmarks.add(0,new bookmarkRowModel(pTitle, pURL,autoval));
     }
 
-    void clearBookmark(int pID) {
+    void clearBookmark(){
+        mBookmarks.clear();
+    }
+
+    void deleteBookmark(int pID) {
         for(int mCounter=0;mCounter<mBookmarks.size();mCounter++){
             if(mBookmarks.get(mCounter).getID()==pID){
                 mBookmarks.remove(mCounter);
@@ -60,15 +68,18 @@ public class bookmarkDataModel {
         databaseController.getInstance().execSQL("delete from bookmark where id="+ pID,null);
     }
 
-    public Object onTrigger(dataEnums.eBookmarkCommands p_commands, List<Object> p_data){
+    public Object onTrigger(dataEnums.eBookmarkCommands p_commands, List<Object> pData){
         if(p_commands == dataEnums.eBookmarkCommands.M_GET_BOOKMARK){
             return getBookmark();
         }
         if(p_commands == dataEnums.eBookmarkCommands.M_ADD_BOOKMARK){
-            addBookmark((String)p_data.get(0), (String)p_data.get(1));
+            addBookmark((String)pData.get(0), (String)pData.get(1));
         }
         if(p_commands == dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK){
-            clearBookmark((int)p_data.get(0));
+            deleteBookmark((int)pData.get(0));
+        }
+        if(p_commands == dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK){
+            clearBookmark();
         }
 
         return null;

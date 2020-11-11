@@ -1,108 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="360dp"
-        android:id="@+id/pMainLayout"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="330dp"
+    android:id="@+id/pMainLayout"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@xml/hox_rounded_corner"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/pHeader"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@xml/hox_rounded_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="10dp"
+        android:paddingStart="15dp"
+        android:text="@string/ALERT_BRIDGE_MAIL"
+        android:textAlignment="textStart"
+        android:textColor="@color/c_text_setting_heading_v2"
+        android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/pHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingStart="15dp"
-            android:text="@string/ALERT_BRIDGE_MAIL"
-            android:textAlignment="textStart"
-            android:textColor="#008080"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/pDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:justificationMode="inter_word"
+        android:alpha="0.6"
+        android:paddingEnd="15dp"
+        android:text="@string/ALERT_BRIDGE_MAIL_INFO"
+        android:textAlignment="textStart"
+        android:paddingStart="15dp"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/c_text_v1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pHeader"
+        tools:ignore="SmallSp" />
 
-        <TextView
-            android:id="@+id/pDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="#242B64"
-            android:paddingEnd="15dp"
-            android:alpha="0.6"
-            android:text="@string/ALERT_BRIDGE_MAIL_INFO"
-            android:textAlignment="textStart"
-            android:paddingStart="15dp"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pHeader"
-            tools:ignore="SmallSp" />
+    <View
+        android:id="@+id/pDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/c_view_divier_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="2"
+        android:id="@+id/pNavigationContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pDivider"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/pDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@xml/ax_ripple_default_round_left"
+            android:padding="0dp"
+            android:text="@string/ALERT_DISMISS"
+            android:textAllCaps="false"
+            android:textColor="@color/c_button_text_v2"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <View
-            android:id="@+id/pDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="25dp"
-            android:background="@color/holo_gray_light"
+            android:id="@+id/pDividerHorizontal"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/pRating" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/pNavigationContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDivider"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/pDismiss"
-                android:textColor="#4d4d4d"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="0dp"
-                android:background="@xml/ax_ripple_default_round_right"
-                android:textSize="15sp"
-                android:textAllCaps="false"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/ALERT_DISMISS" />
+        <Button
+            android:id="@+id/pNext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@xml/ax_ripple_default_round_right"
+            android:padding="0dp"
+            android:text="@string/ALERT_MAIL"
+            android:textAllCaps="false"
+            android:textColor="@color/c_button_text_v1"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <View
-                android:id="@+id/pDividerHorizontal"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/holo_gray_light"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/pNext"
-                android:textColor="@color/cursor_blue"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@xml/ax_ripple_default_round_left"
-                android:padding="0dp"
-                android:textSize="15sp"
-                android:textAllCaps="false"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/ALERT_MAIL" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

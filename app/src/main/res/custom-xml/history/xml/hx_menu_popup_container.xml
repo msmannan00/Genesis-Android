@@ -12,7 +12,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#05e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_05" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -29,7 +29,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#10e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_10" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -46,7 +46,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#15e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_15" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -63,7 +63,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#20e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_20" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -80,7 +80,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#25e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_25" />
                     <corners
                         android:bottomLeftRadius="6dp"
                         android:bottomRightRadius="6dp"
@@ -92,7 +92,7 @@
             <!-- Background -->
             <item>
                 <shape>
-                    <solid android:color="@color/holo_light" />
+                    <solid android:color="@color/c_alert_background" />
                     <corners
                         android:bottomLeftRadius="6dp"
                         android:bottomRightRadius="6dp"
@@ -116,7 +116,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#05e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_05" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -133,7 +133,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#10e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_10" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -150,7 +150,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#15e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_15" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -167,7 +167,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#20e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_20" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -184,7 +184,7 @@
                         android:right="1dp"
                         android:top="1dp" />
 
-                    <solid android:color="#25e6e6e6" />
+                    <solid android:color="@color/c_menu_drop_shadow_25" />
 
                     <corners
                         android:bottomLeftRadius="6dp"
@@ -197,7 +197,7 @@
             <!-- Background -->
             <item>
                 <shape>
-                    <solid android:color="@color/white" />
+                    <solid android:color="@color/c_alert_background" />
                     <corners
                         android:bottomLeftRadius="6dp"
                         android:bottomRightRadius="6dp"

@@ -27,6 +27,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import com.daimajia.androidanimations.library.Techniques;
@@ -42,7 +43,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-//import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -66,7 +66,6 @@ class homeViewController
     private TextView mLoadingText;
     private AdView mBannerAds = null;
     private Handler mUpdateUIHandler = null;
-    private ImageButton mSwitchEngineBack;
     private ImageButton mGatewaySplash;
     private LinearLayout mTopBar;
     private GeckoView mGeckoView;
@@ -76,12 +75,10 @@ class homeViewController
     private PopupWindow popupWindow = null;
 
     /*Local Variables*/
-    private ValueAnimator mEngineAnimator = null;
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
-    private boolean disableSplash = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, boolean is_triggered, Button connect_button, ImageButton switch_engine_back){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -96,7 +93,6 @@ class homeViewController
         this.mGeckoView = gecko_view;
         this.mBackSplash = backsplash;
         this.mConnectButton = connect_button;
-        //this.mSwitchEngineBack = switch_engine_back;
         this.mNewTab = mNewTab;
         this.popupWindow = null;
 
@@ -111,7 +107,7 @@ class homeViewController
     }
 
     void initTab(int count){
-        mNewTab.setText(count+strings.GENERIC_EMPTY_STR);
+        mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
 
         YoYo.with(Techniques.FlipInX)
                 .duration(450)
@@ -127,15 +123,21 @@ class homeViewController
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.landing_ease_blue));
             }
             else{
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                    window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                    window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
                 }
                 else {
-                    initStatusBarColor();
+                    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                        mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }
+                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
                 }
             }
         }
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void initStatusBarColor() {
@@ -237,7 +239,7 @@ class homeViewController
         mConnectButton.setClickable(false);
         mGatewaySplash.setClickable(false);
 
-        mConnectButton.animate().setDuration(300).alpha(0f).withEndAction((() -> initSplashLoading()));
+        mConnectButton.animate().setDuration(300).alpha(0f).withEndAction((this::initSplashLoading));
         mGatewaySplash.animate().setDuration(300).alpha(0f);
     }
 
@@ -262,7 +264,7 @@ class homeViewController
             new Thread(){
                 public void run(){
                     AppCompatActivity temp_context = mContext;
-                    while (!orbotLocalConstants.sIsTorInitialized || !orbotLocalConstants.sNetworkState){
+                    while (!orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState){
                         try
                         {
                             sleep(1000);
@@ -298,8 +300,7 @@ class homeViewController
         mTopBar.setAlpha(1);
         if(mSplashScreen.getAlpha()>=1)
         {
-            disableSplash = true;
-            mSplashScreen.animate().setDuration(300).setStartDelay(500).alpha(0).withEndAction((() -> triggerPostUI()));
+            mSplashScreen.animate().setDuration(300).setStartDelay(500).alpha(0).withEndAction((this::triggerPostUI));
             initPostUI(false);
         }
     }
@@ -326,9 +327,7 @@ class homeViewController
         final View popupView = layoutInflater.inflate(R.layout.popup_menu, null);
 
 
-        int height = 0;
-
-        height = helperMethod.getScreenHeight(mContext)*90 /100;
+        int height = helperMethod.getScreenHeight(mContext)*90 /100;
 
         popupWindow = new PopupWindow(
                 popupView,
@@ -346,16 +345,15 @@ class homeViewController
         }
         popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.END,0,0);
 
+        if(!status.sCharacterEncoding){
+            popupView.findViewById(R.id.menu30).setVisibility(View.GONE);
+        }
+
         ImageButton back = popupView.findViewById(R.id.menu22);
-        ImageButton forward = popupView.findViewById(R.id.menu23);
         ImageButton close = popupView.findViewById(R.id.menu20);
         CheckBox desktop = popupView.findViewById(R.id.menu27);
         desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
 
-        if(!canGoForward){
-           forward.setColorFilter(Color.argb(255, 191, 191, 191));
-           forward.setEnabled(false);
-        }
         if(!canGoBack){
            back.setEnabled(false);
            back.setColorFilter(Color.argb(255, 191, 191, 191));
@@ -444,7 +442,6 @@ class homeViewController
         handlerLocalUrl = url;
 
         if(searchBarUpdateHandler.hasMessages(100)){
-            delay=0;
             return;
         }
 
@@ -478,7 +475,7 @@ class homeViewController
 
         if(url.length()<=300){
             url = removeEndingSlash(url);
-            mSearchbar.setText(helperMethod.urlDesigner(url));
+            mSearchbar.setText(helperMethod.urlDesigner(url, mContext));
             mSearchbar.selectAll();
 
             if(isTextSelected){
@@ -502,7 +499,6 @@ class homeViewController
     }
 
     void onNewTab(boolean keyboard,boolean isKeyboardOpen){
-        onUpdateSearchBar(strings.HOME_BLANK_PAGE,false);
         if(keyboard){
 
             if(!isKeyboardOpen){

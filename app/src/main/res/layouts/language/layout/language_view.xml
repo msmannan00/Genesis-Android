@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/c_background"
         tools:context="com.darkweb.genesissearchengine.appManager.languageManager.languageController">
 
         <!-- Title Header -->
@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:elevation="7dp"
-            android:background="@color/white"
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal"
@@ -33,19 +32,20 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onClose"
                 android:src="@xml/ic_arrow_back"
-                android:tint="@color/black" />
+                android:tint="@color/c_navigation_tint" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="-3dp"
+                android:onClick="onClose"
                 android:layout_weight="40"
                 android:gravity="center_vertical|start"
                 android:text="@string/LANGUAGE_TITLE"
-                android:textColor="@color/text_color_v1"
+                android:textColor="@color/c_text_v1"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
 
@@ -59,132 +59,149 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/c_background"
             android:orientation="vertical"
             android:paddingBottom="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/c_view_divier_background" />
+
             <Button
                 android:id="@+id/langEnglish"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
+                android:background="@xml/gx_ripple_gray"
                 android:gravity="start|center_vertical"
                 android:onClick="onMenuItemInvoked"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white_dark" />
+                android:background="@color/c_view_divier_background" />
 
             <Button
                 android:id="@+id/pLangGerman"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
+                android:background="@xml/gx_ripple_gray"
                 android:gravity="start|center_vertical"
                 android:onClick="onMenuItemInvoked"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_1"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white_dark" />
+                android:background="@color/c_view_divier_background" />
 
             <Button
                 android:id="@+id/pLangItalian"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
+                android:background="@xml/gx_ripple_gray"
                 android:gravity="start|center_vertical"
                 android:onClick="onMenuItemInvoked"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_2"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white_dark" />
+                android:background="@color/c_view_divier_background" />
 
             <Button
                 android:id="@+id/pLangPorteguse"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
+                android:background="@xml/gx_ripple_gray"
                 android:gravity="start|center_vertical"
                 android:onClick="onMenuItemInvoked"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_3"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white_dark" />
+                android:background="@color/c_view_divier_background" />
 
             <Button
                 android:id="@+id/pLangRussian"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
+                android:background="@xml/gx_ripple_gray"
                 android:gravity="start|center_vertical"
                 android:onClick="onMenuItemInvoked"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_4"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white_dark" />
+                android:background="@color/c_view_divier_background" />
 
             <Button
                 android:id="@+id/pLangUkarian"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
+                android:background="@xml/gx_ripple_gray"
                 android:gravity="start|center_vertical"
                 android:onClick="onMenuItemInvoked"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_5"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white_dark" />
+                android:background="@color/c_view_divier_background" />
 
             <Button
                 android:id="@+id/pLangChinese"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
+                android:background="@xml/gx_ripple_gray"
                 android:gravity="start|center_vertical"
                 android:onClick="onMenuItemInvoked"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_6"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/c_view_divier_background" />
             <!-- Title Header -->
 
         </LinearLayout>

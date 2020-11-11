@@ -1,18 +1,13 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.notificationManager;
 
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
-
 import java.util.Arrays;
-import java.util.Collections;
-
-import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
+import java.util.List;
 
 class settingNotificationModel
 {
@@ -29,7 +24,7 @@ class settingNotificationModel
 
     /*Helper Methods*/
 
-    public void updateLocalNotification(boolean pStatus){
+    private void updateLocalNotification(boolean pStatus){
 
         int mStatus = pStatus ? 1 : 0;
         status.sBridgeNotificationManual = mStatus;
@@ -46,5 +41,11 @@ class settingNotificationModel
         }
     }
 
+    public Object onTrigger(settingNotificationEnums.eNotificationModel pCommands, List<Object> pData){
+        if(pCommands.equals(settingNotificationEnums.eNotificationModel.M_UPDATE_LOCAL_NOTIFICATION)){
+            updateLocalNotification((boolean)pData.get(0));
+        }
+        return null;
+    }
 
 }

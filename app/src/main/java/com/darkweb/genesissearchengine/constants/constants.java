@@ -15,7 +15,6 @@ public class constants
 
     public static final String CONST_GENESIS_UPDATE_URL = "https://boogle.store/manual?abi=";
     public static final String CONST_PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
-
     public static final String CONST_BACKEND_GENESIS_URL = "http://boogle.store/q=$s";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com/q=$s";
@@ -32,6 +31,14 @@ public class constants
     public static final boolean CONST_PROXY_DO_NOT_TRACK_HEADER_ENABLED = false;
     public static final int CONST_PROXY_DO_NOT_TRACK_HEADER_VALUE = 1;
 
+    /*HISTORY CONSTANTS*/
+
+    public static final String HISTORY_LOAD_MORE = "loading_more";
+
+    /*BOOKMARK CONSTANTS*/
+
+    public static final String BOOKMARK_LOAD_MORE = "loading_more";
+
     /*MENU CONSTANTS*/
 
     public static final int CONST_LIST_HISTORY = 1;
@@ -43,6 +50,8 @@ public class constants
     public static final int CONST_FETCHABLE_LIST_SIZE =100;
     public static final int CONST_MAX_BOOKMARK_SIZE =500;
     public static final String CONST_DATABASE_NAME ="genesis_dbase";
+    public static final String CONST_PERCENTAGE_SIGN ="%";
+    public static final String CONST_PERCENTAGE_SIGN_100 ="100%";
 
     /*ADMOB CONSTANTS*/
 

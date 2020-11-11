@@ -26,7 +26,7 @@
             android:paddingStart="15dp"
             android:text="@string/ALERT_REPORT_URL"
             android:textAlignment="textStart"
-            android:textColor="@color/secondary"
+            android:textColor="@color/c_text_setting_heading_v2"
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:paddingEnd="10dp"
             android:text="@string/ALERT_REPORT_URL_INFO"
             android:textAlignment="textStart"
-            android:textColor="#242B64"
+            android:textColor="@color/c_alert_text"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="35dp"
-            android:background="@color/holo_gray_light"
+            android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -74,11 +74,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_right"
+                android:background="@xml/ax_ripple_default_round_left"
                 android:padding="0dp"
                 android:text="@string/ALERT_DISMISS"
                 android:textAllCaps="false"
-                android:textColor="@color/text_color_v3"
+                android:textColor="@color/c_button_text_v2"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -86,7 +86,7 @@
                 android:id="@+id/pDividerHorizontal"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -96,11 +96,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_left"
+                android:background="@xml/ax_ripple_default_round_right"
                 android:padding="0dp"
                 android:text="@string/ALERT_REPORT"
                 android:textAllCaps="false"
-                android:textColor="@color/cursor_blue"
+                android:textColor="@color/c_button_text_v3"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>

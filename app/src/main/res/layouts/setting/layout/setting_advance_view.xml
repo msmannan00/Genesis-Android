@@ -1,0 +1,446 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    tools:context="com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController">
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                <!-- Title Header -->
+                <LinearLayout
+                    android:id="@+id/pHeaderContainerTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:clickable="true"
+                    android:paddingEnd="7dp"
+                    android:paddingStart="5dp"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    tools:ignore="RtlSymmetry">
+
+                    <ImageButton
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="1dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onClose"
+                        android:src="@xml/ic_arrow_back"
+                        android:tint="@color/c_navigation_tint" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="-3dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="onClose"
+                        android:gravity="center_vertical|start"
+                        android:text="@string/SETTING_ADVANCE_HEADER"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/c_view_divier_background" />
+
+                <!-- Title Header -->
+
+                <LinearLayout
+                    android:id="@+id/pOption1"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onRestoreTabs"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_RESTORE_TAB"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_RESTORE_TAB_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/pRestoreTabs"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="11dp"
+                        android:background="@android:color/transparent"
+                        android:theme="@style/SCBSwitch"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/c_text_setting_heading"
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="00dp"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/SETTING_ADVANCE_DATA_SAVER"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pOption3"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:baselineAligned="false">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical"
+                        tools:ignore="UselessParent">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_SHOW_IMAGES"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_WEB_FONTS_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@xml/sx_border_left"
+                    android:layout_marginStart="15dp"
+                    android:paddingStart="5dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:background="@xml/gx_ripple_gray"
+                        android:clickable="false"
+                        android:id="@+id/pAdvanceOption1"
+                        android:onClick="onShowImages"
+                        android:orientation="horizontal"
+                        android:weightSum="7">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="6"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:alpha="0.7"
+                                android:background="@android:color/transparent"
+                                android:clickable="false"
+                                android:padding="0dp"
+                                android:paddingStart="5dp"
+                                android:text="@string/SETTING_ADVANCE_IMAGE_OPTION_1"
+                                android:textAlignment="textStart"
+                                android:textAllCaps="false"
+                                android:textColor="@color/c_text_v1"
+                                android:textSize="15sp"
+                                tools:ignore="RtlSymmetry" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/pAdvanceImageOption1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:layout_weight="1"
+                            android:layout_marginStart="50dp"
+                            android:background="@android:color/transparent"
+                            android:buttonTint="@color/c_radio_tint"
+                            android:src="@xml/ic_arrow_right"
+                            android:contentDescription="@string/GENERAL_TODO" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/c_view_divier_background_inner" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:background="@xml/gx_ripple_gray"
+                        android:id="@+id/pAdvanceOption2"
+                        android:onClick="onShowImages"
+                        android:clickable="false"
+                        android:orientation="horizontal"
+                        android:weightSum="7">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="6"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <Button
+                                android:layout_marginStart="15dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.7"
+                                android:background="@android:color/transparent"
+                                android:clickable="false"
+                                android:padding="0dp"
+                                android:paddingStart="5dp"
+                                android:text="@string/SETTING_ADVANCE_IMAGE_OPTION_3"
+                                android:textColor="@color/c_text_v1"
+                                android:textAlignment="textStart"
+                                android:textAllCaps="false"
+                                android:textSize="15sp"
+                                tools:ignore="RtlSymmetry" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/pAdvanceImageOption2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:layout_weight="1"
+                            android:layout_marginStart="50dp"
+                            android:background="@android:color/transparent"
+                            android:buttonTint="@color/c_radio_tint"
+                            android:src="@xml/ic_arrow_right"
+                            android:contentDescription="@string/GENERAL_TODO" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pOption4"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="onShowWebFonts"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_WEB_FONTS"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_WEB_FONTS_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/pShowWebFonts"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:theme="@style/SCBSwitch"
+                        android:layout_marginEnd="11dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/c_text_setting_heading"
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="00dp"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/SETTING_ADVANCE_MEDIA_SUB_HEADER"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pOption5"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:onClick="onAllowAutoPlay"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_MEDIA"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_MEDIA_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/pAllowAutoPlay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:theme="@style/SCBSwitch"
+                        android:layout_marginEnd="11dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+            </LinearLayout>
+        </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

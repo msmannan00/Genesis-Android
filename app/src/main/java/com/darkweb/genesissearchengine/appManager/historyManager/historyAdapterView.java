@@ -40,7 +40,7 @@ public class historyAdapterView
         pView.getLocationOnScreen(location);
         int y = location[1];
         int height = helperMethod.getScreenHeight(mContext);
-        int m_offset_height = 0;
+        int m_offset_height;
         if(y + helperMethod.pxFromDp(300) >height){
             m_offset_height = helperMethod.pxFromDp(203);
         }
@@ -59,15 +59,16 @@ public class historyAdapterView
 
     private void clearLongSelectedURL(ImageButton pPopupMenu, ImageView pLogoImage, View mItemView){
         mItemView.setPressed(false);
-        pPopupMenu.setVisibility(View.VISIBLE);
-        pPopupMenu.animate().setDuration(150).alpha(1);
+        pPopupMenu.setVisibility(View.GONE);
+        pPopupMenu.animate().setDuration(150).alpha(0);
         pPopupMenu.setClickable(true);
-        pLogoImage.setAlpha(1f);
+        pLogoImage.setAlpha(0f);
         pLogoImage.animate().cancel();
+        pLogoImage.setVisibility(View.GONE);
         pLogoImage.animate().setDuration(150).alpha(0).withEndAction(() -> pLogoImage.setVisibility(View.GONE));
     }
 
-    public void onSelectView(View pItemView, View pMenuItem, ImageView pLogoImage, boolean pIsForced, boolean pVibrate){
+    public void onSelectView(View pItemView, ImageView pLogoImage, boolean pIsForced, boolean pVibrate){
         pItemView.setPressed(false);
         int speed = 150;
         if(pIsForced){
@@ -83,7 +84,7 @@ public class historyAdapterView
         pLogoImage.animate().setDuration(speed).alpha(1);
     }
 
-    public void onClearHighlight( View pItemView, View pMenuItem, ImageView pLogoImage, boolean pIsForced)
+    public void onClearHighlight(View pItemView, ImageView pLogoImage, boolean pIsForced)
     {
         try {
             if(pLogoImage.getAlpha()>0){
@@ -109,10 +110,10 @@ public class historyAdapterView
             clearLongSelectedURL((ImageButton)pData.get(0), (ImageView)pData.get(1), (View)pData.get(2));
         }
         if(pCommands == historyEnums.eHistoryViewAdapterCommands.M_SELECT_VIEW){
-            onSelectView((View)pData.get(0), (View)pData.get(1), (ImageView)pData.get(2), (Boolean) pData.get(3), (Boolean) pData.get(4));
+            onSelectView((View)pData.get(0), (ImageView)pData.get(2), (Boolean) pData.get(3), (Boolean) pData.get(4));
         }
         if(pCommands == historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT){
-            onClearHighlight((View)pData.get(0), (View)pData.get(1), (ImageView)pData.get(2), (Boolean) pData.get(3));
+            onClearHighlight((View)pData.get(0), (ImageView)pData.get(2), (Boolean) pData.get(3));
         }
         return null;
     }

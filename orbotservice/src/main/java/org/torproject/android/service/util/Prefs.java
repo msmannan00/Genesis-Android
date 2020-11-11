@@ -29,7 +29,7 @@ public class Prefs {
 
     private static void validatePrefs(){
         if(prefs==null){
-            prefs = getSharedPrefs(orbotLocalConstants.sHomeContext.get());
+            prefs = getSharedPrefs(orbotLocalConstants.mHomeContext.get());
         }
     }
 

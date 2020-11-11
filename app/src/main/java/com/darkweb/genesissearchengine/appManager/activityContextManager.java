@@ -3,6 +3,8 @@ package com.darkweb.genesissearchengine.appManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
+import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 
 public class activityContextManager
@@ -16,11 +18,13 @@ public class activityContextManager
     }
 
     /*Private Contexts*/
-    private historyController history_controller;
-    private bookmarkController bookmark_controller;
-    private homeController home_controller;
-    private tabController tab_controller;
-    private android.app.Activity sCurrentActivity = null;
+    private historyController pHistoryController;
+    private bookmarkController pBookmarkController;
+    private homeController pHomeController;
+    private tabController pTabController;
+    private android.app.Activity pCurrentActivity = null;
+    private settingController pSettingController;
+    private orbotLogController pOrbotLogController;
 
     /*Initialization*/
 
@@ -30,37 +34,51 @@ public class activityContextManager
 
     /*List ContextGetterSetters*/
     public historyController getHistoryController(){
-        return history_controller;
+        return pHistoryController;
     }
     public void setHistoryController(historyController history_controller){
-        this.history_controller = history_controller;
+        this.pHistoryController = history_controller;
     }
 
     public bookmarkController getBookmarkController(){
-        return bookmark_controller;
+        return pBookmarkController;
     }
     public void setBookmarkController(bookmarkController bookmark_controller){
-        this.bookmark_controller = bookmark_controller;
+        this.pBookmarkController = bookmark_controller;
     }
 
     public homeController getHomeController(){
-        return home_controller;
+        return pHomeController;
     }
     public void setHomeController(homeController home_controller){
-        this.home_controller = home_controller;
+        this.pHomeController = home_controller;
     }
 
     public tabController getTabController(){
-        return tab_controller;
+        return pTabController;
     }
     public void setTabController(tabController tab_controller){
-        this.tab_controller = tab_controller;
+        this.pTabController = tab_controller;
     }
 
-    public void setCurrentActivity(android.app.Activity sCurrentActivity){
-        this.sCurrentActivity = sCurrentActivity;
+    public orbotLogController getOrbotLogController(){
+        return pOrbotLogController;
+    }
+    public void setOrbotLogController(orbotLogController pOrbotLogController){
+        this.pOrbotLogController = pOrbotLogController;
+    }
+
+    public settingController getSettingController(){
+        return pSettingController;
+    }
+    public void setSettingController(settingController pSettingController){
+        this.pSettingController = pSettingController;
+    }
+
+    public void setCurrentActivity(android.app.Activity pCurrentActivity){
+        this.pCurrentActivity = pCurrentActivity;
     }
     public android.app.Activity setCurrentActivity(){
-        return sCurrentActivity;
+        return pCurrentActivity;
     }
 }

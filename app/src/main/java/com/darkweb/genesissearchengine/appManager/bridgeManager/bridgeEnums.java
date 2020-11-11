@@ -4,6 +4,11 @@ public class bridgeEnums
 {
     /*Settings Manager*/
     public enum eBridgeViewCommands {
-        S_INIT_VIEWS
+        M_INIT_VIEWS
     }
+
+    public enum eBridgeModelCommands {
+        M_REQUEST_BRIDGE, M_CUSTOM_BRIDGE, M_MEEK_BRIDGE, M_OBFS_CHECK
+    }
+
 }

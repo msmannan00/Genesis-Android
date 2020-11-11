@@ -27,7 +27,7 @@
             android:paddingStart="15dp"
             android:text="@string/ALERT_CLEAR_BOOKMARK"
             android:textAlignment="textStart"
-            android:textColor="#008080"
+            android:textColor="@color/c_text_setting_heading_v2"
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
             android:layout_marginTop="5dp"
             android:alpha="0.6"
             android:paddingEnd="10dp"
-            android:textColor="#242B64"
+            android:textColor="@color/c_alert_text"
             android:text="@string/ALERT_CLEAR_BOOKMARK_INFO"
             android:textAlignment="textStart"
             android:paddingStart="15dp"
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="25dp"
-            android:background="@color/holo_gray_light"
+            android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -70,7 +70,7 @@
             android:orientation="horizontal">
             <Button
                 android:id="@+id/pDismiss"
-                android:textColor="@color/text_color_v3"
+                android:textColor="@color/c_button_text_v2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="0dp"
@@ -85,14 +85,14 @@
                 android:id="@+id/pDividerHorizontal"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
             <Button
                 android:id="@+id/pNext"
-                android:textColor="#cc3300"
+                android:textColor="@color/c_button_warning"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@xml/ax_ripple_default_round_left"

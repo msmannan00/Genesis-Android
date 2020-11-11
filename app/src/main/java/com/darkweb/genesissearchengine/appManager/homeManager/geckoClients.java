@@ -2,17 +2,24 @@ package com.darkweb.genesissearchengine.appManager.homeManager;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.io.File;
+import java.net.URI;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
-import static org.mozilla.geckoview.StorageController.ClearFlags.ALL;
+import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
+import static org.mozilla.geckoview.StorageController.ClearFlags.COOKIES;
+import static org.mozilla.geckoview.StorageController.ClearFlags.DOM_STORAGES;
+import static org.mozilla.geckoview.StorageController.ClearFlags.IMAGE_CACHE;
+import static org.mozilla.geckoview.StorageController.ClearFlags.NETWORK_CACHE;
+import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
+import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
+import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
 
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
@@ -29,6 +36,7 @@ class geckoClients
     private int mSessionID=0;
     private int mGlobalSessionCounter=0;
 
+
     private eventObserver.eventListener event;
     private AppCompatActivity context;
 
@@ -38,19 +46,18 @@ class geckoClients
         this.event = event;
         mGlobalSessionCounter+=1;
         mSessionID = mGlobalSessionCounter;
-        runtimeSettings(context);
+        initRuntimeSettings(context);
 
         if(!isForced && geckoView.getSession()!=null && geckoView.getSession().isOpen()){
             mSession = (geckoSession) geckoView.getSession();
         }
         else {
             geckoView.releaseSession();
-            Log.i("GCHECKS:","GCHECKS:"+mGlobalSessionCounter);
-            mSession = new geckoSession(new geckoViewClientCallback(),mGlobalSessionCounter,context);
+            mSession = new geckoSession(new geckoViewClientCallback(),mGlobalSessionCounter,context, geckoView);
             mSession.open(mRuntime);
-            mSession.getSettings().setUseTrackingProtection(true);
+            mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
             mSession.getSettings().setFullAccessibilityTree(true);
-            mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
+            mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
             mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
             geckoView.releaseSession();
             geckoView.setSession(mSession);
@@ -67,13 +74,21 @@ class geckoClients
         return mSession.getUserAgentMode();
     }
 
-    private void runtimeSettings(AppCompatActivity context){
+    public void initRuntimeSettings(AppCompatActivity context){
         if(mRuntime==null){
             mRuntime = GeckoRuntime.getDefault(context);
+            mRuntime.getSettings().setAboutConfigEnabled(true);
+            mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
+            mRuntime.getSettings().setRemoteDebuggingEnabled(false);
             mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
+            mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
-            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
-            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
+            if(status.sSettingTrackingProtection){
+                mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
+                mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
+            }else {
+                mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.STRICT);
+            }
         }
     }
 
@@ -81,12 +96,25 @@ class geckoClients
         return status.sSettingCookieStatus;
     }
 
-    void updateCookies(){
-        mRuntime.getSettings().getContentBlocking().setCookieBehavior(status.sSettingCookieStatus);
-        onReload();
-    }
+    void updateSetting(){
+        mRuntime.getSettings().setRemoteDebuggingEnabled(false);
+        mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
+        mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
+        mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
+        mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
+        if(status.sSettingTrackingProtection){
+            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
+            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
+        }else {
+            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.STRICT);
+        }
 
-    void onClose(){
+
+        mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
+        mSession.getSettings().setFullAccessibilityTree(true);
+        mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
+        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        onReload();
     }
 
     void initSession(geckoSession mSession){
@@ -118,8 +146,24 @@ class geckoClients
         mSession.loadUri(url);
     }
 
+    void onClearSiteData(){
+        mRuntime.getStorageController().clearData(SITE_SETTINGS);
+        mRuntime.getStorageController().clearData(SITE_DATA);
+    }
+
     void onClearSession(){
-        mRuntime.getStorageController().clearData(ALL);
+        mRuntime.getStorageController().clearData(AUTH_SESSIONS);
+        mRuntime.getStorageController().clearData(PERMISSIONS);
+    }
+
+    void onClearCache(){
+        mRuntime.getStorageController().clearData(NETWORK_CACHE);
+        mRuntime.getStorageController().clearData(IMAGE_CACHE);
+        mRuntime.getStorageController().clearData(DOM_STORAGES);
+    }
+
+    void onClearCookies(){
+        mRuntime.getStorageController().clearData(COOKIES);
     }
 
     void onBackPressed(boolean isFinishAllowed){

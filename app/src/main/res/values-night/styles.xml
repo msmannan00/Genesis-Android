@@ -1,0 +1,93 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/ease_blue</item>
+        <item name="colorPrimaryDark">@color/landing_ease_blue</item>
+        <item name="colorAccent">@color/ease_blue</item>
+        <item name="android:windowBackground">@xml/hox_splash_gradient</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:popupAnimationStyle">@null</item>
+    </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/c_switch_theme</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1</item>
+        <item name="android:colorForeground">#f1f1f1</item>
+    </style>
+
+    <style name="WindowAnimationFadeInOut">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="dialiog_animation">
+        <item name="android:windowEnterAnimation">@anim/popup_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_anim_out</item>
+    </style>
+
+    <style name="noAnimTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:popupAnimationStyle">@null</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="android:popupAnimationStyle">@null</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:popupAnimationStyle">@null</item>
+   </style>
+
+    <style name="AppTheme.popupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground" >@android:color/white</item>
+        <item name="android:layout_marginTop" >1000dp</item>
+        <item name="android:popupAnimationStyle">@null</item>
+    </style>
+
+    <style name="popup_window_animation">
+        <item name="android:windowEnterAnimation">@anim/popup_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_anim_out</item>
+    </style>
+
+    <style name="CFDialog.Title">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/cfdialog_title_font_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="CFDialog.Message">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/cfdialog_desc_font_color</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="CFDialog.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+</resources>

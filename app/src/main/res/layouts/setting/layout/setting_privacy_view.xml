@@ -1,0 +1,506 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    tools:context="com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController">
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                <!-- Title Header -->
+                <LinearLayout
+                    android:id="@+id/pHeaderContainerTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:clickable="true"
+                    android:paddingEnd="7dp"
+                    android:paddingStart="5dp"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    tools:ignore="RtlSymmetry">
+
+                    <ImageButton
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="1dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onClose"
+                        android:src="@xml/ic_arrow_back"
+                        android:tint="@color/c_navigation_tint" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="onClose"
+                        android:layout_marginTop="-3dp"
+                        android:gravity="center_vertical|start"
+                        android:text="@string/SETTING_PRIVACY_HEADER"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/c_view_divier_background" />
+
+                <!-- Title Header -->
+
+                <LinearLayout
+                    android:id="@+id/pOption0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:onClick="onJavaScript"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_JAVASCRIPT"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_JAVASCRIPT_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/pJavascript"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:theme="@style/SCBSwitch"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background"/>
+
+                <LinearLayout
+                    android:id="@+id/pOption1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:minHeight="65dp"
+                    android:paddingBottom="10dp"
+                    android:onClick="onDoNotTrack"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_DONOT_TRACK"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_DONOT_TRACK_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/pDoNotTrack"
+                        android:theme="@style/SCBSwitch"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background"/>
+
+                <LinearLayout
+                    android:id="@+id/pOption2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="65dp"
+                    android:paddingBottom="10dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:onClick="onTrackingProtection"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_TRACKING_PROTECTION"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_TRACKING_PROTECTION_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/pTrackingProtection"
+                        android:theme="@style/SCBSwitch"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background"/>
+
+                <LinearLayout
+                    android:id="@+id/pOption3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:orientation="vertical"
+                        tools:ignore="UselessParent">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_COOKIES"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:layout_marginEnd="10dp"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_COOKIES_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:background="@xml/sx_border_left"
+                            android:paddingStart="5dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_height="wrap_content"
+                            tools:ignore="RtlSymmetry">
+
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:onClick="onCookies"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption1"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:paddingRight="15dp"
+                                    android:clickable="false"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:textColor="@color/c_text_v1"
+                                    android:layout_marginRight="10dp"
+                                    android:paddingLeft="15dp"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION1"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:onClick="onCookies"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption2"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:paddingRight="15dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:layout_marginRight="10dp"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:paddingLeft="15dp"
+                                    android:clickable="false"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION2"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:onClick="onCookies"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption3"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:clickable="false"
+                                    android:paddingRight="15dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:layout_marginRight="10dp"
+                                    android:paddingLeft="15dp"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION3"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:onClick="onCookies"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption4"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:clickable="false"
+                                    android:paddingRight="15dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:layout_marginRight="10dp"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:paddingLeft="15dp"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION4"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pOption4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:minHeight="65dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="5dp"
+                    android:onClick="onClearPrivateData"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_PRIVACY_CLEAR_PRIVATE_DATA"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="@string/SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:id="@+id/pClearDataOnExit"
+                        android:layout_marginTop="10dp"
+                        android:theme="@style/SCBSwitch"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background"/>
+
+            </LinearLayout>
+        </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

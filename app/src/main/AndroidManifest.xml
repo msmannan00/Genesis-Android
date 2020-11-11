@@ -28,58 +28,89 @@
         <!-- Activities -->
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.orbotManager.orbotController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:launchMode="singleTop" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:label="@string/SETTING_HEADER"
                 android:windowSoftInputMode="adjustNothing" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.historyManager.historyController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:windowSoftInputMode="adjustNothing" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.languageManager.languageController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:label="@string/SETTING_HEADER"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager.settingAccessibilityController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:label="@string/SETTING_HEADER"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.settingManager.clearManager.settingClearController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:label="@string/SETTING_HEADER"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController"
+            android:configChanges="uiMode"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController"
+            android:configChanges="uiMode"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustNothing" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.landingManager.landingController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:windowSoftInputMode="adjustNothing" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize">
@@ -150,6 +181,15 @@
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value="ca-app-pub-5074525529134731~2926711128" />
+
+        <service
+            android:name="com.darkweb.genesissearchengine.helperManager.autoFillService"
+            android:label="Genesis | Secure Autofill"
+            android:permission="android.permission.BIND_AUTOFILL_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.autofill.AutofillService" />
+            </intent-filter>
+        </service>
 
         <service
                 android:name="com.darkweb.genesissearchengine.helperManager.downloadFileService"

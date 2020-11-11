@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/c_background">
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingBottom="50dp"
                 android:layout_height="wrap_content">
@@ -18,7 +17,6 @@
             <!-- Title Header -->
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:layout_marginBottom="0dp"
                     android:orientation="horizontal"
                     android:layout_height="52dp">
@@ -29,12 +27,12 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
                     android:layout_weight="2.5"
-                    android:tint="@color/black"
+                    android:tint="@color/c_navigation_tint"
                     android:src="@xml/ic_arrow_back"
                     android:background="@xml/gx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"/>
                 <TextView
-                        android:textColor="@color/text_color_v1"
+                        android:textColor="@color/c_text_v1"
                         android:onClick="onClose"
                         android:textSize="17sp"
                         android:layout_width="0dp"
@@ -43,7 +41,6 @@
                         android:layout_marginTop="-3dp"
                         android:gravity="center_vertical|start"
                         android:textStyle="bold"
-                        android:layout_marginStart="10dp"
                         android:text="@string/ORBOT_HEADER"
                         />
             </LinearLayout>
@@ -51,20 +48,18 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/white_dark" />
+                    android:background="@color/c_view_divier_background" />
 
             <!-- Title Header -->
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/c_background"
                     android:layout_marginBottom="0dp"
                     android:orientation="horizontal"
                     android:layout_height="40dp">
                 <TextView
-                        android:textColor="@color/cursor_blue"
+                        android:textColor="@color/c_text_setting_heading"
                         android:textSize="16sp"
                         android:layout_width="0dp"
                         android:textStyle="bold"
@@ -88,6 +83,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
+                        android:textColor="@color/c_text_v1"
                         android:background="@color/clear_alpha"
                         android:layout_marginStart="20dp"
                         android:text="@string/ORBOT_DESCRIPTION"
@@ -107,6 +103,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
+                        android:textColor="@color/c_text_v1"
                         android:layout_marginStart="20dp"
                         android:textStyle="bold"
                         android:text="@string/ORBOT_TITLE"
@@ -115,9 +112,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@color/white_dark"/>
+                android:background="@color/c_view_divier_background"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@xml/gx_ripple_blue"
@@ -135,6 +130,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="40"
+                    android:textColor="@color/c_text_v1"
                     android:layout_marginStart="20dp"
                     android:text="@string/ORBOT_SETTING_ENABLE_VPN"
                     />
@@ -146,14 +142,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd = "10dp"
                     android:layout_weight="40"
+                    android:theme="@style/SCBSwitch"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_height="1dp"
-                android:background="@color/white_dark"/>
+                android:background="@color/c_view_divier_background"/>
                 <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@xml/gx_ripple_blue"
@@ -171,6 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="40"
+                    android:textColor="@color/c_text_v1"
                     android:layout_marginStart="20dp"
                     android:text="@string/ORBOT_SETTING_BRIDGE_ENABLE"
                     />
@@ -181,15 +177,14 @@
                         android:layout_marginEnd = "10dp"
                         android:clickable="false"
                         android:layout_height="wrap_content"
+                        android:theme="@style/SCBSwitch"
                         android:layout_weight="8"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@color/white_dark"/>
+                android:background="@color/c_view_divier_background"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,13 +223,14 @@
                         android:src="@xml/ic_gateway_splash"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:contentDescription="@string/GENERAL_TODO"
-                        app:tint="@color/black" />
+                        app:tint="@color/c_navigation_tint" />
 
                     <TextView
                         android:textSize="14sp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
+                        android:textColor="@color/c_text_v1"
                         android:layout_marginStart="10dp"
                         android:text="@string/ORBOT_SETTING_CUSTOM_BRIDGE"
                         />
@@ -250,7 +246,7 @@
                         android:src="@xml/ic_arrow_right"
                         android:layout_marginEnd="12dp"
                         android:contentDescription="@string/GENERAL_TODO"
-                        app:tint="@color/black" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -272,7 +268,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="40"
                             android:layout_marginStart="8dp"
-                            android:textColor="#595959"
+                            android:textColor="@color/c_text_v1"
                             android:textStyle="bold"
                             android:text="@string/ORBOT_SETTING_WARNING"
                             />
@@ -282,18 +278,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:textColor="@color/holo_dark_gray"
+                            android:textColor="@color/c_text_v2"
                             android:paddingEnd="8dp"
                             android:text="@string/ORBOT_BRIDGE_WARNING"
                             tools:ignore="RtlSymmetry" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/white_dark"/>
 
             </LinearLayout>
 

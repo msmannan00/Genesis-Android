@@ -12,10 +12,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.darkweb.genesissearchengine.appManager.historyManager.bookmarkEnums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -57,24 +58,26 @@ class bookmarkViewController
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             }
             else {
-                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.white));
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
             }
         }
     }
 
     private void updateIfListEmpty(int pSize,int pDuration){
         if(pSize>0){
-            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
             mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
             mClearButton.setText(strings.BOOKMARK_CLEAR_BOOKMARK);
             mClearButton.setClickable(true);
         }
         else {
-            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             mEmptyListNotification.animate().setDuration(pDuration).alpha(1f);
 
             mClearButton.animate().setDuration(pDuration).alpha(0.4f);
@@ -82,10 +85,13 @@ class bookmarkViewController
             mMenuButton.animate().setDuration(pDuration).alpha(0f);
 
             mClearButton.setEnabled(false);
-            mClearButton.setClickable(false);
             mSearchButton.setClickable(false);
             mMenuButton.setClickable(false);
+            mSearchInput.setVisibility(View.GONE);
+            mClearButton.setAlpha(0f);
+            mClearButton.animate().setDuration(300).alpha(1);
 
+            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             mClearButton.setText(strings.BOOKMARK_NO_BOOKMARK_FOUND);
             mClearButton.setClickable(false);
         }
@@ -95,14 +101,15 @@ class bookmarkViewController
         if(mPopupWindow !=null && mPopupWindow.isShowing()){
             mPopupWindow.dismiss();
         }
+        onSelectionMenu(true);
     }
 
     private void onSelectionMenu(boolean pStatus){
         if(!pStatus){
             mClearButton.setClickable(false);
             mClearButton.animate().cancel();
-            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
-            mClearButton.animate().setDuration(150).alpha(0.4f);
+            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
+            mClearButton.animate().setDuration(200).alpha(0.4f);
             mMenuButton.setVisibility(View.VISIBLE);
             mSearchButton.setVisibility(View.GONE);
             if (mSearchInput.getVisibility() == View.VISIBLE){
@@ -111,9 +118,9 @@ class bookmarkViewController
         }else {
             if (mSearchInput.getVisibility() != View.VISIBLE) {
                 mClearButton.setClickable(true);
-                mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+                mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
                 mClearButton.animate().cancel();
-                mClearButton.animate().setDuration(150).alpha(1);
+                mClearButton.animate().setDuration(200).alpha(1);
             }
             mMenuButton.setVisibility(View.GONE);
             mSearchButton.setVisibility(View.VISIBLE);
@@ -123,7 +130,6 @@ class bookmarkViewController
     }
 
     private void updateList(){
-        int index = Objects.requireNonNull(mRecycleView.getAdapter()).getItemCount()-1;
         mRecycleView.getAdapter().notifyDataSetChanged();
     }
 
@@ -138,6 +144,7 @@ class bookmarkViewController
         updateIfListEmpty(mRecycleView.getAdapter().getItemCount(),300);
         mSearchInput.clearFocus();
         mSearchInput.setText(strings.GENERIC_EMPTY_STR);
+        mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
     }
 
     private boolean onHideSearch() {
@@ -151,7 +158,7 @@ class bookmarkViewController
             mSearchInput.setText(strings.GENERIC_EMPTY_STR);
             mSearchInput.setClickable(false);
             mClearButton.setClickable(true);
-            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.blue));
+            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
             mClearButton.animate().cancel();
             mClearButton.animate().setDuration(150).alpha(1f);
             return false;
@@ -163,7 +170,7 @@ class bookmarkViewController
             mSearchInput.setClickable(true);
             mClearButton.setClickable(false);
             mSearchInput.requestFocus();
-            mClearButton.setTextColor(mContext.getApplication().getResources().getColor(R.color.holo_dark_gray_alpha));
+            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             mClearButton.animate().cancel();
             mClearButton.animate().setDuration(150).alpha(0.4f);
             InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);

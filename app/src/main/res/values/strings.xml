@@ -34,8 +34,8 @@
     <string name="SETTING_NOTIFICATION" translatable="false">Manage Notification</string>
     <string name="SETTING_NOTIFICATION_INFO" translatable="false">New features, network status</string>
     <string name="SETTING_SEARCH_HEADER" translatable="false">Settings | Search</string>
-    <string name="SETTING_SEARCH_HEADER_1" translatable="false">Supported Search Engines</string>
-    <string name="SETTING_SEARCH_HEADER_2" translatable="false">Search Setting</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="false">Supported search engines</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="false">Search setting</string>
     <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default</string>
     <string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
     <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
@@ -49,15 +49,88 @@
     <string name="SETTING_ACCESSIBILITY" translatable="false">Accessiblity</string>
     <string name="SETTING_ACCESSIBILITY_INFO" translatable="false">Text size, zoom, voice input</string>
     <string name="SETTING_ACCESSIBILITY_HEADER" translatable="false">Settings | Accessibility</string>
-
-    <string name="SETTING_ACCESSIBILITY_FONT" translatable="false">Use system font size</string>
+    <string name="SETTING_CLEAR" translatable="false">Clear Private Data</string>
+    <string name="SETTING_CLEAR_INFO" translatable="false">Tabs, history, bookmark, cookies, cache</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="false">Settings | Clear Data</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="false">Clear Data</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="false">Clear Tabs</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="false">Clear History</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="false">Clear Bookmarks</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="false">Clear Cache</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="false">Clear Suggestions</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="false">Site Data</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="false">Clear Session</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="false">Clear Cookies</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="false">Clear Settings</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="false">Font scaling</string>
     <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="false">Scale web content according to system font size</string>
     <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="false">Enable Zoom</string>
     <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="false">Enable zoom on all webpages</string>
     <string name="SETTING_ACCESSIBILITY_VOICE" translatable="false">Voice input</string>
     <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="false">Allow voice dictation in the URL bar</string>
-    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="false">select custom font scale</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="false">Select custom font scale</string>
     <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="false">Drag the slider until you can read this comfortably. Text should look at least this big after double-tapping on a paragraph</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="false">200%</string>
+    <string name="SETTING_PRIVACY" translatable="false">Privacy</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="false">Tracking, logins, data choices</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="false">Settings | Privacy</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="false">Do Not Track</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="false">Genesis will tell sites that you do not want to be tracked</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="false">Tracking Protection</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="false">Enable tracking protection provided by Genesis</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="false">Cookies</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="false">Select cookies preferences according to your security needs</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="false">Clear private data on exit</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="false">Clear data automatically upon application close</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="false">Enabled</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="false">Enabled, excluding tracking cookies</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="false">Enabled, excluding 3rd party</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="false">Disabled</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="false">Javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="false">Disable java scripting for various script attacks</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="false">Settings | Advance</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="false">Restore tabs</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="false">Don\'t restore adfter quitting browser</string>
+    <string name="SETTING_ADVANCE_CHARARACTER_ENCODING" translatable="false">Character Encoding</string>
+    <string name="SETTING_ADVANCE_CHARARACTER_ENCODING_INFO" translatable="false">Show character encoding in menu</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="false">Show Images</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="false">Always load images of websites</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="false">Show web fonts</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="false">Download remote fonts when loading a page</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="false">Allow autoplay</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="false">Allow media to auto start</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="false">Data saver</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="false">Media</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="false">Always show images</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="false">Only show images over WI-FI</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="false">Block all images</string>
+    <string name="SETTING_ADVANCE" translatable="false">Advanced</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="false">Restore tabs, data saver, developer tools</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="false">Settings | General</string>
+    <string name="SETTING_GENERAL" translatable="false">General</string>
+    <string name="SETTING_GENERAL_INFO" translatable="false">Home, language</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="false">Full-screen browsing</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="false">Hide the browser toolbar when scrolling down a page</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="false">Language</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="false">Change the language of your browser</string>
+    <string name="SETTING_GENERAL_THEME" translatable="false">Theme</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="false">Choose light and dark or theme</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="false">Theme Light</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="false">Theme Dark</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="false">System Default</string>
+    <string name="SETTING_GENERAL_HOME" translatable="false">Home</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="false">New Tab</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="false">Open homepage in new tab</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="false">Clear all tabs</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="false">Clear search history</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="false">Clear marked bookmarks</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="false">Clear browsing cache</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="false">Clear suggestions</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="false">Clear site data</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="false">Clear session data</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="false">Clear browsing cookies</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="false">Clear browser settings</string>
 
     <!-- Alerts -->
     <string name="ALERT_CREATE_BOOKMARK" translatable="false">Bookmark Website</string>
@@ -118,6 +191,8 @@
     <string name="ALERT_LONG_URL_MESSAGE" translatable="false" />
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="false">No application found to handle email</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="false">Download File | </string>
+    <string name="ALERT_DATA_CLEARED" translatable="false">Data Notification</string>
+    <string name="ALERT_DATA_CLEARED_INFO" translatable="false">Private data cleared. Now you can safely continue browsing</string>
 
     <!-- Bridge Settings -->
     <string name="BRIDGE_BASIC_SETTING" translatable="false">Security Settings</string>
@@ -132,8 +207,13 @@
     <string name="BRIDGE_OBFS4" translatable="false">obfs4 (Recommended)</string>
     <string name="BRIDGE_MEEK" translatable="false">Meek-azure (China)</string>
 
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="false">Proxy Logs</string>
+    <string name="ORBOT_LOG_HEADER" translatable="false">Proxy Connectivity Logs</string>
+    <string name="ORBOT_LOG_INFO" translatable="false">If you are facing connectivity issue while starting genesis please copy the following code and find issue online or send it to us so we can examine </string>
 
     <!-- Popup Menu -->
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="false">Orbot Logs</string>
     <string name="HOME_MENU__NEW_TABS" translatable="false">New Tabs</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="false">Close Tab</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="false">Open Recent Tabs</string>
@@ -143,10 +223,16 @@
     <string name="HOME_MENU_SETTING" translatable="false">Settings</string>
     <string name="HOME_MENU_DESKTOP" translatable="false">Desktop Site</string>
     <string name="HOME_MENU_BOOKMARK" translatable="false">Bookmark This Page</string>
-    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="false">Open Bookmarks</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="false">Bookmarks</string>
     <string name="HOME_MENU_REPORT" translatable="false">Report Website</string>
     <string name="HOME_MENU_RATE" translatable="false">Rate This App</string>
     <string name="HOME_MENU_SHARE" translatable="false">Share</string>
+    <string name="HOME_CHARACTER_ENCODING" translatable="false">Character Encoding</string>
+
+    <!-- Tab View -->
+    <string name="TAB_MENU_OPEN_TAB" translatable="false">New tabs</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="false">Close all tabs</string>
+    <string name="TAB_MENU_SETTINGS" translatable="false">Settings</string>
 
     <!-- Shared Recycler View -->
     <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="false">Open tabs</string>
@@ -161,7 +247,6 @@
     <string name="HOME_TITLE" translatable="false">History</string>
     <string name="HOME_CLEAR" translatable="false">Clear</string>
     <string name="HOME_SEARCH_HINT" translatable="false">Search ...</string>
-
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="false">Bookmark</string>
@@ -203,6 +288,7 @@
     <string name="HOME_TAB_TEXT" translatable="false">1</string>
     <string name="HOME_CONNECT" translatable="false">Connect</string>
     <string name="HOME_LOADING" translatable="false">Loading Please Wait</string>
+    <string name="HOME_LOADING_STATIC" translatable="false">~&#160;Genesis on standby at the moment</string>
 
     <!-- Landing Page -->
     <string name="LANDING_BRIDGES_INFO" translatable="false">"Sometimes you need a bridge to get to Tor."</string>
@@ -225,6 +311,11 @@
 
     <!-- Others -->
     <string name="PREF_LANGUAGE" translatable="false">pref_language</string>
+    <string name="invalid_package_signature" translatable="false">Invalid package signature</string>
+    <string name="autofill_sign_in_prompt" translatable="false">Tap to sign in.</string>
+    <string name="autofill_manual_prompt" translatable="false">Tap to manually select data.</string>
+    <string name="security_exception" translatable="false">Web domain security exception.</string>
+    <string name="dal_exception" translatable="false">DAL verification failure.</string>
 
     <string-array name="ARRAY_FONTS" translatable="false">
         <item>55 Percent</item>

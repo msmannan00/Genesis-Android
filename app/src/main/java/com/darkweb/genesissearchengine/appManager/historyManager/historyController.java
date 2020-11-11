@@ -35,8 +35,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-
 import static com.darkweb.genesissearchengine.appManager.historyManager.historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU;
 
 public class historyController extends AppCompatActivity
@@ -59,7 +57,6 @@ public class historyController extends AppCompatActivity
 
     private historyViewController mHistoryViewController;
     private boolean isUpdatingRecyclerView = false;
-    private boolean mIsScrollingUp;
 
     /*Initializations*/
 
@@ -152,8 +149,8 @@ public class historyController extends AppCompatActivity
             if (!hasFocus) {
                 mSearchInput.clearFocus();
             }else {
-                ((historyAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).setFilter(mSearchInput.getText().toString());
-                ((historyAdapter) mRecycleView.getAdapter()).invokeFilter(true);
+                mHistoryAdapter.setFilter(mSearchInput.getText().toString());
+                mHistoryAdapter.invokeFilter(true);
             }
         });
 
@@ -172,8 +169,8 @@ public class historyController extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable editable)
             {
-                ((historyAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).setFilter(mSearchInput.getText().toString());
-                ((historyAdapter) mRecycleView.getAdapter()).invokeFilter(true);
+                mHistoryAdapter.setFilter(mSearchInput.getText().toString());
+                mHistoryAdapter.invokeFilter(true);
             }
         });
     }
@@ -240,7 +237,7 @@ public class historyController extends AppCompatActivity
     }
 
     public void onHideSearch(View view) {
-        ((historyAdapter) mRecycleView.getAdapter()).onUpdateSearchStatus((boolean) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_HIDE_SEARCH, null));
+        mHistoryAdapter.onUpdateSearchStatus((boolean) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_HIDE_SEARCH, null));
     }
 
     public void onLongPressMenu(View view) {
@@ -279,7 +276,7 @@ public class historyController extends AppCompatActivity
 
     public void onclearData(){
         mHistoryModel.clearList();
-        ((historyAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).invokeFilter(true );
+        mHistoryAdapter.invokeFilter(true );
         mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_CLEAR_LIST, null);
         databaseController.getInstance().execSQL(sql.SQL_CLEAR_HISTORY,null);
     }
@@ -295,9 +292,7 @@ public class historyController extends AppCompatActivity
                     dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_LOAD_MORE_HISTORY ,null);
                     try {
                         sleep(500);
-                        activityContextManager.getInstance().getHistoryController().runOnUiThread(() -> {
-                            mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_LOADING_CLEAR, null);
-                        });
+                        activityContextManager.getInstance().getHistoryController().runOnUiThread(() -> mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_LOADING_CLEAR, null));
                         sleep(1000);
                         isUpdatingRecyclerView = false;
                     } catch (InterruptedException e) {

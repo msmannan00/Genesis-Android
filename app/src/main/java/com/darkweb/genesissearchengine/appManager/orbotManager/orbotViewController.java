@@ -6,7 +6,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.List;
@@ -41,34 +43,36 @@ class orbotViewController
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             }
             else {
-                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.white));
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
             }
         }
     }
 
-    private void bridgeSettingsStatus(boolean p_status){
-        updateBridgeViews(p_status, true);
+    private void bridgeSettingsStatus(boolean pStatus){
+        updateBridgeViews(pStatus, true);
     }
 
-    public void updateVPN(boolean p_status){
-        mVpnSwitch.setChecked(p_status);
+    private void updateVPN(boolean pStatus){
+        mVpnSwitch.setChecked(pStatus);
     }
 
-    public void updateBridgeViews(boolean p_status,boolean p_is_invoked){
-        mBridgeSwitch.setChecked(p_status);
-        if(p_status){
+    private void updateBridgeViews(boolean pStatus,boolean pIsInvoked){
+        mBridgeSwitch.setChecked(pStatus);
+        if(pStatus){
             mCustomizableBridgeMenu.setClickable(true);
             mCustomizableBridgeMenu.setAlpha(0);
             mCustomizableBridgeMenu.setVisibility(View.VISIBLE);
-            if(p_is_invoked){
+            if(pIsInvoked){
                 mCustomizableBridgeMenu.animate().alpha(1);
             }else {
                 mCustomizableBridgeMenu.setAlpha(1);
             }
         }else {
             mCustomizableBridgeMenu.setClickable(false);
-            if(p_is_invoked){
+            if(pIsInvoked){
                 mCustomizableBridgeMenu.animate().alpha(0).withEndAction(() -> mCustomizableBridgeMenu.setVisibility(View.GONE));
             }else {
                 mCustomizableBridgeMenu.setAlpha(0);
@@ -77,20 +81,26 @@ class orbotViewController
         }
     }
 
-    private void initViews(boolean p_vpn_status, boolean p_gateway_status){
-        updateBridgeViews(p_gateway_status, false);
-        updateVPN(p_vpn_status);
+    private void initViews(boolean pVPNStatus, boolean pGatewayStatus){
+        updateBridgeViews(pGatewayStatus, false);
+        updateVPN(pVPNStatus);
     }
 
-    public void onTrigger(orbotEnums.eOrbotViewCommands p_commands, List<Object> p_data){
-        if(p_commands == orbotEnums.eOrbotViewCommands.S_UPDATE_BRIDGE_SETTINGS_VIEWS){
-            bridgeSettingsStatus((boolean) p_data.get(0));
+    public void onTrigger(orbotEnums.eOrbotViewCommands pCommands, List<Object> pData){
+        if(pCommands == orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS){
+            bridgeSettingsStatus((boolean) pData.get(0));
         }
-        else if(p_commands == orbotEnums.eOrbotViewCommands.S_INIT_POST_UI){
+        else if(pCommands == orbotEnums.eOrbotViewCommands.M_INIT_POST_UI){
             initPostUI();
         }
-        else if(p_commands == orbotEnums.eOrbotViewCommands.S_INIT_UI){
-            initViews((boolean)p_data.get(0),(boolean) p_data.get(1));
+        else if(pCommands == orbotEnums.eOrbotViewCommands.M_INIT_UI){
+            initViews((boolean)pData.get(0),(boolean) pData.get(1));
+        }
+        else if(pCommands == orbotEnums.eOrbotViewCommands.M_UPDATE_VPN){
+            updateVPN((boolean) pData.get(0));
+        }
+        else if(pCommands == orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGES){
+            updateBridgeViews((boolean) pData.get(1), (boolean) pData.get(1));
         }
     }
 }

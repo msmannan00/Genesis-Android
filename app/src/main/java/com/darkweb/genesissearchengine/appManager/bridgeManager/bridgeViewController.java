@@ -15,7 +15,10 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -56,8 +59,10 @@ class bridgeViewController
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             }
             else {
-                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.white));
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
             }
         }
     }
@@ -70,17 +75,17 @@ class bridgeViewController
     }
 
     private void resetRadioButtons(int p_duration){
-        animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.float_white), "textColor", p_duration);
-        animateColor(mBridgeCustom, mBridgeCustom.getCurrentTextColor(), mContext.getResources().getColor(R.color.float_white), "textColor", p_duration);
-        animateColor(mBridgeChina, mBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.float_white), "textColor", p_duration);
+        animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
+        animateColor(mBridgeCustom, mBridgeCustom.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
+        animateColor(mBridgeChina, mBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
 
-        mBridgeObfs.setHighlightColor(mContext.getResources().getColor(R.color.float_white));
-        mBridgeCustom.setHighlightColor(mContext.getResources().getColor(R.color.float_white));
-        mBridgeChina.setHighlightColor(mContext.getResources().getColor(R.color.float_white));
+        mBridgeObfs.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
+        mBridgeCustom.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
+        mBridgeChina.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
 
-        mBridgeObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.float_white)));
-        mBridgeCustom.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.float_white)));
-        mBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.float_white)));
+        mBridgeObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
+        mBridgeCustom.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
+        mBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
 
         helperMethod.hideKeyboard(mContext);
         mCustomPort.clearFocus();
@@ -93,22 +98,21 @@ class bridgeViewController
         resetRadioButtons(p_duration);
         switch (p_bridge) {
             case strings.BRIDGE_CUSTOM_BRIDGE_OBFS4:
-
-                animateColor(mBridgeChina, mBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.black), "textColor", p_duration);
-                mBridgeChina.setHighlightColor(Color.BLACK);
-                mBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.cursor_blue)));
-                mBridgeChina.setChecked(true);
-                break;
-            case strings.BRIDGE_CUSTOM_BRIDGE_MEEK:
-                animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.black), "textColor", p_duration);
+                animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
                 mBridgeObfs.setHighlightColor(Color.BLACK);
-                mBridgeObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.cursor_blue)));
+                mBridgeObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
                 mBridgeObfs.setChecked(true);
                 break;
+            case strings.BRIDGE_CUSTOM_BRIDGE_MEEK:
+                animateColor(mBridgeChina, mBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
+                mBridgeChina.setHighlightColor(Color.BLACK);
+                mBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+                mBridgeChina.setChecked(true);
+                break;
             case strings.BRIDGE_CUSTOM_BRIDGE_CUSTOM:
-                animateColor(mBridgeCustom, mBridgeCustom.getCurrentTextColor(), mContext.getResources().getColor(R.color.black), "textColor", p_duration);
+                animateColor(mBridgeCustom, mBridgeCustom.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
                 mBridgeCustom.setHighlightColor(Color.BLACK);
-                mBridgeCustom.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.cursor_blue)));
+                mBridgeCustom.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
                 mBridgeCustom.setChecked(true);
 
                 mCustomPort.animate().setDuration(p_duration).alpha(1f);
@@ -119,7 +123,7 @@ class bridgeViewController
     }
 
     public void onTrigger(bridgeEnums.eBridgeViewCommands p_commands, List<Object> p_data){
-        if(p_commands == bridgeEnums.eBridgeViewCommands.S_INIT_VIEWS){
+        if(p_commands == bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS){
             initViews((String) p_data.get(0), (int)p_data.get(1));
         }
     }

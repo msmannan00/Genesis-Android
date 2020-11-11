@@ -1,8 +1,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/c_background">
     <ScrollView
             android:layout_width="match_parent"
             android:isScrollContainer="true"
@@ -10,15 +13,17 @@
             android:layout_height="match_parent">
         <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@color/white"
                 android:orientation="vertical"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingBottom="50dp"
                 android:layout_height="wrap_content">
             <!-- Title Header -->
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:layout_marginBottom="0dp"
+                    android:focusable="true"
                     android:orientation="horizontal"
                     android:layout_height="52dp">
                 <ImageButton
@@ -28,12 +33,12 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
                     android:layout_weight="2.5"
-                    android:tint="@color/black"
+                    android:tint="@color/c_navigation_tint"
                     android:src="@xml/ic_arrow_back"
                     android:background="@xml/gx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"/>
                 <TextView
-                    android:textColor="@color/text_color_v1"
+                    android:textColor="@color/c_text_v1"
                     android:onClick="onClose"
                     android:textSize="17sp"
                     android:layout_width="0dp"
@@ -42,7 +47,6 @@
                     android:layout_marginTop="-3dp"
                     android:gravity="center_vertical|start"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
                     android:text="@string/BRIDGE_HEADER"
                     />
             </LinearLayout>
@@ -51,17 +55,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/white_dark" />
+                    android:background="@color/c_view_divier_background" />
 
             <!-- Title Header -->
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/c_background"
+                    android:focusable="true"
                     android:layout_marginBottom="0dp"
                     android:orientation="horizontal"
                     android:layout_height="40dp">
                 <TextView
-                        android:textColor="@color/cursor_blue"
+                        android:textColor="@color/c_text_setting_heading"
                         android:textSize="16sp"
                         android:layout_width="0dp"
                         android:textStyle="bold"
@@ -77,12 +82,14 @@
                     android:layout_width="match_parent"
                     android:background="@color/clear_alpha"
                     android:layout_marginBottom="0dp"
+                    android:focusable="true"
                     android:layout_marginEnd = "20dp"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                 <TextView
                         android:textSize="14sp"
                         android:layout_width="0dp"
+                        android:textColor="@color/c_text_v2"
                         android:paddingBottom="30dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
@@ -97,6 +104,7 @@
                     android:layout_marginEnd = "20dp"
                     android:background="@color/clear_alpha"
                     android:layout_marginTop="8dp"
+                    android:focusable="true"
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
@@ -105,6 +113,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
+                        android:textColor="@color/c_text_setting_heading"
                         android:layout_marginStart="20dp"
                         android:textStyle="bold"
                         android:text="@string/BRIDGE_AUTO"
@@ -115,6 +124,7 @@
                     android:background="@color/clear_alpha"
                     android:layout_marginEnd = "10dp"
                     android:paddingEnd="10dp"
+                    android:focusable="true"
                     android:layout_marginBottom="0dp"
                     android:layout_marginTop="-12dp"
                     android:paddingTop="10dp"
@@ -129,7 +139,8 @@
                     android:layout_width="match_parent"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd = "00dp"
-                    android:paddingEnd="10dp"
+                    android:paddingEnd="5dp"
+                    android:focusable="true"
                     android:layout_marginBottom="0dp"
                     android:layout_marginTop="-8dp"
                     android:paddingTop="10dp"
@@ -141,27 +152,28 @@
                         android:layout_width="match_parent"
                         android:orientation="vertical"
                         android:id="@+id/pProxyGroup"
-                        android:paddingStart="10dp"
+                        android:paddingStart="5dp"
                         android:layout_height="match_parent" >
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/white_dark" />
+                        android:background="@color/c_view_divier_background" />
                     <RadioButton
                             android:id="@+id/pBridgeObfs"
                             android:layout_width="match_parent"
                             android:checked="true"
                             android:textSize="14sp"
                             android:paddingTop="15dp"
-                        android:buttonTint="@color/colorProgressGradientEnd"
+                            android:buttonTint="@color/c_radio_tint"
                             android:paddingBottom="15dp"
                             android:onClick="onObfsChecked"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/c_text_v1"
                             android:text="@string/BRIDGE_OBFS4" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/white_dark" />
+                        android:background="@color/c_view_divier_background" />
                     <RadioButton
                         android:id="@+id/pBridgeChina"
                         android:layout_width="match_parent"
@@ -171,22 +183,24 @@
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorProgressGradientEnd"
+                        android:buttonTint="@color/c_radio_tint"
+                        android:textColor="@color/c_text_v1"
                         android:text="@string/BRIDGE_MEEK" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/white_dark" />
+                        android:background="@color/c_view_divier_background" />
                     <RadioButton
                         android:id="@+id/pBridgeCustom"
                         android:layout_width="match_parent"
                         android:onClick="onCustomChecked"
                         android:checked="false"
                         android:textSize="14sp"
+                        android:textColor="@color/c_text_v1"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorProgressGradientEnd"
+                        android:buttonTint="@color/c_radio_tint"
                         android:text="@string/BRIDGE_MANUAL" />
                 </RadioGroup>
 
@@ -198,7 +212,6 @@
                     android:layout_marginTop="0dp"
                     android:onClick="onCustomChecked"
                     android:paddingTop="10dp"
-                    android:layout_marginStart="20dp"
                     android:paddingBottom="10dp"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content"
@@ -212,7 +225,7 @@
                         android:id="@+id/pCustomPort"
                         android:layout_width="0dp"
                         android:layout_weight="11"
-                        android:layout_height="35dp"
+                        android:layout_height="45dp"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:layout_marginStart="15dp"
@@ -229,9 +242,9 @@
                         android:textSize="13sp"
                         android:layout_width="0dp"
                         android:layout_weight="4"
-                        android:textColor="@color/white"
+                        android:textColor="@color/c_button_text"
                         android:onClick="requestBridges"
-                        android:layout_height="35dp"
+                        android:layout_height="45dp"
                         android:background="@xml/hox_rounded_corner_suggestion_settings"
                         android:layout_marginStart="5dp"
                         android:text="@string/BRIDGE_REQUEST" />
@@ -250,9 +263,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/white_dark" />
+                    android:background="@color/c_view_divier_background" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

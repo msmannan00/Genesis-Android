@@ -1,0 +1,654 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:background="@color/c_background"
+        tools:context="com.darkweb.genesissearchengine.appManager.settingManager.clearManager.settingClearController">
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                <!-- Title Header -->
+
+                <LinearLayout
+                    android:id="@+id/pHeaderContainerTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:clickable="true"
+                    android:paddingEnd="7dp"
+                    android:paddingStart="5dp"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    tools:ignore="RtlSymmetry">
+
+                    <ImageButton
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="1dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onClose"
+                        android:src="@xml/ic_arrow_back"
+                        android:tint="@color/c_navigation_tint" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="-3dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="onClose"
+                        android:gravity="center_vertical|start"
+                        android:text="@string/SETTING_CLEAR_HEADER"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/c_view_divier_background" />
+
+                <!-- Title Header -->
+
+                <LinearLayout
+                    android:id="@+id/pOption1"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:tag="0"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_1"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_1"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pClearChecked_1"
+                        android:tag="0"
+                        android:layout_marginStart="100dp"
+                        android:buttonTint="@color/c_checkbox_tint"
+                        android:checked="true"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:tag="1"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_2"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_2"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:tag="1"
+                        android:id="@+id/pClearChecked_2"
+                        android:layout_marginStart="100dp"
+                        android:checked="true"
+                        android:buttonTint="@color/c_checkbox_tint"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption3"
+                    android:tag="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_3"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_3"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:tag="2"
+                        android:id="@+id/pClearChecked_3"
+                        android:layout_marginStart="100dp"
+                        android:checked="true"
+                        android:buttonTint="@color/c_checkbox_tint"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption4"
+                    android:tag="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_4"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_4"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pClearChecked_4"
+                        android:tag="3"
+                        android:layout_marginStart="100dp"
+                        android:checked="true"
+                        android:buttonTint="@color/c_checkbox_tint"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption6"
+                    android:tag="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_6"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_6"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pClearChecked_6"
+                        android:tag="4"
+                        android:checked="true"
+                        android:layout_marginStart="100dp"
+                        android:buttonTint="@color/c_checkbox_tint"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption7"
+                    android:tag="5"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_7"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_7"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pClearChecked_7"
+                        android:tag="5"
+                        android:layout_marginStart="100dp"
+                        android:checked="true"
+                        android:buttonTint="@color/c_checkbox_tint"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption8"
+                    android:tag="6"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_8"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_8"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pClearChecked_8"
+                        android:tag="6"
+                        android:layout_marginStart="100dp"
+                        android:checked="true"
+                        android:buttonTint="@color/c_checkbox_tint"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption9"
+                    android:tag="7"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onCheckBoxTriggered"
+                    android:orientation="horizontal"
+                    android:weightSum="7"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="13dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_OPTION_9"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_CLEAR_CACHE_OPTION_9"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pClearChecked_9"
+                        android:tag="7"
+                        android:layout_marginStart="100dp"
+                        android:checked="false"
+                        android:buttonTint="@color/c_checkbox_tint_default"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="onCheckBoxTriggered"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checked="true"
+                        android:onClick="onClearData"
+                        android:layout_gravity="end"
+                        android:textStyle="bold"
+                        android:background="@xml/hox_rounded_corner_suggestion_settings"
+                        android:src="@xml/ic_arrow_right"
+                        android:layout_marginEnd="17dp"
+                        android:layout_marginStart="17dp"
+                        android:padding="15dp"
+                        android:paddingBottom="0dp"
+                        android:elevation="7dp"
+                        android:textColor="@color/c_button_text"
+                        android:clickable="false"
+                        android:layout_alignParentEnd="true"
+                        android:textAllCaps="false"
+                        android:text="@string/SETTING_CLEAR_BUTTON"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

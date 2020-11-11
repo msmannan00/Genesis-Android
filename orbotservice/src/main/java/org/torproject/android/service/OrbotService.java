@@ -241,13 +241,13 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     @SuppressLint("NewApi")
     protected void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
 
-        if(orbotLocalConstants.sHomeContext==null){
+        if(orbotLocalConstants.mHomeContext ==null){
             return;
         }
         //Reusable code.
         PackageManager pm = getPackageManager();
         Intent intent = pm.getLaunchIntentForPackage(getPackageName());
-        PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.sHomeContext.get(), 0, intent, 0);
+        PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, intent, 0);
 
         if (mNotifyBuilder == null) {
 
@@ -270,7 +270,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             Intent intentRefresh = new Intent();
             intentRefresh.setAction(CMD_NEWNYM);
-            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(orbotLocalConstants.sHomeContext.get(), 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(orbotLocalConstants.mHomeContext.get(), 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
             mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity),
                     pendingIntentNewNym);
 
@@ -1295,10 +1295,12 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         intent.putExtra(LOCAL_EXTRA_LOG, logMessage);
         intent.putExtra(EXTRA_STATUS, mCurrentStatus);
 
+        orbotLocalConstants.mTorLogsHistory.add(logMessage);
+
         if(!mConnectivity){
-            orbotLocalConstants.tor_logs_status = "No internet connection";
+            orbotLocalConstants.mTorLogsStatus = "No internet connection";
         }else {
-            orbotLocalConstants.tor_logs_status = logMessage;
+            orbotLocalConstants.mTorLogsStatus = logMessage;
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
@@ -1324,7 +1326,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
         //Log.i("MFUCKER","MFUCKER : " + currentStatus);
         if(currentStatus.equals("ON")){
-            orbotLocalConstants.sIsTorInitialized = true;
+            orbotLocalConstants.mIsTorInitialized = true;
         }
         //Log.i("FUCKSS","FUCKSS:"+currentStatus);
         mCurrentStatus = currentStatus;
@@ -1393,7 +1395,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             if (newConnectivityState != mConnectivity) {
                 mConnectivity = newConnectivityState;
-                orbotLocalConstants.sNetworkState = mConnectivity;
+                orbotLocalConstants.mNetworkState = mConnectivity;
 
                 if (mConnectivity)
                     newIdentity();
@@ -1409,7 +1411,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                         int iconId = R.drawable.ic_stat_tor_off;
                         showToolbarNotification(getString(R.string.newnym), getNotifyId(), iconId);
 
-                        orbotLocalConstants.tor_logs_status = "No internet connection";
+                        orbotLocalConstants.mTorLogsStatus = "No internet connection";
                         showToolbarNotification(context.getString(R.string.no_network_connectivity_putting_tor_to_sleep_),NOTIFY_ID,R.drawable.ic_stat_tor_off);
                     }
                     else

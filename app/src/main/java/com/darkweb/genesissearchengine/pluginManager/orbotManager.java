@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
@@ -41,8 +42,8 @@ class orbotManager
     }
 
     void startOrbot(Context context){
-        orbotLocalConstants.bridges = status.sBridgeCustomBridge;
-        orbotLocalConstants.sIsManualBridge = status.sBridgeGatewayManual;
+        orbotLocalConstants.mBridges = status.sBridgeCustomBridge;
+        orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
         this.mAppContext = context;
         Prefs.putBridgesEnabled(status.sBridgeGatewayManual |status.sBridgeGatewayAuto);
         Intent mServiceIntent = new Intent(context, OrbotService.class);
@@ -58,10 +59,10 @@ class orbotManager
     }
 
     int getNotificationStatus(){
-        return orbotLocalConstants.sNotificationStatus;
+        return orbotLocalConstants.mNotificationStatus;
     }
     void initNotification(int status){
-        orbotLocalConstants.sNotificationStatus = status;
+        orbotLocalConstants.mNotificationStatus = status;
     }
     void enableTorNotification(){
         OrbotService.getServiceObject().enableNotification();
@@ -129,20 +130,22 @@ class orbotManager
         setPrivacyPrefs();
     }
 
-    private void setPrivacyPrefs ()
+    public void setPrivacyPrefs ()
     {
+        PrefsHelper.setPref(keys.PROXY_IMAGE, status.sShowImages);
+        PrefsHelper.setPref("browser.display.show_image_placeholders",true);
         PrefsHelper.setPref("browser.cache.disk.enable",false);
         PrefsHelper.setPref("browser.cache.memory.enable",true);
         PrefsHelper.setPref("browser.cache.disk.capacity",0);
         PrefsHelper.setPref("privacy.resistFingerprinting",true);
-        PrefsHelper.setPref("privacy.clearOnShutdown.cache",status.sSettingHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.downloads",status.sSettingHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.formdata",status.sSettingHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.history",status.sSettingHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.offlineApps",status.sSettingHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.passwords",status.sSettingHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.sessions",status.sSettingHistoryStatus);
-        PrefsHelper.setPref("privacy.clearOnShutdown.siteSettings",status.sSettingHistoryStatus);
+        PrefsHelper.setPref("privacy.clearOnShutdown.cache",status.sClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.downloads",status.sClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.formdata",status.sClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.history",status.sClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.offlineApps",status.sClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.passwords",status.sClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.sessions",status.sClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.siteSettings",status.sClearOnExit);
         PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
         PrefsHelper.setPref("privacy.donottrackheader.value",1);
         PrefsHelper.setPref("network.http.sendRefererHeader", 0);
@@ -155,7 +158,7 @@ class orbotManager
 
     String getLogs()
     {
-        String logs = orbotLocalConstants.tor_logs_status;
+        String logs = orbotLocalConstants.mTorLogsStatus;
 
         if(!logs.contains("Bootstrapped") && !mLogsStarted){
             logs = "Initializing Bootstrap";
@@ -178,7 +181,7 @@ class orbotManager
     }
 
     boolean isOrbotRunning(){
-        return orbotLocalConstants.sIsTorInitialized;
+        return orbotLocalConstants.mIsTorInitialized;
     }
 
 }

@@ -14,19 +14,10 @@ class tabModel
     {
         mModelList = model;
     }
+
     ArrayList<tabRowModel> getList()
     {
         return mModelList;
-    }
-    private void removeFromMainList(int index)
-    {
-        if(mModelList.size()>index){
-            mModelList.remove(index);
-        }
-    }
-
-    void onManualClear(int index){
-         removeFromMainList(index);
     }
 
 }

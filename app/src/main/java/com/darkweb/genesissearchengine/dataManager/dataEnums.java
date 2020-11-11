@@ -18,4 +18,12 @@ public class dataEnums
     public enum eImageCacheCommands{
         M_SET_IMAGE, M_GET_IMAGE, M_CLEAR_IMAGE, M_CLEAR_OLD_IMAGES
     }
+
+    public enum eSuggestionCommands{
+        M_UPDATE_SUGGESTION, M_CLEAR_SUGGESTION, M_INIT_SUGGESTION, M_ADD_SUGGESTION, M_GET_SUGGESTION
+    }
+
+    public enum eTabCommands{
+        M_ADD_TAB, M_CLEAR_TAB, M_CLOSE_TAB_PARAMETERIZED, CLOSE_TAB, GET_TAB, GET_CURRENT_TAB, GET_TOTAL_TAB, MOVE_TAB_TO_TOP
+    }
 }

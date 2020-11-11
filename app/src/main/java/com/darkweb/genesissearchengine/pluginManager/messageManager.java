@@ -79,11 +79,11 @@ class messageManager
         });
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private void abiError()
     {
         initializeDialog(R.layout.popup_abi_error, Gravity.CENTER);
-        dialog.findViewById(R.id.pOption1).setOnClickListener(v -> dialog.dismiss());
-        dialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
+        dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             dialog.dismiss();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_GENESIS_UPDATE_URL + status.sAppCurrentABI));
             if(browserIntent.resolveActivity(app_context.getPackageManager()) != null)
@@ -133,6 +133,12 @@ class messageManager
     private void notSupportMessage()
     {
         initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
+        dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
+    }
+
+    private void dataClearedSuccessfully()
+    {
+        initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
@@ -211,6 +217,7 @@ class messageManager
         });
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private void rateApp()
     {
         initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
@@ -251,12 +258,12 @@ class messageManager
         String title = data.get(1);
 
         int size = name.length();
-        if(size>35){
-            size = 35;
+        if(size>235){
+            size = 235;
         }
 
         initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER);
-        ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + data.get(0).substring(0,size)+"..."));
+        ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + " | " + data.get(0).substring(0,size)+"..."));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.download_file_manual);
@@ -281,8 +288,8 @@ class messageManager
         int size = data.get(0).length()-1;
         String title = data.get(1);
 
-        if(size>35){
-            size = 35;
+        if(size>235){
+            size = 235;
         }
 
         initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
@@ -303,7 +310,6 @@ class messageManager
     }
 
     private void popupDownloadFull(){
-
         String url = data.get(0);
         String file = data.get(1);
         String title = data.get(2);
@@ -311,25 +317,28 @@ class messageManager
         String data_local = app_context.getString(R.string.ALERT_LONG_URL_MESSAGE);
 
         int size = url.length();
-        if(size>35){
-            size = 35;
+        if(size>235){
+            size = 235;
         }
 
         int size1 = file.length();
-        if(size1>35){
-            size1 = 35;
+        if(size1>235){
+            size1 = 235;
         }
 
         if(!url.equals("")){
             data_local = title + url.substring(0,size)+"...";
         }
         else if(!file.equals("")){
-            data_local = title + file.substring(0,size1)+"...";
+            data_local = file.substring(0,size1)+"...";
+        }
+        String mTitle = title;
+        if(mTitle.length()<=1){
+            mTitle = data.get(0).substring(0,size)+"...";
         }
 
-
-        initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
-        ((TextView)dialog.findViewById(R.id.pHeader)).setText((title + data.get(0).substring(0,size)+"..."));
+        initializeDialog(R.layout.popup_download_full, Gravity.CENTER);
+        ((TextView)dialog.findViewById(R.id.pHeader)).setText(mTitle);
         ((TextView)dialog.findViewById(R.id.pDescription)).setText((data_local));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
@@ -456,7 +465,7 @@ class messageManager
 
             case on_long_press_with_link:
                 popupDownloadFull();
-                break;
+            break;
 
             case on_bridge_mail:
                 sendBridgeMail();
@@ -464,6 +473,10 @@ class messageManager
 
             case on_not_support:
                 notSupportMessage();
+                break;
+
+            case data_cleared:
+                dataClearedSuccessfully();
                 break;
         }
     }

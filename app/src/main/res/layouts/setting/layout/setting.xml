@@ -1,9 +1,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/c_background"
         tools:context="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController">
         <ScrollView
                 android:layout_width="match_parent"
@@ -11,7 +12,6 @@
 
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:orientation="vertical"
                     android:paddingBottom="50dp"
                     android:layout_height="wrap_content">
@@ -21,7 +21,6 @@
                     android:id="@+id/pHeaderContainerTop"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white"
                     android:clickable="true"
                     android:paddingEnd="7dp"
                     android:paddingStart="5dp"
@@ -38,17 +37,18 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:onClick="onNavigationBackPressed"
                         android:src="@xml/ic_arrow_back"
-                        android:tint="@color/black" />
+                        android:tint="@color/c_navigation_tint" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
                         android:layout_marginTop="-3dp"
-                        android:layout_weight="40"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="onNavigationBackPressed"
                         android:gravity="center_vertical|start"
                         android:text="@string/SETTING_HEADER"
-                        android:textColor="@color/text_color_v1"
+                        android:textColor="@color/c_text_v1"
                         android:textSize="17sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -56,43 +56,28 @@
                 <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/white_dark" />
+                        android:background="@color/c_view_divier_background" />
 
                 <!-- Title Header -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textColor="@color/cursor_blue"
-                            android:textSize="15sp"
-                            android:layout_width="0dp"
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="40"
-                            android:layout_marginTop="00dp"
-                            android:layout_marginStart="15dp"
-                            android:text="@string/SETTING_BASIC_SETTING"
-                            />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
-
                 <LinearLayout
                     android:id="@+id/pOption2"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:onClick="onDefaultBrowser"
                     android:background="@xml/gx_ripple_gray"
+                    android:onClick="onDefaultBrowser"
                     android:orientation="horizontal"
-                    android:weightSum="7">
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        app:tint="@color/c_icon_tint"
+                        android:src="@drawable/ic_baseline_browser"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <Button
                         android:layout_width="0dp"
@@ -102,30 +87,257 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:paddingStart="15dp"
                         android:text="@string/SETTING_DEFAULT_BROWSER"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/blue_dark"
+                        android:textColor="@color/c_text_v1"
                         android:textSize="15sp"
                         tools:ignore="RtlSymmetry" />
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:layout_marginEnd="4.5dp"
+                        android:clickable="false"
                         android:background="@android:color/transparent"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:tint="@color/c_navigation_tint"
+                        android:src="@xml/ic_arrow_right" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onManageGeneral"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        app:tint="@color/c_icon_tint"
+                        android:src="@drawable/ic_baseline_home"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_GENERAL"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_GENERAL_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="5dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:tint="@color/c_navigation_tint"
+                        android:src="@xml/ic_arrow_right" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption4"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onManageSearchEngine"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        app:tint="@color/c_icon_tint"
+                        android:src="@drawable/ic_baseline_search"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_SEARCH"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_SEARCH_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:clickable="false"
+                        android:layout_marginEnd="5dp"
+                        android:tint="@color/c_navigation_tint"
+                        android:src="@xml/ic_arrow_right" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption7"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onManageSearchPrivacy"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        app:tint="@color/c_icon_tint"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_baseline_privacy"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_PRIVACY"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_PRIVACY_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:clickable="false"
+                        android:layout_marginEnd="5dp"
+                        android:tint="@color/c_navigation_tint"
+                        android:src="@xml/ic_arrow_right" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
                     android:id="@+id/pOption3"
@@ -134,7 +346,19 @@
                     android:onClick="onManageNotification"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
-                    android:weightSum="7">
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        app:tint="@color/c_icon_tint"
+                        android:padding="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_baseline_notifications"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
@@ -148,11 +372,10 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="15dp"
                             android:text="@string/SETTING_NOTIFICATION"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -164,87 +387,22 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="15dp"
                             android:text="@string/SETTING_NOTIFICATION_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
-
-                <LinearLayout
-                    android:id="@+id/pOption4"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:onClick="onManageSearchEngine"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="65dp"
                         android:clickable="false"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
-                            android:alpha="0.7"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="0.7"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
+                        android:layout_marginEnd="5dp"
+                        android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -253,7 +411,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption5"
@@ -262,7 +420,18 @@
                     android:onClick="onManageSearchAccessibility"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
-                    android:weightSum="7">
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        app:tint="@color/c_icon_tint"
+                        android:src="@drawable/ic_baseline_accessibility"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -278,11 +447,10 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="15dp"
                             android:text="@string/SETTING_ACCESSIBILITY"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_dark"
+                            android:textColor="@color/c_text_v1"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -294,22 +462,22 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="15dp"
                             android:text="@string/SETTING_ACCESSIBILITY_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/text_color_v3"
-                            android:textSize="12sp"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
+                        android:clickable="false"
+                        android:layout_marginEnd="5dp"
+                        android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -318,395 +486,157 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_gray_light"/>
+                    android:background="@color/c_view_divier_background"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- Title Search Engine -->
                 <LinearLayout
-                    android:layout_marginTop="1000dp"
-                        android:background="@color/white"
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="20dp"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textSize="16sp"
-                            android:layout_gravity="top"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="40"
-                            android:layout_marginStart="20dp"
-                            android:text="@string/SETTING_SEARCH_ENGINE"
-                            />
-                    <Spinner
-                            android:id="@+id/search_manager"
-                            android:textSize="12sp"
-                            android:layout_width="150dp"
-                            android:paddingEnd="20dp"
-                            android:layout_height="40dp"
-                            android:paddingRight="30dp"
-                            android:paddingLeft="30dp"
-                            android:stateListAnimator="@xml/sx_spinner_style_animate"
-                            android:background="@xml/sx_spinner_style_background"
-                            android:drawSelectorOnTop="true"
-                            android:entries="@array/search_engines"
-                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                            android:dropDownWidth="160dp"
-                            android:popupBackground="@android:color/white"
-                            android:layout_marginTop="1dp"
-                            android:overlapAnchor="false"
-                            android:popupTheme="@style/AppTheme.PopupOverlay"
-                            android:popupElevation="3dp"
-                            />
-                    <ImageView android:layout_width="15dp" android:layout_height="15dp"
-                            android:layout_marginEnd="35dp"
-                            android:layout_marginStart="-26dp"
+                    android:id="@+id/pOption6"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:onClick="onManageSearchClearData"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        app:tint="@color/c_icon_tint"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_baseline_clear"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:clickable="false"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:src="@drawable/dropdown_arrow"
-                            android:contentDescription="@string/GENERAL_TODO"/>
-                </LinearLayout>
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_CLEAR"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
 
-                <!-- Title Enable Javascript -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textSize="16sp"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="40"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="20dp"
-                            android:text="@string/SETTING_JAVASCRIPT"
-                            />
-                    <Spinner
-                            android:id="@+id/javascript_manager"
-                            android:textSize="12sp"
-                            android:layout_width="150dp"
-                            android:paddingEnd="20dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="1dp"
-                            android:paddingRight="30dp"
-                            android:paddingLeft="30dp"
-                            android:stateListAnimator="@xml/sx_spinner_style_animate"
-                            android:background="@xml/sx_spinner_style_background"
-                            android:drawSelectorOnTop="true"
-                            android:entries="@array/ARRAY_DEFAULT_BOOLEAN"
-                            android:popupTheme="@style/AppTheme.PopupOverlay"
-
-                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                            android:dropDownWidth="160dp"
-                            android:popupBackground="@android:color/white"
-                            android:overlapAnchor="false"
-                            android:popupElevation="3dp"
-                            />
-                    <ImageView android:layout_width="15dp" android:layout_height="15dp"
-                            android:layout_marginEnd="35dp"
-                            android:layout_marginStart="-26dp"
-                            android:layout_marginTop="12dp"
-                            android:src="@drawable/dropdown_arrow"
-                            android:contentDescription="@string/GENERAL_TODO"/>
-                </LinearLayout>
-
-                <!-- Title Auto Clear -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textSize="16sp"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="40"
-                            android:layout_marginStart="20dp"
-                            android:text="@string/SETTING_CLEAR_HISTORY"
-                            />
-                    <Spinner
-                            android:id="@+id/history_manager"
-                            android:textSize="12sp"
-                            android:layout_width="150dp"
-                            android:paddingEnd="20dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="1dp"
-                            android:paddingRight="30dp"
-                            android:paddingLeft="20dp"
-                            android:stateListAnimator="@xml/sx_spinner_style_animate"
-                            android:background="@xml/sx_spinner_style_background"
-                            android:drawSelectorOnTop="true"
-                            android:entries="@array/ARRAY_DEFAULT_BOOLEAN"
-                            android:popupTheme="@style/AppTheme.PopupOverlay"
-
-                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                            android:dropDownWidth="160dp"
-                            android:popupBackground="@android:color/white"
-                            android:overlapAnchor="false"
-                            android:popupElevation="3dp"
-                            tools:ignore="RtlHardcoded" />
-                    <ImageView android:layout_width="15dp" android:layout_height="15dp"
-                            android:layout_marginEnd="35dp"
-                            android:layout_marginStart="-26dp"
-                            android:layout_marginTop="12dp"
-                            android:src="@drawable/dropdown_arrow"
-                            android:contentDescription="@string/GENERAL_TODO"/>
-                </LinearLayout>
-
-                <!-- Title Notification -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textSize="16sp"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="40"
-                            android:layout_marginStart="20dp"
-                            android:layout_gravity="top"
-                            android:text="@string/SETTING_NOTIFICATION"
-                            />
-                    <Spinner
-                            android:id="@+id/notification_manager"
-                            android:textSize="12sp"
-                            android:layout_width="150dp"
-                            android:paddingEnd="20dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="1dp"
-                            android:paddingRight="30dp"
-                            android:paddingLeft="20dp"
-                            android:stateListAnimator="@xml/sx_spinner_style_animate"
-                            android:background="@xml/sx_spinner_style_background"
-                            android:drawSelectorOnTop="true"
-                            android:entries="@array/ARRAY_NOTIFICATION"
-                            android:popupTheme="@style/AppTheme.PopupOverlay"
-
-                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                            android:dropDownWidth="160dp"
-                            android:popupBackground="@android:color/white"
-                            android:overlapAnchor="false"
-                            android:popupElevation="3dp"
-                            tools:ignore="RtlHardcoded" />
-                    <ImageView android:layout_width="15dp" android:layout_height="15dp"
-                            android:layout_marginEnd="35dp"
-                            android:layout_marginStart="-26dp"
-                            android:layout_marginTop="12dp"
-                            android:src="@drawable/dropdown_arrow"
-                            android:contentDescription="@string/GENERAL_TODO"/>
-                </LinearLayout>
-
-                <!-- Title Header -->
-                <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="0dp"
-                        android:background="@color/white_dark" />
-                <!-- Title Header -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:layout_marginBottom="25dp"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textColor="@color/cursor_blue"
-                            android:textSize="17.5sp"
-                            android:layout_width="0dp"
-                            android:textStyle="bold"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="40"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="20dp"
-                            android:text="@string/SETTING_FONT_TITLE"
-                            />
-                </LinearLayout>
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_CLEAR_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
 
-                <!-- Title Auto Clear -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="20dp"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:id="@+id/font_size_percentage"
-                            android:textSize="16sp"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="40"
-                            android:layout_marginStart="20dp"
-                            android:layout_gravity="top"
-                            android:text="@string/SETTING_ADJUST_FONT"
-                            />
-                    <SeekBar
-                            android:id="@+id/font_size"
-                            android:layout_width="158dp"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
-                            android:ems="10"
-                            android:progress="100"
-                            android:max="200"
-                            android:layout_marginEnd="18dp"
-                            android:layout_weight="1"
-                            android:paddingRight="30dp"
-                            tools:ignore="RtlHardcoded,RtlSymmetry" />
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:layout_marginEnd="5dp"
+                        android:tint="@color/c_navigation_tint"
+                        android:src="@xml/ic_arrow_right"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
-                </LinearLayout>
-
-                <!-- Title Auto Clear -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textSize="16sp"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="40"
-                            android:layout_marginStart="20dp"
-                            android:layout_gravity="top"
-                            android:text="@string/SETTING_MANUAL_FONT"
-                            />
-                    <Spinner
-                            android:id="@+id/font_adjustable"
-                            android:textSize="12sp"
-                            android:paddingEnd="20dp"
-                            android:layout_width="150dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="1dp"
-                            android:paddingRight="30dp"
-                            android:paddingLeft="20dp"
-                            android:stateListAnimator="@xml/sx_spinner_style_animate"
-                            android:background="@xml/sx_spinner_style_background"
-                            android:drawSelectorOnTop="true"
-                            android:entries="@array/ARRAY_DEFAULT_BOOLEAN"
-                            android:popupTheme="@style/AppTheme.PopupOverlay"
-
-                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                            android:dropDownWidth="160dp"
-                            android:popupBackground="@android:color/white"
-                            android:overlapAnchor="false"
-                            android:popupElevation="3dp"
-                            tools:ignore="RtlHardcoded" />
-                    <ImageView android:layout_width="15dp" android:layout_height="15dp"
-                            android:layout_marginEnd="35dp"
-                            android:layout_marginStart="-26dp"
-                            android:layout_marginTop="12dp"
-                            android:src="@drawable/dropdown_arrow"
-                            android:contentDescription="@string/GENERAL_TODO"/>
                 </LinearLayout>
 
                 <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/white_dark" />
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="25dp"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textColor="@color/cursor_blue"
-                            android:textSize="17.5sp"
-                            android:layout_width="0dp"
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="40"
-                            android:layout_marginStart="20dp"
-                            android:text="@string/SETTING_COOKIE_TEXT_INFO"
-                            />
-                </LinearLayout>
+                    android:id="@+id/pOption8"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:onClick="onManageSearchAdvanced"
+                    android:background="@xml/gx_ripple_gray"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
 
-                <!-- Title Auto Clear -->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:textSize="16sp"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="40"
-                            android:layout_marginStart="20dp"
-                            android:layout_gravity="top"
-                            android:text="@string/SETTING_COOKIE"
-                            />
-                    <Spinner
-                            android:id="@+id/cookies_manager"
-                            android:textSize="12sp"
-                            android:layout_width="200dp"
-                            android:paddingEnd="20dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="1dp"
-                            android:paddingRight="10dp"
-                            android:paddingLeft="0dp"
-                            android:stateListAnimator="@xml/sx_spinner_style_animate"
-                            android:background="@xml/sx_spinner_style_background"
-                            android:drawSelectorOnTop="true"
-                            android:entries="@array/ARRAY_COOKIES"
-                            android:popupTheme="@style/AppTheme.PopupOverlay"
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        app:tint="@color/c_icon_tint"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_baseline_advance"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
-                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                            android:dropDownWidth="160dp"
-                            android:popupBackground="@android:color/white"
-                            android:overlapAnchor="false"
-                            android:popupElevation="3dp"
-                            tools:ignore="RtlHardcoded" />
-                    <ImageView android:layout_width="15dp" android:layout_height="15dp"
-                            android:layout_marginEnd="35dp"
-                            android:layout_marginStart="-26dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:clickable="false"
+                        android:orientation="vertical">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:src="@drawable/dropdown_arrow"
-                            android:contentDescription="@string/GENERAL_TODO"/>
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_ADVANCE"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_ADVANCE_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:layout_marginEnd="5dp"
+                        android:tint="@color/c_navigation_tint"
+                        android:src="@xml/ic_arrow_right"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background"/>
 
             </LinearLayout>
         </ScrollView>

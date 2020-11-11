@@ -64,7 +64,7 @@
                     android:id="@+id/pHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/c_text_v1"
                     android:singleLine="true"
                     android:layout_marginTop="10dp"
                     android:textSize="14.5sp"
@@ -80,7 +80,7 @@
                     android:layout_marginTop="1dp"
                     android:ellipsize="end"
                     android:textSize="13sp"
-                    android:textColor="@color/holo_dark_gray"
+                    android:textColor="@color/c_text_v2"
                     />
             </LinearLayout>
 
@@ -91,7 +91,7 @@
                 android:paddingBottom="22dp"
                 android:id="@+id/pRowMenu"
                 android:scaleType="fitCenter"
-                android:tint="@color/black"
+                android:tint="@color/c_navigation_tint"
                 android:src="@drawable/menu_item"
                 android:background="@xml/gx_ripple_gray"
                 android:contentDescription="@string/GENERAL_TODO"
@@ -113,7 +113,7 @@
             android:id="@+id/pDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/holo_dark_gray"
+            android:textColor="@color/c_text_v2"
             android:singleLine="true"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"

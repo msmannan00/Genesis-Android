@@ -26,6 +26,7 @@
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"
                     android:text="@string/SHARED_RECYCLER_VIEW_COPY"
+                    android:textColor="@color/c_text_v1"
                     android:textSize="14.5sp" />
 
             <Button
@@ -38,6 +39,7 @@
                     android:textAllCaps="false"
                     android:paddingEnd="0dp"
                     android:text="@string/SHARED_RECYCLER_VIEW_SHARE"
+                    android:textColor="@color/c_text_v1"
                     android:textSize="14.5sp" />
 
                 <Button
@@ -50,6 +52,7 @@
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"
                     android:text="@string/SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB"
+                    android:textColor="@color/c_text_v1"
                     android:textSize="14.5sp" />
 
                 <Button
@@ -62,13 +65,14 @@
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"
                     android:text="@string/SHARED_RECYCLER_VIEW_OPEN_NEW_TAB"
+                    android:textColor="@color/c_text_v1"
                     android:textSize="14.5sp" />
 
             <View
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/holo_light"/>
+                    android:background="@color/c_view_divier_background_v1"/>
 
             <Button
                     android:id="@+id/pMenuDelete"
@@ -76,7 +80,7 @@
                     android:layout_height="45dp"
                     android:background="@xml/gx_side_item_bottom"
                     android:gravity="start|center_vertical"
-                    android:textColor="@color/progress_tint"
+                    android:textColor="@color/dark_red_soft"
                     android:paddingStart="15dp"
                     android:paddingEnd="0dp"
                     android:textAllCaps="false"

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_gravity="top"
+        android:stateListAnimator="@null"
+        android:outlineProvider="bounds"
+        android:background="@xml/hx_menu_popup_container"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@xml/hx_menu_popup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UselessParent">
+
+            <Button
+                    android:id="@+id/pNewTab"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@xml/gx_side_item_top"
+                    android:onClick="onMenuTrigger"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="0dp"
+                    android:textAllCaps="false"
+                    android:text="@string/TAB_MENU_OPEN_TAB"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="14.5sp" />
+
+            <Button
+                android:id="@+id/pCloseTab"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:paddingStart="15dp"
+                android:textAllCaps="false"
+                android:onClick="onMenuTrigger"
+                android:paddingEnd="0dp"
+                android:text="@string/TAB_MENU_CLOSE_TAB"
+                android:textColor="@color/c_text_v1"
+                android:textSize="14.5sp" />
+
+            <Button
+                android:id="@+id/pOpenSetting"
+                android:layout_width="match_parent"
+                android:onClick="onMenuTrigger"
+                android:layout_height="45dp"
+                android:background="@xml/gx_side_item"
+                android:gravity="start|center_vertical"
+                android:paddingStart="15dp"
+                android:textAllCaps="false"
+                android:paddingEnd="0dp"
+                android:textColor="@color/c_text_v1"
+                android:text="@string/TAB_MENU_SETTINGS"
+                android:textSize="14.5sp" />
+
+        </LinearLayout>
+
+</LinearLayout>

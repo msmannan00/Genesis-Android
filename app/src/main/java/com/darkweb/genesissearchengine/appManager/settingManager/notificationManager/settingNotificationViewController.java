@@ -1,27 +1,18 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.notificationManager;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.SeekBar;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
-import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController;
-import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
-import static com.darkweb.genesissearchengine.constants.status.sSettingHistoryStatus;
-import static com.darkweb.genesissearchengine.constants.status.sSettingJavaStatus;
 
 class settingNotificationViewController
 {
@@ -62,8 +53,10 @@ class settingNotificationViewController
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             }
             else {
-                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.white));
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
             }
         }
     }

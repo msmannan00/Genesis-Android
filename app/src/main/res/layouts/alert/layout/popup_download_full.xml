@@ -7,11 +7,9 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:id="@+id/pMainLayout"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:background="@xml/hox_rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,9 +23,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingStart="15dp"
+            android:layout_marginRight="30dp"
+            android:singleLine="true"
             android:text="@string/ALERT_DOWNLOAD"
             android:textAlignment="textStart"
-            android:textColor="#008080"
+            android:textColor="@color/c_text_setting_heading_v2"
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,24 +38,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:justificationMode="inter_word"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textAlignment="textStart"
-            android:textColor="#242B64"
             android:alpha="0.6"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:singleLine="true"
+            android:paddingEnd="15dp"
+            android:layout_marginRight="30dp"
+            android:textColor="@color/c_alert_text"
             android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pHeader"
             tools:ignore="SmallSp" />
-
         <View
             android:id="@+id/pDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/holo_gray_light"
+            android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -93,7 +92,7 @@
                     android:text="@string/ALERT_WELCOME_MESSAGE_BT_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -102,6 +101,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
 
@@ -110,7 +110,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -138,7 +138,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -147,6 +147,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
 
@@ -155,7 +156,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -183,13 +184,14 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:tint="@color/c_navigation_tint"
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
@@ -200,7 +202,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -210,6 +212,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal"
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +232,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_4"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -236,6 +240,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
@@ -245,7 +250,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -255,6 +260,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal"
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -273,7 +280,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_5"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -281,6 +288,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
@@ -290,7 +298,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -300,6 +308,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal"
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -318,7 +328,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_6"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -326,6 +336,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
@@ -335,7 +346,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -345,6 +356,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal"
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -363,7 +376,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_7"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/blue_dark"
+                    android:textColor="@color/c_alert_text"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -372,6 +385,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
+                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right" />
 
@@ -380,17 +394,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/holo_gray_light"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:background="@color/button_gray"
+                android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
@@ -404,7 +410,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
-                    android:id="@+id/pDontShowAgain"
+                    android:id="@+id/pDismiss"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="1"
@@ -413,7 +419,7 @@
                     android:text="@string/ALERT_WELCOME_MESSAGE_BT_5"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="@color/cursor_blue"
+                    android:textColor="@color/c_button_text_v3"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
