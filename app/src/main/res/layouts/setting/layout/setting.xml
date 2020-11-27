@@ -22,9 +22,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:clickable="true"
-                    android:paddingEnd="7dp"
+                    android:paddingEnd="0dp"
                     android:paddingStart="5dp"
                     android:focusable="true"
+                    android:elevation="8dp"
+                    android:background="@color/c_background"
                     android:orientation="horizontal"
                     tools:ignore="RtlSymmetry">
 
@@ -51,12 +53,25 @@
                         android:textColor="@color/c_text_v1"
                         android:textSize="17sp"
                         android:textStyle="bold" />
-                </LinearLayout>
 
-                <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/c_view_divier_background" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <ImageButton
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="0dp"
+                        android:scaleX="1.08"
+                        android:layout_marginEnd="7dp"
+                        android:scaleY="1.08"
+                        android:layout_marginTop="1dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:src="@xml/ic_baseline_info"
+                        android:tint="@color/c_navigation_light" />
+                </LinearLayout>
 
                 <!-- Title Header -->
                 <LinearLayout
@@ -74,7 +89,7 @@
                         android:layout_height="match_parent"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         app:tint="@color/c_icon_tint"
                         android:src="@drawable/ic_baseline_browser"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -83,7 +98,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="6"
-                        android:alpha="0.7"
+                        android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
@@ -109,7 +124,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
@@ -142,7 +157,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -157,7 +172,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -184,7 +199,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
@@ -218,7 +233,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -233,7 +248,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -260,7 +275,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
@@ -279,7 +294,7 @@
                         android:padding="10dp"
                         app:tint="@color/c_icon_tint"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_baseline_privacy"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -294,7 +309,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -309,7 +324,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -336,7 +351,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
@@ -355,7 +370,7 @@
                         app:tint="@color/c_icon_tint"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_baseline_notifications"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -368,7 +383,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -383,7 +398,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -410,7 +425,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
@@ -428,7 +443,7 @@
                         android:layout_height="match_parent"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         app:tint="@color/c_icon_tint"
                         android:src="@drawable/ic_baseline_accessibility"
                         android:contentDescription="@string/GENERAL_TODO" />
@@ -443,7 +458,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -458,7 +473,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -485,7 +500,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
@@ -504,7 +519,7 @@
                         android:padding="10dp"
                         app:tint="@color/c_icon_tint"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_baseline_clear"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -518,7 +533,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -533,7 +548,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -560,7 +575,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
@@ -579,7 +594,7 @@
                         android:layout_height="match_parent"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_baseline_advance"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -593,7 +608,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -608,7 +623,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:alpha="0.7"
+                            android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
@@ -635,7 +650,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:background="@color/c_view_divier_background"/>
 
             </LinearLayout>

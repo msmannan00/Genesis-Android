@@ -1,20 +1,34 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ActionMenuView;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
@@ -25,17 +39,31 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 class tabViewController
 {
-    /*Private Variables*/
+    /*Private Views*/
     private AppCompatActivity mContext;
     private PopupWindow mTabOptionMenu = null;
     private Button mTabs;
+    private ImageView mRemoveSelection;
+    private LinearLayout mTabsContainer;
+    private ImageButton mMenuButton;
+    private ImageButton mClearSelection;
+    private View mToastLayoutRoot;
+
+    /*Private Local Variables*/
+    private Handler mDelayHandler = new Handler();
+    private Paint mPainter = new Paint();
 
     /*Initializations*/
 
-    tabViewController(AppCompatActivity mContext, Button pTabs)
+    tabViewController(AppCompatActivity mContext, Button pTabs, ImageView pRemoveSelection, LinearLayout pTabsContainer, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot)
     {
         this.mContext = mContext;
         this.mTabs = pTabs;
+        this.mRemoveSelection = pRemoveSelection;
+        this.mTabsContainer = pTabsContainer;
+        this.mMenuButton = pMenuButton;
+        this.mClearSelection = pClearSelection;
+        this.mToastLayoutRoot = pToastLayoutRoot;
 
         initPostUI();
         initUI();
@@ -86,14 +114,83 @@ class tabViewController
         }
     }
 
-    public void onTrigger(tabEnums.eTabViewCommands pCommands, List<Object> pData){
+    private void onShowSelectionMenu() {
+        mRemoveSelection.setVisibility(View.VISIBLE);
+        mClearSelection.setVisibility(View.VISIBLE);
+        mTabsContainer.setVisibility(View.GONE);
+        mMenuButton.setVisibility(View.GONE);
+    }
+
+    private void onHideSelectionMenu() {
+        mRemoveSelection.setVisibility(View.GONE);
+        mClearSelection.setVisibility(View.GONE);
+        mTabsContainer.setVisibility(View.VISIBLE);
+        mMenuButton.setVisibility(View.VISIBLE);
+    }
+
+    private void onShowUndoDialog() {
+        mToastLayoutRoot.animate().cancel();
+        mToastLayoutRoot.setVisibility(View.VISIBLE);
+        mToastLayoutRoot.setAlpha(0);
+        mToastLayoutRoot.animate().alpha(1);
+
+        mDelayHandler.removeCallbacksAndMessages(null);
+        mDelayHandler.postDelayed(() -> mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE)), 1500);
+    }
+
+    private void onHideUndoDialog() {
+        mToastLayoutRoot.animate().cancel();
+        mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE));
+    }
+
+    private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
+
+        Bitmap icon;
+        if(pActionState == ItemTouchHelper.ANIMATION_TYPE_SWIPE_SUCCESS){
+            View itemView = pViewHolder.itemView;
+            itemView.animate().alpha(0f);
+        }
+        else if(pActionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+            View itemView = pViewHolder.itemView;
+            float height = (float) itemView.getBottom() - (float) itemView.getTop();
+            float width = height / 3;
+
+            if(pDX > 0){
+                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
+                RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), pDX,(float) itemView.getBottom());
+                pCanvas.drawRect(background, mPainter);
+                icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
+                RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
+                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+            } else {
+                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
+                RectF background = new RectF((float) itemView.getRight() + pDX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
+                pCanvas.drawRect(background, mPainter);
+                icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
+                RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
+                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+            }
+        }
+    }
+
+    public Object onTrigger(tabEnums.eTabViewCommands pCommands, List<Object> pData){
         if(pCommands.equals(tabEnums.eTabViewCommands.M_SHOW_MENU)){
             onOpenTabMenu((View) pData.get(0));
         }else if(pCommands.equals(tabEnums.eTabViewCommands.M_DISMISS_MENU)){
             onCloseTabMenu();
         }else if(pCommands.equals(tabEnums.eTabViewCommands.INIT_TAB_COUNT)){
             initTabCount();
+        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_SELECTION)){
+            onHideSelectionMenu();
+        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_SELECTION)){
+            onShowSelectionMenu();
+        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG)){
+            onShowUndoDialog();
+        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG)){
+            onHideUndoDialog();
+        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)){
+            onDrawSwipableBackground((Canvas)pData.get(0), (RecyclerView.ViewHolder)pData.get(1), (float)pData.get(2), (int)pData.get(3));
         }
+        return null;
     }
-
 }

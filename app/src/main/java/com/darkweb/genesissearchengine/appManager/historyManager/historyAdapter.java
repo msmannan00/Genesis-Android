@@ -3,7 +3,6 @@ package com.darkweb.genesissearchengine.appManager.historyManager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,7 +51,6 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
     /*Local Variables*/
 
-    private float mRecyclerPositionX1, mRecyclerPositionX2;
     private boolean mDisableCallable = false;
     private boolean mSearchEnabled = false;
 
@@ -280,19 +278,17 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
     }
 
-    private float mPointerPosition = 0;
     @SuppressLint("ClickableViewAccessibility")
-    public void onSwipe(View pItemView, int pPosition, String pUrl, View pMenuItem, ImageView pLogoImage, int pId, Date pDate){
+    public void onSwipe(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, int pId, Date pDate){
 
         Handler handler = new Handler();
 
         Runnable mLongPressed = () -> {
-            if(!mDisableCallable && Math.abs(mRecyclerPositionX1-mPointerPosition) <= 20){
+            if(!mDisableCallable){
                 if(!mLongSelectedIndex.contains(pUrl) || !mLongSelectedID.contains(pId)) {
                     mLongPressedMenuActive = true;
                     onSelectView(pItemView, pUrl,pMenuItem, pLogoImage, false, pId, pDate);
                 }else {
-                    Log.i("I AM HERE 22","I AM HERE");
                     onClearHighlight(pItemView, pUrl,pMenuItem, pLogoImage, false, pId, pDate);
                     mLongPressedMenuActive = true;
                 }
@@ -304,33 +300,10 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
          pItemView.setOnTouchListener((v, event) -> {
 
-             if (mRecyclerPositionX1!=0 && Math.abs(event.getX() - mRecyclerPositionX1) > 400 && !mLongPressedMenuActive) {
-                 v.setPressed(false);
-                 pItemView.clearFocus();
-                 handler.removeCallbacks(mLongPressed);
-                 pItemView.setOnTouchListener(null);
-                 pItemView.clearFocus();
-                 if(mPassedList.size()<=1){
-                     mPassedList.clear();
-                     initializeModelWithDate(false);
-                     notifyItemRemoved(0);
-                     notifyItemRangeChanged(0, 1);
-                     mEvent.invokeObserver(Collections.singletonList(0),enums.etype.is_empty);
-                 }else {
-                     initializeModelWithDate(false);
-                     historyAdapter.this.onClose(pPosition);
-                 }
-                 return true;
-             }
-
-             mPointerPosition = event.getX();
              if (event.getAction() == MotionEvent.ACTION_UP) {
-                 mRecyclerPositionX2 = event.getX();
-                 float deltaX = mRecyclerPositionX2 - mRecyclerPositionX1;
 
-                 Log.i("FCK2","FCK2 : " + mLongSelectedIndex.size());
                  if (mLongSelectedIndex.size() > 0) {
-                     if (Math.abs(deltaX) <= 20 && !mLongPressedMenuActive) {
+                     if (!mLongPressedMenuActive) {
                          if (mLongSelectedIndex.contains(pUrl) && mLongSelectedID.contains(pId)) {
                              handler.removeCallbacks(mLongPressed);
                              historyAdapter.this.onClearHighlight(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
@@ -342,24 +315,15 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                      return false;
                  }
 
-                 if (Math.abs(deltaX) > 100) {
-                     v.setPressed(false);
-                     handler.removeCallbacks(mLongPressed);
-                     historyAdapter.this.onClose(pPosition);
-                 } else {
-                     v.setPressed(false);
-                     handler.removeCallbacks(mLongPressed);
-                     mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered);
-                 }
-
+                 v.setPressed(false);
+                 handler.removeCallbacks(mLongPressed);
+                 mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered);
                  return true;
 
              } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                  mDisableCallable = false;
                  mLongPressedMenuActive = false;
                  v.setPressed(true);
-                 mRecyclerPositionX1 = event.getX();
-                 Log.i("1WOW : ","WOW : " + event.getX() + " -- " + mRecyclerPositionX1);
                  handler.postDelayed(mLongPressed, ViewConfiguration.getLongPressTimeout());
                  return true;
              } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
@@ -417,7 +381,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     private void setItemViewOnClickListener(View pItemView, View pItemMenu, String pUrl, int pPosition, String pTitle, View pMenuItem, ImageView pLogoImage, int pId, Date pDate)
     {
         pItemMenu.setOnClickListener((View v) -> onOpenMenu(v, pUrl, pPosition, pTitle));
-        onSwipe(pItemView, pPosition, pUrl,pMenuItem, pLogoImage, pId, pDate);
+        onSwipe(pItemView, pUrl,pMenuItem, pLogoImage, pId, pDate);
     }
 
     private void onClose(int pIndex){
@@ -559,7 +523,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
    }
 
-    public boolean isLongPressMenuActive(){
+    private boolean isLongPressMenuActive(){
         return mLongSelectedIndex.size()>0;
     }
 
@@ -578,6 +542,12 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
         else if(pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_URL){
             return getLongSelectedleURL();
+        }
+        else if(pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS){
+            return isLongPressMenuActive();
+        }
+        else if(pCommands == historyEnums.eHistoryAdapterCommands.ON_CLOSE){
+            onClose((int)pData.get(0));
         }
         return null;
     }

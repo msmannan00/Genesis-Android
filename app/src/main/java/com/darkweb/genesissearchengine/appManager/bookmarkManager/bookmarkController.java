@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.bookmarkManager;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,12 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.appManager.historyManager.historyEnums;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -35,7 +39,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
+import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
 
 
@@ -70,6 +74,7 @@ public class bookmarkController extends AppCompatActivity
         initializeViews();
         initializeList();
         initCustomListeners();
+        initSwipe();
     }
 
     public void initializeListModel(){
@@ -97,6 +102,12 @@ public class bookmarkController extends AppCompatActivity
         adapter.invokeFilter(false);
         mRecycleView.setNestedScrollingEnabled(false);
         mRecycleView.setHasFixedSize(true);
+
+        mRecycleView.setItemAnimator(new FadeInRightAnimator());
+        Objects.requireNonNull(mRecycleView.getItemAnimator()).setAddDuration(200);
+        mRecycleView.getItemAnimator().setRemoveDuration(200);
+        mRecycleView.getItemAnimator().setMoveDuration(200);
+        mRecycleView.getItemAnimator().setChangeDuration(450);
 
         mRecycleView.setAdapter(adapter);
         mRecycleView.setItemViewCacheSize(100);
@@ -150,6 +161,29 @@ public class bookmarkController extends AppCompatActivity
         });
     }
 
+    private void initSwipe(){
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.ON_CLOSE,Collections.singletonList(position));
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                Canvas mCanvas = (Canvas) mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
+                super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRecycleView);
+    }
+
     /*View Custom Overrides*/
 
     @Override
@@ -198,7 +232,7 @@ public class bookmarkController extends AppCompatActivity
     public void onBackPressed() {
         if(mSearchInput.getVisibility() == View.VISIBLE){
             onHideSearch(null);
-        }else if(mbookmarkAdapter.isLongPressMenuActive()){
+        }else if((Boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS,null)){
             onClearMultipleSelection(null);
         }else {
             onBackPressed(null);
@@ -262,7 +296,7 @@ public class bookmarkController extends AppCompatActivity
 
     public class adapterCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             if(e_type.equals(enums.etype.url_triggered)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());

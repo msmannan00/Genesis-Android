@@ -3,6 +3,7 @@
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
     <string name="GENERAL_SEARCH_HINT" translatable="false">Search or type web address</string>
+    <string name="GENERAL_FIND_HINT" translatable="false">Find in page</string>
     <string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="false">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
     <string name="GENERAL_TODO" translatable="false">TODO</string>
@@ -29,6 +30,8 @@
     <string name="SETTING_NOTIFICATION_HEADER" translatable="false">Settings | Notification</string>
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="false">Network Status Notification</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="false">Device Notification Settings</string>
+    <string name="SETTING_ORBOT_LOG_HEADER" translatable="false">Log Settings</string>
+    <string name="SETTING_ORBOT_LIST_VIEW" translatable="false">Show Logs in Advance List View</string>
     <string name="SETTING_SEARCH" translatable="false">Manage Search</string>
     <string name="SETTING_SEARCH_INFO" translatable="false">Add, set default. show suggestions</string>
     <string name="SETTING_NOTIFICATION" translatable="false">Manage Notification</string>
@@ -193,6 +196,8 @@
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="false">Download File | </string>
     <string name="ALERT_DATA_CLEARED" translatable="false">Data Notification</string>
     <string name="ALERT_DATA_CLEARED_INFO" translatable="false">Private data cleared. Now you can safely continue browsing</string>
+    <string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="false">Tab Closed</string>
+    <string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="false">Undo</string>
 
     <!-- Bridge Settings -->
     <string name="BRIDGE_BASIC_SETTING" translatable="false">Security Settings</string>
@@ -207,21 +212,33 @@
     <string name="BRIDGE_OBFS4" translatable="false">obfs4 (Recommended)</string>
     <string name="BRIDGE_MEEK" translatable="false">Meek-azure (China)</string>
 
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="false">Proxy Logs</string>
+    <string name="ORBOT_LOG_HEADER" translatable="false">Logs Info</string>
+    <string name="ORBOT_LOG_INFO" translatable="false">If you are facing connectivity issue while starting genesis please copy the following code and find issue online or send it to us so we can examine </string>
+
     <!-- Popup Menu -->
-    <string name="HOME_MENU__NEW_TABS" translatable="false">New Tabs</string>
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="false">Orbot logs</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="false">New tabs</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="false">Close Tab</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="false">Open Recent Tabs</string>
     <string name="HOME_MENU_LANGUAGE" translatable="false">Language</string>
     <string name="HOME_MENU_DOWNLOAD" translatable="false">Downloads</string>
     <string name="HOME_MENU_HISTORY" translatable="false">History</string>
     <string name="HOME_MENU_SETTING" translatable="false">Settings</string>
-    <string name="HOME_MENU_DESKTOP" translatable="false">Desktop Site</string>
+    <string name="HOME_MENU_DESKTOP" translatable="false">Desktop site</string>
     <string name="HOME_MENU_BOOKMARK" translatable="false">Bookmark This Page</string>
     <string name="HOME_MENU_OPEN_BOOKMARK" translatable="false">Bookmarks</string>
-    <string name="HOME_MENU_REPORT" translatable="false">Report Website</string>
-    <string name="HOME_MENU_RATE" translatable="false">Rate This App</string>
+    <string name="HOME_MENU_REPORT" translatable="false">Report website</string>
+    <string name="HOME_MENU_RATE" translatable="false">Rate this app</string>
+    <string name="HOME_MENU_FIND" translatable="false">Find in page</string>
     <string name="HOME_MENU_SHARE" translatable="false">Share</string>
-    <string name="HOME_CHARACTER_ENCODING" translatable="false">Character Encoding</string>
+    <string name="HOME_CHARACTER_ENCODING" translatable="false">Character encoding</string>
+
+    <!-- Tab View -->
+    <string name="TAB_MENU_OPEN_TAB" translatable="false">New tabs</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="false">Close all tabs</string>
+    <string name="TAB_MENU_SETTINGS" translatable="false">Settings</string>
 
     <!-- Shared Recycler View -->
     <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="false">Open tabs</string>
@@ -277,6 +294,7 @@
     <string name="HOME_TAB_TEXT" translatable="false">1</string>
     <string name="HOME_CONNECT" translatable="false">Connect</string>
     <string name="HOME_LOADING" translatable="false">Loading Please Wait</string>
+    <string name="HOME_LOADING_STATIC" translatable="false">~&#160;Genesis on standby at the moment</string>
 
     <!-- Landing Page -->
     <string name="LANDING_BRIDGES_INFO" translatable="false">"Sometimes you need a bridge to get to Tor."</string>

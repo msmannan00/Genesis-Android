@@ -89,7 +89,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
-                    android:text="@string/ALERT_WELCOME_MESSAGE_BT_1"
+                    android:text="@string/ALERT_DOWNLOAD_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/c_alert_text"

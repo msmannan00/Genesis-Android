@@ -8,6 +8,6 @@ public class eventObserver
 {
     public interface eventListener
     {
-        Object invokeObserver(List<Object> data, enums.etype event_type);
+        Object invokeObserver(List<Object> data, Object event_type);
     }
 }

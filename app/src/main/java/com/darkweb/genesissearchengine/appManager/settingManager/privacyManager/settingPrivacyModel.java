@@ -69,16 +69,16 @@ class settingPrivacyModel
         if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_JAVASCRIPT)){
             onJavaScript((boolean)pData.get(0));
         }
-        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.SET_DONOT_TRACK)){
+        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_DONOT_TRACK)){
             onDoNotTrack((boolean)pData.get(0));
         }
-        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.SET_TRACKING_PROTECTION)){
+        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_TRACKING_PROTECTION)){
             onTrackingProtection((boolean)pData.get(0));
         }
-        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.SET_COOKIES)){
+        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_COOKIES)){
             onCookies((View) pData.get(0));
         }
-        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.SET_CLEAR_PRIVATE_DATA)){
+        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_CLEAR_PRIVATE_DATA)){
             onClearPrivateData((Boolean) pData.get(0));
         }
         return null;

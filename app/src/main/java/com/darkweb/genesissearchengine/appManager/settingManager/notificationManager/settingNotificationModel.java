@@ -28,7 +28,6 @@ class settingNotificationModel
 
         int mStatus = pStatus ? 1 : 0;
         status.sBridgeNotificationManual = mStatus;
-
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, mStatus));
         pluginController.getInstance().setNotificationStatus(mStatus);
         int notificationStatus = pluginController.getInstance().getNotificationStatus();

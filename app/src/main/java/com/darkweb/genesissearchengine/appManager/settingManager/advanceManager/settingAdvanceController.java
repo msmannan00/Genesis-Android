@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
@@ -49,7 +48,7 @@ public class settingAdvanceController extends AppCompatActivity {
     public class settingAdvanceViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }
@@ -59,7 +58,7 @@ public class settingAdvanceController extends AppCompatActivity {
     public class settingAdvanceModelCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }

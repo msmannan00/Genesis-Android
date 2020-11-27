@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="c_background">#ffffff</color>
+    <color name="c_background_inverted">#1c1b21</color>
     <color name="c_view_divier_background_inner">#ebebeb</color>
+    <color name="c_view_divier_background_inner_v1">#e6e6e6</color>
     <color name="c_view_divier_background">#f2f2f2</color>
-    <color name="c_text_v1">#212d45</color>
+    <color name="c_text_v1">#192234</color>
     <color name="c_text_v2">#999999</color>
     <color name="c_text_v3">#bfbfbf</color>
     <color name="c_text_v4">#425e8a</color>
@@ -11,10 +13,12 @@
     <color name="c_icon_tint">#425e8a</color>
     <color name="c_text_setting_heading">#3385ff</color>
     <color name="c_button_text_v1">#3385ff</color>
+    <color name="c_button_text_v1_inverted">#ffffff</color>
     <color name="c_button_text_v2">#b3b3b3</color>
     <color name="c_button_text_v3">#3385ff</color>
     <color name="c_text_setting_heading_v2">#00b3b3</color>
     <color name="c_navigation_tint">#000000</color>
+    <color name="c_navigation_light">#bfbfbf</color>
     <color name="c_switch_theme">#3385ff</color>
     <color name="c_border_left">#123456</color>
     <color name="c_radio_tint">#4d88ff</color>
@@ -29,19 +33,26 @@
     <color name="c_seekbar_thumb">#3385ff</color>
     <color name="c_ripple">#d9d9d9</color>
     <color name="c_ripple_v1">#d9d9d9</color>
+    <color name="c_ripple_v2">#f2f2f2</color>
     <color name="c_button_text">#ffffff</color>
     <color name="c_button_background">#3385ff</color>
     <color name="c_alert_background">#ffffff</color>
     <color name="c_view_divier_background_v1">#f2f2f2</color>
+    <color name="c_view_divier_background_v2">#f2f2f2</color>
     <color name="c_profile_radial_inner">#000000</color>
     <color name="c_profile_radial_outer">#ffffff</color>
     <color name="c_edittext_background">#e6e6e6</color>
-    <color name="c_button_warning">#f32323</color>
+    <color name="c_button_warning">#610505</color>
     <color name="c_rateus_warning">#b3b3b3</color>
     <color name="c_splash_buttons">#ffffff</color>
     <color name="c_tab">#dde3ee</color>
     <color name="c_tab_background">#212d45</color>
     <color name="c_tab_border">#6482b4</color>
+    <color name="c_list_remove_back">#999999</color>
+    <color name="c_list_alpha_black">#90000000</color>
+    <color name="c_text_home_menu">#212d45</color>
+    <color name="c_hint_text">#b3b3b3</color>
+    <color name="c_list_item_current">#e6e6e6</color>
 
     <color name="c_menu_drop_shadow_05">#05e6e6e6</color>
     <color name="c_menu_drop_shadow_10">#10e6e6e6</color>
@@ -50,6 +61,7 @@
     <color name="c_menu_drop_shadow_25">#25e6e6e6</color>
 
     <color name="c_alert_text">#242B64</color>
+    <color name="c_alert_text_inverted">#ffffff</color>
 
     <color name="blue">#0066FF</color>
     <color name="ease_blue_light">#fdfeff</color>
@@ -59,6 +71,7 @@
     <color name="landing_ease_blue_light_2">#eef1f7</color>
     <color name="cursor_blue">#3385ff</color>
     <color name="text_color_highlight_v1">#b3d1ff</color>
+    <color name="text_color_highlight_v3">#99bbff</color>
     <color name="blue_dark">#212d45</color>
     <color name="blue_dark_v1">#212d45</color>
     <color name="blue_dark_v2">#55212d45</color>

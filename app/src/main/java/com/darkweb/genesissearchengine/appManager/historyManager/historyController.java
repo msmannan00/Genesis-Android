@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.historyManager;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
@@ -35,6 +37,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 import static com.darkweb.genesissearchengine.appManager.historyManager.historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU;
 
 public class historyController extends AppCompatActivity
@@ -69,6 +73,7 @@ public class historyController extends AppCompatActivity
         initializeViews();
         initializeList();
         initCustomListeners();
+        initSwipe();
     }
 
     public void initializeListModel(){
@@ -175,6 +180,30 @@ public class historyController extends AppCompatActivity
         });
     }
 
+
+    private void initSwipe(){
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.ON_CLOSE,Collections.singletonList(position));
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                Canvas mCanvas = (Canvas) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
+                super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRecycleView);
+    }
+
     /*View Custom Overrides*/
 
     @Override
@@ -223,7 +252,7 @@ public class historyController extends AppCompatActivity
     public void onBackPressed() {
         if(mSearchInput.getVisibility() == View.VISIBLE){
             onHideSearch(null);
-        }else if(mHistoryAdapter.isLongPressMenuActive()){
+        }else if((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS,null)){
             onClearMultipleSelection(null);
         }else {
             onBackPressed(null);
@@ -308,7 +337,7 @@ public class historyController extends AppCompatActivity
 
     public class adapterCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             if(e_type.equals(enums.etype.url_triggered)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());

@@ -1,30 +1,33 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
-import com.darkweb.genesissearchengine.constants.keys;
-import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
-import com.darkweb.genesissearchengine.pluginManager.pluginController;
-import java.util.Arrays;
-import java.util.List;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import org.torproject.android.service.wrapper.logRowModel;
+import java.util.ArrayList;
+import java.util.Collections;
 
 class orbotLogModel
 {
-    /*Variable Declaration*/
+    /*Private Variables*/
 
-    private eventObserver.eventListener mEvent;
-
-    /*Initializations*/
-
-    orbotLogModel(eventObserver.eventListener mEvent){
-        this.mEvent = mEvent;
-    }
+    private ArrayList<logRowModel> mModelList = new ArrayList<>();
 
     /*Helper Methods*/
 
-    public void onTrigger(orbotLogEnums.eOrbotLogModelCommands pCommands, List<Object> pData){
+    void setList(ArrayList<logRowModel> model)
+    {
+        if(model.size()>0){
+            mModelList.clear();
+            mModelList.addAll(model);
+            Collections.reverse(mModelList);
+        }
+        else {
+            mModelList.add(0, new logRowModel(constants.LOGS_DEFAULT_MESSAGE, helperMethod.getCurrentTime()));
+        }
     }
 
-
+    ArrayList<logRowModel> getList()
+    {
+        return mModelList;
+    }
 }

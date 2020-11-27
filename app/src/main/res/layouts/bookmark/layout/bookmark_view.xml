@@ -92,6 +92,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
                 android:tint="@color/black" />
+
         </LinearLayout>
 
         <View

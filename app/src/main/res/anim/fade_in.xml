@@ -1,7 +1,8 @@
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:startOffset="250">
     <alpha
-        android:duration="100"
-        android:fromAlpha="0.5"
+        android:duration="350"
+        android:fromAlpha="0.2"
         android:interpolator="@android:anim/linear_interpolator"
         android:toAlpha="1.0" />
 </set>

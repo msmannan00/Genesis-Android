@@ -24,6 +24,8 @@
                     android:layout_width="match_parent"
                     android:layout_marginBottom="0dp"
                     android:focusable="true"
+                    android:elevation="8dp"
+                    android:background="@color/c_background"
                     android:orientation="horizontal"
                     android:layout_height="52dp">
                 <ImageButton
@@ -44,18 +46,32 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="40"
-                    android:layout_marginTop="-3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="4dp"
                     android:gravity="center_vertical|start"
                     android:textStyle="bold"
                     android:text="@string/BRIDGE_HEADER"
                     />
-            </LinearLayout>
 
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/c_view_divier_background" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="0dp"
+                    android:scaleX="1.08"
+                    android:scaleY="1.08"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="7dp"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_info"
+                    android:tint="@color/c_navigation_light" />
+
+            </LinearLayout>
 
             <!-- Title Header -->
             <LinearLayout

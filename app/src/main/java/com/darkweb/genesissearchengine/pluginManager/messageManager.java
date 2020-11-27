@@ -8,12 +8,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -25,12 +27,13 @@ import com.example.myapplication.R;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import static android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 
 class messageManager
 {
     /*Private Variables*/
 
-    private List<String> data;
+    private List<Object> data;
 
     private AppCompatActivity app_context;
     private eventObserver.eventListener event;
@@ -40,6 +43,21 @@ class messageManager
 
     /*Initializations*/
 
+    private void initializeDialog(int pLayout,int pGravity,int pFlag){
+        if(dialog!=null && dialog.isShowing()){
+            dialog.dismiss();
+        }
+
+        dialog = new Dialog(app_context);
+        dialog.getWindow().setGravity(pGravity);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCancelable(true);
+        dialog.setContentView(pLayout);
+        dialog.show();
+        dialog.getWindow().clearFlags(pFlag);
+    }
+
     messageManager(eventObserver.eventListener event)
     {
         this.event = event;
@@ -48,7 +66,7 @@ class messageManager
     /*Helper Methods*/
     private void welcomeMessage()
     {
-        initializeDialog(R.layout.popup_welcome, Gravity.CENTER);
+        initializeDialog(R.layout.popup_welcome, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             event.invokeObserver(Collections.singletonList(constants.CONST_BLACK_MARKET_URL), enums.etype.welcome);
             dialog.dismiss();
@@ -82,7 +100,7 @@ class messageManager
     @SuppressLint("QueryPermissionsNeeded")
     private void abiError()
     {
-        initializeDialog(R.layout.popup_abi_error, Gravity.CENTER);
+        initializeDialog(R.layout.popup_abi_error, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             dialog.dismiss();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_GENESIS_UPDATE_URL + status.sAppCurrentABI));
@@ -107,7 +125,7 @@ class messageManager
 
     private void rateFailure()
     {
-        initializeDialog(R.layout.popup_rate_failure, Gravity.CENTER);
+        initializeDialog(R.layout.popup_rate_failure, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -126,26 +144,27 @@ class messageManager
 
     private void reportedSuccessfully()
     {
-        initializeDialog(R.layout.popup_reported_successfully, Gravity.CENTER);
+        initializeDialog(R.layout.popup_reported_successfully, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> dialog.dismiss());
     }
 
     private void notSupportMessage()
     {
-        initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
+        initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
     private void dataClearedSuccessfully()
     {
-        initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
+        initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
+
 
     @SuppressLint("ResourceType")
     private void bookmark()
     {
-        initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER);
+        initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER, FLAG_DIM_BEHIND);
         EditText mBoomMarkTitle = dialog.findViewById(R.id.pBookmark);
         dialog.setOnDismissListener(dialog -> {
             final Handler handler = new Handler();
@@ -167,27 +186,13 @@ class messageManager
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
             helperMethod.hideKeyboard(app_context);
-            event.invokeObserver(Collections.singletonList(data.get(0).replace("genesis.onion","boogle.store")+"split"+((EditText)dialog.findViewById(R.id.pBookmark)).getText().toString()), enums.etype.bookmark);
+            event.invokeObserver(Collections.singletonList(data.get(0).toString().replace("genesis.onion","boogle.store")+"split"+((EditText)dialog.findViewById(R.id.pBookmark)).getText().toString()), enums.etype.bookmark);
         });
-    }
-
-    private void initializeDialog(int pLayout,int pGravity){
-        if(dialog!=null && dialog.isShowing()){
-            dialog.dismiss();
-        }
-
-        dialog = new Dialog(app_context);
-        dialog.getWindow().setGravity(pGravity);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setCancelable(true);
-        dialog.setContentView(pLayout);
-        dialog.show();
     }
 
     private void clearHistory()
     {
-        initializeDialog(R.layout.popup_clear_history, Gravity.CENTER);
+        initializeDialog(R.layout.popup_clear_history, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -197,7 +202,7 @@ class messageManager
 
     private void clearBookmark()
     {
-        initializeDialog(R.layout.popup_clear_bookmark, Gravity.CENTER);
+        initializeDialog(R.layout.popup_clear_bookmark, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -207,7 +212,7 @@ class messageManager
 
     private void reportURL()
     {
-        initializeDialog(R.layout.popup_report_url, Gravity.CENTER);
+        initializeDialog(R.layout.popup_report_url, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -220,7 +225,7 @@ class messageManager
     @SuppressLint("QueryPermissionsNeeded")
     private void rateApp()
     {
-        initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
+        initializeDialog(R.layout.popup_rate_us, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             RatingBar mRatingBar = dialog.findViewById(R.id.pRating);
@@ -245,7 +250,7 @@ class messageManager
 
     private void downloadFile()
     {
-        initializeDialog(R.layout.popup_download_file, Gravity.BOTTOM);
+        initializeDialog(R.layout.popup_download_file, Gravity.BOTTOM, FLAG_DIM_BEHIND);
         ((TextView)dialog.findViewById(R.id.pDescription)).setText((app_context.getString(R.string.ALERT_DOWNLOAD_MESSAGE) + data.get(0)));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
@@ -253,17 +258,17 @@ class messageManager
     @SuppressLint("ResourceAsColor")
     private void downloadFileLongPress()
     {
-        File f = new File(data.get(0));
+        File f = new File(data.get(0).toString());
         String name = f.getName();
-        String title = data.get(1);
+        String title = data.get(1).toString();
 
         int size = name.length();
         if(size>235){
             size = 235;
         }
 
-        initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER);
-        ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + " | " + data.get(0).substring(0,size)+"..."));
+        initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER, FLAG_DIM_BEHIND);
+        ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + " | " + data.get(0).toString().substring(0,size)+"..."));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.download_file_manual);
@@ -285,15 +290,15 @@ class messageManager
 
     private void openURLLongPress()
     {
-        int size = data.get(0).length()-1;
-        String title = data.get(1);
+        int size = data.get(0).toString().length()-1;
+        String title = data.get(1).toString();
 
         if(size>235){
             size = 235;
         }
 
-        initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
-        ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + data.get(0).substring(0,size)+"..."));
+        initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER, FLAG_DIM_BEHIND);
+        ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + data.get(0).toString().substring(0,size)+"..."));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.open_link_new_tab);
@@ -310,9 +315,9 @@ class messageManager
     }
 
     private void popupDownloadFull(){
-        String url = data.get(0);
-        String file = data.get(1);
-        String title = data.get(2);
+        String url = data.get(0).toString();
+        String file = data.get(1).toString();
+        String title = data.get(2).toString();
 
         String data_local = app_context.getString(R.string.ALERT_LONG_URL_MESSAGE);
 
@@ -334,10 +339,10 @@ class messageManager
         }
         String mTitle = title;
         if(mTitle.length()<=1){
-            mTitle = data.get(0).substring(0,size)+"...";
+            mTitle = data.get(0).toString().substring(0,size)+"...";
         }
 
-        initializeDialog(R.layout.popup_download_full, Gravity.CENTER);
+        initializeDialog(R.layout.popup_download_full, Gravity.CENTER, FLAG_DIM_BEHIND);
         ((TextView)dialog.findViewById(R.id.pHeader)).setText(mTitle);
         ((TextView)dialog.findViewById(R.id.pDescription)).setText((data_local));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
@@ -373,13 +378,13 @@ class messageManager
 
     private void startingOrbotInfo()
     {
-        initializeDialog(R.layout.popup_starting_orbot_info, Gravity.BOTTOM);
+        initializeDialog(R.layout.popup_starting_orbot_info, Gravity.BOTTOM, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
     private void sendBridgeMail()
     {
-        initializeDialog(R.layout.popup_bridge_mail, Gravity.CENTER);
+        initializeDialog(R.layout.popup_bridge_mail, Gravity.CENTER, FLAG_DIM_BEHIND);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -404,7 +409,7 @@ class messageManager
 
     /*External Helper Methods*/
 
-    void createMessage(AppCompatActivity app_context, List<String> data, enums.etype type)
+    void createMessage(AppCompatActivity app_context, List<Object> data, enums.etype type)
     {
         this.app_context = app_context;
         this.data = data;

@@ -11,4 +11,7 @@ class settingGeneralEnums
         M_SET_THEME, M_RESET_THEME, M_UPDATE_THEME_BLOCKER
     }
 
+    public enum eGeneralViewCallback {
+        M_RESET_THEME_INVOKED_BACK
+    }
 }

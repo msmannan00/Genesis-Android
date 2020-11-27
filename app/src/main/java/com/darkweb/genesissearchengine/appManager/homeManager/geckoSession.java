@@ -21,6 +21,8 @@ import android.util.Log;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
 import android.widget.Toast;
+import org.mozilla.gecko.EventDispatcher;
+import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -30,6 +32,7 @@ import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.JavaScriptInterface;
 import com.darkweb.genesissearchengine.helperManager.downloadFileService;
 import com.darkweb.genesissearchengine.helperManager.errorHandler;
@@ -41,18 +44,20 @@ import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.SessionFinder;
 import org.mozilla.geckoview.WebRequestError;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
-public class geckoSession extends GeckoSession implements GeckoSession.PermissionDelegate,GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate,GeckoSession.NavigationDelegate,GeckoSession.ContentDelegate
+public class geckoSession extends GeckoSession implements GeckoSession.ScrollDelegate,GeckoSession.PermissionDelegate,GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate,GeckoSession.NavigationDelegate,GeckoSession.ContentDelegate
 {
     private eventObserver.eventListener event;
 
@@ -85,6 +90,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         setContentDelegate(this);
         setAutoFillDelegate();
         setPermissionDelegate(this);
+        setScrollDelegate(this);
         mDownloadManager = new geckoDownloadManager();
         setPromptDelegate(new geckoPromptView(mContext));
         this.event = event;
@@ -108,6 +114,14 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
             event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update);
         }
         m_current_url_id = -1;
+    }
+
+    /*Scroll Delegate*/
+
+    @Override
+    public void onScrollChanged(GeckoSession session, int scrollX, int scrollY){
+        Log.i("SUPERMAN",scrollX + " - " + scrollY);
+        event.invokeObserver(Collections.singletonList(true), enums.etype.ON_UPDATE_TITLE_BAR);
     }
 
     /*Autofill Delegate*/
@@ -190,7 +204,9 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
     @UiThread
     public void onPageStop(@NonNull GeckoSession var1, boolean var2) {
-
+        if(var2){
+            event.invokeObserver(Arrays.asList("",mSessionID,mCurrentTitle, m_current_url_id), dataEnums.eTabCommands.M_UPDATE_PIXEL);
+        }
     }
 
     @Override
@@ -206,12 +222,17 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         }
     }
 
+    public void onRedrawPixel(){
+        event.invokeObserver(Arrays.asList("",mSessionID,mCurrentTitle, m_current_url_id), dataEnums.eTabCommands.M_UPDATE_PIXEL);
+    }
+
     /*History Delegate*/
     @Override
     public GeckoResult<Boolean> onVisited(@NonNull GeckoSession var1, @NonNull String var2, @Nullable String var3, int var4) {
         if(var4==3 || var4==5 || var4==1){
             event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_url_load);
             m_current_url_id = (int)event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
+            event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id), dataEnums.eTabCommands.M_UPDATE_PIXEL);
             isPageLoading = false;
         }
         return null;
@@ -228,6 +249,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         String newUrl = Objects.requireNonNull(var2).split("#")[0];
         if(!mCurrentTitle.equals("loading")){
             m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
+            event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id), dataEnums.eTabCommands.M_UPDATE_PIXEL);
         }
         mCurrentURL = newUrl;
 
@@ -298,6 +320,8 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
         if(var2!=null && !var2.equals(strings.GENERIC_EMPTY_STR) && var2.length()>2 && !var2.equals("about:blank")){
             mCurrentTitle = var2;
             m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.on_update_history);
+            event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id), dataEnums.eTabCommands.M_UPDATE_PIXEL);
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.ON_UPDATE_TAB_TITLE);
         }
     }
 
@@ -524,6 +548,21 @@ public class geckoSession extends GeckoSession implements GeckoSession.Permissio
 
     public void closeSession(){
         event.invokeObserver(Arrays.asList(null,mSessionID), enums.etype.on_close_sesson);
+    }
+
+    public void findInPage(String pQuery, int pDirection){
+        new Thread(){
+            public void run(){
+                try {
+                    FinderResult mFinder = getFinder().find(pQuery, pDirection).poll(600);
+                    if(mFinder!=null){
+                        event.invokeObserver(Arrays.asList(mFinder.total, mFinder.current), enums.etype.FINDER_RESULT_CALLBACK);
+                    }
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     void goBackSession(){

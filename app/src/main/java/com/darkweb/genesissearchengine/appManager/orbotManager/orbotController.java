@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -53,7 +52,7 @@ public class orbotController extends AppCompatActivity {
 
     public class orbotModelCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }

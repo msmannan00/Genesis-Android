@@ -48,7 +48,7 @@ public class languageController extends AppCompatActivity {
     public class languageViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
 
             return null;
@@ -58,7 +58,7 @@ public class languageController extends AppCompatActivity {
     public void changeLanguage(Locale language){
         status.sSettingLanguage = language.getLanguage();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,language.getLanguage()));
-        pluginController.getInstance().setLanguage(this);
+        pluginController.getInstance().setLanguage();
     }
 
     /*-------------------------------------------------------CALLBACKS-------------------------------------------------------*/

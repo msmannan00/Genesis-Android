@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class orbotLocalConstants
 {
-    public static ArrayList<String> mTorLogsHistory = new ArrayList<>();
+    public static ArrayList<logRowModel> mTorLogsHistory = new ArrayList<>();
     public static String mTorLogsStatus = "Loading...";
     public static boolean mIsTorInitialized = false;
     public static int mNotificationStatus = 0;

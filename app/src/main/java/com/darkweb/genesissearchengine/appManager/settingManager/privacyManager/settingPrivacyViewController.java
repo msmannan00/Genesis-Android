@@ -139,7 +139,7 @@ class settingPrivacyViewController
     }
 
     public Object onTrigger(settingPrivacyEnums.ePrivacyViewController pCommands, List<Object> pData){
-        if(pCommands.equals(settingPrivacyEnums.ePrivacyViewController.SET_COOKIE_STATUS)){
+        if(pCommands.equals(settingPrivacyEnums.ePrivacyViewController.M_SET_COOKIE_STATUS)){
             setCookieStatus((View)pData.get(0));
         }
         return null;

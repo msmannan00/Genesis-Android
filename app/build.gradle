@@ -11,6 +11,7 @@ ext {
 
 repositories {
     maven {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         url "https://maven.mozilla.org/maven2/"
         mavenLocal()
         mavenCentral()
@@ -81,6 +82,7 @@ android {
                             'src/main/res/layouts/orbotLog',
                             'src/main/res/layouts/setting',
                             'src/main/res/layouts/bridge',
+                            'src/main/res/layouts/log',
                             'src/main/res/layouts/alert',
                             'src/main/res/layouts/bookmark',
                             'src/main/res/layouts/shared',
@@ -130,6 +132,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 
     // Testing-only dependencies
     androidTestImplementation('androidx.test.espresso:espresso-core:3.3.0') {
@@ -174,6 +177,8 @@ dependencies {
     /*Helper Libraries*/
     implementation 'com.chauthai.overscroll:overscroll-bouncy:0.1.1'
     androidTestImplementation "junit:junit:4.13.1"
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
+    compile 'com.android.support:design:24.0.0'
 }
 
 apply plugin: 'com.android.application'

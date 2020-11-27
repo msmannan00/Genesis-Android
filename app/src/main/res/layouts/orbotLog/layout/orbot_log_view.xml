@@ -1,117 +1,172 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/c_background">
-    <ScrollView
-            android:layout_width="match_parent"
-            android:isScrollContainer="true"
-            android:id="@+id/pScollview"
-            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:background="@color/c_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="1dp"
+            android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="onClose"
+            android:src="@xml/ic_arrow_back"
+            android:tint="@color/c_navigation_tint" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-3dp"
+            android:layout_weight="40"
+            android:gravity="center_vertical|start"
+            android:paddingStart="10dp"
+            android:onClick="onClose"
+            android:text="@string/ORBOT_LOG"
+            android:textColor="@color/c_text_v1"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="2dp"
+            android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="openLogSettings"
+            android:src="@xml/ic_gear"
+            android:tint="@color/c_navigation_tint" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="0dp"
+            android:scaleX="1.08"
+            android:scaleY="1.08"
+            android:layout_marginTop="0dp"
+            android:padding="5dp"
+            android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:src="@xml/ic_baseline_info"
+            android:tint="@color/c_navigation_light" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mMainScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
         <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="50dp"
-                android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
             <!-- Title Header -->
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="0dp"
-                    android:orientation="horizontal"
-                    android:layout_height="52dp">
-                <ImageButton
-                    android:layout_width="20dp"
-                    android:layout_height="45dp"
-                    android:onClick="onClose"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_weight="2.5"
-                    android:tint="@color/c_navigation_tint"
-                    android:src="@xml/ic_arrow_back"
-                    android:background="@xml/gx_ripple_default_round"
-                    android:contentDescription="@string/GENERAL_TODO"/>
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/c_background"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:textColor="@color/c_text_v1"
-                    android:onClick="onClose"
-                    android:textSize="17sp"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="40"
-                    android:layout_marginTop="-3dp"
-                    android:gravity="center_vertical|start"
-                    android:textStyle="bold"
-                    android:text="@string/ORBOT_LOG"
-                    />
-            </LinearLayout>
-
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/c_view_divier_background" />
-
-            <!-- Title Header -->
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/c_background"
-                    android:layout_marginBottom="0dp"
-                    android:orientation="horizontal"
-                    android:layout_height="40dp">
-                <TextView
-                        android:textColor="@color/c_text_setting_heading"
-                        android:textSize="16sp"
-                        android:layout_width="0dp"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="14dp"
-                        android:text="@string/ORBOT_LOG_HEADER"
-                        />
+                    android:text="@string/ORBOT_LOG_HEADER"
+                    android:textColor="@color/c_text_setting_heading"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginEnd = "20dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-                <TextView
-                        android:textSize="14sp"
-                        android:layout_width="0dp"
-                        android:textColor="@color/c_text_v2"
-                        android:paddingBottom="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:background="@color/clear_alpha"
-                        android:layout_marginStart="15dp"
-                        android:text="@string/ORBOT_LOG_INFO"
-                        />
-            </LinearLayout>
-
-            <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@color/warning" />
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/clear_alpha"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="40"
+                    android:background="@color/clear_alpha"
+                    android:paddingBottom="10dp"
+                    android:text="@string/ORBOT_LOG_INFO"
+                    android:textColor="@color/c_text_v2"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/pLogs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="0dp"
                 android:layout_marginEnd="12dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:background="@xml/sx_border_left"
+                android:layout_marginStart="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:textColor="@color/c_text_v4"
                 android:textSize="14sp"
-                android:text="@string/HOME_LOADING_STATIC" />
+                android:visibility="gone"
+                android:text="@string/HOME_LOADING_STATIC"
+                tools:ignore="RtlSymmetry" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pLogRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layoutAnimation="@anim/log_layout_controller"
+                android:nestedScrollingEnabled="false"/>
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pFloatingScroller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:visibility="gone"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onScrollTop"
+        android:clickable="true"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@xml/ic_baseline_arrow_upward"
+        android:focusable="true"
+        android:contentDescription="@string/GENERAL_TODO" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

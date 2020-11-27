@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/c_background"
-        tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController">
 
     <FrameLayout
-            android:id="@+id/webviewContainer"
-            android:layout_width="match_parent"
-            android:layout_marginTop="55dp"
+        android:id="@+id/webviewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         android:background="@color/c_background"
-            android:layout_height="match_parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
         <org.mozilla.geckoview.GeckoView
-                android:id="@+id/pWebView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="0dp"
-                android:background="@color/c_background"
-                android:alpha="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp" >
+            android:id="@+id/pWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:alpha="1"
+            android:background="@color/c_background"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
         </org.mozilla.geckoview.GeckoView>
 
@@ -31,127 +33,130 @@
     </FrameLayout>
 
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="71dp"
-            android:background="#00000000"
-            app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:background="#00000000"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-                android:id="@+id/topbar"
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@xml/ic_secondary_gradinet"
+            android:elevation="7dp"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:paddingBottom="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded,UselessParent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:elevation="7dp"
-                android:background="@xml/ic_secondary_gradinet"
                 android:gravity="left"
-                android:paddingBottom="1dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="RtlHardcoded,UselessParent">
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="7dp"
-                    android:gravity="left"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="RtlHardcoded,UselessParent">
-
                 <AutoCompleteTextView
-                        android:id="@+id/pSearchInput"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_weight="1"
-                        android:background="@xml/gx_generic_input"
-                        android:completionHintView="@layout/hint_view"
-                        android:ems="10"
-                        android:popupElevation="5dp"
-                        android:hint="@string/GENERAL_SEARCH_HINT"
-                        android:inputType="textNoSuggestions"
-                        android:importantForAutofill="no"
-                        android:maxLines="1"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:selectAllOnFocus="true"
-                        android:text="@string/GENERAL_HOME_URL"
-                        android:textColor="@color/c_text_v1"
-                        android:textColorHint="@color/c_text_v1"
-                        android:textColorHighlight="@color/c_alert_background"
-                        android:textCursorDrawable="@xml/gx_search_cursor_state"
-                        android:textSize="16sp"
-                        tools:targetApi="o" />
+                    android:id="@+id/pSearchInput"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@xml/gx_generic_input"
+                    android:completionHintView="@layout/hint_view"
+                    android:ems="10"
+                    android:hint="@string/GENERAL_SEARCH_HINT"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:popupElevation="5dp"
+                    android:selectAllOnFocus="true"
+                    android:text="@string/GENERAL_HOME_URL"
+                    android:textColor="@color/c_text_v1"
+                    android:textColorHighlight="@color/text_color_highlight_v3"
+                    android:textColorHint="@color/c_text_v1"
+                    android:textCursorDrawable="@xml/gx_search_cursor_state"
+                    android:textSize="16sp"
+                    tools:targetApi="o" />
 
-                    <LinearLayout
-                        android:layout_width="40dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:onClick="onOpenTabViewBoundary"
-                        android:paddingBottom="1dp">
-                        <Button
-                            android:id="@+id/newButtonInvoke"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginTop="17dp"
-                            android:text="@string/HOME_TAB_TEXT"
-                            android:textColor="@color/c_text_v1"
-                            android:clickable="false"
-                            android:textSize="12.5sp"
-                            android:layout_marginBottom="0dp"
-                            android:background="@xml/gx_generic_tab_button"
-                            android:contentDescription="@string/GENERAL_TODO"
-                            android:scaleType="fitCenter"
-                            android:tint="@color/black" />
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:onClick="onOpenTabViewBoundary"
+                    android:paddingBottom="1dp">
+
+                    <Button
+                        android:id="@+id/newButtonInvoke"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginBottom="0dp"
+                        android:background="@xml/gx_generic_tab_button"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:scaleType="fitCenter"
+                        android:text="@string/HOME_TAB_TEXT"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="12.5sp"
+                        android:tint="@color/black" />
+                </LinearLayout>
 
                 <ImageButton
-                        android:id="@+id/menu"
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-4dp"
-                        android:layout_marginEnd="0dp"
-                        android:background="@xml/gx_ripple_gray"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:tint="@color/c_navigation_tint"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="15dp"
-                        android:onClick="onOpenMenuItem"
-                        android:paddingRight="8dp"
-                        android:paddingBottom="15dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/menu_item" />
+                    android:id="@+id/menu"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-4dp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onOpenMenuItem"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/menu_item"
+                    android:tint="@color/c_navigation_tint" />
 
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <com.darkweb.genesissearchengine.widget.AnimatedProgressBar
-                android:id="@+id/progressBar"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:alpha="0"
-                android:progressDrawable="@xml/hox_photon_progress"
-                app:shiftDuration="@integer/progress_shift_duration"
-                app:wrapShiftDrawable="true"
-                android:layout_marginTop="55.9dp"
-                android:progress="0"
-                android:max="10000"
-                android:scaleY="0.7"
-                tools:progress="0"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/progressBar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="55.9dp"
+            android:alpha="0"
+            android:max="10000"
+            android:progress="0"
+            android:progressDrawable="@xml/hox_photon_progress"
+            android:scaleY="0.7"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shiftDuration="@integer/progress_shift_duration"
+            app:wrapShiftDrawable="true"
+            tools:progress="0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/splashScreen"
@@ -163,11 +168,11 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:background="@xml/hox_rounded_corner_container_bottom"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@xml/hox_rounded_corner_container_bottom"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:layout_marginRight="10dp"
                 android:translationZ="11dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -218,7 +223,7 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:elevation="2dp"
                 android:onClick="onLoadProxy"
-                android:src="@xml/ic_gateway_splash"
+                android:src="@xml/ic_gear"
                 android:tint="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/Connect"
                 app:layout_constraintTop_toTopOf="@+id/Connect" />
@@ -260,36 +265,51 @@
     </FrameLayout>
 
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:src="@drawable/icon_ban"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            app:borderWidth="0dp"
-            app:elevation="10dp"
-            android:backgroundTint="@color/white"
-            android:clickable="true" app:srcCompat="?attr/actionModeSelectAllDrawable"
-            android:id="@+id/floatingActionButton3" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="24dp"
-            android:layout_marginEnd="24dp"
-            android:focusable="true" />
+        android:id="@+id/floatingActionButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:alpha="0"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:contentDescription="@string/GENERAL_TODO"
+        android:focusable="true"
+        android:src="@drawable/icon_ban"
+        app:borderWidth="0dp"
+        app:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="?attr/actionModeSelectAllDrawable"
+        tools:ignore="ExtraText" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="395dp"
-            android:background="@color/holo_dark_gray"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="54.9dp"
-            android:alpha="0"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-5074525529134731/7816565677"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintHorizontal_bias="0.5"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/adView"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54.9dp"
+        android:alpha="0"
+        android:background="@color/holo_dark_gray"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-5074525529134731/7816565677"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.5"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/pFindBar"
+        layout="@layout/popup_find"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

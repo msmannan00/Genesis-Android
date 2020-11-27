@@ -14,6 +14,4 @@ class settingModel
         this.mEvent = mEvent;
     }
 
-    /*Helper Methods*/
-
 }

@@ -1,9 +1,14 @@
 package com.darkweb.genesissearchengine.dataManager;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.os.Handler;
 
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
+import com.google.android.gms.ads.AdSize;
+
+import org.mozilla.geckoview.GeckoResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +76,26 @@ class tabDataModel
             return null;
         }
     }
+
+    public void updatePixels(int pSessionID, GeckoResult<Bitmap> pBitmapManager){
+        for(int counter = 0; counter< mTabs.size(); counter++){
+            if(mTabs.get(counter).getSession().getSessionID()==pSessionID)
+            {
+                final Handler handler = new Handler();
+                int finalCounter = counter;
+                handler.postDelayed(() ->
+                {
+                    try {
+                        Bitmap mBitmap = pBitmapManager.poll(0);
+                        mTabs.get(finalCounter).setmBitmap(mBitmap);
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                }, 100);
+            }
+        }
+    }
+
     int getTotalTabs(){
         return mTabs.size();
     }
@@ -100,6 +125,9 @@ class tabDataModel
         }
         else if(p_commands == dataEnums.eTabCommands.GET_TAB){
             return getTab();
+        }
+        else if(p_commands == dataEnums.eTabCommands.M_UPDATE_PIXEL){
+            updatePixels((int)p_data.get(0), (GeckoResult<Bitmap>)p_data.get(1));
         }
 
         return null;

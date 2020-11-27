@@ -12,7 +12,8 @@
             android:id="@+id/pHeaderContainerTop"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:elevation="7dp"
+            android:elevation="8dp"
+            android:background="@color/c_background"
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal"
@@ -46,6 +47,23 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="0dp"
+                android:scaleX="1.08"
+                android:scaleY="1.08"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:src="@xml/ic_baseline_info"
+                android:tint="@color/c_navigation_light" />
+
         </LinearLayout>
 
 
@@ -65,11 +83,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/c_view_divier_background" />
 
             <Button
                 android:id="@+id/langEnglish"

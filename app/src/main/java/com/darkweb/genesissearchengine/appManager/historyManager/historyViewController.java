@@ -1,6 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.historyManager;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +19,7 @@ import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -32,6 +38,9 @@ class historyViewController
     private ImageButton mMenuButton;
     private ImageButton mSearchButton;
     private PopupWindow mPopupWindow = null;
+
+    /*Private Local Variables*/
+    private Paint mPainter = new Paint();
 
     /*Initializations*/
 
@@ -178,6 +187,36 @@ class historyViewController
         mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.recyclerview__menu);
     }
 
+    private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
+
+        Bitmap icon;
+        if(pActionState == ItemTouchHelper.ANIMATION_TYPE_SWIPE_SUCCESS){
+            View itemView = pViewHolder.itemView;
+            itemView.animate().alpha(0f);
+        }
+        else if(pActionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+            View itemView = pViewHolder.itemView;
+            float height = (float) itemView.getBottom() - (float) itemView.getTop();
+            float width = height / 3;
+
+            if(pDX > 0){
+                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
+                RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), pDX,(float) itemView.getBottom());
+                pCanvas.drawRect(background, mPainter);
+                icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
+                RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
+                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+            } else {
+                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
+                RectF background = new RectF((float) itemView.getRight() + pDX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
+                pCanvas.drawRect(background, mPainter);
+                icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
+                RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
+                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+            }
+        }
+    }
+
     public Object onTrigger(historyEnums.eHistoryViewCommands pCommands, List<Object> pData){
         if(pCommands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY){
             updateIfListEmpty((int)pData.get(0), (int)pData.get(1));
@@ -202,6 +241,8 @@ class historyViewController
         }
         else if(pCommands == historyEnums.eHistoryViewCommands.M_LONG_PRESS_MENU){
             onLongPressMenu((View) pData.get(0));
+        }else if(pCommands.equals(historyEnums.eHistoryViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)){
+            onDrawSwipableBackground((Canvas)pData.get(0), (RecyclerView.ViewHolder)pData.get(1), (float)pData.get(2), (int)pData.get(3));
         }
         return null;
     }

@@ -15,21 +15,25 @@ public class constants
 
     public static final String CONST_GENESIS_UPDATE_URL = "https://boogle.store/manual?abi=";
     public static final String CONST_PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
-    public static final String CONST_BACKEND_GENESIS_URL = "http://boogle.store/q=$s";
-    public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/q=$s";
+    public static final String CONST_BACKEND_GENESIS_URL = "https://boogle.store/search?q=$sa&p_num=1&s_type=all";
+    public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com/q=$s";
-    public static final String CONST_BACKEND_BING_URL = "https://bing.com/q=$s";
+    public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";
     public static final String CONST_BACKEND_WIKI_URL = "https://en.wikipedia.org/wiki/$s";
 
     /*PROXY CONSTANTS*/
 
     public static final String CONST_PROXY_SOCKS = "127.0.0.1";
-    public static final int CONST_PROXY_SOCKS_VERSION = 5;
     public static final boolean CONST_PROXY_SOCKS_REMOTE_DNS = true;
     public static final boolean CONST_PROXY_CACHE = true;
     public static final boolean CONST_PROXY_MEMORY = true;
     public static final boolean CONST_PROXY_DO_NOT_TRACK_HEADER_ENABLED = false;
     public static final int CONST_PROXY_DO_NOT_TRACK_HEADER_VALUE = 1;
+    public static final int CONST_PROXY_SOCKS_VERSION = 5;
+
+    /*LOG CONSTANTS*/
+
+    public static final String LOGS_DEFAULT_MESSAGE = "Genesis on standby at the moment";
 
     /*HISTORY CONSTANTS*/
 

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@color/c_background"
         android:clickable="true"
-        android:elevation="7dp"
+        android:elevation="8dp"
         android:focusable="true"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,11 +58,12 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/pTabsContainer"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="onBackPressed"
+                android:onClick="onBackPressedInvoked"
                 android:orientation="horizontal"
                 android:paddingStart="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +101,33 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
                 android:tint="@color/c_navigation_tint" />
+
+            <ImageButton
+                android:id="@+id/pRemoveSelection"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginTop="1dp"
+                android:visibility="gone"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:onClick="onRemoveSelection"
+                android:src="@xml/ic_baseline_delete"
+                android:tint="@color/c_navigation_tint" />
+
+            <ImageButton
+                android:id="@+id/pClearSelection"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="1dp"
+                android:visibility="gone"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:onClick="onClearSelection"
+                android:src="@xml/ic_refresh"
+                android:tint="@color/c_navigation_tint" />
+
         </LinearLayout>
 
         <View
@@ -108,8 +136,6 @@
             android:background="@color/c_view_divier_background_inner"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
-
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -120,5 +146,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer" />
+
+    <include android:id="@+id/pPopupUndo"
+        android:visibility="gone"
+        layout="@layout/popup_undo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

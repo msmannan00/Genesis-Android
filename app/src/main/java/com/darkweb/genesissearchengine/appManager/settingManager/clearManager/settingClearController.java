@@ -56,7 +56,7 @@ public class settingClearController extends AppCompatActivity {
     public class settingClearViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }
@@ -66,7 +66,7 @@ public class settingClearController extends AppCompatActivity {
     public class settingClearModelCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }

@@ -58,6 +58,8 @@ import org.torproject.android.service.util.TorServiceUtils;
 import org.torproject.android.service.util.Utils;
 import org.torproject.android.service.vpn.OrbotVpnManager;
 import org.torproject.android.service.vpn.VpnPrefs;
+import org.torproject.android.service.wrapper.localHelperMethod;
+import org.torproject.android.service.wrapper.logRowModel;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.io.BufferedReader;
@@ -435,7 +437,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         try {
             mHandler = new Handler();
 
-            appBinHome = getFilesDir();//getDir(TorServiceConstants.DIRECTORY_TOR_BINARY, Application.MODE_PRIVATE);
+            appBinHome = getFilesDir();
             if (!appBinHome.exists())
                 appBinHome.mkdirs();
 
@@ -1286,16 +1288,13 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private void sendCallbackLogMessage (String logMessage)
+    private void sendCallbackLogMessage(String logMessage)
     {
 
-        //Log.i("FUCK","FUCK:"+logMessage);
         Intent intent = new Intent(LOCAL_ACTION_LOG);
-        // You can also include some extra data.
         intent.putExtra(LOCAL_EXTRA_LOG, logMessage);
         intent.putExtra(EXTRA_STATUS, mCurrentStatus);
-
-        orbotLocalConstants.mTorLogsHistory.add(logMessage);
+        orbotLocalConstants.mTorLogsHistory.add(new logRowModel(logMessage, localHelperMethod.getCurrentTime()));
 
         if(!mConnectivity){
             orbotLocalConstants.mTorLogsStatus = "No internet connection";

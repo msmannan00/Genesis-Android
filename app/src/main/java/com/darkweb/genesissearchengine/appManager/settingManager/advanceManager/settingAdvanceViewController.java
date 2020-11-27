@@ -120,6 +120,4 @@ class settingAdvanceViewController
         return null;
     }
 
-
-
 }

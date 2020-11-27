@@ -15,13 +15,13 @@ class homeModel
         return status.sSettingSearchStatus;
     }
 
-    String urlComplete(String url){
-        if(url.equals("about:config")){
-            return url;
+    String urlComplete(String pURL, String pSearchEngine){
+        if(pURL.equals("about:config")){
+            return pURL;
         }else {
             try
             {
-                String updateUrl = helperMethod.completeURL(url);
+                String updateUrl = helperMethod.completeURL(pURL);
                 URL host = new URL(updateUrl);
                 boolean isUrlValid = Patterns.WEB_URL.matcher(updateUrl).matches();
                 if(isUrlValid && host.getHost().replace("www.","").contains("."))
@@ -34,7 +34,7 @@ class homeModel
                 ex.printStackTrace();
             }
 
-            return constants.CONST_BACKEND_GOOGLE_URL.replace("$s",url.replaceAll(" ","+"));
+            return pSearchEngine.replace("$s",pURL.replaceAll(" ","+"));
         }
     }
 

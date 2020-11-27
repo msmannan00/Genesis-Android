@@ -1,7 +1,5 @@
 package com.darkweb.genesissearchengine.constants;
 
-import android.content.res.Configuration;
-
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 
@@ -13,16 +11,16 @@ public class status
 {
     /*App Status*/
 
-    public static boolean sPaidStatus = false;
+    public static boolean sPaidStatus = true;
     public static String sAppCurrentABI = "7.0";
+    public static String mCurrentReloadURL = "";
 
     /*Settings Status*/
 
     public static String sSettingSearchStatus = constants.CONST_BACKEND_GENESIS_URL;
     public static String sSettingRedirectStatus = strings.GENERIC_EMPTY_STR;
+    public static String sSettingLanguage = "en";
 
-
-    public static boolean sThemeChanged = false;
     public static boolean sSettingEnableZoom = true;
     public static boolean sSettingEnableVoiceInput = true;
     public static boolean sSettingSearchHistory = false;
@@ -43,21 +41,23 @@ public class status
     public static boolean sAutoPlay = false;
     public static boolean sFullScreenBrowsing = false;
     public static boolean sOpenURLInNewTab = false;
+    public static boolean sDefaultNightMode;
+    public static boolean sLogListView;
+
+    public static float sSettingFontSize = 1;
+
     public static int sTheme = enums.Theme.THEME_DEFAULT;
     public static int sSettingCookieStatus = ACCEPT_FIRST_PARTY;
     public static int sShowImages = -1;
-    public static float sSettingFontSize = 1;
-    public static String sSettingLanguage = "en";
-    public static boolean sDefaultNightMode;
 
     /*Bridge Status*/
 
+    public static String sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_OBFS4;
     public static boolean sBridgeGatewayAuto = false;
     public static boolean sBridgeGatewayManual = false;
     public static boolean sBridgeVPNStatus = false;
     public static boolean sBridgeStatus = false;
     public static int sBridgeNotificationManual = 0;
-    public static String sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_OBFS4;
 
 
     public static void initStatus()
@@ -94,6 +94,7 @@ public class status
         status.sFullScreenBrowsing = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,false));
         status.sTheme = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_THEME,enums.Theme.THEME_DEFAULT));
         status.sOpenURLInNewTab = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,false));
+        status.sLogListView = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
     }
 
 }

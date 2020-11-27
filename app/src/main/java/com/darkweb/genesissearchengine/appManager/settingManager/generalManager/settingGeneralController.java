@@ -1,6 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.generalManager;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -76,14 +75,15 @@ public class settingGeneralController extends AppCompatActivity {
     public class settingGeneralViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
-            if(enums.etype.M_RESET_THEME_INVOKED_BACK.equals(e_type))
+            if(settingGeneralEnums.eGeneralViewCallback.M_RESET_THEME_INVOKED_BACK.equals(e_type))
             {
                 helperMethod.restartActivity(getIntent(), settingGeneralController.this);
                 new Handler().postDelayed(() -> {
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     activityContextManager.getInstance().getSettingController().applyTheme();
+                    activityContextManager.getInstance().getHomeController().applyTheme();
                 }, 150);
             }
             return null;
@@ -94,7 +94,7 @@ public class settingGeneralController extends AppCompatActivity {
     public class settingGeneralModelCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }

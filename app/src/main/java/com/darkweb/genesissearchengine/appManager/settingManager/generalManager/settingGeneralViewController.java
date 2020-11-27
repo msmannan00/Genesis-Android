@@ -19,6 +19,8 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.Collections;
 import java.util.List;
 
+import static com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralEnums.eGeneralViewCallback.M_RESET_THEME_INVOKED_BACK;
+
 class settingGeneralViewController
 {
     /*Private Variables*/
@@ -95,11 +97,11 @@ class settingGeneralViewController
             mOpenURLInNewTab.setChecked(false);
         }
 
-        mHomePageText.setText(helperMethod.getDomainName(status.sSettingSearchStatus));
+        mHomePageText.setText(helperMethod.getDomainName(status.sSettingSearchStatus.replace("boogle.store","genesis.onion")));
     }
 
-    private void updateThemeChanger(int pStatus){
-        mEvent.invokeObserver(Collections.singletonList(status.sTheme), enums.etype.M_RESET_THEME_INVOKED_BACK);
+    private void updateThemeChanger(){
+        mEvent.invokeObserver(Collections.singletonList(status.sTheme), M_RESET_THEME_INVOKED_BACK);
     }
 
     private void resetThemeSelection(){
@@ -132,7 +134,7 @@ class settingGeneralViewController
             resetThemeSelection();
         }
         else if(pCommands.equals(settingGeneralEnums.eGeneralViewController.M_UPDATE_THEME_BLOCKER)){
-            updateThemeChanger((int)pData.get(0));
+            updateThemeChanger();
         }
         return null;
     }

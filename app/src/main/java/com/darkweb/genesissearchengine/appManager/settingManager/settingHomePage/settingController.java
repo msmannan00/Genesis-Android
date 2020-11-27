@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController;
@@ -86,7 +85,7 @@ public class settingController extends AppCompatActivity
         pluginController.getInstance().logEvent(strings.EVENT_SETTINGS_OPENED);
     }
 
-    /*Event Handlers*/
+    /*Local Overrides*/
 
     @Override
     public void onTrimMemory(int level)
@@ -119,6 +118,8 @@ public class settingController extends AppCompatActivity
     public void onBackPressed(){
         finish();
     }
+
+    /*UI Redirection*/
 
     public void onNavigationBackPressed(View view){
         finish();
@@ -165,7 +166,7 @@ public class settingController extends AppCompatActivity
     public class settingViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }
@@ -174,7 +175,7 @@ public class settingController extends AppCompatActivity
     public class settingModelCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }

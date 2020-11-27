@@ -42,10 +42,6 @@ public class databaseController
             mDatabaseInstance = app_context.openOrCreateDatabase(constants.CONST_DATABASE_NAME, MODE_PRIVATE, null);
 
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
-            try {
-                mDatabaseInstance.execSQL("ALTER TABLE history ADD COLUMN title VARCHAR default ''");
-            } catch (SQLiteException ignored) {
-            }
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
 
         }

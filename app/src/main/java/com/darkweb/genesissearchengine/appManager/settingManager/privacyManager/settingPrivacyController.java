@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
@@ -55,7 +54,7 @@ public class settingPrivacyController extends AppCompatActivity {
     public class settingAccessibilityViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }
@@ -65,7 +64,7 @@ public class settingPrivacyController extends AppCompatActivity {
     public class settingAccessibilityModelCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }
@@ -113,25 +112,25 @@ public class settingPrivacyController extends AppCompatActivity {
 
     public void onDoNotTrack(View view){
         mSettingChanged = true;
-        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.SET_DONOT_TRACK, Collections.singletonList(!status.sStatusDoNotTrack));
+        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_DONOT_TRACK, Collections.singletonList(!status.sStatusDoNotTrack));
         mDoNotTrack.toggle();
     }
 
     public void onTrackingProtection(View view){
         mSettingChanged = true;
-        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.SET_TRACKING_PROTECTION, Collections.singletonList(!status.sSettingTrackingProtection));
+        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_TRACKING_PROTECTION, Collections.singletonList(!status.sSettingTrackingProtection));
         mTrackingProtection.toggle();
     }
 
     public void onCookies(View view){
         mSettingChanged = true;
-        mSettingPrivacyViewController.onTrigger(settingPrivacyEnums.ePrivacyViewController.SET_COOKIE_STATUS, Collections.singletonList(view));
-        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.SET_COOKIES, Collections.singletonList(view));
+        mSettingPrivacyViewController.onTrigger(settingPrivacyEnums.ePrivacyViewController.M_SET_COOKIE_STATUS, Collections.singletonList(view));
+        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_COOKIES, Collections.singletonList(view));
     }
 
     public void onClearPrivateData(View view){
         mSettingChanged = true;
-        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.SET_CLEAR_PRIVATE_DATA, Collections.singletonList(!status.sClearOnExit));
+        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_CLEAR_PRIVATE_DATA, Collections.singletonList(!status.sClearOnExit));
         mClearDataOnExit.toggle();
     }
 

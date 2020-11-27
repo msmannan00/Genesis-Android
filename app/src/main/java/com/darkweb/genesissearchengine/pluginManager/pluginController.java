@@ -80,14 +80,11 @@ public class pluginController
     public boolean isInitialized(){
         return mIsInitialized;
     }
-    void proxyManagerExitInvoke(){
-
-    }
 
     /*---------------------------------------------- EXTERNAL REQUEST LISTENER-------------------------------------------------------*/
 
     /*Message Manager*/
-    public void MessageManagerHandler(AppCompatActivity app_context,List<String> data,enums.etype type){
+    public void MessageManagerHandler(AppCompatActivity app_context,List<Object> data,enums.etype type){
         mMessageManager.createMessage(app_context,data,type);
     }
     public void onResetMessage(){
@@ -142,8 +139,7 @@ public class pluginController
     public int getNotificationStatus(){
         return orbotManager.getInstance().getNotificationStatus();
     }
-    public void updateCookiesStatus(){
-    }
+
     public void updateBridges(boolean p_status){
         orbotManager.getInstance().updateBridges(p_status);
     }
@@ -156,7 +152,7 @@ public class pluginController
     /*Ad Manager*/
     private class admobCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, Object event_type)
         {
             mHomeController.onSetBannerAdMargin();
             return null;
@@ -166,7 +162,7 @@ public class pluginController
     /*Analytics Manager*/
     private class analyticCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, Object event_type)
         {
             mAnalyticManager.logUser();
             return null;
@@ -176,7 +172,7 @@ public class pluginController
     /*Fabric Manager*/
     private class fabricCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, Object event_type)
         {
             return null;
         }
@@ -185,7 +181,7 @@ public class pluginController
     /*Firebase Manager*/
     private class firebaseCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, Object event_type)
         {
             return null;
         }
@@ -194,7 +190,7 @@ public class pluginController
     /*Lang Manager*/
     private class langCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, Object event_type)
         {
             return null;
         }
@@ -203,18 +199,20 @@ public class pluginController
     /*Onion Proxy Manager*/
     private class orbotCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, Object event_type)
         {
             return null;
         }
     }
 
     /*Lang Manager*/
-    public void setLanguage(AppCompatActivity context){
+    public void setLanguage(){
         mLangManager.setDefaultLanguage(new Locale(status.sSettingLanguage));
     }
     public void onCreate(Activity activity) {
-        mLangManager.onCreate(activity);
+        if(activity==null || !activity.isDestroyed()){
+            mLangManager.onCreate(activity);
+        }
     }
     public void onResume(Activity activity) {
         mLangManager.onResume(activity);
@@ -223,7 +221,7 @@ public class pluginController
     /*Message Manager*/
     private class messageCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype event_type)
+        public Object invokeObserver(List<Object> data, Object event_type)
         {
             if(event_type.equals(enums.etype.welcome))
             {

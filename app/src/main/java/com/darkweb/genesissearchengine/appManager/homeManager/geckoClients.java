@@ -5,10 +5,13 @@ import android.net.Uri;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.constants.*;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.io.File;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
@@ -146,6 +149,10 @@ class geckoClients
         mSession.loadUri(url);
     }
 
+    public void onRedrawPixel(){
+        mSession.onRedrawPixel();
+    }
+
     void onClearSiteData(){
         mRuntime.getStorageController().clearData(SITE_SETTINGS);
         mRuntime.getStorageController().clearData(SITE_DATA);
@@ -249,9 +256,9 @@ class geckoClients
 
     public class geckoViewClientCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, enums.etype e_type)
+        public Object invokeObserver(List<Object> data, Object e_type)
         {
-            if (mSessionID == (int)data.get(1) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
+            if (mSessionID == (int)data.get(1) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
             {
                 if (e_type.equals(on_handle_external_intent))
                 {

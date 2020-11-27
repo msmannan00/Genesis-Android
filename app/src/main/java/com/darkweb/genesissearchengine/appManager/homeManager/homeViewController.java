@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -73,12 +75,15 @@ class homeViewController
     private Button mConnectButton;
     private Button mNewTab;
     private PopupWindow popupWindow = null;
+    private View mFindBar;
+    private EditText mFindText;
+    private TextView mFindCount;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -95,12 +100,16 @@ class homeViewController
         this.mConnectButton = connect_button;
         this.mNewTab = mNewTab;
         this.popupWindow = null;
+        this.mFindBar = pFindBar;
+        this.mFindText = pFindText;
+        this.mFindCount = pFindCount;
 
         initSplashScreen();
         initializeSuggestionView(suggestions);
         initLock();
         initSearchImage();
         createUpdateUiHandler();
+        recreateStatusBar();
     }
 
     private void initSearchImage(){
@@ -108,11 +117,6 @@ class homeViewController
 
     void initTab(int count){
         mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
-
-        YoYo.with(Techniques.FlipInX)
-                .duration(450)
-                .repeat(0)
-                .playOn(mNewTab);
     }
 
     private void initPostUI(boolean isSplash){
@@ -138,12 +142,34 @@ class homeViewController
         }
     }
 
+    public void recreateStatusBar(){
+        if(status.sSettingIsAppStarted){
+            Window window = mContext.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            }
+            else {
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }else {
+                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.black));
+                    View decorView = mContext.getWindow().getDecorView();
+                    decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+            }
+        }else {
+            onProgressBarUpdate(100);
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void initStatusBarColor() {
-        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.landing_ease_blue_light_1));
-        animatedColor twoToThree = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue_light_1), ContextCompat.getColor(mContext, R.color.white));
-        animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.white), ContextCompat.getColor(mContext, R.color.white));
+        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.landing_ease_blue));
+        animatedColor twoToThree = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.c_background));
+        animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.c_background), ContextCompat.getColor(mContext, R.color.c_background));
 
         ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f).setDuration(0);
         animator.setStartDelay(600);
@@ -164,6 +190,14 @@ class homeViewController
                 {
                     float v = (float) animation1.getAnimatedValue();
                     mContext.getWindow().setStatusBarColor(twoToThree.with(v));
+                    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                        mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }else {
+                        mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.black));
+                        View decorView = mContext.getWindow().getDecorView();
+                        decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }
+                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
                 });
                 animator2.start();
 
@@ -174,8 +208,6 @@ class homeViewController
                         animator3.addUpdateListener(animation1 ->
                         {
                             float v = (float) animation1.getAnimatedValue();
-                            mContext.getWindow().setStatusBarColor(ThreeToFour.with(v));
-
                         });
                         animator3.start();
                     }
@@ -188,7 +220,7 @@ class homeViewController
     }
 
     private void initLock(){
-        Drawable img = mContext.getResources().getDrawable( R.drawable.icon_lock);
+        @SuppressLint("UseCompatLoadingForDrawables") Drawable img = mContext.getResources().getDrawable( R.drawable.icon_lock);
         mSearchbar.measure(0, 0);
         img.setBounds( -10, (int)(mSearchbar.getMeasuredHeight()*0.00), (int)(mSearchbar.getMeasuredHeight()*1.10)-10, (int)(mSearchbar.getMeasuredHeight()*0.69) );
         mSearchbar.setCompoundDrawables( img, null, null, null );
@@ -246,7 +278,7 @@ class homeViewController
     private void initSplashScreen(){
         mSearchbar.setEnabled(false);
         helperMethod.hideKeyboard(mContext);
-        initPostUI(true);
+        //initPostUI(true);
 
         mBackSplash.getLayoutParams().height = helperMethod.getScreenHeight(mContext) - helperMethod.getStatusBarHeight(mContext)*2;
         mSearchbar.setEnabled(false);
@@ -301,7 +333,9 @@ class homeViewController
         if(mSplashScreen.getAlpha()>=1)
         {
             mSplashScreen.animate().setDuration(300).setStartDelay(500).alpha(0).withEndAction((this::triggerPostUI));
-            initPostUI(false);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                initStatusBarColor();
+            }
         }
     }
 
@@ -315,7 +349,7 @@ class homeViewController
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
-    void onOpenMenu(View view,boolean canGoForward,boolean canGoBack,boolean isLoading,int userAgent){
+    void onOpenMenu(View view, boolean canGoBack, boolean isLoading, int userAgent){
 
         if(popupWindow!=null){
             popupWindow.dismiss();
@@ -324,7 +358,7 @@ class homeViewController
         LayoutInflater layoutInflater
                 = (LayoutInflater) mContext
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
-        final View popupView = layoutInflater.inflate(R.layout.popup_menu, null);
+        @SuppressLint("InflateParams") final View popupView = layoutInflater.inflate(R.layout.popup_menu, null);
 
 
         int height = helperMethod.getScreenHeight(mContext)*90 /100;
@@ -375,7 +409,7 @@ class homeViewController
                 = (LayoutInflater) mContext
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
         assert layoutInflater != null;
-        final View popupView = layoutInflater.inflate(R.layout.notification_menu, null);
+        @SuppressLint("InflateParams") final View popupView = layoutInflater.inflate(R.layout.notification_menu, null);
         popupWindow = new PopupWindow(
                 popupView,
                 ActionMenuView.LayoutParams.MATCH_PARENT,
@@ -454,6 +488,35 @@ class homeViewController
         }, delay);
     }
 
+    public void onUpdateFindBarCount(int index, int total)
+    {
+        if(total==0){
+            mFindCount.setText(strings.GENERIC_EMPTY_STR);
+        }else {
+            mFindCount.setText((total + "/" + index));
+        }
+    }
+
+    public void onUpdateFindBar(boolean pStatus)
+    {
+        mFindBar.animate().cancel();
+        if(pStatus){
+            mFindBar.setVisibility(View.VISIBLE);
+            mFindBar.setAlpha(1);
+            mFindBar.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.popup_anim_in));
+            mFindText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        }else {
+            mFindText.clearFocus();
+            mFindCount.setText(strings.GENERIC_EMPTY_STR);
+            mFindBar.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.popup_anim_out));
+            helperMethod.hideKeyboard(mContext);
+            mFindBar.animate().alpha(0).withEndAction(() -> mFindBar.setVisibility(View.GONE));
+            mFindText.setText(strings.GENERIC_EMPTY_STR);
+        }
+    }
+
     private void triggerUpdateSearchBar(String url, boolean showProtocol){
         if (mSearchbar == null || url==null)
         {
@@ -514,6 +577,8 @@ class homeViewController
             mSearchbar.selectAll();
         }
     }
+    Handler mProgressHandler = new Handler();
+    Runnable mProgressBarRunnable = null;
     void onUpdateLogs(String log){
         mLoadingText.setText(log);
     }
@@ -522,16 +587,32 @@ class homeViewController
         mProgressBar.setVisibility(View.INVISIBLE);
     }
     void onProgressBarUpdate(int value){
+        if(mProgressBarRunnable!=null){
+            mProgressHandler.removeCallbacks(mProgressBarRunnable);
+        }
+
         if(mSplashScreen.getAlpha()>0){
             mProgressBar.setProgress(value*100);
         }
         if(value==100){
             mProgressBar.setAlpha(1f);
-            mProgressBar.animate().setStartDelay(200).alpha(0);
+
             setProgressAnimate(mProgressBar,value);
+
+            mProgressBarRunnable = () -> {
+                animation.removeAllListeners();
+                animation.end();
+                animation.cancel();
+                mProgressBar.animate().cancel();
+                mProgressBar.animate().alpha(0);
+            };
+            mProgressHandler.postDelayed(mProgressBarRunnable, 250);
+
+            return;
         }
         else if(mSplashScreen.getAlpha()==0) {
             mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.animate().cancel();
             mProgressBar.animate().setStartDelay(50).alpha(1);
         }
         setProgressAnimate(mProgressBar,value);
@@ -554,7 +635,12 @@ class homeViewController
         animation = ObjectAnimator.ofInt(pb, "progress", pb.getProgress(), progressTo * 100);
         animation.setDuration(progress);
         animation.setInterpolator(new DecelerateInterpolator());
+        animation.setAutoCancel(true);
         animation.start();
+    }
+
+    void onUpdateTitleBar(boolean pStatus){
+
     }
 
     void onClearSelections(boolean hideKeyboard){
