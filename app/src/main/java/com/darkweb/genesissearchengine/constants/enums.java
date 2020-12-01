@@ -4,7 +4,7 @@ public class enums
 {
     /*Settings Manager*/
     public enum etype{
-        ON_UPDATE_VIEW_PIXEL,on_update_favicon,ON_UPDATE_TAB_TITLE,
+        ON_UPDATE_VIEW_PIXEL,on_update_favicon,ON_UPDATE_TAB_TITLE,GECKO_SCROLL_CHANGED,
         on_verify_selected_url_menu,FINDER_RESULT_CALLBACK,
         welcome,abi_error, rate_failure,reported_success,bookmark, clear_tab,clear_history,clear_bookmark,report_url,rate_app,start_orbot,download_file,download_file_long_press,on_long_press_url,
         cancel_welcome,ignore_abi,reload,connect_vpn,app_rated,download_file_manual,download_folder, open_link_new_tab,open_link_current_tab,copy_link,

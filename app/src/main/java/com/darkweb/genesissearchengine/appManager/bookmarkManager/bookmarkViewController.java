@@ -10,14 +10,20 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,21 +37,23 @@ class bookmarkViewController
 {
     /*Private Variables*/
     private AppCompatActivity mContext;
-
     private ImageView mEmptyListNotification;
     private EditText mSearchInput;
     private RecyclerView mRecycleView;
     private Button mClearButton;
     private ImageButton mMenuButton;
     private ImageButton mSearchButton;
+    private PopupWindow mPopupWindow = null;
+    private LinearLayout mHeaderContainer;
+    private TextView mTitle;
 
     /*Private Local Variables*/
     private Paint mPainter = new Paint();
-    private PopupWindow mPopupWindow = null;
+    private boolean isClearButtonVisible = true;
 
     /*Initializations*/
 
-    bookmarkViewController(ImageView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton,AppCompatActivity pContext,ImageButton pMenuButton,ImageButton pSearchButton)
+    bookmarkViewController(ImageView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton,AppCompatActivity pContext,ImageButton pMenuButton,ImageButton pSearchButton, LinearLayout pHeaderContainer, TextView pTitle)
     {
         this.mEmptyListNotification = pEmptyListNotification;
         this.mSearchInput = pSearchInput;
@@ -54,6 +62,8 @@ class bookmarkViewController
         this.mContext = pContext;
         this.mMenuButton = pMenuButton;
         this.mSearchButton = pSearchButton;
+        this.mHeaderContainer = pHeaderContainer;
+        this.mTitle = pTitle;
 
         initPostUI();
     }
@@ -86,20 +96,21 @@ class bookmarkViewController
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             mEmptyListNotification.animate().setDuration(pDuration).alpha(1f);
 
-            mClearButton.animate().setDuration(pDuration).alpha(0.4f);
-            mSearchButton.animate().setDuration(pDuration).alpha(0f);
-            mMenuButton.animate().setDuration(pDuration).alpha(0f);
+            mSearchButton.setAlpha(0f);
+            mMenuButton.setAlpha(0f);
 
             mClearButton.setEnabled(false);
             mSearchButton.setClickable(false);
             mMenuButton.setClickable(false);
             mSearchInput.setVisibility(View.GONE);
-            mClearButton.setAlpha(0f);
-            mClearButton.animate().setDuration(300).alpha(1);
+            mTitle.setVisibility(View.VISIBLE);
 
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             mClearButton.setText(strings.BOOKMARK_NO_BOOKMARK_FOUND);
             mClearButton.setClickable(false);
+
+            mClearButton.getLayoutParams().height = 0;
+            mClearButton.requestLayout();
         }
     }
 
@@ -113,10 +124,11 @@ class bookmarkViewController
     private void onSelectionMenu(boolean pStatus){
         if(!pStatus){
             mClearButton.setClickable(false);
-            mClearButton.animate().cancel();
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
-            mClearButton.animate().setDuration(200).alpha(0.4f);
             mMenuButton.setVisibility(View.VISIBLE);
+            collapse(mClearButton);
+            //mHeaderContainer.setElevation(0);
+            mTitle.setVisibility(View.VISIBLE);
             mSearchButton.setVisibility(View.GONE);
             if (mSearchInput.getVisibility() == View.VISIBLE){
                 onHideSearch();
@@ -125,12 +137,9 @@ class bookmarkViewController
             if (mSearchInput.getVisibility() != View.VISIBLE) {
                 mClearButton.setClickable(true);
                 mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
-                mClearButton.animate().cancel();
-                mClearButton.animate().setDuration(200).alpha(1);
             }
             mMenuButton.setVisibility(View.GONE);
             mSearchButton.setVisibility(View.VISIBLE);
-
         }
 
     }
@@ -155,33 +164,105 @@ class bookmarkViewController
 
     private boolean onHideSearch() {
         if(mSearchInput.getVisibility() == View.VISIBLE){
-            mSearchInput.animate().cancel();
-            mSearchInput.animate().alpha(0).setDuration(150).withEndAction(() -> {
+            mSearchInput.animate().setDuration(200).alpha(0).withEndAction(() -> {
                 mSearchInput.getText().clear();
                 mSearchInput.setVisibility(View.GONE);
                 mSearchInput.setText(strings.GENERIC_EMPTY_STR);
+
+                mTitle.setAlpha(0f);
+                mTitle.setVisibility(View.VISIBLE);
+                mTitle.animate().setDuration(150).alpha(1);
+
+                mSearchButton.setAlpha(0f);
+                mSearchButton.setVisibility(View.VISIBLE);
+                mSearchButton.animate().setDuration(150).alpha(1);
+
+                mSearchInput.setText(strings.GENERIC_EMPTY_STR);
+                mSearchInput.setClickable(false);
+                mClearButton.setClickable(true);
+                mClearButton.animate().setDuration(150).alpha(1);
             });
-            mSearchInput.setText(strings.GENERIC_EMPTY_STR);
-            mSearchInput.setClickable(false);
-            mClearButton.setClickable(true);
-            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
-            mClearButton.animate().cancel();
-            mClearButton.animate().setDuration(150).alpha(1f);
+
             return false;
         }else {
-            mSearchInput.animate().cancel();
             mSearchInput.setAlpha(0f);
-            mSearchInput.animate().setDuration(150).alpha(1);
             mSearchInput.setVisibility(View.VISIBLE);
+            mSearchInput.animate().setDuration(300).alpha(1);
             mSearchInput.setClickable(true);
             mClearButton.setClickable(false);
             mSearchInput.requestFocus();
-            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
-            mClearButton.animate().cancel();
-            mClearButton.animate().setDuration(150).alpha(0.4f);
+            mClearButton.animate().setDuration(300).alpha(0.3f);
             InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+            mSearchButton.setVisibility(View.GONE);
+            mMenuButton.setVisibility(View.GONE);
+            mTitle.setVisibility(View.GONE);
             return true;
+        }
+    }
+
+    public void expand(final View v) {
+        if(isClearButtonVisible){
+            v.animate().alpha(1);
+            v.measure(CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.WRAP_CONTENT);
+            final int targtetHeight = v.getMeasuredHeight();
+            v.getLayoutParams().height = 0;
+            Animation a = new Animation() {
+                @Override
+                protected void applyTransformation(float interpolatedTime,
+                                                   Transformation t) {
+                    v.getLayoutParams().height = interpolatedTime == 1 ? CoordinatorLayout.LayoutParams.WRAP_CONTENT
+                            : (int) (targtetHeight * interpolatedTime);
+                    v.requestLayout();
+                    mClearButton.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public boolean willChangeBounds() {
+                    return true;
+                }
+            };
+            a.setDuration(250);
+            v.startAnimation(a);
+        }
+    }
+
+    public void collapse(final View v) {
+        int[] location = new int[2];
+        v.getLocationOnScreen(location);
+
+        if(location[1]==207){
+            isClearButtonVisible = true;
+        }else {
+            isClearButtonVisible = false;
+            return;
+        }
+
+        v.animate().alpha(1);
+
+        if(mClearButton.getVisibility() == View.VISIBLE){
+            final int initialHeight = v.getMeasuredHeight();
+            v.animate().alpha(0);
+            Animation a = new Animation() {
+                @Override
+                protected void applyTransformation(float interpolatedTime,
+                                                   Transformation t) {
+                    if (interpolatedTime == 1) {
+                        v.setVisibility(View.GONE);
+                    } else {
+                        v.getLayoutParams().height = initialHeight
+                                - (int) (initialHeight * interpolatedTime);
+                        v.requestLayout();
+                    }
+                }
+
+                @Override
+                public boolean willChangeBounds() {
+                    return true;
+                }
+            };
+            a.setDuration(250);
+            v.startAnimation(a);
         }
     }
 

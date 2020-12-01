@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,8 +40,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 import static com.darkweb.genesissearchengine.appManager.historyManager.historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU;
 
 public class historyController extends AppCompatActivity
@@ -49,6 +50,8 @@ public class historyController extends AppCompatActivity
     private homeController mHomeController;
     private activityContextManager mContextManager;
     private historyAdapter mHistoryAdapter;
+    private LinearLayout mHeaderContainer;
+    private TextView mTitle;
 
     /*Private Views*/
 
@@ -91,22 +94,19 @@ public class historyController extends AppCompatActivity
         mClearButton = findViewById(R.id.pClearButton);
         mMenuButton = findViewById(R.id.pMenuButton);
         mSearchButton = findViewById(R.id.pSearchButton);
+        mHeaderContainer = findViewById(R.id.pHeaderContainer);
+        mTitle = findViewById(R.id.pTitle);
 
-        mHistoryViewController = new historyViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton,this, mMenuButton, mSearchButton);
+        mHistoryViewController = new historyViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton,this, mMenuButton, mSearchButton, mHeaderContainer, mTitle);
     }
+
     public void initializeList(){
         ArrayList<historyRowModel> model = (ArrayList<historyRowModel>) dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_GET_HISTORY ,null);
         mHistoryModel.setList(model);
         historyAdapter adapter = new historyAdapter(mHistoryModel.getList(),new adapterCallback(), this);
         mHistoryAdapter = adapter;
         adapter.invokeFilter(false);
-        mRecycleView.setNestedScrollingEnabled(false);
-        mRecycleView.setHasFixedSize(true);
-
         mRecycleView.setAdapter(adapter);
-        mRecycleView.setItemViewCacheSize(100);
-        mRecycleView.setDrawingCacheEnabled(true);
-        mRecycleView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
         mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mHistoryModel.getList().size(),0));
@@ -139,7 +139,9 @@ public class historyController extends AppCompatActivity
         });
 
         mClearButton.requestFocusFromTouch();
-        mClearButton.setOnClickListener(v -> pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHistoryController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.clear_history));
+        mClearButton.setOnClickListener(v -> {
+            pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHistoryController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.clear_history);
+        });
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) ->{
             if (actionId == EditorInfo.IME_ACTION_NEXT)
@@ -152,10 +154,11 @@ public class historyController extends AppCompatActivity
 
         mSearchInput.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                mSearchInput.clearFocus();
+                //mSearchInput.clearFocus();
+                //onHideSearch(null);
             }else {
-                mHistoryAdapter.setFilter(mSearchInput.getText().toString());
-                mHistoryAdapter.invokeFilter(true);
+                //mHistoryAdapter.setFilter(mSearchInput.getText().toString());
+                //mHistoryAdapter.invokeFilter(true);
             }
         });
 
@@ -255,14 +258,14 @@ public class historyController extends AppCompatActivity
         }else if((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS,null)){
             onClearMultipleSelection(null);
         }else {
-            onBackPressed(null);
+            finish();
         }
     }
 
     /*External XML Listeners*/
 
     public void onBackPressed(View view){
-        this.finish();
+        onBackPressed();
     }
 
     public void onHideSearch(View view) {

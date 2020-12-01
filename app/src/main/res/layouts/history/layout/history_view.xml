@@ -5,19 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    android:clickable="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     tools:context="com.darkweb.genesissearchengine.appManager.historyManager.historyController">
 
     <LinearLayout
         android:id="@+id/pHeaderContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+        android:elevation="1dp"
         android:background="@color/c_background"
-        android:clickable="true"
-        android:elevation="7dp"
-        android:focusable="true"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +22,6 @@
             android:id="@+id/pHeaderContainerTop"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:clickable="true"
-            android:focusable="true"
             android:orientation="horizontal"
             android:paddingStart="5dp"
             android:paddingEnd="7dp"
@@ -49,16 +42,47 @@
                 android:tint="@color/c_navigation_tint" />
 
             <TextView
+                android:id="@+id/pTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="-3dp"
-                android:layout_weight="40"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="20dp"
                 android:gravity="center_vertical|start"
                 android:onClick="onBackPressed"
-                android:text="@string/HOME_TITLE"
+                android:text="@string/HISTORY_TITLE"
                 android:textColor="@color/c_text_v1"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/pSearchInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_marginBottom="2.5dp"
+                android:layout_weight="80"
+                android:background="@xml/gx_generic_input"
+                android:ems="10"
+                android:hint="@string/HISTORY_SEARCH_HINT"
+                android:importantForAutofill="no"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1"
+                android:paddingStart="11dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/c_text_v1"
+                android:textColorHighlight="@color/text_color_highlight_v1"
+                android:textColorHint="@color/c_text_v2"
+                android:textCursorDrawable="@xml/gx_search_cursor_state"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:targetApi="o" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="40"/>
 
             <ImageButton
                 android:id="@+id/pSearchButton"
@@ -95,100 +119,63 @@
 
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/mMainScroll"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/pHeaderContainerBottom"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/pAppBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/c_background"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/pClearButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="17"
-                android:background="@xml/gx_ripple_blue"
-                android:paddingStart="20dp"
-                android:stateListAnimator="@null"
-                android:text="@string/HOME_CLEAR"
-                android:textAlignment="textStart"
-                android:textColor="@color/c_text_setting_heading"
-
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/c_background"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
 
-            <EditText
-                android:id="@+id/pSearchInput"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:layout_weight="30"
-                android:background="@xml/gx_generic_input_square"
-                android:ems="10"
-                android:hint="@string/HOME_SEARCH_HINT"
-                android:importantForAutofill="no"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:paddingStart="11dp"
-                android:paddingEnd="8dp"
-                android:textColor="@color/c_text_v1"
-                android:textColorHighlight="@color/text_color_highlight_v1"
-                android:textColorHint="@color/c_text_v2"
-                android:textCursorDrawable="@xml/gx_search_cursor_state"
-                android:textSize="15sp"
-                android:visibility="gone"
-                tools:targetApi="o" />
+                <Button
+                    android:id="@+id/pClearButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="17"
+                    android:background="@xml/gx_ripple_blue"
+                    android:textAllCaps="false"
+                    android:paddingStart="20dp"
+                    android:stateListAnimator="@null"
+                    android:text="@string/HISTORY_CLEAR"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/c_text_setting_heading"
 
-        </LinearLayout>
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="RtlSymmetry" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/c_view_divier_background_inner"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp" />
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pRecycleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer" />
+            android:id="@+id/pRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="60dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
     <ImageView
         android:id="@+id/pEmptyListNotification"
         android:layout_width="130dp"
@@ -196,11 +183,11 @@
         android:alpha="0"
         android:contentDescription="@string/GENERAL_TODO"
         android:src="@drawable/empty_history"
-        app:tint="@color/c_text_v3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/c_text_v3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

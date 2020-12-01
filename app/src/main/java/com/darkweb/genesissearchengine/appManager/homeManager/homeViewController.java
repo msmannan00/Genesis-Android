@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
@@ -32,8 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.helperManager.animatedColor;
@@ -78,12 +76,13 @@ class homeViewController
     private View mFindBar;
     private EditText mFindText;
     private TextView mFindCount;
+    private FrameLayout mTopLayout;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -103,6 +102,7 @@ class homeViewController
         this.mFindBar = pFindBar;
         this.mFindText = pFindText;
         this.mFindCount = pFindCount;
+        this.mTopLayout = pTopLayout;
 
         initSplashScreen();
         initializeSuggestionView(suggestions);
@@ -110,6 +110,21 @@ class homeViewController
         initSearchImage();
         createUpdateUiHandler();
         recreateStatusBar();
+        initTopBarPadding();
+    }
+
+    public void initTopBarPadding(){
+        if(!status.sFullScreenBrowsing){
+            int paddingDp = 60;
+            float density = mContext.getResources().getDisplayMetrics().density;
+            int paddingPixel = (int)(paddingDp * density);
+            mGeckoView.setPadding(0,0,0,paddingPixel);
+        }else {
+            int paddingDp = 0;
+            float density = mContext.getResources().getDisplayMetrics().density;
+            int paddingPixel = (int)(paddingDp * density);
+            mGeckoView.setPadding(0,0,0,paddingPixel);
+        }
     }
 
     private void initSearchImage(){
@@ -432,7 +447,7 @@ class homeViewController
         Button btn = popupView.findViewById(R.id.notification_event);
         btn.setOnClickListener(v ->
         {
-            mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), e_type);
+            mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.progress_update);
             popupWindow.dismiss();
         });
 
@@ -442,6 +457,13 @@ class homeViewController
     void closeMenu(){
         if(popupWindow!=null){
             popupWindow.dismiss();
+        }
+    }
+
+    public void onMoveTopBar(int pPosition){
+        if(mTopLayout.getY() - pPosition > -mTopLayout.getHeight() && mTopLayout.getY() - pPosition < 0){
+            // mTopLayout.setTranslationY(mTopLayout.getTranslationY() - pPosition);
+            // mWebviewContainer.setTranslationY(mWebviewContainer.getTranslationY() - pPosition);
         }
     }
 

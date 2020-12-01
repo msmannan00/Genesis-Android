@@ -250,9 +250,9 @@
     <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="false">Delete</string>
 
     <!-- History Popup Menu -->
-    <string name="HOME_TITLE" translatable="false">History</string>
-    <string name="HOME_CLEAR" translatable="false">Clear</string>
-    <string name="HOME_SEARCH_HINT" translatable="false">Search ...</string>
+    <string name="HISTORY_TITLE" translatable="false">History</string>
+    <string name="HISTORY_CLEAR" translatable="false">Clear</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="false">Search ...</string>
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="false">Bookmark</string>

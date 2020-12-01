@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
 
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
@@ -69,6 +71,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 
+import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_CHANGED;
+
 public class homeController extends AppCompatActivity implements ComponentCallbacks2
 {
     /*Model Declaration*/
@@ -77,7 +81,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private geckoClients mGeckoClient = null;
 
     /*View Webviews*/
-    private GeckoView mGeckoView = null;
+    private NestedGeckoView mGeckoView = null;
+    private FrameLayout mTopLayout;
     private FrameLayout mWebViewContainer;
 
     /*View Objects*/
@@ -100,7 +105,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private boolean mPageClosed = false;
     private boolean isKeyboardOpened = false;
     private boolean isSuggestionChanged = false;
-    private boolean isTabMenuOpened = false;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
@@ -213,8 +217,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mSearchbar = findViewById(R.id.pSearchInput);
         mLoadingIcon = findViewById(R.id.imageView_loading_back);
         mLoadingText = findViewById(R.id.loadingText);
-        mWebViewContainer = findViewById(R.id.webviewContainer);
-        mBannerAds = findViewById(R.id.adView);
+        mWebViewContainer = findViewById(R.id.pWebLayoutView);
+        mTopLayout = findViewById(R.id.pTopLayout);
+        mBannerAds = findViewById(R.id.pAdView);
         mGatewaySplash = findViewById(R.id.gateway_splash);
         mTopBar = findViewById(R.id.topbar);
         mBackSplash = findViewById(R.id.backsplash);
@@ -228,7 +233,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setSaveFromParentEnabled(false);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,(ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null), mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount);
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,(ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null), mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout);
+        mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
     }
 
     public void onChangeTheme(){
@@ -241,7 +247,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         try {
             Class clazz = Class.forName("java.lang.Daemons$FinalizerWatchdogDaemon");
 
-            Method method = clazz.getSuperclass().getDeclaredMethod("stop");
+            Method method = Objects.requireNonNull(clazz.getSuperclass()).getDeclaredMethod("stop");
             method.setAccessible(true);
 
             Field field = clazz.getDeclaredField("INSTANCE");
@@ -296,10 +302,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onLoadURL(String url){
         mHomeViewController.onClearSelections(true);
         mGeckoClient.loadURL(url.replace("genesis.onion","boogle.store"));
-    }
-
-    public GeckoView getmGeckoView(){
-        return mGeckoView;
     }
 
     public void onLoadTab(geckoSession mTempSession,boolean isSessionClosed){
@@ -491,7 +493,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.onRedrawPixel();
         final Handler handler = new Handler();
         mNewTab.setPressed(true);
-        isTabMenuOpened = true;
         handler.postDelayed(() ->
         {
             helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
@@ -513,6 +514,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
 
         mHomeViewController.onOpenMenu(view,mGeckoClient.canGoBack(),!(mProgressBar.getAlpha()<=0 || mProgressBar.getVisibility() ==View.INVISIBLE),mGeckoClient.getUserAgent());
+    }
+
+    public void onFullScreenSettingChanged(){
+        mHomeViewController.initTopBarPadding();
     }
 
     @Override
@@ -701,14 +706,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.initTab((int)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null));
     }
 
-    public void loadExistingTab(){
-        tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
-        if (model != null)
-        {
-            onLoadTab(model.getSession(), true);
-        }
-    }
-
     /*-------------------------------------------------------CALLBACKS-------------------------------------------------------*/
 
     public void onHideFindBar(View view){
@@ -831,6 +828,18 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onOrbotLog(View view) {
         mHomeViewController.closeMenu();
         helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
+    }
+
+    public class nestedGeckoViewCallback implements eventObserver.eventListener{
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type)
+        {
+            if(e_type.equals(GECKO_SCROLL_CHANGED)){
+                mHomeViewController.onMoveTopBar((int)data.get(0));
+            }
+            return null;
+        }
     }
 
     public class homeViewCallback implements eventObserver.eventListener{
@@ -987,7 +996,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(dataEnums.eTabCommands.M_UPDATE_PIXEL)){
                 try{
                     dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(data.get(1), mGeckoView.capturePixels()));
-                }catch (Exception ex){
+                }catch (Exception ignored){
 
                 }
             }

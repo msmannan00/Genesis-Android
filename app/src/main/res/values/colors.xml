@@ -41,7 +41,7 @@
     <color name="c_view_divier_background_v2">#f2f2f2</color>
     <color name="c_profile_radial_inner">#000000</color>
     <color name="c_profile_radial_outer">#ffffff</color>
-    <color name="c_edittext_background">#e6e6e6</color>
+    <color name="c_edittext_background">#f1f3f4</color>
     <color name="c_button_warning">#610505</color>
     <color name="c_rateus_warning">#b3b3b3</color>
     <color name="c_splash_buttons">#ffffff</color>
@@ -52,7 +52,7 @@
     <color name="c_list_alpha_black">#90000000</color>
     <color name="c_text_home_menu">#212d45</color>
     <color name="c_hint_text">#b3b3b3</color>
-    <color name="c_list_item_current">#e6e6e6</color>
+    <color name="c_list_item_current">#f1f3f4</color>
 
     <color name="c_menu_drop_shadow_05">#05e6e6e6</color>
     <color name="c_menu_drop_shadow_10">#10e6e6e6</color>

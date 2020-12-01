@@ -4,17 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
@@ -35,7 +35,7 @@ class messageManager
 
     private List<Object> data;
 
-    private AppCompatActivity app_context;
+    private AppCompatActivity mContext;
     private eventObserver.eventListener event;
 
 
@@ -48,14 +48,22 @@ class messageManager
             dialog.dismiss();
         }
 
-        dialog = new Dialog(app_context);
+        dialog = new Dialog(mContext);
         dialog.getWindow().setGravity(pGravity);
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        Drawable myDrawable;
+        Resources res = mContext.getResources();
+        try {
+            myDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hox_rounded_corner));
+            dialog.getWindow().setBackgroundDrawable(myDrawable);
+        } catch (Exception ignored) {
+        }
+
         dialog.setCancelable(true);
         dialog.setContentView(pLayout);
         dialog.show();
-        dialog.getWindow().clearFlags(pFlag);
+        //dialog.getWindow().clearFlags(pFlag);
     }
 
     messageManager(eventObserver.eventListener event)
@@ -104,21 +112,21 @@ class messageManager
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             dialog.dismiss();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_GENESIS_UPDATE_URL + status.sAppCurrentABI));
-            if(browserIntent.resolveActivity(app_context.getPackageManager()) != null)
+            if(browserIntent.resolveActivity(mContext.getPackageManager()) != null)
             {
-                app_context.startActivity(browserIntent);
+                mContext.startActivity(browserIntent);
             }else {
-                helperMethod.showToastMessage("Not Supported",app_context);
+                helperMethod.showToastMessage("Not Supported", mContext);
             }
         });
         dialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
             dialog.dismiss();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_PLAYSTORE_URL));
-            if(browserIntent.resolveActivity(app_context.getPackageManager()) != null)
+            if(browserIntent.resolveActivity(mContext.getPackageManager()) != null)
             {
-                app_context.startActivity(browserIntent);
+                mContext.startActivity(browserIntent);
             }else {
-                helperMethod.showToastMessage("Playstore Not Found",app_context);
+                helperMethod.showToastMessage("Playstore Not Found", mContext);
             }
         });
     }
@@ -132,10 +140,10 @@ class messageManager
             final Handler handler = new Handler();
             Runnable runnable = () -> {
                 try{
-                    helperMethod.sendRateEmail(app_context);
+                    helperMethod.sendRateEmail(mContext);
                 }
                 catch (Exception ex){
-                    createMessage(app_context,Collections.singletonList(app_context.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
+                    createMessage(mContext,Collections.singletonList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
                 }
             };
             handler.postDelayed(runnable, 1000);
@@ -180,12 +188,12 @@ class messageManager
         });
 
         mBoomMarkTitle.requestFocus();
-        InputMethodManager imm = (InputMethodManager) app_context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
-            helperMethod.hideKeyboard(app_context);
+            helperMethod.hideKeyboard(mContext);
             event.invokeObserver(Collections.singletonList(data.get(0).toString().replace("genesis.onion","boogle.store")+"split"+((EditText)dialog.findViewById(R.id.pBookmark)).getText().toString()), enums.etype.bookmark);
         });
     }
@@ -217,7 +225,7 @@ class messageManager
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
             final Handler handler = new Handler();
-            Runnable runnable = () -> createMessage(app_context,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.reported_success);
+            Runnable runnable = () -> createMessage(mContext,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.reported_success);
             handler.postDelayed(runnable, 1000);
         });
     }
@@ -232,17 +240,17 @@ class messageManager
             if(mRatingBar.getRating()>=3){
                 event.invokeObserver(null, enums.etype.app_rated);
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine"));
-                if(intent.resolveActivity(app_context.getPackageManager()) != null)
+                if(intent.resolveActivity(mContext.getPackageManager()) != null)
                 {
-                    app_context.startActivity(intent);
+                    mContext.startActivity(intent);
                 }else {
-                    helperMethod.showToastMessage("Playstore Not Found",app_context);
+                    helperMethod.showToastMessage("Playstore Not Found", mContext);
                 }
                 dialog.dismiss();
             }else if(mRatingBar.getRating()>0) {
                 event.invokeObserver(null, enums.etype.app_rated);
                 final Handler handler = new Handler();
-                handler.postDelayed(() -> createMessage(app_context,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.rate_failure), 1000);
+                handler.postDelayed(() -> createMessage(mContext,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.rate_failure), 1000);
                 dialog.dismiss();
             }
         });
@@ -251,7 +259,7 @@ class messageManager
     private void downloadFile()
     {
         initializeDialog(R.layout.popup_download_file, Gravity.BOTTOM, FLAG_DIM_BEHIND);
-        ((TextView)dialog.findViewById(R.id.pDescription)).setText((app_context.getString(R.string.ALERT_DOWNLOAD_MESSAGE) + data.get(0)));
+        ((TextView)dialog.findViewById(R.id.pDescription)).setText((mContext.getString(R.string.ALERT_DOWNLOAD_MESSAGE) + data.get(0)));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
@@ -319,7 +327,7 @@ class messageManager
         String file = data.get(1).toString();
         String title = data.get(2).toString();
 
-        String data_local = app_context.getString(R.string.ALERT_LONG_URL_MESSAGE);
+        String data_local = mContext.getString(R.string.ALERT_LONG_URL_MESSAGE);
 
         int size = url.length();
         if(size>235){
@@ -391,10 +399,10 @@ class messageManager
             final Handler handler = new Handler();
             Runnable runnable = () -> {
                 try{
-                    helperMethod.sendBridgeEmail(app_context);
+                    helperMethod.sendBridgeEmail(mContext);
                 }
                 catch (Exception ex){
-                    createMessage(app_context,Collections.singletonList(app_context.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
+                    createMessage(mContext,Collections.singletonList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
                 }
             };
             handler.postDelayed(runnable, 1000);
@@ -411,7 +419,7 @@ class messageManager
 
     void createMessage(AppCompatActivity app_context, List<Object> data, enums.etype type)
     {
-        this.app_context = app_context;
+        this.mContext = app_context;
         this.data = data;
 
         switch (type)

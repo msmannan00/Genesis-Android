@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +54,8 @@ public class bookmarkController extends AppCompatActivity
     private homeController mHomeController;
     private activityContextManager mContextManager;
     private bookmarkAdapter mbookmarkAdapter;
+    private LinearLayout mHeaderContainer;
+    private TextView mTitle;
 
     /*Private Views*/
 
@@ -91,28 +96,19 @@ public class bookmarkController extends AppCompatActivity
         mClearButton = findViewById(R.id.pClearButton);
         mMenuButton = findViewById(R.id.pMenuButton);
         mSearchButton = findViewById(R.id.pSearchButton);
+        mTitle = findViewById(R.id.pTitle);
+        mHeaderContainer = findViewById(R.id.pHeaderContainer);
 
-        mbookmarkViewController = new bookmarkViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton,this, mMenuButton, mSearchButton);
+        mbookmarkViewController = new bookmarkViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton,this, mMenuButton, mSearchButton, mHeaderContainer, mTitle);
     }
+
     public void initializeList(){
         ArrayList<bookmarkRowModel> model = (ArrayList<bookmarkRowModel>) dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_GET_BOOKMARK ,null);
         mbookmarkModel.setList(model);
         bookmarkAdapter adapter = new bookmarkAdapter(mbookmarkModel.getList(),new adapterCallback(), this);
         mbookmarkAdapter = adapter;
         adapter.invokeFilter(false);
-        mRecycleView.setNestedScrollingEnabled(false);
-        mRecycleView.setHasFixedSize(true);
-
-        mRecycleView.setItemAnimator(new FadeInRightAnimator());
-        Objects.requireNonNull(mRecycleView.getItemAnimator()).setAddDuration(200);
-        mRecycleView.getItemAnimator().setRemoveDuration(200);
-        mRecycleView.getItemAnimator().setMoveDuration(200);
-        mRecycleView.getItemAnimator().setChangeDuration(450);
-
         mRecycleView.setAdapter(adapter);
-        mRecycleView.setItemViewCacheSize(100);
-        mRecycleView.setDrawingCacheEnabled(true);
-        mRecycleView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
         mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mbookmarkModel.getList().size(),0));
@@ -235,14 +231,14 @@ public class bookmarkController extends AppCompatActivity
         }else if((Boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS,null)){
             onClearMultipleSelection(null);
         }else {
-            onBackPressed(null);
+            finish();
         }
     }
 
     /*External XML Listeners*/
 
     public void onBackPressed(View view){
-        this.finish();
+        onBackPressed();
     }
 
     public void onHideSearch(View view) {

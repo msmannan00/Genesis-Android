@@ -135,6 +135,7 @@ public class settingGeneralController extends AppCompatActivity {
     public void onFullScreenBrowsing(View view){
         mSettingGeneralModel.onTrigger(settingGeneralEnums.eGeneralModel.M_FULL_SCREEN_BROWSING, Collections.singletonList(!mFullScreenMode.isChecked()));
         mFullScreenMode.toggle();
+        activityContextManager.getInstance().getHomeController().onFullScreenSettingChanged();
     }
 
     public void onSelectTheme(View view){

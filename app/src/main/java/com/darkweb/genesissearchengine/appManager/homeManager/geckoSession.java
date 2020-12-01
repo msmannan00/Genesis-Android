@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import org.mozilla.gecko.EventDispatcher;
 import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -54,6 +56,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import mozilla.components.browser.engine.gecko.GleanMetrics.Geckoview;
+
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
@@ -84,13 +89,13 @@ public class geckoSession extends GeckoSession implements GeckoSession.ScrollDel
         this.mGeckoView = pGeckoView;
         this.mContext = mContext;
         this.mSessionID = mSessionID;
+
         setProgressDelegate(this);
         setHistoryDelegate(this);
         setNavigationDelegate(this);
         setContentDelegate(this);
         setAutoFillDelegate();
         setPermissionDelegate(this);
-        setScrollDelegate(this);
         mDownloadManager = new geckoDownloadManager();
         setPromptDelegate(new geckoPromptView(mContext));
         this.event = event;
@@ -117,12 +122,6 @@ public class geckoSession extends GeckoSession implements GeckoSession.ScrollDel
     }
 
     /*Scroll Delegate*/
-
-    @Override
-    public void onScrollChanged(GeckoSession session, int scrollX, int scrollY){
-        Log.i("SUPERMAN",scrollX + " - " + scrollY);
-        event.invokeObserver(Collections.singletonList(true), enums.etype.ON_UPDATE_TITLE_BAR);
-    }
 
     /*Autofill Delegate*/
 

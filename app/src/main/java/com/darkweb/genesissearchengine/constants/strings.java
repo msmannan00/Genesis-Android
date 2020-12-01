@@ -4,12 +4,12 @@ public class strings
 {
     /*History Manager*/
     public static final String HISTORY_TITLE = "history";
-    public static final String HISTORY_CLEAR_HISTORY = "CLEAR HISTORY";
-    public static final String HISTORY_NO_HISTORY_FOUND = "NO HISTORY FOUND";
+    public static final String HISTORY_CLEAR_HISTORY = "Clear History";
+    public static final String HISTORY_NO_HISTORY_FOUND = "No History Found";
 
     /*Bookmark Manager*/
-    public static final String BOOKMARK_CLEAR_BOOKMARK = "CLEAR HISTORY";
-    public static final String BOOKMARK_NO_BOOKMARK_FOUND = "NO BOOKMARK FOUND";
+    public static final String BOOKMARK_CLEAR_BOOKMARK = "Clear Bookmark";
+    public static final String BOOKMARK_NO_BOOKMARK_FOUND = "No Bookmark Found";
 
     /*Bridge Manager*/
 
