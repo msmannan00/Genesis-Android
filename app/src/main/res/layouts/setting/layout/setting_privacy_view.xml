@@ -1,4 +1,5 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -55,22 +56,58 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:scaleX="1.08"
-                        android:scaleY="1.08"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="7dp"
-                        android:background="@xml/gx_ripple_default_round"
+                    <ImageView
+                        android:layout_width="47dp"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:paddingStart="3dp"
+                        android:onClick="onOpenInfo"
+                        android:background="@xml/gx_ripple_gray"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_baseline_info"
-                        android:tint="@color/c_navigation_light" />
+                        android:src="@drawable/info"
+                        app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
 
                 <!-- Title Header -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/c_text_setting_heading"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="00dp"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/SETTING_PRIVACY_CLEAR_PRIVATE_HEADER"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:id="@+id/pHomePageText"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/pOption0"
@@ -89,7 +126,7 @@
                         android:clickable="false"
                         android:orientation="vertical">
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
@@ -102,7 +139,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -117,7 +154,7 @@
                             android:text="@string/SETTING_PRIVACY_JAVASCRIPT_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -134,11 +171,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption1"
@@ -158,7 +190,7 @@
                         android:clickable="false"
                         android:orientation="vertical">
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
@@ -171,7 +203,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -186,7 +218,7 @@
                             android:text="@string/SETTING_PRIVACY_DONOT_TRACK_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -203,11 +235,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption2"
@@ -227,7 +254,7 @@
                         android:clickable="false"
                         android:orientation="vertical">
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
@@ -240,7 +267,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -255,7 +282,7 @@
                             android:text="@string/SETTING_PRIVACY_TRACKING_PROTECTION_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -274,16 +301,10 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
-
                 <LinearLayout
                     android:id="@+id/pOption3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:weightSum="7">
 
@@ -294,7 +315,7 @@
                         android:orientation="vertical"
                         tools:ignore="UselessParent">
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
@@ -307,7 +328,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -323,19 +344,27 @@
                             android:text="@string/SETTING_PRIVACY_COOKIES_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
 
-                        <RadioGroup
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_marginTop="10dp"
                             android:background="@xml/sx_border_left"
-                            android:paddingStart="5dp"
+                            android:paddingStart="4dp"
                             android:layout_marginStart="15dp"
                             android:layout_height="wrap_content"
+                            android:orientation="vertical"
                             tools:ignore="RtlSymmetry">
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="-1dp"
+                                android:elevation="2dp"
+                                android:background="@color/white"/>
 
                             <LinearLayout
                                 android:id="@+id/pCookieOption1"
@@ -439,11 +468,20 @@
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION4"
                                     tools:ignore="RtlHardcoded" />
                             </LinearLayout>
-                        </RadioGroup>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:elevation="4dp"
+                                android:layout_marginTop="0.5dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/pOption4"
@@ -464,7 +502,7 @@
                         android:clickable="false"
                         android:orientation="vertical">
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
@@ -472,7 +510,7 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="15dp"
+                            android:paddingStart="14dp"
                             android:text="@string/SETTING_PRIVACY_CLEAR_PRIVATE_DATA"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -493,7 +531,7 @@
                             android:text="@string/SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -510,11 +548,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
 
             </LinearLayout>
         </ScrollView>

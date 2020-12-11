@@ -2,16 +2,11 @@ package com.darkweb.genesissearchengine.appManager.homeManager;
 
 import android.content.Intent;
 import android.net.Uri;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.constants.*;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.io.File;
-import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
@@ -23,12 +18,10 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.NETWORK_CACHE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
-
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
-
 
 class geckoClients
 {
@@ -36,9 +29,7 @@ class geckoClients
 
     private geckoSession mSession = null;
     private GeckoRuntime mRuntime = null;
-    private int mSessionID=0;
-    private int mGlobalSessionCounter=0;
-
+    private String mSessionID;
 
     private eventObserver.eventListener event;
     private AppCompatActivity context;
@@ -47,8 +38,7 @@ class geckoClients
     {
         this.context = context;
         this.event = event;
-        mGlobalSessionCounter+=1;
-        mSessionID = mGlobalSessionCounter;
+        mSessionID = helperMethod.createRandomID();
         initRuntimeSettings(context);
 
         if(!isForced && geckoView.getSession()!=null && geckoView.getSession().isOpen()){
@@ -56,7 +46,7 @@ class geckoClients
         }
         else {
             geckoView.releaseSession();
-            mSession = new geckoSession(new geckoViewClientCallback(),mGlobalSessionCounter,context, geckoView);
+            mSession = new geckoSession(new geckoViewClientCallback(),mSessionID,context, geckoView);
             mSession.open(mRuntime);
             mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
             mSession.getSettings().setFullAccessibilityTree(true);
@@ -64,9 +54,29 @@ class geckoClients
             mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
             geckoView.releaseSession();
             geckoView.setSession(mSession);
-
         }
+        mSession.onSetInitializeFromStartup();
         onUpdateFont();
+    }
+
+    public void onValidateInitializeFromStartup(){
+        mSession.onValidateInitializeFromStartup();
+    }
+
+    public boolean onGetInitializeFromStartup(){
+        return mSession.onGetInitializeFromStartup();
+    }
+
+    public geckoSession initFreeSession(GeckoView pGeckoView, AppCompatActivity pcontext, eventObserver.eventListener event){
+        this.event = event;
+        initRuntimeSettings(pcontext);
+        geckoSession mTempSession = new geckoSession(new geckoViewClientCallback(),mSessionID,context, pGeckoView);
+        mTempSession.open(mRuntime);
+        mTempSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
+        mTempSession.getSettings().setFullAccessibilityTree(true);
+        mTempSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
+        mTempSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        return mTempSession;
     }
 
     void toogleUserAgent(){
@@ -129,13 +139,6 @@ class geckoClients
         return mSession;
     }
 
-    void updateJavascript(){
-        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-        if(status.sSettingJavaStatus){
-            mSession.reload();
-        }
-    }
-
     void onUploadRequest(int resultCode,Intent data){
         mSession.onFileUploadRequest(resultCode,data);
     }
@@ -145,8 +148,10 @@ class geckoClients
     }
 
     void loadURL(String url){
-        mSession.initURL(url);
-        mSession.loadUri(url);
+        if(mSession.onGetInitializeFromStartup()){
+            mSession.initURL(url);
+            mSession.loadUri(url);
+        }
     }
 
     public void onRedrawPixel(){
@@ -186,10 +191,6 @@ class geckoClients
         return mSession.canGoBack();
     }
 
-    boolean canGoForward(){
-        return mSession.canGoForward();
-    }
-
     boolean isLoading(){
         return mSession.isLoading();
     }
@@ -221,10 +222,15 @@ class geckoClients
         mSession.reload();
     }
 
+    void onReloadStatic(){
+        mSession.loadUri(mSession.getCurrentURL());
+    }
+
     void manual_download(String url, AppCompatActivity context){
         Uri downloadURL = Uri.parse(url);
         File f = new File(url);
-        String downloadFile = f.getName() != null ? f.getName() : downloadURL.getLastPathSegment();
+        f.getName();
+        String downloadFile = f.getName();
 
         /*EXTERNAL STORAGE REQUEST*/
         if(helperMethod.checkPermissions(context)){
@@ -241,10 +247,6 @@ class geckoClients
 
     /*Session Updates*/
 
-    void onUpdateSettings(){
-        mSession.reload();
-    }
-
     void onUpdateFont(){
         float font = (status.sSettingFontSize -100)/3+100;
         mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
@@ -258,7 +260,7 @@ class geckoClients
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
-            if (mSessionID == (int)data.get(1) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
+            if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
             {
                 if (e_type.equals(on_handle_external_intent))
                 {

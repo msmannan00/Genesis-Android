@@ -6,15 +6,17 @@ import android.view.View;
 import android.widget.CheckBox;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.sql;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import java.util.ArrayList;
@@ -43,13 +45,17 @@ public class settingClearController extends AppCompatActivity {
         mCheckBoxList.add(findViewById(R.id.pClearChecked_2));
         mCheckBoxList.add(findViewById(R.id.pClearChecked_3));
         mCheckBoxList.add(findViewById(R.id.pClearChecked_4));
+        mCheckBoxList.add(findViewById(R.id.pClearChecked_5));
         mCheckBoxList.add(findViewById(R.id.pClearChecked_6));
         mCheckBoxList.add(findViewById(R.id.pClearChecked_7));
         mCheckBoxList.add(findViewById(R.id.pClearChecked_8));
-        mCheckBoxList.add(findViewById(R.id.pClearChecked_9));
 
         mSettingClearViewController = new settingClearViewController(this, new settingClearController.settingClearViewCallback(), mCheckBoxList);
         mSettingClearModel = new settingClearModel(new settingClearController.settingClearModelCallback());
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     /* LISTENERS */
@@ -125,15 +131,9 @@ public class settingClearController extends AppCompatActivity {
                 mCheckBoxList.get(7).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
                 activityContextManager.getInstance().getHomeController().onClearCookies();
             }
-            if(mCheckBoxList.get(8).isChecked()){
-                mCheckBoxList.get(8).setChecked(false);
-                mCheckBoxList.get(8).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_CLEAR_PREFS, null);
-                status.initStatus();
-            }
 
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
-            pluginController.getInstance().MessageManagerHandler(this, null, enums.etype.data_cleared);
+            pluginController.getInstance().MessageManagerHandler(this, null, enums.eMessageEnums.M_DATA_CLEARED);
         }catch (Exception ex){
             ex.printStackTrace();
         }

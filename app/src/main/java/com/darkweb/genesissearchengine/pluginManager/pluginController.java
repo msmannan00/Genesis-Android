@@ -13,8 +13,6 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-//import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +61,6 @@ public class pluginController
         mAnalyticManager = new analyticManager(getAppContext(),new analyticCallback());
         mFirebaseManager = new firebaseManager(getAppContext(),new firebaseCallback());
         mMessageManager = new messageManager(new messageCallback());
-
     }
 
     public void initializeAllServices(AppCompatActivity context){
@@ -84,7 +81,7 @@ public class pluginController
     /*---------------------------------------------- EXTERNAL REQUEST LISTENER-------------------------------------------------------*/
 
     /*Message Manager*/
-    public void MessageManagerHandler(AppCompatActivity app_context,List<Object> data,enums.etype type){
+    public void MessageManagerHandler(AppCompatActivity app_context,List<Object> data,enums.eMessageEnums type){
         mMessageManager.createMessage(app_context,data,type);
     }
     public void onResetMessage(){
@@ -169,15 +166,6 @@ public class pluginController
         }
     }
 
-    /*Fabric Manager*/
-    private class fabricCallback implements eventObserver.eventListener{
-        @Override
-        public Object invokeObserver(List<Object> data, Object event_type)
-        {
-            return null;
-        }
-    }
-
     /*Firebase Manager*/
     private class firebaseCallback implements eventObserver.eventListener{
         @Override
@@ -210,7 +198,7 @@ public class pluginController
         mLangManager.setDefaultLanguage(new Locale(status.sSettingLanguage));
     }
     public void onCreate(Activity activity) {
-        if(activity==null || !activity.isDestroyed()){
+        if(activity==null && mLangManager!=null){
             mLangManager.onCreate(activity);
         }
     }
@@ -227,10 +215,10 @@ public class pluginController
             {
                 mHomeController.onLoadURL(data.get(0).toString());
             }
-            else if(event_type.equals(enums.etype.cancel_welcome)){
+            else if(event_type.equals(enums.eMessageEnums.M_CANCEL_WELCOME)){
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED,false));
             }
-            else if(event_type.equals(enums.etype.ignore_abi)){
+            else if(event_type.equals(enums.eMessageEnums.M_IGNORE_ABI)){
                 //mHomeController.ignoreAbiError();
             }
             else if(event_type.equals(enums.etype.reload)){
@@ -239,21 +227,21 @@ public class pluginController
                     mHomeController.onReload(null);
                 }
                 else {
-                    mMessageManager.createMessage(mHomeController, Collections.singletonList(data.get(0).toString()),enums.etype.start_orbot);
+                    mMessageManager.createMessage(mHomeController, Collections.singletonList(data.get(0).toString()),enums.eMessageEnums.M_START_ORBOT);
                 }
             }
-            else if(event_type.equals(enums.etype.clear_history)){
+            else if(event_type.equals(enums.eMessageEnums.M_CLEAR_HISTORY)){
                 dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
                 mContextManager.getHistoryController().onclearData();
                 mHomeController.onClearSession();
                 dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
                 mHomeController.initTab(false);
             }
-            else if(event_type.equals(enums.etype.clear_bookmark)){
+            else if(event_type.equals(enums.eMessageEnums.M_CLEAR_BOOKMARK)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,data);
                 mContextManager.getBookmarkController().onclearData();
             }
-            else if(event_type.equals(enums.etype.bookmark)){
+            else if(event_type.equals(enums.eMessageEnums.M_BOOKMARK)){
                 String [] dataParser = data.get(0).toString().split("split");
                 if(dataParser.length>1){
                     logEvent(strings.EVENT_URL_BOOKMARKED);
@@ -262,28 +250,28 @@ public class pluginController
                     dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_ADD_BOOKMARK ,Arrays.asList(dataParser[0],""));
                 }
             }
-            else if(event_type.equals(enums.etype.app_rated)){
+            else if(event_type.equals(enums.eMessageEnums.M_APP_RATED)){
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
             }
-            else if(event_type.equals(enums.etype.download_file)){
+            else if(event_type.equals(enums.eMessageEnums.M_DOWNLOAD_FILE)){
                 mHomeController.onDownloadFile();
             }
-            else if(event_type.equals(enums.etype.download_file_manual)){
+            else if(event_type.equals(enums.eMessageEnums.M_DOWNLOAD_FILE_MANUAL)){
                 mHomeController.onManualDownload(data.get(0).toString());
             }
-            else if(event_type.equals(enums.etype.connect_vpn)){
+            else if(event_type.equals(enums.eMessageEnums.M_CONNECT_VPN)){
                 //orbotLocalConstants.sIsTorInitialized = (boolean)data.get(0);
             }
-            else if(event_type.equals(enums.etype.open_link_new_tab)){
+            else if(event_type.equals(enums.eMessageEnums.M_OPEN_LINK_NEW_TAB)){
                 mHomeController.onOpenLinkNewTab(data.get(0).toString());
             }
-            else if(event_type.equals(enums.etype.open_link_current_tab)){
+            else if(event_type.equals(enums.eMessageEnums.M_OPEN_LINK_CURRENT_TAB)){
                 mHomeController.onLoadURL(data.get(0).toString());
             }
-            else if(event_type.equals(enums.etype.copy_link)){
+            else if(event_type.equals(enums.eMessageEnums.M_COPY_LINK)){
                 helperMethod.copyURL(data.get(0).toString(),mContextManager.getHomeController());
             }
-            else if(event_type.equals(enums.etype.clear_tab)){
+            else if(event_type.equals(enums.eMessageEnums.M_CLEAR_TAB)){
                 dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
                 mHomeController.initTab(true);
                 activityContextManager.getInstance().getTabController().finish();

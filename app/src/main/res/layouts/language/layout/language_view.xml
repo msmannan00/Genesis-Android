@@ -18,7 +18,6 @@
             android:focusable="true"
             android:orientation="horizontal"
             android:paddingStart="5dp"
-            android:paddingEnd="7dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,11 +35,12 @@
                 android:tint="@color/c_navigation_tint" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="-3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:onClick="onClose"
-                android:layout_weight="40"
+                android:layout_marginTop="-3dp"
                 android:gravity="center_vertical|start"
                 android:text="@string/LANGUAGE_TITLE"
                 android:textColor="@color/c_text_v1"
@@ -52,17 +52,20 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
 
-            <ImageButton
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="0dp"
-                android:scaleX="1.08"
-                android:scaleY="1.08"
-                android:layout_marginTop="1dp"
-                android:background="@xml/gx_ripple_default_round"
+
+            <ImageView
+                android:layout_width="47dp"
+                android:layout_height="match_parent"
+                android:padding="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:paddingStart="3dp"
+                android:onClick="onOpenInfo"
+                android:background="@xml/gx_ripple_gray"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:src="@xml/ic_baseline_info"
-                android:tint="@color/c_navigation_light" />
+                android:src="@drawable/info"
+                app:tint="@color/c_icon_tint_light" />
 
         </LinearLayout>
 

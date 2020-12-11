@@ -51,18 +51,19 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
 
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="0dp"
-                    android:scaleX="1.08"
-                    android:scaleY="1.08"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="7dp"
-                    android:background="@xml/gx_ripple_default_round"
+                <ImageView
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:padding="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:paddingStart="3dp"
+                    android:onClick="onOpenInfo"
+                    android:background="@xml/gx_ripple_gray"
                     android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_baseline_info"
-                    android:tint="@color/c_navigation_light" />
+                    android:src="@drawable/info"
+                    app:tint="@color/c_icon_tint_light" />
 
             </LinearLayout>
 
@@ -127,6 +128,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginStart="15dp"
                 android:background="@color/c_view_divier_background"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -160,10 +162,13 @@
                     android:theme="@style/SCBSwitch"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:background="@color/c_view_divier_background"/>
+
                 <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@xml/gx_ripple_blue"
@@ -198,6 +203,7 @@
 
             <View
                 android:layout_width="match_parent"
+                android:layout_marginStart="15dp"
                 android:layout_height="1dp"
                 android:background="@color/c_view_divier_background"/>
 
@@ -258,6 +264,7 @@
                         android:layout_marginTop="-5dp"
                         android:clickable="false"
                         android:scaleType="fitCenter"
+                        android:padding="2dp"
                         android:src="@xml/ic_arrow_right"
                         android:layout_marginEnd="12dp"
                         android:contentDescription="@string/GENERAL_TODO"
@@ -269,7 +276,7 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_marginEnd = "10dp"
-                        android:layout_marginStart = "10dp"
+                        android:layout_marginStart = "15dp"
                         android:paddingTop="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="15dp"

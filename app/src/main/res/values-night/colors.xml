@@ -3,13 +3,14 @@
     <color name="c_background_inverted">#ffffff</color>
     <color name="c_view_divier_background_inner">#0f0f0f</color>
     <color name="c_view_divier_background_inner_v1">#666666</color>
-    <color name="c_view_divier_background">#141316</color>
+    <color name="c_view_divier_background">#0f0f0f</color>
     <color name="c_text_v1">#ffffff</color>
     <color name="c_text_v2">#b3b3b3</color>
     <color name="c_text_v3">#666666</color>
     <color name="c_text_v4">#a6a6a6</color>
     <color name="c_text_v5">#ffffff</color>
-    <color name="c_icon_tint">#7591bd</color>
+    <color name="c_icon_tint">#ffffff</color>
+    <color name="c_icon_tint_light">#a6a6a6</color>
     <color name="c_text_setting_heading">#ffad33</color>
     <color name="c_button_text_v1">#ffffff</color>
     <color name="c_button_text_v1_inverted">#3385ff</color>
@@ -34,7 +35,7 @@
     <color name="c_ripple_v1">#0c0b0e</color>
     <color name="c_ripple_v2">#ededed</color>
     <color name="c_button_text">#1c1b21</color>
-    <color name="c_button_background">#ffad33</color>
+    <color name="c_button_background">#a6a6a6</color>
     <color name="c_alert_background">#3c3946</color>
     <color name="c_view_divier_background_v1">#24222a</color>
     <color name="c_view_divier_background_v2">#302e38</color>
@@ -49,6 +50,8 @@
     <color name="c_text_home_menu">#ffffff</color>
     <color name="c_hint_text">#b3b3b3</color>
     <color name="c_list_item_current">#0c0b0e</color>
+    <color name="c_lock_tint">#f2f2f2</color>
+    <color name="c_text_v6">#a6a6a6</color>
 
     <color name="c_alert_text">#ffffff</color>
     <color name="c_alert_text_inverted">#242B64</color>

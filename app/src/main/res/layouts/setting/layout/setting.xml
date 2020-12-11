@@ -59,18 +59,20 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:scaleX="1.08"
-                        android:layout_marginEnd="7dp"
-                        android:scaleY="1.08"
-                        android:layout_marginTop="1dp"
-                        android:background="@xml/gx_ripple_default_round"
+                    <ImageView
+                        android:layout_width="47dp"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:paddingStart="3dp"
+                        android:onClick="onOpenInfo"
+                        android:background="@xml/gx_ripple_gray"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_baseline_info"
-                        android:tint="@color/c_navigation_light" />
+                        android:src="@drawable/info"
+                        app:tint="@color/c_icon_tint_light" />
+
                 </LinearLayout>
 
                 <!-- Title Header -->
@@ -86,7 +88,8 @@
                     <ImageView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -109,17 +112,6 @@
                         android:textSize="15sp"
                         tools:ignore="RtlSymmetry" />
 
-                    <ImageButton
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="4.5dp"
-                        android:clickable="false"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:tint="@color/c_navigation_tint"
-                        android:src="@xml/ic_arrow_right" />
-
                 </LinearLayout>
 
                 <View
@@ -138,7 +130,8 @@
                     <ImageView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -179,7 +172,7 @@
                             android:text="@string/SETTING_GENERAL_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -214,7 +207,8 @@
                     <ImageView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -255,7 +249,7 @@
                             android:text="@string/SETTING_SEARCH_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -290,7 +284,8 @@
                     <ImageView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         app:tint="@color/c_icon_tint"
                         android:layout_marginStart="5dp"
@@ -331,7 +326,7 @@
                             android:text="@string/SETTING_PRIVACY_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -366,7 +361,8 @@
                     <ImageView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         app:tint="@color/c_icon_tint"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
@@ -405,7 +401,7 @@
                             android:text="@string/SETTING_NOTIFICATION_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -440,7 +436,8 @@
                     <ImageView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -480,7 +477,7 @@
                             android:text="@string/SETTING_ACCESSIBILITY_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -515,7 +512,8 @@
                     <ImageView
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         app:tint="@color/c_icon_tint"
                         android:layout_marginStart="5dp"
@@ -555,7 +553,7 @@
                             android:text="@string/SETTING_CLEAR_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -591,7 +589,8 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         app:tint="@color/c_icon_tint"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -630,7 +629,7 @@
                             android:text="@string/SETTING_ADVANCE_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>

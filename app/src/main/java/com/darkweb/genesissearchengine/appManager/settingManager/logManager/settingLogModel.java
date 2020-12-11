@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.settingManager.logManager;
 
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 
@@ -23,7 +22,6 @@ class settingLogModel
 
     public void onUpdateLogView(boolean pIsListView){
         status.sLogListView = pIsListView;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, pIsListView));
     }
 
     /*Helper Methods*/

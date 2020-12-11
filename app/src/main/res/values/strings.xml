@@ -28,8 +28,12 @@
     <string name="SETTING_COOKIE_TEXT_INFO" translatable="false">Cookie Settings</string>
     <string name="SETTING_COOKIE" translatable="false">Cookies</string>
     <string name="SETTING_NOTIFICATION_HEADER" translatable="false">Settings | Notification</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="false">Notifications</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="false">Manage network stats notification</string>
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="false">Network Status Notification</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="false">Local Notification</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="false">Device Notification Settings</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="false">System Notification</string>
     <string name="SETTING_ORBOT_LOG_HEADER" translatable="false">Log Settings</string>
     <string name="SETTING_ORBOT_LIST_VIEW" translatable="false">Show Logs in Advance List View</string>
     <string name="SETTING_SEARCH" translatable="false">Manage Search</string>
@@ -38,7 +42,9 @@
     <string name="SETTING_NOTIFICATION_INFO" translatable="false">New features, network status</string>
     <string name="SETTING_SEARCH_HEADER" translatable="false">Settings | Search</string>
     <string name="SETTING_SEARCH_HEADER_1" translatable="false">Supported search engines</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="false">Choose to search directly from search bar</string>
     <string name="SETTING_SEARCH_HEADER_2" translatable="false">Search setting</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="false">Manage how searches appear</string>
     <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default</string>
     <string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
     <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
@@ -74,6 +80,8 @@
     <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="false">Select custom font scale</string>
     <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="false">Drag the slider until you can read this comfortably. Text should look at least this big after double-tapping on a paragraph</string>
     <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="false">200%</string>
+    <string name="SETTING_INTERACTION" translatable="false">Interactions</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="false">Change how you interact with the content</string>
     <string name="SETTING_PRIVACY" translatable="false">Privacy</string>
     <string name="SETTING_PRIVACY_INFO" translatable="false">Tracking, logins, data choices</string>
     <string name="SETTING_PRIVACY_HEADER" translatable="false">Settings | Privacy</string>
@@ -85,6 +93,8 @@
     <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="false">Select cookies preferences according to your security needs</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="false">Clear private data on exit</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="false">Clear data automatically upon application close</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="false">Private Browsing</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="false">Keep your identity safe and use the options below</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="false">Enabled</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="false">Enabled, excluding tracking cookies</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="false">Enabled, excluding 3rd party</string>
@@ -103,7 +113,11 @@
     <string name="SETTING_ADVANCE_MEDIA" translatable="false">Allow autoplay</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="false">Allow media to auto start</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="false">Data saver</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="false">Tab</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="false">Change how tab behave after restarting application</string>
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="false">Media</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="false">Change default data saver settings</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="false">Change default media settings</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="false">Always show images</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="false">Only show images over WI-FI</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="false">Block all images</string>
@@ -120,6 +134,7 @@
     <string name="SETTING_GENERAL_THEME_INFO" translatable="false">Choose light and dark or theme</string>
     <string name="SETTING_GENERAL_THEME_LIGHT" translatable="false">Theme Light</string>
     <string name="SETTING_GENERAL_THEME_DARK" translatable="false">Theme Dark</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="false">Change full screen browsing and language settings</string>
     <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="false">System Default</string>
     <string name="SETTING_GENERAL_HOME" translatable="false">Home</string>
     <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
@@ -203,6 +218,7 @@
     <string name="BRIDGE_BASIC_SETTING" translatable="false">Security Settings</string>
     <string name="BRIDGE_SETTING" translatable="false">Bridge Settings</string>
     <string name="BRIDGE_AUTO" translatable="false">Create Automatically</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="false">Automatically configure bridges settings</string>
     <string name="BRIDGE_MANUAL" translatable="false">Provide a Bridge I know</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">address:port Single Line</string>
     <string name="BRIDGE_HEADER" translatable="false">Proxy Settings | Bridges</string>
@@ -258,6 +274,9 @@
     <string name="BOOKMARK_TITLE" translatable="false">Bookmark</string>
     <string name="BOOKMARK_CLEAR" translatable="false">Clear</string>
     <string name="BOOKMARK_SEARCH_HINT" translatable="false">Search ...</string>
+
+    <!-- Help -->
+    <string name="HELP_TITLE" translatable="false">Support</string>
 
     <!-- Language Manager Manager -->
     <string name="LANGUAGE_TITLE" translatable="false">Language</string>

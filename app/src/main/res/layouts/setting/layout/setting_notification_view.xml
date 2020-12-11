@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/c_background"
     tools:context="com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController">
         <ScrollView
@@ -55,108 +56,179 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:scaleX="1.08"
-                        android:scaleY="1.08"
-                        android:layout_marginEnd="7dp"
-                        android:layout_marginTop="1dp"
-                        android:background="@xml/gx_ripple_default_round"
+                    <ImageView
+                        android:layout_width="47dp"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:paddingStart="3dp"
+                        android:onClick="onOpenInfo"
+                        android:background="@xml/gx_ripple_gray"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_baseline_info"
-                        android:tint="@color/c_navigation_light" />
+                        android:src="@drawable/info"
+                        app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
 
                 <!-- Title Header -->
 
                 <LinearLayout
-                    android:id="@+id/pOption2"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:onClick="onSaveLocalNotificationSettings"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/c_text_setting_heading"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="00dp"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/SETTING_NOTIFICATION_HEADER_1"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
                         android:alpha="1"
+                        android:id="@+id/pHomePageText"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
-                        android:text="@string/SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION"
+                        android:text="@string/SETTING_NOTIFICATION_HEADER_1_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onSaveLocalNotificationSettings"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="8dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="14sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="30dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:layout_width="0dp"
-                        android:id="@+id/pNotificationManual"
                         android:layout_height="match_parent"
-                        android:clickable="false"
+                        android:id="@+id/pNotificationManual"
                         android:layout_marginEnd="10dp"
-                        android:theme="@style/SCBSwitch"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent">
-                    </com.google.android.material.switchmaterial.SwitchMaterial>
+                        android:theme="@style/SCBSwitch"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
-
                 <LinearLayout
-                    android:id="@+id/pOption3"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:onClick="onSwitchLogUIMode"
+                    android:layout_height="65dp"
                     android:background="@xml/gx_ripple_gray"
+                    android:onClick="onOpenNotificationSettings"
                     android:orientation="horizontal"
                     android:weightSum="7">
 
-                    <Button
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="65dp"
                         android:layout_weight="6"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
                         android:clickable="false"
-                        android:padding="0dp"
-                        android:paddingStart="15dp"
-                        android:text="@string/SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="14sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
 
                     <ImageButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:scaleX="1"
-                        android:scaleY="1"
                         android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
             </LinearLayout>
         </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

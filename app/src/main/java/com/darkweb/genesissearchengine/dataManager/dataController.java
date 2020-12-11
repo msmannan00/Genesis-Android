@@ -49,10 +49,21 @@ public class dataController
         {
             databaseController.getInstance().execSQL("delete from history where 1",null);
         }
+        if(status.sRestoreTabs){
+            mTabModel.initializeTab(databaseController.getInstance().selectTabs());
+            activityContextManager.getInstance().getHomeController().initTabCount();
+        }else{
+            invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
+        }
     }
 
     /*Recieving History*/
     public Object invokeHistory(dataEnums.eHistoryCommands p_commands, List<Object> p_data){
+
+        if(p_commands == dataEnums.eHistoryCommands.M_ADD_HISTORY){
+            mTabModel.onTrigger(dataEnums.eTabCommands.M_UPDATE_TAB, p_data);
+        }
+
         if(p_commands.equals(dataEnums.eHistoryCommands.M_LOAD_MORE_HISTORY)){
             int m_history_size = (int) mHistoryModel.onTrigger(dataEnums.eHistoryCommands.M_HISTORY_SIZE,null);
             return mHistoryModel.onTrigger(p_commands, Collections.singletonList(databaseController.getInstance().selectHistory(m_history_size+1,constants.CONST_FETCHABLE_LIST_SIZE)));

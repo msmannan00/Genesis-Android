@@ -11,6 +11,7 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,7 +34,7 @@ class bridgeModel
     /*Helper Methods*/
 
     public void requestBridges(){
-        pluginController.getInstance().MessageManagerHandler(mContext, Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL), enums.etype.on_bridge_mail);
+        pluginController.getInstance().MessageManagerHandler(mContext, Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL), enums.eMessageEnums.M_BRIDGE_MAIL);
     }
 
     public void onCustomChecked(){

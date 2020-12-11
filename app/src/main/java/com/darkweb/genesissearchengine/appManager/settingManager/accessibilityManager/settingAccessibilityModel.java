@@ -1,11 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager;
 
-import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-import java.util.Arrays;
 import java.util.List;
 
 class settingAccessibilityModel
@@ -24,12 +20,10 @@ class settingAccessibilityModel
 
     private void onZoomSettingUpdate(boolean pStatus){
         status.sSettingEnableZoom = pStatus;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ZOOM,pStatus));
     }
 
     private void onVoiceInputSettingUpdate(boolean pStatus){
         status.sSettingEnableVoiceInput = pStatus;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_VOICE_INPUT,pStatus));
     }
 
     public Object onTrigger(settingAccessibilityEnums.eAccessibilityViewController pCommands, List<Object> pData){
@@ -41,5 +35,4 @@ class settingAccessibilityModel
         }
         return null;
     }
-
 }

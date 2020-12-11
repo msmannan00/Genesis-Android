@@ -1,6 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.helperManager.TopCropImageView;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
@@ -28,7 +25,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
     private ArrayList<tabRowModel> mModelList;
     private eventObserver.eventListener mEvent;
-    private ArrayList<Integer> mSelectedList = new ArrayList<>();
+    private ArrayList<String> mSelectedList = new ArrayList<>();
 
     tabAdapter(ArrayList<tabRowModel> model_list, eventObserver.eventListener event) {
         this.mModelList = model_list;
@@ -68,7 +65,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_CLEAR_TAB_BACKUP);
         for(int mCounter=0;mCounter<mModelList.size();mCounter++){
             if(mSelectedList.contains(mModelList.get(mCounter).getSession().getSessionID())){
-                mSelectedList.remove((Integer) mModelList.get(mCounter).getSession().getSessionID());
+                mSelectedList.remove((String) mModelList.get(mCounter).getSession().getSessionID());
                 mEvent.invokeObserver(Collections.singletonList(mCounter), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB);
                 notifyItemRemoved(mCounter);
                 mCounter-=1;
@@ -158,7 +155,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     }
                 }else {
                     for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
-                        if(mSelectedList.get(mCounter) == mModelList.get(this.getLayoutPosition()).getSession().getSessionID()){
+                        if(mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getSession().getSessionID())){
                             mSelectedList.remove(mCounter);
                         }
                     }

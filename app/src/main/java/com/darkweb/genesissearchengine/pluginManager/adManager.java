@@ -15,6 +15,7 @@ class adManager
     private AppCompatActivity mAppContext;
     private eventObserver.eventListener mEvent;
     private AdView mBannerAds;
+
     private boolean bannerAdsLoading = false;
     private boolean bannerAdsLoaded = false;
 
@@ -56,7 +57,6 @@ class adManager
 
                 @Override
                 public void onAdFailedToLoad(int errorCode) {
-                    //Log.i("Failure___",""+errorCode);
                 }
 
                 @Override
@@ -82,10 +82,9 @@ class adManager
 
     private void initializeBannerAds(){
         if(!sPaidStatus){
-            AdRequest request = new AdRequest.Builder().addTestDevice("E731DE5933CDC0E42B335787CE3E23EF").build();
+            AdRequest request = new AdRequest.Builder().build();
             mBannerAds.loadAd(request);
             admobListeners();
         }
     }
-
 }

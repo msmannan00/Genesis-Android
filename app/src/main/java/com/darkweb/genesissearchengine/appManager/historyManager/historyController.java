@@ -35,6 +35,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -140,7 +141,7 @@ public class historyController extends AppCompatActivity
 
         mClearButton.requestFocusFromTouch();
         mClearButton.setOnClickListener(v -> {
-            pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHistoryController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.clear_history);
+            pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHistoryController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.eMessageEnums.M_CLEAR_HISTORY);
         });
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) ->{

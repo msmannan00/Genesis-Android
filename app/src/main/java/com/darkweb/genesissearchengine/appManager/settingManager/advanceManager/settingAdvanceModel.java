@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
@@ -27,7 +26,6 @@ class settingAdvanceModel
 
     private void onRestoreTabs(boolean pStatus) {
         status.sRestoreTabs = pStatus;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_RESTORE_TAB,pStatus));
     }
 
     private void onShowImages(View pView) {
@@ -38,18 +36,14 @@ class settingAdvanceModel
         else if(pView.getId() == R.id.pAdvanceOption2){
             status.sShowImages = 2;
         }
-
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,status.sShowImages));
     }
 
     private void onShowWebFonts(boolean pStatus) {
         status.sShowWebFonts = pStatus;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS,pStatus));
     }
 
     private void onAllowAutoPlay(boolean pStatus) {
         status.sAutoPlay = pStatus;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_AUTO_PLAY,pStatus));
     }
 
     public Object onTrigger(settingAdvanceEnums.eAdvanceModel pCommands, List<Object> pData){

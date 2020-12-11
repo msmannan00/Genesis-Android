@@ -5,11 +5,19 @@ import android.view.View;
 import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,6 +50,10 @@ public class settingAdvanceController extends AppCompatActivity {
 
         mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts, mAllowAutoPlay, mImageOption);
         mSettingAdvanceModel = new settingAdvanceModel(new settingAdvanceModelCallback());
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     /* LISTENERS */
@@ -108,6 +120,7 @@ public class settingAdvanceController extends AppCompatActivity {
     public void onRestoreTabs(View view) {
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_RESTORE_TAB, Collections.singletonList(!mRestoreTabs.isChecked()));
         mRestoreTabs.toggle();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_RESTORE_TAB, status.sRestoreTabs));
     }
 
     public void onShowImages(View view) {
@@ -115,17 +128,20 @@ public class settingAdvanceController extends AppCompatActivity {
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_IMAGE, Collections.singletonList(null));
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_SHOW_IMAGE, Collections.singletonList(view));
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_SET_IMAGE, Collections.singletonList(view));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,status.sShowImages));
     }
 
     public void onShowWebFonts(View view) {
         mIsChanged = true;
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_SHOW_WEB_FONTS, Collections.singletonList(!mShowWebFonts.isChecked()));
         mShowWebFonts.toggle();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS,status.sShowWebFonts));
     }
 
     public void onAllowAutoPlay(View view) {
         mIsChanged = true;
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_ALLOW_AUTOPLAY, Collections.singletonList(!mAllowAutoPlay.isChecked()));
         mAllowAutoPlay.toggle();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_AUTO_PLAY,status.sAutoPlay));
     }
 }

@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package com.darkweb.genesissearchengine.widget;
+package com.darkweb.genesissearchengine.widget.progressBar;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;

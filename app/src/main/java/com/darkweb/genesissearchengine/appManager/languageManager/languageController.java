@@ -4,15 +4,16 @@ package com.darkweb.genesissearchengine.appManager.languageManager;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +44,10 @@ public class languageController extends AppCompatActivity {
     public void initializeConnections()
     {
         mLanguageViewController.initialization(new languageViewCallback(),this);
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     public class languageViewCallback implements eventObserver.eventListener{

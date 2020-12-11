@@ -4,13 +4,15 @@
     <color name="c_background_inverted">#1c1b21</color>
     <color name="c_view_divier_background_inner">#ebebeb</color>
     <color name="c_view_divier_background_inner_v1">#e6e6e6</color>
-    <color name="c_view_divier_background">#f2f2f2</color>
-    <color name="c_text_v1">#192234</color>
+    <color name="c_view_divier_background">#e6e6e6</color>
+    <color name="c_text_v1">#111722</color>
     <color name="c_text_v2">#999999</color>
     <color name="c_text_v3">#bfbfbf</color>
     <color name="c_text_v4">#425e8a</color>
     <color name="c_text_v5">#000000</color>
+    <color name="c_text_v6">#8c8c8c</color>
     <color name="c_icon_tint">#425e8a</color>
+    <color name="c_icon_tint_light">#7591bd</color>
     <color name="c_text_setting_heading">#3385ff</color>
     <color name="c_button_text_v1">#3385ff</color>
     <color name="c_button_text_v1_inverted">#ffffff</color>
@@ -53,6 +55,7 @@
     <color name="c_text_home_menu">#212d45</color>
     <color name="c_hint_text">#b3b3b3</color>
     <color name="c_list_item_current">#f1f3f4</color>
+    <color name="c_lock_tint">#00b300</color>
 
     <color name="c_menu_drop_shadow_05">#05e6e6e6</color>
     <color name="c_menu_drop_shadow_10">#10e6e6e6</color>

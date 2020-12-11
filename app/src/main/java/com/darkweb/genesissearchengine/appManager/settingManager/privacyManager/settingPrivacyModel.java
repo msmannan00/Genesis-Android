@@ -3,7 +3,6 @@ package com.darkweb.genesissearchengine.appManager.settingManager.privacyManager
 import android.view.View;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
@@ -29,18 +28,15 @@ class settingPrivacyModel
     /*Helper Methods*/
 
     private void onJavaScript(boolean pStatus){
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,pStatus));
         status.sSettingJavaStatus = pStatus;
     }
 
     private void onDoNotTrack(boolean pStatus){
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_DONOT_TRACK,pStatus));
         status.sStatusDoNotTrack = pStatus;
     }
 
     private void onTrackingProtection(boolean pStatus){
         status.sSettingTrackingProtection = pStatus;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TRACKING_PROTECTION,pStatus));
     }
 
     private void onCookies(View pView){
@@ -56,12 +52,9 @@ class settingPrivacyModel
         if(pView.getId() == R.id.pCookieOption4){
             status.sSettingCookieStatus = ACCEPT_NONE;
         }
-
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,status.sSettingCookieStatus));
     }
 
     private void onClearPrivateData(boolean pStatus){
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR,pStatus));
         status.sClearOnExit = pStatus;
     }
 

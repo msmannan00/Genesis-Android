@@ -1,4 +1,5 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -56,47 +57,40 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:scaleX="1.08"
-                        android:scaleY="1.08"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="7dp"
-                        android:background="@xml/gx_ripple_default_round"
+                    <ImageView
+                        android:layout_width="47dp"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:paddingStart="3dp"
+                        android:onClick="onOpenInfo"
+                        android:background="@xml/gx_ripple_gray"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_baseline_info"
-                        android:tint="@color/c_navigation_light" />
+                        android:src="@drawable/info"
+                        app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
 
                 <!-- Title Header -->
 
                 <LinearLayout
-                    android:id="@+id/pOption2"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@xml/gx_ripple_gray"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
-                    android:weightSum="7">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="12dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:paddingStart="15dp"
-                        android:text="@string/SETTING_ACCESSIBILITY_FONT"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/c_text_setting_heading"
                         android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
-
+                        android:layout_width="0dp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="00dp"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/SETTING_ACCESSIBILITY_FONT"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,7 +121,7 @@
                             android:text="@string/SETTING_ACCESSIBILITY_FONT_CUSTOM"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -184,7 +178,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:background="@xml/sx_font_change_round_background"
-                            android:textColor="@color/c_font_change_foreground"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="12sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -194,12 +188,53 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@color/c_view_divier_background"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/c_text_setting_heading"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="00dp"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/SETTING_INTERACTION"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_INTERACTION_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/pOption4"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:background="@xml/gx_ripple_gray"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:onClick="onZoomSettingUpdate"
                     android:orientation="horizontal"
                     android:weightSum="7">
@@ -211,7 +246,7 @@
                         android:clickable="false"
                         android:orientation="vertical">
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
@@ -224,7 +259,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -239,7 +274,7 @@
                             android:text="@string/SETTING_ACCESSIBILITY_ZOOM_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -255,11 +290,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
                     android:id="@+id/pOption5"
@@ -277,7 +307,7 @@
                         android:clickable="false"
                         android:orientation="vertical">
 
-                        <Button
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginTop="12dp"
@@ -290,7 +320,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -305,7 +335,7 @@
                             android:text="@string/SETTING_ACCESSIBILITY_VOICE_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -321,11 +351,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background"/>
 
             </LinearLayout>
         </ScrollView>

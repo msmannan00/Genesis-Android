@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.settingManager.notificationMa
 
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
@@ -28,7 +27,6 @@ class settingNotificationModel
 
         int mStatus = pStatus ? 1 : 0;
         status.sBridgeNotificationManual = mStatus;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, mStatus));
         pluginController.getInstance().setNotificationStatus(mStatus);
         int notificationStatus = pluginController.getInstance().getNotificationStatus();
         if(notificationStatus==0){

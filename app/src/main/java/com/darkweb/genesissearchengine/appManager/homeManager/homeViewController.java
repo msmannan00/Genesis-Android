@@ -34,16 +34,20 @@ import androidx.core.content.ContextCompat;
 
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.*;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.animatedColor;
 import com.darkweb.genesissearchengine.helperManager.autoCompleteAdapter;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -59,7 +63,7 @@ class homeViewController
 
     /*ViewControllers*/
     private FrameLayout mWebviewContainer;
-    private com.darkweb.genesissearchengine.widget.AnimatedProgressBar mProgressBar;
+    private AnimatedProgressBar mProgressBar;
     private AutoCompleteTextView mSearchbar;
     private ConstraintLayout mSplashScreen;
     private ImageView mLoading;
@@ -77,12 +81,14 @@ class homeViewController
     private EditText mFindText;
     private TextView mFindCount;
     private FrameLayout mTopLayout;
+    private ImageButton mVoiceInput;
+    private ImageButton mMenu;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, com.darkweb.genesissearchengine.widget.AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -103,11 +109,11 @@ class homeViewController
         this.mFindText = pFindText;
         this.mFindCount = pFindCount;
         this.mTopLayout = pTopLayout;
+        this.mVoiceInput = pVoiceInput;
+        this.mMenu = pMenu;
 
         initSplashScreen();
         initializeSuggestionView(suggestions);
-        initLock();
-        initSearchImage();
         createUpdateUiHandler();
         recreateStatusBar();
         initTopBarPadding();
@@ -127,34 +133,40 @@ class homeViewController
         }
     }
 
-    private void initSearchImage(){
+    public void initSearchBarFocus(boolean pStatus){
+        if(!pStatus){
+            this.mVoiceInput.animate().setDuration(250).alpha(0).withEndAction(() -> {
+                mVoiceInput.setVisibility(View.GONE);
+                ((LinearLayout)mNewTab.getParent()).setVisibility(View.VISIBLE);
+                mMenu.setVisibility(View.VISIBLE);
+            });
+
+        }else {
+            Drawable drawable;
+            Resources res = mContext.getResources();
+            try {
+                if(status.sSettingEnableVoiceInput){
+                    drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_keyboard_voice));
+                }else {
+                    drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_search_small));
+                }
+                mVoiceInput.setImageDrawable(drawable);
+            } catch (Exception ignored) {
+            }
+
+            final Handler handler = new Handler();
+            handler.postDelayed(() ->
+            {
+                mVoiceInput.setVisibility(View.VISIBLE);
+            }, 250);
+
+            ((LinearLayout)this.mNewTab.getParent()).setVisibility(View.GONE);
+            this.mMenu.setVisibility(View.GONE);
+        }
     }
 
     void initTab(int count){
         mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
-    }
-
-    private void initPostUI(boolean isSplash){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            if(isSplash){
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.landing_ease_blue));
-            }
-            else{
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                    window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
-                }
-                else {
-                    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                        mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    }
-                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-                }
-            }
-        }
     }
 
     public void recreateStatusBar(){
@@ -234,13 +246,6 @@ class homeViewController
         animator.start();
     }
 
-    private void initLock(){
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable img = mContext.getResources().getDrawable( R.drawable.icon_lock);
-        mSearchbar.measure(0, 0);
-        img.setBounds( -10, (int)(mSearchbar.getMeasuredHeight()*0.00), (int)(mSearchbar.getMeasuredHeight()*1.10)-10, (int)(mSearchbar.getMeasuredHeight()*0.69) );
-        mSearchbar.setCompoundDrawables( img, null, null, null );
-    }
-
     void initializeSuggestionView(ArrayList<historyRowModel> suggestions){
 
         if(mSearchbar.isFocused()){
@@ -269,7 +274,7 @@ class homeViewController
         mSearchbar.setInputType(EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     }
 
-    private void initSplashLoading(){
+    public void initSplashLoading(){
 
         mLoading.setAnimation(helperMethod.getRotationAnimation());
         mLoading.setLayoutParams(helperMethod.getCenterScreenPoint(mLoading.getLayoutParams()));
@@ -293,7 +298,6 @@ class homeViewController
     private void initSplashScreen(){
         mSearchbar.setEnabled(false);
         helperMethod.hideKeyboard(mContext);
-        //initPostUI(true);
 
         mBackSplash.getLayoutParams().height = helperMethod.getScreenHeight(mContext) - helperMethod.getStatusBarHeight(mContext)*2;
         mSearchbar.setEnabled(false);
@@ -494,7 +498,7 @@ class homeViewController
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
     void onUpdateSearchBar(String url,boolean showProtocol){
-        int delay = 50;
+        int delay = 0;
         handlerLocalUrl = url;
 
         if(searchBarUpdateHandler.hasMessages(100)){
@@ -710,6 +714,8 @@ class homeViewController
             params.setMargins(0, 0, 0, 0);
             mWebviewContainer.setLayoutParams(params);
             mBannerAds.setVisibility(View.GONE);
+            com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = false;
+            mGeckoView.setPadding(0,0,0,0);
         }
         else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -726,6 +732,8 @@ class homeViewController
             mWebviewContainer.setLayoutParams(params);
             mBannerAds.setVisibility(View.GONE);
             mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
+            com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
+            initTopBarPadding();
         }
     }
 
@@ -765,10 +773,13 @@ class homeViewController
             {
                 if(msg.what == messages.MESSAGE_ON_URL_LOAD)
                 {
-                    if(status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)){
-                        mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingSearchStatus)), enums.etype.on_url_load);
-                    }else {
-                        mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), enums.etype.on_url_load);
+                    if(mEvent.invokeObserver(null, enums.etype.M_HOME_PAGE)==null){
+                        mEvent.invokeObserver(null, enums.etype.M_PRELOAD_URL);
+                        if(status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)){
+                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingSearchStatus)), enums.etype.on_url_load);
+                        }else {
+                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), enums.etype.on_url_load);
+                        }
                     }
                 }
                 if(msg.what == messages.MESSAGE_UPDATE_LOADING_TEXT)

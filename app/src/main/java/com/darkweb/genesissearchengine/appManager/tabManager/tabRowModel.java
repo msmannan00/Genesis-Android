@@ -1,42 +1,63 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.se.omapi.Session;
 
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
+import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
+
+import java.sql.Blob;
+import java.util.Calendar;
+import java.util.UUID;
 
 public class tabRowModel
 {
     /*Private Variables*/
 
     private geckoSession mSession;
-    private int mId;
-    private GeckoView mGeckoView = null;
+    private String mId;
     private Bitmap mBitmap = null;
     private String mDate;
 
     /*Initializations*/
 
-    public tabRowModel(geckoSession mSession,int mId) {
+    public tabRowModel(geckoSession mSession) {
         this.mSession = mSession;
-        this.mId = mId;
+        this.mId = mSession.getSessionID();
         this.mDate = helperMethod.getCurrentDate();
     }
 
-    /*Helper Method*/
+    public tabRowModel(String pID, String pDate, byte[] pBlob) {
+        this.mId = pID;
+        this.mDate = pDate;
+        if(pBlob!=null){
+            mBitmap = BitmapFactory.decodeByteArray(pBlob,0,pBlob.length);
+        }
+    }
+
+   /*Helper Method*/
 
     public geckoSession getSession()
     {
         return mSession;
     }
 
-    public int getmId() {
-        return mId;
+    public void setSession(geckoSession pSession, String pURL, String pTitle)
+    {
+        mSession = pSession;
+        mSession.setTitle(pTitle);
+        mSession.setURL(pURL);
     }
-    public void setId(int id) {
-        mId = id;
+
+    public String getmId() {
+        return mId;
     }
 
     public void setmBitmap(Bitmap pBitmap) {

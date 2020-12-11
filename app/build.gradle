@@ -76,6 +76,7 @@ android {
             res.srcDirs =
                     [
                             'src/main/res/layouts/history',
+                            'src/main/res/layouts/help',
                             'src/main/res/layouts/tab',
                             'src/main/res/layouts/language',
                             'src/main/res/layouts/orbot',
@@ -178,7 +179,7 @@ dependencies {
     implementation 'com.chauthai.overscroll:overscroll-bouncy:0.1.1'
     androidTestImplementation "junit:junit:4.13.1"
     implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
-    compile 'com.android.support:design:24.0.0'
+    implementation 'com.android.support:design:24.0.0'
 }
 
 apply plugin: 'com.android.application'

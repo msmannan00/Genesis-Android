@@ -5,16 +5,18 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.InsetDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.Gravity;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
@@ -27,7 +29,6 @@ import com.example.myapplication.R;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-import static android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 
 class messageManager
 {
@@ -43,7 +44,7 @@ class messageManager
 
     /*Initializations*/
 
-    private void initializeDialog(int pLayout,int pGravity,int pFlag){
+    private void initializeDialog(int pLayout, int pGravity){
         if(dialog!=null && dialog.isShowing()){
             dialog.dismiss();
         }
@@ -63,7 +64,6 @@ class messageManager
         dialog.setCancelable(true);
         dialog.setContentView(pLayout);
         dialog.show();
-        //dialog.getWindow().clearFlags(pFlag);
     }
 
     messageManager(eventObserver.eventListener event)
@@ -74,33 +74,33 @@ class messageManager
     /*Helper Methods*/
     private void welcomeMessage()
     {
-        initializeDialog(R.layout.popup_welcome, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_welcome, Gravity.CENTER);
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(constants.CONST_BLACK_MARKET_URL), enums.etype.welcome);
+            event.invokeObserver(Collections.singletonList(constants.CONST_BLACK_MARKET_URL), enums.eMessageEnums.M_WELCOME);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(constants.CONST_LEAKED_DOCUMENT_URL), enums.etype.welcome);
+            event.invokeObserver(Collections.singletonList(constants.CONST_LEAKED_DOCUMENT_URL), enums.eMessageEnums.M_WELCOME);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(constants.CONST_NEWS_URL), enums.etype.welcome);
+            event.invokeObserver(Collections.singletonList(constants.CONST_NEWS_URL), enums.eMessageEnums.M_WELCOME);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption4).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(constants.CONST_SOFTWARE_URL), enums.etype.welcome);
+            event.invokeObserver(Collections.singletonList(constants.CONST_SOFTWARE_URL), enums.eMessageEnums.M_WELCOME);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption5).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(constants.CONST_SOFTWARE_FINANCE), enums.etype.welcome);
+            event.invokeObserver(Collections.singletonList(constants.CONST_SOFTWARE_FINANCE), enums.eMessageEnums.M_WELCOME);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption6).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(constants.CONST_COMMUNITIES), enums.etype.welcome);
+            event.invokeObserver(Collections.singletonList(constants.CONST_COMMUNITIES), enums.eMessageEnums.M_WELCOME);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pDontShowAgain).setOnClickListener(v -> {
-            event.invokeObserver(null, enums.etype.cancel_welcome);
+            event.invokeObserver(null, enums.eMessageEnums.M_CANCEL_WELCOME);
             dialog.dismiss();
         });
     }
@@ -108,7 +108,7 @@ class messageManager
     @SuppressLint("QueryPermissionsNeeded")
     private void abiError()
     {
-        initializeDialog(R.layout.popup_abi_error, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_abi_error, Gravity.CENTER);
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             dialog.dismiss();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_GENESIS_UPDATE_URL + status.sAppCurrentABI));
@@ -119,6 +119,7 @@ class messageManager
                 helperMethod.showToastMessage("Not Supported", mContext);
             }
         });
+
         dialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
             dialog.dismiss();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_PLAYSTORE_URL));
@@ -133,7 +134,7 @@ class messageManager
 
     private void rateFailure()
     {
-        initializeDialog(R.layout.popup_rate_failure, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_rate_failure, Gravity.CENTER);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -143,7 +144,7 @@ class messageManager
                     helperMethod.sendRateEmail(mContext);
                 }
                 catch (Exception ex){
-                    createMessage(mContext,Collections.singletonList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
+                    createMessage(mContext,Collections.singletonList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.eMessageEnums.M_NOT_SUPPORTED);
                 }
             };
             handler.postDelayed(runnable, 1000);
@@ -152,27 +153,31 @@ class messageManager
 
     private void reportedSuccessfully()
     {
-        initializeDialog(R.layout.popup_reported_successfully, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_reported_successfully, Gravity.CENTER);
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> dialog.dismiss());
     }
 
     private void notSupportMessage()
     {
-        initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
     private void dataClearedSuccessfully()
     {
-        initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM, FLAG_DIM_BEHIND);
-        dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
+        initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
+
+        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(back, 0,0,0,helperMethod.pxFromDp(25));
+        dialog.getWindow().setBackgroundDrawable(inset);
+        dialog.findViewById(R.id.pNext).setOnClickListener(v -> dialog.dismiss());
     }
 
 
     @SuppressLint("ResourceType")
     private void bookmark()
     {
-        initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER);
         EditText mBoomMarkTitle = dialog.findViewById(R.id.pBookmark);
         dialog.setOnDismissListener(dialog -> {
             final Handler handler = new Handler();
@@ -194,38 +199,38 @@ class messageManager
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
             helperMethod.hideKeyboard(mContext);
-            event.invokeObserver(Collections.singletonList(data.get(0).toString().replace("genesis.onion","boogle.store")+"split"+((EditText)dialog.findViewById(R.id.pBookmark)).getText().toString()), enums.etype.bookmark);
+            event.invokeObserver(Collections.singletonList(data.get(0).toString().replace("genesis.onion","boogle.store")+"split"+((EditText)dialog.findViewById(R.id.pBookmark)).getText().toString()), enums.eMessageEnums.M_BOOKMARK);
         });
     }
 
     private void clearHistory()
     {
-        initializeDialog(R.layout.popup_clear_history, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_clear_history, Gravity.CENTER);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
-            event.invokeObserver(null, enums.etype.clear_history);
+            event.invokeObserver(null, enums.eMessageEnums.M_CLEAR_HISTORY);
         });
     }
 
     private void clearBookmark()
     {
-        initializeDialog(R.layout.popup_clear_bookmark, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_clear_bookmark, Gravity.CENTER);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
-            event.invokeObserver(null, enums.etype.clear_bookmark);
+            event.invokeObserver(null, enums.eMessageEnums.M_CLEAR_BOOKMARK);
         });
     }
 
     private void reportURL()
     {
-        initializeDialog(R.layout.popup_report_url, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_report_url, Gravity.CENTER);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
             final Handler handler = new Handler();
-            Runnable runnable = () -> createMessage(mContext,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.reported_success);
+            Runnable runnable = () -> createMessage(mContext,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.eMessageEnums.M_RATE_SUCCESS);
             handler.postDelayed(runnable, 1000);
         });
     }
@@ -233,12 +238,12 @@ class messageManager
     @SuppressLint("QueryPermissionsNeeded")
     private void rateApp()
     {
-        initializeDialog(R.layout.popup_rate_us, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             RatingBar mRatingBar = dialog.findViewById(R.id.pRating);
             if(mRatingBar.getRating()>=3){
-                event.invokeObserver(null, enums.etype.app_rated);
+                event.invokeObserver(null, enums.eMessageEnums.M_APP_RATED);
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine"));
                 if(intent.resolveActivity(mContext.getPackageManager()) != null)
                 {
@@ -248,9 +253,9 @@ class messageManager
                 }
                 dialog.dismiss();
             }else if(mRatingBar.getRating()>0) {
-                event.invokeObserver(null, enums.etype.app_rated);
+                event.invokeObserver(null, enums.eMessageEnums.M_APP_RATED);
                 final Handler handler = new Handler();
-                handler.postDelayed(() -> createMessage(mContext,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.etype.rate_failure), 1000);
+                handler.postDelayed(() -> createMessage(mContext,Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.eMessageEnums.M_RATE_FAILURE), 1000);
                 dialog.dismiss();
             }
         });
@@ -258,7 +263,7 @@ class messageManager
 
     private void downloadFile()
     {
-        initializeDialog(R.layout.popup_download_file, Gravity.BOTTOM, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_download_file, Gravity.BOTTOM);
         ((TextView)dialog.findViewById(R.id.pDescription)).setText((mContext.getString(R.string.ALERT_DOWNLOAD_MESSAGE) + data.get(0)));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
@@ -275,23 +280,23 @@ class messageManager
             size = 235;
         }
 
-        initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER);
         ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + " | " + data.get(0).toString().substring(0,size)+"..."));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.download_file_manual);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_DOWNLOAD_FILE_MANUAL);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.open_link_current_tab);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_OPEN_LINK_CURRENT_TAB);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
     }
@@ -305,19 +310,19 @@ class messageManager
             size = 235;
         }
 
-        initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
         ((TextView)dialog.findViewById(R.id.pDescription)).setText((title + data.get(0).toString().substring(0,size)+"..."));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.open_link_new_tab);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_OPEN_LINK_NEW_TAB);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.open_link_current_tab);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_OPEN_LINK_CURRENT_TAB);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
     }
@@ -350,49 +355,49 @@ class messageManager
             mTitle = data.get(0).toString().substring(0,size)+"...";
         }
 
-        initializeDialog(R.layout.popup_download_full, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_download_full, Gravity.CENTER);
         ((TextView)dialog.findViewById(R.id.pHeader)).setText(mTitle);
         ((TextView)dialog.findViewById(R.id.pDescription)).setText((data_local));
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.open_link_new_tab);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_OPEN_LINK_NEW_TAB);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.open_link_current_tab);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_OPEN_LINK_CURRENT_TAB);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
         dialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            event.invokeObserver(Collections.singletonList(data.get(0)), enums.etype.copy_link);
+            event.invokeObserver(Collections.singletonList(data.get(0)), enums.eMessageEnums.M_COPY_LINK);
             dialog.dismiss();
         });
     }
 
     private void startingOrbotInfo()
     {
-        initializeDialog(R.layout.popup_starting_orbot_info, Gravity.BOTTOM, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_starting_orbot_info, Gravity.BOTTOM);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
     private void sendBridgeMail()
     {
-        initializeDialog(R.layout.popup_bridge_mail, Gravity.CENTER, FLAG_DIM_BEHIND);
+        initializeDialog(R.layout.popup_bridge_mail, Gravity.CENTER);
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -402,7 +407,7 @@ class messageManager
                     helperMethod.sendBridgeEmail(mContext);
                 }
                 catch (Exception ex){
-                    createMessage(mContext,Collections.singletonList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.etype.on_not_support);
+                    createMessage(mContext,Collections.singletonList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.eMessageEnums.M_NOT_SUPPORTED);
                 }
             };
             handler.postDelayed(runnable, 1000);
@@ -417,78 +422,78 @@ class messageManager
 
     /*External Helper Methods*/
 
-    void createMessage(AppCompatActivity app_context, List<Object> data, enums.etype type)
+    void createMessage(AppCompatActivity app_context, List<Object> data, enums.eMessageEnums type)
     {
         this.mContext = app_context;
         this.data = data;
 
         switch (type)
         {
-            case welcome:
+            case M_WELCOME:
                 welcomeMessage();
                 break;
 
-            case abi_error:
+            case M_ABI_ERROR:
                 abiError();
                 break;
 
-            case rate_failure:
+            case M_RATE_FAILURE:
                 rateFailure();
                 break;
 
-            case reported_success:
+            case M_RATE_SUCCESS:
                 reportedSuccessfully();
                 break;
 
-            case bookmark:
+            case M_BOOKMARK:
                 bookmark();
                 break;
 
-            case clear_history:
+            case M_CLEAR_HISTORY:
                 clearHistory();
                 break;
 
-            case clear_bookmark:
+            case M_CLEAR_BOOKMARK:
                 clearBookmark();
                 break;
 
-            case report_url:
+            case M_REPORT_URL:
                 reportURL();
                 break;
 
-            case rate_app:
+            case M_RATE_APP:
                 rateApp();
                 break;
 
-            case download_file:
+            case M_DOWNLOAD_FILE:
                 downloadFile();
                 break;
 
-            case start_orbot:
+            case M_START_ORBOT:
                 startingOrbotInfo();
                 break;
 
-            case download_file_long_press:
+            case M_LONG_PRESS_DOWNLOAD:
                 downloadFileLongPress();
                 break;
 
-            case on_long_press_url:
+            case M_LONG_PRESS_URL:
                 openURLLongPress();
                 break;
 
-            case on_long_press_with_link:
+            case M_LONG_PRESS_WITH_LINK:
                 popupDownloadFull();
             break;
 
-            case on_bridge_mail:
+            case M_BRIDGE_MAIL:
                 sendBridgeMail();
                 break;
 
-            case on_not_support:
+            case M_NOT_SUPPORTED:
                 notSupportMessage();
                 break;
 
-            case data_cleared:
+            case M_DATA_CLEARED:
                 dataClearedSuccessfully();
                 break;
         }

@@ -1,4 +1,5 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -55,18 +56,19 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:scaleX="1.08"
-                        android:scaleY="1.08"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="7dp"
-                        android:background="@xml/gx_ripple_default_round"
+                    <ImageView
+                        android:layout_width="47dp"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:paddingStart="3dp"
+                        android:onClick="onOpenInfo"
+                        android:background="@xml/gx_ripple_gray"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_baseline_info"
-                        android:tint="@color/c_navigation_light" />
+                        android:src="@drawable/info"
+                        app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
 
@@ -81,7 +83,7 @@
                     android:orientation="horizontal"
                     android:weightSum="7">
 
-                    <Button
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="6"
@@ -89,12 +91,13 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
+                        android:layout_marginTop="20dp"
                         android:paddingStart="15dp"
                         android:text="@string/SETTING_ORBOT_LIST_VIEW"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         tools:ignore="RtlSymmetry" />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial

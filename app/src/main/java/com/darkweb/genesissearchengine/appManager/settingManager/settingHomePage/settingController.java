@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController;
 import com.darkweb.genesissearchengine.appManager.settingManager.clearManager.settingClearController;
@@ -28,7 +29,8 @@ import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import java.util.Arrays;
 import java.util.List;
-import static com.darkweb.genesissearchengine.constants.enums.etype.on_not_support;
+
+import static com.darkweb.genesissearchengine.constants.enums.eMessageEnums.M_NOT_SUPPORTED;
 
 public class settingController extends AppCompatActivity
 {
@@ -129,7 +131,7 @@ public class settingController extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS));
         }else{
-            pluginController.getInstance().MessageManagerHandler(this, null, on_not_support);
+            pluginController.getInstance().MessageManagerHandler(this, null, M_NOT_SUPPORTED);
         }
     }
 
@@ -159,6 +161,10 @@ public class settingController extends AppCompatActivity
 
     public void onManageSearchAdvanced(View view) {
         helperMethod.openActivity(settingAdvanceController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     /*Event Observer*/

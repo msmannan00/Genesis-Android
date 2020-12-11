@@ -17,7 +17,6 @@ class firebaseManager
 
     firebaseManager(AppCompatActivity app_context, eventObserver.eventListener event){
         this.mAppContext = app_context;
-
         initialize();
     }
 
@@ -36,5 +35,4 @@ class firebaseManager
             FlurryAgent.logEvent(value);
         }
     }
-
 }

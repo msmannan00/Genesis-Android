@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,18 +58,19 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:scaleX="1.08"
-                        android:scaleY="1.08"
-                        android:layout_marginTop="1dp"
-                        android:background="@xml/gx_ripple_default_round"
+                    <ImageView
+                        android:layout_width="47dp"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:paddingStart="3dp"
+                        android:onClick="onOpenInfo"
+                        android:background="@xml/gx_ripple_gray"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_baseline_info"
-                        android:layout_marginEnd="7dp"
-                        android:tint="@color/c_navigation_light" />
+                        android:src="@drawable/info"
+                        app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
 
@@ -104,7 +106,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -119,7 +121,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_1"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -139,11 +141,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
                     android:id="@+id/pOption2"
@@ -175,7 +172,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
@@ -190,7 +187,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_2"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -210,11 +207,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
                     android:id="@+id/pOption3"
@@ -246,7 +238,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -260,7 +252,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_3"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -280,11 +272,6 @@
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
                     android:id="@+id/pOption4"
@@ -316,7 +303,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -330,7 +317,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_4"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -352,13 +339,8 @@
                 </LinearLayout>
 
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background" />
-
                 <LinearLayout
-                    android:id="@+id/pOption6"
+                    android:id="@+id/pOption5"
                     android:tag="4"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
@@ -387,7 +369,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -401,7 +383,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_6"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -410,7 +392,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:id="@+id/pClearChecked_6"
+                        android:id="@+id/pClearChecked_5"
                         android:tag="4"
                         android:checked="true"
                         android:layout_marginStart="100dp"
@@ -422,13 +404,8 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background" />
-
                 <LinearLayout
-                    android:id="@+id/pOption7"
+                    android:id="@+id/pOption6"
                     android:tag="5"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
@@ -457,7 +434,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -471,7 +448,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_7"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -480,7 +457,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:id="@+id/pClearChecked_7"
+                        android:id="@+id/pClearChecked_6"
                         android:tag="5"
                         android:layout_marginStart="100dp"
                         android:checked="true"
@@ -492,13 +469,8 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c_view_divier_background" />
-
                 <LinearLayout
-                    android:id="@+id/pOption8"
+                    android:id="@+id/pOption7"
                     android:tag="6"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
@@ -527,7 +499,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -541,7 +513,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_8"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -550,7 +522,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:id="@+id/pClearChecked_8"
+                        android:id="@+id/pClearChecked_7"
                         android:tag="6"
                         android:layout_marginStart="100dp"
                         android:checked="true"
@@ -562,14 +534,8 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="0dp"
-                    android:background="@color/c_view_divier_background" />
-
                 <LinearLayout
-                    android:id="@+id/pOption9"
+                    android:id="@+id/pOption8"
                     android:tag="7"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
@@ -598,7 +564,7 @@
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -612,7 +578,7 @@
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_9"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
+                            android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
                             tools:ignore="RtlSymmetry" />
                     </LinearLayout>
@@ -621,7 +587,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:id="@+id/pClearChecked_9"
+                        android:id="@+id/pClearChecked_8"
                         android:tag="7"
                         android:layout_marginStart="100dp"
                         android:checked="false"

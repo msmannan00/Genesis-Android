@@ -16,6 +16,7 @@
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:translationZ="10dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <FrameLayout
@@ -23,9 +24,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
-                app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
+                android:clipToPadding="false"
+                android:layout_marginBottom="-1dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:animateLayoutChanges="true"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -33,11 +37,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@xml/ic_secondary_gradinet"
-                    android:elevation="7dp"
                     android:gravity="left"
+                    android:elevation="4dp"
                     android:orientation="vertical"
-                    android:paddingBottom="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="RtlHardcoded,UselessParent">
@@ -45,21 +49,32 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:elevation="7dp"
                         android:gravity="left"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
+                        android:animateLayoutChanges="true"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlHardcoded,UselessParent">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:src="@xml/ic_baseline_lock"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="21dp"
+                            android:translationZ="10dp"
+                            android:contentDescription="@string/GENERAL_TODO"
+                            app:tint="@color/c_lock_tint" />
 
                         <AutoCompleteTextView
                             android:id="@+id/pSearchInput"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="-31dp"
+                            android:animateLayoutChanges="true"
                             android:layout_marginTop="8dp"
-                            android:layout_marginEnd="0dp"
+                            android:layout_marginEnd="18dp"
                             android:layout_marginBottom="8dp"
                             android:layout_weight="1"
                             android:background="@xml/gx_generic_input"
@@ -69,8 +84,8 @@
                             android:importantForAutofill="no"
                             android:inputType="textNoSuggestions"
                             android:maxLines="1"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp"
+                            android:paddingLeft="38dp"
+                            android:paddingRight="40dp"
                             android:popupElevation="5dp"
                             android:selectAllOnFocus="true"
                             android:text="@string/GENERAL_HOME_URL"
@@ -79,10 +94,30 @@
                             android:textColorHint="@color/c_text_v1"
                             android:textCursorDrawable="@xml/gx_search_cursor_state"
                             android:textSize="16sp"
-                            tools:targetApi="o" />
+                            tools:targetApi="o" >
+
+                        </AutoCompleteTextView>
+
+                        <ImageButton
+                            android:id="@+id/pVoiceInput"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:scaleX="1.1"
+                            android:scaleY="1.1"
+                            android:onClick="onVoiceClick"
+                            android:layout_marginTop="-1dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginStart="-60dp"
+                            android:visibility="gone"
+                            android:src="@xml/ic_baseline_keyboard_voice"
+                            android:tint="@color/c_navigation_tint"
+                            android:background="@color/clear_alpha"
+                            android:layout_gravity="center_vertical"
+                            android:contentDescription="@string/GENERAL_TODO" />
 
                         <LinearLayout
                             android:layout_width="40dp"
+                            android:layout_marginStart="-10dp"
                             android:layout_height="match_parent"
                             android:gravity="left"
                             android:onClick="onOpenTabViewBoundary"
@@ -93,11 +128,12 @@
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="12dp"
-                                android:layout_marginTop="17dp"
+                                android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="13dp"
                                 android:layout_marginBottom="0dp"
                                 android:background="@xml/gx_generic_tab_button"
                                 android:clickable="false"
+                                android:layout_marginTop="-1dp"
                                 android:contentDescription="@string/GENERAL_TODO"
                                 android:scaleType="fitCenter"
                                 android:text="@string/HOME_TAB_TEXT"
@@ -107,7 +143,7 @@
                         </LinearLayout>
 
                         <ImageButton
-                            android:id="@+id/menu"
+                            android:id="@+id/pMenu"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="-4dp"
@@ -137,29 +173,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
+            android:layout_marginTop="0dp"
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <FrameLayout
                 android:id="@+id/pWebLayoutView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
                 android:background="@color/c_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
 
-                <com.darkweb.genesissearchengine.widget.AnimatedProgressBar
+                <com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar
                     android:id="@+id/progressBar"
                     style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="2.5dp"
                     android:alpha="0"
                     android:max="10000"
-                    android:layout_marginTop="-1dp"
+                    android:background="@color/clear_alpha"
+                    android:layout_marginTop="0dp"
                     android:progress="0"
+                    android:elevation="7dp"
                     android:progressDrawable="@xml/hox_photon_progress"
-                    android:scaleY="0.7"
+                    android:scaleY="1"
                     app:shiftDuration="@integer/progress_shift_duration"
                     app:wrapShiftDrawable="true"
                     tools:progress="0" />
@@ -168,7 +206,7 @@
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="2dp"
                     android:alpha="1"
                     android:background="@color/c_background"
                     tools:layout_editor_absoluteX="8dp"

@@ -4,10 +4,19 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,6 +41,10 @@ public class settingLogController extends AppCompatActivity {
         mSettingLogViewController = new settingLogViewController(this, new settingLogViewCallback(), mListView);
 
         mSettingLogModel = new settingLogModel(new settingLogModelCallback());
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     /* LISTENERS */
@@ -84,5 +97,6 @@ public class settingLogController extends AppCompatActivity {
         mSettingLogModel.onTrigger(settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW, Collections.singletonList(!mListView.isChecked()));
         mListView.toggle();
         activityContextManager.getInstance().getOrbotLogController().initializeLogs();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogListView));
     }
 }

@@ -1,19 +1,20 @@
 package com.darkweb.genesissearchengine.appManager.databaseManager;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
+import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
+import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
 import static android.content.Context.MODE_PRIVATE;
 
 public class databaseController
@@ -43,6 +44,7 @@ public class databaseController
 
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
+            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB);");
 
         }
         catch (Exception ex)
@@ -54,6 +56,7 @@ public class databaseController
 
     /*Helper Methods*/
 
+
     public void execSQL(String query,String[] params)
     {
         if(params==null)
@@ -63,6 +66,14 @@ public class databaseController
         else
         {
             mDatabaseInstance.execSQL(query,params);
+        }
+    }
+
+    public void execTab(String query, ContentValues params,String pID)
+    {
+        if(params!=null)
+        {
+            mDatabaseInstance.update(query, params, "mid = ?", new String[]{pID});
         }
     }
 
@@ -89,6 +100,24 @@ public class databaseController
         c.close();
 
         return  tempmodel;
+    }
+
+    public ArrayList<tabRowModel> selectTabs(){
+        ArrayList<tabRowModel> mTempListModel = new ArrayList<>();
+
+        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM tab ORDER BY date DESC", null);
+        if (c.moveToFirst()){
+            do {
+                geckoSession mSession =  activityContextManager.getInstance().getHomeController().onNewTabInit();
+                tabRowModel model = new tabRowModel(c.getString(0), c.getString(1),c.getBlob(4));
+                model.setSession(mSession, c.getString(2),c.getString(3));
+                model.getSession().setSessionID(model.getmId());
+                mTempListModel.add(model);
+            } while(c.moveToNext());
+        }
+        c.close();
+
+        return  mTempListModel;
     }
 
     public int getLargestHistoryID(){

@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.widget;
+package com.darkweb.genesissearchengine.widget.progressBar;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;

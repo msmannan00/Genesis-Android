@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_background"
+        tools:context="com.darkweb.genesissearchengine.appManager.helpManager.helpController">
+
+        <!-- Title Header -->
+        <LinearLayout
+            android:id="@+id/pHeaderContainerTop"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:elevation="8dp"
+            android:background="@color/c_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="7dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry">
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_ripple_default_round"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:onClick="onClose"
+                android:src="@xml/ic_arrow_back"
+                android:tint="@color/c_navigation_tint" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-3dp"
+                android:onClick="onClose"
+                android:layout_weight="40"
+                android:gravity="center_vertical|start"
+                android:text="@string/HELP_TITLE"
+                android:textColor="@color/c_text_v1"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

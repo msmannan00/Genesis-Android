@@ -154,8 +154,9 @@ public class tabController extends AppCompatActivity
     }
 
     public void onRemoveView(int pIndex){
+        mHomeController.onCloseCurrentTab(mListModel.getList().get(pIndex).getSession());
         onClearTabBackup();
-        onRemoveTab(pIndex);
+        //onRemoveTab(pIndex);
         mTabAdapter.notifyItemRemoved(pIndex);
         onShowUndoDialog();
     }
@@ -182,9 +183,9 @@ public class tabController extends AppCompatActivity
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG, null);
     }
 
-    public void onTabRowChanged(int pId){
+    public void onTabRowChanged(String pId){
         for(int mCounter=0; mCounter<mListModel.getList().size();mCounter++){
-            if(mListModel.getList().get(mCounter).getSession().getSessionID() == pId){
+            if(mListModel.getList().get(mCounter).getSession().getSessionID().equals(pId)){
                 mTabAdapter.notifyItemChanged(mCounter);
             }
         }

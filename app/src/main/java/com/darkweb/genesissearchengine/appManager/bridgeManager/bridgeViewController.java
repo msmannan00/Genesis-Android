@@ -89,8 +89,8 @@ class bridgeViewController
 
         helperMethod.hideKeyboard(mContext);
         mCustomPort.clearFocus();
-        mCustomPort.animate().setDuration(p_duration).alpha(0.2f);
-        mBridgeButton.animate().setDuration(p_duration).alpha(0.2f);
+        mCustomPort.animate().setDuration(p_duration).alpha(0.35f);
+        mBridgeButton.animate().setDuration(p_duration).alpha(0.35f);
         mCustomBridgeBlocker.setVisibility(View.VISIBLE);
     }
 
@@ -102,17 +102,23 @@ class bridgeViewController
                 mBridgeObfs.setHighlightColor(Color.BLACK);
                 mBridgeObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
                 mBridgeObfs.setChecked(true);
+                mBridgeChina.setChecked(false);
+                mBridgeCustom.setChecked(false);
                 break;
             case strings.BRIDGE_CUSTOM_BRIDGE_MEEK:
                 animateColor(mBridgeChina, mBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
                 mBridgeChina.setHighlightColor(Color.BLACK);
                 mBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+                mBridgeObfs.setChecked(false);
                 mBridgeChina.setChecked(true);
+                mBridgeCustom.setChecked(false);
                 break;
             case strings.BRIDGE_CUSTOM_BRIDGE_CUSTOM:
                 animateColor(mBridgeCustom, mBridgeCustom.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
                 mBridgeCustom.setHighlightColor(Color.BLACK);
                 mBridgeCustom.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+                mBridgeObfs.setChecked(false);
+                mBridgeChina.setChecked(false);
                 mBridgeCustom.setChecked(true);
 
                 mCustomPort.animate().setDuration(p_duration).alpha(1f);

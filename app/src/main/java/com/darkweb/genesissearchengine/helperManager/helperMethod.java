@@ -13,7 +13,6 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Vibrator;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -29,33 +28,25 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ActionMenuView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ShareCompat;
 import androidx.core.content.ContextCompat;
-
 import com.darkweb.genesissearchengine.constants.keys;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.example.myapplication.BuildConfig;
 import com.example.myapplication.R;
-
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.net.ssl.HttpsURLConnection;
-
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -68,7 +59,7 @@ public class helperMethod
         if(pURL.equals("about:blank")){
             return pURL;
         }
-        URL weburl = null;
+        URL weburl;
         try
         {
             weburl = new URL(pURL);
@@ -76,12 +67,6 @@ public class helperMethod
 
             if (result instanceof HttpsURLConnection) {
 
-            }
-            else if (result instanceof HttpURLConnection) {
-                // http
-            }
-            else {
-                // null or something bad happened
             }
         } catch (IOException e)
         {
@@ -95,6 +80,17 @@ public class helperMethod
             pURL = "http://"+pURL;
         }
         return pURL;
+    }
+
+    public static String createRandomID(){
+        return UUID.randomUUID().toString();
+    }
+
+    public static int getScreenHeight(AppCompatActivity context) {
+        Display display = context.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getRealSize(size);
+        return size.y;
     }
 
     public static SpannableString urlDesigner(String url, Context pContext){
@@ -133,7 +129,7 @@ public class helperMethod
 
     public static void sendBridgeEmail(Context context){
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-        String aEmailList[] = { "bridges@torproject.org"};
+        String[] aEmailList = { "bridges@torproject.org"};
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "get transport");
         emailIntent.setType("plain/text");
@@ -149,11 +145,6 @@ public class helperMethod
             assert imm != null;
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
-
-    public static void rateApp(AppCompatActivity context){
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.darkweb.genesissearchengine")));
     }
 
     public static void shareApp(AppCompatActivity context) {
@@ -199,11 +190,6 @@ public class helperMethod
         }
     }
 
-    public static void openLocaleSettings(Context context){
-        Intent i = new Intent(android.provider.Settings.ACTION_LOCALE_SETTINGS);
-        context.startActivity(i);
-    }
-
     static String getHost(String link){
         URL url;
         try
@@ -244,7 +230,7 @@ public class helperMethod
 
     public static String urlWithoutPrefix(String url){
         try{
-            url = url.substring(url.indexOf(getHost(url)),url.length()).replace("www.","").replace("m.","");
+            url = url.substring(url.indexOf(getHost(url))).replace("www.","").replace("m.","");
             return url;
         }catch (Exception ex){
             return url;
@@ -292,15 +278,6 @@ public class helperMethod
         pContext.startActivity(intent);
     }
 
-    public static String ellipsize(String input, int maxLength) {
-        String ellip = "...";
-        if (input == null || input.length() <= maxLength
-                || input.length() < ellip.length()) {
-            return input;
-        }
-        return input.substring(0, maxLength - ellip.length()).concat(ellip);
-    }
-
     public static String getDomainName(String url)
     {
         try{
@@ -318,11 +295,6 @@ public class helperMethod
         params_loading.topMargin = (int)(heightloader);
 
         return params_loading;
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    public static boolean isBuildValid (){
-        return BuildConfig.FLAVOR.equals("aarch64") && Build.SUPPORTED_ABIS[0].equals("arm64-v8a") || BuildConfig.FLAVOR.equals("arm") && Build.SUPPORTED_ABIS[0].equals("armeabi-v7a") || BuildConfig.FLAVOR.equals("x86") && Build.SUPPORTED_ABIS[0].equals("x86") || BuildConfig.FLAVOR.equals("x86_64") && Build.SUPPORTED_ABIS[0].equals("x86_64");
     }
 
     public static void openPlayStore(String packageName,AppCompatActivity context)
@@ -345,13 +317,6 @@ public class helperMethod
 
     public static int pxFromDp(int dp){
         return   (int) (dp * Resources.getSystem().getDisplayMetrics().density);
-    }
-
-    public static int getScreenHeight(AppCompatActivity context) {
-        Display display = context.getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getRealSize(size);
-        return size.y;
     }
 
     public static int getStatusBarHeight(Context context) {
@@ -395,20 +360,14 @@ public class helperMethod
             }
         }
         if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(context, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
+            ActivityCompat.requestPermissions(context, listPermissionsNeeded.toArray(new String[0]), 100);
             return false;
         }
         return true;
     }
 
-    public static void clearAppData(Context context) {
-        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.parse("package:" + context.getPackageName()));
-        context.startActivity(intent);
-    }
-
     public static String getCurrentDate(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         sdf.applyPattern("E | MMM dd,yyyy");
         return sdf.format(date);
@@ -429,10 +388,7 @@ public class helperMethod
     }
 
     public static PopupWindow onCreateMenu(View p_view, int p_layout) {
-        PopupWindow popupWindow = null;
-        if(popupWindow!=null){
-            popupWindow.dismiss();
-        }
+        PopupWindow popupWindow;
 
         LayoutInflater layoutInflater
                 = (LayoutInflater) p_view.getContext()

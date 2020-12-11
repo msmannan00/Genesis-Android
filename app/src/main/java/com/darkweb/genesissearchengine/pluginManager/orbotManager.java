@@ -3,21 +3,18 @@ package com.darkweb.genesissearchengine.pluginManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-
 import androidx.appcompat.app.AppCompatActivity;
+import org.mozilla.gecko.PrefsHelper;
+import org.torproject.android.service.OrbotService;
+import org.torproject.android.service.util.Prefs;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
+import java.util.Arrays;
 
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
-import org.mozilla.gecko.PrefsHelper;
-import org.torproject.android.service.OrbotService;
-import org.torproject.android.service.util.Prefs;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
-
-import java.util.Arrays;
 
 import static org.torproject.android.service.TorServiceConstants.ACTION_START;
 
