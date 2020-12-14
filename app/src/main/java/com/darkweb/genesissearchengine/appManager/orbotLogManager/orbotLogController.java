@@ -1,11 +1,13 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MotionEventCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -189,6 +191,29 @@ public class orbotLogController extends AppCompatActivity {
     public void onClose(View view){
         finish();
         mActivityClosed = true;
+    }
+
+    float oldTouchValue;
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+
+        int action=event.getAction();
+
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                oldTouchValue = event.getX();
+            case (MotionEvent.ACTION_MOVE):
+                float currentX = event.getX();
+                if (oldTouchValue < currentX-100)
+                {
+                    finish();
+                }else {
+                    return super.onTouchEvent(event);
+                }
+            default:
+                return super.onTouchEvent(event);
+        }
+
     }
 
 }

@@ -1,12 +1,17 @@
 package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MotionEventCompat;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -105,5 +110,28 @@ public class orbotController extends AppCompatActivity {
 
     public void onClose(View view){
         finish();
+    }
+
+    float oldTouchValue;
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+
+        int action=event.getAction();
+
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                oldTouchValue = event.getX();
+            case (MotionEvent.ACTION_MOVE):
+                float currentX = event.getX();
+                if (oldTouchValue < currentX-100)
+                {
+                    finish();
+                }else {
+                    return super.onTouchEvent(event);
+                }
+            default:
+                return super.onTouchEvent(event);
+                }
+
     }
 }

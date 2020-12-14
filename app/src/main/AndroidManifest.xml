@@ -28,8 +28,8 @@
         <!-- Activities -->
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.orbotManager.orbotController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-                android:launchMode="singleTop" />
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+                android:launchMode="singleTask" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
@@ -98,7 +98,7 @@
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController"
             android:configChanges="uiMode"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
 
         <activity

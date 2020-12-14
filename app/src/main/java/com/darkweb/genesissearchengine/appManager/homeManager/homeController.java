@@ -27,6 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.MotionEventCompat;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
@@ -252,9 +254,36 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
     }
 
+
     public void onChangeTheme(){
         if(!status.sSettingIsAppStarted){
             status.sDefaultNightMode = (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+        }
+    }
+
+    float oldTouchValue;
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+
+        int action=event.getAction();
+
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                oldTouchValue = event.getX();
+            case (MotionEvent.ACTION_MOVE):
+                if(mSplashScreen.getVisibility()==View.VISIBLE){
+                    float currentX = event.getX();
+                    if (oldTouchValue < currentX-100)
+                    {
+                        helperMethod.openActivity(orbotController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
+                    }
+                    else if (oldTouchValue > currentX+100 )
+                    {
+                        helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
+                    }
+                }
+            default:
+                return super.onTouchEvent(event);
         }
     }
 
