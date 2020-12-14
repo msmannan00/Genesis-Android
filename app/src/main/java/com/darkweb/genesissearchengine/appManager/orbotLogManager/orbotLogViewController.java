@@ -1,24 +1,16 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
-import android.text.Spannable;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.List;
 
 class orbotLogViewController

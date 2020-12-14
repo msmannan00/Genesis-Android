@@ -8,14 +8,17 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        android:clipToPadding="false"
+        android:layout_height="48dp"
         android:background="@color/c_background"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
 
         <ImageButton
             android:layout_width="45dp"
@@ -29,43 +32,36 @@
             android:tint="@color/c_navigation_tint" />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="-3dp"
-            android:layout_weight="40"
             android:gravity="center_vertical|start"
-            android:paddingStart="10dp"
             android:onClick="onClose"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/ORBOT_LOG"
             android:textColor="@color/c_text_v1"
             android:textSize="17sp"
-            android:textStyle="bold"
-            tools:ignore="RtlSymmetry" />
+            android:textStyle="bold" />
 
-        <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="2dp"
-            android:background="@xml/gx_ripple_default_round"
-            android:contentDescription="@string/GENERAL_TODO"
-            android:onClick="openLogSettings"
-            android:src="@xml/ic_gear"
-            android:tint="@color/c_navigation_tint" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="0dp"
-            android:scaleX="1.08"
-            android:scaleY="1.08"
-            android:layout_marginTop="0dp"
-            android:padding="5dp"
-            android:background="@xml/gx_ripple_default_round"
+        <ImageView
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="0dp"
+            android:background="@xml/gx_ripple_gray"
             android:contentDescription="@string/GENERAL_TODO"
-            android:src="@xml/ic_baseline_info"
-            android:tint="@color/c_navigation_light" />
+            android:onClick="onOpenInfo"
+            android:padding="0dp"
+            android:paddingStart="3dp"
+            android:src="@drawable/info"
+            app:tint="@color/c_icon_tint_light" />
 
     </LinearLayout>
 

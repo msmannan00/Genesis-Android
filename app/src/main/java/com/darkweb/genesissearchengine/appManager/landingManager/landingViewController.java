@@ -33,7 +33,7 @@ class landingViewController
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.landing_ease_blue));
+                window.setStatusBarColor(mContext.getResources().getColor(R.color.secondary));
             }
             else {
                 initStatusBarColor();
@@ -43,9 +43,9 @@ class landingViewController
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void initStatusBarColor() {
-        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-        animatedColor twoToThree = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-        animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.landing_ease_blue));
+        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.secondary), ContextCompat.getColor(mContext, R.color.secondary));
+        animatedColor twoToThree = new animatedColor(ContextCompat.getColor(mContext, R.color.secondary), ContextCompat.getColor(mContext, R.color.secondary));
+        animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.secondary), ContextCompat.getColor(mContext, R.color.secondary));
 
         ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f).setDuration(0);
         animator.addUpdateListener(animation ->

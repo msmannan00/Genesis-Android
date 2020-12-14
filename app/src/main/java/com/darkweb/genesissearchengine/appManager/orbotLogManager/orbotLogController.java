@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
@@ -11,25 +10,17 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.appManager.settingManager.logManager.settingLogController;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-
-import jp.wasabeef.recyclerview.animators.FadeInDownAnimator;
-import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator;
-
-import static android.widget.NumberPicker.OnScrollListener.SCROLL_STATE_IDLE;
 
 public class orbotLogController extends AppCompatActivity {
 
@@ -154,6 +145,10 @@ public class orbotLogController extends AppCompatActivity {
 
     public void onScrollTop(View view) {
         mMainScroll.smoothScrollTo(0,0);
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     public class orbotModelCallback implements eventObserver.eventListener{

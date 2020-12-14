@@ -50,7 +50,6 @@ import com.darkweb.genesissearchengine.helperManager.KeyboardUtils;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
-import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
@@ -87,6 +86,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ConstraintLayout mSplashScreen;
     private AutoCompleteTextView mSearchbar;
     private ImageView mLoadingIcon;
+    private ImageView mBlocker;
     private TextView mLoadingText;
     private AdView mBannerAds = null;
     private ImageButton mGatewaySplash;
@@ -99,6 +99,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private TextView mFindCount;
     private ImageButton mVoiceInput;
     private ImageButton mMenu;
+    private FrameLayout mNestedScroll;
 
     /*Redirection Objects*/
     private boolean mPageClosed = false;
@@ -129,7 +130,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             pluginController.getInstance().initialize();
             initializeLocalEventHandlers();
             initLandingPage();
-            //onNewIntent(getIntent());
             initLocalLanguage();
     }
 
@@ -208,30 +208,32 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     {
         mGeckoView = findViewById(R.id.pWebView);
 
-        mProgressBar = findViewById(R.id.progressBar);
-        mSplashScreen = findViewById(R.id.splashScreen);
+        mProgressBar = findViewById(R.id.pProgressBar);
+        mSplashScreen = findViewById(R.id.pSplashScreen);
         mSearchbar = findViewById(R.id.pSearchInput);
-        mLoadingIcon = findViewById(R.id.imageView_loading_back);
-        mLoadingText = findViewById(R.id.loadingText);
+        mLoadingText = findViewById(R.id.pOrbotLogs);
         mWebViewContainer = findViewById(R.id.pWebLayoutView);
         mTopLayout = findViewById(R.id.pTopLayout);
+        mLoadingIcon = findViewById(R.id.pLoadingIcon);
         mBannerAds = findViewById(R.id.pAdView);
-        mGatewaySplash = findViewById(R.id.gateway_splash);
-        mTopBar = findViewById(R.id.topbar);
-        mBackSplash = findViewById(R.id.backsplash);
+        mGatewaySplash = findViewById(R.id.pSettings);
+        mTopBar = findViewById(R.id.pTopbar);
+        mBackSplash = findViewById(R.id.pTopImage);
         mConnectButton = findViewById(R.id.Connect);
-        mNewTab = findViewById(R.id.newButtonInvoke);
+        mNewTab = findViewById(R.id.pTabCounter);
         mFindBar = findViewById(R.id.pFindBar);
         mFindText = findViewById(R.id.pFindText);
         mFindCount = findViewById(R.id.pFindCount);
         mVoiceInput = findViewById(R.id.pVoiceInput);
         mMenu = findViewById(R.id.pMenu);
+        mBlocker = findViewById(R.id.pBlocker);
+        mNestedScroll = findViewById(R.id.pNestedScroll);
 
         mGeckoView.setSaveEnabled(false);
         mGeckoView.setSaveFromParentEnabled(false);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,(ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null), mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu);
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,(ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null), mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker);
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,false);
         mGeckoClient.onValidateInitializeFromStartup();
@@ -396,14 +398,15 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         {
             if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE)
             {
-                helperMethod.hideKeyboard(homeController.this);
+                onSearchBarInvoked(v);
+                mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),true);
+                mHomeViewController.onClearSelections(true);
                 mGeckoClient.setLoading(true);
                 final Handler handler = new Handler();
                 handler.postDelayed(() ->
                 {
                     pluginController.getInstance().logEvent(strings.EVENT_SEARCH_INVOKED);
-                    onSearchBarInvoked(v);
-                    mGeckoView.clearFocus();
+                    mHomeViewController.onClearSelections(false);
                 }, 500);
             }
             return true;
@@ -458,8 +461,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),true);
             }
         });
-        pluginController.getInstance().logEvent(strings.EVENT_APP_STARTED);
 
+        pluginController.getInstance().logEvent(strings.EVENT_APP_STARTED);
         KeyboardUtils.addKeyboardToggleListener(this, isVisible -> isKeyboardOpened = isVisible);
     }
 
@@ -476,7 +479,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onSuggestionInvoked(View view){
         String val = ((TextView)view.findViewById(R.id.hintCompletionUrl)).getText().toString();
         onLoadURL(val);
-        mSearchbar.clearFocus();
         mSearchbar.setSelection(0);
         mHomeViewController.onUpdateSearchBar(val,false);
     }
@@ -637,16 +639,15 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode==100){
             if(resultCode == RESULT_OK && null != data){
+                onSearchBarInvoked(mSearchbar);
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 mHomeViewController.onUpdateSearchBar(result.get(0),false);
-
                 helperMethod.hideKeyboard(homeController.this);
                 mGeckoClient.setLoading(true);
                 final Handler handler = new Handler();
                 handler.postDelayed(() ->
                 {
                     pluginController.getInstance().logEvent(strings.EVENT_SEARCH_INVOKED);
-                    onSearchBarInvoked(mSearchbar);
                     mGeckoView.clearFocus();
                 }, 500);
             }

@@ -4,67 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c_background"
+    android:background="@color/c_background_keyboard"
     tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/pCoordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/c_background_keyboard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+            android:id="@+id/pAppbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:translationZ="10dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:background="@color/c_background_keyboard"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:translationZ="10dp">
 
             <FrameLayout
                 android:id="@+id/pTopLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:background="#00000000"
                 android:clipToPadding="false"
-                android:layout_marginBottom="-1dp"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:animateLayoutChanges="true"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
 
                 <LinearLayout
-                    android:id="@+id/topbar"
+                    android:id="@+id/pTopbar"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:animateLayoutChanges="true"
                     android:background="@xml/ic_secondary_gradinet"
-                    android:gravity="left"
                     android:elevation="4dp"
+                    android:gravity="left"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:animateLayoutChanges="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="RtlHardcoded,UselessParent">
 
                     <LinearLayout
+                        android:id="@+id/pTopBarContainer"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:animateLayoutChanges="true"
                         android:gravity="left"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:animateLayoutChanges="true"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlHardcoded,UselessParent">
 
                         <ImageView
+                            android:id="@+id/pLock"
                             android:layout_width="20dp"
-                            android:src="@xml/ic_baseline_lock"
                             android:layout_height="20dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="21dp"
-                            android:translationZ="10dp"
                             android:contentDescription="@string/GENERAL_TODO"
+                            android:src="@xml/ic_baseline_lock"
+                            android:translationZ="10dp"
                             app:tint="@color/c_lock_tint" />
 
                         <AutoCompleteTextView
@@ -72,11 +80,11 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="-31dp"
-                            android:animateLayoutChanges="true"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="18dp"
                             android:layout_marginBottom="8dp"
                             android:layout_weight="1"
+                            android:animateLayoutChanges="true"
                             android:background="@xml/gx_generic_input"
                             android:completionHintView="@layout/hint_view"
                             android:ems="10"
@@ -85,16 +93,16 @@
                             android:inputType="textNoSuggestions"
                             android:maxLines="1"
                             android:paddingLeft="38dp"
-                            android:paddingRight="40dp"
+                            android:paddingRight="15dp"
                             android:popupElevation="5dp"
                             android:selectAllOnFocus="true"
                             android:text="@string/GENERAL_HOME_URL"
                             android:textColor="@color/c_text_v1"
                             android:textColorHighlight="@color/text_color_highlight_v3"
-                            android:textColorHint="@color/c_text_v1"
+                            android:textColorHint="@color/c_text_v2"
                             android:textCursorDrawable="@xml/gx_search_cursor_state"
                             android:textSize="16sp"
-                            tools:targetApi="o" >
+                            tools:targetApi="o">
 
                         </AutoCompleteTextView>
 
@@ -102,38 +110,38 @@
                             android:id="@+id/pVoiceInput"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:scaleX="1.1"
-                            android:scaleY="1.1"
-                            android:onClick="onVoiceClick"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="-60dp"
                             android:layout_marginTop="-1dp"
                             android:layout_marginEnd="15dp"
-                            android:layout_marginStart="-60dp"
-                            android:visibility="gone"
+                            android:background="@color/clear_alpha"
+                            android:contentDescription="@string/GENERAL_TODO"
+                            android:onClick="onVoiceClick"
+                            android:scaleX="1.1"
+                            android:scaleY="1.1"
                             android:src="@xml/ic_baseline_keyboard_voice"
                             android:tint="@color/c_navigation_tint"
-                            android:background="@color/clear_alpha"
-                            android:layout_gravity="center_vertical"
-                            android:contentDescription="@string/GENERAL_TODO" />
+                            android:visibility="gone" />
 
                         <LinearLayout
+                            android:id="@+id/pTabCounterContainer"
                             android:layout_width="40dp"
-                            android:layout_marginStart="-10dp"
                             android:layout_height="match_parent"
+                            android:layout_marginStart="-10dp"
                             android:gravity="left"
-                            android:onClick="onOpenTabViewBoundary"
-                            android:paddingBottom="1dp">
+                            android:onClick="onOpenTabViewBoundary">
 
                             <Button
-                                android:id="@+id/newButtonInvoke"
+                                android:id="@+id/pTabCounter"
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
-                                android:layout_marginStart="12dp"
                                 android:layout_gravity="center_vertical"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="-1dp"
                                 android:layout_marginEnd="13dp"
                                 android:layout_marginBottom="0dp"
                                 android:background="@xml/gx_generic_tab_button"
                                 android:clickable="false"
-                                android:layout_marginTop="-1dp"
                                 android:contentDescription="@string/GENERAL_TODO"
                                 android:scaleType="fitCenter"
                                 android:text="@string/HOME_TAB_TEXT"
@@ -164,40 +172,41 @@
             </FrameLayout>
 
 
-
-
-
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:id="@+id/pNestedScroll"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:layout_marginTop="0dp"
+            android:layout_marginBottom="-60dp"
+            android:background="@color/clear_alpha"
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
             <FrameLayout
                 android:id="@+id/pWebLayoutView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/c_background"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
 
                 <com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar
-                    android:id="@+id/progressBar"
+                    android:id="@+id/pProgressBar"
                     style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="2.5dp"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="-1dp"
                     android:alpha="0"
-                    android:max="10000"
                     android:background="@color/clear_alpha"
-                    android:layout_marginTop="0dp"
-                    android:progress="0"
                     android:elevation="7dp"
+                    android:max="10000"
+                    android:progress="0"
                     android:progressDrawable="@xml/hox_photon_progress"
-                    android:scaleY="1"
+                    android:scaleY="0.7"
                     app:shiftDuration="@integer/progress_shift_duration"
                     app:wrapShiftDrawable="true"
                     tools:progress="0" />
@@ -205,12 +214,11 @@
                 <com.darkweb.genesissearchengine.appManager.homeManager.NestedGeckoView
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="60dp"
                     android:alpha="1"
-                    android:background="@color/c_background"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="8dp">
+                    android:background="@color/c_background_keyboard">
+
                 </com.darkweb.genesissearchengine.appManager.homeManager.NestedGeckoView>
             </FrameLayout>
         </androidx.core.widget.NestedScrollView>
@@ -222,46 +230,37 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/splashScreen"
+            android:id="@+id/pSplashScreen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/landing_ease_blue"
+            android:background="@xml/hox_rounded_corner_container_bottom"
             android:clickable="true"
             android:focusable="true">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:background="@xml/hox_rounded_corner_container_bottom"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:translationZ="11dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/orbot_debug"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@xml/hox_rounded_corner_splash"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:elevation="2dp"
-                    android:onClick="onOrbotLog"
-                    android:src="@xml/ic_baseline_bug"
-                    android:tint="@color/black" />
-
-            </LinearLayout>
-
             <ImageView
-                android:id="@+id/backsplash"
+                android:id="@+id/pTopImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@xml/hox_splash_gradient"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:textAlignment="center"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/wall2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/pImageDivider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="270dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:src="@drawable/glide"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -269,59 +268,169 @@
                 android:id="@+id/Connect"
                 android:layout_width="120dp"
                 android:layout_height="53dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@xml/hox_rounded_corner_splash"
                 android:onClick="onStartApplication"
                 android:text="@string/HOME_CONNECT"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView_loading_back"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="11dp"
+                android:background="#0A1727"
+                android:elevation="2dp"
+                app:layout_constraintBottom_toTopOf="@+id/pCopyright"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.37"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/pCopyright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginBottom="14dp"
+                android:text="Copyright © by Genesis Technologies"
+                android:textColor="#004d4d"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
-                android:id="@+id/gateway_splash"
+                android:id="@+id/pSettings"
                 android:layout_width="53dp"
                 android:layout_height="53dp"
                 android:layout_marginStart="7dp"
+                android:layout_marginBottom="20dp"
                 android:background="@xml/hox_rounded_corner_splash"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:elevation="2dp"
                 android:onClick="onLoadProxy"
                 android:src="@xml/ic_gear"
                 android:tint="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/Connect"
-                app:layout_constraintTop_toTopOf="@+id/Connect" />
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toEndOf="@+id/Connect" />
+
+            <ImageButton
+                android:id="@+id/pOrbotLogManager"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginBottom="20dp"
+                android:background="@xml/hox_rounded_corner_splash"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:elevation="2dp"
+                android:onClick="onOrbotLog"
+                android:src="@xml/ic_baseline_bug"
+                android:tint="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toEndOf="@+id/pSettings" />
 
             <TextView
-                android:id="@+id/loadingText"
+                android:id="@+id/pOrbotLogs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="37dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="23dp"
+                android:layout_marginBottom="20dp"
+                android:background="@xml/hx_border_left"
                 android:ellipsize="end"
-                android:gravity="center"
-                android:singleLine="true"
+                android:gravity="start"
+                android:maxHeight="250dp"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="@string/HOME_LOADING"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="@color/white"
                 android:textFontWeight="5"
+                android:textSize="14sp"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/pInfo1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="UnusedAttribute" />
 
+            <TextView
+                android:id="@+id/pInfo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginBottom="160dp"
+                android:background="@xml/hx_border_left_right"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxHeight="250dp"
+                android:paddingStart="15dp"
+                android:paddingRight="15dp"
+                android:text="1. Start Genesis Browser"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textFontWeight="5"
+                android:translationZ="30dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="UnusedAttribute" />
+
+            <TextView
+                android:id="@+id/pInfo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@xml/hx_border_left_right"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxHeight="250dp"
+                android:paddingStart="15dp"
+                android:paddingRight="15dp"
+                android:text="2. Tor Blocked in Region | Enable Bridge"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textFontWeight="5"
+                android:translationZ="30dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pInfo1"
+                tools:ignore="UnusedAttribute" />
+
+            <TextView
+                android:id="@+id/pInfo3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="7dp"
+                android:background="@xml/hx_border_left_right"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxHeight="20dp"
+                android:paddingStart="15dp"
+                android:paddingRight="15dp"
+                android:text="3. See Detailed Logs"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textFontWeight="5"
+                android:translationZ="30dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pInfo2"
+                tools:ignore="UnusedAttribute" />
+
             <ImageView
-                android:id="@+id/imageView_loading_back"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginBottom="25dp"
+                android:id="@+id/pLoadingIcon"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/loadingText"
-                app:layout_constraintEnd_toStartOf="@+id/backsplash"
-                app:layout_constraintStart_toEndOf="@+id/backsplash"
+                android:translationZ="100dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/pOrbotLogs"
+                app:layout_constraintTop_toTopOf="@+id/pOrbotLogs"
                 app:srcCompat="@drawable/icon_loading" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -373,6 +482,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/pBlocker"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:alpha="0"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        tools:srcCompat="@tools:sample/avatars"
+        android:background="@color/black"
+        android:contentDescription="@string/GENERAL_TODO"
+        android:focusable="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

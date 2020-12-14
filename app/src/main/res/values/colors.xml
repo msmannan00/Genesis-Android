@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="c_background">#ffffff</color>
+    <color name="c_background_keyboard">#f2f2f2</color>
     <color name="c_background_inverted">#1c1b21</color>
     <color name="c_view_divier_background_inner">#ebebeb</color>
     <color name="c_view_divier_background_inner_v1">#e6e6e6</color>
@@ -69,7 +70,8 @@
     <color name="blue">#0066FF</color>
     <color name="ease_blue_light">#fdfeff</color>
     <color name="ease_blue">#4d88ff</color>
-    <color name="landing_ease_blue">#212d45</color>
+    <color name="landing_ease_blue">#111722</color>
+    <color name="landing_ease_blue_splash">#192234</color>
     <color name="landing_ease_blue_light_1">#eef1f7</color>
     <color name="landing_ease_blue_light_2">#eef1f7</color>
     <color name="cursor_blue">#3385ff</color>
@@ -106,8 +108,9 @@
     <color name="green">#33cc33</color>
     <color name="green_button">#00802b</color>
     <color name="green_dark">#212d45</color>
-    <color name="dark_purple">#CC212d45</color>
+    <color name="dark_purple">#ffffff</color>
     <color name="warning">#ffc107</color>
+    <color name="connectors">#ffffff</color>
     <color name="colorProgressGradientStart">#00d9ff</color>
     <color name="colorProgressGradientEnd">#00a4fd</color>
     <color name="secondary">#00b3b3</color>

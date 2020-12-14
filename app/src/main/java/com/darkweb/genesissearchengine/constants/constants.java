@@ -15,7 +15,7 @@ public class constants
 
     public static final String CONST_GENESIS_UPDATE_URL = "https://boogle.store/manual?abi=";
     public static final String CONST_PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
-    public static final String CONST_BACKEND_GENESIS_URL = "https://boogle.store/search?q=$sa&p_num=1&s_type=all";
+    public static final String CONST_BACKEND_GENESIS_URL = "https://boogle.store/search?q=$s&p_num=1&s_type=all";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com/q=$s";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";

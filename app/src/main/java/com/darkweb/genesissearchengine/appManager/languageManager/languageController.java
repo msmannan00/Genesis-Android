@@ -1,6 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.languageManager;
 
-
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;

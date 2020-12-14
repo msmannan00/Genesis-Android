@@ -4,7 +4,7 @@
     <item android:drawable="@color/landing_ease_blue"/>
     <item>
         <bitmap
-                android:gravity="center"
-                android:src="@mipmap/splashlogoclip"/>
+            android:gravity="center"
+            android:src="@mipmap/splashlogoclip"/>
     </item>
 </layer-list>

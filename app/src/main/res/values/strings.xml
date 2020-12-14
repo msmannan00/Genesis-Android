@@ -312,7 +312,7 @@
     <!-- Home View -->
     <string name="HOME_TAB_TEXT" translatable="false">1</string>
     <string name="HOME_CONNECT" translatable="false">Connect</string>
-    <string name="HOME_LOADING" translatable="false">Loading Please Wait</string>
+    <string name="HOME_LOADING" translatable="false">Idle | Waiting to start</string>
     <string name="HOME_LOADING_STATIC" translatable="false">~&#160;Genesis on standby at the moment</string>
 
     <!-- Landing Page -->

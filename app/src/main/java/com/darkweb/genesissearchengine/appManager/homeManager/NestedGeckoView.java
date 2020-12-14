@@ -59,6 +59,7 @@ public class NestedGeckoView extends GeckoView {
                     mNestedOffsetY += mScrollOffset[1];
                 }
 
+
                 mLastY = eventY - mScrollOffset[1];
 
                 if (allowScroll && dispatchNestedScroll(0, mScrollOffset[1], 0, deltaY, mScrollOffset)) {

@@ -45,7 +45,7 @@ public class landingController extends AppIntro {
 
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setBarColor(getResources().getColor(R.color.landing_ease_blue));
+        setBarColor(getResources().getColor(R.color.secondary));
         setSeparatorColor(getResources().getColor(R.color.white));
 
         // Hide Skip/Done button.
