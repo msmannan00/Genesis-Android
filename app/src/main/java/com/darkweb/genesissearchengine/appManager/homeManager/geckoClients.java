@@ -179,6 +179,7 @@ class geckoClients
     }
 
     void onBackPressed(boolean isFinishAllowed){
+        mSession.goBackSession();
         if(mSession.canGoBack()){
             mSession.goBackSession();
         }

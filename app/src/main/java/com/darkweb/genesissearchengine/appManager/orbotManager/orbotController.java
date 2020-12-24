@@ -1,22 +1,20 @@
 package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MotionEventCompat;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
-import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
+import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
@@ -35,16 +33,20 @@ public class orbotController extends AppCompatActivity {
     private SwitchMaterial mBridgeSwitch;
     private SwitchMaterial mVpnSwitch;
     private LinearLayout mCustomizableBridgeMenu;
+    private GestureDetector mSwipeDirectionDetector;
 
     /* INITIALIZATIONS */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
+
         pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_settings_view);
 
         viewsInitializations();
+        onInitListener();
     }
 
     public void viewsInitializations() {
@@ -62,6 +64,19 @@ public class orbotController extends AppCompatActivity {
     }
 
     /* LISTENERS */
+
+    private void onInitListener(){
+        mSwipeDirectionDetector=new GestureDetector(this,new SimpleGestureFilter(){
+
+            @Override
+            public boolean onSwipe(Direction direction) {
+                if (direction==Direction.left || direction==Direction.right){
+                    onClose(null);
+                }
+                return true;
+            }
+        });
+    }
 
     public class orbotModelCallback implements eventObserver.eventListener{
         @Override
@@ -87,6 +102,11 @@ public class orbotController extends AppCompatActivity {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED,status.sBridgeVPNStatus));
     }
 
+    public void onClose(View view){
+        finish();
+        overridePendingTransition(R.anim.push_anim_out_reverse, R.anim.push_anim_in_reverse);
+    }
+
     /* LOCAL OVERRIDES */
 
     @Override
@@ -105,33 +125,13 @@ public class orbotController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        onClose(null);
     }
 
-    public void onClose(View view){
-        finish();
-    }
-
-    float oldTouchValue;
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-
-        int action=event.getAction();
-
-        switch (action) {
-            case (MotionEvent.ACTION_DOWN):
-                oldTouchValue = event.getX();
-            case (MotionEvent.ACTION_MOVE):
-                float currentX = event.getX();
-                if (oldTouchValue < currentX-100)
-                {
-                    finish();
-                }else {
-                    return super.onTouchEvent(event);
-                }
-            default:
-                return super.onTouchEvent(event);
-                }
-
+        mSwipeDirectionDetector.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
     }
+
 }

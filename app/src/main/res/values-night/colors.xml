@@ -43,6 +43,7 @@
     <color name="c_profile_radial_inner">#2c2b31</color>
     <color name="c_profile_radial_outer">#2c2b31</color>
     <color name="c_edittext_background">#3c3946</color>
+    <color name="c_edittext_background_dark">#24222a</color>
     <color name="c_menu_drop_shadow_05">#00000000</color>
     <color name="c_menu_drop_shadow_10">#00000000</color>
     <color name="c_menu_drop_shadow_15">#00000000</color>
@@ -69,7 +70,7 @@
     <color name="blue">#0066FF</color>
     <color name="ease_blue_light">#fdfeff</color>
     <color name="ease_blue">#4d88ff</color>
-    <color name="landing_ease_blue">#212d45</color>
+    <color name="landing_ease_blue">#0A1727</color>
     <color name="landing_ease_blue_light_1">#eef1f7</color>
     <color name="landing_ease_blue_light_2">#eef1f7</color>
     <color name="cursor_blue">#3385ff</color>

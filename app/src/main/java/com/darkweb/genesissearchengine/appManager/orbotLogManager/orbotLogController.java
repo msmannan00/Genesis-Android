@@ -1,21 +1,21 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MotionEventCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
-import com.darkweb.genesissearchengine.appManager.settingManager.logManager.settingLogController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -36,19 +36,22 @@ public class orbotLogController extends AppCompatActivity {
 
     private TextView mLogs;
     private boolean mActivityClosed = false;
-    int mLogCounter = 0;
+    private int mLogCounter = 0;
+    private GestureDetector mSwipeDirectionDetector;
 
     /* INITIALIZATIONS */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.push_anim_out_reverse, R.anim.push_anim_in_reverse);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_log_view);
 
         viewsInitializations();
         onUpdateLogs();
         initializeLogs();
-        onScrollListener();
+        onInitListener();
     }
 
     public void viewsInitializations() {
@@ -60,6 +63,7 @@ public class orbotLogController extends AppCompatActivity {
         activityContextManager.getInstance().setOrbotLogController(this);
         mOrbotViewController = new orbotLogViewController(this, mLogs, mRecycleView);
         mOrbotModel = new orbotLogModel();
+
     }
 
     public void initializeLogs(){
@@ -90,7 +94,7 @@ public class orbotLogController extends AppCompatActivity {
 
     /* LISTENERS */
 
-    private void onScrollListener(){
+    private void onInitListener(){
         mMainScroll.getViewTreeObserver().addOnScrollChangedListener(() -> {
             int scrollY = mMainScroll.getScrollY();
             if(scrollY>0){
@@ -101,6 +105,18 @@ public class orbotLogController extends AppCompatActivity {
             }else {
                 mFloatingScroller.animate().cancel();
                 mFloatingScroller.animate().alpha(0).withEndAction(() -> mFloatingScroller.setVisibility(View.GONE));
+            }
+        });
+
+        mSwipeDirectionDetector=new GestureDetector(this,new SimpleGestureFilter(){
+
+            @Override
+            public boolean onSwipe(Direction direction) {
+                if (direction==Direction.left || direction==Direction.right){
+                    finish();
+                    overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
+                }
+                return true;
             }
         });
     }
@@ -161,6 +177,14 @@ public class orbotLogController extends AppCompatActivity {
         }
     }
 
+    /* Helper Methods */
+
+    public void onClose(View view){
+        finish();
+        overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
+        mActivityClosed = true;
+    }
+
     /* LOCAL OVERRIDES */
 
     @Override
@@ -178,42 +202,13 @@ public class orbotLogController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
-        mActivityClosed = true;
+        onClose(null);
     }
 
-    /* Helper Methods */
-
-    public void openLogSettings(View view) {
-        helperMethod.openActivity(settingLogController.class, constants.CONST_LIST_HISTORY, this,true);
-    }
-
-    public void onClose(View view){
-        finish();
-        mActivityClosed = true;
-    }
-
-    float oldTouchValue;
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-
-        int action=event.getAction();
-
-        switch (action) {
-            case (MotionEvent.ACTION_DOWN):
-                oldTouchValue = event.getX();
-            case (MotionEvent.ACTION_MOVE):
-                float currentX = event.getX();
-                if (oldTouchValue < currentX-100)
-                {
-                    finish();
-                }else {
-                    return super.onTouchEvent(event);
-                }
-            default:
-                return super.onTouchEvent(event);
-        }
-
+        mSwipeDirectionDetector.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
     }
 
 }

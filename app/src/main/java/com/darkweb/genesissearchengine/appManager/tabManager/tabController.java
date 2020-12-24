@@ -122,11 +122,8 @@ public class tabController extends AppCompatActivity
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-
                 onClearTabBackup();
-                onRemoveTab(position);
-                mTabAdapter.notifyItemRemoved(position);
-                initTabCount();
+                onRemoveView(position);
             }
 
             @Override
@@ -154,9 +151,8 @@ public class tabController extends AppCompatActivity
     }
 
     public void onRemoveView(int pIndex){
-        mHomeController.onCloseCurrentTab(mListModel.getList().get(pIndex).getSession());
-        onClearTabBackup();
-        //onRemoveTab(pIndex);
+        onRemoveTab(pIndex);
+        mListModel.getList().remove(pIndex);
         mTabAdapter.notifyItemRemoved(pIndex);
         onShowUndoDialog();
     }
@@ -167,9 +163,17 @@ public class tabController extends AppCompatActivity
         mHomeController.initTabCount();
     }
 
+    public void onClose(){
+        onClearTabBackup();
+        if(mListModel.getList().size()<=0){
+            mHomeController.onNewTab(false, false);
+        }
+        finish();
+    }
+
     public void onNewTabInvoked(){
         mHomeController.onNewTab(true,false);
-        finish();
+        onClose();
         overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
     }
 
@@ -213,11 +217,11 @@ public class tabController extends AppCompatActivity
             onNewTabInvoked();
         }
         else if(pView.getId() == R.id.pCloseTab){
-            mListModel.getList().clear();
             mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
-            initTabCount();
-            mRecycleView.animate().setDuration(300).alpha(0).withEndAction(() -> mTabAdapter.notifyDataSetChanged());
-            onShowUndoDialog();
+            for(int mCounter=0;mCounter<mListModel.getList().size();mCounter++){
+                onRemoveView(mCounter);
+                mCounter-=1;
+            }
         }
         else if(pView.getId() == R.id.pOpenSetting){
             mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
@@ -231,7 +235,7 @@ public class tabController extends AppCompatActivity
         if(status.sSettingIsAppPaused && (level==80 || level==15))
         {
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY,true));
-            finish();
+            onClose();
         }
     }
 
@@ -262,7 +266,7 @@ public class tabController extends AppCompatActivity
             onClearSelection(null);
         }else {
             super.onBackPressed();
-            finish();
+            onClose();
             overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
         }
     }
@@ -295,6 +299,7 @@ public class tabController extends AppCompatActivity
                 mHomeController.onLoadTab((geckoSession)data.get(0),(boolean)data.get(1));
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW)){
+                onClearTabBackup();
                 onRemoveView((Integer) data.get(0));
             }
             return null;

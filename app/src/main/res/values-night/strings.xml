@@ -4,6 +4,7 @@
     <string name="app_name" translatable="false">Genesis</string>
     <string name="GENERAL_SEARCH_HINT" translatable="false">Search or type web address</string>
     <string name="GENERAL_FIND_HINT" translatable="false">Find in page</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="false">Search Engine</string>
     <string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="false">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
     <string name="GENERAL_TODO" translatable="false">TODO</string>

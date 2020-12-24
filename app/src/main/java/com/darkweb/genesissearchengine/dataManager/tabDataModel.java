@@ -61,6 +61,7 @@ class tabDataModel
         int size = mTabs.size();
         for(int counter = 0; counter< size; counter++){
             mTabs.get(0).getSession().stop();
+            mTabs.get(0).getSession().closeSession();
             mTabs.remove(0);
         }
         if(mTabs.size()>0){
@@ -68,6 +69,7 @@ class tabDataModel
         }
 
         databaseController.getInstance().execSQL("DELETE FROM tab WHERE 1",null);
+
     }
 
     void closeTab(geckoSession mSession) {
@@ -158,7 +160,7 @@ class tabDataModel
                     } catch (Throwable throwable) {
                         throwable.printStackTrace();
                     }
-                }, 100);
+                }, 500);
             }
         }
     }

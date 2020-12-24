@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.strings;
@@ -39,6 +40,7 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
 
             TextView customerNameLabel = v.findViewById(R.id.hintCompletionTitle);
             TextView myTv = v.findViewById( R.id.hintCompletionUrl);
+            ImageButton mMoveURL = v.findViewById( R.id.pMoveURL);
 
             if (customerNameLabel != null) {
                 if(customer.getHeader().equals(strings.GENERIC_EMPTY_STR)){
@@ -47,6 +49,7 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
                     customerNameLabel.setText(customer.getHeader());
                 }
                 myTv.setText(customer.getDescription());
+                mMoveURL.setTag(customer.getDescription());
             }
         }
         return v;
@@ -72,18 +75,14 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
             if(constraint != null && !constraint.equals("about:blank")) {
                 suggestions.clear();
                 for (historyRowModel customer : itemsAll) {
-                    if(suggestions.size()>10){
+                    if(suggestions.size()>4){
                         break;
                     }
 
-
-                    if(!customer.getHeader().equals("$TITLE") && customer.getHeader().length()>2 && customer.getDescription().toLowerCase().length()>2 && (customer.getHeader().toLowerCase().contains(constraint.toString().toLowerCase()) || customer.getDescription().toLowerCase().contains(constraint.toString().toLowerCase()))){
+                    if(!customer.getHeader().equals("$TITLE") && customer.getHeader().length()>2 && customer.getDescription().toLowerCase().length()>2 && (customer.getHeader().toLowerCase().contains(constraint.toString().toLowerCase()) || constraint.toString().toLowerCase().toLowerCase().contains(customer.getHeader()) || constraint.toString().toLowerCase().contains(customer.getDescription().toLowerCase()) || customer.getDescription().toLowerCase().contains(constraint.toString().toLowerCase()))){
                         Log.i("memememe:","memememe:"+constraint.toString().toLowerCase().replace("https://","").replace("http://",""));
                         Log.i("memememe1:","memememe2:"+customer.getDescription().replace("https://","").replace("http://",""));
-
-                        if(!constraint.toString().toLowerCase().replace("https://","").replace("http://","").equals(customer.getDescription().replace("https://","").replace("http://",""))){
-                            suggestions.add(customer);
-                        }
+                        suggestions.add(customer);
                     }
                 }
                 FilterResults filterResults = new FilterResults();
@@ -98,7 +97,7 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
         protected void publishResults(CharSequence constraint, FilterResults results)
         {
             try{
-                if(results != null && results.count > 0) {
+                if(results != null) {
                     ArrayList<historyRowModel> filteredList = (ArrayList<historyRowModel>)((ArrayList<historyRowModel>)results.values).clone();
 
                     clear();

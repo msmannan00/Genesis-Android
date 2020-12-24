@@ -116,10 +116,12 @@ public class suggestionDataModel {
         addSuggenstions("https://wowhead.com","Wow Head",true);
         addSuggenstions("https://bing.com","Bing",true);
         addSuggenstions("https://google.com","Google",true);
-        addSuggenstions("https://boogle.store","Genesis Search",true);
+        addSuggenstions("https://genesis.onion","Genesis Search",true);
     }
 
     private void addSuggenstions(String url, String title,boolean isLoading){
+        url = url.replace("boogle.store","genesis.onion");
+        title = title.replace("boogle.store","Genesis Search").replace("boogle","genesis");
         url = helperMethod.removeLastSlash(url);
         if(url.length()>1500 || title.equals("$TITLE") || title.equals("loading")){
             return;

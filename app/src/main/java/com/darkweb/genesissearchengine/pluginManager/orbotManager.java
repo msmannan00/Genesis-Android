@@ -162,9 +162,9 @@ class orbotManager
             mLogsStarted = true;
         }
         else {
-            logs = logs.replaceAll("[^a-zA-Z0-9%\\s+]", "");
-            logs = helperMethod.capitalizeString(logs);
-            logs = logs.replace("(","").replace(":","_FERROR_").replace("NOTICE","").replace(")","").replace("_FERROR_","");
+            // logs = logs.replaceAll("[^a-zA-Z0-9%\\s+]", "");
+            // logs = helperMethod.capitalizeString(logs);
+            // logs = logs.replace("(","").replace(":","_FERROR_").replace("NOTICE","").replace(")","").replace("_FERROR_","");
         }
 
 

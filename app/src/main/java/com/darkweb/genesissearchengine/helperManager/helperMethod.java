@@ -246,6 +246,16 @@ public class helperMethod
         context.startActivity(myIntent);
     }
 
+    public static void openActivityReverse( Class<?> cls,int type,AppCompatActivity context,boolean animation){
+        Intent myIntent = new Intent(context, cls);
+        myIntent.putExtra(keys.PROXY_LIST_TYPE, type);
+        if(!animation){
+            myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+        }
+
+        context.startActivity(myIntent);
+    }
+
     public static void restartActivity( Intent pIntent, AppCompatActivity pContext){
         pContext.finish();
         pContext.startActivity(pIntent);

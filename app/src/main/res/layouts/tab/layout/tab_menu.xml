@@ -10,8 +10,9 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:elevation="7dp"
                 android:orientation="vertical"
                 android:background="@xml/hx_menu_popup"
                 app:layout_constraintEnd_toEndOf="parent"

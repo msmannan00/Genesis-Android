@@ -24,13 +24,13 @@
             android:layout_height="wrap_content"
             android:background="@color/c_background_keyboard"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:translationZ="10dp">
+            android:translationZ="3dp">
 
             <FrameLayout
                 android:id="@+id/pTopLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
+                android:animateLayoutChanges="false"
                 android:background="#00000000"
                 android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,6 +87,7 @@
                             android:animateLayoutChanges="true"
                             android:background="@xml/gx_generic_input"
                             android:completionHintView="@layout/hint_view"
+                            android:dropDownAnchor="@id/pSearchEngineBar"
                             android:ems="10"
                             android:hint="@string/GENERAL_SEARCH_HINT"
                             android:importantForAutofill="no"
@@ -94,7 +95,7 @@
                             android:maxLines="1"
                             android:paddingLeft="38dp"
                             android:paddingRight="15dp"
-                            android:popupElevation="5dp"
+                            android:popupElevation="0dp"
                             android:selectAllOnFocus="true"
                             android:text="@string/GENERAL_HOME_URL"
                             android:textColor="@color/c_text_v1"
@@ -175,8 +176,8 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
             android:id="@+id/pNestedScroll"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:layout_marginTop="0dp"
@@ -198,7 +199,7 @@
                     android:id="@+id/pProgressBar"
                     style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="4dp"
+                    android:layout_height="5dp"
                     android:layout_marginTop="-1dp"
                     android:alpha="0"
                     android:background="@color/clear_alpha"
@@ -227,14 +228,15 @@
     <FrameLayout
         android:id="@+id/pSplashLayout"
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/pSplashScreen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@xml/hox_rounded_corner_container_bottom"
-            android:clickable="true"
+            android:background="@color/landing_ease_blue_splash"
+            android:animateLayoutChanges="true"
             android:focusable="true">
 
             <ImageView
@@ -256,10 +258,9 @@
                 android:id="@+id/pImageDivider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="190dp"
+                android:layout_marginTop="103dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:paddingBottom="15dp"
                 android:src="@drawable/glide"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -280,23 +281,24 @@
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="11dp"
-                android:background="#0A1727"
-                android:elevation="2dp"
+                android:layout_height="3dp"
+                android:alpha="0.5"
+                android:elevation="4dp"
+                android:background="#264d73"
                 app:layout_constraintBottom_toTopOf="@+id/pCopyright"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/pCopyright"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginBottom="14dp"
-                android:text="Copyright © by Genesis Technologies"
-                android:textColor="#004d4d"
+                android:background="#0A1727"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Copyright © by Genesis Technologies | Built 1.0.2.2"
+                android:textColor="#4a6868"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -336,17 +338,18 @@
                 android:id="@+id/pOrbotLogs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="23dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginBottom="20dp"
                 android:background="@xml/hx_border_left"
                 android:ellipsize="end"
                 android:gravity="start"
                 android:maxHeight="250dp"
-                android:paddingStart="20dp"
-                android:paddingTop="10dp"
+                android:maxLines="4"
+                android:minHeight="80dp"
+                android:paddingStart="15dp"
+                android:paddingTop="18dp"
                 android:paddingRight="20dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="15dp"
                 android:text="@string/HOME_LOADING"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
@@ -374,10 +377,27 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="85dp"
+                android:contentDescription="@string/GENERAL_TODO"
                 android:translationZ="3dp"
-                app:layout_constraintBottom_toBottomOf="@+id/pImageDivider"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pImageDivider"
                 app:srcCompat="@drawable/genesis_logo_bordered" />
+
+            <ImageView
+                android:id="@+id/pBlocker"
+                android:layout_width="189dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="13dp"
+                android:clickable="false"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:focusable="false"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/pSettings"
+                app:layout_constraintStart_toStartOf="@+id/Connect"
+                app:layout_constraintTop_toBottomOf="@+id/pOrbotLogs" />
 
             <TextView
                 android:id="@+id/pInfo4"
@@ -392,7 +412,7 @@
                 android:paddingRight="15dp"
                 android:text="Secured by Tor Network"
                 android:textAlignment="textStart"
-                android:textColor="#6a9495"
+                android:textColor="#bfbfbf"
                 android:textFontWeight="5"
                 android:textSize="12.5sp"
                 android:textStyle="bold"
@@ -415,7 +435,7 @@
                 android:paddingRight="15dp"
                 android:text="Builtin Onion Search Engine"
                 android:textAlignment="textStart"
-                android:textColor="#6a9495"
+                android:textColor="#bfbfbf"
                 android:textFontWeight="5"
                 android:textSize="12.5sp"
                 android:textStyle="bold"
@@ -438,7 +458,7 @@
                 android:paddingRight="15dp"
                 android:text="No Record and Digital Fingerprinting"
                 android:textAlignment="textStart"
-                android:textColor="#6a9495"
+                android:textColor="#bfbfbf"
                 android:textFontWeight="5"
                 android:textSize="12.5sp"
                 android:textStyle="bold"
@@ -453,10 +473,10 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:translationZ="3dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pImageDivider"
+                app:layout_constraintTop_toBottomOf="@+id/pGenesisLogo"
                 app:srcCompat="@drawable/sheild_logo_bordered" />
 
             <TextView
@@ -472,7 +492,7 @@
                 android:paddingRight="15dp"
                 android:text="Secured by Tor Network"
                 android:textAlignment="textStart"
-                android:textColor="#6a9495"
+                android:textColor="#bfbfbf"
                 android:textFontWeight="5"
                 android:textSize="12.5sp"
                 android:textStyle="bold"
@@ -495,7 +515,7 @@
                 android:paddingRight="15dp"
                 android:text="Builtin Onion Search Engine"
                 android:textAlignment="textStart"
-                android:textColor="#6a9495"
+                android:textColor="#bfbfbf"
                 android:textFontWeight="5"
                 android:textSize="12.5sp"
                 android:textStyle="bold"
@@ -518,7 +538,7 @@
                 android:paddingRight="15dp"
                 android:text="No Record and Digital Fingerprinting"
                 android:textAlignment="textStart"
-                android:textColor="#6a9495"
+                android:textColor="#bfbfbf"
                 android:textFontWeight="5"
                 android:textSize="12.5sp"
                 android:textStyle="bold"
@@ -578,17 +598,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/pBlocker"
+    <include
+        android:id="@+id/pSearchEngineBar"
+        layout="@layout/popup_search_engine"
         android:layout_width="match_parent"
-        android:clickable="true"
-        android:alpha="0"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
         android:visibility="gone"
-        android:layout_height="match_parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:background="@color/black"
-        android:contentDescription="@string/GENERAL_TODO"
-        android:focusable="true" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pAdView" />
 
+    <ImageView
+        android:id="@+id/pBlockerFullSceen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@color/black"
+        android:clickable="true"
+        android:contentDescription="@string/GENERAL_TODO"
+        android:focusable="true"
+        android:visibility="gone"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

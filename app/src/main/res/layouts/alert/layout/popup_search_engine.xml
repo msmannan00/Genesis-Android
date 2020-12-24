@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pPopupFindContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/pNavigationContainer"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/c_edittext_background_dark"
+        android:paddingBottom="1dp"
+        android:elevation="8dp"
+        android:onClick="onOpenSearchEngine"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <LinearLayout
+            android:id="@+id/pNavigationContainerInner"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/c_background"
+            android:elevation="8dp"
+            android:onClick="onOpenSearchEngine"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="45dp"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:padding="6.5dp"
+                android:layout_marginStart="2dp"
+                android:paddingEnd="4dp"
+                app:srcCompat="@xml/ic_baseline_search"
+                tools:ignore="RtlSymmetry"
+                app:tint="@color/c_navigation_tint" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:paddingTop="11dp"
+                android:layout_marginStart="6dp"
+                android:text="@string/GENERAL_SEARCH_ENGINE"
+                android:textColor="@color/c_text_v1"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

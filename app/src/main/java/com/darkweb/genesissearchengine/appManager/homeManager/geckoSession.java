@@ -201,6 +201,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
+        mCanGoBack = true;
         if(mIsLoaded){
             if(!isPageLoading){
                 mCurrentTitle = "loading";

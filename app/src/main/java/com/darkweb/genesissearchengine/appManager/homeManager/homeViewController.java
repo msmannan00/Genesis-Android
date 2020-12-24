@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
@@ -21,9 +22,9 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Transformation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
@@ -31,10 +32,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
-
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
@@ -55,7 +53,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static androidx.appcompat.widget.ListPopupWindow.WRAP_CONTENT;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 
 class homeViewController
@@ -81,6 +78,7 @@ class homeViewController
     private Button mNewTab;
     private PopupWindow popupWindow = null;
     private View mFindBar;
+    private View mSearchEngineBar;
     private EditText mFindText;
     private TextView mFindCount;
     private FrameLayout mTopLayout;
@@ -88,12 +86,14 @@ class homeViewController
     private ImageButton mMenu;
     private FrameLayout mNestedScroll;
     private ImageView mBlocker;
+    private ImageView mBlockerFullSceen;
+    private TextView mCopyright;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, FrameLayout pNestedScroll, ImageView pBlocker){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, FrameLayout pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -118,6 +118,9 @@ class homeViewController
         this.mMenu = pMenu;
         this.mNestedScroll = pNestedScroll;
         this.mBlocker = pBlocker;
+        this.mBlockerFullSceen = pBlockerFullSceen;
+        this.mSearchEngineBar = mSearchEngineBar;
+        this.mCopyright = pCopyright;
 
         initSplashScreen();
         initializeSuggestionView(suggestions);
@@ -216,7 +219,7 @@ class homeViewController
         animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.c_background), ContextCompat.getColor(mContext, R.color.c_background));
 
         ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f).setDuration(0);
-        animator.setStartDelay(600);
+        animator.setStartDelay(1200);
         animator.addUpdateListener(animation ->
         {
             float v = (float) animation.getAnimatedValue();
@@ -269,25 +272,15 @@ class homeViewController
             return;
         }
 
-
         autoCompleteAdapter suggestionAdapter = new autoCompleteAdapter(mContext, R.layout.hint_view, (ArrayList<historyRowModel>) suggestions.clone());
 
         int width = Math.round(helperMethod.screenWidth());
         mSearchbar.setThreshold(2);
         mSearchbar.setAdapter(suggestionAdapter);
-        mSearchbar.setDropDownVerticalOffset(helperMethod.pxFromDp(8));
+        mSearchbar.setDropDownVerticalOffset(helperMethod.pxFromDp(0));
         mSearchbar.setDropDownWidth(width);
-        mSearchbar.setDropDownHeight(WRAP_CONTENT);
-
-        Drawable drawable;
-        Resources res = mContext.getResources();
-        try {
-            drawable = Drawable.createFromXml(res, res.getXml(R.xml.hox_rounded_corner_suggestion));
-            mSearchbar.setDropDownBackgroundDrawable(drawable);
-            mSearchbar.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
-            mSearchbar.setClipToOutline(true);
-        } catch (Exception ignored) {
-        }
+        mSearchbar.setDropDownBackgroundDrawable(new ColorDrawable(mContext.getResources().getColor(R.color.c_background)));
+        mSearchbar.setDropDownHeight(helperMethod.getScreenHeight(mContext)*75/100);
         mSearchbar.setInputType(EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     }
 
@@ -297,18 +290,23 @@ class homeViewController
         mLoading.setAnimation(helperMethod.getRotationAnimation());
         mLoadingText.setAlpha(0);
         mLoadingText.setVisibility(View.VISIBLE);
-        mLoadingText.animate().alpha(1);
+        mLoadingText.animate().setStartDelay(0).alpha(1);
 
         mConnectButton.setClickable(false);
         mGatewaySplash.setClickable(false);
+        mBlocker.setClickable(true);
+        mBlocker.setFocusable(true);
     }
 
     void initHomePage(){
         mConnectButton.setClickable(false);
         mGatewaySplash.setClickable(false);
 
-        mConnectButton.animate().alpha(0.4f).withEndAction(this::initSplashLoading);
-        mGatewaySplash.animate().alpha(0.4f);
+        mConnectButton.animate().setDuration(200).alpha(0.4f).withEndAction(() -> {
+            mCopyright.setVisibility(View.GONE);
+            initSplashLoading();
+        });
+        mGatewaySplash.animate().setDuration(200).alpha(0.4f);
     }
 
     private void initSplashScreen(){
@@ -327,7 +325,7 @@ class homeViewController
     void initProxyLoading(Callable<String> logs){
         this.mLogs = logs;
 
-        if(mSplashScreen.getAlpha()==1){
+        if(mSplashScreen.getVisibility()==View.VISIBLE){
             new Thread(){
                 public void run(){
                     AppCompatActivity temp_context = mContext;
@@ -365,9 +363,9 @@ class homeViewController
     }
     private void splashScreenDisable(){
         mTopBar.setAlpha(1);
-        if(mSplashScreen.getAlpha()>=1)
+        if(mSplashScreen.getVisibility()==View.VISIBLE)
         {
-            mSplashScreen.animate().setDuration(300).setStartDelay(500).alpha(0).withEndAction((this::triggerPostUI));
+            mSplashScreen.animate().setStartDelay(1000).setDuration(500).alpha(0).withEndAction((this::triggerPostUI));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 initStatusBarColor();
             }
@@ -516,7 +514,7 @@ class homeViewController
 
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
-    void onUpdateSearchBar(String url,boolean showProtocol){
+    void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText){
         int delay = 0;
         handlerLocalUrl = url;
 
@@ -528,7 +526,7 @@ class homeViewController
         searchBarUpdateHandler.postDelayed(() ->
         {
             searchBarUpdateHandler.removeMessages(100);
-            triggerUpdateSearchBar(handlerLocalUrl,showProtocol);
+            triggerUpdateSearchBar(handlerLocalUrl,showProtocol, pClearText);
 
         }, delay);
     }
@@ -562,7 +560,22 @@ class homeViewController
         }
     }
 
-    private void triggerUpdateSearchBar(String url, boolean showProtocol){
+    public void onUpdateSearchEngineBar(boolean pStatus)
+    {
+        mSearchEngineBar.animate().cancel();
+        if(pStatus){
+            mSearchEngineBar.setAlpha(0f);
+            mSearchEngineBar.animate().setDuration(300).alpha(1);
+            mSearchEngineBar.setVisibility(View.VISIBLE);
+        }else {
+            mSearchEngineBar.animate().setDuration(300).alpha(0).withEndAction(() -> {
+                mSearchEngineBar.setAlpha(0f);
+                mSearchEngineBar.setVisibility(View.GONE);
+            });
+        }
+    }
+
+    private void triggerUpdateSearchBar(String url, boolean showProtocol, boolean pClearText){
         if (mSearchbar == null || url==null)
         {
             return;
@@ -608,22 +621,10 @@ class homeViewController
 
     void onNewTab(boolean keyboard,boolean isKeyboardOpen){
         if(keyboard){
-
-            if(!isKeyboardOpen){
-                final Handler handler = new Handler();
-                handler.postDelayed(() ->
-                {
-                    InputMethodManager imm = (InputMethodManager)   mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.RESULT_UNCHANGED_SHOWN, 0);
-                }, 250);
-            }
-
             mSearchbar.requestFocus();
             mSearchbar.selectAll();
         }
     }
-    Handler mProgressHandler = new Handler();
-    Runnable mProgressBarRunnable = null;
 
     void onUpdateLogs(String log){
         mLoadingText.setText(log);
@@ -635,62 +636,59 @@ class homeViewController
     }
 
     void onProgressBarUpdate(int value){
-        if(mProgressBarRunnable!=null){
-            mProgressHandler.removeCallbacks(mProgressBarRunnable);
+
+        mProgressBar.setAlpha(1f);
+        mProgressBar.setVisibility(View.VISIBLE);
+
+        ProgressBarAnimation mProgressAnimation = new ProgressBarAnimation(mProgressBar, 1000);
+        mProgressAnimation.setProgress(value*100);
+    }
+
+    public class ProgressBarAnimation extends Animation {
+        private ProgressBar mProgressBar;
+        private int mTo;
+        private int mFrom;
+        private long mStepDuration;
+
+        /**
+         * @param fullDuration - time required to fill progress from 0% to 100%
+         */
+        public ProgressBarAnimation(ProgressBar progressBar, long fullDuration) {
+            super();
+            mProgressBar = progressBar;
+            mStepDuration = fullDuration / progressBar.getMax();
         }
 
-        if(mSplashScreen.getAlpha()>0){
-            mProgressBar.setProgress(value*100);
-        }
-        if(value==100){
-            mProgressBar.setAlpha(1f);
 
-            setProgressAnimate(mProgressBar,value);
-
-            mProgressBarRunnable = () -> {
-                animation.removeAllListeners();
-                animation.end();
-                animation.cancel();
+        public void setProgress(int progress) {
+            if(progress == 10000){
+                mProgressBar.animate().setStartDelay(100).alpha(0);
+            }else {
                 mProgressBar.animate().cancel();
-                mProgressBar.animate().alpha(0);
-            };
-            mProgressHandler.postDelayed(mProgressBarRunnable, 250);
+                mProgressBar.setAlpha(1);
+            }
 
-            return;
+            if (progress < 0) {
+                progress = 0;
+            }
+
+            if (progress > mProgressBar.getMax()) {
+                progress = mProgressBar.getMax();
+            }
+
+            mTo = progress;
+
+            mFrom = mProgressBar.getProgress();
+            setDuration(Math.abs(mTo - mFrom) * mStepDuration);
+            mProgressBar.startAnimation(this);
         }
-        else if(mSplashScreen.getAlpha()==0) {
-            mProgressBar.setVisibility(View.VISIBLE);
-            mProgressBar.animate().cancel();
-            mProgressBar.animate().setStartDelay(50).alpha(1);
+
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            float value = mFrom + (mTo - mFrom) * interpolatedTime;
+            mProgressBar.setProgress((int) value);
         }
-        setProgressAnimate(mProgressBar,value);
     }
-
-    private ObjectAnimator animation = null;
-    private void setProgressAnimate(ProgressBar pb, int progressTo)
-    {
-        int progress = 0;
-        if((progressTo)<mProgressBar.getProgress()){
-            progress = 5;
-        }
-
-        if(animation!=null){
-            animation.removeAllListeners();
-            animation.end();
-            animation.cancel();
-        }
-
-        animation = ObjectAnimator.ofInt(pb, "progress", pb.getProgress(), progressTo * 100);
-        animation.setDuration(progress);
-        animation.setInterpolator(new DecelerateInterpolator());
-        animation.setAutoCancel(true);
-        animation.start();
-    }
-
-    void onUpdateTitleBar(boolean pStatus){
-
-    }
-
     void onClearSelections(boolean hideKeyboard){
         mSearchbar.setFocusable(false);
         mSearchbar.setFocusableInTouchMode(true);
@@ -716,30 +714,30 @@ class homeViewController
     void onFullScreenUpdate(boolean status){
         int value = !status ? 1 : 0;
 
-        this.mBlocker.setVisibility(View.VISIBLE);
-        this.mBlocker.setAlpha(1f);
-
         if(status) {
-            defaultFlag = mContext.getWindow().getDecorView().getSystemUiVisibility();
-            final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            mContext.getWindow().getDecorView().setSystemUiVisibility(flags);
         }else {
+            this.mBlockerFullSceen.setVisibility(View.VISIBLE);
+            this.mBlockerFullSceen.setAlpha(1f);
         }
 
-        final Handler handler = new Handler();
-        handler.postDelayed(() ->
-        {
-            mTopBar.setClickable(!status);
-            disableEnableControls(!status, mTopBar);
-            mTopBar.setAlpha(value);
-            mBannerAds.setVisibility(View.GONE);
+        if(status){
+            this.mBlockerFullSceen.setVisibility(View.VISIBLE);
+            this.mBlockerFullSceen.setAlpha(0f);
+            this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(1).withEndAction(() -> {
+                mTopBar.setClickable(!status);
+                disableEnableControls(!status, mTopBar);
+                mTopBar.setAlpha(value);
+                mBannerAds.setVisibility(View.GONE);
 
-            if(status){
+                defaultFlag = mContext.getWindow().getDecorView().getSystemUiVisibility();
+                final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+                mContext.getWindow().getDecorView().setSystemUiVisibility(flags);
+
                 mProgressBar.setVisibility(View.GONE);
                 mTopBar.setVisibility(View.GONE);
                 mBannerAds.setVisibility(View.GONE);
@@ -755,38 +753,43 @@ class homeViewController
                 com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = false;
                 initTopBarPadding();
 
-                this.mBlocker.animate().setStartDelay(250).setDuration(200).alpha(0).withEndAction(() -> {
-                    mBlocker.setVisibility(View.GONE);
+                this.mBlockerFullSceen.animate().setStartDelay(100).setDuration(200).alpha(0).withEndAction(() -> {
+                    mBlockerFullSceen.setVisibility(View.GONE);
                 });
+            });
+        }
+        else {
+            mTopBar.setClickable(!status);
+            disableEnableControls(!status, mTopBar);
+            mTopBar.setAlpha(value);
+            mBannerAds.setVisibility(View.GONE);
+
+            mProgressBar.setVisibility(View.VISIBLE);
+            mTopBar.setVisibility(View.VISIBLE);
+            mBannerAds.setVisibility(View.GONE);
+            mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
+
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+            params.setMargins(0, 0, 0,0);
+            mWebviewContainer.setLayoutParams(params);
+
+            ViewGroup.MarginLayoutParams params1 = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+            params1.setMargins(0, 0, 0,helperMethod.pxFromDp(0));
+            mGeckoView.setLayoutParams(params1);
+
+            com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
+            initTopBarPadding();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }else {
+                mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             }
-            else {
-                mProgressBar.setVisibility(View.VISIBLE);
-                mTopBar.setVisibility(View.VISIBLE);
-                mBannerAds.setVisibility(View.GONE);
-                mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
 
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-                params.setMargins(0, 0, 0,0);
-                mWebviewContainer.setLayoutParams(params);
-
-                ViewGroup.MarginLayoutParams params1 = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-                params1.setMargins(0, 0, 0,helperMethod.pxFromDp(60));
-                mGeckoView.setLayoutParams(params1);
-
-                com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
-                initTopBarPadding();
-
-                this.mBlocker.animate().setStartDelay(250).setDuration(200).alpha(0).withEndAction(() -> {
-                    mBlocker.setVisibility(View.GONE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    }else {
-                        mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
-                    }
-                });
-            }
-        }, 200);
+            this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(0).withEndAction(() -> {
+                mBlockerFullSceen.setVisibility(View.GONE);
+            });
+        }
 
     }
 
@@ -848,6 +851,9 @@ class homeViewController
                             e.printStackTrace();
                         }
                     }
+                }
+                if(msg.what == messages.MESSAGE_PROGRESSBAR_VALIDATE)
+                {
                 }
             }
         };

@@ -18,8 +18,10 @@ import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.URLUtil;
 import android.widget.*;
@@ -38,6 +40,7 @@ import com.darkweb.genesissearchengine.appManager.landingManager.landingControll
 import com.darkweb.genesissearchengine.appManager.languageManager.languageController;
 import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.appManager.orbotManager.orbotController;
+import com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController;
 import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
@@ -49,6 +52,7 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.KeyboardUtils;
+import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
@@ -77,6 +81,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private homeViewController mHomeViewController;
     private homeModel mHomeModel;
     private geckoClients mGeckoClient = null;
+    private GestureDetector mSwipeDirectionDetector;
 
     /*View Webviews*/
     private NestedGeckoView mGeckoView = null;
@@ -97,16 +102,20 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private Button mConnectButton;
     private Button mNewTab;
     private View mFindBar;
+    private View mSearchEngineBar;
     private EditText mFindText;
     private TextView mFindCount;
     private ImageButton mVoiceInput;
     private ImageButton mMenu;
     private FrameLayout mNestedScroll;
+    private ImageView mBlockerFullSceen;
+    private TextView mCopyright;
 
     /*Redirection Objects*/
     private boolean mPageClosed = false;
     private boolean isKeyboardOpened = false;
     private boolean isSuggestionChanged = false;
+    private String mSearchBarPreviousText = strings.GENERIC_EMPTY_STR;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
@@ -133,6 +142,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             initializeLocalEventHandlers();
             initLandingPage();
             initLocalLanguage();
+            onInitResume(savedInstanceState != null);
+    }
+
+    public void onInitResume(boolean pStatus){
+        if(pStatus){
+            mSplashScreen.animate().alpha(0);
+        }
     }
 
     public void onInitTheme(){
@@ -195,7 +211,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         if(status.sSettingIsAppStarted){
             mHomeViewController.onPageFinished();
-            mSplashScreen.setAlpha(0);
+            mSplashScreen.animate().alpha(0);
             mHomeViewController.onProgressBarUpdate(100);
         }
     }
@@ -224,18 +240,21 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mConnectButton = findViewById(R.id.Connect);
         mNewTab = findViewById(R.id.pTabCounter);
         mFindBar = findViewById(R.id.pFindBar);
+        mSearchEngineBar = findViewById(R.id.pSearchEngineBar);
         mFindText = findViewById(R.id.pFindText);
         mFindCount = findViewById(R.id.pFindCount);
         mVoiceInput = findViewById(R.id.pVoiceInput);
         mMenu = findViewById(R.id.pMenu);
         mBlocker = findViewById(R.id.pBlocker);
         mNestedScroll = findViewById(R.id.pNestedScroll);
+        mBlockerFullSceen = findViewById(R.id.pBlockerFullSceen);
+        mCopyright = findViewById(R.id.pCopyright);
 
         mGeckoView.setSaveEnabled(false);
         mGeckoView.setSaveFromParentEnabled(false);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,(ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null), mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker);
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds,(ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null), mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright);
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,false);
         mGeckoClient.onValidateInitializeFromStartup();
@@ -261,30 +280,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
     }
 
-    float oldTouchValue;
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-
-        int action=event.getAction();
-
-        switch (action) {
-            case (MotionEvent.ACTION_DOWN):
-                oldTouchValue = event.getX();
-            case (MotionEvent.ACTION_MOVE):
-                if(mSplashScreen.getVisibility()==View.VISIBLE){
-                    float currentX = event.getX();
-                    if (oldTouchValue < currentX-100)
-                    {
-                        helperMethod.openActivity(orbotController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
-                    }
-                    else if (oldTouchValue > currentX+100 )
-                    {
-                        helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
-                    }
-                }
-            default:
-                return super.onTouchEvent(event);
-        }
+        mSwipeDirectionDetector.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
     }
 
     public void initPreFixes() {
@@ -358,7 +357,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setSession(mTempSession);
 
         mHomeViewController.onClearSelections(false);
-        mHomeViewController.onUpdateSearchBar(mTempSession.getCurrentURL(),false);
+        mHomeViewController.onUpdateSearchBar(mTempSession.getCurrentURL(),false,true);
         if(mTempSession.getProgress()>0 && mTempSession.getProgress()<100){
             mHomeViewController.onProgressBarUpdate(mTempSession.getProgress());
         }else {
@@ -428,7 +427,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE)
             {
                 onSearchBarInvoked(v);
-                mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),true);
+                mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),true,true);
                 mHomeViewController.onClearSelections(true);
                 mGeckoClient.setLoading(true);
                 final Handler handler = new Handler();
@@ -456,7 +455,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 helperMethod.hideKeyboard(homeController.this);
                 status.sSettingIsAppStarted = true;
                 pluginController.getInstance().onResetMessage();
-                mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false);
+                mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true);
             }
         });
 
@@ -477,17 +476,35 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mSearchbar.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus)
             {
+                mHomeViewController.onUpdateSearchEngineBar(false);
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 mHomeViewController.initSearchBarFocus(false);
                 if(!mGeckoClient.isLoading()){
-                    mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false);
+                    mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true);
                 }
                 if(isSuggestionChanged){
                     isSuggestionChanged = false;
                     mHomeViewController.initializeSuggestionView((ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestion(dataEnums.eSuggestionCommands.M_GET_SUGGESTION, null));
                 }
             }else {
+                mHomeViewController.onUpdateSearchEngineBar(true);
                 mHomeViewController.initSearchBarFocus(true);
-                mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),true);
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+                mSearchbar.setText(strings.GENERIC_EMPTY_STR);
+            }
+        });
+
+        mSwipeDirectionDetector=new GestureDetector(this,new SimpleGestureFilter(){
+
+            @Override
+            public boolean onSwipe(Direction direction) {
+                if (direction==Direction.left){
+                    helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this, true);
+                }
+                else if (direction==Direction.right){
+                    helperMethod.openActivity(orbotController.class, constants.CONST_LIST_HISTORY, homeController.this, true);
+                }
+                return true;
             }
         });
 
@@ -501,15 +518,20 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(validated_url!=null){
             url = validated_url;
         }
-        mHomeViewController.onUpdateSearchBar(url,false);
+        mHomeViewController.onUpdateSearchBar(url,false,true);
         onLoadURL(url);
     }
 
     public void onSuggestionInvoked(View view){
-        String val = ((TextView)view.findViewById(R.id.hintCompletionUrl)).getText().toString();
-        onLoadURL(val);
-        mSearchbar.setSelection(0);
-        mHomeViewController.onUpdateSearchBar(val,false);
+        //String val = ((TextView)view.findViewById(R.id.hintCompletionUrl)).getText().toString();
+        //onLoadURL(val);
+        //mSearchbar.setSelection(0);
+        //mHomeViewController.onUpdateSearchBar(val,false,true);
+    }
+
+    public void onSuggestionMove(View view){
+        String val = ((ImageButton)view).getTag().toString();
+        mHomeViewController.onUpdateSearchBar(val,false,false);
     }
 
     public void applyTheme(){
@@ -532,10 +554,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initializeGeckoView(true, true);
         if(status.sOpenURLInNewTab){
             onLoadURL(helperMethod.getDomainName(status.sSettingSearchStatus));
-            mHomeViewController. onUpdateSearchBar(helperMethod.getDomainName(status.sSettingSearchStatus),false);
+            mHomeViewController. onUpdateSearchBar(helperMethod.getDomainName(status.sSettingSearchStatus),false,true);
         }else {
             onLoadURL("about:blank");
-            mHomeViewController. onUpdateSearchBar(strings.HOME_BLANK_PAGE,false);
+            mHomeViewController. onUpdateSearchBar(strings.HOME_BLANK_PAGE,false,true);
         }
         mHomeViewController.progressBarReset();
         mHomeViewController.onNewTab(isKeyboardOpened,isKeyboardOpenedTemp);
@@ -544,13 +566,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onOpenTabViewBoundary(View view){
         mGeckoClient.onRedrawPixel();
-        final Handler handler = new Handler();
         mNewTab.setPressed(true);
-        handler.postDelayed(() ->
-        {
-            helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
-            overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
-        }, 100);
+        mGeckoClient.onRedrawPixel();
+        helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
+        overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
     }
 
     public void onNotificationInvoked(String message,enums.etype e_type){
@@ -579,6 +598,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mSearchbar.clearFocus();
         if(mFindBar.getVisibility() == View.VISIBLE){
             mHomeViewController.onUpdateFindBar(false);
+        }
+        else if(mSearchEngineBar.getVisibility() == View.VISIBLE){
+            mHomeViewController.onUpdateSearchEngineBar(false);
         }
         else if(mGeckoClient.getFullScreenStatus()){
             mGeckoClient.onBackPressed(true);
@@ -656,9 +678,15 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
         if(status.sSettingIsAppStarted){
             onStartApplication(null);
+            tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
+            if(model!=null){
+                onLoadTab(model.getSession(),true);
+            }
         }
-        if((int)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null)<=0){
-            //onNewTab(false, false);
+        if(!mSearchBarPreviousText.equals(strings.GENERIC_EMPTY_STR)){
+            mSearchbar.setText(mSearchBarPreviousText);
+            mSearchbar.requestFocus();
+            mSearchBarPreviousText = strings.GENERIC_EMPTY_STR;
         }
 
         super.onResume();
@@ -670,7 +698,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(resultCode == RESULT_OK && null != data){
                 onSearchBarInvoked(mSearchbar);
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                mHomeViewController.onUpdateSearchBar(result.get(0),false);
+                mHomeViewController.onUpdateSearchBar(result.get(0),false,true);
                 helperMethod.hideKeyboard(homeController.this);
                 mGeckoClient.setLoading(true);
                 final Handler handler = new Handler();
@@ -752,7 +780,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initializeGeckoView(true, true);
         mHomeViewController.progressBarReset();
         mHomeViewController.onNewTab(false,isKeyboardOpened);
-        mHomeViewController.onUpdateSearchBar(url,false);
+        mHomeViewController.onUpdateSearchBar(url,false,true);
         mGeckoClient.loadURL(url);
     }
 
@@ -799,6 +827,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.getSession().findInPage(mFindText.getText().toString(), GeckoSession.FINDER_FIND_MATCH_CASE & GeckoSession.FINDER_DISPLAY_HIGHLIGHT_ALL);
     }
 
+    public void onOpenSearchEngine(View view){
+        mSearchBarPreviousText = mSearchbar.getText().toString();
+        helperMethod.openActivity(settingSearchController.class,constants.CONST_LIST_HISTORY, homeController.this,true);
+    }
+
     public void onFindPrev(View view){
         mFindText.setText("0/0");
         mGeckoClient.getSession().findInPage(mFindText.getText().toString(), GeckoSession.FINDER_FIND_BACKWARDS & GeckoSession.FINDER_DISPLAY_HIGHLIGHT_ALL);
@@ -827,6 +860,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if (menuId == R.id.menu9) {
                 helperMethod.hideKeyboard(this);
+                mGeckoClient.onRedrawPixel();
                 helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
             }
             else if (menuId == R.id.menu8) {
@@ -937,7 +971,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                mHomeViewController.onSetBannerAdMargin((boolean)data.get(0),pluginController.getInstance().isAdvertLoaded());
            }
            else if(e_type.equals(enums.etype.on_url_load)){
-               mHomeViewController.onUpdateLogs("Starting | Genesis Search");
+               onOpenLinkNewTab(data.get(0).toString());
                onLoadURL(data.get(0).toString());
            }
            else if(e_type.equals(enums.etype.recheck_orbot)){
@@ -982,10 +1016,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onProgressBarUpdate((int)data.get(0));
             }
             else if(e_type.equals(enums.etype.ON_UPDATE_TITLE_BAR)){
-                mHomeViewController.onUpdateTitleBar((boolean)data.get(0));
             }
             else if(e_type.equals(enums.etype.on_url_load)){
-                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false);
+                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false,true);
             }
             else if(e_type.equals(enums.etype.back_list_empty)){
                 if((int)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null)>1){
@@ -1039,10 +1072,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().setLanguage();
                 initLocalLanguage();
                 mHomeViewController.onPageFinished();
-                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false);
+                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false,true);
             }
             else if(e_type.equals(enums.etype.search_update)){
-                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false);
+                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false, true);
             }
             else if(e_type.equals(enums.etype.download_file_popup)){
                 pluginController.getInstance().MessageManagerHandler(homeController.this,Collections.singletonList(dataToStr(data.get(0))),enums.eMessageEnums.M_DOWNLOAD_FILE);
@@ -1083,10 +1116,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if(e_type.equals(dataEnums.eTabCommands.M_UPDATE_PIXEL)){
                 try{
-
                     dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(data.get(1), mGeckoView.capturePixels()));
-                }catch (Exception ignored){
-
+                }catch (Exception EX){
+                    EX.printStackTrace();
                 }
             }
             else if(e_type.equals(enums.etype.FINDER_RESULT_CALLBACK)){

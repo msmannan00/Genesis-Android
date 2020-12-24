@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/c_alert_background" android:layout_height="match_parent" android:layout_width="match_parent">
+
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
 
@@ -16,6 +17,9 @@
                 android:topLeftRadius="6dp"
                 android:topRightRadius="6dp"/>
 
+            <item name="android:shadowColor">#000000</item>
+            <item name="android:shadowRadius">5</item>
+            <item name="android:shadowDy">3</item>
         </shape>
     </item>
 
@@ -39,6 +43,8 @@
                 android:endColor="@color/c_alert_background"
                 android:startColor="@color/c_alert_background"
                 android:type="linear" />
+
+
         </shape>
     </item>
 </ripple>

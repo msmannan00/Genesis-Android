@@ -105,7 +105,7 @@ class tabViewController
         mTabOptionMenu.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mTabOptionMenu.setAnimationStyle(R.style.popup_window_animation);
         mTabOptionMenu.setElevation(7);
-        mTabOptionMenu.showAsDropDown(view,0, helperMethod.pxFromDp(-45));
+        mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-125), helperMethod.pxFromDp(-45));
     }
 
     private void onCloseTabMenu() {
@@ -134,6 +134,7 @@ class tabViewController
         mToastLayoutRoot.setAlpha(0);
         mToastLayoutRoot.animate().alpha(1);
 
+        initTabCount();
         mDelayHandler.removeCallbacksAndMessages(null);
         mDelayHandler.postDelayed(() -> mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE)), 1500);
     }

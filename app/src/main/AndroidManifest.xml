@@ -126,7 +126,7 @@
                 android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustResize">
+                android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
