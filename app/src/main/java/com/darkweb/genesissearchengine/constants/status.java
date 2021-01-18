@@ -14,6 +14,7 @@ public class status
     public static boolean sPaidStatus = true;
     public static String sAppCurrentABI = "7.0";
     public static String mCurrentReloadURL = "";
+    public static int mNotificationID = 1001;
 
     /*Settings Status*/
 
@@ -24,21 +25,25 @@ public class status
     public static boolean sSettingEnableZoom = true;
     public static boolean sSettingEnableVoiceInput = true;
     public static boolean sSettingSearchHistory = false;
-    public static boolean getsSettingSearchSuggestion = false;
+    public static boolean sSearchSuggestionStatus = false;
     public static boolean sSettingJavaStatus = true;
     public static boolean sClearOnExit = true;
     public static boolean sSettingIsAppPaused = false;
     public static boolean sSettingIsWelcomeEnabled = true;
     public static boolean sSettingIsAppStarted = false;
+    public static boolean sSettingIsAppRedirected = false;
+    public static boolean sSettingIsAppRestarting = false;
     public static boolean sSettingIsAppRated = false;
     public static boolean sSettingFontAdjustable = true;
     public static boolean sSettingFirstStart = true;
     public static boolean sSettingTrackingProtection = true;
+    public static boolean mThemeApplying = false;
+
     public static boolean sStatusDoNotTrack = true;
     public static boolean sRestoreTabs = false;
     public static boolean sCharacterEncoding = false;
     public static boolean sShowWebFonts = true;
-    public static boolean sAutoPlay = false;
+    public static boolean sToolbarTheme = false;
     public static boolean sFullScreenBrowsing = false;
     public static boolean sOpenURLInNewTab = false;
     public static boolean sDefaultNightMode;
@@ -63,7 +68,7 @@ public class status
     public static void initStatus()
     {
         status.sSettingSearchHistory = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY,true));
-        status.getsSettingSearchSuggestion = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
+        status.sSearchSuggestionStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
         status.sSettingJavaStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));
         status.sClearOnExit = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR,true));
         status.sBridgeGatewayAuto = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_AUTO,true));
@@ -90,7 +95,7 @@ public class status
         status.sCharacterEncoding = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_CHARACTER_ENCODING,false));
         status.sShowImages = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,0));
         status.sShowWebFonts = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS,true));
-        status.sAutoPlay = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_AUTO_PLAY,false));
+        status.sToolbarTheme = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME,true));
         status.sFullScreenBrowsing = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
         status.sTheme = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_THEME,enums.Theme.THEME_DEFAULT));
         status.sOpenURLInNewTab = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,false));

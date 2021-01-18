@@ -33,7 +33,7 @@ public class orbotAdapter extends RecyclerView.Adapter<orbotAdapter.listViewHold
 
     @NonNull @Override
     public orbotAdapter.listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orbotview_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orbot_row_view, parent, false);
         return new orbotAdapter.listViewHolder(view);
     }
 
@@ -77,7 +77,7 @@ public class orbotAdapter extends RecyclerView.Adapter<orbotAdapter.listViewHold
             activityContextManager.getInstance().getHomeController().startActivity(intent);
         }
     }
-    public Object onTrigger(tabEnums.eTabModelCommands pCommands, List<Object> pData){
+    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData){
         return null;
     }
 }

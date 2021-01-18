@@ -1,18 +1,24 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.helperManager.TopCropImageView;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,21 +29,35 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 {
     /*Private Variables*/
 
-    private ArrayList<tabRowModel> mModelList;
+    private ArrayList<tabRowModel> mModelList = new ArrayList<>();
     private eventObserver.eventListener mEvent;
     private ArrayList<String> mSelectedList = new ArrayList<>();
+    private Boolean mLongPressMenuEnabled = false;
 
-    tabAdapter(ArrayList<tabRowModel> model_list, eventObserver.eventListener event) {
-        this.mModelList = model_list;
+
+    tabAdapter(ArrayList<tabRowModel> pModelList, eventObserver.eventListener event) {
+        this.mModelList.addAll(pModelList);
+        mModelList.add(new tabRowModel(null, null,null));
         this.mEvent = event;
+    }
 
+    private void reInitData(ArrayList<tabRowModel> pModelList){
+        for(int mCounter=0;mCounter<pModelList.size();mCounter++){
+            mModelList.add(0,pModelList.get(mCounter));
+        }
+        notifyItemRangeInserted(0, pModelList.size());
+        notifyItemChanged(pModelList.size());
+    }
+
+    public void initFirstRow(){
+        notifyItemChanged(0);
     }
 
     /*Initializations*/
 
     @NonNull @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tabview_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_row_view, parent, false);
         return new listViewHolder(view);
     }
 
@@ -57,29 +77,75 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
     /*Listeners*/
 
-    private int getSelectedListSize(){
-        return mSelectedList.size();
+    private boolean isSelectionMenuShowing(){
+        return mLongPressMenuEnabled;
     }
 
     private void onRemoveAllSelection() {
-        mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_CLEAR_TAB_BACKUP);
-        for(int mCounter=0;mCounter<mModelList.size();mCounter++){
-            if(mSelectedList.contains(mModelList.get(mCounter).getSession().getSessionID())){
-                mSelectedList.remove((String) mModelList.get(mCounter).getSession().getSessionID());
-                mEvent.invokeObserver(Collections.singletonList(mCounter), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB);
-                notifyItemRemoved(mCounter);
-                mCounter-=1;
+        if(mSelectedList!=null && mSelectedList.size()>0){
+            for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
+                for(int mCounterInner=0;mCounterInner<mModelList.size();mCounterInner++){
+                    if(mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())){
+                        mSelectedList.remove(mCounter);
+                        mModelList.remove(mCounterInner);
+                        notifyItemRemoved(mCounterInner);
+                        notifyItemRangeChanged(mCounterInner,mModelList.size());
+                        mEvent.invokeObserver(Collections.singletonList(mCounterInner), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+                        mCounter=-1;
+                        break;
+                    }
+                }
             }
+
+            mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG);
         }
     }
 
+    private void onNotifyItemSwiped(int pIndex){
+        for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
+            if(mSelectedList.get(mCounter).equals(mModelList.get(pIndex).getmId())){
+                mSelectedList.remove(mCounter);
+                break;
+            }
+        }
+
+        mModelList.remove(pIndex);
+        notifyItemRemoved(pIndex);
+        notifyItemRangeChanged(pIndex, mModelList.size());
+        notifyItemChanged(mModelList.size()-1);
+    }
+
     private void onClearAllSelection(){
-        mSelectedList.clear();
-        notifyDataSetChanged();
+        mEvent.invokeObserver(Arrays.asList(false, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
+
+        for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
+            boolean mIsChanged = false;
+            for(int mCounterInner=0;mCounterInner<mModelList.size();mCounterInner++){
+                if(mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())){
+                    notifyItemChanged(mCounterInner, null);
+                    mIsChanged = true;
+                }
+            }
+            if(mIsChanged){
+                mSelectedList.remove(mCounter);
+                mCounter=mCounter-1;
+            }
+        }
+
+        if(mSelectedList.size()<=0){
+            mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
+        }else{
+            mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
+        }
+        notifyItemChanged(mModelList.size()-1);
+
+    }
+
+    public void onEnableLongClickMenu(){
+        mLongPressMenuEnabled = true;
     }
 
     private void onSelectionCreate(FrameLayout mSelectedView){
-        mSelectedView.setAlpha(0);
         mSelectedView.setVisibility(View.VISIBLE);
         mSelectedView.animate().alpha(1);
         mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION);
@@ -108,6 +174,10 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         ImageButton mRemoveRow;
         TopCropImageView mWebThumbnail;
         FrameLayout mSelectedView;
+        FrameLayout mItemSelectionMenu;
+        Button mItemSelectionMenuButton;
+        ConstraintLayout mItemSelectionMenuReference;
+        ImageView mBorder;
 
         listViewHolder(View itemView) {
             super(itemView);
@@ -121,35 +191,82 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             mWebThumbnail = itemView.findViewById(R.id.pWebThumbnail);
             mDate = itemView.findViewById(R.id.pDate);
             mSelectedView = itemView.findViewById(R.id.pSelectedView);
+            mItemSelectionMenu = itemView.findViewById(R.id.pItemSelectionMenu);
+            mItemSelectionMenuButton = itemView.findViewById(R.id.pItemSelectionMenuButton);
+            mItemSelectionMenuReference = itemView.findViewById(R.id.pRowContainer);
+            mBorder = itemView.findViewById(R.id.pBorder);
 
-            mHeader.setText(model.getSession().getTitle());
-            mDescription.setText(model.getSession().getCurrentURL());
-            mDate.setText(model.getDate());
-            mWebThumbnail.setImageBitmap(model.getBitmap());
-
-            if(mSelectedList.contains(model.getSession().getSessionID())){
-                onSelectionCreate(mSelectedView);
+            if(model.getmId()==null){
+                mItemSelectionMenu.setVisibility(View.VISIBLE);
+                mItemSelectionMenuButton.setOnClickListener(this);
             }else {
-                onSelectionClear(mSelectedView);
+                if(model.getSession().getTheme()==null){
+                    mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_border_background_divider));
+                }else {
+                    try{
+                        mBorder.setBackgroundColor(Color.parseColor(model.getSession().getTheme()));
+                    }catch (Exception ignored){}
+                }
+
+                mItemSelectionMenu.setVisibility(View.GONE);
+                if(model.getSession().getTitle().equals("$TITLE") || model.getSession().getTitle().toLowerCase().equals("loading")){
+                    mHeader.setText(helperMethod.getDomainName(model.getSession().getCurrentURL()));
+                }else {
+                    mHeader.setText(model.getSession().getTitle());
+                }
+                mDescription.setText(model.getSession().getCurrentURL());
+                mDate.setText(model.getDate());
+                mWebThumbnail.setImageBitmap(model.getBitmap());
+
+                if(mSelectedList.contains(model.getSession().getSessionID())){
+                    onSelectionCreate(mSelectedView);
+                }else {
+                    onSelectionClear(mSelectedView);
+                }
+
+                if(model.getSession().equals(mModelList.get(0).getSession())){
+                    itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getTabController(), R.color.c_list_item_current));
+                }else {
+                    Drawable mDrawable;
+                    Resources res = itemView.getContext().getResources();
+                    try {
+                        mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hx_border));
+                        itemView.setBackground(mDrawable);
+                    } catch (Exception ignored) {
+                    }
+                }
+                mLoadSession.setOnLongClickListener(this);
+                mRemoveRow.setOnClickListener(this);
+                mLoadSession.setOnClickListener(this);
             }
 
-            if(model.getSession().equals(mModelList.get(0).getSession())){
-                itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getTabController(), R.color.c_list_item_current));
+            mItemSelectionMenuReference.animate().cancel();
+            if(this.getLayoutPosition()==mModelList.size()-1){
+                if(mSelectedList.size()>0){
+                    itemView.setVisibility(View.GONE);
+                    mLongPressMenuEnabled = true;
+                }else {
+                    itemView.setVisibility(View.VISIBLE);
+                    mLongPressMenuEnabled = false;
+                }
+            }else {
+                itemView.setVisibility(View.VISIBLE);
+                mLongPressMenuEnabled = false;
             }
-
-            mLoadSession.setOnLongClickListener(this);
-            mRemoveRow.setOnClickListener(this);
-            mLoadSession.setOnClickListener(this);
         }
 
 
         @Override
         public void onClick(View v) {
+
             if(v.getId() == R.id.pLoadSession){
                 if(mSelectedView.getVisibility() == View.GONE){
-                    if(mSelectedList.size()>0){
+                    if(mLongPressMenuEnabled){
                         mSelectedList.add(mModelList.get(this.getLayoutPosition()).getSession().getSessionID());
+                        mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
                         onSelectionCreate(mSelectedView);
+                        notifyItemChanged(mModelList.size()-1);
+
                     }else {
                         onTriggerURL(mModelList.get(this.getLayoutPosition()));
                     }
@@ -157,13 +274,34 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
                         if(mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getSession().getSessionID())){
                             mSelectedList.remove(mCounter);
+                            if(mSelectedList.size()<=0){
+                                mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
+                                onClearAllSelection();
+                            }else{
+                                mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
+                            }
                         }
                     }
                     onSelectionClear(mSelectedView);
+                    notifyItemChanged(mModelList.size()-1);
                 }
             }else if(v.getId() == R.id.pRemoveRow){
-                mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_CLEAR_TAB_BACKUP);
+                for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
+                    if(mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getmId())){
+                        mSelectedList.remove(mCounter);
+                        break;
+                    }
+                }
+
+                mModelList.remove(this.getLayoutPosition());
+                notifyItemRemoved(this.getLayoutPosition());
+                notifyItemChanged(mModelList.size()-1);
+                notifyItemRangeChanged(this.getLayoutPosition(), mModelList.size());
                 mEvent.invokeObserver(Collections.singletonList(this.getLayoutPosition()), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW);
+            }
+            else if(v.getId() == R.id.pItemSelectionMenuButton){
+                onEnableLongClickMenu();
+                mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION);
             }
         }
 
@@ -173,9 +311,10 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 if(mSelectedView.getVisibility() == View.GONE){
                     mSelectedList.add(mModelList.get(this.getLayoutPosition()).getSession().getSessionID());
                     onSelectionCreate(mSelectedView);
+                    notifyItemChanged(mModelList.size()-1);
+                    mEvent.invokeObserver(Arrays.asList(false, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
                 }else {
-                    mSelectedList.remove(this.getLayoutPosition());
-                    onSelectionClear(mSelectedView);
+                    v.performClick();
                 }
                 mLoadSession.setPressed(false);
             }
@@ -183,13 +322,21 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         }
     }
 
-    public Object onTrigger(tabEnums.eTabModelCommands pCommands, List<Object> pData){
-        if(pCommands.equals(tabEnums.eTabModelCommands.M_SELECTED_LIST_SIZE)){
-            return getSelectedListSize();
-        }else if(pCommands.equals(tabEnums.eTabModelCommands.M_REMOVE_ALL_SELECTION)){
+    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData){
+        if(pCommands.equals(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING)){
+            return isSelectionMenuShowing();
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION)){
             onRemoveAllSelection();
-        }else if(pCommands.equals(tabEnums.eTabModelCommands.M_CLEAR_ALL_SELECTION)){
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.M_CLEAR_ALL_SELECTION)){
             onClearAllSelection();
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.ENABLE_LONG_CLICK_MENU)){
+            onEnableLongClickMenu();
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW)){
+            initFirstRow();
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.REINIT_DATA)){
+            reInitData((ArrayList<tabRowModel>)pData.get(0));
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.NOTIFY_sWIPE)){
+            onNotifyItemSwiped((int)pData.get(0));
         }
         return null;
     }

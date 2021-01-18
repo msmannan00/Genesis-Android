@@ -3,11 +3,14 @@ package com.darkweb.genesissearchengine.dataManager;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import static com.darkweb.genesissearchengine.constants.status.mThemeApplying;
 
 public class dataController
 {
@@ -16,9 +19,8 @@ public class dataController
     private tabDataModel mTabModel;
     private preferenceDataModel mPreferenceModel;
     private historyDataModel mHistoryModel;
-    private imageCacheModel mImageCacheModel;
+    private imageDataModel mImageDataModel;
     private bookmarkDataModel mBookMarkDataModel;
-    private suggestionDataModel mSuggestionDataModel;
 
     /*Private Declarations*/
 
@@ -34,9 +36,8 @@ public class dataController
         mHistoryModel = new historyDataModel();
         mTabModel = new tabDataModel();
         mPreferenceModel = new preferenceDataModel(app_context);
-        mImageCacheModel = new imageCacheModel();
+        mImageDataModel = new imageDataModel();
         mBookMarkDataModel = new bookmarkDataModel();
-        mSuggestionDataModel = new suggestionDataModel();
     }
     public void initializeListData(){
         invokeSuggestion(dataEnums.eSuggestionCommands.M_INIT_SUGGESTION, null);
@@ -45,11 +46,10 @@ public class dataController
         {
             mHistoryModel.onTrigger(dataEnums.eHistoryCommands.M_INITIALIZE_HISTORY, Arrays.asList(databaseController.getInstance().selectHistory(0,constants.CONST_FETCHABLE_LIST_SIZE), databaseController.getInstance().getLargestHistoryID(),databaseController.getInstance().getLargestHistoryID()));
         }
-        else
-        {
+        else {
             databaseController.getInstance().execSQL("delete from history where 1",null);
         }
-        if(status.sRestoreTabs){
+        if(status.sRestoreTabs || mThemeApplying){
             mTabModel.initializeTab(databaseController.getInstance().selectTabs());
             activityContextManager.getInstance().getHomeController().initTabCount();
         }else{
@@ -72,11 +72,6 @@ public class dataController
         }
     }
 
-    /*Recieving Images*/
-    public Object invokeImageCache(dataEnums.eImageCacheCommands p_commands, List<Object> p_data){
-        return mImageCacheModel.onTrigger(p_commands, p_data);
-    }
-
     /*Recieving Preferences*/
     public Object invokePrefs(dataEnums.ePreferencesCommands p_commands, List<Object> p_data){
         return mPreferenceModel.onTrigger(p_commands, p_data);
@@ -88,21 +83,24 @@ public class dataController
     }
 
     public Object invokeSuggestion(dataEnums.eSuggestionCommands p_commands, List<Object> p_data){
-        if(dataEnums.eSuggestionCommands.M_UPDATE_SUGGESTION.equals(p_commands)){
-            mSuggestionDataModel.onTrigger(p_commands, p_data);
-            activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
-        }
-        else if(dataEnums.eSuggestionCommands.M_ADD_SUGGESTION.equals(p_commands)){
-            mSuggestionDataModel.onTrigger(p_commands, p_data);
-            activityContextManager.getInstance().getHomeController().onSuggestionUpdate();
+        if(dataEnums.eSuggestionCommands.M_GET_SUGGESTION.equals(p_commands)) {
+            ArrayList<historyRowModel> mModel = new ArrayList<>();
+            if(p_data!=null){
+                mModel.addAll((ArrayList<historyRowModel>) dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_GET_SUGGESTIONS, p_data));
+                dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_GET_SUGGESTIONS, Arrays.asList(p_data.get(0),mModel));
+            }
+            return mModel;
         }else {
-            return mSuggestionDataModel.onTrigger(p_commands, p_data);
+            return null;
         }
-        return null;
     }
 
     public Object invokeTab(dataEnums.eTabCommands p_commands, List<Object> p_data){
         return mTabModel.onTrigger(p_commands, p_data);
+    }
+
+    public Object invokeImage(dataEnums.eImageCommands p_commands, List<Object> p_data){
+        return mImageDataModel.onTrigger(p_commands, p_data);
     }
 }
 

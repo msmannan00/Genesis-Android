@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.appManager.settingManager.logManager.settingLogController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
@@ -61,6 +62,7 @@ public class orbotLogController extends AppCompatActivity {
         mFloatingScroller = findViewById(R.id.pFloatingScroller);
 
         activityContextManager.getInstance().setOrbotLogController(this);
+        activityContextManager.getInstance().onStack(this);
         mOrbotViewController = new orbotLogViewController(this, mLogs, mRecycleView);
         mOrbotModel = new orbotLogModel();
 
@@ -166,7 +168,7 @@ public class orbotLogController extends AppCompatActivity {
     }
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingLogController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     public class orbotModelCallback implements eventObserver.eventListener{
@@ -181,11 +183,17 @@ public class orbotLogController extends AppCompatActivity {
 
     public void onClose(View view){
         finish();
+        activityContextManager.getInstance().onRemoveStack(this);
         overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
         mActivityClosed = true;
     }
 
     /* LOCAL OVERRIDES */
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
     @Override
     public void onResume()

@@ -5,6 +5,8 @@ import android.app.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -26,9 +28,10 @@ public class pluginController
     private analyticManager mAnalyticManager;
     private firebaseManager mFirebaseManager;
     private messageManager mMessageManager;
+    private notifictionManager mNotificationManager;
     private activityContextManager mContextManager;
-    private boolean mIsInitialized = false;
     private langManager mLangManager;
+    private boolean mIsInitialized = false;
 
     /*Private Variables*/
 
@@ -57,6 +60,7 @@ public class pluginController
         mHomeController = activityContextManager.getInstance().getHomeController();
         mContextManager = activityContextManager.getInstance();
 
+        mNotificationManager = new notifictionManager(getAppContext(),new notificationCallback());
         mAdManager = new adManager(getAppContext(),new admobCallback(), mHomeController.getBannerAd());
         mAnalyticManager = new analyticManager(getAppContext(),new analyticCallback());
         mFirebaseManager = new firebaseManager(getAppContext(),new firebaseCallback());
@@ -90,6 +94,18 @@ public class pluginController
         }
     }
 
+    /*Notification Manager*/
+    public void onScheduleUserEngagementNotification(int pDelay){
+        if(mNotificationManager!=null){
+            mNotificationManager.onCreateUserEngagementNotification(pDelay);
+        }
+    }
+    public void onClearUserEngagementNotification(){
+        if(mNotificationManager!=null){
+            mNotificationManager.onNotificationClear();
+        }
+    }
+
     /*Firebase Manager*/
     public void logEvent(String value){
         if(mFirebaseManager!=null){
@@ -111,6 +127,9 @@ public class pluginController
     }
     public boolean isOrbotRunning(){
         return orbotManager.getInstance().isOrbotRunning();
+    }
+    public String getOrbotStatus(){
+        return orbotManager.getInstance().getOrbotStatus();
     }
     public void setProxy(String url){
         orbotManager.getInstance().setProxy(url);
@@ -175,6 +194,15 @@ public class pluginController
         }
     }
 
+    /*Notification Manager*/
+    private class notificationCallback implements eventObserver.eventListener{
+        @Override
+        public Object invokeObserver(List<Object> data, Object event_type)
+        {
+            return null;
+        }
+    }
+
     /*Lang Manager*/
     private class langCallback implements eventObserver.eventListener{
         @Override
@@ -215,11 +243,11 @@ public class pluginController
             {
                 mHomeController.onLoadURL(data.get(0).toString());
             }
+            else if(event_type.equals(enums.eMessageEnums.M_SECURE_CONNECTION)){
+                helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController,true);
+            }
             else if(event_type.equals(enums.eMessageEnums.M_CANCEL_WELCOME)){
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED,false));
-            }
-            else if(event_type.equals(enums.eMessageEnums.M_IGNORE_ABI)){
-                //mHomeController.ignoreAbiError();
             }
             else if(event_type.equals(enums.etype.reload)){
                 if(orbotManager.getInstance().isOrbotRunning())
@@ -258,9 +286,6 @@ public class pluginController
             }
             else if(event_type.equals(enums.eMessageEnums.M_DOWNLOAD_FILE_MANUAL)){
                 mHomeController.onManualDownload(data.get(0).toString());
-            }
-            else if(event_type.equals(enums.eMessageEnums.M_CONNECT_VPN)){
-                //orbotLocalConstants.sIsTorInitialized = (boolean)data.get(0);
             }
             else if(event_type.equals(enums.eMessageEnums.M_OPEN_LINK_NEW_TAB)){
                 mHomeController.onOpenLinkNewTab(data.get(0).toString());

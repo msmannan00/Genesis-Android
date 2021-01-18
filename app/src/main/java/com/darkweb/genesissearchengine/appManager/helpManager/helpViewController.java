@@ -4,23 +4,39 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
+
+import java.util.List;
 
 class helpViewController
 {
     /*ViewControllers*/
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
+    private ProgressBar mProgressBar;
+    private RecyclerView mRecyclerView;
+    private ConstraintLayout mRetryContainer;
+    private Button mReloadButton;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, ProgressBar pProgressBar, RecyclerView pRecyclerView, ConstraintLayout pRetryContainer, Button pReloadButton){
         this.mContext = context;
-        initPostUI();
+        this.mProgressBar = pProgressBar;
+        this.mRecyclerView = pRecyclerView;
+        this.mRetryContainer = pRetryContainer;
+        this.mReloadButton = pReloadButton;
     }
 
     private void initPostUI(){
@@ -39,4 +55,53 @@ class helpViewController
             }
         }
     }
+
+    public void onDataLoaded(){
+        mProgressBar.animate().cancel();
+        mRetryContainer.animate().cancel();
+        mRecyclerView.animate().cancel();
+
+        mRecyclerView.animate().setDuration(300).alpha(1);
+        mProgressBar.animate().setDuration(300).alpha(0);
+    }
+
+    public void onLoadError(){
+        mRecyclerView.animate().setDuration(300).alpha(0);
+        mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setAlpha(1);
+
+        mRetryContainer.bringToFront();
+        mProgressBar.animate().setDuration(300).setStartDelay(200).alpha(0).withEndAction(() -> {
+            mRetryContainer.setAlpha(0);
+            mRetryContainer.animate().setDuration(300).alpha(1).withEndAction(() -> mReloadButton.setClickable(true));
+            mRetryContainer.setVisibility(View.VISIBLE);
+        });
+    }
+
+    public void onReloadData(){
+        mRecyclerView.animate().setDuration(300).alpha(0);
+        mReloadButton.setClickable(false);
+        mRetryContainer.animate().cancel();
+        mProgressBar.animate().cancel();
+        mProgressBar.animate().setDuration(300).alpha(1);
+        mRetryContainer.animate().alpha(0).withEndAction(() -> {
+            mRetryContainer.setVisibility(View.GONE);
+        });
+    }
+
+    public void onTrigger(helpEnums.eHelpViewController pCommands, List<Object> pData){
+        if(pCommands.equals(helpEnums.eHelpViewController.M_INIT_VIEWS)){
+            initPostUI();
+        }
+        else if(pCommands.equals(helpEnums.eHelpViewController.M_DATA_LOADED)){
+            onDataLoaded();
+        }
+        else if(pCommands.equals(helpEnums.eHelpViewController.M_LOAD_ERROR)){
+            onLoadError();
+        }
+        else if(pCommands.equals(helpEnums.eHelpViewController.M_RELOAD_DATA)){
+            onReloadData();
+        }
+    }
+
 }

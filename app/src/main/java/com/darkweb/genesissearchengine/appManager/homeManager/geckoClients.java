@@ -2,7 +2,9 @@ package com.darkweb.genesissearchengine.appManager.homeManager;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -18,6 +20,7 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.NETWORK_CACHE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
+
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoSession;
@@ -29,10 +32,13 @@ class geckoClients
 
     private geckoSession mSession = null;
     private GeckoRuntime mRuntime = null;
-    private String mSessionID;
-
+    private BrowserIconManager mIconManager;
     private eventObserver.eventListener event;
     private AppCompatActivity context;
+
+    /*Local Variable*/
+
+    private String mSessionID;
 
     void initialize(GeckoView geckoView, eventObserver.eventListener event, AppCompatActivity context, boolean isForced)
     {
@@ -56,6 +62,8 @@ class geckoClients
             geckoView.setSession(mSession);
         }
         mSession.onSetInitializeFromStartup();
+
+
         onUpdateFont();
     }
 
@@ -79,6 +87,10 @@ class geckoClients
         return mTempSession;
     }
 
+    public void onSessionReinit(){
+        mSession.onSessionReinit();
+    }
+
     void toogleUserAgent(){
         mSession.toogleUserAgent();
     }
@@ -96,6 +108,7 @@ class geckoClients
             mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
             mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
+            mIconManager = new BrowserIconManager();
             if(status.sSettingTrackingProtection){
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
@@ -103,6 +116,16 @@ class geckoClients
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.STRICT);
             }
         }
+    }
+
+    public void onGetFavIcon(ImageView pImageView, String pURL){
+        pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
+        mIconManager.onLoadIconIntoView(context,mRuntime, pImageView, pURL);
+    }
+
+    public void onLoadFavIcon(){
+        BrowserIconManager mIconManager = new BrowserIconManager();
+        mIconManager.onLoadIcon(context, mRuntime);
     }
 
     private int getCookiesBehaviour(){
@@ -115,6 +138,7 @@ class geckoClients
         mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
         mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
         mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
+        mIconManager = new BrowserIconManager();
         if(status.sSettingTrackingProtection){
             mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
             mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
@@ -142,20 +166,36 @@ class geckoClients
     void onUploadRequest(int resultCode,Intent data){
         mSession.onFileUploadRequest(resultCode,data);
     }
-
     void setLoading(boolean status){
         mSession.setLoading(status);
     }
 
-    void loadURL(String url){
+    void loadURL(String url) {
         if(mSession.onGetInitializeFromStartup()){
             mSession.initURL(url);
-            mSession.loadUri(url);
+            if(url.equals("boogle.store") || url.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED)){
+                try{
+                    mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
+                    mSession.loadUri(constants.CONST_GENESIS_URL_CACHED);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }else if(url.contains(constants.CONST_GENESIS_HELP_URL_SUB)){
+                try{
+                    mSession.initURL(constants.CONST_GENESIS_HELP_URL);
+                    mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }else {
+                mSession.loadUri(url);
+            }
         }
     }
 
     public void onRedrawPixel(){
         mSession.onRedrawPixel();
+        onLoadFavIcon();
     }
 
     void onClearSiteData(){

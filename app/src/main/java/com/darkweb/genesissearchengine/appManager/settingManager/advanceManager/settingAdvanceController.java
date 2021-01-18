@@ -28,7 +28,7 @@ public class settingAdvanceController extends AppCompatActivity {
     private settingAdvanceViewController mSettingAdvanceViewController;
     private SwitchMaterial mRestoreTabs;
     private SwitchMaterial mShowWebFonts;
-    private SwitchMaterial mAllowAutoPlay;
+    private SwitchMaterial mToolbarTheme;
     private ArrayList<RadioButton> mImageOption = new ArrayList<>();
     private boolean mIsChanged = false;
 
@@ -44,11 +44,12 @@ public class settingAdvanceController extends AppCompatActivity {
     public void viewsInitializations() {
         mRestoreTabs = findViewById(R.id.pRestoreTabs);
         mShowWebFonts = findViewById(R.id.pShowWebFonts);
-        mAllowAutoPlay = findViewById(R.id.pAllowAutoPlay);
+        mToolbarTheme = findViewById(R.id.pToolbarTheme);
         mImageOption.add(findViewById(R.id.pAdvanceImageOption1));
         mImageOption.add(findViewById(R.id.pAdvanceImageOption2));
 
-        mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts, mAllowAutoPlay, mImageOption);
+        activityContextManager.getInstance().onStack(this);
+        mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts, mToolbarTheme, mImageOption);
         mSettingAdvanceModel = new settingAdvanceModel(new settingAdvanceModelCallback());
     }
 
@@ -104,6 +105,7 @@ public class settingAdvanceController extends AppCompatActivity {
             pluginController.getInstance().updatePrivacy();
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 
@@ -138,10 +140,10 @@ public class settingAdvanceController extends AppCompatActivity {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS,status.sShowWebFonts));
     }
 
-    public void onAllowAutoPlay(View view) {
-        mIsChanged = true;
-        mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_ALLOW_AUTOPLAY, Collections.singletonList(!mAllowAutoPlay.isChecked()));
-        mAllowAutoPlay.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_AUTO_PLAY,status.sAutoPlay));
+    public void onToolbarTheme(View view) {
+        mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME, Collections.singletonList(!mToolbarTheme.isChecked()));
+        mToolbarTheme.toggle();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME,status.sToolbarTheme));
+        activityContextManager.getInstance().getHomeController().onUpdateToolbarTheme();
     }
 }

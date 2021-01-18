@@ -12,12 +12,14 @@ import android.graphics.drawable.InsetDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.Gravity;
-import android.view.WindowManager;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -26,6 +28,8 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -141,7 +145,7 @@ class messageManager
             final Handler handler = new Handler();
             Runnable runnable = () -> {
                 try{
-                    helperMethod.sendRateEmail(mContext);
+                    helperMethod.sendIssueEmail(mContext);
                 }
                 catch (Exception ex){
                     createMessage(mContext,Collections.singletonList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),enums.eMessageEnums.M_NOT_SUPPORTED);
@@ -171,8 +175,49 @@ class messageManager
         InsetDrawable inset = new InsetDrawable(back, 0,0,0,helperMethod.pxFromDp(25));
         dialog.getWindow().setBackgroundDrawable(inset);
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> dialog.dismiss());
+        dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
     }
 
+
+    private void openSecureConnectionPopup()
+    {
+        initializeDialog(R.layout.secure_connection_popup, Gravity.TOP);
+        Window window = dialog.getWindow();
+        window.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+
+        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(back, 0,0,0,0);
+        dialog.getWindow().setBackgroundDrawable(inset);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
+        dialog.findViewById(R.id.pNext).setOnClickListener(v -> { event.invokeObserver(null, enums.eMessageEnums.M_SECURE_CONNECTION); });
+
+        String mJavascript = "| Disabled";
+        String mDoNotTrack = "| Disabled";
+        String mTrackingProtection = "| Disabled";
+
+        if((boolean)data.get(1)){
+            ((SwitchMaterial)dialog.findViewById(R.id.pJSStatus)).setChecked(true);
+        }else {
+            ((SwitchMaterial)dialog.findViewById(R.id.pJSStatus)).setChecked(false);
+        }
+        if((boolean)data.get(2)){
+            ((SwitchMaterial)dialog.findViewById(R.id.pDTStatus)).setChecked(true);
+        }else {
+            ((SwitchMaterial)dialog.findViewById(R.id.pDTStatus)).setChecked(false);
+        }
+        if((boolean)data.get(3)){
+            ((SwitchMaterial)dialog.findViewById(R.id.pTPStatus)).setChecked(true);
+        }else {
+            ((SwitchMaterial)dialog.findViewById(R.id.pTPStatus)).setChecked(false);
+        }
+
+        ((TextView)dialog.findViewById(R.id.pHeaderSubpart)).setText(helperMethod.getDomainName(data.get(0).toString()));
+        //((TextView)dialog.findViewById(R.id.pJSStatus)).setText(mJavascript);
+        //((TextView)dialog.findViewById(R.id.pDTStatus)).setText(mDoNotTrack);
+        //((TextView)dialog.findViewById(R.id.pTPStatus)).setText(mTrackingProtection);
+    }
 
     @SuppressLint("ResourceType")
     private void bookmark()
@@ -226,6 +271,7 @@ class messageManager
     private void reportURL()
     {
         initializeDialog(R.layout.popup_report_url, Gravity.CENTER);
+        ((TextView)dialog.findViewById(R.id.pHeader)).setText(data.get(0).toString());
         dialog.findViewById(R.id.pDismiss).setOnClickListener(v -> dialog.dismiss());
         dialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             dialog.dismiss();
@@ -495,6 +541,10 @@ class messageManager
 
             case M_DATA_CLEARED:
                 dataClearedSuccessfully();
+                break;
+
+            case M_SECURE_CONNECTION:
+                openSecureConnectionPopup();
                 break;
         }
     }

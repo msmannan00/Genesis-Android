@@ -7,9 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.View;
 
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
+import com.darkweb.genesissearchengine.appManager.orbotManager.orbotController;
+import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import com.github.paolorotolo.appintro.AppIntro;
+
+import java.util.Arrays;
 
 public class landingController extends AppIntro {
 
@@ -37,7 +44,7 @@ public class landingController extends AppIntro {
         cs2.showButton(getString(R.string.LANDING_MORE), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(landingController.this,bridgeController.class));
+                startActivity(new Intent(landingController.this, orbotController.class));
             }
         });
         addSlide(cs2);
@@ -45,8 +52,8 @@ public class landingController extends AppIntro {
 
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setBarColor(getResources().getColor(R.color.secondary));
-        setSeparatorColor(getResources().getColor(R.color.white));
+        setBarColor(getResources().getColor(R.color.landing_ease_blue));
+        setSeparatorColor(getResources().getColor(R.color.headerblack));
 
         // Hide Skip/Done button.
         showSkipButton(false);
@@ -61,6 +68,8 @@ public class landingController extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
+        status.sSettingFirstStart = false;
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FIRST_INSTALLED,false));
         finish();
     }
 

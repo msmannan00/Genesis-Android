@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine.dataManager;
 
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 
 import java.util.ArrayList;
@@ -68,17 +69,34 @@ public class bookmarkDataModel {
         databaseController.getInstance().execSQL("delete from bookmark where id="+ pID,null);
     }
 
+    public ArrayList<historyRowModel> getSuggestions(String pQuery){
+        pQuery = pQuery.toLowerCase();
+        ArrayList<historyRowModel> mModel = new ArrayList<>();
+
+        for(int count = 0; count<= mBookmarks.size()-1 && mBookmarks.size()<500; count++){
+            if(mBookmarks.get(count).getHeader().toLowerCase().contains(pQuery)){
+                mModel.add(0, new historyRowModel(mBookmarks.get(count).getHeader(),mBookmarks.get(count).getDescription(),-1));
+            }else if(mModel.size()>0 && mBookmarks.get(count).getDescription().toLowerCase().contains(pQuery)){
+                mModel.add(mModel.size()-1, new historyRowModel(mBookmarks.get(count).getHeader(),mBookmarks.get(count).getDescription(),-1));
+            }
+        }
+        return mModel;
+    }
+
     public Object onTrigger(dataEnums.eBookmarkCommands p_commands, List<Object> pData){
         if(p_commands == dataEnums.eBookmarkCommands.M_GET_BOOKMARK){
             return getBookmark();
         }
-        if(p_commands == dataEnums.eBookmarkCommands.M_ADD_BOOKMARK){
+        else if(p_commands == dataEnums.eBookmarkCommands.M_ADD_BOOKMARK){
             addBookmark((String)pData.get(0), (String)pData.get(1));
         }
-        if(p_commands == dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK){
+        else if(p_commands == dataEnums.eBookmarkCommands.M_GET_SUGGESTIONS){
+            return getSuggestions((String)pData.get(0));
+        }
+        else if(p_commands == dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK){
             deleteBookmark((int)pData.get(0));
         }
-        if(p_commands == dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK){
+        else if(p_commands == dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK){
             clearBookmark();
         }
 

@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.darkweb.genesissearchengine.appManager.historyManager.historyEnums;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
@@ -211,7 +210,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
     @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mListHolderContext = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_bookmark_row_view, parent, false);
         return new listViewHolder(view);
     }
 
@@ -342,7 +341,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
 
     void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle){
         LayoutInflater layoutInflater = (LayoutInflater) pView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.recyclerview__row_menu, null);
+        @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.history_bookmark__row_menu, null);
         mPopupWindow = (PopupWindow) mBookmarkAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_OPEN_MENU, Arrays.asList(mPopupWindow, pView, mPopupView));
 
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuCopy), pUrl, pPosition, pTitle);
@@ -438,6 +437,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         TextView mWebLogo;
         ImageButton mRowMenu;
         ImageView mLogoImage;
+        ImageView mFaviconLogo;
         LinearLayout mRowContainer;
         LinearLayout mDateContainer;
         LinearLayout mLoadingContainer;
@@ -456,7 +456,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             mLogoImage = itemView.findViewById(R.id.pLogoImage);
             mWebLogo = itemView.findViewById(R.id.pWebLogo);
             mLoadingContainer = itemView.findViewById(R.id.pLoadingContainer);
-
+            mFaviconLogo = itemView.findViewById(R.id.pFaviconLogo);
 
             if(model.getID() == -1){
                 mDate.setText(model.getHeader());
@@ -487,6 +487,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
                 String header = model.getHeader();
                 mDescription.setText((model.getDescription()));
+                mEvent.invokeObserver(Arrays.asList(mFaviconLogo, model.getDescription()),enums.etype.fetch_favicon);
                 mHeader.setText(model.getHeader());
 
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());

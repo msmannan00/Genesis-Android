@@ -7,7 +7,7 @@
         android:layout_height="wrap_content">
 
     <ScrollView
-        android:layout_width="260dp"
+        android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
@@ -28,12 +28,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:layout_width="259dp"
+                android:layout_width="238dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginRight="1dp"
-                android:background="@color/clear_alpha"
+                android:layout_marginStart="1dp"
+                android:background="@color/c_ripple_v3"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -95,122 +94,270 @@
                     android:tint="@color/c_navigation_tint" />
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/menu11"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="1dp"
                 android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU__NEW_TABS"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_new_tab"
+                    app:tint="@color/c_navigation_medium"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU__NEW_TABS"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/menu12"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU__ORBOT_LOGS"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+                <ImageView
+                    android:id="@+id/markerTab"
+                    android:layout_width="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_vpn"
+                    app:tint="@color/c_navigation_medium"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU__ORBOT_LOGS"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/pMenuOpenNewTab"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_OPEN_BOOKMARK"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:background="@xml/gx_side_item"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_bookmark_menu"
+                    app:tint="@color/c_navigation_medium"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
-            <TextView
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU_OPEN_BOOKMARK"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/menu7"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_HISTORY"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+                <ImageView
+                    android:layout_width="20dp" android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_history"
+                    app:tint="@color/c_navigation_medium"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU_HISTORY"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/menu8"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_DOWNLOAD"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_arrow_down"
+                    app:tint="@color/c_navigation_medium"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU_DOWNLOAD"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/menu25"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_LANGUAGE"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
-
-            <TextView
-                android:id="@+id/pMenuShare"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_RATE"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_language"
+                    app:tint="@color/c_navigation_medium"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU_LANGUAGE"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/pMenuFind"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_FIND"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_find"
+                    app:tint="@color/c_navigation_medium"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU_FIND"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/menu26"
-                android:layout_width="259dp"
+                android:layout_width="239dp"
+                android:paddingRight="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
@@ -224,6 +371,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_desktop"
+                    app:tint="@color/c_navigation_medium"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
                 <TextView
                     android:id="@+id/menu28"
                     android:layout_width="0dp"
@@ -234,86 +389,105 @@
                     android:focusable="false"
                     android:gravity="left|center_vertical"
                     android:onClick="onMenuItemInvoked"
-                    android:paddingStart="16dp"
+                    android:paddingStart="8dp"
                     android:text="@string/HOME_MENU_DESKTOP"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
-                    android:textSize="16sp"
+                    android:layout_marginStart="4dp"
+                    android:textSize="15sp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/menu27"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1"
                     android:background="@color/clear_alpha"
                     android:buttonTint="@color/c_navigation_tint"
                     android:clickable="false"
                     android:focusable="false"
                     android:gravity="left|center_vertical"
-                    android:paddingLeft="20dp"
+                    android:paddingLeft="0dp"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="16sp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
-
-            <TextView
+            <LinearLayout
                 android:id="@+id/menu6"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_SETTING"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
-
-            <TextView
-                android:id="@+id/menu30"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_CHARACTER_ENCODING"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/pMenuOpenCurrentTab"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_side_item"
-                android:gravity="left|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_REPORT"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_setting"
+                    app:tint="@color/c_navigation_medium"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
-            <TextView
-                android:id="@+id/pMenuCopy"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU_SETTING"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pMenuQuit"
                 android:background="@xml/gx_ripple_gray_bottom"
-                android:gravity="left|center_vertical"
                 android:onClick="onMenuItemInvoked"
-                android:paddingStart="18dp"
-                android:text="@string/HOME_MENU_SHARE"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_home_menu"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="match_parent"
+                    android:src="@xml/ic_baseline_quit"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_medium" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU_QUIT"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

@@ -38,6 +38,7 @@ public class settingLogController extends AppCompatActivity {
 
     public void viewsInitializations() {
         mListView = findViewById(R.id.pListView);
+        activityContextManager.getInstance().onStack(this);
         mSettingLogViewController = new settingLogViewController(this, new settingLogViewCallback(), mListView);
 
         mSettingLogModel = new settingLogModel(new settingLogModelCallback());
@@ -85,6 +86,7 @@ public class settingLogController extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+        activityContextManager.getInstance().onRemoveStack(this);
     }
 
     /*UI Redirection*/

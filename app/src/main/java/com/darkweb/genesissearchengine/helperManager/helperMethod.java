@@ -32,9 +32,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ShareCompat;
 import androidx.core.content.ContextCompat;
+
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
 import com.example.myapplication.R;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -54,6 +58,22 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 public class helperMethod
 {
     /*Helper Methods General*/
+
+    public static int getResId(String resName, Class<?> c) {
+
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public static void onOpenHelpExternal(AppCompatActivity context, String pURL){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pURL));
+        context.startActivity(browserIntent);
+    }
 
     public static String completeURL(String pURL){
         if(pURL.equals("about:blank")){
@@ -77,7 +97,18 @@ public class helperMethod
             pURL = ""+pURL;
         }
         if(!pURL.startsWith("http://")&&!pURL.startsWith("https://")){
-            pURL = "http://"+pURL;
+            if(pURL.startsWith("www")){
+                pURL = "http://"+pURL;
+            }else {
+                pURL = "http://www."+pURL;
+            }
+        }else {
+            pURL = pURL.replace("https://","").replace("http://","");
+            if(pURL.startsWith("www")){
+                pURL = "http://"+pURL;
+            }else {
+                pURL = "http://www."+pURL;
+            }
         }
         return pURL;
     }
@@ -93,38 +124,44 @@ public class helperMethod
         return size.y;
     }
 
-    public static SpannableString urlDesigner(String url, Context pContext){
+    public static SpannableString urlDesigner(String url, Context pContext, int pDefColor){
+
+        int mColor = 0;
+        if(status.sTheme == enums.Theme.THEME_DARK){
+            mColor = Color.argb(255, 0, 204, 71);
+        }else {
+            mColor = Color.argb(255, 0, 153, 54);
+        }
 
         if (url.contains("https://"))
         {
             SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(Color.argb(255, 0, 153, 54)), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(mColor), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ss.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ss;
         } else if (url.contains("http://"))
         {
             SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(Color.argb(255, 0, 153, 54)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(mColor), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ss.setSpan(new ForegroundColorSpan(Color.GRAY), 4, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ss;
         } else
         {
             SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(pContext.getResources().getColor(R.color.c_text_v1)), 0, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ss;
         }
     }
 
-    public static void sendRateEmail(Context context){
-        Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "gamesolstudios@gmail.com", null));
-        i.putExtra(Intent.EXTRA_SUBJECT, "Issue Report");
-        i.putExtra(Intent.EXTRA_TEXT   , "");
-        try {
-            if (i.resolveActivity(context.getPackageManager()) != null) {
-                context.startActivity(i);
-            }
-        } catch (android.content.ActivityNotFoundException ignored) {
-        }
+    public static void sendIssueEmail(Context context){
+        Intent selectorIntent = new Intent(Intent.ACTION_SENDTO);
+        selectorIntent.setData(Uri.parse("mailto:"));
+
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"gamesolstudios@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Issue Report");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Write Message Here....");
+        emailIntent.setSelector( selectorIntent );
+        context.startActivity(Intent.createChooser(emailIntent, "Send email..."));
     }
 
     public static void sendBridgeEmail(Context context){
@@ -154,6 +191,49 @@ public class helperMethod
                 .setSubject("Hi! Check out this Awesome App")
                 .setText("Genesis | Onion Search | http://play.google.com/store/apps/details?id=" + context.getPackageName())
                 .startChooser();
+    }
+
+    public static int invertedShadeColor(int pColor, float pPercent) {
+        int mColor = pColor;
+        double darkness = 1-(0.299*Color.red(mColor) + 0.587*Color.green(mColor) + 0.114*Color.blue(mColor))/255;
+        if(darkness>=0.75){
+            if(darkness==1){
+                return Color.DKGRAY;
+            }
+            int a = Color.alpha(mColor);
+            int r = Math.round(Color.red(mColor) / pPercent);
+            int g = Math.round(Color.green(mColor) / pPercent);
+            int b = Math.round(Color.blue(mColor) / pPercent);
+            return Color.argb(a,Math.min(r,255), Math.min(g,255), Math.min(b,255));
+        }else{
+            pPercent = pPercent + 0.05f;
+            int a = (pColor >> 24) & 0xFF;
+            int r = (int) (((pColor >> 16) & 0xFF) * pPercent);
+            int g = (int) (((pColor >> 8) & 0xFF) * pPercent);
+            int b = (int) ((pColor & 0xFF) * pPercent);
+
+            return (a << 24) | (r << 16) | (g << 8) | b;
+        }
+    }
+
+    public static int invertedGrayColor(int pColor) {
+        int mColor = pColor;
+        double darkness = 1-(0.299*Color.red(mColor) + 0.587*Color.green(mColor) + 0.114*Color.blue(mColor))/255;
+        if(darkness>=0.75){
+            return Color.WHITE;
+        }else{
+            return Color.BLACK;
+        }
+    }
+
+    public static boolean isColorDark(int pColor) {
+        int mColor = pColor;
+        double darkness = 1-(0.299*Color.red(mColor) + 0.587*Color.green(mColor) + 0.114*Color.blue(mColor))/255;
+        if(darkness>=0.75){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static void shareApp(AppCompatActivity context, String p_share, String p_title) {
@@ -299,14 +379,6 @@ public class helperMethod
         }
     }
 
-    public static ViewGroup.MarginLayoutParams getCenterScreenPoint(ViewGroup.LayoutParams itemLayoutParams) {
-        double heightloader = Resources.getSystem().getDisplayMetrics().heightPixels*0.78;
-        ViewGroup.MarginLayoutParams params_loading = (ViewGroup.MarginLayoutParams) itemLayoutParams;
-        params_loading.topMargin = (int)(heightloader);
-
-        return params_loading;
-    }
-
     public static void openPlayStore(String packageName,AppCompatActivity context)
     {
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -328,16 +400,6 @@ public class helperMethod
     public static int pxFromDp(int dp){
         return   (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
-
-    public static int getStatusBarHeight(Context context) {
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
-
 
     public static void copyURL(String url,Context context){
 

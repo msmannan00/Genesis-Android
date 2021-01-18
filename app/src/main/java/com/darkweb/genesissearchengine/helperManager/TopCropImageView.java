@@ -64,7 +64,12 @@ public class TopCropImageView extends androidx.appcompat.widget.AppCompatImageVi
             scale = (float) viewWidth / (float) drawableWidth;
         }
 
-        matrix.setScale(scale, scale);
+        if(drawableWidth<drawableHeight){
+            matrix.setScale(scale/1f, scale/1f);
+        }else {
+            matrix.setScale(scale/1.58f, scale/1.58f);
+        }
+
         setImageMatrix(matrix);
     }
 }

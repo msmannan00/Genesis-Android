@@ -246,10 +246,11 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         if(orbotLocalConstants.mHomeContext ==null){
             return;
         }
-        //Reusable code.
+
         PackageManager pm = getPackageManager();
-        Intent intent = pm.getLaunchIntentForPackage(getPackageName());
-        PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, intent, 0);
+        Intent mIntent = orbotLocalConstants.mHomeIntent;
+        mIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (mNotifyBuilder == null) {
 
@@ -272,7 +273,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             Intent intentRefresh = new Intent();
             intentRefresh.setAction(CMD_NEWNYM);
-            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(orbotLocalConstants.mHomeContext.get(), 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(orbotLocalConstants.mHomeContext.get(), 0, intentRefresh, PendingIntent.FLAG_ONE_SHOT);
             mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity),
                     pendingIntentNewNym);
 
@@ -524,6 +525,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     protected String getCurrentStatus() {
+        orbotLocalConstants.mCurrentStatus = mCurrentStatus;
         return mCurrentStatus;
     }
 

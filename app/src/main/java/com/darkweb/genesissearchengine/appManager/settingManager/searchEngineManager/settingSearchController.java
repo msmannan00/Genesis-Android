@@ -48,6 +48,7 @@ public class settingSearchController extends AppCompatActivity {
         mSearchHistory = findViewById(R.id.pSearchHistory);
         mSearchSuggestions = findViewById(R.id.pSearchSuggestions);
 
+        activityContextManager.getInstance().onStack(this);
         mSettingSearchViewController = new settingSearchViewController(this, new settingSearchViewCallback(), mSearchEngines, mSearchHistory, mSearchSuggestions);
         mSettingSearchModel = new settingSearchModel(new settingSearchModelCallback());
     }
@@ -84,10 +85,10 @@ public class settingSearchController extends AppCompatActivity {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY, status.sSettingSearchHistory));
     }
 
-    public void setSearchStatus(View view){
-        mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_HISTORY, Collections.singletonList(!mSearchSuggestions.isChecked()));
+    public void setSuggestionStatus(View view){
+        mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_SUGGESTION_STATUS, Collections.singletonList(!mSearchSuggestions.isChecked()));
         mSearchSuggestions.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION, status.getsSettingSearchSuggestion));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION, status.sSearchSuggestionStatus));
     }
 
     public void onOpenInfo(View view) {
@@ -132,6 +133,7 @@ public class settingSearchController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 

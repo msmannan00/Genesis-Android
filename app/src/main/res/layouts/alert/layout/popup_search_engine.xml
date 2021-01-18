@@ -3,58 +3,108 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pPopupFindContainer"
+    android:background="@color/c_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/pNavigationContainer"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/c_edittext_background_dark"
-        android:paddingBottom="1dp"
-        android:elevation="8dp"
-        android:onClick="onOpenSearchEngine"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/pSuggestionScroll"
+        android:background="@color/c_background"
+        android:layout_height="match_parent">
+
         <LinearLayout
-            android:id="@+id/pNavigationContainerInner"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:background="@color/c_background"
-            android:elevation="8dp"
-            android:onClick="onOpenSearchEngine"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="vertical" >
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="30dp"
+            <LinearLayout
+                android:id="@+id/pNavigationContainer"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:padding="6.5dp"
-                android:layout_marginStart="2dp"
-                android:paddingEnd="4dp"
-                app:srcCompat="@xml/ic_baseline_search"
-                tools:ignore="RtlSymmetry"
-                app:tint="@color/c_navigation_tint" />
+                android:orientation="horizontal"
+                android:paddingBottom="1dp"
+                android:background="@color/c_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <LinearLayout
+                    android:id="@+id/pNavigationContainerInner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:background="@xml/gx_side_item_suggestions"
+                    android:focusable="true"
+                    android:onClick="onOpenSearchEngine"
+                    android:clickable="true"
+                    android:paddingEnd="14dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="RtlSymmetry,UseCompoundDrawables,UselessParent">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="3"
-                android:paddingTop="11dp"
-                android:layout_marginStart="6dp"
-                android:text="@string/GENERAL_SEARCH_ENGINE"
-                android:textColor="@color/c_text_v1"
-                android:textSize="15sp" />
+                    <ImageView
+                        android:id="@+id/pIcon"
+                        android:layout_width="33dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="5.5dp"
+                        android:layout_marginEnd="5dp"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:padding="4dp"
+                        android:alpha="0.6"
+                        android:paddingEnd="4dp"
+                        android:src="@xml/ic_gear"
+                        app:tint="@color/c_navigation_tint"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:paddingTop="11dp"
+                        android:text="@string/GENERAL_SEARCH_ENGINE"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:background="@color/c_view_divier_background"
+                    android:layout_marginBottom="5dp"
+                    tools:ignore="RtlHardcoded" />
+
+                <ImageButton
+                    android:id="@+id/pClose"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_gravity="center"
+                    android:onClick="onClearSearchBar"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:src="@xml/ic_close"
+                    android:tint="@color/c_navigation_tint"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
         </LinearLayout>
-    </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pHistListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/c_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pNavigationContainer" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

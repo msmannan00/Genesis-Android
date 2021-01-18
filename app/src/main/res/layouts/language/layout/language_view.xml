@@ -62,7 +62,7 @@
                 android:layout_marginStart="6dp"
                 android:paddingStart="3dp"
                 android:onClick="onOpenInfo"
-                android:background="@xml/gx_ripple_gray"
+                android:background="@xml/gx_ripple_gray_round_left"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:src="@drawable/info"
                 app:tint="@color/c_icon_tint_light" />

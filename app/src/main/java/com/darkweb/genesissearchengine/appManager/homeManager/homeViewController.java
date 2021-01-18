@@ -12,27 +12,29 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.Transformation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
@@ -64,7 +66,7 @@ class homeViewController
     /*ViewControllers*/
     private FrameLayout mWebviewContainer;
     private AnimatedProgressBar mProgressBar;
-    private AutoCompleteTextView mSearchbar;
+    private editTextManager mSearchbar;
     private ConstraintLayout mSplashScreen;
     private ImageView mLoading;
     private TextView mLoadingText;
@@ -73,7 +75,6 @@ class homeViewController
     private ImageButton mGatewaySplash;
     private LinearLayout mTopBar;
     private GeckoView mGeckoView;
-    private ImageView mBackSplash;
     private Button mConnectButton;
     private Button mNewTab;
     private PopupWindow popupWindow = null;
@@ -84,16 +85,17 @@ class homeViewController
     private FrameLayout mTopLayout;
     private ImageButton mVoiceInput;
     private ImageButton mMenu;
-    private FrameLayout mNestedScroll;
     private ImageView mBlocker;
     private ImageView mBlockerFullSceen;
     private TextView mCopyright;
+    private ImageButton mOrbotLogManager;
+    private com.google.android.material.appbar.AppBarLayout mAppBar;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, AutoCompleteTextView searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, FrameLayout pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ArrayList<historyRowModel> suggestions, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, FrameLayout pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -106,7 +108,6 @@ class homeViewController
         this.mGatewaySplash = gateway_splash;
         this.mTopBar = top_bar;
         this.mGeckoView = gecko_view;
-        this.mBackSplash = backsplash;
         this.mConnectButton = connect_button;
         this.mNewTab = mNewTab;
         this.popupWindow = null;
@@ -116,11 +117,12 @@ class homeViewController
         this.mTopLayout = pTopLayout;
         this.mVoiceInput = pVoiceInput;
         this.mMenu = pMenu;
-        this.mNestedScroll = pNestedScroll;
         this.mBlocker = pBlocker;
         this.mBlockerFullSceen = pBlockerFullSceen;
         this.mSearchEngineBar = mSearchEngineBar;
         this.mCopyright = pCopyright;
+        this.mAppBar = pAppBar;
+        this.mOrbotLogManager = pOrbotLogManager;
 
         initSplashScreen();
         initializeSuggestionView(suggestions);
@@ -174,14 +176,11 @@ class homeViewController
             ((LinearLayout)this.mNewTab.getParent()).setVisibility(View.GONE);
             this.mMenu.setVisibility(View.GONE);
 
-            mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(40),0);
+            //mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(40),0);
+            mSearchbar.requestFocus();
 
-            final Handler handler_keyboard = new Handler();
-            handler_keyboard.postDelayed(() ->
-            {
-                InputMethodManager imm = (InputMethodManager)   mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.RESULT_UNCHANGED_SHOWN, 0);
-            }, 250);
+            InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(mSearchbar, InputMethodManager.SHOW_IMPLICIT);
         }
     }
 
@@ -190,79 +189,49 @@ class homeViewController
     }
 
     public void recreateStatusBar(){
-        if(status.sSettingIsAppStarted){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             }
             else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }else {
-                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.black));
-                    View decorView = mContext.getWindow().getDecorView();
-                    decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
             }
-        }else {
-            onProgressBarUpdate(100);
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void initStatusBarColor() {
-        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.secondary), ContextCompat.getColor(mContext, R.color.secondary));
-        animatedColor twoToThree = new animatedColor(ContextCompat.getColor(mContext, R.color.secondary), ContextCompat.getColor(mContext, R.color.c_background));
-        animatedColor ThreeToFour = new animatedColor(ContextCompat.getColor(mContext, R.color.c_background), ContextCompat.getColor(mContext, R.color.c_background));
+    public void initStatusBarColor(boolean mInstant) {
+        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-        ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f).setDuration(0);
-        animator.setStartDelay(1200);
+        int mDelay = 0;
+        if(status.mThemeApplying || mInstant){
+            mDelay = 0;
+        }
+
+        ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f);
+        animator.setStartDelay(mDelay);
         animator.addUpdateListener(animation ->
         {
             float v = (float) animation.getAnimatedValue();
             mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
             mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
-            mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
+            mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         });
-        animator.start();
-
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                final ValueAnimator animator2 = ObjectAnimator.ofFloat(0f, 1f).setDuration(217);
-                animator2.addUpdateListener(animation1 ->
-                {
-                    float v = (float) animation1.getAnimatedValue();
-                    mContext.getWindow().setStatusBarColor(twoToThree.with(v));
-                    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                        mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    }else {
-                        mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.black));
-                        View decorView = mContext.getWindow().getDecorView();
-                        decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    }
-                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-                });
-                animator2.start();
-
-                animator2.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        final ValueAnimator animator3 = ObjectAnimator.ofFloat(0f, 1f).setDuration(0);
-                        animator3.addUpdateListener(animation1 ->
-                        {
-                            float v = (float) animation1.getAnimatedValue();
-                        });
-                        animator3.start();
-                    }
-                });
-                animator2.start();
-
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }else {
+                    View decorView = mContext.getWindow().getDecorView();
+                    decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
             }
         });
+
         animator.start();
     }
 
@@ -282,6 +251,8 @@ class homeViewController
         mSearchbar.setDropDownBackgroundDrawable(new ColorDrawable(mContext.getResources().getColor(R.color.c_background)));
         mSearchbar.setDropDownHeight(helperMethod.getScreenHeight(mContext)*75/100);
         mSearchbar.setInputType(EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        mSearchbar.setInputType(EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        mSearchbar.setAnimation(null);
     }
 
     public void initSplashLoading(){
@@ -310,15 +281,14 @@ class homeViewController
     }
 
     private void initSplashScreen(){
+
         mSearchbar.setEnabled(false);
         helperMethod.hideKeyboard(mContext);
 
-        //mBackSplash.getLayoutParams().height = (int)(helperMethod.getScreenHeight(mContext) - helperMethod.getStatusBarHeight(mContext)*1.5f);
         mSearchbar.setEnabled(false);
 
         View root = mSearchbar.getRootView();
         root.setBackgroundColor(ContextCompat.getColor(mContext, R.color.c_background_keyboard));
-        mGeckoView.setBackgroundResource( R.color.dark_purple);
 
     }
 
@@ -344,7 +314,11 @@ class homeViewController
                             e.printStackTrace();
                         }
                     }
-                    startPostTask(messages.MESSAGE_ON_URL_LOAD);
+                    if(!status.sSettingIsAppStarted){
+                        startPostTask(messages.MESSAGE_ON_URL_LOAD);
+                    }else {
+                        mContext.runOnUiThread(() -> mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME));
+                    }
                 }
             }.start();
         }
@@ -356,28 +330,30 @@ class homeViewController
         mSearchbar.setEnabled(true);
         mProgressBar.bringToFront();
         mSplashScreen.bringToFront();
-        if(mSplashScreen.getVisibility()!=View.GONE){
-            mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);//Set Portrait
-        }
         splashScreenDisable();
     }
     private void splashScreenDisable(){
         mTopBar.setAlpha(1);
-        if(mSplashScreen.getVisibility()==View.VISIBLE)
-        {
-            mSplashScreen.animate().setStartDelay(1000).setDuration(500).alpha(0).withEndAction((this::triggerPostUI));
+
+        if(mSplashScreen.getAlpha()==1){
+            triggerPostUI();
+            mProgressBar.setVisibility(View.GONE);
+            mSplashScreen.animate().setStartDelay(0).alpha(0);
+            mOrbotLogManager.setClickable(false);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                initStatusBarColor();
+                initStatusBarColor(false);
             }
+            status.sSettingIsAppRestarting = true;
         }
     }
 
-    private void triggerPostUI(){
-        if(mSplashScreen.getVisibility()!=View.GONE){
-            mSplashScreen.setVisibility(View.GONE);
-            mSplashScreen.invalidate();
-        }
+    public void onUpdateToolbarTheme(){
+        mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
+    }
 
+    private void triggerPostUI(){
+        onUpdateToolbarTheme();
+        mAppBar.setExpanded(true,true);
         if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<10000){
             mProgressBar.animate().setStartDelay(0).alpha(1);
         }
@@ -414,10 +390,6 @@ class homeViewController
             popupWindow.setHeight(height);
         }
         popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.END,0,0);
-
-        if(!status.sCharacterEncoding){
-            popupView.findViewById(R.id.menu30).setVisibility(View.GONE);
-        }
 
         ImageButton back = popupView.findViewById(R.id.menu22);
         ImageButton close = popupView.findViewById(R.id.menu20);
@@ -540,35 +512,124 @@ class homeViewController
         }
     }
 
+    public void onUpdateStatusBarTheme(String pTheme, boolean mForced)
+    {
+        if(mSplashScreen.getAlpha()<=0){
+            int mColor = -1;
+            try{
+                mColor = Color.parseColor(pTheme);
+            }catch (Exception ex){
+                mColor = -1;
+            }
+
+            if(pTheme!=null && status.sToolbarTheme && mColor!=-1){
+                mTopBar.setBackgroundColor(mColor);
+                mSearchbar.setTextColor(helperMethod.invertedGrayColor(mColor));
+                mSearchbar.setHintTextColor(helperMethod.invertedGrayColor(mColor));
+                mNewTab.setTextColor(helperMethod.invertedGrayColor(mColor));
+
+                GradientDrawable mGradientDrawable = new GradientDrawable();
+                mGradientDrawable.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
+                mGradientDrawable.setCornerRadius(helperMethod.pxFromDp(7));
+                mSearchbar.setBackground(mGradientDrawable);
+
+                GradientDrawable gradientDrawable1 = new GradientDrawable();
+                gradientDrawable1.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
+                gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(4));
+                gradientDrawable1.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
+
+                GradientDrawable gradientDrawable2 = new GradientDrawable();
+                gradientDrawable2.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
+                gradientDrawable2.setCornerRadius(helperMethod.pxFromDp(4));
+                gradientDrawable2.setStroke(helperMethod.pxFromDp(2), mColor);
+
+                StateListDrawable states = new StateListDrawable();
+                states.addState(new int[] {android.R.attr.state_pressed}, gradientDrawable2);
+                states.addState(new int[] { }, gradientDrawable1);
+
+                mNewTab.setBackground(states);
+
+                mMenu.setColorFilter(helperMethod.invertedGrayColor(mColor));
+                mVoiceInput.setColorFilter(helperMethod.invertedGrayColor(mColor));
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mContext.getWindow().setStatusBarColor(Color.parseColor(pTheme));
+                }else {
+                    mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                }
+
+                if(helperMethod.isColorDark(mColor)){
+                    View decorView = mContext.getWindow().getDecorView(); //set status background black
+                    decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }else {
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            }
+            else{
+                mTopBar.setBackground(ContextCompat.getDrawable(mContext, R.color.c_background));
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+                }else {
+                    mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                }
+
+                Drawable drawable;
+                Resources res = mContext.getResources();
+                try {
+                    drawable = Drawable.createFromXml(res, res.getXml(R.xml.gx_generic_tab_button));
+                    mNewTab.setBackground(drawable);
+
+                    drawable = Drawable.createFromXml(res, res.getXml(R.xml.gx_generic_input));
+                    mSearchbar.setBackground(drawable);
+                } catch (Exception ignored) {
+                }
+
+                mNewTab.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
+                mMenu.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
+                mVoiceInput.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
+                mSearchbar.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
+
+                if(status.sTheme == enums.Theme.THEME_DARK){
+                    View decorView = mContext.getWindow().getDecorView();
+                    decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }else {
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            }
+        }
+    }
+
     public void onUpdateFindBar(boolean pStatus)
     {
         mFindBar.animate().cancel();
         if(pStatus){
             mFindBar.setVisibility(View.VISIBLE);
             mFindBar.setAlpha(1);
-            mFindBar.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.popup_anim_in));
             mFindText.requestFocus();
             InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
         }else {
             mFindText.clearFocus();
             mFindCount.setText(strings.GENERIC_EMPTY_STR);
-            mFindBar.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.popup_anim_out));
             helperMethod.hideKeyboard(mContext);
             mFindBar.animate().alpha(0).withEndAction(() -> mFindBar.setVisibility(View.GONE));
             mFindText.setText(strings.GENERIC_EMPTY_STR);
         }
     }
 
-    public void onUpdateSearchEngineBar(boolean pStatus)
+    public void onUpdateSearchEngineBar(boolean pStatus, int delay)
     {
-        mSearchEngineBar.animate().cancel();
         if(pStatus){
-            mSearchEngineBar.setAlpha(0f);
-            mSearchEngineBar.animate().setDuration(300).alpha(1);
-            mSearchEngineBar.setVisibility(View.VISIBLE);
+            if(mSearchEngineBar.getAlpha() == 0 || mSearchEngineBar.getVisibility() == View.GONE){
+                mSearchEngineBar.animate().cancel();
+                mSearchEngineBar.setAlpha(0f);
+                mSearchEngineBar.animate().setDuration(delay).alpha(1);
+                mSearchEngineBar.setVisibility(View.VISIBLE);
+            }
         }else {
-            mSearchEngineBar.animate().setDuration(300).alpha(0).withEndAction(() -> {
+                mSearchEngineBar.animate().setDuration(delay).alpha(0).withEndAction(() -> {
+                mSearchEngineBar.animate().cancel();
                 mSearchEngineBar.setAlpha(0f);
                 mSearchEngineBar.setVisibility(View.GONE);
             });
@@ -596,7 +657,7 @@ class homeViewController
 
         if(url.length()<=300){
             url = removeEndingSlash(url);
-            mSearchbar.setText(helperMethod.urlDesigner(url, mContext));
+            mSearchbar.setText(helperMethod.urlDesigner(url, mContext, mSearchbar.getCurrentTextColor()));
             mSearchbar.selectAll();
 
             if(isTextSelected){
@@ -635,60 +696,33 @@ class homeViewController
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 
-    void onProgressBarUpdate(int value){
-
-        mProgressBar.setAlpha(1f);
-        mProgressBar.setVisibility(View.VISIBLE);
-
-        ProgressBarAnimation mProgressAnimation = new ProgressBarAnimation(mProgressBar, 1000);
-        mProgressAnimation.setProgress(value*100);
+    public void onFirstPaint(){
+        mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.clear_alpha));
     }
 
-    public class ProgressBarAnimation extends Animation {
-        private ProgressBar mProgressBar;
-        private int mTo;
-        private int mFrom;
-        private long mStepDuration;
+    public void onSessionReinit(){
+        mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.c_background));
+    }
 
-        /**
-         * @param fullDuration - time required to fill progress from 0% to 100%
-         */
-        public ProgressBarAnimation(ProgressBar progressBar, long fullDuration) {
-            super();
-            mProgressBar = progressBar;
-            mStepDuration = fullDuration / progressBar.getMax();
+    void onProgressBarUpdate(int value){
+        if(mProgressBar.getVisibility()==View.GONE){
+            mProgressBar.setVisibility(View.VISIBLE);
         }
-
-
-        public void setProgress(int progress) {
-            if(progress == 10000){
-                mProgressBar.animate().setStartDelay(100).alpha(0);
+        else if(value != mProgressBar.getProgress()){
+            if(value<=5 && value>0){
+                mProgressBar.setProgress(5);
             }else {
-                mProgressBar.animate().cancel();
+                mProgressBar.setProgress(value);
+            }
+            if(value >= 100 || value<=0){
+                mProgressBar.animate().alpha(0).withEndAction(() -> mProgressBar.setProgress(0));
+            }else {
                 mProgressBar.setAlpha(1);
             }
-
-            if (progress < 0) {
-                progress = 0;
-            }
-
-            if (progress > mProgressBar.getMax()) {
-                progress = mProgressBar.getMax();
-            }
-
-            mTo = progress;
-
-            mFrom = mProgressBar.getProgress();
-            setDuration(Math.abs(mTo - mFrom) * mStepDuration);
-            mProgressBar.startAnimation(this);
-        }
-
-        @Override
-        protected void applyTransformation(float interpolatedTime, Transformation t) {
-            float value = mFrom + (mTo - mFrom) * interpolatedTime;
-            mProgressBar.setProgress((int) value);
         }
     }
+
+
     void onClearSelections(boolean hideKeyboard){
         mSearchbar.setFocusable(false);
         mSearchbar.setFocusableInTouchMode(true);
@@ -786,9 +820,7 @@ class homeViewController
                 mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             }
 
-            this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(0).withEndAction(() -> {
-                mBlockerFullSceen.setVisibility(View.GONE);
-            });
+            this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(0).withEndAction(() -> mBlockerFullSceen.setVisibility(View.GONE));
         }
 
     }
@@ -837,6 +869,7 @@ class homeViewController
                             mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), enums.etype.on_url_load);
                         }
                     }
+                    status.sSettingIsAppStarted = true;
                 }
                 if(msg.what == messages.MESSAGE_UPDATE_LOADING_TEXT)
                 {

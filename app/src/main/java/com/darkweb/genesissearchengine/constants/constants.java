@@ -13,6 +13,12 @@ public class constants
 
     /*URL CONSTANTS*/
 
+    public static final String CONST_GENESIS_URL_CACHED = "resource://android/assets/homepage/homepage.html";
+    public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://boogle.store/";
+    public static final String CONST_GENESIS_DOMAIN_URL = "https://boogle.store";
+    public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
+    public static final String CONST_GENESIS_HELP_URL = "https://boogle.store/help";
+    public static final String CONST_GENESIS_HELP_URL_SUB = "boogle.store/help";
     public static final String CONST_GENESIS_UPDATE_URL = "https://boogle.store/manual?abi=";
     public static final String CONST_PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
     public static final String CONST_BACKEND_GENESIS_URL = "https://boogle.store/search?q=$s&p_num=1&s_type=all";

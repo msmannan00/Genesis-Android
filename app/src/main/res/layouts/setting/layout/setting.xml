@@ -66,9 +66,9 @@
                         android:layout_marginEnd="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="6dp"
-                        android:paddingStart="3dp"
+                        android:paddingStart="7dp"
                         android:onClick="onOpenInfo"
-                        android:background="@xml/gx_ripple_gray"
+                        android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@drawable/info"
                         app:tint="@color/c_icon_tint_light" />
@@ -94,7 +94,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         app:tint="@color/c_icon_tint"
-                        android:src="@drawable/ic_baseline_browser"
+                        android:src="@xml/ic_baseline_browser"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <Button
@@ -594,7 +594,7 @@
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:src="@drawable/ic_baseline_advance"
+                        android:src="@xml/ic_baseline_advance"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
@@ -648,9 +648,306 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:background="@color/c_view_divier_background"/>
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onOpenProxyStatus"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:padding="10dp"
+                        android:src="@xml/ic_baseline_vpn"
+                        app:tint="@color/c_icon_tint" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_PROXY"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_PROXY_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:src="@xml/ic_arrow_right"
+                        android:tint="@color/c_navigation_tint" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/c_view_divier_background" />
+
+                <LinearLayout
+                    android:id="@+id/pOption10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onReportWebsite"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:padding="10dp"
+                        android:src="@xml/ic_baseline_report"
+                        app:tint="@color/c_icon_tint" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_REPORT"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_REPORT_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:src="@xml/ic_arrow_right"
+                        android:tint="@color/c_navigation_tint" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pOption11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onRateApplication"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:padding="10dp"
+                        android:src="@xml/ic_baseline_rate"
+                        app:tint="@color/c_icon_tint" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_RATEUS"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_RATEUS_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:src="@xml/ic_arrow_right"
+                        android:tint="@color/c_navigation_tint" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pOption12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onShareApplication"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:padding="10dp"
+                        android:src="@xml/ic_baseline_share"
+                        app:tint="@color/c_icon_tint" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_SHARE"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_SHARE_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:src="@xml/ic_arrow_right"
+                        android:tint="@color/c_navigation_tint" />
+
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>

@@ -98,6 +98,7 @@ public class historyController extends AppCompatActivity
         mHeaderContainer = findViewById(R.id.pHeaderContainer);
         mTitle = findViewById(R.id.pTitle);
 
+        activityContextManager.getInstance().onStack(this);
         mHistoryViewController = new historyViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton,this, mMenuButton, mSearchButton, mHeaderContainer, mTitle);
     }
 
@@ -252,6 +253,17 @@ public class historyController extends AppCompatActivity
         super.onPause();
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     @Override
     public void onBackPressed() {
         if(mSearchInput.getVisibility() == View.VISIBLE){
@@ -259,6 +271,7 @@ public class historyController extends AppCompatActivity
         }else if((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS,null)){
             onClearMultipleSelection(null);
         }else {
+            activityContextManager.getInstance().onRemoveStack(this);
             finish();
         }
     }
@@ -354,6 +367,9 @@ public class historyController extends AppCompatActivity
                 pluginController.getInstance().logEvent(strings.EVENT_HISTORY_TRIGGERED);
                 mHomeController.onOpenLinkNewTab(url_temp);
                 finish();
+            }
+            else if(e_type.equals(enums.etype.fetch_favicon)){
+                mHomeController.onGetFavIcon((ImageView) data.get(0), (String) data.get(1));
             }
             else if(e_type.equals(enums.etype.url_clear)){
                 mHistoryModel.onManualClear((int)data.get(0));

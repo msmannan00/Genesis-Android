@@ -8,51 +8,51 @@ public class historyRowModel
 {
     /*Private Variables*/
 
-    private int m_id;
-    private String m_header;
-    private String m_description;
-    private Date m_date;
-    private ImageView m_logo;
+    private int mID;
+    private String mHeader;
+    private String mDescription;
+    private Date mDate;
+    private ImageView mLogo;
 
     /*Initializations*/
 
-    public historyRowModel(String p_header, String p_description,int p_id) {
-        this.m_id = p_id;
-        this.m_header = p_header;
-        this.m_description = p_description;
-        m_date = Calendar.getInstance().getTime();
+    public historyRowModel(String pHeader, String pDescription,int pID) {
+        this.mID = pID;
+        this.mHeader = pHeader;
+        this.mDescription = pDescription;
+        mDate = Calendar.getInstance().getTime();
     }
 
     /*Variable Setters*/
 
-    public void setHeader(String p_header){
-        this.m_header = p_header;
+    public void setHeader(String pHeader){
+        this.mHeader = pHeader;
     }
-    public void setURL(String p_url){
-        this.m_description = p_url;
+    public void setURL(String pURL){
+        this.mDescription = pURL;
     }
-    public void setLogo(ImageView p_logo){
-        this.m_logo = p_logo;
+    public void setLogo(ImageView pLogo){
+        this.mLogo = pLogo;
     }
-    public void setDate(Date p_date) {
-        m_date = p_date;
+    public void setDate(Date pDate) {
+        mDate = pDate;
     }
 
     /*Variable Getters*/
 
     public String getHeader() {
-        return m_header;
+        return mHeader;
     }
     public String getDescription() {
-        return m_description;
+        return mDescription;
     }
     public int getID() {
-        return m_id;
+        return mID;
     }
     public ImageView getLogo() {
-        return m_logo;
+        return mLogo;
     }
     public Date getDate() {
-        return m_date;
+        return mDate;
     }
 }

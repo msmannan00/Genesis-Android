@@ -55,6 +55,7 @@ public class bridgeController extends AppCompatActivity {
 
     public void initializeAppModel()
     {
+        activityContextManager.getInstance().onStack(this);
         mBridgeViewController = new bridgeViewController();
     }
 
@@ -133,7 +134,13 @@ public class bridgeController extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
     public void onBackPressed() {
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 

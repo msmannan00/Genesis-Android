@@ -11,24 +11,24 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
@@ -48,6 +48,8 @@ class tabViewController
     private ImageButton mMenuButton;
     private ImageButton mClearSelection;
     private View mToastLayoutRoot;
+    private TextView mSelectionCount;
+    private ImageView mBlocker;
 
     /*Private Local Variables*/
     private Handler mDelayHandler = new Handler();
@@ -55,7 +57,7 @@ class tabViewController
 
     /*Initializations*/
 
-    tabViewController(AppCompatActivity mContext, Button pTabs, ImageView pRemoveSelection, LinearLayout pTabsContainer, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot)
+    tabViewController(AppCompatActivity mContext, Button pTabs, ImageView pRemoveSelection, LinearLayout pTabsContainer, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker)
     {
         this.mContext = mContext;
         this.mTabs = pTabs;
@@ -64,13 +66,25 @@ class tabViewController
         this.mMenuButton = pMenuButton;
         this.mClearSelection = pClearSelection;
         this.mToastLayoutRoot = pToastLayoutRoot;
+        this.mSelectionCount = pSelectionCount;
+        this.mBlocker = pBlocker;
 
         initPostUI();
         initUI();
+        onHoldInteraction();
     }
 
     private void initUI(){
         initTabCount();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void onHoldInteraction(){
+        final Handler handler = new Handler();
+        handler.postDelayed(() ->
+        {
+            mBlocker.setVisibility(View.GONE);
+        }, 350);
     }
 
     private void initTabCount(){
@@ -114,14 +128,28 @@ class tabViewController
         }
     }
 
-    private void onShowSelectionMenu() {
-        mRemoveSelection.setVisibility(View.VISIBLE);
-        mClearSelection.setVisibility(View.VISIBLE);
+    private void onShowSelection() {
+        if(mSelectionCount.getVisibility() == View.GONE){
+            mSelectionCount.setText(0 + " Selected");
+        }
+
         mTabsContainer.setVisibility(View.GONE);
         mMenuButton.setVisibility(View.GONE);
+        mSelectionCount.setVisibility(View.VISIBLE);
+        mClearSelection.setVisibility(View.VISIBLE);
+    }
+
+    private void onShowSelectionMenu(boolean pStatus, int pCount) {
+        if(pStatus || pCount>0){
+            mRemoveSelection.setVisibility(View.VISIBLE);
+        }else {
+            mRemoveSelection.setVisibility(View.GONE);
+        }
+        mSelectionCount.setText(pCount + " Selected");
     }
 
     private void onHideSelectionMenu() {
+        mSelectionCount.setVisibility(View.GONE);
         mRemoveSelection.setVisibility(View.GONE);
         mClearSelection.setVisibility(View.GONE);
         mTabsContainer.setVisibility(View.VISIBLE);
@@ -136,7 +164,7 @@ class tabViewController
 
         initTabCount();
         mDelayHandler.removeCallbacksAndMessages(null);
-        mDelayHandler.postDelayed(() -> mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE)), 1500);
+        mDelayHandler.postDelayed(() -> mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE)), 2000);
     }
 
     private void onHideUndoDialog() {
@@ -183,8 +211,12 @@ class tabViewController
             initTabCount();
         }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_SELECTION)){
             onHideSelectionMenu();
-        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_SELECTION)){
-            onShowSelectionMenu();
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU)){
+            onShowSelectionMenu((boolean) pData.get(0), (int) pData.get(1));
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_SELECTION)){
+            onShowSelection();
         }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG)){
             onShowUndoDialog();
         }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG)){

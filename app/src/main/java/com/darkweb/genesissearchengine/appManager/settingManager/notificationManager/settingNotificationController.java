@@ -37,6 +37,7 @@ public class settingNotificationController extends AppCompatActivity {
     }
 
     public void viewsInitializations() {
+        activityContextManager.getInstance().onStack(this);
         mNotificationManual = findViewById(R.id.pNotificationManual);
         mSettingNotificationViewController = new settingNotificationViewController(this, new settingNotificationViewCallback(), mNotificationManual);
 
@@ -88,6 +89,7 @@ public class settingNotificationController extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+        activityContextManager.getInstance().onRemoveStack(this);
     }
 
     /*UI Redirection*/

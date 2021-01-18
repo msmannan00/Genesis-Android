@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background_keyboard"
@@ -43,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:animateLayoutChanges="true"
-                    android:background="@xml/ic_secondary_gradinet"
+                    android:background="@color/c_background"
                     android:elevation="4dp"
                     android:gravity="left"
                     android:orientation="vertical"
@@ -55,31 +56,37 @@
                     <LinearLayout
                         android:id="@+id/pTopBarContainer"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:animateLayoutChanges="true"
                         android:gravity="left"
+                        android:paddingStart="8dp"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlHardcoded,UselessParent">
 
-                        <ImageView
-                            android:id="@+id/pLock"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                        <ImageButton
+                            android:onClick="onLockSecure"
+                            android:id="@+id/pSearchLock"
+                            android:layout_width="31dp"
+                            android:layout_height="31dp"
+                            android:padding="6dp"
+                            android:scaleType="fitCenter"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="21dp"
+                            android:layout_marginStart="5dp"
+                            android:background="@xml/gx_ripple_default_round"
                             android:contentDescription="@string/GENERAL_TODO"
                             android:src="@xml/ic_baseline_lock"
                             android:translationZ="10dp"
-                            app:tint="@color/c_lock_tint" />
+                            app:tint="@color/c_lock_tint"
+                            tools:ignore="RtlSymmetry" />
 
-                        <AutoCompleteTextView
+                        <com.darkweb.genesissearchengine.appManager.homeManager.editTextManager
                             android:id="@+id/pSearchInput"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="-31dp"
+                            android:layout_marginStart="-36dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="18dp"
                             android:layout_marginBottom="8dp"
@@ -91,6 +98,7 @@
                             android:ems="10"
                             android:hint="@string/GENERAL_SEARCH_HINT"
                             android:importantForAutofill="no"
+                            android:privateImeOptions="nm"
                             android:inputType="textNoSuggestions"
                             android:maxLines="1"
                             android:paddingLeft="38dp"
@@ -103,9 +111,10 @@
                             android:textColorHint="@color/c_text_v2"
                             android:textCursorDrawable="@xml/gx_search_cursor_state"
                             android:textSize="16sp"
+                            app:hintAnimationEnabled="false"
                             tools:targetApi="o">
 
-                        </AutoCompleteTextView>
+                        </com.darkweb.genesissearchengine.appManager.homeManager.editTextManager>
 
                         <ImageButton
                             android:id="@+id/pVoiceInput"
@@ -129,10 +138,10 @@
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="-10dp"
-                            android:gravity="left"
-                            android:onClick="onOpenTabViewBoundary">
+                            android:gravity="left">
 
                             <Button
+                                android:onClick="onOpenTabViewBoundary"
                                 android:id="@+id/pTabCounter"
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
@@ -142,7 +151,7 @@
                                 android:layout_marginEnd="13dp"
                                 android:layout_marginBottom="0dp"
                                 android:background="@xml/gx_generic_tab_button"
-                                android:clickable="false"
+                                android:clickable="true"
                                 android:contentDescription="@string/GENERAL_TODO"
                                 android:scaleType="fitCenter"
                                 android:text="@string/HOME_TAB_TEXT"
@@ -169,6 +178,8 @@
                             android:tint="@color/c_navigation_tint" />
 
                     </LinearLayout>
+
+
                 </LinearLayout>
             </FrameLayout>
 
@@ -192,6 +203,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/blue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
 
@@ -199,15 +211,15 @@
                     android:id="@+id/pProgressBar"
                     style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="4dp"
                     android:layout_marginTop="-1dp"
                     android:alpha="0"
-                    android:background="@color/clear_alpha"
+                    android:background="#1500a4fd"
                     android:elevation="7dp"
-                    android:max="10000"
+                    android:max="100"
                     android:progress="0"
                     android:progressDrawable="@xml/hox_photon_progress"
-                    android:scaleY="0.7"
+                    android:scaleY="1"
                     app:shiftDuration="@integer/progress_shift_duration"
                     app:wrapShiftDrawable="true"
                     tools:progress="0" />
@@ -216,9 +228,10 @@
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="60dp"
+                    android:layout_marginBottom="59.5dp"
+                    android:foreground="@color/c_background"
                     android:alpha="1"
-                    android:background="@color/c_background_keyboard">
+                    android:background="@color/clear_alpha">
 
                 </com.darkweb.genesissearchengine.appManager.homeManager.NestedGeckoView>
             </FrameLayout>
@@ -275,11 +288,11 @@
                 android:background="@xml/hox_rounded_corner_splash"
                 android:onClick="onStartApplication"
                 android:text="@string/HOME_CONNECT"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintBottom_toTopOf="@+id/pDivider1"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/pDivider1"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:alpha="0.5"
@@ -316,7 +329,7 @@
                 android:onClick="onLoadProxy"
                 android:src="@xml/ic_gear"
                 android:tint="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintBottom_toTopOf="@+id/pDivider1"
                 app:layout_constraintStart_toEndOf="@+id/Connect" />
 
             <ImageButton
@@ -331,7 +344,7 @@
                 android:onClick="onOrbotLog"
                 android:src="@xml/ic_baseline_bug"
                 android:tint="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintBottom_toTopOf="@+id/pDivider1"
                 app:layout_constraintStart_toEndOf="@+id/pSettings" />
 
             <TextView
@@ -394,7 +407,7 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:focusable="false"
                 android:translationZ="3dp"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintBottom_toTopOf="@+id/pDivider1"
                 app:layout_constraintEnd_toEndOf="@+id/pSettings"
                 app:layout_constraintStart_toStartOf="@+id/Connect"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotLogs" />
@@ -602,7 +615,8 @@
         android:id="@+id/pSearchEngineBar"
         layout="@layout/popup_search_engine"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="59dp"
         android:elevation="8dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -620,5 +634,6 @@
         android:focusable="true"
         android:visibility="gone"
         tools:srcCompat="@tools:sample/avatars" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

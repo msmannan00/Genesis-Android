@@ -256,6 +256,7 @@
     <string name="TAB_MENU_OPEN_TAB" translatable="false">New tabs</string>
     <string name="TAB_MENU_CLOSE_TAB" translatable="false">Close all tabs</string>
     <string name="TAB_MENU_SETTINGS" translatable="false">Settings</string>
+    <string name="TAB_LIST_SELECT" translatable="false">Select tabs</string>
 
     <!-- Shared Recycler View -->
     <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="false">Open tabs</string>
@@ -313,7 +314,7 @@
     <!-- Home View -->
     <string name="HOME_TAB_TEXT" translatable="false">1</string>
     <string name="HOME_CONNECT" translatable="false">Connect</string>
-    <string name="HOME_LOADING" translatable="false">Idle | Waiting to start</string>
+    <string name="HOME_LOADING" translatable="false">Idle | Genesis on standby at the moment</string>
     <string name="HOME_LOADING_STATIC" translatable="false">~&#160;Genesis on standby at the moment</string>
 
     <!-- Landing Page -->

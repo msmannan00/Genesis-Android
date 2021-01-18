@@ -53,6 +53,7 @@ public class settingPrivacyController extends AppCompatActivity {
         mCookie.add(findViewById(R.id.pCookieRadioOption3));
         mCookie.add(findViewById(R.id.pCookieRadioOption4));
 
+        activityContextManager.getInstance().onStack(this);
         mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mTrackingProtection, mClearDataOnExit, mCookie);
         mSettingPrivacyModel = new settingPrivacyModel(new settingPrivacyController.settingAccessibilityModelCallback());
     }
@@ -106,6 +107,7 @@ public class settingPrivacyController extends AppCompatActivity {
         if(mSettingChanged){
             activityContextManager.getInstance().setCurrentActivity(this);
         }
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 

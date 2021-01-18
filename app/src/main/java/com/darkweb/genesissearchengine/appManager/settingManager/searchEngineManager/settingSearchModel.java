@@ -27,8 +27,8 @@ class settingSearchModel
     private void setSearchHistory(boolean pStatus){
         status.sSettingSearchHistory = pStatus;
     }
-    private void setSearchStatus(boolean pStatus){
-        status.getsSettingSearchSuggestion = pStatus;
+    private void setSearchSuggestionStatus(boolean pStatus){
+        status.sSearchSuggestionStatus = pStatus;
     }
 
     public Object onTrigger(settingSearchEnums.eSearchModel pCommands, List<Object> pData){
@@ -39,9 +39,9 @@ class settingSearchModel
 
             setSearchHistory((boolean) pData.get(0));
         }
-        else if(pCommands.equals(settingSearchEnums.eSearchModel.M_SET_SEARCH_STATUS)){
+        else if(pCommands.equals(settingSearchEnums.eSearchModel.M_SET_SEARCH_SUGGESTION_STATUS)){
 
-            setSearchStatus((boolean) pData.get(0));
+            setSearchSuggestionStatus((boolean) pData.get(0));
         }
         return null;
     }

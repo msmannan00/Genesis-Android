@@ -38,8 +38,8 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
         historyRowModel customer = items.get(position);
         if (customer != null) {
 
-            TextView customerNameLabel = v.findViewById(R.id.hintCompletionTitle);
-            TextView myTv = v.findViewById( R.id.hintCompletionUrl);
+            TextView customerNameLabel = v.findViewById(R.id.pHeader);
+            TextView myTv = v.findViewById( R.id.pURL);
             ImageButton mMoveURL = v.findViewById( R.id.pMoveURL);
 
             if (customerNameLabel != null) {
@@ -74,6 +74,11 @@ public class autoCompleteAdapter extends ArrayAdapter<historyRowModel> {
         protected FilterResults performFiltering(CharSequence constraint) {
             if(constraint != null && !constraint.equals("about:blank")) {
                 suggestions.clear();
+                if(constraint.toString().startsWith("https://")){
+                    constraint = constraint.subSequence(0,8);
+                }else if (constraint.toString().startsWith("http://")){
+                    constraint = constraint.subSequence(0,7);
+                }
                 for (historyRowModel customer : itemsAll) {
                     if(suggestions.size()>4){
                         break;

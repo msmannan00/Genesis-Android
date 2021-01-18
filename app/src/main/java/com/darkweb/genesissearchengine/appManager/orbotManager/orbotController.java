@@ -104,6 +104,7 @@ public class orbotController extends AppCompatActivity {
 
     public void onClose(View view){
         finish();
+        activityContextManager.getInstance().onRemoveStack(this);
         overridePendingTransition(R.anim.push_anim_out_reverse, R.anim.push_anim_in_reverse);
     }
 
@@ -114,6 +115,8 @@ public class orbotController extends AppCompatActivity {
     {
         activityContextManager.getInstance().setCurrentActivity(this);
         mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_POST_UI,null);
+
+        activityContextManager.getInstance().onStack(this);
         super.onResume();
     }
 
@@ -121,6 +124,11 @@ public class orbotController extends AppCompatActivity {
     public void onPause()
     {
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override

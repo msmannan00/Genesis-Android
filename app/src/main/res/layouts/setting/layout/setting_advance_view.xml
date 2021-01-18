@@ -15,16 +15,17 @@
                     android:layout_height="wrap_content">
 
                 <!-- Title Header -->
+
                 <LinearLayout
                     android:id="@+id/pHeaderContainerTop"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:elevation="8dp"
                     android:background="@color/c_background"
                     android:clickable="true"
-                    android:paddingStart="5dp"
+                    android:elevation="8dp"
                     android:focusable="true"
                     android:orientation="horizontal"
+                    android:paddingStart="5dp"
                     tools:ignore="RtlSymmetry">
 
                     <ImageButton
@@ -42,10 +43,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="-3dp"
+                        android:gravity="center_vertical|start"
+                        android:onClick="onClose"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:onClick="onClose"
-                        android:gravity="center_vertical|start"
                         android:text="@string/SETTING_ADVANCE_HEADER"
                         android:textColor="@color/c_text_v1"
                         android:textSize="17sp"
@@ -54,43 +55,42 @@
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                     <ImageView
                         android:layout_width="47dp"
                         android:layout_height="match_parent"
-                        android:padding="0dp"
-                        android:layout_marginEnd="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="6dp"
-                        android:paddingStart="3dp"
-                        android:onClick="onOpenInfo"
-                        android:background="@xml/gx_ripple_gray"
+                        android:layout_marginEnd="0dp"
+                        android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onOpenInfo"
+                        android:padding="0dp"
+                        android:paddingStart="7dp"
                         android:src="@drawable/info"
                         app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
 
-                <!-- Title Header -->
-
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
+
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="00dp"
+                        android:layout_weight="40"
+                        android:text="@string/SETTING_ADVANCE_TAB"
                         android:textColor="@color/c_text_setting_heading"
                         android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
-                        android:text="@string/SETTING_ADVANCE_TAB"
-                        />
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,16 +111,18 @@
                 <LinearLayout
                     android:id="@+id/pOption1"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onRestoreTabs"
                     android:orientation="horizontal"
                     android:weightSum="7">
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
                         android:layout_height="65dp"
+                        android:layout_weight="6"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
@@ -156,6 +158,66 @@
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/pRestoreTabs"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="11dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:theme="@style/SCBSwitch" />
+
+                </LinearLayout>
+
+                <!-- Title Header -->
+
+                <LinearLayout
+                    android:id="@+id/pOption2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onToolbarTheme"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="65dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_TITILE_THEME"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="14sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:text="@string/SETTING_ADVANCE_TITILE_THEME_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/pToolbarTheme"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -378,103 +440,6 @@
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/pShowWebFonts"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:theme="@style/SCBSwitch"
-                        android:layout_marginEnd="11dp"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_view_divier_background" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/c_text_setting_heading"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
-                        android:text="@string/SETTING_ADVANCE_MEDIA_SUB_HEADER"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:paddingStart="15dp"
-                        android:text="@string/SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pOption5"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:onClick="onAllowAutoPlay"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="65dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_ADVANCE_MEDIA"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="14sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_ADVANCE_MEDIA_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/pAllowAutoPlay"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

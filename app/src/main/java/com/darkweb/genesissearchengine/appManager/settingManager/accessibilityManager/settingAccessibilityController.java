@@ -49,6 +49,7 @@ public class settingAccessibilityController  extends AppCompatActivity {
         mSeekBarSample = findViewById(R.id.pSeekBarSample);
         mScalePercentage = findViewById(R.id.pScalePercentage);
 
+        activityContextManager.getInstance().onStack(this);
         mSettingAccessibilityViewController = new settingAccessibilityViewController(this, new settingAccessibilityController.settingAccessibilityViewCallback(), mZoom, mVoiceInput, mSeekBar, mSeekBarSample, mScalePercentage);
         mSettingAccessibilityModel = new settingAccessibilityModel(new settingAccessibilityController.settingAccessibilityModelCallback());
     }
@@ -114,8 +115,9 @@ public class settingAccessibilityController  extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        onClose(null);
     }
+
 
     /*UI Redirection*/
 
@@ -124,6 +126,7 @@ public class settingAccessibilityController  extends AppCompatActivity {
     }
 
     public void onClose(View view){
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 

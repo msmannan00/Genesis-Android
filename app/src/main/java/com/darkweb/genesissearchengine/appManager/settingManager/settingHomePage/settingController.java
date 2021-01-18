@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.proxyStatusManager.proxyStatusController;
 import com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController;
 import com.darkweb.genesissearchengine.appManager.settingManager.clearManager.settingClearController;
@@ -28,6 +30,7 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.constants.enums.eMessageEnums.M_NOT_SUPPORTED;
@@ -59,6 +62,7 @@ public class settingController extends AppCompatActivity
 
     public void onInitTheme(){
 
+        status.mThemeApplying = true;
         if(status.sTheme == enums.Theme.THEME_DARK){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else if(status.sTheme == enums.Theme.THEME_LIGHT){
@@ -99,13 +103,14 @@ public class settingController extends AppCompatActivity
         }
     }
 
-
     @Override
     public void onResume()
     {
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
         onInitTheme();
+        activityContextManager.getInstance().onStack(this);
+
         super.onResume();
     }
 
@@ -118,6 +123,7 @@ public class settingController extends AppCompatActivity
 
     @Override
     public void onBackPressed(){
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 
@@ -165,6 +171,24 @@ public class settingController extends AppCompatActivity
 
     public void onOpenInfo(View view) {
         helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
+    public void onReportWebsite(View view) {
+        pluginController.getInstance().MessageManagerHandler(this, Collections.singletonList(activityContextManager.getInstance().getHomeController().onGetCurrentURL()),enums.eMessageEnums.M_REPORT_URL);
+    }
+
+    public void onRateApplication(View view) {
+        pluginController.getInstance().MessageManagerHandler(this, Collections.singletonList(activityContextManager.getInstance().getHomeController().onGetCurrentURL()),enums.eMessageEnums.M_RATE_APP);
+        status.sSettingIsAppRated = true;
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
+    }
+
+    public void onShareApplication(View view) {
+        helperMethod.shareApp(this);
+    }
+
+    public void onOpenProxyStatus(View view) {
+        helperMethod.openActivity(proxyStatusController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     /*Event Observer*/

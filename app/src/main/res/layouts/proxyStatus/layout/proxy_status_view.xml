@@ -1,0 +1,283 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_background">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="50dp"
+                android:layout_height="wrap_content">
+
+            <!-- Title Header -->
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:elevation="8dp"
+                    android:background="@color/c_background"
+                    android:orientation="horizontal"
+                    android:layout_height="52dp">
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:onClick="onClose"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
+                    android:tint="@color/c_navigation_tint"
+                    android:src="@xml/ic_arrow_back"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"/>
+                <TextView
+                        android:textColor="@color/c_text_v1"
+                        android:onClick="onClose"
+                        android:textSize="17sp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="40"
+                        android:layout_marginTop="-3dp"
+                        android:gravity="center_vertical|start"
+                        android:textStyle="bold"
+                        android:text="@string/PROXY_STATUS_HEADER"
+                        />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:id="@+id/imageView2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="orbotLog"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_bug"
+                    app:tint="@color/c_icon_tint_light" />
+
+            </LinearLayout>
+
+            <!-- Title Header -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/c_background"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal"
+                    android:layout_height="40dp">
+                <TextView
+                        android:textColor="@color/c_text_setting_heading"
+                        android:textSize="16sp"
+                        android:layout_width="0dp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/BRIDGE_BASIC_SETTING"
+                        />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/clear_alpha"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginEnd = "20dp"
+                    android:orientation="horizontal"
+                    android:layout_height="65dp">
+                <TextView
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:textColor="@color/c_text_v1"
+                        android:background="@color/clear_alpha"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/ORBOT_DESCRIPTION"
+                        />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginEnd = "20dp"
+                android:background="@color/clear_alpha"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:textColor="@color/c_text_v1"
+                    android:layout_marginStart="20dp"
+                    android:textStyle="bold"
+                    android:text="@string/PROXY_SUB_HEADER1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@xml/gx_ripple_blue"
+                android:layout_marginEnd = "0dp"
+                android:paddingEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:paddingEnd="15dp"
+                    android:text="@string/ORBOT_PROXY_STATUS_INFO"
+                    android:textColor="@color/c_text_v6"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/pOrbotStatus"
+                    android:layout_width="50dp"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd = "15dp"
+                    android:text="@string/GENERAL_TODO"
+                    android:textColor="@color/c_text_v1"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:theme="@style/SCBSwitch"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd = "20dp"
+                    android:background="@color/clear_alpha"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:textColor="@color/c_text_v1"
+                        android:layout_marginStart="20dp"
+                        android:textStyle="bold"
+                        android:text="@string/PROXY_SUB_HEADER2"
+                        />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@xml/gx_ripple_blue"
+                android:layout_marginEnd = "0dp"
+                android:paddingEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry">
+                <TextView
+                    android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/c_text_v6"
+                    android:paddingEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/PROXY_VPN_STATUS"
+                    />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/pVpnStatus"
+                    android:layout_width="50dp"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd = "10dp"
+                    android:alpha="0.5"
+                    android:theme="@style/SCBSwitch"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@xml/gx_ripple_blue"
+                android:layout_marginEnd = "0dp"
+                android:paddingEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry">
+                <TextView
+                    android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/c_text_v6"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/PROXY_BRIDGE_STATUS"
+                    />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/pBridgeStatus"
+                        android:layout_width="50dp"
+                        android:layout_marginEnd = "10dp"
+                        android:clickable="false"
+                        android:alpha="0.5"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/SCBSwitch"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:layout_marginStart="7dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:background="@xml/ax_border_left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/PROXY_SUB_HEADER3"
+                    android:textColor="@color/c_text_setting_heading"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/c_text_v6"
+                    android:text="@string/PROXY_CONNECTIVITY_SETTING_INFO"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

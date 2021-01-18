@@ -214,6 +214,8 @@ public class bookmarkController extends AppCompatActivity
     {
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
+
+        activityContextManager.getInstance().onStack(this);
         super.onResume();
     }
 
@@ -221,6 +223,7 @@ public class bookmarkController extends AppCompatActivity
     public void onPause()
     {
         status.sSettingIsAppPaused = true;
+
         super.onPause();
     }
 
@@ -231,6 +234,7 @@ public class bookmarkController extends AppCompatActivity
         }else if((Boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS,null)){
             onClearMultipleSelection(null);
         }else {
+            activityContextManager.getInstance().onRemoveStack(this);
             finish();
         }
     }
@@ -306,6 +310,10 @@ public class bookmarkController extends AppCompatActivity
                 mHomeController.onOpenLinkNewTab(url_temp);
                 finish();
             }
+            else if(e_type.equals(enums.etype.fetch_favicon)){
+                mHomeController.onGetFavIcon((ImageView) data.get(0), (String) data.get(1));
+            }
+
             else if(e_type.equals(enums.etype.url_clear)){
                 mbookmarkModel.onManualClear((int)data.get(0));
             }

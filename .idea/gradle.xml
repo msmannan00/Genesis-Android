@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/autofillServices" />
             <option value="$PROJECT_DIR$/chromiumTabs" />
             <option value="$PROJECT_DIR$/orbotservice" />
+            <option value="$PROJECT_DIR$/shutterbug" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

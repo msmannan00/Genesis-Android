@@ -44,7 +44,7 @@ public class databaseController
 
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
-            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB);");
+            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB, theme VARCHAR);");
 
         }
         catch (Exception ex)
@@ -110,7 +110,7 @@ public class databaseController
             do {
                 geckoSession mSession =  activityContextManager.getInstance().getHomeController().onNewTabInit();
                 tabRowModel model = new tabRowModel(c.getString(0), c.getString(1),c.getBlob(4));
-                model.setSession(mSession, c.getString(2),c.getString(3));
+                model.setSession(mSession, c.getString(2),c.getString(3), c.getString(5));
                 model.getSession().setSessionID(model.getmId());
                 mTempListModel.add(model);
             } while(c.moveToNext());

@@ -23,12 +23,11 @@
                     android:orientation="horizontal"
                     android:layout_height="52dp">
                 <ImageButton
-                    android:layout_width="20dp"
+                    android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:onClick="onClose"
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
-                    android:layout_weight="2.5"
                     android:tint="@color/c_navigation_tint"
                     android:src="@xml/ic_arrow_back"
                     android:background="@xml/gx_ripple_default_round"
@@ -58,9 +57,9 @@
                     android:layout_marginEnd="0dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
-                    android:paddingStart="3dp"
+                    android:paddingStart="7dp"
                     android:onClick="onOpenInfo"
-                    android:background="@xml/gx_ripple_gray"
+                    android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@drawable/info"
                     app:tint="@color/c_icon_tint_light" />

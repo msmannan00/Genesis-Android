@@ -50,6 +50,7 @@ public class settingClearController extends AppCompatActivity {
         mCheckBoxList.add(findViewById(R.id.pClearChecked_7));
         mCheckBoxList.add(findViewById(R.id.pClearChecked_8));
 
+        activityContextManager.getInstance().onStack(this);
         mSettingClearViewController = new settingClearViewController(this, new settingClearController.settingClearViewCallback(), mCheckBoxList);
         mSettingClearModel = new settingClearModel(new settingClearController.settingClearModelCallback());
     }
@@ -156,11 +157,12 @@ public class settingClearController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        onClose(null);
     }
 
     /*UI Redirection*/
     public void onClose(View view){
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 

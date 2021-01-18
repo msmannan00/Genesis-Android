@@ -24,20 +24,19 @@ class tabModel
         mBackupIndex.add(mModelList.get(pIndex));
     }
 
-    public void onClearBackup(){
-        for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
-            mBackupIndex.get(mCounter).getSession().closeSession();
-        }
+    public ArrayList<tabRowModel> onGetBackup(){
+        return mBackupIndex;
+    }
+
+    public void onClearBackupWithoutClose(){
         mBackupIndex.clear();
     }
 
-    public int onLoadBackup(){
-        int mSize = mBackupIndex.size();
+    public ArrayList<tabRowModel> onLoadBackup(){
         for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
-            mModelList.add(0,mBackupIndex.remove(mBackupIndex.size()-1));
-            mCounter-=1;
+            mModelList.add(0,mBackupIndex.get(mCounter));
         }
-        return mSize;
+        return mBackupIndex;
     }
 
 }

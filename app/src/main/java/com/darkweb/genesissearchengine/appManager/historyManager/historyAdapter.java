@@ -25,6 +25,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import systems.intelligo.slight.ImageLoader;
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.darkweb.genesissearchengine.constants.constants.HISTORY_LOAD_MORE;
 
@@ -41,13 +43,14 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     private ArrayList<String> mLongSelectedIndex = new ArrayList<>();
     private ArrayList<Integer> mLongSelectedID = new ArrayList<>();
 
+    private ImageLoader imageLoader;
     private AppCompatActivity mContext;
     private historyAdapterView mHistroyAdapterView;
     private Context mListHolderContext;
     private PopupWindow mPopupWindow = null;
     private eventObserver.eventListener mEvent;
-    boolean mLongPressedMenuActive = false;
     private String mFilter = strings.GENERIC_EMPTY_STR;
+    private boolean mLongPressedMenuActive = false;
 
     /*Local Variables*/
 
@@ -60,6 +63,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         this.mPassedList = pModelList;
         this.mContext = pMainContext;
         this.mHistroyAdapterView = new historyAdapterView(mContext);
+        this.imageLoader = new ImageLoader(mContext);
 
         initializeModelWithDate(false);
     }
@@ -210,7 +214,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mListHolderContext = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_bookmark_row_view, parent, false);
         return new listViewHolder(view);
     }
 
@@ -342,7 +346,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
     void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle){
         LayoutInflater layoutInflater = (LayoutInflater) pView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.recyclerview__row_menu, null);
+        @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.history_bookmark__row_menu, null);
         mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_OPEN_MENU, Arrays.asList(mPopupWindow, pView, mPopupView));
 
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuCopy), pUrl, pPosition, pTitle);
@@ -438,6 +442,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         TextView mWebLogo;
         ImageButton mRowMenu;
         ImageView mLogoImage;
+        ImageView mFaviconLogo;
         LinearLayout mRowContainer;
         LinearLayout mDateContainer;
         LinearLayout mLoadingContainer;
@@ -456,7 +461,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             mLogoImage = itemView.findViewById(R.id.pLogoImage);
             mWebLogo = itemView.findViewById(R.id.pWebLogo);
             mLoadingContainer = itemView.findViewById(R.id.pLoadingContainer);
-
+            mFaviconLogo = itemView.findViewById(R.id.pFaviconLogo);
 
             if(model.getID() == -1){
                 mDate.setText(model.getHeader());
@@ -487,6 +492,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
                 String header = model.getHeader();
                 mDescription.setText(("https://"+model.getDescription()));
+                mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + model.getDescription()),enums.etype.fetch_favicon);
                 mHeader.setText(model.getHeader());
 
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());

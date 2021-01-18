@@ -4,7 +4,7 @@ class settingSearchEnums
 {
     /*History Manager*/
     public enum eSearchModel {
-        M_SET_SEARCH_ENGINE, M_SET_SEARCH_HISTORY, M_SET_SEARCH_STATUS
+        M_SET_SEARCH_ENGINE, M_SET_SEARCH_HISTORY, M_SET_SEARCH_SUGGESTION_STATUS
     }
 
     public enum eSearchViewController {

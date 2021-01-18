@@ -30,13 +30,11 @@ class tabDataModel
     }
 
     geckoSession getHomePage(){
-        for(int counter = 0; counter< mTabs.size(); counter++){
-            if(mTabs.get(counter).getSession().getCurrentURL().equals("https://boogle.store/")){
-                moveTabToTop(mTabs.get(counter).getSession());
-                return mTabs.get(0).getSession();
-            }
+        if(mTabs.size()>0){
+            return mTabs.get(0).getSession();
+        }else {
+            return null;
         }
-        return null;
     }
 
     void addTabs(geckoSession mSession,boolean pIsDataSavable){
@@ -48,12 +46,13 @@ class tabDataModel
         }
 
         if(pIsDataSavable){
-            String[] params = new String[2];
+            String[] params = new String[3];
             params[0] = mTabModel.getSession().getTitle();
             params[1] = mTabModel.getSession().getCurrentURL();
+            params[2] = mTabModel.getSession().getTheme();
             String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
-            databaseController.getInstance().execSQL("INSERT INTO tab(mid,date,title,url) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?);",params);
+            databaseController.getInstance().execSQL("INSERT INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params);
         }
     }
 
@@ -97,20 +96,26 @@ class tabDataModel
         }
     }
 
-    boolean updateTab(String mSessionID) {
+    boolean updateTab(String mSessionID, geckoSession pSession) {
 
+        boolean mSessionUpdated = false;
         for(int counter = 0; counter< mTabs.size(); counter++){
 
             if(mTabs.get(counter).getSession().getSessionID().equals(mSessionID))
             {
-                String[] params = new String[2];
+                String[] params = new String[3];
                 params[0] = mTabs.get(counter).getSession().getTitle();
                 params[1] = mTabs.get(counter).getSession().getCurrentURL();
+                params[2] = mTabs.get(counter).getSession().getTheme();
+                mSessionUpdated = true;
 
                 String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
-                databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "'  , url = ? , title = ?  WHERE mid='"+mTabs.get(counter).getmId() + "'",params);
+                databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "'  , url = ? , title = ?, theme = ?  WHERE mid='"+mTabs.get(counter).getmId() + "'",params);
                 return true;
             }
+        }
+        if(!mSessionUpdated){
+            addTabs(pSession, true);
         }
         return false;
     }
@@ -144,7 +149,7 @@ class tabDataModel
                 handler.postDelayed(() ->
                 {
                     try {
-                        Bitmap mBitmap = pBitmapManager.poll(0);
+                        Bitmap mBitmap = pBitmapManager.poll(500);
                         mTabs.get(finalCounter).setmBitmap(mBitmap);
 
 
@@ -165,43 +170,59 @@ class tabDataModel
         }
     }
 
+    public ArrayList<ArrayList<String>> getSuggestions(String pQuery){
+        ArrayList<ArrayList<String>> mModel = new ArrayList<>();
+        for(int count = 0; count<= mTabs.size()-1 && mTabs.size()<500; count++){
+            if(mTabs.get(count).getSession().getTitle().toLowerCase().contains(pQuery) || mTabs.get(count).getSession().getCurrentURL().toLowerCase().contains(pQuery)){
+                ArrayList<String> mTempModel = new ArrayList<>();
+                mTempModel.add(mTabs.get(count).getSession().getTitle().toLowerCase());
+                mTempModel.add(mTabs.get(count).getSession().getCurrentURL());
+                mModel.add(mTempModel);
+            }
+        }
+        return mModel;
+    }
+
     int getTotalTabs(){
         return mTabs.size();
     }
 
     /*List Suggestion*/
-    public Object onTrigger(dataEnums.eTabCommands p_commands, List<Object> p_data){
-        if(p_commands == dataEnums.eTabCommands.GET_TOTAL_TAB){
+    public Object onTrigger(dataEnums.eTabCommands pCommands, List<Object> pData){
+        if(pCommands == dataEnums.eTabCommands.GET_TOTAL_TAB){
             return getTotalTabs();
         }
-        else if(p_commands == dataEnums.eTabCommands.GET_CURRENT_TAB){
+        else if(pCommands == dataEnums.eTabCommands.GET_CURRENT_TAB){
             return getCurrentTab();
         }
-        else if(p_commands == dataEnums.eTabCommands.GET_LAST_TAB){
+        else if(pCommands == dataEnums.eTabCommands.GET_LAST_TAB){
             return getLastTab();
         }
-        else if(p_commands == dataEnums.eTabCommands.MOVE_TAB_TO_TOP){
-            moveTabToTop((geckoSession)p_data.get(0));
+        else if(pCommands == dataEnums.eTabCommands.MOVE_TAB_TO_TOP){
+            moveTabToTop((geckoSession)pData.get(0));
         }
-        else if(p_commands == dataEnums.eTabCommands.CLOSE_TAB){
-            closeTab((geckoSession)p_data.get(0));
+        else if(pCommands == dataEnums.eTabCommands.CLOSE_TAB){
+            closeTab((geckoSession)pData.get(0));
         }
-        else if(p_commands == dataEnums.eTabCommands.M_CLEAR_TAB){
+        else if(pCommands == dataEnums.eTabCommands.M_CLEAR_TAB){
             clearTab();
         }
-        else if(p_commands == dataEnums.eTabCommands.M_ADD_TAB){
-            addTabs((geckoSession)p_data.get(0), (boolean)p_data.get(1));
+        else if(pCommands == dataEnums.eTabCommands.M_ADD_TAB){
+            addTabs((geckoSession)pData.get(0), (boolean)pData.get(1));
         }
-        else if(p_commands == dataEnums.eTabCommands.M_UPDATE_TAB){
-            updateTab((String) p_data.get(1));
+        else if(pCommands == dataEnums.eTabCommands.M_UPDATE_TAB){
+            updateTab((String) pData.get(1), (geckoSession) pData.get(5));
         }
-        else if(p_commands == dataEnums.eTabCommands.GET_TAB){
+        else if(pCommands == dataEnums.eTabCommands.GET_TAB){
             return getTab();
         }
-        else if(p_commands == dataEnums.eTabCommands.M_UPDATE_PIXEL){
-            updatePixels((String)p_data.get(0), (GeckoResult<Bitmap>)p_data.get(1));
+        else if(pCommands == dataEnums.eTabCommands.M_GET_SUGGESTIONS){
+            return getSuggestions((String) pData.get(0));
         }
-        else if(p_commands == dataEnums.eTabCommands.M_HOME_PAGE){
+        else if(pCommands == dataEnums.eTabCommands.M_UPDATE_PIXEL){
+            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1));
+        }
+        else if(pCommands == dataEnums.eTabCommands.M_HOME_PAGE){
             return getHomePage();
         }
 

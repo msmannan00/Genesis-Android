@@ -2,12 +2,10 @@ package com.darkweb.genesissearchengine.appManager.settingManager.advanceManager
 
 import android.view.View;
 
-import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
-import java.util.Arrays;
+
 import java.util.List;
 
 class settingAdvanceModel
@@ -42,8 +40,8 @@ class settingAdvanceModel
         status.sShowWebFonts = pStatus;
     }
 
-    private void onAllowAutoPlay(boolean pStatus) {
-        status.sAutoPlay = pStatus;
+    private void onToolbarThemeChange(boolean pStatus) {
+        status.sToolbarTheme = pStatus;
     }
 
     public Object onTrigger(settingAdvanceEnums.eAdvanceModel pCommands, List<Object> pData){
@@ -56,8 +54,8 @@ class settingAdvanceModel
         else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_WEB_FONTS)){
             onShowWebFonts((boolean)pData.get(0));
         }
-        else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_ALLOW_AUTOPLAY)){
-            onAllowAutoPlay((boolean)pData.get(0));
+        else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME)){
+            onToolbarThemeChange((boolean)pData.get(0));
         }
         return null;
     }

@@ -88,6 +88,7 @@
     <string name="SETTING_PRIVACY_HEADER" translatable="false">Settings | Privacy</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="false">Do Not Track</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="false">Genesis will tell sites that you do not want to be tracked</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="false">Do not Track marker for website</string>
     <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="false">Tracking Protection</string>
     <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="false">Enable tracking protection provided by Genesis</string>
     <string name="SETTING_PRIVACY_COOKIES" translatable="false">Cookies</string>
@@ -105,6 +106,8 @@
     <string name="SETTING_ADVANCE_HEADER" translatable="false">Settings | Advance</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="false">Restore tabs</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="false">Don\'t restore adfter quitting browser</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="false">Toolbar Theme</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="false">Set toolbar theme as defined in website</string>
     <string name="SETTING_ADVANCE_CHARARACTER_ENCODING" translatable="false">Character Encoding</string>
     <string name="SETTING_ADVANCE_CHARARACTER_ENCODING_INFO" translatable="false">Show character encoding in menu</string>
     <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="false">Show Images</string>
@@ -124,6 +127,14 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="false">Block all images</string>
     <string name="SETTING_ADVANCE" translatable="false">Advanced</string>
     <string name="SETTING_ADVANCE_INFO" translatable="false">Restore tabs, data saver, developer tools</string>
+    <string name="SETTING_PROXY" translatable="false">Onion Proxy Status</string>
+    <string name="SETTING_PROXY_INFO" translatable="false">Check onion network or VPN status</string>
+    <string name="SETTING_REPORT" translatable="false">Report website</string>
+    <string name="SETTING_REPORT_INFO" translatable="false">Report abusive website</string>
+    <string name="SETTING_RATEUS" translatable="false">Rate this app</string>
+    <string name="SETTING_RATEUS_INFO" translatable="false">Rate and comment on playstore</string>
+    <string name="SETTING_SHARE" translatable="false">Share this app</string>
+    <string name="SETTING_SHARE_INFO" translatable="false">Share this app with your friends</string>
     <string name="SETTING_GENERAL_HEADER" translatable="false">Settings | General</string>
     <string name="SETTING_GENERAL" translatable="false">General</string>
     <string name="SETTING_GENERAL_INFO" translatable="false">Home, language</string>
@@ -162,6 +173,10 @@
     <string name="ALERT_CLEAR" translatable="false">Clear</string>
     <string name="ALERT_ADD" translatable="false">Done</string>
     <string name="ALERT_TITLE_ADD" translatable="false">Bookmark Title...</string>
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_SECURE_INFO" translatable="false">Connection is secure</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="false">Your information(for example, password or credit card numbers) is private when it is sent to this site</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="false">Privacy Settings</string>
     <string name="ALERT_REPORT" translatable="false">Report</string>
     <string name="ALERT_REPORT_URL" translatable="false">Report Website</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="false">If you think this URL is illegal or disturbing report to us so we can take action</string>
@@ -249,6 +264,7 @@
     <string name="HOME_MENU_REPORT" translatable="false">Report website</string>
     <string name="HOME_MENU_RATE" translatable="false">Rate this app</string>
     <string name="HOME_MENU_FIND" translatable="false">Find in page</string>
+    <string name="HOME_MENU_QUIT" translatable="false">Quit</string>
     <string name="HOME_MENU_SHARE" translatable="false">Share</string>
     <string name="HOME_CHARACTER_ENCODING" translatable="false">Character encoding</string>
 
@@ -256,6 +272,7 @@
     <string name="TAB_MENU_OPEN_TAB" translatable="false">New tabs</string>
     <string name="TAB_MENU_CLOSE_TAB" translatable="false">Close all tabs</string>
     <string name="TAB_MENU_SETTINGS" translatable="false">Settings</string>
+    <string name="TAB_LIST_SELECT" translatable="false">Select tabs</string>
 
     <!-- Shared Recycler View -->
     <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="false">Open tabs</string>
@@ -277,6 +294,8 @@
     <string name="BOOKMARK_SEARCH_HINT" translatable="false">Search ...</string>
 
     <!-- Help -->
+    <string name="HELP_RETRY" translatable="false">Retry</string>
+    <string name="HELP_RETRY_INFO" translatable="false">Opps! network connection error\nGenesis not connected</string>
     <string name="HELP_TITLE" translatable="false">Support</string>
 
     <!-- Language Manager Manager -->
@@ -299,6 +318,16 @@
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="false">Enable Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="false">Enable Gateway</string>
 
+    <!-- Proxy Status -->
+    <string name="PROXY_STATUS_HEADER" translatable="false">Proxy Status</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="false">Current status of orbot proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="false">Orbot Proxy Status</string>
+    <string name="PROXY_SUB_HEADER2" translatable="false">VPN &amp; Bridges Status</string>
+    <string name="PROXY_VPN_STATUS" translatable="false">VPN Connection Status</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="false">Bridge connectivity status</string>
+    <string name="PROXY_SUB_HEADER3" translatable="false">INFO | Change Settings</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="false">To change proxy settings please restart this application and navigate to proxy manager. It can be opened by pressing on GEAR icon at bottom</string>
+
     <!-- Orbot View -->
     <string name="ORBOT_HEADER" translatable="false">Proxy Settings</string>
     <string name="ORBOT_DESCRIPTION" translatable="false">We connect you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
@@ -315,6 +344,7 @@
     <string name="HOME_CONNECT" translatable="false">Connect</string>
     <string name="HOME_LOADING" translatable="false">Idle | Genesis on standby at the moment</string>
     <string name="HOME_LOADING_STATIC" translatable="false">~&#160;Genesis on standby at the moment</string>
+    <string name="HOME_TAB_EMPTY" translatable="false">Open tabs will show here</string>
 
     <!-- Landing Page -->
     <string name="LANDING_BRIDGES_INFO" translatable="false">"Sometimes you need a bridge to get to Tor."</string>

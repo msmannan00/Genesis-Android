@@ -181,4 +181,7 @@ class orbotManager
         return orbotLocalConstants.mIsTorInitialized;
     }
 
+    String getOrbotStatus(){
+        return orbotLocalConstants.mCurrentStatus;
+    }
 }

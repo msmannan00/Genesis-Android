@@ -29,6 +29,7 @@
             android:layout_height="48dp"
             android:clickable="true"
             android:focusable="true"
+            android:animateLayoutChanges="true"
             android:orientation="horizontal"
             android:paddingStart="5dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +48,19 @@
                 android:onClick="onMenuTrigger"
                 android:src="@xml/ic_baseline_add"
                 android:tint="@color/c_navigation_tint" />
+
+            <TextView
+                android:id="@+id/pSelectionCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 Selected"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:paddingStart="20dp"
+                android:animateLayoutChanges="true"
+                android:layout_marginTop="-3dp"
+                android:textColor="@color/c_navigation_tint"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +90,7 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="17dp"
+                    android:layout_marginStart="14dp"
                     android:layout_marginTop="0.5dp"
                     android:background="@xml/gx_generic_tab_button"
                     android:clickable="false"
@@ -106,27 +120,27 @@
                 android:id="@+id/pRemoveSelection"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginEnd="1dp"
                 android:layout_marginTop="1dp"
-                android:visibility="gone"
+                android:layout_marginEnd="1dp"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onRemoveSelection"
                 android:src="@xml/ic_baseline_delete"
-                android:tint="@color/c_navigation_tint" />
+                android:tint="@color/c_navigation_tint"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/pClearSelection"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginEnd="1dp"
-                android:visibility="gone"
                 android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onClearSelection"
                 android:src="@xml/ic_refresh"
-                android:tint="@color/c_navigation_tint" />
+                android:tint="@color/c_navigation_tint"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -138,17 +152,71 @@
             android:paddingEnd="10dp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pRecycleView"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/pNestedScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="49dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_gravity="fill_vertical"
+        android:background="@color/clear_alpha"
+        android:fillViewport="true"
+        android:translationZ="2dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/clear_alpha"
+            android:elevation="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClearSelection"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/c_background"
+                android:layout_marginTop="49dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:text="@string/HOME_TAB_EMPTY"
+        android:textSize="15sp"
+        android:translationZ="1dp"
+        android:textStyle="bold"
+        android:textColor="@color/c_text_v2"
+        app:layout_constraintEnd_toEndOf="@+id/pHeaderContainer"
+        app:layout_constraintStart_toStartOf="@+id/pHeaderContainer"
         app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer" />
 
-    <include android:id="@+id/pPopupUndo"
-        android:visibility="gone"
-        layout="@layout/popup_undo"/>
+    <include
+        android:id="@+id/pPopupUndo"
+        layout="@layout/popup_undo"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/pBlocker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/clear_alpha"
+        android:translationZ="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/GENERAL_TODO" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

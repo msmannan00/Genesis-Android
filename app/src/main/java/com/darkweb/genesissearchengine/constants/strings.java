@@ -2,6 +2,18 @@ package com.darkweb.genesissearchengine.constants;
 
 public class strings
 {
+    /*Notification Manager Manager*/
+    public static final String NOTIFICATION_TITLE = "Genesis Browser";
+    public static final String[] NOTIFICATION_BODY = {"Genesis Browser updated successfully",
+                                                      "Use Genesis Browser to enhance your privacy",
+                                                      "Privacy and security enhanced, use Genesis Browser",
+                                                      "Hidden web & Genesis Search Engine updated",
+                                                      "Live websites updated on Genesis Search Engine",
+                                                      "Access secure part of internet, Use Genesis Browser",
+                                                      "Your privacy matters to us, Use Genesis browser",
+                                                      "Stop tracking, use Genesis Browser"};
+
+
     /*History Manager*/
     public static final String HISTORY_TITLE = "history";
     public static final String HISTORY_CLEAR_HISTORY = "Clear History";

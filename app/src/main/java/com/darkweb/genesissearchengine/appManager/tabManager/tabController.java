@@ -2,16 +2,20 @@ package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
@@ -26,13 +30,13 @@ import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
+import com.google.android.gms.ads.AdSize;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 
 public class tabController extends AppCompatActivity
 {
@@ -43,6 +47,8 @@ public class tabController extends AppCompatActivity
     private ImageButton mMenuButton;
     private ImageButton mClearSelection;
     private View mPopupUndo;
+    private TextView mSelectionCount;
+    private ImageView mBlocker;
 
     /*Private Variables*/
 
@@ -60,13 +66,18 @@ public class tabController extends AppCompatActivity
         pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_view);
-        initializeListModel();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initializeActivity();
         initializeViews();
         initializeList();
         initSwipe();
     }
 
-    public void initializeListModel(){
+    public void initializeActivity(){
         mListModel = new tabModel();
         mListModel.setList((ArrayList<tabRowModel>)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TAB, null));
         mContextManager = activityContextManager.getInstance();
@@ -83,8 +94,10 @@ public class tabController extends AppCompatActivity
         mMenuButton = findViewById(R.id.pMenuButton);
         mClearSelection = findViewById(R.id.pClearSelection);
         mPopupUndo = findViewById(R.id.pPopupUndo);
+        mSelectionCount = findViewById(R.id.pSelectionCount);
+        mBlocker = findViewById(R.id.pBlocker);
 
-        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mTabsContainer, mMenuButton, mClearSelection, mPopupUndo);
+        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mTabsContainer, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker);
     }
 
     public void initializeList(){
@@ -93,11 +106,7 @@ public class tabController extends AppCompatActivity
         mTabAdapter = adapter;
         layoutManager.setReverseLayout(true);
 
-        mRecycleView.setItemAnimator(new FadeInRightAnimator());
-        Objects.requireNonNull(mRecycleView.getItemAnimator()).setAddDuration(200);
-        mRecycleView.getItemAnimator().setRemoveDuration(200);
-        mRecycleView.getItemAnimator().setMoveDuration(200);
-        mRecycleView.getItemAnimator().setChangeDuration(450);
+        ((SimpleItemAnimator) Objects.requireNonNull(mRecycleView.getItemAnimator())).setSupportsChangeAnimations(false);
 
         mRecycleView.setAdapter(adapter);
         mRecycleView.setItemViewCacheSize(100);
@@ -107,7 +116,6 @@ public class tabController extends AppCompatActivity
         mRecycleView.setDrawingCacheEnabled(true);
         mRecycleView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         mRecycleView.setLayoutManager(new LinearLayoutManager(tabController.this));
-        mTabAdapter.notifyDataSetChanged();
     }
 
     /*Listeners*/
@@ -123,7 +131,8 @@ public class tabController extends AppCompatActivity
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 onClearTabBackup();
-                onRemoveView(position);
+                onInitRemoveView(position, true);
+                mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.NOTIFY_sWIPE, Collections.singletonList(position));
             }
 
             @Override
@@ -137,24 +146,23 @@ public class tabController extends AppCompatActivity
     }
     /*View Handlers*/
 
-    public void onBackPressedInvoked(View view) {
-        onBackPressed();
-    }
-
     public void onRemoveTab(int pIndex){
         mListModel.onRemoveTab(pIndex);
+        if(mListModel.getList().size()<1){
+            mRecycleView.animate().setStartDelay(150).alpha(0);
+        }
         initTabCount();
+        mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW, null);
     }
 
-    public void onClearTabBackup(){
-        mListModel.onClearBackup();
-    }
-
-    public void onRemoveView(int pIndex){
+    public void onInitRemoveView(int pIndex, boolean pCreateBackup){
         onRemoveTab(pIndex);
-        mListModel.getList().remove(pIndex);
-        mTabAdapter.notifyItemRemoved(pIndex);
         onShowUndoDialog();
+        if(mListModel.onGetBackup().size()>=mListModel.getList().size()){
+            mRecycleView.animate().setStartDelay(0).alpha(0);
+        }
+        initTabCount();
+        mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW, null);
     }
 
     public void initTabCount()
@@ -178,13 +186,25 @@ public class tabController extends AppCompatActivity
     }
 
     public void onRestoreTab(View view){
-        int mSize = mListModel.onLoadBackup();
-        mTabAdapter.notifyItemRangeInserted(0, mSize);
+        ArrayList<tabRowModel> mBackup = mListModel.onLoadBackup();
+        mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REINIT_DATA, Collections.singletonList(mBackup));
+
+        mListModel.onClearBackupWithoutClose();
         initTabCount();
+        mRecycleView.animate().cancel();
+        mRecycleView.animate().alpha(1);
     }
 
     public void onShowUndoDialog(){
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG, null);
+    }
+
+    public void onClearTabBackup(){
+        ArrayList<tabRowModel> mBackupIndex = mListModel.onGetBackup();
+        for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
+            dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Collections.singletonList(mBackupIndex.get(mCounter).getSession()));
+            mBackupIndex.get(mCounter).getSession().closeSession();
+        }
     }
 
     public void onTabRowChanged(String pId){
@@ -202,12 +222,21 @@ public class tabController extends AppCompatActivity
     }
 
     public void onRemoveSelection(View view) {
-        mTabAdapter.onTrigger(tabEnums.eTabModelCommands.M_REMOVE_ALL_SELECTION, null);
-        onShowUndoDialog();
+        mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
     }
 
     public void onClearSelection(View view) {
-        mTabAdapter.onTrigger(tabEnums.eTabModelCommands.M_CLEAR_ALL_SELECTION, null);
+        mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_CLEAR_ALL_SELECTION, null);
+    }
+
+    public void onTriggerSelected(View view){
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION, null);
+    }
+
+    public void onBackPressedInvoked(View view) {
+        mTabs.setPressed(true);
+        onBackPressed();
+        activityContextManager.getInstance().onRemoveStack(this);
     }
 
     /*Tab Menu*/
@@ -219,7 +248,7 @@ public class tabController extends AppCompatActivity
         else if(pView.getId() == R.id.pCloseTab){
             mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
             for(int mCounter=0;mCounter<mListModel.getList().size();mCounter++){
-                onRemoveView(mCounter);
+                onInitRemoveView(mCounter, true);
                 mCounter-=1;
             }
         }
@@ -244,11 +273,13 @@ public class tabController extends AppCompatActivity
     {
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
+        activityContextManager.getInstance().onStack(this);
         super.onResume();
     }
 
     @Override
     public void onStop() {
+        onBackPressed();
         super.onStop();
     }
 
@@ -256,13 +287,15 @@ public class tabController extends AppCompatActivity
     public void onPause()
     {
         status.sSettingIsAppPaused = true;
+        onBackPressed();
         super.onPause();
     }
 
     @Override
     public void onBackPressed() {
-        int mSize = (Integer) mTabAdapter.onTrigger(tabEnums.eTabModelCommands.M_SELECTED_LIST_SIZE, null);
-        if(mSize>0){
+        boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
+        if(mStatus){
+            onClearTabBackup();
             onClearSelection(null);
         }else {
             super.onBackPressed();
@@ -281,7 +314,7 @@ public class tabController extends AppCompatActivity
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_SELECTION, null);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION)){
-                mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION, null);
+                onTriggerSelected(null);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_CLEAR_TAB_BACKUP)){
                 onClearTabBackup();
@@ -300,8 +333,18 @@ public class tabController extends AppCompatActivity
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW)){
                 onClearTabBackup();
-                onRemoveView((Integer) data.get(0));
+                onInitRemoveView((Integer) data.get(0), true);
             }
+            else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP)){
+                onInitRemoveView((Integer) data.get(0), false);
+            }
+            else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG)){
+                onShowUndoDialog();
+            }
+            else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU)){
+                mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU, data);
+            }
+
             return null;
         }
     }

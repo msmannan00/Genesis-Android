@@ -25,18 +25,18 @@ class settingAdvanceViewController
 
     private SwitchMaterial mRestoreTabs;
     private SwitchMaterial mShowWebFonts;
-    private SwitchMaterial mAllowAutoPlay;
+    private SwitchMaterial mToolbarTheme;
     private ArrayList<RadioButton> mImageOption;
 
     /*Initializations*/
 
-    settingAdvanceViewController(settingAdvanceController pContext, eventObserver.eventListener pEvent, SwitchMaterial pRestoreTabs, SwitchMaterial pShowWebFonts, SwitchMaterial pAllowAutoPlay, ArrayList<RadioButton> pImageOption)
+    settingAdvanceViewController(settingAdvanceController pContext, eventObserver.eventListener pEvent, SwitchMaterial pRestoreTabs, SwitchMaterial pShowWebFonts, SwitchMaterial pToolbarTheme, ArrayList<RadioButton> pImageOption)
     {
         this.mEvent = pEvent;
         this.mContext = pContext;
         this.mRestoreTabs = pRestoreTabs;
         this.mShowWebFonts = pShowWebFonts;
-        this.mAllowAutoPlay = pAllowAutoPlay;
+        this.mToolbarTheme = pToolbarTheme;
         this.mImageOption = pImageOption;
 
         initViews();
@@ -57,10 +57,10 @@ class settingAdvanceViewController
             mShowWebFonts.setChecked(false);
         }
 
-        if(status.sAutoPlay){
-            mAllowAutoPlay.setChecked(true);
+        if(status.sToolbarTheme){
+            mToolbarTheme.setChecked(true);
         }else {
-            mAllowAutoPlay.setChecked(false);
+            mToolbarTheme.setChecked(false);
         }
 
         clearImageOptions();

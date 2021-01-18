@@ -15,6 +15,12 @@
         <item name="android:colorForeground">#f1f1f1</item>
     </style>
 
+    <style name="SCBSwitchSecurity" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/c_lock_text</item>
+        <item name="colorSwitchThumbNormal">#f32323</item>
+        <item name="android:colorForeground">#f32323</item>
+    </style>
+
     <style name="WindowAnimationFadeInOut">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>

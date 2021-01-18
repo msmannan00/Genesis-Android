@@ -51,13 +51,14 @@ public class settingGeneralController extends AppCompatActivity {
 
     public void viewsInitializations() {
 
-        mFullScreenMode = findViewById(R.id.pFullScreenMode);
+        mFullScreenMode = findViewById(R.id.pJSStatus);
         mThemeLight = findViewById(R.id.pThemeLight);
         mThemeDark = findViewById(R.id.pThemeDark);
         mThemeDefault = findViewById(R.id.pThemeDefault);
         mHomePageText = findViewById(R.id.pHomePageText);
         mOpenURLInNewTab = findViewById(R.id.pOpenURLInNewTab);
 
+        activityContextManager.getInstance().onStack(this);
         mSettingGeneralViewController = new settingGeneralViewController(this, new settingGeneralViewCallback(), mFullScreenMode, mThemeLight, mThemeDark, mThemeDefault, mHomePageText, mOpenURLInNewTab);
         mSettingGeneralModel = new settingGeneralModel(new settingGeneralModelCallback());
     }
@@ -93,13 +94,11 @@ public class settingGeneralController extends AppCompatActivity {
                 new Handler().postDelayed(() -> {
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     activityContextManager.getInstance().getSettingController().applyTheme();
-                    activityContextManager.getInstance().getHomeController().applyTheme();
-                }, 150);
+                }, 100);
             }
             return null;
         }
     }
-
 
     public class settingGeneralModelCallback implements eventObserver.eventListener{
 
@@ -130,6 +129,7 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 

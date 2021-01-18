@@ -13,23 +13,26 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
-            android:allowBackup="true"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:fullBackupContent="false"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:networkSecurityConfig="@xml/gx_network_security_config"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/gx_network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <!-- Activities -->
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.orbotManager.orbotController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-                android:launchMode="singleTask" />
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"/>
+
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.proxyStatusManager.proxyStatusController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"/>
+
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
@@ -68,54 +71,45 @@
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.logManager.settingLogController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController"
             android:configChanges="uiMode"
-            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController"
             android:configChanges="uiMode"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity
+            <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-                android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustPan" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.landingManager.landingController"
@@ -124,66 +118,50 @@
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController"
                 android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout"
-                android:launchMode="singleTask"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan|adjustResize">
+                android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
+        </activity>
+
+        <activity android:name="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalNavigationController">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="bridge" />
-            </intent-filter>
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="org.torproject.android.REQUEST_HS_PORT" />
-            </intent-filter>
-
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="org.torproject.android.START_TOR" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="http" />
                 <data android:scheme="https" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data android:mimeType="text/html" />
+                <data android:mimeType="text/html"/>
+                <data android:mimeType="text/plain"/>
+                <data android:mimeType="application/xhtml+xml"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
-                <data android:mimeType="application/xhtml+xml" />
             </intent-filter>
+
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
+                <action android:name="android.intent.action.ASSIST" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                        android:host="content"
-                        android:scheme="rocket" />
             </intent-filter>
-        </activity> <!-- Services & Settings -->
+        </activity>
+
+        <!-- Services & Settings -->
         <uses-library
                 android:name="org.apache.http.legacy"
                 android:required="false" />
@@ -214,6 +192,8 @@
                 android:enabled="true"
                 android:exported="false"
                 android:stopWithTask="true" />
+
+        <receiver android:name = "com.darkweb.genesissearchengine.helperManager.userEngagementNotification" />
 
         <receiver
                 android:name="org.torproject.android.service.StartTorReceiver"

@@ -49,11 +49,12 @@ public class tabRowModel
         return mSession;
     }
 
-    public void setSession(geckoSession pSession, String pURL, String pTitle)
+    public void setSession(geckoSession pSession, String pURL, String pTitle, String pTheme)
     {
         mSession = pSession;
         mSession.setTitle(pTitle);
         mSession.setURL(pURL);
+        mSession.setTheme(pTheme);
     }
 
     public String getmId() {

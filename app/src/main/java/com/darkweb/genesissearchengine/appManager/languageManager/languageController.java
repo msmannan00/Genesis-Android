@@ -3,6 +3,8 @@ package com.darkweb.genesissearchengine.appManager.languageManager;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -42,6 +44,7 @@ public class languageController extends AppCompatActivity {
 
     public void initializeConnections()
     {
+        activityContextManager.getInstance().onStack(this);
         mLanguageViewController.initialization(new languageViewCallback(),this);
     }
 
@@ -68,7 +71,24 @@ public class languageController extends AppCompatActivity {
     /*-------------------------------------------------------CALLBACKS-------------------------------------------------------*/
 
     public void onClose(View view) {
+        activityContextManager.getInstance().onRemoveStack(this);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        onClose(null);
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     public void onMenuItemInvoked(View view) {
