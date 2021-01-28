@@ -13,10 +13,12 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.github.paolorotolo.appintro.AppIntro;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class landingController extends AppIntro {
 
@@ -24,7 +26,6 @@ public class landingController extends AppIntro {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
         super.onCreate(savedInstanceState);
 
         // Instead of fragments, you can also use our default slide
@@ -65,6 +66,8 @@ public class landingController extends AppIntro {
         mLauncherViewController = new landingViewController(this,null);
     }
 
+
+
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
@@ -73,4 +76,9 @@ public class landingController extends AppIntro {
         finish();
     }
 
+    @Override
+    protected void onResume() {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
+        super.onResume();
+    }
 }

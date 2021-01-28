@@ -5,7 +5,10 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
+
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class settingNotificationModel
@@ -27,14 +30,10 @@ class settingNotificationModel
 
         int mStatus = pStatus ? 1 : 0;
         status.sBridgeNotificationManual = mStatus;
-        pluginController.getInstance().setNotificationStatus(mStatus);
-        int notificationStatus = pluginController.getInstance().getNotificationStatus();
-        if(notificationStatus==0){
-            pluginController.getInstance().disableTorNotification();
-        } else if(notificationStatus==1){
-            pluginController.getInstance().enableTorNotification();
-        }else {
-            pluginController.getInstance().enableTorNotificationNoBandwidth();
+        if(!pStatus){
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+        } else{
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
         }
     }
 

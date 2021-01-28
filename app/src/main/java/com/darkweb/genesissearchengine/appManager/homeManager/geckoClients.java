@@ -2,12 +2,15 @@ package com.darkweb.genesissearchengine.appManager.homeManager;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.google.android.gms.ads.AdSize;
+
 import java.io.File;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
@@ -103,11 +106,11 @@ class geckoClients
         if(mRuntime==null){
             mRuntime = GeckoRuntime.getDefault(context);
             mRuntime.getSettings().setAboutConfigEnabled(true);
+            mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
             mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
-            mRuntime.getSettings().setRemoteDebuggingEnabled(false);
+            mRuntime.getSettings().setForceUserScalableEnabled(status.sSettingEnableZoom);
             mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
             mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
-            mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
             mIconManager = new BrowserIconManager();
             if(status.sSettingTrackingProtection){
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
@@ -136,10 +139,12 @@ class geckoClients
         mRuntime.getSettings().setRemoteDebuggingEnabled(false);
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
         mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
-        mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
+        mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
         mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
+        mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
+        mRuntime.getSettings().setForceUserScalableEnabled(status.sSettingEnableZoom);
         mIconManager = new BrowserIconManager();
-        if(status.sSettingTrackingProtection){
+        if(!status.sSettingTrackingProtection){
             mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.AD);
             mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.FINGERPRINTING);
         }else {
@@ -151,6 +156,7 @@ class geckoClients
         mSession.getSettings().setFullAccessibilityTree(true);
         mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
         mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        onUpdateFont();
         onReload();
     }
 
@@ -260,7 +266,8 @@ class geckoClients
     }
 
     void onReload(){
-        mSession.reload();
+        mSession.stop();
+        mSession.loadUri(mSession.getCurrentURL());
     }
 
     void onReloadStatic(){
@@ -290,10 +297,7 @@ class geckoClients
 
     void onUpdateFont(){
         float font = (status.sSettingFontSize -100)/3+100;
-        mRuntime.getSettings().setAutomaticFontSizeAdjustment(status.sSettingFontAdjustable);
-        if(!mRuntime.getSettings().getAutomaticFontSizeAdjustment()){
-            mRuntime.getSettings().setFontSizeFactor(font/100);
-        }
+        mRuntime.getSettings().setFontSizeFactor(font/100);
     }
 
 

@@ -108,7 +108,7 @@ class tabViewController
         }
     }
 
-    private void onOpenTabMenu(View view) {
+    public void onOpenTabMenu(View view) {
         onCloseTabMenu();
         LayoutInflater layoutInflater = (LayoutInflater) view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.tab_menu, null);

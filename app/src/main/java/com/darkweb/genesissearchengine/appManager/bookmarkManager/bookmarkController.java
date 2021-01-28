@@ -44,6 +44,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_BOOKMARK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_NOT_SUPPORTED;
 
 
 public class bookmarkController extends AppCompatActivity
@@ -72,7 +74,7 @@ public class bookmarkController extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmark_view);
         initializeListModel();
@@ -87,7 +89,6 @@ public class bookmarkController extends AppCompatActivity
         mContextManager = activityContextManager.getInstance();
         mHomeController = activityContextManager.getInstance().getHomeController();
         mContextManager.setBookmarkController(this);
-        pluginController.getInstance().logEvent(strings.EVENT_BOOKMARK_OPENED);
     }
     public void initializeViews(){
         mEmptyListNotification = findViewById(R.id.pEmptyListNotification);
@@ -116,7 +117,6 @@ public class bookmarkController extends AppCompatActivity
 
     public void initCustomListeners(){
         mClearButton.requestFocusFromTouch();
-        mClearButton.setOnClickListener(v -> pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getBookmarkController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.eMessageEnums.M_CLEAR_BOOKMARK));
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) ->{
             if (actionId == EditorInfo.IME_ACTION_NEXT)
@@ -212,9 +212,9 @@ public class bookmarkController extends AppCompatActivity
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
-
         activityContextManager.getInstance().onStack(this);
         super.onResume();
     }
@@ -300,13 +300,11 @@ public class bookmarkController extends AppCompatActivity
         {
             if(e_type.equals(enums.etype.url_triggered)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                pluginController.getInstance().logEvent(strings.EVENT_BOOKMARK_TRIGGERED);
                 mHomeController.onLoadURL(url_temp);
                 finish();
             }
             else if(e_type.equals(enums.etype.url_triggered_new_tab)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                pluginController.getInstance().logEvent(strings.EVENT_BOOKMARK_TRIGGERED);
                 mHomeController.onOpenLinkNewTab(url_temp);
                 finish();
             }

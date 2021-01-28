@@ -525,7 +525,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     protected String getCurrentStatus() {
-        orbotLocalConstants.mCurrentStatus = mCurrentStatus;
+        return mCurrentStatus;
+    }
+
+    public String getProxyStatus() {
         return mCurrentStatus;
     }
 
@@ -1364,9 +1367,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if (mCurrentStatus == STATUS_OFF)
-                return;
-
             SharedPreferences prefs = Prefs.getSharedPrefs(getApplicationContext());
 
             if(prefs==null){
@@ -1403,7 +1403,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             }
 
 
-            if (doNetworKSleep && mCurrentStatus != STATUS_OFF)
+            if (doNetworKSleep)
             {
                 try {
                     setTorNetworkEnabled (mConnectivity);
@@ -1413,10 +1413,12 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                         showToolbarNotification(getString(R.string.newnym), getNotifyId(), iconId);
 
                         orbotLocalConstants.mTorLogsStatus = "No internet connection";
+                        sendCallbackStatus(STATUS_OFF);
                         showToolbarNotification(context.getString(R.string.no_network_connectivity_putting_tor_to_sleep_),NOTIFY_ID,R.drawable.ic_stat_tor_off);
                     }
                     else
                     {
+                        sendCallbackStatus(STATUS_STARTING);
                         logNotice(context.getString(R.string.network_connectivity_is_good_waking_tor_up_));
                         showToolbarNotification(getString(R.string.status_activated),NOTIFY_ID,R.drawable.ic_stat_tor);
                     }

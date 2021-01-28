@@ -14,6 +14,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.ArrayList;
@@ -35,15 +36,15 @@ public class settingPrivacyController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.setting_privacy_view);
 
         viewsInitializations();
-        initializeListeners();
     }
 
-    public void viewsInitializations() {
+    private void viewsInitializations() {
         mJavaScript = findViewById(R.id.pJavascript);
         mDoNotTrack = findViewById(R.id.pDoNotTrack);
         mTrackingProtection = findViewById(R.id.pTrackingProtection);
@@ -58,12 +59,9 @@ public class settingPrivacyController extends AppCompatActivity {
         mSettingPrivacyModel = new settingPrivacyModel(new settingPrivacyController.settingAccessibilityModelCallback());
     }
 
-    public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
-    }
+    /*View Callbacks*/
 
-    /* LISTENERS */
-    public class settingAccessibilityViewCallback implements eventObserver.eventListener{
+    private class settingAccessibilityViewCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
@@ -72,17 +70,15 @@ public class settingPrivacyController extends AppCompatActivity {
         }
     }
 
+    /*Model Callbacks*/
 
-    public class settingAccessibilityModelCallback implements eventObserver.eventListener{
+    private class settingAccessibilityModelCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }
-    }
-
-    public void initializeListeners(){
     }
 
     /* LOCAL OVERRIDES */
@@ -93,6 +89,7 @@ public class settingPrivacyController extends AppCompatActivity {
         if(mSettingChanged){
             activityContextManager.getInstance().setCurrentActivity(this);
         }
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         super.onResume();
     }
 
@@ -106,12 +103,14 @@ public class settingPrivacyController extends AppCompatActivity {
     public void onBackPressed() {
         if(mSettingChanged){
             activityContextManager.getInstance().setCurrentActivity(this);
+            activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
         activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 
     /*UI Redirection*/
+
     public void onClose(View view){
         onBackPressed();
     }
@@ -127,7 +126,7 @@ public class settingPrivacyController extends AppCompatActivity {
         mSettingChanged = true;
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_DONOT_TRACK, Collections.singletonList(!status.sStatusDoNotTrack));
         mDoNotTrack.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_DONOT_TRACK,status.sSettingTrackingProtection));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_DONOT_TRACK,status.sStatusDoNotTrack));
     }
 
     public void onTrackingProtection(View view){
@@ -149,6 +148,10 @@ public class settingPrivacyController extends AppCompatActivity {
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_CLEAR_PRIVATE_DATA, Collections.singletonList(!status.sClearOnExit));
         mClearDataOnExit.toggle();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR,status.sClearOnExit));
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
 }

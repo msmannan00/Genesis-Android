@@ -547,9 +547,10 @@
 
                 <LinearLayout
                     android:id="@+id/pOption6"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="65dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="setSearchHistory"
@@ -565,7 +566,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="3dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -601,9 +601,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:clickable="false"
+                        android:focusable="false"
                         android:layout_marginTop="5dp"
                         android:theme="@style/SCBSwitch"
                         android:id="@+id/pSearchHistory"
@@ -619,7 +619,7 @@
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="setSuggestionStatus"
-                    android:minHeight="65dp"
+                    android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:orientation="horizontal"
                     android:weightSum="7"
@@ -633,7 +633,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="6dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -669,11 +668,11 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:id="@+id/pSearchSuggestions"
-                        android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
                         android:layout_marginTop="5dp"
                         android:theme="@style/SCBSwitch"
                         android:clickable="false"
+                        android:focusable="false"
                         android:layout_marginEnd="10dp"
                         android:contentDescription="@string/GENERAL_TODO" />
 

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingStart="15dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:singleLine="true"
             android:text="@string/ALERT_DOWNLOAD"
             android:textAlignment="textStart"
@@ -31,7 +31,8 @@
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/pDescription"
@@ -41,9 +42,9 @@
             android:alpha="0.6"
             android:gravity="start"
             android:paddingStart="15dp"
-            android:singleLine="true"
+            android:lines="2"
             android:paddingEnd="15dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:textColor="@color/c_alert_text"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +104,8 @@
                     android:scaleX="0.5"
                     app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
 
@@ -149,7 +151,8 @@
                     android:scaleX="0.5"
                     app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
 
@@ -195,7 +198,8 @@
                     android:background="@android:color/transparent"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
 
@@ -243,7 +247,8 @@
                     app:tint="@color/c_navigation_tint"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
 
@@ -291,7 +296,8 @@
                     app:tint="@color/c_navigation_tint"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
 
@@ -339,7 +345,8 @@
                     app:tint="@color/c_navigation_tint"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
 
@@ -387,7 +394,8 @@
                     android:scaleX="0.5"
                     app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
 
@@ -414,7 +422,7 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:background="@xml/ax_bottom_rounded_corner_right"
+                    android:background="@xml/ax_ripple_default_round_bottom"
                     android:padding="0dp"
                     android:text="@string/ALERT_WELCOME_MESSAGE_BT_5"
                     android:textAlignment="center"

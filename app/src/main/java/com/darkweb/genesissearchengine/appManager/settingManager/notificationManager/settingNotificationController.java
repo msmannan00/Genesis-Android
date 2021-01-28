@@ -13,6 +13,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -23,20 +24,21 @@ import java.util.List;
 public class settingNotificationController extends AppCompatActivity {
 
     /* PRIVATE VARIABLES */
+
     private SwitchMaterial mNotificationManual;
     private settingNotificationModel mSettingNotificationModel;
     private settingNotificationViewController mSettingNotificationViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_notification_view);
 
         viewsInitializations();
     }
 
-    public void viewsInitializations() {
+    private void viewsInitializations() {
         activityContextManager.getInstance().onStack(this);
         mNotificationManual = findViewById(R.id.pNotificationManual);
         mSettingNotificationViewController = new settingNotificationViewController(this, new settingNotificationViewCallback(), mNotificationManual);
@@ -44,8 +46,9 @@ public class settingNotificationController extends AppCompatActivity {
         mSettingNotificationModel = new settingNotificationModel(new settingNotificationModelCallback());
     }
 
-    /* LISTENERS */
-    public class settingNotificationViewCallback implements eventObserver.eventListener{
+    /*View Callbacks*/
+
+    private class settingNotificationViewCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
@@ -54,8 +57,9 @@ public class settingNotificationController extends AppCompatActivity {
         }
     }
 
+    /*Model Callbacks*/
 
-    public class settingNotificationModelCallback implements eventObserver.eventListener{
+    private class settingNotificationModelCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
@@ -69,14 +73,15 @@ public class settingNotificationController extends AppCompatActivity {
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
 
-        int notificationStatus = pluginController.getInstance().getNotificationStatus();
+        int notificationStatus = status.sBridgeNotificationManual;
         if(notificationStatus==0){
-            pluginController.getInstance().disableTorNotification();
-        } else if(notificationStatus==1){
-            pluginController.getInstance().enableTorNotification();
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+        } else{
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
         }
     }
 

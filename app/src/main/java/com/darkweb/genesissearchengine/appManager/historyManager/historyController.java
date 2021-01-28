@@ -42,6 +42,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import static com.darkweb.genesissearchengine.appManager.historyManager.historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_HISTORY;
 
 public class historyController extends AppCompatActivity
 {
@@ -70,7 +71,7 @@ public class historyController extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_view);
         initializeListModel();
@@ -86,7 +87,6 @@ public class historyController extends AppCompatActivity
         mHomeController = activityContextManager.getInstance().getHomeController();
         mContextManager.setHistoryController(this);
         activityContextManager.getInstance().setHistoryController(this);
-        pluginController.getInstance().logEvent(strings.EVENT_HISTORY_OPENED);
     }
     public void initializeViews(){
         mEmptyListNotification = findViewById(R.id.pEmptyListNotification);
@@ -142,7 +142,7 @@ public class historyController extends AppCompatActivity
 
         mClearButton.requestFocusFromTouch();
         mClearButton.setOnClickListener(v -> {
-            pluginController.getInstance().MessageManagerHandler(activityContextManager.getInstance().getHistoryController(), Collections.singletonList(strings.GENERIC_EMPTY_STR), enums.eMessageEnums.M_CLEAR_HISTORY);
+            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, this),  M_CLEAR_HISTORY);
         });
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) ->{
@@ -241,6 +241,7 @@ public class historyController extends AppCompatActivity
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
         super.onResume();
@@ -358,13 +359,11 @@ public class historyController extends AppCompatActivity
         {
             if(e_type.equals(enums.etype.url_triggered)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                pluginController.getInstance().logEvent(strings.EVENT_HISTORY_TRIGGERED);
                 mHomeController.onLoadURL(url_temp);
                 finish();
             }
             else if(e_type.equals(enums.etype.url_triggered_new_tab)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                pluginController.getInstance().logEvent(strings.EVENT_HISTORY_TRIGGERED);
                 mHomeController.onOpenLinkNewTab(url_temp);
                 finish();
             }

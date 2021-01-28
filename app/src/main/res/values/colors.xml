@@ -14,6 +14,8 @@
     <color name="c_text_v6">#8c8c8c</color>
     <color name="c_icon_tint">#425e8a</color>
     <color name="c_icon_tint_light">#7591bd</color>
+    <color name="c_lang_row">#7591bd</color>
+    <color name="c_lang_row_border">#3a5278</color>
     <color name="c_text_setting_heading">#3385ff</color>
     <color name="c_button_text_v1">#3385ff</color>
     <color name="c_button_text_v1_inverted">#ffffff</color>
@@ -51,7 +53,7 @@
     <color name="c_profile_radial_outer">#ffffff</color>
     <color name="c_edittext_background">#f1f3f4</color>
     <color name="c_edittext_background_dark">#f5f5f5</color>
-    <color name="c_button_warning">#610505</color>
+    <color name="c_button_warning">#f65555</color>
     <color name="c_rateus_warning">#b3b3b3</color>
     <color name="c_splash_buttons">#ffffff</color>
     <color name="c_tab">#dde3ee</color>

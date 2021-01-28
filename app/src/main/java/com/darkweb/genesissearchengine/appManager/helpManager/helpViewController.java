@@ -56,7 +56,7 @@ class helpViewController
         }
     }
 
-    public void onDataLoaded(){
+    private void onDataLoaded(){
         mProgressBar.animate().cancel();
         mRetryContainer.animate().cancel();
         mRecyclerView.animate().cancel();
@@ -65,7 +65,7 @@ class helpViewController
         mProgressBar.animate().setDuration(300).alpha(0);
     }
 
-    public void onLoadError(){
+    private void onLoadError(){
         mRecyclerView.animate().setDuration(300).alpha(0);
         mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setAlpha(1);
@@ -78,7 +78,7 @@ class helpViewController
         });
     }
 
-    public void onReloadData(){
+    private void onReloadData(){
         mRecyclerView.animate().setDuration(300).alpha(0);
         mReloadButton.setClickable(false);
         mRetryContainer.animate().cancel();

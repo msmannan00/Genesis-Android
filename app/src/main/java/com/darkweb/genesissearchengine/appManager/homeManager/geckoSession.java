@@ -54,6 +54,10 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
@@ -141,6 +145,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if(!url.equals("about:blank") && !url.equals("about:config"))
             {
                 mProgress = 5;
+                Log.i("FUCKSSS","FUCKSSS : " + mProgress);
                 event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update);
             }
             m_current_url_id = -1;
@@ -216,6 +221,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
+        event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update);
         if(mIsLoaded){
             if(!isPageLoading){
                 mCurrentTitle = "loading";
@@ -251,10 +257,12 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if(progress==100){
                 if(!mIsProgressBarChanging){
                     mIsProgressBarChanging = true;
+                    Log.i("FUCKSSS","FUCKSSS1 : " + mProgress);
                     mContext.runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
                 }
             }else {
                 mIsProgressBarChanging = false;
+                Log.i("FUCKSSS","FUCKSSS2 : " + mProgress);
                 mContext.runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
             }
         }
@@ -434,14 +442,19 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }
         if(var4.type!=0){
             if(var4.linkUri!=null){
-                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme), enums.eMessageEnums.M_LONG_PRESS_WITH_LINK);
+                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, mContext), M_LONG_PRESS_WITH_LINK);
             }
             else {
-                event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,title, mTheme), enums.etype.on_long_press);
+                try{
+                    event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,title, mTheme, mContext), enums.etype.on_long_press);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                    Log.i("","");
+                }
             }
         }
         else{
-            event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,title, mTheme), enums.eMessageEnums.M_LONG_PRESS_URL);
+            event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,title, mTheme, mContext), M_LONG_PRESS_URL);
         }
     }
 
@@ -606,6 +619,9 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     }
 
     public String getCurrentURL(){
+        if(mCurrentURL.equals("resource://android/assets/Homepage/homepage.html")){
+            mCurrentURL = "https://boogle.store";
+        }
         return mCurrentURL;
     }
 
@@ -720,7 +736,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     private void checkApplicationRate(){
         if(rateCount==7){
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.eMessageEnums.M_RATE_APPLICATION);
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_APPLICATION);
         }
         rateCount+=1;
    }

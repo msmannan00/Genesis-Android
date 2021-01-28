@@ -59,9 +59,11 @@ class tabDataModel
     void clearTab() {
         int size = mTabs.size();
         for(int counter = 0; counter< size; counter++){
-            mTabs.get(0).getSession().stop();
-            mTabs.get(0).getSession().closeSession();
-            mTabs.remove(0);
+            if(mTabs.size()>0){
+                mTabs.get(0).getSession().stop();
+                mTabs.get(0).getSession().closeSession();
+                mTabs.remove(0);
+            }
         }
         if(mTabs.size()>0){
             mTabs.get(0).getSession().closeSession();

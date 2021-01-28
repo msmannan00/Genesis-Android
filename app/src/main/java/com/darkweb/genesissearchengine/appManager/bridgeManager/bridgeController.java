@@ -26,6 +26,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_BRIDGE_MAIL;
+
 public class bridgeController extends AppCompatActivity {
 
 
@@ -44,7 +46,7 @@ public class bridgeController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bridge_settings_view);
 
@@ -129,6 +131,7 @@ public class bridgeController extends AppCompatActivity {
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
     }
@@ -152,7 +155,7 @@ public class bridgeController extends AppCompatActivity {
 
     public void requestBridges(View view){
         mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_REQUEST_BRIDGE, null);
-        pluginController.getInstance().MessageManagerHandler(this, Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL), enums.eMessageEnums.M_BRIDGE_MAIL);
+        pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
     }
 
     public void onCustomChecked(View view){

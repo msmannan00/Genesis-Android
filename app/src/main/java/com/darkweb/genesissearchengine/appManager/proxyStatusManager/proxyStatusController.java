@@ -14,10 +14,12 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class proxyStatusController extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class proxyStatusController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
 
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.proxy_status_view);
 
@@ -49,12 +51,16 @@ public class proxyStatusController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mProxyStatusViewController = new proxyStatusViewController(this, mOrbotStatus, mVpnStatus, mBridgeStatus);
-        mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(pluginController.getInstance().getOrbotStatus(), status.sBridgeVPNStatus,status.sBridgeStatus));
+        mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS), status.sBridgeVPNStatus,status.sBridgeStatus));
         mProxyStatusModel = new proxyStatusModel(new proxyStatusModelCallback());
     }
 
     public void orbotLog(View view) {
         helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
+    public void refreshOrbotStatus(View view) {
+        mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS), status.sBridgeVPNStatus,status.sBridgeStatus));
     }
 
     /* LISTENERS */
@@ -78,6 +84,7 @@ public class proxyStatusController extends AppCompatActivity {
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         super.onResume();
     }
 

@@ -2,9 +2,7 @@ package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -19,18 +17,17 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
-import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController;
+import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
-import com.google.android.gms.ads.AdSize;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,7 +60,7 @@ public class tabController extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_view);
     }
@@ -83,7 +80,6 @@ public class tabController extends AppCompatActivity
         mContextManager = activityContextManager.getInstance();
         mHomeController = activityContextManager.getInstance().getHomeController();
         mContextManager.setTabController(this);
-        pluginController.getInstance().logEvent(strings.EVENT_TAB_OPENED);
     }
 
     public void initializeViews(){
@@ -247,14 +243,15 @@ public class tabController extends AppCompatActivity
         }
         else if(pView.getId() == R.id.pCloseTab){
             mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
-            for(int mCounter=0;mCounter<mListModel.getList().size();mCounter++){
+            int mCounterActual = mListModel.getList().size();
+            for(int mCounter=0;mCounterActual>0;mCounter++){
                 onInitRemoveView(mCounter, true);
-                mCounter-=1;
+                mCounterActual -= 1;
             }
         }
         else if(pView.getId() == R.id.pOpenSetting){
             mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
-            helperMethod.openActivity(settingController.class, constants.CONST_LIST_HISTORY, this,true);
+            helperMethod.openActivity(settingHomeController.class, constants.CONST_LIST_HISTORY, this,true);
         }
     }
 
@@ -271,6 +268,7 @@ public class tabController extends AppCompatActivity
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
         activityContextManager.getInstance().onStack(this);

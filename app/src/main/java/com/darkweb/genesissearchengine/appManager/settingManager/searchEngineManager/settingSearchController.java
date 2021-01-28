@@ -14,6 +14,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.ArrayList;
@@ -32,14 +33,14 @@ public class settingSearchController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_search_view);
 
         viewsInitializations();
     }
 
-    public void viewsInitializations() {
+    private void viewsInitializations() {
         mSearchEngines.add(findViewById(R.id.mRadioSearch_1));
         mSearchEngines.add(findViewById(R.id.mRadioSearch_2));
         mSearchEngines.add(findViewById(R.id.mRadioSearch_3));
@@ -51,6 +52,57 @@ public class settingSearchController extends AppCompatActivity {
         activityContextManager.getInstance().onStack(this);
         mSettingSearchViewController = new settingSearchViewController(this, new settingSearchViewCallback(), mSearchEngines, mSearchHistory, mSearchSuggestions);
         mSettingSearchModel = new settingSearchModel(new settingSearchModelCallback());
+    }
+
+    /*View Callbacks*/
+
+    private class settingSearchViewCallback implements eventObserver.eventListener{
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type)
+        {
+            return null;
+        }
+    }
+
+    /*Model Callbacks*/
+
+    private class settingSearchModelCallback implements eventObserver.eventListener{
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type)
+        {
+            return null;
+        }
+    }
+
+    /* LOCAL OVERRIDES */
+
+    @Override
+    public void onResume()
+    {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
+        activityContextManager.getInstance().setCurrentActivity(this);
+        super.onResume();
+
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        finish();
+    }
+
+    /*UI Redirection*/
+
+    public void onClose(View view){
+        finish();
     }
 
     public void onSelectSearchEngine(View view) {
@@ -93,54 +145,6 @@ public class settingSearchController extends AppCompatActivity {
 
     public void onOpenInfo(View view) {
         helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
-    }
-
-    /* LISTENERS */
-    public class settingSearchViewCallback implements eventObserver.eventListener{
-
-        @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
-            return null;
-        }
-    }
-
-
-    public class settingSearchModelCallback implements eventObserver.eventListener{
-
-        @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
-            return null;
-        }
-    }
-
-    /* LOCAL OVERRIDES */
-
-    @Override
-    public void onResume()
-    {
-        activityContextManager.getInstance().setCurrentActivity(this);
-        super.onResume();
-
-    }
-
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-    }
-
-    @Override
-    public void onBackPressed() {
-        activityContextManager.getInstance().onRemoveStack(this);
-        finish();
-    }
-
-    /*UI Redirection*/
-
-    public void onClose(View view){
-        finish();
     }
 
 }

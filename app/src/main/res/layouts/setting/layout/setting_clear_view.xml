@@ -79,9 +79,11 @@
                 <LinearLayout
                     android:id="@+id/pOption1"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
                     android:weightSum="7"
@@ -91,12 +93,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -145,7 +146,9 @@
                 <LinearLayout
                     android:id="@+id/pOption2"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
@@ -157,12 +160,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -212,7 +214,9 @@
                     android:id="@+id/pOption3"
                     android:tag="2"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
@@ -223,12 +227,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -277,7 +280,9 @@
                     android:id="@+id/pOption4"
                     android:tag="3"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
@@ -288,12 +293,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -343,7 +347,9 @@
                     android:id="@+id/pOption5"
                     android:tag="4"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
@@ -354,12 +360,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -408,7 +413,9 @@
                     android:id="@+id/pOption6"
                     android:tag="5"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
@@ -419,12 +426,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -473,7 +479,9 @@
                     android:id="@+id/pOption7"
                     android:tag="6"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
@@ -484,12 +492,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -538,7 +545,9 @@
                     android:id="@+id/pOption8"
                     android:tag="7"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
                     android:background="@xml/gx_ripple_gray"
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
@@ -549,12 +558,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="13dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -602,9 +610,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="onCheckBoxTriggered"
-                    android:paddingBottom="10dp"
-                    android:layout_marginTop="15dp"
+                    android:paddingBottom="11dp"
+                    android:layout_marginTop="11dp"
                     android:orientation="horizontal">
 
                     <Button
@@ -622,7 +629,6 @@
                         android:elevation="7dp"
                         android:background="@xml/hox_rounded_corner_suggestion_settings"
                         android:textColor="@color/white"
-                        android:clickable="false"
                         android:layout_alignParentEnd="true"
                         android:textAllCaps="false"
                         android:text="@string/SETTING_CLEAR_BUTTON"

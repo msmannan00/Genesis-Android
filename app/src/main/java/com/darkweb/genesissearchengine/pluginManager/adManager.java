@@ -1,11 +1,11 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.google.android.gms.ads.*;
-
+import java.util.List;
 import static com.darkweb.genesissearchengine.constants.status.sPaidStatus;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
 
 class adManager
 {
@@ -21,30 +21,40 @@ class adManager
 
     /*Initializations*/
 
-    adManager(AppCompatActivity app_context, eventObserver.eventListener event, AdView banner_ads) {
-        this.mAppContext = app_context;
-        this.mEvent = event;
-        mBannerAds = banner_ads;
+    adManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, AdView pBannerAds) {
+        this.mAppContext = pAppContext;
+        this.mEvent = pEvent;
+        mBannerAds = pBannerAds;
     }
 
-    void loadAds(){
+    private void initializeBannerAds(){
+        if(!sPaidStatus){
+            AdRequest request = new AdRequest.Builder().build();
+            mBannerAds.loadAd(request);
+            admobListeners();
+        }
+    }
+
+    /*Local Helper Methods*/
+
+    private void loadAds(){
         if(!sPaidStatus)
         {
             if (!bannerAdsLoading)
             {
                 bannerAdsLoading = true;
-                MobileAds.initialize(mAppContext, constants.CONST_ADMOB_KEY);
+                MobileAds.initialize(mAppContext, initializationStatus -> { });
                 mBannerAds.setAlpha(0f);
                 initializeBannerAds();
             }
         }
     }
 
-    boolean isAdvertLoaded(){
+    private boolean isAdvertLoaded(){
         return bannerAdsLoaded;
     }
 
-    /*Local Helper Methods*/
+    /*Local Listeners*/
 
     private void admobListeners(){
         if(!sPaidStatus){
@@ -52,11 +62,7 @@ class adManager
                 @Override
                 public void onAdLoaded() {
                     bannerAdsLoaded = true;
-                    mEvent.invokeObserver(null,null);
-                }
-
-                @Override
-                public void onAdFailedToLoad(int errorCode) {
+                    mEvent.invokeObserver(null,M_SHOW_LOADED_ADS);
                 }
 
                 @Override
@@ -78,13 +84,17 @@ class adManager
         }
     }
 
-    /*External Helper Methods*/
+    /*External Triggers*/
 
-    private void initializeBannerAds(){
-        if(!sPaidStatus){
-            AdRequest request = new AdRequest.Builder().build();
-            mBannerAds.loadAd(request);
-            admobListeners();
+    Object onTrigger(List<Object> pData, pluginEnums.eAdManager pEventType) {
+        if(pEventType.equals(pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS))
+        {
+            loadAds();
         }
+        else if(pEventType.equals(pluginEnums.eAdManager.M_IS_ADVERT_LOADED))
+        {
+            return isAdvertLoaded();
+        }
+        return null;
     }
 }

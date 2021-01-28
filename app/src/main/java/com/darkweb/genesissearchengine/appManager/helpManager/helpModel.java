@@ -5,20 +5,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.darkweb.genesissearchengine.helperManager.ProxiedHurlStack;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import static com.darkweb.genesissearchengine.constants.constants.*;
 
 class helpModel
 {
     private eventObserver.eventListener mEvent;
-    private String mJsonPath = "https://drive.google.com/uc?export=download&id=1es7XOAWCktGGfSnJu_o8W4_LZuudjR-T";
+    private String mJsonPath = CONST_SERVER;
     private AppCompatActivity mContext;
     private ArrayList<helpDataModel> mHelpListModel;
 
@@ -39,9 +38,9 @@ class helpModel
                             JSONObject obj = jsonArray.getJSONObject(i);
 
                             helpDataModel hero = new helpDataModel(
-                                    obj.getString("mHeader"),
-                                    obj.getString("mDescription"),
-                                    obj.getString("mIcon"));
+                                    obj.getString(CONST_HELP_MODEL_HEADER),
+                                    obj.getString(CONST_HELP_MODEL_DESCRIPTION),
+                                    obj.getString(CONST_HELP_MODEL_ICON));
                             mHelpListModel.add(hero);
                         }
                         mEvent.invokeObserver(Collections.singletonList(mHelpListModel),helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);

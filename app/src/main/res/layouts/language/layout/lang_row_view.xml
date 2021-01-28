@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/pHelpRowContainer"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@color/c_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/pContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pDivider"
+        tools:ignore="UnknownIdInLayout">
+
+        <LinearLayout
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_marginStart="10dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pHeader"
+                android:layout_marginTop="10dp"
+                android:textSize="15.5sp"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:textColor="@color/c_text_v1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/GENERAL_TODO" />
+
+            <TextView
+                android:id="@+id/pDescription"
+                android:textSize="12sp"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:textColor="@color/c_text_v6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/GENERAL_TODO" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/pMarker"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            app:srcCompat="@xml/ic_baseline_done"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/c_view_divier_background"
+        app:layout_constraintBottom_toBottomOf="@+id/pContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

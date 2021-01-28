@@ -14,6 +14,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.ArrayList;
@@ -23,7 +24,8 @@ import java.util.List;
 
 public class settingAdvanceController extends AppCompatActivity {
 
-    /* PRIVATE VARIABLES */
+    /* Private Variables */
+
     private settingAdvanceModel mSettingAdvanceModel;
     private settingAdvanceViewController mSettingAdvanceViewController;
     private SwitchMaterial mRestoreTabs;
@@ -32,10 +34,13 @@ public class settingAdvanceController extends AppCompatActivity {
     private ArrayList<RadioButton> mImageOption = new ArrayList<>();
     private boolean mIsChanged = false;
 
+    /* Initializations */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.setting_advance_view);
 
         viewsInitializations();
@@ -57,7 +62,8 @@ public class settingAdvanceController extends AppCompatActivity {
         helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
-    /* LISTENERS */
+    /*View Callbacks*/
+
     public class settingAdvanceViewCallback implements eventObserver.eventListener{
 
         @Override
@@ -67,6 +73,7 @@ public class settingAdvanceController extends AppCompatActivity {
         }
     }
 
+    /*Model Callbacks*/
 
     public class settingAdvanceModelCallback implements eventObserver.eventListener{
 
@@ -82,14 +89,15 @@ public class settingAdvanceController extends AppCompatActivity {
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
 
-        int notificationStatus = pluginController.getInstance().getNotificationStatus();
+        int notificationStatus = (int)pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_NOTIFICATION_STATUS);
         if(notificationStatus==0){
-            pluginController.getInstance().disableTorNotification();
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
         } else if(notificationStatus==1){
-            pluginController.getInstance().enableTorNotification();
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
         }
     }
 
@@ -102,7 +110,7 @@ public class settingAdvanceController extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(mIsChanged){
-            pluginController.getInstance().updatePrivacy();
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_UPDATE_PRIVACY);
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
         activityContextManager.getInstance().onRemoveStack(this);
@@ -113,7 +121,7 @@ public class settingAdvanceController extends AppCompatActivity {
 
     public void onClose(View view){
         if(mIsChanged){
-            pluginController.getInstance().updatePrivacy();
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_UPDATE_PRIVACY);
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
         finish();
@@ -144,6 +152,6 @@ public class settingAdvanceController extends AppCompatActivity {
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME, Collections.singletonList(!mToolbarTheme.isChecked()));
         mToolbarTheme.toggle();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME,status.sToolbarTheme));
-        activityContextManager.getInstance().getHomeController().onUpdateToolbarTheme();
+        activityContextManager.getInstance().getHomeController().onUpdateStatusBarTheme();
     }
 }

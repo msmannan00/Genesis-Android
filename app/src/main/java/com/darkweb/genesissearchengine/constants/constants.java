@@ -10,6 +10,9 @@ public class constants
     public static final String CONST_SOFTWARE_URL = "https://boogle.store/search?q=softwares+tools&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_SOFTWARE_FINANCE = "https://boogle.store/search?q=finance&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_COMMUNITIES = "https://boogle.store/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
+    public static final String CONST_MARKET_URL = "https://boogle.store/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
+    public static final String CONST_SERVER = "https://drive.google.com/uc?export=download&id=1es7XOAWCktGGfSnJu_o8W4_LZuudjR-T";
+    public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
 
     /*URL CONSTANTS*/
 
@@ -19,11 +22,9 @@ public class constants
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
     public static final String CONST_GENESIS_HELP_URL = "https://boogle.store/help";
     public static final String CONST_GENESIS_HELP_URL_SUB = "boogle.store/help";
-    public static final String CONST_GENESIS_UPDATE_URL = "https://boogle.store/manual?abi=";
-    public static final String CONST_PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
     public static final String CONST_BACKEND_GENESIS_URL = "https://boogle.store/search?q=$s&p_num=1&s_type=all";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
-    public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com/q=$s";
+    public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com?q=$s&ia=web";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";
     public static final String CONST_BACKEND_WIKI_URL = "https://en.wikipedia.org/wiki/$s";
 
@@ -39,15 +40,15 @@ public class constants
 
     /*LOG CONSTANTS*/
 
-    public static final String LOGS_DEFAULT_MESSAGE = "Genesis on standby at the moment";
+    public static final String CONST_LOGS_DEFAULT_MESSAGE = "Genesis on standby at the moment";
 
     /*HISTORY CONSTANTS*/
 
-    public static final String HISTORY_LOAD_MORE = "loading_more";
+    public static final String CONST_HISTORY_LOAD_MORE = "loading_more";
 
     /*BOOKMARK CONSTANTS*/
 
-    public static final String BOOKMARK_LOAD_MORE = "loading_more";
+    public static final String CONST_BOOKMARK_LOAD_MORE = "loading_more";
 
     /*MENU CONSTANTS*/
 
@@ -61,14 +62,27 @@ public class constants
     public static final int CONST_MAX_BOOKMARK_SIZE =500;
     public static final String CONST_DATABASE_NAME ="genesis_dbase";
     public static final String CONST_PERCENTAGE_SIGN ="%";
-    public static final String CONST_PERCENTAGE_SIGN_100 ="100%";
-
-    /*ADMOB CONSTANTS*/
-
-    public static final String CONST_ADMOB_KEY = "ca-app-pub-5074525529134731~2926711128";
 
     /*ANALYTICS CONSTANTS*/
 
     public static final String CONST_UNIQUE_KEY_ID = "*PREF_UNIQUE_ID";
+
+    /*Notification Manager*/
+
+    public static final String CONST_NOTIFICATION_ID_NAME = "NOTIFICATION:INDENTIFIER:1001";
+    public static final String CONST_NOTIFICATION_TITLE = "Genesis Browser";
+    public static final int CONST_NOTIFICATION_ID_VALUE = 1;
+    public static final int CONST_NOTIFICATION_REQUEST_CODE = 0;
+
+    /*Language CONSTANTS*/
+
+    public static final String CONST_LANGUAGE_DEFAULT_LANG = "default";
+
+    /*Helper CONSTANTS*/
+
+    public static final String CONST_HELP_MODEL_HEADER = "mHeader";
+    public static final String CONST_HELP_MODEL_DESCRIPTION = "mDescription";
+    public static final String CONST_HELP_MODEL_ICON = "mIcon";
+
 
 }

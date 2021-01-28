@@ -11,11 +11,12 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
-import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_BRIDGE_MAIL;
 
 class bridgeModel
 {
@@ -34,7 +35,7 @@ class bridgeModel
     /*Helper Methods*/
 
     public void requestBridges(){
-        pluginController.getInstance().MessageManagerHandler(mContext, Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL), enums.eMessageEnums.M_BRIDGE_MAIL);
+        pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, mContext), M_BRIDGE_MAIL);
     }
 
     public void onCustomChecked(){

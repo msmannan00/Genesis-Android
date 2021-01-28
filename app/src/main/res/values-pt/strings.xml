@@ -1,3 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- Application Strings -->
+	<string name="app_name" translatable="false">Genesis</string>
+	<string name="GENERAL_SEARCH_HINT" translatable="true">Pesquise ou digite o endereço da web</string>
+	<string name="GENERAL_FIND_HINT" translatable="true">Find in page</string>
+	<string name="GENERAL_SEARCH_ENGINE" translatable="true">Search Engine</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
+	<string name="GENERAL_TODO" translatable="true">"TODO" "GOOD"</string>
+	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis Search Engine</string>
+	<string name="GENERAL_LOADING" translatable="true">Online Freedom</string>
+	<string name="GENERAL_RELOAD" translatable="true">Reload</string>
+	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
+	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
 
+	<!-- Settings -->
+	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+	<string name="SETTING_BASIC_SETTING" translatable="true">dsadsa</string>
+	<string name="SETTING_DEFAULT_BROWSER" translatable="false">asdasd</string>
+	<string name="SETTING_HEADER" translatable="true">asdsad</string>
+	<string name="SETTING_SEARCH_ENGINE" translatable="true">sadasd</string>
+	<string name="SETTING_JAVASCRIPT" translatable="true">asdasds</string>
+	<string name="SETTING_CLEAR_HISTORY" translatable="true">sadsdaa</string>
+	<string name="SETTING_FONT_TITLE" translatable="true">asadsdsa</string>
+	<string name="SETTING_ADJUST_FONT" translatable="true">sadsasad</string>
+	<string name="SETTING_MANUAL_FONT" translatable="true">sadadssad</string>
+	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">sadsadsad</string>
+	<string name="SETTING_COOKIE" translatable="true">Cookies</string>
+	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">Settings | Notification</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">Notifications</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">Manage network stats notification</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">Network Status Notification</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">Local Notification</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Device Notification Settings</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">System Notification</string>
+	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Log Settings</string>
+	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Show Logs in Advance List View</string>
+	<string name="SETTING_SEARCH" translatable="true">Manage Search</string>
+	<string name="SETTING_SEARCH_INFO" translatable="true">Add, set default. show suggestions</string>
+	<string name="SETTING_NOTIFICATION" translatable="true">Manage Notification</string>
+	<string name="SETTING_NOTIFICATION_INFO" translatable="true">New features, network status</string>
+	<string name="SETTING_SEARCH_HEADER" translatable="true">Settings | Search</string>
+	<string name="SETTING_SEARCH_HEADER_1" translatable="true">Supported search engines</string>
+	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">Choose to search directly from search bar</string>
+	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Search setting</string>
+	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Manage how searches appear</string>
+	<string name="SETTING_SEARCH_DEFAULT" translatable="true">Default</string>
+	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+	<string name="SETTING_SEARCH_DUCK" translatable="false">dadsdsa</string>
+	<string name="SETTING_SEARCH_GOOGLE" translatable="false">sadadsdsa</string>
+	<string name="SETTING_SEARCH_AMAZON" translatable="false">sadsaddsa</string>
+	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+	<string name="SETTING_SEARCH_HISTORY" translatable="true">Show search history</string>
+	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">Show search suggestions</string>
+	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">Search websites appears when you type in searchbar</string>
+	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">Focused suggestions appears when you type in searchbar</string>
+	<string name="SETTING_ACCESSIBILITY" translatable="true">Accessiblity</string>
+	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">Text size, zoom, voice input</string>
+	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">Settings | Accessibility</string>
+	<string name="SETTING_CLEAR" translatable="true">Clear Private Data</string>
+	<string name="SETTING_CLEAR_INFO" translatable="true">Tabs, history, bookmark, cookies, cache</string>
+	<string name="SETTING_CLEAR_HEADER" translatable="true">Settings | Clear Data</string>
+	<string name="SETTING_CLEAR_BUTTON" translatable="true">Clear Data</string>
+	<string name="SETTING_CLEAR_OPTION_1" translatable="true">Clear Tabs</string>
+	<string name="SETTING_CLEAR_OPTION_2" translatable="true">Clear History</string>
+	<string name="SETTING_CLEAR_OPTION_3" translatable="true">Clear Bookmarks</string>
+	<string name="SETTING_CLEAR_OPTION_4" translatable="true">Clear Cache</string>
+	<string name="SETTING_CLEAR_OPTION_5" translatable="true">Clear Suggestions</string>
+	<string name="SETTING_CLEAR_OPTION_6" translatable="true">Site Data</string>
+	<string name="SETTING_CLEAR_OPTION_7" translatable="true">Clear Session</string>
+	<string name="SETTING_CLEAR_OPTION_8" translatable="true">Clear Cookies</string>
+	<string name="SETTING_CLEAR_OPTION_9" translatable="true">Clear Settings</string>
+	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">Font scaling</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">Scale web content according to system font size</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">Enable Zoom</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">Enable zoom on all webpages</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">Voice input</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">Allow voice dictation in the URL bar</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">Select custom font scale</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">Drag the slider until you can read this comfortably. Text should look at least this big after double-tapping on a paragraph</string>
+	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+	<string name="SETTING_INTERACTION" translatable="true">Interactions</string>
+	<string name="SETTING_INTERACTION_INFO" translatable="true">Change how you interact with the content</string>
+	<string name="SETTING_PRIVACY" translatable="true">Privacy</string>
+	<string name="SETTING_PRIVACY_INFO" translatable="true">Tracking, logins, data choices</string>
+	<string name="SETTING_PRIVACY_HEADER" translatable="true">Settings | Privacy</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">Do Not Track</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis will tell sites that you do not want to be tracked</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">Do not Track marker for website</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Tracking Protection</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Enable tracking protection provided by Genesis</string>
+	<string name="SETTING_PRIVACY_COOKIES" translatable="true">Cookies</string>
+	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">Select cookies preferences according to your security needs</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">Clear private data on exit</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">Clear data automatically upon application close</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">Private Browsing</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">Keep your identity safe and use the options below</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">Enabled</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">Enabled, excluding tracking cookies</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">Enabled, excluding 3rd party</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">Disabled</string>
+	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">Javascript</string>
+	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Disable java scripting for various script attacks</string>
+	<string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Restore tabs</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Don\'t restore adfter quitting browser</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">Toolbar Theme</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Set toolbar theme as defined in website</string>
+	<string name="SETTING_ADVANCE_CHARARACTER_ENCODING" translatable="true">Character Encoding</string>
+	<string name="SETTING_ADVANCE_CHARARACTER_ENCODING_INFO" translatable="true">Show character encoding in menu</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">Show Images</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Always load images of websites</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Show web fonts</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">Download remote fonts when loading a page</string>
+	<string name="SETTING_ADVANCE_MEDIA" translatable="true">Allow autoplay</string>
+	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Allow media to auto start</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">Data saver</string>
+	<string name="SETTING_ADVANCE_TAB" translatable="true">Tab</string>
+	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">Change how tab behave after restarting application</string>
+	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">Media</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">Change default data saver settings</string>
+	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">Change default media settings</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">Always show images</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Only show images over WI-FI</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Block all images</string>
+	<string name="SETTING_ADVANCE" translatable="true">Advanced</string>
+	<string name="SETTING_ADVANCE_INFO" translatable="true">Restore tabs, data saver, developer tools</string>
+	<string name="SETTING_PROXY" translatable="true">Onion Proxy Status</string>
+	<string name="SETTING_PROXY_INFO" translatable="true">Check onion network or VPN status</string>
+	<string name="SETTING_REPORT" translatable="true">Report website</string>
+	<string name="SETTING_REPORT_INFO" translatable="true">Report abusive website</string>
+	<string name="SETTING_RATEUS" translatable="true">Rate this app</string>
+	<string name="SETTING_RATEUS_INFO" translatable="true">Rate and comment on playstore</string>
+	<string name="SETTING_SHARE" translatable="true">Share this app</string>
+	<string name="SETTING_SHARE_INFO" translatable="true">Share this app with your friends</string>
+	<string name="SETTING_GENERAL_HEADER" translatable="true">Settings | General</string>
+	<string name="SETTING_GENERAL" translatable="true">General</string>
+	<string name="SETTING_GENERAL_INFO" translatable="true">Home, language</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">Full-screen browsing</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">Hide the browser toolbar when scrolling down a page</string>
+	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">Language</string>
+	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">Change the language of your browser</string>
+	<string name="SETTING_GENERAL_THEME" translatable="true">Theme</string>
+	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">Choose light and dark or theme</string>
+	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">Theme Light</string>
+	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">Theme Dark</string>
+	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">Change full screen browsing and language settings</string>
+	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">System Default</string>
+	<string name="SETTING_GENERAL_HOME" translatable="true">Home</string>
+	<string name="SETTING_GENERAL_HOME_INFO" translatable="true">about:blank</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">New Tab</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">Open homepage in new tab</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">Clear all tabs</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">Clear search history</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">Clear marked bookmarks</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">Clear browsing cache</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">Clear suggestions</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">Clear site data</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">Clear session data</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">Clear browsing cookies</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">Clear browser settings</string>
+
+	<!-- Alerts -->
+	<string name="ALERT_CREATE_BOOKMARK" translatable="true">Bookmark Website</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Add this page to bookmark manager</string>
+	<string name="ALERT_CLEAR_HISTORY" translatable="true">Clear History and Data</string>
+	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Clear Bookmark and Data</string>
+	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Clearing will remove history, cookies,  and other browsing data</string>
+	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Clearing will remove bookmarked websites.</string>
+	<string name="ALERT_DISMISS" translatable="true">Dismiss</string>
+	<string name="ALERT_CLEAR" translatable="true">Clear</string>
+	<string name="ALERT_ADD" translatable="true">Done</string>
+	<string name="ALERT_TITLE_ADD" translatable="true">New Bookmark</string>
+	<string name="ALERT_SECURE" translatable="false">https://</string>
+	<string name="ALERT_SECURE_INFO" translatable="true">Connection is secure</string>
+	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Your information(for example, password or credit card numbers) is private when it is sent to this site</string>
+	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy Settings</string>
+	<string name="ALERT_REPORT" translatable="true">Report</string>
+	<string name="ALERT_REPORT_URL" translatable="true">Report Website</string>
+	<string name="ALERT_REPORT_URL_INFO" translatable="true">If you think this URL is illegal or disturbing report to us so we can take action</string>
+	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">Reported Successfully</string>
+	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL has been successfully reported. If something found, action will be taken</string>
+	<string name="ALERT_RATEUS" translatable="true">Rate US</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Tell others what you think about this app</string>
+	<string name="ALERT_RATE" translatable="true">Rate</string>
+	<string name="ALERT_RATEUS_FAILURE" translatable="true">Sorry To Hear That!</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">If you are having any trouble and want to contact us please email us. We will try to solve your problem as soon as possible</string>
+	<string name="ALERT_MAIL" translatable="true">Mail</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Request New Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">You can get a bridge address through email, the web or by scanning a bridge QR code. Select \'Email\' below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start.</string>
+	<string name="ALERT_ORBOT_INIT" translatable="true">Initializing Orbot</string>
+	<string name="ALERT_ORBOT_INIT_INFO" translatable="true">Please wait! While we connect you to hidden web. This might take few minutes</string>
+	<string name="ALERT_NOT_SUPPORTED" translatable="true">Action not supported</string>
+	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">No application found to handle following command</string>
+	<string name="ALERT_WELCOME_MESSAGE" translatable="true">Welcome | Hidden  Web Gateway</string>
+	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">This application provide you a platform to Search and Open Hidden Web urls.Here are few Suggestions\n</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">Deep Web Online Market</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">Leaked Documents and Books</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">Dark Web News and Articles</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">Secret Softwares and Hacking Tools</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">Don\'t Show Again</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">Finance and Money</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">Social Communities</string>
+	<string name="ALERT_ABI_ERROR" translatable="true">Invalid Setup File</string>
+	<string name="ALERT_ABI_ERROR_INFO" translatable="true">Looks like you messed up the installation. Either Install it from playstore or follow the link</string>
+	<string name="ALERT_LOCAL_UPGRADE" translatable="true">Manual</string>
+	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">Playstore</string>
+	<string name="ALERT_LONG_URL" translatable="true">URL Notification</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Open In New Tab</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Open In Current Tab</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copy to Clipboard</string>
+	<string name="ALERT_LONG_FILE" translatable="true">File Notification</string>
+	<string name="ALERT_DOWNLOAD" translatable="true">Download Notification</string>
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Open url in new tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Open url in current tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copy url to clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Open image in new tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Open image current tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copy image to clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
+	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">Download Notification</string>
+	<string name="ALERT_LONG_URL_TITLE" translatable="true">URL Notification</string>
+	<string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
+	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">No application found to handle email</string>
+	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">Download File | </string>
+	<string name="ALERT_DATA_CLEARED" translatable="true">Data Notification</string>
+	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">Private data cleared. Now you can safely continue browsing</string>
+	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">Tab Closed</string>
+	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Undo</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
+	<string name="BRIDGE_SETTING" translatable="true">Bridge Settings</string>
+	<string name="BRIDGE_AUTO" translatable="true">Create Automatically</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Automatically configure bridges settings</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Provide a Bridge I know</string>
+	<string name="BRIDGE_PORT_HINT" translatable="true">address:port Single Line</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridges</string>
+	<string name="BRIDGE_DESC" translatable="true">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
+	<string name="BRIDGE_TITLE" translatable="true">Select Default Bridge</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Request</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
+
+	<!-- Orbot Log -->
+	<string name="ORBOT_LOG" translatable="true">Proxy Logs</string>
+	<string name="ORBOT_LOG_HEADER" translatable="true">Logs Info</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting genesis please copy the following code and find issue online or send it to us so we can examine </string>
+
+	<!-- Popup Menu -->
+	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot logs</string>
+	<string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
+	<string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>
+	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Open Recent Tabs</string>
+	<string name="HOME_MENU_LANGUAGE" translatable="true">Language</string>
+	<string name="HOME_MENU_DOWNLOAD" translatable="true">Downloads</string>
+	<string name="HOME_MENU_HISTORY" translatable="true">History</string>
+	<string name="HOME_MENU_SETTING" translatable="true">Settings</string>
+	<string name="HOME_MENU_DESKTOP" translatable="true">Desktop site</string>
+	<string name="HOME_MENU_BOOKMARK" translatable="true">Bookmark This Page</string>
+	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">Bookmarks</string>
+	<string name="HOME_MENU_REPORT" translatable="true">Report website</string>
+	<string name="HOME_MENU_RATE" translatable="true">Rate this app</string>
+	<string name="HOME_MENU_FIND" translatable="true">Find in page</string>
+	<string name="HOME_MENU_QUIT" translatable="true">Quit</string>
+	<string name="HOME_MENU_SHARE" translatable="true">Share</string>
+	<string name="HOME_CHARACTER_ENCODING" translatable="true">Character encoding</string>
+
+	<!-- Tab View -->
+	<string name="TAB_MENU_OPEN_TAB" translatable="true">New tabs</string>
+	<string name="TAB_MENU_CLOSE_TAB" translatable="true">Close all tabs</string>
+	<string name="TAB_MENU_SETTINGS" translatable="true">Settings</string>
+	<string name="TAB_LIST_SELECT" translatable="true">Select tabs</string>
+
+	<!-- Shared Recycler View -->
+	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">Open tabs</string>
+	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">Copy</string>
+	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">Share</string>
+	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">Clear Selection</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">Open in current tab</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">Open in new tab</string>
+	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">Delete</string>
+
+	<!-- History Popup Menu -->
+	<string name="HISTORY_TITLE" translatable="true">History</string>
+	<string name="HISTORY_CLEAR" translatable="true">Clear</string>
+	<string name="HISTORY_SEARCH_HINT" translatable="true">Search ...</string>
+
+	<!-- BOOKMARK Popup Menu -->
+	<string name="BOOKMARK_TITLE" translatable="true">Bookmark</string>
+	<string name="BOOKMARK_CLEAR" translatable="true">Clear</string>
+	<string name="BOOKMARK_SEARCH_HINT" translatable="true">Search ...</string>
+
+	<!-- Help -->
+	<string name="HELP_RETRY" translatable="true">Retry</string>
+	<string name="HELP_RETRY_INFO" translatable="true">Opps! network connection error\nGenesis not connected</string>
+	<string name="HELP_TITLE" translatable="true">Support</string>
+
+	<!-- Language Manager Manager -->
+	<string name="LANGUAGE_TITLE" translatable="true">Language</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">Change Language</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">We currently support the following langugage would be adding more soon\n</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">English (United States)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">German (Germany)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">Italian (Italy)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">Portuguese (Brazil)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">Russian (Russia)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">Ukrainian (Ukraine)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">Chinese Simplified (Mainland China)</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ Warning</string>
+	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Customize Bridges</string>
+	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Enable Bridges</string>
+	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Enable VPN Serivce</string>
+	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Enable Bridge Gateway</string>
+	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Enable Gateway</string>
+
+	<!-- Proxy Status -->
+	<string name="PROXY_STATUS_HEADER" translatable="true">Proxy Status</string>
+	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Current status of orbot proxy</string>
+	<string name="PROXY_SUB_HEADER1" translatable="true">Orbot Proxy Status</string>
+	<string name="PROXY_SUB_HEADER2" translatable="true">VPN &amp; Bridges Status</string>
+	<string name="PROXY_VPN_STATUS" translatable="true">VPN Connection Status</string>
+	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge connectivity status</string>
+	<string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
+	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">To change proxy settings please restart this application and navigate to proxy manager. It can be opened by pressing on GEAR icon at bottom</string>
+
+	<!-- Orbot View -->
+	<string name="ORBOT_HEADER" translatable="true">Proxy Settings</string>
+	<string name="ORBOT_DESCRIPTION" translatable="true">We connect you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
+	<string name="ORBOT_TITLE" translatable="true">Internet is censored here (Bypass Firewall)</string>
+	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">Bypass Firewall</string>
+	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
+
+	<!-- Notification Menu -->
+	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">Open</string>
+
+	<!-- Home View -->
+	<string name="HOME_TAB_TEXT" translatable="true">1</string>
+	<string name="HOME_CONNECT" translatable="true">Connect</string>
+	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
+	<string name="HOME_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
+	<string name="HOME_TAB_EMPTY" translatable="true">Open tabs will show here</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a bridge to get to Tor."</string>
+	<string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
+	<string name="LANDING_VPN_SETUP" translatable="true">"You can enable any app to go through Tor using our built-in VPN."</string>
+	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"This won\'t make you anonymous, but it will help get through firewalls."</string>
+	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"CHOOSE APPS"</string>
+	<string name="LANDING_HELLO" translatable="true">"Hello"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Welcome to Tor on mobile."</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
+
+	<!-- Error Page -->
+	<string name="ERROR_M1" translatable="true">This site can\'t be reached</string>
+	<string name="ERROR_M2" translatable="true">An error occurred during a connection</string>
+	<string name="ERROR_M3" translatable="true">The page you are trying to view cannot be shown because the authenticity of the received data could not be verified</string>
+	<string name="ERROR_M4" translatable="true">The page is currently not live or down due to some reason</string>
+	<string name="ERROR_M5" translatable="true">Please contact the website owners to inform them of this problem.</string>
+	<string name="ERROR_M6" translatable="true">Reload</string>
+
+	<!-- Others -->
+	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+	<string name="invalid_package_signature" translatable="true">Invalid package signature</string>
+	<string name="autofill_sign_in_prompt" translatable="true">Tap to sign in.</string>
+	<string name="autofill_manual_prompt" translatable="true">Tap to manually select data.</string>
+	<string name="security_exception" translatable="true">Web domain security exception.</string>
+	<string name="dal_exception" translatable="true">DAL verification failure.</string>
 </resources>

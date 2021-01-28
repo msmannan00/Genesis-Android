@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:id="@+id/pMainLayout"
         android:layout_height="wrap_content"
         android:background="@xml/gx_rounded_corner_alert"
@@ -52,7 +52,7 @@
             android:id="@+id/pDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="35dp"
             android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

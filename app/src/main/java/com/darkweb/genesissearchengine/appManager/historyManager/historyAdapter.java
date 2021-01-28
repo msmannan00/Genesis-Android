@@ -28,7 +28,7 @@ import java.util.List;
 import systems.intelligo.slight.ImageLoader;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static com.darkweb.genesissearchengine.constants.constants.HISTORY_LOAD_MORE;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_HISTORY_LOAD_MORE;
 
 public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listViewHolder>
 {
@@ -71,14 +71,14 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
     private void onLoading(){
         mContext.runOnUiThread(() -> {
-            mCurrentList.add(new historyRowModel(HISTORY_LOAD_MORE,null,-2));
+            mCurrentList.add(new historyRowModel(CONST_HISTORY_LOAD_MORE,null,-2));
             notifyItemInserted(mCurrentList.size());
         });
     }
 
     private void onLoadingClear(){
         for(int mCounter = 0; mCounter< mCurrentList.size(); mCounter++){
-            if(mCurrentList.get(mCounter).getHeader().equals(HISTORY_LOAD_MORE)){
+            if(mCurrentList.get(mCounter).getHeader().equals(CONST_HISTORY_LOAD_MORE)){
                 int finalM_counter = mCounter;
                 mContext.runOnUiThread(() -> {
                     mCurrentList.remove(finalM_counter);

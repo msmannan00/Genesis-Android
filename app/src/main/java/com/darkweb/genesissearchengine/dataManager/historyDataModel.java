@@ -150,19 +150,22 @@ public class historyDataModel {
     }
 
     public ArrayList<historyRowModel> getSuggestions(String pQuery, ArrayList<historyRowModel> pList){
+
         String mQueryOriginal = pQuery;
-        pQuery = pQuery.toLowerCase();
-        for(int count = 0; count<= mHistory.size()-1 && mHistory.size()<500; count++){
-            historyRowModel mTempModel = null;
-            if(mHistory.get(count).getHeader().toLowerCase().contains(pQuery)){
-                mTempModel = new historyRowModel(mHistory.get(count).getHeader(),mHistory.get(count).getDescription(),-1);
-                if(!pList.contains(mTempModel)){
-                    pList.add(mTempModel);
-                }
-            }else if(mHistory.get(count).getDescription().toLowerCase().contains(pQuery)){
-                mTempModel = new historyRowModel(mHistory.get(count).getHeader(),mHistory.get(count).getDescription(),-1);
-                if(!pList.contains(mTempModel)){
-                    pList.add(mTempModel);
+        if(status.sSettingSearchHistory){
+            pQuery = pQuery.toLowerCase();
+            for(int count = 0; count<= mHistory.size()-1 && mHistory.size()<500; count++){
+                historyRowModel mTempModel = null;
+                if(mHistory.get(count).getHeader().toLowerCase().contains(pQuery)){
+                    mTempModel = new historyRowModel(mHistory.get(count).getHeader(),mHistory.get(count).getDescription(),-1);
+                    if(!pList.contains(mTempModel)){
+                        pList.add(mTempModel);
+                    }
+                }else if(mHistory.get(count).getDescription().toLowerCase().contains(pQuery)){
+                    mTempModel = new historyRowModel(mHistory.get(count).getHeader(),mHistory.get(count).getDescription(),-1);
+                    if(!pList.contains(mTempModel)){
+                        pList.add(mTempModel);
+                    }
                 }
             }
         }
@@ -180,10 +183,8 @@ public class historyDataModel {
             }
         }
 
-        ArrayList<String> mDuplicateHandler = new ArrayList<>();
-
-
         /*Duplicate handler*/
+        ArrayList<String> mDuplicateHandler = new ArrayList<>();
         for(int mCounter=0;mCounter<pList.size();mCounter++){
             if(mDuplicateHandler.contains(pList.get(mCounter).getDescription())){
                 pList.remove(mCounter);
@@ -193,12 +194,24 @@ public class historyDataModel {
             }
         }
 
-        if(!pQuery.equals(strings.GENERIC_EMPTY_STR) && !pQuery.equals("about:blank")){
+        if(!pQuery.equals(strings.GENERIC_EMPTY_STR) && !pQuery.equals("about:blank") && !pQuery.contains("?") &&  !pQuery.contains("/")  && !pQuery.contains(" ") && !pQuery.contains("  ") && !pQuery.contains("\n")){
             if(pList.size()<3){
-                pList.add( 0,new historyRowModel(mQueryOriginal+".com", strings.GENERIC_EMPTY_STR,-1));
-                pList.add( 0,new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
+                int sepPos = pQuery.indexOf(".");
+                if (sepPos == -1) {
+                    pList.add( 0,new historyRowModel(mQueryOriginal+".com", strings.GENERIC_EMPTY_STR,-1));
+                    pList.add( 0,new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
+                }else
+                {
+                    if(!pQuery.equals(pQuery.substring(0,sepPos)+".com")){
+                        pList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
+                    }
+                    if(!pQuery.equals(pQuery.substring(0,sepPos)+".onion")){
+                        pList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
+                    }
+                }
             }
             pList.add( 0,new historyRowModel(mQueryOriginal, strings.GENERIC_EMPTY_STR,-1));
+
         }
 
         return pList;

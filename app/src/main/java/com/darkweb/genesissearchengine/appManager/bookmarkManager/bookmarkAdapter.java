@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static com.darkweb.genesissearchengine.constants.constants.BOOKMARK_LOAD_MORE;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_BOOKMARK_LOAD_MORE;
 
 public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listViewHolder>
 {
@@ -67,14 +67,14 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
 
     private void onLoading(){
         mContext.runOnUiThread(() -> {
-            mCurrentList.add(new bookmarkRowModel(BOOKMARK_LOAD_MORE,null,-2));
+            mCurrentList.add(new bookmarkRowModel(CONST_BOOKMARK_LOAD_MORE,null,-2));
             notifyItemInserted(mCurrentList.size());
         });
     }
 
     private void onLoadingClear(){
         for(int mCounter = 0; mCounter< mCurrentList.size(); mCounter++){
-            if(mCurrentList.get(mCounter).getHeader().equals(BOOKMARK_LOAD_MORE)){
+            if(mCurrentList.get(mCounter).getHeader().equals(CONST_BOOKMARK_LOAD_MORE)){
                 int finalM_counter = mCounter;
                 mContext.runOnUiThread(() -> {
                     mCurrentList.remove(finalM_counter);

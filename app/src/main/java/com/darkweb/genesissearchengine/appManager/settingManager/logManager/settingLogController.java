@@ -13,6 +13,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -29,14 +30,14 @@ public class settingLogController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_log_view);
 
         viewsInitializations();
     }
 
-    public void viewsInitializations() {
+    private void viewsInitializations() {
         mListView = findViewById(R.id.pListView);
         activityContextManager.getInstance().onStack(this);
         mSettingLogViewController = new settingLogViewController(this, new settingLogViewCallback(), mListView);
@@ -44,12 +45,9 @@ public class settingLogController extends AppCompatActivity {
         mSettingLogModel = new settingLogModel(new settingLogModelCallback());
     }
 
-    public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
-    }
+    /*View Callbacks*/
 
-    /* LISTENERS */
-    public class settingLogViewCallback implements eventObserver.eventListener{
+    private class settingLogViewCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
@@ -58,8 +56,9 @@ public class settingLogController extends AppCompatActivity {
         }
     }
 
+    /*Model Callbacks*/
 
-    public class settingLogModelCallback implements eventObserver.eventListener{
+    private class settingLogModelCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
@@ -73,6 +72,7 @@ public class settingLogController extends AppCompatActivity {
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
     }
@@ -101,4 +101,9 @@ public class settingLogController extends AppCompatActivity {
         activityContextManager.getInstance().getOrbotLogController().initializeLogs();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogListView));
     }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
 }

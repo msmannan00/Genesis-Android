@@ -4,6 +4,8 @@ import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowMod
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.constants.strings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class bookmarkDataModel {
 
         if(pTitle.equals(""))
         {
-            pTitle = "New_Bookmark"+autoval;
+            pTitle = strings.BOOKMARK_DEFAULT_TITLE+autoval;
         }
 
         String[] params = new String[2];
@@ -73,11 +75,13 @@ public class bookmarkDataModel {
         pQuery = pQuery.toLowerCase();
         ArrayList<historyRowModel> mModel = new ArrayList<>();
 
-        for(int count = 0; count<= mBookmarks.size()-1 && mBookmarks.size()<500; count++){
-            if(mBookmarks.get(count).getHeader().toLowerCase().contains(pQuery)){
-                mModel.add(0, new historyRowModel(mBookmarks.get(count).getHeader(),mBookmarks.get(count).getDescription(),-1));
-            }else if(mModel.size()>0 && mBookmarks.get(count).getDescription().toLowerCase().contains(pQuery)){
-                mModel.add(mModel.size()-1, new historyRowModel(mBookmarks.get(count).getHeader(),mBookmarks.get(count).getDescription(),-1));
+        if(status.sSettingSearchHistory) {
+            for (int count = 0; count <= mBookmarks.size() - 1 && mBookmarks.size() < 500; count++) {
+                if (mBookmarks.get(count).getHeader().toLowerCase().contains(pQuery)) {
+                    mModel.add(0, new historyRowModel(mBookmarks.get(count).getHeader(), mBookmarks.get(count).getDescription(), -1));
+                } else if (mModel.size() > 0 && mBookmarks.get(count).getDescription().toLowerCase().contains(pQuery)) {
+                    mModel.add(mModel.size() - 1, new historyRowModel(mBookmarks.get(count).getHeader(), mBookmarks.get(count).getDescription(), -1));
+                }
             }
         }
         return mModel;

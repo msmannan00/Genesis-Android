@@ -77,7 +77,9 @@
                 <LinearLayout
                     android:id="@+id/pOption1"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="10dp"
                     android:onClick="onSwitchLogUIMode"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
@@ -91,7 +93,6 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:layout_marginTop="20dp"
                         android:paddingStart="15dp"
                         android:text="@string/SETTING_ORBOT_LIST_VIEW"
                         android:textAlignment="textStart"
@@ -105,10 +106,10 @@
                         android:id="@+id/pListView"
                         android:layout_height="match_parent"
                         android:clickable="false"
+                        android:focusable="false"
                         android:layout_marginEnd="10dp"
                         android:theme="@style/SCBSwitch"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent">
+                        android:layout_weight="1">
                     </com.google.android.material.switchmaterial.SwitchMaterial>
 
                 </LinearLayout>

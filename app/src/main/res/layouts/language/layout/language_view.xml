@@ -1,226 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    tools:context="com.darkweb.genesissearchengine.appManager.languageManager.languageController">
+
+    <!-- Title Header -->
+
+    <LinearLayout
+        android:id="@+id/pHeaderContainerTop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="48dp"
         android:background="@color/c_background"
-        tools:context="com.darkweb.genesissearchengine.appManager.languageManager.languageController">
-
-        <!-- Title Header -->
-        <LinearLayout
-            android:id="@+id/pHeaderContainerTop"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:elevation="8dp"
-            android:background="@color/c_background"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="horizontal"
-            android:paddingStart="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry">
-
-            <ImageButton
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="1dp"
-                android:background="@xml/gx_ripple_default_round"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:onClick="onClose"
-                android:src="@xml/ic_arrow_back"
-                android:tint="@color/c_navigation_tint" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:onClick="onClose"
-                android:layout_marginTop="-3dp"
-                android:gravity="center_vertical|start"
-                android:text="@string/LANGUAGE_TITLE"
-                android:textColor="@color/c_text_v1"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-
-            <ImageView
-                android:layout_width="47dp"
-                android:layout_height="match_parent"
-                android:padding="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="6dp"
-                android:paddingStart="3dp"
-                android:onClick="onOpenInfo"
-                android:background="@xml/gx_ripple_gray_round_left"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:src="@drawable/info"
-                app:tint="@color/c_icon_tint_light" />
-
-        </LinearLayout>
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainerTop">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/c_background"
-            android:orientation="vertical"
-            android:paddingBottom="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="1dp"
+            android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="onClose"
+            android:src="@xml/ic_arrow_back"
+            android:tint="@color/c_navigation_tint" />
 
-            <Button
-                android:id="@+id/langEnglish"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_ripple_gray"
-                android:gravity="start|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-3dp"
+            android:gravity="center_vertical|start"
+            android:onClick="onClose"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/LANGUAGE_TITLE"
+            android:textColor="@color/c_text_v1"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/c_view_divier_background" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/pLangGerman"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_ripple_gray"
-                android:gravity="start|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_1"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/c_view_divier_background" />
+        <ImageView
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="0dp"
+            android:background="@xml/gx_ripple_gray_round_left"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="onOpenInfo"
+            android:padding="0dp"
+            android:paddingStart="3dp"
+            android:src="@drawable/info"
+            app:tint="@color/c_icon_tint_light" />
 
-            <Button
-                android:id="@+id/pLangItalian"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_ripple_gray"
-                android:gravity="start|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_2"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14sp" />
+    </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/c_view_divier_background" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/pLangPorteguse"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_ripple_gray"
-                android:gravity="start|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_3"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14sp" />
+    </androidx.recyclerview.widget.RecyclerView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/c_view_divier_background" />
-
-            <Button
-                android:id="@+id/pLangRussian"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_ripple_gray"
-                android:gravity="start|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_4"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/c_view_divier_background" />
-
-            <Button
-                android:id="@+id/pLangUkarian"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_ripple_gray"
-                android:gravity="start|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_5"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/c_view_divier_background" />
-
-            <Button
-                android:id="@+id/pLangChinese"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@xml/gx_ripple_gray"
-                android:gravity="start|center_vertical"
-                android:onClick="onMenuItemInvoked"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/LANGUAGE_LANGUAGE_MESSAGE_BT_6"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/c_view_divier_background" />
-            <!-- Title Header -->
-
-        </LinearLayout>
-    </ScrollView>
+    <ImageView
+        android:id="@+id/pBlocker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:visibility="gone"
+        android:background="@color/clear_alpha"
+        android:contentDescription="@string/GENERAL_TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

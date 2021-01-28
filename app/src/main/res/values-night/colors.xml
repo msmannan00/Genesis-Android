@@ -4,7 +4,7 @@
     <color name="c_background_inverted">#ffffff</color>
     <color name="c_view_divier_background_inner">#0f0f0f</color>
     <color name="c_view_divier_background_inner_v1">#666666</color>
-    <color name="c_view_divier_background">#0f0f0f</color>
+    <color name="c_view_divier_background">#141414</color>
     <color name="c_text_v1">#ffffff</color>
     <color name="c_text_v2">#b3b3b3</color>
     <color name="c_text_v3">#666666</color>
@@ -14,6 +14,8 @@
     <color name="c_security_popup_background">#121216</color>
     <color name="c_security_popup_divider">#121216</color>
     <color name="c_icon_tint_light">#a6a6a6</color>
+    <color name="c_lang_row">#293a56</color>
+    <color name="c_lang_row_border">#3a5278</color>
     <color name="c_text_setting_heading">#33cccc</color>
     <color name="c_button_text_v1">#ffffff</color>
     <color name="c_button_text_v1_inverted">#3385ff</color>

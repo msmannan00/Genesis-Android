@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.generalManager;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -7,9 +8,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.appManager.languageManager.languageController;
+import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -19,16 +23,18 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class settingGeneralController extends AppCompatActivity {
 
     /* PRIVATE VARIABLES */
+
     private settingGeneralModel mSettingGeneralModel;
     private settingGeneralViewController mSettingGeneralViewController;
     private SwitchMaterial mFullScreenMode;
@@ -40,16 +46,15 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
-        onInitTheme();
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting_general_view);
 
+        setContentView(R.layout.setting_general_view);
+        activityContextManager.getInstance().setSettingGeneralController(this);
         viewsInitializations();
-        initializeListeners();
     }
 
-    public void viewsInitializations() {
+    private void viewsInitializations() {
 
         mFullScreenMode = findViewById(R.id.pJSStatus);
         mThemeLight = findViewById(R.id.pThemeLight);
@@ -63,53 +68,71 @@ public class settingGeneralController extends AppCompatActivity {
         mSettingGeneralModel = new settingGeneralModel(new settingGeneralModelCallback());
     }
 
-    public void onInitTheme(){
+    private void onInitTheme(){
 
         if(status.sTheme == enums.Theme.THEME_DARK){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            activityContextManager.getInstance().getHomeController().recreate();
         }else if(status.sTheme == enums.Theme.THEME_LIGHT){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            activityContextManager.getInstance().getHomeController().recreate();
         }else {
             if(!status.sDefaultNightMode){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                activityContextManager.getInstance().getHomeController().recreate();
             }else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                activityContextManager.getInstance().getHomeController().recreate();
             }
         }
     }
 
-    public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
-    }
+    /*View Callbacks*/
 
-    /* LISTENERS */
-    public class settingGeneralViewCallback implements eventObserver.eventListener{
+    private class settingGeneralViewCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
             if(settingGeneralEnums.eGeneralViewCallback.M_RESET_THEME_INVOKED_BACK.equals(e_type))
             {
-                helperMethod.restartActivity(getIntent(), settingGeneralController.this);
-                new Handler().postDelayed(() -> {
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    activityContextManager.getInstance().getSettingController().applyTheme();
-                }, 100);
+                boolean mIsThemeChangable = false;
+                if(status.sTheme == enums.Theme.THEME_DARK){
+                    if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES){
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        mIsThemeChangable = true;
+                    }
+                }
+                else if(status.sTheme == enums.Theme.THEME_LIGHT){
+                    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        mIsThemeChangable = true;
+                    }
+                }
+
+                if(mIsThemeChangable){
+                    status.mThemeApplying = true;
+                    onInitTheme();
+                    onBackPressed();
+                    overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+                    activityContextManager.getInstance().getSettingController().onReInitTheme();
+                    activityContextManager.getInstance().getHomeController().onReInitTheme();
+                    helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this,true);
+                }
             }
             return null;
         }
     }
 
-    public class settingGeneralModelCallback implements eventObserver.eventListener{
+    /*Model Callbacks*/
+
+    private class settingGeneralModelCallback implements eventObserver.eventListener{
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
             return null;
         }
-    }
-
-    public void initializeListeners(){
     }
 
     /* LOCAL OVERRIDES */
@@ -117,6 +140,7 @@ public class settingGeneralController extends AppCompatActivity {
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
     }
@@ -133,7 +157,14 @@ public class settingGeneralController extends AppCompatActivity {
         finish();
     }
 
+    /*External Redirection*/
+
+    public void onLanguageChanged(){
+        setContentView(R.layout.setting_general_view);
+    }
+
     /*UI Redirection*/
+
     public void onClose(View view){
         finish();
     }
@@ -175,6 +206,10 @@ public class settingGeneralController extends AppCompatActivity {
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME,status.sTheme));
             }
         }
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     public void onURLInNewTab(View view) {

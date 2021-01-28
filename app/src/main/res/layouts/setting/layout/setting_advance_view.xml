@@ -110,6 +110,8 @@
 
                 <LinearLayout
                     android:id="@+id/pOption1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@xml/gx_ripple_gray"
@@ -119,14 +121,13 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -158,11 +159,12 @@
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/pRestoreTabs"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="11dp"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:theme="@style/SCBSwitch" />
 
@@ -173,7 +175,9 @@
                 <LinearLayout
                     android:id="@+id/pOption2"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onToolbarTheme"
                     android:orientation="horizontal"
@@ -181,12 +185,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -218,11 +221,12 @@
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/pToolbarTheme"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_marginEnd="11dp"
-                        android:background="@android:color/transparent"
                         android:theme="@style/SCBSwitch"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -394,8 +398,10 @@
                 <LinearLayout
                     android:id="@+id/pOption4"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:onClick="onShowWebFonts"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
@@ -403,12 +409,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -440,12 +445,13 @@
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/pShowWebFonts"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:theme="@style/SCBSwitch"
                         android:layout_marginEnd="11dp"
-                        android:background="@android:color/transparent"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>

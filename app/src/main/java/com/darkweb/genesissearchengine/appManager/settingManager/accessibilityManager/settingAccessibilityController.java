@@ -15,6 +15,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ import java.util.List;
 public class settingAccessibilityController  extends AppCompatActivity {
 
     /* PRIVATE VARIABLES */
+
     private settingAccessibilityModel mSettingAccessibilityModel;
     private settingAccessibilityViewController mSettingAccessibilityViewController;
     private SwitchMaterial mZoom;
@@ -32,17 +34,25 @@ public class settingAccessibilityController  extends AppCompatActivity {
     private TextView mSeekBarSample;
     private TextView mScalePercentage;
 
+    /* PRIVATE LOCAL VARIABLES */
+
+    private boolean mIsSettingChanged = false;
+    private float mDefaultFontSize = status.sSettingFontSize;
+
+    /* Initializations */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.setting_accessibility_view);
 
         viewsInitializations();
         initializeListeners();
     }
 
-    public void viewsInitializations() {
+    private void viewsInitializations() {
         mZoom = findViewById(R.id.pZoom);
         mVoiceInput = findViewById(R.id.pVoiceInput);
         mSeekBar = findViewById(R.id.pSeekBar);
@@ -54,27 +64,7 @@ public class settingAccessibilityController  extends AppCompatActivity {
         mSettingAccessibilityModel = new settingAccessibilityModel(new settingAccessibilityController.settingAccessibilityModelCallback());
     }
 
-    /* LISTENERS */
-    public class settingAccessibilityViewCallback implements eventObserver.eventListener{
-
-        @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
-            return null;
-        }
-    }
-
-
-    public class settingAccessibilityModelCallback implements eventObserver.eventListener{
-
-        @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
-            return null;
-        }
-    }
-
-    public void initializeListeners(){
+    private void initializeListeners(){
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -87,6 +77,7 @@ public class settingAccessibilityController  extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                mIsSettingChanged = true;
                 int percentage = ((progress+5)*10);
                 mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_SAMPLE_TEXT, Collections.singletonList((int)((12.0*percentage)/100)));
                 mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_PERCENTAGE, Collections.singletonList((percentage+ constants.CONST_PERCENTAGE_SIGN)));
@@ -98,11 +89,34 @@ public class settingAccessibilityController  extends AppCompatActivity {
         });
     }
 
+    /*View Callbacks*/
+
+    private class settingAccessibilityViewCallback implements eventObserver.eventListener{
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type)
+        {
+            return null;
+        }
+    }
+
+    /*Model Callbacks*/
+
+    private class settingAccessibilityModelCallback implements eventObserver.eventListener{
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type)
+        {
+            return null;
+        }
+    }
+
     /* LOCAL OVERRIDES */
 
     @Override
     public void onResume()
     {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
     }
@@ -118,7 +132,6 @@ public class settingAccessibilityController  extends AppCompatActivity {
         onClose(null);
     }
 
-
     /*UI Redirection*/
 
     public void onOpenInfo(View view) {
@@ -128,6 +141,10 @@ public class settingAccessibilityController  extends AppCompatActivity {
     public void onClose(View view){
         activityContextManager.getInstance().onRemoveStack(this);
         finish();
+
+        if(mIsSettingChanged && mDefaultFontSize!=status.sSettingFontSize){
+            activityContextManager.getInstance().getHomeController().initRuntimeSettings();
+        }
     }
 
     public void onZoomSettingUpdate(View view){

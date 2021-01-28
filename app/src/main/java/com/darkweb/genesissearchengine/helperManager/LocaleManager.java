@@ -21,19 +21,6 @@ public class LocaleManager {
     }
 
     public void onResume(Activity activity) {
-        // If the activity has the incorrect locale, restart it
-        //if (!currentLocale.equals(getSelectedLocale(activity))) {
-            //Intent intent = activity.getIntent();
-            //activity.finish();
-            //activity.overridePendingTransition(0, 0);
-            //activity.startActivity(intent);
-            //activity.overridePendingTransition(0, 0);
-        //}
-    }
-
-    public void updateServiceLocale(Service service) {
-        currentLocale = getSelectedLocale(service);
-        setContextLocale(service, currentLocale);
     }
 
     private static Locale getSelectedLocale(Context context) {

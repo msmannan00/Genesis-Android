@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pMainLayout"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@xml/hox_rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,9 +73,9 @@
             android:padding="7dp"
             android:paddingStart="11dp"
             android:paddingEnd="8dp"
-            android:textColor="@color/text_color_v2"
-            android:textColorHint="@color/text_color_v2"
-            android:textColorHighlight="@color/text_color_highlight_v1"
+            android:textColor="@color/c_text_v1"
+            android:textColorHighlight="@color/text_color_highlight_v3"
+            android:textColorHint="@color/c_text_v2"
             android:textCursorDrawable="@xml/gx_search_cursor_state"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/pDivider"

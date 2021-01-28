@@ -284,9 +284,10 @@
                         android:layout_height="match_parent"
                         android:id="@+id/pZoom"
                         android:layout_marginEnd="10dp"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:layout_weight="1"
                         android:theme="@style/SCBSwitch"
-                        android:background="@android:color/transparent"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
@@ -344,10 +345,11 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:layout_weight="1"
                         android:id="@+id/pVoiceInput"
                         android:theme="@style/SCBSwitch"
-                        android:background="@android:color/transparent"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>

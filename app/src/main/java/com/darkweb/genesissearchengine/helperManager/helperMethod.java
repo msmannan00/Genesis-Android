@@ -54,6 +54,7 @@ import javax.net.ssl.HttpsURLConnection;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_PLAYSTORE_URL;
 
 public class helperMethod
 {
@@ -189,7 +190,7 @@ public class helperMethod
                 .setType("text/plain")
                 .setChooserTitle("Hi! Check out this Awesome App")
                 .setSubject("Hi! Check out this Awesome App")
-                .setText("Genesis | Onion Search | http://play.google.com/store/apps/details?id=" + context.getPackageName())
+                .setText("Genesis | Onion Search | " + CONST_PLAYSTORE_URL)
                 .startChooser();
     }
 
@@ -283,6 +284,53 @@ public class helperMethod
             return "";
         }
 
+    }
+
+    public static String langaugeWithoutTranslation(String pLangauge) {
+        switch (pLangauge) {
+            case "en_US":
+                return "English (United States)";
+            case "de_DE":
+                return "German (Deutsche)";
+            case "ca_ES":
+                return "Catalan (Català)";
+            case "zh_CN":
+                return "Chinese （中文-中国）";
+            case "ch_CZ":
+                return "Czech （čeština）";
+            case "nl_NL":
+                return "Dutch （Netherland）";
+            case "fr_FR":
+                return "French （francaise）";
+            case "el_GR":
+                return "Greek （Ελληνικά）";
+            case "hu_HU":
+                return "Hungarian （Magyar）";
+            case "in_ID":
+                return "Indonesian （bahasa）";
+            case "it_IT":
+                return "Italian （Italiana）";
+            case "ja_JP":
+                return "Japanese （日本人）";
+            case "ko_KR":
+                return "Korean （韓国語）";
+            case "pt_PT":
+                return "Portuguese （Português）";
+            case "ro_RO":
+                return "Romanian （Română）";
+            case "ru_RU":
+                return "Russian （русский）";
+            case "th_TH":
+                return "Thai （ไทย）";
+            case "tr_TR":
+                return "Turkish （Türk）";
+            case "uk_UA":
+                return "Ukrainian （Український）";
+            case "vi_VN":
+                return "Vietnamese （Tiếng Việt）";
+        }
+
+        return "Not Defined";
     }
 
     public static String capitalizeString(String string) {

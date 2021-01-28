@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/c_background"
-        tools:context="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController">
+        tools:context="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -79,7 +79,9 @@
                 <LinearLayout
                     android:id="@+id/pOption2"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onDefaultBrowser"
                     android:orientation="horizontal"
@@ -121,7 +123,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onManageGeneral"
                     android:orientation="horizontal"
@@ -136,12 +140,12 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         app:tint="@color/c_icon_tint"
-                        android:src="@drawable/ic_baseline_home"
+                        android:src="@xml/ic_baseline_home"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -149,7 +153,6 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -198,7 +201,9 @@
                 <LinearLayout
                     android:id="@+id/pOption4"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onManageSearchEngine"
                     android:orientation="horizontal"
@@ -218,7 +223,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -226,7 +231,6 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -275,7 +279,9 @@
                 <LinearLayout
                     android:id="@+id/pOption7"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onManageSearchPrivacy"
                     android:orientation="horizontal"
@@ -290,12 +296,12 @@
                         app:tint="@color/c_icon_tint"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:src="@drawable/ic_baseline_privacy"
+                        android:src="@xml/ic_baseline_privacy"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -303,7 +309,6 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -352,7 +357,9 @@
                 <LinearLayout
                     android:id="@+id/pOption3"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:onClick="onManageNotification"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
@@ -367,18 +374,17 @@
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:src="@drawable/ic_baseline_notifications"
+                        android:src="@xml/ic_baseline_notifications"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -427,7 +433,9 @@
                 <LinearLayout
                     android:id="@+id/pOption5"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:onClick="onManageSearchAccessibility"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
@@ -442,19 +450,18 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         app:tint="@color/c_icon_tint"
-                        android:src="@drawable/ic_baseline_accessibility"
+                        android:src="@xml/ic_baseline_accessibility"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:clickable="false"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -503,7 +510,9 @@
                 <LinearLayout
                     android:id="@+id/pOption6"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:onClick="onManageSearchClearData"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
@@ -518,19 +527,18 @@
                         app:tint="@color/c_icon_tint"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:src="@drawable/ic_baseline_clear"
+                        android:src="@xml/ic_baseline_clear"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:clickable="false"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -579,7 +587,9 @@
                 <LinearLayout
                     android:id="@+id/pOption8"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:onClick="onManageSearchAdvanced"
                     android:background="@xml/gx_ripple_gray"
                     android:orientation="horizontal"
@@ -600,13 +610,12 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="6"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:clickable="false"
                         android:orientation="vertical">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -657,6 +666,8 @@
                     android:id="@+id/pOption9"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onOpenProxyStatus"
                     android:orientation="horizontal"
@@ -676,7 +687,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -684,7 +695,6 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -729,14 +739,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
                     android:id="@+id/pOption10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onReportWebsite"
                     android:orientation="horizontal"
@@ -756,7 +766,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -764,7 +774,6 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -809,6 +818,8 @@
                     android:id="@+id/pOption11"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onRateApplication"
                     android:orientation="horizontal"
@@ -828,7 +839,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -836,7 +847,6 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
@@ -881,6 +891,8 @@
                     android:id="@+id/pOption12"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onShareApplication"
                     android:orientation="horizontal"
@@ -900,7 +912,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -908,7 +920,6 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"

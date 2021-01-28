@@ -5,7 +5,8 @@ import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkContro
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
-import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController;
+import com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController;
+import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 import java.util.ArrayList;
 
@@ -25,7 +26,8 @@ public class activityContextManager
     private homeController pHomeController;
     private tabController pTabController;
     private android.app.Activity pCurrentActivity = null;
-    private settingController pSettingController;
+    private settingHomeController pSettingController;
+    private settingGeneralController pSettingGeneralController;
     private orbotLogController pOrbotLogController;
     private ArrayList<AppCompatActivity> mStackList;
 
@@ -72,10 +74,18 @@ public class activityContextManager
         this.pOrbotLogController = pOrbotLogController;
     }
 
-    public settingController getSettingController(){
+
+    public settingGeneralController getSettingGeneralController(){
+        return pSettingGeneralController;
+    }
+    public void setSettingGeneralController(settingGeneralController pSettingGeneralController){
+        this.pSettingGeneralController = pSettingGeneralController;
+    }
+
+    public settingHomeController getSettingController(){
         return pSettingController;
     }
-    public void setSettingController(settingController pSettingController){
+    public void setSettingController(settingHomeController pSettingController){
         this.pSettingController = pSettingController;
     }
 

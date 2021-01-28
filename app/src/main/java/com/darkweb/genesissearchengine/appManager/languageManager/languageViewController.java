@@ -4,20 +4,32 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.example.myapplication.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class languageViewController
 {
-    /*ViewControllers*/
+    /*Private Variables*/
+
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
+    private ImageView mBlocker;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context){
+    /*Initializations*/
+
+    protected void initialization(eventObserver.eventListener pEvent, AppCompatActivity context, ImageView pBlocker){
         this.mContext = context;
+        this.mBlocker = pBlocker;
+        this.mEvent = pEvent;
+
         initPostUI();
     }
 
@@ -37,4 +49,20 @@ class languageViewController
             }
         }
     }
+
+    private void initBlocker(boolean pStatus){
+        if(pStatus){
+            mBlocker.setVisibility(View.VISIBLE);
+        }else {
+            mBlocker.setVisibility(View.GONE);
+        }
+    }
+
+    public Object onTrigger(languageEnums.eLanguagevViewController pCommands, List<Object> pData){
+        if(languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER.equals(pCommands)){
+            initBlocker((boolean)pData.get(0));
+        }
+        return null;
+    }
+
 }

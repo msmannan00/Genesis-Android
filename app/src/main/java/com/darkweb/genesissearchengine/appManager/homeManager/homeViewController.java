@@ -124,11 +124,16 @@ class homeViewController
         this.mAppBar = pAppBar;
         this.mOrbotLogManager = pOrbotLogManager;
 
+        initializeViews();
         initSplashScreen();
         initializeSuggestionView(suggestions);
         createUpdateUiHandler();
         recreateStatusBar();
         initTopBarPadding();
+    }
+
+    public void initializeViews(){
+        mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
     }
 
     public void initTopBarPadding(){
@@ -200,6 +205,8 @@ class homeViewController
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
             }
         }
+
+        //mContext.getWindow().getDecorView().setSystemUiVisibility(status.sTheme);
     }
 
     public void initStatusBarColor(boolean mInstant) {
@@ -316,6 +323,7 @@ class homeViewController
                     }
                     if(!status.sSettingIsAppStarted){
                         startPostTask(messages.MESSAGE_ON_URL_LOAD);
+                        mContext.runOnUiThread(() -> splashScreenDisable());
                     }else {
                         mContext.runOnUiThread(() -> mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME));
                     }
@@ -332,13 +340,18 @@ class homeViewController
         mSplashScreen.bringToFront();
         splashScreenDisable();
     }
-    private void splashScreenDisable(){
+    public void splashScreenDisable(){
         mTopBar.setAlpha(1);
 
         if(mSplashScreen.getAlpha()==1){
             triggerPostUI();
             mProgressBar.setVisibility(View.GONE);
-            mSplashScreen.animate().setStartDelay(0).alpha(0);
+            mSplashScreen.animate().setStartDelay(0).alpha(0).withEndAction(() -> {
+                mSplashScreen.setClickable(false);
+                mSplashScreen.setFocusable(false);
+                mSearchbar.setEnabled(true);
+            });
+            mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
             mOrbotLogManager.setClickable(false);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 initStatusBarColor(false);
@@ -352,7 +365,6 @@ class homeViewController
     }
 
     private void triggerPostUI(){
-        onUpdateToolbarTheme();
         mAppBar.setExpanded(true,true);
         if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<10000){
             mProgressBar.animate().setStartDelay(0).alpha(1);
@@ -487,20 +499,22 @@ class homeViewController
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
     void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText){
-        int delay = 0;
-        handlerLocalUrl = url;
+        if(!mSearchbar.hasFocus() || pClearText){
+            int delay = 0;
+             handlerLocalUrl = url;
 
-        if(searchBarUpdateHandler.hasMessages(100)){
-            return;
+            if(searchBarUpdateHandler.hasMessages(100)){
+                return;
+            }
+
+            searchBarUpdateHandler.sendEmptyMessage(100);
+            searchBarUpdateHandler.postDelayed(() ->
+            {
+                searchBarUpdateHandler.removeMessages(100);
+                triggerUpdateSearchBar(handlerLocalUrl,showProtocol, pClearText);
+
+            }, delay);
         }
-
-        searchBarUpdateHandler.sendEmptyMessage(100);
-        searchBarUpdateHandler.postDelayed(() ->
-        {
-            searchBarUpdateHandler.removeMessages(100);
-            triggerUpdateSearchBar(handlerLocalUrl,showProtocol, pClearText);
-
-        }, delay);
     }
 
     public void onUpdateFindBarCount(int index, int total)
@@ -705,10 +719,10 @@ class homeViewController
     }
 
     void onProgressBarUpdate(int value){
-        if(mProgressBar.getVisibility()==View.GONE){
-            mProgressBar.setVisibility(View.VISIBLE);
-        }
-        else if(value != mProgressBar.getProgress()){
+        mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.animate().cancel();
+
+        if(value != mProgressBar.getProgress()){
             if(value<=5 && value>0){
                 mProgressBar.setProgress(5);
             }else {

@@ -1,57 +1,43 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
-import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-
-import java.util.UUID;
+import com.flurry.android.FlurryAgent;
+import java.util.List;
 
 class analyticManager
 {
-    /*Private Variables */
+    /*Private Variables*/
 
     private AppCompatActivity mAppContext;
-    private String mUniqueID = null;
 
     /*Initializations*/
 
-    analyticManager(AppCompatActivity app_context, eventObserver.eventListener event){
-        this.mAppContext = app_context;
+    analyticManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent){
+        this.mAppContext = pAppContext;
         initialize();
     }
 
-    private void initialize(){
-        final String PREF_UNIQUE_ID = constants.CONST_UNIQUE_KEY_ID;
+    private void initialize()
+    {
+        new FlurryAgent.Builder()
+                .withLogEnabled(true)
+                .build(mAppContext, "BKFSCH4CRS6RB9HSCM9H");
+    }
 
-        if (mUniqueID == null)
-        {
-            SharedPreferences sharedPrefs = mAppContext.getSharedPreferences(
-                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
-            mUniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
-            if (mUniqueID == null) {
+    /*External Triggers*/
 
-                new Thread(){
-                    public void run(){
-                        try{
-                            mUniqueID = UUID.randomUUID().toString();
-                        }catch (Exception ex){
-                            mUniqueID = UUID.randomUUID().toString();
-                        }
-
-                        SharedPreferences.Editor editor = sharedPrefs.edit();
-                        editor.putString(PREF_UNIQUE_ID, mUniqueID);
-                        editor.apply();
-                    }
-                }.start();
-            }
+    private void logEvent(String pValue)
+    {
+        if(FlurryAgent.isSessionActive()){
+            FlurryAgent.logEvent(pValue);
         }
     }
 
-    /*Helper Methods*/
-
-    void logUser(){
+    void onTrigger(List<Object> pData, pluginEnums.eAnalyticManager pEventType) {
+        if(pEventType.equals(pluginEnums.eAnalyticManager.M_LOG_EVENT))
+        {
+            //logEvent((String) pData.get(0));
+        }
     }
-
 }

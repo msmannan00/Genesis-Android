@@ -8,14 +8,9 @@ import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-import java.util.Arrays;
-
+import java.util.List;
 import com.darkweb.genesissearchengine.constants.*;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
 import static org.torproject.android.service.TorServiceConstants.ACTION_START;
 
 class orbotManager
@@ -34,57 +29,58 @@ class orbotManager
         return sOurInstance;
     }
 
-    public void initialize(AppCompatActivity app_context, eventObserver.eventListener event){
-        initNotification((Integer) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS,1)));
+    public void initialize(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, int pNotificationStatus){
+        this.mAppContext = pAppContext;
+        onInitNotificationStatus(pNotificationStatus);
     }
 
-    void startOrbot(Context context){
+    private void onStartOrbot(){
         orbotLocalConstants.mBridges = status.sBridgeCustomBridge;
         orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
-        this.mAppContext = context;
         Prefs.putBridgesEnabled(status.sBridgeGatewayManual |status.sBridgeGatewayAuto);
-        Intent mServiceIntent = new Intent(context, OrbotService.class);
+        Intent mServiceIntent = new Intent(mAppContext, OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(mServiceIntent);
+            mAppContext.startForegroundService(mServiceIntent);
         }
         else
         {
-            context.startService(mServiceIntent);
+            mAppContext.startService(mServiceIntent);
         }
         initializeProxy();
     }
 
-    int getNotificationStatus(){
+    /*Helper Methods*/
+
+    private int onGetNotificationStatus(){
         return orbotLocalConstants.mNotificationStatus;
     }
-    void initNotification(int status){
+    private void onInitNotificationStatus(int status){
         orbotLocalConstants.mNotificationStatus = status;
     }
-    void enableTorNotification(){
+    private void onEnableTorNotification(){
         OrbotService.getServiceObject().enableNotification();
     }
-    void disableTorNotification(){
+    private void onDisableTorNotification(){
         OrbotService.getServiceObject().disableNotification();
     }
-
-    void enableTorNotificationNoBandwidth(){
+    private void onEnableTorNotificationNoBandwidth(){
         OrbotService service = OrbotService.getServiceObject();
         if(service!=null){
             OrbotService.getServiceObject().enableTorNotificationNoBandwidth();
         }
     }
 
-    public void updateBridges(boolean p_status){
+    private  void onUpdateBridges(boolean p_status){
         Prefs.putBridgesEnabled(p_status);
     }
-    public void updateVPN(boolean p_status){
+    private  void onUpdateVPN(boolean p_status){
         Prefs.putUseVpn(p_status);
     }
 
-    /*------------------------------------------------------- POST TASK HANDLER -------------------------------------------------------*/
+    /*Proxy Manager*/
 
-    void setProxy(String url){
+    private void onSetProxy(String url){
         if(url.contains("boogle.store")){
             PrefsHelper.setPref(keys.PROXY_TYPE, 0);
             PrefsHelper.setPref(keys.PROXY_SOCKS,null);
@@ -124,10 +120,10 @@ class orbotManager
         PrefsHelper.setPref("browser.cache.memory.enable",true);
         PrefsHelper.setPref("browser.cache.disk.capacity",1000);
 
-        setPrivacyPrefs();
+        onUpdatePrivacyPreferences();
     }
 
-    public void setPrivacyPrefs ()
+    private void onUpdatePrivacyPreferences()
     {
         PrefsHelper.setPref(keys.PROXY_IMAGE, status.sShowImages);
         PrefsHelper.setPref("browser.display.show_image_placeholders",true);
@@ -152,8 +148,9 @@ class orbotManager
         PrefsHelper.setPref("media.peerconnection.enabled",false); //webrtc disabled
     }
 
+    /*Log Manager*/
 
-    String getLogs()
+    private String getLogs()
     {
         String logs = orbotLocalConstants.mTorLogsStatus;
 
@@ -161,12 +158,6 @@ class orbotManager
             logs = "Initializing Bootstrap";
             mLogsStarted = true;
         }
-        else {
-            // logs = logs.replaceAll("[^a-zA-Z0-9%\\s+]", "");
-            // logs = helperMethod.capitalizeString(logs);
-            // logs = logs.replace("(","").replace(":","_FERROR_").replace("NOTICE","").replace(")","").replace("_FERROR_","");
-        }
-
 
         if(!logs.equals(strings.GENERIC_EMPTY_STR))
         {
@@ -177,11 +168,74 @@ class orbotManager
         return "Loading Please Wait";
     }
 
-    boolean isOrbotRunning(){
+    private boolean isOrbotRunning(){
         return orbotLocalConstants.mIsTorInitialized;
     }
 
-    String getOrbotStatus(){
-        return orbotLocalConstants.mCurrentStatus;
+    private String getOrbotStatus(){
+        return OrbotService.getServiceObject().getProxyStatus();
     }
+
+    /*External Triggers*/
+
+    Object onTrigger(List<Object> pData, pluginEnums.eOrbotManager pEventType) {
+        if(pEventType.equals(pluginEnums.eOrbotManager.M_GET_NOTIFICATION_STATUS))
+        {
+            return onGetNotificationStatus();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION))
+        {
+            onEnableTorNotification();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION))
+        {
+            onDisableTorNotification();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION_NO_BANDWIDTH))
+        {
+            onEnableTorNotificationNoBandwidth();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_GET_LOGS))
+        {
+            return getLogs();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_PRIVACY))
+        {
+            onUpdatePrivacyPreferences();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_START_ORBOT))
+        {
+            onStartOrbot();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING))
+        {
+            isOrbotRunning();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS))
+        {
+            return getOrbotStatus();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN))
+        {
+            onUpdateVPN((boolean)pData.get(0));
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES))
+        {
+            onUpdateBridges((boolean)pData.get(0));
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_SET_PROXY))
+        {
+            onSetProxy((String)pData.get(0));
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_SHOW_NOTIFICATION_STATUS))
+        {
+            onInitNotificationStatus((int)pData.get(0));
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_ORBOT_RUNNING))
+        {
+            return isOrbotRunning();
+        }
+        return null;
+    }
+
 }

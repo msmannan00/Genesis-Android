@@ -34,9 +34,10 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"/>
 
         <activity
-                android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingController"
+                android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:label="@string/SETTING_HEADER"
+                android:launchMode="singleTop"
                 android:windowSoftInputMode="adjustPan" />
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.historyManager.historyController"
@@ -119,7 +120,7 @@
                 android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController"
                 android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout"
                 android:launchMode="singleTop"
-                android:screenOrientation="portrait"
+                android:screenOrientation="unspecified"
                 android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

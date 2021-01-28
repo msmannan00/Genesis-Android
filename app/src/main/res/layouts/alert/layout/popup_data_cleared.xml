@@ -7,8 +7,8 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/pMainLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@xml/hox_rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,13 +36,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:alpha="0.6"
+            android:paddingStart="15dp"
             android:paddingEnd="10dp"
             android:text="@string/ALERT_DATA_CLEARED_INFO"
             android:textAlignment="textStart"
-            android:paddingStart="15dp"
             android:textColor="@color/c_alert_text"
             android:textSize="13sp"
-            android:alpha="0.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pHeader"
@@ -59,25 +59,27 @@
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
             android:id="@+id/pNavigationContainer"
+            android:layout_width="409dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDivider"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/pDescription">
+
             <Button
                 android:id="@+id/pDismiss"
-                android:textColor="@color/c_button_text_v1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="0dp"
                 android:background="@xml/ax_ripple_default_round_bottom"
-                android:textSize="15sp"
+                android:padding="0dp"
+                android:text="@string/ALERT_DISMISS"
                 android:textAllCaps="false"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/ALERT_DISMISS" />
+                android:textColor="@color/c_button_text_v1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -30,7 +30,6 @@ class settingClearViewController
         this.mContext = pContext;
         this.mCheckBoxList = pCheckBoxList;
 
-        initViews();
         initPostUI();
     }
 
@@ -49,10 +48,6 @@ class settingClearViewController
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
             }
         }
-    }
-
-    private void initViews()
-    {
     }
 
     private void onClearCheckbox(int pIndex, boolean pStatus){

@@ -34,7 +34,8 @@ class homeModel
                 ex.printStackTrace();
             }
 
-            return pSearchEngine.replace("$s",pURL.replaceAll(" ","+"));
+            String mURL = pSearchEngine.replace("$s",pURL.replaceAll(" ","+"));
+            return mURL;
         }
     }
 

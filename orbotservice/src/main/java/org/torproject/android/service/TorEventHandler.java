@@ -92,7 +92,7 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
             int iconId = R.drawable.ic_stat_tor;
 
             if (read > 0 || written > 0)
-                iconId = R.drawable.ic_stat_tor_xfer;
+                iconId = R.drawable.ic_stat_tor;
 
             String sb = formatCount(read) +
                     " \u2193" +

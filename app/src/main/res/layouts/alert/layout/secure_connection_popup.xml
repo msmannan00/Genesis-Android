@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@xml/ax_border_left"
+            android:background="@xml/ax_border_top"
             android:orientation="vertical"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"

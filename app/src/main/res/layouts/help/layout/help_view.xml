@@ -177,7 +177,7 @@
             android:clickable="true"
             android:orientation="vertical">
 
-            <com.darkweb.genesissearchengine.appManager.helpManager.editTextManager
+            <com.darkweb.genesissearchengine.appManager.helpManager.editViewController
                 android:id="@+id/pSearchInput"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

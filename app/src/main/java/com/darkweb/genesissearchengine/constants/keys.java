@@ -24,6 +24,7 @@ public class keys
     /*Settings*/
 
     public static final String SETTING_LANGUAGE = "LANGUAGE";
+    public static final String SETTING_LANGUAGE_REGION = "LANGUAGE_REGION";
     public static final String SETTING_SEARCH_ENGINE = "SEARCH_ENGINE";
     public static final String SETTING_FIRST_INSTALLED = "FIRST_INSTALLED";
     public static final String SETTING_JAVA_SCRIPT = "JAVA_SCRIPT";

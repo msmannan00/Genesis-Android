@@ -7,14 +7,12 @@ import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -22,6 +20,7 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +37,7 @@ public class helpController extends AppCompatActivity {
     private RecyclerView mRecycleView;
     private ConstraintLayout mRetryContainer;
     private Button mReloadButton;
-    private editTextManager mSearchInput;
+    private editViewController mSearchInput;
 
     /*Private Variables*/
     private Handler mSearchInvokedHandler = new Handler();
@@ -46,7 +45,7 @@ public class helpController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onCreate(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_view);
 
@@ -74,7 +73,7 @@ public class helpController extends AppCompatActivity {
 
     }
 
-    public void initializeLocalEventHandlers(){
+    private void initializeLocalEventHandlers(){
 
         mRecycleView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
 
@@ -105,9 +104,7 @@ public class helpController extends AppCompatActivity {
 
         mSearchInput.setEventHandler(new edittextManagerCallback());
 
-        postToServerRunnable = () -> {
-            mHelpAdapter.onTrigger(helpEnums.eHelpAdapter.M_INIT_FILTER, Collections.singletonList(mSearchInput.getText().toString()));
-        };
+        postToServerRunnable = () -> mHelpAdapter.onTrigger(helpEnums.eHelpAdapter.M_INIT_FILTER, Collections.singletonList(mSearchInput.getText().toString()));
 
         mSearchInput.addTextChangedListener(new TextWatcher() {
 
@@ -127,35 +124,9 @@ public class helpController extends AppCompatActivity {
         });
     }
 
-    public class edittextManagerCallback implements eventObserver.eventListener {
 
-        @Override
-        public Object invokeObserver(List<Object> data, Object e_type) {
 
-            if(e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)){
-                mSearchInput.clearFocus();
-                //helperMethod.hideKeyboard(helpController.this);
-            }
-            return null;
-        }
-    }
-
-    public void onOpenHelp(View view) {
-        helperMethod.sendIssueEmail(this);
-    }
-
-    /*LISTENERS CALLBACKS*/
-
-    private class helpViewCallback implements eventObserver.eventListener{
-
-        @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
-            return null;
-        }
-    }
-
-    /*CALLBACKS HELPER FUNCTIONS*/
+    /*HELPER FUNCTIONS*/
 
     private void onShowHelperManager(ArrayList<helpDataModel> pHelpListModel){
         mHelpAdapter = new helpAdapter(pHelpListModel, getApplicationContext());
@@ -168,7 +139,34 @@ public class helpController extends AppCompatActivity {
         mSearchInput.animate().setDuration(300).alpha(1);
     }
 
-    /*LISTENERS*/
+    /*Ediitext Callback*/
+
+    private class edittextManagerCallback implements eventObserver.eventListener {
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type) {
+
+            if(e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)){
+                mSearchInput.clearFocus();
+                //helperMethod.hideKeyboard(helpController.this);
+            }
+            return null;
+        }
+    }
+
+    /*Helper View Callback*/
+
+    private class helpViewCallback implements eventObserver.eventListener{
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type)
+        {
+            return null;
+        }
+    }
+
+
+    /*Adapter Callbacks*/
 
     private class helpAdapterCallback implements eventObserver.eventListener{
 
@@ -198,14 +196,8 @@ public class helpController extends AppCompatActivity {
         mHelpModel.onTrigger(helpEnums.eHelpModel.M_LOAD_HELP_DATA,null);
     }
 
-    @Override
-    public void onBackPressed() {
-        if(mSearchInput.hasFocus()){
-            mSearchInput.clearFocus();
-        }else {
-            finish();
-        }
-        super.onBackPressed();
+    public void onOpenHelp(View view) {
+        helperMethod.sendIssueEmail(this);
     }
 
     public void onOpenHelpExternal(View view) {
@@ -216,5 +208,24 @@ public class helpController extends AppCompatActivity {
         finish();
         activityContextManager.getInstance().onClearStack();
     }
+
+    /*Local Overrides*/
+
+    @Override
+    protected void onResume() {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
+        super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mSearchInput.hasFocus()){
+            mSearchInput.clearFocus();
+        }else {
+            finish();
+        }
+        super.onBackPressed();
+    }
+
 
 }
