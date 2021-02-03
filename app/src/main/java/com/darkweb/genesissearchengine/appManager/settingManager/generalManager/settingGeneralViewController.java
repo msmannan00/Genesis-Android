@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralEnums.eGeneralViewCallback.M_RESET_THEME_INVOKED_BACK;
+import static com.flurry.sdk.jo.v;
 
 class settingGeneralViewController
 {
@@ -108,12 +109,14 @@ class settingGeneralViewController
         mThemeDark.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint_default)));
         mThemeLight.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint_default)));
         mThemeDefault.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint_default)));
+
         mThemeDark.setChecked(false);
         mThemeLight.setChecked(false);
         mThemeDefault.setChecked(false);
     }
 
-    private void setThemeLight(int pTheme){
+    private void setTheme(int pTheme){
+
         if(pTheme == enums.Theme.THEME_LIGHT){
             mThemeLight.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
             mThemeLight.setChecked(true);
@@ -128,7 +131,7 @@ class settingGeneralViewController
 
     public Object onTrigger(settingGeneralEnums.eGeneralViewController pCommands, List<Object> pData){
         if(pCommands.equals(settingGeneralEnums.eGeneralViewController.M_SET_THEME)){
-            setThemeLight((int)pData.get(0));
+            setTheme((int)pData.get(0));
         }
         else if(pCommands.equals(settingGeneralEnums.eGeneralViewController.M_RESET_THEME)){
             resetThemeSelection();

@@ -2,8 +2,9 @@ package com.darkweb.genesissearchengine.appManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
+import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController;
 import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
@@ -21,6 +22,7 @@ public class activityContextManager
     }
 
     /*Private Contexts*/
+    private bridgeController pBridgeController;
     private historyController pHistoryController;
     private bookmarkController pBookmarkController;
     private homeController pHomeController;
@@ -51,6 +53,13 @@ public class activityContextManager
     }
     public void setBookmarkController(bookmarkController bookmark_controller){
         this.pBookmarkController = bookmark_controller;
+    }
+
+    public bridgeController getBridgeController(){
+        return pBridgeController;
+    }
+    public void setBridgeController(bridgeController bridge_controller){
+        this.pBridgeController = bridge_controller;
     }
 
     public homeController getHomeController(){

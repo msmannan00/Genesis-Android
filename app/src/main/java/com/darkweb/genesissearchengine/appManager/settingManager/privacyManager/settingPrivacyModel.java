@@ -35,10 +35,6 @@ class settingPrivacyModel
         status.sStatusDoNotTrack = pStatus;
     }
 
-    private void onTrackingProtection(boolean pStatus){
-        status.sSettingTrackingProtection = pStatus;
-    }
-
     private void onCookies(View pView){
         if(pView.getId() == R.id.pCookieOption1){
             status.sSettingCookieStatus = ACCEPT_ALL;
@@ -64,9 +60,6 @@ class settingPrivacyModel
         }
         else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_DONOT_TRACK)){
             onDoNotTrack((boolean)pData.get(0));
-        }
-        else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_TRACKING_PROTECTION)){
-            onTrackingProtection((boolean)pData.get(0));
         }
         else if(pCommands.equals(settingPrivacyEnums.ePrivacyModel.M_SET_COOKIES)){
             onCookies((View) pData.get(0));

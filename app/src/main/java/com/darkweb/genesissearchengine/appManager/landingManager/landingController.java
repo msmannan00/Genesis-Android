@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.View;
 
-import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.appManager.orbotManager.orbotController;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -30,17 +29,17 @@ public class landingController extends AppIntro {
 
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
-        CustomSlideBigText welcome = CustomSlideBigText.newInstance(R.layout.custom_slide_big_text);
+        CustomSlideBigText welcome = CustomSlideBigText.newInstance(R.layout.landing_view);
         welcome.setTitle(getString(R.string.LANDING_HELLO));
         welcome.setSubTitle(getString(R.string.LANDING_WELCOME));
         addSlide(welcome);
 
-        CustomSlideBigText intro2 = CustomSlideBigText.newInstance(R.layout.custom_slide_big_text);
+        CustomSlideBigText intro2 = CustomSlideBigText.newInstance(R.layout.landing_view);
         intro2.setTitle(getString(R.string.LANDING_BROWSE_INFO));
         intro2.setSubTitle(getString(R.string.LANDING_NO_TRACKING));
         addSlide(intro2);
 
-        CustomSlideBigText cs2 = CustomSlideBigText.newInstance(R.layout.custom_slide_big_text);
+        CustomSlideBigText cs2 = CustomSlideBigText.newInstance(R.layout.landing_view);
         cs2.setTitle(getString(R.string.LANDING_BRIDGES_INFO));
         cs2.showButton(getString(R.string.LANDING_MORE), new View.OnClickListener() {
             @Override

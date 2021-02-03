@@ -59,7 +59,7 @@ public class Prefs {
         String defaultBridgeType = "obfs4";
         if (Locale.getDefault().getLanguage().equals("fa"))
             defaultBridgeType = "meek"; //if Farsi, use meek as the default bridge type
-        return prefs.getString(PREF_BRIDGES_LIST, defaultBridgeType);
+        return orbotLocalConstants.mBridges;
     }
 
     public static String getDefaultLocale() {

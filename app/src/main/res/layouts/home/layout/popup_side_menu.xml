@@ -12,7 +12,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:background="@xml/gx_side_menu"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,8 +30,8 @@
             <LinearLayout
                 android:layout_width="238dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
                 android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/c_ripple_v3"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -102,46 +102,46 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="1dp"
                 android:background="@xml/gx_side_item"
-                android:onClick="onMenuItemInvoked"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="20dp"
-                    android:layout_marginStart="16dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_new_tab"
-                    app:tint="@color/c_navigation_medium"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU__NEW_TABS"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
-                    android:layout_marginStart="10dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/menu12"
-                android:background="@xml/gx_side_item"
-                android:onClick="onMenuItemInvoked"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -149,37 +149,37 @@
                 <ImageView
                     android:id="@+id/markerTab"
                     android:layout_width="20dp"
-                    android:layout_marginStart="16dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_vpn"
-                    app:tint="@color/c_navigation_medium"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU__ORBOT_LOGS"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
-                    android:layout_marginStart="10dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/pMenuOpenNewTab"
-                android:onClick="onMenuItemInvoked"
-                android:background="@xml/gx_side_item"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -187,17 +187,17 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@xml/ic_baseline_bookmark_menu"
-                    app:tint="@color/c_navigation_medium"
                     android:layout_marginStart="16dp"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_bookmark_menu"
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
-                    android:gravity="left|center_vertical"
                     android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU_OPEN_BOOKMARK"
                     android:textAllCaps="false"
@@ -208,35 +208,36 @@
 
             <LinearLayout
                 android:id="@+id/menu7"
-                android:background="@xml/gx_side_item"
-                android:onClick="onMenuItemInvoked"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="20dp" android:layout_height="match_parent"
-                    android:src="@xml/ic_baseline_history"
-                    app:tint="@color/c_navigation_medium"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_history"
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU_HISTORY"
                     android:textAllCaps="false"
-                    android:layout_marginStart="10dp"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -244,15 +245,15 @@
 
             <LinearLayout
                 android:id="@+id/menu8"
-                android:background="@xml/gx_side_item"
-                android:onClick="onMenuItemInvoked"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -260,36 +261,36 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@xml/ic_arrow_down"
-                    app:tint="@color/c_navigation_medium"
                     android:layout_marginStart="16dp"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_down"
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU_DOWNLOAD"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
-                    android:layout_marginStart="10dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/menu25"
-                android:background="@xml/gx_side_item"
-                android:onClick="onMenuItemInvoked"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -297,59 +298,59 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@xml/ic_baseline_language"
-                    app:tint="@color/c_navigation_medium"
                     android:layout_marginStart="16dp"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_language"
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU_LANGUAGE"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
-                    android:layout_marginStart="10dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/pMenuFind"
-                android:background="@xml/gx_side_item"
-                android:onClick="onMenuItemInvoked"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="20dp"
-                    android:layout_marginStart="16dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_find"
-                    app:tint="@color/c_navigation_medium"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU_FIND"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
-                    android:layout_marginStart="10dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
@@ -357,7 +358,6 @@
             <LinearLayout
                 android:id="@+id/menu26"
                 android:layout_width="239dp"
-                android:paddingRight="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
@@ -367,22 +367,24 @@
                 android:focusable="true"
                 android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
+                android:paddingRight="10dp"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="20dp"
-                    android:layout_marginStart="16dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_desktop"
-                    app:tint="@color/c_navigation_medium"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:id="@+id/menu28"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_marginStart="4dp"
                     android:layout_weight="4"
                     android:background="@color/clear_alpha"
                     android:clickable="false"
@@ -393,7 +395,6 @@
                     android:text="@string/HOME_MENU_DESKTOP"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
-                    android:layout_marginStart="4dp"
                     android:textSize="15sp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
@@ -416,75 +417,75 @@
 
             <LinearLayout
                 android:id="@+id/menu6"
-                android:background="@xml/gx_side_item"
-                android:onClick="onMenuItemInvoked"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="20dp"
-                    android:layout_marginStart="16dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_setting"
-                    app:tint="@color/c_navigation_medium"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU_SETTING"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
-                    android:layout_marginStart="10dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/pMenuQuit"
-                android:background="@xml/gx_ripple_gray_bottom"
-                android:onClick="onMenuItemInvoked"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="1dp"
+                android:background="@xml/gx_ripple_gray_bottom"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="onMenuItemInvoked"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="20dp"
-                    android:layout_marginStart="16dp"
                     android:layout_height="match_parent"
-                    android:src="@xml/ic_baseline_quit"
+                    android:layout_marginStart="16dp"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_quit"
                     app:tint="@color/c_navigation_medium" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:paddingStart="3dp"
                     android:text="@string/HOME_MENU_QUIT"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
-                    android:layout_marginStart="10dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
 

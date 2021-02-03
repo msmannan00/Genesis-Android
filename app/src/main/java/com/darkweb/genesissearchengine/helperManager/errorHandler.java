@@ -23,7 +23,7 @@ public class errorHandler
             BufferedReader reader = null;
             StringBuilder builder = new StringBuilder();
             try {
-                stream = mContext.getResources().getAssets().open("error.html");
+                stream = mContext.getResources().getAssets().open("error/error.html");
                 reader = new BufferedReader(new InputStreamReader(stream));
 
                 String line;
@@ -173,7 +173,7 @@ public class errorHandler
             BufferedReader reader = null;
             StringBuilder builder = new StringBuilder();
             try {
-                stream = mContext.getResources().getAssets().open("error.html");
+                stream = mContext.getResources().getAssets().open("error/error.html");
                 reader = new BufferedReader(new InputStreamReader(stream));
 
                 String line;

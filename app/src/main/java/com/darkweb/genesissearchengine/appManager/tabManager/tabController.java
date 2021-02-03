@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,8 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -40,7 +41,7 @@ public class tabController extends AppCompatActivity
     /*Private Views*/
     private Button mTabs;
     private ImageView mRemoveSelection;
-    private LinearLayout mTabsContainer;
+    private FrameLayout mTabsContainer;
     private ImageButton mMenuButton;
     private ImageButton mClearSelection;
     private View mPopupUndo;
@@ -152,13 +153,13 @@ public class tabController extends AppCompatActivity
     }
 
     public void onInitRemoveView(int pIndex, boolean pCreateBackup){
-        onRemoveTab(pIndex);
-        onShowUndoDialog();
-        if(mListModel.onGetBackup().size()>=mListModel.getList().size()){
-            mRecycleView.animate().setStartDelay(0).alpha(0);
+        mListModel.onRemoveTab(pIndex);
+        mListModel.getList().remove(pIndex);
+        if(mListModel.getList().size()<1){
+            mRecycleView.animate().setStartDelay(150).alpha(0);
         }
         initTabCount();
-        mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW, null);
+        mTabAdapter.notifyItemRangeChanged(pIndex, mTabAdapter.getItemCount() - pIndex);
     }
 
     public void initTabCount()

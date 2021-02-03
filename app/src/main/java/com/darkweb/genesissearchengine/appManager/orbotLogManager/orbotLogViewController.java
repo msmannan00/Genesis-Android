@@ -63,7 +63,7 @@ class orbotLogViewController
 
     private void onUpdateLogs(String pLogs){
         pLogs = "~ " + pLogs;
-        mLogs.setText(String.format("%s%s", pLogs + "\n\n", mLogs.getText()));
+        mLogs.setText(String.format("%s%s",mLogs.getText() ,pLogs + "\n\n"));
     }
 
     public void onTrigger(orbotLogEnums.eOrbotLogViewCommands pCommands, List<Object> pData){

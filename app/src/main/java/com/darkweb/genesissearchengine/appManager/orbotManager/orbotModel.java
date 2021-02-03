@@ -28,7 +28,7 @@ class orbotModel
     }
 
     public void onVPNSwitch(boolean pStatus){
-        status.sBridgeVPNStatus = pStatus;
+        status.sVPNStatus = pStatus;
         pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.sBridgeStatus), pluginEnums.eOrbotManager.M_UPDATE_VPN);
     }
 

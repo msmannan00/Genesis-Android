@@ -12,8 +12,8 @@ public class preferenceDataModel {
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor mEdit;
 
-    public preferenceDataModel(AppCompatActivity app_context){
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(app_context);
+    public preferenceDataModel(AppCompatActivity pAppContext){
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(pAppContext);
         mEdit = mPrefs.edit();
     }
 
@@ -22,61 +22,61 @@ public class preferenceDataModel {
         mEdit.apply();
     }
 
-    void setString(String valueKey, String value){
-        mEdit.putString(valueKey, value);
+    void setString(String pValueKey, String pValue){
+        mEdit.putString(pValueKey, pValue);
         mEdit.apply();
     }
-    String getString(String valueKey, String valueDefault){
-        return mPrefs.getString(valueKey, valueDefault);
+    String getString(String pValueKey, String pValueDefault){
+        return mPrefs.getString(pValueKey, pValueDefault);
     }
     void setBool(String valueKey, boolean value){
         mEdit.putBoolean(valueKey, value);
         mEdit.apply();
     }
-    boolean getBool(String valueKey, boolean valueDefault){
-        return mPrefs.getBoolean(valueKey, valueDefault);
+    boolean getBool(String pValueKey, boolean pValueDefault){
+        return mPrefs.getBoolean(pValueKey, pValueDefault);
     }
     void setInt(String valueKey, int value){
         mEdit.putInt(valueKey, value);
         mEdit.apply();
     }
-    int getInt(String valueKey, int valueDefault){
-        return mPrefs.getInt(valueKey, valueDefault);
+    int getInt(String pValueKey, int pValueDefault){
+        return mPrefs.getInt(pValueKey, pValueDefault);
     }
-    void setFloat(String valueKey, int value){
-        mEdit.putInt(valueKey, value);
+    void setFloat(String pValueKey, int pValue){
+        mEdit.putInt(pValueKey, pValue);
         mEdit.apply();
     }
-    int getFloat(String valueKey, int valueDefault){
-        return mPrefs.getInt(valueKey, valueDefault);
+    int getFloat(String pValueKey, int pValueDefault){
+        return mPrefs.getInt(pValueKey, pValueDefault);
     }
 
-    public Object onTrigger(dataEnums.ePreferencesCommands p_commands, List<Object> p_data){
-        if(p_commands == dataEnums.ePreferencesCommands.M_GET_BOOL){
-            return getBool((String)p_data.get(0), (boolean)p_data.get(1));
+    public Object onTrigger(dataEnums.ePreferencesCommands pCommands, List<Object> pData){
+        if(pCommands == dataEnums.ePreferencesCommands.M_GET_BOOL){
+            return getBool((String)pData.get(0), (boolean)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_GET_INT){
-            return getInt((String)p_data.get(0), (int)p_data.get(1));
+        else if(pCommands == dataEnums.ePreferencesCommands.M_GET_INT){
+            return getInt((String)pData.get(0), (int)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_GET_STRING){
-            return getString((String)p_data.get(0), (String)p_data.get(1));
+        else if(pCommands == dataEnums.ePreferencesCommands.M_GET_STRING){
+            return getString((String)pData.get(0), (String)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_GET_FLOAT){
-            return getFloat((String)p_data.get(0), (int)p_data.get(1));
+        else if(pCommands == dataEnums.ePreferencesCommands.M_GET_FLOAT){
+            return getFloat((String)pData.get(0), (int)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_SET_BOOL){
-            setBool((String)p_data.get(0), (boolean)p_data.get(1));
+        else if(pCommands == dataEnums.ePreferencesCommands.M_SET_BOOL){
+            setBool((String)pData.get(0), (boolean)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_SET_INT){
-            setInt((String)p_data.get(0), (int)p_data.get(1));
+        else if(pCommands == dataEnums.ePreferencesCommands.M_SET_INT){
+            setInt((String)pData.get(0), (int)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_SET_STRING){
-            setString((String)p_data.get(0), (String)p_data.get(1));
+        else if(pCommands == dataEnums.ePreferencesCommands.M_SET_STRING){
+            setString((String)pData.get(0), (String)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_SET_FLOAT){
-            setFloat((String)p_data.get(0), (int)p_data.get(1));
+        else if(pCommands == dataEnums.ePreferencesCommands.M_SET_FLOAT){
+            setFloat((String)pData.get(0), (int)pData.get(1));
         }
-        else if(p_commands == dataEnums.ePreferencesCommands.M_CLEAR_PREFS){
+        else if(pCommands == dataEnums.ePreferencesCommands.M_CLEAR_PREFS){
             clearPrefs();
         }
 

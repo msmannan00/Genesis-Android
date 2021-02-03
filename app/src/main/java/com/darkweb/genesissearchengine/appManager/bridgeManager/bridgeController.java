@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
@@ -47,6 +46,7 @@ public class bridgeController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        activityContextManager.getInstance().setBridgeController(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bridge_settings_view);
 
@@ -96,13 +96,36 @@ public class bridgeController extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                status.sBridgeCustomBridge = mCustomPort.getText().toString();
+                if(!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length()<=5){
+                    mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
+                }
             }
         });
     }
 
+    /* VIEW LISTENERS */
+
     public void onOpenInfo(View view) {
         helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
+    public void onOpenCustomBridgeUpdater(View view) {
+        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_UPDATE_BRIDGES);
+    }
+
+    /* EXTERNAL LISTENERS */
+
+    public void onUpdateBridges(String pString) {
+        if(pString.length()>5){
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE, Collections.singletonList(pString));
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
+        }else {
+            if(status.sBridgeCustomBridge.equals("meek")){
+                mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
+            }else {
+                mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
+            }
+        }
     }
 
     /* LISTENERS */
@@ -123,7 +146,7 @@ public class bridgeController extends AppCompatActivity {
         super.onPause();
         if(dataController.getInstance()!=null){
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_AUTO,status.sBridgeGatewayAuto));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY,status.sBridgeGatewayAuto));
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,status.sBridgeGatewayManual));
         }
     }
@@ -153,15 +176,13 @@ public class bridgeController extends AppCompatActivity {
         finish();
     }
 
+    public void onCustomChecked(View view) {
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE,null);
+    }
+
     public void requestBridges(View view){
         mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_REQUEST_BRIDGE, null);
         pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
-    }
-
-    public void onCustomChecked(View view){
-        mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE, null);
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
-
     }
     public void onMeekChecked(View view){
         mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);

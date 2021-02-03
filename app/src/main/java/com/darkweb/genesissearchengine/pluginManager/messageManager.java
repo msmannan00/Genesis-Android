@@ -19,11 +19,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
+import org.mozilla.geckoview.ContentBlocking;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -182,7 +185,7 @@ class messageManager
         }else {
             ((SwitchMaterial) mDialog.findViewById(R.id.pDTStatus)).setChecked(false);
         }
-        if((boolean) mData.get(3)){
+        if((int) mData.get(3) != ContentBlocking.AntiTracking.NONE){
             ((SwitchMaterial) mDialog.findViewById(R.id.pTPStatus)).setChecked(true);
         }else {
             ((SwitchMaterial) mDialog.findViewById(R.id.pTPStatus)).setChecked(false);
@@ -216,7 +219,45 @@ class messageManager
             mDialog.dismiss();
             mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             helperMethod.hideKeyboard(mContext);
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString().replace("genesis.onion","boogle.store")+"split"+((EditText) mDialog.findViewById(R.id.pBookmark)).getText().toString()), M_BOOKMARK);
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString().replace("genesis.onion","boogle.store")+"split"+((EditText) mDialog.findViewById(R.id.pBridgeInput)).getText().toString()), M_BOOKMARK);
+        });
+    }
+
+    private void onUpdateBridges()
+    {
+        initializeDialog(R.layout.popup_update_bridges, Gravity.CENTER);
+        mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+        if(!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4")){
+            ((EditText)mDialog.findViewById(R.id.pBridgeInput)).setText(status.sBridgeCustomBridge);
+        }
+        mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
+        mDialog.setOnDismissListener(dialog -> {
+            final Handler handler = new Handler();
+            Runnable runnable = () -> {
+                helperMethod.hideKeyboard(activityContextManager.getInstance().getHomeController());
+                dialog.dismiss();
+                mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            };
+            handler.postDelayed(runnable, 50);
+        });
+        mDialog.findViewById(R.id.pBridgeRequest).setOnClickListener(v -> {
+            final Handler handler = new Handler();
+            Runnable runnable = () -> {
+                try{
+                    helperMethod.sendBridgeEmail(mContext);
+                }
+                catch (Exception ex){
+                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
+                }
+            };
+            handler.postDelayed(runnable, 200);
+        });
+
+        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
+            mDialog.dismiss();
+            mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            helperMethod.hideKeyboard(mContext);
+            mEvent.invokeObserver(Collections.singletonList(((EditText)mDialog.findViewById(R.id.pBridgeInput)).getText().toString()), M_SET_BRIDGES);
         });
     }
 
@@ -495,6 +536,11 @@ class messageManager
                 case M_SECURE_CONNECTION:
                     /*VERIFIED*/
                     openSecureConnectionPopup();
+                    break;
+
+                case M_UPDATE_BRIDGES:
+                    /*VERIFIED*/
+                    onUpdateBridges();
                     break;
             }
         }

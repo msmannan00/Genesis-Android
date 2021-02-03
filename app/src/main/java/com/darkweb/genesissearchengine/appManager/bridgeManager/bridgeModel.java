@@ -38,8 +38,8 @@ class bridgeModel
         pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, mContext), M_BRIDGE_MAIL);
     }
 
-    public void onCustomChecked(){
-        status.sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_CUSTOM;
+    public void onCustomChecked(String pString){
+        status.sBridgeCustomBridge = pString;
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
 
     }
@@ -57,7 +57,7 @@ class bridgeModel
             requestBridges();
         }
         else if(pCommands == bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE){
-            onCustomChecked();
+            onCustomChecked((String) pData.get(0));
         }
         else if(pCommands == bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE){
             onMeekChecked();

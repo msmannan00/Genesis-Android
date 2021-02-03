@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.sql;
@@ -44,8 +44,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_BOOKMARK;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_NOT_SUPPORTED;
 
 
 public class bookmarkController extends AppCompatActivity
@@ -256,7 +254,7 @@ public class bookmarkController extends AppCompatActivity
     public void onOpenMultipleTabs(View view) {
         ArrayList<String> m_long_selected_urk = (ArrayList<String>) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_URL, null);
         for(int m_counter=0;m_counter<m_long_selected_urk.size();m_counter++){
-            mHomeController.onOpenLinkNewTab(m_long_selected_urk.get(m_counter));
+            mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter));
         }
         onBackPressed(null);
         mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.M_CLEAR_LONG_SELECTED_URL,null);

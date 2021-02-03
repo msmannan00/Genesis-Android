@@ -2,7 +2,7 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
-          android:top="60dp">
+          android:top="160dp">
         <shape
                 android:shape="rectangle" android:padding="15dp" >
             <!-- you can use any color you want I used here gray color-->
@@ -10,6 +10,7 @@
             <corners android:radius="4dp"/>
             <stroke
                     android:width="2dp"
+                    android:top="160dp"
                     android:color="@color/c_tab_border" />
             <corners android:radius="4dp" />
         </shape>

@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.sql;
@@ -294,7 +294,7 @@ public class historyController extends AppCompatActivity
     public void onOpenMultipleTabs(View view) {
         ArrayList<String> m_long_selected_urk = (ArrayList<String>) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_URL, null);
         for(int m_counter=0;m_counter<m_long_selected_urk.size();m_counter++){
-            mHomeController.onOpenLinkNewTab(m_long_selected_urk.get(m_counter));
+            mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter));
         }
         onBackPressed(null);
         mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL,null);
@@ -364,7 +364,7 @@ public class historyController extends AppCompatActivity
             }
             else if(e_type.equals(enums.etype.url_triggered_new_tab)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                mHomeController.onOpenLinkNewTab(url_temp);
+                mHomeController.postNewLinkTabAnimation(url_temp);
                 finish();
             }
             else if(e_type.equals(enums.etype.fetch_favicon)){

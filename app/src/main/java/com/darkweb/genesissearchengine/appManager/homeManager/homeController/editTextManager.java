@@ -1,9 +1,8 @@
-package com.darkweb.genesissearchengine.appManager.homeManager;
+package com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

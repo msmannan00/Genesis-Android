@@ -105,10 +105,9 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:background="@color/clear_alpha"
-                    android:layout_marginBottom="0dp"
                     android:layout_marginEnd = "20dp"
                     android:orientation="horizontal"
-                    android:layout_height="65dp">
+                    android:layout_height="wrap_content">
                 <TextView
                         android:textSize="14sp"
                         android:layout_width="0dp"
@@ -121,20 +120,25 @@
                         />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/c_view_divier_background" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:textSize="14sp"
+                    android:textColor="@color/c_text_v7"
+                    android:textSize="13.5sp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
                     android:layout_weight="40"
-                    android:textColor="@color/c_text_v1"
-                    android:background="@xml/sx_border_left"
-                    android:paddingStart="15dp"
                     android:padding="10dp"
                     android:layout_marginStart="10dp"
                     android:textStyle="bold"
@@ -148,7 +152,6 @@
                 android:layout_marginEnd = "0dp"
                 android:paddingEnd="0dp"
                 android:layout_marginBottom="0dp"
-                android:paddingTop="14dp"
                 android:paddingBottom="14dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
@@ -162,7 +165,7 @@
                     android:paddingEnd="15dp"
                     android:text="@string/ORBOT_PROXY_STATUS_INFO"
                     android:textColor="@color/c_text_v6"
-                    android:textSize="14sp" />
+                    android:textSize="13.5sp" />
 
                 <TextView
                     android:id="@+id/pOrbotStatus"
@@ -179,20 +182,25 @@
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_view_divier_background" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:textSize="14sp"
+                    android:textColor="@color/c_text_v7"
+                    android:textSize="13.5sp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
                     android:layout_weight="40"
-                    android:textColor="@color/c_text_v1"
-                    android:background="@xml/sx_border_left"
-                    android:paddingStart="15dp"
                     android:padding="10dp"
                     android:layout_marginStart="10dp"
                     android:textStyle="bold"
@@ -207,13 +215,12 @@
                 android:layout_marginEnd = "0dp"
                 android:paddingEnd="0dp"
                 android:layout_marginBottom="0dp"
-                android:paddingTop="14dp"
                 android:paddingBottom="14dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
                 tools:ignore="RtlSymmetry">
                 <TextView
-                    android:textSize="14sp"
+                    android:textSize="13.5sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -240,13 +247,12 @@
                 android:layout_marginEnd = "0dp"
                 android:paddingEnd="0dp"
                 android:layout_marginBottom="0dp"
-                android:paddingTop="14dp"
                 android:paddingBottom="14dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
                 tools:ignore="RtlSymmetry">
                 <TextView
-                    android:textSize="14sp"
+                    android:textSize="13.5sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -280,8 +286,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/PROXY_SUB_HEADER3"
-                    android:textColor="@color/c_text_setting_heading"
-                    android:textSize="14sp"
+                    android:textColor="@color/c_text_v7"
+                    android:textSize="13.5sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -290,7 +296,7 @@
                     android:layout_marginTop="10dp"
                     android:textColor="@color/c_text_v6"
                     android:text="@string/PROXY_CONNECTIVITY_SETTING_INFO"
-                    android:textSize="14sp" />
+                    android:textSize="13.5sp" />
             </LinearLayout>
 
         </LinearLayout>

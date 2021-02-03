@@ -31,12 +31,6 @@ class imageDataModel
         mParsedQueues = new HashMap<>();
         mRequestQueue = new ArrayList<>();
 
-
-
-
-
-
-
         mBackgroundThread();
     }
 

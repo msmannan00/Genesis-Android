@@ -165,7 +165,7 @@ public class OrbotVpnManager implements Handler.Callback {
         }
 
 
-        return Service.START_STICKY;
+        return Service.START_NOT_STICKY;
     }
 
     private void startSocksBypass() {

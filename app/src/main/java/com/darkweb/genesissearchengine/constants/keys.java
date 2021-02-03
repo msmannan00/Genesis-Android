@@ -29,7 +29,7 @@ public class keys
     public static final String SETTING_FIRST_INSTALLED = "FIRST_INSTALLED";
     public static final String SETTING_JAVA_SCRIPT = "JAVA_SCRIPT";
     public static final String SETTING_HISTORY_CLEAR = "HISTORY_CLEAR";
-    public static final String SETTING_GATEWAY_AUTO = "pref_bridges_enabled_auto";
+    public static final String SETTING_GATEWAY = "pref_bridges_enabled_auto";
     public static final String SETTING_GATEWAY_MANUAL = "pref_bridges_enabled_manual";
     public static final String SETTING_IS_BOOTSTRAPPED = "IS_BOOTSTRAPPED";
     public static final String SETTING_IS_WELCOME_ENABLED = "IS_WELCOME_ENABLED";
@@ -57,8 +57,8 @@ public class keys
     /*Bridge Settings*/
 
     public static final String BRIDGE_CUSTOM_BRIDGE_1 = "CLEAR_PREFS";
-    public static final String BRIDGE_BRIDGE_ENABLES = "S_BRIDGE_ENABLES";
-    public static final String BRIDGE_VPN_ENABLED = "S_VPN_ENABLED";
     public static final String BRIDGE_NOTIFICATION = "BRIDGE_NOTIFICATION";
+    public static final String BRIDGE_ENABLES = "pref_bridges_enabled";
+    public static final String VPN_ENABLED = "pref_vpn";
 
 }

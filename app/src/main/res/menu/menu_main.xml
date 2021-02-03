@@ -20,7 +20,7 @@
     <item  android:id="@+id/menu13"
             android:title="Top Menu"
             app:showAsAction="always"
-            android:actionLayout="@layout/popup_menu"/>
+            android:actionLayout="@layout/popup_side_menu"/>
       <group android:id="@+id/group_0" >
           <item  android:id="@+id/menu9"
                   android:title="Location                                    "

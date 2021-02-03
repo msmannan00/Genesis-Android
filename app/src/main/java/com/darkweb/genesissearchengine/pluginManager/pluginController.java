@@ -2,7 +2,7 @@ package com.darkweb.genesissearchengine.pluginManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -226,6 +226,12 @@ public class pluginController
                 dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
                 mHomeController.initTab(true);
                 activityContextManager.getInstance().getTabController().finish();
+            }
+            else if(pEventType.equals(M_REQUEST_BRIDGES)){
+                pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
+            }
+            else if(pEventType.equals(M_SET_BRIDGES)){
+                activityContextManager.getInstance().getBridgeController().onUpdateBridges((String) pData.get(0));
             }
             return null;
         }

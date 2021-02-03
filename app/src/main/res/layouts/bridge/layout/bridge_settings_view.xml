@@ -366,8 +366,13 @@
                         android:id="@+id/pCustomPort"
                         android:layout_width="0dp"
                         android:layout_weight="11"
+                        android:clickable="false"
+                        android:onClick="onOpenCustomBridgeUpdater"
                         android:layout_height="45dp"
+                        android:focusable="false"
                         android:paddingLeft="15dp"
+                        android:cursorVisible="false"
+                        android:singleLine="true"
                         android:paddingRight="15dp"
                         android:layout_marginStart="15dp"
                         android:ems="10"
@@ -375,8 +380,8 @@
                         android:hint="@string/BRIDGE_PORT_HINT"
                         android:textSize="14.5sp"
                         android:text=""
-                        android:autofillHints=""
-                        android:inputType="text" />
+                        android:inputType="none"
+                        android:autofillHints=""/>
                     <Button
                         android:layout_marginTop="-1dp"
                         android:id="@+id/pBridgeButton"

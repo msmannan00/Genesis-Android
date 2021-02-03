@@ -117,10 +117,14 @@
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:windowSoftInputMode="adjustPan" />
         <activity
-                android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController"
+            android:name="com.darkweb.genesissearchengine.appManager.settingManager.trackingManager.settingTrackingController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+                android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController"
                 android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout"
                 android:launchMode="singleTop"
-                android:screenOrientation="unspecified"
+                android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -175,6 +179,7 @@
                 android:value="ca-app-pub-5074525529134731~2926711128" />
 
         <service
+            android:stopWithTask="true"
             android:name="com.darkweb.genesissearchengine.helperManager.autoFillService"
             android:label="Genesis | Secure Autofill"
             android:permission="android.permission.BIND_AUTOFILL_SERVICE">
@@ -193,6 +198,10 @@
                 android:enabled="true"
                 android:exported="false"
                 android:stopWithTask="true" />
+
+        <service
+            android:name="com.darkweb.genesissearchengine.helperManager.OnClearFromRecentService"
+            android:stopWithTask="true" />
 
         <receiver android:name = "com.darkweb.genesissearchengine.helperManager.userEngagementNotification" />
 

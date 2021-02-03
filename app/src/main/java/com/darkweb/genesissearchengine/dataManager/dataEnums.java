@@ -4,11 +4,11 @@ public class dataEnums
 {
     /*Settings Manager*/
     public enum eHistoryCommands {
-        M_GET_HISTORY, M_ADD_HISTORY, M_REMOVE_HISTORY, M_CLEAR_HISTORY, M_GET_SUGGESTIONS, M_LOAD_MORE_HISTORY, M_INITIALIZE_HISTORY, M_HISTORY_SIZE
+        M_GET_HISTORY, M_ADD_HISTORY, M_REMOVE_HISTORY, M_CLEAR_HISTORY,M_LOAD_MORE_HISTORY ,M_INITIALIZE_HISTORY, M_HISTORY_SIZE
     }
 
     public enum eBookmarkCommands {
-        M_ADD_BOOKMARK, M_GET_BOOKMARK, M_DELETE_BOOKMARK, M_CLEAR_BOOKMARK, M_GET_SUGGESTIONS;
+        M_ADD_BOOKMARK, M_GET_BOOKMARK, M_DELETE_BOOKMARK, M_CLEAR_BOOKMARK;
     }
 
     public enum ePreferencesCommands{
@@ -16,7 +16,7 @@ public class dataEnums
     }
 
     public enum eSuggestionCommands{
-        M_UPDATE_SUGGESTION, M_CLEAR_SUGGESTION, M_INIT_SUGGESTION, M_ADD_SUGGESTION, M_GET_SUGGESTION
+        M_GET_SUGGESTIONS
     }
 
     public enum eTabCommands{

@@ -85,21 +85,44 @@
                     android:orientation="horizontal"
                     android:weightSum="7">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
+                        android:layout_marginStart="15dp"
                         android:clickable="false"
-                        android:padding="0dp"
-                        android:paddingStart="15dp"
-                        android:text="@string/SETTING_ORBOT_LIST_VIEW"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="14sp"
-                        tools:ignore="RtlSymmetry" />
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_ORBOT_LIST_VIEW"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_ORBOT_LIST_VIEW_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:layout_width="0dp"
@@ -113,6 +136,11 @@
                     </com.google.android.material.switchmaterial.SwitchMaterial>
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c_view_divier_background" />
 
             </LinearLayout>
         </ScrollView>

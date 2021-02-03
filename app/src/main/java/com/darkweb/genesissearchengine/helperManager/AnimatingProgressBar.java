@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.homeManager;
+package com.darkweb.genesissearchengine.helperManager;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;

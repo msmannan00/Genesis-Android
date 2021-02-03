@@ -2,20 +2,9 @@ package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.se.omapi.Session;
 
-import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
+import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
-import org.mozilla.geckoview.GeckoSession;
-import org.mozilla.geckoview.GeckoView;
-
-import java.sql.Blob;
-import java.util.Calendar;
-import java.util.UUID;
 
 public class tabRowModel
 {

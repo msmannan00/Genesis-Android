@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.orbotManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -56,7 +57,7 @@ public class orbotController extends AppCompatActivity {
         mCustomizableBridgeMenu = findViewById(R.id.pCustomizableBridgeMenu);
 
         mOrbotViewController = new com.darkweb.genesissearchengine.appManager.orbotManager.orbotViewController(mBridgeSwitch, mVpnSwitch, this, mCustomizableBridgeMenu);
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sBridgeVPNStatus,status.sBridgeStatus));
+        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sVPNStatus,status.sBridgeStatus));
         mOrbotModel = new com.darkweb.genesissearchengine.appManager.orbotManager.orbotModel(new orbotModelCallback());
     }
 
@@ -90,7 +91,7 @@ public class orbotController extends AppCompatActivity {
     public void onBridgeSwitch(View view){
         mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH,Collections.singletonList(!mBridgeSwitch.isChecked()));
         mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(status.sBridgeStatus));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_BRIDGE_ENABLES,status.sBridgeVPNStatus));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES,status.sBridgeStatus));
     }
 
     public void openBridgeSettings(View view){
@@ -99,8 +100,8 @@ public class orbotController extends AppCompatActivity {
 
     public void onVPNSwitch(View view){
         mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_VPN_SWITCH,Collections.singletonList(!mVpnSwitch.isChecked()));
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_VPN,Collections.singletonList(status.sBridgeVPNStatus));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED,status.sBridgeVPNStatus));
+        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_VPN,Collections.singletonList(status.sVPNStatus));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.VPN_ENABLED,status.sVPNStatus));
     }
 
     public void onClose(View view){

@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.homeManager;
+package com.darkweb.genesissearchengine.appManager.homeManager.hintManager;
 
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 

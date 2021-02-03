@@ -19,26 +19,26 @@ import org.torproject.android.service.wrapper.logRowModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class orbotAdapter extends RecyclerView.Adapter<orbotAdapter.listViewHolder>
+public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listViewHolder>
 {
     /*Private Variables*/
 
     private ArrayList<logRowModel> mModelList;
     private eventObserver.eventListener mEvent;
 
-    orbotAdapter(ArrayList<logRowModel> model_list, eventObserver.eventListener event) {
+    orbotLogAdapter(ArrayList<logRowModel> model_list, eventObserver.eventListener event) {
         this.mModelList = model_list;
         this.mEvent = event;
     }
 
     @NonNull @Override
-    public orbotAdapter.listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public orbotLogAdapter.listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orbot_row_view, parent, false);
-        return new orbotAdapter.listViewHolder(view);
+        return new orbotLogAdapter.listViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull orbotAdapter.listViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull orbotLogAdapter.listViewHolder holder, int position)
     {
         holder.bindListView(mModelList.get(position));
     }
@@ -64,7 +64,7 @@ public class orbotAdapter extends RecyclerView.Adapter<orbotAdapter.listViewHold
             mDescription = itemView.findViewById(R.id.pDescription);
             mRowContainerInner = itemView.findViewById(R.id.pRowContainerInner);
 
-            mHeader.setText((mModelList.size() - this.getLayoutPosition() + ". " + model.getLog()));
+            mHeader.setText((this.getLayoutPosition() + ". " + model.getLog()));
             mDescription.setText(model.getDate());
             mRowContainerInner.setOnClickListener(this);
         }

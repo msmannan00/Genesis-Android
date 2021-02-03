@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.appManager.homeManager.geckoSession;
+import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import org.mozilla.geckoview.GeckoResult;
 import java.io.ByteArrayOutputStream;

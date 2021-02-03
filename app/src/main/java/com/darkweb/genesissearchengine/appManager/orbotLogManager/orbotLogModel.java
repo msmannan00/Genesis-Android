@@ -19,10 +19,9 @@ class orbotLogModel
         if(model.size()>0){
             mModelList.clear();
             mModelList.addAll(model);
-            Collections.reverse(mModelList);
         }
         else {
-            mModelList.add(0, new logRowModel(constants.CONST_LOGS_DEFAULT_MESSAGE, helperMethod.getCurrentTime()));
+            mModelList.add(new logRowModel(constants.CONST_LOGS_DEFAULT_MESSAGE, helperMethod.getCurrentTime()));
         }
     }
 

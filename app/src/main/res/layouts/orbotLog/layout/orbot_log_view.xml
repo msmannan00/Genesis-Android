@@ -130,7 +130,8 @@
                 android:layout_marginStart="10dp"
                 android:paddingStart="10dp"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:layout_marginBottom="25dp"
+                android:paddingBottom="25dp"
                 android:textColor="@color/c_text_v4"
                 android:textSize="14sp"
                 android:visibility="gone"
@@ -141,7 +142,6 @@
                 android:id="@+id/pLogRecycleView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layoutAnimation="@anim/log_layout_controller"
                 android:nestedScrollingEnabled="false"/>
 
         </LinearLayout>
@@ -155,12 +155,12 @@
         android:visibility="gone"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:onClick="onScrollTop"
+        android:onClick="onScrollBottom"
         android:clickable="true"
         android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@xml/ic_baseline_arrow_upward"
+        app:srcCompat="@xml/ic_baseline_keyboard_arrow_down"
         android:focusable="true"
         android:contentDescription="@string/GENERAL_TODO" />
 

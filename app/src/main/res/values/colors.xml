@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="c_background">#ffffff</color>
-    <color name="c_background_keyboard">#f2f2f2</color>
+    <color name="c_background_alpha">#501c1b21</color>
+    <color name="c_background_keyboard">#999999</color>
     <color name="c_background_inverted">#1c1b21</color>
     <color name="c_view_divier_background_inner">#ebebeb</color>
     <color name="c_view_divier_background_inner_v1">#e6e6e6</color>
@@ -12,6 +13,7 @@
     <color name="c_text_v4">#425e8a</color>
     <color name="c_text_v5">#000000</color>
     <color name="c_text_v6">#8c8c8c</color>
+    <color name="c_text_v7">#7591bd</color>
     <color name="c_icon_tint">#425e8a</color>
     <color name="c_icon_tint_light">#7591bd</color>
     <color name="c_lang_row">#7591bd</color>
@@ -76,6 +78,7 @@
 
     <color name="c_alert_text">#212d45</color>
     <color name="c_alert_text_inverted">#ffffff</color>
+    <color name="c_long_button">#7591bd</color>
 
     <color name="blue">#0066FF</color>
     <color name="ease_blue_light">#fdfeff</color>
@@ -119,7 +122,7 @@
     <color name="green_button">#00b33c</color>
     <color name="green_dark">#212d45</color>
     <color name="green_dark_v1">#0A1727</color>
-    <color name="green_dark_v2">#ebf1fa</color>
+    <color name="green_dark_v2">#f0f5ff</color>
     <color name="dark_purple">#ffffff</color>
     <color name="warning">#ffc107</color>
     <color name="connectors">#ffffff</color>

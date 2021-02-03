@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.homeManager;
+package com.darkweb.genesissearchengine.appManager.homeManager.geckoManager;
 
 import android.content.Context;
 import androidx.core.view.NestedScrollingChildHelper;

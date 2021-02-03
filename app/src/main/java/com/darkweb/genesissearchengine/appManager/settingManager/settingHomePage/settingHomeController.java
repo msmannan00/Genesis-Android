@@ -15,6 +15,7 @@ import com.darkweb.genesissearchengine.appManager.settingManager.generalManager.
 import com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController;
 import com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController;
 import com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController;
+import com.darkweb.genesissearchengine.appManager.settingManager.trackingManager.settingTrackingController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -171,6 +172,10 @@ public class settingHomeController extends AppCompatActivity
 
     public void onManageSearchAdvanced(View view) {
         helperMethod.openActivity(settingAdvanceController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
+    public void onManageTracking(View view) {
+        helperMethod.openActivity(settingTrackingController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     public void onOpenInfo(View view) {

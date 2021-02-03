@@ -1,18 +1,17 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.appManager.settingManager.logManager.settingLogController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
@@ -27,13 +26,15 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.Collections;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+
 public class orbotLogController extends AppCompatActivity {
 
     /* PRIVATE VARIABLES */
     private orbotLogModel mOrbotModel;
     private orbotLogViewController mOrbotViewController;
     private RecyclerView mRecycleView;
-    private orbotAdapter mOrbotAdapter;
+    private orbotLogAdapter mOrbotAdapter;
     private NestedScrollView mMainScroll;
     private FloatingActionButton mFloatingScroller;
 
@@ -41,6 +42,7 @@ public class orbotLogController extends AppCompatActivity {
     private boolean mActivityClosed = false;
     private int mLogCounter = 0;
     private GestureDetector mSwipeDirectionDetector;
+    private boolean mIsLayoutChanging = false;
 
     /* INITIALIZATIONS */
 
@@ -77,39 +79,51 @@ public class orbotLogController extends AppCompatActivity {
             mLogCounter = orbotLocalConstants.mTorLogsHistory.size();
             mOrbotModel.setList(orbotLocalConstants.mTorLogsHistory);
             LinearLayoutManager layoutManager = new LinearLayoutManager(orbotLogController.this);
-            orbotAdapter adapter = new orbotAdapter(mOrbotModel.getList(),new orbotLogController.orbotModelCallback());
+            orbotLogAdapter adapter = new orbotLogAdapter(mOrbotModel.getList(),new orbotLogController.orbotModelCallback());
             mOrbotAdapter = adapter;
             layoutManager.setReverseLayout(true);
 
-            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.log_layout_controller);
-            mRecycleView.setLayoutAnimation(controller);
 
-            mRecycleView.setAdapter(adapter);
-            mRecycleView.setItemViewCacheSize(100);
+            mRecycleView.setAdapter(new AlphaInAnimationAdapter(adapter));
+            mRecycleView.getItemAnimator().setAddDuration(250);
+            mRecycleView.getItemAnimator().setChangeDuration(250);
+            mRecycleView.getItemAnimator().setMoveDuration(250);
+            mRecycleView.getItemAnimator().setRemoveDuration(250);
             mRecycleView.setNestedScrollingEnabled(false);
-            mRecycleView.setItemViewCacheSize(100);
-            mRecycleView.setDrawingCacheEnabled(true);
-            mRecycleView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
             mRecycleView.setLayoutManager(new LinearLayoutManager(orbotLogController.this));
             mOrbotAdapter.notifyDataSetChanged();
+        }else {
+            logToString();
         }
         mOrbotViewController.onTrigger(orbotLogEnums.eOrbotLogViewCommands.M_INIT_VIEWS, null);
         mRecycleView.smoothScrollToPosition(mOrbotModel.getList().size());
     }
 
+    public void logToString(){
+        for(int mCounter=0;mCounter<orbotLocalConstants.mTorLogsHistory.size();mCounter++){
+            mOrbotViewController.onTrigger(orbotLogEnums.eOrbotLogViewCommands.M_UPDATE_LOGS, Collections.singletonList(orbotLocalConstants.mTorLogsHistory.get(mCounter).getLog()));
+            mLogCounter+=1;
+        }
+    }
+
     /* LISTENERS */
 
     private void onInitListener(){
+
+        mRecycleView.getViewTreeObserver().addOnGlobalLayoutListener(() -> mIsLayoutChanging = false);
+
         mMainScroll.getViewTreeObserver().addOnScrollChangedListener(() -> {
-            int scrollY = mMainScroll.getScrollY();
-            if(scrollY>0){
-                if(mFloatingScroller.getAlpha()==0){
-                    mFloatingScroller.setVisibility(View.VISIBLE);
-                    mFloatingScroller.animate().alpha(1);
+            if(status.sLogListView){
+                if(mMainScroll.canScrollVertically(1)){
+                    if(mFloatingScroller.getAlpha()==0){
+                        mFloatingScroller.setVisibility(View.VISIBLE);
+                        mFloatingScroller.animate().cancel();
+                        mFloatingScroller.animate().alpha(1);
+                    }
+                }else {
+                    mFloatingScroller.animate().cancel();
+                    mFloatingScroller.animate().alpha(0).withEndAction(() -> mFloatingScroller.setVisibility(View.GONE));
                 }
-            }else {
-                mFloatingScroller.animate().cancel();
-                mFloatingScroller.animate().alpha(0).withEndAction(() -> mFloatingScroller.setVisibility(View.GONE));
             }
         });
 
@@ -127,6 +141,7 @@ public class orbotLogController extends AppCompatActivity {
     }
 
     public void onUpdateLogs(){
+
         new Thread(){
             public void run(){
                 while (true){
@@ -134,29 +149,44 @@ public class orbotLogController extends AppCompatActivity {
                         if(mActivityClosed){
                             break;
                         }
-                        if(orbotLocalConstants.mTorLogsHistory.size()>mLogCounter){
-                            if(!status.sLogListView){
-                                sleep(0);
+                        boolean mLayoutChangeTemp = mIsLayoutChanging;
+                        if(mIsLayoutChanging){
+                            if(status.sLogListView){
+                                sleep(1000);
                             }else {
-                                sleep(500);
+                                sleep(50);
                             }
+                            continue;
                         }else {
-                            sleep(500);
+                            if(status.sLogListView){
+                                sleep(500);
+                            }else {
+                                sleep(50);
+                            }
+                            if(mLayoutChangeTemp != mIsLayoutChanging){
+                                continue;
+                            }
                         }
-
                         if(orbotLocalConstants.mTorLogsHistory.size()>0){
+                            mIsLayoutChanging = true;
                             runOnUiThread(() -> {
                                 if(orbotLocalConstants.mTorLogsHistory.size()>mLogCounter){
-                                    mOrbotModel.getList().add(0,orbotLocalConstants.mTorLogsHistory.get(mLogCounter));
+                                    mOrbotModel.getList().add(orbotLocalConstants.mTorLogsHistory.get(mLogCounter));
                                     if(!status.sLogListView){
                                         mOrbotViewController.onTrigger(orbotLogEnums.eOrbotLogViewCommands.M_UPDATE_LOGS, Collections.singletonList(orbotLocalConstants.mTorLogsHistory.get(mLogCounter).getLog()));
+                                        mIsLayoutChanging = false;
+                                        onScrollBottom(null);
                                     }else {
-                                        mOrbotAdapter.notifyItemInserted(0);
-                                        mOrbotAdapter.notifyItemChanged(0);
+                                        if(mOrbotAdapter!=null){
+                                            mOrbotAdapter.notifyItemInserted(mOrbotModel.getList().size()-1);
+                                        }
                                     }
-                                    mLogCounter+=1;
+                                }else {
+                                    mIsLayoutChanging = false;
                                 }
+                                mLogCounter+=1;
                             });
+                            sleep(500);
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -166,13 +196,28 @@ public class orbotLogController extends AppCompatActivity {
         }.start();
     }
 
-    public void onScrollTop(View view) {
-        mMainScroll.smoothScrollTo(0,0);
+    public void onScrollBottom(View view) {
+        mMainScroll.fullScroll(View.FOCUS_DOWN);
     }
 
     public void onOpenInfo(View view) {
         helperMethod.openActivity(settingLogController.class, constants.CONST_LIST_HISTORY, this,true);
     }
+
+    public void onClose(View view){
+        finish();
+        activityContextManager.getInstance().onRemoveStack(this);
+        overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
+        mActivityClosed = true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mActivityClosed = true;
+    }
+
+    /* Model Callback */
 
     public class orbotModelCallback implements eventObserver.eventListener{
         @Override
@@ -180,15 +225,6 @@ public class orbotLogController extends AppCompatActivity {
         {
             return null;
         }
-    }
-
-    /* Helper Methods */
-
-    public void onClose(View view){
-        finish();
-        activityContextManager.getInstance().onRemoveStack(this);
-        overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
-        mActivityClosed = true;
     }
 
     /* LOCAL OVERRIDES */

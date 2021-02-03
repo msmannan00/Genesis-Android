@@ -60,7 +60,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_row_view, parent, false);
         return new listViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull tabAdapter.listViewHolder holder, int position)
     {
@@ -248,10 +247,13 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }else {
                     itemView.setVisibility(View.VISIBLE);
                     mLongPressMenuEnabled = false;
+                    mItemSelectionMenuButton.animate().cancel();
+                    mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
                 }
             }else {
                 itemView.setVisibility(View.VISIBLE);
                 mLongPressMenuEnabled = false;
+                mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
             }
         }
 
@@ -292,15 +294,24 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         break;
                     }
                 }
-
                 mModelList.remove(this.getLayoutPosition());
                 notifyItemRemoved(this.getLayoutPosition());
                 notifyItemChanged(mModelList.size()-1);
                 notifyItemRangeChanged(this.getLayoutPosition(), mModelList.size());
+
+                if(mModelList.size()==1){
+                    mModelList.remove(this.getLayoutPosition());
+                    notifyItemRemoved(this.getLayoutPosition());
+                    notifyItemChanged(mModelList.size()-1);
+                    notifyItemRangeChanged(this.getLayoutPosition(), mModelList.size());
+                }
+
                 mEvent.invokeObserver(Collections.singletonList(this.getLayoutPosition()), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW);
             }
             else if(v.getId() == R.id.pItemSelectionMenuButton){
                 onEnableLongClickMenu();
+                v.animate().cancel();
+                v.animate().setDuration(350).alpha(0);
                 mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION);
             }
         }

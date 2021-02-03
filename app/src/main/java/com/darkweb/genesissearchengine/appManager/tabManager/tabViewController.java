@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ActionMenuView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,7 +45,7 @@ class tabViewController
     private PopupWindow mTabOptionMenu = null;
     private Button mTabs;
     private ImageView mRemoveSelection;
-    private LinearLayout mTabsContainer;
+    private FrameLayout mTabsContainer;
     private ImageButton mMenuButton;
     private ImageButton mClearSelection;
     private View mToastLayoutRoot;
@@ -57,7 +58,7 @@ class tabViewController
 
     /*Initializations*/
 
-    tabViewController(AppCompatActivity mContext, Button pTabs, ImageView pRemoveSelection, LinearLayout pTabsContainer, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker)
+    tabViewController(AppCompatActivity mContext, Button pTabs, ImageView pRemoveSelection, FrameLayout pTabsContainer, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker)
     {
         this.mContext = mContext;
         this.mTabs = pTabs;

@@ -1513,20 +1513,13 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                 if (bridgeList != null && bridgeList.length() > 5) //longer then 1 = some real values here
                 {
                     String[] bridgeListLines = parseBridgesFromSettings(bridgeList);
+
                     int bridgeIdx = (int) Math.floor(Math.random() * ((double) bridgeListLines.length));
                     String bridgeLine = bridgeListLines[bridgeIdx];
                     extraLines.append("Bridge ");
                     extraLines.append(bridgeLine);
                     extraLines.append("\n");
-                    /**
-                     for (String bridgeConfigLine : bridgeListLines) {
-                     if (!TextUtils.isEmpty(bridgeConfigLine)) {
-                     extraLines.append("Bridge ");
-                     extraLines.append(bridgeConfigLine.trim());
-                     extraLines.append("\n");
-                     }
 
-                     }**/
                 } else {
 
                     String type = "obfs4";

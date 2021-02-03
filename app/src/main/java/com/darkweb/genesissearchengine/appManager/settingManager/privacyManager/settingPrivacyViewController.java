@@ -28,18 +28,16 @@ class settingPrivacyViewController
     private AppCompatActivity mContext;
     private SwitchMaterial mJavaScript;
     private SwitchMaterial mDoNotTrack;
-    private SwitchMaterial mTrackingProtection;
     private SwitchMaterial mClearDataOnExit;
     private ArrayList<RadioButton> mCookie;
 
     /*Initializations*/
 
-    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener pEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pTrackingProtection, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie)
+    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener pEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie)
     {
         this.mEvent = pEvent;
         this.mContext = pContext;
         this.mJavaScript = pJavaScript;
-        this.mTrackingProtection = pTrackingProtection;
         this.mClearDataOnExit = pClearDataOnExit;
         this.mCookie = pCookie;
         this.mDoNotTrack = pDoNotTrack;
@@ -76,12 +74,6 @@ class settingPrivacyViewController
             this.mClearDataOnExit.setChecked(true);
         }else{
             this.mClearDataOnExit.setChecked(false);
-        }
-
-        if(status.sSettingTrackingProtection){
-            this.mTrackingProtection.setChecked(true);
-        }else{
-            this.mTrackingProtection.setChecked(false);
         }
 
         if(status.sStatusDoNotTrack){

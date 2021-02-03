@@ -1,6 +1,5 @@
 package com.darkweb.genesissearchengine.helperManager;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -9,7 +8,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.view.ContextThemeWrapper;
 
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 
 import java.util.Locale;
 

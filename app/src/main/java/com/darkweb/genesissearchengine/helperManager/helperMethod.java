@@ -1,6 +1,8 @@
 package com.darkweb.genesissearchengine.helperManager;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.ClipData;
@@ -21,6 +23,7 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -166,13 +169,38 @@ public class helperMethod
     }
 
     public static void sendBridgeEmail(Context context){
-        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-        String[] aEmailList = { "bridges@torproject.org"};
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "get transport");
-        emailIntent.setType("plain/text");
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "get transport");
-        context.startActivity(emailIntent);
+        Intent selectorIntent = new Intent(Intent.ACTION_SENDTO);
+        selectorIntent.setData(Uri.parse("mailto:"));
+
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"bridges@torproject.org"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "get bridges");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "get bridges");
+        emailIntent.setSelector( selectorIntent );
+        context.startActivity(Intent.createChooser(emailIntent, "get transport"));
+    }
+
+    public static void onRevealView(View pView) {
+        int cx = pView.getWidth();
+        int cy = pView.getHeight();
+        float finalRadius = (float) Math.hypot(cx, cy);
+        Animator anim = ViewAnimationUtils.createCircularReveal(pView, 100, 100, 0, finalRadius);
+        pView.setVisibility(View.VISIBLE);
+        anim.start();
+    }
+    public static void onHideView(View pView) {
+        int cx = pView.getWidth();
+        int cy = pView.getHeight();
+        float initialRadius = (float) Math.hypot(cx, cy);
+        Animator anim = ViewAnimationUtils.createCircularReveal(pView, 100, 100, initialRadius, 0);
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                pView.setVisibility(View.INVISIBLE);
+            }
+        });
+        anim.start();
     }
 
     public static void hideKeyboard(AppCompatActivity context) {

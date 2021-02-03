@@ -17,6 +17,7 @@ public class constants
     /*URL CONSTANTS*/
 
     public static final String CONST_GENESIS_URL_CACHED = "resource://android/assets/homepage/homepage.html";
+    public static final String CONST_GENESIS_ERROR_CACHED = "resource://android/assets/error/error.html";
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://boogle.store/";
     public static final String CONST_GENESIS_DOMAIN_URL = "https://boogle.store";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";

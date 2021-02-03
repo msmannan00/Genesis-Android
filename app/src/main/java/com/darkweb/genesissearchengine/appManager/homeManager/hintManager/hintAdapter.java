@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.homeManager;
+package com.darkweb.genesissearchengine.appManager.homeManager.hintManager;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
@@ -36,7 +36,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     ImageView[] mWebIcon = new ImageView[15];
 
     boolean mCounters=false;
-    hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext) {
+    public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext) {
         this.mHintList = new ArrayList();
         int maxCounter=5;
         if(pHintList.size()<maxCounter){

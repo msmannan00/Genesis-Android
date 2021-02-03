@@ -94,43 +94,48 @@ class bridgeViewController
         mCustomBridgeBlocker.setVisibility(View.VISIBLE);
     }
 
+    private void onEnableCustomBridge(){
+        animateColor(mBridgeCustom, mBridgeCustom.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", 200);
+        mBridgeCustom.setHighlightColor(Color.BLACK);
+        mBridgeCustom.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+        mBridgeObfs.setChecked(false);
+        mBridgeChina.setChecked(false);
+        mBridgeCustom.setChecked(true);
+        mCustomPort.animate().setDuration(200).alpha(1f);
+        mBridgeButton.animate().setDuration(200).alpha(1f);
+        mCustomBridgeBlocker.setVisibility(View.GONE);
+    }
+
     private void initViews(String p_bridge, int p_duration){
         resetRadioButtons(p_duration);
-        switch (p_bridge) {
-            case strings.BRIDGE_CUSTOM_BRIDGE_OBFS4:
-                animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
-                mBridgeObfs.setHighlightColor(Color.BLACK);
-                mBridgeObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
-                mBridgeObfs.setChecked(true);
-                mBridgeChina.setChecked(false);
-                mBridgeCustom.setChecked(false);
-                break;
-            case strings.BRIDGE_CUSTOM_BRIDGE_MEEK:
-                animateColor(mBridgeChina, mBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
-                mBridgeChina.setHighlightColor(Color.BLACK);
-                mBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
-                mBridgeObfs.setChecked(false);
-                mBridgeChina.setChecked(true);
-                mBridgeCustom.setChecked(false);
-                break;
-            case strings.BRIDGE_CUSTOM_BRIDGE_CUSTOM:
-                animateColor(mBridgeCustom, mBridgeCustom.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
-                mBridgeCustom.setHighlightColor(Color.BLACK);
-                mBridgeCustom.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
-                mBridgeObfs.setChecked(false);
-                mBridgeChina.setChecked(false);
-                mBridgeCustom.setChecked(true);
-
-                mCustomPort.animate().setDuration(p_duration).alpha(1f);
-                mBridgeButton.animate().setDuration(p_duration).alpha(1f);
-                mCustomBridgeBlocker.setVisibility(View.GONE);
-                break;
+        if(p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_OBFS4)){
+            animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
+            mBridgeObfs.setHighlightColor(Color.BLACK);
+            mBridgeObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+            mBridgeObfs.setChecked(true);
+            mBridgeChina.setChecked(false);
+            mBridgeCustom.setChecked(false);
+            mCustomPort.setText(strings.GENERIC_EMPTY_STR);
+        }else if(p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_MEEK)){
+            animateColor(mBridgeChina, mBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
+            mBridgeChina.setHighlightColor(Color.BLACK);
+            mBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+            mBridgeObfs.setChecked(false);
+            mBridgeChina.setChecked(true);
+            mBridgeCustom.setChecked(false);
+            mCustomPort.setText(strings.GENERIC_EMPTY_STR);
+        }else {
+            onEnableCustomBridge();
+            mCustomPort.setText(p_bridge.replace("\n",""));
         }
     }
 
     public void onTrigger(bridgeEnums.eBridgeViewCommands p_commands, List<Object> p_data){
         if(p_commands == bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS){
             initViews((String) p_data.get(0), (int)p_data.get(1));
+        }
+        if(p_commands == bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE){
+            onEnableCustomBridge();
         }
     }
 

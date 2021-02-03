@@ -349,6 +349,79 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/pOption8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:onClick="onManageTracking"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="10dp"
+                        app:tint="@color/c_icon_tint"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@xml/ic_baseline_privacy"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_TRACKING"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_TRACKING_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:clickable="false"
+                        android:layout_marginEnd="5dp"
+                        android:tint="@color/c_navigation_tint"
+                        android:src="@xml/ic_arrow_right" />
+
+                </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -585,7 +658,7 @@
                     android:background="@color/c_view_divier_background"/>
 
                 <LinearLayout
-                    android:id="@+id/pOption8"
+                    android:id="@+id/pOption9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
@@ -663,7 +736,7 @@
                     android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
-                    android:id="@+id/pOption9"
+                    android:id="@+id/pOption10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
@@ -742,7 +815,7 @@
                     android:background="@color/c_view_divier_background" />
 
                 <LinearLayout
-                    android:id="@+id/pOption10"
+                    android:id="@+id/pOption11"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
@@ -815,7 +888,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption11"
+                    android:id="@+id/pOption12"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
@@ -888,7 +961,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption12"
+                    android:id="@+id/pOption13"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"

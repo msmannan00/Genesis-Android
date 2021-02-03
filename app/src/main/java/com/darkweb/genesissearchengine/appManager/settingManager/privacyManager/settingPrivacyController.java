@@ -6,6 +6,7 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.appManager.settingManager.trackingManager.settingTrackingController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -29,7 +30,6 @@ public class settingPrivacyController extends AppCompatActivity {
     private settingPrivacyViewController mSettingPrivacyViewController;
     private SwitchMaterial mJavaScript;
     private SwitchMaterial mDoNotTrack;
-    private SwitchMaterial mTrackingProtection;
     private SwitchMaterial mClearDataOnExit;
     private ArrayList<RadioButton> mCookie = new ArrayList<>();
     private boolean mSettingChanged = false;
@@ -47,7 +47,6 @@ public class settingPrivacyController extends AppCompatActivity {
     private void viewsInitializations() {
         mJavaScript = findViewById(R.id.pJavascript);
         mDoNotTrack = findViewById(R.id.pDoNotTrack);
-        mTrackingProtection = findViewById(R.id.pTrackingProtection);
         mClearDataOnExit = findViewById(R.id.pClearDataOnExit);
         mCookie.add(findViewById(R.id.pCookieRadioOption1));
         mCookie.add(findViewById(R.id.pCookieRadioOption2));
@@ -55,7 +54,7 @@ public class settingPrivacyController extends AppCompatActivity {
         mCookie.add(findViewById(R.id.pCookieRadioOption4));
 
         activityContextManager.getInstance().onStack(this);
-        mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mTrackingProtection, mClearDataOnExit, mCookie);
+        mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mClearDataOnExit, mCookie);
         mSettingPrivacyModel = new settingPrivacyModel(new settingPrivacyController.settingAccessibilityModelCallback());
     }
 
@@ -129,13 +128,6 @@ public class settingPrivacyController extends AppCompatActivity {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_DONOT_TRACK,status.sStatusDoNotTrack));
     }
 
-    public void onTrackingProtection(View view){
-        mSettingChanged = true;
-        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_TRACKING_PROTECTION, Collections.singletonList(!status.sSettingTrackingProtection));
-        mTrackingProtection.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TRACKING_PROTECTION,status.sSettingTrackingProtection));
-    }
-
     public void onCookies(View view){
         mSettingChanged = true;
         mSettingPrivacyViewController.onTrigger(settingPrivacyEnums.ePrivacyViewController.M_SET_COOKIE_STATUS, Collections.singletonList(view));
@@ -152,6 +144,10 @@ public class settingPrivacyController extends AppCompatActivity {
 
     public void onOpenInfo(View view) {
         helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+    }
+
+    public void onManageTracking(View view) {
+        helperMethod.openActivity(settingTrackingController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
 }

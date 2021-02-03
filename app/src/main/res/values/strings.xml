@@ -37,6 +37,7 @@
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">System Notifications</string>
     <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Log Settings</string>
     <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Show Logs in Advance List View</string>
+    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">Toogle between classic and advance view</string>
     <string name="SETTING_SEARCH" translatable="true">Manage Search</string>
     <string name="SETTING_SEARCH_INFO" translatable="true">Add, set default. show suggestions</string>
     <string name="SETTING_NOTIFICATION" translatable="true">Manage Notifications</string>
@@ -85,7 +86,12 @@
     <string name="SETTING_INTERACTION_INFO" translatable="true">Change how you interact with the content</string>
     <string name="SETTING_PRIVACY" translatable="true">Privacy</string>
     <string name="SETTING_PRIVACY_INFO" translatable="true">Tracking, logins, data choices</string>
+    <string name="SETTING_TRACKING" translatable="true">Tracking Protection</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackers, fingerprinting</string>
     <string name="SETTING_PRIVACY_HEADER" translatable="true">Settings | Privacy</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">Settings | Tracking Protection</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">Protect your online identity</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">Keep your identity to your self. We can protect you from several trackers that follow what you do online. Tracking protection can also be used to block advertisement</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">Do Not Track</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis will tell sites that you do not want to be tracked</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">Do not track marker for website</string>
@@ -101,6 +107,14 @@
     <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">Enabled, excluding tracking cookies</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">Enabled, excluding 3rd party</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">Disabled</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">Disable Protection</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">Allow identity tracking. This might cause your online identity to be stolen</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">Default (Recommended)</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">Block advertisement and social tracking. Pages will load normally</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">Strict Policy</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">Stop all known trackers, Pages will load faster but some functionality might not work</string>
+
     <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">Javascript</string>
     <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Disable java scripting for various script attacks</string>
     <string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
@@ -161,6 +175,12 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">Clear browser settings</string>
 
     <!-- Alerts -->
+    <string name="ALERT_UPDATE_BRIDGES" translatable="true">Provide a Bridge I know</string>
+    <string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">Enter bridge information from a trusted source</string>
+    <string name="ALERT_ADD_BRIDGES_HINT" translatable="true">bridge string ...</string>
+    <string name="ALERT_REQUEST_BRIDGE" translatable="true">Request</string>
+    <string name="ALERT_SAVE_BRIDGE" translatable="true">Done</string>
+
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">Bookmark Website</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Add this page to your bookmarks</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">Clear History and Data</string>
@@ -233,7 +253,7 @@
     <string name="BRIDGE_AUTO" translatable="true">Create Automatically</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Automatically configure bridge settings</string>
     <string name="BRIDGE_MANUAL" translatable="true">Provide a bridge I know</string>
-    <string name="BRIDGE_PORT_HINT" translatable="false">address:port Single Line</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Paste custom bridge</string>
     <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
     <string name="BRIDGE_TITLE" translatable="true">Select Default bridge</string>
@@ -310,7 +330,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ Warning</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Customize Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Enable Bridges</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Enable Onion Serivce</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Enable VPN Serivce</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Enable bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Enable Gateway</string>
 
@@ -319,8 +339,8 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Current status of orbot proxy</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">Orbot Proxy Status</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">Onion &amp; Bridges Status</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">Onion Connection Status</string>
-    <string name="PROXY_BRIDGE_STATUS" translatable="true">bridge connectivity status</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">VPN connectivity status</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge connectivity status</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">To change proxy settings please restart this application and navigate to proxy manager. It can be opened by pressing on GEAR icon at bottom</string>
 

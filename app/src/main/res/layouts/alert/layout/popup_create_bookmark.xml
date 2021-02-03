@@ -53,10 +53,10 @@
             android:layout_height="1dp"
             android:layout_marginTop="14dp"
             android:background="@color/c_view_divier_background"
-            app:layout_constraintTop_toBottomOf="@+id/pBookmark" />
+            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
 
         <EditText
-            android:id="@+id/pBookmark"
+            android:id="@+id/pBridgeInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -88,7 +88,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="14dp"
             android:background="@color/c_view_divier_background"
-            app:layout_constraintTop_toBottomOf="@+id/pBookmark" />
+            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
 
         <LinearLayout
             android:id="@+id/pNavigationContainer"

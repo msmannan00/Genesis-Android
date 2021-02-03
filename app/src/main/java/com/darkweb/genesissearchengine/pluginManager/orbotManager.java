@@ -31,14 +31,15 @@ class orbotManager
 
     public void initialize(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, int pNotificationStatus){
         this.mAppContext = pAppContext;
+
         onInitNotificationStatus(pNotificationStatus);
     }
 
     private void onStartOrbot(){
         orbotLocalConstants.mBridges = status.sBridgeCustomBridge;
         orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
-        Prefs.putBridgesEnabled(status.sBridgeGatewayManual |status.sBridgeGatewayAuto);
-        Intent mServiceIntent = new Intent(mAppContext, OrbotService.class);
+        Prefs.putBridgesEnabled(status.sBridgeStatus);
+        Intent mServiceIntent = new Intent(mAppContext.getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mAppContext.startForegroundService(mServiceIntent);

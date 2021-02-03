@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.logManager;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
@@ -98,8 +99,13 @@ public class settingLogController extends AppCompatActivity {
     public void onSwitchLogUIMode(View view){
         mSettingLogModel.onTrigger(settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW, Collections.singletonList(!mListView.isChecked()));
         mListView.toggle();
-        activityContextManager.getInstance().getOrbotLogController().initializeLogs();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogListView));
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() ->
+        {
+            activityContextManager.getInstance().getOrbotLogController().recreate();
+        }, 250);
     }
 
     public void onOpenInfo(View view) {
