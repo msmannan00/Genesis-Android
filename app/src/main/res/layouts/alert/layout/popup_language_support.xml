@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="@string/ALERT_LANGUAGE_SUPPORT_FAILURE"
             android:textAlignment="textStart"
             android:textColor="@color/c_text_setting_heading_v2"
@@ -34,7 +35,7 @@
 
         <TextView
             android:id="@+id/pLanguage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
@@ -50,7 +51,7 @@
             android:layout_marginTop="35dp"
             android:alpha="0.6"
             android:paddingStart="15dp"
-            android:paddingEnd="10dp"
+            android:paddingEnd="15dp"
             android:text="@string/ALERT_LANGUAGE_SUPPORT_FAILURE_INFO"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"

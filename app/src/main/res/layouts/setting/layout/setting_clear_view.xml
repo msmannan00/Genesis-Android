@@ -86,23 +86,23 @@
                     android:paddingBottom="11dp"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:tag="0"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_1"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -111,7 +111,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -119,6 +119,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_1"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -128,12 +129,11 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:id="@+id/pClearChecked_1"
                         android:tag="0"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:buttonTint="@color/c_checkbox_tint"
                         android:checked="true"
                         android:background="@android:color/transparent"
@@ -153,23 +153,23 @@
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:tag="1"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_2"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -178,7 +178,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -186,6 +186,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_2"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -195,12 +196,11 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:tag="1"
                         android:id="@+id/pClearChecked_2"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:checked="true"
                         android:buttonTint="@color/c_checkbox_tint"
                         android:background="@android:color/transparent"
@@ -221,22 +221,22 @@
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_3"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -244,7 +244,7 @@
                             android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -252,6 +252,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_3"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -261,12 +262,11 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:tag="2"
                         android:id="@+id/pClearChecked_3"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:checked="true"
                         android:buttonTint="@color/c_checkbox_tint"
                         android:background="@android:color/transparent"
@@ -287,22 +287,22 @@
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_4"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -310,7 +310,7 @@
                             android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -318,6 +318,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_4"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -327,12 +328,11 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:id="@+id/pClearChecked_4"
                         android:tag="3"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:checked="true"
                         android:buttonTint="@color/c_checkbox_tint"
                         android:background="@android:color/transparent"
@@ -354,22 +354,22 @@
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_6"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -377,7 +377,7 @@
                             android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -385,6 +385,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_6"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -394,13 +395,12 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:id="@+id/pClearChecked_5"
                         android:tag="4"
                         android:checked="true"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:buttonTint="@color/c_checkbox_tint"
                         android:background="@android:color/transparent"
                         android:src="@xml/ic_arrow_right"
@@ -420,22 +420,22 @@
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_7"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -443,7 +443,7 @@
                             android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -451,6 +451,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_7"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -460,12 +461,11 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:id="@+id/pClearChecked_6"
                         android:tag="5"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:checked="true"
                         android:buttonTint="@color/c_checkbox_tint"
                         android:background="@android:color/transparent"
@@ -486,22 +486,22 @@
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_8"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -509,7 +509,7 @@
                             android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -517,6 +517,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_8"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -526,12 +527,11 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:id="@+id/pClearChecked_7"
                         android:tag="6"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:checked="true"
                         android:buttonTint="@color/c_checkbox_tint"
                         android:background="@android:color/transparent"
@@ -552,22 +552,22 @@
                     android:clickable="true"
                     android:onClick="onCheckBoxTriggered"
                     android:orientation="horizontal"
-                    android:weightSum="7"
                     android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_OPTION_9"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -575,7 +575,7 @@
                             android:textSize="14sp"
                             tools:ignore="RtlSymmetry" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -583,6 +583,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_CLEAR_CACHE_OPTION_9"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -592,12 +593,11 @@
                     </LinearLayout>
 
                     <CheckBox
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:id="@+id/pClearChecked_8"
                         android:tag="7"
-                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="15dp"
                         android:checked="false"
                         android:buttonTint="@color/c_checkbox_tint_default"
                         android:background="@android:color/transparent"

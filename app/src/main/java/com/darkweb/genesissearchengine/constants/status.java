@@ -13,7 +13,7 @@ public class status
 {
     /*App Status*/
 
-    public static boolean sPaidStatus = true;
+    public static boolean sPaidStatus = false;
     public static String mCurrentReloadURL = "";
     public static int mNotificationID = 1001;
 

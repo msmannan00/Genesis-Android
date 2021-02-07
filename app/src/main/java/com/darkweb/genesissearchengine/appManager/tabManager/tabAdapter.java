@@ -3,6 +3,7 @@ package com.darkweb.genesissearchengine.appManager.tabManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +115,17 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         notifyItemChanged(mModelList.size()-1);
     }
 
+    private void onRemoveAll(){
+        int mSize = mModelList.size()-1;
+        for(int mCounter=0;mCounter<mSize;mCounter++){
+            mModelList.remove(0);
+            notifyDataSetChanged();
+            mEvent.invokeObserver(Collections.singletonList(0), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+        }
+
+        mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG);
+    }
+
     private void onClearAllSelection(){
         mEvent.invokeObserver(Arrays.asList(false, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
 
@@ -161,6 +173,10 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         mEvent.invokeObserver(Arrays.asList(model.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
         mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_BACK_PRESSED);
         mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_INIT_TAB_COUNT);
+    }
+
+    private int getSelectionSize(){
+        return mSelectedList.size();
     }
 
     /*View Holder Extensions*/
@@ -215,7 +231,12 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
                 mDescription.setText(model.getSession().getCurrentURL());
                 mDate.setText(model.getDate());
-                mWebThumbnail.setImageBitmap(model.getBitmap());
+
+                final Handler handler = new Handler();
+                handler.postDelayed(() ->
+                {
+                    mWebThumbnail.setImageBitmap(model.getBitmap());
+                }, 500);
 
                 if(mSelectedList.contains(model.getSession().getSessionID())){
                     onSelectionCreate(mSelectedView);
@@ -307,6 +328,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
                 mEvent.invokeObserver(Collections.singletonList(this.getLayoutPosition()), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW);
+                mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG);
             }
             else if(v.getId() == R.id.pItemSelectionMenuButton){
                 onEnableLongClickMenu();
@@ -333,6 +355,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         }
     }
 
+
     public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData){
         if(pCommands.equals(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING)){
             return isSelectionMenuShowing();
@@ -346,8 +369,12 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             initFirstRow();
         }else if(pCommands.equals(tabEnums.eTabAdapterCommands.REINIT_DATA)){
             reInitData((ArrayList<tabRowModel>)pData.get(0));
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.NOTIFY_sWIPE)){
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.NOTIFY_SWIPE)){
             onNotifyItemSwiped((int)pData.get(0));
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.GET_SELECTION_SIZE)){
+            return getSelectionSize();
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.REMOVE_ALL)){
+            onRemoveAll();
         }
         return null;
     }

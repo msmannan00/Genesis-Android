@@ -91,8 +91,9 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="40"
                     android:text="@string/ORBOT_LOG_HEADER"

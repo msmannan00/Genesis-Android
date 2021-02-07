@@ -2,6 +2,8 @@ package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,7 +74,7 @@ public class orbotController extends AppCompatActivity {
 
             @Override
             public boolean onSwipe(Direction direction) {
-                if (direction==Direction.left || direction==Direction.right){
+                if (direction==Direction.left){
                     onClose(null);
                 }
                 return true;
@@ -141,8 +143,19 @@ public class orbotController extends AppCompatActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        mSwipeDirectionDetector.onTouchEvent(event);
+        if(inSignatureArea(event)){
+            try{
+                mSwipeDirectionDetector.onTouchEvent(event);
+            }catch (Exception ignored){ }
+        }
         return super.dispatchTouchEvent(event);
+    }
+
+    public boolean inSignatureArea(MotionEvent ev) {
+        float mEventY = ev.getY();
+        float mEventX = ev.getX();
+        Log.i("FUCKSSSS", helperMethod.getScreenWidth(this)-ev.getX() + "----" + ev.getX());
+        return mEventY>helperMethod.pxFromDp(500) || mEventX>helperMethod.getScreenWidth(this)-helperMethod.pxFromDp(80);
     }
 
 }

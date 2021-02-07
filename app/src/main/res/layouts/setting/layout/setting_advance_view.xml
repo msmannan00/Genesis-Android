@@ -81,8 +81,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="00dp"
                         android:layout_weight="40"
@@ -92,14 +94,15 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:alpha="1"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:paddingStart="15dp"
                         android:text="@string/SETTING_ADVANCE_TAB_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
@@ -126,13 +129,14 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_ADVANCE_RESTORE_TAB"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -141,7 +145,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -149,6 +153,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_ADVANCE_RESTORE_TAB_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -188,13 +193,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_ADVANCE_TITILE_THEME"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -203,7 +209,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -211,6 +217,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_ADVANCE_TITILE_THEME_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -247,8 +254,10 @@
                     <TextView
                         android:textColor="@color/c_text_setting_heading"
                         android:textSize="15sp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:textStyle="bold"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
@@ -256,13 +265,14 @@
                         android:text="@string/SETTING_ADVANCE_DATA_SAVER"
                         />
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:text="@string/SETTING_ADVANCE_DATA_SAVER_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
@@ -304,7 +314,7 @@
                             android:orientation="vertical">
 
                             <Button
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="15dp"
                                 android:alpha="1"
@@ -412,13 +422,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_ADVANCE_WEB_FONTS"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -427,7 +438,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -435,6 +446,7 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_ADVANCE_WEB_FONTS_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"

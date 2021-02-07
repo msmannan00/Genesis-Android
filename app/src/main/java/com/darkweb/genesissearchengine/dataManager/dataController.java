@@ -20,6 +20,7 @@ public class dataController
     private imageDataModel mImageDataModel;
     private bookmarkDataModel mBookmarkDataModel;
     private suggestionDataModel mSuggestionDataModel;
+    private helpDataModel mHelpDataModel;
 
     /*Private Declarations*/
 
@@ -38,6 +39,7 @@ public class dataController
         mImageDataModel = new imageDataModel();
         mBookmarkDataModel = new bookmarkDataModel();
         mSuggestionDataModel = new suggestionDataModel(pAppContext);
+        mHelpDataModel = new helpDataModel();
     }
     public void initializeListData(){
         mBookmarkDataModel.initializebookmark(databaseController.getInstance().selectBookmark());
@@ -78,6 +80,11 @@ public class dataController
     /*Recieving Preferences*/
     public Object invokePrefs(dataEnums.ePreferencesCommands pCommands, List<Object> pData){
         return mPreferenceModel.onTrigger(pCommands, pData);
+    }
+
+    /*Recieving Help*/
+    public Object invokeHelp(dataEnums.eHelpCommands pCommands, List<Object> pData){
+        return mHelpDataModel.onTrigger(pCommands, pData);
     }
 
     /*Recieving History*/

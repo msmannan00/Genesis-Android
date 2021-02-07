@@ -77,6 +77,8 @@
                         android:textColor="@color/c_text_setting_heading"
                         android:textSize="16sp"
                         android:layout_width="0dp"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
@@ -87,10 +89,11 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:background="@color/clear_alpha"
                     android:layout_marginBottom="0dp"
-                    android:layout_marginEnd = "20dp"
+                    android:layout_marginEnd = "15dp"
+                    android:layout_marginStart = "15dp"
                     android:orientation="horizontal"
                     android:layout_height="65dp">
                 <TextView
@@ -100,14 +103,13 @@
                         android:layout_weight="40"
                         android:textColor="@color/c_text_v1"
                         android:background="@color/clear_alpha"
-                        android:layout_marginStart="20dp"
                         android:text="@string/ORBOT_DESCRIPTION"
                         />
             </LinearLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_marginEnd = "20dp"
+                    android:layout_marginEnd = "15dp"
                     android:background="@color/clear_alpha"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="15dp"
@@ -145,7 +147,9 @@
                     android:textSize="14sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="40"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:layout_weight="1"
                     android:textColor="@color/c_text_v1"
                     android:layout_marginStart="20dp"
                     android:text="@string/ORBOT_SETTING_ENABLE_VPN"
@@ -153,11 +157,10 @@
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/pVpnSwitch"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:clickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd = "10dp"
-                    android:layout_weight="40"
                     android:theme="@style/SCBSwitch"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
@@ -182,22 +185,23 @@
                 tools:ignore="RtlSymmetry">
                 <TextView
                     android:textSize="14sp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="40"
                     android:textColor="@color/c_text_v1"
                     android:layout_marginStart="20dp"
+                    android:layout_weight="1"
                     android:text="@string/ORBOT_SETTING_BRIDGE_ENABLE"
                     />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/pBridgeSwitch"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_marginEnd = "10dp"
                         android:clickable="false"
                         android:layout_height="wrap_content"
-                        android:theme="@style/SCBSwitch"
-                        android:layout_weight="8"/>
+                        android:theme="@style/SCBSwitch"/>
             </LinearLayout>
 
             <View
@@ -285,8 +289,10 @@
                         android:layout_height="wrap_content">
                     <TextView
                             android:textSize="16sp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
                             android:layout_weight="40"
                             android:layout_marginStart="8dp"
                             android:textColor="@color/c_text_v1"

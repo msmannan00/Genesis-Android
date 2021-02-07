@@ -84,16 +84,17 @@
                     <TextView
                         android:textColor="@color/c_text_setting_heading"
                         android:textSize="15sp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
                         android:text="@string/SETTING_SEARCH_HEADER_1"
                         />
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:alpha="1"
@@ -101,6 +102,7 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
+                        android:paddingEnd="15dp"
                         android:paddingStart="15dp"
                         android:text="@string/SETTING_SEARCH_HEADER_1_INFO"
                         android:textAlignment="textStart"
@@ -143,18 +145,19 @@
                         android:layout_height="55dp"
                         android:orientation="vertical">
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_marginTop="8dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="15dp"
                             android:text="@string/SETTING_SEARCH_GENESIS"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v1"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:textSize="15sp"
                             tools:ignore="RtlSymmetry" />
 
@@ -521,22 +524,24 @@
                     <TextView
                         android:textColor="@color/c_text_setting_heading"
                         android:textSize="15sp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:text="@string/SETTING_SEARCH_HEADER_2"
                         />
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:text="@string/SETTING_SEARCH_HEADER_2_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
@@ -564,13 +569,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_SEARCH_HISTORY"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -579,7 +585,7 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
@@ -587,9 +593,8 @@
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
-                            android:layout_marginEnd="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_SEARCH_HISTORY_INFO"
-                            android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
@@ -631,13 +636,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_SEARCH_SUGGESTIONS"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -646,15 +652,15 @@
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:layout_marginEnd="15dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_SEARCH_SUGGESTION_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"

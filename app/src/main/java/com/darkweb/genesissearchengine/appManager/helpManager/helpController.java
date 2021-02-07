@@ -27,6 +27,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static com.darkweb.genesissearchengine.appManager.helpManager.helpEnums.eHelpModel.M_IS_LOADED;
+
 public class helpController extends AppCompatActivity {
 
     /*Initializations*/
@@ -49,8 +51,8 @@ public class helpController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_view);
 
-        initializeAppModel();
         initializeViews();
+        initializeAppModel();
         initializeLocalEventHandlers();
     }
 
@@ -58,6 +60,9 @@ public class helpController extends AppCompatActivity {
     {
         mHelpModel = new helpModel(this, new helpAdapterCallback());
         mHelpModel.onTrigger(helpEnums.eHelpModel.M_LOAD_HELP_DATA,null);
+        if((boolean)mHelpModel.onTrigger(M_IS_LOADED,null)){
+            mProgressBar.setVisibility(View.GONE);
+        }
     }
 
     private void initializeViews(){

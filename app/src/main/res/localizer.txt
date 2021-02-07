@@ -1,0 +1,12 @@
+1111	Genesis
+2222	Bridge
+3333 	bridge
+4444	Bridges
+5555	bridges
+6666	Tor
+7777	VPN
+8888	Onion
+9999	onion
+11111	Orbot
+11112	orbot
+11113   Gateway

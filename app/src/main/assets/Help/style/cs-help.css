@@ -11,7 +11,46 @@
 
 .hi_info{
   margin-top: 30px;
-  padding-left:3%;
+  padding-left:15px;
+  padding-bottom: 12px;
+  padding-top: 10px;
   margin-bottom: 30px;
+  height: auto;
   border-left: 5px solid #ff9933;
+}
+
+.hi_bullets{
+  margin-left: 20px;
+  line-height: 30px;
+}
+
+.hi_card{
+cursor: pointer;
+}
+
+.hi_card_link{
+  color: #6699cc;
+  font-size: 15px;
+}
+
+.hi_issue--color{
+  color: #336699;
+}
+
+.hi_arrow--color{
+  color: #4080bf;
+}
+
+.hi_card--margin-top{
+  margin-top: 2%;
+}
+
+.hi_no_select {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }

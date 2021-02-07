@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:id="@+id/pFindText"
             android:background="@color/c_background"
             android:textColorHint="@color/c_hint_text"

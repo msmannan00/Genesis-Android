@@ -65,6 +65,7 @@
                         android:layout_marginStart="6dp"
                         android:paddingStart="7dp"
                         android:onClick="onOpenInfo"
+                        android:autoMirrored="true"
                         android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@drawable/info"
@@ -83,16 +84,17 @@
                     <TextView
                         android:textColor="@color/c_text_setting_heading"
                         android:textSize="15sp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:text="@string/SETTING_TRACKING_SUB_HEADER"
                         />
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:alpha="1"
@@ -101,6 +103,7 @@
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:text="@string/SETTING_TRACKING_SUB_HEADER_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
@@ -129,10 +132,10 @@
                             android:layout_marginTop="10dp"
                             android:background="@xml/sx_border_left"
                             android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
                             android:layout_marginStart="15dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            tools:ignore="RtlSymmetry">
+                            android:orientation="vertical">
 
                             <View
                                 android:layout_width="match_parent"
@@ -169,7 +172,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="15dp"
                                     android:layout_marginTop="-2dp"
-                                    android:paddingEnd="65dp"
+                                    android:paddingEnd="55dp"
                                     android:textSize="13sp"
                                     android:text="@string/SETTING_PRIVACY_TRACKING_OPTION1_INFO"
                                     />
@@ -208,7 +211,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="15dp"
                                     android:layout_marginTop="-2dp"
-                                    android:paddingEnd="65dp"
+                                    android:paddingEnd="55dp"
                                     android:textSize="13sp"
                                     android:text="@string/SETTING_PRIVACY_TRACKING_OPTION2_INFO"
                                     />
@@ -247,7 +250,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="15dp"
                                     android:layout_marginTop="-2dp"
-                                    android:paddingEnd="65dp"
+                                    android:paddingEnd="55dp"
                                     android:textSize="13sp"
                                     android:text="@string/SETTING_PRIVACY_TRACKING_OPTION3_INFO"
                                     />

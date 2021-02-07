@@ -8,6 +8,7 @@
         >
 
     <TextView
+            android:translationY="-50dp"
             android:id="@+id/custom_slide_big_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
             android:textStyle="bold"
             android:textSize="28sp"/>
     <TextView
+            android:translationY="-50dp"
             android:id="@+id/custom_slide_big_text_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +33,7 @@
             />
 
     <Button
+            android:translationY="-50dp"
             android:id="@+id/custom_slide_button"
             android:layout_width="120dp"
             android:layout_height="40dp"

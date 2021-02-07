@@ -88,7 +88,6 @@ import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE_TAB_SINGLE;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
-import static org.torproject.android.service.wrapper.orbotLocalConstants.mIsTorInitialized;
 
 public class homeController extends AppCompatActivity implements ComponentCallbacks2
 {
@@ -101,7 +100,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     /*View Webviews*/
     private NestedGeckoView mGeckoView = null;
     private FrameLayout mTopLayout;
-    private FrameLayout mWebViewContainer;
+    private ConstraintLayout mWebViewContainer;
 
     /*View Objects*/
     private AnimatedProgressBar mProgressBar;
@@ -139,6 +138,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private boolean isSuggestionSearchOpened = false;
     private boolean isFocusChanging = false;
     private boolean mAppRestarted = false;
+    private boolean mSearchBarLoading = false;
     private String mSearchBarPreviousText = strings.GENERIC_EMPTY_STR;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
@@ -146,8 +146,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-            mAppRestarted = false;
-            mIsTorInitialized = false;
+            onInitBooleans();
             orbotLocalConstants.mHomeIntent = getIntent();
 
             getWindow().getDecorView().setBackgroundColor(Color.WHITE);
@@ -174,9 +173,18 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             onInitResume(false);
     }
 
+    public void onInitBooleans(){
+        mPageClosed = false;
+        isKeyboardOpened = false;
+        isSuggestionChanged = false;
+        isSuggestionSearchOpened = false;
+        isFocusChanging = false;
+        mAppRestarted = false;
+        mSearchBarLoading = false;
+    }
+
     public void onInitResume(boolean pStatus){
         if(status.mThemeApplying){
-            isFocusChanging = true;
             mSplashScreen.setAlpha(0);
             mSplashScreen.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -186,8 +194,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(ContextCompat.getColor(this, R.color.c_text_v3));
             }
-            mSplashScreen.setAlpha(0f);
-            mSplashScreen.setVisibility(View.GONE);
+            mHomeViewController.splashScreenDisableInstant();
             onLoadTabOnResume();
             mSearchLock.setColorFilter(ContextCompat.getColor(this, R.color.c_lock_tint));
         }
@@ -328,7 +335,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mTopBar = findViewById(R.id.pTopbar);
         mBackSplash = findViewById(R.id.pTopImage);
         mConnectButton = findViewById(R.id.Connect);
-        mNewTab = findViewById(R.id.pTabCounter);
+        mNewTab = findViewById(R.id.pNewTab);
         mSearchEngineBar = findViewById(R.id.pSearchEngineBar);
         mFindText = findViewById(R.id.pFindText);
         mFindCount = findViewById(R.id.pFindCount);
@@ -374,8 +381,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        mSwipeDirectionDetector.onTouchEvent(event);
+        if(inSignatureArea(event)){
+            try{
+                mSwipeDirectionDetector.onTouchEvent(event);
+            }catch (Exception ignored){ }
+        }
         return super.dispatchTouchEvent(event);
+    }
+
+    public boolean inSignatureArea(MotionEvent ev) {
+        float mEventY = ev.getY();
+        return mEventY>mTopBar.getY()+mTopBar.getHeight() && mEventY<mConnectButton.getY();
     }
 
     public void initPreFixes() {
@@ -419,10 +435,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.onGetFavIcon(pImageView, pURL);
     }
 
-    public void onLoadFavIcon(){
-        mGeckoClient.onLoadFavIcon();
-    }
-
     public void onLoadFont(){
         mGeckoClient.onUpdateFont();
         mHomeViewController.onReDraw();
@@ -447,10 +459,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onLoadURL(String url){
+        mAppBar.animate().cancel();
         mHomeViewController.onClearSelections(true);
         mGeckoView.getSession().stop();
         mGeckoClient.loadURL(url.replace("genesis.onion","boogle.store"));
-        mAppBar.setExpanded(true,true);
     }
 
     public void onLoadTab(geckoSession mTempSession, boolean isSessionClosed){
@@ -503,8 +515,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     @Override
     protected void onDestroy() {
-        Intent intent = new Intent(getApplicationContext(), OrbotService.class);
-        stopService(intent);
+        if(!status.sSettingIsAppStarted){
+            Intent intent = new Intent(getApplicationContext(), OrbotService.class);
+            stopService(intent);
+        }
         super.onDestroy();
     }
 
@@ -514,6 +528,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
 
         registerReceiver(downloadStatus,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
+        mNewTab.setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                onOpenTabViewBoundary(null);
+            }
+            return false;
+        });
+
 
         mFindText.addTextChangedListener(new TextWatcher() {
 
@@ -596,6 +618,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 if(status.sSearchSuggestionStatus && isSuggestionChanged){
                     mSuggestions = (ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestions(dataEnums.eSuggestionCommands.M_GET_SUGGESTIONS, Collections.singletonList(mSearchbar.getText().toString()));
                     if(mSuggestions.size()>0){
+                        if(!isSuggestionSearchOpened && mSearchbar.isFocused()){
+                            if(Objects.requireNonNull(mHintListView.getAdapter()).getItemCount()>0){
+                                mHomeViewController.onUpdateSearchEngineBar(true, 0);
+                            }
+                        }
                         if(mHintListView.getAdapter()==null){
                             initSuggestionView(mSuggestions);
                             mSearchEngineBar.setVisibility(View.VISIBLE);
@@ -604,12 +631,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                             mSearchEngineBar.setVisibility(View.VISIBLE);
                             mSearchEngineBar.setAlpha(1);
                             mEdittextChanged.removeCallbacks(postToServerRunnable);
-                            mEdittextChanged.postDelayed(postToServerRunnable, 50);
-                        }
-
-                        if(!isSuggestionSearchOpened && mSearchbar.isFocused()){
-                            if(Objects.requireNonNull(mHintListView.getAdapter()).getItemCount()>0){
-                                mHomeViewController.onUpdateSearchEngineBar(true, 0);
+                            if(!mSearchBarLoading){
+                                mSearchBarLoading = true;
+                                mEdittextChanged.postDelayed(postToServerRunnable, 0);
+                            }else{
+                                mEdittextChanged.postDelayed(postToServerRunnable, 100);
                             }
                         }
                     }
@@ -677,6 +703,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private Handler mEdittextChanged = new Handler();
     private Runnable postToServerRunnable = () -> {
         onUpdateSuggestionList(mSuggestions);
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> mSearchBarLoading = false, 110);
     };
 
     public void onSearchBarInvoked(View view){
@@ -720,7 +748,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void postNewTabAnimation(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened){
-        mGeckoClient.onRedrawPixel();
         initializeGeckoView(true, true);
         if(status.sOpenURLInNewTab){
             onLoadURL(helperMethod.getDomainName(status.sSettingSearchStatus));
@@ -736,7 +763,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void postNewLinkTabAnimation(String url){
-        mGeckoClient.onRedrawPixel();
         initializeGeckoView(true, true);
         mHomeViewController.progressBarReset();
         mHomeViewController.onUpdateSearchBar(url,false,true);
@@ -752,10 +778,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onOpenTabViewBoundary(View view){
+        mGeckoClient.onRedrawPixel();
         mNewTab.setPressed(true);
         helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
         overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
-        mGeckoClient.onRedrawPixel();
     }
 
     public void onLockSecure(View view){
@@ -835,9 +861,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
             final Handler handler = new Handler();
             handler.postDelayed(() -> mGeckoClient.onRedrawPixel(), 300);
-            if(mSplashScreen.getAlpha()>0){
-                mHomeViewController.initSplashOrientation();
-            }
             if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 mHomeViewController.setOrientation(true);
                 if(mGeckoClient.getFullScreenStatus())
@@ -850,6 +873,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 {
                     mHomeViewController.onSetBannerAdMargin(true,(boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
                 }
+            }
+            if(mSplashScreen.getAlpha()>0){
+                mHomeViewController.initSplashOrientation();
             }
     }
 
@@ -1224,14 +1250,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            else if(e_type.equals(enums.etype.on_url_load)){
                if(status.sSettingIsAppRedirected){
                    mHomeViewController.onPageFinished();
+
                    status.sSettingIsAppRedirected = false;
                    onLoadURL(status.sSettingRedirectStatus);
                    status.sSettingRedirectStatus = strings.GENERIC_EMPTY_STR;
                }else {
                    if(status.mThemeApplying){
                        mHomeViewController.onUpdateSearchBar(data.get(0).toString(),false, false);
-                       mSplashScreen.setAlpha(0f);
-                       mSplashScreen.setVisibility(View.GONE);
+                       mHomeViewController.splashScreenDisableInstant();
                        onLoadTabOnResume();
                    }
                    onLoadURL(data.get(0).toString());
@@ -1245,8 +1271,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                    status.sSettingRedirectStatus = strings.GENERIC_EMPTY_STR;
                }else {
                    if(status.mThemeApplying){
-                       mSplashScreen.setAlpha(0f);
-                       mSplashScreen.setVisibility(View.GONE);
+                       mHomeViewController.splashScreenDisableInstant();
                        onLoadTabOnResume();
                    }
                    else if(status.sSettingIsAppStarted){
@@ -1328,7 +1353,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
-            if(e_type.equals(enums.etype.ON_LOAD_REQUEST)){
+            if(e_type.equals(enums.etype.ON_EXPAND_TOP_BAR)){
                 mAppBar.setExpanded(true,true);
             }
             else if(e_type.equals(enums.etype.progress_update)){
@@ -1429,6 +1454,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(dataEnums.eTabCommands.M_UPDATE_PIXEL)){
                 try{
                     dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(data.get(1), mGeckoView.capturePixels()));
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() ->
+                    {
+                        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(data.get(1), mGeckoView.capturePixels()));
+                    }, 500);
                 }catch (Exception EX){
                     EX.printStackTrace();
                 }

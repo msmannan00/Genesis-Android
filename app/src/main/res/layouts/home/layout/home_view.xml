@@ -136,41 +136,26 @@
                             android:tint="@color/c_navigation_tint"
                             android:visibility="gone" />
 
-                        <FrameLayout
-                            android:id="@+id/pTabCounterContainer"
+                        <Button
+                            android:id="@+id/pNewTab"
                             android:layout_width="40dp"
-                            android:layout_height="match_parent"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_marginStart="-10dp"
-                            android:onClick="onOpenTabViewBoundary"
-                            android:gravity="left">
-
-                            <Button
-                                android:id="@+id/pTabCounter"
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="12dp"
-                                android:layout_marginTop="-1dp"
-                                android:layout_marginEnd="13dp"
-                                android:layout_marginBottom="0dp"
-                                android:background="@xml/gx_generic_tab_button"
-                                android:clickable="false"
-                                android:focusable="false"
-                                android:contentDescription="@string/GENERAL_TODO"
-                                android:scaleType="fitCenter"
-                                android:text="@string/HOME_TAB_TEXT"
-                                android:textColor="@color/c_text_v1"
-                                android:textSize="12.5sp"
-                                android:tint="@color/black" />
-                        </FrameLayout>
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="-1dp"
+                            android:layout_marginBottom="0dp"
+                            android:background="@xml/gx_generic_tab_button"
+                            android:contentDescription="@string/GENERAL_TODO"
+                            android:scaleType="fitCenter"
+                            android:text="@string/HOME_TAB_TEXT"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="12.5sp"
+                            android:tint="@color/black" />
 
                         <ImageButton
                             android:id="@+id/pMenu"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-4dp"
+                            android:layout_marginTop="-3dp"
                             android:layout_marginEnd="0dp"
                             android:background="@xml/gx_ripple_gray"
                             android:contentDescription="@string/GENERAL_TODO"
@@ -203,29 +188,45 @@
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <FrameLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pWebLayoutView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:background="@color/c_background"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
+
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/pAdView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="1"
+                    android:visibility="gone"
+                    android:background="@color/c_background"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                    ads:layout_constraintEnd_toEndOf="parent"
+                    ads:layout_constraintHorizontal_bias="0.5"
+                    ads:layout_constraintStart_toStartOf="parent"
+                    ads:layout_constraintTop_toTopOf="parent" />
 
                 <com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar
                     android:id="@+id/pProgressBar"
                     style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
-                    android:layout_marginTop="-1dp"
                     android:alpha="0"
-                    android:background="#1500a4fd"
+                    android:background="@color/clear_alpha"
                     android:elevation="7dp"
                     android:max="100"
                     android:progress="0"
                     android:progressDrawable="@xml/hox_photon_progress"
                     android:scaleY="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pAdView"
                     app:shiftDuration="@integer/progress_shift_duration"
                     app:wrapShiftDrawable="true"
                     tools:progress="0" />
@@ -233,21 +234,27 @@
                 <com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="59.5dp"
-                    android:foreground="@color/c_background"
+                    android:layout_height="0dp"
                     android:alpha="1"
-                    android:background="@color/clear_alpha">
+                    android:background="@color/clear_alpha"
+                    android:foreground="@color/c_background"
+                    android:minHeight="400dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pProgressBar"
+                    app:layout_constraintVertical_bias="1.0">
 
                 </com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView>
-            </FrameLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <FrameLayout
         android:id="@+id/pSplashLayout"
-        android:visibility="visible"
         android:layout_width="match_parent"
+        android:visibility="visible"
         android:animateLayoutChanges="true"
         android:layout_height="match_parent">
 
@@ -698,22 +705,6 @@
         app:srcCompat="?attr/actionModeSelectAllDrawable"
         tools:ignore="ExtraText" />
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/pAdView"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54.9dp"
-        android:alpha="0"
-        android:background="@color/holo_dark_gray"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-5074525529134731/7816565677"
-        ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintHorizontal_bias="0.5"
-        ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="parent" />
-
     <include
         android:id="@+id/pFindBar"
         layout="@layout/popup_find"
@@ -734,8 +725,7 @@
         android:elevation="8dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pAdView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/pBlockerFullSceen"
@@ -749,5 +739,9 @@
         android:visibility="gone"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <FrameLayout
+        android:id="@+id/fragment_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

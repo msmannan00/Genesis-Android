@@ -131,7 +131,7 @@ public class orbotLogController extends AppCompatActivity {
 
             @Override
             public boolean onSwipe(Direction direction) {
-                if (direction==Direction.left || direction==Direction.right){
+                if (direction==Direction.right){
                     finish();
                     overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
                 }
@@ -255,8 +255,18 @@ public class orbotLogController extends AppCompatActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        mSwipeDirectionDetector.onTouchEvent(event);
+        if(inSignatureArea(event)){
+            try{
+                mSwipeDirectionDetector.onTouchEvent(event);
+            }catch (Exception ignored){ }
+        }
         return super.dispatchTouchEvent(event);
     }
+
+    public boolean inSignatureArea(MotionEvent ev) {
+        float mEventY = ev.getY();
+        return mEventY>helperMethod.pxFromDp(300) || ev.getX()<helperMethod.pxFromDp(80);
+    }
+
 
 }

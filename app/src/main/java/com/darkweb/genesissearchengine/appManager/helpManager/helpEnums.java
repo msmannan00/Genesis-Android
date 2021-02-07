@@ -4,7 +4,7 @@ class helpEnums
 {
     /*History Manager*/
     public enum eHelpModel {
-        M_LOAD_HELP_DATA
+        M_LOAD_HELP_DATA, M_IS_LOADED
     }
 
     public enum eHelpModelCallback {

@@ -242,7 +242,6 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                 event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
                 event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.on_update_favicon);
                 event.invokeObserver(Arrays.asList(null,mSessionID), enums.etype.on_page_loaded);
-                onRedrawPixel();
             }
         }
     }
@@ -324,6 +323,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
         else if(var1.uri.equals("about:blank") && mIsLoaded){
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }
         else if(var1.target==2){
@@ -341,6 +341,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.start_proxy);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID), enums.etype.search_update);
             checkApplicationRate();
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }else {
             return GeckoResult.fromValue(AllowOrDeny.DENY);

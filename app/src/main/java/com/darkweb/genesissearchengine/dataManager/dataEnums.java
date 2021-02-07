@@ -26,4 +26,9 @@ public class dataEnums
     public enum eImageCommands{
         M_REQUEST_IMAGE_URL, M_GET_IMAGE
     }
+
+    public enum eHelpCommands {
+        M_GET_HELP, M_SET_HELP
+    }
+
 }

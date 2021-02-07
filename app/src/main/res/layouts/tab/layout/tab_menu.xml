@@ -1,66 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
-        android:layout_gravity="top"
-        android:stateListAnimator="@null"
-        android:outlineProvider="bounds"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_gravity="top"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="20dp"
         android:background="@xml/hx_menu_popup_container"
-        android:layout_height="wrap_content">
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:elevation="7dp"
-                android:orientation="vertical"
-                android:background="@xml/hx_menu_popup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/pNewTab"
+                android:onClick="onMenuTrigger"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item_top"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="UselessParent">
+                app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                    android:id="@+id/pNewTab"
+                <Button
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@xml/gx_side_item_top"
-                    android:onClick="onMenuTrigger"
-                    android:gravity="start|center_vertical"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@color/clear_alpha"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textAlignment="textStart"
+                    android:paddingEnd="15dp"
                     android:paddingStart="15dp"
-                    android:paddingEnd="0dp"
-                    android:textAllCaps="false"
                     android:text="@string/TAB_MENU_OPEN_TAB"
+                    android:textAllCaps="false"
                     android:textColor="@color/c_text_v1"
-                    android:textSize="14.5sp" />
+                    android:textSize="14.5sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:id="@+id/pCloseTab"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@xml/gx_side_item"
-                android:gravity="start|center_vertical"
-                android:paddingStart="15dp"
-                android:textAllCaps="false"
                 android:onClick="onMenuTrigger"
-                android:paddingEnd="0dp"
-                android:text="@string/TAB_MENU_CLOSE_TAB"
-                android:textColor="@color/c_text_v1"
-                android:textSize="14.5sp" />
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <Button
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@color/clear_alpha"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textAlignment="textStart"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:text="@string/TAB_MENU_CLOSE_TAB"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="14.5sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/pOpenSetting"
-                android:layout_width="match_parent"
                 android:onClick="onMenuTrigger"
-                android:layout_height="45dp"
-                android:background="@xml/gx_side_item"
-                android:gravity="start|center_vertical"
-                android:paddingStart="15dp"
-                android:textAllCaps="false"
-                android:paddingEnd="0dp"
-                android:textColor="@color/c_text_v1"
-                android:text="@string/TAB_MENU_SETTINGS"
-                android:textSize="14.5sp" />
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@xml/gx_side_item_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@color/clear_alpha"
+                    android:textAlignment="textStart"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:text="@string/TAB_MENU_SETTINGS"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="14.5sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
 
         </LinearLayout>
+    </ScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

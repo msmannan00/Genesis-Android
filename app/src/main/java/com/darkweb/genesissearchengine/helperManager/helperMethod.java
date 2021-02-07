@@ -128,6 +128,13 @@ public class helperMethod
         return size.y;
     }
 
+    public static int getScreenWidth(AppCompatActivity context) {
+        Display display = context.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getRealSize(size);
+        return size.x;
+    }
+
     public static SpannableString urlDesigner(String url, Context pContext, int pDefColor){
 
         int mColor = 0;

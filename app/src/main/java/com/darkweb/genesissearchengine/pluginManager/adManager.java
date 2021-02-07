@@ -44,7 +44,7 @@ class adManager
             {
                 bannerAdsLoading = true;
                 MobileAds.initialize(mAppContext, initializationStatus -> { });
-                mBannerAds.setAlpha(0f);
+
                 initializeBannerAds();
             }
         }

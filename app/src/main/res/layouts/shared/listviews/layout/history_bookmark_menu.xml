@@ -26,7 +26,7 @@
                     android:onClick="onOpenMultipleTabs"
                     android:gravity="start|center_vertical"
                     android:paddingStart="15dp"
-                    android:paddingEnd="0dp"
+                    android:paddingEnd="15dp"
                     android:textAllCaps="false"
                     android:text="@string/SHARED_RECYCLER_VIEW_OPEN"
                     android:textColor="@color/c_text_v1"
@@ -41,7 +41,7 @@
                 android:paddingStart="15dp"
                 android:textAllCaps="false"
                 android:onClick="onShareSelectedURL"
-                android:paddingEnd="0dp"
+                android:paddingEnd="15dp"
                 android:text="@string/SHARED_RECYCLER_VIEW_SHARE"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
@@ -54,7 +54,7 @@
                 android:gravity="start|center_vertical"
                 android:paddingStart="15dp"
                 android:textAllCaps="false"
-                android:paddingEnd="0dp"
+                android:paddingEnd="15dp"
                 android:textColor="@color/c_text_v1"
                 android:text="@string/SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES"
                 android:textSize="14.5sp" />
@@ -75,7 +75,7 @@
                     android:textColor="@color/dark_red_soft"
                     android:paddingStart="15dp"
                     android:onClick="onDeleteSelected"
-                    android:paddingEnd="0dp"
+                    android:paddingEnd="15dp"
                     android:textAllCaps="false"
                     android:text="@string/SHARED_RECYCLER_VIEW_DELETE"
                     android:textSize="14.5sp" />

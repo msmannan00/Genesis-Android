@@ -29,46 +29,123 @@
 	<body>
 
 		<div class="container">
-		  <p class="hi_info"><strong>Note | </strong> The following<strong> help manual</strong> is loaded from local cache. Connect to proxy for viewing latest help repository</p>
+		  <p class="hi_info hi_no_select">The following<strong> help manual</strong> is loaded from local cache. Connect to proxy for viewing latest help repository</p>
 		  <div id="accordion">
-		    <div class="card">
-		      <div class="card-header">
-		        <a class="card-link" data-toggle="collapse" href="#collapseOne">
-		          <strong>Issue 1: Connection Problem</strong>
+		    <div class="card hi_card">
+		      <div class="card-header" data-toggle="collapse" href="#collapseZero">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 1 &nbsp;&nbsp; </span>Internet Connection Problem</strong>
 		        </a>
 		      </div>
-		      <div id="collapseOne" class="collapse show" data-parent="#accordion">
-		        <div class="card-body">
-		          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		      <div id="collapseZero" class="collapse show" data-parent="#accordion">
+		        <div class="card-body hi_bullets">
+					  <li>Checking the network cables and router</li>
+					  <li>Reconnect to Wi-Fi</li>
+					  <li>Restart phone or application</li>
 		        </div>
 		      </div>
 		    </div>
-		    <br>
-		    <div class="card">
-		      <div class="card-header">
-		        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-		          <strong>Issue 2: Bridge not connection</strong>
-		      </a>
+
+		    <div class="card hi_card hi_card--margin-top">
+		      <div class="card-header" data-toggle="collapse" href="#collapseOne">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 2 &nbsp;&nbsp; </span> View Connection Status </strong>
+		        </a>
+		      </div>
+		      <div id="collapseOne" class="collapse" data-parent="#accordion">
+		        <div class="card-body">
+		          To see connection status with Tor network GOTO
+		          <br><br>Menu Icon (Top-Right) <span class="hi_arrow--color">&#10132;</span> Settings <span class="hi_arrow--color">&#10132;</span> Onion Proxy Status
+		        </div>
+		      </div>
+		    </div>
+
+
+		    <div class="card hi_card hi_card--margin-top">
+		      <div class="card-header" data-toggle="collapse" href="#collapseTwo">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 3 &nbsp;&nbsp; </span> View Tor Logs </strong>
+		        </a>
 		      </div>
 		      <div id="collapseTwo" class="collapse" data-parent="#accordion">
 		        <div class="card-body">
-		          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		          You can view Tor logs to debug an issue. To do this GOTO
+		          <br><br> Menu Icon (Top-Right) <span class="hi_arrow--color">&#10132;</span> Orbot Logs
 		        </div>
 		      </div>
 		    </div>
-		    <br>
-		    <div class="card">
-		      <div class="card-header">
-		        <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-		          <strong>Issue 3: Stuck at connecting</strong>
+
+		    <div class="card hi_card hi_card--margin-top">
+		      <div class="card-header" data-toggle="collapse" href="#collapseThree">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 4 &nbsp;&nbsp; </span> Help manual not loading</strong>
 		        </a>
 		      </div>
 		      <div id="collapseThree" class="collapse" data-parent="#accordion">
 		        <div class="card-body">
-		          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		          This happens when we are unable to fetch help manual due to internet connection issue. It can also happen when ISP blocks some of our servers.
 		        </div>
 		      </div>
 		    </div>
+
+		    <div class="card hi_card hi_card--margin-top">
+		      <div class="card-header" data-toggle="collapse" href="#collapseFour">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 5 &nbsp;&nbsp; </span> Tor routing blocked by ISP</strong>
+		        </a>
+		      </div>
+		      <div id="collapseFour" class="collapse" data-parent="#accordion">
+		        <div class="card-body">
+		          Some times ISP blocks Tor network routing. This issue can be solved by enabling Tor Bridges. To do this GOTO
+		          <br><br> Connection Screen <span class="hi_arrow--color">&#10132;</span> Gear Icon <span class="hi_arrow--color">&#10132;</span> Enable Bridges
+		        </div>
+		      </div>
+		    </div>
+
+		    <div class="card hi_card hi_card--margin-top">
+		      <div class="card-header" data-toggle="collapse" href="#collapseFive">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 6 &nbsp;&nbsp; </span> Genesis not working in China</strong>
+		        </a>
+		      </div>
+		      <div id="collapseFive" class="collapse" data-parent="#accordion">
+		        <div class="card-body">
+		          Tor routing can be blocked in China even when you are using default bridges. This issue can be solved by connecting with Meek bridges. To do this GOTO
+		          <br><br> Connection Screen <span class="hi_arrow--color">&#10132;</span> Gear Icon <span class="hi_arrow--color">&#10132;</span> Enable Bridges <span class="hi_arrow--color">&#10132;</span> Customize bridges <span class="hi_arrow--color">&#10132;</span> Meek-azure (China) 	
+		        </div>
+		      </div>
+		    </div>
+
+		    <div class="card hi_card hi_card--margin-top">
+		      <div class="card-header" data-toggle="collapse" href="#collapseSix">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 7 &nbsp;&nbsp; </span> Provide a custom bridges</strong>
+		        </a>
+		      </div>
+		      <div id="collapseSix" class="collapse" data-parent="#accordion">
+		        <div class="card-body">
+		          You can also provide custom bridges in Genesis. To do this GOTO
+		          <br><br> Connection Screen <span class="hi_arrow--color">&#10132;</span> Gear Icon <span class="hi_arrow--color">&#10132;</span> Enable Bridges <span class="hi_arrow--color">&#10132;</span> Customize bridges <span class="hi_arrow--color">&#10132;</span> Paste custom bridge <span class="hi_arrow--color">&#10132;</span> paste your bridge string
+		        </div>
+		      </div>
+		    </div>
+
+
+		    <div class="card hi_card hi_card--margin-top">
+		      <div class="card-header" data-toggle="collapse" href="#collapseSeven">
+		        <a class="card-link">
+		          <strong class="hi_card_link hi_no_select"><span class="hi_issue--color">Issue 8 &nbsp;&nbsp; </span> Use Genesis as a VPN </strong>
+		        </a>
+		      </div>
+		      <div id="collapseSeven" class="collapse" data-parent="#accordion">
+		        <div class="card-body">
+		          Genesis also provides a vpn from which you can secure data of other applications. To do this GOTO
+		          <br><br> Connection Screen <span class="hi_arrow--color">&#10132;</span> Gear Icon <span class="hi_arrow--color">&#10132;</span> Enable VPN Service
+		        </div>
+		      </div>
+		    </div>
+
+
 		  </div>
 		</div>
 	</body>

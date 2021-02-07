@@ -47,7 +47,7 @@
     <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">Choose default search engine</string>
     <string name="SETTING_SEARCH_HEADER_2" translatable="true">Search setting</string>
     <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Manage how searches appear</string>
-    <string name="SETTING_SEARCH_DEFAULT" translatable="true">Default</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default</string>
     <string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
     <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
     <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
@@ -87,7 +87,7 @@
     <string name="SETTING_PRIVACY" translatable="true">Privacy</string>
     <string name="SETTING_PRIVACY_INFO" translatable="true">Tracking, logins, data choices</string>
     <string name="SETTING_TRACKING" translatable="true">Tracking Protection</string>
-    <string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackers, fingerprinting</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">Adblock, trackers, fingerprinting</string>
     <string name="SETTING_PRIVACY_HEADER" translatable="true">Settings | Privacy</string>
     <string name="SETTING_TRACKING_HEADER" translatable="true">Settings | Tracking Protection</string>
     <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">Protect your online identity</string>
@@ -357,7 +357,7 @@
 
     <!-- Home View -->
     <string name="HOME_TAB_TEXT" translatable="true">1</string>
-    <string name="HOME_CONNECT" translatable="true">Connect</string>
+    <string name="HOME_CONNECT" translatable="false">Connect</string>
     <string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
     <string name="HOME_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">Open tabs will show here</string>

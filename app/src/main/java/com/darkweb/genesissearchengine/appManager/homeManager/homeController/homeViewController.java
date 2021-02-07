@@ -13,6 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Handler;
@@ -42,7 +43,6 @@ import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
@@ -62,7 +62,7 @@ class homeViewController
 
     /*ViewControllers*/
     private com.google.android.material.appbar.AppBarLayout mAppBar;
-    private FrameLayout mWebviewContainer;
+    private ConstraintLayout mWebviewContainer;
     private AnimatedProgressBar mProgressBar;
     private editTextManager mSearchbar;
     private ConstraintLayout mSplashScreen;
@@ -94,7 +94,7 @@ class homeViewController
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, FrameLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, FrameLayout pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, FrameLayout pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -156,7 +156,7 @@ class homeViewController
     }
 
     public void initSplashOrientation(){
-        if(!isLandscape){
+        if(isLandscape){
             this.mInfoPortrait.setVisibility(View.GONE);
             this.mInfoLandscape.setVisibility(View.VISIBLE);
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue_splash));
@@ -171,7 +171,7 @@ class homeViewController
         if(!pStatus){
             this.mVoiceInput.animate().setDuration(0).alpha(0).withEndAction(() -> {
                 mVoiceInput.setVisibility(View.GONE);
-                ((FrameLayout)mNewTab.getParent()).setVisibility(View.VISIBLE);
+                mNewTab.setVisibility(View.VISIBLE);
                 mMenu.setVisibility(View.VISIBLE);
 
                 mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(15),0);
@@ -195,7 +195,7 @@ class homeViewController
                 mVoiceInput.setVisibility(View.VISIBLE);
             }, 0);
 
-            ((FrameLayout)this.mNewTab.getParent()).setVisibility(View.GONE);
+            mNewTab.setVisibility(View.GONE);
             this.mMenu.setVisibility(View.GONE);
 
             //mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(40),0);
@@ -288,8 +288,6 @@ class homeViewController
 
     public void initSplashLoading(){
 
-        mLoading.setAnimation(helperMethod.getRotationAnimation());
-        mLoading.setAnimation(helperMethod.getRotationAnimation());
         mLoadingText.setAlpha(0);
         mLoadingText.setVisibility(View.VISIBLE);
         mLoadingText.animate().setStartDelay(0).alpha(1);
@@ -311,11 +309,11 @@ class homeViewController
             mOrbotLogManager.setEnabled(true);
         }, 700);
 
-        mConnectButton.animate().setDuration(350).alpha(0.2f).withEndAction(() -> {
+        mConnectButton.animate().setDuration(350).alpha(0.4f).withEndAction(() -> {
             mCopyright.setVisibility(View.GONE);
             initSplashLoading();
         });
-        mGatewaySplash.animate().setDuration(350).alpha(0.2f);
+        mGatewaySplash.animate().setDuration(350).alpha(0.4f);
     }
 
     private void initSplashScreen(){
@@ -372,6 +370,14 @@ class homeViewController
         mSplashScreen.bringToFront();
         splashScreenDisable();
     }
+
+    public void splashScreenDisableInstant() {
+        mSplashScreen.setAlpha(0f);
+        mSplashScreen.setVisibility(View.GONE);
+        mSplashScreen.setVisibility(View.GONE);
+        mBlocker.setEnabled(false);
+    }
+
     private boolean mIsAnimating = false;
     public void splashScreenDisable(){
         mTopBar.setAlpha(1);
@@ -386,6 +392,7 @@ class homeViewController
                     mSplashScreen.setClickable(false);
                     mSplashScreen.setFocusable(false);
                     mSearchbar.setEnabled(true);
+                    mBlocker.setEnabled(false);
                 });
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
@@ -519,11 +526,9 @@ class homeViewController
                 handler.postDelayed(() ->
                 {
                     mWebviewContainer.clearAnimation();
-                    mWebviewContainer.setPadding(0,AdSize.SMART_BANNER.getHeightInPixels(mContext)+1,0,0);
                     mProgressBar.bringToFront();
                 }, 250);
             }else{
-                mWebviewContainer.setPadding(0,0,0,0);
                 mBannerAds.setVisibility(View.GONE);
             }
         }
@@ -583,21 +588,25 @@ class homeViewController
                 GradientDrawable gradientDrawable1 = new GradientDrawable();
                 gradientDrawable1.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(4));
-                gradientDrawable1.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
+                gradientDrawable1.setStroke(helperMethod.pxFromDp(2), mColor);
 
                 GradientDrawable gradientDrawable2 = new GradientDrawable();
                 gradientDrawable2.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
                 gradientDrawable2.setCornerRadius(helperMethod.pxFromDp(4));
-                gradientDrawable2.setStroke(helperMethod.pxFromDp(2), mColor);
+                gradientDrawable2.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
 
                 StateListDrawable states = new StateListDrawable();
-                states.addState(new int[] {android.R.attr.state_pressed}, gradientDrawable2);
-                states.addState(new int[] { }, gradientDrawable1);
+                InsetDrawable mInsetDrawable1 = new InsetDrawable(gradientDrawable1, helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8));
+                InsetDrawable mInsetDrawable2 = new InsetDrawable(gradientDrawable2, helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8));
+
+                states.addState(new int[] {android.R.attr.state_pressed}, mInsetDrawable1);
+                states.addState(new int[] { }, mInsetDrawable2);
 
                 mNewTab.setBackground(states);
 
                 mMenu.setColorFilter(helperMethod.invertedGrayColor(mColor));
                 mVoiceInput.setColorFilter(helperMethod.invertedGrayColor(mColor));
+                mVoiceInput.setBackground(mGradientDrawable);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     mContext.getWindow().setStatusBarColor(Color.parseColor(pTheme));
@@ -629,6 +638,7 @@ class homeViewController
 
                     drawable = Drawable.createFromXml(res, res.getXml(R.xml.gx_generic_input));
                     mSearchbar.setBackground(drawable);
+                    mVoiceInput.setBackground(drawable);
                 } catch (Exception ignored) {
                 }
 
@@ -831,11 +841,11 @@ class homeViewController
                 mTopBar.setVisibility(View.GONE);
                 mBannerAds.setVisibility(View.GONE);
 
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+                ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
                 params.setMargins(0, helperMethod.pxFromDp(0), 0, 0);
                 mWebviewContainer.setLayoutParams(params);
 
-                ViewGroup.MarginLayoutParams params1 = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+                ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
                 params1.setMargins(0, 0, 0,0);
                 mGeckoView.setLayoutParams(params1);
 
@@ -858,11 +868,11 @@ class homeViewController
             mBannerAds.setVisibility(View.GONE);
             mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
 
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+            ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
             params.setMargins(0, 0, 0,0);
             mWebviewContainer.setLayoutParams(params);
 
-            ViewGroup.MarginLayoutParams params1 = (ViewGroup.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+            ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
             params1.setMargins(0, 0, 0,helperMethod.pxFromDp(0));
             mGeckoView.setLayoutParams(params1);
 

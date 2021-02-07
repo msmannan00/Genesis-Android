@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true"
-          android:top="160dp">
-        <shape
-                android:shape="rectangle" android:padding="15dp" >
-            <!-- you can use any color you want I used here gray color-->
-            <solid android:color="@color/c_tab"/>
-            <corners android:radius="4dp"/>
-            <stroke
-                    android:width="2dp"
-                    android:top="160dp"
-                    android:color="@color/c_tab_border" />
-            <corners android:radius="4dp" />
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <padding android:left="8dp"
+                android:right="8dp"
+                android:top="8dp"
+                android:bottom="8dp" />
         </shape>
     </item>
-    <item android:state_pressed="false"
-          android:top="60dp">
-        <shape
-            android:shape="rectangle" android:padding="15dp" >
-            <!-- you can use any color you want I used here gray color-->
-            <solid android:color="@color/c_background"/>
-            <corners android:radius="4dp"/>
-            <stroke
-                android:width="2dp"
-                android:color="@color/c_text_v5" />
-            <corners android:radius="4dp" />
-        </shape>
+    <item>
+
+        <inset android:insetBottom="0dp">
+            <selector>
+
+                <item android:state_pressed="false">
+                    <shape
+                        android:shape="rectangle" android:padding="15dp" >
+                        <!-- you can use any color you want I used here gray color-->
+                        <solid android:color="@color/c_background"/>
+                        <corners android:radius="4dp"/>
+                        <stroke
+                            android:width="2.5dp"
+                            android:color="@color/c_text_v5" />
+                        <corners android:radius="4dp" />
+                    </shape>
+                </item>
+
+                <item android:state_pressed="true">
+                    <shape
+                        android:shape="rectangle" android:padding="15dp" >
+                        <!-- you can use any color you want I used here gray color-->
+                        <solid android:color="@color/c_background" />
+                        <corners android:radius="4dp"/>
+                        <stroke
+                            android:width="2dp"
+                            android:color="@color/c_tab_border" />
+                        <corners android:radius="4dp" />
+                    </shape>
+                </item>
+            </selector>
+        </inset>
     </item>
-</selector>
-
-
-
+</layer-list>

@@ -1,13 +1,14 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,6 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +41,6 @@ public class tabController extends AppCompatActivity
     /*Private Views*/
     private Button mTabs;
     private ImageView mRemoveSelection;
-    private FrameLayout mTabsContainer;
     private ImageButton mMenuButton;
     private ImageButton mClearSelection;
     private View mPopupUndo;
@@ -73,6 +72,7 @@ public class tabController extends AppCompatActivity
         initializeViews();
         initializeList();
         initSwipe();
+        initializeLocalEventHandlers();
     }
 
     public void initializeActivity(){
@@ -87,16 +87,24 @@ public class tabController extends AppCompatActivity
         mRecycleView = findViewById(R.id.pRecycleView);
         mTabs = findViewById(R.id.pTabs);
         mRemoveSelection = findViewById(R.id.pRemoveSelection);
-        mTabsContainer = findViewById(R.id.pTabsContainer);
         mMenuButton = findViewById(R.id.pMenuButton);
         mClearSelection = findViewById(R.id.pClearSelection);
         mPopupUndo = findViewById(R.id.pPopupUndo);
         mSelectionCount = findViewById(R.id.pSelectionCount);
         mBlocker = findViewById(R.id.pBlocker);
 
-        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mTabsContainer, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker);
+        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    public void initializeLocalEventHandlers(){
+        mTabs.setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                onBackPressedInvoked(null);
+            }
+            return false;
+        });
+    }
     public void initializeList(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(tabController.this);
         tabAdapter adapter = new tabAdapter(mListModel.getList(),new adapterCallback());
@@ -113,6 +121,7 @@ public class tabController extends AppCompatActivity
         mRecycleView.setDrawingCacheEnabled(true);
         mRecycleView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         mRecycleView.setLayoutManager(new LinearLayoutManager(tabController.this));
+        initTabCount();
     }
 
     /*Listeners*/
@@ -127,9 +136,12 @@ public class tabController extends AppCompatActivity
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                onClearTabBackup();
-                onInitRemoveView(position, true);
-                mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.NOTIFY_sWIPE, Collections.singletonList(position));
+                mListModel.onClearBackupWithoutClose();
+                boolean mStatus = onInitRemoveView(position, true);
+                if(mStatus){
+                    mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.NOTIFY_SWIPE, Collections.singletonList(position));
+                }
+                onShowUndoDialog();
             }
 
             @Override
@@ -146,25 +158,28 @@ public class tabController extends AppCompatActivity
     public void onRemoveTab(int pIndex){
         mListModel.onRemoveTab(pIndex);
         if(mListModel.getList().size()<1){
-            mRecycleView.animate().setStartDelay(150).alpha(0);
+            mRecycleView.animate().setStartDelay(250).alpha(0);
         }
         initTabCount();
         mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW, null);
     }
 
-    public void onInitRemoveView(int pIndex, boolean pCreateBackup){
+    public boolean onInitRemoveView(int pIndex, boolean pCreateBackup){
         mListModel.onRemoveTab(pIndex);
         mListModel.getList().remove(pIndex);
-        if(mListModel.getList().size()<1){
-            mRecycleView.animate().setStartDelay(150).alpha(0);
-        }
         initTabCount();
-        mTabAdapter.notifyItemRangeChanged(pIndex, mTabAdapter.getItemCount() - pIndex);
+        if(mListModel.getList().size()<1){
+            mRecycleView.animate().setStartDelay(250).alpha(0).withEndAction(() -> mTabAdapter.notifyDataSetChanged());
+            return false;
+        }else{
+            mTabAdapter.notifyItemRangeChanged(pIndex, mTabAdapter.getItemCount() - pIndex);
+            return true;
+        }
     }
 
     public void initTabCount()
     {
-        mtabViewController.onTrigger(tabEnums.eTabViewCommands.INIT_TAB_COUNT, null);
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.INIT_TAB_COUNT, Collections.singletonList(mListModel.getList().size()));
         mHomeController.initTabCount();
     }
 
@@ -183,17 +198,25 @@ public class tabController extends AppCompatActivity
     }
 
     public void onRestoreTab(View view){
+        Log.i("FUCKSSS","FUCKSSS1 : " + (mPopupUndo.findViewById(R.id.pBlockerUndo).getVisibility()==View.VISIBLE));
+        mPopupUndo.findViewById(R.id.pBlockerUndo).setVisibility(View.VISIBLE);
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG, null);
+
+        if(mRecycleView.getAlpha()==0){
+            initializeList();
+            mRecycleView.animate().cancel();
+            mRecycleView.setVisibility(View.VISIBLE);
+            mRecycleView.animate().setDuration(250).alpha(1);
+        }
+
         ArrayList<tabRowModel> mBackup = mListModel.onLoadBackup();
         mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REINIT_DATA, Collections.singletonList(mBackup));
-
         mListModel.onClearBackupWithoutClose();
         initTabCount();
-        mRecycleView.animate().cancel();
-        mRecycleView.animate().alpha(1);
     }
 
     public void onShowUndoDialog(){
-        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG, null);
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG, Collections.singletonList(mListModel.getList().size()));
     }
 
     public void onClearTabBackup(){
@@ -219,7 +242,18 @@ public class tabController extends AppCompatActivity
     }
 
     public void onRemoveSelection(View view) {
-        mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
+        int mSelectionSize = (int)mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.GET_SELECTION_SIZE,null);
+        if(mSelectionSize >= mListModel.getList().size()){
+            mRecycleView.animate().setStartDelay(250).alpha(0).withEndAction(() -> {
+                mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
+                onShowUndoDialog();
+            });
+        }else {
+            mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
+        }
+
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU, Arrays.asList(false,0));
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_SELECTION, null);
     }
 
     public void onClearSelection(View view) {
@@ -243,17 +277,16 @@ public class tabController extends AppCompatActivity
             onNewTabInvoked();
         }
         else if(pView.getId() == R.id.pCloseTab){
-            mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
-            int mCounterActual = mListModel.getList().size();
-            for(int mCounter=0;mCounterActual>0;mCounter++){
-                onInitRemoveView(mCounter, true);
-                mCounterActual -= 1;
-            }
+            mRecycleView.animate().setDuration(250).alpha(0).withEndAction(() -> {
+                onClearTabBackup();
+                mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REMOVE_ALL, null);
+                initTabCount();
+            });
         }
         else if(pView.getId() == R.id.pOpenSetting){
-            mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
             helperMethod.openActivity(settingHomeController.class, constants.CONST_LIST_HISTORY, this,true);
         }
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
     }
 
     @Override
@@ -331,14 +364,14 @@ public class tabController extends AppCompatActivity
                 mHomeController.onLoadTab((geckoSession)data.get(0),(boolean)data.get(1));
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW)){
-                onClearTabBackup();
+                mListModel.onClearBackupWithoutClose();
                 onInitRemoveView((Integer) data.get(0), true);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP)){
                 onInitRemoveView((Integer) data.get(0), false);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG)){
-                onShowUndoDialog();
+                mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG, Collections.singletonList(mListModel.getList().size()));
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU)){
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU, data);

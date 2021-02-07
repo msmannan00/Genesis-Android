@@ -149,11 +149,13 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
                     android:layout_weight="17"
+                    android:paddingEnd="15dp"
                     android:background="@xml/gx_ripple_blue"
                     android:textAllCaps="false"
                     android:paddingStart="20dp"
                     android:stateListAnimator="@null"
                     android:text="@string/HISTORY_CLEAR"
+
                     android:textAlignment="textStart"
                     android:textColor="@color/c_text_setting_heading"
 

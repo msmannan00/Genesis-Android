@@ -56,7 +56,7 @@ class imageDataModel
             public void run(){
                 while (true) {
                     try {
-                        sleep(1000);
+                        sleep(50);
                         if(mRequestQueue.size()>0){
                             mParsedQueues.put(mRequestQueue.get(0), enums.ImageQueueStatus.M_IMAGE_LOADING);
                             Bitmap mBitmap = getBitmapFromURL(mRequestQueue.get(0));
