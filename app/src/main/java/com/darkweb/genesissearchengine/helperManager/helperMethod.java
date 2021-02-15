@@ -46,13 +46,16 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.crypto.Cipher;
 import javax.net.ssl.HttpsURLConnection;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -71,6 +74,17 @@ public class helperMethod
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    public static String caesarCipherEncrypt(String pMessage, Key pSecretKey) {
+        try{
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, pSecretKey);
+            byte[] cipherText = cipher.doFinal((pMessage + "__" + createRandomID()).getBytes());
+            return new String(cipherText);
+        }catch (Exception ex){
+            return pMessage;
         }
     }
 
@@ -560,7 +574,13 @@ public class helperMethod
         popupWindow.setFocusable(true);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popupWindow.setAnimationStyle(R.style.popup_window_animation);
-        popupWindow.showAtLocation(p_view, Gravity.TOP|Gravity.END,0,0);
+
+        if(status.sSettingLanguageRegion.equals("Ur")){
+            popupWindow.showAtLocation(p_view, Gravity.TOP|Gravity.START,0,0);
+        }else {
+            popupWindow.showAtLocation(p_view, Gravity.TOP|Gravity.END,0,0);
+        }
+
         popupWindow.setElevation(7);
 
         return popupWindow;

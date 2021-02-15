@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
@@ -51,6 +54,12 @@ public class orbotController extends AppCompatActivity {
 
         viewsInitializations();
         onInitListener();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
     }
 
     public void viewsInitializations() {

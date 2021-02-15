@@ -37,6 +37,8 @@ import com.darkweb.genesissearchengine.helperManager.JavaScriptInterface;
 import com.darkweb.genesissearchengine.helperManager.downloadFileService;
 import com.darkweb.genesissearchengine.helperManager.errorHandler;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.helperManager.trueTime;
 import com.example.myapplication.R;
 import org.json.JSONObject;
 import org.mozilla.gecko.util.ThreadUtils;
@@ -51,9 +53,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import javax.crypto.spec.SecretKeySpec;
 
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
@@ -312,8 +317,27 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }
     }
 
+    private String setGenesisVerificationToken(String pString){
+        try{
+            Uri built = Uri.parse(pString).buildUpon()
+                    .appendQueryParameter(constants.CONST_GENESIS_GMT_TIME_GET_KEY, URLEncoder.encode(helperMethod.caesarCipherEncrypt(trueTime.getInstance().getGMT(),new SecretKeySpec(constants.CONST_ENCRYPTION_KEY.getBytes(), "AES")),  "utf-8"))
+                    .appendQueryParameter(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY, URLEncoder.encode(helperMethod.caesarCipherEncrypt(trueTime.getInstance().getLTZ(),new SecretKeySpec(constants.CONST_ENCRYPTION_KEY.getBytes(), "AES")),  "utf-8"))
+                    .build();
+            return built.toString();
+        }catch (Exception ex){
+            return pString;
+        }
+    }
+
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
-        if(var1.uri.contains("boogle.store/advert__")){
+
+        if(!var1.uri.equals(constants.CONST_GENESIS_URL_CACHED) && var1.uri.startsWith("https://boogle.store") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
+            String mVerificationURL = setGenesisVerificationToken(var1.uri);
+            initURL(mVerificationURL);
+            loadUri(mVerificationURL);
+            return GeckoResult.fromValue(AllowOrDeny.DENY);
+        }
+        else if(var1.uri.contains("boogle.store/advert__")){
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.on_playstore_load);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }

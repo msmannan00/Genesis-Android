@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.homeManager.geckoManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.ImageView;
@@ -88,6 +89,10 @@ public class geckoClients
         return mTempSession;
     }
 
+    public GeckoRuntime getmRuntime(){
+        return mRuntime;
+    }
+
     public void onSessionReinit(){
         mSession.onSessionReinit();
     }
@@ -100,6 +105,7 @@ public class geckoClients
         return mSession.getUserAgentMode();
     }
 
+    @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context){
         if(mRuntime==null){
             mRuntime = GeckoRuntime.getDefault(context);
@@ -176,7 +182,7 @@ public class geckoClients
     public void loadURL(String url) {
         if(mSession.onGetInitializeFromStartup()){
             mSession.initURL(url);
-            if(url.endsWith("boogle.store") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED)){
+            if(url.startsWith("https://boogle.store?pG") || url.endsWith("boogle.store") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED)){
                 try{
                     mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
                     mSession.loadUri(constants.CONST_GENESIS_URL_CACHED);

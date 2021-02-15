@@ -1,4 +1,5 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:autoMirrored="true"
     android:color="@color/c_ripple">
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">

@@ -1,8 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
@@ -38,6 +41,12 @@ public class settingSearchController extends AppCompatActivity {
         setContentView(R.layout.setting_search_view);
 
         viewsInitializations();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
     }
 
     private void viewsInitializations() {

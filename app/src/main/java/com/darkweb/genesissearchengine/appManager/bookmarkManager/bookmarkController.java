@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.bookmarkManager;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.text.Editable;
@@ -80,6 +81,11 @@ public class bookmarkController extends AppCompatActivity
         initializeList();
         initCustomListeners();
         initSwipe();
+    }
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
     }
 
     public void initializeListModel(){

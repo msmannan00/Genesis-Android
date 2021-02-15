@@ -41,8 +41,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:onClick="onClose"
                         android:layout_marginTop="-3dp"
                         android:gravity="center_vertical|start"
@@ -67,7 +67,7 @@
                         android:onClick="onOpenInfo"
                         android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@drawable/info"
+                        android:src="@xml/ic_info"
                         app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
@@ -125,7 +125,6 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
                         android:layout_weight="1"
                         android:clickable="false"
                         android:orientation="vertical">
@@ -150,12 +149,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:alpha="1"
+                            android:textDirection="locale"
+                            android:textAlignment="viewStart"
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:paddingStart="15dp"
                             android:paddingEnd="15dp"
                             android:text="@string/SETTING_TRACKING_INFO"
-                            android:textAlignment="textStart"
                             android:textAllCaps="false"
                             android:textColor="@color/c_text_v6"
                             android:textSize="13.5sp"
@@ -360,7 +360,6 @@
                             android:layout_marginTop="10dp"
                             android:background="@xml/sx_border_left"
                             android:paddingStart="4dp"
-                            android:layout_marginStart="15dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             tools:ignore="RtlSymmetry">
@@ -384,12 +383,12 @@
                                     android:layoutDirection="rtl"
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp"
-                                    android:paddingRight="15dp"
+                                    android:paddingEnd="15dp"
                                     android:clickable="false"
                                     android:buttonTint="@color/c_radio_tint"
                                     android:textColor="@color/c_text_v1"
-                                    android:layout_marginRight="10dp"
-                                    android:paddingLeft="15dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:paddingStart="15dp"
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION1"
                                     tools:ignore="RtlHardcoded" />
                             </LinearLayout>
@@ -411,11 +410,11 @@
                                     android:layoutDirection="rtl"
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp"
-                                    android:paddingRight="15dp"
+                                    android:paddingEnd="15dp"
                                     android:textColor="@color/c_text_v1"
-                                    android:layout_marginRight="10dp"
+                                    android:layout_marginEnd="10dp"
                                     android:buttonTint="@color/c_radio_tint"
-                                    android:paddingLeft="15dp"
+                                    android:paddingStart="15dp"
                                     android:clickable="false"
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION2"
                                     tools:ignore="RtlHardcoded" />
@@ -439,11 +438,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp"
                                     android:clickable="false"
-                                    android:paddingRight="15dp"
+                                    android:paddingEnd="15dp"
                                     android:textColor="@color/c_text_v1"
                                     android:buttonTint="@color/c_radio_tint"
-                                    android:layout_marginRight="10dp"
-                                    android:paddingLeft="15dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:paddingStart="15dp"
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION3"
                                     tools:ignore="RtlHardcoded" />
                             </LinearLayout>
@@ -466,11 +465,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp"
                                     android:clickable="false"
-                                    android:paddingRight="15dp"
+                                    android:paddingEnd="15dp"
                                     android:textColor="@color/c_text_v1"
-                                    android:layout_marginRight="10dp"
+                                    android:layout_marginEnd="10dp"
                                     android:buttonTint="@color/c_radio_tint"
-                                    android:paddingLeft="15dp"
+                                    android:paddingStart="15dp"
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION4"
                                     tools:ignore="RtlHardcoded" />
                             </LinearLayout>

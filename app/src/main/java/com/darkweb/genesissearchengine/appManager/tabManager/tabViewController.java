@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -26,6 +27,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
@@ -109,7 +112,11 @@ class tabViewController
         mTabOptionMenu.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mTabOptionMenu.setAnimationStyle(R.style.popup_window_animation);
         mTabOptionMenu.setElevation(7);
-        mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-125), helperMethod.pxFromDp(-45));
+        if(status.sSettingLanguageRegion.equals("Ur")){
+            mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-45), helperMethod.pxFromDp(-45));
+        }else {
+            mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-125), helperMethod.pxFromDp(-45));
+        }
     }
 
     private void onCloseTabMenu() {
@@ -143,7 +150,7 @@ class tabViewController
         mRemoveSelection.setVisibility(View.GONE);
         mClearSelection.setVisibility(View.GONE);
         mMenuButton.setVisibility(View.VISIBLE);
-        mTabs.animate().setStartDelay(250).setDuration(200).alpha(1);
+        mTabs.animate().setStartDelay(350).setDuration(200).alpha(1);
     }
 
     private void onShowUndoDialog(int pTabCount) {

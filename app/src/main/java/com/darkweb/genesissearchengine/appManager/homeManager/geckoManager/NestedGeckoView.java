@@ -6,10 +6,8 @@ import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-
 import org.mozilla.geckoview.GeckoView;
 
 import java.util.Collections;
@@ -136,10 +134,5 @@ public class NestedGeckoView extends GeckoView {
     @Override
     public boolean dispatchNestedFling(float velocityX, float velocityY, boolean consumed) {
         return mChildHelper.dispatchNestedFling(velocityX, velocityY, consumed);
-    }
-
-    @Override
-    public boolean dispatchNestedPreFling(float velocityX, float velocityY) {
-        return mChildHelper.dispatchNestedPreFling(velocityX, velocityY);
     }
 }

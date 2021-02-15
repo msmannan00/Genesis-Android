@@ -2,16 +2,32 @@ package com.darkweb.genesissearchengine.dataManager;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
+import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.messages;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
 import org.mozilla.geckoview.GeckoResult;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -141,35 +157,120 @@ class tabDataModel
         }
     }
 
-    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager){
+    @SuppressLint("HandlerLeak")
+    static Handler handler = new Handler()
+    {
+        @Override
+        public void dispatchMessage(@NonNull Message msg) {
+            super.dispatchMessage(msg);
+        }
+
+        @NonNull
+        @Override
+        public String getMessageName(@NonNull Message message) {
+            return super.getMessageName(message);
+        }
+
+        @Override
+        public boolean sendMessageAtTime(@NonNull Message msg, long uptimeMillis) {
+            return super.sendMessageAtTime(msg, uptimeMillis);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+
+        @Override
+        public void handleMessage(Message msg)
+        {
+            Log.i("FUCK","FUCK");
+        }
+    };
+
+    // int isLoading = 0;
+    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, NestedGeckoView pGeckoView){
+
+        new Thread(){
+            public void run(){
+                try {
+                    for(int counter = 0; counter< mTabs.size(); counter++) {
+                        int finalCounter = counter;
+                        if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID)) {
+                            GeckoResult<Bitmap> mResult = pBitmapManager.withHandler(handler);
+                            Bitmap mBitmap = pBitmapManager.poll(4000);
+
+                            mTabs.get(finalCounter).setmBitmap(mBitmap);
+                            if(pImageView!=null){
+                                activityContextManager.getInstance().getHomeController().runOnUiThread(() -> pImageView.setImageBitmap(mBitmap));
+                            }
+
+                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                            byte[] mThumbnail = bos.toByteArray();
+
+                            ContentValues mContentValues = new  ContentValues();
+                            mContentValues.put("mThumbnail", mThumbnail);
+                            databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter).getmId());
+                        }
+                    }
+
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        }.start();
+
+
+
+       /*int e=0;
+       e=1;
         for(int counter = 0; counter< mTabs.size(); counter++){
             if(mTabs.get(counter).getSession().getSessionID().equals(pSessionID))
             {
                 final Handler handler = new Handler();
                 int finalCounter = counter;
                 int finalCounter1 = counter;
-                handler.postDelayed(() ->
-                {
-                    try {
-                        Bitmap mBitmap = pBitmapManager.poll(500);
-                        mTabs.get(finalCounter).setmBitmap(mBitmap);
+                new Thread(){
+                    public void run(){
+                        try {
+                            int mCounter=0;
+
+                            while (mCounter<=20){
 
 
-                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                        mBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-                        byte[] mThumbnail = bos.toByteArray();
+                                activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
+                                    Bitmap mBitmap = null;
+                                    try {
+                                        mBitmap = pBitmapManager.poll(0);
+                                    } catch (Throwable throwable) {
+                                        throwable.printStackTrace();
+                                        isLoading = 2;
+                                        return;
+                                    }
+                                    mTabs.get(finalCounter).setmBitmap(mBitmap);
+                                    if(pImageView!=null){
+                                        pImageView.setImageBitmap(mBitmap);
+                                    }
 
-                        ContentValues mContentValues = new  ContentValues();
-                        mContentValues.put("mThumbnail", mThumbnail);
+                                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                    mBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+                                    byte[] mThumbnail = bos.toByteArray();
 
-                        databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter1).getmId());
+                                    ContentValues mContentValues = new  ContentValues();
+                                    mContentValues.put("mThumbnail", mThumbnail);
 
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
+                                    databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter1).getmId());
+                                    isLoading = 3;
+                                });
+                                mCounter++;
+                            }
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
                     }
-                }, 500);
+                }.start();
             }
-        }
+        }*/
     }
 
     public ArrayList<ArrayList<String>> getSuggestions(String pQuery){
@@ -222,7 +323,7 @@ class tabDataModel
             return getSuggestions((String) pData.get(0));
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_PIXEL){
-            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1));
+            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1),  (ImageView) pData.get(2), (NestedGeckoView) pData.get(3));
         }
         else if(pCommands == dataEnums.eTabCommands.M_HOME_PAGE){
             return getHomePage();

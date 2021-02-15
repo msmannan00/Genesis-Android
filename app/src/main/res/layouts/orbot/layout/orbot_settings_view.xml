@@ -61,7 +61,7 @@
                     android:onClick="onOpenInfo"
                     android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@drawable/info"
+                    android:src="@xml/ic_info"
                     app:tint="@color/c_icon_tint_light" />
 
             </LinearLayout>
@@ -83,7 +83,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="10dp"
-                        android:layout_marginStart="20dp"
                         android:text="@string/BRIDGE_BASIC_SETTING"
                         />
             </LinearLayout>
@@ -121,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:textColor="@color/c_text_v1"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="15dp"
                         android:textStyle="bold"
                         android:text="@string/ORBOT_TITLE"
                         />
@@ -151,7 +150,6 @@
                     android:paddingStart="15dp"
                     android:layout_weight="1"
                     android:textColor="@color/c_text_v1"
-                    android:layout_marginStart="20dp"
                     android:text="@string/ORBOT_SETTING_ENABLE_VPN"
                     />
 
@@ -190,7 +188,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/c_text_v1"
-                    android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:text="@string/ORBOT_SETTING_BRIDGE_ENABLE"
                     />
@@ -291,7 +288,6 @@
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:paddingStart="7dp"
                             android:paddingEnd="7dp"
                             android:layout_weight="40"
                             android:layout_marginStart="8dp"

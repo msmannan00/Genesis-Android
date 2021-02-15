@@ -1,14 +1,20 @@
 package com.darkweb.genesissearchengine.appManager.languageManager;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
@@ -56,6 +62,12 @@ public class languageController extends AppCompatActivity {
         onInitScroll();
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+    }
+
     private void initializeAppModel()
     {
         mLanguageViewController = new languageViewController();
@@ -73,6 +85,15 @@ public class languageController extends AppCompatActivity {
 
     private void initializeAdapter(){
         mLanguageAdapter = new languageAdapter((ArrayList<languageDataModel>)mLanguageModel.onTrigger(languageEnums.eLanguageModel.M_SUPPORTED_LANGUAGE,null), this, status.sSettingLanguage, new languageAdapterCallback());
+        ((SimpleItemAnimator) Objects.requireNonNull(mRecycleView.getItemAnimator())).setSupportsChangeAnimations(false);
+
+        mRecycleView.setAdapter(mLanguageAdapter);
+        mRecycleView.setItemViewCacheSize(100);
+        mRecycleView.setNestedScrollingEnabled(false);
+        mRecycleView.setHasFixedSize(true);
+        mRecycleView.setItemViewCacheSize(100);
+        mRecycleView.setDrawingCacheEnabled(true);
+        mRecycleView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
         mRecycleView.setAdapter(mLanguageAdapter);
@@ -137,6 +158,10 @@ public class languageController extends AppCompatActivity {
         if(mDefaultLanguageNotSupported){
             pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Resources.getSystem().getConfiguration().locale.getDisplayName(), this),M_LANGUAGE_SUPPORT_FAILURE);
         }
+
+        status.mThemeApplying = true;
+        activityContextManager.getInstance().getHomeController().recreate();
+
         return true;
     }
 

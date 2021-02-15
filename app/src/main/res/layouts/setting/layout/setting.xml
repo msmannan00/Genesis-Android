@@ -45,8 +45,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="-3dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:onClick="onNavigationBackPressed"
                         android:gravity="center_vertical|start"
                         android:text="@string/SETTING_HEADER"
@@ -70,7 +70,7 @@
                         android:onClick="onOpenInfo"
                         android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@drawable/info"
+                        android:src="@xml/ic_info"
                         app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
@@ -84,28 +84,29 @@
                     android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onDefaultBrowser"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:weightSum="8"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="45dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
-                        android:layout_marginStart="7dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         app:tint="@color/c_icon_tint"
                         android:src="@xml/ic_baseline_browser"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <Button
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="7"
                         android:layout_height="match_parent"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:paddingEnd="20dp"
-                        android:paddingStart="3dp"
                         android:text="@string/SETTING_DEFAULT_BROWSER"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
@@ -184,12 +185,12 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_marginEnd="5dp"
+                        android:autoMirrored="true"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
-                        
                         android:tint="@color/c_navigation_tint"
-                        android:src="@xml/ic_arrow_right" />
+                        android:src="@xml/ic_arrow_right"/>
 
                 </LinearLayout>
 

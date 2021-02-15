@@ -41,8 +41,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:onClick="onClose"
                         android:layout_marginTop="-3dp"
                         android:gravity="center_vertical|start"
@@ -67,7 +67,7 @@
                         android:onClick="onOpenInfo"
                         android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@drawable/info"
+                        android:src="@xml/ic_info"
                         app:tint="@color/c_icon_tint_light" />
 
                 </LinearLayout>
@@ -88,7 +88,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
                         android:text="@string/SETTING_GENERAL_HOME"
                         />
                 </LinearLayout>
@@ -105,17 +104,17 @@
                         android:layout_marginTop="2dp"
                         android:alpha="1"
                         android:id="@+id/pHomePageText"
+                        android:textDirection="locale"
+                        android:textAlignment="viewStart"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
                         android:text="@string/SETTING_GENERAL_HOME_INFO"
-                        android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v6"
-                        android:textSize="13.5sp"
-                        tools:ignore="RtlSymmetry" />
+                        android:textSize="13.5sp" />
 
                     <LinearLayout
                         android:layout_marginTop="10dp"
@@ -215,7 +214,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
                         android:text="@string/SETTING_GENERAL_THEME"
                         />
                 </LinearLayout>
@@ -249,7 +247,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:background="@xml/sx_border_left"
-                    android:layout_marginStart="15dp"
                     android:paddingStart="4dp"
                     android:layout_marginTop="15dp"
                     android:orientation="vertical"
@@ -455,7 +452,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
                         android:layout_marginTop="00dp"
-                        android:layout_marginStart="15dp"
                         android:text="@string/SETTING_GENERAL"
                         />
                         <TextView
@@ -563,8 +559,8 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="25dp"
-                            android:paddingEnd="25dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_GENERAL_LANGUAGE"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"
@@ -580,8 +576,8 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:padding="0dp"
-                            android:paddingStart="25dp"
-                            android:paddingEnd="25dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="@string/SETTING_GENERAL_LANGUAGE_INFO"
                             android:textAlignment="textStart"
                             android:textAllCaps="false"

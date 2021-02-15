@@ -75,7 +75,7 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="1dp"
+                    android:layout_marginStart="1dp"
                     android:background="@color/c_view_divier_background"
                     android:layout_marginBottom="5dp"
                     tools:ignore="RtlHardcoded" />

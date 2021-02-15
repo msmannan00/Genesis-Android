@@ -1,9 +1,12 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
@@ -50,6 +53,12 @@ public class settingAccessibilityController  extends AppCompatActivity {
 
         viewsInitializations();
         initializeListeners();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
     }
 
     private void viewsInitializations() {

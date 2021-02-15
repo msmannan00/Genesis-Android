@@ -2,51 +2,51 @@
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">1111</string>
-    <string name="GENERAL_SEARCH_HINT" translatable="true">search or type a weblink</string>
+    <string name="GENERAL_SEARCH_HINT" translatable="true">search something or type a weblink</string>
     <string name="GENERAL_FIND_HINT" translatable="true">find in page</string>
     <string name="GENERAL_SEARCH_ENGINE" translatable="true">search engine</string>
     <string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
-    <string name="GENERAL_ERROR_TITLE" translatable="true">\u0020\u0020\u0020 opps! Something Went Wrong</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">opps! something has went wrong</string>
     <string name="GENERAL_TODO" translatable="true">todo</string>
     <string name="GENERAL_PROJECT_NAME" translatable="false">1111 search engine</string>
     <string name="GENERAL_LOADING" translatable="true">digital freedom</string>
     <string name="GENERAL_RELOAD" translatable="true">reload</string>
-    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">these might be the problems you are facing. webpage or website might not be working. your internet connection might be poor. you might be using a proxy. website might be blocked by firewall</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">you are facing the one of the  following problem. webpage or website might not be working. your internet connection might be poor. you might be using a proxy. website might be blocked by firewall</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
 
     <!-- Settings -->
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
-    <string name="SETTING_BASIC_SETTING" translatable="true">basic customizing</string>
+    <string name="SETTING_BASIC_SETTING" translatable="true">System Setting</string>
     <string name="SETTING_DEFAULT_BROWSER" translatable="true">make 1111 your default browser</string>
-    <string name="SETTING_HEADER" translatable="true">customize</string>
+    <string name="SETTING_HEADER" translatable="true">System Setting</string>
     <string name="SETTING_SEARCH_ENGINE" translatable="true">search Engine</string>
     <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
     <string name="SETTING_CLEAR_HISTORY" translatable="true">remove browsed web links</string>
     <string name="SETTING_FONT_TITLE" translatable="true">font customize</string>
-    <string name="SETTING_ADJUST_FONT" translatable="true">customized font</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">System Font Constomization</string>
     <string name="SETTING_MANUAL_FONT" translatable="true">change font automatically</string>
-    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">cookie customize</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie Setting</string>
     <string name="SETTING_COOKIE" translatable="true">cookies</string>
-    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">customize | notification</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">System Setting . Notification</string>
     <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">notifications</string>
-    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">manage notification</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">change notification preferences</string>
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">condition of network and notifications</string>
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">local notifications</string>
-    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">customize device notification</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">customize Software notification</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">system notifications</string>
-    <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">customize logs</string>
-    <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">show logs in complex list view</string>
-    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">toogle between classic and complex customizing view</string>
+    <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">change the way how system Log appear</string>
+    <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">show Log using modern list view</string>
+    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">toogle between classic and modern list view</string>
     <string name="SETTING_SEARCH" translatable="true">manage search engine</string>
     <string name="SETTING_SEARCH_INFO" translatable="true">add, set default. show suggestions</string>
     <string name="SETTING_NOTIFICATION" translatable="true">manage notifications</string>
     <string name="SETTING_NOTIFICATION_INFO" translatable="true">new features, condition of network</string>
-    <string name="SETTING_SEARCH_HEADER" translatable="true">customize | search</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">Customize Software . Search Engine</string>
     <string name="SETTING_SEARCH_HEADER_1" translatable="true">supported search engines</string>
-    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">choose default search engine</string>
-    <string name="SETTING_SEARCH_HEADER_2" translatable="true">search customize</string>
-    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">manage how web searches appear</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">choose Default search engine</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">Customize Software . Search Engine</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">change how Web Searches appear</string>
     <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
     <string name="SETTING_SEARCH_GENESIS" translatable="false">1111</string>
     <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
@@ -54,70 +54,70 @@
     <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
     <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
     <string name="SETTING_SEARCH_HISTORY" translatable="true">show browsed web links</string>
-    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">show search suggestions</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">show suggestions during  searching</string>
     <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">suggestions from browsed web links appear when you type in the search bar</string>
     <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">focused suggestions appear when you type in the search bar</string>
     <string name="SETTING_ACCESSIBILITY" translatable="true">accessibility</string>
-    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">text size, zoom, voice input</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">text size, zoom, input using voice</string>
     <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">customize | accessibility</string>
     <string name="SETTING_CLEAR" translatable="true">clear private data</string>
     <string name="SETTING_CLEAR_INFO" translatable="true">tabs, browsed web links, bookmark, cookies, cache</string>
-    <string name="SETTING_CLEAR_HEADER" translatable="true">customize | clear Data</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">Change System Setting. Clear System Data</string>
     <string name="SETTING_CLEAR_BUTTON" translatable="true">clear Data</string>
-    <string name="SETTING_CLEAR_OPTION_1" translatable="true">cancel tabs</string>
-    <string name="SETTING_CLEAR_OPTION_2" translatable="true">cancel browsed web links</string>
-    <string name="SETTING_CLEAR_OPTION_3" translatable="true">cancel bookmarks</string>
-    <string name="SETTING_CLEAR_OPTION_4" translatable="true">cancel cache</string>
-    <string name="SETTING_CLEAR_OPTION_5" translatable="true">cancel suggestions</string>
-    <string name="SETTING_CLEAR_OPTION_6" translatable="true">cancel data</string>
-    <string name="SETTING_CLEAR_OPTION_7" translatable="true">cancel session</string>
-    <string name="SETTING_CLEAR_OPTION_8" translatable="true">cancel cookies</string>
-    <string name="SETTING_CLEAR_OPTION_9" translatable="true">cancel customize</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">delete all tabs</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">delete browsed web links</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">delete bookmarks</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">delete cache</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">delete suggestions</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">delete data</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">delete session</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">delete cookies</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">delete customize</string>
     <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">font scaling</string>
     <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">scale web content according to system font size</string>
-    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">enable zoom</string>
-    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">enable and force zoom for all webpages</string>
-    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">voice input</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">turn on zoom</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">turn on and force zoom for all webpages</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">input using voice</string>
     <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">allow voice dictation in the url bar</string>
     <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">select custom font scaling</string>
     <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">drag the slider until you can read this comfortably. text should look at least this big after double-tapping on a paragraph</string>
     <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
     <string name="SETTING_INTERACTION" translatable="true">interactions</string>
-    <string name="SETTING_INTERACTION_INFO" translatable="true">change how you interact with the content</string>
-    <string name="SETTING_PRIVACY" translatable="true">privacy</string>
-    <string name="SETTING_PRIVACY_INFO" translatable="true">user tracking, logins, data choices</string>
-    <string name="SETTING_TRACKING" translatable="true">user tracking protection</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">change the way of interacting with website content</string>
+    <string name="SETTING_PRIVACY" translatable="true">User Sur</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">user survelance, logins, data choices</string>
+    <string name="SETTING_TRACKING" translatable="true">User Surveillance Protection</string>
     <string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackers, fingerprinting</string>
-    <string name="SETTING_PRIVACY_HEADER" translatable="true">customize | privacy</string>
-    <string name="SETTING_TRACKING_HEADER" translatable="true">customize | tracking protection</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">System Setting . privacy</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">System Setting . user survelance protection</string>
     <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">protect your online identity</string>
-    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">keep your identity private. we can protect you from several trackers which follow you online. tracking protection can also be used to block advertisement</string>
-    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">save yourself from user tracking</string>
-    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">1111 will tell sites that you do not want to be tracked as user</string>
-    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">tell website not to track user</string>
-    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">tracking protection</string>
-    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">enable user tracking protection provided by 1111</string>
-    <string name="SETTING_PRIVACY_COOKIES" translatable="true">cookies</string>
-    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">select cookies preferences according to your security needs</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">keep your identity private. we can protect you from several trackers which follow you online. this System Setting can also be used to block advertisement</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">save yourself from user Survelance Protection</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">1111 will tell sites not to track me</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">tell website not to track me</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">User Surveillance Protection</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">enable user Survelance Protection provided by 1111</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">website cookies</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">select website cookies preferences according to your security needs</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">clear private data on exit</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">clear data automatically once the software is closed</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">private Browsing</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">keep your identity safe and use the options below</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">enabled</string>
-    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">enabled, excluding tracking cookies</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">enabled, excluding website tracking cookies</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">enabled, excluding 3rd party</string>
     <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">disabled</string>
 
     <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">disable protection</string>
-    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">allow identity tracking. this might cause your online identity to be stolen</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">allow identity Survelance Protection. this might cause your online identity to be stolen</string>
     <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">default (recommended)</string>
-    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">block online advertisement and social user tracking. pages will load as default</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">block online advertisement and social web user Survelance. pages will load as default</string>
     <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">strict policy</string>
     <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">stop all known trackers, pages will load faster but some functionality might not work</string>
 
     <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
     <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">disable java scripting for various script attacks</string>
-    <string name="SETTING_ADVANCE_HEADER" translatable="true">customize | complex customizing</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">System Setting . complex System Setting</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">restore tabs</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">don\'t restore after exiting browser</string>
     <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">toolbar theme</string>
@@ -127,17 +127,17 @@
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">show web fonts</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">download remote fonts when loading a page</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">allow autoplay</string>
-    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">allow media to auto start</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">allow media to start automatically</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">data saver</string>
     <string name="SETTING_ADVANCE_TAB" translatable="true">tab</string>
-    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">change how the tab behaves after restarting the software</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">change the way how the tab behaves after restarting the software</string>
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">media</string>
     <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">change default data saver customize</string>
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">change default media customize</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">always show images</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">only show images when using wifi</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">block all images</string>
-    <string name="SETTING_ADVANCE" translatable="true">complex customizing</string>
+    <string name="SETTING_ADVANCE" translatable="true">Advance System Setting</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">restore tabs, data saver, developer tools</string>
     <string name="SETTING_PROXY" translatable="true">9999 condition of proxy</string>
     <string name="SETTING_PROXY_INFO" translatable="true">check 9999 condition of network</string>
@@ -147,8 +147,8 @@
     <string name="SETTING_RATEUS_INFO" translatable="true">rate and comment on playstore</string>
     <string name="SETTING_SHARE" translatable="true">share this app</string>
     <string name="SETTING_SHARE_INFO" translatable="true">share this software with your friends</string>
-    <string name="SETTING_GENERAL_HEADER" translatable="true">customize | general customize</string>
-    <string name="SETTING_GENERAL" translatable="true">general customization</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">System Setting . general customize</string>
+    <string name="SETTING_GENERAL" translatable="true">Default System Setting</string>
     <string name="SETTING_GENERAL_INFO" translatable="true">homepage, language</string>
     <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">full-screen browsing</string>
     <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">hide the browser toolbar when scrolling down a page</string>
@@ -158,20 +158,20 @@
     <string name="SETTING_GENERAL_THEME_INFO" translatable="true">choose bright and dark theme</string>
     <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">theme bright</string>
     <string name="SETTING_GENERAL_THEME_DARK" translatable="true">theme Dark</string>
-    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">change full-screen browsing and language customize</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">change full-screen browsing and language</string>
     <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">system Default</string>
     <string name="SETTING_GENERAL_HOME" translatable="true">homepage</string>
     <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
     <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">new tab</string>
     <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">open homepage in new tab</string>
-    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">cancel all tabs</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">remove all tabs</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">remove browsed web links</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">remove bookmarks</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">remove browsing cache</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">remove suggestions</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">remove site data</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">remove session data</string>
-    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">remove browsing cookies</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">remove web browsing cookies</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">remove browser customization</string>
 
     <!-- Alerts -->
@@ -183,7 +183,7 @@
 
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">bookmark website</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">add this page to your bookmarks</string>
-    <string name="ALERT_CLEAR_HISTORY" translatable="true">cancel browsed web links and Data</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">delete browsed web links and Data</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">clear bookmark and Data</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">clearing data will remove browsed web links, cookies, and other browsing data</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">deleting data will deleting bookmarked websites</string>
@@ -194,7 +194,7 @@
     <string name="ALERT_SECURE" translatable="false">https://</string>
     <string name="ALERT_SECURE_INFO" translatable="true">connection is secure</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">your information(for example, password or credit card numbers) is private when it is sent to this site</string>
-    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">privacy customize</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">System and User Surveillance Setting</string>
     <string name="ALERT_REPORT" translatable="true">report</string>
     <string name="ALERT_REPORT_URL" translatable="true">report website</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">if you think this URL is illegal or disturbing, report it to us, so we can take legal action</string>
@@ -203,11 +203,11 @@
     <string name="ALERT_RATEUS" translatable="true">rate us</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">tell others what you think about this app</string>
     <string name="ALERT_RATE" translatable="true">rate</string>
-    <string name="ALERT_RATEUS_FAILURE" translatable="true">sorry to hear that!</string>
+    <string name="ALERT_RATEUS_FAILURE" translatable="true">we are sorry to hear that!</string>
     <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">if you are having difficulty while using this software please reach out to us via email. we will try to solve your problem as soon as possible</string>
     <string name="ALERT_MAIL" translatable="true">mail</string>
     <string name="ALERT_BRIDGE_MAIL" translatable="true">request new 2222</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">select mail below to request a 3333 address. once you get it, copy and paste it into the above box and start the software.</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">select mail to request a 3333 address. once you recieve it, copy and paste it into the above box and start the software.</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">language not supported</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">system language is not supported by this software. we are working to include it soon</string>
     <string name="ALERT_ORBOT_INIT" translatable="true">initializing 11111</string>
@@ -252,8 +252,8 @@
     <string name="BRIDGE_SETTING" translatable="true">2222 customize</string>
     <string name="BRIDGE_AUTO" translatable="true">create automatically</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">automatically configure 3333 customize</string>
-    <string name="BRIDGE_MANUAL" translatable="true">provide a 3333 you know</string>
-    <string name="BRIDGE_PORT_HINT" translatable="false">paste custom 3333</string>
+    <string name="BRIDGE_MANUAL" translatable="true">provide a 3333 that you know</string>
+    <string name="BRIDGE_PORT_HINT" translatable="true">paste custom 3333</string>
     <string name="BRIDGE_HEADER" translatable="true">proxy customize | 2222</string>
     <string name="BRIDGE_DESC" translatable="true">4444 are unlisted 6666 relays that make it more difficult to block connections into the 6666 network. because of how some countries try to block 6666, certain 5555 work in some countries but not others</string>
     <string name="BRIDGE_TITLE" translatable="true">select default 3333</string>
@@ -263,7 +263,7 @@
 
     <!-- 11111 Log -->
     <string name="ORBOT_LOG" translatable="true">proxy logs</string>
-    <string name="ORBOT_LOG_HEADER" translatable="true">logs info</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">System Log info</string>
     <string name="ORBOT_LOG_INFO" translatable="true">if you are facing connectivity issue while starting 1111 please copy the following code and find issue online or send it to us, so we can try to help you out </string>
 
     <!-- Popup Menu -->
@@ -274,7 +274,7 @@
     <string name="HOME_MENU_LANGUAGE" translatable="true">language</string>
     <string name="HOME_MENU_DOWNLOAD" translatable="true">downloads</string>
     <string name="HOME_MENU_HISTORY" translatable="true">browsed web links</string>
-    <string name="HOME_MENU_SETTING" translatable="true">customize</string>
+    <string name="HOME_MENU_SETTING" translatable="true">System Setting</string>
     <string name="HOME_MENU_DESKTOP" translatable="true">desktop site</string>
     <string name="HOME_MENU_BOOKMARK" translatable="true">save this page</string>
     <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">bookmarks</string>
@@ -287,7 +287,7 @@
     <!-- Tab View -->
     <string name="TAB_MENU_OPEN_TAB" translatable="true">new tabs</string>
     <string name="TAB_MENU_CLOSE_TAB" translatable="true">close all tabs</string>
-    <string name="TAB_MENU_SETTINGS" translatable="true">customize</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">System Setting</string>
     <string name="TAB_LIST_SELECT" translatable="true">select tabs</string>
 
     <!-- Shared Recycler View -->
@@ -301,12 +301,12 @@
 
     <!-- History Popup Menu -->
     <string name="HISTORY_TITLE" translatable="true">browsed web links</string>
-    <string name="HISTORY_CLEAR" translatable="true">clear</string>
+    <string name="HISTORY_CLEAR" translatable="true">remove this</string>
     <string name="HISTORY_SEARCH_HINT" translatable="true">search ...</string>
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="true">bookmark</string>
-    <string name="BOOKMARK_CLEAR" translatable="true">clear</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">remove this</string>
     <string name="BOOKMARK_SEARCH_HINT" translatable="true">search ...</string>
 
     <!-- Help -->
@@ -328,9 +328,9 @@
 
     <!-- Orbot Settings -->
     <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ warning</string>
-    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">customize 4444</string>
-    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">enable 4444</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">enable 7777 serivces</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">customize Gateway</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">enable Gateway</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">enable Gateway serivces</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">enable 2222 11113</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">enable 11113</string>
 
@@ -338,18 +338,18 @@
     <string name="PROXY_STATUS_HEADER" translatable="true">condition of proxy</string>
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">current condition of 11112 proxy</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">11111 condition of proxy</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">9999 &amp; 4444 status</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">7777 condition of connectivity</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">9999 &amp; Gateway status</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">Gateway condition of connectivity</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">2222 condition of proxy</string>
-    <string name="PROXY_SUB_HEADER3" translatable="true">info | change customize</string>
-    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">you can change proxy by restarting the software and going to proxy manager. it can be opened by pressing on gear icon at bottom</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">info | change System Setting</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">you can change proxy by restarting the software and going to proxy manager. it can be opened by clicking on a gear icon at bottom</string>
 
     <!-- Orbot View -->
     <string name="ORBOT_HEADER" translatable="true">proxy customize</string>
     <string name="ORBOT_DESCRIPTION" translatable="true">we connect you to the 6666 network run by thousands of volunteers around the world! Can these options help you</string>
     <string name="ORBOT_TITLE" translatable="true">internet is censored here (bypass firewall)</string>
     <string name="ORBOT_OPTION_DESCRIPTION" translatable="true">bypass firewall</string>
-    <string name="ORBOT_BRIDGE_WARNING" translatable="true">4444 causes internet to run very slow. use them only if internet is censored in your country or Tor network is blocked</string>
+    <string name="ORBOT_BRIDGE_WARNING" translatable="true">Gateway causes internet to run very slow. use them only if internet is censored in your country or 6666 network is blocked</string>
 
     <!-- Notification Menu -->
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
@@ -358,8 +358,8 @@
     <!-- Home View -->
     <string name="HOME_TAB_TEXT" translatable="true">1</string>
     <string name="HOME_CONNECT" translatable="false">connect</string>
-    <string name="HOME_LOADING" translatable="true">1111 is paused at the moment</string>
-    <string name="HOME_LOADING_STATIC" translatable="true">~&#160;1111 on standby at the moment</string>
+    <string name="HOME_LOADING" translatable="false">1111 is paused at the moment</string>
+    <string name="HOME_LOADING_STATIC" translatable="false">~&#160;1111 on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">open tabs will show here</string>
 
     <!-- Landing Page -->
@@ -371,11 +371,11 @@
     <string name="LANDING_HELLO" translatable="true">"hello"</string>
     <string name="LANDING_WELCOME" translatable="true">"welcome to 6666 on mobile."</string>
     <string name="LANDING_BROWSE_INFO" translatable="true">"browse the internet how you expect you should."</string>
-    <string name="LANDING_NO_TRACKING" translatable="true">"no tracking. no censorship."</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">"no User Surveillance Protection. no censorship."</string>
 
     <!-- Error Page -->
     <string name="ERROR_M1" translatable="true">this site is not reachable</string>
-    <string name="ERROR_M2" translatable="true">an error occurred during a connection</string>
+    <string name="ERROR_M2" translatable="true">an error occurred while connecting with website</string>
     <string name="ERROR_M3" translatable="true">the page you are trying to view cannot be shown because the authenticity of the received data could not be verified</string>
     <string name="ERROR_M4" translatable="true">the page is currently not working due to some reason</string>
     <string name="ERROR_M5" translatable="true">please contact the website owners to inform them of this problem.</string>
@@ -400,12 +400,6 @@
         <item>115 Percent</item>
         <item>130 Percent</item>
         <item>145 Percent</item>
-    </string-array>
-
-    <string-array name="search_engines" translatable="true">
-        <item translatable="true">Hidden Web</item>
-        <item translatable="true">Google</item>
-        <item translatable="true">Duck Duck Go</item>
     </string-array>
 
     <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">

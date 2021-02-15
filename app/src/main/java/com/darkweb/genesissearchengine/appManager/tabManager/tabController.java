@@ -77,7 +77,7 @@ public class tabController extends AppCompatActivity
 
     public void initializeActivity(){
         mListModel = new tabModel();
-        mListModel.setList((ArrayList<tabRowModel>)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TAB, null));
+        mListModel.onTrigger(tabEnums.eModelCallback.M_SET_LIST, Collections.singletonList(dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TAB, null)));
         mContextManager = activityContextManager.getInstance();
         mHomeController = activityContextManager.getInstance().getHomeController();
         mContextManager.setTabController(this);
@@ -136,7 +136,7 @@ public class tabController extends AppCompatActivity
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                mListModel.onClearBackupWithoutClose();
+                mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_WITHOUT_CLOSE,null);
                 boolean mStatus = onInitRemoveView(position, true);
                 if(mStatus){
                     mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.NOTIFY_SWIPE, Collections.singletonList(position));
@@ -156,7 +156,7 @@ public class tabController extends AppCompatActivity
     /*View Handlers*/
 
     public void onRemoveTab(int pIndex){
-        mListModel.onRemoveTab(pIndex);
+        mListModel.onTrigger(tabEnums.eModelCallback.M_REMOVE_TAB,Collections.singletonList(pIndex));
         if(mListModel.getList().size()<1){
             mRecycleView.animate().setStartDelay(250).alpha(0);
         }
@@ -165,7 +165,7 @@ public class tabController extends AppCompatActivity
     }
 
     public boolean onInitRemoveView(int pIndex, boolean pCreateBackup){
-        mListModel.onRemoveTab(pIndex);
+        mListModel.onTrigger(tabEnums.eModelCallback.M_REMOVE_TAB,Collections.singletonList(pIndex));
         mListModel.getList().remove(pIndex);
         initTabCount();
         if(mListModel.getList().size()<1){
@@ -185,9 +185,6 @@ public class tabController extends AppCompatActivity
 
     public void onClose(){
         onClearTabBackup();
-        if(mListModel.getList().size()<=0){
-            mHomeController.onNewTab(false, false);
-        }
         finish();
     }
 
@@ -209,9 +206,9 @@ public class tabController extends AppCompatActivity
             mRecycleView.animate().setDuration(250).alpha(1);
         }
 
-        ArrayList<tabRowModel> mBackup = mListModel.onLoadBackup();
+        ArrayList<tabRowModel> mBackup = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_LOAD_BACKUP,null);
         mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REINIT_DATA, Collections.singletonList(mBackup));
-        mListModel.onClearBackupWithoutClose();
+        mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_WITHOUT_CLOSE,null);
         initTabCount();
     }
 
@@ -220,7 +217,7 @@ public class tabController extends AppCompatActivity
     }
 
     public void onClearTabBackup(){
-        ArrayList<tabRowModel> mBackupIndex = mListModel.onGetBackup();
+        ArrayList<tabRowModel> mBackupIndex = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_GET_BACKUP,null);
         for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Collections.singletonList(mBackupIndex.get(mCounter).getSession()));
             mBackupIndex.get(mCounter).getSession().closeSession();
@@ -364,7 +361,7 @@ public class tabController extends AppCompatActivity
                 mHomeController.onLoadTab((geckoSession)data.get(0),(boolean)data.get(1));
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW)){
-                mListModel.onClearBackupWithoutClose();
+                mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_WITHOUT_CLOSE,null);
                 onInitRemoveView((Integer) data.get(0), true);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP)){

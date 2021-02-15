@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import java.util.List;
@@ -54,7 +55,11 @@ public class bookmarkAdapterView
         pPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         pPopupWindow.setAnimationStyle(R.style.popup_window_animation);
         pPopupWindow.setElevation(7);
-        pPopupWindow.showAsDropDown(pView,xOffset - 90, -m_offset_height-helperMethod.pxFromDp(50));
+        if(status.sSettingLanguageRegion.equals("Ur")){
+            pPopupWindow.showAsDropDown(pView,0, helperMethod.pxFromDp(-45));
+        }else {
+            pPopupWindow.showAsDropDown(pView,xOffset - 90, -m_offset_height-helperMethod.pxFromDp(50));
+        }
         return pPopupWindow;
     }
 

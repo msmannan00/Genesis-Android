@@ -9,7 +9,7 @@ import com.example.myapplication.R;
 /**
  * Created by BrainWang on 05/01/2016.
  */
-public class AdBlocker {
+public class adBlocker {
     static String[] adUrls = null;
     public static boolean isAd(Context context, String url) {
         Resources res = context.getResources();

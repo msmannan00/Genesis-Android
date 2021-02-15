@@ -20,6 +20,8 @@ public class constants
     public static final String CONST_GENESIS_ERROR_CACHED = "resource://android/assets/error/error.html";
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://boogle.store/";
     public static final String CONST_GENESIS_DOMAIN_URL = "https://boogle.store";
+    public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
+    public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pGlobalTimeVerificationToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
     public static final String CONST_GENESIS_HELP_URL = "https://boogle.store/help";
     public static final String CONST_GENESIS_HELP_URL_SUB = "boogle.store/help";
@@ -84,6 +86,9 @@ public class constants
     public static final String CONST_HELP_MODEL_HEADER = "mHeader";
     public static final String CONST_HELP_MODEL_DESCRIPTION = "mDescription";
     public static final String CONST_HELP_MODEL_ICON = "mIcon";
+
+    /*ENCRYPTION KEY*/
+    public static final String CONST_ENCRYPTION_KEY = "Zr4u7x!A%D*F-JaNdRgUkXp2s5v8y/B?";
 
 
 }

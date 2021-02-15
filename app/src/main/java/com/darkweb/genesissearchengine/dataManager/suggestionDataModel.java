@@ -24,12 +24,14 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
     private SpellCheckerSession mSpellCheckerSession;
     private TextServicesManager mTextServicesManager;
+    private ArrayList<historyRowModel> mHintListLocalCache;
 
     /*Initializations*/
 
     public suggestionDataModel(Context mContext){
         mTextServicesManager = (TextServicesManager) mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE);
         mSpellCheckerSession = mTextServicesManager.newSpellCheckerSession(null, null, this, true);
+        mHintListLocalCache = initSuggestions();
     }
 
     /*Helper Methods*/
@@ -70,15 +72,14 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
-        ArrayList<historyRowModel> mDefaultSuggestions = initSuggestions();
-        for(int count = 0; count<= mDefaultSuggestions.size()-1 && mDefaultSuggestions.size()<500; count++){
-            if(mDefaultSuggestions.get(count).getHeader().toLowerCase().contains(pQuery)){
-                mList.add(new historyRowModel(mDefaultSuggestions.get(count).getHeader(),mDefaultSuggestions.get(count).getDescription(),-1));
-            }else if(mDefaultSuggestions.get(count).getDescription().toLowerCase().contains(pQuery)){
+        for(int count = 0; count<= mHintListLocalCache.size()-1 && mHintListLocalCache.size()<500; count++){
+            if(mHintListLocalCache.get(count).getHeader().toLowerCase().contains(pQuery)){
+                mList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
+            }else if(mHintListLocalCache.get(count).getDescription().toLowerCase().contains(pQuery)){
                 if(mList.size()==0){
-                    mList.add(new historyRowModel(mDefaultSuggestions.get(count).getHeader(),mDefaultSuggestions.get(count).getDescription(),-1));
+                    mList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
                 }else {
-                    mList.add(new historyRowModel(mDefaultSuggestions.get(count).getHeader(),mDefaultSuggestions.get(count).getDescription(),-1));
+                    mList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
                 }
             }
         }

@@ -1,5 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.google.android.gms.ads.*;
@@ -62,7 +64,10 @@ class adManager
                 @Override
                 public void onAdLoaded() {
                     bannerAdsLoaded = true;
-                    mEvent.invokeObserver(null,M_SHOW_LOADED_ADS);
+                    mBannerAds.animate().cancel();
+                    mBannerAds.animate().alpha(0);
+                    mBannerAds.setVisibility(View.VISIBLE);
+                    mBannerAds.animate().setStartDelay(100).setDuration(500).alpha(1).withEndAction(() -> mEvent.invokeObserver(null,M_SHOW_LOADED_ADS));
                 }
 
                 @Override

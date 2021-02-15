@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
@@ -51,6 +53,12 @@ public class settingGeneralController extends AppCompatActivity {
         setContentView(R.layout.setting_general_view);
         activityContextManager.getInstance().setSettingGeneralController(this);
         viewsInitializations();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
     }
 
     private void viewsInitializations() {

@@ -40,6 +40,8 @@
                 android:paddingEnd="7dp"
                 android:textColor="@color/c_text_v1"
                 android:layout_width="match_parent"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 android:layout_height="wrap_content"
                 android:text="@string/GENERAL_TODO" />
 
@@ -49,6 +51,8 @@
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
                 android:textColor="@color/c_text_v6"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/GENERAL_TODO" />

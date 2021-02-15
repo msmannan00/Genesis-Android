@@ -38,7 +38,7 @@
     <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Log Settings</string>
     <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Show Logs in Advance List View</string>
     <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">Toogle between classic and advance view</string>
-    <string name="SETTING_SEARCH" translatable="true">Manage Search</string>
+    <string name="SETTING_SEARCH" translatable="false">Manage Search</string>
     <string name="SETTING_SEARCH_INFO" translatable="true">Add, set default. show suggestions</string>
     <string name="SETTING_NOTIFICATION" translatable="true">Manage Notifications</string>
     <string name="SETTING_NOTIFICATION_INFO" translatable="true">New features, network status</string>
@@ -358,6 +358,7 @@
     <!-- Home View -->
     <string name="HOME_TAB_TEXT" translatable="true">1</string>
     <string name="HOME_CONNECT" translatable="false">Connect</string>
+    <string name="HOME_COPYRIGHT" translatable="false">Copyright © by Genesis Technologies | Built 1.0.2.2</string>
     <string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
     <string name="HOME_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">Open tabs will show here</string>

@@ -120,6 +120,7 @@
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.trackingManager.settingTrackingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
                 android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController"
                 android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout"

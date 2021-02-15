@@ -44,6 +44,8 @@
             android:paddingStart="15dp"
             android:lines="2"
             android:paddingEnd="15dp"
+            android:textDirection="locale"
+            android:textAlignment="viewStart"
             android:layout_marginEnd="30dp"
             android:textColor="@color/c_alert_text"
             android:textSize="13sp"

@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.helperManager.TopCropImageView;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -231,12 +232,11 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
                 mDescription.setText(model.getSession().getCurrentURL());
                 mDate.setText(model.getDate());
+                mWebThumbnail.setImageBitmap(model.getBitmap());
 
-                final Handler handler = new Handler();
-                handler.postDelayed(() ->
-                {
-                    mWebThumbnail.setImageBitmap(model.getBitmap());
-                }, 500);
+                if(getLayoutPosition()==0){
+                    mEvent.invokeObserver(Arrays.asList(mWebThumbnail, model.getSession().getCurrentURL()), enums.etype.fetch_thumbnail);
+                }
 
                 if(mSelectedList.contains(model.getSession().getSessionID())){
                     onSelectionCreate(mSelectedView);

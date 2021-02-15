@@ -1,9 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.proxyStatusManager;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
@@ -41,6 +43,12 @@ public class proxyStatusController extends AppCompatActivity {
         setContentView(R.layout.proxy_status_view);
 
         viewsInitializations();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
     }
 
     public void viewsInitializations() {

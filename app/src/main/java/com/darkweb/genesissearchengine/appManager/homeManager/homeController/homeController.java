@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -32,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
@@ -63,11 +65,13 @@ import com.darkweb.genesissearchengine.helperManager.OnClearFromRecentService;
 import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.helperManager.trueTime;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
+import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
@@ -99,7 +103,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     /*View Webviews*/
     private NestedGeckoView mGeckoView = null;
-    private FrameLayout mTopLayout;
+    private androidx.constraintlayout.widget.ConstraintLayout mTopLayout;
     private ConstraintLayout mWebViewContainer;
 
     /*View Objects*/
@@ -121,7 +125,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private TextView mFindCount;
     private ImageButton mVoiceInput;
     private ImageButton mMenu;
-    private FrameLayout mNestedScroll;
+    private NestedScrollView mNestedScroll;
     private ImageView mBlockerFullSceen;
     private TextView mCopyright;
     private RecyclerView mHintListView;
@@ -132,6 +136,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private com.google.android.material.appbar.AppBarLayout mAppBar;
 
     /*Redirection Objects*/
+    private GeckoResult<Bitmap> mRenderedBitmap = null;
     private boolean mPageClosed = false;
     private boolean isKeyboardOpened = false;
     private boolean isSuggestionChanged = false;
@@ -157,6 +162,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             status.initStatus();
             pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
             onInitTheme();
+            trueTime.getInstance().initTime();
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.home_view);
@@ -432,8 +438,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
     public void onGetFavIcon(ImageView pImageView, String pURL){
-        mGeckoClient.onGetFavIcon(pImageView, pURL);
     }
+
+    public void onGetThumbnail(ImageView pImageView){
+        mRenderedBitmap = mGeckoView.capturePixels();
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, pImageView, mGeckoView));
+    }
+
 
     public void onLoadFont(){
         mGeckoClient.onUpdateFont();
@@ -466,6 +477,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onLoadTab(geckoSession mTempSession, boolean isSessionClosed){
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView));
+
         if(!isSessionClosed){
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mTempSession));
         }
@@ -481,17 +494,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }else {
             mHomeViewController.progressBarReset();
         }
-        if(mGeckoClient.getSession().onGetInitializeFromStartup()){
-            mGeckoClient.onRedrawPixel();
-        }
 
         mGeckoClient.onValidateInitializeFromStartup();
-        mGeckoClient.onRedrawPixel();
         mGeckoClient.onSessionReinit();
         mHomeViewController.onUpdateStatusBarTheme(mTempSession.getTheme(), false);
         mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false);
         mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getSession().getTheme(),true);
         mAppBar.setExpanded(true,true);
+        mRenderedBitmap = mGeckoView.capturePixels();
     }
 
     /*-------------------------------------------------------USER EVENTS-------------------------------------------------------*/
@@ -512,6 +522,42 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
         }
     };
+
+    @SuppressLint("NewApi")
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+
+        switch (level) {
+            case TRIM_MEMORY_BACKGROUND:
+                Log.i("wow : ", "trim memory requested: app in the background");
+                break;
+
+            case TRIM_MEMORY_COMPLETE:
+                Log.i("wow : ", "trim memory requested: cleanup all memory");
+                break;
+
+            case TRIM_MEMORY_MODERATE:
+                Log.i("wow : ", "trim memory requested: clean up some memory");
+                break;
+
+            case TRIM_MEMORY_RUNNING_CRITICAL:
+                Log.i("wow : ", "trim memory requested: memory on device is very low and critical");
+                break;
+
+            case TRIM_MEMORY_RUNNING_LOW:
+                Log.i("wow : ", "trim memory requested: memory on device is running low");
+                break;
+
+            case TRIM_MEMORY_RUNNING_MODERATE:
+                Log.i("wow : ", "trim memory requested: memory on device is moderate");
+                break;
+
+            case TRIM_MEMORY_UI_HIDDEN:
+                Log.i("wow : ", "trim memory requested: app is not showing UI anymore");
+                break;
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -635,7 +681,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                                 mSearchBarLoading = true;
                                 mEdittextChanged.postDelayed(postToServerRunnable, 0);
                             }else{
-                                mEdittextChanged.postDelayed(postToServerRunnable, 100);
+                                mEdittextChanged.postDelayed(postToServerRunnable, 300);
                             }
                         }
                     }
@@ -718,13 +764,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onSuggestionInvoked(View view){
-        String val = ((TextView)view.findViewById(R.id.pURL)).getText().toString();
-        if(val.equals(strings.GENERIC_EMPTY_STR)){
-            val =  ((TextView)view.findViewById(R.id.pHeaderSingle)).getText().toString();
+        String mVal = ((TextView)view.findViewById(R.id.pURL)).getText().toString();
+        if(mVal.equals(strings.GENERIC_EMPTY_STR)){
+            mVal = ((TextView)view.findViewById(R.id.pHeaderSingle)).getText().toString();
         }
-        Log.i("FUCLSSS","FUCLSSS3");
-        onLoadURL(val);
-        mHomeViewController.onUpdateSearchBar(val,false,true);
+        String pURL = mHomeModel.urlComplete(mVal, status.sSettingSearchStatus);
+        if(pURL==null){
+            pURL = mVal;
+        }
+
+        onLoadURL(pURL);
+        mHomeViewController.onUpdateSearchBar(pURL,false,true);
     }
 
     public void onSuggestionMove(View view){
@@ -763,21 +813,34 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void postNewLinkTabAnimation(String url){
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView));
         initializeGeckoView(true, true);
         mHomeViewController.progressBarReset();
         mHomeViewController.onUpdateSearchBar(url,false,true);
         mGeckoClient.loadURL(url);
     }
 
+
     public void onNewTab(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened){
-        mHomeViewController.onNewTabAnimation(Arrays.asList(isKeyboardOpenedTemp, isKeyboardOpened),M_INITIALIZE_TAB_SINGLE);
+        try {
+            onGetThumbnail(null);
+        }catch (Exception ignored){}
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            mHomeViewController.onNewTabAnimation(Arrays.asList(isKeyboardOpenedTemp, isKeyboardOpened), M_INITIALIZE_TAB_SINGLE);
+        }, 100);
     }
 
     public void onOpenLinkNewTab(String url){
-        mHomeViewController.onNewTabAnimation(Collections.singletonList(url),M_INITIALIZE_TAB_LINK);
+        onGetThumbnail(null);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> mHomeViewController.onNewTabAnimation(Collections.singletonList(url),M_INITIALIZE_TAB_LINK), 100);
     }
 
     public void onOpenTabViewBoundary(View view){
+        onGetThumbnail(null);
         mGeckoClient.onRedrawPixel();
         mNewTab.setPressed(true);
         helperMethod.openActivity(tabController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
@@ -849,12 +912,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onClearCookies(){
         mGeckoClient.onClearCookies();
     }
-
-
+    
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
 
         pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         mHomeViewController.closeMenu();
@@ -877,6 +938,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(mSplashScreen.getAlpha()>0){
                 mHomeViewController.initSplashOrientation();
             }
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
     }
 
     @Override
@@ -933,9 +995,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(mGeckoView!=null){
             tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
             if(model!=null){
-                mGeckoView.releaseSession();
-                mGeckoView.requestFocus();
-                mGeckoView.setSession(model.getSession());
+                if(!mGeckoView.getSession().isOpen()){
+                    onReDrawGeckoview();
+                    onLoadURL(model.getSession().getCurrentURL());
+                }else {
+                    mGeckoView.releaseSession();
+                    mGeckoView.requestFocus();
+                    mGeckoView.setSession(model.getSession());
+                }
             }
         }
 
@@ -1250,6 +1317,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            else if(e_type.equals(enums.etype.on_url_load)){
                if(status.sSettingIsAppRedirected){
                    mHomeViewController.onPageFinished();
+                   mGeckoClient.onRedrawPixel();
 
                    status.sSettingIsAppRedirected = false;
                    onLoadURL(status.sSettingRedirectStatus);
@@ -1276,6 +1344,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                    }
                    else if(status.sSettingIsAppStarted){
                        mHomeViewController.onPageFinished();
+                       mGeckoClient.onRedrawPixel();
                        mHomeViewController.onProgressBarUpdate(5);
                        onLoadTabOnResume();
                    }
@@ -1387,14 +1456,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().onOrbotInvoke(data, pluginEnums.eOrbotManager.M_SET_PROXY);
             }
             else if(e_type.equals(enums.etype.on_update_history)){
-                if(activityContextManager.getInstance().getTabController()!=null && !activityContextManager.getInstance().getTabController().isDestroyed() && !activityContextManager.getInstance().getTabController().isFinishing()){
-                    //dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(data.get(1), mGeckoView.capturePixels()));
-                }
                 return dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_ADD_HISTORY ,data);
             }
             else if(e_type.equals(enums.etype.on_page_loaded)){
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_BOOTSTRAPPED,true));
                 mHomeViewController.onPageFinished();
+                mGeckoClient.onRedrawPixel();
 
                 final Handler handler = new Handler();
                 Runnable runnable = () -> pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS);
@@ -1411,6 +1478,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().onLanguageInvoke(Collections.singletonList(homeController.this), pluginEnums.eLangManager.M_SET_LANGUAGE);
                 initLocalLanguage();
                 mHomeViewController.onPageFinished();
+                mGeckoClient.onRedrawPixel();
                 mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false,true);
             }
             else if(e_type.equals(enums.etype.search_update)){
@@ -1450,18 +1518,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE)){
                 if(activityContextManager.getInstance().getTabController()!=null && !activityContextManager.getInstance().getTabController().isDestroyed())
                 activityContextManager.getInstance().getTabController().onTabRowChanged((String) data.get(1));
-            }
-            else if(e_type.equals(dataEnums.eTabCommands.M_UPDATE_PIXEL)){
-                try{
-                    dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(data.get(1), mGeckoView.capturePixels()));
-                    final Handler handler = new Handler();
-                    handler.postDelayed(() ->
-                    {
-                        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(data.get(1), mGeckoView.capturePixels()));
-                    }, 500);
-                }catch (Exception EX){
-                    EX.printStackTrace();
-                }
             }
             else if(e_type.equals(enums.etype.FINDER_RESULT_CALLBACK)){
                 mHomeViewController.onUpdateFindBarCount((int)data.get(0),(int)data.get(1));

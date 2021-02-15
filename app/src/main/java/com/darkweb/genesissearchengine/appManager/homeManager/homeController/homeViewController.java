@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -32,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.*;
@@ -80,7 +82,7 @@ class homeViewController
     private View mSearchEngineBar;
     private EditText mFindText;
     private TextView mFindCount;
-    private FrameLayout mTopLayout;
+    private androidx.constraintlayout.widget.ConstraintLayout mTopLayout;
     private ImageButton mVoiceInput;
     private ImageButton mMenu;
     private ImageView mBlocker;
@@ -89,12 +91,13 @@ class homeViewController
     private ImageButton mOrbotLogManager;
     private ConstraintLayout mInfoPortrait;
     private ConstraintLayout mInfoLandscape;
+    private NestedScrollView mNestedScroll;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, FrameLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, FrameLayout pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -124,6 +127,7 @@ class homeViewController
         this.mOrbotLogManager = pOrbotLogManager;
         this.mInfoPortrait = pInfoPortrait;
         this.mInfoLandscape = pInfoLandscape;
+        this.mNestedScroll = pNestedScroll;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -133,7 +137,9 @@ class homeViewController
     }
 
     public void initializeViews(){
+        mNestedScroll.setNestedScrollingEnabled(true);
         this.mBlockerFullSceen.setVisibility(View.GONE);
+
         final Handler handler = new Handler();
         handler.postDelayed(() ->
         {
@@ -174,7 +180,16 @@ class homeViewController
                 mNewTab.setVisibility(View.VISIBLE);
                 mMenu.setVisibility(View.VISIBLE);
 
-                mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(15),0);
+                if(status.sSettingLanguageRegion.equals("Ur")){
+                    mSearchbar.setPadding(helperMethod.pxFromDp(17),0,mSearchbar.getPaddingRight(),0);
+                    ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
+                    params.leftMargin = helperMethod.pxFromDp(5);
+                }else {
+                    mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(45),0);
+                    ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
+                    params.rightMargin = helperMethod.pxFromDp(10);
+                }
+
             });
         }else {
             Drawable drawable;
@@ -198,9 +213,17 @@ class homeViewController
             mNewTab.setVisibility(View.GONE);
             this.mMenu.setVisibility(View.GONE);
 
-            //mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(40),0);
-            mSearchbar.requestFocus();
+            if(status.sSettingLanguageRegion.equals("Ur")){
+                mSearchbar.setPadding(helperMethod.pxFromDp(45),0,mSearchbar.getPaddingRight(),0);
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
+                params.leftMargin = helperMethod.pxFromDp(17);
+            }else {
+                mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(45),0);
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
+                params.rightMargin = helperMethod.pxFromDp(17);
+            }
 
+            mSearchbar.requestFocus();
             InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(mSearchbar, InputMethodManager.SHOW_IMPLICIT);
         }
@@ -445,7 +468,11 @@ class homeViewController
             helperMethod.hideKeyboard(mContext);
             popupWindow.setHeight(height);
         }
-        popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.END,0,0);
+        if(status.sSettingLanguageRegion.equals("Ur")){
+            popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.START,0,0);
+        }else {
+            popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.END,0,0);
+        }
 
         ImageButton back = popupView.findViewById(R.id.menu22);
         ImageButton close = popupView.findViewById(R.id.menu20);
@@ -520,7 +547,6 @@ class homeViewController
         if(isAdLoaded){
             if(status && !isLandscape){
                 mBannerAds.setVisibility(View.VISIBLE);
-                mBannerAds.setAlpha(1f);
 
                 final Handler handler = new Handler();
                 handler.postDelayed(() ->
@@ -841,13 +867,13 @@ class homeViewController
                 mTopBar.setVisibility(View.GONE);
                 mBannerAds.setVisibility(View.GONE);
 
-                ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-                params.setMargins(0, helperMethod.pxFromDp(0), 0, 0);
-                mWebviewContainer.setLayoutParams(params);
+                //ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+                //params.setMargins(0, helperMethod.pxFromDp(0), 0, 0);
+                //mWebviewContainer.setLayoutParams(params);
 
-                ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-                params1.setMargins(0, 0, 0,0);
-                mGeckoView.setLayoutParams(params1);
+                //ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+                //params1.setMargins(0, 0, 0,0);
+                //mGeckoView.setLayoutParams(params1);
 
                 com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = false;
                 initTopBarPadding();
@@ -868,13 +894,13 @@ class homeViewController
             mBannerAds.setVisibility(View.GONE);
             mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
 
-            ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-            params.setMargins(0, 0, 0,0);
-            mWebviewContainer.setLayoutParams(params);
+            //ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+            //params.setMargins(0, 0, 0,0);
+            //mWebviewContainer.setLayoutParams(params);
 
-            ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-            params1.setMargins(0, 0, 0,helperMethod.pxFromDp(0));
-            mGeckoView.setLayoutParams(params1);
+            //ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
+            //params1.setMargins(0, 0, 0,helperMethod.pxFromDp(0));
+            //mGeckoView.setLayoutParams(params1);
 
             com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
             initTopBarPadding();

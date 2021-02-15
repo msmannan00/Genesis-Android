@@ -1,339 +1,355 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
 	<!-- Application Strings -->
 	<string name="app_name" translatable="false">Genesis</string>
-	<string name="GENERAL_SEARCH_HINT" translatable="true">Знайдіть або введіть веб-адресу</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">Find in page</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">Search Engine</string>
+	<string name="GENERAL_SEARCH_HINT" translatable="true">Zoek of typ een webadres</string>
+	<string name="GENERAL_FIND_HINT" translatable="true">Zoek op pagina</string>
+	<string name="GENERAL_SEARCH_ENGINE" translatable="true">Zoekmachine</string>
 	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">\u0020\u0020\u0020Opps! Some Thing Went Wrong</string>
-	<string name="GENERAL_TODO" translatable="true">"TODO" "GOOD"</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis Search Engine</string>
-	<string name="GENERAL_LOADING" translatable="true">Online Freedom</string>
-	<string name="GENERAL_RELOAD" translatable="true">Reload</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">\ U0020 \ U0020 \ U0020Opps! Er Is Iets Misgegaan</string>
+	<string name="GENERAL_TODO" translatable="true">TODO</string>
+	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis-zoekmachine</string>
+	<string name="GENERAL_LOADING" translatable="true">Online Vrijheid</string>
+	<string name="GENERAL_RELOAD" translatable="true">Opnieuw laden</string>
+	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Dit kunnen de problemen zijn waarmee u wordt geconfronteerd \ n \ n • De webpagina of website is mogelijk niet beschikbaar \ n • Uw internetverbinding is mogelijk slecht \ n • U gebruikt mogelijk een proxy \ n • De website is mogelijk geblokkeerd door een firewall</string>
 	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
 
 	<!-- Settings -->
 	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
-	<string name="SETTING_BASIC_SETTING" translatable="true">Basic Settings</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="false">Make Genesis your default browser</string>
-	<string name="SETTING_HEADER" translatable="true">Settings</string>
-	<string name="SETTING_SEARCH_ENGINE" translatable="true">Search Engine</string>
+	<string name="SETTING_BASIC_SETTING" translatable="true">Basisinstellingen</string>
+	<string name="SETTING_DEFAULT_BROWSER" translatable="true">Stel Genesis in als uw standaardbrowser</string>
+	<string name="SETTING_HEADER" translatable="true">Instellingen</string>
+	<string name="SETTING_SEARCH_ENGINE" translatable="true">Zoekmachine</string>
 	<string name="SETTING_JAVASCRIPT" translatable="true">Javascript</string>
-	<string name="SETTING_CLEAR_HISTORY" translatable="true">Auto Clear History</string>
-	<string name="SETTING_FONT_TITLE" translatable="true">Font Settings</string>
-	<string name="SETTING_ADJUST_FONT" translatable="true">Customized Font</string>
-	<string name="SETTING_MANUAL_FONT" translatable="true">Auto Adjust Font</string>
-	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie Settings</string>
+	<string name="SETTING_CLEAR_HISTORY" translatable="true">Geschiedenis Automatisch Wissen</string>
+	<string name="SETTING_FONT_TITLE" translatable="true">Lettertype-instellingen</string>
+	<string name="SETTING_ADJUST_FONT" translatable="true">Aangepast Lettertype</string>
+	<string name="SETTING_MANUAL_FONT" translatable="true">Lettertype Automatisch Aanpassen</string>
+	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie-instellingen</string>
 	<string name="SETTING_COOKIE" translatable="true">Cookies</string>
 	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">Settings | Notification</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">Notifications</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">Manage network stats notification</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">Network Status Notification</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">Local Notification</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Device Notification Settings</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">System Notification</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Log Settings</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Show Logs in Advance List View</string>
-	<string name="SETTING_SEARCH" translatable="true">Manage Search</string>
-	<string name="SETTING_SEARCH_INFO" translatable="true">Add, set default. show suggestions</string>
-	<string name="SETTING_NOTIFICATION" translatable="true">Manage Notification</string>
-	<string name="SETTING_NOTIFICATION_INFO" translatable="true">New features, network status</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">Meldingen</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">Melding beheren</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">Netwerkstatus en meldingen</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">Lokale Meldingen</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Instellingen Voor Apparaatmeldingen</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">Systeemmeldingen</string>
+	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Logboekinstellingen</string>
+	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Toon logboeken in geavanceerde lijstweergave</string>
+	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">Toogle tussen klassieke en geavanceerde weergave</string>
+	<string name="SETTING_SEARCH" translatable="false">Zoekopdracht Beheren</string>
+	<string name="SETTING_SEARCH_INFO" translatable="true">Toevoegen, standaard instellen. suggesties weergeven</string>
+	<string name="SETTING_NOTIFICATION" translatable="true">Meldingen Beheren</string>
+	<string name="SETTING_NOTIFICATION_INFO" translatable="true">Nieuwe functies, netwerkstatus</string>
 	<string name="SETTING_SEARCH_HEADER" translatable="true">Settings | Search</string>
-	<string name="SETTING_SEARCH_HEADER_1" translatable="true">Supported search engines</string>
-	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">Choose to search directly from search bar</string>
-	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Search setting</string>
-	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Manage how searches appear</string>
-	<string name="SETTING_SEARCH_DEFAULT" translatable="true">Default</string>
+	<string name="SETTING_SEARCH_HEADER_1" translatable="true">Ondersteunde zoekmachines</string>
+	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">Kies standaard zoekmachine</string>
+	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Zoekinstelling</string>
+	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Beheer hoe zoekopdrachten worden weergegeven</string>
+	<string name="SETTING_SEARCH_DEFAULT" translatable="false">Standaard</string>
 	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
 	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
 	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
 	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
 	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
-	<string name="SETTING_SEARCH_HISTORY" translatable="true">Show search history</string>
-	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">Show search suggestions</string>
-	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">Search websites appears when you type in searchbar</string>
-	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">Focused suggestions appears when you type in searchbar</string>
-	<string name="SETTING_ACCESSIBILITY" translatable="true">Accessiblity</string>
-	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">Text size, zoom, voice input</string>
+	<string name="SETTING_SEARCH_HISTORY" translatable="true">Zoekgeschiedenis weergeven</string>
+	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">Zoeksuggesties weergeven</string>
+	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">Suggesties uit de zoekgeschiedenis verschijnen wanneer u typt in de zoekbalk</string>
+	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">Gerichte suggesties worden weergegeven wanneer u in de zoekbalk</string>
+	<string name="SETTING_ACCESSIBILITY" translatable="true">typt Toegankelijkheid</string>
+	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">Tekstgrootte, zoom, spraakinvoer</string>
 	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">Settings | Accessibility</string>
-	<string name="SETTING_CLEAR" translatable="true">Clear Private Data</string>
-	<string name="SETTING_CLEAR_INFO" translatable="true">Tabs, history, bookmark, cookies, cache</string>
+	<string name="SETTING_CLEAR" translatable="true">Privégegevens Wissen</string>
+	<string name="SETTING_CLEAR_INFO" translatable="true">Tabbladen, geschiedenis, bladwijzer, cookies, cache</string>
 	<string name="SETTING_CLEAR_HEADER" translatable="true">Settings | Clear Data</string>
-	<string name="SETTING_CLEAR_BUTTON" translatable="true">Clear Data</string>
-	<string name="SETTING_CLEAR_OPTION_1" translatable="true">Clear Tabs</string>
-	<string name="SETTING_CLEAR_OPTION_2" translatable="true">Clear History</string>
-	<string name="SETTING_CLEAR_OPTION_3" translatable="true">Clear Bookmarks</string>
-	<string name="SETTING_CLEAR_OPTION_4" translatable="true">Clear Cache</string>
-	<string name="SETTING_CLEAR_OPTION_5" translatable="true">Clear Suggestions</string>
-	<string name="SETTING_CLEAR_OPTION_6" translatable="true">Site Data</string>
-	<string name="SETTING_CLEAR_OPTION_7" translatable="true">Clear Session</string>
-	<string name="SETTING_CLEAR_OPTION_8" translatable="true">Clear Cookies</string>
-	<string name="SETTING_CLEAR_OPTION_9" translatable="true">Clear Settings</string>
-	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">Font scaling</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">Scale web content according to system font size</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">Enable Zoom</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">Enable zoom on all webpages</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">Voice input</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">Allow voice dictation in the URL bar</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">Select custom font scale</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">Drag the slider until you can read this comfortably. Text should look at least this big after double-tapping on a paragraph</string>
+	<string name="SETTING_CLEAR_BUTTON" translatable="true">Gegevens Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_1" translatable="true">Tabbladen Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_2" translatable="true">Geschiedenis Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_3" translatable="true">Bladwijzers Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_4" translatable="true">Cache Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_5" translatable="true">Suggesties Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_6" translatable="true">Sitegegevens</string>
+	<string name="SETTING_CLEAR_OPTION_7" translatable="true">Sessie Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_8" translatable="true">Cookies Wissen</string>
+	<string name="SETTING_CLEAR_OPTION_9" translatable="true">Instellingen Wissen</string>
+	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">Lettertype schalen</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">Webinhoud schalen volgens systeemlettergrootte</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">Zoom Inschakelen</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">Zoom inschakelen en forceren voor alle webpagina\'s</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">Spraakinvoer</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">Sta spraakdictatie toe in de URL-balk</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">Selecteer aangepaste lettertypeschaling</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">Sleep de schuifregelaar totdat u dit comfortabel kunt lezen. Tekst moet er minstens zo groot uitzien na dubbeltikken op een alinea</string>
 	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
-	<string name="SETTING_INTERACTION" translatable="true">Interactions</string>
-	<string name="SETTING_INTERACTION_INFO" translatable="true">Change how you interact with the content</string>
+	<string name="SETTING_INTERACTION" translatable="true">Interacties</string>
+	<string name="SETTING_INTERACTION_INFO" translatable="true">Verander hoe u omgaat met de inhoud</string>
 	<string name="SETTING_PRIVACY" translatable="true">Privacy</string>
-	<string name="SETTING_PRIVACY_INFO" translatable="true">Tracking, logins, data choices</string>
+	<string name="SETTING_PRIVACY_INFO" translatable="true">Volgen, logins, gegevenskeuzes</string>
+	<string name="SETTING_TRACKING" translatable="true">Bescherming Tegen Volgen</string>
+	<string name="SETTING_TRACKING_INFO" translatable="true">Adblock, trackers, vingerafdrukken</string>
 	<string name="SETTING_PRIVACY_HEADER" translatable="true">Settings | Privacy</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">Do Not Track</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis will tell sites that you do not want to be tracked</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">Do not Track marker for website</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Tracking Protection</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Enable tracking protection provided by Genesis</string>
+	<string name="SETTING_TRACKING_HEADER" translatable="true">Settings | Tracking Protection</string>
+	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">Bescherm uw online identiteit</string>
+	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">Houd uw identiteit voor uzelf. We kunnen je beschermen tegen verschillende trackers die volgen wat je online doet. Trackingbeveiliging kan ook worden gebruikt om advertenties te blokkeren</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">Niet Volgen</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis zal sites vertellen dat u niet wilt worden gevolgd</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">Volg geen marker voor website</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Bescherming Tegen Volgen</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Schakel trackingbeveiliging in die wordt geboden door Genesis</string>
 	<string name="SETTING_PRIVACY_COOKIES" translatable="true">Cookies</string>
-	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">Select cookies preferences according to your security needs</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">Clear private data on exit</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">Clear data automatically upon application close</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">Private Browsing</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">Keep your identity safe and use the options below</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">Enabled</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">Enabled, excluding tracking cookies</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">Enabled, excluding 3rd party</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">Disabled</string>
+	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">Selecteer cookievoorkeuren op basis van uw beveiligingsbehoeften</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">Privégegevens wissen bij afsluiten</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">Gegevens automatisch wissen zodra de toepassing is gesloten</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">Privé Browsen</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">Houd uw identiteit veilig en gebruik de onderstaande opties</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">Ingeschakeld</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">Ingeschakeld, met uitzondering van tracking cookies</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">Ingeschakeld, met uitzondering van derden</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">Uitgeschakeld</string>
+
+	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">Bescherming Uitschakelen</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">Sta identiteitstracering toe. Hierdoor kan uw online identiteit worden gestolen</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">Standaard (aanbevolen)</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">Blokkeer advertenties en sociale tracking. Pagina\'s worden normaal geladen</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">Strikt Beleid</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">Stop alle bekende trackers. Pagina\'s worden sneller geladen, maar sommige functies werken mogelijk niet</string>
+
 	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">Javascript</string>
-	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Disable java scripting for various script attacks</string>
+	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Schakel java-scripting uit voor verschillende scriptaanvallen</string>
 	<string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Restore tabs</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Don\'t restore adfter quitting browser</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">Toolbar Theme</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Set toolbar theme as defined in website</string>
-	<string name="SETTING_ADVANCE_CHARARACTER_ENCODING" translatable="true">Character Encoding</string>
-	<string name="SETTING_ADVANCE_CHARARACTER_ENCODING_INFO" translatable="true">Show character encoding in menu</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">Show Images</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Always load images of websites</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Show web fonts</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">Download remote fonts when loading a page</string>
-	<string name="SETTING_ADVANCE_MEDIA" translatable="true">Allow autoplay</string>
-	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Allow media to auto start</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">Data saver</string>
-	<string name="SETTING_ADVANCE_TAB" translatable="true">Tab</string>
-	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">Change how tab behave after restarting application</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Tabbladen herstellen</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Herstel niet na het afsluiten van browser</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">Werkbalkthema</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Stel het werkbalkthema in zoals gedefinieerd in website</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">Afbeeldingen Weergeven</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Altijd website-afbeeldingen laden</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Weblettertypen weergeven</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">Download externe lettertypen bij het laden van een pagina</string>
+	<string name="SETTING_ADVANCE_MEDIA" translatable="true">Autoplay toestaan ​​</string>
+	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Media automatisch starten</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">Gegevensbesparing</string>
+	<string name="SETTING_ADVANCE_TAB" translatable="true">Tabblad</string>
+	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">Wijzig hoe het tabblad zich gedraagt ​​na het herstarten van de toepassing</string>
 	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">Media</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">Change default data saver settings</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">Change default media settings</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">Always show images</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Only show images over WI-FI</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Block all images</string>
-	<string name="SETTING_ADVANCE" translatable="true">Advanced</string>
-	<string name="SETTING_ADVANCE_INFO" translatable="true">Restore tabs, data saver, developer tools</string>
-	<string name="SETTING_PROXY" translatable="true">Onion Proxy Status</string>
-	<string name="SETTING_PROXY_INFO" translatable="true">Check onion network or VPN status</string>
-	<string name="SETTING_REPORT" translatable="true">Report website</string>
-	<string name="SETTING_REPORT_INFO" translatable="true">Report abusive website</string>
-	<string name="SETTING_RATEUS" translatable="true">Rate this app</string>
-	<string name="SETTING_RATEUS_INFO" translatable="true">Rate and comment on playstore</string>
-	<string name="SETTING_SHARE" translatable="true">Share this app</string>
-	<string name="SETTING_SHARE_INFO" translatable="true">Share this app with your friends</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">Standaardinstellingen voor gegevensbesparing wijzigen</string>
+	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">Standaard media-instellingen wijzigen</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">Altijd afbeeldingen weergeven</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Alleen afbeeldingen weergeven via WI-FI</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Blokkeer alle afbeeldingen</string>
+	<string name="SETTING_ADVANCE" translatable="true">Geavanceerd</string>
+	<string name="SETTING_ADVANCE_INFO" translatable="true">Herstel tabbladen, databesparing, ontwikkelaarstools</string>
+	<string name="SETTING_PROXY" translatable="true">Onion Proxy-status</string>
+	<string name="SETTING_PROXY_INFO" translatable="true">Controleer uienetwerk of status</string>
+	<string name="SETTING_REPORT" translatable="true">Rapport website</string>
+	<string name="SETTING_REPORT_INFO" translatable="true">Beledigende website melden</string>
+	<string name="SETTING_RATEUS" translatable="true">Beoordeel deze app</string>
+	<string name="SETTING_RATEUS_INFO" translatable="true">Beoordeel en reageer op playstore</string>
+	<string name="SETTING_SHARE" translatable="true">Deel deze app</string>
+	<string name="SETTING_SHARE_INFO" translatable="true">Deel deze app met je vrienden</string>
 	<string name="SETTING_GENERAL_HEADER" translatable="true">Settings | General</string>
-	<string name="SETTING_GENERAL" translatable="true">General</string>
-	<string name="SETTING_GENERAL_INFO" translatable="true">Home, language</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">Full-screen browsing</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">Hide the browser toolbar when scrolling down a page</string>
-	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">Language</string>
-	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">Change the language of your browser</string>
-	<string name="SETTING_GENERAL_THEME" translatable="true">Theme</string>
-	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">Choose light and dark or theme</string>
-	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">Theme Light</string>
-	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">Theme Dark</string>
-	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">Change full screen browsing and language settings</string>
-	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">System Default</string>
+	<string name="SETTING_GENERAL" translatable="true">Algemeen</string>
+	<string name="SETTING_GENERAL_INFO" translatable="true">Home, taal</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">Browsen op volledig scherm</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">Verberg de browserwerkbalk wanneer u naar beneden scrolt</string>
+	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">Taal</string>
+	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">Wijzig de taal van uw browser</string>
+	<string name="SETTING_GENERAL_THEME" translatable="true">Thema</string>
+	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">Kies een licht en donker thema</string>
+	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">Thema Licht</string>
+	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">Thema Donker</string>
+	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">Browsen en taalinstellingen op volledig scherm wijzigen</string>
+	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">Systeemstandaard</string>
 	<string name="SETTING_GENERAL_HOME" translatable="true">Home</string>
-	<string name="SETTING_GENERAL_HOME_INFO" translatable="true">about:blank</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">New Tab</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">Open homepage in new tab</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">Clear all tabs</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">Clear search history</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">Clear marked bookmarks</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">Clear browsing cache</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">Clear suggestions</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">Clear site data</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">Clear session data</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">Clear browsing cookies</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">Clear browser settings</string>
+	<string name="SETTING_GENERAL_HOME_INFO" translatable="true">over: blanco</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">Nieuw Tabblad</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">Open homepage in nieuw tabblad</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">Wis alle tabbladen</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">Zoekgeschiedenis wissen</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">Gemarkeerde bladwijzers wissen</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">Browsingscache wissen</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">Duidelijke suggesties</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">Sitegegevens wissen</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">Sessiegegevens wissen</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">Browsercookies wissen</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">Browserinstellingen wissen</string>
 
 	<!-- Alerts -->
+	<string name="ALERT_UPDATE_BRIDGES" translatable="true">Zorg voor een brug die ik ken</string>
+	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">Voer bridge-informatie van een vertrouwde bron in</string>
+	<string name="ALERT_ADD_BRIDGES_HINT" translatable="true">brug snaar ...</string>
+	<string name="ALERT_REQUEST_BRIDGE" translatable="true">Verzoek</string>
+	<string name="ALERT_SAVE_BRIDGE" translatable="true">Klaar</string>
+
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">Bookmark Website</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Add this page to bookmark manager</string>
-	<string name="ALERT_CLEAR_HISTORY" translatable="true">Clear History and Data</string>
-	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Clear Bookmark and Data</string>
-	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Clearing will remove history, cookies,  and other browsing data</string>
-	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Clearing will remove bookmarked websites.</string>
-	<string name="ALERT_DISMISS" translatable="true">Dismiss</string>
-	<string name="ALERT_CLEAR" translatable="true">Clear</string>
-	<string name="ALERT_ADD" translatable="true">Done</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">New Bookmark</string>
-	<string name="ALERT_SECURE" translatable="false">https://</string>
-	<string name="ALERT_SECURE_INFO" translatable="true">Connection is secure</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Your information(for example, password or credit card numbers) is private when it is sent to this site</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy Settings</string>
-	<string name="ALERT_REPORT" translatable="true">Report</string>
-	<string name="ALERT_REPORT_URL" translatable="true">Report Website</string>
-	<string name="ALERT_REPORT_URL_INFO" translatable="true">If you think this URL is illegal or disturbing report to us so we can take action</string>
-	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">Reported Successfully</string>
-	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL has been successfully reported. If something found, action will be taken</string>
-	<string name="ALERT_RATEUS" translatable="true">Rate US</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">Tell others what you think about this app</string>
-	<string name="ALERT_RATE" translatable="true">Rate</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">Sorry To Hear That!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">If you are having any trouble and want to contact us please email us. We will try to solve your problem as soon as possible</string>
-	<string name="ALERT_MAIL" translatable="true">Mail</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">Request New Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">You can get a bridge address through email, the web or by scanning a bridge QR code. Select \'Email\' below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start.</string>
-	<string name="ALERT_ORBOT_INIT" translatable="true">Initializing Orbot</string>
-	<string name="ALERT_ORBOT_INIT_INFO" translatable="true">Please wait! While we connect you to hidden web. This might take few minutes</string>
-	<string name="ALERT_NOT_SUPPORTED" translatable="true">Action not supported</string>
-	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">No application found to handle following command</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Voeg deze pagina toe aan uw bladwijzers</string>
+	<string name="ALERT_CLEAR_HISTORY" translatable="true">Geschiedenis en gegevens wissen</string>
+	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Bladwijzer en gegevens wissen</string>
+	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Als u gegevens wist, worden geschiedenis, cookies en andere browsegegevens verwijderd</string>
+	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Als u gegevens wist, worden websites met bladwijzers verwijderd</string>
+	<string name="ALERT_DISMISS" translatable="true">Sluiten</string>
+	<string name="ALERT_CLEAR" translatable="true">Wissen</string>
+	<string name="ALERT_ADD" translatable="true">Klaar</string>
+	<string name="ALERT_TITLE_ADD" translatable="true">Nieuwe Bladwijzer</string>
+	<string name="ALERT_SECURE" translatable="false">https: //</string>
+	<string name="ALERT_SECURE_INFO" translatable="true">Verbinding is veilig</string>
+	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Uw informatie (bijvoorbeeld wachtwoord of creditcardnummers) is privé wanneer deze naar deze site wordt verzonden</string>
+	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy-instellingen</string>
+	<string name="ALERT_REPORT" translatable="true">Rapport</string>
+	<string name="ALERT_REPORT_URL" translatable="true">Website Melden</string>
+	<string name="ALERT_REPORT_URL_INFO" translatable="true">Als u denkt dat deze URL illegaal of storend is, meld dit dan aan ons, zodat we juridische stappen kunnen ondernemen</string>
+	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">Succesvol Gerapporteerd</string>
+	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL is succesvol gerapporteerd. Als er iets wordt gevonden, wordt juridische actie ondernomen</string>
+	<string name="ALERT_RATEUS" translatable="true">Beoordeel US</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Vertel anderen wat je van deze app vindt</string>
+	<string name="ALERT_RATE" translatable="true">Tarief</string>
+	<string name="ALERT_RATEUS_FAILURE" translatable="true">Sorry Dat Te Horen!​Als U Problemen Ondervindt Bij Het Gebruik Van Deze Applicatie, Neem Dan Contact Met Ons Op Via E-mail. We Zullen Proberen Uw Probleem Zo Snel Mogelijk Op Te Lossen</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">E-mail</string>
+	<string name="ALERT_MAIL" translatable="true">Nieuwe brug aanvragen</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Selecteer E-mail Hieronder Om Een ​​bridge-adres Aan Te Vragen. \ N \ NZodra Je Een Adres Hebt, Kopieer Plak Het In Het Bovenstaande Vak En Start De Applicatie.​Taal Niet Ondersteund</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Systeemtaal wordt niet ondersteund door deze applicatie. We werken eraan om het binnenkort op te nemen</string>
+	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">Orbot initialiseren</string>
+	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">Actie niet ondersteund</string>
+	<string name="ALERT_ORBOT_INIT" translatable="true">Geen Toepassing Gevonden Om De Volgende Opdracht Te Verwerken</string>
+	<string name="ALERT_NOT_SUPPORTED" translatable="true">Welkom</string>
+	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">Verborgen webgateway</string>
 	<string name="ALERT_WELCOME_MESSAGE" translatable="true">Welcome | Hidden  Web Gateway</string>
-	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">This application provide you a platform to Search and Open Hidden Web urls.Here are few Suggestions\n</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">Deep Web Online Market</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">Leaked Documents and Books</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">Dark Web News and Articles</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">Secret Softwares and Hacking Tools</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">Don\'t Show Again</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">Finance and Money</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">Social Communities</string>
-	<string name="ALERT_ABI_ERROR" translatable="true">Invalid Setup File</string>
-	<string name="ALERT_ABI_ERROR_INFO" translatable="true">Looks like you messed up the installation. Either Install it from playstore or follow the link</string>
-	<string name="ALERT_LOCAL_UPGRADE" translatable="true">Manual</string>
+	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">Gelekte documenten en boeken</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">Dark Web Nieuws En Artikelen</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">Geheime software en hacktools</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">Niet meer laten zien</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">Financiën en geld</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">Sociale Gemeenschappen</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">Handleiding</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">Openen in nieuw tabblad</string>
+	<string name="ALERT_LOCAL_UPGRADE" translatable="true">URL-melding</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">Playstore</string>
-	<string name="ALERT_LONG_URL" translatable="true">URL Notification</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Open In New Tab</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Open In Current Tab</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copy to Clipboard</string>
-	<string name="ALERT_LONG_FILE" translatable="true">File Notification</string>
-	<string name="ALERT_DOWNLOAD" translatable="true">Download Notification</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Open url in new tab</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Open url in current tab</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copy url to clipboard</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Open image in new tab</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Open image current tab</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copy image to clipboard</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
-	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">Download Notification</string>
-	<string name="ALERT_LONG_URL_TITLE" translatable="true">URL Notification</string>
+	<string name="ALERT_LONG_URL" translatable="true">Openen In Huidig ​​tabblad</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Kopiëren Naar Klembord</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Bestandsmelding</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Melding downloaden</string>
+	<string name="ALERT_LONG_FILE" translatable="true">Open Url In Nieuw Tabblad</string>
+	<string name="ALERT_DOWNLOAD" translatable="true">Open Url In Huidig ​​tabblad</string>
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Kopieer url naar klembord</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Afbeelding openen op nieuw tabblad</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Open afbeelding huidige tabblad</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Kopieer afbeelding naar klembord</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Download afbeeldingsbestand</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Melding downloaden</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">URL-melding</string>
+	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">Geen Applicatie Gevonden Om E-mail Te Verwerken</string>
+	<string name="ALERT_LONG_URL_TITLE" translatable="true">Bestand Downloaden</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
-	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">No application found to handle email</string>
+	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">​Gegevens gewist</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">Download File | </string>
-	<string name="ALERT_DATA_CLEARED" translatable="true">Data Notification</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">Private data cleared. Now you can safely continue browsing</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">Tab Closed</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Undo</string>
+	<string name="ALERT_DATA_CLEARED" translatable="true">Data Cleared | Restart Required</string>
+	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">Ongedaan maken</string>
+	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">Beveiligingsinstellingen</string>
+	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Bridge-instellingen</string>
 
 	<!-- Bridge Settings -->
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge Settings</string>
-	<string name="BRIDGE_AUTO" translatable="true">Create Automatically</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">Automatically configure bridges settings</string>
-	<string name="BRIDGE_MANUAL" translatable="true">Provide a Bridge I know</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">address:port Single Line</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridges</string>
-	<string name="BRIDGE_DESC" translatable="true">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
-	<string name="BRIDGE_TITLE" translatable="true">Select Default Bridge</string>
-	<string name="BRIDGE_REQUEST" translatable="true">Request</string>
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Automatisch Maken</string>
+	<string name="BRIDGE_SETTING" translatable="true">Bruginstellingen Automatisch Configureren</string>
+	<string name="BRIDGE_AUTO" translatable="true">Zorg Voor Een Brug Die Ik Ken</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Plak aangepaste bridge</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Proxy-instellingen</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Brug</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">Verzoek</string>
+	<string name="BRIDGE_TITLE" translatable="true">obfs4 (aanbevolen)</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Meek-azuur (China)</string>
 	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
 	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
 
 	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">Proxy Logs</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Logs Info</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting genesis please copy the following code and find issue online or send it to us so we can examine </string>
+	<string name="ORBOT_LOG" translatable="true">Proxylogboeken</string>
+	<string name="ORBOT_LOG_HEADER" translatable="true">Logboeken Info</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
 
 	<!-- Popup Menu -->
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot logs</string>
-	<string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
-	<string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>
-	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Open Recent Tabs</string>
-	<string name="HOME_MENU_LANGUAGE" translatable="true">Language</string>
+	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot-logboeken</string>
+	<string name="HOME_MENU__NEW_TABS" translatable="true">Nieuwe tabbladen</string>
+	<string name="HOME_MENU_CLOSE_TABS" translatable="true">Tabblad Sluiten</string>
+	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Open Recente Tabbladen</string>
+	<string name="HOME_MENU_LANGUAGE" translatable="true">Taal</string>
 	<string name="HOME_MENU_DOWNLOAD" translatable="true">Downloads</string>
-	<string name="HOME_MENU_HISTORY" translatable="true">History</string>
-	<string name="HOME_MENU_SETTING" translatable="true">Settings</string>
-	<string name="HOME_MENU_DESKTOP" translatable="true">Desktop site</string>
-	<string name="HOME_MENU_BOOKMARK" translatable="true">Bookmark This Page</string>
-	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">Bookmarks</string>
-	<string name="HOME_MENU_REPORT" translatable="true">Report website</string>
-	<string name="HOME_MENU_RATE" translatable="true">Rate this app</string>
-	<string name="HOME_MENU_FIND" translatable="true">Find in page</string>
-	<string name="HOME_MENU_QUIT" translatable="true">Quit</string>
-	<string name="HOME_MENU_SHARE" translatable="true">Share</string>
-	<string name="HOME_CHARACTER_ENCODING" translatable="true">Character encoding</string>
+	<string name="HOME_MENU_HISTORY" translatable="true">Geschiedenis</string>
+	<string name="HOME_MENU_SETTING" translatable="true">Instellingen</string>
+	<string name="HOME_MENU_DESKTOP" translatable="true">Desktopsite</string>
+	<string name="HOME_MENU_BOOKMARK" translatable="true">Maak Een Bladwijzer Voor Deze Pagina</string>
+	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">Bladwijzers</string>
+	<string name="HOME_MENU_REPORT" translatable="true">Rapport website</string>
+	<string name="HOME_MENU_RATE" translatable="true">Beoordeel deze app</string>
+	<string name="HOME_MENU_FIND" translatable="true">Zoek op pagina</string>
+	<string name="HOME_MENU_QUIT" translatable="true">Afsluiten</string>
+	<string name="HOME_MENU_SHARE" translatable="true">Delen</string>
 
 	<!-- Tab View -->
-	<string name="TAB_MENU_OPEN_TAB" translatable="true">New tabs</string>
-	<string name="TAB_MENU_CLOSE_TAB" translatable="true">Close all tabs</string>
-	<string name="TAB_MENU_SETTINGS" translatable="true">Settings</string>
-	<string name="TAB_LIST_SELECT" translatable="true">Select tabs</string>
+	<string name="TAB_MENU_OPEN_TAB" translatable="true">Nieuwe tabbladen</string>
+	<string name="TAB_MENU_CLOSE_TAB" translatable="true">Sluit alle tabbladen</string>
+	<string name="TAB_MENU_SETTINGS" translatable="true">Instellingen</string>
+	<string name="TAB_LIST_SELECT" translatable="true">Selecteer tabbladen</string>
 
 	<!-- Shared Recycler View -->
-	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">Open tabs</string>
-	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">Copy</string>
-	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">Share</string>
-	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">Clear Selection</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">Open in current tab</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">Open in new tab</string>
-	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">Delete</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">Open tabbladen</string>
+	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">Kopiëren</string>
+	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">Delen</string>
+	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">Selectie Wissen</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">Openen in huidig ​​tabblad</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">Openen in nieuw tabblad</string>
+	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">Verwijderen</string>
 
 	<!-- History Popup Menu -->
-	<string name="HISTORY_TITLE" translatable="true">History</string>
-	<string name="HISTORY_CLEAR" translatable="true">Clear</string>
-	<string name="HISTORY_SEARCH_HINT" translatable="true">Search ...</string>
+	<string name="HISTORY_TITLE" translatable="true">Geschiedenis</string>
+	<string name="HISTORY_CLEAR" translatable="true">Wissen</string>
+	<string name="HISTORY_SEARCH_HINT" translatable="true">Zoeken ...</string>
 
 	<!-- BOOKMARK Popup Menu -->
-	<string name="BOOKMARK_TITLE" translatable="true">Bookmark</string>
-	<string name="BOOKMARK_CLEAR" translatable="true">Clear</string>
-	<string name="BOOKMARK_SEARCH_HINT" translatable="true">Search ...</string>
+	<string name="BOOKMARK_TITLE" translatable="true">Bladwijzer</string>
+	<string name="BOOKMARK_CLEAR" translatable="true">Wissen</string>
+	<string name="BOOKMARK_SEARCH_HINT" translatable="true">Zoeken ...</string>
 
 	<!-- Help -->
-	<string name="HELP_RETRY" translatable="true">Retry</string>
-	<string name="HELP_RETRY_INFO" translatable="true">Opps! network connection error\nGenesis not connected</string>
-	<string name="HELP_TITLE" translatable="true">Support</string>
+	<string name="HELP_RETRY" translatable="true">Opnieuw proberen</string>
+	<string name="HELP_RETRY_INFO" translatable="true">Opps! Netwerkverbindingsfout \ nGenese niet verbonden</string>
+	<string name="HELP_TITLE" translatable="true">Ondersteuning</string>
 
 	<!-- Language Manager Manager -->
-	<string name="LANGUAGE_TITLE" translatable="true">Language</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">Change Language</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">We currently support the following langugage would be adding more soon\n</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">English (United States)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">German (Germany)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">Italian (Italy)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">Portuguese (Brazil)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">Russian (Russia)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">Ukrainian (Ukraine)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">Chinese Simplified (Mainland China)</string>
+	<string name="LANGUAGE_TITLE" translatable="true">Taal</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">Taal Wijzigen</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">We ondersteunen momenteel de volgende talen. We zouden binnenkort meer toevoegen \ n</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">Engels (Verenigde Staten)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">Duits (Duitsland)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">Italiaans (Italië)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">Portugees (Brazilië)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">Russisch (Rusland)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">Oekraïens (Oekraïne)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">Vereenvoudigd Chinees (vasteland Van China)</string>
 
 	<!-- Orbot Settings -->
-	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ Warning</string>
-	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Customize Bridges</string>
-	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Enable Bridges</string>
-	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Enable VPN Serivce</string>
-	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Enable Bridge Gateway</string>
-	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Enable Gateway</string>
+	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ Waarschuwing</string>
+	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Bridges Aanpassen</string>
+	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridges Inschakelen</string>
+	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Schakel VPN-service</string>
+	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">in Bridge Gateway</string>
+	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Inschakelen Gateway Inschakelen</string>
 
 	<!-- Proxy Status -->
-	<string name="PROXY_STATUS_HEADER" translatable="true">Proxy Status</string>
-	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Current status of orbot proxy</string>
-	<string name="PROXY_SUB_HEADER1" translatable="true">Orbot Proxy Status</string>
-	<string name="PROXY_SUB_HEADER2" translatable="true">VPN &amp; Bridges Status</string>
-	<string name="PROXY_VPN_STATUS" translatable="true">VPN Connection Status</string>
-	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge connectivity status</string>
+	<string name="PROXY_STATUS_HEADER" translatable="true">Proxystatus</string>
+	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Huidige status van orbot-proxy</string>
+	<string name="PROXY_SUB_HEADER1" translatable="true">Orbot-proxystatus</string>
+	<string name="PROXY_SUB_HEADER2" translatable="true">Ui Bruggen Status</string>
+	<string name="PROXY_VPN_STATUS" translatable="true">VPN-verbindingsstatus</string>
+	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge-verbindingsstatus</string>
 	<string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
-	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">To change proxy settings please restart this application and navigate to proxy manager. It can be opened by pressing on GEAR icon at bottom</string>
+	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">Om de proxy-instellingen te wijzigen, start u deze applicatie opnieuw en navigeert u naar proxybeheer. Het kan worden geopend door op het GEAR-pictogram onderaan</string>
 
 	<!-- Orbot View -->
-	<string name="ORBOT_HEADER" translatable="true">Proxy Settings</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">We connect you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
-	<string name="ORBOT_TITLE" translatable="true">Internet is censored here (Bypass Firewall)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">Bypass Firewall</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
+	<string name="ORBOT_HEADER" translatable="true">Te Drukken Proxy-instellingen</string>
+	<string name="ORBOT_DESCRIPTION" translatable="true">We verbinden je met het Tor-netwerk dat wordt gerund door duizenden vrijwilligers over de hele wereld! Kunnen deze opties u helpen</string>
+	<string name="ORBOT_TITLE" translatable="true">Internet wordt hier gecensureerd (Bypass Firewall)</string>
+	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">Firewall Omzeilen</string>
+	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges zorgt ervoor dat internet erg traag werkt. Gebruik ze alleen als internet in uw land wordt gecensureerd of als het Tor-netwerk is geblokkeerd</string>
 
 	<!-- Notification Menu -->
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
@@ -341,36 +357,75 @@
 
 	<!-- Home View -->
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_CONNECT" translatable="true">Connect</string>
+	<string name="HOME_CONNECT" translatable="false">Verbinden</string>
+	<string name="HOME_COPYRIGHT" translatable="false">Copyright © by Genesis Technologies | Built 1.0.2.2</string>
 	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
-	<string name="HOME_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
-	<string name="HOME_TAB_EMPTY" translatable="true">Open tabs will show here</string>
+	<string name="HOME_LOADING_STATIC" translatable="true">Genesis op standby op dit moment</string>
+	<string name="HOME_TAB_EMPTY" translatable="true">Open tabbladen worden hier weergegeven</string>
 
 	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a bridge to get to Tor."</string>
-	<string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"You can enable any app to go through Tor using our built-in VPN."</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"This won\'t make you anonymous, but it will help get through firewalls."</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"CHOOSE APPS"</string>
-	<string name="LANDING_HELLO" translatable="true">"Hello"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Welcome to Tor on mobile."</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"Soms heb je een brug nodig om bij Tor te komen"</string>
+	<string name="LANDING_MORE" translatable="true">"VERTEL ME MEER"</string>
+	<string name="LANDING_VPN_SETUP" translatable="true">"Je kunt elke app inschakelen om door Tor te gaan met onze ingebouwde Onion"</string>
+	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"Dit maakt je niet anoniem, maar het helpt wel om door firewalls heen te komen"</string>
+	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"Kies Apps"</string>
+	<string name="LANDING_HELLO" translatable="true">"Hallo"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Welkom bij Tor op mobiel."​"Surf op internet zoals u verwacht dat u zou moeten."​\'Geen tracking. Geen censuur.\'​Deze site is niet bereikbaar</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">Er is een fout opgetreden tijdens een verbinding</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">De pagina die u probeert te bekijken, kan niet worden weergegeven omdat de authenticiteit van de ontvangen gegevens niet kon worden geverifieerd</string>
 
 	<!-- Error Page -->
-	<string name="ERROR_M1" translatable="true">This site can\'t be reached</string>
-	<string name="ERROR_M2" translatable="true">An error occurred during a connection</string>
-	<string name="ERROR_M3" translatable="true">The page you are trying to view cannot be shown because the authenticity of the received data could not be verified</string>
-	<string name="ERROR_M4" translatable="true">The page is currently not live or down due to some reason</string>
-	<string name="ERROR_M5" translatable="true">Please contact the website owners to inform them of this problem.</string>
-	<string name="ERROR_M6" translatable="true">Reload</string>
+	<string name="ERROR_M1" translatable="true">De pagina is momenteel niet live of offline vanwege de een of andere reden</string>
+	<string name="ERROR_M2" translatable="true">Neem contact op met de website-eigenaren om hen over dit probleem te informeren.​Opnieuw laden</string>
+	<string name="ERROR_M3" translatable="true">pref_language</string>
+	<string name="ERROR_M4" translatable="true">Ongeldige pakkethandtekening</string>
+	<string name="ERROR_M5" translatable="true">Tik om in te loggen.</string>
+	<string name="ERROR_M6" translatable="true">Tik om handmatig gegevens te selecteren.​Uitzondering beveiliging webdomein.​DAL-verificatiefout.</string>
 
 	<!-- Others -->
 	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
-	<string name="invalid_package_signature" translatable="true">Invalid package signature</string>
-	<string name="autofill_sign_in_prompt" translatable="true">Tap to sign in.</string>
-	<string name="autofill_manual_prompt" translatable="true">Tap to manually select data.</string>
+	<string name="invalid_package_signature" translatable="true">Ongeldige pakkethandtekening</string>
+	<string name="autofill_sign_in_prompt" translatable="true">Tik om in te loggen.</string>
+	<string name="autofill_manual_prompt" translatable="true">Tik om handmatig gegevens te selecteren. ​ Uitzondering beveiliging webdomein. ​ DAL-verificatiefout.</string>
 	<string name="security_exception" translatable="true">Web domain security exception.</string>
 	<string name="dal_exception" translatable="true">DAL verification failure.</string>
+
+	<item type="id" name="LaguageID"/>
+	<item type="id" name="LaguageRegion"/>
+
+	<string-array name="ARRAY_FONTS" translatable="true">
+		<item>55 Percent</item>
+		<item>70 Percent</item>
+		<item>85 Percent</item>
+		<item>100 Percent</item>
+		<item>115 Percent</item>
+		<item>130 Percent</item>
+		<item>145 Percent</item>
+	</string-array>
+
+	<string-array name="search_engines" translatable="true">
+		<item>Hidden Web</item>
+		<item>Google</item>
+		<item>Duck Duck Go</item>
+	</string-array>
+
+	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+		<item>Enabled</item>
+		<item>Disabled</item>
+	</string-array>
+
+	<string-array name="ARRAY_NOTIFICATION" translatable="true">
+		<item>Enable All</item>
+		<item>Disable All</item>
+		<item>No Bandwidth</item>
+	</string-array>
+
+	<string-array name="ARRAY_COOKIES" translatable="true">
+		<item>Allow All</item>
+		<item>Allow Trusted</item>
+		<item>Allow None</item>
+		<item>Allow Visited</item>
+		<item>Allow Non Tracker</item>
+	</string-array>
 
 </resources>
