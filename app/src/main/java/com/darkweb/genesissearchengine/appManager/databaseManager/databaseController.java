@@ -80,7 +80,7 @@ public class databaseController
     public ArrayList<historyRowModel> selectHistory(int startIndex,int endIndex){
         ArrayList<historyRowModel> tempmodel = new ArrayList<>();
 
-        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM history ORDER BY date ASC LIMIT "+endIndex+" OFFSET "+startIndex, null);
+        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM history ORDER BY date DESC LIMIT " + endIndex + " OFFSET "+startIndex, null);
         if (c.moveToFirst()){
             do {
                 historyRowModel model = new historyRowModel(c.getString(3), c.getString(2),Integer.parseInt(c.getString(0)));
@@ -93,7 +93,7 @@ public class databaseController
                 if(Calendar.getInstance().getTime().getTime() < model.getDate().getTime()){
                     tempmodel.add(model);
                 }else {
-                    tempmodel.add(0, model);
+                    tempmodel.add(model);
                 }
             } while(c.moveToNext());
         }

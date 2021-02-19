@@ -19,6 +19,7 @@ public class constants
     public static final String CONST_GENESIS_URL_CACHED = "resource://android/assets/homepage/homepage.html";
     public static final String CONST_GENESIS_ERROR_CACHED = "resource://android/assets/error/error.html";
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://boogle.store/";
+    public static final String CONST_GENESIS_REFERENCE_WEBSITES = "https://drive.google.com/uc?export=download&id=1lOmukKOPYHApBFyTDkaRPoAwm59E_YEE";
     public static final String CONST_GENESIS_DOMAIN_URL = "https://boogle.store";
     public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pGlobalTimeVerificationToken";

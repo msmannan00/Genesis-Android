@@ -64,10 +64,6 @@ class adManager
                 @Override
                 public void onAdLoaded() {
                     bannerAdsLoaded = true;
-                    mBannerAds.animate().cancel();
-                    mBannerAds.animate().alpha(0);
-                    mBannerAds.setVisibility(View.VISIBLE);
-                    mBannerAds.animate().setStartDelay(100).setDuration(500).alpha(1).withEndAction(() -> mEvent.invokeObserver(null,M_SHOW_LOADED_ADS));
                 }
 
                 @Override

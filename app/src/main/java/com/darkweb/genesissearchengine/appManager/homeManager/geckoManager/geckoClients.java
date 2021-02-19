@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.darkweb.genesissearchengine.constants.*;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
@@ -185,7 +187,8 @@ public class geckoClients
             if(url.startsWith("https://boogle.store?pG") || url.endsWith("boogle.store") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED)){
                 try{
                     mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
-                    mSession.loadUri(constants.CONST_GENESIS_URL_CACHED);
+                    String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
+                    mSession.loadUri(mURL);
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }

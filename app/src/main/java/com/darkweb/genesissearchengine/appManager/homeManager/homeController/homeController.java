@@ -438,6 +438,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
     public void onGetFavIcon(ImageView pImageView, String pURL){
+        mGeckoClient.onGetFavIcon(pImageView, pURL);
     }
 
     public void onGetThumbnail(ImageView pImageView){
@@ -1422,8 +1423,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
+
             if(e_type.equals(enums.etype.ON_EXPAND_TOP_BAR)){
                 mAppBar.setExpanded(true,true);
+            }
+            else if(e_type.equals(enums.etype.M_ON_BANNER_UPDATE)){
+                mHomeViewController.updateBannerAdvertStatus((boolean)data.get(3));
             }
             else if(e_type.equals(enums.etype.progress_update)){
                 mHomeViewController.onProgressBarUpdate((int)data.get(0));

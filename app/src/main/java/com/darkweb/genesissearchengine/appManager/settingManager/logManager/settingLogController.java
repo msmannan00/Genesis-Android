@@ -37,6 +37,7 @@ public class settingLogController extends AppCompatActivity {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_log_view);
+        activityContextManager.getInstance().onStack(this);
 
         viewsInitializations();
     }

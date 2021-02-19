@@ -3,6 +3,7 @@ package com.darkweb.genesissearchengine.appManager.historyManager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,7 +29,6 @@ import java.util.List;
 import systems.intelligo.slight.ImageLoader;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_HISTORY_LOAD_MORE;
 
 public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listViewHolder>
 {
@@ -68,25 +68,9 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         initializeModelWithDate(false);
     }
 
-
-    private void onLoading(){
-        mContext.runOnUiThread(() -> {
-            mCurrentList.add(new historyRowModel(CONST_HISTORY_LOAD_MORE,null,-2));
-            notifyItemInserted(mCurrentList.size());
-        });
-    }
-
-    private void onLoadingClear(){
-        for(int mCounter = 0; mCounter< mCurrentList.size(); mCounter++){
-            if(mCurrentList.get(mCounter).getHeader().equals(CONST_HISTORY_LOAD_MORE)){
-                int finalM_counter = mCounter;
-                mContext.runOnUiThread(() -> {
-                    mCurrentList.remove(finalM_counter);
-                    notifyItemRemoved(finalM_counter);
-                });
-                break;
-            }
-        }
+    public void onLoadMore(ArrayList<historyRowModel> pModelList){
+        notifyDataSetChanged();
+        initializeModelWithDate(false);
     }
 
 
@@ -120,7 +104,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             float diff = m_date_2-m_date_1;
 
             if(diff==0){
-                if(m_date_state!=1){
+                if(m_date_state!=1 && p_model_list.get(counter).getID()!=-2){
                     this.mModelList.add(new historyRowModel("Today ",null,-1));
                     mRealID.add(m_real_counter);
                     mRealIndex.add(m_real_counter);
@@ -179,8 +163,8 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                         if(mDateVerify){
                             notifyItemRemoved(m_counter_inner-1);
                             mCurrentList.remove(m_counter_inner-1);
-                            notifyItemRemoved(m_counter_inner-1);
-                            mCurrentList.remove(m_counter_inner-1);
+                            //notifyItemRemoved(m_counter_inner-1);
+                            //mCurrentList.remove(m_counter_inner-1);
                             notifyItemRangeChanged(m_counter_inner-1, mCurrentList.size());
                         }else {
                             notifyItemRemoved(m_counter_inner);
@@ -412,24 +396,11 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mCurrentList.remove(pIndex-1);
                 notifyItemRangeChanged(pIndex-1, mCurrentList.size());
             }else {
-                notifyItemRemoved(pIndex);
                 mCurrentList.remove(pIndex);
-                notifyItemRangeChanged(pIndex, mCurrentList.size());
-            }
 
-            if(size>1){
-                new Thread(){
-                    public void run(){
-                        try
-                        {
-                            sleep(500);
-                        }
-                        catch (InterruptedException e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
+                notifyItemRemoved(pIndex);
+                notifyItemRangeChanged(pIndex, mCurrentList.size());
+                notifyItemChanged(mCurrentList.size()-1);
             }
     }
 
@@ -446,6 +417,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         LinearLayout mRowContainer;
         LinearLayout mDateContainer;
         LinearLayout mLoadingContainer;
+        ImageView mHindTypeIconTemp;
 
         listViewHolder(View itemView) {
             super(itemView);
@@ -462,6 +434,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             mWebLogo = itemView.findViewById(R.id.pWebLogo);
             mLoadingContainer = itemView.findViewById(R.id.pLoadingContainer);
             mFaviconLogo = itemView.findViewById(R.id.pFaviconLogo);
+            mHindTypeIconTemp = new ImageView(mContext);
 
             if(model.getID() == -1){
                 mDate.setText(model.getHeader());
@@ -480,6 +453,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mRowMenu.setClickable(false);
                 mWebLogo.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.VISIBLE);
+                return;
             }
             else {
                 mDateContainer.setVisibility(View.GONE);
@@ -488,12 +462,34 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mRowMenu.setVisibility(View.VISIBLE);
                 mRowMenu.setClickable(true);
                 mWebLogo.setVisibility(View.VISIBLE);
-
+                mHeader.setText(model.getHeader());
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
                 String header = model.getHeader();
                 mDescription.setText(("https://"+model.getDescription()));
-                mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + model.getDescription()),enums.etype.fetch_favicon);
-                mHeader.setText(model.getHeader());
+
+                new Thread(){
+                    public void run(){
+                        try {
+                            mHindTypeIconTemp.setImageDrawable(null);
+                            mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                            while (true){
+                                int mCounter=0;
+                                if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
+                                    sleep(50);
+                                    mCounter+=1;
+                                }else {
+                                    break;
+                                }
+                                if(mCounter>6){
+                                    break;
+                                }
+                            }
+                            mContext.runOnUiThread(() -> mFaviconLogo.setImageDrawable(mHindTypeIconTemp.getDrawable()));
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
 
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
             }
@@ -536,12 +532,6 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     public Object onTrigger(historyEnums.eHistoryAdapterCommands pCommands, List<Object> pData){
         if(pCommands == historyEnums.eHistoryAdapterCommands.GET_SELECTED_URL){
             return getSelectedURL();
-        }
-        else if(pCommands == historyEnums.eHistoryAdapterCommands.M_ON_LOADING){
-            onLoading();
-        }
-        else if(pCommands == historyEnums.eHistoryAdapterCommands.M_LOADING_CLEAR){
-            onLoadingClear();
         }
         else if(pCommands == historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL){
             clearLongSelectedURL();

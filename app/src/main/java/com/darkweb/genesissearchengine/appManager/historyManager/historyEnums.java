@@ -8,7 +8,7 @@ public class historyEnums
     }
 
     public enum eHistoryAdapterCommands {
-        M_ON_LOADING, M_LOADING_CLEAR, M_CLEAR_LONG_SELECTED_URL, GET_SELECTED_URL, GET_LONG_SELECTED_URL, GET_LONG_SELECTED_STATUS, ON_CLOSE
+        M_CLEAR_LONG_SELECTED_URL, GET_SELECTED_URL, GET_LONG_SELECTED_URL, GET_LONG_SELECTED_STATUS, ON_CLOSE
     }
 
     public enum eHistoryViewAdapterCommands {

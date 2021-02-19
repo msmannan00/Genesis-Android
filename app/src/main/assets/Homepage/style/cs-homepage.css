@@ -75,6 +75,31 @@
 	transition: .0s;
 }
 
+.hi_reference{
+	align-self: center;
+	height:auto;
+	padding: 10px;
+	padding-bottom: 0px;
+	border-radius: 6px;
+	outline: none;
+
+    border: 1px solid #f0f0f0;
+	box-shadow: 0 3px 3px 0 #cccccc;
+	width:91% !important;
+    max-width: 575px;
+	display:block;
+	font:16px arial,sans-serif;
+	color: black;
+	margin: 0 auto 0px;
+	margin-top: -15px;
+	margin-bottom: 35px;
+
+	-webkit-transition: .0s;
+	-moz-transition: .0s;
+	-o-transition: .0s;
+	transition: .0s;
+}
+
 @media only screen and (max-width: 943px) {
     .hi_search__search-box {
 		margin-top: 30px;
@@ -192,3 +217,35 @@
     }
 }
 
+
+.hi_loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 30px;
+  float: left;
+  height: 30px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+line-style
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.hide {
+  opacity: 0;
+  transition: opacity 350ms;
+}

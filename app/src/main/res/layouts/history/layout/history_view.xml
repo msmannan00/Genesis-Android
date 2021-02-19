@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/c_background"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -143,8 +143,9 @@
 
                 <Button
                     android:id="@+id/pClearButton"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:elevation="1dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
@@ -166,6 +167,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="RtlSymmetry" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/c_ripple_v2"
+                    android:layout_height="1dp"/>
+
             </LinearLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -173,8 +179,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pRecycleView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="60dp"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

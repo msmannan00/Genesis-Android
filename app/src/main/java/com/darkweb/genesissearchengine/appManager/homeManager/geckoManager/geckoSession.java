@@ -60,6 +60,7 @@ import java.util.Objects;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
@@ -82,6 +83,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private AppCompatActivity mContext;
     private geckoDownloadManager mDownloadManager;
     private String mTheme = null;
+    private boolean mPreviousErrorPage = false;
 
     /*Temp Variables*/
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
@@ -304,7 +306,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         if(!mCurrentTitle.equals("loading")){
             m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
         }
-        if(newUrl.equals(constants.CONST_GENESIS_URL_CACHED)){
+        if(newUrl.startsWith(CONST_GENESIS_URL_CACHED)){
             mCurrentURL = constants.CONST_GENESIS_DOMAIN_URL;
         }
         else if(newUrl.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
@@ -330,8 +332,8 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     }
 
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
-
-        if(!var1.uri.equals(constants.CONST_GENESIS_URL_CACHED) && var1.uri.startsWith("https://boogle.store") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
+        mPreviousErrorPage = false;
+        if(!var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && var1.uri.startsWith("https://boogle.store") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
             String mVerificationURL = setGenesisVerificationToken(var1.uri);
             initURL(mVerificationURL);
             loadUri(mVerificationURL);
@@ -348,6 +350,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }
         else if(var1.uri.equals("about:blank") && mIsLoaded){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }
         else if(var1.target==2){
@@ -356,7 +359,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }
         else if(!var1.uri.equals("about:blank")){
             mCurrentURL = var1.uri;
-            if(mCurrentURL.equals(constants.CONST_GENESIS_URL_CACHED)){
+            if(mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED)){
                 mCurrentURL = constants.CONST_GENESIS_DOMAIN_URL;
             }else if(mCurrentURL.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
                 mCurrentURL = constants.CONST_GENESIS_HELP_URL;
@@ -366,6 +369,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID), enums.etype.search_update);
             checkApplicationRate();
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
+
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }else {
             return GeckoResult.fromValue(AllowOrDeny.DENY);
@@ -388,6 +392,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
         errorHandler handler = new errorHandler();
         mProgress = 0;
+        mPreviousErrorPage = true;
         event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
         return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext,var2));
@@ -408,6 +413,13 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     @UiThread
     public void onFirstContentfulPaint(@NonNull GeckoSession var1) {
         isFirstPaintExecuted = true;
+
+        if(mPreviousErrorPage || mCurrentURL.contains("boogle.store") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED)){
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
+        }else {
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, true), enums.etype.M_ON_BANNER_UPDATE);
+        }
+
         if(!mCurrentURL.equals("about:blank")){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id,mTheme), enums.etype.ON_FIRST_PAINT);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id,mTheme), enums.etype.ON_LOAD_REQUEST);

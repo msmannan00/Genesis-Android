@@ -340,14 +340,18 @@ public class historyController extends AppCompatActivity
             isUpdatingRecyclerView = true;
             new Thread(){
                 public void run(){
-                    if(pLoadingEnabled){
-                        mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_ON_LOADING, null);
-                    }
+                    int mPrevSize = mHistoryModel.getList().size();
                     dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_LOAD_MORE_HISTORY ,null);
+                    ArrayList<historyRowModel> model = (ArrayList<historyRowModel>) dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_GET_HISTORY ,null);
+                    mHistoryModel.setList(model);
+                    activityContextManager.getInstance().getHistoryController().runOnUiThread(() -> {
+                        if(mPrevSize<mHistoryModel.getList().size()){
+                            mHistoryAdapter.onLoadMore(mHistoryModel.getList());
+                            //mHistoryAdapter.notifyItemRangeInserted(mPrevSize, mHistoryModel.getList().size()-1);
+                        }
+                    });
                     try {
                         sleep(500);
-                        activityContextManager.getInstance().getHistoryController().runOnUiThread(() -> mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_LOADING_CLEAR, null));
-                        sleep(1000);
                         isUpdatingRecyclerView = false;
                     } catch (InterruptedException e) {
                         e.printStackTrace();

@@ -54,6 +54,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 
 class homeViewController
@@ -145,6 +146,8 @@ class homeViewController
         {
             mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
         }, 1500);
+
+        updateBannerAdvertStatus(false);
     }
 
     public void initTopBarPadding(){
@@ -557,6 +560,20 @@ class homeViewController
             }else{
                 mBannerAds.setVisibility(View.GONE);
             }
+        }
+    }
+
+    void updateBannerAdvertStatus(boolean status){
+        if(status){
+            mBannerAds.animate().cancel();
+            mBannerAds.setAlpha(0);
+            mBannerAds.animate().alpha(1);
+            mBannerAds.setVisibility(View.VISIBLE);
+            onSetBannerAdMargin(true,true);
+        }else{
+            mBannerAds.animate().cancel();
+            mBannerAds.animate().alpha(0).withEndAction(() -> mBannerAds.setVisibility(View.GONE));
+            onSetBannerAdMargin(false,true);
         }
     }
 

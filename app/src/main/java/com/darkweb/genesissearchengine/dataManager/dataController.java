@@ -24,6 +24,7 @@ public class dataController
     private bookmarkDataModel mBookmarkDataModel;
     private suggestionDataModel mSuggestionDataModel;
     private helpDataModel mHelpDataModel;
+    private referenceWebsiteDataModel mReferenceWebsiteDataModel;
 
     /*Private Declarations*/
 
@@ -43,8 +44,10 @@ public class dataController
         mBookmarkDataModel = new bookmarkDataModel();
         mSuggestionDataModel = new suggestionDataModel(pAppContext);
         mHelpDataModel = new helpDataModel();
+        mReferenceWebsiteDataModel = new referenceWebsiteDataModel();
     }
     public void initializeListData(){
+        mReferenceWebsiteDataModel.onTrigger(dataEnums.eReferenceWebsiteCommands.M_LOAD,Collections.singletonList(activityContextManager.getInstance().getHomeController()));
         mBookmarkDataModel.initializebookmark(databaseController.getInstance().selectBookmark());
         if(!status.sClearOnExit)
         {
@@ -69,7 +72,7 @@ public class dataController
         }
 
         if(pCommands.equals(dataEnums.eHistoryCommands.M_LOAD_MORE_HISTORY)){
-            int m_history_size = (int) mHistoryModel.onTrigger(dataEnums.eHistoryCommands.M_HISTORY_SIZE,null);
+            int m_history_size = (int) mHistoryModel.onTrigger(dataEnums.eHistoryCommands.M_HISTORY_SIZE,null) - 1;
             return mHistoryModel.onTrigger(pCommands, Collections.singletonList(databaseController.getInstance().selectHistory(m_history_size+1,constants.CONST_FETCHABLE_LIST_SIZE)));
         }else {
             return mHistoryModel.onTrigger(pCommands, pData);
@@ -78,6 +81,10 @@ public class dataController
 
     public Object invokeSuggestions(dataEnums.eSuggestionCommands pCommands, List<Object> pData){
         return mSuggestionDataModel.onTrigger(pCommands, Arrays.asList(pData.get(0), mHistoryModel.onTrigger(dataEnums.eHistoryCommands.M_GET_HISTORY, null), mBookmarkDataModel.onTrigger(dataEnums.eBookmarkCommands.M_GET_BOOKMARK, null)));
+    }
+
+    public Object invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands pCommands, List<Object> pData){
+        return mReferenceWebsiteDataModel.onTrigger(pCommands, null);
     }
 
     /*Recieving Preferences*/

@@ -31,7 +31,6 @@
                 android:textStyle="bold"
                 android:textSize="17sp"
                 android:text="A"
-                android:translationZ="3dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:background="@xml/hx_circle_favicon"
@@ -39,20 +38,21 @@
                 tools:ignore="RtlCompat" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
                 android:padding="20dp"
-                android:layout_marginStart="-47dp"
-                android:layout_marginTop="9dp"
+                android:translationZ="1dp"
+                android:layout_marginStart="-48dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 android:gravity="center_vertical"
                 app:cardCornerRadius="40dp">
 
                 <ImageView
                     android:id="@+id/pFaviconLogo"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:background="@xml/hx_circle_favicon"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:background="@color/button_gray"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:textAlignment="center"
                     android:textColor="@color/white"
@@ -62,11 +62,11 @@
             </androidx.cardview.widget.CardView>
             <ImageView
                 android:id="@+id/pLogoImage"
-                android:layout_width="43dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="-47.5dp"
+                android:layout_width="45dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="-49dp"
                 android:layout_marginEnd="4.5dp"
-                android:layout_height="43dp"
+                android:layout_height="45dp"
                 android:visibility="gone"
                 android:alpha="0"
                 android:translationZ="3dp"

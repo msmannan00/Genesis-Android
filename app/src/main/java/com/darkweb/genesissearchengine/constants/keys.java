@@ -5,6 +5,7 @@ public class keys
     /*Home page*/
 
     public static String HOME_LOW_MEMORY = "LOW_MEMORY";
+    public static final String HOME_REFERENCE_WEBSITES = "HOME_REFERENCE_WEBSITES";
 
     /*Proxy Manager*/
 

@@ -150,7 +150,7 @@ class tabViewController
         mRemoveSelection.setVisibility(View.GONE);
         mClearSelection.setVisibility(View.GONE);
         mMenuButton.setVisibility(View.VISIBLE);
-        mTabs.animate().setStartDelay(350).setDuration(200).alpha(1);
+        mTabs.animate().setStartDelay(0).setDuration(250).alpha(1);
     }
 
     private void onShowUndoDialog(int pTabCount) {

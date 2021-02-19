@@ -46,6 +46,7 @@ public class strings
     /*Home Manager*/
 
     public static final String HOME_BLANK_PAGE = "about:blank";
+    public static final String HOME_REFERENCE_WEBSITES_DEFAULT = "";
 
     /*Message Manager*/
 
