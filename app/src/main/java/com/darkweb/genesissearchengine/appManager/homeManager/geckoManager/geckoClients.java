@@ -240,8 +240,8 @@ public class geckoClients
         }
     }
 
-    public boolean canGoBack(){
-        return mSession.canGoBack();
+    public boolean canGoForward(){
+        return mSession.canGoForward();
     }
 
     public boolean isLoading(){

@@ -1,10 +1,9 @@
-
 package org.torproject.android.service.util;
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.OrbotConstants;
 
 import java.util.Locale;
 
@@ -16,9 +15,12 @@ public class Prefs {
     private final static String PREF_ENABLE_LOGGING = "pref_enable_logging";
     private final static String PREF_EXPANDED_NOTIFICATIONS = "pref_expanded_notifications";
     private final static String PREF_PERSIST_NOTIFICATIONS = "pref_persistent_notifications";
+    private final static String PREF_START_ON_BOOT = "pref_start_boot";
     private final static String PREF_ALLOW_BACKGROUND_STARTS = "pref_allow_background_starts";
     private final static String PREF_OPEN_PROXY_ON_ALL_INTERFACES = "pref_open_proxy_on_all_interfaces";
     private final static String PREF_USE_VPN = "pref_vpn";
+    private final static String PREF_EXIT_NODES = "pref_exit_nodes";
+    private final static String PREF_BE_A_SNOWFLAKE = "pref_be_a_snowflake";
 
     private static SharedPreferences prefs;
 
@@ -27,44 +29,45 @@ public class Prefs {
             prefs = getSharedPrefs(context);
     }
 
-    private static void validatePrefs(){
-        if(prefs==null){
-            prefs = getSharedPrefs(orbotLocalConstants.mHomeContext.get());
-        }
-    }
-
     private static void putBoolean(String key, boolean value) {
-        validatePrefs();
         prefs.edit().putBoolean(key, value).apply();
     }
 
     private static void putString(String key, String value) {
-        validatePrefs();
         prefs.edit().putString(key, value).apply();
     }
 
     public static boolean bridgesEnabled() {
-        validatePrefs();
+        //if phone is in Farsi, enable bridges by default
         boolean bridgesEnabledDefault = Locale.getDefault().getLanguage().equals("fa");
         return prefs.getBoolean(PREF_BRIDGES_ENABLED, bridgesEnabledDefault);
     }
 
     public static void putBridgesEnabled(boolean value) {
-        validatePrefs();
         putBoolean(PREF_BRIDGES_ENABLED, value);
     }
 
     public static String getBridgesList() {
-        validatePrefs();
         String defaultBridgeType = "obfs4";
         if (Locale.getDefault().getLanguage().equals("fa"))
             defaultBridgeType = "meek"; //if Farsi, use meek as the default bridge type
-        return orbotLocalConstants.mBridges;
+        return prefs.getString(PREF_BRIDGES_LIST, defaultBridgeType);
+    }
+
+    public static void setBridgesList(String value) {
+        putString(PREF_BRIDGES_LIST, value);
     }
 
     public static String getDefaultLocale() {
-        validatePrefs();
         return prefs.getString(PREF_DEFAULT_LOCALE, Locale.getDefault().getLanguage());
+    }
+
+    public static boolean beSnowflakeProxy () {
+        return prefs.getBoolean(PREF_BE_A_SNOWFLAKE,false);
+    }
+
+    public static void setBeSnowflakeProxy (boolean beSnowflakeProxy) {
+        putBoolean(PREF_BE_A_SNOWFLAKE,beSnowflakeProxy);
     }
 
     public static void setDefaultLocale(String value) {
@@ -72,43 +75,50 @@ public class Prefs {
     }
 
     public static boolean expandedNotifications() {
-        validatePrefs();
         return prefs.getBoolean(PREF_EXPANDED_NOTIFICATIONS, true);
     }
 
     public static boolean useDebugLogging() {
-        //prefs = null;
-        //validatePrefs();
-        return false;
+        return prefs.getBoolean(PREF_ENABLE_LOGGING, false);
     }
 
     public static boolean persistNotifications() {
-        validatePrefs();
         return prefs.getBoolean(PREF_PERSIST_NOTIFICATIONS, true);
     }
 
     public static boolean allowBackgroundStarts() {
-        validatePrefs();
         return prefs.getBoolean(PREF_ALLOW_BACKGROUND_STARTS, true);
     }
 
     public static boolean openProxyOnAllInterfaces() {
-        validatePrefs();
         return prefs.getBoolean(PREF_OPEN_PROXY_ON_ALL_INTERFACES, false);
     }
 
     public static boolean useVpn() {
-        validatePrefs();
         return prefs.getBoolean(PREF_USE_VPN, false);
     }
 
     public static void putUseVpn(boolean value) {
-        validatePrefs();
         putBoolean(PREF_USE_VPN, value);
     }
 
+    public static boolean startOnBoot() {
+        return prefs.getBoolean(PREF_START_ON_BOOT, true);
+    }
 
-    public static SharedPreferences getSharedPrefs (Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context);
+    public static void putStartOnBoot(boolean value) {
+        putBoolean(PREF_START_ON_BOOT, value);
+    }
+
+    public static String getExitNodes() {
+        return prefs.getString(PREF_EXIT_NODES, "");
+    }
+
+    public static void setExitNodes(String exits) {
+        putString(PREF_EXIT_NODES, exits);
+    }
+
+    public static SharedPreferences getSharedPrefs(Context context) {
+        return context.getSharedPreferences(OrbotConstants.PREF_TOR_SHARED_PREFS, Context.MODE_MULTI_PROCESS);
     }
 }

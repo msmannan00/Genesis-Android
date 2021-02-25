@@ -5,8 +5,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+
+import java.util.Arrays;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_REFERENCE_WEBSITES;
 
@@ -25,10 +28,19 @@ public class referenceWebsiteDataModel {
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, CONST_GENESIS_REFERENCE_WEBSITES,
                     response -> {
-                        mReferenceWebsiteData = response;
-                        mLoading = false;
+                        if(response.length()>10){
+                            mReferenceWebsiteData = response;
+                            status.mReferenceWebsites = response;
+                            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.HOME_REFERENCE_WEBSITES,status.mReferenceWebsites));
+                            mLoading = false;
+                        }else {
+                            mReferenceWebsiteData = status.mReferenceWebsites;
+                        }
                     },
-                    error -> {});
+                    error -> {
+                        mReferenceWebsiteData = status.mReferenceWebsites;
+                        mLoading = false;
+                    });
 
             RequestQueue requestQueue = Volley.newRequestQueue(pContext);
             requestQueue.add(stringRequest);

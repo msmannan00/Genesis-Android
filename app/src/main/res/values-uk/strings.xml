@@ -1,22 +1,17 @@
 <resources>
 
 	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Вікіпедія</string>
 	<string name="GENERAL_SEARCH_HINT" translatable="true">щось шукати або ввести веб-посилання</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">знайти на сторінці</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">пошукова система</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">Опс! щось пішло не так</string>
 	<string name="GENERAL_TODO" translatable="true">todo</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">1111 пошукова система</string>
 	<string name="GENERAL_LOADING" translatable="true">цифрова свобода</string>
 	<string name="GENERAL_RELOAD" translatable="true">перезавантажити</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Ви стикаєтесь із однією з наведених нижче проблем. веб-сторінка або веб-сайт можуть не працювати. з’єднання з Інтернетом може бути поганим. можливо, ви використовуєте проксі. веб-сайт може бути заблокований брандмауером</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">ВВС, Ізраїль знову страйкує Ru</string>
 
 	<!-- Settings -->
-	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">Налаштування системи</string>
 	<string name="SETTING_BASIC_SETTING" translatable="true">Зробити 1111 браузером за замовчуванням</string>
 	<string name="SETTING_DEFAULT_BROWSER" translatable="true">Налаштування системи</string>
 	<string name="SETTING_HEADER" translatable="true">Пошукова система</string>
@@ -47,12 +42,6 @@
 	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">змінити спосіб відображення веб-пошуків</string>
 	<string name="SETTING_SEARCH_HEADER_2" translatable="true">За замовчуванням</string>
 	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">1111</string>
-	<string name="SETTING_SEARCH_DEFAULT" translatable="false">Бінг</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">1111</string>
-	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
-	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
-	<string name="SETTING_SEARCH_AMAZON" translatable="false">показати переглянуті веб-посилання</string>
-	<string name="SETTING_SEARCH_BING" translatable="false">показати пропозиції під час пошуку</string>
 	<string name="SETTING_SEARCH_HISTORY" translatable="true">пропозиції з переглянутих веб-посилань з’являються, коли ви вводите в рядок пошуку</string>
 	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">сфокусовані пропозиції з’являються, коли ви вводите в рядок пошуку</string>
 	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">доступність</string>
@@ -192,7 +181,6 @@
 	<string name="ALERT_CLEAR" translatable="true">Очистити</string>
 	<string name="ALERT_ADD" translatable="true">Готово</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">Нова закладка</string>
-	<string name="ALERT_SECURE" translatable="false">https: //</string>
 	<string name="ALERT_SECURE_INFO" translatable="true">З\'єднання безпечне</string>
 	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Ваша інформація (наприклад, пароль або номери кредитних карток) є приватною, коли вона надсилається на цей сайт</string>
 	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Налаштування конфіденційності</string>
@@ -254,7 +242,6 @@
 	<string name="BRIDGE_AUTO" translatable="true">Створювати автоматично</string>
 	<string name="BRIDGE_AUTO_INFO" translatable="true">Автоматично налаштовувати параметри мосту</string>
 	<string name="BRIDGE_MANUAL" translatable="true">Надайте міст, який я знаю</string>
-	<string name="BRIDGE_PORT_HINT" translatable="false">Вставити спеціальний міст</string>
 	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
 	<string name="BRIDGE_DESC" translatable="true">Мости - це недоступні реле Tor, які ускладнюють блокування з\'єднань у мережу Tor. Через те, як деякі країни намагаються заблокувати Tor, деякі мости працюють в деяких країнах, але не в інших</string>
 	<string name="BRIDGE_TITLE" translatable="true">Виберіть Типовий міст</string>
@@ -358,8 +345,6 @@
 
 	<!-- Home View -->
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_CONNECT" translatable="false">Підключити</string>
-	<string name="HOME_COPYRIGHT" translatable="false">Copyright © by Genesis Technologies | Built 1.0.2.2</string>
 	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="true">Буття в режимі очікування на даний момент</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">Тут відкриються відкриті вкладки</string>

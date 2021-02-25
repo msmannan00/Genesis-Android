@@ -1,6 +1,15 @@
 /*Search*/
+.clear_selection{
+	moz-user-select: none; 
+	-webkit-user-select: none; 
+	-ms-user-select:none; 
+	user-select:none;
+	-o-user-select:none;
+}
+
 #hi_search_container {
     margin-top:15vh;
+    margin-bottom: -25px;
 }
 
 @media only screen and (max-width: 943px) {
@@ -207,6 +216,10 @@
     }
 }
 
+.hi_reference_website{
+	cursor: pointer;
+}
+
 .hi_container_size
 {
     min-height: 100% !important;
@@ -228,6 +241,54 @@
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
+
+.hi_loader_item{
+	height:10px;
+	border-width:0;
+	color:gray;
+	background-color:#cccccc;
+}
+
+.hi_reference_body{
+	margin-left: 0px;
+	line-height: 18px;
+	margin-top: 15px;
+	color: #8c8c8c;
+	font-size: 14px;
+}
+
+.hi_reference_header{
+	margin-left: 50px;
+	padding-left: 10px;
+	border-left: 4px solid #ecf2f9;
+	font-weight: bold;
+	font-size: 16px;
+	color: #4080bf;
+	height: 40px;
+	padding-top:9px;
+}
+
+.hi_image_container{
+	width: 40px;
+	height: 40px;
+	border-radius: 100px;
+	float: left;
+	background-color: #f5f5f5;
+	display: flex;
+}
+
+.hi_reference_image{
+    max-width: 22px;  /* Or whatever */
+    max-height: 22px; /* Or whatever */
+    margin: auto;  /* Magic! */
+	border-radius: 4px;
+
+	float:left;
+	font-size: 20px;
+	color: #bfbfbf;
+	font-weight: bold;
+}
+
 line-style
 /* Safari */
 @-webkit-keyframes spin {

@@ -189,7 +189,7 @@ public class tabController extends AppCompatActivity
     }
 
     public void onNewTabInvoked(){
-        mHomeController.onNewTab(true,false);
+        mHomeController.onNewTabBackground(true,false);
         onClose();
         overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
     }

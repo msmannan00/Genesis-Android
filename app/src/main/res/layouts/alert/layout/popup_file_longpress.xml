@@ -71,8 +71,56 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDivider"
             android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/pOption1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="horizontal"
+                android:weightSum="7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pDivider">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="6"
+                    android:alpha="0.7"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:padding="0dp"
+                    android:paddingStart="15dp"
+                    android:text="@string/ALERT_LONG_URL_OPTION_4"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_alert_text"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    app:srcCompat="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/c_view_divier_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+
+            <LinearLayout
+                android:id="@+id/pOption2"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -118,7 +166,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption2"
+                android:id="@+id/pOption3"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -164,7 +212,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption3"
+                android:id="@+id/pOption4"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"

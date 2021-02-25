@@ -339,7 +339,7 @@ class messageManager
             mDialog.dismiss();
         });
         mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
             mDialog.dismiss();
         });
         mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
@@ -390,7 +390,6 @@ class messageManager
         initializeDialog(R.layout.popup_download_full, Gravity.CENTER);
         ((TextView) mDialog.findViewById(R.id.pHeader)).setText(mTitle);
         ((TextView) mDialog.findViewById(R.id.pDescription)).setText((data_local));
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             mEvent.invokeObserver(Collections.singletonList(url), M_OPEN_LINK_NEW_TAB);
             mDialog.dismiss();

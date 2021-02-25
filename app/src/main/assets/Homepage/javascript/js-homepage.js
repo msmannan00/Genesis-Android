@@ -19,7 +19,7 @@ class homepage {
 
 	Object.keys(obj).forEach(function(key) {
 		var mObject = obj[key];
-		mReferenceHTML += '<div class="hi_reference"><div class="clearfix content-heading"> <img style="float:left" src='+mObject[ReferenceWebsitesDataID.mIcon]+' alt="" /><h6 style="margin-left: 40px;padding-top:5px">'+mObject[ReferenceWebsitesDataID.mHeader]+'</h5><p style="margin-left: 0px;line-height: 18px;margin-top: 20px;color: #8c8c8c;font-size: 15px">'+mObject[ReferenceWebsitesDataID.mBody]+'</p></div></div>'
+		mReferenceHTML += '<div class="hi_reference" onclick="location.href=\' ' + mObject[ReferenceWebsitesDataID.mUrl] + ' \';"><div class="hi_reference_website content-heading"> <div class="hi_image_container"><img class="hi_reference_image" alt="&#10063;" src="'+mObject[ReferenceWebsitesDataID.mIcon]+'"/></div><h6 class="hi_reference_header">'+mObject[ReferenceWebsitesDataID.mHeader]+'</h5><p class="hi_reference_body">'+mObject[ReferenceWebsitesDataID.mBody]+'</p></div></div>'
 	});
 
 
@@ -52,5 +52,10 @@ function onTriggerScriptHandler(pCommand) {
 
 /*Default Loaders*/
 $(window).on('load', function() {
+	/* For Local Testing */
+	 //var mResponseJson = '[{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://wikileaks.org/static/img/wl-logo.png", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"}]';
+	 //setTimeout(mHomepageLoader.onLoadReferenceWebsites, 500);
+	 //setTimeout(mHomepageLoader.onLoadReferenceWebsiteContent, 1000, mResponseJson);
+
 	onTriggerScriptHandler(Commands.onLoadReferenceWebsites)
 });

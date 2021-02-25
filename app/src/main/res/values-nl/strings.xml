@@ -1,22 +1,17 @@
 <resources>
 
 	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Genesis</string>
 	<string name="GENERAL_SEARCH_HINT" translatable="true">Zoek of typ een webadres</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">Zoek op pagina</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">Zoekmachine</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">\ U0020 \ U0020 \ U0020Opps! Er Is Iets Misgegaan</string>
 	<string name="GENERAL_TODO" translatable="true">TODO</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis-zoekmachine</string>
 	<string name="GENERAL_LOADING" translatable="true">Online Vrijheid</string>
 	<string name="GENERAL_RELOAD" translatable="true">Opnieuw laden</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Dit kunnen de problemen zijn waarmee u wordt geconfronteerd \ n \ n • De webpagina of website is mogelijk niet beschikbaar \ n • Uw internetverbinding is mogelijk slecht \ n • U gebruikt mogelijk een proxy \ n • De website is mogelijk geblokkeerd door een firewall</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
 
 	<!-- Settings -->
-	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
 	<string name="SETTING_BASIC_SETTING" translatable="true">Basisinstellingen</string>
 	<string name="SETTING_DEFAULT_BROWSER" translatable="true">Stel Genesis in als uw standaardbrowser</string>
 	<string name="SETTING_HEADER" translatable="true">Instellingen</string>
@@ -38,7 +33,6 @@
 	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Logboekinstellingen</string>
 	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Toon logboeken in geavanceerde lijstweergave</string>
 	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">Toogle tussen klassieke en geavanceerde weergave</string>
-	<string name="SETTING_SEARCH" translatable="false">Zoekopdracht Beheren</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">Toevoegen, standaard instellen. suggesties weergeven</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">Meldingen Beheren</string>
 	<string name="SETTING_NOTIFICATION_INFO" translatable="true">Nieuwe functies, netwerkstatus</string>
@@ -47,12 +41,6 @@
 	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">Kies standaard zoekmachine</string>
 	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Zoekinstelling</string>
 	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Beheer hoe zoekopdrachten worden weergegeven</string>
-	<string name="SETTING_SEARCH_DEFAULT" translatable="false">Standaard</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
-	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
-	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
-	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
-	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
 	<string name="SETTING_SEARCH_HISTORY" translatable="true">Zoekgeschiedenis weergeven</string>
 	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">Zoeksuggesties weergeven</string>
 	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">Suggesties uit de zoekgeschiedenis verschijnen wanneer u typt in de zoekbalk</string>
@@ -191,7 +179,6 @@
 	<string name="ALERT_CLEAR" translatable="true">Wissen</string>
 	<string name="ALERT_ADD" translatable="true">Klaar</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">Nieuwe Bladwijzer</string>
-	<string name="ALERT_SECURE" translatable="false">https: //</string>
 	<string name="ALERT_SECURE_INFO" translatable="true">Verbinding is veilig</string>
 	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Uw informatie (bijvoorbeeld wachtwoord of creditcardnummers) is privé wanneer deze naar deze site wordt verzonden</string>
 	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy-instellingen</string>
@@ -253,7 +240,6 @@
 	<string name="BRIDGE_AUTO" translatable="true">Zorg Voor Een Brug Die Ik Ken</string>
 	<string name="BRIDGE_AUTO_INFO" translatable="true">Plak aangepaste bridge</string>
 	<string name="BRIDGE_MANUAL" translatable="true">Proxy-instellingen</string>
-	<string name="BRIDGE_PORT_HINT" translatable="false">Brug</string>
 	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
 	<string name="BRIDGE_DESC" translatable="true">Verzoek</string>
 	<string name="BRIDGE_TITLE" translatable="true">obfs4 (aanbevolen)</string>
@@ -357,8 +343,6 @@
 
 	<!-- Home View -->
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_CONNECT" translatable="false">Verbinden</string>
-	<string name="HOME_COPYRIGHT" translatable="false">Copyright © by Genesis Technologies | Built 1.0.2.2</string>
 	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="true">Genesis op standby op dit moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">Open tabbladen worden hier weergegeven</string>

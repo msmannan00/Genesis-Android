@@ -82,7 +82,7 @@ class orbotManager
     /*Proxy Manager*/
 
     private void onSetProxy(String url){
-        if(url.contains("boogle.store")){
+        /* if(url.contains("boogle.store")){
             PrefsHelper.setPref(keys.PROXY_TYPE, 0);
             PrefsHelper.setPref(keys.PROXY_SOCKS,null);
             PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, null);
@@ -95,7 +95,13 @@ class orbotManager
             PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
             PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
             PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
-        }
+        } */
+
+        PrefsHelper.setPref(keys.PROXY_TYPE, 1);
+        PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
     }
 
     private void initializeProxy()

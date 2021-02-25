@@ -339,6 +339,10 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             loadUri(mVerificationURL);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
+        else if(var1.uri.startsWith("mailto")){
+            event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.M_ON_MAIL);
+            return GeckoResult.fromValue(AllowOrDeny.ALLOW);
+        }
         else if(var1.uri.contains("boogle.store/advert__")){
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.on_playstore_load);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
@@ -358,7 +362,6 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
         else if(!var1.uri.equals("about:blank")){
-            mCurrentURL = var1.uri;
             if(mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED)){
                 mCurrentURL = constants.CONST_GENESIS_DOMAIN_URL;
             }else if(mCurrentURL.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
@@ -369,6 +372,12 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID), enums.etype.search_update);
             checkApplicationRate();
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
+
+            /* Its Absence causes delay on first launch*/
+            if(mCurrentURL.contains("boogle.store")){
+                event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update_forced);
+            }
+            mCurrentURL = var1.uri;
 
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }else {
@@ -748,7 +757,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if (mHistoryList != null && index >= 0 && index < mHistoryList.size())
             {
 
-                event.invokeObserver(Arrays.asList(mHistoryList.get(index), mSessionID), enums.etype.start_proxy);
+                event.invokeObserver(Arrays.asList(mHistoryList.get(index).getUri(), mSessionID), enums.etype.start_proxy);
                 new Handler().postDelayed(this::goForward, 100);
             }
         }else {

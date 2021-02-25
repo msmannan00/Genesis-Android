@@ -13,6 +13,9 @@ public class constants
     public static final String CONST_MARKET_URL = "https://boogle.store/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_SERVER = "https://drive.google.com/uc?export=download&id=1es7XOAWCktGGfSnJu_o8W4_LZuudjR-T";
     public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
+    public static final String CONST_PRIVACY_POLICY_URL = "https://boogle.store/privacy";
+    public static final String CONST_REPORT_URL = "https://boogle.store/reportus?url=";
+    public static final String CONST_SITEMAP = "https://boogle.store/create";
 
     /*URL CONSTANTS*/
 

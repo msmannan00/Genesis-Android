@@ -20,4 +20,5 @@ var ReferenceWebsitesDataID  = {
 	mIcon : "mIcon",
 	mHeader : "mHeader",
 	mBody : "mBody",
+	mUrl : "mUrl",
 };

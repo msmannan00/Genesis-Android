@@ -19,6 +19,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.MovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,12 +94,15 @@ class homeViewController
     private ConstraintLayout mInfoPortrait;
     private ConstraintLayout mInfoLandscape;
     private NestedScrollView mNestedScroll;
+    private ProgressBar mProgressBarIndeterminate;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
+    private boolean isFullScreen = false;
+    private MovementMethod mSearchBarMovementMethod = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -129,6 +133,7 @@ class homeViewController
         this.mInfoPortrait = pInfoPortrait;
         this.mInfoLandscape = pInfoLandscape;
         this.mNestedScroll = pNestedScroll;
+        this.mProgressBarIndeterminate = pProgressBarIndeterminate;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -140,6 +145,8 @@ class homeViewController
     public void initializeViews(){
         mNestedScroll.setNestedScrollingEnabled(true);
         this.mBlockerFullSceen.setVisibility(View.GONE);
+        mSearchBarMovementMethod = mSearchbar.getMovementMethod();
+        mSearchbar.setMovementMethod(null);
 
         final Handler handler = new Handler();
         handler.postDelayed(() ->
@@ -182,19 +189,23 @@ class homeViewController
                 mVoiceInput.setVisibility(View.GONE);
                 mNewTab.setVisibility(View.VISIBLE);
                 mMenu.setVisibility(View.VISIBLE);
+                mSearchbar.setFadingEdgeLength(helperMethod.pxFromDp(20));
+                mSearchbar.setMovementMethod(null);
 
                 if(status.sSettingLanguageRegion.equals("Ur")){
                     mSearchbar.setPadding(helperMethod.pxFromDp(17),0,mSearchbar.getPaddingRight(),0);
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                     params.leftMargin = helperMethod.pxFromDp(5);
                 }else {
-                    mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(45),0);
+                    mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(5),0);
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                     params.rightMargin = helperMethod.pxFromDp(10);
                 }
 
             });
         }else {
+            mSearchbar.setMovementMethod(mSearchBarMovementMethod);
+            mSearchbar.setFadingEdgeLength(helperMethod.pxFromDp(0));
             Drawable drawable;
             Resources res = mContext.getResources();
             try {
@@ -255,7 +266,7 @@ class homeViewController
     public void initStatusBarColor(boolean mInstant) {
         animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-        int mDelay = 200;
+        int mDelay = 450;
         if(status.mThemeApplying || mInstant){
             mDelay = 0;
         }
@@ -318,6 +329,8 @@ class homeViewController
         mLoadingText.setVisibility(View.VISIBLE);
         mLoadingText.animate().setStartDelay(0).alpha(1);
 
+        mProgressBarIndeterminate.setVisibility(View.VISIBLE);
+        mProgressBarIndeterminate.animate().alpha(1);
         mConnectButton.setEnabled(false);
         mSplashScreen.setEnabled(false);
         mBlocker.setClickable(true);
@@ -414,12 +427,20 @@ class homeViewController
                 triggerPostUI();
                 mProgressBar.setVisibility(View.GONE);
                 mSplashScreen.animate().cancel();
-                mSplashScreen.animate().setDuration(350).setStartDelay(200).alpha(0).withEndAction(() -> {
+                mProgressBarIndeterminate.animate().setDuration(250).alpha(0).withEndAction(() -> mSplashScreen.animate().setDuration(350).setStartDelay(200).alpha(0).withEndAction(() -> {
+                    mProgressBarIndeterminate.setVisibility(View.GONE);
                     mSplashScreen.setClickable(false);
                     mSplashScreen.setFocusable(false);
+                    mProgressBarIndeterminate.setVisibility(View.GONE);
                     mSearchbar.setEnabled(true);
                     mBlocker.setEnabled(false);
-                });
+
+                    mProgressBarIndeterminate.setVisibility(View.GONE);
+                    mBlocker.setVisibility(View.GONE);
+                    mGatewaySplash.setVisibility(View.GONE);
+                    mConnectButton.setVisibility(View.GONE);
+
+                }));
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -443,7 +464,7 @@ class homeViewController
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
-    void onOpenMenu(View view, boolean canGoBack, boolean isLoading, int userAgent){
+    void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent){
 
         if(popupWindow!=null){
             popupWindow.dismiss();
@@ -482,7 +503,7 @@ class homeViewController
         CheckBox desktop = popupView.findViewById(R.id.menu27);
         desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
 
-        if(!canGoBack){
+        if(!canGoForward){
            back.setEnabled(false);
            back.setColorFilter(Color.argb(255, 191, 191, 191));
         }
@@ -548,7 +569,7 @@ class homeViewController
 
     void onSetBannerAdMargin(boolean status,boolean isAdLoaded){
         if(isAdLoaded){
-            if(status && !isLandscape){
+            if(status && !isLandscape && !isFullScreen){
                 mBannerAds.setVisibility(View.VISIBLE);
 
                 final Handler handler = new Handler();
@@ -565,14 +586,18 @@ class homeViewController
 
     void updateBannerAdvertStatus(boolean status){
         if(status){
-            mBannerAds.animate().cancel();
-            mBannerAds.setAlpha(0);
-            mBannerAds.animate().alpha(1);
-            mBannerAds.setVisibility(View.VISIBLE);
+            if(mBannerAds.getAlpha()==0){
+                mBannerAds.animate().cancel();
+                mBannerAds.setAlpha(0);
+                mBannerAds.animate().alpha(1);
+                mBannerAds.setVisibility(View.VISIBLE);
+            }
             onSetBannerAdMargin(true,true);
         }else{
-            mBannerAds.animate().cancel();
-            mBannerAds.animate().alpha(0).withEndAction(() -> mBannerAds.setVisibility(View.GONE));
+            if(mBannerAds.getAlpha()==1){
+                mBannerAds.animate().cancel();
+                mBannerAds.animate().alpha(0).withEndAction(() -> mBannerAds.setVisibility(View.GONE));
+            }
             onSetBannerAdMargin(false,true);
         }
     }
@@ -803,8 +828,8 @@ class homeViewController
         mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.c_background));
     }
 
-    void onProgressBarUpdate(int value){
-        if(mSearchbar.getText().toString().equals("genesis.onion")){
+    void onProgressBarUpdate(int value, boolean mForced){
+        if(mSearchbar.getText().toString().equals("genesis.onion") && !mForced){
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
             return;
@@ -857,12 +882,15 @@ class homeViewController
         int value = !status ? 1 : 0;
 
         if(status) {
+            isFullScreen = true;
         }else {
             this.mBlockerFullSceen.setVisibility(View.VISIBLE);
             this.mBlockerFullSceen.setAlpha(1f);
+            isFullScreen = false;
         }
 
         if(status){
+            onProgressBarUpdate(100, false);
             this.mBlockerFullSceen.setVisibility(View.VISIBLE);
             this.mBlockerFullSceen.setAlpha(0f);
             this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(1).withEndAction(() -> {

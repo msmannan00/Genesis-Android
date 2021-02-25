@@ -20,7 +20,7 @@ public class dataEnums
     }
 
     public enum eSuggestionCommands{
-        M_GET_SUGGESTIONS
+        M_GET_SUGGESTIONS, M_GET_DEFAULT_SUGGESTION
     }
 
     public enum eTabCommands{

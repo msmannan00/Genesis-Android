@@ -136,6 +136,9 @@ public class languageController extends AppCompatActivity {
                 mDefaultLanguageNotSupported = true;
             }
         }else {
+            if(status.sSettingLanguage.equals(pLanguageCode)){
+                return true;
+            }
             status.sSettingLanguage = pLanguageCode;
             status.sSettingLanguageRegion = pLanguageRegion;
         }
@@ -160,7 +163,7 @@ public class languageController extends AppCompatActivity {
         }
 
         status.mThemeApplying = true;
-        activityContextManager.getInstance().getHomeController().recreate();
+        //activityContextManager.getInstance().getHomeController().recreate();
 
         return true;
     }

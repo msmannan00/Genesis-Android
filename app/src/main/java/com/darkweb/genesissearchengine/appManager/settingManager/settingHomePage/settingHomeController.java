@@ -29,6 +29,9 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -192,7 +195,22 @@ public class settingHomeController extends AppCompatActivity
     }
 
     public void onReportWebsite(View view) {
-        pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(activityContextManager.getInstance().getHomeController().onGetCurrentURL(), this),  M_REPORT_URL);
+        try {
+            finish();
+            activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_REPORT_URL + URLEncoder.encode(activityContextManager.getInstance().getHomeController().onGetCurrentURL(), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onSitemap(View view) {
+        finish();
+        activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_SITEMAP);
+    }
+
+    public void onPrivacyPolicy(View view) {
+        finish();
+        activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_PRIVACY_POLICY_URL);
     }
 
     public void onRateApplication(View view) {

@@ -189,6 +189,20 @@ public class helperMethod
         context.startActivity(Intent.createChooser(emailIntent, "Send email..."));
     }
 
+    public static void sendCustomMail(Context context, String pURL){
+        String mail = pURL.replaceFirst("mailto:", "");
+
+        Intent selectorIntent = new Intent(Intent.ACTION_SENDTO);
+        selectorIntent.setData(Uri.parse("mailto:"));
+
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "get bridges");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "get bridges");
+        emailIntent.setSelector( selectorIntent );
+        context.startActivity(Intent.createChooser(emailIntent, "get transport"));
+    }
+
     public static void sendBridgeEmail(Context context){
         Intent selectorIntent = new Intent(Intent.ACTION_SENDTO);
         selectorIntent.setData(Uri.parse("mailto:"));

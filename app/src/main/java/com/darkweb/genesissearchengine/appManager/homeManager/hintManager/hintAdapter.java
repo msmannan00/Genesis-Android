@@ -33,10 +33,11 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     private ArrayList<historyRowModel> mHintList;
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
-    ImageView[] mWebIcon = new ImageView[15];
+    private String mSearch;
+    private ImageView[] mWebIcon = new ImageView[15];
+    private boolean mCounters=false;
 
-    boolean mCounters=false;
-    public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext) {
+    public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
         this.mHintList = new ArrayList();
         int maxCounter=5;
         if(pHintList.size()<maxCounter){
@@ -46,12 +47,13 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
         this.mHintList.addAll(pHintList.subList(0,maxCounter));
         this.mContext = pContext;
         this.mEvent = pEvent;
+        this.mSearch = pSearch;
     }
 
-
-    public void onUpdateAdapter(ArrayList<historyRowModel> pHintList){
-        mHintList.clear();
-        mHintList.addAll(pHintList);
+    public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch){
+        //mHintList.clear();
+        mHintList = pHintList;
+        mSearch = pSearch;
         notifyDataSetChanged();
     }
 
@@ -131,7 +133,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             Drawable mDrawable = null;
             Resources res = itemView.getContext().getResources();
             try {
-                if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
+                if(model.getDescription().equals(strings.GENERIC_EMPTY_STR) && !model.getHeader().contains(".")){
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_search));
                     mMoveURL.setVisibility(View.GONE);
                 }else {
