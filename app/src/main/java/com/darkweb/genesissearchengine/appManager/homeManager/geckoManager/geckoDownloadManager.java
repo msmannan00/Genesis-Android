@@ -44,7 +44,7 @@ class geckoDownloadManager
         downloadFile = response.filename != null ? response.filename : downloadURL.getLastPathSegment();
 
         event.invokeObserver(Arrays.asList(0,session.getSessionID()), enums.etype.progress_update);
-        event.invokeObserver(Arrays.asList(downloadFile,session.getSessionID(),downloadURL), enums.etype.download_file_popup);
+        event.invokeObserver(Arrays.asList(downloadFile.toString(),session.getSessionID(),downloadURL.toString()), enums.etype.download_file_popup);
     }
 
     Uri getDownloadURL(){

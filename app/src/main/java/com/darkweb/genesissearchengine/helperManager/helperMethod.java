@@ -35,6 +35,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ShareCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -259,9 +260,8 @@ public class helperMethod
 
     public static int invertedShadeColor(int pColor, float pPercent) {
         int mColor = pColor;
-        double darkness = 1-(0.299*Color.red(mColor) + 0.587*Color.green(mColor) + 0.114*Color.blue(mColor))/255;
-        if(darkness>=0.75){
-            if(darkness==1){
+        if(ColorUtils.calculateLuminance(pColor) <= 0.5){
+            if(ColorUtils.calculateLuminance(pColor)==1){
                 return Color.DKGRAY;
             }
             int a = Color.alpha(mColor);
@@ -281,9 +281,7 @@ public class helperMethod
     }
 
     public static int invertedGrayColor(int pColor) {
-        int mColor = pColor;
-        double darkness = 1-(0.299*Color.red(mColor) + 0.587*Color.green(mColor) + 0.114*Color.blue(mColor))/255;
-        if(darkness>=0.75){
+        if(ColorUtils.calculateLuminance(pColor) <= 0.5){
             return Color.WHITE;
         }else{
             return Color.BLACK;
@@ -291,9 +289,7 @@ public class helperMethod
     }
 
     public static boolean isColorDark(int pColor) {
-        int mColor = pColor;
-        double darkness = 1-(0.299*Color.red(mColor) + 0.587*Color.green(mColor) + 0.114*Color.blue(mColor))/255;
-        if(darkness>=0.75){
+        if(ColorUtils.calculateLuminance(pColor) > 0.5){
             return true;
         }else{
             return false;

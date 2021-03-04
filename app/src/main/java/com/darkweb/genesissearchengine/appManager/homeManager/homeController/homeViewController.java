@@ -34,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
@@ -649,17 +650,17 @@ class homeViewController
                 mNewTab.setTextColor(helperMethod.invertedGrayColor(mColor));
 
                 GradientDrawable mGradientDrawable = new GradientDrawable();
-                mGradientDrawable.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
+                mGradientDrawable.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
                 mGradientDrawable.setCornerRadius(helperMethod.pxFromDp(7));
                 mSearchbar.setBackground(mGradientDrawable);
 
                 GradientDrawable gradientDrawable1 = new GradientDrawable();
-                gradientDrawable1.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
+                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(4));
                 gradientDrawable1.setStroke(helperMethod.pxFromDp(2), mColor);
 
                 GradientDrawable gradientDrawable2 = new GradientDrawable();
-                gradientDrawable2.setColor(helperMethod.invertedShadeColor(mColor,0.85f));
+                gradientDrawable2.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
                 gradientDrawable2.setCornerRadius(helperMethod.pxFromDp(4));
                 gradientDrawable2.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
 
@@ -683,10 +684,10 @@ class homeViewController
                 }
 
                 if(helperMethod.isColorDark(mColor)){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }else {
                     View decorView = mContext.getWindow().getDecorView(); //set status background black
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }else {
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
             }
             else{

@@ -1099,6 +1099,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.manual_download(url,this);
     }
 
+    public void onManualDownloadFileName(String pURL, String pPath){
+
+        /*EXTERNAL STORAGE REQUEST*/
+        mGeckoClient.manualDownloadWithName(pURL,pPath,this);
+    }
+
     public AdView getBannerAd()
     {
         return mBannerAds;
@@ -1518,7 +1524,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false, true);
             }
             else if(e_type.equals(enums.etype.download_file_popup)){
-                pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(dataToStr(data.get(0)), homeController.this), M_DOWNLOAD_FILE);
+                onManualDownloadFileName((String) data.get(2), (String) data.get(0));
             }
             else if(e_type.equals(enums.etype.on_full_screen)){
                 boolean status = (Boolean)data.get(0);

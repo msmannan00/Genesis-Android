@@ -190,7 +190,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     private void showConnectedToTorNetworkNotification() {
-        showToolbarNotification(getString(R.string.status_activated), NOTIFY_ID, R.drawable.ic_stat_tor);
+        showToolbarNotification(getString(R.string.status_activated), NOTIFY_ID, R.drawable.ic_stat_tor_logo);
     }
 
     private boolean findExistingTorDaemon() {
@@ -310,7 +310,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         self = this;
-        showToolbarNotification("", NOTIFY_ID, R.drawable.ic_stat_tor);
+        showToolbarNotification("", NOTIFY_ID, R.drawable.ic_stat_tor_logo);
 
         if (intent != null)
             exec(new IncomingIntentRouter(intent));
@@ -535,7 +535,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             }).start();
 
-            //mVpnManager = new OrbotVpnManager(this);
+            mVpnManager = new OrbotVpnManager(this);
 
         } catch (Exception e) {
             //what error here
@@ -795,7 +795,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             String version = prefs.getString(PREF_BINARY_TOR_VERSION_INSTALLED, null);
             logNotice("checking binary version: " + version);
 
-            showToolbarNotification(getString(R.string.status_starting_up), NOTIFY_ID, R.drawable.ic_stat_tor);
+            showToolbarNotification(getString(R.string.status_starting_up), NOTIFY_ID, R.drawable.ic_stat_tor_logo);
             //sendCallbackLogMessage(getString(R.string.status_starting_up));
             //logNotice(getString(R.string.status_starting_up));
 
@@ -1165,7 +1165,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             new Thread() {
                 public void run() {
                     try {
-                        int iconId = R.drawable.ic_stat_tor;
+                        int iconId = R.drawable.ic_stat_tor_logo;
 
                         if (conn != null) {
                             if (mCurrentStatus.equals(STATUS_ON) && Prefs.expandedNotifications())

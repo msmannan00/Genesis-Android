@@ -292,7 +292,22 @@ public class geckoClients
         }
     }
 
+    public void manualDownloadWithName(String url, String file, AppCompatActivity context){
+        Uri downloadURL = Uri.parse(url);
+        /*EXTERNAL STORAGE REQUEST*/
+        if(helperMethod.checkPermissions(context)){
+            mSession.downloadRequestedFile(downloadURL,file);
+        }
+    }
+
     public void downloadFile()
+    {
+        if(helperMethod.checkPermissions(context)){
+            mSession.downloadRequestedFile();
+        }
+    }
+
+    public void downloadFile(String mURL)
     {
         if(helperMethod.checkPermissions(context)){
             mSession.downloadRequestedFile();

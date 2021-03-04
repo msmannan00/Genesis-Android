@@ -502,7 +502,12 @@ class messageManager
                     rateApp();
                     break;
 
-                case M_LONG_PRESS_DOWNLOAD:
+                case M_DOWNLOAD_FILE :
+                    /*VERIFIED*/
+                    //downloadFileLongPress();
+                    break;
+
+                case M_LONG_PRESS_DOWNLOAD :
                     /*VERIFIED*/
                     downloadFileLongPress();
                     break;
