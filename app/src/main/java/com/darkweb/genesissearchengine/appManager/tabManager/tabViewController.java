@@ -8,30 +8,19 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ActionMenuView;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import java.util.List;
@@ -40,7 +29,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 class tabViewController
 {
     /*Private Views*/
-    private AppCompatActivity mContext;
+    private Fragment mContext;
     private PopupWindow mTabOptionMenu = null;
     private Button mTabs;
     private ImageView mRemoveSelection;
@@ -49,6 +38,7 @@ class tabViewController
     private View mToastLayoutRoot;
     private TextView mSelectionCount;
     private ImageView mBlocker;
+    private RecyclerView mRecycleView;
 
     /*Private Local Variables*/
     private Handler mDelayHandler = new Handler();
@@ -56,7 +46,7 @@ class tabViewController
 
     /*Initializations*/
 
-    tabViewController(AppCompatActivity mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker)
+    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView)
     {
         this.mContext = mContext;
         this.mTabs = pTabs;
@@ -66,6 +56,7 @@ class tabViewController
         this.mToastLayoutRoot = pToastLayoutRoot;
         this.mSelectionCount = pSelectionCount;
         this.mBlocker = pBlocker;
+        this.mRecycleView = pRecycleView;
 
         initPostUI();
         onHoldInteraction();
@@ -74,10 +65,7 @@ class tabViewController
     @SuppressLint("ClickableViewAccessibility")
     public void onHoldInteraction(){
         final Handler handler = new Handler();
-        handler.postDelayed(() ->
-        {
-            mBlocker.setVisibility(View.GONE);
-        }, 350);
+        handler.postDelayed(() -> mBlocker.setVisibility(View.GONE), 350);
     }
 
     private void initTabCount(int pCount){
@@ -85,20 +73,8 @@ class tabViewController
     }
 
     private void initPostUI(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-            }
-        }
+        mRecycleView.setAlpha(1);
+        mContext.getView().setBackgroundColor(Color.WHITE);
     }
 
     public void onOpenTabMenu(View view) {
@@ -162,9 +138,7 @@ class tabViewController
 
         initTabCount(pTabCount);
         mDelayHandler.removeCallbacksAndMessages(null);
-        mDelayHandler.postDelayed(() -> mToastLayoutRoot.animate().alpha(0).withEndAction(() -> {
-            mToastLayoutRoot.setVisibility(View.GONE);
-        }), 3000);
+        mDelayHandler.postDelayed(() -> mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE)), 3000);
     }
 
     private void onHideUndoDialog() {
@@ -185,16 +159,12 @@ class tabViewController
             float width = height / 3;
 
             if(pDX > 0){
-                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
-                RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), pDX,(float) itemView.getBottom());
-                pCanvas.drawRect(background, mPainter);
+                pCanvas.drawARGB(0, 241, 243, 244);
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
                 RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
                 pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
             } else {
-                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
-                RectF background = new RectF((float) itemView.getRight() + pDX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
-                pCanvas.drawRect(background, mPainter);
+                pCanvas.drawARGB(0, 241, 243, 244);
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
                 RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
                 pCanvas.drawBitmap(icon,null,icon_dest, mPainter);

@@ -245,7 +245,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
                 if(model.getSession().equals(mModelList.get(0).getSession())){
-                    itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getTabController(), R.color.c_list_item_current));
+                    itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
                 }else {
                     Drawable mDrawable;
                     Resources res = itemView.getContext().getResources();

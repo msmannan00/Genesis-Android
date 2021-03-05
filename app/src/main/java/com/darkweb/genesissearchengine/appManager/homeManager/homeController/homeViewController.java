@@ -36,6 +36,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.*;
@@ -85,7 +86,7 @@ class homeViewController
     private View mSearchEngineBar;
     private EditText mFindText;
     private TextView mFindCount;
-    private androidx.constraintlayout.widget.ConstraintLayout mTopLayout;
+    private ConstraintLayout mTopLayout;
     private ImageButton mVoiceInput;
     private ImageButton mMenu;
     private ImageView mBlocker;
@@ -96,6 +97,7 @@ class homeViewController
     private ConstraintLayout mInfoLandscape;
     private NestedScrollView mNestedScroll;
     private ProgressBar mProgressBarIndeterminate;
+    private FragmentContainerView mTabFragment;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
@@ -103,7 +105,7 @@ class homeViewController
     private boolean isFullScreen = false;
     private MovementMethod mSearchBarMovementMethod = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -135,6 +137,7 @@ class homeViewController
         this.mInfoLandscape = pInfoLandscape;
         this.mNestedScroll = pNestedScroll;
         this.mProgressBarIndeterminate = pProgressBarIndeterminate;
+        this.mTabFragment = pTabFragment;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -181,6 +184,19 @@ class homeViewController
             this.mInfoPortrait.setVisibility(View.VISIBLE);
             this.mInfoLandscape.setVisibility(View.GONE);
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
+        }
+    }
+
+    public void onShowTabContainer(){
+        if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
+            mTabFragment.setVisibility(View.VISIBLE);
+            mTabFragment.animate().setDuration(250).alpha(1);
+        }
+    }
+
+    public void onHideTabContainer(){
+        if(mTabFragment.getAlpha()==1){
+            mTabFragment.animate().setDuration(250).alpha(0).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
         }
     }
 
@@ -913,13 +929,9 @@ class homeViewController
                 mTopBar.setVisibility(View.GONE);
                 mBannerAds.setVisibility(View.GONE);
 
-                //ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-                //params.setMargins(0, helperMethod.pxFromDp(0), 0, 0);
-                //mWebviewContainer.setLayoutParams(params);
-
-                //ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-                //params1.setMargins(0, 0, 0,0);
-                //mGeckoView.setLayoutParams(params1);
+                NestedScrollView.MarginLayoutParams params = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
+                params.setMargins(0, 0, 0,helperMethod.pxFromDp(60)*-1);
+                mNestedScroll.setLayoutParams(params);
 
                 com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = false;
                 initTopBarPadding();
@@ -940,13 +952,9 @@ class homeViewController
             mBannerAds.setVisibility(View.GONE);
             mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
 
-            //ConstraintLayout.MarginLayoutParams params = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-            //params.setMargins(0, 0, 0,0);
-            //mWebviewContainer.setLayoutParams(params);
-
-            //ConstraintLayout.MarginLayoutParams params1 = (ConstraintLayout.MarginLayoutParams) mWebviewContainer.getLayoutParams();
-            //params1.setMargins(0, 0, 0,helperMethod.pxFromDp(0));
-            //mGeckoView.setLayoutParams(params1);
+            NestedScrollView.MarginLayoutParams params = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
+            params.setMargins(0, 0, 0,0);
+            mNestedScroll.setLayoutParams(params);
 
             com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
             initTopBarPadding();

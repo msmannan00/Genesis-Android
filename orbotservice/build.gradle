@@ -48,8 +48,8 @@ dependencies {
     implementation 'org.torproject:tor-android-binary:0.4.4.6'
 
     /**
-    implementation 'info.pluggabletransports.aptds:apt-dispatch-library:1.0.9'
-    implementation 'info.pluggabletransports.aptds:apt-meek-obfs4-legacy:1.0.9'
+     implementation 'info.pluggabletransports.aptds:apt-dispatch-library:1.0.9'
+     implementation 'info.pluggabletransports.aptds:apt-meek-obfs4-legacy:1.0.9'
      **/
     implementation 'info.pluggabletransports.aptds:jsocksAndroid:1.0.4'
 

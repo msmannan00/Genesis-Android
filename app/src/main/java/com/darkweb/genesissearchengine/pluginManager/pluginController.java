@@ -225,7 +225,7 @@ public class pluginController
             else if(pEventType.equals(M_CLEAR_TAB)){
                 dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
                 mHomeController.initTab(true);
-                activityContextManager.getInstance().getTabController().finish();
+                mHomeController.onDisableTabViewController();
             }
             else if(pEventType.equals(M_REQUEST_BRIDGES)){
                 pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);

@@ -2,31 +2,33 @@ package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.annotation.SuppressLint;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
-import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
-import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -36,7 +38,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class tabController extends AppCompatActivity
+public class tabController extends Fragment
 {
     /*Private Views*/
     private Button mTabs;
@@ -46,6 +48,7 @@ public class tabController extends AppCompatActivity
     private View mPopupUndo;
     private TextView mSelectionCount;
     private ImageView mBlocker;
+    private View mRootView;
 
     /*Private Variables*/
 
@@ -55,24 +58,30 @@ public class tabController extends AppCompatActivity
     private tabViewController mtabViewController;
     private RecyclerView mRecycleView;
     private tabAdapter mTabAdapter;
+    private ColorDrawable mBackground;
 
     /*Initializations*/
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        @SuppressLint("InflateParams") View root = inflater.inflate(R.layout.tab_view, null);
+        mRootView = root;
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_view);
+        return root;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        activityContextManager.getInstance().setTabController(this);
+    }
+
+    public void onInit(){
         initializeActivity();
         initializeViews();
+        initializeLocalEventHandlers();
         initializeList();
         initSwipe();
-        initializeLocalEventHandlers();
     }
 
     public void initializeActivity(){
@@ -84,16 +93,17 @@ public class tabController extends AppCompatActivity
     }
 
     public void initializeViews(){
-        mRecycleView = findViewById(R.id.pRecycleView);
-        mTabs = findViewById(R.id.pTabs);
-        mRemoveSelection = findViewById(R.id.pRemoveSelection);
-        mMenuButton = findViewById(R.id.pMenuButton);
-        mClearSelection = findViewById(R.id.pClearSelection);
-        mPopupUndo = findViewById(R.id.pPopupUndo);
-        mSelectionCount = findViewById(R.id.pSelectionCount);
-        mBlocker = findViewById(R.id.pBlocker);
+        mBackground = new ColorDrawable();
+        mRecycleView = mRootView.findViewById(R.id.pRecycleView);
+        mTabs = mRootView.findViewById(R.id.pTabs);
+        mRemoveSelection = mRootView.findViewById(R.id.pRemoveSelection);
+        mMenuButton = mRootView.findViewById(R.id.pMenuButton);
+        mClearSelection = mRootView.findViewById(R.id.pClearSelection);
+        mPopupUndo = mRootView.findViewById(R.id.pPopupUndo);
+        mSelectionCount = mRootView.findViewById(R.id.pSelectionCount);
+        mBlocker = mRootView.findViewById(R.id.pBlocker);
 
-        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker);
+        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker, mRecycleView);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -106,7 +116,7 @@ public class tabController extends AppCompatActivity
         });
     }
     public void initializeList(){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(tabController.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         tabAdapter adapter = new tabAdapter(mListModel.getList(),new adapterCallback());
         mTabAdapter = adapter;
         layoutManager.setReverseLayout(true);
@@ -120,7 +130,7 @@ public class tabController extends AppCompatActivity
         mRecycleView.setItemViewCacheSize(100);
         mRecycleView.setDrawingCacheEnabled(true);
         mRecycleView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        mRecycleView.setLayoutManager(new LinearLayoutManager(tabController.this));
+        mRecycleView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         initTabCount();
     }
 
@@ -146,8 +156,10 @@ public class tabController extends AppCompatActivity
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                Canvas mCanvas = (Canvas) mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
-                super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    Canvas mCanvas = (Canvas) mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
+                    super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                }
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
@@ -185,13 +197,13 @@ public class tabController extends AppCompatActivity
 
     public void onClose(){
         onClearTabBackup();
-        finish();
+        // finish();
     }
 
     public void onNewTabInvoked(){
         mHomeController.onNewTabBackground(true,false);
         onClose();
-        overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
+        // overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
     }
 
     public void onRestoreTab(View view){
@@ -225,9 +237,11 @@ public class tabController extends AppCompatActivity
     }
 
     public void onTabRowChanged(String pId){
-        for(int mCounter=0; mCounter<mListModel.getList().size();mCounter++){
-            if(mListModel.getList().get(mCounter).getSession().getSessionID().equals(pId)){
-                mTabAdapter.notifyItemChanged(mCounter);
+        if(mListModel!=null){
+            for(int mCounter=0; mCounter<mListModel.getList().size();mCounter++){
+                if(mListModel.getList().get(mCounter).getSession().getSessionID().equals(pId)){
+                    mTabAdapter.notifyItemChanged(mCounter);
+                }
             }
         }
     }
@@ -264,7 +278,6 @@ public class tabController extends AppCompatActivity
     public void onBackPressedInvoked(View view) {
         mTabs.setPressed(true);
         onBackPressed();
-        activityContextManager.getInstance().onRemoveStack(this);
     }
 
     /*Tab Menu*/
@@ -281,28 +294,15 @@ public class tabController extends AppCompatActivity
             });
         }
         else if(pView.getId() == R.id.pOpenSetting){
-            helperMethod.openActivity(settingHomeController.class, constants.CONST_LIST_HISTORY, this,true);
+            // helperMethod.openActivity(settingHomeController.class, constants.CONST_LIST_HISTORY, this,true);
         }
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
     }
 
     @Override
-    public void onTrimMemory(int level)
-    {
-        if(status.sSettingIsAppPaused && (level==80 || level==15))
-        {
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY,true));
-            onClose();
-        }
-    }
-
-    @Override
     public void onResume()
     {
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
-        activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
-        activityContextManager.getInstance().onStack(this);
         super.onResume();
     }
 
@@ -320,16 +320,17 @@ public class tabController extends AppCompatActivity
         super.onPause();
     }
 
-    @Override
+
     public void onBackPressed() {
-        boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
-        if(mStatus){
-            onClearTabBackup();
-            onClearSelection(null);
-        }else {
-            super.onBackPressed();
-            onClose();
-            overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
+        if(mTabAdapter!=null){
+            boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
+            if(mStatus){
+                onClearTabBackup();
+                onClearSelection(null);
+            }else {
+                mHomeController.onDisableTabViewController();
+                onClose();
+            }
         }
     }
 

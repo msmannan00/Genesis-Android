@@ -11,6 +11,8 @@ import android.os.Environment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.mozilla.gecko.util.HardwareUtils;
+
 import java.io.File;
 
 public class downloadFileService extends IntentService
@@ -56,5 +58,29 @@ public class downloadFileService extends IntentService
             Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
             startActivity(intent);
         }
+
+
+        final String uri = fn[0];
+        final String filename = fn[1];
+        final String mimeType = "mimeType";
+
+        final DownloadManager.Request request = new DownloadManager.Request(Uri.parse(uri));
+        request.setMimeType(mimeType);
+
+        try {
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
+        } catch (IllegalStateException e) {
+            return;
+        }
+
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+        try {
+            DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            manager.enqueue(request);
+        } catch (RuntimeException ignored) {
+        }
+
     }
 }

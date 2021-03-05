@@ -217,60 +217,10 @@ class tabDataModel
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
+                activityContextManager.getInstance().getHomeController().onOpenTabReady();
+
             }
         }.start();
-
-
-
-       /*int e=0;
-       e=1;
-        for(int counter = 0; counter< mTabs.size(); counter++){
-            if(mTabs.get(counter).getSession().getSessionID().equals(pSessionID))
-            {
-                final Handler handler = new Handler();
-                int finalCounter = counter;
-                int finalCounter1 = counter;
-                new Thread(){
-                    public void run(){
-                        try {
-                            int mCounter=0;
-
-                            while (mCounter<=20){
-
-
-                                activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
-                                    Bitmap mBitmap = null;
-                                    try {
-                                        mBitmap = pBitmapManager.poll(0);
-                                    } catch (Throwable throwable) {
-                                        throwable.printStackTrace();
-                                        isLoading = 2;
-                                        return;
-                                    }
-                                    mTabs.get(finalCounter).setmBitmap(mBitmap);
-                                    if(pImageView!=null){
-                                        pImageView.setImageBitmap(mBitmap);
-                                    }
-
-                                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                                    mBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-                                    byte[] mThumbnail = bos.toByteArray();
-
-                                    ContentValues mContentValues = new  ContentValues();
-                                    mContentValues.put("mThumbnail", mThumbnail);
-
-                                    databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter1).getmId());
-                                    isLoading = 3;
-                                });
-                                mCounter++;
-                            }
-                        } catch (Throwable throwable) {
-                            throwable.printStackTrace();
-                        }
-                    }
-                }.start();
-            }
-        }*/
     }
 
     public ArrayList<ArrayList<String>> getSuggestions(String pQuery){
