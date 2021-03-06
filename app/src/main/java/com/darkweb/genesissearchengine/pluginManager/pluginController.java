@@ -31,6 +31,7 @@ public class pluginController
     private activityContextManager mContextManager;
     private langManager mLangManager;
     private orbotManager mOrbotManager;
+    private downloadManager mDownloadManager;
 
     /*Private Variables*/
 
@@ -64,6 +65,7 @@ public class pluginController
         mAnalyticsManager = new com.darkweb.genesissearchengine.pluginManager.analyticManager(mHomeController,new analyticManager());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
+        mDownloadManager = new downloadManager(mHomeController,new downloadCallback());
     }
 
     /*Helper Methods*/
@@ -127,6 +129,22 @@ public class pluginController
         return null;
     }
 
+    /*Download Manager*/
+    private class downloadCallback implements eventObserver.eventListener{
+        @Override
+        public Object invokeObserver(List<Object> data, Object event_type)
+        {
+            return null;
+        }
+    }
+
+    public Object onDownloadInvoke(List<Object> pData, pluginEnums.eDownloadManager pEventType){
+        if(mDownloadManager!=null){
+            return mDownloadManager.onTrigger(pData, pEventType);
+        }
+        return null;
+    }
+
     /*Onion Proxy Manager*/
     private class orbotCallback implements eventObserver.eventListener{
         @Override
@@ -168,6 +186,9 @@ public class pluginController
             if(pEventType.equals(enums.etype.welcome))
             {
                 mHomeController.onLoadURL(pData.get(0).toString());
+            }
+            else if(pEventType.equals(M_DOWNLOAD_SINGLE)){
+                activityContextManager.getInstance().getHomeController().onManualDownloadFileName((String)pData.get(2),(String)pData.get(0));
             }
             else if(pEventType.equals(M_SECURE_CONNECTION)){
                 helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController,true);

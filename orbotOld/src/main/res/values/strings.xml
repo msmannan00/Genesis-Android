@@ -14,7 +14,8 @@
     <string name="something_bad_happened">Something bad happened. Check the log</string>
     <string name="unable_to_read_hidden_service_name">unable to read onion service name</string>
     <string name="unable_to_start_tor">Unable to start Tor:</string>
-
+    <string name="waiting_for_control_port">Waiting for control port...</string>
+    <string name="connecting_to_control_port">Connecting to control port:</string>
     <string name="newnym">You\'ve switched to a new Tor identity!</string>
 
     <string name="updating_settings_in_tor_service">updating settings in Tor service</string>

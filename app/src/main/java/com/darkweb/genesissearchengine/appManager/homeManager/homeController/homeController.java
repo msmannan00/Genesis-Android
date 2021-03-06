@@ -1570,7 +1570,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0),mGeckoClient.getSession().getCurrentURL()),false, true);
             }
             else if(e_type.equals(enums.etype.download_file_popup)){
-                onManualDownloadFileName((String) data.get(2), (String) data.get(0));
+                List<Object> mData = new ArrayList<>();
+                mData.addAll(data);
+                mData.add(homeController.this);
+                pluginController.getInstance().onMessageManagerInvoke(mData, M_DOWNLOAD_SINGLE);
             }
             else if(e_type.equals(enums.etype.on_full_screen)){
                 boolean status = (Boolean)data.get(0);

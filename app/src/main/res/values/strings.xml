@@ -201,6 +201,8 @@
     <string name="ALERT_SECURE_INFO" translatable="true">Connection is secure</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Your information(for example, password or credit card numbers) is private when it is sent to this site</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy Settings</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Download File</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Download</string>
     <string name="ALERT_REPORT" translatable="true">Report</string>
     <string name="ALERT_REPORT_URL" translatable="true">Report Website</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">If you think this URL is illegal or disturbing, report it to us, so we can take legal action</string>

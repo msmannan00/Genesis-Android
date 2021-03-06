@@ -1,22 +1,26 @@
 package com.darkweb.genesissearchengine.helperManager;
 
 import android.annotation.SuppressLint;
-import android.app.DownloadManager;
 import android.app.IntentService;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.mozilla.gecko.util.HardwareUtils;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
-import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
+
+import static com.darkweb.genesissearchengine.constants.constants.CONST_PROXY_SOCKS;
+import static java.lang.Thread.sleep;
 
 public class downloadFileService extends IntentService
 {
+    private static final String PROXY_ADDRESS = CONST_PROXY_SOCKS;
+    private static final int PROXY_PORT = 9050;
     private static final String DOWNLOAD_PATH = "com.spartons.androiddownloadmanager_DownloadSongService_Download_path";
     private static final String DESTINATION_PATH = "com.spartons.androiddownloadmanager_DownloadSongService_Destination_path";
     public downloadFileService() {
@@ -37,50 +41,7 @@ public class downloadFileService extends IntentService
         startDownload(downloadPath);
     }
     private void startDownload(String downloadPath) {
-        String []fn = downloadPath.split("__");
-
-        try {
-            File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            Uri mDestinationUri = Uri.withAppendedPath(Uri.fromFile(file), fn[1]);
-
-            File myFile = new File(mDestinationUri.getPath());
-            if(myFile.exists())
-                myFile.delete();
-
-            Uri uri = Uri.parse(fn[0]); // Path where you want to download file.
-            DownloadManager manager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
-            DownloadManager.Request req = new DownloadManager.Request(uri);
-            req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fn[1]);
-            req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            manager.enqueue(req);
-        } catch ( ActivityNotFoundException e ) {
-            e.printStackTrace();
-            Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
-            startActivity(intent);
-        }
-
-
-        final String uri = fn[0];
-        final String filename = fn[1];
-        final String mimeType = "mimeType";
-
-        final DownloadManager.Request request = new DownloadManager.Request(Uri.parse(uri));
-        request.setMimeType(mimeType);
-
-        try {
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
-        } catch (IllegalStateException e) {
-            return;
-        }
-
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
-        try {
-            DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-            manager.enqueue(request);
-        } catch (RuntimeException ignored) {
-        }
-
+        String []fn = (downloadPath+"__"+"as").split("__");
+        pluginController.getInstance().onDownloadInvoke(Arrays.asList(fn[0],fn[1]), pluginEnums.eDownloadManager.M_DOWNLOAD_FILE);
     }
 }

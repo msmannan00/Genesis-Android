@@ -196,6 +196,7 @@ dependencies {
     implementation 'com.github.intelligo-systems:slight:1.1.3'
     implementation "org.mozilla.components:concept-fetch:70.0.5"
     implementation "org.mozilla.components:concept-base:70.0.9"
+    implementation 'com.coolerfall:android-http-download-manager:1.6.3'
 
 }
 

@@ -294,6 +294,21 @@ class messageManager
         });
     }
 
+    private void downloadSingle()
+    {
+        initializeDialog(R.layout.popup_download_url, Gravity.CENTER);
+        ((TextView) mDialog.findViewById(R.id.pDescription)).setText(mData.get(0).toString());
+        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
+            mDialog.dismiss();
+            final Handler handler = new Handler();
+            Runnable runnable = () -> {
+                mEvent.invokeObserver(mData, M_DOWNLOAD_SINGLE);
+            };
+            handler.postDelayed(runnable, 1000);
+        });
+    }
+
     private void rateApp()
     {
         initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
@@ -540,6 +555,11 @@ class messageManager
                 case M_SECURE_CONNECTION:
                     /*VERIFIED*/
                     openSecureConnectionPopup();
+                    break;
+
+                case M_DOWNLOAD_SINGLE:
+                    /*VERIFIED*/
+                    downloadSingle();
                     break;
 
                 case M_UPDATE_BRIDGES:

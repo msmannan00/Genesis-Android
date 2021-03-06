@@ -2,10 +2,13 @@ package org.torproject.android.service;
 
 import android.text.TextUtils;
 
+import androidx.core.app.NotificationCompat;
+
 import net.freehaven.tor.control.EventHandler;
 
 import org.torproject.android.service.util.ExternalIPFetcher;
 import org.torproject.android.service.util.Prefs;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -91,8 +94,13 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
 
             int iconId = R.drawable.ic_stat_tor_logo;
 
-            if (read > 0 || written > 0)
-                iconId = R.drawable.ic_stat_tor_logo;
+            if (read > 0 || written > 0){
+                if(orbotLocalConstants.mIsTorInitialized){
+                    iconId = R.drawable.ic_stat_tor_logo;
+                }else {
+                    iconId = R.drawable.ic_stat_starting_tor_logo;
+                }
+            }
 
             String sb = formatCount(read) +
                     " \u2193" +
@@ -134,8 +142,9 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
     public void circuitStatus(String status, String circID, String path) {
 
         /* once the first circuit is complete, then announce that Orbot is on*/
-        if (mService.getCurrentStatus() == STATUS_STARTING && TextUtils.equals(status, "BUILT"))
+        if (mService.getCurrentStatus() == STATUS_STARTING && TextUtils.equals(status, "BUILT")) {
             mService.sendCallbackStatus(STATUS_ON);
+        }
 
         if (Prefs.useDebugLogging()) {
             StringBuilder sb = new StringBuilder();

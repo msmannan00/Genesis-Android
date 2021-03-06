@@ -110,10 +110,6 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-                android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-                android:windowSoftInputMode="adjustPan" />
-        <activity
                 android:name="com.darkweb.genesissearchengine.appManager.landingManager.landingController"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
                 android:windowSoftInputMode="adjustPan" />
@@ -207,6 +203,12 @@
 
         <receiver android:name = "com.darkweb.genesissearchengine.helperManager.userEngagementNotification" />
 
+        <receiver android:name="com.darkweb.genesissearchengine.helperManager.downloadNotification" android:exported="false">
+            <intent-filter>
+                <action android:name="Download_Cancelled" />
+            </intent-filter>
+        </receiver>
+
         <receiver
                 android:name="org.torproject.android.service.StartTorReceiver"
                 android:exported="true"
@@ -217,6 +219,17 @@
                 <action android:name="org.torproject.android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+
+        <provider
+            android:authorities="com.darkweb.genesissearchengine.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
     </application>
 
 </manifest>
