@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -29,7 +28,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -57,7 +55,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 
 class homeViewController
@@ -98,6 +95,8 @@ class homeViewController
     private NestedScrollView mNestedScroll;
     private ProgressBar mProgressBarIndeterminate;
     private FragmentContainerView mTabFragment;
+    private LinearLayout mTopBarContainer;
+    private ImageView mSearchLock;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
@@ -105,7 +104,7 @@ class homeViewController
     private boolean isFullScreen = false;
     private MovementMethod mSearchBarMovementMethod = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -138,6 +137,8 @@ class homeViewController
         this.mNestedScroll = pNestedScroll;
         this.mProgressBarIndeterminate = pProgressBarIndeterminate;
         this.mTabFragment = pTabFragment;
+        this.mTopBarContainer = pTopBarContainer;
+        this.mSearchLock = pSearchLock;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -151,6 +152,7 @@ class homeViewController
         this.mBlockerFullSceen.setVisibility(View.GONE);
         mSearchBarMovementMethod = mSearchbar.getMovementMethod();
         mSearchbar.setMovementMethod(null);
+        mTopBarContainer.getLayoutTransition().setDuration(200);
 
         final Handler handler = new Handler();
         handler.postDelayed(() ->
@@ -200,9 +202,32 @@ class homeViewController
         }
     }
 
+    public int getSearchLogo(){
+        switch (status.sSettingSearchStatus) {
+            case constants.CONST_BACKEND_GENESIS_URL:
+                return R.drawable.genesis;
+            case constants.CONST_BACKEND_GOOGLE_URL:
+                return R.drawable.google;
+            case constants.CONST_BACKEND_DUCK_DUCK_GO_URL:
+                return R.drawable.duckduckgo;
+            case constants.CONST_BACKEND_BING_URL:
+                return R.drawable.bing;
+            default:
+                return R.drawable.wikipedia;
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void initSearchBarFocus(boolean pStatus){
         if(!pStatus){
             this.mVoiceInput.animate().setDuration(0).alpha(0).withEndAction(() -> {
+                try {
+                    mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
+                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 mVoiceInput.setVisibility(View.GONE);
                 mNewTab.setVisibility(View.VISIBLE);
                 mMenu.setVisibility(View.VISIBLE);
@@ -221,6 +246,15 @@ class homeViewController
 
             });
         }else {
+            try {
+                mSearchLock.setImageDrawable(mContext.getResources().getDrawable(getSearchLogo()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            mSearchLock.setColorFilter(null);
+            mSearchLock.clearColorFilter();
+            mSearchLock.setImageTintList(null);
             mSearchbar.setMovementMethod(mSearchBarMovementMethod);
             mSearchbar.setFadingEdgeLength(helperMethod.pxFromDp(0));
             Drawable drawable;
@@ -433,7 +467,7 @@ class homeViewController
         mSplashScreen.setVisibility(View.GONE);
         mBlocker.setEnabled(false);
     }
-
+//C:\Users\MSi\AppData\Local\Android\ndk
     private boolean mIsAnimating = false;
     public void splashScreenDisable(){
         mTopBar.setAlpha(1);

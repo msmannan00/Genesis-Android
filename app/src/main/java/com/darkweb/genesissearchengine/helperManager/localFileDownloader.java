@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.helperManager;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,6 +16,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.FileProvider;
+
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import org.torproject.android.service.util.Prefs;
@@ -46,10 +49,12 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
     private String mFileName="";
     private float mTotalByte;
     private float mDownloadByte;
+    private String mURL;
 
     public localFileDownloader(Context pContext, String pURL, String pFileName, int pID) {
         this.context = pContext;
         this.mFileName = pFileName;
+        this.mURL = pURL;
         this.mID = pID;
 
 
@@ -172,8 +177,18 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         build.setSmallIcon(R.drawable.ic_download_complete);
         build.setProgress(0, 0, false);
         build.setAutoCancel(true);
+        build.setOngoing(false);
         build.setPriority(Notification.PRIORITY_LOW);
         mNotifyManager.notify(mID, build.build());
+
+        DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//","content://");
+        File mFile = new File(mPath);
+
+
+        Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", mFile);
+        dm.addCompletedDownload(mFileName, mURL, false, helperMethod.getMimeType(uri.toString()), mFile.getAbsolutePath(), mFile.length(), false);
+
     }
 
     public void onCancel(){

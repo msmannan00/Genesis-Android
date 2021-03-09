@@ -8,6 +8,7 @@ import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Vibrator;
 import android.text.SpannableString;
@@ -29,6 +31,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
 import android.widget.ActionMenuView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -39,10 +42,13 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
 
+import com.darkweb.genesissearchengine.appManager.homeManager.FakeLauncherActivity;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.example.myapplication.R;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.IOException;
@@ -519,9 +525,17 @@ public class helperMethod
         return   (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
+    public static String getMimeType(String url) {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        }
+        return type;
+    }
+
     public static void openFile(File url, Context context) {
         try {
-
             Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", url);
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -550,7 +564,10 @@ public class helperMethod
             } else if (url.toString().contains(".wav") || url.toString().contains(".mp3")) {
                 // WAV audio file
                 intent.setDataAndType(uri, "audio/x-wav");
-            } else if (url.toString().contains(".gif")) {
+            }  else if (url.toString().contains(".apk")) {
+
+            }
+              else if (url.toString().contains(".gif")) {
                 // GIF file
                 intent.setDataAndType(uri, "image/gif");
             } else if (url.toString().contains(".jpg") || url.toString().contains(".jpeg") || url.toString().contains(".png")) {
@@ -564,7 +581,8 @@ public class helperMethod
                 // Video files
                 intent.setDataAndType(uri, "video/*");
             } else {
-                intent.setDataAndType(uri, "*/*");
+                context.startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+                return;
             }
 
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -615,6 +633,14 @@ public class helperMethod
         Date date = new Date();
         sdf.applyPattern("E | MMM dd,yyyy");
         return sdf.format(date);
+    }
+
+    public static Drawable getDrawableXML(Context pContext, int pSrc) throws IOException, XmlPullParserException {
+        Drawable mDrawable;
+        Resources res = pContext.getResources();
+        mDrawable = Drawable.createFromXml(res, res.getXml(pSrc));
+
+        return mDrawable;
     }
 
     public static String getCurrentTime(){

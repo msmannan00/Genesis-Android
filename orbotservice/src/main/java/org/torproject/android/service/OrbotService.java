@@ -535,7 +535,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             }).start();
 
-            //mVpnManager = new OrbotVpnManager(this);
+            mVpnManager = new OrbotVpnManager(this);
 
         } catch (Exception e) {
             //what error here

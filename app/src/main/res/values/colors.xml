@@ -115,6 +115,7 @@
     <color name="white_darker">#f8f8f8</color>
     <color name="white_dark">#f2f2f2</color>
     <color name="white">#ffffff</color>
+    <color name="clear_tint">#00000000 </color>
 
     <color name="dark_red">#910808</color>
     <color name="dark_red_soft">#f32323</color>

@@ -33,9 +33,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     private ArrayList<historyRowModel> mHintList;
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
-    private String mSearch;
     private ImageView[] mWebIcon = new ImageView[15];
-    private boolean mCounters=false;
 
     public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
         this.mHintList = new ArrayList();
@@ -168,7 +166,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                                 break;
                             }
                         }
-                        mContext.runOnUiThread(() -> mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable()));
+                        mContext.runOnUiThread(() -> {
+                            mHintWebIcon.setClipToOutline(true);
+                            mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                        });
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

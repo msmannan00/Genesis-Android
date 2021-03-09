@@ -136,7 +136,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:padding="3dp"
-                        android:src="@drawable/genesis_logo"
+                        android:src="@drawable/genesis"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
@@ -217,7 +217,7 @@
                         android:clickable="false"
                         android:padding="6dp"
                         android:layout_marginStart="7dp"
-                        android:src="@drawable/duckduckgologo"
+                        android:src="@drawable/duckduckgo"
                         android:contentDescription="@string/GENERAL_TODO" />
 
                     <LinearLayout
@@ -375,7 +375,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
-                        android:padding="3dp"
+                        android:padding="5dp"
                         android:src="@drawable/bing"
                         android:contentDescription="@string/GENERAL_TODO" />
 

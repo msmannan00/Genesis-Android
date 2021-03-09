@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.google.android.gms.ads.*;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static com.darkweb.genesissearchengine.constants.status.sPaidStatus;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
 
@@ -32,8 +35,17 @@ class adManager
     private void initializeBannerAds(){
         if(!sPaidStatus){
             AdRequest request = new AdRequest.Builder().build();
-            mBannerAds.loadAd(request);
-            admobListeners();
+            new Timer().schedule(new TimerTask()
+            {
+                @Override
+                public void run()
+                {
+                    mAppContext.runOnUiThread(() -> {
+                        mBannerAds.loadAd(request);
+                        admobListeners();
+                    });
+                }
+            }, 1500);
         }
     }
 

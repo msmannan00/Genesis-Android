@@ -42,17 +42,17 @@
 
             <ImageView
                 android:id="@+id/pHintWebIcon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="5dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="11dp"
                 android:layout_marginBottom="3dp"
-                android:background="@color/clear_alpha"
+                android:background="@xml/hox_round_outline"
                 android:contentDescription="@string/GENERAL_TODO"
+                android:src="@xml/ic_baseline_browser"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/pHindTypeIcon"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@xml/ic_baseline_browser"
-                app:layout_constraintVertical_bias="0.578"/>
+                app:layout_constraintVertical_bias="0.578" />
 
             <TextView
                 android:id="@+id/pHeader"
