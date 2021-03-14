@@ -1,7 +1,9 @@
 <resources>
 
     <!-- Application Strings -->
+    <string name="mode">Day</string>
     <string name="app_name" translatable="false">Genesis</string>
+    <string name="GENERAL_DEFAULT_TEXT" translatable="true">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="GENERAL_SEARCH_HINT" translatable="true">Search or type a web address</string>
     <string name="GENERAL_FIND_HINT" translatable="true">Find in page</string>
     <string name="GENERAL_SEARCH_ENGINE" translatable="true">Search Engine</string>
@@ -201,7 +203,7 @@
     <string name="ALERT_SECURE_INFO" translatable="true">Connection is secure</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Your information(for example, password or credit card numbers) is private when it is sent to this site</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy Settings</string>
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Download File</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Download</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Download</string>
     <string name="ALERT_REPORT" translatable="true">Report</string>
     <string name="ALERT_REPORT_URL" translatable="true">Report Website</string>

@@ -24,6 +24,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -172,12 +173,12 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         Log.d(OrbotConstants.TAG, msg);
 
         if (Prefs.useDebugLogging()) {
-            sendCallbackLogMessage(msg);
+            //sendCallbackLogMessage(msg);
         }
     }
 
     public void logException(String msg, Exception e) {
-        if (Prefs.useDebugLogging()) {
+        if (1==1 || Prefs.useDebugLogging()) {
             Log.e(OrbotConstants.TAG, msg, e);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             e.printStackTrace(new PrintStream(baos));
@@ -260,6 +261,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             if (mNotifyBuilder == null) {
                 mNotifyBuilder = new NotificationCompat.Builder(this)
                         .setContentTitle("Genesis")
+                        .setColor(Color.parseColor("#84989f"))
                         .setSmallIcon(R.drawable.ic_stat_tor_logo);
 
                 mNotifyBuilder.setContentIntent(pendIntent);
@@ -310,7 +312,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         self = this;
-        showToolbarNotification("", NOTIFY_ID, R.drawable.ic_stat_tor_logo);
+        showToolbarNotification("", NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
 
         if (intent != null)
             exec(new IncomingIntentRouter(intent));
@@ -474,7 +476,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         try {
             mHandler = new Handler();
 
-            appBinHome = getFilesDir();//getDir(TorServiceConstants.DIRECTORY_TOR_BINARY, Application.MODE_PRIVATE);
+            appBinHome = getFilesDir();
             if (!appBinHome.exists())
                 appBinHome.mkdirs();
 
@@ -795,7 +797,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             String version = prefs.getString(PREF_BINARY_TOR_VERSION_INSTALLED, null);
             logNotice("checking binary version: " + version);
 
-            showToolbarNotification(getString(R.string.status_starting_up), NOTIFY_ID, R.drawable.ic_stat_tor_logo);
+            showToolbarNotification(getString(R.string.status_starting_up), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
             //sendCallbackLogMessage(getString(R.string.status_starting_up));
             //logNotice(getString(R.string.status_starting_up));
 
@@ -1197,6 +1199,9 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     private void sendCallbackLogMessage(String logMessage)
     {
 
+        if(logMessage.contains("Bootstrapped 100%")){
+            orbotLocalConstants.mIsTorInitialized = true;
+        }
         mHandler.post(() -> {
             Intent intent = new Intent(LOCAL_ACTION_LOG);
             intent.putExtra(LOCAL_EXTRA_LOG, logMessage);
@@ -1230,9 +1235,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     protected void sendCallbackStatus(String currentStatus) {
 
         //Log.i("MFUCKER","MFUCKER : " + currentStatus);
-        if(currentStatus.equals("ON")){
-            orbotLocalConstants.mIsTorInitialized = true;
-        }
         //Log.i("FUCKSS","FUCKSS:"+currentStatus);
         mCurrentStatus = currentStatus;
         Intent intent = getActionStatusIntent(currentStatus);
@@ -1818,7 +1820,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                 {
                     //sendCallbackStatus(STATUS_STARTING);
                     logNotice(context.getString(R.string.network_connectivity_is_good_waking_tor_up_));
-                    showToolbarNotification(getString(R.string.status_activated),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
+                    showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
                 }
 
             }

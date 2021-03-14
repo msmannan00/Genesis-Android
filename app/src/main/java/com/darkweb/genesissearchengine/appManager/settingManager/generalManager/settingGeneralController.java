@@ -210,6 +210,8 @@ public class settingGeneralController extends AppCompatActivity {
                     dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME,status.sTheme));
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_UPDATE_THEME_BLOCKER, Collections.singletonList(enums.Theme.THEME_DARK));
                     mIsThemeChanging = false;
+                }else {
+                    mIsThemeChanging = false;
                 }
             }else if(view.getId() == R.id.pOption2) {
                 if(status.sTheme != enums.Theme.THEME_LIGHT) {
@@ -219,6 +221,8 @@ public class settingGeneralController extends AppCompatActivity {
                     dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME,status.sTheme));
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_UPDATE_THEME_BLOCKER, Collections.singletonList(enums.Theme.THEME_LIGHT));
                     mIsThemeChanging = false;
+                }else {
+                    mIsThemeChanging = false;
                 }
             }else {
                 if(status.sTheme != enums.Theme.THEME_DEFAULT) {
@@ -227,6 +231,8 @@ public class settingGeneralController extends AppCompatActivity {
                     mSettingGeneralModel.onTrigger(settingGeneralEnums.eGeneralModel.M_SELECT_THEME, Collections.singletonList(enums.Theme.THEME_DEFAULT));
                     dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME,status.sTheme));
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_UPDATE_THEME_BLOCKER, Collections.singletonList(enums.Theme.THEME_DEFAULT));
+                    mIsThemeChanging = false;
+                }else {
                     mIsThemeChanging = false;
                 }
             }

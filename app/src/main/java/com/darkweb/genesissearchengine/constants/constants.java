@@ -20,13 +20,16 @@ public class constants
     /*URL CONSTANTS*/
 
     public static final String CONST_GENESIS_URL_CACHED = "resource://android/assets/homepage/homepage.html";
+    public static final String CONST_GENESIS_URL_CACHED_DARK = "resource://android/assets/homepage/homepage-dark.html";
     public static final String CONST_GENESIS_ERROR_CACHED = "resource://android/assets/error/error.html";
+    public static final String CONST_GENESIS_ERROR_CACHED_DARK = "resource://android/assets/error/error-dark.html";
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://boogle.store/";
     public static final String CONST_GENESIS_REFERENCE_WEBSITES = "https://drive.google.com/uc?export=download&id=1lOmukKOPYHApBFyTDkaRPoAwm59E_YEE";
     public static final String CONST_GENESIS_DOMAIN_URL = "https://boogle.store";
     public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pGlobalTimeVerificationToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
+    public static final String CONST_GENESIS_HELP_URL_CACHE_DARK = "resource://android/assets/help/help-dark.html";
     public static final String CONST_GENESIS_HELP_URL = "https://boogle.store/help";
     public static final String CONST_GENESIS_HELP_URL_SUB = "boogle.store/help";
     public static final String CONST_BACKEND_GENESIS_URL = "https://boogle.store/search?q=$s&p_num=1&s_type=all";

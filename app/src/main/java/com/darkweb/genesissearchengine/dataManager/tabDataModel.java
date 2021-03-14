@@ -58,7 +58,7 @@ class tabDataModel
         mTabs.add(0,mTabModel);
 
         if(mTabs.size()>20){
-            closeTab(mTabs.get(mTabs.size()-1).getSession());
+            closeTab(mTabs.get(mTabs.size()-1).getSession(), mTabs.get(mTabs.size()-1).getmId());
         }
 
         if(pIsDataSavable){
@@ -89,14 +89,27 @@ class tabDataModel
 
     }
 
-    void closeTab(geckoSession mSession) {
-        for(int counter = 0; counter< mTabs.size(); counter++){
-            if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
-            {
-                databaseController.getInstance().execSQL("DELETE FROM tab WHERE mid='" + mTabs.get(counter).getmId() + "'",null);
-                mTabs.remove(counter);
-                break;
+    void closeTab(geckoSession mSession,Object pID) {
+        if(pID == null){
+            String mID = strings.GENERIC_EMPTY_STR;
+            for(int counter = 0; counter< mTabs.size(); counter++){
+                if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
+                {
+                    mTabs.remove(counter);
+                    mID = mTabs.get(counter).getmId();
+                    break;
+                }
             }
+            databaseController.getInstance().execSQL("DELETE FROM tab WHERE mid='" + mID + "'",null);
+        }else {
+            for(int counter = 0; counter< mTabs.size(); counter++){
+                if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
+                {
+                    mTabs.remove(counter);
+                    break;
+                }
+            }
+            databaseController.getInstance().execSQL("DELETE FROM tab WHERE mid='" + pID + "'",null);
         }
     }
 
@@ -189,7 +202,7 @@ class tabDataModel
     };
 
     // int isLoading = 0;
-    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, NestedGeckoView pGeckoView){
+    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, NestedGeckoView pGeckoView, boolean pOpenTabView){
 
         new Thread(){
             public void run(){
@@ -217,7 +230,9 @@ class tabDataModel
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
-                activityContextManager.getInstance().getHomeController().onOpenTabReady();
+                if(pOpenTabView){
+                    activityContextManager.getInstance().getHomeController().onOpenTabReady();
+                }
 
             }
         }.start();
@@ -255,7 +270,7 @@ class tabDataModel
             moveTabToTop((geckoSession)pData.get(0));
         }
         else if(pCommands == dataEnums.eTabCommands.CLOSE_TAB){
-            closeTab((geckoSession)pData.get(0));
+            closeTab((geckoSession)pData.get(0), pData.get(1));
         }
         else if(pCommands == dataEnums.eTabCommands.M_CLEAR_TAB){
             clearTab();
@@ -273,7 +288,7 @@ class tabDataModel
             return getSuggestions((String) pData.get(0));
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_PIXEL){
-            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1),  (ImageView) pData.get(2), (NestedGeckoView) pData.get(3));
+            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1),  (ImageView) pData.get(2), (NestedGeckoView) pData.get(3), (Boolean) pData.get(4));
         }
         else if(pCommands == dataEnums.eTabCommands.M_HOME_PAGE){
             return getHomePage();

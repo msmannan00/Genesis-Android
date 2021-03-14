@@ -8,18 +8,26 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -58,6 +66,7 @@ class tabViewController
         this.mBlocker = pBlocker;
         this.mRecycleView = pRecycleView;
 
+        initUI();
         initPostUI();
         onHoldInteraction();
     }
@@ -72,9 +81,34 @@ class tabViewController
         mTabs.setText(String.valueOf(pCount));
     }
 
+    public void initUI(){
+        mMenuButton.setAlpha(0f);
+        mMenuButton.animate().setStartDelay(200).setDuration(350).alpha(1);
+        mMenuButton.setVisibility(View.VISIBLE);
+    }
+
+    public void initExitUI(){
+        //mMenuButton.setVisibility(View.GONE);
+    }
+
     private void initPostUI(){
         mRecycleView.setAlpha(1);
         mContext.getView().setBackgroundColor(Color.WHITE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = mContext.getActivity().getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            }
+            else {
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                    mContext.getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+                mContext.getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(mContext.getActivity(), R.color.c_background));
+            }
+        }
     }
 
     public void onOpenTabMenu(View view) {
@@ -159,12 +193,20 @@ class tabViewController
             float width = height / 3;
 
             if(pDX > 0){
-                pCanvas.drawARGB(0, 241, 243, 244);
+                if(status.sTheme == enums.Theme.THEME_DARK){
+                    pCanvas.drawARGB(255, 59, 57, 70);
+                }else {
+                    pCanvas.drawARGB(255, 230, 230, 230);
+                }
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
                 RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
                 pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
             } else {
-                pCanvas.drawARGB(0, 241, 243, 244);
+                if(status.sTheme == enums.Theme.THEME_DARK){
+                    pCanvas.drawARGB(255, 59, 57, 70);
+                }else {
+                    pCanvas.drawARGB(255, 230, 230, 230);
+                }
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
                 RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
                 pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
@@ -193,6 +235,8 @@ class tabViewController
             onHideUndoDialog();
         }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)){
             onDrawSwipableBackground((Canvas)pData.get(0), (RecyclerView.ViewHolder)pData.get(1), (float)pData.get(2), (int)pData.get(3));
+        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_EXIT)){
+            initExitUI();
         }
         return null;
     }

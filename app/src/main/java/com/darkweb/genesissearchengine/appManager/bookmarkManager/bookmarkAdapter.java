@@ -80,47 +80,11 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         onVerifyLongSelectedURL();
 
         ArrayList<bookmarkRowModel> p_model_list = mPassedList;
-        int m_date_state = -1;
-        int m_last_day = -1;
         for(int counter = 0; counter< p_model_list.size(); counter++){
 
             if(pFilterEnabled){
                 if(!p_model_list.get(counter).getHeader().toLowerCase().contains(this.mFilter.toLowerCase()) && !p_model_list.get(counter).getDescription().toLowerCase().contains(this.mFilter)){
                     continue;
-                }
-            }
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(p_model_list.get(counter).getDate());
-
-            int m_date_1 = cal.get(Calendar.DAY_OF_YEAR);
-            cal.setTime(Calendar.getInstance().getTime());
-            int m_date_2 = cal.get(Calendar.DAY_OF_YEAR);
-
-            float diff = m_date_2-m_date_1;
-
-            if(diff==0){
-                if(m_date_state!=1 && p_model_list.get(counter).getID()!=-2){
-                    this.mModelList.add(new bookmarkRowModel("Today ",null,-1));
-                    mRealID.add(m_real_counter);
-                    mRealIndex.add(m_real_counter);
-                    m_date_state = 1;
-                }
-            }else if (diff>=1){
-
-                if(m_date_state!=2 || m_last_day!=(int)(Math.ceil(diff/7)*7)){
-                    m_last_day = (int)(Math.ceil(diff/7)*7);
-                    this.mModelList.add(new bookmarkRowModel("Last " + m_last_day + " Days",null,-1));
-                    mRealID.add(m_real_counter);
-                    mRealIndex.add(m_real_counter);
-                    m_date_state = 2;
-                }
-            }else {
-                if(m_date_state!=3){
-                    this.mModelList.add(new bookmarkRowModel("Older ",null,-1));
-                    mRealID.add(m_real_counter);
-                    mRealIndex.add(m_real_counter);
-                    m_date_state = 3;
                 }
             }
 
@@ -179,7 +143,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         mLongSelectedDate.clear();
         mLongSelectedIndex.clear();
         mLongSelectedID.clear();
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 
     private String getSelectedURL(){
@@ -227,7 +191,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             }
             if(!pIsForced){
                 if(mLongSelectedID.size()==0){
-                    notifyDataSetChanged();
+                    //notifyDataSetChanged();
                 }
                 mLongSelectedDate.add(pDate);
                 mLongSelectedIndex.add(pUrl);
@@ -254,7 +218,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             mLongSelectedIndex.remove(pUrl);
             mLongSelectedID.remove((Integer) pId);
             if(mLongSelectedID.size()==0){
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
             }
             onVerifyLongSelectedURL();
         } catch (Exception e) {
@@ -375,7 +339,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
         boolean mDateVerify = false;
         if(mPassedList.size()>0){
-            if(mCurrentList.size()>0 && mCurrentList.get(pIndex-1).getDescription()==null && (mCurrentList.size()>pIndex+1 && mCurrentList.get(pIndex+1).getDescription()==null || mCurrentList.size()==pIndex+1)){
+            if(mCurrentList.size()>0 && (mCurrentList.size()>pIndex+1 || mCurrentList.size()==pIndex+1)){
                 mDateVerify = true;
             }
         }else {
@@ -386,11 +350,9 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         int size = mCurrentList.size();
 
         if(mDateVerify){
-            notifyItemRemoved(pIndex-1);
-            mCurrentList.remove(pIndex-1);
-            notifyItemRemoved(pIndex-1);
-            mCurrentList.remove(pIndex-1);
-            notifyItemRangeChanged(pIndex-1, mCurrentList.size());
+            notifyItemRemoved(pIndex);
+            mCurrentList.remove(pIndex);
+            notifyItemRangeChanged(pIndex, mCurrentList.size());
         }else {
             mCurrentList.remove(pIndex);
 

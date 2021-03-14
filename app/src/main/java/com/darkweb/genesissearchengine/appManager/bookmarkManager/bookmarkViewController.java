@@ -283,14 +283,14 @@ class bookmarkViewController
             float width = height / 3;
 
             if(pDX > 0){
-                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
+                mPainter.setColor(ContextCompat.getColor(mContext, R.color.holo_gray_light_row));
                 RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), pDX,(float) itemView.getBottom());
                 pCanvas.drawRect(background, mPainter);
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
                 RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
                 pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
             } else {
-                mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_list_item_current));
+                mPainter.setColor(ContextCompat.getColor(mContext, R.color.holo_gray_light_row));
                 RectF background = new RectF((float) itemView.getRight() + pDX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
                 pCanvas.drawRect(background, mPainter);
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);

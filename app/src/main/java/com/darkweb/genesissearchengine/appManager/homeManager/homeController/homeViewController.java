@@ -55,6 +55,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_DOMAIN_URL;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 
 class homeViewController
@@ -160,7 +163,7 @@ class homeViewController
             mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
         }, 1500);
 
-        updateBannerAdvertStatus(false);
+        updateBannerAdvertStatus(false, false);
     }
 
     public void initTopBarPadding(){
@@ -192,20 +195,27 @@ class homeViewController
     public void onShowTabContainer(){
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
             mTabFragment.setVisibility(View.VISIBLE);
-            mTabFragment.animate().setDuration(250).alpha(1);
+            mTabFragment.setTranslationY(-1 * helperMethod.pxFromDp(15));
+            mTabFragment.animate()
+                    .setDuration(250)
+                    .translationY(0)
+                    .alpha(1f);
         }
     }
 
     public void onHideTabContainer(){
         if(mTabFragment.getAlpha()==1){
-            mTabFragment.animate().setDuration(250).alpha(0).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
+            mTabFragment.animate()
+                    .setDuration(250)
+                    .alpha(0f).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
         }
+        mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.M_INIT_TAB_COUNT);
     }
 
     public int getSearchLogo(){
         switch (status.sSettingSearchStatus) {
             case constants.CONST_BACKEND_GENESIS_URL:
-                return R.drawable.genesis;
+                return R.drawable.ic_genesis_vector;
             case constants.CONST_BACKEND_GOOGLE_URL:
                 return R.drawable.google;
             case constants.CONST_BACKEND_DUCK_DUCK_GO_URL:
@@ -218,16 +228,33 @@ class homeViewController
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
+    public void onUpdateSearchIcon(int mStatus){
+        try {
+            if(mStatus==0){
+                mSearchLock.setColorFilter(null);
+                mSearchLock.clearColorFilter();
+                mSearchLock.setImageTintList(null);
+                mSearchLock.setImageDrawable(mContext.getResources().getDrawable(getSearchLogo()));
+            }
+            else if(mStatus==1){
+                mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
+                mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
+            }
+            else if(mStatus==2){
+                mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_icon_tint));
+                mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_browser));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void initSearchBarFocus(boolean pStatus){
         if(!pStatus){
             this.mVoiceInput.animate().setDuration(0).alpha(0).withEndAction(() -> {
-                try {
-                    mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
-                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
+                onUpdateSearchIcon(1);
                 mVoiceInput.setVisibility(View.GONE);
                 mNewTab.setVisibility(View.VISIBLE);
                 mMenu.setVisibility(View.VISIBLE);
@@ -246,28 +273,10 @@ class homeViewController
 
             });
         }else {
-            try {
-                mSearchLock.setImageDrawable(mContext.getResources().getDrawable(getSearchLogo()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-            mSearchLock.setColorFilter(null);
-            mSearchLock.clearColorFilter();
-            mSearchLock.setImageTintList(null);
+            onUpdateSearchIcon(0);
             mSearchbar.setMovementMethod(mSearchBarMovementMethod);
             mSearchbar.setFadingEdgeLength(helperMethod.pxFromDp(0));
-            Drawable drawable;
-            Resources res = mContext.getResources();
-            try {
-                if(status.sSettingEnableVoiceInput){
-                    drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_keyboard_voice));
-                }else {
-                    drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_search_small));
-                }
-                mVoiceInput.setImageDrawable(drawable);
-            } catch (Exception ignored) {
-            }
 
             final Handler handler = new Handler();
             handler.postDelayed(() ->
@@ -295,6 +304,25 @@ class homeViewController
     }
 
     void initTab(int count){
+        mNewTab.animate().cancel();
+        mNewTab.animate().withLayer()
+                .rotationX(60)
+                .alpha(0.4f)
+                .setDuration(80)
+                .withEndAction(
+                        new Runnable() {
+                            @Override public void run() {
+                                // second quarter turn
+                                mNewTab.setRotationX(-60);
+                                mNewTab.animate().withLayer()
+                                        .rotationX(0)
+                                        .alpha(1)
+                                        .setDuration(100)
+                                        .start();
+                            }
+                        }
+                ).start();
+
         mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
     }
 
@@ -635,8 +663,8 @@ class homeViewController
         }
     }
 
-    void updateBannerAdvertStatus(boolean status){
-        if(status){
+    void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded){
+        if(status && pIsAdvertLoaded){
             if(mBannerAds.getAlpha()==0){
                 mBannerAds.animate().cancel();
                 mBannerAds.setAlpha(0);
@@ -655,8 +683,11 @@ class homeViewController
 
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
-    void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText){
-        if(!mSearchbar.hasFocus() || pClearText){
+    void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText, boolean pBypassFocus){
+        if(url.equals(CONST_GENESIS_URL_CACHED) || url.equals(CONST_GENESIS_URL_CACHED_DARK)){
+            url = CONST_GENESIS_DOMAIN_URL;
+        }
+        if(!mSearchbar.hasFocus() || pClearText || pBypassFocus){
             int delay = 0;
              handlerLocalUrl = url;
 
@@ -685,7 +716,7 @@ class homeViewController
 
     public void onUpdateStatusBarTheme(String pTheme, boolean mForced)
     {
-        if(mSplashScreen.getAlpha()<=0){
+        if(mSplashScreen.getAlpha()<=0 && status.sTheme != enums.Theme.THEME_DARK){
             int mColor = -1;
             try{
                 mColor = Color.parseColor(pTheme);
@@ -693,7 +724,7 @@ class homeViewController
                 mColor = -1;
             }
 
-            if(pTheme!=null && status.sToolbarTheme && mColor!=-1){
+            if(pTheme!=null && status.sToolbarTheme && mColor!=-1 && helperMethod.getColorDensity(mColor)<0.80){
                 mTopBar.setBackgroundColor(mColor);
                 mSearchbar.setTextColor(helperMethod.invertedGrayColor(mColor));
                 mSearchbar.setHintTextColor(helperMethod.invertedGrayColor(mColor));
@@ -929,10 +960,10 @@ class homeViewController
     }
 
     private int defaultFlag = 0;
-    void onFullScreenUpdate(boolean status){
-        int value = !status ? 1 : 0;
+    void onFullScreenUpdate(boolean pStatus){
+        int value = !pStatus ? 1 : 0;
 
-        if(status) {
+        if(pStatus) {
             isFullScreen = true;
         }else {
             this.mBlockerFullSceen.setVisibility(View.VISIBLE);
@@ -940,13 +971,13 @@ class homeViewController
             isFullScreen = false;
         }
 
-        if(status){
+        if(pStatus){
             onProgressBarUpdate(100, false);
             this.mBlockerFullSceen.setVisibility(View.VISIBLE);
             this.mBlockerFullSceen.setAlpha(0f);
             this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(1).withEndAction(() -> {
-                mTopBar.setClickable(!status);
-                disableEnableControls(!status, mTopBar);
+                mTopBar.setClickable(!pStatus);
+                disableEnableControls(!pStatus, mTopBar);
                 mTopBar.setAlpha(value);
                 mBannerAds.setVisibility(View.GONE);
 
@@ -976,8 +1007,8 @@ class homeViewController
             });
         }
         else {
-            mTopBar.setClickable(!status);
-            disableEnableControls(!status, mTopBar);
+            mTopBar.setClickable(!pStatus);
+            disableEnableControls(!pStatus, mTopBar);
             mTopBar.setAlpha(value);
             mBannerAds.setVisibility(View.GONE);
 
@@ -994,7 +1025,11 @@ class homeViewController
             initTopBarPadding();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                if(status.sTheme == enums.Theme.THEME_DARK){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(0);
+                }else {
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
             }else {
                 mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             }

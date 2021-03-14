@@ -35,17 +35,8 @@ class adManager
     private void initializeBannerAds(){
         if(!sPaidStatus){
             AdRequest request = new AdRequest.Builder().build();
-            new Timer().schedule(new TimerTask()
-            {
-                @Override
-                public void run()
-                {
-                    mAppContext.runOnUiThread(() -> {
-                        mBannerAds.loadAd(request);
-                        admobListeners();
-                    });
-                }
-            }, 1500);
+            mBannerAds.loadAd(request);
+            admobListeners();
         }
     }
 

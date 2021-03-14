@@ -66,6 +66,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
 import javax.net.ssl.HttpsURLConnection;
@@ -313,6 +315,10 @@ public class helperMethod
         }
     }
 
+    public static double getColorDensity(int pColor) {
+        return ColorUtils.calculateLuminance(pColor);
+    }
+
     public static void shareApp(AppCompatActivity context, String p_share, String p_title) {
         ShareCompat.IntentBuilder.from(context)
                 .setType("text/plain")
@@ -347,7 +353,7 @@ public class helperMethod
         }
     }
 
-    static String getHost(String link){
+    static public String getHost(String link){
         URL url;
         try
         {
@@ -407,6 +413,13 @@ public class helperMethod
         }
 
         return "Not Defined";
+    }
+    public static Boolean isValidURL(String url)
+    {
+        Pattern p = Pattern.compile("((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)");
+        Matcher m;
+        m=p.matcher(url);
+        return m.matches();
     }
 
     public static String capitalizeString(String string) {
@@ -490,6 +503,15 @@ public class helperMethod
         intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
         intent.putExtra("android.provider.extra.APP_PACKAGE", pContext.getPackageName());
         pContext.startActivity(intent);
+    }
+
+    public static boolean isDayMode(AppCompatActivity pContext)
+    {
+        if(pContext.getResources().getString(R.string.mode).equals("Day")){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public static String getDomainName(String url)

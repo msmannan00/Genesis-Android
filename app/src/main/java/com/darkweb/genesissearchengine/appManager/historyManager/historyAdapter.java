@@ -163,8 +163,6 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                         if(mDateVerify){
                             notifyItemRemoved(m_counter_inner-1);
                             mCurrentList.remove(m_counter_inner-1);
-                            //notifyItemRemoved(m_counter_inner-1);
-                            //mCurrentList.remove(m_counter_inner-1);
                             notifyItemRangeChanged(m_counter_inner-1, mCurrentList.size());
                         }else {
                             notifyItemRemoved(m_counter_inner);
@@ -183,7 +181,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         mLongSelectedDate.clear();
         mLongSelectedIndex.clear();
         mLongSelectedID.clear();
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 
     private String getSelectedURL(){
@@ -231,7 +229,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             }
             if(!pIsForced){
                 if(mLongSelectedID.size()==0){
-                    notifyDataSetChanged();
+                    // notifyDataSetChanged();
                 }
                 mLongSelectedDate.add(pDate);
                 mLongSelectedIndex.add(pUrl);
@@ -258,7 +256,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             mLongSelectedIndex.remove(pUrl);
             mLongSelectedID.remove((Integer) pId);
             if(mLongSelectedID.size()==0){
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
             }
             onVerifyLongSelectedURL();
         } catch (Exception e) {
@@ -384,7 +382,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 }
             }else {
                 mCurrentList.clear();
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
                 return;
             }
             int size = mCurrentList.size();
@@ -402,6 +400,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 notifyItemRangeChanged(pIndex, mCurrentList.size());
                 notifyItemChanged(mCurrentList.size()-1);
             }
+        initializeModelWithDate(false);
     }
 
     /*View Holder Extensions*/

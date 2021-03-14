@@ -4,14 +4,28 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
+import com.darkweb.genesissearchengine.appManager.landingManager.landingController;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 
-public class externalNavigationController extends Activity {
+public class externalNavigationController extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(status.sSettingIsAppStarted){
+            finish();
+            Uri data = externalNavigationController.this.getIntent().getData();
+            activityContextManager.getInstance().getHomeController().onLoadURL(data.toString());
+            return;
+        }
         setContentView(R.layout.home_view);
         Intent intent = new Intent(this.getIntent());
         intent.setClassName(this.getApplicationContext(), homeController.class.getName());

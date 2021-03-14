@@ -309,6 +309,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     notifyItemChanged(mModelList.size()-1);
                 }
             }else if(v.getId() == R.id.pRemoveRow){
+                v.setEnabled(false);
+                v.setFocusableInTouchMode(false);
+                v.setClickable(false);
                 for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
                     if(mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getmId())){
                         mSelectedList.remove(mCounter);

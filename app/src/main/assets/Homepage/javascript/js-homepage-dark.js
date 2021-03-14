@@ -35,10 +35,10 @@ class homepage {
 
   onLoadStaticWebpage(pData){
   	if(this.mLastLinkID.localeCompare("") != 0){
-		document.getElementById(this.mLastLinkID).style.backgroundColor = "#ffffff";
+		document.getElementById(this.mLastLinkID).style.backgroundColor = "#1c1b21";
   	}
 
-	document.getElementById(pData[0]).style.backgroundColor = "#f2f2f2";
+	document.getElementById(pData[0]).style.backgroundColor = "#0c0b0e";
 	window.open(pData[1],"_self");
 	this.mLastLinkID = pData[0];
   }

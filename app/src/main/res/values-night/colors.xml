@@ -42,7 +42,7 @@
     <color name="c_seekbar_thumb">#33cccc</color>
     <color name="c_ripple">#808080</color>
     <color name="c_ripple_v1">#0c0b0e</color>
-    <color name="c_ripple_v2">#ededed</color>
+    <color name="c_ripple_v2">#18171c</color>
     <color name="c_ripple_v3">#24222a</color>
     <color name="c_button_text">#1c1b21</color>
     <color name="c_button_background">#3c3946</color>
@@ -64,6 +64,7 @@
     <color name="c_lock_tint">#f2f2f2</color>
     <color name="c_lock_text">#00b300</color>
     <color name="c_text_v6">#a6a6a6</color>
+    <color name="c_home_side">#28282a</color>
 
     <color name="c_alert_text">#ffffff</color>
     <color name="c_alert_text_inverted">#242B64</color>
@@ -109,6 +110,7 @@
     <color name="button_gray">#d9d9d9</color>
     <color name="button_light">#e3e3e3</color>
     <color name="holo_gray_light">#f2f2f2</color>
+    <color name="holo_gray_light_row">#3b3946</color>
     <color name="holo_light">#e6e6e6</color>
     <color name="white_darker">#f8f8f8</color>
     <color name="white_dark">#f2f2f2</color>

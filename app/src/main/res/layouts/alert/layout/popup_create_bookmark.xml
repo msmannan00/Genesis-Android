@@ -62,7 +62,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
-            android:background="@xml/gx_generic_input"
+            android:background="@xml/gx_generic_input_create_bookmark"
             android:ems="10"
             android:elevation="3dp"
             android:hint="@string/ALERT_TITLE_ADD"

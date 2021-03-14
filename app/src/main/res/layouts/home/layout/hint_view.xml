@@ -49,6 +49,7 @@
                 android:background="@xml/hox_round_outline"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:src="@xml/ic_baseline_browser"
+                app:tint="@color/c_text_v6"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/pHindTypeIcon"
                 app:layout_constraintTop_toTopOf="parent"

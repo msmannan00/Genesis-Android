@@ -81,10 +81,11 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
                 .setChannelId(mID + "")
                 .setAutoCancel(false)
                 .setDefaults(0)
+                .setColor(Color.parseColor("#84989f"))
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 .addAction(R.drawable.ic_download, "Cancel",pendingIntent)
-                .setSmallIcon(R.drawable.ic_download);
+                .setSmallIcon(android.R.drawable.stat_sys_download);
 
         build.setOngoing(Prefs.persistNotifications());
 
@@ -140,13 +141,21 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
 
             }
 
+            build.setContentText("saving file");
+            build.setSmallIcon(android.R.drawable.stat_sys_download);
+            mNotifyManager.notify(mID, build.build());
+
             output.flush();
             output.close();
-
             mStream.close();
 
         } catch (Exception ex) {
-            Log.i("ERROR", Objects.requireNonNull(ex.getMessage()));
+            build.setContentText("error occured while downloading file");
+            build.setAutoCancel(true);
+            build.setOngoing(false);
+            build.setPriority(Notification.PRIORITY_LOW);
+            build.setSmallIcon(android.R.drawable.stat_sys_download);
+            mNotifyManager.notify(mID, build.build());
         }
 
         return null;
@@ -172,11 +181,12 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, mID, snoozeIntentPost, PendingIntent.FLAG_UPDATE_CURRENT);
 
         build.setContentIntent(pendingIntent);
-        build.addAction(R.drawable.ic_download, "Open",pendingIntent);
+        build.addAction(android.R.drawable.stat_sys_download, "Open",pendingIntent);
         build.setContentText("Download complete");
-        build.setSmallIcon(R.drawable.ic_download_complete);
+        build.setSmallIcon(R.xml.ic_check);
         build.setProgress(0, 0, false);
         build.setAutoCancel(true);
+        build.setColor(Color.parseColor("#212d45"));
         build.setOngoing(false);
         build.setPriority(Notification.PRIORITY_LOW);
         mNotifyManager.notify(mID, build.build());

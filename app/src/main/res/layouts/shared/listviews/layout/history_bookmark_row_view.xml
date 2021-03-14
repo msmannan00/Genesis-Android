@@ -40,6 +40,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="43dp"
                 android:layout_height="43dp"
+                app:cardElevation="0dp"
                 android:padding="20dp"
                 android:translationZ="1dp"
                 android:layout_marginStart="-48dp"

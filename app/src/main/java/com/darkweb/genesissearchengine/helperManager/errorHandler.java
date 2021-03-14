@@ -2,7 +2,12 @@ package com.darkweb.genesissearchengine.helperManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.example.myapplication.R;
 
 import org.mozilla.geckoview.WebRequestError;
@@ -11,6 +16,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_ERROR_CACHED;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_ERROR_CACHED_DARK;
 
 public class errorHandler
 {
@@ -23,7 +31,12 @@ public class errorHandler
             BufferedReader reader = null;
             StringBuilder builder = new StringBuilder();
             try {
-                stream = mContext.getResources().getAssets().open("error/error.html");
+                if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext)){
+                    stream = mContext.getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED);
+                }else {
+                    stream = mContext.getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
+                }
+
                 reader = new BufferedReader(new InputStreamReader(stream));
 
                 String line;
@@ -173,7 +186,11 @@ public class errorHandler
             BufferedReader reader = null;
             StringBuilder builder = new StringBuilder();
             try {
-                stream = mContext.getResources().getAssets().open("error/error.html");
+                if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext)){
+                    stream = mContext.getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED);
+                }else {
+                    stream = mContext.getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
+                }
                 reader = new BufferedReader(new InputStreamReader(stream));
 
                 String line;

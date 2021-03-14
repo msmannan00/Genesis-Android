@@ -3,6 +3,7 @@
 
 var Commands  = {
     onLoadReferenceWebsites  : "onLoadReferenceWebsites",
+    onClickReferenceWebsite  : "onClickReferenceWebsite"
 };
 
 /*Links*/

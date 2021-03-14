@@ -45,13 +45,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
         this.mHintList.addAll(pHintList.subList(0,maxCounter));
         this.mContext = pContext;
         this.mEvent = pEvent;
-        this.mSearch = pSearch;
     }
 
     public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch){
-        //mHintList.clear();
         mHintList = pHintList;
-        mSearch = pSearch;
         notifyDataSetChanged();
     }
 
@@ -103,12 +100,14 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             mHintWebIcon = itemView.findViewById(R.id.pHintWebIcon);
             mHindTypeIconTemp = new ImageView(mContext);
 
-            if(mWebIcon[getLayoutPosition()]!=null){
-                mHintWebIcon = itemView.findViewById(R.id.pHintWebIcon);
-                mHintWebIcon.setImageDrawable(mWebIcon[getLayoutPosition()].getDrawable());
-                mHindTypeIconTemp.setImageDrawable(mWebIcon[getLayoutPosition()].getDrawable());
+            if(getLayoutPosition() < mWebIcon.length){
+                if(mWebIcon[getLayoutPosition()]!=null){
+                    mHintWebIcon = itemView.findViewById(R.id.pHintWebIcon);
+                    mHintWebIcon.setImageDrawable(mWebIcon[getLayoutPosition()].getDrawable());
+                    mHindTypeIconTemp.setImageDrawable(mWebIcon[getLayoutPosition()].getDrawable());
+                }
+                mWebIcon[getLayoutPosition()] = mHintWebIcon;
             }
-            mWebIcon[getLayoutPosition()] = mHintWebIcon;
 
             if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
                 mHeaderSingle.setText(model.getHeader());
@@ -126,7 +125,12 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             }
 
             mHeader.setText(model.getHeader());
-            mMoveURL.setTag(model.getDescription());
+            if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
+                mMoveURL.setTag(model.getHeader());
+            }else {
+                mMoveURL.setTag(model.getDescription());
+            }
+
             mURL.setText(model.getDescription());
             Drawable mDrawable = null;
             Resources res = itemView.getContext().getResources();
@@ -167,6 +171,9 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                             }
                         }
                         mContext.runOnUiThread(() -> {
+                            mHintWebIcon.setColorFilter(null);
+                            mHintWebIcon.clearColorFilter();
+                            mHintWebIcon.setImageTintList(null);
                             mHintWebIcon.setClipToOutline(true);
                             mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
                         });

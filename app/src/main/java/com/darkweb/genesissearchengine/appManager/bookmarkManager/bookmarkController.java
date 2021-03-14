@@ -57,7 +57,6 @@ public class bookmarkController extends AppCompatActivity
     private bookmarkAdapter mbookmarkAdapter;
     private LinearLayout mHeaderContainer;
     private TextView mTitle;
-
     /*Private Views*/
 
     private ImageView mEmptyListNotification;

@@ -1,11 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
-import android.graphics.Canvas;
-import android.view.View;
-
-import androidx.recyclerview.widget.RecyclerView;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class tabModel
@@ -35,6 +35,13 @@ class tabModel
     }
 
     private void onClearBackupWithoutClose(){
+        for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
+            dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mBackupIndex.get(mCounter).getSession(), mBackupIndex.get(mCounter).getmId()));
+        }
+        mBackupIndex.clear();
+    }
+
+    private void onClearBackupRetainDatabase(){
         mBackupIndex.clear();
     }
 
@@ -61,6 +68,9 @@ class tabModel
         }
         if(pCommands.equals(tabEnums.eModelCallback.M_CLEAR_BACKUP_WITHOUT_CLOSE)){
             onClearBackupWithoutClose();
+        }
+        if(pCommands.equals(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE)){
+            onClearBackupRetainDatabase();
         }
         if(pCommands.equals(tabEnums.eModelCallback.M_LOAD_BACKUP)){
             return onLoadBackup();
