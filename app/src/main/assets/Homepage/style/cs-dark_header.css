@@ -12,7 +12,7 @@
 @media only screen and (max-width: 943px) {
     .lh_light_header__catagory_bold_mobile {
         font-weight: bold;
-        color: #cccccc !important;
+        color: #f0f0f0 !important;
     }
 }
 
@@ -20,7 +20,7 @@
     color:#000000;
     text-align: right;
     padding-top: 0px;
-    border-bottom-color:#000000 !important;
+    border-bottom-color:#121212 !important;
     padding-top: 11px;
     padding-bottom: 15px;
     border-style: solid;border-right-width: 0;
@@ -47,7 +47,7 @@
 
 .lh_light_header__bold{
     font-weight: bold;
-    color: #1967d2 !important;
+    color: #5f9aec !important;
 }
 
 .lh_light_header__catagory-spacing-right{

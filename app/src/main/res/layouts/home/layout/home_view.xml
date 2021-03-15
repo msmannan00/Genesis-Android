@@ -761,6 +761,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <include
+        android:id="@+id/pPopupLoadNewTab"
+        layout="@layout/popup_load_new_tab"
+        android:translationZ="5dp"
+        android:visibility="gone" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mTabFragment"
         android:layout_width="match_parent"

@@ -66,8 +66,6 @@ public class geckoClients
             geckoView.setSession(mSession);
         }
         mSession.onSetInitializeFromStartup();
-
-
         onUpdateFont();
     }
 
@@ -185,6 +183,11 @@ public class geckoClients
         mSession.setLoading(status);
     }
 
+
+    public void initURL(String url) {
+        mSession.initURL(url);
+    }
+
     public void loadURL(String url) {
         if(mSession.onGetInitializeFromStartup()){
             mSession.initURL(url);
@@ -201,9 +204,10 @@ public class geckoClients
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
-            }else if(url.contains(constants.CONST_GENESIS_HELP_URL_SUB)){
+            }else if(url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)){
                 try{
                     mSession.initURL(constants.CONST_GENESIS_HELP_URL);
+
                     if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(context)){
                         mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
                     }else {
@@ -244,7 +248,6 @@ public class geckoClients
     }
 
     public void onBackPressed(boolean isFinishAllowed){
-        mSession.goBackSession();
         if(mSession.canGoBack()){
             mSession.goBackSession();
         }

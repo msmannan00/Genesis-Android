@@ -27,6 +27,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_DOMAIN_URL;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
+
 public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 {
     /*Private Variables*/
@@ -224,18 +231,26 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     }catch (Exception ignored){}
                 }
 
+                String mURL = model.getSession().getCurrentURL();
+                if(mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+                    mURL = CONST_GENESIS_DOMAIN_URL;
+                }
+                else if(mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                    mURL = CONST_GENESIS_HELP_URL;
+                }
+
                 mItemSelectionMenu.setVisibility(View.GONE);
                 if(model.getSession().getTitle().equals("$TITLE") || model.getSession().getTitle().toLowerCase().equals("loading")){
-                    mHeader.setText(helperMethod.getDomainName(model.getSession().getCurrentURL()));
+                    mHeader.setText(helperMethod.getDomainName(mURL));
                 }else {
                     mHeader.setText(model.getSession().getTitle());
                 }
-                mDescription.setText(model.getSession().getCurrentURL());
+                mDescription.setText(mURL);
                 mDate.setText(model.getDate());
                 mWebThumbnail.setImageBitmap(model.getBitmap());
 
                 if(getLayoutPosition()==0){
-                    mEvent.invokeObserver(Arrays.asList(mWebThumbnail, model.getSession().getCurrentURL()), enums.etype.fetch_thumbnail);
+                    mEvent.invokeObserver(Arrays.asList(mWebThumbnail, mURL), enums.etype.fetch_thumbnail);
                 }
 
                 if(mSelectedList.contains(model.getSession().getSessionID())){
@@ -260,21 +275,25 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 mLoadSession.setOnClickListener(this);
             }
 
-            mItemSelectionMenuReference.animate().cancel();
-            if(this.getLayoutPosition()==mModelList.size()-1){
-                if(mSelectedList.size()>0){
-                    itemView.setVisibility(View.GONE);
-                    mLongPressMenuEnabled = true;
+            try{
+                mItemSelectionMenuReference.animate().cancel();
+                if(this.getLayoutPosition()==mModelList.size()-1){
+                    if(mSelectedList.size()>0){
+                        itemView.setVisibility(View.GONE);
+                        mLongPressMenuEnabled = true;
+                    }else {
+                        itemView.setVisibility(View.VISIBLE);
+                        mLongPressMenuEnabled = false;
+                        mItemSelectionMenuButton.animate().cancel();
+                        mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
+                    }
                 }else {
                     itemView.setVisibility(View.VISIBLE);
                     mLongPressMenuEnabled = false;
-                    mItemSelectionMenuButton.animate().cancel();
                     mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
                 }
-            }else {
-                itemView.setVisibility(View.VISIBLE);
-                mLongPressMenuEnabled = false;
-                mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
+            }catch (Exception ex){
+                ex.printStackTrace();
             }
         }
 

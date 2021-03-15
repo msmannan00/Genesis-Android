@@ -257,6 +257,8 @@
     <string name="ALERT_DATA_CLEARED_INFO" translatable="true">Private data cleared successfully. Some default settings will require application to restart. Now you can safely continue browsing</string>
     <string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">Tab Closed</string>
     <string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Undo</string>
+    <string name="ALERT_OPEN_NEW_TAB" translatable="true">New tab opened</string>
+    <string name="ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Switch</string>
 
     <!-- Privacy Policy -->
     <string name="PRIVACY_HEADER" translatable="true">Privacy Policy</string>

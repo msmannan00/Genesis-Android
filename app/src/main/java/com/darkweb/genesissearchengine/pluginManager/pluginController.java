@@ -235,7 +235,7 @@ public class pluginController
                 mHomeController.onManualDownload(pData.get(0).toString());
             }
             else if(pEventType.equals(M_OPEN_LINK_NEW_TAB)){
-                mHomeController.onOpenLinkNewTab(pData.get(0).toString());
+                mHomeController.postNewLinkTabAnimationInBackgroundTrigger(pData.get(0).toString());
             }
             else if(pEventType.equals(M_OPEN_LINK_CURRENT_TAB)){
                 mHomeController.onLoadURL(pData.get(0).toString());

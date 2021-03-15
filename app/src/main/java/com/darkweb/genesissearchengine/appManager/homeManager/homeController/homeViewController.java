@@ -48,6 +48,7 @@ import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +57,9 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_DOMAIN_URL;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
@@ -100,6 +104,7 @@ class homeViewController
     private FragmentContainerView mTabFragment;
     private LinearLayout mTopBarContainer;
     private ImageView mSearchLock;
+    private View mPopupLoadNewTab;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
@@ -107,7 +112,7 @@ class homeViewController
     private boolean isFullScreen = false;
     private MovementMethod mSearchBarMovementMethod = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -142,6 +147,7 @@ class homeViewController
         this.mTabFragment = pTabFragment;
         this.mTopBarContainer = pTopBarContainer;
         this.mSearchLock = pSearchLock;
+        this.mPopupLoadNewTab = pPopupLoadNewTab;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -192,6 +198,25 @@ class homeViewController
         }
     }
 
+    public void onShowLoadTabDialog() {
+        mPopupLoadNewTab.findViewById(R.id.pBlockerUndo).setVisibility(View.GONE);
+        mPopupLoadNewTab.animate().cancel();
+        mPopupLoadNewTab.setAlpha(0);
+        mPopupLoadNewTab.setVisibility(View.VISIBLE);
+        mPopupLoadNewTab.animate().setDuration(350).alpha(1);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(this::onHideLoadTabDialog, 2000);
+    }
+
+    public void onHideLoadTabDialog() {
+        mPopupLoadNewTab.findViewById(R.id.pBlockerUndo).setVisibility(View.VISIBLE);
+        mPopupLoadNewTab.animate().cancel();
+        mPopupLoadNewTab.animate().setDuration(350).alpha(0).withEndAction(() -> {
+            mPopupLoadNewTab.setVisibility(View.GONE);
+        });
+    }
+
     public void onShowTabContainer(){
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
             mTabFragment.setVisibility(View.VISIBLE);
@@ -208,8 +233,8 @@ class homeViewController
             mTabFragment.animate()
                     .setDuration(250)
                     .alpha(0f).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
+            mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.M_INIT_TAB_COUNT);
         }
-        mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.M_INIT_TAB_COUNT);
     }
 
     public int getSearchLogo(){
@@ -684,8 +709,12 @@ class homeViewController
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
     void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText, boolean pBypassFocus){
-        if(url.equals(CONST_GENESIS_URL_CACHED) || url.equals(CONST_GENESIS_URL_CACHED_DARK)){
+
+        if(url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
             url = CONST_GENESIS_DOMAIN_URL;
+        }
+        else if(url.startsWith(CONST_GENESIS_HELP_URL_CACHE) || url.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+            url = CONST_GENESIS_HELP_URL;
         }
         if(!mSearchbar.hasFocus() || pClearText || pBypassFocus){
             int delay = 0;

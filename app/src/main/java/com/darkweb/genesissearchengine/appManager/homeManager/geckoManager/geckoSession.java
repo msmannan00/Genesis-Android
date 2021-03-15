@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Matrix;
@@ -60,6 +61,8 @@ import java.util.Objects;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
@@ -387,7 +390,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
             /* Its Absence causes delay on first launch*/
             if(mCurrentURL.contains("boogle.store")){
-                event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update_forced);
+                event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             }
 
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
@@ -434,7 +437,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     public void onFirstContentfulPaint(@NonNull GeckoSession var1) {
         isFirstPaintExecuted = true;
 
-        if(mPreviousErrorPage || mCurrentURL.contains("boogle.store") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+        if(mPreviousErrorPage || mCurrentURL.contains("boogle.store") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.toString().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
         }else {
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, true), enums.etype.M_ON_BANNER_UPDATE);
@@ -703,6 +706,9 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         return mTheme;
     }
     boolean canGoBack(){
+        if(mHistoryList==null || mHistoryList.size()==0){
+            return false;
+        }
         return mCanGoBack;
     }
 
@@ -746,16 +752,25 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     }
 
     void goBackSession(){
-        if(mHistoryList!=null){
-            int index = mHistoryList.getCurrentIndex()-1;
 
-            if(mHistoryList!=null && index>=0 && index<mHistoryList.size()){
-                event.invokeObserver(Arrays.asList(mHistoryList.get(index).getUri(),mSessionID), enums.etype.start_proxy);
-                new Handler().postDelayed(this::goBack, 100);
+        if(mHistoryList!=null){
+            stop();
+            int index = mHistoryList.getCurrentIndex()-1;
+            initURL(mHistoryList.get(index).getUri());
+            if(mHistoryList.size()>index && index>0){
+                event.invokeObserver(Arrays.asList(mHistoryList.get(index).getUri(), mSessionID), enums.etype.start_proxy);
             }
+
+            final Handler handler = new Handler();
+            handler.postDelayed(this::goBack, 100);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }
         else {
-            goBack();
+            final Handler handler = new Handler();
+            handler.postDelayed(this::goBack, 100);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }
     }
 
@@ -763,16 +778,21 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
         if(mHistoryList!=null)
         {
+            stop();
             int index = mHistoryList.getCurrentIndex() + 1;
-
-            if (mHistoryList != null && index >= 0 && index < mHistoryList.size())
-            {
-
+            initURL(mHistoryList.get(index).getUri());
+            if(mHistoryList.size()>index){
                 event.invokeObserver(Arrays.asList(mHistoryList.get(index).getUri(), mSessionID), enums.etype.start_proxy);
-                new Handler().postDelayed(this::goForward, 100);
             }
+            final Handler handler = new Handler();
+            handler.postDelayed(this::goForward, 100);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }else {
-            goForward();
+            final Handler handler = new Handler();
+            handler.postDelayed(this::goForward, 100);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
+            event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }
     }
 

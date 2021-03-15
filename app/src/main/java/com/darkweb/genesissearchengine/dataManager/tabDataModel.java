@@ -161,6 +161,15 @@ class tabDataModel
         }
     }
 
+    tabRowModel getRecentTab(){
+        if(mTabs.size()>0){
+            return mTabs.get(1);
+        }
+        else {
+            return null;
+        }
+    }
+
     tabRowModel getLastTab(){
         if(mTabs.size()>0){
             return mTabs.get(mTabs.size()-1);
@@ -262,6 +271,9 @@ class tabDataModel
         }
         else if(pCommands == dataEnums.eTabCommands.GET_CURRENT_TAB){
             return getCurrentTab();
+        }
+        else if(pCommands == dataEnums.eTabCommands.GET_RECENT_TAB){
+            return getRecentTab();
         }
         else if(pCommands == dataEnums.eTabCommands.GET_LAST_TAB){
             return getLastTab();
