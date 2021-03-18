@@ -57,6 +57,7 @@ public class status
     public static int sTheme = enums.Theme.THEME_DEFAULT;
     public static int sSettingCookieStatus = ContentBlocking.AntiTracking.DEFAULT;
     public static int sShowImages = -1;
+    public static int sWidgetResponse = enums.WidgetResponse.NONE;
 
     /*Bridge Status*/
 

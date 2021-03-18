@@ -165,12 +165,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/pEmptyView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="65dp"
+                android:gravity="center"
+                android:text="@string/HOME_TAB_EMPTY"
+                android:textColor="@color/c_text_v2"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pRecycleView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/c_background"
-                android:layout_marginTop="66dp"
+                android:layout_marginTop="-150dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer">
@@ -180,19 +191,6 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:text="@string/HOME_TAB_EMPTY"
-        android:textSize="15sp"
-        android:translationZ="1dp"
-        android:textStyle="bold"
-        android:textColor="@color/c_text_v2"
-        app:layout_constraintEnd_toEndOf="@+id/pHeaderContainer"
-        app:layout_constraintStart_toStartOf="@+id/pHeaderContainer"
-        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainer" />
 
     <include
         android:id="@+id/pPopupUndo"

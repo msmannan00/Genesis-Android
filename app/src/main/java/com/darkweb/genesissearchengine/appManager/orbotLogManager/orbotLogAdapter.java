@@ -71,7 +71,7 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com/search?q=tor logs " + mHeader.getText()));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://duckduckgo.com/?q=tor logs " + mHeader.getText()));
             intent.putExtra(SearchManager.QUERY, mDescription.getText());
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             activityContextManager.getInstance().getHomeController().startActivity(intent);

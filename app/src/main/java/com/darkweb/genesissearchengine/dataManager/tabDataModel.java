@@ -68,7 +68,7 @@ class tabDataModel
             params[2] = mTabModel.getSession().getTheme();
             String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
-            databaseController.getInstance().execSQL("INSERT INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params);
+            databaseController.getInstance().execSQL("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params);
         }
     }
 
@@ -77,12 +77,13 @@ class tabDataModel
         for(int counter = 0; counter< size; counter++){
             if(mTabs.size()>0){
                 mTabs.get(0).getSession().stop();
-                mTabs.get(0).getSession().closeSession();
+                mTabs.get(0).getSession().close();
                 mTabs.remove(0);
             }
         }
         if(mTabs.size()>0){
-            mTabs.get(0).getSession().closeSession();
+            mTabs.get(0).getSession().close();
+            mTabs.remove(0);
         }
 
         databaseController.getInstance().execSQL("DELETE FROM tab WHERE 1",null);
@@ -90,11 +91,15 @@ class tabDataModel
     }
 
     void closeTab(geckoSession mSession,Object pID) {
+        mSession.stop();
+        mSession.close();
         if(pID == null){
             String mID = strings.GENERIC_EMPTY_STR;
             for(int counter = 0; counter< mTabs.size(); counter++){
                 if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
                 {
+                    mTabs.get(counter).getSession().stop();
+                    mTabs.get(counter).getSession().close();
                     mTabs.remove(counter);
                     mID = mTabs.get(counter).getmId();
                     break;
@@ -105,6 +110,8 @@ class tabDataModel
             for(int counter = 0; counter< mTabs.size(); counter++){
                 if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
                 {
+                    mTabs.get(counter).getSession().stop();
+                    mTabs.get(counter).getSession().close();
                     mTabs.remove(counter);
                     break;
                 }

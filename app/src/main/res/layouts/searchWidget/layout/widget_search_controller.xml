@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin"
+    android:theme="@style/ThemeOverlay.GenesisAndroid.AppWidgetContainer">
+
+    <LinearLayout
+        android:id="@+id/pTopBarContainer"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:minWidth="187dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_height="49dp"
+        android:animateLayoutChanges="true"
+        android:gravity="start"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageButton
+            android:id="@+id/pSearchLogo"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/genesis"
+            android:translationZ="10dp"/>
+
+        <TextView
+            android:id="@+id/pSearchInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="-56dp"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="13dp"
+            android:layout_marginEnd="1dp"
+            android:animateLayoutChanges="true"
+            android:background="@xml/gx_generic_input_white"
+            android:fontFamily="sans-serif"
+            android:completionHintView="@layout/hint_view"
+            android:dropDownAnchor="@id/pSearchEngineBar"
+            android:ems="10"
+            android:fadingEdgeLength="20dp"
+            android:focusableInTouchMode="true"
+            android:hint="@string/GENERAL_HIDDEN_WEB"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:paddingStart="70dp"
+            android:paddingEnd="15dp"
+            android:popupElevation="0dp"
+            android:privateImeOptions="nm"
+            android:requiresFadingEdge="horizontal"
+            android:selectAllOnFocus="true"
+            android:textColor="@color/c_text_v1"
+            android:textColorHighlight="@color/text_color_highlight_v3"
+            android:textColorHint="#737373"
+            android:textCursorDrawable="@xml/gx_search_cursor_state"
+            android:textIsSelectable="false"
+            android:textSize="15sp">
+
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/pVoiceInput"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="-48dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="-5dp"
+            android:background="@color/white"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            android:src="@xml/ic_baseline_keyboard_voice"
+            android:tint="@color/c_navigation_tint"
+            android:visibility="visible" />
+
+    </LinearLayout>
+</RelativeLayout>

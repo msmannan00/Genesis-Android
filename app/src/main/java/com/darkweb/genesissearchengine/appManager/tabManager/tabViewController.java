@@ -85,6 +85,8 @@ class tabViewController
         mMenuButton.setAlpha(0f);
         mMenuButton.animate().setStartDelay(200).setDuration(350).alpha(1);
         mMenuButton.setVisibility(View.VISIBLE);
+
+        onHideUndoDialogInit();
     }
 
     public void initExitUI(){
@@ -180,6 +182,13 @@ class tabViewController
         mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE));
     }
 
+    private void onHideUndoDialogInit() {
+        mToastLayoutRoot.animate().cancel();
+        mToastLayoutRoot.setAlpha(0);
+        mToastLayoutRoot.setVisibility(View.GONE);
+    }
+
+
     private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
 
         Bitmap icon;
@@ -194,18 +203,18 @@ class tabViewController
 
             if(pDX > 0){
                 if(status.sTheme == enums.Theme.THEME_DARK){
-                    pCanvas.drawARGB(255, 59, 57, 70);
+                    pCanvas.drawARGB(150, 59, 57, 70);
                 }else {
-                    pCanvas.drawARGB(255, 230, 230, 230);
+                    pCanvas.drawARGB(150, 230, 230, 230);
                 }
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
                 RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
                 pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
             } else {
                 if(status.sTheme == enums.Theme.THEME_DARK){
-                    pCanvas.drawARGB(255, 59, 57, 70);
+                    pCanvas.drawARGB(150, 59, 57, 70);
                 }else {
-                    pCanvas.drawARGB(255, 230, 230, 230);
+                    pCanvas.drawARGB(150, 230, 230, 230);
                 }
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
                 RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);

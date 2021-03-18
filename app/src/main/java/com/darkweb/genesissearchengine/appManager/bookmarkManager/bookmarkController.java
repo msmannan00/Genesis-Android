@@ -19,12 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -35,6 +35,7 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.helperManager.theme;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -43,7 +44,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
 
 
@@ -60,7 +60,7 @@ public class bookmarkController extends AppCompatActivity
     /*Private Views*/
 
     private ImageView mEmptyListNotification;
-    private EditText mSearchInput;
+    private editTextManager mSearchInput;
     private RecyclerView mRecycleView;
     private Button mClearButton;
     private ImageButton mMenuButton;
@@ -85,6 +85,8 @@ public class bookmarkController extends AppCompatActivity
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+
+        theme.getInstance().onConfigurationChanged(this);
     }
 
     public void initializeListModel(){
@@ -120,6 +122,8 @@ public class bookmarkController extends AppCompatActivity
 
     public void initCustomListeners(){
         mClearButton.requestFocusFromTouch();
+
+        mSearchInput.setEventHandler(new edittextManagerCallback());
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) ->{
             if (actionId == EditorInfo.IME_ACTION_NEXT)
@@ -294,6 +298,18 @@ public class bookmarkController extends AppCompatActivity
         finish();
     }
 
+    public class edittextManagerCallback implements eventObserver.eventListener {
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type) {
+
+            if(e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)){
+                onHideSearch(null);
+                onClearMultipleSelection(null);
+            }
+            return null;
+        }
+    }
 
     /*Event Observer*/
 

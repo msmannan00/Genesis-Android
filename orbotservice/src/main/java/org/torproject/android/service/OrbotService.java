@@ -8,12 +8,14 @@
 package org.torproject.android.service;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -77,6 +79,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.StringTokenizer;
@@ -244,7 +247,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     @SuppressLint("NewApi")
     protected void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
-
         if(orbotLocalConstants.mHomeContext ==null){
             return;
         }
@@ -252,7 +254,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         PackageManager pm = getPackageManager();
         Intent mIntent = orbotLocalConstants.mHomeIntent;
         mIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (mNotifyBuilder == null) {
 
@@ -264,7 +265,35 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                         .setColor(Color.parseColor("#84989f"))
                         .setSmallIcon(R.drawable.ic_stat_tor_logo);
 
-                mNotifyBuilder.setContentIntent(pendIntent);
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+                    final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                    final List<ActivityManager.AppTask> recentTaskInfos = activityManager.getAppTasks();
+                    if (!recentTaskInfos.isEmpty()) {
+                        for (ActivityManager.AppTask appTaskTaskInfo: recentTaskInfos) {
+                            if (appTaskTaskInfo.getTaskInfo().baseIntent.getComponent().getPackageName().equals("com.darkweb.genesissearchengine")) {
+                                Intent resultIntent = null;
+                                try
+                                {
+                                    Class mClass = Class.forName("com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController"); //without the .class
+
+                                    resultIntent = new Intent(this, mClass);
+                                    resultIntent.setAction("android.intent.action.MAIN");
+                                    resultIntent.addCategory("android.intent.category.LAUNCHER");
+                                    PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    mNotifyBuilder.setContentIntent(resultPendingIntent);
+
+                                }
+                                catch (ClassNotFoundException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                }else {
+                     PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                     mNotifyBuilder.setContentIntent(pendIntent);
+                }
 
             }
 
@@ -276,9 +305,36 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             Intent intentRefresh = new Intent();
             intentRefresh.setAction(CMD_NEWNYM);
-            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(orbotLocalConstants.mHomeContext.get(), 0, intentRefresh, PendingIntent.FLAG_ONE_SHOT);
-            mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity),
-                    pendingIntentNewNym);
+
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+                final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                final List<ActivityManager.AppTask> recentTaskInfos = activityManager.getAppTasks();
+                if (!recentTaskInfos.isEmpty()) {
+                    for (ActivityManager.AppTask appTaskTaskInfo: recentTaskInfos) {
+                        if (appTaskTaskInfo.getTaskInfo().baseIntent.getComponent().getPackageName().equals("com.darkweb.genesissearchengine")) {
+                            Intent resultIntent = null;
+                            try
+                            {
+                                Class mClass = Class.forName("com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController"); //without the .class
+
+                                resultIntent = new Intent(this, mClass);
+                                resultIntent.setAction("android.intent.action.MAIN");
+                                resultIntent.addCategory("android.intent.category.LAUNCHER");
+                                PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                mNotifyBuilder.setContentIntent(resultPendingIntent);
+
+                            }
+                            catch (ClassNotFoundException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }else {
+                PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                mNotifyBuilder.setContentIntent(pendIntent);
+            }
 
             mNotifyBuilder.setOngoing(Prefs.persistNotifications());
 

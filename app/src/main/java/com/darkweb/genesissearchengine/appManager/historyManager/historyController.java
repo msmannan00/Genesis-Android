@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -59,7 +60,7 @@ public class historyController extends AppCompatActivity
     /*Private Views*/
 
     private ImageView mEmptyListNotification;
-    private EditText mSearchInput;
+    private editTextManager mSearchInput;
     private RecyclerView mRecycleView;
     private Button mClearButton;
     private ImageButton mMenuButton;
@@ -122,6 +123,8 @@ public class historyController extends AppCompatActivity
     }
 
     public void initCustomListeners(){
+        mSearchInput.setEventHandler(new edittextManagerCallback());
+
         mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -359,6 +362,19 @@ public class historyController extends AppCompatActivity
                     }
                 }
             }.start();
+        }
+    }
+
+    public class edittextManagerCallback implements eventObserver.eventListener {
+
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type) {
+
+            if(e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)){
+                onHideSearch(null);
+                onClearMultipleSelection(null);
+            }
+            return null;
         }
     }
 

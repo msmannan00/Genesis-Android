@@ -1,5 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -211,7 +213,7 @@ public class pluginController
                 mContextManager.getHistoryController().onclearData();
                 mHomeController.onClearSession();
                 dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
-                mHomeController.initTab(false);
+                mHomeController.initTab(true);
             }
             else if(pEventType.equals(M_CLEAR_BOOKMARK)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,pData);

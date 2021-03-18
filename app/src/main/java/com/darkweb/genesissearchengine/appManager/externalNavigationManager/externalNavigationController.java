@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
@@ -16,6 +17,10 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 
+import java.util.Collections;
+
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE_TAB_LINK;
+
 public class externalNavigationController extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,7 +28,15 @@ public class externalNavigationController extends AppCompatActivity {
         if(status.sSettingIsAppStarted){
             finish();
             Uri data = externalNavigationController.this.getIntent().getData();
-            activityContextManager.getInstance().getHomeController().onLoadURL(data.toString());
+            activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
+
+
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
+                startActivity(launchIntent);
+            }, 500);
+
             return;
         }
         setContentView(R.layout.home_view);
@@ -32,7 +45,7 @@ public class externalNavigationController extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Uri data = this.getIntent().getData();
         if(data!=null){
-            activityContextManager.getInstance().getHomeController().onLoadURL(data.toString());
+            activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
         }
         this.startActivity(intent);
 
@@ -46,7 +59,12 @@ public class externalNavigationController extends AppCompatActivity {
                 }
             }
         }.start();
+
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
+        startActivity(launchIntent);
+
     }
+
 
     @Override
     protected void onNewIntent(Intent intent)
@@ -54,7 +72,9 @@ public class externalNavigationController extends AppCompatActivity {
         super.onNewIntent(intent);
         Uri data = intent.getData();
         if(data!=null){
-            activityContextManager.getInstance().getHomeController().onLoadURL("https://bbc.com");
+            activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
+            startActivity(launchIntent);
         }
     }
 

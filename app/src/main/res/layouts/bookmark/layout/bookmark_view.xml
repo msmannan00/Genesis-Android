@@ -55,7 +55,7 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
                 android:id="@+id/pSearchInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

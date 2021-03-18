@@ -19,6 +19,12 @@ public class enums
         public static final int THEME_DEFAULT = 2;
     }
 
+    public static class WidgetResponse {
+        public static final int NONE = 0;
+        public static final int VOICE = 1;
+        public static final int SEARCHBAR = 2;
+    }
+
     public static class ImageQueueStatus {
         public static final int M_IMAGE_LOADING = 0;
         public static final int M_IMAGE_LOADED_SUCCESSFULLY = 1;

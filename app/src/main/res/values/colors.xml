@@ -3,7 +3,7 @@
     <color name="c_background">#ffffff</color>
     <color name="c_background_alpha">#501c1b21</color>
     <color name="c_background_keyboard">#999999</color>
-    <color name="c_background_inverted">#1c1b21</color>
+    <color name="c_background_inverted">#302e38</color>
     <color name="c_view_divier_background_inner">#ebebeb</color>
     <color name="c_view_divier_background_inner_v1">#e6e6e6</color>
     <color name="c_view_divier_background">#e6e6e6</color>

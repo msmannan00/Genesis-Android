@@ -390,6 +390,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
             /* Its Absence causes delay on first launch*/
             if(mCurrentURL.contains("boogle.store")){
+                mProgress = 5;
                 event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             }
 
@@ -763,12 +764,14 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
             final Handler handler = new Handler();
             handler.postDelayed(this::goBack, 100);
+            mProgress = 5;
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }
         else {
             final Handler handler = new Handler();
             handler.postDelayed(this::goBack, 100);
+            mProgress = 5;
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }
@@ -786,11 +789,13 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             }
             final Handler handler = new Handler();
             handler.postDelayed(this::goForward, 100);
+            mProgress = 5;
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }else {
             final Handler handler = new Handler();
             handler.postDelayed(this::goForward, 100);
+            mProgress = 5;
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
         }

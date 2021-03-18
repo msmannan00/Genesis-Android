@@ -63,7 +63,7 @@
                         tools:ignore="RtlHardcoded,UselessParent">
 
                         <ImageButton
-                            android:id="@+id/pSearchLock"
+                            android:id="@+id/pSearchLogo"
                             android:layout_width="31dp"
                             android:layout_height="31dp"
                             android:layout_gravity="center_vertical"
@@ -765,6 +765,7 @@
         android:id="@+id/pPopupLoadNewTab"
         layout="@layout/popup_load_new_tab"
         android:translationZ="5dp"
+        android:alpha="0"
         android:visibility="gone" />
 
     <androidx.fragment.app.FragmentContainerView

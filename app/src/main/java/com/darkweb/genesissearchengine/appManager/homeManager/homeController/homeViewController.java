@@ -48,7 +48,6 @@ import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.GeckoView;
-import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -170,6 +169,7 @@ class homeViewController
         }, 1500);
 
         updateBannerAdvertStatus(false, false);
+        expandTopBar();
     }
 
     public void initTopBarPadding(){
@@ -206,7 +206,7 @@ class homeViewController
         mPopupLoadNewTab.animate().setDuration(350).alpha(1);
 
         final Handler handler = new Handler();
-        handler.postDelayed(this::onHideLoadTabDialog, 2000);
+        handler.postDelayed(this::onHideLoadTabDialog, 2500);
     }
 
     public void onHideLoadTabDialog() {
@@ -275,7 +275,7 @@ class homeViewController
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void initSearchBarFocus(boolean pStatus){
+    public void initSearchBarFocus(boolean pStatus, boolean mIsKeyboardOpened){
         if(!pStatus){
             this.mVoiceInput.animate().setDuration(0).alpha(0).withEndAction(() -> {
 
@@ -322,9 +322,11 @@ class homeViewController
                 params.rightMargin = helperMethod.pxFromDp(17);
             }
 
-            mSearchbar.requestFocus();
-            InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(mSearchbar, InputMethodManager.SHOW_IMPLICIT);
+            if(!mIsKeyboardOpened){
+                mSearchbar.requestFocus();
+                InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(mSearchbar, InputMethodManager.SHOW_IMPLICIT);
+            }
         }
     }
 
@@ -357,7 +359,7 @@ class homeViewController
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
             }
             else {
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
@@ -560,9 +562,16 @@ class homeViewController
     }
 
     private void triggerPostUI(){
-        mAppBar.setExpanded(true,true);
+        expandTopBar();
         if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<10000){
             mProgressBar.animate().setStartDelay(0).alpha(1);
+        }
+    }
+
+    public void expandTopBar(){
+        Object mTag = mAppBar.getTag(R.id.expandableBar);
+        if(mTag!=null && (boolean) mTag){
+            mAppBar.setExpanded(true,true);
         }
     }
 
@@ -745,7 +754,7 @@ class homeViewController
 
     public void onUpdateStatusBarTheme(String pTheme, boolean mForced)
     {
-        if(mSplashScreen.getAlpha()<=0 && status.sTheme != enums.Theme.THEME_DARK){
+        if(mSplashScreen.getAlpha()<=0 && (status.sTheme != enums.Theme.THEME_DARK && status.sDefaultNightMode)){
             int mColor = -1;
             try{
                 mColor = Color.parseColor(pTheme);
@@ -826,7 +835,7 @@ class homeViewController
                 mVoiceInput.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
                 mSearchbar.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
 
-                if(status.sTheme == enums.Theme.THEME_DARK){
+                if(status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode){
                     View decorView = mContext.getWindow().getDecorView();
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }else {
@@ -919,7 +928,6 @@ class homeViewController
     void onNewTab(){
         mSearchbar.requestFocus();
         mSearchbar.selectAll();
-        ((InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
     void onUpdateLogs(String log){
@@ -1054,7 +1062,7 @@ class homeViewController
             initTopBarPadding();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if(status.sTheme == enums.Theme.THEME_DARK){
+                if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
                     mContext.getWindow().getDecorView().setSystemUiVisibility(0);
                 }else {
                     mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
