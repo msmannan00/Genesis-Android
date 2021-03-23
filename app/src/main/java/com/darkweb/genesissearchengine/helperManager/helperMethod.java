@@ -665,6 +665,8 @@ public class helperMethod
         return mDrawable;
     }
 
+
+
     public static String getCurrentTime(){
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);

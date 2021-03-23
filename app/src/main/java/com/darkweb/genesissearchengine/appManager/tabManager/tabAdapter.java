@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
 
     tabAdapter(ArrayList<tabRowModel> pModelList, eventObserver.eventListener event) {
+        this.mModelList.clear();
         this.mModelList.addAll(pModelList);
         mModelList.add(new tabRowModel(null, null,null));
         this.mEvent = event;
@@ -178,9 +180,11 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     }
 
     private void onTriggerURL(tabRowModel model){
-        mEvent.invokeObserver(Arrays.asList(model.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
-        mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_BACK_PRESSED);
-        mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_INIT_TAB_COUNT);
+        if(model.getSession()!=null){
+            mEvent.invokeObserver(Arrays.asList(model.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
+            mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_BACK_PRESSED);
+            mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_INIT_TAB_COUNT);
+        }
     }
 
     private int getSelectionSize(){
@@ -238,6 +242,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             mItemSelectionMenuReference = itemView.findViewById(R.id.pRowContainer);
             mBorder = itemView.findViewById(R.id.pBorder);
 
+            itemView.setClickable(true);
+
             if(model.getmId()==null){
                 mItemSelectionMenu.setVisibility(View.VISIBLE);
                 mItemSelectionMenuButton.setOnClickListener(this);
@@ -294,7 +300,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 mLoadSession.setOnClickListener(this);
             }
 
-            mItemSelectionMenuReference.animate().cancel();
             if(this.getLayoutPosition()==mModelList.size()-1){
                 if(mSelectedList.size()>0){
                     itemView.setVisibility(View.GONE);
@@ -306,6 +311,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
                 }
             }else {
+                if(model.getmId()!=null){
+                    mItemSelectionMenuReference.animate().cancel();
+                }
                 itemView.setVisibility(View.VISIBLE);
                 mLongPressMenuEnabled = false;
                 mItemSelectionMenuButton.animate().setDuration(250).alpha(1);

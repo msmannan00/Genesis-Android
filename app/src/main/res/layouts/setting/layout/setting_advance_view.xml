@@ -299,20 +299,19 @@
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="false"
                         android:id="@+id/pAdvanceOption1"
+                        android:layoutDirection="ltr"
                         android:onClick="onShowImages"
-                        android:orientation="horizontal"
-                        android:weightSum="7">
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="6"
+                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
                             <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="15dp"
                                 android:alpha="1"
                                 android:background="@android:color/transparent"
                                 android:clickable="false"
@@ -328,12 +327,12 @@
 
                         <RadioButton
                             android:id="@+id/pAdvanceImageOption1"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:clickable="false"
-                            android:layout_weight="1"
-                            android:layout_marginStart="50dp"
                             android:background="@android:color/transparent"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="7dp"
                             android:buttonTint="@color/c_radio_tint"
                             android:src="@xml/ic_arrow_right"
                             android:contentDescription="@string/GENERAL_TODO" />
@@ -353,12 +352,12 @@
                         android:id="@+id/pAdvanceOption2"
                         android:onClick="onShowImages"
                         android:clickable="false"
-                        android:orientation="horizontal"
-                        android:weightSum="7">
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="6"
+                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
                             <Button
@@ -380,13 +379,13 @@
 
                         <RadioButton
                             android:id="@+id/pAdvanceImageOption2"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:clickable="false"
-                            android:layout_weight="1"
-                            android:layout_marginStart="50dp"
                             android:background="@android:color/transparent"
                             android:buttonTint="@color/c_radio_tint"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="7dp"
                             android:src="@xml/ic_arrow_right"
                             android:contentDescription="@string/GENERAL_TODO" />
 

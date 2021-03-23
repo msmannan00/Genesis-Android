@@ -359,7 +359,8 @@
                             android:layout_width="match_parent"
                             android:layout_marginTop="10dp"
                             android:background="@xml/sx_border_left"
-                            android:paddingStart="4dp"
+                            android:paddingStart="0dp"
+                            android:layoutDirection="ltr"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             tools:ignore="RtlSymmetry">
@@ -377,6 +378,9 @@
                                 android:layout_height="wrap_content"
                                 android:background="@xml/gx_ripple_gray"
                                 android:onClick="onCookies"
+                                android:layoutDirection="ltr"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginStart="4dp"
                                 android:orientation="horizontal">
                                 <RadioButton
                                     android:id="@+id/pCookieRadioOption1"
@@ -385,9 +389,11 @@
                                     android:layout_height="50dp"
                                     android:paddingEnd="15dp"
                                     android:clickable="false"
+                                    android:background="@android:color/transparent"
                                     android:buttonTint="@color/c_radio_tint"
                                     android:textColor="@color/c_text_v1"
                                     android:layout_marginEnd="10dp"
+                                    android:layout_marginStart="10dp"
                                     android:paddingStart="15dp"
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION1"
                                     tools:ignore="RtlHardcoded" />
@@ -403,6 +409,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@xml/gx_ripple_gray"
+                                android:layoutDirection="ltr"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginStart="4dp"
                                 android:onClick="onCookies"
                                 android:orientation="horizontal">
                                 <RadioButton
@@ -413,6 +422,8 @@
                                     android:paddingEnd="15dp"
                                     android:textColor="@color/c_text_v1"
                                     android:layout_marginEnd="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@android:color/transparent"
                                     android:buttonTint="@color/c_radio_tint"
                                     android:paddingStart="15dp"
                                     android:clickable="false"
@@ -430,6 +441,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@xml/gx_ripple_gray"
+                                android:layoutDirection="ltr"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginStart="4dp"
                                 android:onClick="onCookies"
                                 android:orientation="horizontal">
                                 <RadioButton
@@ -440,8 +454,10 @@
                                     android:clickable="false"
                                     android:paddingEnd="15dp"
                                     android:textColor="@color/c_text_v1"
+                                    android:background="@android:color/transparent"
                                     android:buttonTint="@color/c_radio_tint"
                                     android:layout_marginEnd="10dp"
+                                    android:layout_marginStart="10dp"
                                     android:paddingStart="15dp"
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION3"
                                     tools:ignore="RtlHardcoded" />
@@ -468,8 +484,10 @@
                                     android:paddingEnd="15dp"
                                     android:textColor="@color/c_text_v1"
                                     android:layout_marginEnd="10dp"
+                                    android:background="@android:color/transparent"
                                     android:buttonTint="@color/c_radio_tint"
                                     android:paddingStart="15dp"
+                                    android:layout_marginStart="10dp"
                                     android:text="@string/SETTING_PRIVACY_COOKIES_OPTION4"
                                     tools:ignore="RtlHardcoded" />
                             </LinearLayout>

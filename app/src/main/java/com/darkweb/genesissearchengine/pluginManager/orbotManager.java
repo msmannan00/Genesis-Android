@@ -180,6 +180,10 @@ class orbotManager
         return orbotLocalConstants.mIsTorInitialized;
     }
 
+    private void newCircuit(){
+        OrbotService.getServiceObject().newIdentity();
+    }
+
     private String getOrbotStatus(){
         return OrbotService.getServiceObject().getProxyStatus();
     }
@@ -242,6 +246,10 @@ class orbotManager
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_ORBOT_RUNNING))
         {
             return isOrbotRunning();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT))
+        {
+            newCircuit();
         }
         return null;
     }

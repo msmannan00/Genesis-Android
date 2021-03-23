@@ -29,6 +29,7 @@ import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.WebResponse;
 
 public class geckoClients
 {
@@ -143,6 +144,7 @@ public class geckoClients
         return status.sSettingCookieStatus;
     }
 
+    @SuppressLint("WrongConstant")
     public void updateSetting(){
         mRuntime.getSettings().setRemoteDebuggingEnabled(false);
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
@@ -256,6 +258,10 @@ public class geckoClients
         }
     }
 
+    public boolean wasPreviousErrorPage(){
+        return mSession.wasPreviousErrorPage();
+    }
+
     public boolean canGoForward(){
         return mSession.canGoForward();
     }
@@ -342,10 +348,12 @@ public class geckoClients
             {
                 if (e_type.equals(on_handle_external_intent))
                 {
-                    GeckoSession.WebResponseInfo responseInfo = (GeckoSession.WebResponseInfo)data.get(0);
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.contentType);
-                    context.startActivity(intent);
+                    try {
+                        WebResponse responseInfo = (WebResponse)data.get(0);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.headers.get("Content-Type"));
+                        context.startActivity(intent);
+                    }catch (Exception ignored){}
                 } else
                 {
                     return event.invokeObserver(data, e_type);

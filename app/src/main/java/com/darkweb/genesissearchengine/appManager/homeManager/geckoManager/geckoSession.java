@@ -21,6 +21,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,8 +49,11 @@ import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.SessionFinder;
 import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebRequestError;
+import org.mozilla.geckoview.WebResponse;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -60,6 +64,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.crypto.spec.SecretKeySpec;
+
+import mozilla.components.support.utils.DownloadUtils;
 
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
@@ -97,6 +103,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private boolean mIsLoaded = false;
     private boolean isFirstPaintExecuted = false;
     private boolean mIsProgressBarChanging = false;
+    private Handler mFindHandler;
 
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
@@ -145,6 +152,13 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }else {
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.ON_FIRST_PAINT);
         }
+
+        mFindHandler = new Handler();
+        mFindHandler.postDelayed(() ->
+        {
+            mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
+        }, 1500);
+
     }
 
     void initURL(String url){
@@ -356,9 +370,9 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.on_playstore_load);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        else if(var1.uri.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED)){
+        else if(var1.uri.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED) || var1.uri.startsWith("https://boogle.store/?")){
             initURL(constants.CONST_GENESIS_DOMAIN_URL);
-            loadUri("resource://android/assets/Homepage/homepage.html");
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
         else if(var1.uri.equals("about:blank") && mIsLoaded){
@@ -389,7 +403,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
 
             /* Its Absence causes delay on first launch*/
-            if(mCurrentURL.contains("boogle.store")){
+            if(!mCurrentURL.contains("boogle.store")){
                 mProgress = 5;
                 event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             }
@@ -425,13 +439,23 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     /*Content Delegate*/
     @UiThread
     @Override
-    public void onExternalResponse(@NonNull GeckoSession session, @NonNull GeckoSession.WebResponseInfo response) {
+    public void onExternalResponse(@NonNull GeckoSession session, @NonNull WebResponse response) {
         try {
-            event.invokeObserver(Arrays.asList(response,mSessionID), enums.etype.on_handle_external_intent);
+            if(response.headers.containsKey("Content-Disposition")){
+                mDownloadManager.downloadFile(response,this,mContext,event);
+            }else if(response.headers.containsKey("Content-Type")){
+                event.invokeObserver(Arrays.asList(response,mSessionID), enums.etype.on_handle_external_intent);
+                stop();
+            }
         } catch (ActivityNotFoundException e) {
-            mDownloadManager.downloadFile(response,this,mContext,event);
+            event.invokeObserver(Arrays.asList(response,mSessionID), enums.etype.on_handle_external_intent);
             stop();
         }
+    }
+
+    @UiThread
+    public void onExternalResponse(@NonNull  GeckoSession session, @NonNull GeckoSession.WebResponseInfo response){
+
     }
 
     @UiThread
@@ -713,6 +737,10 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         return mCanGoBack;
     }
 
+    boolean wasPreviousErrorPage(){
+        return mPreviousErrorPage;
+    }
+
     boolean canGoForward(){
         return mCanGoForward;
     }
@@ -737,19 +765,35 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         event.invokeObserver(Arrays.asList(null,mSessionID), enums.etype.on_close_sesson);
     }
 
+    GeckoResult<FinderResult> mFinder = null;
     public void findInPage(String pQuery, int pDirection){
+        mFinder = null;
+        mFinder = getFinder().find(pQuery, pDirection);
         new Thread(){
             public void run(){
-                try {
-                    FinderResult mFinder = getFinder().find(pQuery, pDirection).poll(600);
-                    if(mFinder!=null){
-                        event.invokeObserver(Arrays.asList(mFinder.total, mFinder.current), enums.etype.FINDER_RESULT_CALLBACK);
+
+                int mCounter=0;
+                while (mFinder==null){
+                    try {
+                        mCounter+=1;
+                        sleep(100);
+                        if(mCounter>10){
+                            return;
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
+                }
+
+                try {
+                    FinderResult mResult = mFinder.poll();
+                    event.invokeObserver(Arrays.asList(mResult.total, mResult.current), enums.etype.FINDER_RESULT_CALLBACK);
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
             }
         }.start();
+
     }
 
     void goBackSession(){

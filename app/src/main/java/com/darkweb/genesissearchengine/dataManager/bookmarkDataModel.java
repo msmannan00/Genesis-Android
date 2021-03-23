@@ -50,7 +50,7 @@ public class bookmarkDataModel {
         params[1] = pURL;
 
         if(!pTitle.equals("loading")){
-            databaseController.getInstance().execSQL("INSERT INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params);
+            databaseController.getInstance().execSQL("REPLACE INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params);
         }
         mBookmarks.add(0,new bookmarkRowModel(pTitle, pURL,autoval));
     }

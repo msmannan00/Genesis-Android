@@ -42,9 +42,9 @@
 
             <ImageView
                 android:id="@+id/pHintWebIcon"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="11dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginBottom="3dp"
                 android:background="@xml/hox_round_outline"
                 android:contentDescription="@string/GENERAL_TODO"

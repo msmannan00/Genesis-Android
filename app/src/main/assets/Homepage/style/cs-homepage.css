@@ -29,6 +29,12 @@
     }
 }
 
+@media only screen and (max-width: 943px) {
+    #hi_search__search-button {
+    	visibility: hidden;
+    }
+}
+
 .hi_logo_text{
 	max-width: 450px;
 	width: 90%;

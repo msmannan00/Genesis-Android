@@ -39,7 +39,7 @@
             tools:ignore="SmallSp" />
 
         <Button
-            android:id="@+id/pUndo"
+            android:id="@+id/pDismiss"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -80,7 +80,7 @@
             android:layout_marginEnd="20dp"
             android:background="@color/c_border_background_divider"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pUndo"
+            app:layout_constraintEnd_toStartOf="@+id/pDismiss"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

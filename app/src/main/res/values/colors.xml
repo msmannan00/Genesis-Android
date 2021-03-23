@@ -80,6 +80,7 @@
     <color name="c_alert_text">#212d45</color>
     <color name="c_alert_text_inverted">#ffffff</color>
     <color name="c_long_button">#7591bd</color>
+    <color name="c_ripple_light">#dedede</color>
 
     <color name="blue">#0066FF</color>
     <color name="ease_blue_light">#fdfeff</color>

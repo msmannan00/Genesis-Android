@@ -307,6 +307,8 @@
     <string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
 
     <!-- Popup Menu -->
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
+    <string name="HOME_MENU__NEW_CIRCUIT_CREATED" translatable="true">New identity created</string>
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot logs</string>
     <string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>

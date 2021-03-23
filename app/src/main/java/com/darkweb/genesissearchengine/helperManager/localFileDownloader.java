@@ -76,6 +76,9 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         mNotifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         build = new NotificationCompat.Builder(context);
 
+        if(mFileName.length()>30){
+            mFileName = "..." + mFileName.substring(mFileName.length()-30);
+        }
         build.setContentTitle(mFileName)
                 .setContentText("starting...")
                 .setChannelId(mID + "")
@@ -150,12 +153,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
             mStream.close();
 
         } catch (Exception ex) {
-            build.setContentText("error occured while downloading file");
-            build.setAutoCancel(true);
-            build.setOngoing(false);
-            build.setPriority(Notification.PRIORITY_LOW);
-            build.setSmallIcon(android.R.drawable.stat_sys_download);
-            mNotifyManager.notify(mID, build.build());
+            onCancel();
         }
 
         return null;

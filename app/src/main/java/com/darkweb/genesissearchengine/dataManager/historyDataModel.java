@@ -119,7 +119,7 @@ public class historyDataModel {
             String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
             if(!pHeader.equals("loading")){
-                databaseController.getInstance().execSQL("INSERT INTO history(id,date,url,title) VALUES("+ mMaxHistoryId +",'" + m_date + "',?,?);",params);
+                databaseController.getInstance().execSQL("REPLACE INTO history(id,date,url,title) VALUES("+ mMaxHistoryId +",'" + m_date + "',?,?);",params);
             }
 
             mHistory.add(0,new historyRowModel(pHeader,pUrl, mMaxHistoryId));

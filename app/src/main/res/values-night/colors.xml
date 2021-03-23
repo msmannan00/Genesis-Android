@@ -79,6 +79,7 @@
     <color name="c_tab_image_border">#324467</color>
     <color name="c_list_remove_back">#0f0f0f</color>
     <color name="c_list_alpha_black">#90000000</color>
+    <color name="c_ripple_light">#d9d9d9</color>
 
     <color name="blue">#0066FF</color>
     <color name="ease_blue_light">#fdfeff</color>

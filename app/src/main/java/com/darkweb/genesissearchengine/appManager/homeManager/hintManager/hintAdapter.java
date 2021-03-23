@@ -24,7 +24,9 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder>
 {
@@ -33,7 +35,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     private ArrayList<historyRowModel> mHintList;
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
-    private ImageView[] mWebIcon = new ImageView[15];
+    private Map<String, Drawable> mWebIcon = new HashMap<>();
 
     public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
         this.mHintList = new ArrayList();
@@ -50,6 +52,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch){
         mHintList = pHintList;
         notifyDataSetChanged();
+    }
+
+    public void onClearAdapter(){
+        mWebIcon.clear();
     }
 
     /*Initializations*/
@@ -100,28 +106,29 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             mHintWebIcon = itemView.findViewById(R.id.pHintWebIcon);
             mHindTypeIconTemp = new ImageView(mContext);
 
-            if(getLayoutPosition() < mWebIcon.length){
-                if(mWebIcon[getLayoutPosition()]!=null){
-                    mHintWebIcon = itemView.findViewById(R.id.pHintWebIcon);
-                    mHintWebIcon.setImageDrawable(mWebIcon[getLayoutPosition()].getDrawable());
-                    mHindTypeIconTemp.setImageDrawable(mWebIcon[getLayoutPosition()].getDrawable());
-                }
-                mWebIcon[getLayoutPosition()] = mHintWebIcon;
-            }
-
+            String mURLLink;
             if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
-                mHeaderSingle.setText(model.getHeader());
+                mURLLink = model.getHeader();
+                mHeaderSingle.setText(model.getHeader().replace("+"," ").replace("%", "+"));
                 mHeaderSingle.setVisibility(View.VISIBLE);
                 mHeader.setVisibility(View.GONE);
                 mURL.setVisibility(View.GONE);
                 mHintWebIcon.setVisibility(View.GONE);
                 mHindTypeIcon.setVisibility(View.VISIBLE);
             }else {
+                mURLLink = model.getDescription();
                 mHeaderSingle.setVisibility(View.GONE);
                 mHeader.setVisibility(View.VISIBLE);
                 mURL.setVisibility(View.VISIBLE);
                 mHintWebIcon.setVisibility(View.VISIBLE);
                 mHindTypeIcon.setVisibility(View.GONE);
+            }
+
+            if(mWebIcon.containsKey(mURLLink)){
+                mHintWebIcon.setColorFilter(null);
+                mHintWebIcon.clearColorFilter();
+                mHintWebIcon.setImageTintList(null);
+                mHintWebIcon.setClipToOutline(true);
             }
 
             mHeader.setText(model.getHeader());
@@ -152,36 +159,45 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
-            new Thread(){
-                public void run(){
-                    try {
-                        mHindTypeIconTemp.setImageDrawable(null);
-                        mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                        while (true){
-                            int mCounter=0;
-                            if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                sleep(50);
-                                mCounter+=1;
-                            }else {
-                                Log.i("BREAK","");
-                                break;
+            if(mWebIcon.containsKey(mURLLink)){
+                mHintWebIcon.setImageDrawable(mWebIcon.get(mURLLink));
+            }
+
+            if(!mWebIcon.containsKey(mURLLink)){
+                new Thread(){
+                    public void run(){
+                        try {
+                            mHindTypeIconTemp.setImageDrawable(null);
+                            mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                            while (true){
+                                int mCounter=0;
+                                if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
+                                    sleep(10);
+                                    mCounter+=1;
+                                }else {
+                                    Log.i("BREAK","");
+                                    break;
+                                }
+                                if(mCounter>6){
+                                    break;
+                                }
                             }
-                            if(mCounter>6){
-                                break;
-                            }
+
+                            mContext.runOnUiThread(() -> {
+                                mHintWebIcon.setColorFilter(null);
+                                mHintWebIcon.clearColorFilter();
+                                mHintWebIcon.setImageTintList(null);
+                                mHintWebIcon.setClipToOutline(true);
+                                mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                                mWebIcon.put(mURLLink,mHindTypeIconTemp.getDrawable());
+                            });
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                        mContext.runOnUiThread(() -> {
-                            mHintWebIcon.setColorFilter(null);
-                            mHintWebIcon.clearColorFilter();
-                            mHintWebIcon.setImageTintList(null);
-                            mHintWebIcon.setClipToOutline(true);
-                            mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                        });
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
-                }
-            }.start();
+                }.start();
+            }
        }
 
         @SuppressLint("ClickableViewAccessibility")

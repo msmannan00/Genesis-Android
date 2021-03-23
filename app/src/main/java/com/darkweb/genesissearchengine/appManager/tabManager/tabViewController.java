@@ -43,7 +43,7 @@ class tabViewController
     private ImageView mRemoveSelection;
     private ImageButton mMenuButton;
     private ImageButton mClearSelection;
-    private View mToastLayoutRoot;
+    private View mUndoLayout;
     private TextView mSelectionCount;
     private ImageView mBlocker;
     private RecyclerView mRecycleView;
@@ -61,7 +61,7 @@ class tabViewController
         this.mRemoveSelection = pRemoveSelection;
         this.mMenuButton = pMenuButton;
         this.mClearSelection = pClearSelection;
-        this.mToastLayoutRoot = pToastLayoutRoot;
+        this.mUndoLayout = pToastLayoutRoot;
         this.mSelectionCount = pSelectionCount;
         this.mBlocker = pBlocker;
         this.mRecycleView = pRecycleView;
@@ -166,26 +166,37 @@ class tabViewController
     }
 
     private void onShowUndoDialog(int pTabCount) {
-        mToastLayoutRoot.findViewById(R.id.pBlockerUndo).setVisibility(View.GONE);
-        mToastLayoutRoot.animate().cancel();
-        mToastLayoutRoot.setVisibility(View.VISIBLE);
-        mToastLayoutRoot.setAlpha(0);
-        mToastLayoutRoot.animate().alpha(1);
+        mUndoLayout.findViewById(R.id.pBlockerUndo).setVisibility(View.GONE);
+        mUndoLayout.animate().cancel();
+        mUndoLayout.setVisibility(View.VISIBLE);
+
+        mUndoLayout.animate().cancel();
+        mUndoLayout.setTranslationY(60);
+        mUndoLayout.setAlpha(0);
+
+        mUndoLayout.animate().withLayer()
+                .translationY(0)
+                .alpha(1f)
+                .setDuration(220).start();
+
 
         initTabCount(pTabCount);
         mDelayHandler.removeCallbacksAndMessages(null);
-        mDelayHandler.postDelayed(() -> mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE)), 3000);
+        mDelayHandler.postDelayed(() -> {
+            mUndoLayout.animate().cancel();
+            mUndoLayout.animate().alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
+        }, 3000);
     }
 
     private void onHideUndoDialog() {
-        mToastLayoutRoot.animate().cancel();
-        mToastLayoutRoot.animate().alpha(0).withEndAction(() -> mToastLayoutRoot.setVisibility(View.GONE));
+        mUndoLayout.animate().cancel();
+        mUndoLayout.animate().alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
     }
 
     private void onHideUndoDialogInit() {
-        mToastLayoutRoot.animate().cancel();
-        mToastLayoutRoot.setAlpha(0);
-        mToastLayoutRoot.setVisibility(View.GONE);
+        mUndoLayout.animate().cancel();
+        mUndoLayout.setAlpha(0);
+        mUndoLayout.setVisibility(View.GONE);
     }
 
 

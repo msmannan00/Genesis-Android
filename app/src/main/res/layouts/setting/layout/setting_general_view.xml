@@ -247,7 +247,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:background="@xml/sx_border_left"
-                    android:paddingStart="4dp"
                     android:layout_marginTop="15dp"
                     android:orientation="vertical"
                     android:layout_height="wrap_content"
@@ -266,10 +265,11 @@
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="true"
+                        android:layout_marginStart="4dp"
+                        android:layoutDirection="ltr"
                         android:paddingStart="0dp"
                         android:onClick="onSelectTheme"
                         android:orientation="horizontal"
-                        android:weightSum="8"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry">
 
@@ -300,12 +300,10 @@
 
                         <RadioButton
                             android:id="@+id/pThemeDark"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:clickable="false"
-                            android:layout_weight="1"
                             android:layout_marginEnd="10dp"
-                            android:layout_marginStart="50dp"
                             android:buttonTint="@color/c_radio_tint"
                             android:background="@android:color/transparent"
                             android:src="@xml/ic_arrow_right"
@@ -324,9 +322,10 @@
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="true"
+                        android:layoutDirection="ltr"
+                        android:layout_marginStart="4dp"
                         android:onClick="onSelectTheme"
                         android:orientation="horizontal"
-                        android:weightSum="8"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry">
 
@@ -356,13 +355,11 @@
                         </LinearLayout>
 
                         <RadioButton
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="10dp"
                             android:id="@+id/pThemeLight"
-                            android:layout_weight="1"
                             android:background="@android:color/transparent"
-                            android:layout_marginStart="50dp"
                             android:src="@xml/ic_arrow_right"
                             android:buttonTint="@color/c_radio_tint"
                             android:clickable="false"
@@ -383,13 +380,14 @@
                         android:clickable="true"
                         android:onClick="onSelectTheme"
                         android:orientation="horizontal"
-                        android:weightSum="8"
+                        android:layoutDirection="ltr"
+                        android:layout_marginStart="4dp"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry">
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
@@ -414,13 +412,11 @@
                         </LinearLayout>
 
                         <RadioButton
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="10dp"
                             android:id="@+id/pThemeDefault"
-                            android:layout_weight="1"
                             android:background="@android:color/transparent"
-                            android:layout_marginStart="50dp"
                             android:src="@xml/ic_arrow_right"
                             android:buttonTint="@color/c_radio_tint"
                             android:clickable="false"

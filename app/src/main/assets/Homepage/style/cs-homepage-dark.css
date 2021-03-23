@@ -219,6 +219,12 @@
 }
 
 @media only screen and (max-width: 943px) {
+    #hi_search__search-button {
+    	visibility: hidden;
+    }
+}
+
+@media only screen and (max-width: 943px) {
     #hi_search_button {
     	font-size: 13px;
     }

@@ -37,7 +37,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
     /*Helper Methods*/
 
-    private ArrayList<historyRowModel> getDefaultSuggestions(String pQuery){
+    private ArrayList<historyRowModel> getDefaultSuggestions(String pQuery, int mSize){
         for(int count = 0; count<= mHintListLocalCache.size()-1 && mHintListLocalCache.size()<500; count++){
             if(mHintListLocalCache.get(count).getHeader().toLowerCase().contains(pQuery)){
                 mCurrentList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
@@ -48,6 +48,9 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
                     mCurrentList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
                 }
             }
+            if(mCurrentList.size() + mSize > 6){
+                break;
+            }
         }
 
         return mCurrentList;
@@ -57,6 +60,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
         mCurrentList = new ArrayList<>();
         mCurrentList.clear();
+        String mQueryOriginal = pQuery;
         pQuery = pQuery.replace("+","%").replace(" ","+");
         ArrayList<historyRowModel> mHistory = pHistory;
         ArrayList<bookmarkRowModel> mBookmarks = pBookmarks;
@@ -82,14 +86,14 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
                             mCurrentList.add(mTempModel);
                         }
                     }
-                    if(mCurrentList.size()>8){
+                    if(mCurrentList.size()>6){
                         break;
                     }
                 }
             }
         }
 
-        if(status.sSettingSearchHistory && mCurrentList.size()>8) {
+        if(status.sSettingSearchHistory && mCurrentList.size()>4) {
             for (int count = 0; count <= mBookmarks.size() - 1 && mBookmarks.size() < 500; count++) {
                 if(!mDuplicationHandler.contains(mBookmarks.get(count).getDescription())){
                     if (mBookmarks.get(count).getHeader().toLowerCase().contains(pQuery)) {
@@ -99,34 +103,32 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
                         mDuplicationHandler.add(mBookmarks.get(count).getDescription());
                         mCurrentList.add(mCurrentList.size() - 1, new historyRowModel(mBookmarks.get(count).getHeader(), mBookmarks.get(count).getDescription(), -1));
                     }
-                    if(mCurrentList.size()>8){
+                    if(mCurrentList.size()>6){
                         break;
                     }
                 }
             }
         }
 
-        if(mCurrentList.size()<8) {
-            getDefaultSuggestions(pQuery);
+        if(mCurrentList.size()<6) {
+             getDefaultSuggestions(pQuery, mCurrentList.size());
         }
 
-        if(mCurrentList.size()<8){
-            String mQueryOriginal = pQuery;
+        if(mCurrentList.size()<3){
 
-            if(!pQuery.equals(strings.GENERIC_EMPTY_STR) && !pQuery.equals("about:blank") && !pQuery.contains("?") &&  !pQuery.contains("/")  && !pQuery.contains(" ") && !pQuery.contains("  ") && !pQuery.contains("\n")){
-                if(mCurrentList.size()<3){
-                    int sepPos = pQuery.indexOf(".");
-                    if (sepPos == -1) {
-                        mCurrentList.add( 0,new historyRowModel(mQueryOriginal+".com", strings.GENERIC_EMPTY_STR,-1));
-                        mCurrentList.add( 0,new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
-                    }else
-                    {
-                        if(!pQuery.equals(pQuery.substring(0,sepPos)+".com")){
-                            mCurrentList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
-                        }
-                        if(!pQuery.equals(pQuery.substring(0,sepPos)+".onion")){
-                            mCurrentList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
-                        }
+            if(!mQueryOriginal.equals(strings.GENERIC_EMPTY_STR) && !mQueryOriginal.equals("about:blank") && !mQueryOriginal.contains("?") &&  !mQueryOriginal.contains("/")  && !mQueryOriginal.contains(" ") && !mQueryOriginal.contains("  ") && !mQueryOriginal.contains("\n")){
+                mCurrentList.size();
+                int sepPos = pQuery.indexOf(".");
+                if (sepPos == -1) {
+                    mCurrentList.add( 0,new historyRowModel(mQueryOriginal+".com", strings.GENERIC_EMPTY_STR,-1));
+                    mCurrentList.add( 0,new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
+                }else
+                {
+                    if(!pQuery.equals(pQuery.substring(0,sepPos)+".com")){
+                        mCurrentList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
+                    }
+                    if(!pQuery.equals(pQuery.substring(0,sepPos)+".onion")){
+                        mCurrentList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
                     }
                 }
             }
@@ -257,7 +259,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
         else if(pCommands == dataEnums.eSuggestionCommands.M_GET_DEFAULT_SUGGESTION)
         {
-            return getDefaultSuggestions((String) pData.get(0));
+            return getDefaultSuggestions((String) pData.get(0),0);
         }
 
         return null;

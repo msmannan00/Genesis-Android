@@ -245,122 +245,46 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         mNotificationManager.createNotificationChannel(mChannel);
     }
 
-    @SuppressLint("NewApi")
+    @SuppressLint({"NewApi", "RestrictedApi"})
     protected void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
-        if(orbotLocalConstants.mHomeContext ==null){
-            return;
-        }
-
         PackageManager pm = getPackageManager();
-        Intent mIntent = orbotLocalConstants.mHomeIntent;
-        mIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        Intent intent = pm.getLaunchIntentForPackage(getPackageName());
+        PendingIntent pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, 0);
 
         if (mNotifyBuilder == null) {
-
             mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            if (mNotifyBuilder == null) {
-                mNotifyBuilder = new NotificationCompat.Builder(this)
-                        .setContentTitle("Genesis")
-                        .setColor(Color.parseColor("#84989f"))
-                        .setSmallIcon(R.drawable.ic_stat_tor_logo);
-
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-                    final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                    final List<ActivityManager.AppTask> recentTaskInfos = activityManager.getAppTasks();
-                    if (!recentTaskInfos.isEmpty()) {
-                        for (ActivityManager.AppTask appTaskTaskInfo: recentTaskInfos) {
-                            if (appTaskTaskInfo.getTaskInfo().baseIntent.getComponent().getPackageName().equals("com.darkweb.genesissearchengine")) {
-                                Intent resultIntent = null;
-                                try
-                                {
-                                    Class mClass = Class.forName("com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController"); //without the .class
-
-                                    resultIntent = new Intent(this, mClass);
-                                    resultIntent.setAction("android.intent.action.MAIN");
-                                    resultIntent.addCategory("android.intent.category.LAUNCHER");
-                                    PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                                    mNotifyBuilder.setContentIntent(resultPendingIntent);
-
-                                }
-                                catch (ClassNotFoundException e)
-                                {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-                }else {
-                     PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                     mNotifyBuilder.setContentIntent(pendIntent);
-                }
-
-            }
-
-
-            mNotifyBuilder.setCategory(Notification.CATEGORY_SERVICE);
-
-            mNotifyBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
-
-
-            Intent intentRefresh = new Intent();
-            intentRefresh.setAction(CMD_NEWNYM);
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-                final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                final List<ActivityManager.AppTask> recentTaskInfos = activityManager.getAppTasks();
-                if (!recentTaskInfos.isEmpty()) {
-                    for (ActivityManager.AppTask appTaskTaskInfo: recentTaskInfos) {
-                        if (appTaskTaskInfo.getTaskInfo().baseIntent.getComponent().getPackageName().equals("com.darkweb.genesissearchengine")) {
-                            Intent resultIntent = null;
-                            try
-                            {
-                                Class mClass = Class.forName("com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController"); //without the .class
-
-                                resultIntent = new Intent(this, mClass);
-                                resultIntent.setAction("android.intent.action.MAIN");
-                                resultIntent.addCategory("android.intent.category.LAUNCHER");
-                                PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                                mNotifyBuilder.setContentIntent(resultPendingIntent);
-
-                            }
-                            catch (ClassNotFoundException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            }else {
-                PendingIntent pendIntent = PendingIntent.getActivity(orbotLocalConstants.mHomeContext.get(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                mNotifyBuilder.setContentIntent(pendIntent);
-            }
-
-            mNotifyBuilder.setOngoing(Prefs.persistNotifications());
-
+            mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                    .setContentIntent(pendIntent)
+                    .setCategory(Notification.CATEGORY_SERVICE)
+                    .setContentTitle("Genesis")
+                    .setColor(Color.parseColor("#84989f"))
+                    .setSmallIcon(R.drawable.ic_stat_tor_logo)
+                    .setOngoing(Prefs.persistNotifications());
         }
 
-        mNotifyBuilder.setContentText(notifyMsg);
-        mNotifyBuilder.setSmallIcon(icon);
-
-        if (notifyType != NOTIFY_ID) {
-            mNotifyBuilder.setTicker(notifyMsg);
-        } else {
-            mNotifyBuilder.setTicker(null);
+        mNotifyBuilder.mActions.clear(); // clear out NEWNYM action
+        if (conn != null) { // only add new identity action when there is a connection
+            Intent intentRefresh = new Intent(CMD_NEWNYM);
+            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
+            mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
         }
+
+        mNotifyBuilder.setContentText(notifyMsg)
+                .setSmallIcon(icon)
+                .setTicker(notifyType != NOTIFY_ID ? notifyMsg : null);
 
         if (!Prefs.persistNotifications())
             mNotifyBuilder.setPriority(Notification.PRIORITY_LOW);
 
-        mNotification = mNotifyBuilder.build();
+        Notification notification = mNotifyBuilder.build();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForeground(NOTIFY_ID, mNotification);
+            startForeground(NOTIFY_ID, notification);
         } else if (Prefs.persistNotifications() && (!mNotificationShowing)) {
-            startForeground(NOTIFY_ID, mNotification);
+            startForeground(NOTIFY_ID, notification);
             logNotice("Set background service to FOREGROUND");
         } else {
-            mNotificationManager.notify(NOTIFY_ID, mNotification);
+            mNotificationManager.notify(NOTIFY_ID, notification);
         }
 
         mNotificationShowing = true;

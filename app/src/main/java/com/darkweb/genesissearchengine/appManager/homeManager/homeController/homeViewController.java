@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.MovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,10 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.ArrayList;
@@ -75,7 +80,6 @@ class homeViewController
     private AnimatedProgressBar mProgressBar;
     private editTextManager mSearchbar;
     private ConstraintLayout mSplashScreen;
-    private ImageView mLoading;
     private TextView mLoadingText;
     private AdView mBannerAds = null;
     private Handler mUpdateUIHandler = null;
@@ -116,7 +120,6 @@ class homeViewController
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
         this.mSplashScreen = splashScreen;
-        this.mLoading = loading;
         this.mLoadingText = loadingText;
         this.mWebviewContainer = webviewContainer;
         this.mBannerAds = banner_ads;
@@ -156,6 +159,7 @@ class homeViewController
     }
 
     public void initializeViews(){
+        mSearchbar.setTag(R.id.msearchbarProcessing,false);
         mNestedScroll.setNestedScrollingEnabled(true);
         this.mBlockerFullSceen.setVisibility(View.GONE);
         mSearchBarMovementMethod = mSearchbar.getMovementMethod();
@@ -219,28 +223,41 @@ class homeViewController
 
     public void onShowTabContainer(){
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
+
+            mTabFragment.setAlpha(0);
+            mTabFragment.setTranslationY(0);
             mTabFragment.setVisibility(View.VISIBLE);
             mTabFragment.setTranslationY(-1 * helperMethod.pxFromDp(15));
-            mTabFragment.animate()
-                    .setDuration(250)
-                    .translationY(0)
-                    .alpha(1f);
+
+            new Handler().postDelayed(() ->
+            {
+                mTabFragment.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                mTabFragment.animate().withLayer()
+                        .setDuration(250)
+                        .translationY(0)
+                        .alpha(1f)
+                        .withEndAction(
+                                () -> mTabFragment.setLayerType(View.LAYER_TYPE_NONE, null)
+                        ).start();
+
+            }, 10);
         }
     }
 
     public void onHideTabContainer(){
         if(mTabFragment.getAlpha()==1){
             mTabFragment.animate()
-                    .setDuration(250)
+                    .setDuration(150)
                     .alpha(0f).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
             mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.M_INIT_TAB_COUNT);
+            mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
         }
     }
 
     public int getSearchLogo(){
         switch (status.sSettingSearchStatus) {
             case constants.CONST_BACKEND_GENESIS_URL:
-                return R.drawable.ic_genesis_vector;
+                return R.drawable.genesis;
             case constants.CONST_BACKEND_GOOGLE_URL:
                 return R.drawable.google;
             case constants.CONST_BACKEND_DUCK_DUCK_GO_URL:
@@ -252,6 +269,17 @@ class homeViewController
         }
     }
 
+    public static void initImageLoader(Context context) {
+        ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
+        config.threadPriority(Thread.NORM_PRIORITY - 2);
+        config.denyCacheImageMultipleSizesInMemory();
+        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
+        config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
+        config.tasksProcessingOrder(QueueProcessingType.LIFO);
+        config.writeDebugLogs(); // Remove for release app
+        ImageLoader.getInstance().init(config.build());
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     public void onUpdateSearchIcon(int mStatus){
         try {
@@ -259,11 +287,16 @@ class homeViewController
                 mSearchLock.setColorFilter(null);
                 mSearchLock.clearColorFilter();
                 mSearchLock.setImageTintList(null);
+
                 mSearchLock.setImageDrawable(mContext.getResources().getDrawable(getSearchLogo()));
             }
             else if(mStatus==1){
-                mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
-                mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
+                if(!(boolean)mSearchLock.getTag(R.id.themed)){
+                    mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
+                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
+                }else {
+                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
+                }
             }
             else if(mStatus==2){
                 mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_icon_tint));
@@ -335,16 +368,15 @@ class homeViewController
         mNewTab.animate().withLayer()
                 .rotationX(60)
                 .alpha(0.4f)
-                .setDuration(80)
+                .setDuration(120)
                 .withEndAction(
                         new Runnable() {
                             @Override public void run() {
-                                // second quarter turn
                                 mNewTab.setRotationX(-60);
                                 mNewTab.animate().withLayer()
                                         .rotationX(0)
                                         .alpha(1)
-                                        .setDuration(100)
+                                        .setDuration(150)
                                         .start();
                             }
                         }
@@ -365,20 +397,18 @@ class homeViewController
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
             }
         }
-
-        //mContext.getWindow().getDecorView().setSystemUiVisibility(status.sTheme);
     }
 
     public void initStatusBarColor(boolean mInstant) {
         animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-        int mDelay = 450;
+        int mDelay = 500;
         if(status.mThemeApplying || mInstant){
             mDelay = 0;
         }
 
         ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f);
-        animator.setDuration(350).setStartDelay(mDelay);
+        animator.setDuration(300).setStartDelay(mDelay);
         animator.addUpdateListener(animation ->
         {
             float v = (float) animation.getAnimatedValue();
@@ -466,6 +496,8 @@ class homeViewController
         mIsAnimating = false;
         mSearchbar.setEnabled(false);
         helperMethod.hideKeyboard(mContext);
+        mSearchLock.setTag(R.id.themed,false);
+        mAppBar.setTag(R.id.expandableBar,true);
 
         mSearchbar.setEnabled(false);
 
@@ -697,6 +729,9 @@ class homeViewController
         }
     }
 
+    public void performDummyClick(){
+    }
+
     void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded){
         if(status && pIsAdvertLoaded){
             if(mBannerAds.getAlpha()==0){
@@ -720,11 +755,19 @@ class homeViewController
     void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText, boolean pBypassFocus){
 
         if(url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+            mSearchbar.setTag(R.id.msearchbarProcessing,true);
             url = CONST_GENESIS_DOMAIN_URL;
         }
         else if(url.startsWith(CONST_GENESIS_HELP_URL_CACHE) || url.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+            mSearchbar.setTag(R.id.msearchbarProcessing,true);
             url = CONST_GENESIS_HELP_URL;
         }
+        else if(url.contains("genesis") || url.contains("boogle")){
+            mSearchbar.setTag(R.id.msearchbarProcessing,true);
+        }else {
+            mSearchbar.setTag(R.id.msearchbarProcessing,false);
+        }
+        Log.i("FUCK::5",url);
         if(!mSearchbar.hasFocus() || pClearText || pBypassFocus){
             int delay = 0;
              handlerLocalUrl = url;
@@ -738,7 +781,7 @@ class homeViewController
             {
                 searchBarUpdateHandler.removeMessages(100);
                 triggerUpdateSearchBar(handlerLocalUrl,showProtocol, pClearText);
-
+                mSearchbar.setTag(R.id.msearchbarProcessing,false);
             }, delay);
         }
     }
@@ -746,7 +789,7 @@ class homeViewController
     public void onUpdateFindBarCount(int index, int total)
     {
         if(total==0){
-            mFindCount.setText(strings.GENERIC_EMPTY_STR);
+            mFindCount.setText("0/0");
         }else {
             mFindCount.setText((total + "/" + index));
         }
@@ -754,7 +797,7 @@ class homeViewController
 
     public void onUpdateStatusBarTheme(String pTheme, boolean mForced)
     {
-        if(mSplashScreen.getAlpha()<=0 && (status.sTheme != enums.Theme.THEME_DARK && status.sDefaultNightMode)){
+        if(mSplashScreen.getAlpha()<=0 && (status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode) && mTabFragment.getAlpha()<=0 || mForced){
             int mColor = -1;
             try{
                 mColor = Color.parseColor(pTheme);
@@ -771,7 +814,6 @@ class homeViewController
                 GradientDrawable mGradientDrawable = new GradientDrawable();
                 mGradientDrawable.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
                 mGradientDrawable.setCornerRadius(helperMethod.pxFromDp(7));
-                mSearchbar.setBackground(mGradientDrawable);
 
                 GradientDrawable gradientDrawable1 = new GradientDrawable();
                 gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
@@ -795,6 +837,10 @@ class homeViewController
                 mMenu.setColorFilter(helperMethod.invertedGrayColor(mColor));
                 mVoiceInput.setColorFilter(helperMethod.invertedGrayColor(mColor));
                 mVoiceInput.setBackground(mGradientDrawable);
+                mSearchLock.setColorFilter(helperMethod.invertedGrayColor(mColor));
+                mSearchLock.setTag(R.id.themed,true);
+                gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(7));
+                mSearchbar.setBackground(gradientDrawable1);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     mContext.getWindow().setStatusBarColor(Color.parseColor(pTheme));
@@ -810,6 +856,7 @@ class homeViewController
                 }
             }
             else{
+                mSearchLock.setTag(R.id.themed,false);
                 mTopBar.setBackground(ContextCompat.getDrawable(mContext, R.color.c_background));
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -834,12 +881,13 @@ class homeViewController
                 mMenu.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
                 mVoiceInput.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
                 mSearchbar.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
+                onUpdateSearchIcon(1);
 
                 if(status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode){
+                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }else {
                     View decorView = mContext.getWindow().getDecorView();
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }else {
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
             }
         }
@@ -852,14 +900,20 @@ class homeViewController
             mFindBar.setVisibility(View.VISIBLE);
             mFindBar.setAlpha(1);
             mFindText.requestFocus();
-            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
+            final Handler handler = new Handler();
+            handler.postDelayed(() ->
+            {
+                InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
+            }, 300);
         }else {
             mFindText.clearFocus();
-            mFindCount.setText(strings.GENERIC_EMPTY_STR);
             helperMethod.hideKeyboard(mContext);
-            mFindBar.animate().alpha(0).withEndAction(() -> mFindBar.setVisibility(View.GONE));
-            mFindText.setText(strings.GENERIC_EMPTY_STR);
+            mFindBar.animate().alpha(0).withEndAction(() -> {
+                mFindCount.setText(strings.GENERIC_EMPTY_STR);
+                mFindText.setText(strings.GENERIC_EMPTY_STR);
+                mFindBar.setVisibility(View.GONE);
+            });
         }
     }
 
@@ -948,7 +1002,7 @@ class homeViewController
     }
 
     void onProgressBarUpdate(int value, boolean mForced){
-        if(mSearchbar.getText().toString().equals("genesis.onion") && !mForced){
+        if(mSearchbar.getText().toString().equals("genesis.onion") && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
             return;

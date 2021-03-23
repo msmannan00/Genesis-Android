@@ -148,6 +148,19 @@ class messageManager
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> mDialog.dismiss());
     }
 
+    private void newIdentityCreated()
+    {
+        initializeDialog(R.layout.popup_new_circuit, Gravity.BOTTOM);
+        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+
+        final Handler handler = new Handler();
+        Runnable runnable = () -> {
+            mDialog.dismiss();
+        };
+        handler.postDelayed(runnable, 1500);
+
+    }
+
     private void notSupportMessage()
     {
         initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
@@ -565,6 +578,11 @@ class messageManager
                 case M_UPDATE_BRIDGES:
                     /*VERIFIED*/
                     onUpdateBridges();
+                    break;
+
+                case M_NEW_IDENTITY:
+                    /*VERIFIED*/
+                    newIdentityCreated();
                     break;
             }
         }

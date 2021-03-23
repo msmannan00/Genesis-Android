@@ -121,15 +121,18 @@ class tabDataModel
     }
 
     void moveTabToTop(geckoSession mSession) {
-
         for(int counter = 0; counter< mTabs.size(); counter++){
 
-            if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
-            {
-                String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
-                databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null);
-                mTabs.add(0,mTabs.remove(counter));
-                break;
+            try{
+                if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
+                {
+                    String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
+                    databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null);
+                    mTabs.add(0,mTabs.remove(counter));
+                    break;
+                }
+            }catch (Exception ex){
+                Log.i(ex.getMessage(), ex.getMessage());
             }
         }
     }
