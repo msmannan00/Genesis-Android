@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -213,6 +214,30 @@ public class historyController extends AppCompatActivity
             }
 
             @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                boolean mStatus = (boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null);
+                if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
+                    if(mStatus){
+                        return 0;
+                    }
+                    else {
+                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                        final int swipeFlags = 0;
+                        return makeMovementFlags(swipeFlags, dragFlags);
+                    }
+                } else {
+                    if(mStatus){
+                        return 0;
+                    }
+                    else {
+                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                        final int swipeFlags = 0;
+                        return makeMovementFlags(swipeFlags, dragFlags);
+                    }
+                }
+            }
+
+            @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 Canvas mCanvas = (Canvas) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
                 super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
@@ -307,7 +332,7 @@ public class historyController extends AppCompatActivity
     public void onOpenMultipleTabs(View view) {
         ArrayList<String> m_long_selected_urk = (ArrayList<String>) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_URL, null);
         for(int m_counter=0;m_counter<m_long_selected_urk.size();m_counter++){
-            mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter));
+            mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter), false);
         }
         onBackPressed(null);
         mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL,null);
@@ -394,7 +419,7 @@ public class historyController extends AppCompatActivity
             }
             else if(e_type.equals(enums.etype.url_triggered_new_tab)){
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                mHomeController.postNewLinkTabAnimation(url_temp);
+                mHomeController.postNewLinkTabAnimation(url_temp,false);
                 finish();
             }
             else if(e_type.equals(enums.etype.fetch_favicon)){

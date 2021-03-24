@@ -29,6 +29,7 @@ public class keys
     public static final String SETTING_SEARCH_ENGINE = "SEARCH_ENGINE";
     public static final String SETTING_FIRST_INSTALLED = "FIRST_INSTALLED";
     public static final String SETTING_JAVA_SCRIPT = "JAVA_SCRIPT";
+    public static final String SETTING_POPUP = "POPUP";
     public static final String SETTING_HISTORY_CLEAR = "HISTORY_CLEAR";
     public static final String SETTING_GATEWAY = "pref_bridges_enabled_auto";
     public static final String SETTING_GATEWAY_MANUAL = "pref_bridges_enabled_manual";

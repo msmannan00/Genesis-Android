@@ -41,6 +41,7 @@
             android:textColor="@color/c_alert_text"
             android:alpha="0.6"
             android:paddingEnd="15dp"
+            android:maxLines="5"
             android:layout_marginEnd="20dp"
             android:textDirection="locale"
             android:textAlignment="viewStart"

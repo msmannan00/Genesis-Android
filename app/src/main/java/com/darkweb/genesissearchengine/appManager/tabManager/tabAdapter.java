@@ -243,6 +243,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             mBorder = itemView.findViewById(R.id.pBorder);
 
             itemView.setClickable(true);
+            mRemoveRow.setEnabled(true);
 
             if(model.getmId()==null){
                 mItemSelectionMenu.setVisibility(View.VISIBLE);
@@ -352,8 +353,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
             }else if(v.getId() == R.id.pRemoveRow){
                 v.setEnabled(false);
-                v.setFocusableInTouchMode(false);
-                v.setClickable(false);
                 onRemoveRowCross(this.getLayoutPosition());
             }
             else if(v.getId() == R.id.pItemSelectionMenuButton){

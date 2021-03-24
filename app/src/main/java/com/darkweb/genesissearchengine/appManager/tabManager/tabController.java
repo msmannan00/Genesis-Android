@@ -145,8 +145,9 @@ public class tabController extends Fragment
 
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
                 if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-                    if((Integer) viewHolder.itemView.getTag() >= mListModel.getList().size()){
+                    if((Integer) viewHolder.itemView.getTag() >= mListModel.getList().size() || mStatus){
                         return 0;
                     }
                     else {
@@ -155,7 +156,7 @@ public class tabController extends Fragment
                         return makeMovementFlags(swipeFlags, dragFlags);
                     }
                 } else {
-                    if((Integer) viewHolder.itemView.getTag() >= mListModel.getList().size()){
+                    if((Integer) viewHolder.itemView.getTag() >= mListModel.getList().size() || mStatus){
                         return 0;
                     }
                     else {
@@ -229,7 +230,6 @@ public class tabController extends Fragment
 
     public void initTabCount(int pDelay)
     {
-        //mtabViewController.onTrigger(tabEnums.eTabViewCommands.INIT_TAB_COUNT, Collections.singletonList(mListModel.getList().size()));
         final Handler handler = new Handler();
         handler.postDelayed(() ->
         {
@@ -239,7 +239,7 @@ public class tabController extends Fragment
                 mRecycleView.setLayoutParams(params);
             }
         }, pDelay);
-
+        activityContextManager.getInstance().getHomeController().initTabCountForced();
     }
 
     public void onClose(){

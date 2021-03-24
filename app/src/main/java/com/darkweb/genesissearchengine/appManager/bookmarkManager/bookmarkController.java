@@ -26,6 +26,7 @@ import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
+import com.darkweb.genesissearchengine.appManager.tabManager.tabEnums;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.sql;
@@ -178,6 +179,30 @@ public class bookmarkController extends AppCompatActivity
             }
 
             @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                boolean mStatus = (boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS, null);
+                if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
+                    if(mStatus){
+                        return 0;
+                    }
+                    else {
+                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                        final int swipeFlags = 0;
+                        return makeMovementFlags(swipeFlags, dragFlags);
+                    }
+                } else {
+                    if(mStatus){
+                        return 0;
+                    }
+                    else {
+                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                        final int swipeFlags = 0;
+                        return makeMovementFlags(swipeFlags, dragFlags);
+                    }
+                }
+            }
+
+            @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 Canvas mCanvas = (Canvas) mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
                 super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
@@ -263,7 +288,7 @@ public class bookmarkController extends AppCompatActivity
     public void onOpenMultipleTabs(View view) {
         ArrayList<String> m_long_selected_urk = (ArrayList<String>) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_URL, null);
         for(int m_counter=0;m_counter<m_long_selected_urk.size();m_counter++){
-            mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter));
+            mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter), false);
         }
         onBackPressed(null);
         mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.M_CLEAR_LONG_SELECTED_URL,null);

@@ -118,8 +118,11 @@
     <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">Strict Policy</string>
     <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">Stop all known trackers, Pages will load faster but some functionality might not work</string>
 
-    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">Javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">Allow Javascript | Toggle to Enable Javascript</string>
     <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Disable java scripting for various script attacks</string>
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Block Popup | Toggle to Disable Popup Advert</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Remove popup advertizement. Might break functionaly of some websites</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO_ALERT" translatable="true">Popup blocked</string>
     <string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Restore tabs</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Don\'t restore after quitting browser</string>

@@ -30,10 +30,11 @@ class settingPrivacyViewController
     private SwitchMaterial mDoNotTrack;
     private SwitchMaterial mClearDataOnExit;
     private ArrayList<RadioButton> mCookie;
+    private SwitchMaterial mPopup;
 
     /*Initializations*/
 
-    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener pEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie)
+    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener pEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie, SwitchMaterial pPopup)
     {
         this.mEvent = pEvent;
         this.mContext = pContext;
@@ -41,6 +42,7 @@ class settingPrivacyViewController
         this.mClearDataOnExit = pClearDataOnExit;
         this.mCookie = pCookie;
         this.mDoNotTrack = pDoNotTrack;
+        this.mPopup = pPopup;
 
         initViews();
         initPostUI();
@@ -68,6 +70,12 @@ class settingPrivacyViewController
             this.mJavaScript.setChecked(true);
         }else{
             this.mJavaScript.setChecked(false);
+        }
+
+        if(status.sSettingPopupStatus){
+            this.mPopup.setChecked(true);
+        }else{
+            this.mPopup.setChecked(false);
         }
 
         if(status.sClearOnExit){

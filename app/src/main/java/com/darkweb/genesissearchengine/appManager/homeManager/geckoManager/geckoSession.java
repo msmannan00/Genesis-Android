@@ -94,6 +94,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private geckoDownloadManager mDownloadManager;
     private String mTheme = null;
     private boolean mPreviousErrorPage = false;
+    private boolean mRemovableFromBackPressed = false;
 
     /*Temp Variables*/
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
@@ -164,7 +165,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     void initURL(String url){
         if(mIsLoaded){
             isPageLoading = true;
-            mCurrentURL = url;
+            setURL(url);
             mCurrentTitle = mCurrentURL;
 
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.on_update_suggestion);
@@ -326,16 +327,16 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
         }
         if(newUrl.startsWith(CONST_GENESIS_URL_CACHED) || newUrl.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
-            mCurrentURL = constants.CONST_GENESIS_DOMAIN_URL;
+            setURL(constants.CONST_GENESIS_DOMAIN_URL);
         }
         else if(newUrl.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
             if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext)){
-                mCurrentURL = constants.CONST_GENESIS_HELP_URL;
+                setURL(constants.CONST_GENESIS_HELP_URL);
             }else {
-                mCurrentURL = constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
+                setURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
             }
-        }else {
-            mCurrentURL = newUrl;
+        }else if(!newUrl.equals("about:blank")){
+            setURL(newUrl);
         }
         if(!mCurrentURL.equals("about:blank")){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
@@ -386,15 +387,15 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }
         else if(!var1.uri.equals("about:blank")){
             if(mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
-                mCurrentURL = constants.CONST_GENESIS_DOMAIN_URL;
+                setURL(constants.CONST_GENESIS_DOMAIN_URL);
             }else if(mCurrentURL.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
                 if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext)){
-                    mCurrentURL = constants.CONST_GENESIS_HELP_URL;
+                    setURL(constants.CONST_GENESIS_HELP_URL);
                 }else {
-                    mCurrentURL = constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
+                    setURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
                 }
             }else{
-                mCurrentURL = var1.uri;
+                setURL(var1.uri);
             }
 
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.start_proxy);
@@ -702,7 +703,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     public String getCurrentURL(){
         if(mCurrentURL.equals("resource://android/assets/Homepage/homepage.html")){
-            mCurrentURL = "https://boogle.store";
+            setURL("https://boogle.store");
         }
         return mCurrentURL;
     }
@@ -721,6 +722,14 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     public void setURL(String pURL){
         mCurrentURL = pURL;
+    }
+
+    public void setRemovableFromBackPressed(boolean pStatus){
+        mRemovableFromBackPressed = pStatus;
+    }
+
+    public boolean getRemovableFromBackPressed(){
+        return mRemovableFromBackPressed;
     }
 
     public void setTheme(String pTheme){

@@ -2,9 +2,9 @@ package com.darkweb.genesissearchengine.appManager.settingManager.privacyManager
 
 class settingPrivacyEnums
 {
-    /*History Manager*/
+    /*Privacy Manager*/
     public enum ePrivacyModel {
-        M_SET_JAVASCRIPT, M_SET_DONOT_TRACK, M_SET_TRACKING_PROTECTION, M_SET_COOKIES, M_SET_CLEAR_PRIVATE_DATA
+        M_SET_JAVASCRIPT, M_SET_POPUP, M_SET_DONOT_TRACK, M_SET_COOKIES, M_SET_CLEAR_PRIVATE_DATA
     }
 
     public enum ePrivacyViewController {

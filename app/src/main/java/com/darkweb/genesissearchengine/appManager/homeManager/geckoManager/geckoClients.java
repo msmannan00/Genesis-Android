@@ -198,10 +198,14 @@ public class geckoClients
                     mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
                     if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(context)){
                         String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
+                        mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(mURL);
+                        return;
                     }else {
                         String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
+                        mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(mURL);
+                        return;
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
@@ -211,9 +215,13 @@ public class geckoClients
                     mSession.initURL(constants.CONST_GENESIS_HELP_URL);
 
                     if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(context)){
+                        mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
+                        return;
                     }else {
+                        mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
+                        return;
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
@@ -221,6 +229,7 @@ public class geckoClients
             }else {
                 mSession.loadUri(url);
             }
+            mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
         }
     }
 
@@ -254,7 +263,11 @@ public class geckoClients
             mSession.goBackSession();
         }
         else if(isFinishAllowed){
-            event.invokeObserver(null, enums.etype.back_list_empty);
+            if(mSession.getRemovableFromBackPressed()){
+                event.invokeObserver(null, enums.etype.M_CLOSE_TAB);
+            }else {
+                event.invokeObserver(null, enums.etype.back_list_empty);
+            }
         }
     }
 
@@ -286,6 +299,10 @@ public class geckoClients
         if(mSession.canGoForward()){
             mSession.goForwardSession();
         }
+    }
+
+    public void setRemovableFromBackPressed(boolean pStatus){
+        mSession.setRemovableFromBackPressed(pStatus);
     }
 
 

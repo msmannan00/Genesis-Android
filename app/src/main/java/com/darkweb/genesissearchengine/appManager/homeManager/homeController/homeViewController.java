@@ -224,6 +224,7 @@ class homeViewController
     public void onShowTabContainer(){
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
 
+            onUpdateStatusBarTheme(null, false);
             mTabFragment.setAlpha(0);
             mTabFragment.setTranslationY(0);
             mTabFragment.setVisibility(View.VISIBLE);
@@ -246,6 +247,8 @@ class homeViewController
 
     public void onHideTabContainer(){
         if(mTabFragment.getAlpha()==1){
+
+            mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
             mTabFragment.animate()
                     .setDuration(150)
                     .alpha(0f).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
@@ -363,26 +366,29 @@ class homeViewController
         }
     }
 
-    void initTab(int count){
-        mNewTab.animate().cancel();
-        mNewTab.animate().withLayer()
-                .rotationX(60)
-                .alpha(0.4f)
-                .setDuration(120)
-                .withEndAction(
-                        new Runnable() {
-                            @Override public void run() {
-                                mNewTab.setRotationX(-60);
-                                mNewTab.animate().withLayer()
-                                        .rotationX(0)
-                                        .alpha(1)
-                                        .setDuration(150)
-                                        .start();
+    void initTab(int count, boolean pForced){
+        if(!pForced){
+            mNewTab.animate().cancel();
+            mNewTab.animate().withLayer()
+                    .rotationX(60)
+                    .alpha(0.4f)
+                    .setDuration(120)
+                    .withEndAction(
+                            new Runnable() {
+                                @Override public void run() {
+                                    mNewTab.setRotationX(-60);
+                                    mNewTab.animate().withLayer()
+                                            .rotationX(0)
+                                            .alpha(1)
+                                            .setDuration(150)
+                                            .start();
+                                }
                             }
-                        }
-                ).start();
+                    ).start();
+        }
 
         mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
+
     }
 
     public void recreateStatusBar(){
@@ -805,7 +811,7 @@ class homeViewController
                 mColor = -1;
             }
 
-            if(pTheme!=null && status.sToolbarTheme && mColor!=-1 && helperMethod.getColorDensity(mColor)<0.80){
+            if(!mSearchbar.isFocused() && pTheme!=null && status.sToolbarTheme && mColor!=-1 && helperMethod.getColorDensity(mColor)<0.80){
                 mTopBar.setBackgroundColor(mColor);
                 mSearchbar.setTextColor(helperMethod.invertedGrayColor(mColor));
                 mSearchbar.setHintTextColor(helperMethod.invertedGrayColor(mColor));
@@ -841,6 +847,7 @@ class homeViewController
                 mSearchLock.setTag(R.id.themed,true);
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(7));
                 mSearchbar.setBackground(gradientDrawable1);
+                mSearchbar.setHintTextColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.10f), Color.BLACK, 0.2f));
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     mContext.getWindow().setStatusBarColor(Color.parseColor(pTheme));
@@ -865,22 +872,29 @@ class homeViewController
                     mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
                 }
 
+                GradientDrawable gradientDrawable1 = new GradientDrawable();
+                gradientDrawable1.setColor(ContextCompat.getColor(mContext, R.color.c_edittext_background));
+                gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(7));
+                gradientDrawable1.setStroke(helperMethod.pxFromDp(2), ContextCompat.getColor(mContext, R.color.c_edittext_background));
+                mSearchbar.setBackground(gradientDrawable1);
+
                 Drawable drawable;
                 Resources res = mContext.getResources();
                 try {
                     drawable = Drawable.createFromXml(res, res.getXml(R.xml.gx_generic_tab_button));
                     mNewTab.setBackground(drawable);
 
-                    drawable = Drawable.createFromXml(res, res.getXml(R.xml.gx_generic_input));
-                    mSearchbar.setBackground(drawable);
-                    mVoiceInput.setBackground(drawable);
-                } catch (Exception ignored) {
+                    Drawable drawableTemp = Drawable.createFromXml(res, res.getXml(R.xml.gx_generic_input));
+                    mVoiceInput.setBackground(drawableTemp);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
 
                 mNewTab.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
                 mMenu.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
                 mVoiceInput.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
                 mSearchbar.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
+                mSearchbar.setHintTextColor(ContextCompat.getColor(mContext, R.color.c_text_v2));
                 onUpdateSearchIcon(1);
 
                 if(status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode){
@@ -925,12 +939,14 @@ class homeViewController
                 mSearchEngineBar.setAlpha(0f);
                 mSearchEngineBar.animate().setDuration(delay).alpha(1);
                 mSearchEngineBar.setVisibility(View.VISIBLE);
+                onUpdateStatusBarTheme(null, false);
             }
         }else {
                 mSearchEngineBar.animate().setDuration(delay).alpha(0).withEndAction(() -> {
                 mSearchEngineBar.animate().cancel();
                 mSearchEngineBar.setAlpha(0f);
                 mSearchEngineBar.setVisibility(View.GONE);
+                mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
             });
         }
     }

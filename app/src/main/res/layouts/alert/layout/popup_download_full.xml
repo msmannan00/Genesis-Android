@@ -47,6 +47,7 @@
             android:textAlignment="viewStart"
             android:textColor="@color/c_alert_text"
             android:textDirection="locale"
+            android:maxLines="5"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pHeader"

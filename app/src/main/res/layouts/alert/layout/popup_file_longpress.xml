@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:alpha="0.6"
+            android:maxLines="5"
             android:ellipsize="start"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"

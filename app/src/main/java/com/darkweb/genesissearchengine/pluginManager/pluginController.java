@@ -208,12 +208,8 @@ public class pluginController
                     mMessageManager.onTrigger(Arrays.asList(mHomeController, Collections.singletonList(pData.get(0).toString())),M_START_ORBOT);
                 }
             }
-            else if(pEventType.equals(M_CLEAR_HISTORY)){
-                dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
-                mContextManager.getHistoryController().onclearData();
-                mHomeController.onClearSession();
-                dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
-                mHomeController.initTab(true);
+            else if(pEventType.equals(M_OPEN_PRIVACY)){
+                helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController,true);
             }
             else if(pEventType.equals(M_CLEAR_BOOKMARK)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,pData);

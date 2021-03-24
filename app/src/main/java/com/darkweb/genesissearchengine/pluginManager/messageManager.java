@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -157,6 +159,26 @@ class messageManager
         Runnable runnable = () -> {
             mDialog.dismiss();
         };
+        handler.postDelayed(runnable, 1500);
+
+    }
+
+    private void popupBlocked()
+    {
+        final Handler handler = new Handler();
+        Runnable runnable = () -> {
+            mDialog.dismiss();
+        };
+
+        initializeDialog(R.layout.popup_block_popup, Gravity.BOTTOM);
+        mDialog.findViewById(R.id.pOpenPrivacy).setOnClickListener(v -> {
+            mEvent.invokeObserver(null, M_OPEN_PRIVACY);
+            mDialog.dismiss();
+            handler.removeCallbacks(runnable);
+        });
+
+        mDialog.setOnDismissListener(dialog -> handler.removeCallbacks(runnable));
+
         handler.postDelayed(runnable, 1500);
 
     }
@@ -583,6 +605,11 @@ class messageManager
                 case M_NEW_IDENTITY:
                     /*VERIFIED*/
                     newIdentityCreated();
+                    break;
+
+                case M_POPUP_BLOCKED:
+                    /*VERIFIED*/
+                    popupBlocked();
                     break;
             }
         }

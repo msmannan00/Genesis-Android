@@ -33,6 +33,7 @@ public class settingPrivacyController extends AppCompatActivity {
     private settingPrivacyModel mSettingPrivacyModel;
     private settingPrivacyViewController mSettingPrivacyViewController;
     private SwitchMaterial mJavaScript;
+    private SwitchMaterial mPopup;
     private SwitchMaterial mDoNotTrack;
     private SwitchMaterial mClearDataOnExit;
     private ArrayList<RadioButton> mCookie = new ArrayList<>();
@@ -60,13 +61,14 @@ public class settingPrivacyController extends AppCompatActivity {
         mJavaScript = findViewById(R.id.pJavascript);
         mDoNotTrack = findViewById(R.id.pDoNotTrack);
         mClearDataOnExit = findViewById(R.id.pClearDataOnExit);
+        mPopup = findViewById(R.id.pPopup);
         mCookie.add(findViewById(R.id.pCookieRadioOption1));
         mCookie.add(findViewById(R.id.pCookieRadioOption2));
         mCookie.add(findViewById(R.id.pCookieRadioOption3));
         mCookie.add(findViewById(R.id.pCookieRadioOption4));
 
         activityContextManager.getInstance().onStack(this);
-        mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mClearDataOnExit, mCookie);
+        mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mClearDataOnExit, mCookie, mPopup);
         mSettingPrivacyModel = new settingPrivacyModel(new settingPrivacyController.settingAccessibilityModelCallback());
     }
 
@@ -131,6 +133,12 @@ public class settingPrivacyController extends AppCompatActivity {
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_JAVASCRIPT, Collections.singletonList(!status.sSettingJavaStatus));
         mJavaScript.toggle();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,status.sSettingJavaStatus));
+    }
+
+    public void onPopup(View view){
+        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_POPUP, Collections.singletonList(!status.sSettingPopupStatus));
+        mPopup.toggle();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_POPUP,status.sSettingPopupStatus));
     }
 
     public void onDoNotTrack(View view){
