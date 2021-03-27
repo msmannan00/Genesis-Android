@@ -49,12 +49,14 @@ public class keys
     public static final String SETTING_RESTORE_TAB = "SETTING_RESTORE_TAB";
     public static final String SETTING_CHARACTER_ENCODING = "SETTING_CHARACTER_ENCODING";
     public static final String SETTING_SHOW_IMAGES = "SETTING_SHOW_IMAGES";
+    public static final String SETTING_SHOW_TAB_GRID = "SETTING_SHOW_TAB_GRID";
     public static final String SETTING_SHOW_FONTS = "SETTING_SHOW_FONTS";
     public static final String SETTING_TOOLBAR_THEME = "SETTING_TOOLBAR_THEME";
     public static final String SETTING_THEME = "SETTING_THEME_LIGHT";
     public static final String SETTING_FULL_SCREEN_BROWSIING = "SETTING_FULL_SCREEN_BROWSIING";
     public static final String SETTING_OPEN_URL_IN_NEW_TAB = "SETTING_OPEN_URL_IN_NEW_TAB";
     public static final String SETTING_LIST_VIEW = "SETTING_LIST_VIEW";
+    public static final String SETTING_TOOLBAR_THEME_ALLOWED = "SETTING_TOOLBAR_THEME_ALLOWED";
 
     /*Bridge Settings*/
 

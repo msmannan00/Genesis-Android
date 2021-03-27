@@ -24,6 +24,7 @@ public class status
     public static String sSettingLanguage = "en";
     public static String sSettingLanguageRegion = "Us";
     public static String mReferenceWebsites;
+    public static String sBridgeCustomBridge = strings.GENERIC_EMPTY_STR;
 
     public static boolean sSettingEnableZoom = true;
     public static boolean sSettingEnableVoiceInput = true;
@@ -40,9 +41,8 @@ public class status
     public static boolean sSettingIsAppRated = false;
     public static boolean sSettingFontAdjustable = true;
     public static boolean sSettingFirstStart = true;
-    public static int sSettingTrackingProtection = 0;
     public static boolean mThemeApplying = false;
-
+    public static boolean sTabGridLayoutEnabled = true;
     public static boolean sStatusDoNotTrack = true;
     public static boolean sRestoreTabs = false;
     public static boolean sCharacterEncoding = false;
@@ -52,23 +52,19 @@ public class status
     public static boolean sOpenURLInNewTab = true;
     public static boolean sDefaultNightMode;
     public static boolean sLogListView;
-
-    public static float sSettingFontSize = 1;
+    public static boolean sBridgeGatewayAuto = false;
+    public static boolean sBridgeGatewayManual = false;
+    public static boolean sVPNStatus = false;
+    public static boolean sBridgeStatus = false;
 
     public static int sTheme = enums.Theme.THEME_DEFAULT;
     public static int sSettingCookieStatus = ContentBlocking.AntiTracking.DEFAULT;
     public static int sShowImages = -1;
     public static int sWidgetResponse = enums.WidgetResponse.NONE;
-
-    /*Bridge Status*/
-
-    public static String sBridgeCustomBridge = strings.GENERIC_EMPTY_STR;
-    public static boolean sBridgeGatewayAuto = false;
-    public static boolean sBridgeGatewayManual = false;
-    public static boolean sVPNStatus = false;
-    public static boolean sBridgeStatus = false;
     public static int sBridgeNotificationManual = 0;
+    public static int sSettingTrackingProtection = 0;
 
+    public static float sSettingFontSize = 1;
 
     public static void initStatus()
     {
@@ -92,13 +88,11 @@ public class status
         status.sSettingCookieStatus = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,ACCEPT_FIRST_PARTY));
         status.sSettingFontSize = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_FLOAT, Arrays.asList(keys.SETTING_FONT_SIZE,100));
         status.sSettingLanguage = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,strings.SETTING_DEFAULT_LANGUAGE));
-
         status.mReferenceWebsites = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.HOME_REFERENCE_WEBSITES,strings.HOME_REFERENCE_WEBSITES_DEFAULT));
         status.sSettingLanguageRegion = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE_REGION,strings.SETTING_DEFAULT_LANGUAGE_REGION));
         status.sSettingSearchStatus = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
         status.sBridgeCustomBridge = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
         status.sBridgeNotificationManual = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS,0));
-
         status.sRestoreTabs = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_RESTORE_TAB,false));
         status.sCharacterEncoding = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_CHARACTER_ENCODING,false));
         status.sShowImages = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,0));
@@ -108,6 +102,7 @@ public class status
         status.sTheme = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_THEME,enums.Theme.THEME_DEFAULT));
         status.sOpenURLInNewTab = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,true));
         status.sLogListView = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
+        status.sTabGridLayoutEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,true));
     }
 
 }

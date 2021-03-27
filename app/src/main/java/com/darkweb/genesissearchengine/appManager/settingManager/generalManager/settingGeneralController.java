@@ -138,7 +138,6 @@ public class settingGeneralController extends AppCompatActivity {
                     onBackPressed();
                     overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
                     activityContextManager.getInstance().getSettingController().onReInitTheme();
-                    activityContextManager.getInstance().getHomeController().onReInitTheme();
                     helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this,true);
                 }
             }

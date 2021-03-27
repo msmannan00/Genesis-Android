@@ -2,32 +2,26 @@ package com.darkweb.genesissearchengine.dataManager;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.constants.messages;
-import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
 import org.mozilla.geckoview.GeckoResult;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -53,12 +47,13 @@ class tabDataModel
         }
     }
 
-    void addTabs(geckoSession mSession,boolean pIsDataSavable){
+    int addTabs(geckoSession mSession,boolean pIsDataSavable){
         tabRowModel mTabModel = new tabRowModel(mSession);
         mTabs.add(0,mTabModel);
 
         if(mTabs.size()>20){
             closeTab(mTabs.get(mTabs.size()-1).getSession(), mTabs.get(mTabs.size()-1).getmId());
+            return enums.AddTabCallback.TAB_FULL;
         }
 
         if(pIsDataSavable){
@@ -70,6 +65,7 @@ class tabDataModel
 
             databaseController.getInstance().execSQL("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params);
         }
+        return enums.AddTabCallback.TAB_ADDED;
     }
 
     void clearTab() {
@@ -139,7 +135,6 @@ class tabDataModel
 
     boolean updateTab(String mSessionID, geckoSession pSession) {
 
-        boolean mSessionUpdated = false;
         for(int counter = 0; counter< mTabs.size(); counter++){
 
             if(mTabs.get(counter).getSession().getSessionID().equals(mSessionID))
@@ -148,16 +143,12 @@ class tabDataModel
                 params[0] = mTabs.get(counter).getSession().getTitle();
                 params[1] = mTabs.get(counter).getSession().getCurrentURL();
                 params[2] = mTabs.get(counter).getSession().getTheme();
-                mSessionUpdated = true;
-
                 String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
                 databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "'  , url = ? , title = ?, theme = ?  WHERE mid='"+mTabs.get(counter).getmId() + "'",params);
                 return true;
             }
         }
-        if(!mSessionUpdated){
-            addTabs(pSession, true);
-        }
+        addTabs(pSession, true);
         return false;
     }
 
@@ -231,8 +222,11 @@ class tabDataModel
                         if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID)) {
                             GeckoResult<Bitmap> mResult = pBitmapManager.withHandler(handler);
                             Bitmap mBitmap = pBitmapManager.poll(4000);
+                            ByteArrayOutputStream out = new ByteArrayOutputStream();
+                            mBitmap.compress(Bitmap.CompressFormat.PNG, 20, out);
+                            Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
 
-                            mTabs.get(finalCounter).setmBitmap(mBitmap);
+                            mTabs.get(finalCounter).setmBitmap(decoded);
                             if(pImageView!=null){
                                 activityContextManager.getInstance().getHomeController().runOnUiThread(() -> pImageView.setImageBitmap(mBitmap));
                             }
@@ -298,7 +292,7 @@ class tabDataModel
             clearTab();
         }
         else if(pCommands == dataEnums.eTabCommands.M_ADD_TAB){
-            addTabs((geckoSession)pData.get(0), (boolean)pData.get(1));
+            return addTabs((geckoSession)pData.get(0), (boolean)pData.get(1));
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_TAB){
             updateTab((String) pData.get(1), (geckoSession) pData.get(5));

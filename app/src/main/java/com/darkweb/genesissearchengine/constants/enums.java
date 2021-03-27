@@ -13,6 +13,11 @@ public class enums
 
     /*General Enums*/
 
+    public static class AddTabCallback {
+        public static final int TAB_ADDED = 0;
+        public static final int TAB_FULL = 1;
+    }
+
     public static class Theme {
         public static final int THEME_LIGHT = 0;
         public static final int THEME_DARK = 1;

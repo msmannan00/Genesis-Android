@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="15dp"
+                    android:padding="19dp"
                     android:src="@drawable/tick_recycler_view" />
             </FrameLayout>
 

@@ -35,7 +35,9 @@ public class settingAdvanceController extends AppCompatActivity {
     private SwitchMaterial mRestoreTabs;
     private SwitchMaterial mShowWebFonts;
     private SwitchMaterial mToolbarTheme;
+
     private ArrayList<RadioButton> mImageOption = new ArrayList<>();
+    private ArrayList<RadioButton> mTabLayoutOption = new ArrayList<>();
     private boolean mIsChanged = false;
 
     /* Initializations */
@@ -64,9 +66,11 @@ public class settingAdvanceController extends AppCompatActivity {
         mToolbarTheme = findViewById(R.id.pToolbarTheme);
         mImageOption.add(findViewById(R.id.pAdvanceImageOption1));
         mImageOption.add(findViewById(R.id.pAdvanceImageOption2));
+        mTabLayoutOption.add(findViewById(R.id.pAdvanceGridOption1));
+        mTabLayoutOption.add(findViewById(R.id.pAdvanceGridOption2));
 
         activityContextManager.getInstance().onStack(this);
-        mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts, mToolbarTheme, mImageOption);
+        mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts, mToolbarTheme, mImageOption, mTabLayoutOption);
         mSettingAdvanceModel = new settingAdvanceModel(new settingAdvanceModelCallback());
     }
 
@@ -151,6 +155,13 @@ public class settingAdvanceController extends AppCompatActivity {
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_SHOW_IMAGE, Collections.singletonList(view));
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_SET_IMAGE, Collections.singletonList(view));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,status.sShowImages));
+    }
+
+    public void onGridView(View view) {
+        mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_GRID, Collections.singletonList(null));
+        mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_SHOW_TAB_GRID, Collections.singletonList(view));
+        mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_SET_GRID, Collections.singletonList(view));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,status.sTabGridLayoutEnabled));
     }
 
     public void onShowWebFonts(View view) {

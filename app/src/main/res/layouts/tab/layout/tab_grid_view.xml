@@ -1,0 +1,277 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pRowContainer"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginStart="0dp"
+    android:clickable="true"
+    android:background="@color/clear_alpha"
+    android:focusable="true"
+    android:orientation="horizontal"
+    tools:ignore="RtlSymmetry">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pCardViewParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="0dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        android:background="@color/clear_alpha"
+        app:cardCornerRadius="4dp"
+        android:clipChildren="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pRowContainerInner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:orientation="horizontal"
+            android:paddingEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="38dp"
+                android:background="@xml/tx_border"
+                android:clipChildren="true"
+                android:elevation="0dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view7">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="0dp">
+
+                    <com.darkweb.genesissearchengine.helperManager.TopCropImageView
+                        android:id="@+id/pWebThumbnail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="-2dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:elevation="10dp"
+                        android:scaleType="fitCenter" />
+                </androidx.cardview.widget.CardView>
+
+                <FrameLayout
+                    android:id="@+id/pSelectedView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0"
+                    android:background="@xml/tx_border_image_dark_no_corner"
+                    android:translationZ="15dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:padding="65dp"
+                        android:src="@drawable/tick_recycler_view" />
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="6"
+                android:background="@color/c_background"
+                android:clickable="false"
+                android:focusable="false"
+                android:orientation="vertical"
+                android:paddingEnd="8dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/pRemoveRow"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="NestedWeights,RtlSymmetry">
+
+                <TextView
+                    android:id="@+id/pDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="0dp"
+                    android:clickable="false"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingTop="5dp"
+                    android:singleLine="true"
+                    android:text="@string/SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/pHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="1dp"
+                    android:clickable="false"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/c_text_v2"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:orientation="horizontal"
+                    android:paddingEnd="8dp"
+                    android:visibility="gone"
+                    tools:ignore="NestedWeights,RtlSymmetry"
+                    tools:layout_editor_absoluteX="114dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="-5dp"
+                        android:layout_marginTop="0dp"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:src="@xml/ic_baseline_clock"
+                        android:textColor="@color/c_text_v1"
+                        app:tint="@color/c_text_v3" />
+
+                    <TextView
+                        android:id="@+id/pDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="0dp"
+                        android:clickable="false"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/c_text_v3"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/c_view_divier_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <ImageView
+                android:id="@+id/pLoadSession"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_light"
+                android:clickable="true"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:focusable="true"
+                android:longClickable="true"
+                android:translationZ="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/pBorder"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/c_ripple_v2"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/pRemoveRow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="3dp"
+                android:background="@xml/tx_ripple_light"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:elevation="11dp"
+                android:longClickable="true"
+                android:outlineProvider="none"
+                android:padding="8dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:scaleType="fitCenter"
+                android:src="@xml/ic_baseline_cross"
+                android:tint="@color/c_navigation_tint"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:translationZ="100dp"
+        android:id="@+id/pItemSelectionMenu"
+        android:layout_width="match_parent"
+        android:background="@color/c_background"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/pItemSelectionMenuButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:background="@xml/hox_rounded_corner_suggestion_settings"
+            android:elevation="7dp"
+            android:text="@string/TAB_LIST_SELECT"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

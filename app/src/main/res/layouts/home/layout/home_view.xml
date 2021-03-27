@@ -171,6 +171,21 @@
 
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/pTopBarHider"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:translationZ="4dp"
+                    android:alpha="0"
+                    android:visibility="gone"
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/c_background"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/pAdView"
                     android:layout_width="match_parent"

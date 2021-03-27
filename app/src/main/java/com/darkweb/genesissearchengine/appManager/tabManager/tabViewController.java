@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ActionMenuView;
@@ -19,10 +20,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +50,7 @@ class tabViewController
     private TextView mSelectionCount;
     private ImageView mBlocker;
     private RecyclerView mRecycleView;
+    private NestedScrollView mNestedScrollView;
 
     /*Private Local Variables*/
     private Handler mDelayHandler = new Handler();
@@ -54,7 +58,7 @@ class tabViewController
 
     /*Initializations*/
 
-    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView)
+    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView)
     {
         this.mContext = mContext;
         this.mTabs = pTabs;
@@ -65,6 +69,7 @@ class tabViewController
         this.mSelectionCount = pSelectionCount;
         this.mBlocker = pBlocker;
         this.mRecycleView = pRecycleView;
+        this.mNestedScrollView = pNestedScrollView;
 
         initUI();
         initPostUI();
@@ -85,6 +90,10 @@ class tabViewController
         mMenuButton.setAlpha(0f);
         mMenuButton.animate().setStartDelay(200).setDuration(350).alpha(1);
         mMenuButton.setVisibility(View.VISIBLE);
+
+        if(!status.sTabGridLayoutEnabled){
+            mNestedScrollView.setPadding(0,0,0,0);
+        }
 
         onHideUndoDialogInit();
     }
@@ -214,22 +223,26 @@ class tabViewController
 
             if(pDX > 0){
                 if(status.sTheme == enums.Theme.THEME_DARK){
-                    pCanvas.drawARGB(150, 59, 57, 70);
+                    pCanvas.drawARGB(255,28, 27, 33);
                 }else {
-                    pCanvas.drawARGB(150, 230, 230, 230);
+                    pCanvas.drawARGB(255, 255, 255, 255);
                 }
-                icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
-                RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
-                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+                if(!status.sTabGridLayoutEnabled){
+                    icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
+                    RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
+                    pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+                }
             } else {
                 if(status.sTheme == enums.Theme.THEME_DARK){
-                    pCanvas.drawARGB(150, 59, 57, 70);
+                    pCanvas.drawARGB(255,28, 27, 33);
                 }else {
-                    pCanvas.drawARGB(150, 230, 230, 230);
+                    pCanvas.drawARGB(255, 255, 255, 255);
                 }
-                icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
-                RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
-                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+                if(!status.sTabGridLayoutEnabled){
+                    icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
+                    RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
+                    pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+                }
             }
         }
     }

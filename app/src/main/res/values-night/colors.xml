@@ -1,6 +1,6 @@
 <resources>
     <color name="c_background">#1c1b21</color>
-    <color name="c_background_alpha">#50ffffff</color>
+    <color name="c_background_alpha">#60ffffff</color>
     <color name="c_background_keyboard">#091a2a</color>
     <color name="c_background_inverted">#ffffff</color>
     <color name="c_view_divier_background_inner">#0f0f0f</color>

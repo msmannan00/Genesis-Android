@@ -36,6 +36,16 @@ class settingAdvanceModel
         }
     }
 
+    private void onShowTabGrid(View pView) {
+
+        if(pView.getId() == R.id.pGridOption1){
+            status.sTabGridLayoutEnabled = true;
+        }
+        else if(pView.getId() == R.id.pGridOption2){
+            status.sTabGridLayoutEnabled = false;
+        }
+    }
+
     private void onShowWebFonts(boolean pStatus) {
         status.sShowWebFonts = pStatus;
     }
@@ -56,6 +66,9 @@ class settingAdvanceModel
         }
         else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME)){
             onToolbarThemeChange((boolean)pData.get(0));
+        }
+        else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_TAB_GRID)){
+            onShowTabGrid((View)pData.get(0));
         }
         return null;
     }

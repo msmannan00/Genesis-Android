@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="c_background">#ffffff</color>
-    <color name="c_background_alpha">#501c1b21</color>
+    <color name="c_background_alpha">#601c1b21</color>
     <color name="c_background_keyboard">#999999</color>
     <color name="c_background_inverted">#302e38</color>
     <color name="c_view_divier_background_inner">#ebebeb</color>
@@ -111,6 +111,7 @@
     <color name="holo_gray">#b3b3b3</color>
     <color name="float_white">#bfbfbf</color>
     <color name="button_gray">#d9d9d9</color>
+    <color name="button_gray_alpha">#AAffffff</color>
     <color name="button_light">#e3e3e3</color>
     <color name="holo_gray_light">#f2f2f2</color>
     <color name="holo_gray_light_row">#f2f2f2</color>

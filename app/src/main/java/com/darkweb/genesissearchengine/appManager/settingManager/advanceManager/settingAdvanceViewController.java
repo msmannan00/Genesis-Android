@@ -27,10 +27,11 @@ class settingAdvanceViewController
     private SwitchMaterial mShowWebFonts;
     private SwitchMaterial mToolbarTheme;
     private ArrayList<RadioButton> mImageOption;
+    private ArrayList<RadioButton> mTabLayoutOption;
 
     /*Initializations*/
 
-    settingAdvanceViewController(settingAdvanceController pContext, eventObserver.eventListener pEvent, SwitchMaterial pRestoreTabs, SwitchMaterial pShowWebFonts, SwitchMaterial pToolbarTheme, ArrayList<RadioButton> pImageOption)
+    settingAdvanceViewController(settingAdvanceController pContext, eventObserver.eventListener pEvent, SwitchMaterial pRestoreTabs, SwitchMaterial pShowWebFonts, SwitchMaterial pToolbarTheme, ArrayList<RadioButton> pImageOption, ArrayList<RadioButton> pTabLayoutOption)
     {
         this.mEvent = pEvent;
         this.mContext = pContext;
@@ -38,6 +39,7 @@ class settingAdvanceViewController
         this.mShowWebFonts = pShowWebFonts;
         this.mToolbarTheme = pToolbarTheme;
         this.mImageOption = pImageOption;
+        this.mTabLayoutOption = pTabLayoutOption;
 
         initViews();
         initPostUI();
@@ -72,6 +74,16 @@ class settingAdvanceViewController
             mImageOption.get(1).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
             mImageOption.get(1).setChecked(true);
         }
+
+        if(status.sTabGridLayoutEnabled){
+            mTabLayoutOption.get(0).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+            mTabLayoutOption.get(0).setChecked(true);
+        }
+        else{
+            mTabLayoutOption.get(1).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+            mTabLayoutOption.get(1).setChecked(true);
+        }
+
     }
 
     private void initPostUI(){
@@ -98,6 +110,13 @@ class settingAdvanceViewController
         mImageOption.get(1).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint_default)));
     }
 
+    private void clearGridOptions(){
+        mTabLayoutOption.get(0).setChecked(false);
+        mTabLayoutOption.get(1).setChecked(false);
+        mTabLayoutOption.get(0).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint_default)));
+        mTabLayoutOption.get(1).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint_default)));
+    }
+
     private void setImageOptions(View pView){
         clearImageOptions();
         if(pView.getId() == R.id.pAdvanceOption1){
@@ -110,12 +129,31 @@ class settingAdvanceViewController
         }
     }
 
+    private void setGridOptions(View pView){
+        clearGridOptions();
+        if(pView.getId() == R.id.pGridOption1){
+            mTabLayoutOption.get(0).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+            mTabLayoutOption.get(0).setChecked(true);
+        }
+        else if(pView.getId() == R.id.pGridOption2){
+            mTabLayoutOption.get(1).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+            mTabLayoutOption.get(1).setChecked(true);
+        }
+    }
+
     public Object onTrigger(settingAdvanceEnums.eAdvanceViewController pCommands, List<Object> pData){
         if(pCommands.equals(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_IMAGE)){
             clearImageOptions();
         }
+        else if(pCommands.equals(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_GRID)){
+            clearGridOptions();
+        }
+
         else if(pCommands.equals(settingAdvanceEnums.eAdvanceViewController.M_SET_IMAGE)){
             setImageOptions((View) pData.get(0));
+        }
+        else if(pCommands.equals(settingAdvanceEnums.eAdvanceViewController.M_SET_GRID)){
+            setGridOptions((View) pData.get(0));
         }
         return null;
     }

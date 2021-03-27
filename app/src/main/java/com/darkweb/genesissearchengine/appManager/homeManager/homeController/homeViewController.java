@@ -108,14 +108,17 @@ class homeViewController
     private LinearLayout mTopBarContainer;
     private ImageView mSearchLock;
     private View mPopupLoadNewTab;
+    private ImageView mTopBarHider;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
     private boolean isLandscape = false;
     private boolean isFullScreen = false;
     private MovementMethod mSearchBarMovementMethod = null;
+    private Handler mTabDialogHandler = null;
+    private Runnable mTabDialogRunnable = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -150,6 +153,7 @@ class homeViewController
         this.mTopBarContainer = pTopBarContainer;
         this.mSearchLock = pSearchLock;
         this.mPopupLoadNewTab = pPopupLoadNewTab;
+        this.mTopBarHider = pTopBarHider;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -209,13 +213,19 @@ class homeViewController
         mPopupLoadNewTab.setVisibility(View.VISIBLE);
         mPopupLoadNewTab.animate().setDuration(350).alpha(1);
 
-        final Handler handler = new Handler();
-        handler.postDelayed(this::onHideLoadTabDialog, 2500);
+        if(mTabDialogHandler!=null){
+            mTabDialogHandler.removeCallbacksAndMessages(null);
+        }
+
+        mTabDialogHandler = new Handler();
+        mTabDialogRunnable = this::onHideLoadTabDialog;
+        mTabDialogHandler.postDelayed(mTabDialogRunnable, 7500);
     }
 
     public void onHideLoadTabDialog() {
         mPopupLoadNewTab.findViewById(R.id.pBlockerUndo).setVisibility(View.VISIBLE);
         mPopupLoadNewTab.animate().cancel();
+
         mPopupLoadNewTab.animate().setDuration(350).alpha(0).withEndAction(() -> {
             mPopupLoadNewTab.setVisibility(View.GONE);
         });
@@ -225,10 +235,13 @@ class homeViewController
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
 
             onUpdateStatusBarTheme(null, false);
+
             mTabFragment.setAlpha(0);
             mTabFragment.setTranslationY(0);
             mTabFragment.setVisibility(View.VISIBLE);
             mTabFragment.setTranslationY(-1 * helperMethod.pxFromDp(15));
+            mTopBarHider.setVisibility(View.VISIBLE);
+            mTopBarHider.animate().alpha(1).setDuration(0);
 
             new Handler().postDelayed(() ->
             {
@@ -248,12 +261,14 @@ class homeViewController
     public void onHideTabContainer(){
         if(mTabFragment.getAlpha()==1){
 
-            mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
-            mTabFragment.animate()
-                    .setDuration(150)
-                    .alpha(0f).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
+            new Handler().postDelayed(() ->
+            {
+                mTopBarHider.animate().alpha(0).setDuration(0).setStartDelay(0).withEndAction(() -> mTopBarHider.setVisibility(View.GONE));
+                mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
+            }, 150);
+
+            mTabFragment.animate() .setDuration(150).alpha(0f).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
             mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.M_INIT_TAB_COUNT);
-            mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
         }
     }
 
@@ -652,6 +667,7 @@ class homeViewController
         ImageButton back = popupView.findViewById(R.id.menu22);
         ImageButton close = popupView.findViewById(R.id.menu20);
         CheckBox desktop = popupView.findViewById(R.id.menu27);
+        LinearLayout newTab = popupView.findViewById(R.id.menu11);
         desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
 
         if(!canGoForward){
@@ -662,6 +678,14 @@ class homeViewController
            close.setEnabled(false);
            close.setColorFilter(Color.argb(255, 191, 191, 191));
         }
+
+        newTab.setClickable(false);
+        close.setClickable(false);
+        new Handler().postDelayed(() ->
+        {
+            newTab.setClickable(true);
+            close.setClickable(true);
+        }, 300);
 
     }
 
@@ -804,7 +828,7 @@ class homeViewController
     public void onUpdateStatusBarTheme(String pTheme, boolean mForced)
     {
         if(mSplashScreen.getAlpha()<=0 && (status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode) && mTabFragment.getAlpha()<=0 || mForced){
-            int mColor = -1;
+            int mColor;
             try{
                 mColor = Color.parseColor(pTheme);
             }catch (Exception ex){
@@ -822,9 +846,13 @@ class homeViewController
                 mGradientDrawable.setCornerRadius(helperMethod.pxFromDp(7));
 
                 GradientDrawable gradientDrawable1 = new GradientDrawable();
-                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
+                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.50f), Color.BLACK, 0.2f));
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(4));
-                gradientDrawable1.setStroke(helperMethod.pxFromDp(2), mColor);
+
+                GradientDrawable gradientDrawable3 = new GradientDrawable();
+                gradientDrawable3.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.50f), Color.BLACK, 0.2f));
+                gradientDrawable3.setCornerRadius(helperMethod.pxFromDp(4));
+                gradientDrawable3.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
 
                 GradientDrawable gradientDrawable2 = new GradientDrawable();
                 gradientDrawable2.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
@@ -832,7 +860,7 @@ class homeViewController
                 gradientDrawable2.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
 
                 StateListDrawable states = new StateListDrawable();
-                InsetDrawable mInsetDrawable1 = new InsetDrawable(gradientDrawable1, helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8));
+                InsetDrawable mInsetDrawable1 = new InsetDrawable(gradientDrawable3, helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8));
                 InsetDrawable mInsetDrawable2 = new InsetDrawable(gradientDrawable2, helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8));
 
                 states.addState(new int[] {android.R.attr.state_pressed}, mInsetDrawable1);
@@ -846,6 +874,8 @@ class homeViewController
                 mSearchLock.setColorFilter(helperMethod.invertedGrayColor(mColor));
                 mSearchLock.setTag(R.id.themed,true);
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(7));
+                gradientDrawable1.setStroke(helperMethod.pxFromDp(2), mColor);
+                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
                 mSearchbar.setBackground(gradientDrawable1);
                 mSearchbar.setHintTextColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.10f), Color.BLACK, 0.2f));
 
@@ -895,7 +925,10 @@ class homeViewController
                 mVoiceInput.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
                 mSearchbar.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
                 mSearchbar.setHintTextColor(ContextCompat.getColor(mContext, R.color.c_text_v2));
-                onUpdateSearchIcon(1);
+
+                if(!mSearchbar.isFocused()){
+                    onUpdateSearchIcon(1);
+                }
 
                 if(status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode){
                     mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

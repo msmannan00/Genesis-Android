@@ -16,9 +16,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.TopCropImageView;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -68,8 +71,13 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
     @NonNull @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_row_view, parent, false);
-        return new listViewHolder(view);
+        if(status.sTabGridLayoutEnabled){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_grid_view, parent, false);
+            return new listViewHolder(view);
+        }else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_row_view, parent, false);
+            return new listViewHolder(view);
+        }
     }
     @Override
     public void onBindViewHolder(@NonNull tabAdapter.listViewHolder holder, int position)
@@ -250,7 +258,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 mItemSelectionMenuButton.setOnClickListener(this);
             }else {
                 if(model.getSession().getTheme()==null){
-                    mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_border_background_divider));
+                    mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple_v2));
                 }else {
                     try{
                         mBorder.setBackgroundColor(Color.parseColor(model.getSession().getTheme()));
@@ -271,12 +279,17 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }else {
                     mHeader.setText(model.getSession().getTitle());
                 }
-                mDescription.setText(mURL);
+
+                if(status.sTabGridLayoutEnabled){
+                    mDescription.setText(helperMethod.getDomainName(mURL));
+                }else {
+                    mDescription.setText(mURL);
+                }
                 mDate.setText(model.getDate());
                 mWebThumbnail.setImageBitmap(model.getBitmap());
 
                 if(getLayoutPosition()==0){
-                    mEvent.invokeObserver(Arrays.asList(mWebThumbnail, mURL), enums.etype.fetch_thumbnail);
+                   // mEvent.invokeObserver(Arrays.asList(mWebThumbnail, mURL), enums.etype.fetch_thumbnail);
                 }
 
                 if(mSelectedList.contains(model.getSession().getSessionID())){
@@ -286,7 +299,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
                 if(model.getSession().equals(mModelList.get(0).getSession())){
-                    itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
+                    if(!status.sTabGridLayoutEnabled){
+                        itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
+                    }
                 }else {
                     Drawable mDrawable;
                     Resources res = itemView.getContext().getResources();
@@ -319,6 +334,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 mLongPressMenuEnabled = false;
                 mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
             }
+            mRemoveRow.bringToFront();
         }
 
 

@@ -238,6 +238,162 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/c_text_setting_heading"
+                        android:textSize="15sp"
+                        android:layout_width="match_parent"
+                        android:textStyle="bold"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="40"
+                        android:layout_marginTop="00dp"
+                        android:text="@string/SETTING_ADVANCE_GRID_LAYOUT"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/SETTING_ADVANCE_GRID_LAYOUT_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@xml/sx_border_left"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="-1dp"
+                        android:elevation="2dp"
+                        android:background="@color/white"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:background="@xml/gx_ripple_gray"
+                        android:clickable="false"
+                        android:id="@+id/pGridOption1"
+                        android:layoutDirection="ltr"
+                        android:onClick="onGridView"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="1"
+                                android:background="@android:color/transparent"
+                                android:layout_marginStart="15dp"
+                                android:clickable="false"
+                                android:padding="0dp"
+                                android:paddingStart="5dp"
+                                android:text="@string/SETTING_ADVANCE_GRID_OPTION_1"
+                                android:textAlignment="textStart"
+                                android:textAllCaps="false"
+                                android:textColor="@color/c_text_v1"
+                                android:textSize="15sp"
+                                tools:ignore="RtlSymmetry" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/pAdvanceGridOption1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:background="@android:color/transparent"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="7dp"
+                            android:buttonTint="@color/c_radio_tint"
+                            android:src="@xml/ic_arrow_right"
+                            android:contentDescription="@string/GENERAL_TODO" />
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/c_view_divier_background_inner" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:background="@xml/gx_ripple_gray"
+                        android:id="@+id/pGridOption2"
+                        android:onClick="onGridView"
+                        android:clickable="false"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <Button
+                                android:layout_marginStart="15dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="1"
+                                android:background="@android:color/transparent"
+                                android:clickable="false"
+                                android:padding="0dp"
+                                android:paddingStart="5dp"
+                                android:text="@string/SETTING_ADVANCE_GRID_OPTION_2"
+                                android:textColor="@color/c_text_v1"
+                                android:textAlignment="textStart"
+                                android:textAllCaps="false"
+                                android:textSize="15sp"
+                                tools:ignore="RtlSymmetry" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/pAdvanceGridOption2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:background="@android:color/transparent"
+                            android:buttonTint="@color/c_radio_tint"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="7dp"
+                            android:src="@xml/ic_arrow_right"
+                            android:contentDescription="@string/GENERAL_TODO" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:elevation="4dp"
+                        android:background="@color/c_view_divier_background_inner"/>
+
+                </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -313,6 +469,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:alpha="1"
+                                android:layout_marginStart="15dp"
                                 android:background="@android:color/transparent"
                                 android:clickable="false"
                                 android:padding="0dp"

@@ -123,11 +123,14 @@
     <string name="SETTING_PRIVACY_POPUP" translatable="true">Block Popup | Toggle to Disable Popup Advert</string>
     <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Remove popup advertizement. Might break functionaly of some websites</string>
     <string name="SETTING_PRIVACY_POPUP_INFO_ALERT" translatable="true">Popup blocked</string>
+    <string name="SETTING_MAX_TAB_POPUP_INFO_ALERT" translatable="true">Memory full &#160; ➔ &#160; Clearing tab</string>
     <string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Restore tabs</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Don\'t restore after quitting browser</string>
     <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">Toolbar Theme</string>
     <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Set toolbar theme as defined in website</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Tab view</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Switch between Tab manager Grid Layout and List Layout</string>
     <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">Show Images</string>
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Always load website images</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Show web fonts</string>
@@ -140,6 +143,8 @@
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">Media</string>
     <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">Change default data saver settings</string>
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">Change default media settings</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Grid Design</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">List Design</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">Always show images</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Only show images over WI-FI</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Block all images</string>
@@ -164,6 +169,8 @@
     <string name="SETTING_GENERAL_INFO" translatable="true">Home, language</string>
     <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">Full-screen browsing</string>
     <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">Hide the browser toolbar when scrolling down a page</string>
+    <string name="SETTING_GENERAL_TOOLBAR_THEME" translatable="true">Searchbar theme</string>
+    <string name="SETTING_GENERAL_TOOLBAR_THEME_INFO" translatable="true">Automatically change search bar theme according to website</string>
     <string name="SETTING_GENERAL_LANGUAGE" translatable="true">Language</string>
     <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">Change the language of your browser</string>
     <string name="SETTING_GENERAL_THEME" translatable="true">Theme</string>
