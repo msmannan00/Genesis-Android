@@ -2,6 +2,8 @@ package com.darkweb.genesissearchengine.appManager.homeManager.hintManager;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Ignore;
+
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabEnums;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -22,6 +26,9 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -95,7 +102,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             super(itemView);
         }
 
-        @SuppressLint("ClickableViewAccessibility")
+        @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
         void bindListView(historyRowModel model) {
             mHeader = itemView.findViewById(R.id.pHeader);
             mHeaderSingle = itemView.findViewById(R.id.pHeaderSingle);
@@ -164,39 +171,49 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             }
 
             if(!mWebIcon.containsKey(mURLLink)){
-                new Thread(){
-                    public void run(){
-                        try {
-                            mHindTypeIconTemp.setImageDrawable(null);
-                            mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                            while (true){
-                                int mCounter=0;
-                                if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                    sleep(10);
-                                    mCounter+=1;
-                                }else {
-                                    Log.i("BREAK","");
-                                    break;
+                if(mURLLink.contains("boogle.store") || mURLLink.contains("genesis.onion")){
+                    mHintWebIcon.setColorFilter(null);
+                    mHintWebIcon.clearColorFilter();
+                    mHintWebIcon.setImageTintList(null);
+                    mHintWebIcon.setClipToOutline(true);
+                    mHintWebIcon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                }else
+                {
+                    new Thread(){
+                        public void run(){
+                            try {
+                                mHindTypeIconTemp.setImageDrawable(null);
+                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                                while (true){
+                                    int mCounter=0;
+                                    if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
+                                        sleep(10);
+                                        mCounter+=1;
+                                    }else {
+                                        Log.i("BREAK","");
+                                        break;
+                                    }
+                                    if(mCounter>6){
+                                        break;
+                                    }
                                 }
-                                if(mCounter>6){
-                                    break;
-                                }
+
+                                mContext.runOnUiThread(() -> {
+                                    mHintWebIcon.setColorFilter(null);
+                                    mHintWebIcon.clearColorFilter();
+                                    mHintWebIcon.setImageTintList(null);
+                                    mHintWebIcon.setClipToOutline(true);
+                                    mWebIcon.put(mURLLink,mHindTypeIconTemp.getDrawable());
+                                    mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+
+                                });
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
-
-                            mContext.runOnUiThread(() -> {
-                                mHintWebIcon.setColorFilter(null);
-                                mHintWebIcon.clearColorFilter();
-                                mHintWebIcon.setImageTintList(null);
-                                mHintWebIcon.setClipToOutline(true);
-                                mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                                mWebIcon.put(mURLLink,mHindTypeIconTemp.getDrawable());
-                            });
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
-                    }
-                }.start();
+                    }.start();
+                }
             }
        }
 

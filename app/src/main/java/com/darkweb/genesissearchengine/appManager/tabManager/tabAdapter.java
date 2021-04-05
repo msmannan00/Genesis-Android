@@ -1,23 +1,30 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.util.Log;
+import android.graphics.drawable.TransitionDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -30,13 +37,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_DOMAIN_URL;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
+import static org.mozilla.gecko.util.ThreadUtils.runOnUiThread;
 
 public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 {
@@ -46,14 +53,22 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     private eventObserver.eventListener mEvent;
     private ArrayList<String> mSelectedList = new ArrayList<>();
     private Boolean mLongPressMenuEnabled = false;
+    private boolean mViewLoaded = false;
+    private ObjectAnimator mFirstRow = null;
 
 
     tabAdapter(ArrayList<tabRowModel> pModelList, eventObserver.eventListener event) {
+        initialize(pModelList);
+        this.mEvent = event;
+    }
+
+    private void initialize(ArrayList<tabRowModel> pModelList){
         this.mModelList.clear();
         this.mModelList.addAll(pModelList);
         mModelList.add(new tabRowModel(null, null,null));
-        this.mEvent = event;
+        mViewLoaded = false;
     }
+
 
     private void reInitData(ArrayList<tabRowModel> pModelList){
         for(int mCounter=0;mCounter<pModelList.size();mCounter++){
@@ -86,6 +101,74 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         holder.itemView.setTag(position);
         holder.itemView.findViewById(R.id.pRemoveRow).setTag(position);
         holder.itemView.findViewById(R.id.pLoadSession).setTag(position);
+        if(position == 0 && status.sTabGridLayoutEnabled && !mViewLoaded){
+            onExpandScale(holder.itemView);
+            mViewLoaded = true;
+        }else if(position != mModelList.size()-1){
+            holder.itemView.setScaleY(1f);
+            holder.itemView.setScaleX(1f);
+        }
+    }
+
+    private boolean mFirstRowAnimating = false;
+    public void onExpandScale(View v) {
+        if(mFirstRowAnimating){
+            return;
+        }
+        mFirstRowAnimating = true;
+        v.bringToFront();
+        if(mFirstRow!=null){
+            mFirstRow.end();
+            mFirstRow.cancel();
+        }
+        v.setScaleY(0.85f);
+        v.setScaleX(0.85f);
+        mFirstRow = ObjectAnimator.ofPropertyValuesHolder(v,
+                PropertyValuesHolder.ofFloat("scaleX", 0.85f, 1),
+                PropertyValuesHolder.ofFloat("scaleY", 0.85f, 1));
+        mFirstRow.setDuration(200);
+        mFirstRow.setStartDelay(150);
+        mFirstRow.start();
+        mFirstRow.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation, boolean isReverse) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation, boolean isReverse) {
+                mFirstRowAnimating = false;
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mFirstRowAnimating = false;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                mFirstRowAnimating = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
+    public void scaleView(View v) {
+        v.bringToFront();
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(v,
+                PropertyValuesHolder.ofFloat("scaleX", 1, 0.85f),
+                PropertyValuesHolder.ofFloat("scaleY", 1, 0.85f));
+        scaleDown.setDuration(200);
+        scaleDown.start();
     }
 
     @Override
@@ -114,8 +197,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     }
                 }
             }
-
-            mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG);
         }
     }
 
@@ -141,7 +222,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             mEvent.invokeObserver(Collections.singletonList(0), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
         }
 
-        mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG);
     }
 
     private void onClearAllSelection(){
@@ -214,8 +294,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             notifyItemRangeChanged(mIndex, mModelList.size());
         }
 
+        mEvent.invokeObserver(Collections.singletonList(mIndex), tabEnums.eTabAdapterCallback.M_CLEAR_BACKUP);
         mEvent.invokeObserver(Collections.singletonList(mIndex), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW);
-        mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_DIALOG);
     }
 
     /*View Holder Extensions*/
@@ -257,8 +337,15 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 mItemSelectionMenu.setVisibility(View.VISIBLE);
                 mItemSelectionMenuButton.setOnClickListener(this);
             }else {
+                mLoadSession.setOnLongClickListener(this);
+                mRemoveRow.setOnClickListener(this);
+                mLoadSession.setOnClickListener(this);
                 if(model.getSession().getTheme()==null){
-                    mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple_v2));
+                    if(status.sTabGridLayoutEnabled){
+                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_view_divier_background_inner));
+                    }else {
+                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple));
+                    }
                 }else {
                     try{
                         mBorder.setBackgroundColor(Color.parseColor(model.getSession().getTheme()));
@@ -281,15 +368,30 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
                 if(status.sTabGridLayoutEnabled){
-                    mDescription.setText(helperMethod.getDomainName(mURL));
+                    mDescription.setText((model.getSession().getTitle()));
                 }else {
                     mDescription.setText(mURL);
                 }
                 mDate.setText(model.getDate());
-                mWebThumbnail.setImageBitmap(model.getBitmap());
 
-                if(getLayoutPosition()==0){
-                   // mEvent.invokeObserver(Arrays.asList(mWebThumbnail, mURL), enums.etype.fetch_thumbnail);
+                if(mURL.equals("about:blank")){
+                    mWebThumbnail.setAlpha(0f);
+                }else {
+                Thread timer = new Thread()
+                {
+                    public void run()
+                    {
+                        runOnUiThread(() -> {
+                            if(mWebThumbnail.getDrawable()==null){
+                                mWebThumbnail.setImageBitmap(model.getBitmap());
+                            }else {
+                                Drawable mDrawable = new BitmapDrawable(itemView.getContext().getResources(), model.getBitmap());
+                                helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable,250);
+                            }
+                        });
+                    }
+                };
+                timer.start();
                 }
 
                 if(mSelectedList.contains(model.getSession().getSessionID())){
@@ -298,11 +400,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     onSelectionClear(mSelectedView);
                 }
 
-                if(model.getSession().equals(mModelList.get(0).getSession())){
-                    if(!status.sTabGridLayoutEnabled){
-                        itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
-                    }
-                }else {
+                if(!model.getSession().equals(mModelList.get(0).getSession()) && !status.sTabGridLayoutEnabled){
                     Drawable mDrawable;
                     Resources res = itemView.getContext().getResources();
                     try {
@@ -311,9 +409,49 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     } catch (Exception ignored) {
                     }
                 }
-                mLoadSession.setOnLongClickListener(this);
-                mRemoveRow.setOnClickListener(this);
-                mLoadSession.setOnClickListener(this);
+            }
+
+            itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.clear_alpha));
+            if(!status.sTabGridLayoutEnabled){
+                if(getLayoutPosition() == 0){
+                    itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
+                }
+            }
+
+            if(status.sTabGridLayoutEnabled){
+                CardView mLayout = itemView.findViewById(R.id.pRowContainerInner);
+                CardView mCardView = itemView.findViewById(R.id.pCardViewParent);
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLayout.getLayoutParams();
+
+                if(getLayoutPosition() == 0){
+                    params.leftMargin = helperMethod.pxFromDp(2.5f);
+                    params.rightMargin = helperMethod.pxFromDp(2.5f);
+                    params.topMargin = helperMethod.pxFromDp(2.5f);
+                    params.bottomMargin = helperMethod.pxFromDp(2.5f);
+
+                    if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_button_text_v1_inverted));
+                    }else {
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.text_color_highlight_v3));
+                    }
+                }else {
+
+                    if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
+                        params.leftMargin = helperMethod.pxFromDp(2.5f);
+                        params.rightMargin = helperMethod.pxFromDp(2.5f);
+                        params.topMargin = helperMethod.pxFromDp(2.5f);
+                        params.bottomMargin = helperMethod.pxFromDp(2.5f);
+
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_tab_background));
+                    }else {
+                        params.leftMargin = helperMethod.pxFromDp(0f);
+                        params.rightMargin = helperMethod.pxFromDp(0f);
+                        params.topMargin = helperMethod.pxFromDp(0f);
+                        params.bottomMargin = helperMethod.pxFromDp(0f);
+
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_view_divier_background));
+                    }
+                }
             }
 
             if(this.getLayoutPosition()==mModelList.size()-1){
@@ -327,9 +465,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
                 }
             }else {
-                if(model.getmId()!=null){
-                    mItemSelectionMenuReference.animate().cancel();
-                }
                 itemView.setVisibility(View.VISIBLE);
                 mLongPressMenuEnabled = false;
                 mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
@@ -351,6 +486,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
                     }else {
                         onTriggerURL(mModelList.get(this.getLayoutPosition()));
+                        if(status.sTabGridLayoutEnabled){
+                            scaleView(itemView);
+                        }
                     }
                 }else {
                     for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
@@ -418,6 +556,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             onRemoveAll();
         }else if(pCommands.equals(tabEnums.eTabAdapterCommands.REMOVE_ROW_CROSSED)){
             onRemoveRowCross((int)pData.get(0));
+        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.M_INITIALIZE)){
+            initialize((ArrayList<tabRowModel>) pData.get(0));
         }
         return null;
     }

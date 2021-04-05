@@ -383,13 +383,21 @@
 	<string name="ERROR_M5" translatable="true">kérjük, lépjen kapcsolatba a weboldal tulajdonosával, hogy tájékoztassa őket erről a problémáról.</string>
 	<string name="ERROR_M6" translatable="true">újratöltés</string>
 
-
 	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
 	<string name="invalid_package_signature" translatable="true">Érvénytelen csomag aláírás</string>
 	<string name="autofill_sign_in_prompt" translatable="true">kattintson a bejelentkezéshez.</string>
 	<string name="autofill_manual_prompt" translatable="true">kattintson az adatok manuális kiválasztásához.</string>
 	<string name="security_exception" translatable="true">Web domain biztonsági kivétel.</string>
 	<string name="dal_exception" translatable="true">DAL ellenőrzési hiba.</string>
+
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Legutóbbi lapok</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Új identitás</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Adatvédelmi irányelvek</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser adatvédelmi irányelvek</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Webhely jelentése</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Illegális weboldal bejelentése</string>
+	<string name="SETTING_SITEMAP" translatable="true">tegye közzé webhelyét</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Adja hozzá webhelyét keresőmotorunkhoz</string>
 
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>

@@ -250,7 +250,7 @@ public class pluginController
                 pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
             }
             else if(pEventType.equals(M_SET_BRIDGES)){
-                activityContextManager.getInstance().getBridgeController().onUpdateBridges((String) pData.get(0));
+                activityContextManager.getInstance().getBridgeController().onUpdateBridges((String) pData.get(0), (String) pData.get(1));
             }
             return null;
         }

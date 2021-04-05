@@ -1,4 +1,16 @@
 /*Search*/
+body{ 
+    opacity: 0;
+    transition: opacity 2s;
+    -webkit-transition: opacity 2s; /* Safari */
+}
+
+.body_fadein {
+    opacity: 1;
+    transition-duration: 0.5s;
+    transition-property: opacity;
+}
+  
 .line-style {
   border: 0;
   height: 1px;

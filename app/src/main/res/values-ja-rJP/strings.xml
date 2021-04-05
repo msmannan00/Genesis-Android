@@ -383,6 +383,14 @@
 	<string name="ERROR_M5" translatable="true">この問題については、Webサイトの所有者に連絡してください。</string>
 	<string name="ERROR_M6" translatable="true">リロード</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">最近のタブ</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">新しいアイデンティティ</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">個人情報保護方針</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser プライバシーポリシー</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">レポートのウェブサイト</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">違法なウェブサイトを報告する</string>
+	<string name="SETTING_SITEMAP" translatable="true">あなたのウェブサイトを公開する</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">あなたのウェブサイトを私たちの検索エンジンに追加してください</string>
 
 	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
 	<string name="invalid_package_signature" translatable="true">無効なパッケージ署名</string>

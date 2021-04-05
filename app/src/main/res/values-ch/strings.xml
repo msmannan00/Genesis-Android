@@ -391,6 +391,15 @@
 	<string name="security_exception" translatable="true">Výjimka zabezpečení webové domény.</string>
 	<string name="dal_exception" translatable="true">Selhání ověření DAL.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Nedávné karty</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nová identita</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Zásady ochrany osobních údajů</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Zásady ochrany osobních údajů Genesis Browser</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Nahlásit web</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Nahlásit nelegální web</string>
+	<string name="SETTING_SITEMAP" translatable="true">zveřejněte svůj web</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Přidejte svůj web do našeho vyhledávače</string>
+
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>
 

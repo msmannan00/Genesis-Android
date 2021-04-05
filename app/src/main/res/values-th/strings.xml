@@ -391,6 +391,15 @@
 	<string name="security_exception" translatable="true">ข้อยกเว้นด้านความปลอดภัยของโดเมนเว็บ</string>
 	<string name="dal_exception" translatable="true">การตรวจสอบ DAL ล้มเหลว</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">แท็บล่าสุด</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">เอกลักษณ์ใหม่</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">นโยบายความเป็นส่วนตัว</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser นโยบายความเป็นส่วนตัว</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">รายงานเว็บไซต์</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">รายงานเว็บไซต์ที่ผิดกฎหมาย</string>
+	<string name="SETTING_SITEMAP" translatable="true">เผยแพร่เว็บไซต์ของคุณ</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">เพิ่มเว็บไซต์ของคุณในเครื่องมือค้นหาของเรา</string>
+
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>
 

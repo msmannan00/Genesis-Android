@@ -15,6 +15,7 @@ import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.Neste
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import org.mozilla.geckoview.GeckoResult;
 import java.io.ByteArrayInputStream;
@@ -163,7 +164,7 @@ class tabDataModel
     }
 
     tabRowModel getRecentTab(){
-        if(mTabs.size()>0){
+        if(mTabs.size()>1){
             return mTabs.get(1);
         }
         else {
@@ -221,22 +222,31 @@ class tabDataModel
                         int finalCounter = counter;
                         if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID)) {
                             GeckoResult<Bitmap> mResult = pBitmapManager.withHandler(handler);
-                            Bitmap mBitmap = pBitmapManager.poll(4000);
+                            Bitmap mBitmap = pBitmapManager.poll(0);
+
                             ByteArrayOutputStream out = new ByteArrayOutputStream();
                             mBitmap.compress(Bitmap.CompressFormat.PNG, 20, out);
                             Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
 
-                            mTabs.get(finalCounter).setmBitmap(decoded);
-                            if(pImageView!=null){
-                                activityContextManager.getInstance().getHomeController().runOnUiThread(() -> pImageView.setImageBitmap(mBitmap));
+
+                            Bitmap emptyBitmap = Bitmap.createBitmap(decoded.getWidth(), decoded.getHeight(), decoded.getConfig());
+                            if (!decoded.sameAs(emptyBitmap)) {
+
+                                mTabs.get(finalCounter).setmBitmap(decoded);
+
+                                if(pImageView!=null){
+                                    activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
+                                        pImageView.setImageBitmap(mBitmap);
+                                    });
+                                }
+
+                                byte[] mThumbnail = out.toByteArray();
+                                if(status.sRestoreTabs){
+                                    ContentValues mContentValues = new  ContentValues();
+                                    mContentValues.put("mThumbnail", mThumbnail);
+                                    databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter).getmId());
+                                }
                             }
-
-                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                            byte[] mThumbnail = bos.toByteArray();
-
-                            ContentValues mContentValues = new  ContentValues();
-                            mContentValues.put("mThumbnail", mThumbnail);
-                            databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter).getmId());
                         }
                     }
 
@@ -244,7 +254,7 @@ class tabDataModel
                     throwable.printStackTrace();
                 }
                 if(pOpenTabView){
-                    activityContextManager.getInstance().getHomeController().onOpenTabReady();
+                    activityContextManager.getInstance().getHomeController().onLoadFirstElement();
                 }
 
             }
@@ -287,15 +297,21 @@ class tabDataModel
         }
         else if(pCommands == dataEnums.eTabCommands.CLOSE_TAB){
             closeTab((geckoSession)pData.get(0), pData.get(1));
+            activityContextManager.getInstance().getHomeController().initTabCountForced();
         }
         else if(pCommands == dataEnums.eTabCommands.M_CLEAR_TAB){
             clearTab();
+            activityContextManager.getInstance().getHomeController().initTabCountForced();
         }
         else if(pCommands == dataEnums.eTabCommands.M_ADD_TAB){
-            return addTabs((geckoSession)pData.get(0), (boolean)pData.get(1));
+            int mTabs = addTabs((geckoSession)pData.get(0), (boolean)pData.get(1));
+            activityContextManager.getInstance().getHomeController().initTabCountForced();
+
+            return mTabs;
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_TAB){
             updateTab((String) pData.get(1), (geckoSession) pData.get(5));
+            activityContextManager.getInstance().getHomeController().initTabCountForced();
         }
         else if(pCommands == dataEnums.eTabCommands.GET_TAB){
             return getTab();

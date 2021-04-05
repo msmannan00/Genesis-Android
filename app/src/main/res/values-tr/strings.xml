@@ -375,7 +375,6 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"İnternette beklediğiniz şekilde göz atın."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Kullanıcı Gözetim Koruması yok. Sansür yok."</string>
 
-
     <string name="ERROR_M1" translatable="true">bu siteye ulaşılamıyor</string>
     <string name="ERROR_M2" translatable="true">web sitesine bağlanırken bir hata oluştu</string>
     <string name="ERROR_M3" translatable="true">görüntülemeye çalıştığınız sayfa, alınan verilerin gerçekliği doğrulanamadığı için gösterilemiyor</string>
@@ -383,13 +382,21 @@
     <string name="ERROR_M5" translatable="true">Bu sorunu bildirmek için lütfen web sitesi sahipleriyle iletişime geçin.</string>
     <string name="ERROR_M6" translatable="true">Tekrar yükle</string>
 
-
     <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
     <string name="invalid_package_signature" translatable="true">Geçersiz paket imzası</string>
     <string name="autofill_sign_in_prompt" translatable="true">oturum açmak için tıklayın.</string>
     <string name="autofill_manual_prompt" translatable="true">verileri manuel olarak seçmek için tıklayın.</string>
     <string name="security_exception" translatable="true">Web alanı güvenlik istisnası.</string>
     <string name="dal_exception" translatable="true">DAL doğrulama hatası.</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Son sekmeler</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Yeni kimlik</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">Gizlilik Politikası</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser gizlilik ilkesi</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">Web sitesini bildir</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Yasadışı web sitesini bildirin</string>
+    <string name="SETTING_SITEMAP" translatable="true">web sitenizi yayınlayın</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">Web sitenizi arama motorumuza ekleyin</string>
 
     <item name="LaguageID" type="id"/>
     <item name="LaguageRegion" type="id"/>

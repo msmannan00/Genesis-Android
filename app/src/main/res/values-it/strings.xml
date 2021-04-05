@@ -383,13 +383,21 @@
 	<string name="ERROR_M5" translatable="true">si prega di contattare i proprietari del sito web per informarli di questo problema.</string>
 	<string name="ERROR_M6" translatable="true">ricaricare</string>
 
-
 	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
 	<string name="invalid_package_signature" translatable="true">Firma del pacchetto non valida</string>
 	<string name="autofill_sign_in_prompt" translatable="true">fare clic per accedere.</string>
 	<string name="autofill_manual_prompt" translatable="true">fare clic per selezionare manualmente i dati.</string>
 	<string name="security_exception" translatable="true">Eccezione di sicurezza del dominio Web.</string>
 	<string name="dal_exception" translatable="true">DAL verification failure.</string>
+
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Schede recenti</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nuova identità</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">politica sulla riservatezza</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser informativa sulla privacy</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Segnala sito web</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Segnala sito web illegale</string>
+	<string name="SETTING_SITEMAP" translatable="true">pubblica il tuo sito web</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Aggiungi il tuo sito web al nostro motore di ricerca</string>
 
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>

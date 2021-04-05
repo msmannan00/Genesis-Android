@@ -12,6 +12,7 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="vertical"
+                    android:paddingBottom="100dp"
                     android:layout_height="wrap_content">
 
                 <!-- Title Header -->
@@ -373,205 +374,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:orientation="vertical"
-                        tools:ignore="UselessParent">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_PRIVACY_COOKIES"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="14sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_PRIVACY_COOKIES_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:background="@xml/sx_border_left"
-                            android:paddingStart="0dp"
-                            android:layoutDirection="ltr"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            tools:ignore="RtlSymmetry">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="-1dp"
-                                android:elevation="2dp"
-                                android:background="@color/white"/>
-
-                            <LinearLayout
-                                android:id="@+id/pCookieOption1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@xml/gx_ripple_gray"
-                                android:onClick="onCookies"
-                                android:layoutDirection="ltr"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginStart="4dp"
-                                android:orientation="horizontal">
-                                <RadioButton
-                                    android:id="@+id/pCookieRadioOption1"
-                                    android:layoutDirection="rtl"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="50dp"
-                                    android:paddingEnd="15dp"
-                                    android:clickable="false"
-                                    android:background="@android:color/transparent"
-                                    android:buttonTint="@color/c_radio_tint"
-                                    android:textColor="@color/c_text_v1"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:paddingStart="15dp"
-                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION1"
-                                    tools:ignore="RtlHardcoded" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/c_view_divier_background_inner"/>
-
-                            <LinearLayout
-                                android:id="@+id/pCookieOption2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@xml/gx_ripple_gray"
-                                android:layoutDirection="ltr"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginStart="4dp"
-                                android:onClick="onCookies"
-                                android:orientation="horizontal">
-                                <RadioButton
-                                    android:id="@+id/pCookieRadioOption2"
-                                    android:layoutDirection="rtl"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="50dp"
-                                    android:paddingEnd="15dp"
-                                    android:textColor="@color/c_text_v1"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:background="@android:color/transparent"
-                                    android:buttonTint="@color/c_radio_tint"
-                                    android:paddingStart="15dp"
-                                    android:clickable="false"
-                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION2"
-                                    tools:ignore="RtlHardcoded" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/c_view_divier_background_inner"/>
-
-                            <LinearLayout
-                                android:id="@+id/pCookieOption3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@xml/gx_ripple_gray"
-                                android:layoutDirection="ltr"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginStart="4dp"
-                                android:onClick="onCookies"
-                                android:orientation="horizontal">
-                                <RadioButton
-                                    android:id="@+id/pCookieRadioOption3"
-                                    android:layoutDirection="rtl"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="50dp"
-                                    android:clickable="false"
-                                    android:paddingEnd="15dp"
-                                    android:textColor="@color/c_text_v1"
-                                    android:background="@android:color/transparent"
-                                    android:buttonTint="@color/c_radio_tint"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:paddingStart="15dp"
-                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION3"
-                                    tools:ignore="RtlHardcoded" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/c_view_divier_background_inner"/>
-
-                            <LinearLayout
-                                android:id="@+id/pCookieOption4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@xml/gx_ripple_gray"
-                                android:onClick="onCookies"
-                                android:orientation="horizontal">
-                                <RadioButton
-                                    android:id="@+id/pCookieRadioOption4"
-                                    android:layoutDirection="rtl"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="50dp"
-                                    android:clickable="false"
-                                    android:paddingEnd="15dp"
-                                    android:textColor="@color/c_text_v1"
-                                    android:layout_marginEnd="10dp"
-                                    android:background="@android:color/transparent"
-                                    android:buttonTint="@color/c_radio_tint"
-                                    android:paddingStart="15dp"
-                                    android:layout_marginStart="10dp"
-                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION4"
-                                    tools:ignore="RtlHardcoded" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:elevation="4dp"
-                                android:layout_marginTop="0.5dp"
-                                android:background="@color/c_view_divier_background_inner"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/pOption4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -635,6 +437,209 @@
                         android:layout_marginTop="10dp"
                         android:theme="@style/SCBSwitch"
                         android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pOption3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:orientation="vertical"
+                        tools:ignore="UselessParent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="12dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:text="@string/SETTING_PRIVACY_COOKIES"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="14sp"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:text="@string/SETTING_PRIVACY_COOKIES_INFO"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v6"
+                            android:textSize="13.5sp"
+                            tools:ignore="RtlSymmetry" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:background="@xml/sx_border_left"
+                            android:paddingStart="0dp"
+                            android:layout_marginLeft="15dp"
+                            android:layoutDirection="ltr"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:ignore="RtlSymmetry">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="-1dp"
+                                android:elevation="2dp"
+                                android:background="@color/white"/>
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:onClick="onCookies"
+                                android:layoutDirection="ltr"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginStart="0dp"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption1"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:paddingEnd="15dp"
+                                    android:clickable="false"
+                                    android:background="@android:color/transparent"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:textColor="@color/c_text_v1"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:paddingStart="15dp"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION1"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="4dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:layoutDirection="ltr"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginStart="0dp"
+                                android:onClick="onCookies"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption2"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:paddingEnd="15dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@android:color/transparent"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:paddingStart="15dp"
+                                    android:clickable="false"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION2"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="4dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:layoutDirection="ltr"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginStart="0dp"
+                                android:onClick="onCookies"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption3"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:clickable="false"
+                                    android:paddingEnd="15dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:background="@android:color/transparent"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:paddingStart="15dp"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION3"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="4dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                            <LinearLayout
+                                android:id="@+id/pCookieOption4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@xml/gx_ripple_gray"
+                                android:onClick="onCookies"
+                                android:orientation="horizontal">
+                                <RadioButton
+                                    android:id="@+id/pCookieRadioOption4"
+                                    android:layoutDirection="rtl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:clickable="false"
+                                    android:paddingEnd="15dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="@android:color/transparent"
+                                    android:buttonTint="@color/c_radio_tint"
+                                    android:paddingStart="15dp"
+                                    android:layout_marginStart="10dp"
+                                    android:text="@string/SETTING_PRIVACY_COOKIES_OPTION4"
+                                    tools:ignore="RtlHardcoded" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:elevation="4dp"
+                                android:layout_marginTop="0.5dp"
+                                android:background="@color/c_view_divier_background_inner"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

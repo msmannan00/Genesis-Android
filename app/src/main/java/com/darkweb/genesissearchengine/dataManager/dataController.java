@@ -58,7 +58,7 @@ public class dataController
         }
         if(status.sRestoreTabs || mThemeApplying){
             mTabModel.initializeTab(databaseController.getInstance().selectTabs());
-            activityContextManager.getInstance().getHomeController().initTabCount();
+            activityContextManager.getInstance().getHomeController().initTabCountForced();
         }else{
             invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
         }
@@ -102,7 +102,7 @@ public class dataController
         return mBookmarkDataModel.onTrigger(pCommands, pData);
     }
 
-       public Object invokeTab(dataEnums.eTabCommands pCommands, List<Object> pData){
+    public Object invokeTab(dataEnums.eTabCommands pCommands, List<Object> pData){
         return mTabModel.onTrigger(pCommands, pData);
     }
 

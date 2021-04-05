@@ -391,6 +391,15 @@
 	<string name="security_exception" translatable="true">Εξαίρεση ασφάλειας τομέα διαδικτύου.</string>
 	<string name="dal_exception" translatable="true">Αποτυχία επαλήθευσης DAL.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Πρόσφατες καρτέλες</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Νέα ταυτότητα</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Πολιτική απορρήτου</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser πολιτική απορρήτου</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Αναφορά ιστότοπου</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Αναφορά παράνομου ιστότοπου</string>
+	<string name="SETTING_SITEMAP" translatable="true">δημοσιεύστε τον ιστότοπό σας</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Προσθέστε τον ιστότοπό σας στη μηχανή αναζήτησης</string>
+
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>
 

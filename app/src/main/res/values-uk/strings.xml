@@ -376,6 +376,15 @@
 	<string name="security_exception" translatable="true">Виняток безпеки веб-домену.</string>
 	<string name="dal_exception" translatable="true">Помилка перевірки DAL.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Останні вкладки</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Нова ідентичність</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Політика конфіденційності</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser Політика конфіденційності</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Веб-сайт звітів</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Повідомити про незаконний веб-сайт</string>
+	<string name="SETTING_SITEMAP" translatable="true">опублікуйте свій веб-сайт</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Додайте свій веб-сайт у нашу пошукову систему</string>
+
 	<item type="id" name="LaguageID"/>
 	<item type="id" name="LaguageRegion"/>
 

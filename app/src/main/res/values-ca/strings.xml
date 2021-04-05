@@ -391,6 +391,15 @@
 	<string name="security_exception" translatable="true">Excepció de seguretat del domini web.</string>
 	<string name="dal_exception" translatable="true">Error de verificació DAL.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Pestanyes recents</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nova identitat</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Política de privacitat</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Política de privadesa Genesis Browser</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Lloc web d\'informes</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Informeu d’un lloc web il·legal</string>
+	<string name="SETTING_SITEMAP" translatable="true">publiqueu el vostre lloc web</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Afegiu el vostre lloc web al nostre motor de cerca</string>
+
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>
 

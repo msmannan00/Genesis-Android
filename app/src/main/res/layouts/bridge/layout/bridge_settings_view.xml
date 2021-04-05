@@ -152,6 +152,7 @@
                     android:layout_width="match_parent"
                     android:background="@xml/sx_border_left"
                     android:layout_marginTop="15dp"
+                    android:layout_marginStart="15dp"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
 
@@ -218,6 +219,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_marginStart="4dp"
                         android:background="@color/c_view_divier_background_inner"/>
 
                     <LinearLayout
@@ -274,6 +276,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_marginStart="4dp"
                         android:background="@color/c_view_divier_background_inner"/>
 
                     <LinearLayout

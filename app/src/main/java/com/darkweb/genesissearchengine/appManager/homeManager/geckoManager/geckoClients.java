@@ -14,6 +14,8 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
 import java.io.File;
 import java.util.List;
+
+import static com.darkweb.genesissearchengine.constants.constants.CONST_REPORT_URL;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
@@ -70,10 +72,10 @@ public class geckoClients
         onUpdateFont();
     }
 
-    public void onValidateInitializeFromStartup(){
+    public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView){
         boolean mStatus = mSession.onValidateInitializeFromStartup();
         if(mStatus){
-            loadURL(mSession.getCurrentURL());
+            loadURL(mSession.getCurrentURL(), mNestedGeckoView);
         }
 
     }
@@ -145,7 +147,7 @@ public class geckoClients
     }
 
     @SuppressLint("WrongConstant")
-    public void updateSetting(){
+    public void updateSetting(NestedGeckoView mNestedGeckoView){
         mRuntime.getSettings().setRemoteDebuggingEnabled(false);
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
         mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
@@ -166,7 +168,7 @@ public class geckoClients
         mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
         mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
         onUpdateFont();
-        onReload();
+        onReload(mNestedGeckoView);
     }
 
     public void initSession(geckoSession mSession){
@@ -190,22 +192,24 @@ public class geckoClients
         mSession.initURL(url);
     }
 
-    public void loadURL(String url) {
+    public void loadURL(String url, NestedGeckoView mNestedGeckoView) {
+        mSession = (geckoSession)mNestedGeckoView.getSession();
+        if(mSession==null){
+            return;
+        }
         if(mSession.onGetInitializeFromStartup()){
             mSession.initURL(url);
-            if(url.startsWith("https://boogle.store/?pG") || url.startsWith("https://boogle.store?pG") || url.endsWith("boogle.store") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED)){
+            if(!url.startsWith(CONST_REPORT_URL) && (url.startsWith("https://boogle.store/?pG") || url.startsWith("https://boogle.store?pG") || url.endsWith("boogle.store") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))){
                 try{
                     mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
                     if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(context)){
                         String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
                         mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(mURL);
-                        return;
                     }else {
                         String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
                         mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(mURL);
-                        return;
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
@@ -217,19 +221,17 @@ public class geckoClients
                     if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(context)){
                         mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
-                        return;
                     }else {
                         mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
-                        return;
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
             }else {
+                mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
                 mSession.loadUri(url);
             }
-            mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
         }
     }
 
@@ -310,9 +312,9 @@ public class geckoClients
         mSession.stop();
     }
 
-    public void onReload(){
+    public void onReload(NestedGeckoView mNestedGeckoView){
         mSession.stop();
-        loadURL(mSession.getCurrentURL());
+        loadURL(mSession.getCurrentURL(), mNestedGeckoView);
     }
 
     public void manual_download(String url, AppCompatActivity context){
@@ -361,7 +363,10 @@ public class geckoClients
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
-            if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
+            if(e_type.equals(enums.etype.SESSION_ID)){
+                return mSession.getSessionID();
+            }
+            else if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
             {
                 if (e_type.equals(on_handle_external_intent))
                 {

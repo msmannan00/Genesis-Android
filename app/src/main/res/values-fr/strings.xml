@@ -391,6 +391,15 @@
 	<string name="security_exception" translatable="true">Exception de sécurité de domaine Web.</string>
 	<string name="dal_exception" translatable="true">Échec de la vérification DAL.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Onglets récents</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nouvelle identité</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Politique de confidentialité</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser Politique de confidentialité</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Signaler le site Web</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Signaler un site Web illégal</string>
+	<string name="SETTING_SITEMAP" translatable="true">publier votre site web</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Ajoutez votre site Web à notre moteur de recherche</string>
+
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>
 

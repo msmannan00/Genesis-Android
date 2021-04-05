@@ -375,7 +375,6 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">“向互联网浏览您的期望。”</string>
     <string name="LANDING_NO_TRACKING" translatable="true">“没有用户监督保护。没有审查。”</string>
 
-
     <string name="ERROR_M1" translatable="true">该网站无法访问</string>
     <string name="ERROR_M2" translatable="true">与网站连接时发生错误</string>
     <string name="ERROR_M3" translatable="true">您尝试查看的页面无法显示，因为无法验证所接收数据的真实性</string>
@@ -383,13 +382,21 @@
     <string name="ERROR_M5" translatable="true">请与网站所有者联系，以告知他们该问题。</string>
     <string name="ERROR_M6" translatable="true">重装</string>
 
-
     <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
     <string name="invalid_package_signature" translatable="true">无效的包裹签名</string>
     <string name="autofill_sign_in_prompt" translatable="true">单击以登录。</string>
     <string name="autofill_manual_prompt" translatable="true">单击以手动选择数据。</string>
     <string name="security_exception" translatable="true">Web域安全异常。</string>
     <string name="dal_exception" translatable="true">DAL验证失败。</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">最近的标签</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">新身份</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">隐私政策</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser 隐私政策</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">报告网站</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">举报非法网站</string>
+    <string name="SETTING_SITEMAP" translatable="true">发布您的网站</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">将您的网站添加到我们的搜索引擎</string>
 
     <item name="LaguageID" type="id"/>
     <item name="LaguageRegion" type="id"/>

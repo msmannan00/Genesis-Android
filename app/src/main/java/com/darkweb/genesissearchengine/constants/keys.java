@@ -61,6 +61,7 @@ public class keys
     /*Bridge Settings*/
 
     public static final String BRIDGE_CUSTOM_BRIDGE_1 = "CLEAR_PREFS";
+    public static final String BRIDGE_CUSTOM_TYPE = "BRIDGE_CUSTOM_TYPE";
     public static final String BRIDGE_NOTIFICATION = "BRIDGE_NOTIFICATION";
     public static final String BRIDGE_ENABLES = "pref_bridges_enabled";
     public static final String VPN_ENABLED = "pref_vpn";

@@ -9,9 +9,7 @@ import android.view.MotionEvent;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import org.mozilla.geckoview.GeckoView;
-
 import java.util.Collections;
-
 import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_CHANGED;
 
 public class NestedGeckoView extends GeckoView {
@@ -48,6 +46,7 @@ public class NestedGeckoView extends GeckoView {
 
         switch (action) {
             case MotionEvent.ACTION_MOVE:
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
                 final boolean allowScroll = status.sFullScreenBrowsing;
                 int deltaY = mLastY - eventY;
 
@@ -76,15 +75,18 @@ public class NestedGeckoView extends GeckoView {
             case MotionEvent.ACTION_DOWN:
                 mLastY = eventY;
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
                 break;
 
             case MotionEvent.ACTION_UP:
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
             case MotionEvent.ACTION_CANCEL:
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
                 stopNestedScroll();
                 break;
 
             default:
-                // We don't care about other touch events
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
         }
 
         // Execute event handler from parent class in all cases

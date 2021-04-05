@@ -391,6 +391,15 @@
     <string name="security_exception" translatable="true">Ngoại lệ bảo mật tên miền web.</string>
     <string name="dal_exception" translatable="true">Không xác minh được DAL.</string>
 
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Các tab gần đây</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nhận dạng mới</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">Chính sách bảo mật</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser chính sách về quyền riêng tư</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">Báo cáo trang web</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Báo cáo trang web bất hợp pháp</string>
+    <string name="SETTING_SITEMAP" translatable="true">xuất bản trang web của bạn</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">Thêm trang web của bạn vào công cụ tìm kiếm của chúng tôi</string>
+
     <item name="LaguageID" type="id"/>
     <item name="LaguageRegion" type="id"/>
 

@@ -180,13 +180,20 @@ class tabViewController
         mUndoLayout.setVisibility(View.VISIBLE);
 
         mUndoLayout.animate().cancel();
-        mUndoLayout.setTranslationY(60);
+
+        int mDuration = 220;
+        if(mUndoLayout.getAlpha()>0){
+            mUndoLayout.setTranslationY(360);
+            mDuration = 400;
+        }else {
+            mUndoLayout.setTranslationY(60);
+        }
         mUndoLayout.setAlpha(0);
 
         mUndoLayout.animate().withLayer()
                 .translationY(0)
                 .alpha(1f)
-                .setDuration(220).start();
+                .setDuration(mDuration).start();
 
 
         initTabCount(pTabCount);
@@ -208,6 +215,13 @@ class tabViewController
         mUndoLayout.setVisibility(View.GONE);
     }
 
+    public void blockUI(boolean pStatus){
+        if(pStatus){
+            mBlocker.setVisibility(View.VISIBLE);
+        }else {
+            mBlocker.setVisibility(View.GONE);
+        }
+    }
 
     private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
 
@@ -270,6 +284,15 @@ class tabViewController
             onDrawSwipableBackground((Canvas)pData.get(0), (RecyclerView.ViewHolder)pData.get(1), (float)pData.get(2), (int)pData.get(3));
         }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_EXIT)){
             initExitUI();
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT)){
+            onHideUndoDialogInit();
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HOLD_BLOCKER)){
+            blockUI(true);
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER)){
+            blockUI(false);
         }
         return null;
     }

@@ -39,6 +39,7 @@ class orbotManager
     private void onStartOrbot(){
         orbotLocalConstants.mBridges = status.sBridgeCustomBridge;
         orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
+        orbotLocalConstants.mManualBridgeType = status.sBridgeCustomType;
         Prefs.putBridgesEnabled(status.sBridgeStatus);
         Intent mServiceIntent = new Intent(mAppContext.getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
@@ -49,6 +50,7 @@ class orbotManager
         {
             mAppContext.startService(mServiceIntent);
         }
+
         initializeProxy();
     }
 

@@ -383,13 +383,21 @@
 	<string name="ERROR_M5" translatable="true">пожалуйста, свяжитесь с владельцами веб-сайтов, чтобы сообщить им об этой проблеме.</string>
 	<string name="ERROR_M6" translatable="true">перезагрузить</string>
 
-
 	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
 	<string name="invalid_package_signature" translatable="true">Неверная подпись пакета</string>
 	<string name="autofill_sign_in_prompt" translatable="true">нажмите, чтобы войти.</string>
 	<string name="autofill_manual_prompt" translatable="true">щелкните, чтобы вручную выбрать данные.</string>
 	<string name="security_exception" translatable="true">Исключение безопасности веб-домена.</string>
 	<string name="dal_exception" translatable="true">Ошибка проверки DAL.</string>
+
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Недавние вкладки</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Новая личность</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Политика конфиденциальности</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Политика конфиденциальности Genesis Browser</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Веб-сайт отчета</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Сообщить о незаконном веб-сайте</string>
+	<string name="SETTING_SITEMAP" translatable="true">опубликуйте свой сайт</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Добавьте свой сайт в нашу поисковую систему</string>
 
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>

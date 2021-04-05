@@ -16,6 +16,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.darkweb.genesissearchengine.constants.strings.BRIDGE_CUSTOM_BRIDGE_MEEK;
+import static com.darkweb.genesissearchengine.constants.strings.BRIDGE_CUSTOM_BRIDGE_OBFS4;
+import static com.darkweb.genesissearchengine.constants.strings.GENERIC_EMPTY_STR;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_BRIDGE_MAIL;
 
 class bridgeModel
@@ -38,18 +41,32 @@ class bridgeModel
         pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, mContext), M_BRIDGE_MAIL);
     }
 
-    public void onCustomChecked(String pString){
-        status.sBridgeCustomBridge = pString;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+    public void onCustomChecked(String pBridge, String pType){
+        status.sBridgeCustomBridge = pBridge;
+        status.sBridgeCustomType = pType;
+        status.sBridgeGatewayManual = true;
 
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,status.sBridgeCustomType));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,status.sBridgeGatewayManual));
     }
     public void onMeekChecked(){
-        status.sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_MEEK;
+        status.sBridgeCustomBridge = BRIDGE_CUSTOM_BRIDGE_MEEK;
+        status.sBridgeCustomType = GENERIC_EMPTY_STR;
+        status.sBridgeGatewayManual = false;
+
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,status.sBridgeCustomType));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,status.sBridgeGatewayManual));
     }
     public void onObfsChecked(){
-        status.sBridgeCustomBridge = strings.BRIDGE_CUSTOM_BRIDGE_OBFS4;
+        status.sBridgeCustomBridge = BRIDGE_CUSTOM_BRIDGE_OBFS4;
+        status.sBridgeCustomType = GENERIC_EMPTY_STR;
+        status.sBridgeGatewayManual = false;
+
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,status.sBridgeCustomType));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,status.sBridgeGatewayManual));
     }
 
     public void onTrigger(bridgeEnums.eBridgeModelCommands pCommands, List<Object> pData){
@@ -57,7 +74,7 @@ class bridgeModel
             requestBridges();
         }
         else if(pCommands == bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE){
-            onCustomChecked((String) pData.get(0));
+            onCustomChecked((String) pData.get(0), (String) pData.get(1));
         }
         else if(pCommands == bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE){
             onMeekChecked();

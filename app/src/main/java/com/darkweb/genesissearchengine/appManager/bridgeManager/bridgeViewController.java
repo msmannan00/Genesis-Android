@@ -106,7 +106,7 @@ class bridgeViewController
         mCustomBridgeBlocker.setVisibility(View.GONE);
     }
 
-    private void initViews(String p_bridge, int p_duration){
+    private void initViews(String p_bridge, int p_duration, String pType){
         resetRadioButtons(p_duration);
         if(p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_OBFS4)){
             animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
@@ -126,13 +126,13 @@ class bridgeViewController
             mCustomPort.setText(strings.GENERIC_EMPTY_STR);
         }else {
             onEnableCustomBridge();
-            mCustomPort.setText(p_bridge.replace("\n",""));
+            mCustomPort.setText(("(Type) " + pType + " ➔ " + "(Config) "+p_bridge.replace("\n","")));
         }
     }
 
     public void onTrigger(bridgeEnums.eBridgeViewCommands p_commands, List<Object> p_data){
         if(p_commands == bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS){
-            initViews((String) p_data.get(0), (int)p_data.get(1));
+            initViews((String) p_data.get(0), (int)p_data.get(1), (String) p_data.get(2));
         }
         if(p_commands == bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE){
             onEnableCustomBridge();

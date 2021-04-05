@@ -383,6 +383,14 @@
 	<string name="ERROR_M5" translatable="true">entre em contato com os proprietários do site para informá-los sobre este problema.</string>
 	<string name="ERROR_M6" translatable="true">recarregar</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Guia recente</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nova identidade</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Política de privacidade</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser política de privacidade</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Site Do Relatório</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Denunciar sites ilegais</string>
+	<string name="SETTING_SITEMAP" translatable="true">publique seu site</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Adicione o seu site ao nosso mecanismo de pesquisa</string>
 
 	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
 	<string name="invalid_package_signature" translatable="true">Assinatura de pacote inválida</string>

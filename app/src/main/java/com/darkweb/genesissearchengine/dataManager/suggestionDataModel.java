@@ -11,6 +11,7 @@ import android.view.textservice.TextServicesManager;
 
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import java.util.ArrayList;
@@ -135,8 +136,14 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
 
         if(pQuery.length()>0){
-            mCurrentList.add( 0,new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR,-1));
+            if(!pQuery.equals("about:blank")){
+                mCurrentList.add( 0,new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR,-1));
+            }
         }
+        if(mCurrentList.size()<=0) {
+            mCurrentList.add( 0,new historyRowModel("Genesis Search", "genesis.onion",-1));
+        }
+
         return mCurrentList;
     }
 

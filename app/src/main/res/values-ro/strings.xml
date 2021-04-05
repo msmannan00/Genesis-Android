@@ -391,6 +391,15 @@
 	<string name="security_exception" translatable="true">Excepție de securitate a domeniului web.</string>
 	<string name="dal_exception" translatable="true">Eșec de verificare DAL.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Filele recente</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Identitate nouă</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Politica de confidențialitate</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser politica de confidențialitate</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Raportați site-ul web</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Raportați site-ul ilegal</string>
+	<string name="SETTING_SITEMAP" translatable="true">publică-ți site-ul web</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Adăugați site-ul dvs. la motorul nostru de căutare</string>
+
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>
 

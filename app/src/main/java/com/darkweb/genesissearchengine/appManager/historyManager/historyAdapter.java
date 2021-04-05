@@ -2,6 +2,8 @@ package com.darkweb.genesissearchengine.appManager.historyManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,9 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -488,7 +493,13 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                                     break;
                                 }
                             }
-                            mContext.runOnUiThread(() -> mFaviconLogo.setImageDrawable(mHindTypeIconTemp.getDrawable()));
+                            mContext.runOnUiThread(() -> {
+                                Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
+                                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                                mBitmap.compress(Bitmap.CompressFormat.PNG, 20, out);
+                                Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+                                mFaviconLogo.setImageBitmap(decoded);
+                            });
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

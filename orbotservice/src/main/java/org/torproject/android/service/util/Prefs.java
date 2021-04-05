@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import org.torproject.android.service.OrbotConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.util.Locale;
 
@@ -51,6 +52,24 @@ public class Prefs {
         String defaultBridgeType = "obfs4";
         if (Locale.getDefault().getLanguage().equals("fa"))
             defaultBridgeType = "meek"; //if Farsi, use meek as the default bridge type
+        if(orbotLocalConstants.mIsManualBridge){
+            if(!orbotLocalConstants.mManualBridgeType.equals("")){
+                defaultBridgeType = orbotLocalConstants.mManualBridgeType;
+                putString(PREF_BRIDGES_LIST, defaultBridgeType);
+                return defaultBridgeType;
+            }
+        }else {
+            if(orbotLocalConstants.mBridges.equals("obfs4")){
+                defaultBridgeType = "obfs4";
+                putString(PREF_BRIDGES_LIST, defaultBridgeType);
+                return defaultBridgeType;
+            }else if(orbotLocalConstants.mBridges.equals("meek")){
+                defaultBridgeType = "meek";
+                putString(PREF_BRIDGES_LIST, defaultBridgeType);
+                return defaultBridgeType;
+            }
+        }
+
         return prefs.getString(PREF_BRIDGES_LIST, defaultBridgeType);
     }
 

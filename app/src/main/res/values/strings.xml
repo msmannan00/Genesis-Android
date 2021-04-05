@@ -196,7 +196,8 @@
     <!-- Alerts -->
     <string name="ALERT_UPDATE_BRIDGES" translatable="true">Provide a Bridge I know</string>
     <string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">Enter bridge information from a trusted source</string>
-    <string name="ALERT_ADD_BRIDGES_HINT" translatable="true">bridge string ...</string>
+    <string name="ALERT_ADD_BRIDGES_HINT" translatable="true">bridge string (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_ADD_BRIDGES_TYPE_HINT" translatable="true">bridge type (obfs4, meek, ...)</string>
     <string name="ALERT_REQUEST_BRIDGE" translatable="true">Request</string>
     <string name="ALERT_SAVE_BRIDGE" translatable="true">Done</string>
 

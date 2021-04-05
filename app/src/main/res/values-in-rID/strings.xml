@@ -371,6 +371,15 @@
 	<string name="security_exception" translatable="true">Web domain security exception.</string>
 	<string name="dal_exception" translatable="true">DAL verification failure.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Tab terbaru</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Identitas baru</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Kebijakan pribadi</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser kebijakan privasi</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Laporkan Situs Web</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Laporkan situs web ilegal</string>
+	<string name="SETTING_SITEMAP" translatable="true">publikasikan situs web Anda</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Tambahkan situs web Anda ke mesin pencari kami</string>
+
 	<item type="id" name="LaguageID"/>
 	<item type="id" name="LaguageRegion"/>
 

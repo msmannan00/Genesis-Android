@@ -391,6 +391,15 @@
 	<string name="security_exception" translatable="true">ویب ڈومین سیکیورٹی کی رعایت۔</string>
 	<string name="dal_exception" translatable="true">DAL تصدیق میں ناکامی۔</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">حالیہ ٹیبز</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">نئی شناخت</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">رازداری کی پالیسی</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true"> رازداری کی پالیسی</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">رپورٹ ویب سائٹ</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">غیر قانونی ویب سائٹ کی اطلاع دیں</string>
+	<string name="SETTING_SITEMAP" translatable="true">اپنی ویب سائٹ شائع کریں</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">اپنی ویب سائٹ کو ہمارے سرچ انجن میں شامل کریں</string>
+
 	<item name="LaguageID" type="id"/>
 	<item name="LaguageRegion" type="id"/>
 

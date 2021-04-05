@@ -116,6 +116,7 @@
                     android:id="@+id/pOption3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
                     android:orientation="horizontal"
                     android:weightSum="7">
 
@@ -177,6 +178,7 @@
                                     android:layout_marginEnd="42dp"
                                     android:layout_marginTop="-2dp"
                                     android:paddingEnd="17dp"
+                                    android:textColor="@color/c_text_v6"
                                     android:textSize="13sp"
                                     android:text="@string/SETTING_PRIVACY_TRACKING_OPTION1_INFO"
                                     />
@@ -185,6 +187,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
+                                android:layout_marginStart="4dp"
                                 android:background="@color/c_view_divier_background_inner"/>
 
                             <LinearLayout
@@ -221,6 +224,7 @@
                                     android:layout_marginStart="20dp"
                                     android:layout_marginEnd="42dp"
                                     android:layout_marginTop="-2dp"
+                                    android:textColor="@color/c_text_v6"
                                     android:paddingEnd="16dp"
                                     android:textSize="13sp"
                                     android:text="@string/SETTING_PRIVACY_TRACKING_OPTION2_INFO"
@@ -230,6 +234,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
+                                android:layout_marginStart="4dp"
                                 android:background="@color/c_view_divier_background_inner"/>
 
                             <LinearLayout
@@ -268,6 +273,7 @@
                                     android:layout_marginTop="-2dp"
                                     android:paddingEnd="16dp"
                                     android:textSize="13sp"
+                                    android:textColor="@color/c_text_v6"
                                     android:text="@string/SETTING_PRIVACY_TRACKING_OPTION3_INFO"
                                     />
                             </LinearLayout>

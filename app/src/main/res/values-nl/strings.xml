@@ -374,6 +374,15 @@
 	<string name="security_exception" translatable="true">Web domain security exception.</string>
 	<string name="dal_exception" translatable="true">DAL verification failure.</string>
 
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Recente tabbladen</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nieuwe identiteit</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Privacybeleid</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser privacybeleid</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Website melden</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Meld illegale website</string>
+	<string name="SETTING_SITEMAP" translatable="true">publiceer uw website</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Voeg uw website toe aan onze zoekmachine</string>
+
 	<item type="id" name="LaguageID"/>
 	<item type="id" name="LaguageRegion"/>
 

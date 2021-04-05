@@ -26,6 +26,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -231,63 +232,72 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createNotificationChannel() {
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(orbotLocalConstants.mNotificationStatus==1) {
+            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        CharSequence name = getString(R.string.app_name); // The user-visible name of the channel.
-        String description = getString(R.string.app_description); // The user-visible description of the channel.
-        NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, NotificationManager.IMPORTANCE_LOW);
-        // Configure the notification channel.
-        mChannel.setDescription(description);
-        mChannel.enableLights(false);
-        mChannel.enableVibration(false);
-        mChannel.setShowBadge(false);
-        mChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
-        mNotificationManager.createNotificationChannel(mChannel);
+            CharSequence name = getString(R.string.app_name); // The user-visible name of the channel.
+            String description = getString(R.string.app_description); // The user-visible description of the channel.
+            NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, NotificationManager.IMPORTANCE_LOW);
+            // Configure the notification channel.
+            mChannel.setDescription(description);
+            mChannel.enableLights(false);
+            mChannel.enableVibration(false);
+            mChannel.setShowBadge(false);
+            mChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+            mNotificationManager.createNotificationChannel(mChannel);
+        }
     }
 
     @SuppressLint({"NewApi", "RestrictedApi"})
     protected void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
-        PackageManager pm = getPackageManager();
-        Intent intent = pm.getLaunchIntentForPackage(getPackageName());
-        PendingIntent pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, 0);
+        //if(orbotLocalConstants.mNotificationStatus==1){
+            PackageManager pm = getPackageManager();
+            Intent intent = pm.getLaunchIntentForPackage(getPackageName());
+            PendingIntent pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, 0);
 
-        if (mNotifyBuilder == null) {
-            mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setContentIntent(pendIntent)
-                    .setCategory(Notification.CATEGORY_SERVICE)
-                    .setContentTitle("Genesis")
-                    .setColor(Color.parseColor("#84989f"))
-                    .setSmallIcon(R.drawable.ic_stat_tor_logo)
-                    .setOngoing(Prefs.persistNotifications());
-        }
+            if (mNotifyBuilder == null) {
+                mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                        .setContentIntent(pendIntent)
+                        .setCategory(Notification.CATEGORY_SERVICE)
+                        .setContentTitle("Genesis")
+                        .setColor(Color.parseColor("#84989f"))
+                        .setSmallIcon(R.drawable.ic_stat_tor_logo)
+                        .setOngoing(Prefs.persistNotifications());
+            }
 
-        mNotifyBuilder.mActions.clear(); // clear out NEWNYM action
-        if (conn != null) { // only add new identity action when there is a connection
-            Intent intentRefresh = new Intent(CMD_NEWNYM);
-            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
-            mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
-        }
+            mNotifyBuilder.mActions.clear(); // clear out NEWNYM action
+            if (conn != null) { // only add new identity action when there is a connection
+                Intent intentRefresh = new Intent(CMD_NEWNYM);
+                PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
+                mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
+            }
 
-        mNotifyBuilder.setContentText(notifyMsg)
-                .setSmallIcon(icon)
-                .setTicker(notifyType != NOTIFY_ID ? notifyMsg : null);
+            mNotifyBuilder.setContentText(notifyMsg)
+                    .setSmallIcon(icon)
+                    .setTicker(notifyType != NOTIFY_ID ? notifyMsg : null);
 
-        if (!Prefs.persistNotifications())
-            mNotifyBuilder.setPriority(Notification.PRIORITY_LOW);
+            if (!Prefs.persistNotifications())
+                mNotifyBuilder.setPriority(Notification.PRIORITY_LOW);
 
-        Notification notification = mNotifyBuilder.build();
+            Notification notification = mNotifyBuilder.build();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForeground(NOTIFY_ID, notification);
-        } else if (Prefs.persistNotifications() && (!mNotificationShowing)) {
-            startForeground(NOTIFY_ID, notification);
-            logNotice("Set background service to FOREGROUND");
-        } else {
-            mNotificationManager.notify(NOTIFY_ID, notification);
-        }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForeground(NOTIFY_ID, notification);
+            } else if (Prefs.persistNotifications() && (!mNotificationShowing)) {
+                startForeground(NOTIFY_ID, notification);
+                logNotice("Set background service to FOREGROUND");
+            } else {
+                mNotificationManager.notify(NOTIFY_ID, notification);
+            }
 
-        mNotificationShowing = true;
+            mNotificationShowing = true;
+            if(orbotLocalConstants.mNotificationStatus==0){
+                stopForeground(true);
+            }
+        //}else {
+        //    disableNotification();
+        //}
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -487,8 +497,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             mEventHandler = new TorEventHandler(this);
 
-            if (mNotificationManager == null) {
-                mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if(orbotLocalConstants.mNotificationStatus==1) {
+                if (mNotificationManager == null) {
+                    mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                }
             }
 
             IntentFilter mNetworkStateFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -1622,11 +1634,27 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
         Collections.shuffle(alBridges, bridgeSelectRandom);
 
-        //let's just pull up to 2 bridges from the defaults at time
         int maxBridges = 2;
         int bridgeCount = 0;
 
-        //now go through the list to find the bridges we want
+        List<String> mList = Arrays.asList(orbotLocalConstants.mBridges.split("\n "));
+
+        if(orbotLocalConstants.mIsManualBridge){
+            alBridges.clear();
+        }
+
+        for(int e=0;e<mList.size();e++){
+            if(mList.get(e).length()<5){
+                continue;
+            }
+            List<String> mListTemp = Arrays.asList(mList.get(e).split(" "));
+            int mIndex = 0;
+            while(mListTemp.get(mIndex).length()<3){
+                mIndex+=1;
+            }
+            alBridges.add(new Bridge(mList.get(e).replace(mListTemp.get(mIndex),"") , orbotLocalConstants.mManualBridgeType));
+        }
+
         for (Bridge b : alBridges) {
             if (b.type.equals(type)) {
                 extraLines.append("Bridge ");
@@ -1669,6 +1697,14 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     static class Bridge {
         String type;
         String config;
+
+        public Bridge(String pConfig,String pType){
+            config = pConfig;
+            type = pType;
+        }
+
+        public Bridge(){
+        }
     }
 
     private class IncomingIntentRouter implements Runnable {
@@ -1821,14 +1857,17 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         if(mNotificationManager!=null){
             mNotificationManager.cancel(NOTIFY_ID);
             stopForeground(true);
+            orbotLocalConstants.mNotificationStatus = 0;
         }
     }
 
     public void enableTorNotificationNoBandwidth(){
+        orbotLocalConstants.mNotificationStatus = 1;
         showToolbarNotification("Connected to the Tor network", HS_NOTIFY_ID, R.drawable.ic_stat_tor_logo);
     }
 
     public void enableNotification(){
+        orbotLocalConstants.mNotificationStatus = 1;
         showToolbarNotification(0+"kbps ⇣ / " +0+"kbps ⇡", HS_NOTIFY_ID, R.drawable.ic_stat_tor_logo);
     }
 

@@ -83,7 +83,7 @@ public class bridgeController extends AppCompatActivity {
         mCustomBridgeBlocker = findViewById(R.id.pCustomBridgeBlocker);
 
         mBridgeViewController.initialization(mCustomPort, mBridgeButton,this, mBridgeObfs, mBridgeChina, mBridgeCustom, mCustomBridgeBlocker);
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,0));
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,0,status.sBridgeCustomType));
         mBridgeModel = new bridgeModel(new bridgeController.bridgeModelCallback(), this);
     }
 
@@ -127,10 +127,10 @@ public class bridgeController extends AppCompatActivity {
 
     /* EXTERNAL LISTENERS */
 
-    public void onUpdateBridges(String pString) {
-        if(pString.length()>5){
-            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE, Collections.singletonList(pString));
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
+    public void onUpdateBridges(String pBridge, String pType) {
+        if(pBridge.length()>5){
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE, Arrays.asList(pBridge, pType));
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
         }else {
             if(status.sBridgeCustomBridge.equals("meek")){
                 mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
@@ -198,10 +198,10 @@ public class bridgeController extends AppCompatActivity {
     }
     public void onMeekChecked(View view){
         mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
     }
     public void onObfsChecked(View view){
         mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
     }
 }

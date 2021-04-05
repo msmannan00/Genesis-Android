@@ -3,6 +3,7 @@ package com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -178,6 +179,7 @@ class homeViewController
 
         updateBannerAdvertStatus(false, false);
         expandTopBar();
+        mBlockerFullSceen.setVisibility(View.GONE);
     }
 
     public void initTopBarPadding(){
@@ -232,43 +234,31 @@ class homeViewController
     }
 
     public void onShowTabContainer(){
+
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
 
-            onUpdateStatusBarTheme(null, false);
-
+            mTabFragment.animate().cancel();
             mTabFragment.setAlpha(0);
-            mTabFragment.setTranslationY(0);
             mTabFragment.setVisibility(View.VISIBLE);
-            mTabFragment.setTranslationY(-1 * helperMethod.pxFromDp(15));
-            mTopBarHider.setVisibility(View.VISIBLE);
-            mTopBarHider.animate().alpha(1).setDuration(0);
+            mTabFragment.animate().alpha(1).setDuration(250);
 
-            new Handler().postDelayed(() ->
-            {
-                mTabFragment.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-                mTabFragment.animate().withLayer()
-                        .setDuration(250)
-                        .translationY(0)
-                        .alpha(1f)
-                        .withEndAction(
-                                () -> mTabFragment.setLayerType(View.LAYER_TYPE_NONE, null)
-                        ).start();
-
-            }, 10);
+            onUpdateStatusBarTheme(null, false);
         }
     }
 
     public void onHideTabContainer(){
-        if(mTabFragment.getAlpha()==1){
+        if(mTabFragment.getAlpha()>0 || mTabFragment.getVisibility()!=View.GONE){
 
             new Handler().postDelayed(() ->
             {
-                mTopBarHider.animate().alpha(0).setDuration(0).setStartDelay(0).withEndAction(() -> mTopBarHider.setVisibility(View.GONE));
+                mTopBarHider.animate().alpha(0).setDuration(250).setStartDelay(0).withEndAction(() -> mTopBarHider.setVisibility(View.GONE));
                 mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
-            }, 150);
+            }, 250);
 
-            mTabFragment.animate() .setDuration(150).alpha(0f).withEndAction(() -> mTabFragment.setVisibility(View.GONE));
-            mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.M_INIT_TAB_COUNT);
+            mTabFragment.animate().setDuration(150).setStartDelay(150).alpha(0f).withEndAction(() -> {
+                mTabFragment.setVisibility(View.GONE);
+                mEvent.invokeObserver(null, enums.etype.M_UPDATE_PIXEL_BACKGROUND);
+            });
         }
     }
 
@@ -357,6 +347,18 @@ class homeViewController
             final Handler handler = new Handler();
             handler.postDelayed(() ->
             {
+                Drawable drawable;
+                Resources res = mContext.getResources();
+                try {
+                    if(status.sSettingEnableVoiceInput){
+                        drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_keyboard_voice));
+                    }else {
+                        drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_cancel));
+                    }
+                    mVoiceInput.setImageDrawable(drawable);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 mVoiceInput.setVisibility(View.VISIBLE);
             }, 0);
 
@@ -381,25 +383,35 @@ class homeViewController
         }
     }
 
-    void initTab(int count, boolean pForced){
+    void initTab(int count, boolean pForced, enums.etype pEvent, List<Object> pData){
         if(!pForced){
-            mNewTab.animate().cancel();
-            mNewTab.animate().withLayer()
-                    .rotationX(60)
-                    .alpha(0.4f)
-                    .setDuration(120)
-                    .withEndAction(
-                            new Runnable() {
-                                @Override public void run() {
-                                    mNewTab.setRotationX(-60);
-                                    mNewTab.animate().withLayer()
-                                            .rotationX(0)
-                                            .alpha(1)
-                                            .setDuration(150)
-                                            .start();
-                                }
-                            }
-                    ).start();
+            ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mNewTab,
+                    PropertyValuesHolder.ofFloat("scaleX", 1, 0.70f, 1),
+                    PropertyValuesHolder.ofFloat("scaleY", 1, 0.70f, 1));
+            scaleDown.setDuration(250);
+            scaleDown.start();
+
+            scaleDown.addListener(new Animator.AnimatorListener() {
+
+                @Override
+                public void onAnimationStart(Animator arg0) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator arg0) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animator arg0) {
+                    if(pEvent!=null){
+                        mEvent.invokeObserver(pData, pEvent);
+                    }
+                }
+
+                @Override
+                public void onAnimationCancel(Animator arg0) {
+                }
+            });
         }
 
         mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
@@ -423,7 +435,7 @@ class homeViewController
     public void initStatusBarColor(boolean mInstant) {
         animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-        int mDelay = 500;
+        int mDelay = 800;
         if(status.mThemeApplying || mInstant){
             mDelay = 0;
         }
@@ -515,12 +527,15 @@ class homeViewController
     private void initSplashScreen(){
 
         mIsAnimating = false;
-        mSearchbar.setEnabled(false);
         helperMethod.hideKeyboard(mContext);
         mSearchLock.setTag(R.id.themed,false);
         mAppBar.setTag(R.id.expandableBar,true);
 
-        mSearchbar.setEnabled(false);
+        if(!status.mThemeApplying){
+            mSearchbar.setEnabled(false);
+        }else {
+            mSearchbar.setEnabled(true);
+        }
 
         View root = mSearchbar.getRootView();
         root.setBackgroundColor(ContextCompat.getColor(mContext, R.color.c_background_keyboard));
@@ -586,7 +601,7 @@ class homeViewController
                 triggerPostUI();
                 mProgressBar.setVisibility(View.GONE);
                 mSplashScreen.animate().cancel();
-                mProgressBarIndeterminate.animate().setDuration(250).alpha(0).withEndAction(() -> mSplashScreen.animate().setDuration(350).setStartDelay(200).alpha(0).withEndAction(() -> {
+                mProgressBarIndeterminate.animate().setStartDelay(300).setDuration(250).alpha(0).withEndAction(() -> mSplashScreen.animate().setDuration(350).setStartDelay(200).alpha(0).withEndAction(() -> {
                     mProgressBarIndeterminate.setVisibility(View.GONE);
                     mSplashScreen.setClickable(false);
                     mSplashScreen.setFocusable(false);
@@ -598,7 +613,7 @@ class homeViewController
                     mBlocker.setVisibility(View.GONE);
                     mGatewaySplash.setVisibility(View.GONE);
                     mConnectButton.setVisibility(View.GONE);
-
+                    mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
                 }));
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
@@ -820,8 +835,10 @@ class homeViewController
     {
         if(total==0){
             mFindCount.setText("0/0");
+            mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.dark_red_soft));
         }else {
             mFindCount.setText((total + "/" + index));
+            mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v6));
         }
     }
 
@@ -835,7 +852,7 @@ class homeViewController
                 mColor = -1;
             }
 
-            if(!mSearchbar.isFocused() && pTheme!=null && status.sToolbarTheme && mColor!=-1 && helperMethod.getColorDensity(mColor)<0.80){
+            if(!mSearchbar.isFocused() && pTheme!=null && status.sToolbarTheme && mColor!=-1 && helperMethod.getColorDensity(mColor)<0.80 && status.sTheme != enums.Theme.THEME_DARK){
                 mTopBar.setBackgroundColor(mColor);
                 mSearchbar.setTextColor(helperMethod.invertedGrayColor(mColor));
                 mSearchbar.setHintTextColor(helperMethod.invertedGrayColor(mColor));
@@ -891,6 +908,7 @@ class homeViewController
                     View decorView = mContext.getWindow().getDecorView(); //set status background black
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
+                mTopBarHider.setBackgroundColor(mColor);
             }
             else{
                 mSearchLock.setTag(R.id.themed,false);
@@ -936,6 +954,8 @@ class homeViewController
                     View decorView = mContext.getWindow().getDecorView();
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
+
+                mTopBarHider.setBackground(ContextCompat.getDrawable(mContext, R.color.c_background));
             }
         }
     }
@@ -947,6 +967,8 @@ class homeViewController
             mFindBar.setVisibility(View.VISIBLE);
             mFindBar.setAlpha(1);
             mFindText.requestFocus();
+            mFindCount.setText("0/0");
+            mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v6));
             final Handler handler = new Handler();
             handler.postDelayed(() ->
             {

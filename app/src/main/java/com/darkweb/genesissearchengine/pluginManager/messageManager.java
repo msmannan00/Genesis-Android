@@ -282,7 +282,9 @@ class messageManager
         mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         if(!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4")){
             ((EditText)mDialog.findViewById(R.id.pBridgeInput)).setText(status.sBridgeCustomBridge);
+            ((EditText)mDialog.findViewById(R.id.pBridgeType)).setText(status.sBridgeCustomType);
         }
+
         mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
         mDialog.setOnDismissListener(dialog -> {
             final Handler handler = new Handler();
@@ -310,7 +312,7 @@ class messageManager
             mDialog.dismiss();
             mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             helperMethod.hideKeyboard(mContext);
-            mEvent.invokeObserver(Collections.singletonList(((EditText)mDialog.findViewById(R.id.pBridgeInput)).getText().toString()), M_SET_BRIDGES);
+            mEvent.invokeObserver(Arrays.asList(((EditText)mDialog.findViewById(R.id.pBridgeInput)).getText().toString(), ((EditText)mDialog.findViewById(R.id.pBridgeType)).getText().toString()), M_SET_BRIDGES);
         });
     }
 

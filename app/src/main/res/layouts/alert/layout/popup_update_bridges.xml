@@ -49,13 +49,6 @@
             app:layout_constraintTop_toBottomOf="@+id/pHeader"
             tools:ignore="SmallSp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="14dp"
-            android:background="@color/c_view_divier_background"
-            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
-
         <EditText
             android:id="@+id/pBridgeInput"
             android:layout_width="match_parent"
@@ -82,13 +75,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
+        <EditText
+            android:id="@+id/pBridgeType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@xml/gx_generic_input"
+            android:elevation="3dp"
+            android:ems="10"
+            android:hint="@string/ALERT_ADD_BRIDGES_TYPE_HINT"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="7dp"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/c_text_v1"
+            android:textColorHighlight="@color/text_color_highlight_v3"
+            android:textColorHint="@color/c_text_v2"
+            android:textCursorDrawable="@xml/gx_search_cursor_state"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/pDivider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
+
         <View
             android:id="@+id/pDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="15dp"
             android:background="@color/c_view_divier_background"
-            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pBridgeType" />
 
         <LinearLayout
             android:id="@+id/pNavigationContainer"

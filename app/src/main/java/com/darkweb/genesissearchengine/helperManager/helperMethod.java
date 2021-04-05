@@ -13,10 +13,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Vibrator;
 import android.text.SpannableString;
@@ -29,10 +33,12 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ActionMenuView;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -217,10 +223,10 @@ public class helperMethod
 
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "get bridges");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "get bridges");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "get transport obfs4");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "get transport obfs4");
         emailIntent.setSelector( selectorIntent );
-        context.startActivity(Intent.createChooser(emailIntent, "get transport"));
+        context.startActivity(Intent.createChooser(emailIntent, "get transport obfs4"));
     }
 
     public static void sendBridgeEmail(Context context){
@@ -229,10 +235,10 @@ public class helperMethod
 
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"bridges@torproject.org"});
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "get bridges");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "get bridges");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "get transport obfs4");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "get transport obfs4");
         emailIntent.setSelector( selectorIntent );
-        context.startActivity(Intent.createChooser(emailIntent, "get transport"));
+        context.startActivity(Intent.createChooser(emailIntent, "get transport obfs4"));
     }
 
     public static void onRevealView(View pView) {
@@ -256,6 +262,31 @@ public class helperMethod
             }
         });
         anim.start();
+    }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if(drawable==null){
+            return null;
+        }
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
     public static void hideKeyboard(AppCompatActivity context) {
@@ -543,8 +574,23 @@ public class helperMethod
         return (int)(px / context.getResources().getDisplayMetrics().density);
     }
 
-    public static int pxFromDp(int dp){
+    public static int pxFromDp(float dp){
         return   (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    public static void setImageDrawableWithAnimation(ImageView imageView, Drawable drawable, int duration) {
+        Drawable currentDrawable = imageView.getDrawable();
+        if (currentDrawable == null) {
+            imageView.setImageDrawable(drawable);
+            return;
+        }
+
+        TransitionDrawable transitionDrawable = new TransitionDrawable(new Drawable[] {
+                currentDrawable,
+                drawable
+        });
+        imageView.setImageDrawable(transitionDrawable);
+        transitionDrawable.startTransition(duration);
     }
 
     public static String getMimeType(String url) {

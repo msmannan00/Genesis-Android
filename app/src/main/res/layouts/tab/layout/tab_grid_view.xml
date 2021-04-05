@@ -4,7 +4,7 @@
     android:id="@+id/pRowContainer"
     android:layout_width="match_parent"
     android:layout_height="220dp"
-    android:layout_marginTop="0dp"
+    android:layout_marginTop="-5dp"
     android:layout_marginStart="0dp"
     android:clickable="true"
     android:background="@color/clear_alpha"
@@ -18,20 +18,25 @@
         android:layout_height="match_parent"
         android:layout_marginTop="0dp"
         android:layout_marginStart="0dp"
-        app:cardElevation="5dp"
+        app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
-        android:background="@color/clear_alpha"
+        app:cardBackgroundColor="@color/blue"
         app:cardCornerRadius="4dp"
+        app:cardPreventCornerOverlap="false"
         android:clipChildren="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/pRowContainerInner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
+            android:background="@xml/tx_card_corner"
+            app:cardBackgroundColor="@color/c_background"
+            android:layout_margin="2dp"
             android:focusable="true"
+            android:clipChildren="true"
             android:longClickable="true"
             android:orientation="horizontal"
             android:paddingEnd="0dp"
@@ -45,7 +50,8 @@
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="38dp"
+                android:layout_marginTop="39dp"
+                app:cardBackgroundColor="@color/c_background"
                 android:background="@xml/tx_border"
                 android:clipChildren="true"
                 android:elevation="0dp"
@@ -60,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    app:cardBackgroundColor="@color/c_background"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="0dp"
                     app:contentPadding="0dp">
@@ -79,17 +86,19 @@
                     android:id="@+id/pSelectedView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0"
+                    android:layout_marginTop="0dp"
+                    android:alpha="9"
                     android:background="@xml/tx_border_image_dark_no_corner"
                     android:translationZ="15dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:alpha="0.7"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="65dp"
+                        android:padding="54dp"
                         android:src="@drawable/tick_recycler_view" />
                 </FrameLayout>
 
@@ -99,9 +108,10 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="4dp"
                 android:layout_weight="6"
+                android:layout_marginEnd="25dp"
                 android:background="@color/c_background"
                 android:clickable="false"
                 android:focusable="false"
@@ -118,7 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginTop="0dp"
                     android:clickable="false"
                     android:ellipsize="end"
@@ -190,17 +200,43 @@
                 android:id="@+id/view7"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="38dp"
                 android:background="@color/c_view_divier_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
             <ImageView
+                android:id="@+id/pBorder"
+                android:layout_width="30dp"
+                android:layout_height="12dp"
+                android:background="@color/c_view_divier_background_inner"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:layout_gravity="end"
+                android:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/pRemoveRow"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:background="@xml/tx_ripple_light"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:elevation="11dp"
+                android:longClickable="true"
+                android:outlineProvider="none"
+                android:padding="10dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:scaleType="fitCenter"
+                android:src="@xml/ic_baseline_cross"
+                android:tint="@color/c_navigation_tint"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
                 android:id="@+id/pLoadSession"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_light"
                 android:clickable="true"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:focusable="true"
@@ -212,40 +248,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/pBorder"
-                android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:background="@color/c_ripple_v2"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/pRemoveRow"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="3dp"
-                android:background="@xml/tx_ripple_light"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:elevation="11dp"
-                android:longClickable="true"
-                android:outlineProvider="none"
-                android:padding="8dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="22dp"
-                android:scaleType="fitCenter"
-                android:src="@xml/ic_baseline_cross"
-                android:tint="@color/c_navigation_tint"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlSymmetry" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 
     <FrameLayout
@@ -260,10 +264,10 @@
             android:id="@+id/pItemSelectionMenuButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
             android:textSize="16sp"
             android:textAllCaps="false"
             android:background="@xml/hox_rounded_corner_suggestion_settings"
