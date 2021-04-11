@@ -49,8 +49,8 @@ public class bridgeController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         activityContextManager.getInstance().setBridgeController(this);
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bridge_settings_view);
 
@@ -61,8 +61,8 @@ public class bridgeController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -172,15 +172,23 @@ public class bridgeController extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().setBridgeController(null);
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
     }
 
     @Override
     public void onBackPressed() {
-        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
+
+
 
     /*Helper Method*/
 

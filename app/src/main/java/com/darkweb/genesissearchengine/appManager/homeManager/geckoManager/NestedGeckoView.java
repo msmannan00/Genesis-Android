@@ -17,7 +17,7 @@ public class NestedGeckoView extends GeckoView {
     private final int[] mScrollOffset = new int[2];
     private final int[] mScrollConsumed = new int[2];
     private int mNestedOffsetY;
-    private final NestedScrollingChildHelper mChildHelper;
+    private NestedScrollingChildHelper mChildHelper;
     private eventObserver.eventListener mEvent;
 
 
@@ -25,8 +25,13 @@ public class NestedGeckoView extends GeckoView {
         mEvent = pEvent;
     }
 
+    public void onDestroy() {
+        mEvent = null;
+        mChildHelper = null;
+    }
+
     public NestedGeckoView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(context.getApplicationContext(), attrs);
 
         mChildHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);

@@ -58,8 +58,8 @@ public class settingAccessibilityController  extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -157,6 +157,12 @@ public class settingAccessibilityController  extends AppCompatActivity {
         if(mIsSettingChanged && mDefaultFontSize!=status.sSettingFontSize){
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
     }
 
     public void onZoomSettingUpdate(View view){

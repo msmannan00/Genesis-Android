@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -48,32 +49,39 @@ class messageManager
 
     /*Initializations*/
 
+    private void onClearReference(){
+        mContext = null;
+        mData = null;
+    }
+
     private void initializeDialog(int pLayout, int pGravity){
-        if(mDialog !=null && mDialog.isShowing()){
-            mDialog.dismiss();
-        }
-
-        mDialog = new Dialog(mContext);
-        mDialog.getWindow().setGravity(pGravity);
-        mDialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
-
-        Drawable myDrawable;
-        Resources res = mContext.getResources();
         try {
-            myDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hox_rounded_corner));
-            mDialog.getWindow().setBackgroundDrawable(myDrawable);
-        } catch (Exception ignored) {
-        }
+            if(mDialog !=null && mDialog.isShowing()){
+                mDialog.dismiss();
+            }
 
-        mDialog.setCancelable(true);
-        mDialog.setContentView(pLayout);
+            mDialog = new Dialog(mContext);
+            mDialog.getWindow().setGravity(pGravity);
+            mDialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
 
-        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(15),0,helperMethod.pxFromDp(15),0);
-        mDialog.getWindow().setBackgroundDrawable(inset);
-        mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
-        mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        mDialog.show();
+            Drawable myDrawable;
+            Resources res = mContext.getResources();
+            try {
+                myDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hox_rounded_corner));
+                mDialog.getWindow().setBackgroundDrawable(myDrawable);
+            } catch (Exception ignored) {
+            }
+
+            mDialog.setCancelable(true);
+            mDialog.setContentView(pLayout);
+
+            ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
+            InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(15),0,helperMethod.pxFromDp(15),0);
+            mDialog.getWindow().setBackgroundDrawable(inset);
+            mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
+            mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+            mDialog.show();
+        }catch (Exception ignored){}
     }
 
     messageManager(eventObserver.eventListener event)
@@ -113,6 +121,8 @@ class messageManager
             mEvent.invokeObserver(null, M_CANCEL_WELCOME);
             mDialog.dismiss();
         });
+
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void languageSupportFailure()
@@ -120,6 +130,7 @@ class messageManager
         initializeDialog(R.layout.popup_language_support, Gravity.CENTER);
         ((TextView) mDialog.findViewById(R.id.pLanguage)).setText((mData.get(0).toString()));
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void rateFailure()
@@ -140,12 +151,14 @@ class messageManager
             };
             handler.postDelayed(runnable, 1000);
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void reportedSuccessfully()
     {
         initializeDialog(R.layout.popup_reported_successfully, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void newIdentityCreated()
@@ -156,7 +169,10 @@ class messageManager
         initializeDialog(R.layout.popup_new_circuit, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
 
-        mDialog.setOnDismissListener(dialog -> handler.removeCallbacks(runnable));
+        mDialog.setOnDismissListener(dialog -> {
+            handler.removeCallbacks(runnable);
+            onClearReference();
+        });
 
         handler.postDelayed(runnable, 1500);
     }
@@ -175,10 +191,12 @@ class messageManager
             handler.removeCallbacks(runnable);
         });
 
-        mDialog.setOnDismissListener(dialog -> handler.removeCallbacks(runnable));
+        mDialog.setOnDismissListener(dialog -> {
+            handler.removeCallbacks(runnable);
+            onClearReference();
+        });
 
         handler.postDelayed(runnable, 1500);
-
     }
 
     private void maxTabReached()
@@ -195,7 +213,10 @@ class messageManager
             handler.removeCallbacks(runnable);
         });
 
-        mDialog.setOnDismissListener(dialog -> handler.removeCallbacks(runnable));
+        mDialog.setOnDismissListener(dialog -> {
+            handler.removeCallbacks(runnable);
+            onClearReference();
+        });
 
         handler.postDelayed(runnable, 1500);
 
@@ -205,12 +226,14 @@ class messageManager
     {
         initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void dataClearedSuccessfully()
     {
         initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
 
@@ -245,6 +268,7 @@ class messageManager
         }
 
         ((TextView) mDialog.findViewById(R.id.pHeaderSubpart)).setText(helperMethod.getDomainName(mData.get(0).toString()));
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void bookmark()
@@ -259,6 +283,7 @@ class messageManager
                 helperMethod.hideKeyboard(activityContextManager.getInstance().getHomeController());
                 dialog.dismiss();
                 mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                onClearReference();
             };
             handler.postDelayed(runnable, 50);
         });
@@ -292,6 +317,7 @@ class messageManager
                 helperMethod.hideKeyboard(activityContextManager.getInstance().getHomeController());
                 dialog.dismiss();
                 mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                onClearReference();
             };
             handler.postDelayed(runnable, 50);
         });
@@ -324,6 +350,7 @@ class messageManager
             mDialog.dismiss();
             mEvent.invokeObserver(null, M_CLEAR_HISTORY);
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void clearBookmark()
@@ -334,6 +361,7 @@ class messageManager
             mDialog.dismiss();
             mEvent.invokeObserver(null, M_CLEAR_BOOKMARK);
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void reportURL()
@@ -347,6 +375,7 @@ class messageManager
             Runnable runnable = () -> onTrigger(Arrays.asList(strings.GENERIC_EMPTY_STR, mContext),M_RATE_SUCCESS);
             handler.postDelayed(runnable, 1000);
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void downloadSingle()
@@ -362,6 +391,7 @@ class messageManager
             };
             handler.postDelayed(runnable, 1000);
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void rateApp()
@@ -387,6 +417,7 @@ class messageManager
                 mDialog.dismiss();
             }
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void downloadFileLongPress()
@@ -416,6 +447,7 @@ class messageManager
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
             mDialog.dismiss();
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void openURLLongPress()
@@ -437,6 +469,7 @@ class messageManager
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
             mDialog.dismiss();
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void popupDownloadFull(){
@@ -488,6 +521,7 @@ class messageManager
             mEvent.invokeObserver(Collections.singletonList(file), M_DOWNLOAD_FILE_MANUAL);
             mDialog.dismiss();
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void sendBridgeMail()
@@ -507,6 +541,7 @@ class messageManager
             };
             handler.postDelayed(runnable, 1000);
         });
+        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     void onReset(){
@@ -519,6 +554,7 @@ class messageManager
 
     void onTrigger(List<Object> pData, pluginEnums.eMessageManager pEventType)
     {
+        onClearReference();
         if(pEventType.equals(pluginEnums.eMessageManager.M_RESET)){
             onReset();
         }

@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
@@ -18,6 +18,8 @@ import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import org.mozilla.geckoview.GeckoResult;
+import org.mozilla.geckoview.GeckoView;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -213,7 +215,7 @@ class tabDataModel
     };
 
     // int isLoading = 0;
-    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, NestedGeckoView pGeckoView, boolean pOpenTabView){
+    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, GeckoView pGeckoView, boolean pOpenTabView){
 
         new Thread(){
             public void run(){
@@ -241,11 +243,9 @@ class tabDataModel
                                 }
 
                                 byte[] mThumbnail = out.toByteArray();
-                                if(status.sRestoreTabs){
-                                    ContentValues mContentValues = new  ContentValues();
-                                    mContentValues.put("mThumbnail", mThumbnail);
-                                    databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter).getmId());
-                                }
+                                ContentValues mContentValues = new  ContentValues();
+                                mContentValues.put("mThumbnail", mThumbnail);
+                                databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter).getmId());
                             }
                         }
                     }
@@ -320,7 +320,7 @@ class tabDataModel
             return getSuggestions((String) pData.get(0));
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_PIXEL){
-            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1),  (ImageView) pData.get(2), (NestedGeckoView) pData.get(3), (Boolean) pData.get(4));
+            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1),  (ImageView) pData.get(2), (GeckoView) pData.get(3), (Boolean) pData.get(4));
         }
         else if(pCommands == dataEnums.eTabCommands.M_HOME_PAGE){
             return getHomePage();

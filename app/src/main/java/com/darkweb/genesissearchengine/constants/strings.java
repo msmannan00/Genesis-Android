@@ -36,12 +36,13 @@ public class strings
     public static final String GENERIC_EMPTY_SPACE = " ";
 
     /*Language Manager*/
-    public static final String LANGUAGE_NOT_SUPPORTED = "not supported";
+    public static final String LANGUAGE_NOT_SUPPORTED = "is unsupported";
 
     /*Settings Manager*/
 
     public static final String SETTING_DEFAULT_LANGUAGE = "en";
     public static final String SETTING_DEFAULT_LANGUAGE_REGION = "Us";
+    public static final String SETTING_DEFAULT_VERSION = "1.0.0.1";
 
     /*Home Manager*/
 

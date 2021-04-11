@@ -1,11 +1,14 @@
 package com.darkweb.genesissearchengine.constants;
 
+import android.content.Context;
+
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 
 import org.mozilla.geckoview.ContentBlocking;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
@@ -14,7 +17,6 @@ public class status
     /*App Status*/
 
     public static boolean sPaidStatus = false;
-    public static String mCurrentReloadURL = "";
     public static int mNotificationID = 1001;
 
     /*Settings Status*/
@@ -26,6 +28,8 @@ public class status
     public static String mReferenceWebsites;
     public static String sBridgeCustomBridge = strings.GENERIC_EMPTY_STR;
     public static String sBridgeCustomType = strings.GENERIC_EMPTY_STR;
+    public static String sVersion = "";
+    public static Locale mSystemLocale = null;
 
     public static boolean sSettingEnableZoom = true;
     public static boolean sSettingEnableVoiceInput = true;
@@ -67,8 +71,20 @@ public class status
 
     public static float sSettingFontSize = 1;
 
-    public static void initStatus()
+    private static void versionVerifier(Context pContext){
+        status.sVersion = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_VERSION,strings.GENERIC_EMPTY_STR));
+        if(!status.sVersion.equals("1.0.0.1")){
+            pContext.deleteDatabase(constants.CONST_DATABASE_NAME);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_CLEAR_PREFS, null);
+            status.sVersion = "1.0.0.1";
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_VERSION,strings.SETTING_DEFAULT_VERSION));
+        }
+    }
+
+    public static void initStatus(Context pContext)
     {
+        versionVerifier(pContext);
+
         status.sSettingSearchHistory = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY,true));
         status.sSearchSuggestionStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
         status.sSettingJavaStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));

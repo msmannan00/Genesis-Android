@@ -30,27 +30,14 @@
                 <item android:state_pressed="true">
                     <shape
                         android:shape="rectangle" android:padding="15dp" >
-                        <!-- you can use any color you want I used here gray color-->
-                        <solid android:color="@color/c_background"/>
-                        <corners android:radius="4dp"/>
-                        <stroke
-                            android:width="2.5dp"
-                            android:color="@color/c_text_v5" />
-                        <corners android:radius="4dp" />
-                    </shape>
-                </item>
-
-                <!--<item android:state_pressed="true">
-                    <shape
-                        android:shape="rectangle" android:padding="15dp" >
                         <solid android:color="@color/c_background" />
                         <corners android:radius="4dp"/>
                         <stroke
-                            android:width="2dp"
+                            android:width="2.5dp"
                             android:color="@color/c_tab_border" />
                         <corners android:radius="4dp" />
                     </shape>
-                </item>-->
+                </item>
             </selector>
         </inset>
     </item>

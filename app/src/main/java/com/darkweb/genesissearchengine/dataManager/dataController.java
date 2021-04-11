@@ -2,12 +2,10 @@ package com.darkweb.genesissearchengine.dataManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
+import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -89,6 +87,9 @@ public class dataController
 
     /*Recieving Preferences*/
     public Object invokePrefs(dataEnums.ePreferencesCommands pCommands, List<Object> pData){
+        if(mPreferenceModel==null){
+            return null;
+        }
         return mPreferenceModel.onTrigger(pCommands, pData);
     }
 

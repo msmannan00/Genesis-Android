@@ -59,7 +59,6 @@ public class theme {
                 }
             }
         }
-
     }
 
     public Context setupTheme(Context context) {

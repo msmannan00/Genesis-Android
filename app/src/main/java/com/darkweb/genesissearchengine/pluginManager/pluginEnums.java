@@ -19,7 +19,7 @@ public class pluginEnums
 
     /*Lanuage Manager*/
     public enum eLangManager{
-        M_SET_LANGUAGE, M_ACTIVITY_CREATED, M_RESUME, M_SUPPORTED_SYSTEM_LANGUAGE_INFO
+        M_SET_LANGUAGE, M_ACTIVITY_CREATED, M_RESUME, M_SUPPORTED_SYSTEM_LANGUAGE_INFO, M_INIT_LOCALE
     }
 
     public enum eLangManagerCallbacks{

@@ -24,46 +24,44 @@ public class keys
 
     /*Settings*/
 
-    public static final String SETTING_LANGUAGE = "LANGUAGE";
-    public static final String SETTING_LANGUAGE_REGION = "LANGUAGE_REGION";
-    public static final String SETTING_SEARCH_ENGINE = "SEARCH_ENGINE";
-    public static final String SETTING_FIRST_INSTALLED = "FIRST_INSTALLED";
-    public static final String SETTING_JAVA_SCRIPT = "JAVA_SCRIPT";
-    public static final String SETTING_POPUP = "POPUP";
-    public static final String SETTING_HISTORY_CLEAR = "HISTORY_CLEAR";
-    public static final String SETTING_GATEWAY = "pref_bridges_enabled_auto";
-    public static final String SETTING_GATEWAY_MANUAL = "pref_bridges_enabled_manual";
-    public static final String SETTING_IS_BOOTSTRAPPED = "IS_BOOTSTRAPPED";
-    public static final String SETTING_IS_WELCOME_ENABLED = "IS_WELCOME_ENABLED";
-    public static final String SETTING_ENGINE_SWITCHED = "ENGINE_SWITCHED";
-    public static final String SETTING_FONT_SIZE = "FONT_SIZE";
-    public static final String SETTING_FONT_ADJUSTABLE = "FONT_ADJUSTABLE";
-    public static final String SETTING_COOKIE_ADJUSTABLE = "COOKIE_ADJUSTABLE_NEW";
-    public static final String SETTING_NOTIFICATION_STATUS = "NOTIFICATION_STATUS";
-    public static final String SETTING_SEARCH_HISTORY = "SETTING_SEARCH_HISTORY";
-    public static final String SETTING_SEARCH_SUGGESTION = "SETTING_SEARCH_STATUS";
-    public static final String SETTING_ZOOM = "SETTING_ZOOM";
-    public static final String SETTING_VOICE_INPUT = "SETTING_VOICE_INPUT";
-    public static final String SETTING_TRACKING_PROTECTION = "SETTING_TRACKING_PROTECTION";
-    public static final String SETTING_DONOT_TRACK = "SETTING_DONOT_TRACK";
-    public static final String SETTING_RESTORE_TAB = "SETTING_RESTORE_TAB";
-    public static final String SETTING_CHARACTER_ENCODING = "SETTING_CHARACTER_ENCODING";
-    public static final String SETTING_SHOW_IMAGES = "SETTING_SHOW_IMAGES";
-    public static final String SETTING_SHOW_TAB_GRID = "SETTING_SHOW_TAB_GRID";
-    public static final String SETTING_SHOW_FONTS = "SETTING_SHOW_FONTS";
-    public static final String SETTING_TOOLBAR_THEME = "SETTING_TOOLBAR_THEME";
-    public static final String SETTING_THEME = "SETTING_THEME_LIGHT";
-    public static final String SETTING_FULL_SCREEN_BROWSIING = "SETTING_FULL_SCREEN_BROWSIING";
-    public static final String SETTING_OPEN_URL_IN_NEW_TAB = "SETTING_OPEN_URL_IN_NEW_TAB";
-    public static final String SETTING_LIST_VIEW = "SETTING_LIST_VIEW";
-    public static final String SETTING_TOOLBAR_THEME_ALLOWED = "SETTING_TOOLBAR_THEME_ALLOWED";
+    public static final String SETTING_VERSION = "VERSION_V1";
+    public static final String SETTING_LANGUAGE = "LANGUAGE_V1";
+    public static final String SETTING_LANGUAGE_REGION = "LANGUAGE_REGION_V1";
+    public static final String SETTING_SEARCH_ENGINE = "SEARCH_ENGINE_V1";
+    public static final String SETTING_FIRST_INSTALLED = "FIRST_INSTALLED_V1";
+    public static final String SETTING_JAVA_SCRIPT = "JAVA_SCRIPT_V1";
+    public static final String SETTING_POPUP = "POPUP_V1";
+    public static final String SETTING_HISTORY_CLEAR = "HISTORY_CLEAR_V1";
+    public static final String SETTING_GATEWAY = "pref_bridges_enabled_auto_V1";
+    public static final String SETTING_GATEWAY_MANUAL = "pref_bridges_enabled_manual_V1";
+    public static final String SETTING_IS_BOOTSTRAPPED = "IS_BOOTSTRAPPED_V1";
+    public static final String SETTING_IS_WELCOME_ENABLED = "IS_WELCOME_ENABLED_V1";
+    public static final String SETTING_FONT_SIZE = "FONT_SIZE_V1";
+    public static final String SETTING_FONT_ADJUSTABLE = "FONT_ADJUSTABLE_V1";
+    public static final String SETTING_COOKIE_ADJUSTABLE = "COOKIE_ADJUSTABLE_NEW_V1";
+    public static final String SETTING_NOTIFICATION_STATUS = "NOTIFICATION_STATUS_V1";
+    public static final String SETTING_SEARCH_HISTORY = "SETTING_SEARCH_HISTORY_V1";
+    public static final String SETTING_SEARCH_SUGGESTION = "SETTING_SEARCH_STATUS_V1";
+    public static final String SETTING_ZOOM = "SETTING_ZOOM_V1";
+    public static final String SETTING_VOICE_INPUT = "SETTING_VOICE_INPUT_V1";
+    public static final String SETTING_TRACKING_PROTECTION = "SETTING_TRACKING_PROTECTION_V1";
+    public static final String SETTING_DONOT_TRACK = "SETTING_DONOT_TRACK_V1";
+    public static final String SETTING_RESTORE_TAB = "SETTING_RESTORE_TAB_V1";
+    public static final String SETTING_CHARACTER_ENCODING = "SETTING_CHARACTER_ENCODING_V1";
+    public static final String SETTING_SHOW_IMAGES = "SETTING_SHOW_IMAGES_V1";
+    public static final String SETTING_SHOW_TAB_GRID = "SETTING_SHOW_TAB_GRID_V1";
+    public static final String SETTING_SHOW_FONTS = "SETTING_SHOW_FONTS_V1";
+    public static final String SETTING_TOOLBAR_THEME = "SETTING_TOOLBAR_THEME_V1";
+    public static final String SETTING_THEME = "SETTING_THEME_LIGHT_V1";
+    public static final String SETTING_FULL_SCREEN_BROWSIING = "SETTING_FULL_SCREEN_BROWSIING_V1";
+    public static final String SETTING_OPEN_URL_IN_NEW_TAB = "SETTING_OPEN_URL_IN_NEW_TAB_V1";
+    public static final String SETTING_LIST_VIEW = "SETTING_LIST_VIEW_V1";
 
     /*Bridge Settings*/
 
-    public static final String BRIDGE_CUSTOM_BRIDGE_1 = "CLEAR_PREFS";
-    public static final String BRIDGE_CUSTOM_TYPE = "BRIDGE_CUSTOM_TYPE";
-    public static final String BRIDGE_NOTIFICATION = "BRIDGE_NOTIFICATION";
-    public static final String BRIDGE_ENABLES = "pref_bridges_enabled";
-    public static final String VPN_ENABLED = "pref_vpn";
+    public static final String BRIDGE_CUSTOM_BRIDGE_1 = "CLEAR_PREFS_V1";
+    public static final String BRIDGE_CUSTOM_TYPE = "BRIDGE_CUSTOM_TYPE_V1";
+    public static final String BRIDGE_ENABLES = "pref_bridges_enabled_V1";
+    public static final String VPN_ENABLED = "pref_vpn_V1";
 
 }

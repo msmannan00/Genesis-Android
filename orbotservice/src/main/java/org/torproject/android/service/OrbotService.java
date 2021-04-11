@@ -451,11 +451,15 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     protected void logNotice(String msg) {
-        if (msg != null && msg.trim().length() > 0) {
-            if (Prefs.useDebugLogging())
-                Log.d(OrbotConstants.TAG, msg);
+        try{
+            if (msg != null && msg.trim().length() > 0) {
+                if (Prefs.useDebugLogging())
+                    Log.d(OrbotConstants.TAG, msg);
 
-            sendCallbackLogMessage(msg);
+                sendCallbackLogMessage(msg);
+            }
+        }catch (Exception ignored){
+
         }
     }
 

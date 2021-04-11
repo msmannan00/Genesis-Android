@@ -51,8 +51,8 @@ public class settingPrivacyController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -118,8 +118,13 @@ public class settingPrivacyController extends AppCompatActivity {
             activityContextManager.getInstance().setCurrentActivity(this);
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
-        activityContextManager.getInstance().onRemoveStack(this);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
     }
 
     /*UI Redirection*/

@@ -9,29 +9,31 @@ import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogContro
 import com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController;
 import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class activityContextManager
 {
     /*Private Variables*/
 
-    private static final activityContextManager ourInstance = new activityContextManager();
+    private static activityContextManager ourInstance = new activityContextManager();
     public static activityContextManager getInstance()
     {
         return ourInstance;
     }
 
     /*Private Contexts*/
-    private bridgeController pBridgeController;
-    private historyController pHistoryController;
-    private bookmarkController pBookmarkController;
-    private homeController pHomeController;
-    private tabController pTabController;
-    private android.app.Activity pCurrentActivity = null;
-    private settingHomeController pSettingController;
-    private settingGeneralController pSettingGeneralController;
-    private orbotLogController pOrbotLogController;
-    private ArrayList<AppCompatActivity> mStackList;
+    private WeakReference<bridgeController> pBridgeController;
+    private WeakReference<historyController> pHistoryController;
+    private WeakReference<bookmarkController> pBookmarkController;
+    private WeakReference<homeController> pHomeController;
+    private WeakReference<tabController> pTabController;
+    private WeakReference<android.app.Activity> pCurrentActivity = null;
+    private WeakReference<settingHomeController> pSettingController;
+    private WeakReference<settingGeneralController> pSettingGeneralController;
+    private WeakReference<orbotLogController> pOrbotLogController;
+    private ArrayList<WeakReference<AppCompatActivity>> mStackList;
 
     /*Initialization*/
 
@@ -42,85 +44,128 @@ public class activityContextManager
 
     /*List ContextGetterSetters*/
     public historyController getHistoryController(){
-        return pHistoryController;
+        if(pHistoryController==null){
+            return null;
+        }
+        return pHistoryController.get();
     }
     public void setHistoryController(historyController history_controller){
-        this.pHistoryController = history_controller;
+        this.pHistoryController = new WeakReference(history_controller);
     }
 
     public bookmarkController getBookmarkController(){
-        return pBookmarkController;
+        if(pBookmarkController==null){
+            return null;
+        }
+        return pBookmarkController.get();
     }
     public void setBookmarkController(bookmarkController bookmark_controller){
-        this.pBookmarkController = bookmark_controller;
+        this.pBookmarkController = new WeakReference(bookmark_controller);
     }
 
     public bridgeController getBridgeController(){
-        return pBridgeController;
+        if(pBridgeController==null){
+            return null;
+        }
+        return pBridgeController.get();
     }
     public void setBridgeController(bridgeController bridge_controller){
-        this.pBridgeController = bridge_controller;
+        this.pBridgeController = new WeakReference(bridge_controller);
     }
 
     public homeController getHomeController(){
-        return pHomeController;
+        if(pHomeController==null){
+            return null;
+        }
+        return pHomeController.get();
     }
     public void setHomeController(homeController home_controller){
-        this.pHomeController = home_controller;
+        this.pHomeController = new WeakReference(home_controller);
     }
 
     public tabController getTabController(){
-        return pTabController;
+        if(pTabController==null){
+            return null;
+        }
+        return pTabController.get();
     }
     public void setTabController(tabController tab_controller){
-        this.pTabController = tab_controller;
+        this.pTabController = new WeakReference(tab_controller);
     }
 
     public orbotLogController getOrbotLogController(){
-        return pOrbotLogController;
+        if(pOrbotLogController==null){
+            return null;
+        }
+        return pOrbotLogController.get();
     }
     public void setOrbotLogController(orbotLogController pOrbotLogController){
-        this.pOrbotLogController = pOrbotLogController;
+        this.pOrbotLogController = new WeakReference(pOrbotLogController);
     }
 
 
     public settingGeneralController getSettingGeneralController(){
-        return pSettingGeneralController;
+        if(pSettingGeneralController==null){
+            return null;
+        }
+        return pSettingGeneralController.get();
     }
     public void setSettingGeneralController(settingGeneralController pSettingGeneralController){
-        this.pSettingGeneralController = pSettingGeneralController;
+        this.pSettingGeneralController = new WeakReference(pSettingGeneralController);
     }
 
     public settingHomeController getSettingController(){
-        return pSettingController;
+        if(pSettingController==null){
+            return null;
+        }
+        return pSettingController.get();
     }
     public void setSettingController(settingHomeController pSettingController){
-        this.pSettingController = pSettingController;
+        this.pSettingController = new WeakReference(pSettingController);
     }
 
     public void setCurrentActivity(android.app.Activity pCurrentActivity){
-        this.pCurrentActivity = pCurrentActivity;
+        this.pCurrentActivity = new WeakReference(pCurrentActivity);
     }
     public android.app.Activity getCurrentActivity(){
-        return pCurrentActivity;
+        if(pCurrentActivity==null){
+            return null;
+        }
+        return pCurrentActivity.get();
     }
 
-    public void onStack(AppCompatActivity pActivity){
-        mStackList.add(pActivity);
+    public void onStack(AppCompatActivity pActivity) {
+        try{
+            if (mStackList.size() > 0) {
+                if (!mStackList.get(mStackList.size() - 1).get().getLocalClassName().equals(pActivity.getLocalClassName())) {
+                    mStackList.add(new WeakReference(pActivity));
+                }
+            }else {
+                mStackList.add(new WeakReference(pActivity));
+            }
+        }catch (Exception ignored){}
     }
 
     public void onRemoveStack(AppCompatActivity pActivity){
-        if(mStackList.size()>0 && mStackList.get(mStackList.size()-1).equals(pActivity)){
-            mStackList.remove(mStackList.size()-1);
-        }
+        try{
+            for(int mCounter=0;mCounter<mStackList.size();mCounter++){
+                if(mStackList.get(mCounter).get().getLocalClassName().equals(pActivity.getLocalClassName())){
+                    mStackList.remove(mCounter);
+                    mCounter-=1;
+                }
+            }
+        }catch (Exception ignored){}
     }
 
     public void onClearStack(){
         for(int mCounter=0;mCounter<mStackList.size();mCounter++){
-            if(!mStackList.get(mCounter).isFinishing()){
-                mStackList.get(mCounter).finish();
-                mStackList.remove(mCounter);
-            }
+            try{
+                if(!mStackList.get(mCounter).get().isFinishing()){
+                    mStackList.get(mCounter).get().finish();
+                    mStackList.remove(mCounter);
+                    mCounter-=1;
+                }
+            }catch (Exception ignored){}
         }
     }
 }

@@ -139,7 +139,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalNavigationController">
+        <activity android:name="com.darkweb.genesissearchengine.externalNavigationManager.externalNavigationController">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -185,15 +185,6 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5074525529134731~2926711128" />
 
-        <service
-            android:name="com.darkweb.genesissearchengine.helperManager.autoFillService"
-            android:label="Genesis | Secure Autofill"
-            android:permission="android.permission.BIND_AUTOFILL_SERVICE"
-            android:stopWithTask="true">
-            <intent-filter>
-                <action android:name="android.service.autofill.AutofillService" />
-            </intent-filter>
-        </service>
         <service
             android:name="com.darkweb.genesissearchengine.helperManager.downloadFileService"
             android:enabled="true"

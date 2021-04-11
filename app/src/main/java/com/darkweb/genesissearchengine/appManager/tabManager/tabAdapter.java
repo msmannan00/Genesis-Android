@@ -4,18 +4,14 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -101,74 +97,53 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         holder.itemView.setTag(position);
         holder.itemView.findViewById(R.id.pRemoveRow).setTag(position);
         holder.itemView.findViewById(R.id.pLoadSession).setTag(position);
+
         if(position == 0 && status.sTabGridLayoutEnabled && !mViewLoaded){
-            onExpandScale(holder.itemView);
-            mViewLoaded = true;
-        }else if(position != mModelList.size()-1){
-            holder.itemView.setScaleY(1f);
-            holder.itemView.setScaleX(1f);
+
+        }else{
         }
     }
 
-    private boolean mFirstRowAnimating = false;
-    public void onExpandScale(View v) {
-        if(mFirstRowAnimating){
-            return;
-        }
-        mFirstRowAnimating = true;
+    public void scaleView(View v, tabRowModel mTabRowModel) {
         v.bringToFront();
-        if(mFirstRow!=null){
-            mFirstRow.end();
-            mFirstRow.cancel();
-        }
-        v.setScaleY(0.85f);
-        v.setScaleX(0.85f);
-        mFirstRow = ObjectAnimator.ofPropertyValuesHolder(v,
-                PropertyValuesHolder.ofFloat("scaleX", 0.85f, 1),
-                PropertyValuesHolder.ofFloat("scaleY", 0.85f, 1));
-        mFirstRow.setDuration(200);
-        mFirstRow.setStartDelay(150);
-        mFirstRow.start();
-        mFirstRow.addListener(new Animator.AnimatorListener() {
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(v,
+                PropertyValuesHolder.ofFloat("scaleX", 1, 0.9f),
+                PropertyValuesHolder.ofFloat("scaleY", 1, 0.9f));
+        scaleDown.setDuration(130);
+        scaleDown.start();
+        v.setClickable(false);
+        v.setFocusable(false);
+        v.setEnabled(false);
+        mEvent.invokeObserver(Arrays.asList(mTabRowModel.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
+
+        scaleDown.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation, boolean isReverse) {
-
             }
 
             @Override
             public void onAnimationEnd(Animator animation, boolean isReverse) {
-                mFirstRowAnimating = false;
+                onTriggerURL(mTabRowModel);
             }
 
             @Override
             public void onAnimationStart(Animator animation) {
-
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                mFirstRowAnimating = false;
             }
 
             @Override
             public void onAnimationCancel(Animator animation) {
-                mFirstRowAnimating = false;
+
             }
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-
             }
         });
-    }
 
-    public void scaleView(View v) {
-        v.bringToFront();
-        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(v,
-                PropertyValuesHolder.ofFloat("scaleX", 1, 0.85f),
-                PropertyValuesHolder.ofFloat("scaleY", 1, 0.85f));
-        scaleDown.setDuration(200);
-        scaleDown.start();
     }
 
     @Override
@@ -183,7 +158,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     }
 
     private void onRemoveAllSelection() {
-        if(mSelectedList!=null && mSelectedList.size()>0){
+        if(mSelectedList.size()>0){
+            int mSelectionInitialSize = mSelectedList.size();
             for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
                 for(int mCounterInner=0;mCounterInner<mModelList.size();mCounterInner++){
                     if(mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())){
@@ -191,7 +167,11 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         mModelList.remove(mCounterInner);
                         notifyItemRemoved(mCounterInner);
                         notifyItemRangeChanged(mCounterInner,mModelList.size());
-                        mEvent.invokeObserver(Collections.singletonList(mCounterInner), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+                        if(mSelectionInitialSize == 1){
+                            mEvent.invokeObserver(Arrays.asList(mCounterInner, true), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+                        }else {
+                            mEvent.invokeObserver(Arrays.asList(mCounterInner, false), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+                        }
                         mCounter=-1;
                         break;
                     }
@@ -216,12 +196,17 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
     private void onRemoveAll(){
         int mSize = mModelList.size()-1;
-        for(int mCounter=0;mCounter<mSize;mCounter++){
+        if(mSize==1){
             mModelList.remove(0);
             notifyDataSetChanged();
-            mEvent.invokeObserver(Collections.singletonList(0), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+            mEvent.invokeObserver(Arrays.asList(0, true), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+        }else {
+            for(int mCounter=0;mCounter<mSize;mCounter++){
+                mModelList.remove(0);
+                notifyDataSetChanged();
+                mEvent.invokeObserver(Arrays.asList(0, false), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
+            }
         }
-
     }
 
     private void onClearAllSelection(){
@@ -269,7 +254,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
     private void onTriggerURL(tabRowModel model){
         if(model.getSession()!=null){
-            mEvent.invokeObserver(Arrays.asList(model.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
             mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_BACK_PRESSED);
             mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_INIT_TAB_COUNT);
         }
@@ -330,7 +314,11 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             mItemSelectionMenuReference = itemView.findViewById(R.id.pRowContainer);
             mBorder = itemView.findViewById(R.id.pBorder);
 
+            itemView.setScaleX(1);
+            itemView.setScaleY(1);
             itemView.setClickable(true);
+            itemView.setFocusable(true);
+            itemView.setEnabled(true);
             mRemoveRow.setEnabled(true);
 
             if(model.getmId()==null){
@@ -340,6 +328,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 mLoadSession.setOnLongClickListener(this);
                 mRemoveRow.setOnClickListener(this);
                 mLoadSession.setOnClickListener(this);
+
                 if(model.getSession().getTheme()==null){
                     if(status.sTabGridLayoutEnabled){
                         mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_view_divier_background_inner));
@@ -361,7 +350,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
                 mItemSelectionMenu.setVisibility(View.GONE);
-                if(model.getSession().getTitle().equals("$TITLE") || model.getSession().getTitle().toLowerCase().equals("loading")){
+                if(model.getSession().getTitle().contains("TITLE") || model.getSession().getTitle().contains("title") || model.getSession().getTitle().toLowerCase().equals("loading")){
                     mHeader.setText(helperMethod.getDomainName(mURL));
                 }else {
                     mHeader.setText(model.getSession().getTitle());
@@ -377,21 +366,15 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 if(mURL.equals("about:blank")){
                     mWebThumbnail.setAlpha(0f);
                 }else {
-                Thread timer = new Thread()
-                {
-                    public void run()
+                    new Handler().postDelayed(() ->
                     {
-                        runOnUiThread(() -> {
-                            if(mWebThumbnail.getDrawable()==null){
-                                mWebThumbnail.setImageBitmap(model.getBitmap());
-                            }else {
-                                Drawable mDrawable = new BitmapDrawable(itemView.getContext().getResources(), model.getBitmap());
-                                helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable,250);
-                            }
-                        });
-                    }
-                };
-                timer.start();
+                        if(mWebThumbnail.getDrawable()==null){
+                            mWebThumbnail.setImageBitmap(model.getBitmap());
+                        }else {
+                            Drawable mDrawable = new BitmapDrawable(itemView.getContext().getResources(), model.getBitmap());
+                            helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable,250);
+                        }
+                    }, 1 * getLayoutPosition());
                 }
 
                 if(mSelectedList.contains(model.getSession().getSessionID())){
@@ -411,12 +394,14 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
             }
 
-            itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.clear_alpha));
-            if(!status.sTabGridLayoutEnabled){
-                if(getLayoutPosition() == 0){
-                    itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
+            new Handler().postDelayed(() ->
+            {
+                itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.clear_alpha));
+                if(!status.sTabGridLayoutEnabled){
+                    if(getLayoutPosition() == 0){
+                        itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
+                    }
                 }
-            }
 
             if(status.sTabGridLayoutEnabled){
                 CardView mLayout = itemView.findViewById(R.id.pRowContainerInner);
@@ -470,6 +455,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
             }
             mRemoveRow.bringToFront();
+            }, 10 * getLayoutPosition());
+
         }
 
 
@@ -485,9 +472,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         notifyItemChanged(mModelList.size()-1);
 
                     }else {
-                        onTriggerURL(mModelList.get(this.getLayoutPosition()));
                         if(status.sTabGridLayoutEnabled){
-                            scaleView(itemView);
+                            scaleView(itemView, mModelList.get(this.getLayoutPosition()));
                         }
                     }
                 }else {

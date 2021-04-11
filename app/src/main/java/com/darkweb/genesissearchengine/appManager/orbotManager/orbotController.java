@@ -47,9 +47,9 @@ public class orbotController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
 
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_settings_view);
 
@@ -59,8 +59,8 @@ public class orbotController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -125,6 +125,12 @@ public class orbotController extends AppCompatActivity {
     }
 
     /* LOCAL OVERRIDES */
+
+    @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
+    }
 
     @Override
     public void onResume()

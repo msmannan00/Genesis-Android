@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.helperManager.localFileDownloader;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +16,12 @@ class downloadManager
 {
     /*Private Variables*/
 
-    private AppCompatActivity mAppContext;
+    private WeakReference<AppCompatActivity> mAppContext;
     private Map<Integer, localFileDownloader> mDownloads = new HashMap<Integer, localFileDownloader>();
 
     /*Initializations*/
 
-    downloadManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent){
+    downloadManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent){
         this.mAppContext = pAppContext;
         initialize();
     }
@@ -30,7 +32,7 @@ class downloadManager
 
     private void startDownload(String pPath,String pFile) {
         int mID = helperMethod.createNotificationID();
-        localFileDownloader mFileDownloader = (localFileDownloader)new localFileDownloader(mAppContext,pPath, pFile, mID).execute(pPath);
+        localFileDownloader mFileDownloader = (localFileDownloader)new localFileDownloader(mAppContext.get().getApplicationContext(),pPath, pFile, mID).execute(pPath);
         mDownloads.put(mID,mFileDownloader);
     }
 

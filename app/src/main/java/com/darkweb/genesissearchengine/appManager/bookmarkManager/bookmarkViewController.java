@@ -74,7 +74,8 @@ class bookmarkViewController
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
+                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
             }
             else {
                 if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){

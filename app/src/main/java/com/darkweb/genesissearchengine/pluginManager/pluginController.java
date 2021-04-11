@@ -1,7 +1,5 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import android.util.Log;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -14,6 +12,7 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +37,7 @@ public class pluginController
     /*Private Variables*/
 
     private static pluginController ourInstance = new pluginController();
-    private homeController mHomeController;
+    private WeakReference<AppCompatActivity> mHomeController;
     private boolean mIsInitialized = false;
 
     /*Initializations*/
@@ -57,13 +56,18 @@ public class pluginController
         mIsInitialized = true;
     }
 
+    public void onRemoveInstances(){
+        mHomeController = null;
+        mOrbotManager.onRemoveInstances();
+    }
+
     private void instanceObjectInitialization()
     {
-        mHomeController = activityContextManager.getInstance().getHomeController();
+        mHomeController = new WeakReference(activityContextManager.getInstance().getHomeController());
         mContextManager = activityContextManager.getInstance();
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
-        mAdManager = new adManager(mHomeController,new admobCallback(), mHomeController.getBannerAd());
+        mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd());
         mAnalyticsManager = new com.darkweb.genesissearchengine.pluginManager.analyticManager(mHomeController,new analyticManager());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
@@ -89,7 +93,7 @@ public class pluginController
         public Object invokeObserver(List<Object> data, Object event_type)
         {
             if(event_type.equals(M_SHOW_LOADED_ADS))
-            mHomeController.onSetBannerAdMargin();
+                ((homeController)mHomeController.get()).onSetBannerAdMargin();
             return null;
         }
     }
@@ -165,6 +169,9 @@ public class pluginController
 
     /*Lang Manager*/
     public Object onLanguageInvoke(List<Object> pData, pluginEnums.eLangManager pEventType){
+        if(mLangManager==null){
+            return null;
+        }
         return mLangManager.onTrigger(pData, pEventType);
     }
 
@@ -178,7 +185,9 @@ public class pluginController
 
     /*Message Manager*/
     public void onMessageManagerInvoke(List<Object> pData, pluginEnums.eMessageManager pEventType){
-        mMessageManager.onTrigger(pData,pEventType);
+        if(mMessageManager!=null){
+            mMessageManager.onTrigger(pData,pEventType);
+        }
     }
 
     private class messageCallback implements eventObserver.eventListener{
@@ -187,13 +196,13 @@ public class pluginController
         {
             if(pEventType.equals(enums.etype.welcome))
             {
-                mHomeController.onLoadURL(pData.get(0).toString());
+                ((homeController)mHomeController.get()).onLoadURL(pData.get(0).toString());
             }
             else if(pEventType.equals(M_DOWNLOAD_SINGLE)){
                 activityContextManager.getInstance().getHomeController().onManualDownloadFileName((String)pData.get(2),(String)pData.get(0));
             }
             else if(pEventType.equals(M_SECURE_CONNECTION)){
-                helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController,true);
+                helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController.get(),true);
             }
             else if(pEventType.equals(M_CANCEL_WELCOME)){
                 status.sSettingIsWelcomeEnabled = false;
@@ -202,14 +211,14 @@ public class pluginController
             else if(pEventType.equals(enums.etype.reload)){
                 if((Boolean) mOrbotManager.onTrigger(null, pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING))
                 {
-                    mHomeController.onReload(null);
+                    ((homeController)mHomeController.get()).onReload(null);
                 }
                 else {
                     mMessageManager.onTrigger(Arrays.asList(mHomeController, Collections.singletonList(pData.get(0).toString())),M_START_ORBOT);
                 }
             }
             else if(pEventType.equals(M_OPEN_PRIVACY)){
-                helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController,true);
+                helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController.get(),true);
             }
             else if(pEventType.equals(M_CLEAR_BOOKMARK)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,pData);
@@ -227,24 +236,24 @@ public class pluginController
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
             }
             else if(pEventType.equals(M_DOWNLOAD_FILE)){
-                mHomeController.onDownloadFile();
+                ((homeController)mHomeController.get()).onDownloadFile();
             }
             else if(pEventType.equals(M_DOWNLOAD_FILE_MANUAL)){
-                mHomeController.onManualDownload(pData.get(0).toString());
+                ((homeController)mHomeController.get()).onManualDownload(pData.get(0).toString());
             }
             else if(pEventType.equals(M_OPEN_LINK_NEW_TAB)){
-                mHomeController.postNewLinkTabAnimationInBackgroundTrigger(pData.get(0).toString());
+                ((homeController)mHomeController.get()).postNewLinkTabAnimationInBackgroundTrigger(pData.get(0).toString());
             }
             else if(pEventType.equals(M_OPEN_LINK_CURRENT_TAB)){
-                mHomeController.onLoadURL(pData.get(0).toString());
+                ((homeController)mHomeController.get()).onLoadURL(pData.get(0).toString());
             }
             else if(pEventType.equals(M_COPY_LINK)){
                 helperMethod.copyURL(pData.get(0).toString(),mContextManager.getHomeController());
             }
             else if(pEventType.equals(M_CLEAR_TAB)){
                 dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
-                mHomeController.initTab(true);
-                mHomeController.onDisableTabViewController();
+                ((homeController)mHomeController.get()).initTab(true);
+                ((homeController)mHomeController.get()).onDisableTabViewController();
             }
             else if(pEventType.equals(M_REQUEST_BRIDGES)){
                 pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);

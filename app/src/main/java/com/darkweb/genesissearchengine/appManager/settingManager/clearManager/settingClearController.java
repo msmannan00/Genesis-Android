@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -46,18 +46,17 @@ public class settingClearController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_clear_view);
-
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
 
         viewsInitializations();
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -147,7 +146,7 @@ public class settingClearController extends AppCompatActivity {
             mCheckBoxList.get(7).setChecked(false);
             mCheckBoxList.get(7).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             onClearSettings();
-            status.initStatus();
+            status.initStatus(activityContextManager.getInstance().getHomeController());
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
             mHomeInvoked = true;
         }
@@ -228,6 +227,12 @@ public class settingClearController extends AppCompatActivity {
         if(view!=null && view.getTag()!=null){
             mSettingClearViewController.onTrigger(settingClearEnums.eClearViewController.M_CHECK_INVOKE, Arrays.asList(view.getTag(),!mCheckBoxList.get(Integer.parseInt(view.getTag().toString())).isChecked()));
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
     }
 
     public void onClose(View view){

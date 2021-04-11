@@ -32,20 +32,16 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.darkweb.genesissearchengine.helperManager.PathUtil;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
-import java.net.URISyntaxException;
+import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
 import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
@@ -55,24 +51,24 @@ import org.mozilla.geckoview.SlowScriptResponse;
 final class geckoPromptView implements GeckoSession.PromptDelegate {
     protected static final String LOGTAG = "geckoPromptView";
 
-    private final Activity mActivity;
+    private final WeakReference<Activity> mActivity;
     public int filePickerRequestCode = 1;
     private int mFileType;
     private GeckoResult<PromptResponse> mFileResponse;
     private FilePrompt mFilePrompt;
 
     public geckoPromptView(final Activity activity) {
-        mActivity = activity;
+        mActivity = new WeakReference(activity);
     }
 
     @Override
     public GeckoResult<PromptResponse> onAlertPrompt(final GeckoSession session,
                                                      final AlertPrompt prompt) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext())
                 .setTitle(prompt.title)
                 .setMessage(prompt.message)
                 .setPositiveButton(android.R.string.ok, /* onClickListener */ null);
@@ -84,11 +80,11 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onButtonPrompt(final GeckoSession session,
                                                       final ButtonPrompt prompt) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext())
                 .setTitle(prompt.title)
                 .setMessage(prompt.message);
 
@@ -157,11 +153,11 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onTextPrompt(final GeckoSession session,
                                                     final TextPrompt prompt) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         final LinearLayout container = addStandardLayout(builder, prompt.title, prompt.message);
         final EditText editText = new EditText(builder.getContext());
         editText.setText(prompt.defaultValue);
@@ -185,11 +181,11 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onAuthPrompt(final GeckoSession session,
                                                     final AuthPrompt prompt) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         final LinearLayout container = addStandardLayout(builder, prompt.title, prompt.message);
 
         final int flags = prompt.authOptions.flags;
@@ -285,12 +281,12 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
                                     final String message, final int type,
                                     final ChoicePrompt.Choice[] choices, final ChoicePrompt prompt,
                                     final GeckoResult<PromptResponse> res) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             res.complete(prompt.dismiss());
             return;
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         addStandardLayout(builder, title, message);
 
         final ListView list = new ListView(builder.getContext());
@@ -476,11 +472,11 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onColorPrompt(final GeckoSession session,
                                                      final ColorPrompt prompt) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         addStandardLayout(builder, prompt.title, /* msg */ null);
 
         final int initial = parseColor(prompt.defaultValue, /* def */ 0);
@@ -587,7 +583,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onDateTimePrompt(final GeckoSession session,
                                                         final DateTimePrompt prompt) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
@@ -613,7 +609,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
         final Calendar cal = formatter.getCalendar();
         cal.setTime(date);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         final LayoutInflater inflater = LayoutInflater.from(builder.getContext());
         final DatePicker datePicker;
         if (prompt.type == DateTimePrompt.Type.DATE || prompt.type == DateTimePrompt.Type.MONTH ||
@@ -706,12 +702,12 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @TargetApi(19)
     public GeckoResult<PromptResponse> onFilePrompt(GeckoSession session, FilePrompt prompt)
     {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
 
-        if(!helperMethod.checkPermissions((AppCompatActivity)mActivity)){
+        if(!helperMethod.checkPermissions((AppCompatActivity)mActivity.get().getApplicationContext())){
             return GeckoResult.fromValue(prompt.dismiss());
         }
 
@@ -787,7 +783,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
 
         String filePath = null;
 
-        filePath = PathUtil.getPath(mActivity.getApplicationContext(),uri);
+        filePath = PathUtil.getPath(mActivity.get().getApplicationContext(),uri);
 
         if (filePath==null) {
             res.complete(prompt.dismiss());
@@ -800,7 +796,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
 
         if (prompt.type == FilePrompt.Type.SINGLE ||
                 (prompt.type == FilePrompt.Type.MULTIPLE && clip == null)) {
-            res.complete(prompt.confirm(mActivity, uri));
+            res.complete(prompt.confirm(mActivity.get().getApplicationContext(), uri));
         } else if (prompt.type == FilePrompt.Type.MULTIPLE) {
             if (clip == null) {
                 Log.w(LOGTAG, "No selected file");
@@ -812,18 +808,18 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
             for (int i = 0; i < count; i++) {
                 uris.add(clip.getItemAt(i).getUri());
             }
-            res.complete(prompt.confirm(mActivity, uris.toArray(new Uri[uris.size()])));
+            res.complete(prompt.confirm(mActivity.get().getApplicationContext(), uris.toArray(new Uri[uris.size()])));
         }
     }
 
     public void onPermissionPrompt(final GeckoSession session, final String title,
                                    final GeckoSession.PermissionDelegate.Callback callback) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             callback.reject();
             return;
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         builder.setTitle(title)
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
@@ -843,11 +839,11 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     }
 
     public void onSlowScriptPrompt(GeckoSession geckoSession, String title, GeckoResult<SlowScriptResponse> reportAction) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null) {
             return;
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         builder.setTitle(title)
                 .setNegativeButton("Wait", new DialogInterface.OnClickListener() {
                     @Override
@@ -904,12 +900,12 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
                               final MediaSource[] video, final MediaSource[] audio,
                               final String[] videoNames, final String[] audioNames,
                               final GeckoSession.PermissionDelegate.MediaCallback callback) {
-        final Activity activity = mActivity;
+        final Activity activity = mActivity.get();
         if (activity == null || (video == null && audio == null)) {
             callback.reject();
             return;
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity.getApplicationContext());
         final LinearLayout container = addStandardLayout(builder, title, /* msg */ null);
 
         final Spinner videoSpinner;

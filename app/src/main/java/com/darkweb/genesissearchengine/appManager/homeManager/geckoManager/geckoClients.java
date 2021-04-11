@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
@@ -41,7 +43,6 @@ public class geckoClients
     private GeckoRuntime mRuntime = null;
     private BrowserIconManager mIconManager;
     private eventObserver.eventListener event;
-    private AppCompatActivity context;
 
     /*Local Variable*/
 
@@ -49,7 +50,6 @@ public class geckoClients
 
     public void initialize(GeckoView geckoView, eventObserver.eventListener event, AppCompatActivity context, boolean isForced)
     {
-        this.context = context;
         this.event = event;
         mSessionID = helperMethod.createRandomID();
         initRuntimeSettings(context);
@@ -72,10 +72,10 @@ public class geckoClients
         onUpdateFont();
     }
 
-    public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView){
+    public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         boolean mStatus = mSession.onValidateInitializeFromStartup();
         if(mStatus){
-            loadURL(mSession.getCurrentURL(), mNestedGeckoView);
+            loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
         }
 
     }
@@ -87,13 +87,21 @@ public class geckoClients
     public geckoSession initFreeSession(GeckoView pGeckoView, AppCompatActivity pcontext, eventObserver.eventListener event){
         this.event = event;
         initRuntimeSettings(pcontext);
-        geckoSession mTempSession = new geckoSession(new geckoViewClientCallback(),mSessionID,context, pGeckoView);
+        geckoSession mTempSession = new geckoSession(new geckoViewClientCallback(),mSessionID,pcontext, pGeckoView);
         mTempSession.open(mRuntime);
         mTempSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
         mTempSession.getSettings().setFullAccessibilityTree(true);
         mTempSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
         mTempSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
         return mTempSession;
+    }
+
+    public void onDestroy(){
+        mSession.onDestroy();
+        mSession = null;
+        mRuntime = null;
+        mIconManager = null;
+        event = null;
     }
 
     public GeckoRuntime getmRuntime(){
@@ -115,7 +123,7 @@ public class geckoClients
     @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context){
         if(mRuntime==null){
-            mRuntime = GeckoRuntime.getDefault(context);
+            mRuntime = GeckoRuntime.getDefault(context.getApplicationContext());
             mRuntime.getSettings().setAboutConfigEnabled(true);
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
             mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
@@ -132,14 +140,14 @@ public class geckoClients
         }
     }
 
-    public void onGetFavIcon(ImageView pImageView, String pURL){
+    public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext){
         pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
-        mIconManager.onLoadIconIntoView(context,mRuntime, pImageView, pURL);
+        mIconManager.onLoadIconIntoView(pcontext,mRuntime, pImageView, pURL);
     }
 
-    public void onLoadFavIcon(){
+    public void onLoadFavIcon(AppCompatActivity pcontext){
         BrowserIconManager mIconManager = new BrowserIconManager();
-        mIconManager.onLoadIcon(context, mRuntime);
+        mIconManager.onLoadIcon(pcontext.getApplicationContext(), mRuntime);
     }
 
     private int getCookiesBehaviour(){
@@ -147,7 +155,7 @@ public class geckoClients
     }
 
     @SuppressLint("WrongConstant")
-    public void updateSetting(NestedGeckoView mNestedGeckoView){
+    public void updateSetting(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         mRuntime.getSettings().setRemoteDebuggingEnabled(false);
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
         mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
@@ -168,7 +176,7 @@ public class geckoClients
         mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
         mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
         onUpdateFont();
-        onReload(mNestedGeckoView);
+        onReload(mNestedGeckoView, pcontext);
     }
 
     public void initSession(geckoSession mSession){
@@ -192,7 +200,7 @@ public class geckoClients
         mSession.initURL(url);
     }
 
-    public void loadURL(String url, NestedGeckoView mNestedGeckoView) {
+    public void loadURL(String url, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
         mSession = (geckoSession)mNestedGeckoView.getSession();
         if(mSession==null){
             return;
@@ -202,7 +210,7 @@ public class geckoClients
             if(!url.startsWith(CONST_REPORT_URL) && (url.startsWith("https://boogle.store/?pG") || url.startsWith("https://boogle.store?pG") || url.endsWith("boogle.store") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))){
                 try{
                     mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
-                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(context)){
+                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)){
                         String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
                         mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(mURL);
@@ -218,7 +226,7 @@ public class geckoClients
                 try{
                     mSession.initURL(constants.CONST_GENESIS_HELP_URL);
 
-                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(context)){
+                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)){
                         mSession.getSettings().setAllowJavascript(true);
                         mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
                     }else {
@@ -235,9 +243,9 @@ public class geckoClients
         }
     }
 
-    public void onRedrawPixel(){
+    public void onRedrawPixel(AppCompatActivity pcontext){
         mSession.onRedrawPixel();
-        onLoadFavIcon();
+        onLoadFavIcon(pcontext);
     }
 
     public void onClearSiteData(){
@@ -312,9 +320,9 @@ public class geckoClients
         mSession.stop();
     }
 
-    public void onReload(NestedGeckoView mNestedGeckoView){
+    public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         mSession.stop();
-        loadURL(mSession.getCurrentURL(), mNestedGeckoView);
+        loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
     }
 
     public void manual_download(String url, AppCompatActivity context){
@@ -337,16 +345,16 @@ public class geckoClients
         }
     }
 
-    public void downloadFile()
+    public void downloadFile(AppCompatActivity pcontext)
     {
-        if(helperMethod.checkPermissions(context)){
+        if(helperMethod.checkPermissions(pcontext)){
             mSession.downloadRequestedFile();
         }
     }
 
-    public void downloadFile(String mURL)
+    public void downloadFile(String mURL, AppCompatActivity pcontext)
     {
-        if(helperMethod.checkPermissions(context)){
+        if(helperMethod.checkPermissions(pcontext)){
             mSession.downloadRequestedFile();
         }
     }
@@ -374,7 +382,7 @@ public class geckoClients
                         WebResponse responseInfo = (WebResponse)data.get(0);
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.headers.get("Content-Type"));
-                        context.startActivity(intent);
+                        activityContextManager.getInstance().getHomeController().startActivity(intent);
                     }catch (Exception ignored){}
                 } else
                 {

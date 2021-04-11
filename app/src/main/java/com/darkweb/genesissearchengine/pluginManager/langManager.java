@@ -3,38 +3,75 @@ package com.darkweb.genesissearchengine.pluginManager;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+
+import static com.darkweb.genesissearchengine.constants.status.mSystemLocale;
 
 class langManager {
 
     /*Private Variables*/
 
-    private AppCompatActivity mAppContext;
     private eventObserver.eventListener mEvent;
     private Locale mLanguage;
 
     /*Initializations*/
 
     langManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, Locale pLanguage) {
-        this.mAppContext = pAppContext;
         this.mEvent = pEvent;
         this.mLanguage = pLanguage;
 
         onInitLanguage(pAppContext);
     }
 
+    private boolean initLocale(){
+        if(!status.mThemeApplying){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Locale mSystemLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+                if(mSystemLocale!=status.mSystemLocale || !mSystemLocale.getLanguage().equals(mLanguage.getLanguage()) ){
+                    status.mSystemLocale = mSystemLocale;
+                    /*if(activityContextManager.getInstance().getHomeController()!=null && status.sSettingLanguage.equals("default")){
+                        return true;
+                    }*/
+                }
+            } else {
+                Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
+                if(mSystemLocale!=status.mSystemLocale  || !mSystemLocale.getLanguage().equals(mLanguage.getLanguage())){
+                    status.mSystemLocale = mSystemLocale;
+                    activityContextManager.getInstance().getCurrentActivity().recreate();
+                    /*if(activityContextManager.getInstance().getHomeController()!=null && status.sSettingLanguage.equals("default")){
+                        return true;
+                    }*/
+                }
+            }
+       }
+        return false;
+    }
+
     private void onInitLanguage(AppCompatActivity pAppContext) {
         if(status.sSettingLanguage.equals("default")){
-            if(mLanguage==null || !mLanguage.getLanguage().equals(Resources.getSystem().getConfiguration().locale.getLanguage()) || !mLanguage.getCountry().equals(Resources.getSystem().getConfiguration().locale.getCountry()))
+            if(!mLanguage.getLanguage().equals(Resources.getSystem().getConfiguration().locale.getLanguage()) || !mLanguage.getCountry().equals(Resources.getSystem().getConfiguration().locale.getCountry()))
             {
-                Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
+                if(mSystemLocale==null){
+                    initLocale();
+                }
                 String mSystemLangugage = mSystemLocale.toString();
-                if(mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ur_UR") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")){
-                    mLanguage = new Locale(mSystemLocale.getLanguage(), mSystemLocale.getCountry());
+                if(mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ur_UR") || mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")){
+                    if(mSystemLangugage.equals("ur_PK")){
+                        mLanguage = new Locale("ur", "Ur");
+                    } else if(mSystemLangugage.equals("vi_VN")){
+                        mLanguage = new Locale("ch", "Cz");
+                    } else {
+                        mLanguage = new Locale(mSystemLocale.getLanguage(), mSystemLocale.getCountry());
+                    }
                 }else {
                     mLanguage = new Locale("en", "Us");
                 }
@@ -66,7 +103,8 @@ class langManager {
         if(status.sSettingLanguage.equals("default")){
             Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
             String mSystemLangugage = mSystemLocale.toString();
-            if(mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")){
+
+            if(mSystemLangugage.equals("cs_CZ") || mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")){
                 return "Default | " + mSystemLocale.getDisplayName();
             }else {
                 return mSystemLocale.getDisplayName() + " | is unsupported";
@@ -85,6 +123,7 @@ class langManager {
         }
         else if(pEventType.equals(pluginEnums.eLangManager.M_RESUME))
         {
+            boolean mStatus = initLocale();
             onResume((AppCompatActivity) pData.get(0));
         }
         else if(pEventType.equals(pluginEnums.eLangManager.M_SET_LANGUAGE))

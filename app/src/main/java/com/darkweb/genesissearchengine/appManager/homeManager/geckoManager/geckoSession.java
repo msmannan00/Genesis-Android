@@ -60,6 +60,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
@@ -92,7 +93,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private String mCurrentTitle = "loading";
     private String mCurrentURL = "about:blank";
     private Uri mUriPermission = null;
-    private AppCompatActivity mContext;
+    private WeakReference<AppCompatActivity> mContext;
     private geckoDownloadManager mDownloadManager;
     private String mTheme = null;
     private boolean mPreviousErrorPage = false;
@@ -112,7 +113,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
         this.mGeckoView = pGeckoView;
-        this.mContext = mContext;
+        this.mContext = new WeakReference(mContext);
         this.mSessionID = mSessionID;
         this.event = event;
 
@@ -126,6 +127,25 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         setScrollDelegate(this);
         mDownloadManager = new geckoDownloadManager();
         setPromptDelegate(new geckoPromptView(mContext));
+    }
+
+    public void onDestroy(){
+        close();
+        setProgressDelegate(null);
+        setHistoryDelegate(null);
+        setNavigationDelegate(null);
+        setContentDelegate(null);
+        setAutoFillDelegate();
+        setPermissionDelegate(null);
+        setScrollDelegate(null);
+        mDownloadManager = null;
+        setPromptDelegate(null);
+        event = null;
+        mContext = null;
+        mDownloadManager = null;
+        mHistoryList = null;
+        mFindHandler = null;
+        mGeckoView = null;
     }
 
     public void onSetInitializeFromStartup(){
@@ -162,7 +182,10 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         mFindHandler = new Handler();
         mFindHandler.postDelayed(() ->
         {
-            mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
+            if(mContext!=null){
+                mContext.get().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
+
+            }
         }, 1500);
 
     }
@@ -220,7 +243,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             }
 
             final AutofillManager manager =
-                    mContext.getSystemService(AutofillManager.class);
+                    mContext.get().getApplicationContext().getSystemService(AutofillManager.class);
             if (manager == null) {
                 return;
             }
@@ -287,7 +310,9 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                     {
                         if(!mThemeChanged){
                             mTheme = null;
-                            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
+                            if(event!=null) {
+                                event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
+                            }
                         }
                     }, 500);
                 }
@@ -305,12 +330,12 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if(progress==100){
                 if(!mIsProgressBarChanging){
                     mIsProgressBarChanging = true;
-                    mContext.runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
+                    mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
                     event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
                 }
             }else {
                 mIsProgressBarChanging = false;
-                mContext.runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
+                mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
             }
         }
 
@@ -355,7 +380,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             setURL(constants.CONST_GENESIS_DOMAIN_URL);
         }
         else if(newUrl.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
-            if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext)){
+            if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
                 setURL(constants.CONST_GENESIS_HELP_URL);
             }else {
                 setURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
@@ -414,7 +439,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if(mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
                 setURL(constants.CONST_GENESIS_DOMAIN_URL);
             }else if(mCurrentURL.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
-                if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext)){
+                if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
                     setURL(constants.CONST_GENESIS_HELP_URL);
                 }else {
                     setURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
@@ -459,7 +484,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         mPreviousErrorPage = true;
         event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
-        return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext,var2));
+        return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2));
     }
 
     /*Content Delegate*/
@@ -468,7 +493,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     public void onExternalResponse(@NonNull GeckoSession session, @NonNull WebResponse response) {
         try {
             if(response.headers.containsKey("Content-Disposition")){
-                mDownloadManager.downloadFile(response,this,mContext,event);
+                mDownloadManager.downloadFile(response,this,mContext.get(),event);
             }else if(response.headers.containsKey("Content-Type")){
                 event.invokeObserver(Arrays.asList(response,mSessionID), enums.etype.on_handle_external_intent);
                 stop();
@@ -588,11 +613,11 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }
         if(var4.type!=0){
             if(var4.linkUri!=null){
-                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, mContext), M_LONG_PRESS_WITH_LINK);
+                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, mContext.get()), M_LONG_PRESS_WITH_LINK);
             }
             else {
                 try{
-                    event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,title, mTheme, mContext), enums.etype.on_long_press);
+                    event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,title, mTheme, mContext.get()), enums.etype.on_long_press);
                 }catch (Exception ex){
                     ex.printStackTrace();
                     Log.i("","");
@@ -600,7 +625,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             }
         }
         else{
-            event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,title, mTheme, mContext), M_LONG_PRESS_URL);
+            event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,title, mTheme, mContext.get()), M_LONG_PRESS_URL);
         }
     }
 
@@ -625,7 +650,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     {
         if(mDownloadManager.getDownloadURL()!=null && mDownloadManager.getDownloadFile()!=null){
             if(!createAndSaveFileFromBase64Url(mDownloadManager.getDownloadURL().toString())){
-                mContext.startService(downloadFileService.getDownloadService(mContext, mDownloadManager.getDownloadURL()+"__"+mDownloadManager.getDownloadFile(), Environment.DIRECTORY_DOWNLOADS));
+                mContext.get().startService(downloadFileService.getDownloadService(mContext.get().getApplicationContext(), mDownloadManager.getDownloadURL()+"__"+mDownloadManager.getDownloadFile(), Environment.DIRECTORY_DOWNLOADS));
             }
         }
     }
@@ -634,7 +659,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     {
         if(downloadURL!=null && downloadFile!=null){
             if(!createAndSaveFileFromBase64Url(downloadURL.toString())){
-                mContext.startService(downloadFileService.getDownloadService(mContext, downloadURL + "__" + downloadFile, Environment.DIRECTORY_DOWNLOADS));
+                mContext.get().startService(downloadFileService.getDownloadService(mContext.get().getApplicationContext(), downloadURL + "__" + downloadFile, Environment.DIRECTORY_DOWNLOADS));
             }
         }
     }
@@ -645,7 +670,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             return false;
         }
         else if(url.startsWith("blob")){
-            Toast toast = Toast.makeText(mContext.getApplicationContext(),
+            Toast toast = Toast.makeText(mContext.get().getApplicationContext(),
                     "Unable to download urls that contain prefix blob. Not Supported",
                     Toast.LENGTH_SHORT);
 
@@ -681,7 +706,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                 os.close();
 
                 //Tell the media scanner about the new file so that it is immediately available to the user.
-                MediaScannerConnection.scanFile(mContext,
+                MediaScannerConnection.scanFile(mContext.get().getApplicationContext(),
                         new String[]{file.toString()}, null,
                         (path1, uri) ->
                         {
@@ -693,20 +718,20 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                 String mimetype = url.substring(url.indexOf(":") + 1, url.indexOf("/"));
                 Intent intent = new Intent();
                 intent.setAction(android.content.Intent.ACTION_VIEW);
-                Uri uri_temp = FileProvider.getUriForFile(mContext,mContext.getString(R.string.GENERAL_FILE_PROVIDER_AUTHORITY), file);
+                Uri uri_temp = FileProvider.getUriForFile(mContext.get().getApplicationContext(),mContext.get().getString(R.string.GENERAL_FILE_PROVIDER_AUTHORITY), file);
                 intent.setDataAndType(uri_temp, (mimetype + "/*"));
 
-                List<ResolveInfo> resInfoList = mContext.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                List<ResolveInfo> resInfoList = mContext.get().getApplicationContext().getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
                 for (ResolveInfo resolveInfo : resInfoList) {
                     String packageName = resolveInfo.activityInfo.packageName;
                     mUriPermission = uri_temp;
-                    mContext.grantUriPermission(packageName, uri_temp, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    mContext.get().getApplicationContext().grantUriPermission(packageName, uri_temp, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 }
-                PendingIntent pIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+                PendingIntent pIntent = PendingIntent.getActivity(mContext.get().getApplicationContext(), 0, intent, 0);
 
-                String channel_id = createNotificationChannel(mContext);
+                String channel_id = createNotificationChannel(mContext.get().getApplicationContext());
                 assert channel_id != null;
-                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, channel_id)
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext.get().getApplicationContext(), channel_id)
                         .setSmallIcon(R.xml.ic_download)
                         .setContentTitle(filename)
                         .setContentIntent(pIntent);
@@ -714,7 +739,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                 notificationBuilder.setAutoCancel(true);
 
                 int notificationId = 85851;
-                NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationManager notificationManager = (NotificationManager) mContext.get().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(notificationId, notificationBuilder.build());
 
             } catch (IOException e) {

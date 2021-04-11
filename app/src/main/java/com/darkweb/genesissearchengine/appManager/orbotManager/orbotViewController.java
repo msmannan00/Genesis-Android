@@ -40,6 +40,7 @@ class orbotViewController
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
             }
             else {
                 if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){

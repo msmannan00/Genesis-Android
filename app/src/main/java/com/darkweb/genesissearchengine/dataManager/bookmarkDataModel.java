@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.dataManager;
 
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
-import com.darkweb.genesissearchengine.appManager.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.strings;
 import java.util.ArrayList;

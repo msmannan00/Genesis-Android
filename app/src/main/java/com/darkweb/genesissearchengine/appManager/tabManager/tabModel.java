@@ -27,7 +27,9 @@ class tabModel
     }
 
     private void onRemoveTab(int pIndex){
-        mBackupIndex.add(mModelList.get(pIndex));
+        if(mModelList.size()>pIndex){
+            mBackupIndex.add(mModelList.get(pIndex));
+        }
     }
 
     private ArrayList<tabRowModel> onGetBackup(){

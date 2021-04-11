@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.darkweb.genesissearchengine",
+  "variantName": "processAarch64ReleaseResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 600,
+      "versionName": "600.0",
+      "outputFile": "app-aarch64-release.apk"
+    }
+  ]
+}

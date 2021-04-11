@@ -5,6 +5,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.google.android.gms.ads.*;
+
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,38 +19,36 @@ class adManager
 
     /*Private Variables */
 
-    private AppCompatActivity mAppContext;
     private eventObserver.eventListener mEvent;
-    private AdView mBannerAds;
+    private WeakReference<AdView> mBannerAds;
 
     private boolean bannerAdsLoading = false;
     private boolean bannerAdsLoaded = false;
 
     /*Initializations*/
 
-    adManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, AdView pBannerAds) {
-        this.mAppContext = pAppContext;
+    adManager(eventObserver.eventListener pEvent, AdView pBannerAds) {
         this.mEvent = pEvent;
-        mBannerAds = pBannerAds;
+        mBannerAds = new WeakReference(pBannerAds);
     }
 
     private void initializeBannerAds(){
         if(!sPaidStatus){
             AdRequest request = new AdRequest.Builder().build();
-            mBannerAds.loadAd(request);
+            mBannerAds.get().loadAd(request);
             admobListeners();
         }
     }
 
     /*Local Helper Methods*/
 
-    private void loadAds(){
+    private void loadAds(AppCompatActivity pAppContext){
         if(!sPaidStatus)
         {
             if (!bannerAdsLoading)
             {
                 bannerAdsLoading = true;
-                MobileAds.initialize(mAppContext, initializationStatus -> { });
+                MobileAds.initialize(pAppContext.getApplicationContext(), initializationStatus -> { });
 
                 initializeBannerAds();
             }
@@ -63,7 +63,7 @@ class adManager
 
     private void admobListeners(){
         if(!sPaidStatus){
-            mBannerAds.setAdListener(new AdListener() {
+            mBannerAds.get().setAdListener(new AdListener() {
                 @Override
                 public void onAdLoaded() {
                     bannerAdsLoaded = true;
@@ -93,7 +93,7 @@ class adManager
     Object onTrigger(List<Object> pData, pluginEnums.eAdManager pEventType) {
         if(pEventType.equals(pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS))
         {
-            loadAds();
+            loadAds((AppCompatActivity)pData.get(0));
         }
         else if(pEventType.equals(pluginEnums.eAdManager.M_IS_ADVERT_LOADED))
         {

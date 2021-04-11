@@ -65,8 +65,8 @@ public class languageController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -135,7 +135,7 @@ public class languageController extends AppCompatActivity {
             String mSystemLangugage = mSystemLocale.toString();
             status.sSettingLanguage = CONST_LANGUAGE_DEFAULT_LANG;
             status.sSettingLanguageRegion = CONST_LANGUAGE_DEFAULT_LANG;
-            if(!mSystemLangugage.equals("en_US") && !mSystemLangugage.equals("de_DE") && !mSystemLangugage.equals("ca_ES") && !mSystemLangugage.equals("zh_CN") && !mSystemLangugage.equals("ch_CZ") && !mSystemLangugage.equals("nl_NL") && !mSystemLangugage.equals("fr_FR") && !mSystemLangugage.equals("el_GR") && !mSystemLangugage.equals("hu_HU") && !mSystemLangugage.equals("in_ID") && !mSystemLangugage.equals("it_IT") && !mSystemLangugage.equals("ja_JP") && !mSystemLangugage.equals("ko_KR") && !mSystemLangugage.equals("pt_PT") && !mSystemLangugage.equals("ro_RO") && !mSystemLangugage.equals("ru_RU") && !mSystemLangugage.equals("th_TH") && !mSystemLangugage.equals("tr_TR") && !mSystemLangugage.equals("uk_UA") && !mSystemLangugage.equals("vi_VN")){
+            if(!mSystemLangugage.equals("cs_CZ") && !mSystemLangugage.equals("en_US") && !mSystemLangugage.equals("ur_PK") && !mSystemLangugage.equals("de_DE") && !mSystemLangugage.equals("ca_ES") && !mSystemLangugage.equals("zh_CN") && !mSystemLangugage.equals("ch_CZ") && !mSystemLangugage.equals("nl_NL") && !mSystemLangugage.equals("fr_FR") && !mSystemLangugage.equals("el_GR") && !mSystemLangugage.equals("hu_HU") && !mSystemLangugage.equals("in_ID") && !mSystemLangugage.equals("it_IT") && !mSystemLangugage.equals("ja_JP") && !mSystemLangugage.equals("ko_KR") && !mSystemLangugage.equals("pt_PT") && !mSystemLangugage.equals("ro_RO") && !mSystemLangugage.equals("ru_RU") && !mSystemLangugage.equals("th_TH") && !mSystemLangugage.equals("tr_TR") && !mSystemLangugage.equals("uk_UA") && !mSystemLangugage.equals("vi_VN")){
                 mDefaultLanguageNotSupported = true;
             }
         }else {
@@ -167,11 +167,20 @@ public class languageController extends AppCompatActivity {
 
         status.mThemeApplying = true;
         activityContextManager.getInstance().getHomeController().recreate();
+        if(activityContextManager.getInstance().getSettingGeneralController()!=null){
+            activityContextManager.getInstance().getSettingGeneralController().recreate();
+        }
 
         return true;
     }
 
     /*View Callbacks*/
+
+    @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
+    }
 
     private class languageViewCallback implements eventObserver.eventListener{
 

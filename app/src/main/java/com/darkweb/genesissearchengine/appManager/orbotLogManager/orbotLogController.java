@@ -52,9 +52,9 @@ public class orbotLogController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         overridePendingTransition(R.anim.push_anim_out_reverse, R.anim.push_anim_in_reverse);
 
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_log_view);
 
@@ -66,8 +66,8 @@ public class orbotLogController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -226,6 +226,8 @@ public class orbotLogController extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        activityContextManager.getInstance().onRemoveStack(this);
+        activityContextManager.getInstance().setOrbotLogController(null);
         mActivityClosed = true;
     }
 

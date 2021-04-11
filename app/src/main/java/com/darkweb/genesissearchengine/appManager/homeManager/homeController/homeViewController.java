@@ -110,6 +110,7 @@ class homeViewController
     private ImageView mSearchLock;
     private View mPopupLoadNewTab;
     private ImageView mTopBarHider;
+    private ImageView mNewTabBlocker;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
@@ -119,7 +120,7 @@ class homeViewController
     private Handler mTabDialogHandler = null;
     private Runnable mTabDialogRunnable = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -155,6 +156,7 @@ class homeViewController
         this.mSearchLock = pSearchLock;
         this.mPopupLoadNewTab = pPopupLoadNewTab;
         this.mTopBarHider = pTopBarHider;
+        this.mNewTabBlocker = pNewTabBlocker;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -237,25 +239,25 @@ class homeViewController
 
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
 
+            onUpdateStatusBarTheme(null, false);
             mTabFragment.animate().cancel();
             mTabFragment.setAlpha(0);
             mTabFragment.setVisibility(View.VISIBLE);
-            mTabFragment.animate().alpha(1).setDuration(250);
-
-            onUpdateStatusBarTheme(null, false);
+            mTabFragment.animate().alpha(1).setStartDelay(100).setDuration(150).withEndAction(() -> mNewTab.setPressed(false));
         }
     }
 
     public void onHideTabContainer(){
         if(mTabFragment.getAlpha()>0 || mTabFragment.getVisibility()!=View.GONE){
 
+            mNewTab.setPressed(false);
             new Handler().postDelayed(() ->
             {
                 mTopBarHider.animate().alpha(0).setDuration(250).setStartDelay(0).withEndAction(() -> mTopBarHider.setVisibility(View.GONE));
                 mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
             }, 250);
 
-            mTabFragment.animate().setDuration(150).setStartDelay(150).alpha(0f).withEndAction(() -> {
+            mTabFragment.animate().setDuration(150).alpha(0f).withEndAction(() -> {
                 mTabFragment.setVisibility(View.GONE);
                 mEvent.invokeObserver(null, enums.etype.M_UPDATE_PIXEL_BACKGROUND);
             });
@@ -320,6 +322,8 @@ class homeViewController
         if(!pStatus){
             this.mVoiceInput.animate().setDuration(0).alpha(0).withEndAction(() -> {
 
+                mVoiceInput.setClickable(true);
+                mVoiceInput.setFocusable(true);
                 onUpdateSearchIcon(1);
                 mVoiceInput.setVisibility(View.GONE);
                 mNewTab.setVisibility(View.VISIBLE);
@@ -360,6 +364,8 @@ class homeViewController
                     ex.printStackTrace();
                 }
                 mVoiceInput.setVisibility(View.VISIBLE);
+                mVoiceInput.setClickable(true);
+                mVoiceInput.setFocusable(true);
             }, 0);
 
             mNewTab.setVisibility(View.GONE);
@@ -414,6 +420,9 @@ class homeViewController
             });
         }
 
+        if(count==0){
+            count=1;
+        }
         mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
 
     }
@@ -433,43 +442,48 @@ class homeViewController
     }
 
     public void initStatusBarColor(boolean mInstant) {
-        animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-        int mDelay = 800;
-        if(status.mThemeApplying || mInstant){
-            mDelay = 0;
+            int mDelay = 800;
+            if(status.mThemeApplying || mInstant){
+                mDelay = 0;
+            }
+
+            ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f);
+            animator.setDuration(300).setStartDelay(mDelay);
+            animator.addUpdateListener(animation ->
+            {
+                float v = (float) animation.getAnimatedValue();
+                mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
+                mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
+                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            });
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+                }
+            });
+            animator.addListener(new AnimatorListenerAdapter()
+            {
+                @Override
+                public void onAnimationEnd(Animator animation)
+                {
+                    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                        mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }else {
+                        View decorView = mContext.getWindow().getDecorView();
+                        decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }
+                }
+            });
+
+            animator.start();
+        }else {
+            mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
         }
 
-        ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f);
-        animator.setDuration(300).setStartDelay(mDelay);
-        animator.addUpdateListener(animation ->
-        {
-            float v = (float) animation.getAnimatedValue();
-            mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
-            mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
-            mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        });
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-            }
-        });
-        animator.addListener(new AnimatorListenerAdapter()
-        {
-            @Override
-            public void onAnimationEnd(Animator animation)
-            {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }else {
-                    View decorView = mContext.getWindow().getDecorView();
-                    decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-            }
-        });
-
-        animator.start();
     }
 
     void initializeSuggestionView(ArrayList<historyRowModel> suggestions){
@@ -614,6 +628,7 @@ class homeViewController
                     mGatewaySplash.setVisibility(View.GONE);
                     mConnectButton.setVisibility(View.GONE);
                     mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
+                    mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
                 }));
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
@@ -673,7 +688,8 @@ class homeViewController
             helperMethod.hideKeyboard(mContext);
             popupWindow.setHeight(height);
         }
-        if(status.sSettingLanguageRegion.equals("Ur")){
+
+        if(status.sSettingLanguageRegion.equals("Ur") || status.sSettingLanguage.equals("default") && status.mSystemLocale.getLanguage().equals("ur")){
             popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.START,0,0);
         }else {
             popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.END,0,0);
@@ -844,7 +860,10 @@ class homeViewController
 
     public void onUpdateStatusBarTheme(String pTheme, boolean mForced)
     {
-        if(mSplashScreen.getAlpha()<=0 && (status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode) && mTabFragment.getAlpha()<=0 || mForced){
+        if(mSplashScreen.getAlpha()<=0 && (status.sTheme != enums.Theme.THEME_DARK) && mTabFragment.getAlpha()<=0 || mForced){
+            if(status.sDefaultNightMode && status.sTheme == enums.Theme.THEME_DEFAULT){
+                return;
+            }
             int mColor;
             try{
                 mColor = Color.parseColor(pTheme);
@@ -899,7 +918,7 @@ class homeViewController
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     mContext.getWindow().setStatusBarColor(Color.parseColor(pTheme));
                 }else {
-                    mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
                 }
 
                 if(helperMethod.isColorDark(mColor)){
@@ -918,6 +937,7 @@ class homeViewController
                     mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
                 }else {
                     mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+                    mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
                 }
 
                 GradientDrawable gradientDrawable1 = new GradientDrawable();
@@ -948,7 +968,7 @@ class homeViewController
                     onUpdateSearchIcon(1);
                 }
 
-                if(status.sTheme != enums.Theme.THEME_DARK && !status.sDefaultNightMode){
+                if(status.sTheme != enums.Theme.THEME_DARK || (status.sDefaultNightMode && status.sTheme != enums.Theme.THEME_DEFAULT)){
                     mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }else {
                     View decorView = mContext.getWindow().getDecorView();
@@ -1097,7 +1117,61 @@ class homeViewController
     }
 
     public void onNewTabAnimation(List<Object> data, Object e_type){
-        mEvent.invokeObserver(data, e_type);
+        mGeckoView.setPivotX(0);
+        mGeckoView.setPivotY(0);
+        mGeckoView.setClickable(false);
+        mGeckoView.setFocusable(false);
+        mGeckoView.setEnabled(false);
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
+                PropertyValuesHolder.ofFloat("scaleX", 1, 0.35f),
+                PropertyValuesHolder.ofFloat("scaleY", 1, 0.35f));
+        scaleDown.setDuration(300);
+        mNewTabBlocker.setAlpha(0f);
+        mNewTabBlocker.setVisibility(View.VISIBLE);
+        mNewTabBlocker.animate().setDuration(300).alpha(1);
+        mNewTabBlocker.setTranslationZ(100);
+        scaleDown.start();
+
+        scaleDown.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation, boolean isReverse) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation, boolean isReverse) {
+                mEvent.invokeObserver(data, e_type);
+                ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
+                        PropertyValuesHolder.ofFloat("scaleX", 0.35f, 1f),
+                        PropertyValuesHolder.ofFloat("scaleY", 0.35f, 1f));
+                scaleDown.setDuration(300);
+                scaleDown.setStartDelay(650);
+                mNewTabBlocker.animate().setStartDelay(650).setDuration(300).alpha(0).withEndAction(() -> {
+                    mNewTabBlocker.setAlpha(0f);
+                    mNewTabBlocker.setVisibility(View.GONE);
+                });
+                scaleDown.start();
+                mGeckoView.setClickable(true);
+                mGeckoView.setFocusable(true);
+                mGeckoView.setEnabled(true);
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
     }
 
     void onClearSelections(boolean hideKeyboard){

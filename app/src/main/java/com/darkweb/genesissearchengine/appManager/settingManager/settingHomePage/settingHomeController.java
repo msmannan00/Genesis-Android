@@ -56,16 +56,19 @@ public class settingHomeController extends AppCompatActivity
     {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting);
+        if(!status.mThemeApplying){
+            activityContextManager.getInstance().onStack(this);
+        }
 
+        setContentView(R.layout.setting);
         viewsInitializations();
         listenersInitializations();
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -117,10 +120,13 @@ public class settingHomeController extends AppCompatActivity
     @Override
     public void onResume()
     {
+        if(status.mThemeApplying){
+            // activityContextManager.getInstance().onStack(this);
+        }
+
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;
-        activityContextManager.getInstance().onStack(this);
         super.onResume();
     }
 
@@ -133,8 +139,16 @@ public class settingHomeController extends AppCompatActivity
 
     @Override
     public void onBackPressed(){
-        activityContextManager.getInstance().onRemoveStack(this);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(!status.mThemeApplying){
+            activityContextManager.getInstance().onRemoveStack(this);
+        }
+        activityContextManager.getInstance().setSettingController(null);
+        super.onDestroy();
     }
 
     /*External Redirection*/
@@ -157,7 +171,7 @@ public class settingHomeController extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS));
         }else{
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this),  M_NOT_SUPPORTED);
+            //pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this),  M_NOT_SUPPORTED);
         }
     }
 

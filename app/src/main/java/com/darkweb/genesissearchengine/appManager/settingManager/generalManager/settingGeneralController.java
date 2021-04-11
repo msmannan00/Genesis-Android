@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -50,6 +49,9 @@ public class settingGeneralController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
+        if(!status.mThemeApplying){
+            activityContextManager.getInstance().onStack(this);
+        }
 
         setContentView(R.layout.setting_general_view);
         activityContextManager.getInstance().setSettingGeneralController(this);
@@ -58,8 +60,8 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -73,28 +75,8 @@ public class settingGeneralController extends AppCompatActivity {
         mHomePageText = findViewById(R.id.pHomePageText);
         mOpenURLInNewTab = findViewById(R.id.pOpenURLInNewTab);
 
-        activityContextManager.getInstance().onStack(this);
         mSettingGeneralViewController = new settingGeneralViewController(this, new settingGeneralViewCallback(), mFullScreenMode, mThemeLight, mThemeDark, mThemeDefault, mHomePageText, mOpenURLInNewTab);
         mSettingGeneralModel = new settingGeneralModel(new settingGeneralModelCallback());
-    }
-
-    private void onInitTheme(){
-
-        if(status.sTheme == enums.Theme.THEME_DARK){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            activityContextManager.getInstance().getHomeController().recreate();
-        }else if(status.sTheme == enums.Theme.THEME_LIGHT){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            activityContextManager.getInstance().getHomeController().recreate();
-        }else {
-            if(!status.sDefaultNightMode){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                activityContextManager.getInstance().getHomeController().recreate();
-            }else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                activityContextManager.getInstance().getHomeController().recreate();
-            }
-        }
     }
 
     /*View Callbacks*/
@@ -134,9 +116,9 @@ public class settingGeneralController extends AppCompatActivity {
 
                 if(mIsThemeChangable){
                     status.mThemeApplying = true;
-                    onInitTheme();
                     onBackPressed();
                     overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+                    activityContextManager.getInstance().getHomeController().onReInitTheme();
                     activityContextManager.getInstance().getSettingController().onReInitTheme();
                     helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this,true);
                 }
@@ -161,6 +143,9 @@ public class settingGeneralController extends AppCompatActivity {
     @Override
     public void onResume()
     {
+        if(status.mThemeApplying){
+            // activityContextManager.getInstance().onStack(this);
+        }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
@@ -174,7 +159,6 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }
 
@@ -188,6 +172,15 @@ public class settingGeneralController extends AppCompatActivity {
 
     public void onClose(View view){
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(!status.mThemeApplying){
+            activityContextManager.getInstance().onRemoveStack(this);
+        }
+        activityContextManager.getInstance().setSettingGeneralController(null);
+        super.onDestroy();
     }
 
     public void onManageLanguage(View view) {

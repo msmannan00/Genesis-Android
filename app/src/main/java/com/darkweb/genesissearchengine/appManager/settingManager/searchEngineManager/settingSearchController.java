@@ -46,8 +46,8 @@ public class settingSearchController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -109,6 +109,12 @@ public class settingSearchController extends AppCompatActivity {
     public void onBackPressed() {
         activityContextManager.getInstance().onRemoveStack(this);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
     }
 
     /*UI Redirection*/

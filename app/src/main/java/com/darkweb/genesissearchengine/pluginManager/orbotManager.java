@@ -8,6 +8,8 @@ import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
+
+import java.lang.ref.WeakReference;
 import java.util.List;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
@@ -19,7 +21,7 @@ class orbotManager
 
     /*Private Variables*/
 
-    private Context mAppContext;
+    private WeakReference<Context> mAppContext;
     private boolean mLogsStarted = false;
 
     /*Initialization*/
@@ -31,9 +33,13 @@ class orbotManager
     }
 
     public void initialize(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, int pNotificationStatus){
-        this.mAppContext = pAppContext;
+        this.mAppContext = new WeakReference(pAppContext);
 
         onInitNotificationStatus(pNotificationStatus);
+    }
+
+    public void onRemoveInstances(){
+        this.mAppContext = null;
     }
 
     private void onStartOrbot(){
@@ -41,14 +47,14 @@ class orbotManager
         orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
         orbotLocalConstants.mManualBridgeType = status.sBridgeCustomType;
         Prefs.putBridgesEnabled(status.sBridgeStatus);
-        Intent mServiceIntent = new Intent(mAppContext.getApplicationContext(), OrbotService.class);
+        Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mAppContext.startForegroundService(mServiceIntent);
+            mAppContext.get().getApplicationContext().startForegroundService(mServiceIntent);
         }
         else
         {
-            mAppContext.startService(mServiceIntent);
+            mAppContext.get().getApplicationContext().startService(mServiceIntent);
         }
 
         initializeProxy();

@@ -54,8 +54,8 @@ public class settingAdvanceController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+        super.onConfigurationChanged(newConfig);
 
         theme.getInstance().onConfigurationChanged(this);
     }
@@ -134,6 +134,12 @@ public class settingAdvanceController extends AppCompatActivity {
     }
 
     /*UI Redirection*/
+
+    @Override
+    protected void onDestroy() {
+        activityContextManager.getInstance().onRemoveStack(this);
+        super.onDestroy();
+    }
 
     public void onClose(View view){
         if(mIsChanged){

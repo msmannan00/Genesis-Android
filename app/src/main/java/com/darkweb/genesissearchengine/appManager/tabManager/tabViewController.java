@@ -79,7 +79,7 @@ class tabViewController
     @SuppressLint("ClickableViewAccessibility")
     public void onHoldInteraction(){
         final Handler handler = new Handler();
-        handler.postDelayed(() -> mBlocker.setVisibility(View.GONE), 350);
+        handler.postDelayed(() -> mBlocker.setVisibility(View.GONE), 250);
     }
 
     private void initTabCount(int pCount){
@@ -103,23 +103,6 @@ class tabViewController
     }
 
     private void initPostUI(){
-        mRecycleView.setAlpha(1);
-        mContext.getView().setBackgroundColor(Color.WHITE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getActivity().getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                    mContext.getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-                mContext.getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(mContext.getActivity(), R.color.c_background));
-            }
-        }
     }
 
     public void onOpenTabMenu(View view) {

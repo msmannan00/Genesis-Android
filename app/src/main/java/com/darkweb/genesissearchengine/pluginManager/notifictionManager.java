@@ -13,6 +13,8 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.userEngagementNotification;
 import com.example.myapplication.R;
+
+import java.lang.ref.WeakReference;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.constants.*;
 
@@ -20,17 +22,17 @@ class notifictionManager
 {
     /*Private Variables*/
 
-    private AppCompatActivity mAppContext;
+    private WeakReference<AppCompatActivity> mAppContext;
 
     /*Initializations*/
 
-    notifictionManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent){
+    notifictionManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent){
         this.mAppContext = pAppContext;
         onNotificationClear();
     }
 
     private void onNotificationClear(){
-        NotificationManager notificationManager = (NotificationManager) mAppContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) mAppContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(status.mNotificationID);
     }
 
@@ -39,18 +41,18 @@ class notifictionManager
     }
 
     private void onSchedule(Notification pNotification , int pDelay){
-        Intent notificationIntent = new Intent( mAppContext, userEngagementNotification.class) ;
+        Intent notificationIntent = new Intent( mAppContext.get().getApplicationContext(), userEngagementNotification.class) ;
         notificationIntent.putExtra(CONST_NOTIFICATION_ID_NAME, CONST_NOTIFICATION_ID_VALUE) ;
         notificationIntent.putExtra(CONST_NOTIFICATION_ID_NAME, pNotification) ;
-        PendingIntent pendingIntent = PendingIntent. getBroadcast ( mAppContext, CONST_NOTIFICATION_REQUEST_CODE, notificationIntent , PendingIntent. FLAG_UPDATE_CURRENT ) ;
+        PendingIntent pendingIntent = PendingIntent. getBroadcast ( mAppContext.get().getApplicationContext(), CONST_NOTIFICATION_REQUEST_CODE, notificationIntent , PendingIntent. FLAG_UPDATE_CURRENT ) ;
         long futureInMillis = SystemClock. elapsedRealtime () + pDelay ;
-        AlarmManager alarmManager = (AlarmManager) mAppContext.getSystemService(Context. ALARM_SERVICE ) ;
+        AlarmManager alarmManager = (AlarmManager) mAppContext.get().getSystemService(Context. ALARM_SERVICE ) ;
         assert alarmManager != null;
         alarmManager.set(AlarmManager. ELAPSED_REALTIME_WAKEUP , futureInMillis , pendingIntent) ;
     }
 
     private Notification getNotification () {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mAppContext, CONST_NOTIFICATION_ID_NAME) ;
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mAppContext.get().getApplicationContext(), CONST_NOTIFICATION_ID_NAME) ;
         builder.setContentTitle(CONST_NOTIFICATION_TITLE) ;
         builder.setSmallIcon(R.drawable.notification_logo);
         builder.setAutoCancel(true) ;
