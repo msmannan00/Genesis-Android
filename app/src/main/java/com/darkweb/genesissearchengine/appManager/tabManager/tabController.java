@@ -1,8 +1,9 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,6 +48,7 @@ public class tabController extends Fragment
     private ImageView mRemoveSelection;
     private ImageButton mMenuButton;
     private ImageButton mClearSelection;
+    private TextView mEmptyView;
     private View mPopupUndo;
     private TextView mSelectionCount;
     private ImageView mBlocker;
@@ -70,6 +72,7 @@ public class tabController extends Fragment
     private float getmScreenWidth;
     private boolean mClosed = false;
     private boolean mClosedByNewTab = false;
+    private boolean mFirstLaunch = true;
     boolean mScrolled = true;
 
     /*Initializations*/
@@ -95,6 +98,7 @@ public class tabController extends Fragment
         mScrollHandler = null;
         mScrollRunnable = null;
         mScrolled = false;
+        mFirstLaunch = false;
         super.onDestroy();
     }
 
@@ -109,13 +113,14 @@ public class tabController extends Fragment
 
 
     public void onInit(){
-        initializeActivity();
         initializeViews();
+        initializeActivity();
         initializeLocalEventHandlers();
         initializeList();
         initSwipe();
 
         mClosed = false;
+        mFirstLaunch = false;
         mTabGridLayoutEnabled = status.sTabGridLayoutEnabled;
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER, null);
         mNestedScrollView.scrollTo(0,0);
@@ -125,13 +130,30 @@ public class tabController extends Fragment
     }
 
     public void onInitInvoked(){
+        if(mFirstLaunch){
+            mRecycleView.setAlpha(0);
+            mFirstLaunch = false;
+
+            ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mRecycleView, PropertyValuesHolder.ofFloat("alpha", 0, 1f));
+            alpha.setDuration(300);
+            alpha.setStartDelay(600);
+            alpha.start();
+            mEmptyView.setAlpha(0);
+            new Handler().postDelayed(() ->
+            {
+                mEmptyView.setAlpha(1);
+            }, 1000);
+        }else {
+            mRecycleView.setAlpha(1);
+            mEmptyView.setAlpha(1);
+        }
+
         initializeList();
 
         mClosed = false;
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER, null);
         mNestedScrollView.scrollTo(0,0);
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
-        mRecycleView.setAlpha(1);
         mTabAdapter.notifyDataSetChanged();
     }
 
@@ -156,6 +178,7 @@ public class tabController extends Fragment
     public void initializeViews(){
         mRecycleView = mRootView.findViewById(R.id.pRecycleView);
         mTabs = mRootView.findViewById(R.id.pTabs);
+        mEmptyView = mRootView.findViewById(R.id.pEmptyView);
         mRemoveSelection = mRootView.findViewById(R.id.pRemoveSelection);
         mMenuButton = mRootView.findViewById(R.id.pMenuButton);
         mClearSelection = mRootView.findViewById(R.id.pClearSelection);
@@ -164,7 +187,7 @@ public class tabController extends Fragment
         mBlocker = mRootView.findViewById(R.id.pBlocker);
         mNestedScrollView = mRootView.findViewById(R.id.pNestedScroll);
 
-        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker, mRecycleView, mNestedScrollView);
+        mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker, mRecycleView, mNestedScrollView, mEmptyView);
     }
 
     @SuppressLint("ClickableViewAccessibility")

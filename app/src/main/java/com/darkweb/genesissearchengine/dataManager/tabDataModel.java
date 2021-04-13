@@ -66,6 +66,14 @@ class tabDataModel
             params[2] = mTabModel.getSession().getTheme();
             String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
+            if(mTabModel.getSession().getTitle().equals("$TITLE") || mTabModel.getSession().getTitle().startsWith("http://loading") || mTabModel.getSession().getTitle().startsWith("loading")){
+                return enums.AddTabCallback.TAB_ADDED;
+            }
+
+            if(mTabModel.getSession().getCurrentURL().equals("$TITLE") || mTabModel.getSession().getCurrentURL().startsWith("http://loading") || mTabModel.getSession().getCurrentURL().startsWith("loading")){
+                return enums.AddTabCallback.TAB_ADDED;
+            }
+
             databaseController.getInstance().execSQL("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params);
         }
         return enums.AddTabCallback.TAB_ADDED;

@@ -29,6 +29,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.mozilla.geckoview.ContentBlocking;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -384,12 +385,15 @@ class messageManager
         ((TextView) mDialog.findViewById(R.id.pDescription)).setText(mData.get(0).toString());
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
+            ArrayList<Object> tempData = new ArrayList<>();
+            tempData.addAll(mData);
             mDialog.dismiss();
             final Handler handler = new Handler();
             Runnable runnable = () -> {
-                mEvent.invokeObserver(mData, M_DOWNLOAD_SINGLE);
+                mEvent.invokeObserver(tempData, M_DOWNLOAD_SINGLE);
             };
             handler.postDelayed(runnable, 1000);
+            onClearReference();
         });
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }

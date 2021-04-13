@@ -269,14 +269,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.splashScreenDisableInstant();
             onLoadTabOnResume();
             mSearchLock.setColorFilter(ContextCompat.getColor(this, R.color.c_lock_tint));
-        }else {
-            new Handler().postDelayed(() ->
-            {
-                mTabFragment.setAlpha(1f);
-                mTabFragment.setVisibility(View.VISIBLE);
-                activityContextManager.getInstance().getTabController().onInit();
-                mTabFragment.setVisibility(View.GONE);
-            }, 500);
         }
         initSuggestionView(new ArrayList<>(), strings.GENERIC_EMPTY_STR);
     }
@@ -551,7 +543,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
 
         mAppBar.animate().cancel();
-        mHomeViewController.onClearSelections(true);
         Objects.requireNonNull(mGeckoView.getSession()).stop();
         mGeckoClient.loadURL(url.replace("genesis.onion","boogle.store"),mGeckoView, homeController.this);
     }
@@ -957,6 +948,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             pURL = mVal;
         }
 
+        mHomeViewController.onClearSelections(true);
         onLoadURL(pURL);
         mHomeViewController.onUpdateSearchBar(pURL,false,true, false);
     }
@@ -1015,7 +1007,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initializeGeckoView(true, true);
         if(status.sOpenURLInNewTab){
             if(mGeckoView.getSession()!=null && !mGeckoView.getSession().isOpen()){
-                mGeckoView.getSession().open(mGeckoClient.getmRuntime());
+               mGeckoView.getSession().open(mGeckoClient.getmRuntime());
             }
 
             mHomeViewController. onUpdateSearchBar(helperMethod.getDomainName(status.sSettingSearchStatus),false,true, false);
@@ -1562,9 +1554,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if (menuId == R.id.pMenuOpenRecentTab)
             {
-                mHomeViewController.onShowTabContainer();
-                Log.i("I AM FUCKED,","I AM FUCKED : 1");
                 activityContextManager.getInstance().getTabController().onInit();
+                mHomeViewController.onShowTabContainer();
                 // overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
             }
             else if (menuId == R.id.pMenuOpenNewTab)
@@ -1688,6 +1679,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         {
             if(e_type.equals(GECKO_SCROLL_CHANGED)){
                 mHomeViewController.onMoveTopBar((int)data.get(0));
+                onInvokePixelGenerator();
             }
             return null;
         }

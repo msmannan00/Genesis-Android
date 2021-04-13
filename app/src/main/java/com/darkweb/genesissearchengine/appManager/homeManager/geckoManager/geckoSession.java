@@ -884,7 +884,6 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
                 try {
                     FinderResult mResult = mFinder.poll(1000);
-                    Log.i("FUCK","FUCK : " + mResult.found + "----" + mResult.current + "-----" + mResult.total);
                     event.invokeObserver(Arrays.asList(mResult.total, mResult.current), enums.etype.FINDER_RESULT_CALLBACK);
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();

@@ -7,6 +7,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +17,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
@@ -194,8 +198,23 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         File mFile = new File(mPath);
 
 
-        Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", mFile);
-        dm.addCompletedDownload(mFileName, mURL, false, helperMethod.getMimeType(uri.toString()), mFile.getAbsolutePath(), mFile.length(), false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", mFile);
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.Downloads.TITLE, mFileName);
+            contentValues.put(MediaStore.Downloads.DISPLAY_NAME, mFileName);
+            contentValues.put(MediaStore.Downloads.SIZE, mDownloadByte);
+            contentValues.put(MediaStore.Downloads.MIME_TYPE, helperMethod.getMimeType(uri.toString()));
+
+            contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + "Temp");
+
+            ContentResolver database = context.getContentResolver();
+            database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
+        } else {
+            Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", mFile);
+            dm.addCompletedDownload(mFileName, mURL, false, helperMethod.getMimeType(uri.toString()), mFile.getAbsolutePath(), mFile.length(), false);
+        }
 
     }
 

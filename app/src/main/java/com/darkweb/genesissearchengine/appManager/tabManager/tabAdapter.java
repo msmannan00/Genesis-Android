@@ -350,17 +350,25 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
                 mItemSelectionMenu.setVisibility(View.GONE);
-                if(model.getSession().getTitle().contains("TITLE") || model.getSession().getTitle().contains("title") || model.getSession().getTitle().toLowerCase().equals("loading")){
-                    mHeader.setText(helperMethod.getDomainName(mURL));
-                }else {
-                    mHeader.setText(model.getSession().getTitle());
-                }
 
                 if(status.sTabGridLayoutEnabled){
                     mDescription.setText((model.getSession().getTitle()));
                 }else {
+                    mHeader.setText(model.getSession().getTitle());
                     mDescription.setText(mURL);
                 }
+
+                String mHeadText = mHeader.getText().toString();
+                String mDescText = mDescription.getText().toString();
+
+                if(mHeadText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")){
+                    mHeader.setText("about:blank");
+                }
+
+                if(mDescText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")){
+                    mDescription.setText("about:blank");
+                }
+
                 mDate.setText(model.getDate());
 
                 if(mURL.equals("about:blank")){
@@ -474,6 +482,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     }else {
                         if(status.sTabGridLayoutEnabled){
                             scaleView(itemView, mModelList.get(this.getLayoutPosition()));
+                        }else {
+                            onTriggerURL(mModelList.get(this.getLayoutPosition()));
                         }
                     }
                 }else {

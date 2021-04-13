@@ -790,9 +790,6 @@ class homeViewController
         }
     }
 
-    public void performDummyClick(){
-    }
-
     void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded){
         if(status && pIsAdvertLoaded){
             if(mBannerAds.getAlpha()==0){
@@ -1064,6 +1061,10 @@ class homeViewController
             mSearchbar.setSelection(mSearchbar.getText().length());
             mSearchbar.selectAll();
         }
+
+        if(mSearchbar.getText().toString().equals("loading")){
+            mSearchbar.setText("about:blank");
+        }
     }
 
     private String removeEndingSlash(String url){
@@ -1071,8 +1072,10 @@ class homeViewController
     }
 
     void onNewTab(){
-        mSearchbar.requestFocus();
-        mSearchbar.selectAll();
+        if(!mSearchbar.isFocused()){
+            mSearchbar.requestFocus();
+            mSearchbar.selectAll();
+        }
     }
 
     void onUpdateLogs(String log){
@@ -1119,18 +1122,23 @@ class homeViewController
     public void onNewTabAnimation(List<Object> data, Object e_type){
         mGeckoView.setPivotX(0);
         mGeckoView.setPivotY(0);
-        mGeckoView.setClickable(false);
-        mGeckoView.setFocusable(false);
-        mGeckoView.setEnabled(false);
+        //mGeckoView.setClickable(false);
+        //mGeckoView.setFocusable(false);
+        //mGeckoView.setEnabled(false);
+
         ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
-                PropertyValuesHolder.ofFloat("scaleX", 1, 0.35f),
-                PropertyValuesHolder.ofFloat("scaleY", 1, 0.35f));
-        scaleDown.setDuration(300);
-        mNewTabBlocker.setAlpha(0f);
+                PropertyValuesHolder.ofFloat("scaleX", 1, 0.8f),
+                PropertyValuesHolder.ofFloat("scaleY", 1, 0.8f));
+
         mNewTabBlocker.setVisibility(View.VISIBLE);
-        mNewTabBlocker.animate().setDuration(300).alpha(1);
-        mNewTabBlocker.setTranslationZ(100);
+        ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mNewTabBlocker,
+                PropertyValuesHolder.ofFloat("alpha", 0, 1f));
+
+        scaleDown.setDuration(150);
+        alpha.setDuration(150);
+
         scaleDown.start();
+        alpha.start();
 
         scaleDown.addListener(new Animator.AnimatorListener() {
             @Override
@@ -1141,18 +1149,18 @@ class homeViewController
             public void onAnimationEnd(Animator animation, boolean isReverse) {
                 mEvent.invokeObserver(data, e_type);
                 ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
-                        PropertyValuesHolder.ofFloat("scaleX", 0.35f, 1f),
-                        PropertyValuesHolder.ofFloat("scaleY", 0.35f, 1f));
-                scaleDown.setDuration(300);
-                scaleDown.setStartDelay(650);
-                mNewTabBlocker.animate().setStartDelay(650).setDuration(300).alpha(0).withEndAction(() -> {
-                    mNewTabBlocker.setAlpha(0f);
+                        PropertyValuesHolder.ofFloat("scaleX", 0.8f, 1f),
+                        PropertyValuesHolder.ofFloat("scaleY", 0.8f, 1f));
+
+                scaleDown.setDuration(150);
+                scaleDown.setStartDelay(0);
+                mNewTabBlocker.animate().setStartDelay(350).setDuration(150).alpha(0f).withEndAction(() -> {
                     mNewTabBlocker.setVisibility(View.GONE);
                 });
                 scaleDown.start();
-                mGeckoView.setClickable(true);
-                mGeckoView.setFocusable(true);
-                mGeckoView.setEnabled(true);
+                //mGeckoView.setClickable(true);
+                //mGeckoView.setFocusable(true);
+                //mGeckoView.setEnabled(true);
             }
 
             @Override

@@ -51,6 +51,7 @@ class tabViewController
     private ImageView mBlocker;
     private RecyclerView mRecycleView;
     private NestedScrollView mNestedScrollView;
+    private TextView mEmptyView;
 
     /*Private Local Variables*/
     private Handler mDelayHandler = new Handler();
@@ -58,7 +59,7 @@ class tabViewController
 
     /*Initializations*/
 
-    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView)
+    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView, TextView pEmptyView)
     {
         this.mContext = mContext;
         this.mTabs = pTabs;
@@ -70,6 +71,7 @@ class tabViewController
         this.mBlocker = pBlocker;
         this.mRecycleView = pRecycleView;
         this.mNestedScrollView = pNestedScrollView;
+        this.mEmptyView = pEmptyView;
 
         initUI();
         initPostUI();

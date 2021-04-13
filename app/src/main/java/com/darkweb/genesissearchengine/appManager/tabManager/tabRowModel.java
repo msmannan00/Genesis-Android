@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
 public class tabRowModel
@@ -44,6 +45,13 @@ public class tabRowModel
         mSession.setTitle(pTitle);
         mSession.setURL(pURL);
         mSession.setTheme(pTheme);
+
+        if(!status.sSettingIsAppStarted){
+            if(pTitle.equals("$TITLE") || pTitle.startsWith("http://loading") || pTitle.startsWith("loading") || pURL.equals("$TITLE") || pURL.startsWith("http://loading") || pURL.startsWith("loading")){
+                mSession.setTitle("about:blank");
+                mSession.setURL("about:blank");
+            }
+        }
     }
 
     public String getmId() {
