@@ -1,5 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.annotation.SuppressLint;
@@ -120,7 +122,7 @@ public class tabController extends Fragment
         initSwipe();
 
         mClosed = false;
-        mFirstLaunch = false;
+        mClosedByNewTab = false;
         mTabGridLayoutEnabled = status.sTabGridLayoutEnabled;
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER, null);
         mNestedScrollView.scrollTo(0,0);
@@ -136,35 +138,38 @@ public class tabController extends Fragment
 
             ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mRecycleView, PropertyValuesHolder.ofFloat("alpha", 0, 1f));
             alpha.setDuration(300);
-            alpha.setStartDelay(600);
+            alpha.setStartDelay(500);
             alpha.start();
             mEmptyView.setAlpha(0);
-            new Handler().postDelayed(() ->
-            {
-                mEmptyView.setAlpha(1);
-            }, 1000);
+
+
+            initializeList();
+            mClosed = false;
+            mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER, null);
+            mNestedScrollView.scrollTo(0,0);
+            mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
+            mTabAdapter.notifyDataSetChanged();
+            mEmptyView.animate().setStartDelay(1200).setDuration(0).alpha(1);
         }else {
+            initializeList();
             mRecycleView.setAlpha(1);
             mEmptyView.setAlpha(1);
+            mClosed = false;
+            mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER, null);
+            mNestedScrollView.scrollTo(0,0);
+            mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
+            mTabAdapter.notifyDataSetChanged();
         }
-
-        initializeList();
-
-        mClosed = false;
-        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER, null);
-        mNestedScrollView.scrollTo(0,0);
-        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
-        mTabAdapter.notifyDataSetChanged();
     }
 
     public void onInitFirstElement(){
-        if(mTabAdapter!=null){
-            mHomeController.runOnUiThread(() -> {
+        mHomeController.runOnUiThread(() -> {
+            if(mTabAdapter!=null){
                 if(mBlocker.getVisibility() != View.VISIBLE){
                     mTabAdapter.notifyItemChanged(0);
                 }
-            });
-        }
+            }
+        });
     }
 
     public void initializeActivity(){
@@ -398,7 +403,7 @@ public class tabController extends Fragment
 
             mClosedByNewTab = false;
             onPostExit();
-            onBackPressed();
+            //onBackPressed();
             onClose();
         }
         else {
@@ -408,27 +413,26 @@ public class tabController extends Fragment
 
     public void onRestoreTab(View view){
 
-        ArrayList<tabRowModel> mBackup = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_LOAD_BACKUP,null);
-
         final Handler handler = new Handler();
         handler.postDelayed(() ->
         {
+            ArrayList<tabRowModel> mBackup = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_LOAD_BACKUP,null);
             mPopupUndo.findViewById(R.id.pBlockerUndo).setVisibility(View.VISIBLE);
+            mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE,null);
 
             if(mRecycleView.getAlpha()==0){
-                mTabAdapter.notifyDataSetChanged();
-                initializeList();
                 mRecycleView.animate().cancel();
                 mRecycleView.setVisibility(View.VISIBLE);
+                mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REINIT_DATA, Collections.singletonList(mBackup));
+                mTabAdapter.notifyDataSetChanged();
                 mRecycleView.animate().setDuration(200).alpha(1).withEndAction(() -> mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG, null));
             }else {
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG, null);
                 mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REINIT_DATA, Collections.singletonList(mBackup));
             }
+            activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
 
-            mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE,null);
         }, 100);
-        activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
     }
 
     public void onShowUndoDialog(){
@@ -522,19 +526,18 @@ public class tabController extends Fragment
     public void onMenuTrigger(View pView){
         if(pView.getId() == R.id.pNewTab){
             onNewTabInvoked();
-            mClosedByNewTab = true;
             mHomeController.onBackPressed();
+            mClosedByNewTab = true;
         }
         if(pView.getId() == R.id.pNewTabMenu){
             onNewTabInvoked();
-            mClosedByNewTab = true;
             mHomeController.onBackPressed();
+            mClosedByNewTab = true;
         }
         else if(pView.getId() == R.id.pCloseTab){
-            mRecycleView.animate().setDuration(200).alpha(0).withEndAction(() -> {
-                ArrayList<tabRowModel> mBackup = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_GET_BACKUP,null);
+            onExitAndClearBackup();
+            mRecycleView.animate().setDuration(250).alpha(0).withEndAction(() -> {
                 mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REMOVE_ALL, null);
-                onClearTabBackup();
             });
         }
         else if(pView.getId() == R.id.pOpenSetting){
@@ -568,7 +571,7 @@ public class tabController extends Fragment
 
 
     public void onBackPressed() {
-        if(mTabAdapter!=null && !mClosedByNewTab){
+        if(mTabAdapter!=null){
             boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
             onClearTabBackup();
             onClearSelection(null);

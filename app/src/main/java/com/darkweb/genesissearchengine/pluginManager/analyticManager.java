@@ -3,7 +3,6 @@ package com.darkweb.genesissearchengine.pluginManager;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.flurry.android.FlurryAgent;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -39,7 +38,6 @@ class analyticManager
     void onTrigger(List<Object> pData, pluginEnums.eAnalyticManager pEventType) {
         if(pEventType.equals(pluginEnums.eAnalyticManager.M_LOG_EVENT))
         {
-            //logEvent((String) pData.get(0));
         }
     }
 }

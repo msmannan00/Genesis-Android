@@ -481,7 +481,7 @@
                     android:layout_marginStart="0dp"
                     android:layout_weight="1"
                     android:background="@color/clear_alpha"
-                    android:buttonTint="@color/c_navigation_tint"
+                    android:buttonTint="@color/c_checkbox_tint"
                     android:clickable="false"
                     android:focusable="false"
                     android:gravity="start|center_vertical"

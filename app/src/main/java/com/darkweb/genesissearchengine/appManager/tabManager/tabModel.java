@@ -48,10 +48,10 @@ class tabModel
     }
 
     private ArrayList<tabRowModel> onLoadBackup(){
-        for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
-            mModelList.add(0,mBackupIndex.get(mCounter));
-        }
-        return mBackupIndex;
+        mModelList.addAll(0, mBackupIndex);
+        ArrayList<tabRowModel> mModelListTemp = new ArrayList<>();
+        mModelListTemp.addAll(mBackupIndex);
+        return mModelListTemp;
     }
 
 

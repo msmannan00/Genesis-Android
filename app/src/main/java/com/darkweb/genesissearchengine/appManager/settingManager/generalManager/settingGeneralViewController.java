@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralEnums.eGeneralViewCallback.M_RESET_THEME_INVOKED_BACK;
-import static com.flurry.sdk.jo.v;
 
 class settingGeneralViewController
 {

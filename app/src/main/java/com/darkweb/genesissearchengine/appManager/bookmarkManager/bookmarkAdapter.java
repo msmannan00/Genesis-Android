@@ -111,31 +111,25 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                     mEvent.invokeObserver(Collections.singletonList(m_counter_inner),enums.etype.is_empty);
 
                     boolean mDateVerify = false;
-                    if(mCurrentList.size()>0 && mCurrentList.get(m_counter_inner-1).getDescription()==null && (mCurrentList.size()>m_counter_inner+1 && mCurrentList.get(m_counter_inner+1).getDescription()==null || mCurrentList.size()==m_counter_inner+1)){
+                    if(mCurrentList.size()>0 && mCurrentList.size()<m_counter_inner+1 && mCurrentList.get(m_counter_inner-1).getDescription()==null && (mCurrentList.size()>m_counter_inner+1 && mCurrentList.get(m_counter_inner+1).getDescription()==null || mCurrentList.size()==m_counter_inner+1)){
                         mDateVerify = true;
                     }
 
-                    if(m_counter_inner==0){
-                        notifyDataSetChanged();
+                    if(mDateVerify){
+                        notifyItemRemoved(m_counter_inner-1);
+                        mCurrentList.remove(m_counter_inner-1);
+                        notifyItemRangeChanged(m_counter_inner-1, mCurrentList.size());
                     }else {
-
-                        if(mDateVerify){
-                            notifyItemRemoved(m_counter_inner-1);
-                            mCurrentList.remove(m_counter_inner-1);
-                            //notifyItemRemoved(m_counter_inner-1);
-                            //mCurrentList.remove(m_counter_inner-1);
-                            notifyItemRangeChanged(m_counter_inner-1, mCurrentList.size());
-                        }else {
-                            notifyItemRemoved(m_counter_inner);
-                            mCurrentList.remove(m_counter_inner);
-                            notifyItemRangeChanged(m_counter_inner, mCurrentList.size());
-                        }
+                        notifyItemRemoved(m_counter_inner);
+                        mCurrentList.remove(m_counter_inner);
+                        notifyItemRangeChanged(m_counter_inner, mCurrentList.size());
                     }
                     break;
                 }
             }
         }
         clearLongSelectedURL();
+        initializeModelWithDate(false);
     }
 
     private void clearLongSelectedURL(){
@@ -322,7 +316,6 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mPopupWindow.dismiss();
             }
             else if(v.getId() == R.id.pMenuDelete){
-                initializeModelWithDate(false);
                 onClose(pPosition);
                 invokeFilter(true);
                 mPopupWindow.dismiss();
@@ -339,7 +332,6 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
     private void onClose(int pIndex){
         mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.url_clear_at);
-        invokeFilter(false);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
         boolean mDateVerify = false;
         if(mPassedList.size()>0){
@@ -348,22 +340,20 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             }
         }else {
             mCurrentList.clear();
-            //notifyDataSetChanged();
             return;
         }
         int size = mCurrentList.size();
 
         if(mDateVerify){
-            notifyItemRemoved(pIndex);
             mCurrentList.remove(pIndex);
+            notifyItemRemoved(pIndex);
             notifyItemRangeChanged(pIndex, mCurrentList.size());
         }else {
             mCurrentList.remove(pIndex);
-
             notifyItemRemoved(pIndex);
-            notifyItemRangeChanged(pIndex, mCurrentList.size());
             notifyItemChanged(mCurrentList.size()-1);
         }
+        initializeModelWithDate(false);
     }
 
     /*View Holder Extensions*/
@@ -429,35 +419,36 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 String header = model.getHeader();
                 mDescription.setText(("https://"+model.getDescription()));
 
-                new Thread(){
-                    public void run(){
-                        try {
-                            mHindTypeIconTemp.setImageDrawable(null);
-                            mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                            while (true){
-                                int mCounter=0;
-                                if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                    sleep(50);
-                                    mCounter+=1;
-                                }else {
-                                    break;
+                if(model.getDescription().contains("boogle.store") || model.getDescription().contains("genesis.onion")){
+                    mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                }else{
+                    new Thread(){
+                        public void run(){
+                            try {
+                                mHindTypeIconTemp.setImageDrawable(null);
+                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                                while (true){
+                                    int mCounter=0;
+                                    if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
+                                        sleep(50);
+                                        mCounter+=1;
+                                    }else {
+                                        break;
+                                    }
+                                    if(mCounter>6){
+                                        break;
+                                    }
                                 }
-                                if(mCounter>6){
-                                    break;
-                                }
+                                mContext.runOnUiThread(() -> {
+                                    Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
+                                    mFaviconLogo.setImageBitmap(mBitmap);
+                                });
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
-                            mContext.runOnUiThread(() -> {
-                                Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
-                                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                                mBitmap.compress(Bitmap.CompressFormat.PNG, 20, out);
-                                Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-                                mFaviconLogo.setImageBitmap(decoded);
-                            });
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
-                    }
-                }.start();
+                    }.start();
+                }
 
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
             }
@@ -484,11 +475,6 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
 
     void invokeFilter(boolean notify){
         if(notify){
-            if(mFilter.length()>0){
-                initializeModelWithDate(true);
-            }else {
-                initializeModelWithDate(false);
-            }
             notifyDataSetChanged();
         }
     }

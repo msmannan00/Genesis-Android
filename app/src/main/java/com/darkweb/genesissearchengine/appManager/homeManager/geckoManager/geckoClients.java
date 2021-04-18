@@ -3,6 +3,7 @@ package com.darkweb.genesissearchengine.appManager.homeManager.geckoManager;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -177,6 +178,18 @@ public class geckoClients
         mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
         onUpdateFont();
         onReload(mNestedGeckoView, pcontext);
+    }
+
+    public void resetSession(){
+        mSessionID = strings.GENERIC_EMPTY_STR;
+    }
+
+    public String getTheme(){
+        if(mSessionID.equals(strings.GENERIC_EMPTY_STR)){
+            return null;
+        }else {
+            return mSession.getTheme();
+        }
     }
 
     public void initSession(geckoSession mSession){
@@ -383,7 +396,9 @@ public class geckoClients
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.headers.get("Content-Type"));
                         activityContextManager.getInstance().getHomeController().startActivity(intent);
-                    }catch (Exception ignored){}
+                    }catch (Exception ex){
+                        Log.i("ex","ex");
+                    }
                 } else
                 {
                     return event.invokeObserver(data, e_type);

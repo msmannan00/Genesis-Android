@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.status;
@@ -30,15 +28,20 @@ public class externalNavigationController extends AppCompatActivity {
 
             return;
         }
-        setContentView(R.layout.home_view);
+
         Intent intent = new Intent(this.getIntent());
         intent.setClassName(this.getApplicationContext(), homeController.class.getName());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Uri data = this.getIntent().getData();
         if(data!=null){
-            activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
+            if(activityContextManager.getInstance().getHomeController()!=null){
+                activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
+            }else {
+                status.sExternalWebsite = data.toString();
+            }
         }
         this.startActivity(intent);
+        this.overridePendingTransition(0, 0);
 
         new Thread(){
             public void run(){

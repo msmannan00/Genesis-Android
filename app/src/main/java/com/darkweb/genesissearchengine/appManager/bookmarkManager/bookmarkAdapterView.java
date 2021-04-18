@@ -77,16 +77,16 @@ public class bookmarkAdapterView
         pItemView.setPressed(false);
         int speed = 150;
         if(pIsForced){
-            speed=0;
+            speed=150;
         }
         if(pVibrate){
             helperMethod.vibrate(mContext);
         }
 
-        pLogoImage.setAlpha(0.5f);
+        pLogoImage.setAlpha(0f);
         pLogoImage.setVisibility(View.VISIBLE);
         pLogoImage.animate().cancel();
-        pLogoImage.animate().setDuration(speed).alpha(1);
+        pLogoImage.animate().setDuration(speed).alpha(0.95f);
     }
 
     public void onClearHighlight( View pItemView, View pMenuItem, ImageView pLogoImage, boolean pIsForced)

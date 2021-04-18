@@ -28,7 +28,6 @@ public class strings
 
     public static final String BRIDGE_CUSTOM_BRIDGE_OBFS4 = "obfs4";
     public static final String BRIDGE_CUSTOM_BRIDGE_MEEK = "meek";
-    public static final String BRIDGE_CUSTOM_BRIDGE_CUSTOM = "custom";
 
     /*Generic*/
 

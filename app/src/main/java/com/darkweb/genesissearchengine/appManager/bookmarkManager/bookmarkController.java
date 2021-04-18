@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.historyManager.historyEnums;
 import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -45,6 +46,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_BOOKMARK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_HISTORY;
 
 
 public class bookmarkController extends AppCompatActivity
@@ -124,6 +127,10 @@ public class bookmarkController extends AppCompatActivity
         mClearButton.requestFocusFromTouch();
 
         mSearchInput.setEventHandler(new edittextManagerCallback());
+
+        mClearButton.setOnClickListener(v -> {
+            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, this),  M_CLEAR_BOOKMARK);
+        });
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) ->{
             if (actionId == EditorInfo.IME_ACTION_NEXT)
@@ -325,7 +332,7 @@ public class bookmarkController extends AppCompatActivity
         ((bookmarkAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).invokeFilter(true );
         mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_CLEAR_LIST, null);
         databaseController.getInstance().execSQL(sql.SQL_CLEAR_BOOKMARK,null);
-        finish();
+        mRecycleView.setAlpha(0);
     }
 
     public class edittextManagerCallback implements eventObserver.eventListener {
@@ -334,8 +341,7 @@ public class bookmarkController extends AppCompatActivity
         public Object invokeObserver(List<Object> data, Object e_type) {
 
             if(e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)){
-                onHideSearch(null);
-                onClearMultipleSelection(null);
+                onBackPressed();
             }
             return null;
         }
@@ -363,6 +369,9 @@ public class bookmarkController extends AppCompatActivity
 
             else if(e_type.equals(enums.etype.url_clear)){
                 mbookmarkModel.onManualClear((int)data.get(0));
+                if(mbookmarkModel.getList().size()==0){
+                    mRecycleView.setAlpha(0);
+                }
             }
             else if(e_type.equals(enums.etype.url_clear_at)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK ,data);

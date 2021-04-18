@@ -31,9 +31,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Objects;
+
+import javax.net.ssl.HttpsURLConnection;
+
 import static java.lang.Thread.sleep;
 
 
@@ -117,11 +121,11 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         int count;
         try {
             URL url = new URL(f_url[0]);
-
             Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, PROXY_PORT));
+            URLConnection conection= null;
 
-
-            URLConnection conection = url.openConnection(proxy);
+            conection = url.openConnection(proxy);
+            //conection = (HttpsURLConnection)ProxySelector.openConnectionWithProxy(new URI(f_url[0]));
 
             conection.connect();
             int lenghtOfFile = conection.getContentLength();

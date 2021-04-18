@@ -204,7 +204,15 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                                     mHintWebIcon.setImageTintList(null);
                                     mHintWebIcon.setClipToOutline(true);
                                     mWebIcon.put(mURLLink,mHindTypeIconTemp.getDrawable());
-                                    mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                                    if(mHindTypeIconTemp.getDrawable() != null){
+                                        mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                                    }else {
+                                        Resources res = itemView.getContext().getResources();
+                                        try {
+                                            mHintWebIcon.setImageDrawable(Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser)));
+                                        } catch (Exception ignored) {
+                                        }
+                                    }
 
                                 });
 

@@ -1,20 +1,13 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
-
-import static com.darkweb.genesissearchengine.constants.status.mSystemLocale;
 
 class langManager {
 
@@ -22,12 +15,14 @@ class langManager {
 
     private eventObserver.eventListener mEvent;
     private Locale mLanguage;
+    private Locale mSystemLocale;
 
     /*Initializations*/
 
-    langManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, Locale pLanguage) {
+    langManager(AppCompatActivity pAppContext, eventObserver.eventListener pEvent, Locale pLanguage, Locale pSystemLocale) {
         this.mEvent = pEvent;
         this.mLanguage = pLanguage;
+        this.mSystemLocale = pSystemLocale;
 
         onInitLanguage(pAppContext);
     }
@@ -38,18 +33,11 @@ class langManager {
                 Locale mSystemLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
                 if(mSystemLocale!=status.mSystemLocale || !mSystemLocale.getLanguage().equals(mLanguage.getLanguage()) ){
                     status.mSystemLocale = mSystemLocale;
-                    /*if(activityContextManager.getInstance().getHomeController()!=null && status.sSettingLanguage.equals("default")){
-                        return true;
-                    }*/
                 }
             } else {
                 Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
                 if(mSystemLocale!=status.mSystemLocale  || !mSystemLocale.getLanguage().equals(mLanguage.getLanguage())){
                     status.mSystemLocale = mSystemLocale;
-                    activityContextManager.getInstance().getCurrentActivity().recreate();
-                    /*if(activityContextManager.getInstance().getHomeController()!=null && status.sSettingLanguage.equals("default")){
-                        return true;
-                    }*/
                 }
             }
        }
@@ -123,7 +111,7 @@ class langManager {
         }
         else if(pEventType.equals(pluginEnums.eLangManager.M_RESUME))
         {
-            boolean mStatus = initLocale();
+            initLocale();
             onResume((AppCompatActivity) pData.get(0));
         }
         else if(pEventType.equals(pluginEnums.eLangManager.M_SET_LANGUAGE))

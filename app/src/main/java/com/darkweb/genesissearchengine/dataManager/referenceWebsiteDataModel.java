@@ -19,7 +19,7 @@ public class referenceWebsiteDataModel {
     private boolean mLoading = false;
 
     public referenceWebsiteDataModel(){
-        mReferenceWebsiteData = status.mReferenceWebsites;
+        mReferenceWebsiteData = status.sReferenceWebsites;
     }
 
     private void onLoad(Context pContext){
@@ -30,15 +30,15 @@ public class referenceWebsiteDataModel {
                     response -> {
                         if(response.length()>10){
                             mReferenceWebsiteData = response;
-                            status.mReferenceWebsites = response;
-                            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.HOME_REFERENCE_WEBSITES,status.mReferenceWebsites));
+                            status.sReferenceWebsites = response;
+                            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.HOME_REFERENCE_WEBSITES,status.sReferenceWebsites));
                             mLoading = false;
                         }else {
-                            mReferenceWebsiteData = status.mReferenceWebsites;
+                            mReferenceWebsiteData = status.sReferenceWebsites;
                         }
                     },
                     error -> {
-                        mReferenceWebsiteData = status.mReferenceWebsites;
+                        mReferenceWebsiteData = status.sReferenceWebsites;
                         mLoading = false;
                     });
 

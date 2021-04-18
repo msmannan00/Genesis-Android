@@ -495,8 +495,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if(response.headers.containsKey("Content-Disposition")){
                 mDownloadManager.downloadFile(response,this,mContext.get(),event);
             }else if(response.headers.containsKey("Content-Type")){
-                event.invokeObserver(Arrays.asList(response,mSessionID), enums.etype.on_handle_external_intent);
-                stop();
+                mDownloadManager.downloadFile(response,this,mContext.get(),event);
             }
         } catch (ActivityNotFoundException e) {
             event.invokeObserver(Arrays.asList(response,mSessionID), enums.etype.on_handle_external_intent);

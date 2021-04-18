@@ -48,7 +48,7 @@ public class pluginController
     }
 
     public void preInitialize(homeController context){
-        mLangManager = new langManager(context,new langCallback(), new Locale(status.sSettingLanguage));
+        mLangManager = new langManager(context,new langCallback(), new Locale(status.sSettingLanguage), status.mSystemLocale);
     }
 
     public void initialize(){
@@ -67,7 +67,7 @@ public class pluginController
         mContextManager = activityContextManager.getInstance();
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
-        mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd());
+        mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), status.sPaidStatus);
         mAnalyticsManager = new com.darkweb.genesissearchengine.pluginManager.analyticManager(mHomeController,new analyticManager());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
@@ -223,6 +223,10 @@ public class pluginController
             else if(pEventType.equals(M_CLEAR_BOOKMARK)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,pData);
                 mContextManager.getBookmarkController().onclearData();
+            }
+            else if(pEventType.equals(M_CLEAR_HISTORY)){
+                dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,pData);
+                mContextManager.getHistoryController().onclearData();
             }
             else if(pEventType.equals(M_BOOKMARK)){
                 String [] dataParser = pData.get(0).toString().split("split");

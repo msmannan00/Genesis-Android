@@ -46,6 +46,9 @@ public class historyRowModel
     public String getDescription() {
         return mDescription;
     }
+    public String getDescriptionParsed() {
+        return mDescription.substring(8);
+    }
     public int getID() {
         return mID;
     }

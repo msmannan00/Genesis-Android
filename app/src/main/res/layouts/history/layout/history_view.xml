@@ -77,6 +77,7 @@
                 android:textCursorDrawable="@xml/gx_search_cursor_state"
                 android:textSize="15sp"
                 android:visibility="gone"
+                android:layout_marginEnd="15dp"
                 tools:targetApi="o" />
 
             <View
@@ -156,7 +157,6 @@
                     android:paddingStart="20dp"
                     android:stateListAnimator="@null"
                     android:text="@string/HISTORY_CLEAR"
-
                     android:textAlignment="textStart"
                     android:textColor="@color/c_text_setting_heading"
 

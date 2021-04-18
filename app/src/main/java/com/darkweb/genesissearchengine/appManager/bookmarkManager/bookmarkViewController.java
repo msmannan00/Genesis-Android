@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,9 +28,16 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -90,7 +98,7 @@ class bookmarkViewController
         if(pSize>0){
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
             mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
-            mClearButton.setText(strings.BOOKMARK_CLEAR_BOOKMARK);
+            mClearButton.setText(strings.HISTORY_CLEAR_HISTORY);
             mClearButton.setClickable(true);
         }
         else {
@@ -107,7 +115,7 @@ class bookmarkViewController
             mTitle.setVisibility(View.VISIBLE);
 
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
-            mClearButton.setText(strings.BOOKMARK_NO_BOOKMARK_FOUND);
+            mClearButton.setText(strings.HISTORY_NO_HISTORY_FOUND);
             mClearButton.setClickable(false);
 
             mClearButton.getLayoutParams().height = 0;
@@ -157,7 +165,7 @@ class bookmarkViewController
 
     private void clearList(){
         Objects.requireNonNull(mRecycleView.getAdapter()).notifyDataSetChanged();
-        updateIfListEmpty(mRecycleView.getAdapter().getItemCount(),300);
+        updateIfListEmpty(0,300);
         mSearchInput.clearFocus();
         mSearchInput.setText(strings.GENERIC_EMPTY_STR);
         mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
@@ -170,13 +178,16 @@ class bookmarkViewController
                 mSearchInput.setVisibility(View.GONE);
                 mSearchInput.setText(strings.GENERIC_EMPTY_STR);
 
-                mTitle.setAlpha(0f);
-                mTitle.setVisibility(View.VISIBLE);
-                mTitle.animate().setDuration(150).alpha(1);
+                new Handler().postDelayed(() ->
+                {
+                    mTitle.setAlpha(0f);
+                    mTitle.setVisibility(View.VISIBLE);
+                    mTitle.animate().setDuration(150).alpha(1);
 
-                mSearchButton.setAlpha(0f);
-                mSearchButton.setVisibility(View.VISIBLE);
-                mSearchButton.animate().setDuration(150).alpha(1);
+                    mSearchButton.setAlpha(0f);
+                    mSearchButton.setVisibility(View.VISIBLE);
+                    mSearchButton.animate().setDuration(150).alpha(1);
+                }, 500);
 
                 mSearchInput.setText(strings.GENERIC_EMPTY_STR);
                 mSearchInput.setClickable(false);

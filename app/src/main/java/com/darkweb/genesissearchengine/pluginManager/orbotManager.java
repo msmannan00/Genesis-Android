@@ -8,7 +8,6 @@ import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
 import com.darkweb.genesissearchengine.constants.*;

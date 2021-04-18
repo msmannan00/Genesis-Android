@@ -1,5 +1,7 @@
 package com.darkweb.genesissearchengine.appManager;
 
+import android.content.Context;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
@@ -9,7 +11,6 @@ import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogContro
 import com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController;
 import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class activityContextManager
     private WeakReference<settingHomeController> pSettingController;
     private WeakReference<settingGeneralController> pSettingGeneralController;
     private WeakReference<orbotLogController> pOrbotLogController;
+    private WeakReference<Context> pApplicationContext;
     private ArrayList<WeakReference<AppCompatActivity>> mStackList;
 
     /*Initialization*/
@@ -79,6 +81,15 @@ public class activityContextManager
         }
         return pHomeController.get();
     }
+
+    public void setApplicationContext(Context pContext){
+        this.pApplicationContext = new WeakReference(pContext);
+    }
+
+    public Context getApplicationController(){
+        return pApplicationContext.get();
+    }
+
     public void setHomeController(homeController home_controller){
         this.pHomeController = new WeakReference(home_controller);
     }

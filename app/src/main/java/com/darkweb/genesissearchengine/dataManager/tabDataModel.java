@@ -66,11 +66,11 @@ class tabDataModel
             params[2] = mTabModel.getSession().getTheme();
             String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
-            if(mTabModel.getSession().getTitle().equals("$TITLE") || mTabModel.getSession().getTitle().startsWith("http://loading") || mTabModel.getSession().getTitle().startsWith("loading")){
+            if(mTabModel.getSession().getTitle().equals("about:blank") || mTabModel.getSession().getTitle().equals("$TITLE") || mTabModel.getSession().getTitle().startsWith("http://loading") || mTabModel.getSession().getTitle().startsWith("loading")){
                 return enums.AddTabCallback.TAB_ADDED;
             }
 
-            if(mTabModel.getSession().getCurrentURL().equals("$TITLE") || mTabModel.getSession().getCurrentURL().startsWith("http://loading") || mTabModel.getSession().getCurrentURL().startsWith("loading")){
+            if(mTabModel.getSession().getCurrentURL().equals("about:blank") || mTabModel.getSession().getCurrentURL().equals("$TITLE") || mTabModel.getSession().getCurrentURL().startsWith("http://loading") || mTabModel.getSession().getCurrentURL().startsWith("loading")){
                 return enums.AddTabCallback.TAB_ADDED;
             }
 
@@ -155,7 +155,16 @@ class tabDataModel
                 params[1] = mTabs.get(counter).getSession().getCurrentURL();
                 params[2] = mTabs.get(counter).getSession().getTheme();
                 String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
-                databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "'  , url = ? , title = ?, theme = ?  WHERE mid='"+mTabs.get(counter).getmId() + "'",params);
+
+                if(mTabs.get(counter).getSession().getTitle().equals("about:blank") || mTabs.get(counter).getSession().getTitle().equals("$TITLE") || mTabs.get(counter).getSession().getTitle().startsWith("http://loading") || mTabs.get(counter).getSession().getTitle().startsWith("loading")){
+                    return false;
+                }
+
+                if(mTabs.get(counter).getSession().getCurrentURL().equals("about:blank") || mTabs.get(counter).getSession().getCurrentURL().equals("$TITLE") || mTabs.get(counter).getSession().getCurrentURL().startsWith("http://loading") || mTabs.get(counter).getSession().getCurrentURL().startsWith("loading")){
+                    return false;
+                }
+
+                databaseController.getInstance().execSQL("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabs.get(counter).getmId() +"','" + m_date + "',?,?,?);",params);
                 return true;
             }
         }

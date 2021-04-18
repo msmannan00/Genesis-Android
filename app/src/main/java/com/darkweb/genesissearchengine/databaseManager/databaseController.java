@@ -110,7 +110,7 @@ public class databaseController
             do {
                 geckoSession mSession =  activityContextManager.getInstance().getHomeController().onNewTabInit();
                 tabRowModel model = new tabRowModel(c.getString(0), c.getString(1),c.getBlob(4));
-                model.setSession(mSession, c.getString(2),c.getString(3), c.getString(5));
+                model.setSession(mSession, c.getString(3),c.getString(2), c.getString(5));
                 model.getSession().setSessionID(model.getmId());
                 mTempListModel.add(model);
             } while(c.moveToNext());

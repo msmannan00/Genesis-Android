@@ -13,7 +13,6 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.userEngagementNotification;
 import com.example.myapplication.R;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.constants.*;

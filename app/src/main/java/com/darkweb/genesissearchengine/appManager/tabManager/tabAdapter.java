@@ -67,10 +67,8 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
 
     private void reInitData(ArrayList<tabRowModel> pModelList){
-        for(int mCounter=0;mCounter<pModelList.size();mCounter++){
-            mModelList.add(0,pModelList.get(mCounter));
-        }
-        notifyItemRangeInserted(0, pModelList.size());
+        mModelList.addAll(0, pModelList);
+        notifyItemRangeInserted(0,pModelList.size());
         notifyItemChanged(pModelList.size());
     }
 
@@ -107,14 +105,16 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     public void scaleView(View v, tabRowModel mTabRowModel) {
         v.bringToFront();
         ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(v,
-                PropertyValuesHolder.ofFloat("scaleX", 1, 0.9f),
-                PropertyValuesHolder.ofFloat("scaleY", 1, 0.9f));
-        scaleDown.setDuration(130);
+                PropertyValuesHolder.ofFloat("scaleX", 1, 1f),
+                PropertyValuesHolder.ofFloat("scaleY", 1, 1f));
+        scaleDown.setDuration(0);
         scaleDown.start();
         v.setClickable(false);
         v.setFocusable(false);
         v.setEnabled(false);
+
         mEvent.invokeObserver(Arrays.asList(mTabRowModel.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
+        onTriggerURL(mTabRowModel);
 
         scaleDown.addListener(new Animator.AnimatorListener() {
             @Override
@@ -123,7 +123,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
             @Override
             public void onAnimationEnd(Animator animation, boolean isReverse) {
-                onTriggerURL(mTabRowModel);
             }
 
             @Override
@@ -203,9 +202,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         }else {
             for(int mCounter=0;mCounter<mSize;mCounter++){
                 mModelList.remove(0);
-                notifyDataSetChanged();
                 mEvent.invokeObserver(Arrays.asList(0, false), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
             }
+            notifyDataSetChanged();
         }
     }
 
@@ -256,6 +255,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         if(model.getSession()!=null){
             mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_BACK_PRESSED);
             mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_INIT_TAB_COUNT);
+            mEvent.invokeObserver(Arrays.asList(model.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
         }
     }
 
@@ -331,7 +331,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
                 if(model.getSession().getTheme()==null){
                     if(status.sTabGridLayoutEnabled){
-                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_view_divier_background_inner));
+                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple));
                     }else {
                         mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple));
                     }
@@ -366,7 +366,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
                 if(mDescText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")){
-                    mDescription.setText("about:blank");
+                    mDescription.setText(mURL);
                 }
 
                 mDate.setText(model.getDate());
@@ -391,7 +391,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     onSelectionClear(mSelectedView);
                 }
 
-                if(!model.getSession().equals(mModelList.get(0).getSession()) && !status.sTabGridLayoutEnabled){
+                //if(!model.getSession().equals(mModelList.get(0).getSession()) && !status.sTabGridLayoutEnabled){
                     Drawable mDrawable;
                     Resources res = itemView.getContext().getResources();
                     try {
@@ -399,7 +399,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         itemView.setBackground(mDrawable);
                     } catch (Exception ignored) {
                     }
-                }
+                //}
             }
 
             new Handler().postDelayed(() ->
@@ -480,6 +480,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         notifyItemChanged(mModelList.size()-1);
 
                     }else {
+                        v.setFocusable(false);
+                        v.setClickable(false);
+                        v.setEnabled(false);
                         if(status.sTabGridLayoutEnabled){
                             scaleView(itemView, mModelList.get(this.getLayoutPosition()));
                         }else {

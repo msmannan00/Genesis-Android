@@ -10,7 +10,6 @@ public class constants
     public static final String CONST_SOFTWARE_URL = "https://boogle.store/search?q=softwares+tools&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_SOFTWARE_FINANCE = "https://boogle.store/search?q=finance&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_COMMUNITIES = "https://boogle.store/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
-    public static final String CONST_MARKET_URL = "https://boogle.store/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_SERVER = "https://drive.google.com/uc?export=download&id=1es7XOAWCktGGfSnJu_o8W4_LZuudjR-T";
     public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
     public static final String CONST_PRIVACY_POLICY_URL = "https://boogle.store/privacy";
@@ -52,14 +51,6 @@ public class constants
 
     public static final String CONST_LOGS_DEFAULT_MESSAGE = "Genesis on standby at the moment";
 
-    /*HISTORY CONSTANTS*/
-
-    public static final String CONST_HISTORY_LOAD_MORE = "loading_more";
-
-    /*BOOKMARK CONSTANTS*/
-
-    public static final String CONST_BOOKMARK_LOAD_MORE = "loading_more";
-
     /*MENU CONSTANTS*/
 
     public static final int CONST_LIST_HISTORY = 1;
@@ -72,10 +63,6 @@ public class constants
     public static final int CONST_MAX_BOOKMARK_SIZE =500;
     public static final String CONST_DATABASE_NAME ="genesis_dbase";
     public static final String CONST_PERCENTAGE_SIGN ="%";
-
-    /*ANALYTICS CONSTANTS*/
-
-    public static final String CONST_UNIQUE_KEY_ID = "*PREF_UNIQUE_ID";
 
     /*Notification Manager*/
 

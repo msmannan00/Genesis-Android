@@ -7,9 +7,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pMainLayout"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@xml/hox_rounded_corner"
+        android:minHeight="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -40,7 +41,7 @@
             android:text="@string/ALERT_DOWNLOAD_SINGLE"
             android:textAlignment="textStart"
             android:textColor="@color/c_text_setting_heading_v2"
-            android:textSize="14sp"
+            android:textSize="14.5sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,9 +52,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="19dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/holo_gray_light"
-            app:layout_constraintBottom_toTopOf="@+id/pDescription"
+            android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pHeader" />
@@ -65,10 +64,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="3dp"
             android:alpha="0.6"
+            android:maxLines="5"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:maxLines="5"
-            android:text="@string/GENERAL_DEFAULT_TEXT"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="12sp"
@@ -81,20 +79,19 @@
             android:id="@+id/pDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
             android:background="@color/c_view_divier_background"
+            app:layout_constraintBottom_toTopOf="@+id/pNavigationContainer"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:id="@+id/pNavigationContainer"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDivider">
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
                 android:id="@+id/pDismiss"
@@ -106,7 +103,7 @@
                 android:text="@string/ALERT_DISMISS"
                 android:textAllCaps="false"
                 android:textColor="@color/c_button_text_v2"
-                android:textSize="13sp"
+                android:textSize="14.5sp"
                 android:textStyle="bold" />
 
             <View
@@ -128,7 +125,7 @@
                 android:text="@string/ALERT_DOWNLOAD_SINGLE_BUTTON"
                 android:textAllCaps="false"
                 android:textColor="@color/c_button_text_v3"
-                android:textSize="13sp"
+                android:textSize="14.5sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

@@ -1,7 +1,6 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -26,14 +25,11 @@ import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
 import org.mozilla.geckoview.ContentBlocking;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static com.darkweb.genesissearchengine.constants.constants.*;
 import static com.darkweb.genesissearchengine.constants.strings.MESSAGE_PLAYSTORE_NOT_FOUND;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
@@ -181,9 +177,7 @@ class messageManager
     private void popupBlocked()
     {
         final Handler handler = new Handler();
-        Runnable runnable = () -> {
-            mDialog.dismiss();
-        };
+        Runnable runnable = () -> mDialog.dismiss();
 
         initializeDialog(R.layout.popup_block_popup, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pOpenPrivacy).setOnClickListener(v -> {
@@ -203,9 +197,7 @@ class messageManager
     private void maxTabReached()
     {
         final Handler handler = new Handler();
-        Runnable runnable = () -> {
-            mDialog.dismiss();
-        };
+        Runnable runnable = () -> mDialog.dismiss();
 
         initializeDialog(R.layout.popup_max_tab, Gravity.BOTTOM);
         mDialog.getWindow().setDimAmount(0);
@@ -389,9 +381,7 @@ class messageManager
             tempData.addAll(mData);
             mDialog.dismiss();
             final Handler handler = new Handler();
-            Runnable runnable = () -> {
-                mEvent.invokeObserver(tempData, M_DOWNLOAD_SINGLE);
-            };
+            Runnable runnable = () -> mEvent.invokeObserver(tempData, M_DOWNLOAD_SINGLE);
             handler.postDelayed(runnable, 1000);
             onClearReference();
         });

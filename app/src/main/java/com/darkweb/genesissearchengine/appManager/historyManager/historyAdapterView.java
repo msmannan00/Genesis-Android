@@ -79,16 +79,16 @@ public class historyAdapterView
         pItemView.setPressed(false);
         int speed = 150;
         if(pIsForced){
-            speed=0;
+            speed=150;
         }
         if(pVibrate){
             helperMethod.vibrate(mContext);
         }
 
-        pLogoImage.setAlpha(0.5f);
+        pLogoImage.setAlpha(0f);
         pLogoImage.setVisibility(View.VISIBLE);
         pLogoImage.animate().cancel();
-        pLogoImage.animate().setDuration(speed).alpha(1);
+        pLogoImage.animate().setDuration(speed).alpha(0.95f);
     }
 
     public void onClearHighlight(View pItemView, ImageView pLogoImage, boolean pIsForced)
@@ -100,9 +100,9 @@ public class historyAdapterView
                 if(pIsForced){
                     speed = 0;
                 }
-                pLogoImage.setAlpha(1f);
+                pLogoImage.setAlpha(0f);
                 pLogoImage.animate().cancel();
-                pLogoImage.animate().setDuration(speed).alpha(0).withEndAction(() -> pLogoImage.setVisibility(View.GONE));
+                pLogoImage.animate().setDuration(speed).alpha(0f).withEndAction(() -> pLogoImage.setVisibility(View.GONE));
             }
         } catch (Exception e) {
             e.printStackTrace();

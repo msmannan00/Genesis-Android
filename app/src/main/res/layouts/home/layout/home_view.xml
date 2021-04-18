@@ -94,6 +94,7 @@
                             android:ems="10"
                             android:fadingEdgeLength="20dp"
                             android:focusableInTouchMode="true"
+                            android:focusedByDefault="false"
                             android:hint="@string/GENERAL_SEARCH_HINT"
                             android:importantForAutofill="no"
                             android:inputType="textNoSuggestions"
@@ -175,25 +176,25 @@
                     android:id="@+id/pTopBarHider"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:translationZ="4dp"
                     android:alpha="0"
-                    android:visibility="gone"
+                    android:background="@color/c_background"
                     android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:focusable="false"
+                    android:translationZ="4dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@color/c_background"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/pAdView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0"
-                    android:background="@color/clear_alpha"
+                    android:background="@color/c_border_background_divider"
                     android:visibility="gone"
-                    app:adSize="SMART_BANNER"
+                    app:adSize="BANNER"
                     app:adUnitId="ca-app-pub-3940256099942544/6300978111"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -257,6 +258,22 @@
                     app:shiftDuration="@integer/progress_shift_duration"
                     app:wrapShiftDrawable="true"
                     tools:progress="0" />
+
+                <ImageView
+                    android:id="@+id/pNewTabBlocker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0"
+                    android:background="@color/c_background"
+                    android:clickable="true"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -296,8 +313,9 @@
                     android:scaleY="1.55"
                     android:src="@drawable/wall2"
                     android:translationY="-90dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pImageDivider"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.55"
+                    app:layout_constraintHeight_percent="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -305,11 +323,12 @@
                     android:id="@+id/pImageDivider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="130dp"
+                    android:layout_marginBottom="100dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:scaleType="fitXY"
                     android:src="@drawable/glide"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -723,12 +742,12 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:alpha="0"
-        android:visibility="gone"
         android:backgroundTint="@color/white"
         android:clickable="true"
         android:contentDescription="@string/GENERAL_TODO"
         android:focusable="true"
         android:src="@drawable/icon_ban"
+        android:visibility="gone"
         app:borderWidth="0dp"
         app:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -778,39 +797,22 @@
     <include
         android:id="@+id/pPopupLoadNewTab"
         layout="@layout/popup_load_new_tab"
-        android:translationZ="0dp"
         android:alpha="0"
+        android:translationZ="0dp"
 
         android:visibility="gone" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mTabFragment"
+        android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
-        android:visibility="gone"
-        android:background="@color/c_background"
         android:alpha="0"
+        android:background="@color/c_background"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/pNewTabBlocker"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:clickable="true"
-        android:alpha="0"
-        android:background="@color/c_background"
-        android:contentDescription="@string/GENERAL_TODO"
-        android:focusable="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

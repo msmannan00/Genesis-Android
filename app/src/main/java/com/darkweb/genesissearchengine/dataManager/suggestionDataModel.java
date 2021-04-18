@@ -1,22 +1,17 @@
 package com.darkweb.genesissearchengine.dataManager;
 
 import android.content.Context;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.SuggestionSpan;
 import android.view.textservice.SentenceSuggestionsInfo;
 import android.view.textservice.SpellCheckerSession;
 import android.view.textservice.SuggestionsInfo;
 import android.view.textservice.TextServicesManager;
-
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
-import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSessionListener {
 
@@ -38,19 +33,69 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
     /*Helper Methods*/
 
-    private ArrayList<historyRowModel> getDefaultSuggestions(String pQuery, int mSize){
-        for(int count = 0; count<= mHintListLocalCache.size()-1 && mHintListLocalCache.size()<500; count++){
-            if(mHintListLocalCache.get(count).getHeader().toLowerCase().contains(pQuery)){
-                mCurrentList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
-            }else if(mHintListLocalCache.get(count).getDescription().toLowerCase().contains(pQuery)){
-                if(mCurrentList.size()==0){
-                    mCurrentList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
-                }else {
-                    mCurrentList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescription(),-1));
+
+
+    private ArrayList<historyRowModel> getDefaultSuggestionsOnStart(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChaned){
+
+        mCurrentList.clear();
+        if(!pQuery.equals(strings.GENERIC_EMPTY_STR) && !pQuery.equals("about:blank") && !pQuery.contains("?") &&  !pQuery.contains("/")  && !pQuery.contains(" ") && !pQuery.contains("  ") && !pQuery.contains("\n")){
+            mCurrentList.size();
+            int sepPos = pQuery.indexOf(".");
+            if (sepPos == -1) {
+                mCurrentList.add( 0, new historyRowModel(pQuery+".com", strings.GENERIC_EMPTY_STR,-1));
+                mCurrentList.add( 0, new historyRowModel(pQuery+".onion", strings.GENERIC_EMPTY_STR,-1));
+            }else
+            {
+                if(!pQuery.equals(pQuery.substring(0,sepPos)+".com")){
+                    mCurrentList.add( 0, new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
+                }
+                if(!pQuery.equals(pQuery.substring(0,sepPos)+".onion")){
+                    mCurrentList.add( 0, new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
                 }
             }
-            if(mCurrentList.size() + mSize > 6){
-                break;
+        }
+
+        mCurrentList.add( 0,new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR,-1));
+        return mCurrentList;
+    }
+
+    private ArrayList<historyRowModel> getDefaultSuggestions(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChaned){
+
+        for(int count = 0; count<= mHintListLocalCache.size()-1 && mHintListLocalCache.size()<500; count++){
+            if(mHintListLocalCache.get(count).getHeader().toLowerCase().contains(pQuery)){
+                if(mHintListLocalCache.get(count).getHeader().toLowerCase().startsWith(pQuery)){
+                    if(mDuplicationHandler!=null && !mDuplicationHandler.contains(mHintListLocalCache.get(count).getDescriptionParsed())) {
+                        if(pDefaultHostChaned){
+                            mCurrentList.add(1, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
+                        }else {
+                            mCurrentList.add(0, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
+                        }
+                    }
+                    if(mCurrentList.size() + mSize > 6){
+                        break;
+                    }
+                }else {
+                    if(mCurrentList.size() + mSize <= 6){
+                        mCurrentList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescriptionParsed(),-1));
+                    }
+                }
+            }else if(mHintListLocalCache.get(count).getDescriptionParsed().toLowerCase().contains(pQuery)){
+                if(mHintListLocalCache.get(count).getHeader().toLowerCase().startsWith(pQuery)){
+                    if(mDuplicationHandler!=null && !mDuplicationHandler.contains(mHintListLocalCache.get(count).getDescriptionParsed())) {
+                        if(pDefaultHostChaned){
+                            mCurrentList.add(1, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
+                        }else {
+                            mCurrentList.add(0, new historyRowModel(mHintListLocalCache.get(count).getHeader(), mHintListLocalCache.get(count).getDescriptionParsed(), -1));
+                        }
+                    }
+                    if(mCurrentList.size() + mSize > 6){
+                        break;
+                    }
+                }else {
+                    if(mCurrentList.size() + mSize <= 6){
+                        mCurrentList.add(new historyRowModel(mHintListLocalCache.get(count).getHeader(),mHintListLocalCache.get(count).getDescriptionParsed(),-1));
+                    }
+                }
             }
         }
 
@@ -111,37 +156,61 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
-        if(mCurrentList.size()<6) {
-             getDefaultSuggestions(pQuery, mCurrentList.size());
+        boolean mDefaultHostChaned = false;
+        if(mCurrentList.size()>3){
+            String mHost1 = helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(0).getDescription()));
+            String mHost2 = helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(1).getDescription()));
+            String mHost3 = helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(2).getDescription()));
+
+            String mHostReal = mHost1.replace("www.","");
+            if(mHost1.equals(mHost2) && mHost1.equals(mHost3) && !mDuplicationHandler.contains(mHostReal)){
+                mCurrentList.add( 0,new historyRowModel(mHostReal, strings.GENERIC_EMPTY_STR,-1));
+                mDuplicationHandler.add(mHostReal);
+            }
+            mDefaultHostChaned = true;
         }
 
+        getDefaultSuggestions(pQuery, mCurrentList.size(), mDuplicationHandler, mDefaultHostChaned);
+
+        boolean mHostAppend = false;
+        if(mCurrentList.size()>1 && helperMethod.getHost(helperMethod.completeURL(mCurrentList.get(0).getDescription())).equals(helperMethod.completeURL(mCurrentList.get(1).getDescription()))){
+            mHostAppend = true;
+        }
+
+        int mSize = mCurrentList.size();
         if(mCurrentList.size()<3){
 
             if(!mQueryOriginal.equals(strings.GENERIC_EMPTY_STR) && !mQueryOriginal.equals("about:blank") && !mQueryOriginal.contains("?") &&  !mQueryOriginal.contains("/")  && !mQueryOriginal.contains(" ") && !mQueryOriginal.contains("  ") && !mQueryOriginal.contains("\n")){
                 mCurrentList.size();
                 int sepPos = pQuery.indexOf(".");
                 if (sepPos == -1) {
-                    mCurrentList.add( 0,new historyRowModel(mQueryOriginal+".com", strings.GENERIC_EMPTY_STR,-1));
-                    mCurrentList.add( 0,new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
+                    mCurrentList.add( mSize, new historyRowModel(mQueryOriginal+".com", strings.GENERIC_EMPTY_STR,-1));
+                    mCurrentList.add( mSize, new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
                 }else
                 {
                     if(!pQuery.equals(pQuery.substring(0,sepPos)+".com")){
-                        mCurrentList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
+                        mCurrentList.add( mSize, new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
                     }
                     if(!pQuery.equals(pQuery.substring(0,sepPos)+".onion")){
-                        mCurrentList.add( 0,new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
+                        mCurrentList.add( mSize, new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
                     }
                 }
             }
         }
 
+        if(mHostAppend){
+            if(mCurrentList.get(0).getDescription().startsWith(pQuery)){
+                mCurrentList.add( mSize,new historyRowModel(mCurrentList.get(0).getHeader(), mCurrentList.get(0).getDescription(),-1));
+            }
+        }
+
         if(pQuery.length()>0){
             if(!pQuery.equals("about:blank")){
-                mCurrentList.add( 0,new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR,-1));
+                mCurrentList.add( mSize,new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR,-1));
             }
         }
         if(mCurrentList.size()<=0) {
-            mCurrentList.add( 0,new historyRowModel("Genesis Search", "genesis.onion",-1));
+            mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
         }
 
         return mCurrentList;
@@ -224,6 +293,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         mHintListLocalCache.add(new historyRowModel("Steam Powered","https://steampowered.com",-1 ));
         mHintListLocalCache.add(new historyRowModel("Macys","https://macys.com",-1 ));
         mHintListLocalCache.add(new historyRowModel("Wikihow","https://wikihow.com",-1 ));
+        mHintListLocalCache.add(new historyRowModel("Wikipedia","https://en.wikipedia.org/",-1 ));
         mHintListLocalCache.add(new historyRowModel("Mail Yahoo","https://mail.yahoo.com",-1 ));
         mHintListLocalCache.add(new historyRowModel("Wiktionary","https://wiktionary.com",-1 ));
         mHintListLocalCache.add(new historyRowModel("Cbssports","https://cbssports.com",-1 ));
@@ -266,7 +336,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
         else if(pCommands == dataEnums.eSuggestionCommands.M_GET_DEFAULT_SUGGESTION)
         {
-            return getDefaultSuggestions((String) pData.get(0),0);
+            return getDefaultSuggestionsOnStart((String) pData.get(0),0, null, false);
         }
 
         return null;

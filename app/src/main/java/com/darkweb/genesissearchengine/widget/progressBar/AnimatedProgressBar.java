@@ -13,7 +13,6 @@ public class AnimatedProgressBar extends ProgressBar {
   private static final Interpolator DEFAULT_INTERPOLATER = new LinearInterpolator();
 
   private ValueAnimator animator;
-  private ValueAnimator animatorSecondary;
   private boolean animate = true;
 
   public AnimatedProgressBar(Context context, AttributeSet attrs, int defStyle) {

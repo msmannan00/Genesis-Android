@@ -157,7 +157,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                     mEvent.invokeObserver(Collections.singletonList(m_counter_inner),enums.etype.is_empty);
 
                     boolean mDateVerify = false;
-                    if(mCurrentList.size()>0 && mCurrentList.get(m_counter_inner-1).getDescription()==null && (mCurrentList.size()>m_counter_inner+1 && mCurrentList.get(m_counter_inner+1).getDescription()==null || mCurrentList.size()==m_counter_inner+1)){
+                    if(mCurrentList.size()>0 && mCurrentList.size()<m_counter_inner+1 && mCurrentList.get(m_counter_inner-1).getDescription()==null && (mCurrentList.size()>m_counter_inner+1 && mCurrentList.get(m_counter_inner+1).getDescription()==null || mCurrentList.size()==m_counter_inner+1)){
                         mDateVerify = true;
                     }
 
@@ -333,6 +333,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
              }
              return false;
          });
+        initializeModelWithDate(false);
     }
 
     void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle){
@@ -366,7 +367,6 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mPopupWindow.dismiss();
             }
             else if(v.getId() == R.id.pMenuDelete){
-                initializeModelWithDate(false);
                 onClose(pPosition);
                 invokeFilter(true);
                 mPopupWindow.dismiss();
@@ -381,35 +381,29 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     }
 
     private void onClose(int pIndex){
-            mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
-            mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.url_clear_at);
-            invokeFilter(false);
-            mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
-            boolean mDateVerify = false;
-            if(mPassedList.size()>0){
-                if(mCurrentList.size()>0 && mCurrentList.get(pIndex-1).getDescription()==null && (mCurrentList.size()>pIndex+1 && mCurrentList.get(pIndex+1).getDescription()==null || mCurrentList.size()==pIndex+1)){
-                    mDateVerify = true;
-                }
-            }else {
-                mCurrentList.clear();
-                //notifyDataSetChanged();
-                return;
+        mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
+        mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.url_clear_at);
+        mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
+        boolean mDateVerify = false;
+        if(mPassedList.size()>0){
+            if(mCurrentList.size()>0 && (mCurrentList.size()>pIndex+1 || mCurrentList.size()==pIndex+1)){
+                mDateVerify = true;
             }
-            int size = mCurrentList.size();
+        }else {
+            mCurrentList.clear();
+            return;
+        }
+        int size = mCurrentList.size();
 
-            if(mDateVerify){
-                notifyItemRemoved(pIndex-1);
-                mCurrentList.remove(pIndex-1);
-                notifyItemRemoved(pIndex-1);
-                mCurrentList.remove(pIndex-1);
-                notifyItemRangeChanged(pIndex-1, mCurrentList.size());
-            }else {
-                mCurrentList.remove(pIndex);
-
-                notifyItemRemoved(pIndex);
-                notifyItemRangeChanged(pIndex, mCurrentList.size());
-                notifyItemChanged(mCurrentList.size()-1);
-            }
+        if(mDateVerify){
+            mCurrentList.remove(pIndex);
+            notifyItemRemoved(pIndex);
+            notifyItemRangeChanged(pIndex, mCurrentList.size());
+        }else {
+            mCurrentList.remove(pIndex);
+            notifyItemRemoved(pIndex);
+            notifyItemChanged(mCurrentList.size()-1);
+        }
         initializeModelWithDate(false);
     }
 
@@ -432,6 +426,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             super(itemView);
         }
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         void bindListView(historyRowModel model, int p_position) {
             mDateContainer = itemView.findViewById(R.id.pDateContainer);
             mHeader = itemView.findViewById(R.id.pHeader);
@@ -476,35 +471,36 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 String header = model.getHeader();
                 mDescription.setText(("https://"+model.getDescription()));
 
-                new Thread(){
-                    public void run(){
-                        try {
-                            mHindTypeIconTemp.setImageDrawable(null);
-                            mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                            while (true){
-                                int mCounter=0;
-                                if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                    sleep(50);
-                                    mCounter+=1;
-                                }else {
-                                    break;
+                if(model.getDescription().contains("boogle.store") || model.getDescription().contains("genesis.onion")){
+                    mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                }else{
+                    new Thread(){
+                        public void run(){
+                            try {
+                                mHindTypeIconTemp.setImageDrawable(null);
+                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                                while (true){
+                                    int mCounter=0;
+                                    if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
+                                        sleep(50);
+                                        mCounter+=1;
+                                    }else {
+                                        break;
+                                    }
+                                    if(mCounter>6){
+                                        break;
+                                    }
                                 }
-                                if(mCounter>6){
-                                    break;
-                                }
+                                mContext.runOnUiThread(() -> {
+                                    Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
+                                    mFaviconLogo.setImageBitmap(mBitmap);
+                                });
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
-                            mContext.runOnUiThread(() -> {
-                                Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
-                                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                                mBitmap.compress(Bitmap.CompressFormat.PNG, 20, out);
-                                Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-                                mFaviconLogo.setImageBitmap(decoded);
-                            });
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
-                    }
-                }.start();
+                    }.start();
+                }
 
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
             }
@@ -531,12 +527,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
     void invokeFilter(boolean notify){
         if(notify){
-            if(mFilter.length()>0){
-                initializeModelWithDate(true);
-            }else {
-                initializeModelWithDate(false);
-            }
-            notifyDataSetChanged();
+            initializeModelWithDate(true);
         }
    }
 

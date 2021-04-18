@@ -400,8 +400,7 @@ public class historyController extends AppCompatActivity
         public Object invokeObserver(List<Object> data, Object e_type) {
 
             if(e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)){
-                onHideSearch(null);
-                onClearMultipleSelection(null);
+                onBackPressed();
             }
             return null;
         }
