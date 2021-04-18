@@ -52,6 +52,7 @@ class tabViewController
     private RecyclerView mRecycleView;
     private NestedScrollView mNestedScrollView;
     private TextView mEmptyView;
+    private ImageButton mNewTab;
 
     /*Private Local Variables*/
     private Handler mDelayHandler = new Handler();
@@ -59,7 +60,7 @@ class tabViewController
 
     /*Initializations*/
 
-    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView, TextView pEmptyView)
+    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView, TextView pEmptyView, ImageButton pNewTab)
     {
         this.mContext = mContext;
         this.mTabs = pTabs;
@@ -72,6 +73,7 @@ class tabViewController
         this.mRecycleView = pRecycleView;
         this.mNestedScrollView = pNestedScrollView;
         this.mEmptyView = pEmptyView;
+        this.mNewTab = pNewTab;
 
         initUI();
         initPostUI();
@@ -139,6 +141,11 @@ class tabViewController
         mMenuButton.setVisibility(View.GONE);
         mSelectionCount.setVisibility(View.VISIBLE);
         mClearSelection.setVisibility(View.VISIBLE);
+
+        mNewTab.setVisibility(View.GONE);
+        mNewTab.animate().setDuration(250).alpha(0);
+        mNewTab.setEnabled(false);
+        mNewTab.setFocusable(false);
     }
 
     private void onShowSelectionMenu(boolean pStatus, int pCount) {
@@ -157,6 +164,11 @@ class tabViewController
         mClearSelection.setVisibility(View.GONE);
         mMenuButton.setVisibility(View.VISIBLE);
         mTabs.animate().setStartDelay(0).setDuration(250).alpha(1);
+
+        mNewTab.setVisibility(View.VISIBLE);
+        mNewTab.animate().setDuration(250).alpha(1);
+        mNewTab.setEnabled(true);
+        mNewTab.setFocusable(true);
     }
 
     private void onShowUndoDialog(int pTabCount) {

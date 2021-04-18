@@ -324,6 +324,15 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             if(model.getmId()==null){
                 mItemSelectionMenu.setVisibility(View.VISIBLE);
                 mItemSelectionMenuButton.setOnClickListener(this);
+
+                if(status.sTabGridLayoutEnabled){
+                    itemView.setVisibility(View.GONE);
+                    itemView.setClickable(false);
+                    itemView.setFocusable(false);
+                    itemView.setEnabled(false);
+                    return;
+                }
+
             }else {
                 mLoadSession.setOnLongClickListener(this);
                 mRemoveRow.setOnClickListener(this);

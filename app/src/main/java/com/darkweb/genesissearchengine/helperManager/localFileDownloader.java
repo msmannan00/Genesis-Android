@@ -122,7 +122,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         try {
             URL url = new URL(f_url[0]);
             Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, PROXY_PORT));
-            URLConnection conection= null;
+            URLConnection conection;
 
             conection = url.openConnection(proxy);
             //conection = (HttpsURLConnection)ProxySelector.openConnectionWithProxy(new URI(f_url[0]));

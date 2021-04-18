@@ -11,7 +11,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
@@ -27,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,22 +37,18 @@ import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.animatedColor;
-import com.darkweb.genesissearchengine.helperManager.autoCompleteAdapter;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
-
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -281,7 +275,7 @@ class homeViewController
 
     public void onHideTabContainer(){
         if(mTabFragment.getAlpha()>0 || mTabFragment.getVisibility()!=View.GONE){
-
+            Log.i("SUPERFUCK4","SUPERFUCK");
             mNewTab.setPressed(false);
             new Handler().postDelayed(() ->
             {
@@ -289,7 +283,8 @@ class homeViewController
                 mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
             }, 250);
 
-            mTabFragment.animate().setDuration(150).alpha(0f).withEndAction(() -> {
+            mTabFragment.animate().cancel();
+            mTabFragment.animate().setDuration(100).alpha(0f).withEndAction(() -> {
                 mTabFragment.setVisibility(View.GONE);
                 mEvent.invokeObserver(null, enums.etype.M_UPDATE_PIXEL_BACKGROUND);
             });
@@ -1345,16 +1340,12 @@ class homeViewController
             {
                 if(msg.what == messages.MESSAGE_ON_URL_LOAD)
                 {
-                    Log.i("SUPEEEE","SUPEEE1");
                     if(mEvent.invokeObserver(null, enums.etype.M_HOME_PAGE)==null){
                         mEvent.invokeObserver(null, enums.etype.M_PRELOAD_URL);
-                        Log.i("SUPEEEE","SUPEEE2");
                         if(status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)){
                             mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingSearchStatus)), enums.etype.on_url_load);
-                            Log.i("SUPEEEE","SUPEEE5");
                         }else {
                             mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), enums.etype.on_url_load);
-                            Log.i("SUPEEEE","SUPEEE5");
                         }
                     }
                     if(!status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR) ){

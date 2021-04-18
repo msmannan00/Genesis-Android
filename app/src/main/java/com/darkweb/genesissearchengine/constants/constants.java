@@ -83,6 +83,7 @@ public class constants
 
     /*ENCRYPTION KEY*/
     public static final String CONST_ENCRYPTION_KEY = "Zr4u7x!A%D*F-JaNdRgUkXp2s5v8y/B?";
+    public static final String CONST_ENCRYPTION_KEY_DATABASE = "Zr4u7x!!A%D*F-JaNdsS@@gUbbp^^5v8y/B?";
 
 
 }

@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.databaseManager;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
@@ -10,12 +9,17 @@ import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
+import net.sqlcipher.database.SQLiteDatabaseHook;
+import net.sqlcipher.database.SQLiteDatabase;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import static android.content.Context.MODE_PRIVATE;
+
+import static com.darkweb.genesissearchengine.constants.constants.CONST_DATABASE_NAME;
+
 
 public class databaseController
 {
@@ -23,7 +27,7 @@ public class databaseController
     /*Private Variables*/
 
     private static final databaseController sOurInstance = new databaseController();
-    private SQLiteDatabase mDatabaseInstance;
+    private static SQLiteDatabase mDatabaseInstance;
 
     public static databaseController getInstance()
     {
@@ -36,11 +40,21 @@ public class databaseController
 
     /*Initializations*/
 
+    public void prepareDatabaseEnvironment(AppCompatActivity app_context) {
+        File databaseFile = app_context.getDatabasePath(CONST_DATABASE_NAME);
+
+        if (!databaseFile.exists()) {
+            databaseFile.getParentFile().mkdirs();
+        }
+    }
+
     public void initialize(AppCompatActivity app_context)
     {
         try
         {
-            mDatabaseInstance = app_context.openOrCreateDatabase(constants.CONST_DATABASE_NAME, MODE_PRIVATE, null);
+            SQLiteDatabase.loadLibs(app_context);
+            prepareDatabaseEnvironment(app_context);
+            mDatabaseInstance = mDatabaseInstance.openOrCreateDatabase(app_context.getDatabasePath(CONST_DATABASE_NAME), constants.CONST_ENCRYPTION_KEY_DATABASE,null, wrapHook(null));
 
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
@@ -56,6 +70,37 @@ public class databaseController
 
     /*Helper Methods*/
 
+    public SQLiteDatabaseHook wrapHook(final SQLiteDatabaseHook hook) {
+        if (hook == null)
+        {
+            return keyHook;
+        }
+        return new SQLiteDatabaseHook() {
+            @Override
+            public void preKey(net.sqlcipher.database.SQLiteDatabase sqLiteDatabase) {
+                keyHook.preKey(sqLiteDatabase);
+                hook.preKey(sqLiteDatabase);
+            }
+
+            @Override
+            public void postKey(net.sqlcipher.database.SQLiteDatabase sqLiteDatabase) {
+                keyHook.postKey(sqLiteDatabase);
+                hook.preKey(sqLiteDatabase);
+            }
+        };
+    }
+
+    SQLiteDatabaseHook keyHook = new SQLiteDatabaseHook() {
+        @Override
+        public void preKey(net.sqlcipher.database.SQLiteDatabase sqLiteDatabase) {
+
+        }
+
+        @Override
+        public void postKey(net.sqlcipher.database.SQLiteDatabase sqLiteDatabase) {
+
+        }
+    };
 
     public void execSQL(String query,String[] params)
     {
