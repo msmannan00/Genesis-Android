@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -62,7 +64,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -663,19 +667,37 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         }
     }
 
-    private boolean createAndSaveFileFromBase64Url(String url) {
+    private void saveImage(Bitmap finalBitmap) {
 
-        if(!url.startsWith("data") && !url.startsWith("blob")){
-            return false;
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String fname = "Shutta_"+ timeStamp +".jpg";
+
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else if(url.startsWith("blob")){
-            Toast toast = Toast.makeText(mContext.get().getApplicationContext(),
-                    "Unable to download urls that contain prefix blob. Not Supported",
-                    Toast.LENGTH_SHORT);
+    }
 
-            toast.show();
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
             return true;
         }
+        return false;
+    }
+
+    private boolean createAndSaveFileFromBase64Url(String url) {
 
         try{
             File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
@@ -731,7 +753,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                 String channel_id = createNotificationChannel(mContext.get().getApplicationContext());
                 assert channel_id != null;
                 NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext.get().getApplicationContext(), channel_id)
-                        .setSmallIcon(R.xml.ic_download)
+                        .setSmallIcon(R.drawable.ic_download)
                         .setContentTitle(filename)
                         .setContentIntent(pIntent);
 
@@ -741,7 +763,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                 NotificationManager notificationManager = (NotificationManager) mContext.get().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(notificationId, notificationBuilder.build());
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

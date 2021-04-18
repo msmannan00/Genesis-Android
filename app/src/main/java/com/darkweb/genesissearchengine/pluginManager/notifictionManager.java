@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.SystemClock;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -53,10 +54,11 @@ class notifictionManager
     private Notification getNotification () {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mAppContext.get().getApplicationContext(), CONST_NOTIFICATION_ID_NAME) ;
         builder.setContentTitle(CONST_NOTIFICATION_TITLE) ;
-        builder.setSmallIcon(R.drawable.notification_logo);
-        builder.setAutoCancel(true) ;
-        builder.setChannelId(CONST_NOTIFICATION_ID_NAME) ;
-        return builder.build() ;
+        builder.setSmallIcon(R.mipmap.ic_stat_tor_logo);
+        builder.setAutoCancel(true);
+        builder.setColor(Color.parseColor("#84989f"));
+        builder.setChannelId(CONST_NOTIFICATION_ID_NAME);
+        return builder.build();
     }
 
     /*External Triggers*/

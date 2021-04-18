@@ -84,6 +84,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController"
+            android:launchMode="singleTop"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -219,6 +220,16 @@
                 <action android:name="org.torproject.android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.darkweb.genesissearchengine.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
         <provider
             android:name="androidx.core.content.FileProvider"

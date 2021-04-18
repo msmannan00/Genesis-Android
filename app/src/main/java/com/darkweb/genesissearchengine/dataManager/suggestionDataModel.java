@@ -206,7 +206,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
         if(pQuery.length()>0){
             if(!pQuery.equals("about:blank")){
-                mCurrentList.add( mSize,new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR,-1));
+                mCurrentList.add( 0,new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR,-1));
             }
         }
         if(mCurrentList.size()<=0) {

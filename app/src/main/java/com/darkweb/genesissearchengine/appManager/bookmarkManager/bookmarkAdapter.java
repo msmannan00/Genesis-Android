@@ -426,7 +426,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                         public void run(){
                             try {
                                 mHindTypeIconTemp.setImageDrawable(null);
-                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "http://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
                                 while (true){
                                     int mCounter=0;
                                     if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){

@@ -846,7 +846,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
                             mEdittextChanged.removeCallbacks(postToServerRunnable);
                             mSuggestions = (ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestions(dataEnums.eSuggestionCommands.M_GET_SUGGESTIONS, Collections.singletonList(mText));
-                            mEdittextChanged.postDelayed(postToServerRunnable, 150);
+                            mEdittextChanged.postDelayed(postToServerRunnable, 350);
                             return;
                         }
                         if(mSuggestions.size()>0){
@@ -859,7 +859,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                                     mSearchBarLoading = true;
                                     mEdittextChanged.postDelayed(postToServerRunnable, 0);
                                 }else{
-                                    mEdittextChanged.postDelayed(postToServerRunnable, 150);
+                                    mEdittextChanged.postDelayed(postToServerRunnable, 350);
                                 }
                             }
                         }
@@ -952,7 +952,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             mSearchBarLoading = false;
-        }, 150);
+        }, 350);
     };
 
     public void onSearchBarInvoked(View view){
@@ -1377,6 +1377,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_INIT_LOCALE);
             mHomeViewController.onUpdateSearchEngineBar(false, 0);
             mNewTab.setPressed(false);
+            pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         }
 
         status.mThemeApplying = false;

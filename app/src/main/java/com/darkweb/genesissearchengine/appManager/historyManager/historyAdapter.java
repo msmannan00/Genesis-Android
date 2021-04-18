@@ -2,8 +2,10 @@ package com.darkweb.genesissearchengine.appManager.historyManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +31,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import systems.intelligo.slight.ImageLoader;
 
@@ -56,6 +60,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     private eventObserver.eventListener mEvent;
     private String mFilter = strings.GENERIC_EMPTY_STR;
     private boolean mLongPressedMenuActive = false;
+    private Map<String, Drawable> mWebIcon = new HashMap<>();
 
     /*Local Variables*/
 
@@ -273,6 +278,10 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
     }
 
+    public void onClearAdapter(){
+        mWebIcon.clear();
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     public void onSwipe(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, int pId, Date pDate){
 
@@ -473,7 +482,11 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
                 if(model.getDescription().contains("boogle.store") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                }else{
+                }
+                else if(mWebIcon.containsKey(model.getDescription())){
+                    mFaviconLogo.setImageDrawable(mWebIcon.get(model.getDescription()));
+                }
+                else{
                     new Thread(){
                         public void run(){
                             try {
@@ -482,19 +495,35 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                                 while (true){
                                     int mCounter=0;
                                     if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                        sleep(50);
+                                        sleep(10);
                                         mCounter+=1;
                                     }else {
+                                        Log.i("BREAK","");
                                         break;
                                     }
                                     if(mCounter>6){
                                         break;
                                     }
                                 }
+
                                 mContext.runOnUiThread(() -> {
-                                    Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
-                                    mFaviconLogo.setImageBitmap(mBitmap);
+                                    mFaviconLogo.setColorFilter(null);
+                                    mFaviconLogo.clearColorFilter();
+                                    mFaviconLogo.setImageTintList(null);
+                                    mFaviconLogo.setClipToOutline(true);
+                                    mWebIcon.put(model.getDescription(),mHindTypeIconTemp.getDrawable());
+                                    if(mHindTypeIconTemp.getDrawable() != null){
+                                        mFaviconLogo.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                                    }else {
+                                        Resources res = itemView.getContext().getResources();
+                                        try {
+                                            mFaviconLogo.setImageDrawable(Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser)));
+                                        } catch (Exception ignored) {
+                                        }
+                                    }
+
                                 });
+
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

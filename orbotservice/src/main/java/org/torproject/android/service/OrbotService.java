@@ -90,6 +90,8 @@ import java.util.concurrent.TimeoutException;
 
 import IPtProxy.IPtProxy;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class OrbotService extends VpnService implements TorServiceConstants, OrbotConstants {
 
     public final static String BINARY_TOR_VERSION = org.torproject.android.binary.TorServiceConstants.BINARY_TOR_VERSION;
@@ -195,7 +197,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     private void showConnectedToTorNetworkNotification() {
-        showToolbarNotification(getString(R.string.status_activated), NOTIFY_ID, R.drawable.ic_stat_tor_logo);
+        showToolbarNotification(getString(R.string.status_activated), NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
     }
 
     private boolean findExistingTorDaemon() {
@@ -262,7 +264,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                         .setCategory(Notification.CATEGORY_SERVICE)
                         .setContentTitle("Genesis")
                         .setColor(Color.parseColor("#84989f"))
-                        .setSmallIcon(R.drawable.ic_stat_tor_logo)
+                        .setSmallIcon(R.mipmap.ic_stat_tor_logo)
                         .setOngoing(Prefs.persistNotifications());
             }
 
@@ -270,8 +272,12 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             if (conn != null) { // only add new identity action when there is a connection
                 Intent intentRefresh = new Intent(CMD_NEWNYM);
                 PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
-                mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
+                mNotifyBuilder.addAction(0, getString(R.string.menu_new_identity), pendingIntentNewNym);
             }
+
+            Intent intentRefresh = new Intent(CMD_setting);
+            PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
+            mNotifyBuilder.addAction(0, "Notification Settings", pendingIntentNewNym);
 
             mNotifyBuilder.setContentText(notifyMsg)
                     .setSmallIcon(icon)
@@ -320,7 +326,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     public void onTaskRemoved(Intent rootIntent) {
         Log.d(OrbotConstants.TAG, "task removed");
         Intent intent = new Intent(this, DummyActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -512,6 +518,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             IntentFilter filter = new IntentFilter();
             filter.addAction(CMD_NEWNYM);
+            filter.addAction(CMD_setting);
             filter.addAction(CMD_ACTIVE);
             mActionBroadcastReceiver = new ActionBroadcastReceiver();
             registerReceiver(mActionBroadcastReceiver, filter);
@@ -1158,12 +1165,16 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         }
     }
 
+    public void notificationSetting() {
+
+    }
+
     public void newIdentity() {
         if (conn != null) { // it is possible to not have a connection yet, and someone might try to newnym
             new Thread() {
                 public void run() {
                     try {
-                        int iconId = R.drawable.ic_stat_tor_logo;
+                        int iconId = R.mipmap.ic_stat_tor_logo;
 
                         if (conn != null) {
                             if (mCurrentStatus.equals(STATUS_ON) && Prefs.expandedNotifications())
@@ -1774,7 +1785,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                     requestTorRereadConfig();
                 } else if (action.equals(CMD_NEWNYM)) {
                     newIdentity();
-                } else if (action.equals(CMD_ACTIVE)) {
+                } else if (action.equals(CMD_setting)) {
+                    notificationSetting();
+                }
+                else if (action.equals(CMD_ACTIVE)) {
                     sendSignalActive();
                 } else if (action.equals(CMD_SET_EXIT)) {
                     setExitNode(mIntent.getStringExtra("exit"));
@@ -1857,6 +1871,17 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         return self;
     }
 
+    public void onSettingRegister(){
+        try {
+            Intent intent = null;
+            intent = new Intent(this, Class.forName("com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController"));
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            getApplicationContext().startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void disableNotification(){
         if(mNotificationManager!=null){
             mNotificationManager.cancel(NOTIFY_ID);
@@ -1867,12 +1892,12 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     public void enableTorNotificationNoBandwidth(){
         orbotLocalConstants.mNotificationStatus = 1;
-        showToolbarNotification("Connected to the Tor network", HS_NOTIFY_ID, R.drawable.ic_stat_tor_logo);
+        showToolbarNotification("Connected to the Tor network", HS_NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
     }
 
     public void enableNotification(){
         orbotLocalConstants.mNotificationStatus = 1;
-        showToolbarNotification(0+"kbps ⇣ / " +0+"kbps ⇡", HS_NOTIFY_ID, R.drawable.ic_stat_tor_logo);
+        showToolbarNotification(0+"kbps ⇣ / " +0+"kbps ⇡", HS_NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
     }
 
     private class ActionBroadcastReceiver extends BroadcastReceiver {
@@ -1880,6 +1905,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             switch (intent.getAction()) {
                 case CMD_NEWNYM: {
                     newIdentity();
+                    break;
+                }
+                case CMD_setting: {
+                    onSettingRegister();
                     break;
                 }
                 case CMD_ACTIVE: {

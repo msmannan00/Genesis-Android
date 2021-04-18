@@ -20,7 +20,7 @@ class orbotManager
 
     /*Private Variables*/
 
-    private WeakReference<Context> mAppContext;
+    private WeakReference<AppCompatActivity> mAppContext;
     private boolean mLogsStarted = false;
 
     /*Initialization*/
@@ -46,7 +46,7 @@ class orbotManager
         orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
         orbotLocalConstants.mManualBridgeType = status.sBridgeCustomType;
         Prefs.putBridgesEnabled(status.sBridgeStatus);
-        Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
+        Intent mServiceIntent = new Intent(mAppContext.get(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mAppContext.get().getApplicationContext().startForegroundService(mServiceIntent);
