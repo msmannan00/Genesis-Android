@@ -824,7 +824,7 @@ class homeViewController
             mSearchbar.setTag(R.id.msearchbarProcessing,true);
             url = CONST_GENESIS_HELP_URL;
         }
-        else if(url.contains("genesis") || url.contains("boogle")){
+        else if(helperMethod.getHost(helperMethod.completeURL(url)).contains("genesis") || helperMethod.getHost(helperMethod.completeURL(url)).contains("boogle")){
             mSearchbar.setTag(R.id.msearchbarProcessing,true);
         }else {
             mSearchbar.setTag(R.id.msearchbarProcessing,false);
