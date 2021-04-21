@@ -198,6 +198,9 @@ public class pluginController
             {
                 ((homeController)mHomeController.get()).onLoadURL(pData.get(0).toString());
             }
+            else if(pEventType.equals(M_PANIC_RESET)){
+                activityContextManager.getInstance().getHomeController().panicExitInvoked();
+            }
             else if(pEventType.equals(M_DOWNLOAD_SINGLE)){
                 activityContextManager.getInstance().getHomeController().onManualDownloadFileName((String)pData.get(2),(String)pData.get(0));
             }

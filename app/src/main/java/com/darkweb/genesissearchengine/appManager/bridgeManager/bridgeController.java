@@ -62,14 +62,17 @@ public class bridgeController extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        super.onConfigurationChanged(newConfig);
-
         theme.getInstance().onConfigurationChanged(this);
+        activityContextManager.getInstance().onResetTheme();
+        
+        super.onConfigurationChanged(newConfig);
     }
 
     public void initializeAppModel()
     {
-        activityContextManager.getInstance().onStack(this);
+        if(!status.mThemeApplying){
+            activityContextManager.getInstance().onStack(this);
+        }
         mBridgeViewController = new bridgeViewController();
     }
 
@@ -168,6 +171,7 @@ public class bridgeController extends AppCompatActivity {
     {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
+
         super.onResume();
     }
 

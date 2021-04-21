@@ -317,7 +317,8 @@ public class tabController extends Fragment
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                onExitAndClearBackup();
+                onClearTabBackup();
+                mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE,null);
                 boolean mStatus = onInitRemoveView(position, true, true);
                 if(mStatus){
                     mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.NOTIFY_SWIPE, Collections.singletonList(position));
@@ -378,7 +379,7 @@ public class tabController extends Fragment
             new Handler().postDelayed(() -> {
                 onSwipeBounce(0);
             }, 400);
-            return false;
+            return true;
         }else{
             onShowUndoDialog();
             mTabAdapter.notifyItemRangeChanged(pIndex, mTabAdapter.getItemCount() - pIndex);
@@ -446,8 +447,8 @@ public class tabController extends Fragment
     public void onClearTabBackup(){
         ArrayList<tabRowModel> mBackupIndex = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_GET_BACKUP,null);
         for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
+            mBackupIndex.get(mCounter).getSession().closeSessionInstant();
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mBackupIndex.get(mCounter).getSession(), mBackupIndex.get(mCounter).getmId()));
-            mBackupIndex.get(mCounter).getSession().closeSession();
         }
     }
 
@@ -551,9 +552,6 @@ public class tabController extends Fragment
             mRecycleView.animate().setDuration(250).alpha(0).withEndAction(() -> {
                 mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REMOVE_ALL, null);
                 onClearSelection(null);
-
-                onClearTabBackup();
-                mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE,null);
             });
         }
         else if(pView.getId() == R.id.pOpenSetting){
@@ -586,7 +584,7 @@ public class tabController extends Fragment
     }
 
 
-    public void onBackPressed() {
+    public boolean onBackPressed() {
         if(mTabAdapter!=null){
             boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
             onClearTabBackup();
@@ -594,8 +592,10 @@ public class tabController extends Fragment
             if(!mStatus){
                 mHomeController.onDisableTabViewController();
                 onClose();
+                return true;
             }
         }
+        return false;
     }
 
     /*Event Observer*/

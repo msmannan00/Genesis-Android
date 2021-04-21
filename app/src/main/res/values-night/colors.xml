@@ -44,7 +44,7 @@
     <color name="c_ripple_v1">#0c0b0e</color>
     <color name="c_ripple_v2">#18171c</color>
     <color name="c_ripple_v3">#24222a</color>
-    <color name="c_button_text">#1c1b21</color>
+    <color name="c_button_text">#b3b3b3</color>
     <color name="c_button_background">#3c3946</color>
     <color name="c_alert_background">#3c3946</color>
     <color name="c_view_divier_background_v1">#24222a</color>

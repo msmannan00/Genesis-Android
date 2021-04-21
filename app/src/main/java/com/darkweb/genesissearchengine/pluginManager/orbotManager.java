@@ -169,6 +169,10 @@ class orbotManager
     {
         String logs = orbotLocalConstants.mTorLogsStatus;
 
+        if(orbotLocalConstants.mTorLogsStatus.equals("No internet connection")){
+            return "Warning | " + orbotLocalConstants.mTorLogsStatus;
+        }
+
         if(!logs.contains("Bootstrapped") && !mLogsStarted){
             logs = "Initializing Bootstrap";
             mLogsStarted = true;

@@ -222,6 +222,16 @@ class messageManager
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
+    private void onPanic(){
+        initializeDialog(R.layout.popup_panic, Gravity.BOTTOM);
+        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.setOnDismissListener(dialog -> onClearReference());
+        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
+            mDialog.dismiss();
+            mEvent.invokeObserver(null, M_PANIC_RESET);
+        });
+    }
+
     private void dataClearedSuccessfully()
     {
         initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
@@ -630,6 +640,11 @@ class messageManager
                 case M_NOT_SUPPORTED:
                     /*VERIFIED*/
                     notSupportMessage();
+                    break;
+
+                case M_PANIC_RESET:
+                    /*VERIFIED*/
+                    onPanic();
                     break;
 
                 case M_DATA_CLEARED:

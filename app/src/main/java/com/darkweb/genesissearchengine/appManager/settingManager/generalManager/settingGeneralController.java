@@ -63,6 +63,10 @@ public class settingGeneralController extends AppCompatActivity {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
 
+        if(!mIsThemeChanging){
+            //activityContextManager.getInstance().onResetTheme();
+        }
+
         theme.getInstance().onConfigurationChanged(this);
     }
 

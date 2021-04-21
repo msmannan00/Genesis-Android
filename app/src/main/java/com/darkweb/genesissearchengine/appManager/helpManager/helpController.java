@@ -64,6 +64,9 @@ public class helpController extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         theme.getInstance().onConfigurationChanged(this);
+        activityContextManager.getInstance().onResetTheme();
+
+        super.onConfigurationChanged(newConfig);
     }
 
     private void initializeAppModel()
@@ -119,7 +122,9 @@ public class helpController extends AppCompatActivity {
 
         mSearchInput.setEventHandler(new edittextManagerCallback());
 
-        postToServerRunnable = () -> mHelpAdapter.onTrigger(helpEnums.eHelpAdapter.M_INIT_FILTER, Collections.singletonList(mSearchInput.getText().toString()));
+        if(mHelpAdapter!=null){
+            postToServerRunnable = () -> mHelpAdapter.onTrigger(helpEnums.eHelpAdapter.M_INIT_FILTER, Collections.singletonList(mSearchInput.getText().toString()));
+        }
 
         mSearchInput.addTextChangedListener(new TextWatcher() {
 

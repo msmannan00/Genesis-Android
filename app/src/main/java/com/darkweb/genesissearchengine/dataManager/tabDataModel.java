@@ -100,6 +100,7 @@ class tabDataModel
     void closeTab(geckoSession mSession,Object pID) {
         mSession.stop();
         mSession.close();
+
         if(pID == null){
             String mID = strings.GENERIC_EMPTY_STR;
             for(int counter = 0; counter< mTabs.size(); counter++){

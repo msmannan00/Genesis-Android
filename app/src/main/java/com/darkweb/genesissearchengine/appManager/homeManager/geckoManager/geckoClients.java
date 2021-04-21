@@ -384,24 +384,28 @@ public class geckoClients
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
-            if(e_type.equals(enums.etype.SESSION_ID)){
-                return mSession.getSessionID();
-            }
-            else if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
-            {
-                if (e_type.equals(on_handle_external_intent))
+            if(mSession!=null && mSession.isClosed()){
+                return null;
+            }else if(mSession!=null) {
+                if(e_type.equals(enums.etype.SESSION_ID)){
+                    return mSession.getSessionID();
+                }
+                else if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
                 {
-                    try {
-                        WebResponse responseInfo = (WebResponse)data.get(0);
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.headers.get("Content-Type"));
-                        activityContextManager.getInstance().getHomeController().startActivity(intent);
-                    }catch (Exception ex){
-                        Log.i("ex","ex");
+                    if (e_type.equals(on_handle_external_intent))
+                    {
+                        try {
+                            WebResponse responseInfo = (WebResponse)data.get(0);
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.headers.get("Content-Type"));
+                            activityContextManager.getInstance().getHomeController().startActivity(intent);
+                        }catch (Exception ex){
+                            Log.i("ex","ex");
+                        }
+                    } else
+                    {
+                        return event.invokeObserver(data, e_type);
                     }
-                } else
-                {
-                    return event.invokeObserver(data, e_type);
                 }
             }
             return null;

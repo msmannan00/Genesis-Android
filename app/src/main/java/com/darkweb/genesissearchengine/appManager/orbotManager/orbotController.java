@@ -53,6 +53,10 @@ public class orbotController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_settings_view);
 
+        if(!status.mThemeApplying){
+            activityContextManager.getInstance().onStack(this);
+        }
+
         viewsInitializations();
         onInitListener();
     }
@@ -60,9 +64,10 @@ public class orbotController extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        super.onConfigurationChanged(newConfig);
-
         theme.getInstance().onConfigurationChanged(this);
+        activityContextManager.getInstance().onResetTheme();
+
+        super.onConfigurationChanged(newConfig);
     }
 
     public void viewsInitializations() {
@@ -137,9 +142,6 @@ public class orbotController extends AppCompatActivity {
     {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_POST_UI,null);
-
-        activityContextManager.getInstance().onStack(this);
         super.onResume();
     }
 

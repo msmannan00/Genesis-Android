@@ -428,6 +428,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/pGenesisLogo"
                     app:srcCompat="@drawable/sheild_logo_bordered" />
 
+                <ImageButton
+                    android:id="@+id/pPanicButton"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:adjustViewBounds="true"
+                    android:alpha="1"
+                    android:background="@xml/hox_rounded_corner_splash_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="panicExit"
+                    android:padding="7dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/reset"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/pInfo2"
                     android:layout_width="wrap_content"

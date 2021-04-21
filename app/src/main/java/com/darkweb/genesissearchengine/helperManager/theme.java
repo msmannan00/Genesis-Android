@@ -22,10 +22,10 @@ public class theme {
 
     public void onConfigurationChanged(AppCompatActivity pContext){
         boolean sDefaultNightMode = (pContext.getApplicationContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
-        if(status.sDefaultNightMode != sDefaultNightMode){
+        // if(status.sDefaultNightMode != sDefaultNightMode){
             setupThemeLocal(pContext, sDefaultNightMode);
             pContext.recreate();
-        }
+        // }
     }
 
     public void setupThemeLocal(Context context, boolean sDefaultNightMode) {

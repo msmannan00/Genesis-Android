@@ -48,6 +48,7 @@ public class settingSearchController extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
+        activityContextManager.getInstance().onResetTheme();
 
         theme.getInstance().onConfigurationChanged(this);
     }

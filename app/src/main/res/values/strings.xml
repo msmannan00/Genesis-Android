@@ -241,6 +241,12 @@
     <string name="ALERT_ORBOT_INIT" translatable="true">Initializing Orbot</string>
     <string name="ALERT_NOT_SUPPORTED" translatable="true">Action not supported</string>
     <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">No application found to handle the following command</string>
+
+    <string name="ALERT_PANIC" translatable="true">Troubleshoot | Genesis</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Reset application in case if its not working. We will try to reconfigure it so it might work again. \n\n⚠️ Warning! it will clear Genesis app data</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Reset</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Dismiss</string>
+
     <string name="ALERT_WELCOME_MESSAGE" translatable="true">Welcome | Hidden  Web Gateway</string>
     <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">This application provide you a platform to search and open hidden web urls. Here are few suggestions\n</string>
     <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">Deep Web Online Market</string>

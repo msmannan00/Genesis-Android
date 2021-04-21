@@ -76,6 +76,8 @@ import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
+
+import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.torproject.android.service.OrbotService;
@@ -104,6 +106,7 @@ import static com.darkweb.genesissearchengine.constants.enums.etype.open_new_tab
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static java.lang.Character.isLetter;
+import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
 public class homeController extends AppCompatActivity implements ComponentCallbacks2
 {
@@ -127,6 +130,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private TextView mLoadingText;
     private AdView mBannerAds = null;
     private ImageButton mGatewaySplash;
+    private ImageButton mPanicButton;
     private LinearLayout mTopBar;
     private ImageView mBackSplash;
     private Button mConnectButton;
@@ -433,13 +437,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mNewTabBlocker = findViewById(R.id.pNewTabBlocker);
         mCoordinatorLayout = findViewById(R.id.pCoordinatorLayout);
         mImageDivider = findViewById(R.id.pImageDivider);
+        mPanicButton = findViewById(R.id.pPanicButton);
 
         mGeckoView.setSaveEnabled(false);
         mGeckoView.setSaveFromParentEnabled(false);
         mGeckoView.setAutofillEnabled(true);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mPopupLoadNewTab, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider);
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mPopupLoadNewTab, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton);
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,false);
         mGeckoClient.onValidateInitializeFromStartup(mGeckoView, homeController.this);
@@ -1211,10 +1216,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(activityContextManager.getInstance().getTabController().isSelectionOpened()){
                 activityContextManager.getInstance().getTabController().onClearSelection(null);
             }else {
+                boolean mStatus = activityContextManager.getInstance().getTabController().onBackPressed();
                 onResumeDump();
-                mHomeViewController.onHideTabContainer();
                 activityContextManager.getInstance().getTabController().onPostExit();
-                activityContextManager.getInstance().getTabController().onBackPressed();
+                if(!mStatus){
+                    mHomeViewController.onHideTabContainer();
+                }
             }
             return;
         }
@@ -1368,7 +1375,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         pluginController.getInstance().onNotificationInvoke(null, pluginEnums.eNotificationManager.M_CLEAR_NOTIFICATION );
 
         if(!status.mThemeApplying){
-            activityContextManager.getInstance().onClearStack();
+            //activityContextManager.getInstance().onClearStack();
         }
         initWidget();
         initTabCountForced();
@@ -1378,6 +1385,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.onUpdateSearchEngineBar(false, 0);
             mNewTab.setPressed(false);
             pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
+        }
+
+        if(status.sSettingIsAppStarted && !status.mThemeApplying){
+            if(mGeckoClient.getSession().wasPreviousErrorPage()){
+                mGeckoClient.onReload(mGeckoView, this);
+            }
         }
 
         status.mThemeApplying = false;
@@ -1745,6 +1758,60 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onOrbotLog(View view) {
         mHomeViewController.closeMenu();
         helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this,true);
+    }
+
+    public void panicExit(View view) {
+        pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
+        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_PANIC_RESET);
+    }
+
+    public void panicExitInvoked() {
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,false));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.VPN_ENABLED,false));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES,false));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ZOOM,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_VOICE_INPUT,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_TRACKING_PROTECTION, ContentBlocking.AntiTracking.DEFAULT));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_DONOT_TRACK,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,ACCEPT_FIRST_PARTY));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_FLOAT, Arrays.asList(keys.SETTING_FONT_SIZE,100));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE, strings.SETTING_DEFAULT_LANGUAGE));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE_REGION,strings.SETTING_DEFAULT_LANGUAGE_REGION));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS,1));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_RESTORE_TAB,false));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_CHARACTER_ENCODING,false));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,0));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME, enums.Theme.THEME_DEFAULT));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
+
+        status.sSettingIsAppStarted = false;
+        finishAndRemoveTask();
+
+        new Thread(){
+            public void run(){
+                try {
+                    sleep(1000);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     public class nestedGeckoViewCallback implements eventObserver.eventListener{

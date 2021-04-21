@@ -113,6 +113,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private boolean isFirstPaintExecuted = false;
     private boolean mIsProgressBarChanging = false;
     private Handler mFindHandler;
+    private boolean mClosed = false;
 
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
@@ -562,7 +563,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     @UiThread
     public void onCloseRequest(@NonNull GeckoSession var1) {
-        if(!canGoBack()){
+        if(!canGoBack() && !mClosed){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.back_list_empty);
         }
     }
@@ -570,33 +571,37 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     int mCrashCount = 0;
     @UiThread
     public void onCrash(@NonNull GeckoSession session) {
-        String mSessionID = (String) event.invokeObserver(null, enums.etype.SESSION_ID);
-        if(mSessionID.equals(getSessionID())){
-            if(mCrashCount<=5){
-                final Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    if(!session.isOpen()){
-                        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.M_OPEN_SESSION);
-                    }
-                }, mCrashCount*500);
+        if(!mClosed){
+            String mSessionID = (String) event.invokeObserver(null, enums.etype.SESSION_ID);
+            if(mSessionID.equals(getSessionID())){
+                if(mCrashCount<=5){
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        if(!session.isOpen()){
+                            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.M_OPEN_SESSION);
+                        }
+                    }, mCrashCount*500);
+                }
+                mCrashCount+=1;
             }
-            mCrashCount+=1;
         }
     }
 
     @UiThread
     public void onKill(@NonNull GeckoSession session) {
-        String mSessionID = (String) event.invokeObserver(null, enums.etype.SESSION_ID);
-        if(mSessionID.equals(getSessionID())){
-            if(mCrashCount<=5){
-                final Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    if(!session.isOpen()){
-                        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.M_OPEN_SESSION);
-                    }
-                }, mCrashCount*500);
+        if(!mClosed){
+            String mSessionID = (String) event.invokeObserver(null, enums.etype.SESSION_ID);
+            if(mSessionID.equals(getSessionID())){
+                if(mCrashCount<=5){
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        if(!session.isOpen()){
+                            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.M_OPEN_SESSION);
+                        }
+                    }, mCrashCount*500);
+                }
+                mCrashCount+=1;
             }
-            mCrashCount+=1;
         }
     }
 
@@ -700,6 +705,10 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private boolean createAndSaveFileFromBase64Url(String url) {
 
         try{
+            if(!url.startsWith("data") && !url.startsWith("blob")){
+                return false;
+            }
+
             File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 
             String filetype;
@@ -855,7 +864,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         return mCanGoBack;
     }
 
-    boolean wasPreviousErrorPage(){
+    public boolean wasPreviousErrorPage(){
         return mPreviousErrorPage;
     }
 
@@ -881,6 +890,16 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     public void closeSession(){
         event.invokeObserver(Arrays.asList(null,mSessionID), enums.etype.on_close_sesson);
+    }
+
+    public void closeSessionInstant(){
+        mSessionID = "-1";
+        mClosed = true;
+        close();
+    }
+
+    public boolean isClosed(){
+        return mClosed;
     }
 
     GeckoResult<FinderResult> mFinder = null;

@@ -14,14 +14,6 @@ import java.util.List;
 public class ProxySelector {
 
     public static URLConnection openConnectionWithProxy(final URI uri) throws IOException {
-        final java.net.ProxySelector ps = java.net.ProxySelector.getDefault();
-        Proxy proxy = Proxy.NO_PROXY;
-        if (ps != null) {
-            final List<Proxy> proxies = ps.select(uri);
-            if (proxies != null && !proxies.isEmpty()) {
-                proxy = proxies.get(0);
-            }
-        }
 
         return uri.toURL().openConnection(ProxySettings.getProxy());
     }
