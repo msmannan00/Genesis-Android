@@ -14,7 +14,7 @@
     <string name="GENERAL_LOADING" translatable="true">tự do kỹ thuật số</string>
     <string name="GENERAL_RELOAD" translatable="true">tải lại</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">bạn đang phải đối mặt với một trong những vấn đề sau. trang web hoặc trang web có thể không hoạt động. kết nối internet của bạn có thể kém. bạn có thể đang sử dụng proxy. trang web có thể bị tường lửa chặn</string>
-    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.fileprovider</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel lại tấn công</string>
 
 

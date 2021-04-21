@@ -6,7 +6,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,26 +17,28 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
-
+import com.darkweb.genesissearchengine.netcipher.client.StrongHttpsClient;
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import org.torproject.android.service.util.Prefs;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Objects;
+import java.net.URLEncoder;
 
-import javax.net.ssl.HttpsURLConnection;
-
+import ch.boye.httpclientandroidlib.HttpResponse;
+import ch.boye.httpclientandroidlib.client.methods.HttpGet;
 import static java.lang.Thread.sleep;
 
 
@@ -53,8 +54,8 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
     private String PROXY_ADDRESS = "localhost";
     private int PROXY_PORT = 9050;
 
-    private int mID = 123;
-    private String mFileName="";
+    private int mID;
+    private String mFileName;
     private float mTotalByte;
     private float mDownloadByte;
     private String mURL;
@@ -119,51 +120,99 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... f_url) {
         int count;
-        try {
-            URL url = new URL(f_url[0]);
-            Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, PROXY_PORT));
-            URLConnection conection;
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            try {
+                URL url = new URL(f_url[0]);
+                Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, PROXY_PORT));
+                URLConnection conection;
 
-            conection = url.openConnection(proxy);
-            //conection = (HttpsURLConnection)ProxySelector.openConnectionWithProxy(new URI(f_url[0]));
+                conection = url.openConnection(proxy);
+                //conection = (HttpsURLConnection)ProxySelector.openConnectionWithProxy(new URI(f_url[0]));
 
-            conection.connect();
-            int lenghtOfFile = conection.getContentLength();
+                conection.connect();
+                int lenghtOfFile = conection.getContentLength();
 
-            mStream = conection.getInputStream();
-            // Output stream
-            output = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/"+mFileName));
-            byte[] data = new byte[100000];
+                mStream = conection.getInputStream();
+                // Output stream
+                output = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/"+mFileName));
+                byte[] data = new byte[100000];
 
-            long total = 0;
+                long total = 0;
 
-            mTotalByte = lenghtOfFile;
-            while ((count = mStream.read(data)) != -1) {
-                total += count;
-                int cur = (int) ((total * 100) / lenghtOfFile);
-                mDownloadByte = cur;
-                publishProgress(Math.min(cur, 100));
-                if (Math.min(cur, 100) > 98) {
-                    sleep(500);
+                mTotalByte = lenghtOfFile;
+                while ((count = mStream.read(data)) != -1) {
+                    total += count;
+                    int cur = (int) ((total * 100) / lenghtOfFile);
+                    mDownloadByte = cur;
+                    publishProgress(Math.min(cur, 100));
+                    if (Math.min(cur, 100) > 98) {
+                        sleep(500);
+                    }
+                    Log.i("currentProgress", "currentProgress: " + Math.min(cur, 100) + "\n " + cur);
+
+                    output.write(data, 0, count);
+
                 }
-                Log.i("currentProgress", "currentProgress: " + Math.min(cur, 100) + "\n " + cur);
 
-                output.write(data, 0, count);
+                build.setContentText("saving file");
+                build.setSmallIcon(android.R.drawable.stat_sys_download);
+                mNotifyManager.notify(mID, build.build());
 
+                output.flush();
+                output.close();
+                mStream.close();
+
+            } catch (Exception ex) {
+                onCancel();
             }
+        }else {
+            try {
+                String ALLOWED_URI_CHARS = "@#&=*+-_.,:!?()/~'%";
+                String urlEncoded = Uri.encode(f_url[0], ALLOWED_URI_CHARS);
 
-            build.setContentText("saving file");
-            build.setSmallIcon(android.R.drawable.stat_sys_download);
-            mNotifyManager.notify(mID, build.build());
+                StrongHttpsClient httpclient = new StrongHttpsClient(context);
 
-            output.flush();
-            output.close();
-            mStream.close();
+                httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9050);
 
-        } catch (Exception ex) {
-            onCancel();
+                HttpGet httpget = new HttpGet(urlEncoded);
+                HttpResponse response = httpclient.execute(httpget);
+
+                StringBuffer sb = new StringBuffer();
+                sb.append(response.getStatusLine()).append("\n\n");
+
+                InputStream mStream = response.getEntity().getContent();
+
+                output = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/"+mFileName));
+                byte[] data = new byte[100000];
+
+                long total = 0;
+
+                mTotalByte = response.getEntity().getContentLength();
+                int read;
+                while ((read = mStream.read(data)) != -1) {
+                    total += read;
+                    int cur = (int) ((total * 100) / response.getEntity().getContentLength());
+                    mDownloadByte = cur;
+                    publishProgress(Math.min(cur, 100));
+                    if (Math.min(cur, 100) > 98) {
+                        sleep(500);
+                    }
+
+                    Log.i("currentProgress", "currentProgress: " + Math.min(cur, 100) + "\n " + cur);
+                    output.write(data, 0, read);
+                }
+
+                build.setContentText("saving file");
+                build.setSmallIcon(android.R.drawable.stat_sys_download);
+                mNotifyManager.notify(mID, build.build());
+
+                output.flush();
+                output.close();
+                mStream.close();
+            }catch (Exception ex){
+                Log.d("sda", "dsa");
+            }
         }
-
         return null;
     }
 

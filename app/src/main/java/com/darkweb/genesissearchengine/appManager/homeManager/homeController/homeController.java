@@ -35,6 +35,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
@@ -703,6 +704,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(!status.sSettingIsAppStarted){
             Intent intent = new Intent(getApplicationContext(), OrbotService.class);
             stopService(intent);
+        }else {
+            NotificationManagerCompat.from(this).cancelAll();
         }
 
 
@@ -1389,6 +1392,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         if(status.sSettingIsAppStarted && !status.mThemeApplying){
             if(mGeckoClient.getSession().wasPreviousErrorPage()){
+                pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);
                 mGeckoClient.onReload(mGeckoView, this);
             }
         }
