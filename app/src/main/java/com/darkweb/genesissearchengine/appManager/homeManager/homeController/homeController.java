@@ -138,6 +138,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private Button mNewTab;
     private View mFindBar;
     private View mSearchEngineBar;
+    private ImageView mGenesisLogo;
     private EditText mFindText;
     private TextView mFindCount;
     private ImageButton mVoiceInput;
@@ -439,13 +440,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mCoordinatorLayout = findViewById(R.id.pCoordinatorLayout);
         mImageDivider = findViewById(R.id.pImageDivider);
         mPanicButton = findViewById(R.id.pPanicButton);
+        mGenesisLogo = findViewById(R.id.pGenesisLogo);
 
         mGeckoView.setSaveEnabled(false);
         mGeckoView.setSaveFromParentEnabled(false);
         mGeckoView.setAutofillEnabled(true);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mPopupLoadNewTab, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton);
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mPopupLoadNewTab, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton, mGenesisLogo);
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,false);
         mGeckoClient.onValidateInitializeFromStartup(mGeckoView, homeController.this);
@@ -806,6 +808,19 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mGeckoView.setOnTouchListener((v, event) -> {
             mHomeViewController.onClearSelections(true);
+            if (event.getAction() == MotionEvent.ACTION_DOWN)
+                mGatewaySplash.setElevation(9);
+            else if (event.getAction() == MotionEvent.ACTION_UP){
+                int[] location = new int[2];
+                mTopLayout.getLocationOnScreen(location);
+                int y = location[1];
+                if(y<=-12){
+                    mAppBar.setExpanded(false,true);
+                }else {
+                    mAppBar.setExpanded(true,true);
+                }
+            }
+
             return false;
         });
 
@@ -945,8 +960,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mNestedScroll.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if(v.getChildAt(v.getChildCount() - 1) != null) {
-                if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
-                        scrollY > oldScrollY) {
+                if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&  scrollY > oldScrollY) {
                 }
             }
         });
@@ -1646,9 +1660,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if (menuId == R.id.pMenuOpenRecentTab)
             {
-                activityContextManager.getInstance().getTabController().onInit();
-                mHomeViewController.onShowTabContainer();
-                // overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
+                onOpenTabViewBoundary(null);
+                mNewTab.setPressed(true);
             }
             else if (menuId == R.id.pMenuOpenNewTab)
             {
@@ -1659,6 +1672,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             {
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);
                 pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_NEW_IDENTITY);
+                mGeckoClient.onReload(mGeckoView, this);
             }
             else if (menuId == R.id.pMenuOpenCurrentTab)
             {

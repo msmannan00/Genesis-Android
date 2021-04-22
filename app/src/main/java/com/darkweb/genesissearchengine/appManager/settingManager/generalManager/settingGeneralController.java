@@ -64,10 +64,12 @@ public class settingGeneralController extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
 
         if(!mIsThemeChanging){
-            //activityContextManager.getInstance().onResetTheme();
+            if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+                activityContextManager.getInstance().onResetTheme();
+                theme.getInstance().onConfigurationChanged(this);
+            }
         }
 
-        theme.getInstance().onConfigurationChanged(this);
     }
 
     private void viewsInitializations() {

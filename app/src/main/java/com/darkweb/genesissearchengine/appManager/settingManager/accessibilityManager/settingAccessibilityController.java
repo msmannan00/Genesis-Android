@@ -60,9 +60,10 @@ public class settingAccessibilityController  extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
-        activityContextManager.getInstance().onResetTheme();
-
-        theme.getInstance().onConfigurationChanged(this);
+        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+            activityContextManager.getInstance().onResetTheme();
+            theme.getInstance().onConfigurationChanged(this);
+        }
     }
 
     private void viewsInitializations() {

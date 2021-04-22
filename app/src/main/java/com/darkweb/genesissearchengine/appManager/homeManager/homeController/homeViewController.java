@@ -107,6 +107,7 @@ class homeViewController
     private CoordinatorLayout mCoordinatorLayout;
     private ImageView mImageDivider;
     private ImageButton mPanicButton;
+    private ImageView mGenesisLogo;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
@@ -116,7 +117,7 @@ class homeViewController
     private Handler mTabDialogHandler = null;
     private Runnable mTabDialogRunnable = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -156,6 +157,7 @@ class homeViewController
         this.mCoordinatorLayout = mCoordinatorLayout;
         this.mImageDivider = pImageDivider;
         this.mPanicButton = pPanicButton;
+        this.mGenesisLogo = pGenesisLogo;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -164,6 +166,7 @@ class homeViewController
         initializeViews();
     }
 
+    @SuppressLint("WrongConstant")
     public void initializeViews(){
         mSearchbar.setTag(R.id.msearchbarProcessing,false);
         mNestedScroll.setNestedScrollingEnabled(true);
@@ -194,6 +197,21 @@ class homeViewController
 
         onClearSelections(false);
         mGeckoView.requestFocus();
+
+
+        mContext.runOnUiThread(() -> {
+            if(helperMethod.getScreenHeight(mContext)<1000){
+
+                ConstraintLayout.LayoutParams newLayoutParams1 = (ConstraintLayout.LayoutParams) mImageDivider.getLayoutParams();
+                newLayoutParams1.bottomMargin = helperMethod.pxFromDp(200);
+                mImageDivider.setLayoutParams(newLayoutParams1);
+
+
+                ConstraintLayout.LayoutParams newLayoutParams = (ConstraintLayout.LayoutParams) mGenesisLogo.getLayoutParams();
+                newLayoutParams.topMargin = helperMethod.pxFromDp(80);
+                mGenesisLogo.setLayoutParams(newLayoutParams);
+            }
+        });
     }
 
     @SuppressLint("WrongConstant")

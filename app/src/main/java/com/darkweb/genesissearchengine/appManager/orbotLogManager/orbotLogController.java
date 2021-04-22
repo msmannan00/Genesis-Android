@@ -67,8 +67,10 @@ public class orbotLogController extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        theme.getInstance().onConfigurationChanged(this);
-        activityContextManager.getInstance().onResetTheme();
+        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+            activityContextManager.getInstance().onResetTheme();
+            theme.getInstance().onConfigurationChanged(this);
+        }
 
         super.onConfigurationChanged(newConfig);
     }

@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.historyManager.historyEnums;
 import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -47,7 +46,6 @@ import java.util.List;
 import java.util.Objects;
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_BOOKMARK;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_HISTORY;
 
 
 public class bookmarkController extends AppCompatActivity
@@ -88,9 +86,12 @@ public class bookmarkController extends AppCompatActivity
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
-        activityContextManager.getInstance().onResetTheme();
 
-        theme.getInstance().onConfigurationChanged(this);
+        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+            activityContextManager.getInstance().onResetTheme();
+            theme.getInstance().onConfigurationChanged(this);
+        }
+
     }
 
     public void initializeListModel(){
