@@ -1479,14 +1479,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 handler.postDelayed(() ->  mGeckoView.clearFocus(), 500);
             }
         }
-        else if(requestCode == 7777){
-            if(resultCode == RESULT_OK){
-                status.sVPNPermission = true;
-                onStartVPNApplication();
-            }else {
-                status.sVPNPermission = false;
-            }
-        }
+
         else if(requestCode==1){
             mGeckoClient.onUploadRequest(resultCode,data);
         }
@@ -1521,17 +1514,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onStartApplication(View view){
-        Intent intentVPN = VpnService.prepare(this);
-        if(status.sVPNStatus && intentVPN!=null){
-            startActivityForResult(intentVPN, REQUEST_VPN);
-        }else{
-            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_START_ORBOT);
-            onInvokeProxyLoading();
-            mHomeViewController.initHomePage();
-        }
-    }
-
-    public void onStartVPNApplication(){
         pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_START_ORBOT);
         onInvokeProxyLoading();
         mHomeViewController.initHomePage();

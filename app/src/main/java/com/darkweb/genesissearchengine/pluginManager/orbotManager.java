@@ -1,21 +1,19 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import android.content.Intent;
-import android.net.VpnService;
 import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.proxy.OrbotService;
-import org.torproject.android.proxy.TorServiceConstants;
 import org.torproject.android.proxy.util.Prefs;
 import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
+
 import static org.torproject.android.proxy.TorServiceConstants.ACTION_START;
-import static org.torproject.android.proxy.TorServiceConstants.ACTION_START_VPN;
-import static org.torproject.android.proxy.TorServiceConstants.REQUEST_VPN;
 
 // https://github.com/guardianproject/orbot/blob/8fca5f8ecddb4da9565ac3fd8936e4f28acdd352/BUILD.md
 class orbotManager
@@ -48,29 +46,18 @@ class orbotManager
         orbotLocalConstants.mBridges = status.sBridgeCustomBridge;
         orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
         orbotLocalConstants.mManualBridgeType = status.sBridgeCustomType;
-        orbotLocalConstants.mBridgesDefault = status.sBridgesDefault;
         Prefs.putBridgesEnabled(status.sBridgeStatus);
-        isVPNEnabled();
+        Intent mServiceIntent = new Intent(mAppContext.get(), OrbotService.class);
+        mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //mAppContext.get().getApplicationContext().startForegroundService(mServiceIntent);
+            mAppContext.get().getApplicationContext().startForegroundService(mServiceIntent);
         }
         else
         {
-            //mAppContext.get().getApplicationContext().startService(mServiceIntent);
+            mAppContext.get().getApplicationContext().startService(mServiceIntent);
         }
 
         initializeProxy();
-    }
-
-    private void sendIntentToService(final String action) {
-        Intent intent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
-        intent.setAction(action);
-        mAppContext.get().startService(intent);
-    }
-
-    public void isVPNEnabled(){
-        sendIntentToService(TorServiceConstants.ACTION_START);
-        sendIntentToService(TorServiceConstants.ACTION_START_VPN);
     }
 
     /*Helper Methods*/
