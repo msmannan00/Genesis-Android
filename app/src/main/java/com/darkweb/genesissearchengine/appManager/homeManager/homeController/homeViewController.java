@@ -48,7 +48,7 @@ import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
 import org.mozilla.geckoview.GeckoView;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -1028,6 +1028,7 @@ class homeViewController
         }
     }
 
+    @SuppressLint("WrongConstant")
     public void onUpdateSearchEngineBar(boolean pStatus, int delay)
     {
         if(pStatus){
@@ -1275,6 +1276,7 @@ class homeViewController
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
                 mContext.getWindow().getDecorView().setSystemUiVisibility(flags);
+                mContext.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
                 mProgressBar.setVisibility(View.GONE);
                 mTopBar.setVisibility(View.GONE);
@@ -1320,6 +1322,7 @@ class homeViewController
             }
 
             this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(0).withEndAction(() -> mBlockerFullSceen.setVisibility(View.GONE));
+            mContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             initTopBarPadding();
             mAppBar.setExpanded(true,false);
             mAppBar.refreshDrawableState();

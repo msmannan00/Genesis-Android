@@ -22,7 +22,7 @@ import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.netcipher.client.StrongHttpsClient;
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
-import org.torproject.android.service.util.Prefs;
+import org.torproject.android.proxy.util.Prefs;
 
 import java.io.BufferedReader;
 import java.io.File;

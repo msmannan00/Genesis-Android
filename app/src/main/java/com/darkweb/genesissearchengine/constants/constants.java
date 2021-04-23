@@ -24,6 +24,7 @@ public class constants
     public static final String CONST_GENESIS_ERROR_CACHED_DARK = "error/error-dark.html";
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://boogle.store/";
     public static final String CONST_GENESIS_REFERENCE_WEBSITES = "https://drive.google.com/uc?export=download&id=1lOmukKOPYHApBFyTDkaRPoAwm59E_YEE";
+    public static final String CONST_GENESIS_BRIDGE_WEBSITES = "https://drive.google.com/uc?export=download&id=1EIX0ERNxDesCv8yc65reEn4LV6Y1PjbR";
     public static final String CONST_GENESIS_DOMAIN_URL = "https://boogle.store";
     public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pGlobalTimeVerificationToken";

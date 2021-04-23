@@ -23,6 +23,7 @@ public class dataController
     private suggestionDataModel mSuggestionDataModel;
     private helpDataModel mHelpDataModel;
     private referenceWebsiteDataModel mReferenceWebsiteDataModel;
+    private bridgesDataModel mBridgeWebsiteDataModel;
 
     /*Private Declarations*/
 
@@ -43,9 +44,11 @@ public class dataController
         mSuggestionDataModel = new suggestionDataModel(pAppContext);
         mHelpDataModel = new helpDataModel();
         mReferenceWebsiteDataModel = new referenceWebsiteDataModel();
+        mBridgeWebsiteDataModel = new bridgesDataModel();
     }
     public void initializeListData(){
         mReferenceWebsiteDataModel.onTrigger(dataEnums.eReferenceWebsiteCommands.M_LOAD,Collections.singletonList(activityContextManager.getInstance().getHomeController()));
+        mBridgeWebsiteDataModel.onTrigger(dataEnums.eBridgeWebsiteCommands.M_LOAD,Collections.singletonList(activityContextManager.getInstance().getHomeController()));
         mBookmarkDataModel.initializebookmark(databaseController.getInstance().selectBookmark());
         if(!status.sClearOnExit)
         {

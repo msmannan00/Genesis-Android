@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.net.VpnService;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,7 +44,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
-import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
 import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
@@ -81,10 +81,10 @@ import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
-import org.torproject.android.service.OrbotService;
-import org.torproject.android.service.util.Prefs;
-import org.torproject.android.service.wrapper.LocaleHelper;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.OrbotService;
+import org.torproject.android.proxy.util.Prefs;
+import org.torproject.android.proxy.wrapper.LocaleHelper;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -108,6 +108,7 @@ import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessage
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static java.lang.Character.isLetter;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
+import static org.torproject.android.proxy.TorServiceConstants.REQUEST_VPN;
 
 public class homeController extends AppCompatActivity implements ComponentCallbacks2
 {
@@ -1478,6 +1479,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 handler.postDelayed(() ->  mGeckoView.clearFocus(), 500);
             }
         }
+        else if(requestCode == 7777){
+            if(resultCode == RESULT_OK){
+                status.sVPNPermission = true;
+                onStartVPNApplication();
+            }else {
+                status.sVPNPermission = false;
+            }
+        }
         else if(requestCode==1){
             mGeckoClient.onUploadRequest(resultCode,data);
         }
@@ -1512,6 +1521,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onStartApplication(View view){
+        Intent intentVPN = VpnService.prepare(this);
+        if(status.sVPNStatus && intentVPN!=null){
+            startActivityForResult(intentVPN, REQUEST_VPN);
+        }else{
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_START_ORBOT);
+            onInvokeProxyLoading();
+            mHomeViewController.initHomePage();
+        }
+    }
+
+    public void onStartVPNApplication(){
         pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_START_ORBOT);
         onInvokeProxyLoading();
         mHomeViewController.initHomePage();

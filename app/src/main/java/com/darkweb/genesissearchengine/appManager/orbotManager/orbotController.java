@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.VpnService;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;

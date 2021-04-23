@@ -194,11 +194,6 @@
             android:exported="false"
             android:stopWithTask="true" />
         <service
-            android:name="org.torproject.android.service.OrbotService"
-            android:enabled="true"
-            android:exported="false"
-            android:stopWithTask="true" />
-        <service
             android:name="com.darkweb.genesissearchengine.helperManager.OnClearFromRecentService"
             android:stopWithTask="true" />
 
@@ -208,16 +203,6 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="Download_Cancelled" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="org.torproject.android.service.StartTorReceiver"
-            android:exported="true"
-            android:permission="TODO"
-            android:stopWithTask="true"
-            tools:ignore="ExportedReceiver">
-            <intent-filter>
-                <action android:name="org.torproject.android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
 
@@ -230,6 +215,26 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <receiver
+            android:name="org.torproject.android.proxy.StartTorReceiver"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="org.torproject.android.intent.action.START" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="org.torproject.android.proxy.OrbotService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

@@ -2,9 +2,8 @@ package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import org.torproject.android.service.wrapper.logRowModel;
+import org.torproject.android.proxy.wrapper.logRowModel;
 import java.util.ArrayList;
-import java.util.Collections;
 
 class orbotLogModel
 {

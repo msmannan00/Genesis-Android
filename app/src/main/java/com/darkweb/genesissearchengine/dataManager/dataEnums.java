@@ -15,6 +15,10 @@ public class dataEnums
         M_LOAD, M_FETCH;
     }
 
+    public enum eBridgeWebsiteCommands {
+        M_LOAD, M_FETCH;
+    }
+
     public enum ePreferencesCommands{
         M_SET_STRING, M_SET_BOOL, M_SET_INT, M_SET_FLOAT, M_GET_STRING, M_GET_BOOL, M_GET_INT, M_GET_FLOAT, M_CLEAR_PREFS
     }

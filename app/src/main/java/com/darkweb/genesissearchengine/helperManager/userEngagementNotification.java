@@ -18,7 +18,7 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.example.myapplication.R;
 
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 
 import java.util.Random;
 

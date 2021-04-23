@@ -1,3 +1,4 @@
+include ':intentintegrator'
 include ':httpclient'
 include ':chromiumTabs'
 include ':autofillLib'
