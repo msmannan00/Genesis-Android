@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.historyManager;
 
+import android.os.Handler;
 import android.widget.ImageView;
 import java.util.Calendar;
 import java.util.Date;

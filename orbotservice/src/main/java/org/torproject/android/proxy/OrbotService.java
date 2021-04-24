@@ -73,8 +73,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.StringReader;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,22 +91,21 @@ import java.util.concurrent.TimeoutException;
 import IPtProxy.IPtProxy;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static org.torproject.android.proxy.wrapper.orbotLocalConstants.mBridgesDefault;
 
 public class OrbotService extends VpnService implements TorServiceConstants, OrbotConstants {
 
     public final static String BINARY_TOR_VERSION = org.torproject.android.binary.TorServiceConstants.BINARY_TOR_VERSION;
-    static final int NOTIFY_ID = 11;
+    static final int NOTIFY_ID = 1;
     private final static int CONTROL_SOCKET_TIMEOUT = 60000;
     private boolean mConnectivity = true;
-    private static final int ERROR_NOTIFY_ID = 31;
-    private static final int HS_NOTIFY_ID = 41;
+    private static final int ERROR_NOTIFY_ID = 3;
+    private static final int HS_NOTIFY_ID = 4;
     private Notification mNotification;
     private static final Uri V2_HS_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.hiddenservices.providers/hs");
     private static final Uri V3_ONION_SERVICES_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.v3onionservice/v3");
     private static final Uri COOKIE_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.hiddenservices.providers.cookie/cookie");
-    private static final Uri V3_CLIENT_AUTH_URI = Uri.parse("content://org.torproject.android.ui.v3onionservice.clientauth/v3auth");
-    private final static String NOTIFICATION_CHANNEL_ID = "genesis_channel_1";
+    private static final Uri V3_CLIENT_AUTH_URI = Uri.parse("content://com.darkweb.genesissearchengine.clientauth.ClientAuthContentProvider/v3auth");
+    private final static String NOTIFICATION_CHANNEL_ID = "orbot_channel_1";
     private static final String[] LEGACY_V2_ONION_SERVICE_PROJECTION = new String[]{
             OnionService._ID,
             OnionService.NAME,
@@ -237,9 +234,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createNotificationChannel() {
-        if(1==1){
-            return;
-        }
         if(orbotLocalConstants.mNotificationStatus==1) {
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -258,9 +252,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     @SuppressLint({"NewApi", "RestrictedApi"})
     protected void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
-        if(1==1){
-            return;
-        }
         //if(orbotLocalConstants.mNotificationStatus==1){
             PackageManager pm = getPackageManager();
             Intent intent = pm.getLaunchIntentForPackage(getPackageName());
@@ -981,12 +972,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     protected void exec(Runnable runn) {
-        try {
-            new Thread(runn).start();
-        }catch (Exception ex){
-            ex.printStackTrace();
-            Log.i("","");
-        }
+        mExecutor.execute(runn);
     }
 
     private int exec(String cmd, boolean wait) throws Exception {
@@ -1635,8 +1621,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             alBridges = new ArrayList<>();
 
             try {
-                Reader inputString = new StringReader(mBridgesDefault);
-                BufferedReader in = new BufferedReader(inputString);
+                BufferedReader in = new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.bridges), "UTF-8"));
                 String str;
 
                 while ((str = in.readLine()) != null) {

@@ -108,7 +108,6 @@ import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessage
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static java.lang.Character.isLetter;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
-import static org.torproject.android.proxy.TorServiceConstants.REQUEST_VPN;
 
 public class homeController extends AppCompatActivity implements ComponentCallbacks2
 {
@@ -964,6 +963,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&  scrollY > oldScrollY) {
                 }
             }
+            onInvokePixelGenerator();
         });
     }
 
@@ -1323,6 +1323,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onClearSelections(true);
             }
             pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
+            mHomeViewController.onClearSelections(true);
+            mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true, true);
     }
 
     @Override
@@ -1381,6 +1383,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     onLoadURL(model.getSession().getCurrentURL());
                 }
             }
+        }
+
+        if(status.sSettingIsAppStarted){
+            mHomeViewController.onClearSelections(isKeyboardOpened);
         }
 
         if(mAppBar!=null){
@@ -2055,10 +2061,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, true));
                     }
                 }
-            }, 150);
+            }, 400);
 
         };
-        mScrollHandler.postDelayed(mScrollRunnable, 250);
+        mScrollHandler.postDelayed(mScrollRunnable, 450);
     }
 
     public class geckoViewCallback implements eventObserver.eventListener{

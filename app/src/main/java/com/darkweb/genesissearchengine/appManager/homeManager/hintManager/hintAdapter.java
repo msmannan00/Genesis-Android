@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,7 +23,10 @@ import androidx.room.Ignore;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabEnums;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -43,6 +47,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
     private Map<String, Drawable> mWebIcon = new HashMap<>();
+    private ArrayList<String> mKeys = new ArrayList<>();
+    private Map<Integer,Handler> mHandlers = new HashMap<>();
+    private Map<Integer, Drawable> mPastWebIcon = new HashMap<>();
+    private Map<Integer, String> mPastIconFlicker = new HashMap<>();
 
     public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
         this.mHintList = new ArrayList();
@@ -62,7 +70,9 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     }
 
     public void onClearAdapter(){
-        mWebIcon.clear();
+        // mHandlers.clear();
+        // mPastIconFlicker.clear();
+        // mWebIcon.clear();
     }
 
     /*Initializations*/
@@ -131,13 +141,6 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                 mHindTypeIcon.setVisibility(View.GONE);
             }
 
-            if(mWebIcon.containsKey(mURLLink)){
-                mHintWebIcon.setColorFilter(null);
-                mHintWebIcon.clearColorFilter();
-                mHintWebIcon.setImageTintList(null);
-                mHintWebIcon.setClipToOutline(true);
-            }
-
             mHeader.setText(model.getHeader());
             if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
                 mMoveURL.setTag(model.getHeader());
@@ -166,8 +169,33 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
+            String mURLPast = mURLLink;
+            mPastIconFlicker.put(getLayoutPosition(),mURLPast);
+
             if(mWebIcon.containsKey(mURLLink)){
-                mHintWebIcon.setImageDrawable(mWebIcon.get(mURLLink));
+                mHintWebIcon.setColorFilter(null);
+                mHintWebIcon.clearColorFilter();
+                mHintWebIcon.setImageTintList(null);
+                mHintWebIcon.setClipToOutline(true);
+                mHintWebIcon.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
+
+            }else if(mHandlers.containsKey(getLayoutPosition())){
+                if(mPastWebIcon.containsKey(getLayoutPosition())){
+                    mHintWebIcon.setColorFilter(null);
+                    mHintWebIcon.clearColorFilter();
+                    mHintWebIcon.setImageTintList(null);
+                    mHintWebIcon.setClipToOutline(true);
+                    mHintWebIcon.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
+                    Log.i("FUSSSS1111","FUSSSS3333");
+
+                }else {
+                    Resources res1 = itemView.getContext().getResources();
+                    try {
+                        mHintWebIcon.setImageDrawable(Drawable.createFromXml(res1, res1.getXml(R.xml.ic_baseline_browser)));
+                        mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
+                    } catch (Exception ignored) {
+                    }
+                }
             }
 
             if(!mWebIcon.containsKey(mURLLink)){
@@ -177,6 +205,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                     mHintWebIcon.setImageTintList(null);
                     mHintWebIcon.setClipToOutline(true);
                     mHintWebIcon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                    mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
                 }else
                 {
                     new Thread(){
@@ -187,10 +216,9 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                                 while (true){
                                     int mCounter=0;
                                     if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                        sleep(10);
+                                        sleep(50);
                                         mCounter+=1;
                                     }else {
-                                        Log.i("BREAK","");
                                         break;
                                     }
                                     if(mCounter>6){
@@ -199,18 +227,49 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                                 }
 
                                 mContext.runOnUiThread(() -> {
-                                    mHintWebIcon.setColorFilter(null);
-                                    mHintWebIcon.clearColorFilter();
-                                    mHintWebIcon.setImageTintList(null);
-                                    mHintWebIcon.setClipToOutline(true);
                                     mWebIcon.put(mURLLink,mHindTypeIconTemp.getDrawable());
+                                    mKeys.add(mURLLink);
+
+                                    if(mKeys.size()>5){
+                                        mWebIcon.remove(mKeys.get(0));
+                                        mKeys.remove(0);
+                                    }
+
                                     if(mHindTypeIconTemp.getDrawable() != null){
-                                        mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                                        if(mHandlers.containsKey(getLayoutPosition())){
+                                            mHandlers.get(getLayoutPosition()).removeCallbacksAndMessages(null);
+                                            if(getLayoutPosition()==1){
+                                                Log.i("SUPERFUCK1","SUPERFUCK1");
+                                            }
+                                        }else {
+                                            mHandlers.put(getLayoutPosition(), new Handler());
+                                        }
+
+                                        if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
+                                            Runnable mRunnable = () -> {
+                                                mHintWebIcon.setColorFilter(null);
+                                                mHintWebIcon.clearColorFilter();
+                                                mHintWebIcon.setImageTintList(null);
+                                                mHintWebIcon.setClipToOutline(true);
+                                                mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                                                mPastWebIcon.put(getLayoutPosition(),mHindTypeIconTemp.getDrawable());
+
+                                                if(getLayoutPosition() == 1){
+                                                    Log.i("FUSSSS1111","FUSSSS1111");
+                                                }
+
+                                            };
+                                            mHandlers.get(getLayoutPosition()).postDelayed(mRunnable, 200);
+                                        }
+
                                     }else {
-                                        Resources res = itemView.getContext().getResources();
-                                        try {
-                                            mHintWebIcon.setImageDrawable(Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser)));
-                                        } catch (Exception ignored) {
+                                        if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
+                                            Resources res = itemView.getContext().getResources();
+                                            try {
+                                                Log.i("FUSSSS1111","FUSSSS2222");
+                                                mHintWebIcon.setImageDrawable(Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser)));
+                                            } catch (Exception ignored) {
+                                            }
                                         }
                                     }
 

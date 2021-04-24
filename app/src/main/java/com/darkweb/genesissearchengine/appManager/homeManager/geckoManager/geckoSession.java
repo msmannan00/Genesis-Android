@@ -760,7 +760,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
                 PendingIntent pIntent = PendingIntent.getActivity(mContext.get().getApplicationContext(), 0, intent, 0);
 
                 String channel_id = createNotificationChannel(mContext.get().getApplicationContext());
-                assert channel_id != null;
+
                 NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext.get().getApplicationContext(), channel_id)
                         .setSmallIcon(R.drawable.ic_download)
                         .setContentTitle(filename)

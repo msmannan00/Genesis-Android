@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:requestLegacyExternalStorage="true"
@@ -216,14 +217,15 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <receiver
-            android:name="org.torproject.android.proxy.StartTorReceiver"
-            android:exported="true"
-            tools:ignore="ExportedReceiver">
-            <intent-filter>
-                <action android:name="org.torproject.android.intent.action.START" />
-            </intent-filter>
-        </receiver>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
 
         <service
             android:name="org.torproject.android.proxy.OrbotService"
@@ -234,6 +236,11 @@
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
+
+        <provider
+            android:authorities="com.darkweb.genesissearchengine.provider"
+            android:name="com.darkweb.genesissearchengine.clientauth.ClientAuthContentProvider"
+            android:exported="false"/>
 
     </application>
 

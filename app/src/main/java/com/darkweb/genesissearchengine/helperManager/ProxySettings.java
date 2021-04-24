@@ -7,7 +7,7 @@ import ch.boye.httpclientandroidlib.HttpHost;
 
 public class ProxySettings {
     private static final String TOR_PROXY_ADDRESS = "127.0.0.1";
-    private static final int TOR_PROXY_PORT = 1080;
+    private static final int TOR_PROXY_PORT = 8118;
 
     public static Proxy getProxy() {
         // TODO make configurable

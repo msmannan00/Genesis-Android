@@ -37,6 +37,9 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
     private ArrayList<historyRowModel> getDefaultSuggestionsOnStart(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChaned){
 
+        if(pQuery.equals(strings.GENERIC_EMPTY_STR)){
+            pQuery = "hidden web";
+        }
         mCurrentList.clear();
         if(!pQuery.equals(strings.GENERIC_EMPTY_STR) && !pQuery.equals("about:blank") && !pQuery.contains("?") &&  !pQuery.contains("/")  && !pQuery.contains(" ") && !pQuery.contains("  ") && !pQuery.contains("\n")){
             mCurrentList.size();

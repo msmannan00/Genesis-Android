@@ -15,30 +15,34 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.widget.Toast;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.netcipher.client.StrongHttpsClient;
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import org.torproject.android.proxy.util.Prefs;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.text.DecimalFormat;
 
+import ch.boye.httpclientandroidlib.HttpHost;
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
+import ch.boye.httpclientandroidlib.conn.params.ConnRoutePNames;
+
 import static java.lang.Thread.sleep;
 
 
@@ -50,6 +54,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
     private NotificationCompat.Builder build;
     private OutputStream output;
     private InputStream mStream;
+    private Boolean mIsCanceled = false;
 
     private String PROXY_ADDRESS = "localhost";
     private int PROXY_PORT = 9050;
@@ -117,21 +122,39 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         mNotifyManager.notify(mID, build.build());
     }
 
+    public static String getFileSize(long size) {
+        if (size <= 0)
+            return "0";
+
+        final String[] units = new String[] { "B Downloaded", "KB ⇣", "MB ⇣", "GB ⇣", "TB ⇣" };
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
+
     @Override
     protected String doInBackground(String... f_url) {
         int count;
+        int mRequestCode = 0;
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             try {
                 URL url = new URL(f_url[0]);
-                Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, PROXY_PORT));
-                URLConnection conection;
+                HttpURLConnection conection;
+                Proxy proxy;
+                if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
+                    proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, 9050));
+                    conection = (HttpURLConnection) url.openConnection(proxy);
+                }else {
+                    conection = (HttpURLConnection) ProxySelector.openConnectionWithProxy(new URI(f_url[0]));;
+                }
 
-                conection = url.openConnection(proxy);
-                //conection = (HttpsURLConnection)ProxySelector.openConnectionWithProxy(new URI(f_url[0]));
+                conection.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0");
+                conection.setRequestProperty("Accept","*/*");
 
                 conection.connect();
                 int lenghtOfFile = conection.getContentLength();
-
+                mRequestCode = conection.getResponseCode();
                 mStream = conection.getInputStream();
                 // Output stream
                 output = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/"+mFileName));
@@ -143,7 +166,12 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
                 while ((count = mStream.read(data)) != -1) {
                     total += count;
                     int cur = (int) ((total * 100) / lenghtOfFile);
-                    mDownloadByte = cur;
+                    if(lenghtOfFile<0){
+                        cur = (int)total;
+                        mDownloadByte = cur * -1;
+                    }else {
+                        mDownloadByte = cur;
+                    }
                     publishProgress(Math.min(cur, 100));
                     if (Math.min(cur, 100) > 98) {
                         sleep(500);
@@ -163,6 +191,10 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
                 mStream.close();
 
             } catch (Exception ex) {
+                Log.i("FIZZAHFUCK", ex.getMessage());
+                if(mRequestCode>300){
+                    //Toast.makeText(context,"Request Forbidden Error Code : ",mRequestCode).show();
+                }
                 onCancel();
             }
         }else {
@@ -172,7 +204,11 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
 
                 StrongHttpsClient httpclient = new StrongHttpsClient(context);
 
-                httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9050);
+                if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
+                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9050);
+                }else {
+                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9050);
+                }
 
                 HttpGet httpget = new HttpGet(urlEncoded);
                 HttpResponse response = httpclient.execute(httpget);
@@ -182,17 +218,26 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
 
                 InputStream mStream = response.getEntity().getContent();
 
+                mRequestCode = response.getStatusLine().getStatusCode();
                 output = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/"+mFileName));
                 byte[] data = new byte[100000];
 
                 long total = 0;
 
-                mTotalByte = response.getEntity().getContentLength();
+                float lenghtOfFile = response.getEntity().getContentLength();
+                mTotalByte = lenghtOfFile;
                 int read;
                 while ((read = mStream.read(data)) != -1) {
                     total += read;
                     int cur = (int) ((total * 100) / response.getEntity().getContentLength());
                     mDownloadByte = cur;
+                    if(lenghtOfFile<0){
+                        cur = (int)total;
+                        mDownloadByte = total * -1;
+                    }else {
+                        mDownloadByte = cur;
+                    }
+
                     publishProgress(Math.min(cur, 100));
                     if (Math.min(cur, 100) > 98) {
                         sleep(500);
@@ -210,19 +255,24 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
                 output.close();
                 mStream.close();
             }catch (Exception ex){
-                Log.d("sda", "dsa");
+                if(mRequestCode>300){
+                    //Toast.makeText(context,"Request Forbidden Error Code : ",mRequestCode).show();
+                }
+                onCancel();
             }
         }
         return null;
     }
 
     protected void onProgressUpdate(Integer... progress) {
-        build.setProgress(100, progress[0], false);
         int mPercentage =  (int)(mDownloadByte);
         if(mPercentage<0){
-            mPercentage = 0;
+            build.setProgress(100, progress[0], true);
+            build.setContentText(getFileSize(mPercentage * -1));
+        }else {
+            build.setProgress(100, progress[0], false);
+            build.setContentText(mPercentage+"%");
         }
-        build.setContentText(mPercentage+"%");
         mNotifyManager.notify(mID, build.build());
         super.onProgressUpdate(progress);
     }
@@ -230,19 +280,27 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String file_url) {
         Intent snoozeIntentPost = new Intent(context, downloadNotification.class);
-        snoozeIntentPost.setAction("Download_Cancelled");
+        snoozeIntentPost.setAction("Download_Open");
         snoozeIntentPost.putExtra("N_ID", mID);
         snoozeIntentPost.putExtra("N_COMMAND", 1);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, mID, snoozeIntentPost, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Intent snoozeIntentPost1 = new Intent(context, downloadNotification.class);
+        snoozeIntentPost1.setAction("Download_Cancelled");
+        snoozeIntentPost1.putExtra("N_ID", mID);
+        snoozeIntentPost1.putExtra("N_COMMAND", 2);
+        PendingIntent pendingIntent1 = PendingIntent.getBroadcast(context, mID, snoozeIntentPost1, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        build.addAction(0, null, null);
         build.setContentIntent(pendingIntent);
-        build.addAction(android.R.drawable.stat_sys_download, "Open",pendingIntent);
         build.setContentText("Download complete");
         build.setSmallIcon(R.xml.ic_check);
+        build.setColor(Color.parseColor("#84989f"));
         build.setProgress(0, 0, false);
         build.setAutoCancel(true);
-        build.setColor(Color.parseColor("#212d45"));
         build.setOngoing(false);
+        build.addAction(android.R.drawable.stat_sys_download, "Open",pendingIntent);
+        build.addAction(R.drawable.ic_download, "Cancel",pendingIntent1);
         build.setPriority(Notification.PRIORITY_LOW);
         mNotifyManager.notify(mID, build.build());
 
@@ -258,7 +316,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
             contentValues.put(MediaStore.Downloads.TITLE, mFileName);
             contentValues.put(MediaStore.Downloads.DISPLAY_NAME, mFileName);
             contentValues.put(MediaStore.Downloads.SIZE, mDownloadByte);
-            contentValues.put(MediaStore.Downloads.MIME_TYPE, helperMethod.getMimeType(uri.toString()));
+            contentValues.put(MediaStore.Downloads.MIME_TYPE, helperMethod.getMimeType(uri.toString(), context));
 
             contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + "Temp");
 
@@ -266,21 +324,28 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
             database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
         } else {
             Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", mFile);
-            dm.addCompletedDownload(mFileName, mURL, false, helperMethod.getMimeType(uri.toString()), mFile.getAbsolutePath(), mFile.length(), false);
+            String mime = helperMethod.getMimeType(uri.toString(), context);
+            if(mime!=null){
+                dm.addCompletedDownload(mFileName, mURL, false, mime, mFile.getAbsolutePath(), mFile.length(), false);
+            }
         }
 
     }
 
     public void onCancel(){
+        mIsCanceled = true;
         mNotifyManager.cancel(mID);
         cancel(true);
     }
 
     public void onTrigger(){
-        mNotifyManager.cancel(mID);
-        String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//","content://");
-        File mFile = new File(mPath);
-        helperMethod.openFile(mFile, context);
+        if(!mIsCanceled){
+            mNotifyManager.cancel(mID);
+            String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//","content://");
+            File mFile = new File(mPath);
+
+            new Handler().postDelayed(() -> helperMethod.openFile(mFile, context), 500);
+        }
     }
 }
 

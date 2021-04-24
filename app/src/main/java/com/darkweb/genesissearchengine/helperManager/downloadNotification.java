@@ -12,7 +12,7 @@ public class downloadNotification extends BroadcastReceiver {
         int mCommand = intent.getExtras().getInt("N_COMMAND");
         if(mCommand==1){
             pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt("N_ID")), pluginEnums.eDownloadManager.M_TRIGGER);
-        }else if(mCommand==0) {
+        }else if(mCommand==0 || mCommand==2) {
             pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt("N_ID")), pluginEnums.eDownloadManager.M_CANCEL);
         }
     }

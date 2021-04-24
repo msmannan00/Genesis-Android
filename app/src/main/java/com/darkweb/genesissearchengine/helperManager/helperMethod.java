@@ -9,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -632,13 +633,17 @@ public class helperMethod
         transitionDrawable.startTransition(duration);
     }
 
-    public static String getMimeType(String url) {
-        String type = null;
-        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
-        if (extension != null) {
-            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    public static String getMimeType(String url, Context pContext) {
+        String mimeType;
+        Uri myUri = Uri.parse(url);
+        if (ContentResolver.SCHEME_CONTENT.equals(myUri.getScheme())) {
+            ContentResolver cr = pContext.getContentResolver();
+            mimeType = cr.getType(myUri);
+        } else {
+            String fileExtension = MimeTypeMap.getFileExtensionFromUrl(myUri.toString());
+            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase());
         }
-        return type;
+        return mimeType;
     }
 
     public static void openFile(File url, Context context) {
@@ -650,7 +655,16 @@ public class helperMethod
             intent.setDataAndType(uri, Uri.parse(url.toString()).getScheme());
             context.startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(context, "No application found which can open the file", Toast.LENGTH_SHORT).show();
+            try {
+                Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", url);
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setDataAndType(Uri.fromFile(url), getMimeType(uri.toString(),context));
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                Toast.makeText(context, "No application found which can open the file", Toast.LENGTH_SHORT).show();
+            }
         }
     }
     public static void copyURL(String url,Context context){
