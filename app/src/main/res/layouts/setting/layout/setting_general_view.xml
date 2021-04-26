@@ -302,7 +302,7 @@
 
                         <RadioButton
                             android:id="@+id/pThemeDark"
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:clickable="false"
                             android:layout_marginEnd="10dp"
@@ -358,7 +358,7 @@
                         </LinearLayout>
 
                         <RadioButton
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="10dp"
                             android:id="@+id/pThemeLight"
@@ -416,7 +416,7 @@
                         </LinearLayout>
 
                         <RadioButton
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="10dp"
                             android:id="@+id/pThemeDefault"
@@ -541,13 +541,12 @@
                     android:layout_height="65dp"
                     android:onClick="onManageLanguage"
                     android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="65dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:clickable="false"
                         android:orientation="vertical">
 
@@ -587,9 +586,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"

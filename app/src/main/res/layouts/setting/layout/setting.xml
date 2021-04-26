@@ -84,12 +84,10 @@
                     android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onDefaultBrowser"
-                    android:weightSum="8"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -128,12 +126,10 @@
                     android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onManageGeneral"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -146,7 +142,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:clickable="false"
                         android:orientation="vertical">
 
@@ -181,9 +177,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_marginEnd="5dp"
                         android:autoMirrored="true"
                         android:background="@android:color/transparent"
@@ -207,12 +202,10 @@
                     android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onManageSearchEngine"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -260,9 +253,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:clickable="false"
@@ -285,12 +277,10 @@
                     android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onManageSearchPrivacy"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -338,9 +328,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:clickable="false"
@@ -358,12 +347,10 @@
                     android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onManageTracking"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -411,9 +398,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:clickable="false"
@@ -436,12 +422,10 @@
                     android:paddingBottom="10dp"
                     android:onClick="onManageNotification"
                     android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         app:tint="@color/c_icon_tint"
@@ -487,9 +471,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
@@ -512,12 +495,10 @@
                     android:paddingBottom="10dp"
                     android:onClick="onManageSearchAccessibility"
                     android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -564,9 +545,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
@@ -589,12 +569,10 @@
                     android:paddingBottom="10dp"
                     android:onClick="onManageSearchClearData"
                     android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -641,9 +619,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
@@ -666,12 +643,10 @@
                     android:paddingBottom="10dp"
                     android:onClick="onManageSearchAdvanced"
                     android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         app:tint="@color/c_icon_tint"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -718,9 +693,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
@@ -744,16 +718,14 @@
                     android:paddingBottom="10dp"
                     android:background="@xml/gx_ripple_gray"
                     android:onClick="onOpenProxyStatus"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_vpn"
@@ -797,10 +769,9 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
@@ -823,16 +794,14 @@
                     android:onClick="onRateApplication"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:weightSum="8">
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_rate"
@@ -876,10 +845,9 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
@@ -896,16 +864,14 @@
                     android:onClick="onShareApplication"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:weightSum="8">
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_share"
@@ -949,10 +915,9 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
@@ -976,16 +941,14 @@
                     android:onClick="onPrivacyPolicy"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:weightSum="8">
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_policy"
@@ -1029,10 +992,9 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
@@ -1049,16 +1011,14 @@
                     android:onClick="onReportWebsite"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:weightSum="8">
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_report"
@@ -1102,10 +1062,9 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
@@ -1122,16 +1081,14 @@
                     android:onClick="onSitemap"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:weightSum="8">
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_sitemap"
@@ -1175,10 +1132,9 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"

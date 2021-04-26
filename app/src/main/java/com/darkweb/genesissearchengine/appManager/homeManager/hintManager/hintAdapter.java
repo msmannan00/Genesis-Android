@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.homeManager.hintManager;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,9 +47,6 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     private ArrayList<historyRowModel> mHintList;
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
-    private Map<String, Drawable> mWebIcon = new HashMap<>();
-    private ArrayList<String> mKeys = new ArrayList<>();
-    private Map<Integer,Handler> mHandlers = new HashMap<>();
     private Map<Integer, Drawable> mPastWebIcon = new HashMap<>();
     private Map<Integer, String> mPastIconFlicker = new HashMap<>();
 
@@ -70,9 +68,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     }
 
     public void onClearAdapter(){
-        // mHandlers.clear();
-        // mPastIconFlicker.clear();
-        // mWebIcon.clear();
+        //mPastWebIcon.clear();
+        mPastWebIcon.remove(0);
+        mPastWebIcon.remove(1);
+        mPastWebIcon.remove(2);
     }
 
     /*Initializations*/
@@ -123,6 +122,26 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             mHintWebIcon = itemView.findViewById(R.id.pHintWebIcon);
             mHindTypeIconTemp = new ImageView(mContext);
 
+            mHintWebIcon.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v6)));
+
+            if(mPastWebIcon.containsKey(getLayoutPosition())){
+                mHintWebIcon.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
+                mHintWebIcon.setImageTintList(null);
+            }else {
+                mHintWebIcon.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
+
+                Drawable mDrawable;
+                Resources res = itemView.getContext().getResources();
+                try {
+                    mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser));
+                    mMoveURL.setVisibility(View.VISIBLE);
+                    mMoveURL.setOnTouchListener(listViewHolder.this);
+                    mHintWebIcon.setImageDrawable(mDrawable);
+                } catch (Exception ignored) {
+                }
+
+            }
+
             String mURLLink;
             if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
                 mURLLink = model.getHeader();
@@ -169,118 +188,42 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
-            String mURLPast = mURLLink;
-            mPastIconFlicker.put(getLayoutPosition(),mURLPast);
-
-            if(mWebIcon.containsKey(mURLLink)){
-                mHintWebIcon.setColorFilter(null);
-                mHintWebIcon.clearColorFilter();
+            if(mURLLink.contains("boogle.store") || mURLLink.contains("genesis.onion")){
                 mHintWebIcon.setImageTintList(null);
-                mHintWebIcon.setClipToOutline(true);
-                mHintWebIcon.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
+                mHintWebIcon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
+            }else
+            {
+                new Thread(){
 
-            }else if(mHandlers.containsKey(getLayoutPosition())){
-                if(mPastWebIcon.containsKey(getLayoutPosition())){
-                    mHintWebIcon.setColorFilter(null);
-                    mHintWebIcon.clearColorFilter();
-                    mHintWebIcon.setImageTintList(null);
-                    mHintWebIcon.setClipToOutline(true);
-                    mHintWebIcon.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
-                    Log.i("FUSSSS1111","FUSSSS3333");
+                    public void run(){
+                        try {
+                            String mURLPast = mURLLink;
+                            mPastIconFlicker.put(getLayoutPosition(),mURLPast);
 
-                }else {
-                    Resources res1 = itemView.getContext().getResources();
-                    try {
-                        mHintWebIcon.setImageDrawable(Drawable.createFromXml(res1, res1.getXml(R.xml.ic_baseline_browser)));
-                        mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
-                    } catch (Exception ignored) {
-                    }
-                }
-            }
+                            mHindTypeIconTemp.setImageDrawable(null);
+                            mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                            sleep(200);
 
-            if(!mWebIcon.containsKey(mURLLink)){
-                if(mURLLink.contains("boogle.store") || mURLLink.contains("genesis.onion")){
-                    mHintWebIcon.setColorFilter(null);
-                    mHintWebIcon.clearColorFilter();
-                    mHintWebIcon.setImageTintList(null);
-                    mHintWebIcon.setClipToOutline(true);
-                    mHintWebIcon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                    mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
-                }else
-                {
-                    new Thread(){
-                        public void run(){
-                            try {
-                                mHindTypeIconTemp.setImageDrawable(null);
-                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "http://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                                while (true){
-                                    int mCounter=0;
-                                    if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                        sleep(50);
-                                        mCounter+=1;
-                                    }else {
-                                        break;
+                            mContext.runOnUiThread(() -> new Handler().postDelayed(() ->
+                            {
+                                if(mHindTypeIconTemp.getDrawable() != null){
+                                    if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
+                                        mHintWebIcon.setImageTintList(null);
+                                        mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                                        mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
                                     }
-                                    if(mCounter>6){
-                                        break;
+                                    if(getLayoutPosition() == 1){
+                                        Log.i("FUSSSS1111","FUSSSS4444");
                                     }
                                 }
+                            }, 200));
 
-                                mContext.runOnUiThread(() -> {
-                                    mWebIcon.put(mURLLink,mHindTypeIconTemp.getDrawable());
-                                    mKeys.add(mURLLink);
-
-                                    if(mKeys.size()>5){
-                                        mWebIcon.remove(mKeys.get(0));
-                                        mKeys.remove(0);
-                                    }
-
-                                    if(mHindTypeIconTemp.getDrawable() != null){
-                                        if(mHandlers.containsKey(getLayoutPosition())){
-                                            mHandlers.get(getLayoutPosition()).removeCallbacksAndMessages(null);
-                                            if(getLayoutPosition()==1){
-                                                Log.i("SUPERFUCK1","SUPERFUCK1");
-                                            }
-                                        }else {
-                                            mHandlers.put(getLayoutPosition(), new Handler());
-                                        }
-
-                                        if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
-                                            Runnable mRunnable = () -> {
-                                                mHintWebIcon.setColorFilter(null);
-                                                mHintWebIcon.clearColorFilter();
-                                                mHintWebIcon.setImageTintList(null);
-                                                mHintWebIcon.setClipToOutline(true);
-                                                mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                                                mPastWebIcon.put(getLayoutPosition(),mHindTypeIconTemp.getDrawable());
-
-                                                if(getLayoutPosition() == 1){
-                                                    Log.i("FUSSSS1111","FUSSSS1111");
-                                                }
-
-                                            };
-                                            mHandlers.get(getLayoutPosition()).postDelayed(mRunnable, 200);
-                                        }
-
-                                    }else {
-                                        if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
-                                            Resources res = itemView.getContext().getResources();
-                                            try {
-                                                Log.i("FUSSSS1111","FUSSSS2222");
-                                                mHintWebIcon.setImageDrawable(Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser)));
-                                            } catch (Exception ignored) {
-                                            }
-                                        }
-                                    }
-
-                                });
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    }.start();
-                }
+                    }
+                }.start();
             }
        }
 

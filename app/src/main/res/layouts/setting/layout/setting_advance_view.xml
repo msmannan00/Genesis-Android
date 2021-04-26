@@ -324,7 +324,7 @@
 
                         <RadioButton
                             android:id="@+id/pAdvanceGridOption1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:clickable="false"
                             android:background="@android:color/transparent"
@@ -377,7 +377,7 @@
 
                         <RadioButton
                             android:id="@+id/pAdvanceGridOption2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:clickable="false"
                             android:background="@android:color/transparent"
@@ -488,7 +488,7 @@
 
                         <RadioButton
                             android:id="@+id/pAdvanceImageOption1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:clickable="false"
                             android:background="@android:color/transparent"
@@ -541,7 +541,7 @@
 
                         <RadioButton
                             android:id="@+id/pAdvanceImageOption2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:clickable="false"
                             android:background="@android:color/transparent"

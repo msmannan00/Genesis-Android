@@ -114,6 +114,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private boolean mIsProgressBarChanging = false;
     private Handler mFindHandler;
     private boolean mClosed = false;
+    private SessionState mSessionState;
 
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
@@ -369,6 +370,10 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         mHistoryList = var2;
     }
 
+    @UiThread
+    public void onSessionStateChange(@NonNull GeckoSession session, @NonNull SessionState sessionState) {
+        mSessionState = sessionState;
+    }
 
     /*Navigation Delegate*/
     public void onLocationChange(@NonNull GeckoSession var1, @Nullable String var2) {

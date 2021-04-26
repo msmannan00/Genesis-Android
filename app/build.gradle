@@ -132,7 +132,7 @@ dependencies {
 
     /* Orbot Service */
 
-    implementation project(path: ':orbotservice')
+    implementation project(path: ':orbotservicemanager')
 
     /* Helper Libraries */
 

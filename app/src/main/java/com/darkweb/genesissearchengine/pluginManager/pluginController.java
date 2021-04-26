@@ -138,8 +138,12 @@ public class pluginController
     /*Download Manager*/
     private class downloadCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, Object event_type)
+        public Object invokeObserver(List<Object> pData, Object event_type)
         {
+            if(event_type.equals(enums.etype.M_DOWNLOAD_FAILURE))
+            {
+                mMessageManager.onTrigger(Arrays.asList(Collections.singletonList(pData.get(0).toString()), mHomeController.get()),M_DOWNLOAD_FAILURE);
+            }
             return null;
         }
     }
@@ -202,7 +206,11 @@ public class pluginController
                 activityContextManager.getInstance().getHomeController().panicExitInvoked();
             }
             else if(pEventType.equals(M_DOWNLOAD_SINGLE)){
-                activityContextManager.getInstance().getHomeController().onManualDownloadFileName((String)pData.get(2),(String)pData.get(0));
+                if(pData.size()<3){
+                    ((homeController)mHomeController.get()).onManualDownload(pData.get(0).toString());
+                }else {
+                    activityContextManager.getInstance().getHomeController().onManualDownloadFileName((String)pData.get(2),(String)pData.get(0));
+                }
             }
             else if(pEventType.equals(M_SECURE_CONNECTION)){
                 helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController.get(),true);

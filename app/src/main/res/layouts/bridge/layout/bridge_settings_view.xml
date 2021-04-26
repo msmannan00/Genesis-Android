@@ -172,13 +172,12 @@
                         android:paddingStart="0dp"
                         android:onClick="onObfsChecked"
                         android:orientation="horizontal"
-                        android:weightSum="8"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry">
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="1"
                             android:layout_height="55dp"
                             android:orientation="vertical">
 
@@ -202,10 +201,9 @@
 
                         <RadioButton
                             android:id="@+id/pBridgeObfs"
-                            android:layout_width="0dp"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:clickable="false"
-                            android:layout_weight="1"
                             android:layout_marginEnd="10dp"
                             android:layout_marginStart="50dp"
                             android:checked="true"
@@ -230,13 +228,12 @@
                         android:clickable="true"
                         android:onClick="onMeekChecked"
                         android:orientation="horizontal"
-                        android:weightSum="8"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry">
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
@@ -259,11 +256,10 @@
                         </LinearLayout>
 
                         <RadioButton
-                            android:layout_width="0dp"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="10dp"
                             android:id="@+id/pBridgeChina"
-                            android:layout_weight="1"
                             android:background="@android:color/transparent"
                             android:layout_marginStart="50dp"
                             android:src="@xml/ic_arrow_right"
@@ -287,13 +283,12 @@
                         android:clickable="true"
                         android:onClick="onCustomChecked"
                         android:orientation="horizontal"
-                        android:weightSum="8"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry">
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
@@ -317,11 +312,10 @@
                         </LinearLayout>
 
                         <RadioButton
-                            android:layout_width="0dp"
+                            android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="10dp"
                             android:id="@+id/pBridgeCustom"
-                            android:layout_weight="1"
                             android:background="@android:color/transparent"
                             android:layout_marginStart="50dp"
                             android:src="@xml/ic_arrow_right"

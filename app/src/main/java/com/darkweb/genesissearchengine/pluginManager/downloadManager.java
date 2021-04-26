@@ -16,11 +16,14 @@ class downloadManager
 
     private WeakReference<AppCompatActivity> mAppContext;
     private Map<Integer, localFileDownloader> mDownloads = new HashMap<>();
+    private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
     downloadManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent){
         this.mAppContext = pAppContext;
+        this.mEvent = pEvent;
+
         initialize();
     }
 
@@ -30,7 +33,7 @@ class downloadManager
 
     private void startDownload(String pPath,String pFile) {
         int mID = helperMethod.createNotificationID();
-        localFileDownloader mFileDownloader = (localFileDownloader)new localFileDownloader(mAppContext.get().getApplicationContext(),pPath, pFile, mID).execute(pPath);
+        localFileDownloader mFileDownloader = (localFileDownloader)new localFileDownloader(mAppContext.get().getApplicationContext(),pPath, pFile, mID, mEvent).execute(pPath);
         mDownloads.put(mID,mFileDownloader);
     }
 

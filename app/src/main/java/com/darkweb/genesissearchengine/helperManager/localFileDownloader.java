@@ -37,12 +37,14 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
+import java.util.Collections;
 
 import ch.boye.httpclientandroidlib.HttpHost;
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
 import ch.boye.httpclientandroidlib.conn.params.ConnRoutePNames;
 
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_DOWNLOAD_FAILURE;
 import static java.lang.Thread.sleep;
 
 
@@ -64,12 +66,14 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
     private float mTotalByte;
     private float mDownloadByte;
     private String mURL;
+    private eventObserver.eventListener mEvent;
 
-    public localFileDownloader(Context pContext, String pURL, String pFileName, int pID) {
+    public localFileDownloader(Context pContext, String pURL, String pFileName, int pID, eventObserver.eventListener pEvent) {
         this.context = pContext;
         this.mFileName = pFileName;
         this.mURL = pURL;
         this.mID = pID;
+        this.mEvent = pEvent;
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -193,6 +197,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
             } catch (Exception ex) {
                 Log.i("FIZZAHFUCK", ex.getMessage());
                 if(mRequestCode>300){
+                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
                     //Toast.makeText(context,"Request Forbidden Error Code : ",mRequestCode).show();
                 }
                 onCancel();
@@ -256,7 +261,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
                 mStream.close();
             }catch (Exception ex){
                 if(mRequestCode>300){
-                    //Toast.makeText(context,"Request Forbidden Error Code : ",mRequestCode).show();
+                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
                 }
                 onCancel();
             }

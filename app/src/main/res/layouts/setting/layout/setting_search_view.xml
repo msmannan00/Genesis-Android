@@ -128,12 +128,10 @@
                     android:paddingStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:padding="3dp"
@@ -142,7 +140,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="55dp"
                         android:orientation="vertical">
                         <Button
@@ -181,10 +179,9 @@
 
                     <RadioButton
                         android:id="@+id/mRadioSearch_1"
-                        android:layout_width="0dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:clickable="false"
-                        android:layout_weight="1"
                         android:layout_marginStart="50dp"
                         android:buttonTint="@color/c_radio_tint"
                         android:background="@android:color/transparent"
@@ -208,12 +205,10 @@
                     android:paddingStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:clickable="false"
                         android:padding="6dp"
@@ -223,7 +218,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="55dp"
                         android:orientation="vertical">
                         <Button
@@ -260,10 +255,9 @@
                     </LinearLayout>
 
                     <RadioButton
-                        android:layout_width="0dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:id="@+id/mRadioSearch_2"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:layout_marginStart="50dp"
                         android:src="@xml/ic_arrow_right"
@@ -288,12 +282,10 @@
                     android:paddingStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:padding="3dp"
                         android:layout_marginStart="7dp"
@@ -302,7 +294,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="55dp"
                         android:orientation="vertical">
                         <Button
@@ -340,11 +332,10 @@
                     </LinearLayout>
 
                     <RadioButton
-                        android:layout_width="0dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:id="@+id/mRadioSearch_3"
                         android:clickable="false"
-                        android:layout_weight="1"
                         android:layout_marginStart="50dp"
                         android:buttonTint="@color/c_radio_tint"
                         android:background="@android:color/transparent"
@@ -368,12 +359,10 @@
                     android:paddingStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:padding="5dp"
@@ -382,7 +371,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="55dp"
                         android:orientation="vertical">
                         <Button
@@ -420,10 +409,9 @@
                     </LinearLayout>
 
                     <RadioButton
-                        android:layout_width="0dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:id="@+id/mRadioSearch_4"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:layout_marginStart="50dp"
                         android:buttonTint="@color/c_radio_tint"
@@ -448,12 +436,10 @@
                     android:paddingStart="3dp"
                     android:onClick="onSelectSearchEngine"
                     android:orientation="horizontal"
-                    android:weightSum="8"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:layout_marginStart="7dp"
@@ -462,7 +448,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:layout_height="55dp"
                         android:orientation="vertical">
                         <Button
@@ -500,10 +486,9 @@
                     </LinearLayout>
 
                     <RadioButton
-                        android:layout_width="0dp"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:id="@+id/mRadioSearch_5"
-                        android:layout_weight="1"
                         android:clickable="false"
                         android:layout_marginStart="50dp"
                         android:buttonTint="@color/c_radio_tint"

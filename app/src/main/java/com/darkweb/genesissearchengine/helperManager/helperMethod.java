@@ -293,6 +293,19 @@ public class helperMethod
         return bitmap;
     }
 
+    public static String getMimeType(Context context, Uri uri) {
+        String extension;
+
+        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            final MimeTypeMap mime = MimeTypeMap.getSingleton();
+            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
+        } else {
+            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
+        }
+
+        return extension;
+    }
+
     public static void hideKeyboard(AppCompatActivity context) {
         View view = context.findViewById(android.R.id.content);
         if (view != null)

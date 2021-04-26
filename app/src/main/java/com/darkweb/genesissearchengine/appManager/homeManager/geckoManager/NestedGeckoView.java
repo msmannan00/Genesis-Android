@@ -4,11 +4,12 @@ import android.content.Context;
 import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.PanZoomController;
+
 import java.util.Collections;
 import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_CHANGED;
 
@@ -19,7 +20,7 @@ public class NestedGeckoView extends GeckoView {
     private int mNestedOffsetY;
     private NestedScrollingChildHelper mChildHelper;
     private eventObserver.eventListener mEvent;
-
+    private int mInputResult = PanZoomController.INPUT_RESULT_UNHANDLED;
 
     public void onSetHomeEvent(eventObserver.eventListener pEvent){
         mEvent = pEvent;
@@ -30,77 +31,83 @@ public class NestedGeckoView extends GeckoView {
         mChildHelper = null;
     }
 
-    public NestedGeckoView(Context context, AttributeSet attrs) {
-        super(context.getApplicationContext(), attrs);
+    public NestedGeckoView(final Context context) {
+        this(context, null);
+    }
 
+    public NestedGeckoView(final Context context, final AttributeSet attrs) {
+        super(context, attrs);
         mChildHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        final MotionEvent event = MotionEvent.obtain(ev);
-        final int action = ev.getActionMasked();
+        boolean eventHandled = false;
 
+        final MotionEvent event = MotionEvent.obtain(ev);
+        final int action = event.getActionMasked();
         if (action == MotionEvent.ACTION_DOWN) {
             mNestedOffsetY = 0;
         }
-
         final int eventY = (int) event.getY();
         event.offsetLocation(0, mNestedOffsetY);
 
         switch (action) {
             case MotionEvent.ACTION_MOVE:
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
                 final boolean allowScroll = status.sFullScreenBrowsing;
                 int deltaY = mLastY - eventY;
 
                 if (allowScroll && dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset)) {
                     deltaY -= mScrollConsumed[1];
+                    mLastY = eventY - mScrollOffset[1];
                     event.offsetLocation(0, -mScrollOffset[1]);
                     mNestedOffsetY += mScrollOffset[1];
                 }
 
-
-                mLastY = eventY - mScrollOffset[1];
+                eventHandled = super.onTouchEvent(event);
+                mEvent.invokeObserver(Collections.singletonList(deltaY), GECKO_SCROLL_CHANGED);
 
                 if (allowScroll && dispatchNestedScroll(0, mScrollOffset[1], 0, deltaY, mScrollOffset)) {
-                    mLastY -= mScrollOffset[1];
                     event.offsetLocation(0, mScrollOffset[1]);
                     mNestedOffsetY += mScrollOffset[1];
+                    mLastY -= mScrollOffset[1];
                 }
-
-                if(status.sFullScreenBrowsing){
-                    Log.i("wow1", eventY + "");
-                    mEvent.invokeObserver(Collections.singletonList(deltaY), GECKO_SCROLL_CHANGED);
-                }
-
                 break;
 
             case MotionEvent.ACTION_DOWN:
+                eventHandled = super.onTouchEvent(event);
                 mLastY = eventY;
+
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
                 break;
 
             case MotionEvent.ACTION_UP:
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
             case MotionEvent.ACTION_CANCEL:
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
+                eventHandled = super.onTouchEvent(event);
                 stopNestedScroll();
                 break;
 
             default:
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
+                // We don't care about other touch events
         }
 
-        // Execute event handler from parent class in all cases
-        boolean eventHandled = super.onTouchEvent(event);
-
-        // Recycle previously obtained event
-        event.recycle();
-
         return eventHandled;
+    }
+
+    private boolean callSuperOnTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+    private void updateInputResult(MotionEvent event) {
+        super.onTouchEventForResult(event).accept(inputResult -> {
+            mInputResult = inputResult;
+            startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
+        });
+    }
+
+    public int getInputResult() {
+        return mInputResult;
     }
 
     @Override
@@ -129,7 +136,11 @@ public class NestedGeckoView extends GeckoView {
     }
 
     @Override
-    public boolean dispatchNestedScroll(int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int[] offsetInWindow) {
+    public boolean dispatchNestedScroll(int dxConsumed,
+                                        int dyConsumed,
+                                        int dxUnconsumed,
+                                        int dyUnconsumed,
+                                        int[] offsetInWindow) {
         return mChildHelper.dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow);
     }
 
@@ -141,5 +152,10 @@ public class NestedGeckoView extends GeckoView {
     @Override
     public boolean dispatchNestedFling(float velocityX, float velocityY, boolean consumed) {
         return mChildHelper.dispatchNestedFling(velocityX, velocityY, consumed);
+    }
+
+    @Override
+    public boolean dispatchNestedPreFling(float velocityX, float velocityY) {
+        return mChildHelper.dispatchNestedPreFling(velocityX, velocityY);
     }
 }

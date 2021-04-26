@@ -8,6 +8,7 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -220,6 +221,16 @@ class homeViewController
             int paddingDp = 110;
             if(isFullScreen){
                 paddingDp = 60;
+            }else {
+                if(mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    paddingDp = 0;
+                }else {
+                    mGeckoView.setPadding(0,0,0,0);
+                    View child = mAppBar.getChildAt(0);
+                    AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
+                    params.setScrollFlags(0);
+                    return;
+                }
             }
             float density = mContext.getResources().getDisplayMetrics().density;
             int paddingPixel = (int)(paddingDp * density);
@@ -282,7 +293,7 @@ class homeViewController
     }
 
     public void onShowTabContainer(){
-
+        onHideLoadTabDialog();
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
 
             onUpdateStatusBarTheme(null, false);
@@ -294,6 +305,7 @@ class homeViewController
     }
 
     public void onHideTabContainer(){
+        onHideLoadTabDialog();
         if(mTabFragment.getAlpha()>0 || mTabFragment.getVisibility()!=View.GONE){
             Log.i("SUPERFUCK4","SUPERFUCK");
             mNewTab.setPressed(false);
@@ -683,7 +695,7 @@ class homeViewController
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
-    void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent){
+    void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent, String mURL){
 
         if(popupWindow!=null){
             popupWindow.dismiss();
@@ -720,17 +732,28 @@ class homeViewController
 
         ImageButton back = popupView.findViewById(R.id.menu22);
         ImageButton close = popupView.findViewById(R.id.menu20);
+        ImageButton mRefresh = popupView.findViewById(R.id.menu21);
+        ImageButton mDownload = popupView.findViewById(R.id.menuItem25);
         CheckBox desktop = popupView.findViewById(R.id.menu27);
         LinearLayout newTab = popupView.findViewById(R.id.menu11);
         desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
+
+        String mExtention = helperMethod.getMimeType(mURL, mContext);
+        if(mExtention == null || mExtention.equals("text/html") || mExtention.equals("application/vnd.ms-htmlhelp") || mExtention.equals("application/vnd.sun.xml.writer") || mExtention.equals("application/vnd.sun.xml.writer.global") || mExtention.equals("application/vnd.sun.xml.writer.template") || mExtention.equals("application/xhtml+xml")){
+            mDownload.setEnabled(false);
+            mDownload.setColorFilter(Color.argb(255, 191, 191, 191));
+        }
 
         if(!canGoForward){
            back.setEnabled(false);
            back.setColorFilter(Color.argb(255, 191, 191, 191));
         }
         if(!isLoading){
-           close.setEnabled(false);
-           close.setColorFilter(Color.argb(255, 191, 191, 191));
+           close.setVisibility(View.GONE);
+           mRefresh.setVisibility(View.VISIBLE);
+        }else {
+            close.setVisibility(View.VISIBLE);
+            mRefresh.setVisibility(View.GONE);
         }
 
         newTab.setClickable(false);

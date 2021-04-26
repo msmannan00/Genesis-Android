@@ -281,12 +281,12 @@ public class geckoClients
         mRuntime.getStorageController().clearData(COOKIES);
     }
 
-    public void onBackPressed(boolean isFinishAllowed){
+    public void onBackPressed(boolean isFinishAllowed, int mTabSize){
         if(mSession.canGoBack()){
             mSession.goBackSession();
         }
         else if(isFinishAllowed){
-            if(mSession.getRemovableFromBackPressed()){
+            if(mSession.getRemovableFromBackPressed() && mTabSize>1){
                 event.invokeObserver(null, enums.etype.M_CLOSE_TAB);
             }else {
                 event.invokeObserver(null, enums.etype.back_list_empty);

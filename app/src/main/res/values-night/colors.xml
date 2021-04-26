@@ -12,6 +12,7 @@
     <color name="c_text_v4">#a6a6a6</color>
     <color name="c_text_v5">#ffffff</color>
     <color name="c_text_v7">#248f8f</color>
+    <color name="c_text_v8">#a6a6a6</color>
     <color name="c_icon_tint">#ffffff</color>
     <color name="c_security_popup_background">#121216</color>
     <color name="c_security_popup_divider">#121216</color>

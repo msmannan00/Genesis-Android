@@ -174,6 +174,26 @@ class messageManager
         handler.postDelayed(runnable, 1500);
     }
 
+    private void mDownloadFailure()
+    {
+        mContext.runOnUiThread(() -> {
+            final Handler handler = new Handler();
+            Runnable runnable = () -> mDialog.dismiss();
+
+            initializeDialog(R.layout.popup_download_failure, Gravity.BOTTOM);
+            ((TextView)mDialog.findViewById(R.id.pDescription)).setText(("Request denied Error  " + mData.get(0)));
+            mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+
+            mDialog.setOnDismissListener(dialog -> {
+                handler.removeCallbacks(runnable);
+                onClearReference();
+            });
+
+            handler.postDelayed(runnable, 20000);
+
+        });
+    }
+
     private void popupBlocked()
     {
         final Handler handler = new Handler();
@@ -440,14 +460,14 @@ class messageManager
             mDialog.dismiss();
         });
         mDialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
-            mDialog.dismiss();
-        });
-        mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
             mDialog.dismiss();
         });
         mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
+            mDialog.dismiss();
+        });
+        mDialog.findViewById(R.id.pOption4).setOnClickListener(v -> {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
             mDialog.dismiss();
         });
@@ -670,6 +690,11 @@ class messageManager
                 case M_NEW_IDENTITY:
                     /*VERIFIED*/
                     newIdentityCreated();
+                    break;
+
+                case M_DOWNLOAD_FAILURE:
+                    /*VERIFIED*/
+                    mDownloadFailure();
                     break;
 
                 case M_POPUP_BLOCKED:

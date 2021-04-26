@@ -14,6 +14,7 @@
     <color name="c_text_v5">#000000</color>
     <color name="c_text_v6">#8c8c8c</color>
     <color name="c_text_v7">#7591bd</color>
+    <color name="c_text_v8">#666666</color>
     <color name="c_icon_tint">#425e8a</color>
     <color name="c_icon_tint_light">#7591bd</color>
     <color name="c_lang_row">#7591bd</color>
