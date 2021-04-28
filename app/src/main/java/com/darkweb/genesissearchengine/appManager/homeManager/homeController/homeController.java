@@ -132,6 +132,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private AdView mBannerAds = null;
     private ImageButton mGatewaySplash;
     private ImageButton mPanicButton;
+    private ImageButton mPanicButtonLandscape;
     private LinearLayout mTopBar;
     private ImageView mBackSplash;
     private Button mConnectButton;
@@ -326,7 +327,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateSearchBar(model.getSession().getCurrentURL(), false, false, false);
             }
             onLoadTab(model.getSession(),false,true);
-            onLoadURL(model.getSession().getCurrentURL());
+            //onLoadURL(model.getSession().getCurrentURL());
+            mGeckoClient.onReload(mGeckoView, this);
         }else {
             onNewIntent(getIntent());
             onOpenLinkNewTab(helperMethod.getDomainName(mHomeModel.getSearchEngine()));
@@ -440,6 +442,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mCoordinatorLayout = findViewById(R.id.pCoordinatorLayout);
         mImageDivider = findViewById(R.id.pImageDivider);
         mPanicButton = findViewById(R.id.pPanicButton);
+        mPanicButtonLandscape = findViewById(R.id.pPanicButtonLandscape);
         mGenesisLogo = findViewById(R.id.pGenesisLogo);
 
         mGeckoView.setSaveEnabled(false);
@@ -447,7 +450,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setAutofillEnabled(true);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mPopupLoadNewTab, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton, mGenesisLogo);
+        mHomeViewController.initialization(new homeViewCallback(),this,mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mPopupLoadNewTab, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton, mGenesisLogo, mPanicButtonLandscape);
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,false);
         mGeckoClient.onValidateInitializeFromStartup(mGeckoView, homeController.this);
@@ -2198,7 +2201,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if(e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE)){
                 if(activityContextManager.getInstance().getTabController()!=null && mTabFragment.getVisibility()==View.VISIBLE)
-                activityContextManager.getInstance().getTabController().onTabRowChanged((String) data.get(1));
+                    activityContextManager.getInstance().getTabController().onTabRowChanged((String) data.get(1));
+            }
+            else if(e_type.equals(enums.etype.M_UPDATE_SESSION_STATE)){
+                dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_SESSION_STATE, data);
             }
             else if(e_type.equals(enums.etype.FINDER_RESULT_CALLBACK)){
                 mHomeViewController.onUpdateFindBarCount((int)data.get(0),(int)data.get(1));

@@ -7,6 +7,8 @@ import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.gecko
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
+import org.mozilla.geckoview.GeckoSession;
+
 public class tabRowModel
 {
     /*Private Variables*/
@@ -39,12 +41,17 @@ public class tabRowModel
         return mSession;
     }
 
-    public void setSession(geckoSession pSession, String pURL, String pTitle, String pTheme)
+    public void setSession(geckoSession pSession, String pURL, String pTitle, String pTheme, GeckoSession.SessionState pSessionState)
     {
         mSession = pSession;
         mSession.setTitle(pTitle);
         mSession.setURL(pURL);
         mSession.setTheme(pTheme);
+
+        if(pSessionState != null){
+            mSession.mSessionState = pSessionState;
+            mSession.restoreState(pSessionState);
+        }
 
         if(!status.sSettingIsAppStarted){
             if(pTitle.equals("$TITLE") || pTitle.startsWith("http://loading") || pTitle.startsWith("loading") || pURL.equals("$TITLE") || pURL.startsWith("http://loading") || pURL.startsWith("loading")){

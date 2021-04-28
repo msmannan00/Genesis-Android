@@ -74,11 +74,22 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled project.ext.minifyEnabled
-            proguardFiles getDefaultProguardFile(project.ext.proguard_file), project.ext.proguard_rule
-
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        splits {
+            abi {
+                enable true
+                reset()
+                include 'arm64-v8a'
+                include 'x86'
+                include 'armeabi-v7a'
+                include 'x86_64'
+                universalApk false
+            }
         }
     }
+
     lintOptions {
         checkReleaseBuilds project.ext.checkReleaseBuilds
         abortOnError project.ext.abortOnError

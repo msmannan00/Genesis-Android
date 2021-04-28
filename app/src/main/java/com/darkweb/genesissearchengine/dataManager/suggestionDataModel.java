@@ -10,6 +10,9 @@ import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
+import org.mozilla.gecko.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
     private ArrayList<historyRowModel> getDefaultSuggestionsOnStart(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChaned){
 
-        if(pQuery.equals(strings.GENERIC_EMPTY_STR)){
+        if(pQuery.equals(strings.GENERIC_EMPTY_STR) || pQuery.trim().isEmpty()) {
             pQuery = "hidden web";
         }
         mCurrentList.clear();
@@ -63,6 +66,10 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
     }
 
     private ArrayList<historyRowModel> getDefaultSuggestions(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChaned){
+
+        if(pQuery.trim().isEmpty()) {
+            pQuery = "";
+        }
 
         for(int count = 0; count<= mHintListLocalCache.size()-1 && mHintListLocalCache.size()<500; count++){
             if(mHintListLocalCache.get(count).getHeader().toLowerCase().contains(pQuery)){
@@ -106,6 +113,10 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
     }
 
     private ArrayList<historyRowModel> getSuggestions(String pQuery, ArrayList<historyRowModel> pHistory, ArrayList<bookmarkRowModel> pBookmarks){
+
+        if(pQuery.trim().isEmpty()) {
+            pQuery = "";
+        }
 
         mCurrentList = new ArrayList<>();
         mCurrentList.clear();

@@ -308,6 +308,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         self = this;
+
         showToolbarNotification("", NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
 
         if (intent != null)
@@ -1737,7 +1738,8 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                 if (action.equals(ACTION_START) || action.equals(ACTION_START_ON_BOOT)) {
 
                     if (useIPtObfsMeekProxy())
-                        IPtProxy.startObfs4Proxy("DEBUG", false, false);
+                        IPtProxy.stopObfs4Proxy();
+                        IPtProxy.startObfs4Proxy("DEBUG", true, true);
 
                     if (useIPtSnowflakeProxy())
                         startSnowflakeClient();

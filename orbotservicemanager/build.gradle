@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
     buildToolsVersion '30.0.3'
     ndkVersion '21.4.7075529'
 
@@ -56,5 +56,5 @@ dependencies {
     implementation 'com.jaredrummler:android-shell:1.0.0'
     implementation 'com.offbynull.portmapper:portmapper:2.0.5'
     implementation 'info.guardianproject:jtorctl:0.4'
-    implementation 'com.github.tladesignz:IPtProxy:0.5.2'
+    implementation 'com.github.tladesignz:IPtProxy:0.5.0'
 }

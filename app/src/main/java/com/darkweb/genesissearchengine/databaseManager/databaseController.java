@@ -9,9 +9,18 @@ import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
 import net.sqlcipher.database.SQLiteDatabaseHook;
 import net.sqlcipher.database.SQLiteDatabase;
+
+import org.mozilla.geckoview.GeckoSession;
+
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,7 +67,7 @@ public class databaseController
 
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
-            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB, theme VARCHAR);");
+            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB, theme VARCHAR, session VARCHAR);");
 
         }
         catch (Exception ex)
@@ -155,7 +164,15 @@ public class databaseController
             do {
                 geckoSession mSession =  activityContextManager.getInstance().getHomeController().onNewTabInit();
                 tabRowModel model = new tabRowModel(c.getString(0), c.getString(1),c.getBlob(4));
-                model.setSession(mSession, c.getString(3),c.getString(2), c.getString(5));
+                GeckoSession.SessionState session = null;
+                try {
+                    if(status.sRestoreTabs){
+                        session = GeckoSession.SessionState.fromString(c.getString(6));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                model.setSession(mSession, c.getString(3),c.getString(2), c.getString(5), session);
                 model.getSession().setSessionID(model.getmId());
                 mTempListModel.add(model);
             } while(c.moveToNext());

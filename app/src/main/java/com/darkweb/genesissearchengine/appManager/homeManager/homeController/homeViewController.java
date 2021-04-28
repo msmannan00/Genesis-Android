@@ -108,6 +108,7 @@ class homeViewController
     private CoordinatorLayout mCoordinatorLayout;
     private ImageView mImageDivider;
     private ImageButton mPanicButton;
+    private ImageButton mPanicButtonLandscape;
     private ImageView mGenesisLogo;
 
     /*Local Variables*/
@@ -118,7 +119,7 @@ class homeViewController
     private Handler mTabDialogHandler = null;
     private Runnable mTabDialogRunnable = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo,ImageButton pPanicButtonLandscape){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -159,6 +160,7 @@ class homeViewController
         this.mImageDivider = pImageDivider;
         this.mPanicButton = pPanicButton;
         this.mGenesisLogo = pGenesisLogo;
+        this.mPanicButtonLandscape = pPanicButtonLandscape;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -553,6 +555,7 @@ class homeViewController
         mSplashScreen.setEnabled(false);
         mOrbotLogManager.setEnabled(false);
         mPanicButton.setEnabled(false);
+        mPanicButtonLandscape.setEnabled(false);
 
         final Handler handler = new Handler();
         handler.postDelayed(() ->
@@ -566,6 +569,7 @@ class homeViewController
         });
         mGatewaySplash.animate().setDuration(350).alpha(0.4f);
         mPanicButton.animate().setDuration(250).alpha(0f);
+        mPanicButtonLandscape.animate().setDuration(250).alpha(0f);
     }
 
     private void initSplashScreen(){
@@ -661,6 +665,7 @@ class homeViewController
                     mGatewaySplash.setVisibility(View.GONE);
                     mConnectButton.setVisibility(View.GONE);
                     mPanicButton.setVisibility(View.GONE);
+                    mPanicButtonLandscape.setVisibility(View.GONE);
 
                     mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
                     mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);

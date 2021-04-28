@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.darkweb.genesissearchengine.constants.*;
@@ -14,10 +13,8 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
 import java.io.File;
 import java.util.List;
-
 import static com.darkweb.genesissearchengine.constants.constants.CONST_REPORT_URL;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
@@ -29,10 +26,8 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.NETWORK_CACHE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
-
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
-import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.WebResponse;
 
@@ -76,7 +71,9 @@ public class geckoClients
     public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         boolean mStatus = mSession.onValidateInitializeFromStartup();
         if(mStatus){
-            loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+            // loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+            mSession.onRestoreState();
+            mSession.reload();
         }
 
     }
@@ -334,8 +331,9 @@ public class geckoClients
     }
 
     public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
-        mSession.stop();
-        loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+        ///mSession.stop();
+        mSession.reload();
+        //loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
     }
 
     public void manual_download(String url, AppCompatActivity context){

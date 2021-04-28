@@ -11,17 +11,19 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
 import org.mozilla.geckoview.GeckoResult;
+import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -136,6 +138,23 @@ class tabDataModel
                 {
                     String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
                     databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null);
+                    mTabs.add(0,mTabs.remove(counter));
+                    break;
+                }
+            }catch (Exception ex){
+                Log.i(ex.getMessage(), ex.getMessage());
+            }
+        }
+    }
+
+    void updateSession(String mSessionState, String mSessionID) {
+        for(int counter = 0; counter< mTabs.size(); counter++){
+
+            try{
+                if(mTabs.get(counter).getSession().getSessionID().equals(mSessionID))
+                {
+
+                    databaseController.getInstance().execSQL("UPDATE tab SET session = '" + mSessionState + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null);
                     mTabs.add(0,mTabs.remove(counter));
                     break;
                 }
@@ -326,6 +345,9 @@ class tabDataModel
             activityContextManager.getInstance().getHomeController().initTabCountForced();
 
             return mTabs;
+        }
+        else if(pCommands == dataEnums.eTabCommands.M_UPDATE_SESSION_STATE){
+            updateSession((String) pData.get(5), (String) pData.get(1));
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_TAB){
             updateTab((String) pData.get(1), (geckoSession) pData.get(5));

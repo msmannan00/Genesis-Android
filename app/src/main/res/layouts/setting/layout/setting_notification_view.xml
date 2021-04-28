@@ -79,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
+                    android:layout_marginStart="5dp"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
@@ -117,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:background="@xml/gx_ripple_gray"
                     android:paddingBottom="10dp"
+                    android:layout_marginStart="5dp"
                     android:paddingTop="10dp"
                     android:onClick="onSaveLocalNotificationSettings"
                     android:orientation="horizontal"
@@ -178,18 +180,18 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
                     android:layout_height="wrap_content"
                     android:background="@xml/gx_ripple_gray"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:onClick="onOpenNotificationSettings"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="6"
+                        android:layout_weight="1"
                         android:clickable="false"
                         android:orientation="vertical">
 
@@ -228,9 +230,8 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:layout_width="0dp"
+                        android:layout_width="55dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:clickable="false"
                         android:focusable="false"
                         android:background="@android:color/transparent"

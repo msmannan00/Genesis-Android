@@ -10,7 +10,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -23,17 +22,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
-
-import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
-
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
@@ -53,14 +47,11 @@ import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
-import org.mozilla.geckoview.SessionFinder;
 import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
-
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
@@ -69,11 +60,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 import javax.crypto.spec.SecretKeySpec;
-
-import mozilla.components.support.utils.DownloadUtils;
-
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
@@ -114,7 +101,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     private boolean mIsProgressBarChanging = false;
     private Handler mFindHandler;
     private boolean mClosed = false;
-    private SessionState mSessionState;
+    public SessionState mSessionState;
 
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
@@ -373,6 +360,17 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     @UiThread
     public void onSessionStateChange(@NonNull GeckoSession session, @NonNull SessionState sessionState) {
         mSessionState = sessionState;
+        if(!status.sRestoreTabs){
+            mSessionState = null;
+        }
+        if(mSessionState!=null)
+        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, mSessionState.toString()), enums.etype.M_UPDATE_SESSION_STATE);
+    }
+
+    public void onRestoreState(){
+        if(mSessionState!=null){
+            restoreState(mSessionState);
+        }
     }
 
     /*Navigation Delegate*/
@@ -489,12 +487,15 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
 
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
-        errorHandler handler = new errorHandler();
-        mProgress = 0;
-        mPreviousErrorPage = true;
-        event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
-        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
-        return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2));
+        if(status.sSettingIsAppStarted){
+            errorHandler handler = new errorHandler();
+            mProgress = 0;
+            mPreviousErrorPage = true;
+            event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
+            return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2));
+        }
+        return null;
     }
 
     /*Content Delegate*/
@@ -940,6 +941,8 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     void goBackSession(){
 
+        goBack();
+        /*
         if(mHistoryList!=null){
             stop();
             int index = mHistoryList.getCurrentIndex()-1;
@@ -960,7 +963,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             mProgress = 5;
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
             event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.M_ADMOB_BANNER_RECHECK);
-        }
+        }*/
     }
 
     void goForwardSession(){

@@ -60,8 +60,12 @@ import com.example.myapplication.R;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -99,6 +103,23 @@ public class helperMethod
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public static byte[] convertToBytes(Object object) throws IOException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(object);
+        oos.flush();
+        oos.close();
+        bos.close();
+        byte[] data = bos.toByteArray();
+        return data;
+    }
+
+    public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException {
+        ByteArrayInputStream in = new ByteArrayInputStream(data);
+        ObjectInputStream is = new ObjectInputStream(in);
+        return is.readObject();
     }
 
     public static String caesarCipherEncrypt(String pMessage, Key pSecretKey) {

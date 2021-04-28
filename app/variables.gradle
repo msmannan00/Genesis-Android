@@ -1,17 +1,17 @@
 /* arm versions */
-project.ext.arm_vname = 'Build | Dark-Origin'
+project.ext.arm_vname = 'Build | Dark-Origin 1.0'
 project.ext.arm_vcode = 1000
 
 /* aarch versions */
-project.ext.aarch_vname = 'Build | Dark-Origin'
+project.ext.aarch_vname = 'Build | Dark-Origin 1.1'
 project.ext.aarch_vcode = 1001
 
 /* x86 versions */
-project.ext.x86_vname = 'Build | Dark-Origin'
+project.ext.x86_vname = 'Build | Dark-Origin 1.2'
 project.ext.x86_vcode = 1002
 
 /* x64 versions */
-project.ext.x64_vname = 'Build | Dark-Origin'
+project.ext.x64_vname = 'Build | Dark-Origin 1.3'
 project.ext.x64_vcode = 1003
 
 /* dimension */
