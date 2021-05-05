@@ -356,7 +356,9 @@ public class tabController extends Fragment
             onClearSelection(null);
         }
         initTabCount(400);
-        activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
+        new Handler().postDelayed(() -> {
+            activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
+        }, 500);
         mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW, null);
         onSwipeBounce(0);
     }
@@ -375,19 +377,19 @@ public class tabController extends Fragment
                 mTabAdapter.notifyDataSetChanged();
                 onClearSelection(null);
             });
-            activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
             new Handler().postDelayed(() -> {
+                activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
                 onSwipeBounce(0);
-            }, 400);
+            }, 500);
             return true;
         }else{
             onShowUndoDialog();
             mTabAdapter.notifyItemRangeChanged(pIndex, mTabAdapter.getItemCount() - pIndex);
             mTabAdapter.notifyItemChanged(0);
-            activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
             new Handler().postDelayed(() -> {
+                activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
                 onSwipeBounce(0);
-            }, 400);
+            }, 500);
             return true;
         }
     }
@@ -435,7 +437,10 @@ public class tabController extends Fragment
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG, null);
                 mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REINIT_DATA, Collections.singletonList(mBackup));
             }
-            activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
+
+            new Handler().postDelayed(() -> {
+                activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
+            }, 500);
 
         }, 100);
     }
@@ -498,7 +503,9 @@ public class tabController extends Fragment
 
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU, Arrays.asList(false,0));
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_SELECTION, null);
-        activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
+        new Handler().postDelayed(() -> {
+            activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
+        }, 500);
 
         // mTabAdapter.notifyDataSetChanged();
         initTabCount(400);

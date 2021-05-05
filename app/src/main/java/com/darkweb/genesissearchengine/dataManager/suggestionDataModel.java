@@ -109,6 +109,10 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
+        if(mCurrentList.size()<=0) {
+            mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
+        }
+
         return mCurrentList;
     }
 

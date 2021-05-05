@@ -4,24 +4,24 @@ import android.content.Context;
 import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import org.mozilla.geckoview.GeckoView;
-import org.mozilla.geckoview.PanZoomController;
-
 import java.util.Collections;
-import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_CHANGED;
+
+import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_DOWN;
+import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_UP_ALWAYS;
 
 public class NestedGeckoView extends GeckoView {
-    private int mLastY = 0;
-    private int deltaY = 0;
+    private int mLastY;
     private final int[] mScrollOffset = new int[2];
     private final int[] mScrollConsumed = new int[2];
     private int mNestedOffsetY;
     private NestedScrollingChildHelper mChildHelper;
     private eventObserver.eventListener mEvent;
-    private int mInputResult = PanZoomController.INPUT_RESULT_UNHANDLED;
+
 
     public void onSetHomeEvent(eventObserver.eventListener pEvent){
         mEvent = pEvent;
@@ -32,95 +32,81 @@ public class NestedGeckoView extends GeckoView {
         mChildHelper = null;
     }
 
-    public NestedGeckoView(final Context context) {
-        this(context, null);
-    }
+    public NestedGeckoView(Context context, AttributeSet attrs) {
+        super(context.getApplicationContext(), attrs);
 
-    public NestedGeckoView(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
         mChildHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        MotionEvent event = MotionEvent.obtain(ev);
-        final int action = event.getActionMasked();
-        int eventY = (int) event.getY();
+        final MotionEvent event = MotionEvent.obtain(ev);
+        final int action = ev.getActionMasked();
+
+        if (action == MotionEvent.ACTION_DOWN) {
+            mNestedOffsetY = 0;
+        }
+
+        final int eventY = (int) event.getY();
+        event.offsetLocation(0, mNestedOffsetY);
+
+        if(event.getPointerCount() > 1 && !status.sSettingEnableZoom) {
+            return true;
+        }
 
         switch (action) {
             case MotionEvent.ACTION_MOVE:
-                final boolean allowScroll = !shouldPinOnScreen() &&
-                        mInputResult == PanZoomController.INPUT_RESULT_HANDLED;
-
-                if(!status.sSettingEnableZoom){
-                    mInputResult = PanZoomController.INPUT_RESULT_UNHANDLED;
-                }
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
+                final boolean allowScroll = status.sFullScreenBrowsing;
                 int deltaY = mLastY - eventY;
+
 
                 if (allowScroll && dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset)) {
                     deltaY -= mScrollConsumed[1];
-                    event.offsetLocation(0f, -mScrollOffset[1]);
+                    event.offsetLocation(0, -mScrollOffset[1]);
                     mNestedOffsetY += mScrollOffset[1];
                 }
+
 
                 mLastY = eventY - mScrollOffset[1];
 
                 if (allowScroll && dispatchNestedScroll(0, mScrollOffset[1], 0, deltaY, mScrollOffset)) {
                     mLastY -= mScrollOffset[1];
-                    event.offsetLocation(0f, mScrollOffset[1]);
+                    event.offsetLocation(0, mScrollOffset[1]);
                     mNestedOffsetY += mScrollOffset[1];
                 }
+
+                if(status.sFullScreenBrowsing){
+                    Log.i("wow1", eventY + "");
+                }
+
                 break;
 
             case MotionEvent.ACTION_DOWN:
-                // A new gesture started. Reset handled status and ask GV if it can handle this.
-                mInputResult = PanZoomController.INPUT_RESULT_UNHANDLED;
-
-                updateInputResult(event);
-
-                mNestedOffsetY = 0;
                 mLastY = eventY;
+                startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
+                mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_DOWN);
+                break;
 
-                // The event should be handled either by onTouchEvent,
-                // either by onTouchEventForResult, never by both.
-                // Early return if we sent it to updateInputResult(..) which calls onTouchEventForResult.
-                event.recycle();
-                return true;
-
-            // We don't care about other touch events
             case MotionEvent.ACTION_UP:
+                mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_UP_ALWAYS);
             case MotionEvent.ACTION_CANCEL:
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
                 stopNestedScroll();
                 break;
+
+            default:
+                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
         }
 
         // Execute event handler from parent class in all cases
-        final boolean eventHandled = callSuperOnTouchEvent(event);
+        boolean eventHandled = super.onTouchEvent(event);
 
         // Recycle previously obtained event
         event.recycle();
 
         return eventHandled;
-    }
-
-    private boolean callSuperOnTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
-    }
-
-    private void updateInputResult(MotionEvent event) {
-        if(status.sSettingEnableZoom){
-            super.onTouchEventForResult(event).accept(inputResult -> {
-                mInputResult = inputResult;
-                mInputResult = PanZoomController.INPUT_RESULT_UNHANDLED;
-
-                startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
-            });
-        }
-    }
-
-    public int getInputResult() {
-        return mInputResult;
     }
 
     @Override
@@ -149,11 +135,7 @@ public class NestedGeckoView extends GeckoView {
     }
 
     @Override
-    public boolean dispatchNestedScroll(int dxConsumed,
-                                        int dyConsumed,
-                                        int dxUnconsumed,
-                                        int dyUnconsumed,
-                                        int[] offsetInWindow) {
+    public boolean dispatchNestedScroll(int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int[] offsetInWindow) {
         return mChildHelper.dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow);
     }
 
@@ -167,8 +149,8 @@ public class NestedGeckoView extends GeckoView {
         return mChildHelper.dispatchNestedFling(velocityX, velocityY, consumed);
     }
 
-    @Override
-    public boolean dispatchNestedPreFling(float velocityX, float velocityY) {
-        return mChildHelper.dispatchNestedPreFling(velocityX, velocityY);
+    public int getMaxY(){
+        return 1;
     }
+
 }

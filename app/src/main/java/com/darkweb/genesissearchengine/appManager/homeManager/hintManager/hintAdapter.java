@@ -64,6 +64,11 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
     public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch){
         mHintList = pHintList;
+        if(mHintList.size()==1 && mHintList.get(0).getHeader().equals("about:blank")) {
+            mHintList.clear();
+            mHintList.add( new historyRowModel("Genesis Search", "genesis.onion",-1));
+        }
+
         notifyDataSetChanged();
     }
 

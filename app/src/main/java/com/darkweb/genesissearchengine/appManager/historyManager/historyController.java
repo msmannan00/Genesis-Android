@@ -164,6 +164,9 @@ public class historyController extends AppCompatActivity
         mSearchInput.setOnEditorActionListener((v, actionId, event) ->{
             if (actionId == EditorInfo.IME_ACTION_NEXT)
             {
+                mHistoryAdapter.setFilter(mSearchInput.getText().toString());
+                mHistoryAdapter.invokeFilter(true);
+                mHistoryAdapter.notifyDataSetChanged();
                 helperMethod.hideKeyboard(this);
                 return true;
             }
@@ -172,13 +175,14 @@ public class historyController extends AppCompatActivity
 
         mSearchInput.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                //mSearchInput.clearFocus();
-                //onHideSearch(null);
+                // mSearchInput.clearFocus();
             }else {
-                //mHistoryAdapter.setFilter(mSearchInput.getText().toString());
-                //mHistoryAdapter.invokeFilter(true);
+                mHistoryAdapter.setFilter(mSearchInput.getText().toString());
+                mHistoryAdapter.invokeFilter(true);
+                mHistoryAdapter.notifyDataSetChanged();
             }
         });
+
 
         mSearchInput.addTextChangedListener(new TextWatcher() {
 
@@ -197,6 +201,7 @@ public class historyController extends AppCompatActivity
             {
                 mHistoryAdapter.setFilter(mSearchInput.getText().toString());
                 mHistoryAdapter.invokeFilter(true);
+                mHistoryAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -212,30 +217,18 @@ public class historyController extends AppCompatActivity
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.ON_CLOSE,Collections.singletonList(position));
+                mHistoryAdapter.invokeSwipeClose(position);
             }
 
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                boolean mStatus = (boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null);
-                if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-                    if(mStatus){
-                        return 0;
-                    }
-                    else {
-                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-                        final int swipeFlags = 0;
-                        return makeMovementFlags(swipeFlags, dragFlags);
-                    }
-                } else {
-                    if(mStatus){
-                        return 0;
-                    }
-                    else {
-                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-                        final int swipeFlags = 0;
-                        return makeMovementFlags(swipeFlags, dragFlags);
-                    }
+                int position = viewHolder.getAdapterPosition();
+                if(mHistoryAdapter.isSwipable(position)){
+                    final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                    final int swipeFlags = 0;
+                    return makeMovementFlags(swipeFlags, dragFlags);
+                }else {
+                    return 0;
                 }
             }
 

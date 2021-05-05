@@ -17,6 +17,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.MovementMethod;
@@ -49,7 +50,7 @@ import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
 import org.mozilla.geckoview.GeckoView;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -118,6 +119,7 @@ class homeViewController
     private MovementMethod mSearchBarMovementMethod = null;
     private Handler mTabDialogHandler = null;
     private Runnable mTabDialogRunnable = null;
+    private boolean mIsTopBarExpanded = true;
 
     void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo,ImageButton pPanicButtonLandscape){
         this.mContext = context;
@@ -179,13 +181,10 @@ class homeViewController
         mTopBarContainer.getLayoutTransition().setDuration(200);
 
         final Handler handler = new Handler();
-        handler.postDelayed(() ->
-        {
-            mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
-        }, 1500);
+        handler.postDelayed(() -> mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER), 1500);
 
         updateBannerAdvertStatus(false, false);
-        expandTopBar();
+        expandTopBar(false, 2000);
         mBlockerFullSceen.setVisibility(View.GONE);
         mNewTab.setPressed(true);
         mNewTab.setPressed(false);
@@ -194,6 +193,7 @@ class homeViewController
         View child = mAppBar.getChildAt(0);
         AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
         params.setScrollFlags(1);
+        mIsTopBarExpanded = false;
         mAppBar.setExpanded(true,false);
         mAppBar.refreshDrawableState();
         mAppBar.invalidate();
@@ -274,7 +274,7 @@ class homeViewController
         mPopupLoadNewTab.animate().cancel();
         mPopupLoadNewTab.setAlpha(0);
         mPopupLoadNewTab.setVisibility(View.VISIBLE);
-        mPopupLoadNewTab.animate().setDuration(350).alpha(1);
+        mPopupLoadNewTab.animate().setStartDelay(400).setDuration(250).alpha(1);
 
         if(mTabDialogHandler!=null){
             mTabDialogHandler.removeCallbacksAndMessages(null);
@@ -282,14 +282,14 @@ class homeViewController
 
         mTabDialogHandler = new Handler();
         mTabDialogRunnable = this::onHideLoadTabDialog;
-        mTabDialogHandler.postDelayed(mTabDialogRunnable, 7500);
+        mTabDialogHandler.postDelayed(mTabDialogRunnable, 3500);
     }
 
     public void onHideLoadTabDialog() {
         mPopupLoadNewTab.findViewById(R.id.pBlockerUndo).setVisibility(View.VISIBLE);
         mPopupLoadNewTab.animate().cancel();
 
-        mPopupLoadNewTab.animate().setDuration(350).alpha(0).withEndAction(() -> {
+        mPopupLoadNewTab.animate().setDuration(250).alpha(0).withEndAction(() -> {
             mPopupLoadNewTab.setVisibility(View.GONE);
         });
     }
@@ -495,13 +495,13 @@ class homeViewController
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-            int mDelay = 800;
+            int mDelay = 1150;
             if(status.mThemeApplying || mInstant){
                 mDelay = 0;
             }
 
             ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f);
-            animator.setDuration(300).setStartDelay(mDelay);
+            animator.setDuration(250).setStartDelay(mDelay);
             animator.addUpdateListener(animation ->
             {
                 float v = (float) animation.getAnimatedValue();
@@ -647,29 +647,30 @@ class homeViewController
         if(mSplashScreen.getAlpha()==1){
             if(!mIsAnimating){
                 mIsAnimating = true;
-                triggerPostUI();
+                triggerPostUI(2000);
                 mProgressBar.setVisibility(View.GONE);
                 mSplashScreen.animate().cancel();
                 onClearSelections(false);
                 mGeckoView.requestFocus();
-                mProgressBarIndeterminate.animate().setStartDelay(300).setDuration(250).alpha(0).withEndAction(() -> mSplashScreen.animate().setDuration(350).setStartDelay(200).alpha(0).withEndAction(() -> {
-                    mProgressBarIndeterminate.setVisibility(View.GONE);
-                    mSplashScreen.setClickable(false);
-                    mSplashScreen.setFocusable(false);
-                    mProgressBarIndeterminate.setVisibility(View.GONE);
-                    mSearchbar.setEnabled(true);
-                    mBlocker.setEnabled(false);
+                mProgressBarIndeterminate.animate().cancel();
+                mProgressBarIndeterminate.animate().setStartDelay(750).setDuration(250).alpha(0).withEndAction(() -> {
+                    mSplashScreen.animate().setDuration(250).setStartDelay(100).alpha(0).withEndAction(() -> {
+                        mProgressBarIndeterminate.setVisibility(View.GONE);
+                        mSplashScreen.setClickable(false);
+                        mSplashScreen.setFocusable(false);
+                        mSearchbar.setEnabled(true);
+                        mBlocker.setEnabled(false);
 
-                    mProgressBarIndeterminate.setVisibility(View.GONE);
-                    mBlocker.setVisibility(View.GONE);
-                    mGatewaySplash.setVisibility(View.GONE);
-                    mConnectButton.setVisibility(View.GONE);
-                    mPanicButton.setVisibility(View.GONE);
-                    mPanicButtonLandscape.setVisibility(View.GONE);
+                        mBlocker.setVisibility(View.GONE);
+                        mGatewaySplash.setVisibility(View.GONE);
+                        mConnectButton.setVisibility(View.GONE);
+                        mPanicButton.setVisibility(View.GONE);
+                        mPanicButtonLandscape.setVisibility(View.GONE);
 
-                    mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
-                    mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
-                }));
+                        mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
+                        mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
+                    });
+                });
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -684,18 +685,79 @@ class homeViewController
         mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
     }
 
-    private void triggerPostUI(){
-        expandTopBar();
+    private void triggerPostUI(int pOffsetY){
+        expandTopBar(false, pOffsetY);
         if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<10000){
             mProgressBar.animate().setStartDelay(0).alpha(1);
         }
     }
 
-    public void expandTopBar(){
-        Object mTag = mAppBar.getTag(R.id.expandableBar);
-        if(mTag!=null && (boolean) mTag){
+    public void disableExpand(){
+
+        View child = mAppBar.getChildAt(0);
+        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
+        params.setScrollFlags(0);
+
+    }
+
+    @SuppressLint("WrongConstant")
+    private void enableCollapsing() {
+        View child = mAppBar.getChildAt(0);
+        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
+        params.setScrollFlags(1);
+    }
+    public void expandTopBar(boolean pForced, int pOffsetY){
+
+        if(pOffsetY == -1){
             mAppBar.setExpanded(true,true);
+            disableExpand();
+        }else {
+            enableCollapsing();
         }
+
+        new Handler().postDelayed(() ->
+        {
+            mTopBarContainer.getLayoutTransition().setDuration(200);
+            Object mTag = mAppBar.getTag(R.id.expandableBar);
+            if(mIsTopBarExpanded && !pForced){
+                return;
+            }
+
+
+            if(mTag!=null && (boolean) mTag){
+                mAppBar.setExpanded(true,true);
+                mIsTopBarExpanded = true;
+                Log.i("wwwwww1","wwwwww");
+            }
+        }, 100);
+
+    }
+
+    public void shrinkTopBar(boolean pForced, int pOffsetY){
+
+        if(pOffsetY == -1){
+            mAppBar.setExpanded(true,true);
+            disableExpand();
+        }else {
+            enableCollapsing();
+        }
+
+        mTopBarContainer.getLayoutTransition().setDuration(0);
+        new Handler().postDelayed(() ->
+        {
+            mTopBarContainer.getLayoutTransition().setDuration(200);
+            Object mTag = mAppBar.getTag(R.id.expandableBar);
+
+            if(!mIsTopBarExpanded && !pForced){
+                return;
+            }
+
+            if(mTag!=null && (boolean) mTag){
+                mIsTopBarExpanded = false;
+                mAppBar.setExpanded(false,true);
+                Log.i("wwwwww2","wwwwww");
+            }
+        }, 100);
     }
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
@@ -867,15 +929,8 @@ class homeViewController
             mSearchbar.setTag(R.id.msearchbarProcessing,true);
             url = CONST_GENESIS_DOMAIN_URL;
         }
-        else if(url.startsWith(CONST_GENESIS_HELP_URL_CACHE) || url.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
-            mSearchbar.setTag(R.id.msearchbarProcessing,true);
-            url = CONST_GENESIS_HELP_URL;
-        }
-        else if(helperMethod.getHost(helperMethod.completeURL(url)).contains("genesis") || helperMethod.getHost(helperMethod.completeURL(url)).contains("boogle")){
-            mSearchbar.setTag(R.id.msearchbarProcessing,true);
-        }else {
-            mSearchbar.setTag(R.id.msearchbarProcessing,false);
-        }
+
+
         Log.i("FUCK::5",url);
         if(!mSearchbar.hasFocus() || pClearText || pBypassFocus){
             if(mSearchEngineBar.getVisibility() == View.GONE || pBypassFocus){
@@ -1010,7 +1065,7 @@ class homeViewController
 
                 mNewTab.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
                 mMenu.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
-                mVoiceInput.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint));
+                mVoiceInput.setColorFilter(ContextCompat.getColor(mContext, R.color.c_text_v8));
                 mSearchbar.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
                 mSearchbar.setHintTextColor(ContextCompat.getColor(mContext, R.color.c_text_v2));
 
@@ -1352,6 +1407,8 @@ class homeViewController
             this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(0).withEndAction(() -> mBlockerFullSceen.setVisibility(View.GONE));
             mContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             initTopBarPadding();
+
+            mIsTopBarExpanded = false;
             mAppBar.setExpanded(true,false);
             mAppBar.refreshDrawableState();
             mAppBar.invalidate();

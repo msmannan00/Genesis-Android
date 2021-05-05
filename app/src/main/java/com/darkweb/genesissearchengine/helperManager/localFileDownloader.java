@@ -22,7 +22,11 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
+
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.netcipher.client.StrongHttpsClient;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import org.torproject.android.proxy.util.Prefs;
@@ -37,6 +41,7 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Collections;
 
 import ch.boye.httpclientandroidlib.HttpHost;
@@ -196,10 +201,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
 
             } catch (Exception ex) {
                 Log.i("FIZZAHFUCK", ex.getMessage());
-                if(mRequestCode>300){
-                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
-                    //Toast.makeText(context,"Request Forbidden Error Code : ",mRequestCode).show();
-                }
+                mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
                 onCancel();
             }
         }else {
@@ -260,9 +262,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
                 output.close();
                 mStream.close();
             }catch (Exception ex){
-                if(mRequestCode>300){
-                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
-                }
+                pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Collections.singletonList(mRequestCode), activityContextManager.getInstance().getHomeController()), pluginEnums.eMessageManager.M_DOWNLOAD_FAILURE);
                 onCancel();
             }
         }
@@ -299,7 +299,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
         build.addAction(0, null, null);
         build.setContentIntent(pendingIntent);
         build.setContentText("Download complete");
-        build.setSmallIcon(R.xml.ic_check);
+        build.setSmallIcon(R.drawable.ic_download_complete);
         build.setColor(Color.parseColor("#84989f"));
         build.setProgress(0, 0, false);
         build.setAutoCancel(true);

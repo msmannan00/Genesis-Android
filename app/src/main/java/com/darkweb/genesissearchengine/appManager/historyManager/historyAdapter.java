@@ -91,7 +91,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         mRealIndex.clear();
         mCurrentList.clear();
         this.mModelList.clear();
-        onVerifyLongSelectedURL();
+        onVerifyLongSelectedURL(true);
 
         ArrayList<historyRowModel> p_model_list = mPassedList;
         int m_date_state = -1;
@@ -117,7 +117,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 if(m_date_state!=1 && p_model_list.get(counter).getID()!=-2){
                     this.mModelList.add(new historyRowModel("Today ",null,-1));
                     mRealID.add(m_real_counter);
-                    mRealIndex.add(m_real_counter);
+                    mRealIndex.add(counter);
                     m_date_state = 1;
                 }
             }else if (diff>=1){
@@ -126,20 +126,20 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                     m_last_day = (int)(Math.ceil(diff/7)*7);
                     this.mModelList.add(new historyRowModel("Last " + m_last_day + " Days",null,-1));
                     mRealID.add(m_real_counter);
-                    mRealIndex.add(m_real_counter);
+                    mRealIndex.add(counter);
                     m_date_state = 2;
                 }
             }else {
                 if(m_date_state!=3){
                     this.mModelList.add(new historyRowModel("Older ",null,-1));
                     mRealID.add(m_real_counter);
-                    mRealIndex.add(m_real_counter);
+                    mRealIndex.add(counter);
                     m_date_state = 3;
                 }
             }
 
             mRealID.add(p_model_list.get(counter).getID());
-            mRealIndex.add(m_real_counter);
+            mRealIndex.add(counter);
             this.mModelList.add(p_model_list.get(counter));
             m_real_counter+=1;
         }
@@ -251,16 +251,33 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mLongSelectedDate.add(pDate);
                 mLongSelectedIndex.add(pUrl);
                 mLongSelectedID.add(pId);
-
+                if(mLongSelectedIndex.size()<=1){
+                    notifyDataSetChanged();
+                }
             }
-            onVerifyLongSelectedURL();
+            onVerifyLongSelectedURL(false);
+            pItemView.clearFocus();
+            pItemView.setPressed(false);
+            pItemView.setVisibility(View.GONE);
+            pItemView.setVisibility(View.VISIBLE);
         }
     }
 
-    public void onVerifyLongSelectedURL(){
+    public boolean isSwipable(int mIndex){
+        if(mCurrentList.get(mIndex).getID() == -1){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public void onVerifyLongSelectedURL(boolean pIsComputing){
         if(mLongSelectedIndex.size()>0){
             mEvent.invokeObserver(Collections.singletonList(false),enums.etype.on_verify_selected_url_menu);
         }else {
+            if(!pIsComputing){
+                notifyDataSetChanged();
+            }
             mEvent.invokeObserver(Collections.singletonList(true),enums.etype.on_verify_selected_url_menu);
         }
     }
@@ -272,7 +289,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             mLongSelectedDate.remove(pDate);
             mLongSelectedIndex.remove(pUrl);
             mLongSelectedID.remove((Integer) pId);
-            onVerifyLongSelectedURL();
+            onVerifyLongSelectedURL(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -280,6 +297,13 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
     public void onClearAdapter(){
         mWebIcon.clear();
+    }
+
+    public void notifyFilter(){
+        if(mFilter.length()>0){
+            initializeModelWithDate(true);
+            notifyDataSetChanged();
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -300,6 +324,11 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 pItemView.setPressed(false);
                 pItemView.clearFocus();
             }
+
+            if(mFilter.length()>0){
+                initializeModelWithDate(true);
+                notifyDataSetChanged();
+            }
         };
 
          pItemView.setOnTouchListener((v, event) -> {
@@ -316,12 +345,15 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                              historyAdapter.this.onSelectView(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
                          }
                      }
+
+                     initializeModelWithDate(true);
                      return false;
                  }
 
                  v.setPressed(false);
                  handler.removeCallbacks(mLongPressed);
                  mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered);
+                 initializeModelWithDate(true);
                  return true;
 
              } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -329,6 +361,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                  mLongPressedMenuActive = false;
                  v.setPressed(true);
                  handler.postDelayed(mLongPressed, ViewConfiguration.getLongPressTimeout());
+                 initializeModelWithDate(true);
                  return true;
              } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
                  handler.removeCallbacks(mLongPressed);
@@ -338,11 +371,14 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                  }
                  handler.removeCallbacks(mLongPressed);
 
+                 initializeModelWithDate(true);
                  return true;
              }
+             initializeModelWithDate(true);
              return false;
+
          });
-        initializeModelWithDate(false);
+        //initializeModelWithDate(false);
     }
 
     void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle){
@@ -355,6 +391,20 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuOpenCurrentTab), pUrl, pPosition, pTitle);
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuOpenNewTab), pUrl, pPosition, pTitle);
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuDelete), pUrl, pPosition, pTitle);
+
+        if(mFilter.length()>0){
+            initializeModelWithDate(true);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void invokeSwipeClose(int pPosition){
+        onClose(pPosition);
+        invokeFilter(true);
+
+        if(mPopupWindow!=null){
+            mPopupWindow.dismiss();
+        }
     }
 
     public void setPopupWindowEvents(View pView, String pUrl, int pPosition, String pTitle){
@@ -393,27 +443,16 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.url_clear_at);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
-        boolean mDateVerify = false;
-        if(mPassedList.size()>0){
-            if(mCurrentList.size()>0 && (mCurrentList.size()>pIndex+1 || mCurrentList.size()==pIndex+1)){
-                mDateVerify = true;
-            }
-        }else {
+
+        if(mPassedList.size()<=0){
             mCurrentList.clear();
             return;
         }
-        int size = mCurrentList.size();
 
-        if(mDateVerify){
-            mCurrentList.remove(pIndex);
-            notifyItemRemoved(pIndex);
-            notifyItemRangeChanged(pIndex, mCurrentList.size());
-        }else {
-            mCurrentList.remove(pIndex);
-            notifyItemRemoved(pIndex);
-            notifyItemChanged(mCurrentList.size()-1);
-        }
-        initializeModelWithDate(false);
+        mCurrentList.remove(pIndex);
+        notifyItemRemoved(pIndex);
+        notifyItemRangeChanged(0, mCurrentList.size());
+        clearLongSelectedURL();
     }
 
     /*View Holder Extensions*/
@@ -472,8 +511,14 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mDateContainer.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.GONE);
                 mRowContainer.setVisibility(View.VISIBLE);
-                mRowMenu.setVisibility(View.VISIBLE);
-                mRowMenu.setClickable(true);
+                if(mLongSelectedID.size()>0){
+                    mRowMenu.setVisibility(View.INVISIBLE);
+                    mRowMenu.setClickable(false);
+                }else {
+                    mRowMenu.setVisibility(View.VISIBLE);
+                    mRowMenu.setClickable(true);
+                }
+
                 mWebLogo.setVisibility(View.VISIBLE);
                 mHeader.setText(model.getHeader());
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));

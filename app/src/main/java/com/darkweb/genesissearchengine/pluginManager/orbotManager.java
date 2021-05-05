@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.proxy.OrbotService;
 import org.torproject.android.proxy.util.Prefs;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -47,7 +47,7 @@ class orbotManager
         orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
         orbotLocalConstants.mManualBridgeType = status.sBridgeCustomType;
         Prefs.putBridgesEnabled(status.sBridgeStatus);
-        Intent mServiceIntent = new Intent(mAppContext.get(), OrbotService.class);
+        Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mAppContext.get().getApplicationContext().startForegroundService(mServiceIntent);
@@ -200,6 +200,12 @@ class orbotManager
         return OrbotService.getServiceObject().getProxyStatus();
     }
 
+    private void onDestroy(){
+        if(!status.mThemeApplying) {
+            OrbotService.getServiceObject().onDestroy();
+        }
+    }
+
     /*External Triggers*/
 
     Object onTrigger(List<Object> pData, pluginEnums.eOrbotManager pEventType) {
@@ -262,6 +268,10 @@ class orbotManager
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT))
         {
             newCircuit();
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_DESTROY))
+        {
+            onDestroy();
         }
         return null;
     }

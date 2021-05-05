@@ -50,7 +50,7 @@ public class databaseController
     /*Initializations*/
 
     public void prepareDatabaseEnvironment(AppCompatActivity app_context) {
-        File databaseFile = app_context.getDatabasePath(CONST_DATABASE_NAME);
+        File databaseFile = app_context.getDatabasePath(CONST_DATABASE_NAME + "_SECURE");
 
         if (!databaseFile.exists()) {
             databaseFile.getParentFile().mkdirs();
@@ -63,7 +63,7 @@ public class databaseController
         {
             SQLiteDatabase.loadLibs(app_context);
             prepareDatabaseEnvironment(app_context);
-            mDatabaseInstance = mDatabaseInstance.openOrCreateDatabase(app_context.getDatabasePath(CONST_DATABASE_NAME), constants.CONST_ENCRYPTION_KEY_DATABASE,null, wrapHook(null));
+            mDatabaseInstance = mDatabaseInstance.openOrCreateDatabase(app_context.getDatabasePath(CONST_DATABASE_NAME + "_SECURE"), constants.CONST_ENCRYPTION_KEY_DATABASE,null, wrapHook(null));
 
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
             mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
@@ -159,22 +159,26 @@ public class databaseController
     public ArrayList<tabRowModel> selectTabs(){
         ArrayList<tabRowModel> mTempListModel = new ArrayList<>();
 
-        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM tab ORDER BY date DESC", null);
+        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM tab ORDER BY date ASC", null);
         if (c.moveToFirst()){
             do {
                 geckoSession mSession =  activityContextManager.getInstance().getHomeController().onNewTabInit();
                 tabRowModel model = new tabRowModel(c.getString(0), c.getString(1),c.getBlob(4));
                 GeckoSession.SessionState session = null;
                 try {
-                    if(status.sRestoreTabs){
+                    // if(status.sRestoreTabs){
                         session = GeckoSession.SessionState.fromString(c.getString(6));
-                    }
+                    // }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 model.setSession(mSession, c.getString(3),c.getString(2), c.getString(5), session);
                 model.getSession().setSessionID(model.getmId());
-                mTempListModel.add(model);
+                if(session != null){
+                    mTempListModel.add(0, model);
+                }else {
+                    mTempListModel.add(model);
+                }
             } while(c.moveToNext());
         }
         c.close();

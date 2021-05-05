@@ -1,4 +1,4 @@
-package org.torproject.android.proxy.wrapper;
+package org.torproject.android.service.wrapper;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;

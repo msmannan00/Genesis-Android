@@ -143,7 +143,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.darkweb.genesissearchengine.externalNavigationManager.externalNavigationController">
+        <activity android:name="com.darkweb.genesissearchengine.externalNavigationManager.externalNavigationController"
+            android:launchMode="singleTask"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

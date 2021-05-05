@@ -103,7 +103,7 @@ public interface TorServiceConstants {
     // actions for internal command Intents
     String CMD_SIGNAL_HUP = "signal_hup";
     String CMD_NEWNYM = "newnym";
-    String CMD_setting = "setting";
+    String CMD_SETTING = "setting";
     String CMD_SET_EXIT = "setexit";
     String CMD_ACTIVE = "ACTIVE";
 

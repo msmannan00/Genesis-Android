@@ -36,24 +36,24 @@
       "filters": [
         {
           "filterType": "ABI",
-          "value": "arm64-v8a"
-        }
-      ],
-      "versionCode": 1001,
-      "versionName": "Build | Dark-Origin 1.1",
-      "outputFile": "app-aarch64-arm64-v8a-release.apk"
-    },
-    {
-      "type": "ONE_OF_MANY",
-      "filters": [
-        {
-          "filterType": "ABI",
           "value": "armeabi-v7a"
         }
       ],
       "versionCode": 1001,
       "versionName": "Build | Dark-Origin 1.1",
       "outputFile": "app-aarch64-armeabi-v7a-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "arm64-v8a"
+        }
+      ],
+      "versionCode": 1001,
+      "versionName": "Build | Dark-Origin 1.1",
+      "outputFile": "app-aarch64-arm64-v8a-release.apk"
     }
   ]
 }

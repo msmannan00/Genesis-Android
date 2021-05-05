@@ -3,6 +3,7 @@ package com.darkweb.genesissearchengine.appManager.homeManager.geckoManager;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +14,12 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
 import java.io.File;
 import java.util.List;
+
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_REPORT_URL;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
@@ -71,15 +76,28 @@ public class geckoClients
     public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         boolean mStatus = mSession.onValidateInitializeFromStartup();
         if(mStatus){
-            // loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
-            mSession.onRestoreState();
-            mSession.reload();
+            boolean mState = mSession.onRestoreState();
+            if(!mState){
+                new Handler().postDelayed(() ->
+                {
+                    mSession.stop();
+                    mSession.loadUri(mSession.getCurrentURL());
+                }, 500);
+            }else {
+                String mURL = mSession.getCurrentURL();
+                if(mURL.equals("https://boogle.store") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+                    if(!mSession.canGoBack()){
+                        mNestedGeckoView.releaseSession();
+                        mSession.close();
+                        mSession.open(mRuntime);
+                        mNestedGeckoView.setSession(mSession);
+                    }else {
+                        mSession.goBack();
+                    }
+                    loadURL("boogle.store", mNestedGeckoView, pcontext);
+                }
+            }
         }
-
-    }
-
-    public boolean onGetInitializeFromStartup(){
-        return mSession.onGetInitializeFromStartup();
     }
 
     public geckoSession initFreeSession(GeckoView pGeckoView, AppCompatActivity pcontext, eventObserver.eventListener event){
@@ -223,6 +241,7 @@ public class geckoClients
                     if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)){
                         String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
                         mSession.getSettings().setAllowJavascript(true);
+                        mSession.initURL(mURL);
                         mSession.loadUri(mURL);
                     }else {
                         String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
@@ -258,6 +277,10 @@ public class geckoClients
         onLoadFavIcon(pcontext);
     }
 
+    public boolean isLoaded(){
+       return mSession.isLoaded();
+    }
+
     public void onClearSiteData(){
         mRuntime.getStorageController().clearData(SITE_SETTINGS);
         mRuntime.getStorageController().clearData(SITE_DATA);
@@ -278,9 +301,10 @@ public class geckoClients
         mRuntime.getStorageController().clearData(COOKIES);
     }
 
-    public void onBackPressed(boolean isFinishAllowed, int mTabSize){
+    public void onBackPressed(boolean isFinishAllowed, int mTabSize, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         if(mSession.canGoBack()){
             mSession.goBackSession();
+            mSession.onUpdateBannerAdvert();
         }
         else if(isFinishAllowed){
             if(mSession.getRemovableFromBackPressed() && mTabSize>1){
@@ -321,6 +345,10 @@ public class geckoClients
         }
     }
 
+    public void onClose(){
+        mSession.onClose();
+    }
+
     public void setRemovableFromBackPressed(boolean pStatus){
         mSession.setRemovableFromBackPressed(pStatus);
     }
@@ -331,9 +359,18 @@ public class geckoClients
     }
 
     public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
+        mSession.stop();
+        String url = mSession.getCurrentURL();
+        if(url.startsWith("https://boogle.store/?pG") || url.startsWith("https://boogle.store?pG") || url.endsWith("boogle.store") ||  url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)){
+            loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+        }else{
+            mSession.reload();
+        }
+    }
+
+    public void onReloadStatic(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         ///mSession.stop();
-        mSession.reload();
-        //loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+        loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
     }
 
     public void manual_download(String url, AppCompatActivity context){
@@ -377,12 +414,53 @@ public class geckoClients
         mRuntime.getSettings().setFontSizeFactor(font/100);
     }
 
+    public void reinitHomeTheme(){
+        String mURLFinal;
+        mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
+        if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(activityContextManager.getInstance().getHomeController())){
+            String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
+            mSession.getSettings().setAllowJavascript(true);
+            mSession.initURL(mURL);
+            mURLFinal = mURL;
+        }else {
+            String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
+            mSession.getSettings().setAllowJavascript(true);
+            mSession.initURL(mURL);
+            mURLFinal = mURL;
+        }
+
+        if(!mSession.canGoBack()){
+            activityContextManager.getInstance().getHomeController().getGeckoView().releaseSession();
+            mSession.close();
+            mSession.open(mRuntime);
+            activityContextManager.getInstance().getHomeController().getGeckoView().setSession(mSession);
+        }else {
+            mSession.goBack();
+        }
+
+        new Handler().postDelayed(() ->
+        {
+            if(!mSession.canGoBack()){
+                mSession.close();
+                activityContextManager.getInstance().getHomeController().getGeckoView().releaseSession();
+                mSession.open(mRuntime);
+                activityContextManager.getInstance().getHomeController().getGeckoView().setSession(mSession);
+            }
+
+            mSession.loadUri(mURLFinal);
+
+        }, 10);
+
+    }
 
     public class geckoViewClientCallback implements eventObserver.eventListener{
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
         {
-            if(mSession!=null && mSession.isClosed()){
+            if(e_type.equals(enums.etype.M_CHANGE_HOME_THEME)){
+                reinitHomeTheme();
+            }
+            else if(mSession!=null && mSession.isClosed()){
                 return null;
             }else if(mSession!=null) {
                 if(e_type.equals(enums.etype.SESSION_ID)){

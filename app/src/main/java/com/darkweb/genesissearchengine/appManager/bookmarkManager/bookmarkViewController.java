@@ -100,6 +100,7 @@ class bookmarkViewController
             mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
             mClearButton.setText(strings.HISTORY_CLEAR_HISTORY);
             mClearButton.setClickable(true);
+            mRecycleView.setVisibility(View.VISIBLE);
         }
         else {
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
@@ -120,6 +121,7 @@ class bookmarkViewController
 
             mClearButton.getLayoutParams().height = 0;
             mClearButton.requestLayout();
+            mRecycleView.setVisibility(View.GONE);
         }
     }
 
@@ -178,16 +180,13 @@ class bookmarkViewController
                 mSearchInput.setVisibility(View.GONE);
                 mSearchInput.setText(strings.GENERIC_EMPTY_STR);
 
-                new Handler().postDelayed(() ->
-                {
-                    mTitle.setAlpha(0f);
-                    mTitle.setVisibility(View.VISIBLE);
-                    mTitle.animate().setDuration(150).alpha(1);
+                mTitle.setAlpha(0f);
+                mTitle.setVisibility(View.VISIBLE);
+                mTitle.animate().setDuration(150).alpha(1);
 
-                    mSearchButton.setAlpha(0f);
-                    mSearchButton.setVisibility(View.VISIBLE);
-                    mSearchButton.animate().setDuration(150).alpha(1);
-                }, 500);
+                mSearchButton.setAlpha(0f);
+                mSearchButton.setVisibility(View.VISIBLE);
+                mSearchButton.animate().setDuration(150).alpha(1);
 
                 mSearchInput.setText(strings.GENERIC_EMPTY_STR);
                 mSearchInput.setClickable(false);

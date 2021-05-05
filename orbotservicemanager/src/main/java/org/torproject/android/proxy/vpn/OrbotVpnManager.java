@@ -35,10 +35,11 @@ import com.runjva.sourceforge.jsocks.server.ServerAuthenticatorNone;
 
 import org.torproject.android.proxy.OrbotConstants;
 import org.torproject.android.proxy.OrbotService;
-import org.torproject.android.proxy.R;
 import org.torproject.android.proxy.TorServiceConstants;
 import org.torproject.android.proxy.util.CustomNativeLoader;
 import org.torproject.android.proxy.util.Prefs;
+import org.torproject.android.service.R;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;

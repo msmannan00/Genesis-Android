@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.historyManager.historyEnums;
 import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -145,10 +146,11 @@ public class bookmarkController extends AppCompatActivity
 
         mSearchInput.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                mSearchInput.clearFocus();
+                // mSearchInput.clearFocus();
             }else {
-                ((bookmarkAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).setFilter(mSearchInput.getText().toString());
-                ((bookmarkAdapter) mRecycleView.getAdapter()).invokeFilter(true);
+                mbookmarkAdapter.setFilter(mSearchInput.getText().toString());
+                mbookmarkAdapter.invokeFilter(true);
+                mbookmarkAdapter.notifyDataSetChanged();
             }
         });
 
@@ -167,10 +169,12 @@ public class bookmarkController extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable editable)
             {
-                ((bookmarkAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).setFilter(mSearchInput.getText().toString());
-                ((bookmarkAdapter) mRecycleView.getAdapter()).invokeFilter(true);
+                mbookmarkAdapter.setFilter(mSearchInput.getText().toString());
+                mbookmarkAdapter.invokeFilter(true);
+                mbookmarkAdapter.notifyDataSetChanged();
             }
         });
+
     }
 
     @Override
@@ -189,31 +193,14 @@ public class bookmarkController extends AppCompatActivity
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.ON_CLOSE,Collections.singletonList(position));
+                mbookmarkAdapter.invokeSwipeClose(position);
             }
 
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                boolean mStatus = (boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS, null);
-                if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-                    if(mStatus){
-                        return 0;
-                    }
-                    else {
-                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-                        final int swipeFlags = 0;
-                        return makeMovementFlags(swipeFlags, dragFlags);
-                    }
-                } else {
-                    if(mStatus){
-                        return 0;
-                    }
-                    else {
-                        final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-                        final int swipeFlags = 0;
-                        return makeMovementFlags(swipeFlags, dragFlags);
-                    }
-                }
+                final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                final int swipeFlags = 0;
+                return makeMovementFlags(swipeFlags, dragFlags);
             }
 
             @Override
@@ -371,9 +358,6 @@ public class bookmarkController extends AppCompatActivity
 
             else if(e_type.equals(enums.etype.url_clear)){
                 mbookmarkModel.onManualClear((int)data.get(0));
-                if(mbookmarkModel.getList().size()==0){
-                    mRecycleView.setAlpha(0);
-                }
             }
             else if(e_type.equals(enums.etype.url_clear_at)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK ,data);

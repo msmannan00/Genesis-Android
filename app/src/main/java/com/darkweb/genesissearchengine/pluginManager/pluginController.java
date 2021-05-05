@@ -1,5 +1,8 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.os.Handler;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -203,7 +206,10 @@ public class pluginController
                 ((homeController)mHomeController.get()).onLoadURL(pData.get(0).toString());
             }
             else if(pEventType.equals(M_PANIC_RESET)){
-                activityContextManager.getInstance().getHomeController().panicExitInvoked();
+                new Handler().postDelayed(() ->
+                {
+                    activityContextManager.getInstance().getHomeController().panicExitInvoked();
+                }, 300);
             }
             else if(pEventType.equals(M_DOWNLOAD_SINGLE)){
                 if(pData.size()<3){

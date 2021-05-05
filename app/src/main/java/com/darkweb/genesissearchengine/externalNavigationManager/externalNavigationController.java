@@ -10,29 +10,46 @@ import com.darkweb.genesissearchengine.appManager.homeManager.homeController.hom
 import com.darkweb.genesissearchengine.constants.status;
 import com.example.myapplication.R;
 
+import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 public class externalNavigationController extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Uri data = externalNavigationController.this.getIntent().getData();
+        if(data == null){
+            finish();
+            activityContextManager.getInstance().onClearStack();
+            Intent bringToForegroundIntent = new Intent(activityContextManager.getInstance().getHomeController(), homeController.class);
+            bringToForegroundIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(bringToForegroundIntent);
+            return;
+        }
+
         if(status.sSettingIsAppStarted){
             finish();
-            Uri data = externalNavigationController.this.getIntent().getData();
-            activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
+            activityContextManager.getInstance().onClearStack();
 
-
-            final Handler handler = new Handler();
-            handler.postDelayed(() -> {
-                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
-                startActivity(launchIntent);
+            new Handler().postDelayed(() ->
+            {
+                activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(activityContextManager.getInstance().getHomeController().completeURL(data.toString()));
+                activityContextManager.getInstance().getHomeController().onClearSelectionTab();
             }, 500);
 
+            Intent bringToForegroundIntent = new Intent(activityContextManager.getInstance().getHomeController(), homeController.class);
+            bringToForegroundIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(bringToForegroundIntent);
+
+            return;
+        }else if(status.sSettingIsAppRunning){
+            finish();
+            status.sExternalWebsite = data.toString();
             return;
         }
 
         Intent intent = new Intent(this.getIntent());
         intent.setClassName(this.getApplicationContext(), homeController.class.getName());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Uri data = this.getIntent().getData();
         if(data!=null){
             if(activityContextManager.getInstance().getHomeController()!=null){
                 activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());

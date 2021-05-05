@@ -441,7 +441,6 @@ class messageManager
                 mDialog.dismiss();
             }
         });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void downloadFileLongPress()
@@ -565,7 +564,6 @@ class messageManager
             };
             handler.postDelayed(runnable, 1000);
         });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     void onReset(){

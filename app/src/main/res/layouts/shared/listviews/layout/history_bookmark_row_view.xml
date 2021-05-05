@@ -68,7 +68,7 @@
                 android:layout_marginEnd="-1dp"
                 android:layout_height="48dp"
                 android:visibility="visible"
-                android:alpha="1"
+                android:alpha="0"
                 android:translationZ="3dp"
                 android:src="@drawable/tick_recycler_view_green"
                 android:gravity="center_vertical"

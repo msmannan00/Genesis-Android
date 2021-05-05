@@ -8,8 +8,10 @@ import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController;
 import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.constants.constants;
@@ -160,9 +162,25 @@ public class settingClearController extends AppCompatActivity {
         if(mHomeInvoked){
             activityContextManager.getInstance().getHomeController().onClearSettings();
         }
+
+
     }
 
     private void onClearSettings(){
+
+        boolean mIsThemeChangable = false;
+        if(!status.sDefaultNightMode){
+            if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                mIsThemeChangable = true;
+            }
+        }else {
+            if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                mIsThemeChangable = true;
+            }
+        }
+
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));
@@ -197,6 +215,15 @@ public class settingClearController extends AppCompatActivity {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_POPUP,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
+
+        if(mIsThemeChangable) {
+            status.mThemeApplying = true;
+            onBackPressed();
+            overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+            activityContextManager.getInstance().getHomeController().onReInitTheme();
+            activityContextManager.getInstance().getSettingController().onReInitTheme();
+            helperMethod.openActivity(settingClearController.class, constants.CONST_LIST_HISTORY, settingClearController.this, true);
+        }
     }
 
     /* LOCAL OVERRIDES */

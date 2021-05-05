@@ -2,6 +2,7 @@ package com.darkweb.genesissearchengine.appManager.settingManager.accessibilityM
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -171,6 +172,12 @@ public class settingAccessibilityController  extends AppCompatActivity {
         mSettingAccessibilityModel.onTrigger(settingAccessibilityEnums.eAccessibilityViewController.M_ZOOM_SETTING, Collections.singletonList(!mZoom.isChecked()));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ZOOM,status.sSettingEnableZoom));
         mZoom.toggle();
+
+        new Handler().postDelayed(() ->
+        {
+            activityContextManager.getInstance().getHomeController().onReload(null);
+        }, 300);
+
     }
 
     public void onVoiceInputSettingUpdate(View view){

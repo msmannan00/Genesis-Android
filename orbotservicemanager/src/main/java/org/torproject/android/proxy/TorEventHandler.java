@@ -2,13 +2,12 @@ package org.torproject.android.proxy;
 
 import android.text.TextUtils;
 
-import androidx.core.app.NotificationCompat;
-
 import net.freehaven.tor.control.EventHandler;
 
 import org.torproject.android.proxy.util.ExternalIPFetcher;
 import org.torproject.android.proxy.util.Prefs;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+import org.torproject.android.service.R;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.text.NumberFormat;
 import java.util.HashMap;

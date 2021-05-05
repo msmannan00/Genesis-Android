@@ -91,6 +91,7 @@ class historyViewController
             mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
             mClearButton.setText(strings.HISTORY_CLEAR_HISTORY);
             mClearButton.setClickable(true);
+            mRecycleView.setVisibility(View.VISIBLE);
         }
         else {
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
@@ -111,6 +112,7 @@ class historyViewController
 
             mClearButton.getLayoutParams().height = 0;
             mClearButton.requestLayout();
+            mRecycleView.setVisibility(View.GONE);
         }
     }
 

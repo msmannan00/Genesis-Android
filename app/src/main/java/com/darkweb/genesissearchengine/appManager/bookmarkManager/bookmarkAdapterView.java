@@ -83,6 +83,7 @@ public class bookmarkAdapterView
             helperMethod.vibrate(mContext);
         }
 
+
         pLogoImage.setAlpha(0f);
         pLogoImage.setVisibility(View.VISIBLE);
         pLogoImage.animate().cancel();

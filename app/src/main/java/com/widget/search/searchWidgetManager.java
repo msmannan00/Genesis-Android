@@ -3,20 +3,27 @@ package com.widget.search;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 
 public class searchWidgetManager extends AppWidgetProvider {
 
     private static final String SHARED_PREF_FILE = "com.example.android.appwidgetsample";
     private static final String COUNT_KEY = "count";
+    private static int mCurrentWidth = -1;
 
     private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
@@ -43,9 +50,10 @@ public class searchWidgetManager extends AppWidgetProvider {
 
         views.setOnClickPendingIntent(R.id.pSearchLogo, pendingUpdate);
         views.setOnClickPendingIntent(R.id.pTopBarContainer, pendingUpdate);
-        views.setOnClickPendingIntent(R.id.pSearchInput, pendingUpdate);
+        views.setOnClickPendingIntent(R.id.pSearchInputWidget, pendingUpdate);
         views.setOnClickPendingIntent(R.id.pVoiceInput, mpintentUpdate);
         appWidgetManager.updateAppWidget(appWidgetId, views);
+
     }
 
     public void onReceive(Context context, Intent intent) {
@@ -104,9 +112,33 @@ public class searchWidgetManager extends AppWidgetProvider {
     }
 
     @Override
+    public void onAppWidgetOptionsChanged (Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle widgetInfo) {
+        int width = widgetInfo.getInt (AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
+        mCurrentWidth = width;
+        int[] appWidgetIds = new int[1];
+        appWidgetIds[0] = appWidgetId;
+        onUpdate(context, appWidgetManager, appWidgetIds);
+    }
+
+    private int getColsNum (int size) {
+        return (int) Math.floor ((size - 30) / 70);
+    }
+
+    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
+
+            int size = getColsNum(mCurrentWidth);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_search_controller);
+            if(mCurrentWidth!=-1){
+                if(size<=2){
+                    views.setTextColor(R.id.pSearchInputWidget, Color.WHITE);
+                }else {
+                    views.setTextColor(R.id.pSearchInputWidget, Color.GRAY);
+                }
+                appWidgetManager.updateAppWidget(appWidgetIds, views);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package org.torproject.android.proxy.wrapper;
+package org.torproject.android.service.wrapper;
 
 import android.annotation.TargetApi;
 import android.content.Context;

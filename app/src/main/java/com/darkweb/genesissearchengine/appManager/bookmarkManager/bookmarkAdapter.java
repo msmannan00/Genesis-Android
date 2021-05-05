@@ -76,7 +76,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         mRealIndex.clear();
         mCurrentList.clear();
         this.mModelList.clear();
-        onVerifyLongSelectedURL();
+        onVerifyLongSelectedURL(true);
 
         ArrayList<bookmarkRowModel> p_model_list = mPassedList;
         for(int counter = 0; counter< p_model_list.size(); counter++){
@@ -88,7 +88,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             }
 
             mRealID.add(p_model_list.get(counter).getID());
-            mRealIndex.add(m_real_counter);
+            mRealIndex.add(counter);
             this.mModelList.add(p_model_list.get(counter));
             m_real_counter+=1;
         }
@@ -129,7 +129,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             }
         }
         clearLongSelectedURL();
-        initializeModelWithDate(false);
+        // initializeModelWithDate(false);
     }
 
     private void clearLongSelectedURL(){
@@ -185,6 +185,15 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         mSearchEnabled = p_is_searched;
     }
 
+    public void invokeSwipeClose(int pPosition){
+        onClose(pPosition);
+        invokeFilter(true);
+
+        if(mPopupWindow!=null){
+            mPopupWindow.dismiss();
+        }
+    }
+
     public void onSelectView(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, boolean pIsForced, int pId, Date pDate){
         if(!mSearchEnabled){
             try {
@@ -196,16 +205,21 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mLongSelectedDate.add(pDate);
                 mLongSelectedIndex.add(pUrl);
                 mLongSelectedID.add(pId);
-
+                if(mLongSelectedIndex.size()<=1){
+                    notifyDataSetChanged();
+                }
             }
-            onVerifyLongSelectedURL();
+            onVerifyLongSelectedURL(false);
         }
     }
 
-    public void onVerifyLongSelectedURL(){
+    public void onVerifyLongSelectedURL(boolean pIsComputing){
         if(mLongSelectedIndex.size()>0){
             mEvent.invokeObserver(Collections.singletonList(false),enums.etype.on_verify_selected_url_menu);
         }else {
+            if(!pIsComputing){
+                notifyDataSetChanged();
+            }
             mEvent.invokeObserver(Collections.singletonList(true),enums.etype.on_verify_selected_url_menu);
         }
     }
@@ -217,9 +231,16 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             mLongSelectedDate.remove(pDate);
             mLongSelectedIndex.remove(pUrl);
             mLongSelectedID.remove((Integer) pId);
-            onVerifyLongSelectedURL();
+            onVerifyLongSelectedURL(false);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void notifyFilter(){
+        if(mFilter.length()>0){
+            initializeModelWithDate(true);
+            notifyDataSetChanged();
         }
     }
 
@@ -241,6 +262,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 pItemView.setPressed(false);
                 pItemView.clearFocus();
             }
+            notifyFilter();
         };
 
         pItemView.setOnTouchListener((v, event) -> {
@@ -257,12 +279,14 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                             bookmarkAdapter.this.onSelectView(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
                         }
                     }
+                    initializeModelWithDate(true);
                     return false;
                 }
 
                 v.setPressed(false);
                 handler.removeCallbacks(mLongPressed);
                 mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered);
+                initializeModelWithDate(true);
                 return true;
 
             } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -270,6 +294,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mLongPressedMenuActive = false;
                 v.setPressed(true);
                 handler.postDelayed(mLongPressed, ViewConfiguration.getLongPressTimeout());
+                initializeModelWithDate(true);
                 return true;
             } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
                 handler.removeCallbacks(mLongPressed);
@@ -279,10 +304,13 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 }
                 handler.removeCallbacks(mLongPressed);
 
+                initializeModelWithDate(true);
                 return true;
             }
+            initializeModelWithDate(true);
             return false;
         });
+        // initializeModelWithDate(false);
     }
 
     void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle){
@@ -295,6 +323,11 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuOpenCurrentTab), pUrl, pPosition, pTitle);
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuOpenNewTab), pUrl, pPosition, pTitle);
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuDelete), pUrl, pPosition, pTitle);
+
+        if(mFilter.length()>0){
+            initializeModelWithDate(true);
+            notifyDataSetChanged();
+        }
     }
 
     public void setPopupWindowEvents(View pView, String pUrl, int pPosition, String pTitle){
@@ -333,28 +366,18 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.url_clear_at);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
-        boolean mDateVerify = false;
-        if(mPassedList.size()>0){
-            if(mCurrentList.size()>0 && (mCurrentList.size()>pIndex+1 || mCurrentList.size()==pIndex+1)){
-                mDateVerify = true;
-            }
-        }else {
+
+        if(mPassedList.size()<=0){
             mCurrentList.clear();
             return;
         }
-        int size = mCurrentList.size();
 
-        if(mDateVerify){
-            mCurrentList.remove(pIndex);
-            notifyItemRemoved(pIndex);
-            notifyItemRangeChanged(pIndex, mCurrentList.size());
-        }else {
-            mCurrentList.remove(pIndex);
-            notifyItemRemoved(pIndex);
-            notifyItemChanged(mCurrentList.size()-1);
-        }
-        initializeModelWithDate(false);
+        mCurrentList.remove(mRealIndex.get(pIndex));
+        notifyItemRemoved(mRealIndex.get(pIndex));
+        notifyItemRangeChanged(0, mCurrentList.size());
+        clearLongSelectedURL();
     }
+
 
     /*View Holder Extensions*/
     class listViewHolder extends RecyclerView.ViewHolder
@@ -411,8 +434,13 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mDateContainer.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.GONE);
                 mRowContainer.setVisibility(View.VISIBLE);
-                mRowMenu.setVisibility(View.VISIBLE);
-                mRowMenu.setClickable(true);
+                if(mLongSelectedID.size()>0){
+                    mRowMenu.setVisibility(View.INVISIBLE);
+                    mRowMenu.setClickable(false);
+                }else {
+                    mRowMenu.setVisibility(View.VISIBLE);
+                    mRowMenu.setClickable(true);
+                }
                 mWebLogo.setVisibility(View.VISIBLE);
                 mHeader.setText(model.getHeader());
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
@@ -443,7 +471,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                                     Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
                                     mFaviconLogo.setImageBitmap(mBitmap);
                                 });
-                            } catch (InterruptedException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -475,7 +503,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
 
     void invokeFilter(boolean notify){
         if(notify){
-            notifyDataSetChanged();
+            initializeModelWithDate(true);
         }
     }
 

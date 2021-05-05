@@ -33,6 +33,7 @@ public class status
     public static String sExternalWebsite = strings.GENERIC_EMPTY_STR;
     public static String sBridgesDefault = strings.BRIDGES_DEFAULT;
 
+    public static boolean sUIInteracted = false;
     public static boolean sSettingEnableZoom = true;
     public static boolean sSettingEnableVoiceInput = true;
     public static boolean sSettingSearchHistory = false;
@@ -43,6 +44,7 @@ public class status
     public static boolean sSettingIsAppPaused = false;
     public static boolean sSettingIsWelcomeEnabled = true;
     public static boolean sSettingIsAppStarted = false;
+    public static boolean sSettingIsAppRunning = false;
     public static boolean sSettingIsAppRedirected = false;
     public static boolean sSettingIsAppRestarting = false;
     public static boolean sSettingIsAppRated = false;
@@ -88,6 +90,7 @@ public class status
     {
         versionVerifier(pContext);
 
+        status.sUIInteracted = false;
         status.sSettingSearchHistory = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY,true));
         status.sSearchSuggestionStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
         status.sSettingJavaStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));
