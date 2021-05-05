@@ -73,6 +73,7 @@ public class status
     public static int sWidgetResponse = enums.WidgetResponse.NONE;
     public static int sBridgeNotificationManual = 0;
     public static int sSettingTrackingProtection = 0;
+    public static int sRateCount = 0;
 
     public static float sSettingFontSize = 1;
 
@@ -128,6 +129,7 @@ public class status
         status.sOpenURLInNewTab = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,true));
         status.sLogListView = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
         status.sTabGridLayoutEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,true));
+        status.sRateCount = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, 0));
     }
 
 }

@@ -22,13 +22,13 @@
             <option value="$PROJECT_DIR$/chromiumTabs" />
             <option value="$PROJECT_DIR$/httpclient" />
             <option value="$PROJECT_DIR$/intentintegrator" />
-            <option value="$PROJECT_DIR$/orbotservicemanager" />
+            <option value="$PROJECT_DIR$/orbotmanager" />
+            <option value="$PROJECT_DIR$/orbotservicemanagers" />
             <option value="$PROJECT_DIR$/shutterbug" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
-    <option name="offlineMode" value="true" />
   </component>
 </project>

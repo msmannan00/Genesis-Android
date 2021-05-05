@@ -20,20 +20,20 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:layout_width="wrap_content"
             android:id="@+id/pFindText"
-            android:background="@color/c_background"
-            android:textColorHint="@color/c_hint_text"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="5"
+            android:autofillHints="yes"
+            android:background="@color/c_background"
             android:focusedByDefault="true"
-            android:textColor="@color/c_text_v1"
-            android:textSize="16sp"
-            android:padding="15dp"
             android:hint="@string/GENERAL_FIND_HINT"
-            android:inputType="text"
             android:importantForAutofill="yes"
-            android:autofillHints="yes">
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="@color/c_text_v1"
+            android:textColorHint="@color/c_hint_text"
+            android:textSize="16sp">
 
         </EditText>
 
@@ -43,7 +43,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp"
             android:singleLine="true"
-            android:width="100dp"
+            android:width="60dp"
             android:text="0/0"
             android:textColor="@color/c_text_v6"
             android:layout_height="wrap_content"

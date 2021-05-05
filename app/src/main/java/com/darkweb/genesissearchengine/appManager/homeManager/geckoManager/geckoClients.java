@@ -466,7 +466,7 @@ public class geckoClients
                 if(e_type.equals(enums.etype.SESSION_ID)){
                     return mSession.getSessionID();
                 }
-                else if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
+                else if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.M_RATE_COUNT) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
                 {
                     if (e_type.equals(on_handle_external_intent))
                     {

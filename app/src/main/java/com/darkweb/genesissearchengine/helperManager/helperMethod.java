@@ -681,14 +681,19 @@ public class helperMethod
     }
 
     public static void openFile(File url, Context context) {
-        try {
-            Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", url);
-            Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setDataAndType(uri, Uri.parse(url.toString()).getScheme());
-            context.startActivity(intent);
-        } catch (ActivityNotFoundException e) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1){
+            try {
+
+                Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", url);
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setDataAndType(uri, Uri.parse(url.toString()).getScheme());
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(context, "No application found which can open the file", Toast.LENGTH_SHORT).show();
+            }
+        } else{
             try {
                 Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", url);
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));

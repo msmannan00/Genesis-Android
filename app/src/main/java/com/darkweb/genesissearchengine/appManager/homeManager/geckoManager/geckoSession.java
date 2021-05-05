@@ -32,8 +32,10 @@ import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.JavaScriptInterface;
 import com.darkweb.genesissearchengine.helperManager.downloadFileService;
@@ -67,6 +69,7 @@ import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_RATE_COUNT;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
@@ -1020,10 +1023,11 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     }
 
     private void checkApplicationRate(){
-        if(rateCount==7){
+        if(status.sRateCount==40){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_APPLICATION);
         }
-        rateCount+=1;
-   }
+        status.sRateCount+=1;
+        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_COUNT);
+    }
 
 }

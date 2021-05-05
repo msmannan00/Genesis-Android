@@ -144,11 +144,11 @@ class messageManager
                 catch (Exception ex)
                 {
                     onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
+                    onClearReference();
                 }
             };
             handler.postDelayed(runnable, 1000);
         });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void reportedSuccessfully()
@@ -408,7 +408,9 @@ class messageManager
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             ArrayList<Object> tempData = new ArrayList<>();
-            tempData.addAll(mData);
+            if(mData!=null){
+                tempData.addAll(mData);
+            }
             mDialog.dismiss();
             final Handler handler = new Handler();
             Runnable runnable = () -> mEvent.invokeObserver(tempData, M_DOWNLOAD_SINGLE);
@@ -576,7 +578,9 @@ class messageManager
 
     void onTrigger(List<Object> pData, pluginEnums.eMessageManager pEventType)
     {
-        onClearReference();
+        if(!pEventType.equals(M_RATE_FAILURE) && !pEventType.equals(M_RATE_SUCCESS) && !pEventType.equals(M_NOT_SUPPORTED)){
+            onClearReference();
+        }
         if(pEventType.equals(pluginEnums.eMessageManager.M_RESET)){
             onReset();
         }

@@ -45,6 +45,7 @@ public class keys
     public static final String SETTING_ZOOM = "SETTING_ZOOM_V1";
     public static final String SETTING_VOICE_INPUT = "SETTING_VOICE_INPUT_V1";
     public static final String SETTING_TRACKING_PROTECTION = "SETTING_TRACKING_PROTECTION_V1";
+    public static final String SETTING_RATE_COUNT = "SETTING_RATE_COUNT_V1";
     public static final String SETTING_DONOT_TRACK = "SETTING_DONOT_TRACK_V1";
     public static final String SETTING_RESTORE_TAB = "SETTING_RESTORE_TAB_V1";
     public static final String SETTING_CHARACTER_ENCODING = "SETTING_CHARACTER_ENCODING_V1";

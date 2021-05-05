@@ -228,8 +228,10 @@ public class helpController extends AppCompatActivity {
         }
 
         if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(this)){
+            activityContextManager.getInstance().getHomeController().onDisableAdvert();
             activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE);
         }else {
+            activityContextManager.getInstance().getHomeController().onDisableAdvert();
             activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
         }
         finish();

@@ -2,9 +2,7 @@ package com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.DownloadManager;
-import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
@@ -81,11 +79,9 @@ import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
-
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
-import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.proxy.OrbotService;
 import org.torproject.android.proxy.util.Prefs;
 import org.torproject.android.service.wrapper.LocaleHelper;
@@ -100,7 +96,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
@@ -111,7 +106,6 @@ import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE_TAB_SINGLE;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB;
 import static com.darkweb.genesissearchengine.constants.enums.etype.open_new_tab;
-import static com.darkweb.genesissearchengine.constants.enums.etype.reload;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static java.lang.Character.isLetter;
@@ -566,7 +560,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onLoadURL(String url){
-        status.sUIInteracted = true;
         if(mGeckoView.getSession()!=null && !mGeckoView.getSession().isOpen()){
             mGeckoView.getSession().open(mGeckoClient.getmRuntime());
         }
@@ -827,18 +820,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if (event.getAction() == MotionEvent.ACTION_DOWN){
                 mGatewaySplash.setElevation(9);
                 status.sUIInteracted = true;
-            }
-            else if (event.getAction() == MotionEvent.ACTION_UP){
-                int[] location = new int[2];
-                mTopLayout.getLocationOnScreen(location);
-                int y = location[1];
-                if(status.sFullScreenBrowsing){
-                    if(y<=-helperMethod.pxFromDp(6)){
-                        //mAppBar.setExpanded(false,true);
-                    }else {
-                        //mAppBar.setExpanded(true,true);
-                    }
-                }
+                mHomeViewController.onUpdateFindBar(false);
             }
 
             return false;
@@ -1143,7 +1125,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         new Handler().postDelayed(() ->
         {
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, false));
-            if(status.sSettingSearchStatus.startsWith("https://boogle.store") || !status.sOpenURLInNewTab){
+            if(status.sSettingSearchStatus.startsWith("https://boogle.store") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("boogle.store") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                 mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
             }
 
@@ -1167,7 +1149,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onNewTabBackground(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened){
-        if(status.sSettingSearchStatus.startsWith("https://boogle.store") || !status.sOpenURLInNewTab){
+        if(status.sSettingSearchStatus.startsWith("https://boogle.store") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("boogle.store") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
         }
 
@@ -1196,7 +1178,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         handler.postDelayed(() -> {
             onGetThumbnail(null, false);
             mHomeViewController.expandTopBar(false,mGeckoView.getMaxY());
-            if(status.sSettingSearchStatus.startsWith("https://boogle.store") || !status.sOpenURLInNewTab){
+            if(status.sSettingSearchStatus.startsWith("https://boogle.store") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("boogle.store") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                 mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
             }
             mHomeViewController.onNewTabAnimation(Collections.singletonList(url), M_INITIALIZE_TAB_LINK);
@@ -1240,6 +1222,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onOpenMenuItem(View view){
+        status.sUIInteracted = true;
         pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         initLocalLanguage();
 
@@ -1397,7 +1380,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         pluginController.getInstance().onNotificationInvoke(Collections.singletonList(1296000000)  , pluginEnums.eNotificationManager.M_CREATE_NOTIFICATION);
         mSearchBarWasBackButtonPressed = false;
-        status.sUIInteracted = true;
+        if(status.sSettingIsAppStarted){
+            status.sUIInteracted = true;
+        }
+        mHomeViewController.onUpdateFindBar(false);
     }
 
     @Override
@@ -2134,6 +2120,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
     }
 
+    public void onDisableAdvert(){
+        mHomeViewController.updateBannerAdvertStatus(false, true);
+    }
+
     public void onClearSettings(){
         mHomeViewController.updateBannerAdvertStatus(false, true);
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
@@ -2320,6 +2310,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if(e_type.equals(enums.etype.M_INIT_PADDING)){
                 mHomeViewController.initTopBarPadding();
+            }
+            else if(e_type.equals(enums.etype.M_RATE_COUNT)){
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, status.sRateCount));
             }
 
             return null;

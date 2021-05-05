@@ -495,7 +495,7 @@ class homeViewController
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-            int mDelay = 1150;
+            int mDelay = 1350;
             if(status.mThemeApplying || mInstant){
                 mDelay = 0;
             }
@@ -654,7 +654,7 @@ class homeViewController
                 mGeckoView.requestFocus();
                 mProgressBarIndeterminate.animate().cancel();
                 mProgressBarIndeterminate.animate().setStartDelay(750).setDuration(250).alpha(0).withEndAction(() -> {
-                    mSplashScreen.animate().setDuration(250).setStartDelay(100).alpha(0).withEndAction(() -> {
+                    mSplashScreen.animate().setDuration(250).setStartDelay(300).alpha(0).withEndAction(() -> {
                         mProgressBarIndeterminate.setVisibility(View.GONE);
                         mSplashScreen.setClickable(false);
                         mSplashScreen.setFocusable(false);
@@ -1090,7 +1090,8 @@ class homeViewController
         mFindBar.animate().cancel();
         if(pStatus){
             mFindBar.setVisibility(View.VISIBLE);
-            mFindBar.setAlpha(1);
+            mFindBar.setAlpha(0);
+            mFindBar.animate().setDuration(200).alpha(1);
             mFindText.requestFocus();
             mFindCount.setText("0/0");
             mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v6));
@@ -1103,7 +1104,7 @@ class homeViewController
         }else {
             mFindText.clearFocus();
             helperMethod.hideKeyboard(mContext);
-            mFindBar.animate().alpha(0).withEndAction(() -> {
+            mFindBar.animate().setDuration(200).alpha(0).withEndAction(() -> {
                 mFindCount.setText(strings.GENERIC_EMPTY_STR);
                 mFindText.setText(strings.GENERIC_EMPTY_STR);
                 mFindBar.setVisibility(View.GONE);
