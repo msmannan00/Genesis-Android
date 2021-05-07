@@ -258,7 +258,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         }
 
         mNotifyBuilder.mActions.clear();
-        if (conn != null) {
+        if (conn != null && orbotLocalConstants.mIsTorInitialized) {
             Intent intentRefresh = new Intent(CMD_NEWNYM);
             PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
             mNotifyBuilder.addAction(R.drawable.ic_stat_starting_tor_logo, getString(R.string.menu_new_identity), pendingIntentNewNym);
@@ -307,10 +307,11 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        Log.d(OrbotConstants.TAG, "task removed");
-        Intent intent = new Intent(this, DummyActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        try{
+            Intent intent = new Intent(this, DummyActivity.class);
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }catch (Exception ignored){}
     }
 
     @Override

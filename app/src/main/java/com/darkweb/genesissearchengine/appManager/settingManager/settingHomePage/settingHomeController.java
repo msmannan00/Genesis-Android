@@ -1,10 +1,14 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,6 +88,10 @@ public class settingHomeController extends AppCompatActivity
 
     private void listenersInitializations()
     {
+    }
+
+    public void cicadaClipboard(View view) {
+        Toast.makeText(getApplicationContext(),"Authorization Failed", Toast.LENGTH_SHORT).show();
     }
 
     /*View Callbacks*/

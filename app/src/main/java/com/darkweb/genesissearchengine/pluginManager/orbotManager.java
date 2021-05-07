@@ -50,11 +50,12 @@ class orbotManager
         Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mAppContext.get().getApplicationContext().startForegroundService(mServiceIntent);
+            mAppContext.get().stopService(mServiceIntent);
+            mAppContext.get().startForegroundService(mServiceIntent);
         }
         else
         {
-            mAppContext.get().getApplicationContext().startService(mServiceIntent);
+            mAppContext.get().startService(mServiceIntent);
         }
 
         initializeProxy();

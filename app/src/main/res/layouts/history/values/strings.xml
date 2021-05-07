@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="compose_shortcut_short_label1">hello</string>
+    <string name="compose_shortcut_long_label1">hello1</string>
+    <string name="compose_disabled_message1">hello2</string>
+</resources>

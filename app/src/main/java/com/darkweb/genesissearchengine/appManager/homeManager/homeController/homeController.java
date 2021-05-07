@@ -706,6 +706,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onDestroy() {
+        if(!status.sSettingIsAppStarted){
+            super.onDestroy();
+            return;
+        }
         pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DESTROY);
         mBackSplash.setImageDrawable(null);
         mBackSplash.setBackground(null);
@@ -1900,10 +1904,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
         overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
-        if (this
-                instanceof Activity) {
-            ((Activity) this).finish();
-        }
+        ((Activity) this).finish();
 
         Runtime.getRuntime().exit(0);
 

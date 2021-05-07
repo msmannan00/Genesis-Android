@@ -38,7 +38,7 @@
             android:textColor="@color/green_button"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pHeaderSubpart"
+            app:layout_constraintStart_toEndOf="@+id/pLock"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlSymmetry" />
 
@@ -46,14 +46,13 @@
             android:id="@+id/pHeaderSubpart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
             android:layout_marginTop="16dp"
             android:alpha="0.8"
             android:text="www.bbc.com"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/pLock"
+            app:layout_constraintStart_toEndOf="@+id/pHeader"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout

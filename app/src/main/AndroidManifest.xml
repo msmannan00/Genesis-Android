@@ -126,6 +126,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
@@ -143,6 +145,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.darkweb.genesissearchengine.externalNavigationManager.externalShortcuts"
+            android:launchMode="singleTop"/>
+
         <activity android:name="com.darkweb.genesissearchengine.externalNavigationManager.externalNavigationController"
             android:launchMode="singleTask"
             >

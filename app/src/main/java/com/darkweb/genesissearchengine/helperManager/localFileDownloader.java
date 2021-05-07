@@ -201,8 +201,10 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
 
             } catch (Exception ex) {
                 Log.i("FIZZAHFUCK", ex.getMessage());
-                mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
-                onCancel();
+                if(mRequestCode!=200){
+                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
+                    onCancel();
+                }
             }
         }else {
             try {
@@ -262,8 +264,10 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
                 output.close();
                 mStream.close();
             }catch (Exception ex){
-                pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Collections.singletonList(mRequestCode), activityContextManager.getInstance().getHomeController()), pluginEnums.eMessageManager.M_DOWNLOAD_FAILURE);
-                onCancel();
+                if(mRequestCode!=200){
+                    pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Collections.singletonList(mRequestCode), activityContextManager.getInstance().getHomeController()), pluginEnums.eMessageManager.M_DOWNLOAD_FAILURE);
+                    onCancel();
+                }
             }
         }
         return null;

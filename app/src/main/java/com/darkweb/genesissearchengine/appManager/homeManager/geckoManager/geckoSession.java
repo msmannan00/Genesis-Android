@@ -1023,11 +1023,12 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     }
 
     private void checkApplicationRate(){
-        if(status.sRateCount==40){
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_APPLICATION);
+        if(status.sSettingIsAppStarted){
+            if(status.sRateCount==40){
+                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_APPLICATION);
+            }
+            status.sRateCount+=1;
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_COUNT);
         }
-        status.sRateCount+=1;
-        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_COUNT);
     }
-
 }

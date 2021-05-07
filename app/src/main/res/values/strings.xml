@@ -18,6 +18,14 @@
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
     <string name="GENERAL_HIDDEN_WEB" translatable="false">Search the web ...</string>
 
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label">Erase data</string>
+    <string name="shortcut_erase_long_label">Erase browsing history</string>
+    <string name="shortcut_erase_and_open_short_label">Erase &amp; open</string>
+    <string name="shortcut_erase_and_open_long_label">Erase and open</string>
+    <string name="shortcut_open">Restart</string>
+    <string name="shortcut_open_long">Restart Application</string>
+
     <!-- Temp -->
     <string name="downloading">Downloading...</string>
     <string name="title_file_download">APK is downloading</string>
@@ -283,6 +291,9 @@
     <string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Undo</string>
     <string name="ALERT_OPEN_NEW_TAB" translatable="true">New tab opened</string>
     <string name="ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Switch</string>
+    <string name="ALERT_DATA_CLEARED_SHORTCUT" translatable="true">Data Cleared Successfully</string>
+    <string name="ALERT_DATA_CLEARED_INFO_SHORTCUT" translatable="true">Private data cleared successfully. Application will close in a moment. Now you can safely continue browsing</string>
+    <string name="ALERT_DATA_CLEARED_BUTTON" translatable="true">Closing Genesis Please Wait ...</string>
 
     <!-- Privacy Policy -->
     <string name="PRIVACY_HEADER" translatable="true">Privacy Policy</string>
