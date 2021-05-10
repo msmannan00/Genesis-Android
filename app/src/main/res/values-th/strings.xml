@@ -14,7 +14,7 @@
 	<string name="GENERAL_LOADING" translatable="true">เสรีภาพดิจิทัล</string>
 	<string name="GENERAL_RELOAD" translatable="true">โหลดใหม่</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">คุณกำลังประสบปัญหาอย่างใดอย่างหนึ่งต่อไปนี้ หน้าเว็บหรือเว็บไซต์อาจไม่ทำงาน การเชื่อมต่ออินเทอร์เน็ตของคุณอาจไม่ดี คุณอาจใช้พร็อกซี เว็บไซต์อาจถูกปิดกั้นโดยไฟร์วอลล์</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | อิสราเอลนัดหยุดงานอีกครั้ง</string>
 
 

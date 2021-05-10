@@ -525,7 +525,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 String header = model.getHeader();
                 mDescription.setText(("https://"+model.getDescription()));
 
-                if(model.getDescription().contains("boogle.store") || model.getDescription().contains("genesis.onion")){
+                if(model.getDescription().contains("genesishiddentechnologies.com") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 }
                 else if(mWebIcon.containsKey(model.getDescription())){

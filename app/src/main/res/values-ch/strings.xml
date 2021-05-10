@@ -14,7 +14,7 @@
 	<string name="GENERAL_LOADING" translatable="true">digitální svoboda</string>
 	<string name="GENERAL_RELOAD" translatable="true">Znovu načíst</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">čelíte jednomu z následujících problémů. webová stránka nebo web nemusí fungovat. vaše připojení k internetu může být špatné. možná používáte proxy. web může být blokován bránou firewall</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Izrael znovu udeří</string>
 
 

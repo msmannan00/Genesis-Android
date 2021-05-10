@@ -681,10 +681,10 @@ public class helperMethod
     }
 
     public static void openFile(File url, Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1){
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
             try {
 
-                Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", url);
+                Uri uri = FileProvider.getUriForFile(context, "com.darkweb.genesissearchengine.provider.dev", url);
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -695,7 +695,7 @@ public class helperMethod
             }
         } else{
             try {
-                Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", url);
+                Uri uri = FileProvider.getUriForFile(context, "com.darkweb.genesissearchengine.provider.dev", url);
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

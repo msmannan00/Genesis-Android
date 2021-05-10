@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1026582312920:android:056aacc3b6f0c3b3f164ad",
         "android_client_info": {
-          "package_name": "com.darkweb.genesissearchengine"
+          "package_name": "com.darkweb.genesissearchengine.dev"
         }
       },
       "oauth_client": [
@@ -21,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBMzD4SV_-2_2tG9E5a475k5OkwP9V-Naw"
+          "current_key": "AIza SyBMzD4SV_-2_2tG9E5a475k5OkwP9V-Naw"
         }
       ],
       "services": {

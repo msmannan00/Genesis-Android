@@ -14,7 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_BRIDGE_WEBSITES;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_REFERENCE_WEBSITES;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_BRIDGE_WEBSITES_DEV;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_SERVER;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_SERVER_DEV;
 
 public class bridgesDataModel {
 
@@ -29,7 +31,14 @@ public class bridgesDataModel {
         if(!mLoading){
             mLoading = true;
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, CONST_GENESIS_BRIDGE_WEBSITES,
+            String mRefURL;
+            if(status.sDeveloperBuild){
+                mRefURL = CONST_GENESIS_BRIDGE_WEBSITES_DEV;
+            }else {
+                mRefURL = CONST_GENESIS_BRIDGE_WEBSITES;
+            }
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, mRefURL,
                     response -> {
                         if(response.length()>10){
                             mBridges = response;

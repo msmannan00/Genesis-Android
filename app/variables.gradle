@@ -1,50 +1,47 @@
-/* arm versions */
-project.ext.arm_vname = 'Build | Dark-Origin 1.0'
-project.ext.arm_vcode = 1000
-
-/* aarch versions */
-project.ext.aarch_vname = 'Build | Dark-Origin 1.1'
-project.ext.aarch_vcode = 1001
-
-/* x86 versions */
-project.ext.x86_vname = 'Build | Dark-Origin 1.2'
-project.ext.x86_vcode = 1002
-
-/* x64 versions */
-project.ext.x64_vname = 'Build | Dark-Origin 1.3'
-project.ext.x64_vcode = 1003
+/* Version */
+project.ext.vname = 'Build | Dark-Origin 1.0'
+project.ext.vcode = 35
+project.ext.buildType = 'release'
 
 /* dimension */
-project.ext.dimen = 'abi'
-
-/* firefox version */
-project.ext.firefox_version = "87.0.20210318103112"
-project.ext.firefox_channel = ""
-
-/* Maven */
-project.ext.url_snapshot = "https://oss.sonatype.org/content/repositories/snapshots/"
-project.ext.url = "https://maven.mozilla.org/maven2/"
+project.ext.dimen = 'product'
 
 /* Proguard */
-project.ext.proguard_file = "proguard-android.txt"
+project.ext.proguard_file = "proguard-android-optimize.txt"
 project.ext.proguard_rule = "proguard-rules.pro"
 
 /* Build Types */
 project.ext.minifyEnabled = true
+project.ext.shrinkResources = true
 
 /* Lint Options */
 project.ext.checkReleaseBuilds = false
 project.ext.abortOnError = false
 
+/* Source Sets */
+project.ext.releaseRoot = "src/GenesisRelease"
+
+/* Dex Options */
+project.ext.preDexLibraries = true
+
+/* Splits */
+project.ext.splitEnabled = true
+
 /* Application Preferences */
-project.ext.version_code = 1000
-project.ext.version_name = "Build | Dark-Origin"
 project.ext.compile_sdk_version = 30
 project.ext.min_sdk_version = 21
 project.ext.target_sdk_version = 30
 project.ext.build_tool_version = '30.0.3'
 project.ext.ndk_version = '21.4.7075529'
-project.ext.application_id = "com.darkweb.genesissearchengine"
+project.ext.application_id = "com.darkweb.genesissearchengine.dev"
+project.ext.debugSymbolLevel = 'FULL'
+
+/* Splits */
+project.ext.abi_x86 = "x86_64"
+project.ext.abi_x86_x64 = "x86"
+project.ext.abi_arm64 = "arm64-v8a"
+project.ext.abi_armeabi = "armeabi-v7a"
+project.ext.abi_unknown = "Unknown ABI:"
 
 /* Resource Directories */
 project.ext.resource_directories = [

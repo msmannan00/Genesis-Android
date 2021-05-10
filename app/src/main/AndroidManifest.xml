@@ -4,11 +4,9 @@
     package="com.example.myapplication">
 
     <!-- Permissions -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.READ_CLIPBOARD" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
@@ -21,7 +19,8 @@
         android:allowBackup="true"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:fullBackupContent="false"
-        android:icon="@mipmap/ic_launcher"
+        android:extractNativeLibs="true"
+        android:icon="@mipmap/ic_launcher_genesis"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/gx_network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -193,9 +192,16 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="be76c64dae2519d4ab8daaed88298da14c7c294f" />
-        <meta-data
+
+        <!-- Live Build -->
+        <!-- <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5074525529134731~2926711128" />
+            android:value="ca-app-pub-9340927969469822~8113004486" /> -->
+
+        <!-- Development Build -->
+        <!-- --> <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6985886044951738~4177628900" />
 
         <service
             android:name="com.darkweb.genesissearchengine.helperManager.downloadFileService"
@@ -215,15 +221,38 @@
             </intent-filter>
         </receiver>
 
+        <!-- Permissions File Provider Live
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.darkweb.genesissearchengine.provider"
+            android:authorities="com.darkweb.genesissearchengine.provider.dev"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <provider
+            android:authorities="com.darkweb.genesissearchengine.dev.provider"
+            android:name="com.darkweb.genesissearchengine.clientauth.ClientAuthContentProvider"
+            android:exported="false"/>
+        -->
+
+        <!-- Permissions File Provider Dev -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.darkweb.genesissearchengine.provider.dev"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <provider
+            android:authorities="com.darkweb.genesissearchengine.provider.dev"
+            android:name="com.darkweb.genesissearchengine.clientauth.ClientAuthContentProvider"
+            android:exported="false"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -244,11 +273,6 @@
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
-
-        <provider
-            android:authorities="com.darkweb.genesissearchengine.provider"
-            android:name="com.darkweb.genesissearchengine.clientauth.ClientAuthContentProvider"
-            android:exported="false"/>
 
     </application>
 

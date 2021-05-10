@@ -14,7 +14,7 @@
     <string name="GENERAL_LOADING" translatable="true">数字自由</string>
     <string name="GENERAL_RELOAD" translatable="true">重装</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">您正面临以下问题之一。网页或网站可能无法正常工作。您的互联网连接可能不佳。您可能正在使用代理。网站可能被防火墙阻止</string>
-    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">英国广播公司|以色列再次罢工</string>
 
 

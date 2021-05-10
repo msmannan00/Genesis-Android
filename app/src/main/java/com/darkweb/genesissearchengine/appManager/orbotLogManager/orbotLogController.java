@@ -28,7 +28,6 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.Collections;
 import java.util.List;
 
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 public class orbotLogController extends AppCompatActivity {
 
@@ -97,11 +96,6 @@ public class orbotLogController extends AppCompatActivity {
             layoutManager.setReverseLayout(true);
 
 
-            mRecycleView.setAdapter(new AlphaInAnimationAdapter(adapter));
-            mRecycleView.getItemAnimator().setAddDuration(250);
-            mRecycleView.getItemAnimator().setChangeDuration(250);
-            mRecycleView.getItemAnimator().setMoveDuration(250);
-            mRecycleView.getItemAnimator().setRemoveDuration(250);
             mRecycleView.setNestedScrollingEnabled(false);
             mRecycleView.setLayoutManager(new LinearLayoutManager(orbotLogController.this));
             mOrbotAdapter.notifyDataSetChanged();

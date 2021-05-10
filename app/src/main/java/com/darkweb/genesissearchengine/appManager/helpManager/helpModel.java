@@ -5,6 +5,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
@@ -19,7 +21,7 @@ import static com.darkweb.genesissearchengine.constants.constants.*;
 class helpModel
 {
     private eventObserver.eventListener mEvent;
-    private String mJsonPath = CONST_SERVER;
+    private String mJsonPath;
     private AppCompatActivity mContext;
     private ArrayList<helpDataModel> mHelpListModel;
     private boolean mIsLoaded = false;
@@ -28,6 +30,12 @@ class helpModel
         this.mContext = pContext;
         this.mEvent = pEvent;
         this.mHelpListModel = new ArrayList<>();
+
+        if(status.sDeveloperBuild){
+            this.mJsonPath = CONST_SERVER_DEV;
+        }else {
+            this.mJsonPath = CONST_SERVER;
+        }
     }
 
     private void getHelpJSON(){

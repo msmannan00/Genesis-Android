@@ -44,6 +44,9 @@ public class bookmarkRowModel
         return m_header;
     }
     public String getDescription() {
+        if(m_description!=null && m_description.equals("genesishiddentechnologies.com")){
+            return "genesis.onion";
+        }
         return m_description;
     }
     public int getID() {

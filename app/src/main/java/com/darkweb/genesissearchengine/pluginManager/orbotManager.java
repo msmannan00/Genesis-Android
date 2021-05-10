@@ -92,7 +92,7 @@ class orbotManager
     /*Proxy Manager*/
 
     private void onSetProxy(String url){
-        /* if(url.contains("boogle.store")){
+        /* if(url.contains("genesishiddentechnologies.com")){
             PrefsHelper.setPref(keys.PROXY_TYPE, 0);
             PrefsHelper.setPref(keys.PROXY_SOCKS,null);
             PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, null);

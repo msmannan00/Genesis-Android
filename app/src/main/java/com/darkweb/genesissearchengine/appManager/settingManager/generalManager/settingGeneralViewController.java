@@ -98,7 +98,7 @@ class settingGeneralViewController
             mOpenURLInNewTab.setChecked(false);
         }
 
-        mHomePageText.setText(helperMethod.getDomainName(status.sSettingSearchStatus.replace("boogle.store","genesis.onion")));
+        mHomePageText.setText(helperMethod.getDomainName(status.sSettingSearchStatus.replace("genesishiddentechnologies.com","genesis.onion")));
     }
 
     private void updateThemeChanger(){

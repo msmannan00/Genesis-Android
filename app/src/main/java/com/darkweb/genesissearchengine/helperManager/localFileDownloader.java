@@ -319,7 +319,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", mFile);
+            Uri uri = FileProvider.getUriForFile(context, "com.darkweb.genesissearchengine.provider.dev", mFile);
 
             ContentValues contentValues = new ContentValues();
             contentValues.put(MediaStore.Downloads.TITLE, mFileName);
@@ -332,7 +332,7 @@ public class localFileDownloader extends AsyncTask<String, Integer, String> {
             ContentResolver database = context.getContentResolver();
             database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
         } else {
-            Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", mFile);
+            Uri uri = FileProvider.getUriForFile(context, "com.darkweb.genesissearchengine.provider.dev", mFile);
             String mime = helperMethod.getMimeType(uri.toString(), context);
             if(mime!=null){
                 dm.addCompletedDownload(mFileName, mURL, false, mime, mFile.getAbsolutePath(), mFile.length(), false);

@@ -14,7 +14,7 @@
 	<string name="GENERAL_LOADING" translatable="true">libertatea digitală</string>
 	<string name="GENERAL_RELOAD" translatable="true">reîncărcați</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">vă confruntați cu una dintre următoarele probleme. este posibil ca pagina web sau site-ul web să nu funcționeze. conexiunea la internet ar putea fi slabă. s-ar putea să utilizați un proxy. site-ul web ar putea fi blocat de firewall</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israelul lovește din nou</string>
 
 

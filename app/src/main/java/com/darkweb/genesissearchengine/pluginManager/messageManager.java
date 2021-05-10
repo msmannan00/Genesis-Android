@@ -320,7 +320,7 @@ class messageManager
             mDialog.dismiss();
             mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             helperMethod.hideKeyboard(mContext);
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString().replace("genesis.onion","boogle.store")+"split"+((EditText) mDialog.findViewById(R.id.pBridgeInput)).getText().toString()), M_BOOKMARK);
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString().replace("genesis.onion","genesishiddentechnologies.com")+"split"+((EditText) mDialog.findViewById(R.id.pBridgeInput)).getText().toString()), M_BOOKMARK);
         });
     }
 

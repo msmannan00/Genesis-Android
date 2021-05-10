@@ -1156,7 +1156,7 @@ class homeViewController
             url=url.replace("http://","");
         }
 
-        url = url.replace("boogle.store","genesis.onion");
+        url = url.replace("genesishiddentechnologies.com","genesis.onion");
         boolean isTextSelected = false;
 
         if(mSearchbar.isSelected()){

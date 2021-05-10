@@ -14,7 +14,7 @@
 	<string name="GENERAL_LOADING" translatable="true">liberté numérique</string>
 	<string name="GENERAL_RELOAD" translatable="true">recharger</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">vous êtes confronté à l\'un des problèmes suivants. la page Web ou le site Web peut ne pas fonctionner. votre connexion Internet est peut-être mauvaise. vous utilisez peut-être un proxy. le site Web peut être bloqué par le pare-feu</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israël frappe à nouveau</string>
 
 

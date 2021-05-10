@@ -16,7 +16,7 @@ class homeModel
 
     String urlComplete(String pURL, String pSearchEngine){
         if(pURL.equals("about:blank")){
-            return helperMethod.completeURL("boogle.store");
+            return helperMethod.completeURL("genesishiddentechnologies.com");
         }
         else if(pURL.equals("about:config")){
             return pURL;

@@ -197,6 +197,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!-- Live Build
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/pAdView"
                     android:layout_width="match_parent"
@@ -205,7 +206,21 @@
                     android:background="@color/c_border_background_divider"
                     android:visibility="gone"
                     app:adSize="BANNER"
-                    app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                    app:adUnitId="ca-app-pub-9340927969469822/2860677803"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pTopbar" />-->
+
+                <!-- Development Build -->
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/pAdView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="@color/c_border_background_divider"
+                    android:visibility="gone"
+                    app:adSize="BANNER"
+                    app:adUnitId="ca-app-pub-6985886044951738/2630126403"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pTopbar" />

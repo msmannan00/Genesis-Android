@@ -12,6 +12,9 @@ import com.darkweb.genesissearchengine.constants.strings;
 import java.util.Arrays;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_REFERENCE_WEBSITES;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_REFERENCE_WEBSITES_DEV;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_SERVER;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_SERVER_DEV;
 
 public class referenceWebsiteDataModel {
 
@@ -26,7 +29,14 @@ public class referenceWebsiteDataModel {
         if(!mLoading){
             mLoading = true;
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, CONST_GENESIS_REFERENCE_WEBSITES,
+            String mRefURL;
+            if(status.sDeveloperBuild){
+                mRefURL = CONST_GENESIS_REFERENCE_WEBSITES_DEV;
+            }else {
+                mRefURL = CONST_GENESIS_REFERENCE_WEBSITES;
+            }
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, mRefURL,
                     response -> {
                         if(response.length()>10){
                             mReferenceWebsiteData = response;

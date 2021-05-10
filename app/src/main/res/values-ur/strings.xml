@@ -14,7 +14,7 @@
 	<string name="GENERAL_LOADING" translatable="true">ڈیجیٹل آزادی</string>
 	<string name="GENERAL_RELOAD" translatable="true">دوبارہ لوڈ کریں</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">آپ کو مندرجہ ذیل میں سے ایک مسئلہ درپیش ہے۔ ہوسکتا ہے کہ ویب صفحہ یا ویب سائٹ کام نہیں کررہی ہے۔ ہوسکتا ہے کہ آپ کا انٹرنیٹ کنیکشن خراب ہو۔ آپ شاید ایک پراکسی استعمال کر رہے ہوں گے۔ ہوسکتا ہے کہ ویب سائٹ فائر وال کے ذریعے مسدود کردی جائے</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">بی بی سی | اسرائیل نے ایک بار پھر حملہ کیا</string>
 
 

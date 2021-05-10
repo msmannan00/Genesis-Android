@@ -45,6 +45,9 @@ public class historyRowModel
         return mHeader;
     }
     public String getDescription() {
+        if(mDescription!=null && mDescription.equals("genesishiddentechnologies.com")){
+            return "genesis.onion";
+        }
         return mDescription;
     }
     public String getDescriptionParsed() {

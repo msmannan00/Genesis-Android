@@ -16,7 +16,8 @@ public class status
 {
     /*App Status*/
 
-    public static boolean sPaidStatus = true;
+    public static boolean sPaidStatus = false;
+    public static boolean sDeveloperBuild = true;
     public static int mNotificationID = 1001;
 
     /*Settings Status*/

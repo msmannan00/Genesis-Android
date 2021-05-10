@@ -1,6 +1,8 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.eventObserver;
 import com.flurry.android.FlurryAgent;
 import java.lang.ref.WeakReference;
@@ -21,9 +23,11 @@ class analyticManager
 
     private void initialize()
     {
-        new FlurryAgent.Builder()
-                .withLogEnabled(true)
-                .build(mAppContext.get().getApplicationContext(), "BKFSCH4CRS6RB9HSCM9H");
+        if(status.sDeveloperBuild){
+            new FlurryAgent.Builder() .withLogEnabled(true) .build(mAppContext.get().getApplicationContext(), "4C4K4T5ND9RJKT4H47GQ");
+        }else {
+            new FlurryAgent.Builder() .withLogEnabled(true) .build(mAppContext.get().getApplicationContext(), "5RQYRV23928K6DXH8VWV");
+        }
     }
 
     /*External Triggers*/

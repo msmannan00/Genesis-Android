@@ -193,7 +193,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
-            if(mURLLink.contains("boogle.store") || mURLLink.contains("genesis.onion")){
+            if(mURLLink.contains("genesishiddentechnologies.com") || mURLLink.contains("genesis.onion")){
                 mHintWebIcon.setImageTintList(null);
                 mHintWebIcon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
