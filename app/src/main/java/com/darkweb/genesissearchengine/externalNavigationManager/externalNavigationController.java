@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.status;
-import com.example.myapplication.R;
 
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
 
 public class externalNavigationController extends AppCompatActivity {
     @Override
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Uri data = externalNavigationController.this.getIntent().getData();
@@ -30,11 +31,10 @@ public class externalNavigationController extends AppCompatActivity {
             finish();
             activityContextManager.getInstance().onClearStack();
 
-            new Handler().postDelayed(() ->
-            {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(activityContextManager.getInstance().getHomeController().completeURL(data.toString()));
                 activityContextManager.getInstance().getHomeController().onClearSelectionTab();
-            }, 500);
+            }, 3000);
 
             Intent bringToForegroundIntent = new Intent(activityContextManager.getInstance().getHomeController(), homeController.class);
             bringToForegroundIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -50,13 +50,13 @@ public class externalNavigationController extends AppCompatActivity {
         Intent intent = new Intent(this.getIntent());
         intent.setClassName(this.getApplicationContext(), homeController.class.getName());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if(data!=null){
-            if(activityContextManager.getInstance().getHomeController()!=null){
-                activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
-            }else {
-                status.sExternalWebsite = data.toString();
-            }
+
+        if(activityContextManager.getInstance().getHomeController()!=null){
+            activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
+        }else {
+            status.sExternalWebsite = data.toString();
         }
+
         this.startActivity(intent);
         this.overridePendingTransition(0, 0);
 
@@ -71,11 +71,10 @@ public class externalNavigationController extends AppCompatActivity {
             }
         }.start();
 
-        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
         startActivity(launchIntent);
 
     }
-
 
     @Override
     protected void onNewIntent(Intent intent)
@@ -84,9 +83,8 @@ public class externalNavigationController extends AppCompatActivity {
         Uri data = intent.getData();
         if(data!=null){
             activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
             startActivity(launchIntent);
         }
     }
-
 }

@@ -3,17 +3,14 @@ package com.darkweb.genesissearchengine.appManager.bridgeManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.constants.strings.BRIDGE_CUSTOM_BRIDGE_MEEK;

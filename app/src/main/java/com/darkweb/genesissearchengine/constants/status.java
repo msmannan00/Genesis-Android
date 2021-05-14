@@ -61,7 +61,7 @@ public class status
     public static boolean sFullScreenBrowsing = false;
     public static boolean sOpenURLInNewTab = true;
     public static boolean sDefaultNightMode;
-    public static boolean sLogListView;
+    public static boolean sLogThemeStyleAdvanced;
     public static boolean sBridgeGatewayAuto = false;
     public static boolean sBridgeGatewayManual = false;
     public static boolean sVPNStatus = false;
@@ -128,7 +128,7 @@ public class status
         status.sToolbarTheme = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME,true));
         status.sTheme = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_THEME,enums.Theme.THEME_DEFAULT));
         status.sOpenURLInNewTab = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,true));
-        status.sLogListView = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
+        status.sLogThemeStyleAdvanced = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
         status.sTabGridLayoutEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,true));
         status.sRateCount = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, 0));
     }

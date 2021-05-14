@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.google.android.gms.ads.*;
 import java.lang.ref.WeakReference;
 import java.util.List;

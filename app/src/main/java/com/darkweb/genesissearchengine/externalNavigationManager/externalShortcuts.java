@@ -1,14 +1,10 @@
 package com.darkweb.genesissearchengine.externalNavigationManager;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
@@ -20,17 +16,12 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.databaseManager.databaseController;
-import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
-
 import org.mozilla.geckoview.ContentBlocking;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.util.Arrays;
-import java.util.Collections;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_DATA_CLEARED;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
 public class externalShortcuts extends AppCompatActivity {
@@ -62,10 +53,7 @@ public class externalShortcuts extends AppCompatActivity {
         setContentView(R.layout.empty_view);
 
         if(mConnect){
-            new Handler().postDelayed(() ->
-            {
-                activityContextManager.getInstance().getHomeController().onStartApplication(null);
-            }, 2000);
+            new Handler().postDelayed(() -> activityContextManager.getInstance().getHomeController().onStartApplication(null), 2000);
         }
 
         new Handler().postDelayed(() ->
@@ -106,13 +94,13 @@ public class externalShortcuts extends AppCompatActivity {
             Intent intent = new Intent(this.getIntent());
             intent.setClassName(this.getApplicationContext(), homeController.class.getName());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            if(data!=null){
-                if(activityContextManager.getInstance().getHomeController()!=null){
-                    activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
-                }else {
-                    status.sExternalWebsite = data.toString();
-                }
+
+            if(activityContextManager.getInstance().getHomeController()!=null){
+                activityContextManager.getInstance().getHomeController().onOpenLinkNewTab(data.toString());
+            }else {
+                status.sExternalWebsite = data.toString();
             }
+
             this.startActivity(intent);
             overridePendingTransition(R.anim.fade_in_instant, R.anim.fade_out_instant);
 
@@ -127,11 +115,10 @@ public class externalShortcuts extends AppCompatActivity {
                 }
             }.start();
 
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
             startActivity(launchIntent);
             overridePendingTransition(R.anim.fade_in_instant, R.anim.fade_out_instant);
         }, 800);
-
     }
 
 

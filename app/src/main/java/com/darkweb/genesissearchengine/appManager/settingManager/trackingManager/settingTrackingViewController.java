@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
 import org.mozilla.geckoview.ContentBlocking;
 import java.util.ArrayList;

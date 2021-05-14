@@ -1,11 +1,8 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.logManager;
 
-import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 
-import java.util.Arrays;
 import java.util.List;
 
 class settingLogModel
@@ -20,8 +17,8 @@ class settingLogModel
         this.mEvent = mEvent;
     }
 
-    public void onUpdateLogView(boolean pIsListView){
-        status.sLogListView = pIsListView;
+    private void onUpdateLogView(boolean pLogThemeStyle){
+        status.sLogThemeStyleAdvanced = pLogThemeStyle;
     }
 
     /*Helper Methods*/

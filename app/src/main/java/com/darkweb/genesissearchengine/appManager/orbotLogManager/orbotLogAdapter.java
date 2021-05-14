@@ -10,10 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
 import org.torproject.android.service.wrapper.logRowModel;
 import java.util.ArrayList;
@@ -26,9 +26,9 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
     private ArrayList<logRowModel> mModelList;
     private eventObserver.eventListener mEvent;
 
-    orbotLogAdapter(ArrayList<logRowModel> model_list, eventObserver.eventListener event) {
-        this.mModelList = model_list;
-        this.mEvent = event;
+    orbotLogAdapter(ArrayList<logRowModel> pModelList, eventObserver.eventListener pEvent) {
+        this.mModelList = pModelList;
+        this.mEvent = pEvent;
     }
 
     @NonNull @Override
@@ -71,12 +71,13 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://duckduckgo.com/?q=tor logs " + mHeader.getText()));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_LOG_DUCKDUCK + mHeader.getText()));
             intent.putExtra(SearchManager.QUERY, mDescription.getText());
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             activityContextManager.getInstance().getHomeController().startActivity(intent);
         }
     }
+
     public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData){
         return null;
     }

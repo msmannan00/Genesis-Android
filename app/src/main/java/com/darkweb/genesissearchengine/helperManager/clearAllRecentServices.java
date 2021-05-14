@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import com.darkweb.genesissearchengine.constants.status;
 
-public class OnClearFromRecentService extends Service {
+public class clearAllRecentServices extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {

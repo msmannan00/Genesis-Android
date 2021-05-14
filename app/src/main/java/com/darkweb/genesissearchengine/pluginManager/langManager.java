@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import java.util.List;
 import java.util.Locale;
 

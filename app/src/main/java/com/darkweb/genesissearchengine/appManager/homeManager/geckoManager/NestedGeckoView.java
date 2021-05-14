@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import org.mozilla.geckoview.GeckoView;
 import java.util.Collections;
 

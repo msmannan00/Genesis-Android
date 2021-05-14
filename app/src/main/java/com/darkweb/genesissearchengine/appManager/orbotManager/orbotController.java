@@ -1,10 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.orbotManager;
 
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.VpnService;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -22,7 +19,7 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.helperManager.theme;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;

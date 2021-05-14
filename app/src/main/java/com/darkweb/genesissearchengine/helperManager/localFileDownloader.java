@@ -18,12 +18,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.netcipher.client.StrongHttpsClient;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
@@ -39,15 +39,12 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
 
-import ch.boye.httpclientandroidlib.HttpHost;
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
-import ch.boye.httpclientandroidlib.conn.params.ConnRoutePNames;
 
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_DOWNLOAD_FAILURE;
 import static java.lang.Thread.sleep;

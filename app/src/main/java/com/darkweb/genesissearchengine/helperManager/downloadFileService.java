@@ -19,10 +19,9 @@ import static java.lang.Thread.sleep;
 
 public class downloadFileService extends IntentService
 {
-    private static final String PROXY_ADDRESS = CONST_PROXY_SOCKS;
-    private static final int PROXY_PORT = 9050;
     private static final String DOWNLOAD_PATH = "com.spartons.androiddownloadmanager_DownloadSongService_Download_path";
     private static final String DESTINATION_PATH = "com.spartons.androiddownloadmanager_DownloadSongService_Destination_path";
+
     public downloadFileService() {
         super("DownloadSongService");
     }

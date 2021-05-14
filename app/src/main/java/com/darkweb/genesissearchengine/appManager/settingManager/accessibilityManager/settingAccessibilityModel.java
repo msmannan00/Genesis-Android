@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager;
 
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import java.util.List;
 
 class settingAccessibilityModel

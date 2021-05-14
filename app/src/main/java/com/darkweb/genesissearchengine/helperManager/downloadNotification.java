@@ -16,5 +16,4 @@ public class downloadNotification extends BroadcastReceiver {
             pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt("N_ID")), pluginEnums.eDownloadManager.M_CANCEL);
         }
     }
-
 }

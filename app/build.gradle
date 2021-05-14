@@ -1,10 +1,10 @@
+import com.android.build.OutputFile
+
 apply from: 'variables.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
-
-import com.android.build.OutputFile
 
 android {
 

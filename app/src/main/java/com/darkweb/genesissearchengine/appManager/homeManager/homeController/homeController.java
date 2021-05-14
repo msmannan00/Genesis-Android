@@ -29,7 +29,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.URLUtil;
 import android.widget.*;
 import androidx.annotation.NonNull;
@@ -68,9 +67,9 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.KeyboardUtils;
-import com.darkweb.genesissearchengine.helperManager.OnClearFromRecentService;
+import com.darkweb.genesissearchengine.helperManager.clearAllRecentServices;
 import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.helperManager.theme;
 import com.darkweb.genesissearchengine.helperManager.trueTime;
@@ -480,6 +479,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void initPreFixes() {
         try {
+            if(!status.mThemeApplying){
+                orbotLocalConstants.mTorLogsStatus = strings.GENERIC_EMPTY_STR;
+            }
+
             Class clazz = Class.forName("java.lang.Daemons$FinalizerWatchdogDaemon");
 
             Method method = Objects.requireNonNull(clazz.getSuperclass()).getDeclaredMethod("stop");
@@ -758,7 +761,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @SuppressLint("ClickableViewAccessibility")
     private void initializeLocalEventHandlers() {
 
-        startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
+        startService(new Intent(getBaseContext(), clearAllRecentServices.class));
 
         registerReceiver(downloadStatus,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 

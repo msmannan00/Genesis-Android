@@ -1,6 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage;
 
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 
 class settingHomeModel
 {

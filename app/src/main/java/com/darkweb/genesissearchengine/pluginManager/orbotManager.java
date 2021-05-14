@@ -11,7 +11,7 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.lang.ref.WeakReference;
 import java.util.List;
 import com.darkweb.genesissearchengine.constants.*;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 
 import static org.torproject.android.proxy.TorServiceConstants.ACTION_START;
 

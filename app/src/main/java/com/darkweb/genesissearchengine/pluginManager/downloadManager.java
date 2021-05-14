@@ -2,7 +2,7 @@ package com.darkweb.genesissearchengine.pluginManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.helperManager.localFileDownloader;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;

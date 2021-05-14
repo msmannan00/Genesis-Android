@@ -12,7 +12,7 @@ import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserI
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
 import java.io.File;

@@ -1,4 +1,5 @@
-package com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage;
+package com.darkweb.genesissearchengine.helperManager;
+
 
 import android.os.Build;
 import android.view.View;
@@ -7,28 +8,13 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
-import java.util.List;
 
-class settingHomeViewController
+public class sharedUIMethod
 {
-    /*Private Variables*/
+    /*Shared UI Helper Methods General*/
 
-    private eventObserver.eventListener mEvent;
-    private AppCompatActivity mContext;
-
-    /*Initializations*/
-
-    settingHomeViewController(settingHomeController mContext, eventObserver.eventListener mEvent)
-    {
-        this.mEvent = mEvent;
-        this.mContext = mContext;
-
-        initPostUI();
-    }
-
-    private void initPostUI(){
+    public static void updateStatusBar(AppCompatActivity mContext) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -45,12 +31,4 @@ class settingHomeViewController
             }
         }
     }
-
-    public Object onTrigger(settingHomeEnums.eHomeViewController pCommands, List<Object> pData){
-        if(pCommands.equals(settingHomeEnums.eHomeViewController.M_INIT)){
-            initPostUI();
-        }
-        return null;
-    }
-
 }

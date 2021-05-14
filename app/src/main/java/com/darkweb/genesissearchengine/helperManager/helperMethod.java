@@ -4,6 +4,7 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
@@ -25,6 +26,7 @@ import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -52,6 +54,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
 
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.FakeLauncherActivity;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -80,6 +83,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -131,6 +135,18 @@ public class helperMethod
         }catch (Exception ex){
             return pMessage;
         }
+    }
+
+    public static void onDelayHandler(AppCompatActivity pActivity, int pTime, Callable<Void> pMethodParam) {
+        final Handler handler = new Handler();
+        handler.postDelayed(() ->
+        {
+            try {
+                pMethodParam.call();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, pTime);
     }
 
     public static void onOpenHelpExternal(AppCompatActivity context, String pURL){

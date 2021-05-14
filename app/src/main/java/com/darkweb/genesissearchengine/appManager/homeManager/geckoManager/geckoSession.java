@@ -29,18 +29,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
-import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.JavaScriptInterface;
+import com.darkweb.genesissearchengine.helperManager.internalFileDownloadManager;
 import com.darkweb.genesissearchengine.helperManager.downloadFileService;
-import com.darkweb.genesissearchengine.helperManager.errorHandler;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.helperManager.trueTime;
 import com.example.myapplication.R;
@@ -56,6 +52,7 @@ import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
@@ -65,6 +62,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.crypto.spec.SecretKeySpec;
+
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_ERROR_CACHED;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_ERROR_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
@@ -528,12 +528,24 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
         if(status.sSettingIsAppStarted){
-            errorHandler handler = new errorHandler();
+            pageErrorHandler handler = new pageErrorHandler();
             mProgress = 0;
             mPreviousErrorPage = true;
             event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
-            return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2));
+
+            InputStream mResourceURL = null;
+            try {
+                if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
+                    mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED);
+                }else {
+                    mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
+                }
+            }catch (Exception ignored){
+
+            }
+
+            return GeckoResult.fromValue("data:text/html," + handler.loadErrorPage(var3.category, var3.code,mContext.get(),var2, mResourceURL));
         }
         return null;
     }
@@ -763,7 +775,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             String filename;
 
             if(url.startsWith("blob")){
-                loadUri(JavaScriptInterface.getBase64StringFromBlobUrl(url));
+                loadUri(internalFileDownloadManager.getBase64StringFromBlobUrl(url));
                 return true;
             }
 

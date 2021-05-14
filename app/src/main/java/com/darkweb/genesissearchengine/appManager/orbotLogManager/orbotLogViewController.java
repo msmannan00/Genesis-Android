@@ -1,16 +1,15 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
-import android.os.Build;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.darkweb.genesissearchengine.constants.status;
-import com.example.myapplication.R;
+
+import com.darkweb.genesissearchengine.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.sharedUIMethod;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 class orbotLogViewController
@@ -18,61 +17,77 @@ class orbotLogViewController
     /*Private Variables*/
 
     private AppCompatActivity mContext;
+    private eventObserver.eventListener mEvent;
+
     private TextView mLogs;
-    private RecyclerView mRecycleView;
+    private RecyclerView mLogRecycleView;
+    private NestedScrollView mNestedScrollView;
+    private FloatingActionButton mFloatingScroller;
 
     /*Initializations*/
 
-    orbotLogViewController(AppCompatActivity pContext, TextView pLogs, RecyclerView pRecycleView)
+    orbotLogViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, TextView pLogs, RecyclerView pLogRecycleView, NestedScrollView pNestedScrollView, FloatingActionButton pFloatingScroller)
     {
         this.mContext = pContext;
         this.mLogs = pLogs;
-        this.mRecycleView = pRecycleView;
+        this.mLogRecycleView = pLogRecycleView;
+        this.mNestedScrollView = pNestedScrollView;
+        this.mFloatingScroller = pFloatingScroller;
+        this.mEvent = pEvent;
 
-        initViews();
         initPostUI();
     }
 
-    private void initViews(){
-        if(status.sLogListView){
-            mRecycleView.setVisibility(View.VISIBLE);
+    private void initViews(boolean pLogThemeStyleAdvanced){
+        if(pLogThemeStyleAdvanced){
+            mLogRecycleView.setVisibility(View.VISIBLE);
             mLogs.setVisibility(View.GONE);
         }else {
-            mRecycleView.setVisibility(View.GONE);
+            mLogRecycleView.setVisibility(View.GONE);
             mLogs.setVisibility(View.VISIBLE);
         }
     }
 
+    /*Helper Methods*/
+
     private void initPostUI(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-            }
-        }
+        sharedUIMethod.updateStatusBar(mContext);
     }
-
 
     private void onUpdateLogs(String pLogs){
         pLogs = "~ " + pLogs;
         mLogs.setText(String.format("%s%s",mLogs.getText() ,pLogs + "\n\n"));
     }
 
+    private void onScrollThemeUpdate(){
+        if(mNestedScrollView.canScrollVertically(1)){
+            if(mFloatingScroller.getAlpha()==0){
+                mFloatingScroller.setVisibility(View.VISIBLE);
+                mFloatingScroller.animate().cancel();
+                mFloatingScroller.animate().alpha(1);
+            }
+        }else {
+            mFloatingScroller.animate().cancel();
+            mFloatingScroller.animate().alpha(0).withEndAction(() -> mFloatingScroller.setVisibility(View.GONE));
+        }
+    }
+
+
+    /*Triggers*/
+
     public void onTrigger(orbotLogEnums.eOrbotLogViewCommands pCommands, List<Object> pData){
         if(pCommands.equals(orbotLogEnums.eOrbotLogViewCommands.M_UPDATE_LOGS)){
             onUpdateLogs((String) pData.get(0));
         }
         else if(pCommands.equals(orbotLogEnums.eOrbotLogViewCommands.M_INIT_VIEWS)){
-            initViews();
+            initViews((boolean)pData.get(0));
         }
+        else if(pCommands.equals(orbotLogEnums.eOrbotLogViewCommands.M_SCROLL_THEME_UPDATE)){
+            onScrollThemeUpdate();
+        }
+    }
+
+    public void onTrigger(orbotLogEnums.eOrbotLogViewCommands pCommands){
+        onTrigger(pCommands, null);
     }
 }

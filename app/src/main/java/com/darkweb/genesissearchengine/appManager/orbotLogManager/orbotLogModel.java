@@ -13,11 +13,11 @@ class orbotLogModel
 
     /*Helper Methods*/
 
-    void setList(ArrayList<logRowModel> model)
+    void setList(ArrayList<logRowModel> pModel)
     {
-        if(model.size()>0){
+        if(pModel.size()>0){
             mModelList.clear();
-            mModelList.addAll(model);
+            mModelList.addAll(pModel);
         }
         else {
             mModelList.add(new logRowModel(constants.CONST_LOGS_DEFAULT_MESSAGE, helperMethod.getCurrentTime()));

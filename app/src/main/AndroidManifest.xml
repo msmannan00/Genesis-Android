@@ -209,7 +209,7 @@
             android:exported="false"
             android:stopWithTask="true" />
         <service
-            android:name="com.darkweb.genesissearchengine.helperManager.OnClearFromRecentService"
+            android:name="com.darkweb.genesissearchengine.helperManager.clearAllRecentServices"
             android:stopWithTask="true" />
 
         <receiver android:name="com.darkweb.genesissearchengine.helperManager.userEngagementNotification" />

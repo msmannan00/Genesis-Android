@@ -9,23 +9,16 @@ import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
 import net.sqlcipher.database.SQLiteDatabaseHook;
 import net.sqlcipher.database.SQLiteDatabase;
-
 import org.mozilla.geckoview.GeckoSession;
-
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import static com.darkweb.genesissearchengine.constants.constants.CONST_DATABASE_NAME;
 
@@ -36,15 +29,11 @@ public class databaseController
     /*Private Variables*/
 
     private static final databaseController sOurInstance = new databaseController();
-    private static SQLiteDatabase mDatabaseInstance;
+    private static SQLiteDatabase sDatabaseInstance;
 
     public static databaseController getInstance()
     {
         return sOurInstance;
-    }
-
-    private databaseController()
-    {
     }
 
     /*Initializations*/
@@ -53,7 +42,7 @@ public class databaseController
         File databaseFile = app_context.getDatabasePath(CONST_DATABASE_NAME + "_SECURE");
 
         if (!databaseFile.exists()) {
-            databaseFile.getParentFile().mkdirs();
+            Objects.requireNonNull(databaseFile.getParentFile()).mkdirs();
         }
     }
 
@@ -63,11 +52,11 @@ public class databaseController
         {
             SQLiteDatabase.loadLibs(app_context);
             prepareDatabaseEnvironment(app_context);
-            mDatabaseInstance = mDatabaseInstance.openOrCreateDatabase(app_context.getDatabasePath(CONST_DATABASE_NAME + "_SECURE"), constants.CONST_ENCRYPTION_KEY_DATABASE,null, wrapHook(null));
+            sDatabaseInstance = SQLiteDatabase.openOrCreateDatabase(app_context.getDatabasePath(CONST_DATABASE_NAME + "_SECURE"), constants.CONST_ENCRYPTION_KEY_DATABASE,null, wrapHook(null));
 
-            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
-            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
-            mDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB, theme VARCHAR, session VARCHAR);");
+            sDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
+            sDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
+            sDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "tab" + " (mid INT(4) PRIMARY KEY,date,title VARCHAR,url VARCHAR,mThumbnail BLOB, theme VARCHAR, session VARCHAR);");
 
         }
         catch (Exception ex)
@@ -115,11 +104,11 @@ public class databaseController
     {
         if(params==null)
         {
-            mDatabaseInstance.execSQL(query);
+            sDatabaseInstance.execSQL(query);
         }
         else
         {
-            mDatabaseInstance.execSQL(query,params);
+            sDatabaseInstance.execSQL(query,params);
         }
     }
 
@@ -127,14 +116,14 @@ public class databaseController
     {
         if(params!=null)
         {
-            mDatabaseInstance.update(query, params, "mid = ?", new String[]{pID});
+            sDatabaseInstance.update(query, params, "mid = ?", new String[]{pID});
         }
     }
 
-    public ArrayList<historyRowModel> selectHistory(int startIndex,int endIndex){
+    public ArrayList<historyRowModel> selectHistory(int pStartIndex,int pEndIndex){
         ArrayList<historyRowModel> tempmodel = new ArrayList<>();
 
-        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM history ORDER BY date DESC LIMIT " + endIndex + " OFFSET "+startIndex, null);
+        Cursor c = sDatabaseInstance.rawQuery("SELECT * FROM history ORDER BY date DESC LIMIT " + pEndIndex + " OFFSET "+pStartIndex, null);
         if (c.moveToFirst()){
             do {
                 historyRowModel model = new historyRowModel(c.getString(3), c.getString(2),Integer.parseInt(c.getString(0)));
@@ -159,7 +148,7 @@ public class databaseController
     public ArrayList<tabRowModel> selectTabs(){
         ArrayList<tabRowModel> mTempListModel = new ArrayList<>();
 
-        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM tab ORDER BY date ASC", null);
+        Cursor c = sDatabaseInstance.rawQuery("SELECT * FROM tab ORDER BY date ASC", null);
         if (c.moveToFirst()){
             do {
                 geckoSession mSession =  activityContextManager.getInstance().getHomeController().onNewTabInit();
@@ -188,7 +177,7 @@ public class databaseController
 
     public int getLargestHistoryID(){
         int id = 0;
-        Cursor c = mDatabaseInstance.rawQuery("SELECT max(id) FROM history", null);
+        Cursor c = sDatabaseInstance.rawQuery("SELECT max(id) FROM history", null);
 
         if (c.moveToFirst()){
             do {
@@ -206,7 +195,7 @@ public class databaseController
 
     public ArrayList<bookmarkRowModel> selectBookmark(){
         ArrayList<bookmarkRowModel> tempmodel = new ArrayList<>();
-        Cursor c = mDatabaseInstance.rawQuery("SELECT * FROM bookmark ORDER BY id DESC ", null);
+        Cursor c = sDatabaseInstance.rawQuery("SELECT * FROM bookmark ORDER BY id DESC ", null);
 
         if (c.moveToFirst()){
             do {

@@ -17,7 +17,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
-import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.MovementMethod;
@@ -42,8 +41,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.animatedColor;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.colorAnimationReciever;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
@@ -57,9 +56,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_DOMAIN_URL;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
@@ -493,7 +489,7 @@ class homeViewController
 
     public void initStatusBarColor(boolean mInstant) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            animatedColor oneToTwo = new animatedColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
+            colorAnimationReciever oneToTwo = new colorAnimationReciever(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
             int mDelay = 1350;
             if(status.mThemeApplying || mInstant){

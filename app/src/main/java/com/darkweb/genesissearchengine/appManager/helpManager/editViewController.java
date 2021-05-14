@@ -6,7 +6,7 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 
 public class editViewController extends androidx.appcompat.widget.AppCompatAutoCompleteTextView {
 

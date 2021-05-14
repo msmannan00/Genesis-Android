@@ -1,19 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.landingManager;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Build;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-import com.darkweb.genesissearchengine.helperManager.animatedColor;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
 
 class landingViewController

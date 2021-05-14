@@ -3,7 +3,7 @@ package com.darkweb.genesissearchengine.appManager.settingManager.advanceManager
 import android.view.View;
 
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
 
 import java.util.List;

@@ -65,7 +65,7 @@
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/mMainScroll"
+        android:id="@+id/pNestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
@@ -129,10 +129,12 @@
                 android:layout_marginEnd="12dp"
                 android:background="@xml/sx_border_left"
                 android:layout_marginStart="10dp"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp"
-                android:layout_marginBottom="25dp"
-                android:paddingBottom="25dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="25dp"
+                android:paddingBottom="5dp"
+                android:layout_marginBottom="190dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/c_text_v4"
                 android:textSize="14sp"
                 android:visibility="gone"
@@ -141,6 +143,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pLogRecycleView"
+                android:fillViewport="true"
+                android:paddingBottom="150dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"/>

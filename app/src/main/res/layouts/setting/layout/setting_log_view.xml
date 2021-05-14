@@ -130,7 +130,7 @@
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:layout_width="0dp"
-                        android:id="@+id/pListView"
+                        android:id="@+id/pLogThemeToggle"
                         android:layout_height="match_parent"
                         android:clickable="false"
                         android:focusable="false"

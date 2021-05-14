@@ -10,8 +10,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
-import org.mozilla.geckoview.GeckoSession;
+import com.darkweb.genesissearchengine.eventObserver;
+
 import org.mozilla.geckoview.WebResponse;
 
 import java.util.Arrays;

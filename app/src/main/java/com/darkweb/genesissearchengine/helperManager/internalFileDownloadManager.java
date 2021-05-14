@@ -17,10 +17,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class JavaScriptInterface {
+public class internalFileDownloadManager {
     private Context context;
     private NotificationManager nm;
-    public JavaScriptInterface(Context context) {
+    public internalFileDownloadManager(Context context) {
         this.context = context;
     }
 

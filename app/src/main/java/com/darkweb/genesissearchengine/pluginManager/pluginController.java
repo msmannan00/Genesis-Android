@@ -1,7 +1,6 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import android.os.Handler;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
@@ -13,7 +12,7 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;

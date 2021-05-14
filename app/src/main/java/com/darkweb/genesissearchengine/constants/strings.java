@@ -63,22 +63,5 @@ public class strings
     /*Message Manager*/
 
     public static final String MESSAGE_PLAYSTORE_NOT_FOUND = "Playstore Not Found";
-
-    /*Events*/
-
-    /*  public static final String EVENT_APP_STARTED = "APP_STARTED";
-        public static final String EVENT_SETTINGS_OPENED = "SETTINGS_OPENED";
-        public static final String EVENT_URL_BOOKMARKED = "URL_BOOKMARKED";
-        public static final String EVENT_BOOKMARK_OPENED = "BOOKMARK_OPENED";
-        public static final String EVENT_TAB_OPENED = "TAB_OPENED";
-        public static final String EVENT_GATEWAY_OPENED = "GATEWAY_OPENED";
-        public static final String EVENT_HISTORY_OPENED = "HISTORY_OPENED";
-        public static final String EVENT_HISTORY_TRIGGERED = "HISTORY_TRIGGERED";
-        public static final String EVENT_BOOKMARK_TRIGGERED = "BOOKMARK_TRIGGERED";
-        public static final String EVENT_PAGE_OPENED_SUCCESS = "PAGE_OPENED_SUCCESS";
-        public static final String EVENT_HOME_INVOKED = "HOME_INVOKED";
-        public static final String EVENT_SEARCH_INVOKED = "SEARCH_INVOKED";
-        public static final String EVENT_MENU_INVOKED = "MENU_INVOKED";
-        public static final String EVENT_ON_BACK = "ON_BACK";   */
 }
 

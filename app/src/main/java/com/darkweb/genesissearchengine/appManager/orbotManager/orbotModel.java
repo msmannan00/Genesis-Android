@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 

@@ -1,14 +1,10 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.notificationManager;
 
-import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 class settingNotificationModel

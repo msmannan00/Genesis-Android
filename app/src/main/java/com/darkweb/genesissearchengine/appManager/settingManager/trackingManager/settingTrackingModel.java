@@ -1,20 +1,14 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.trackingManager;
 
 import android.view.View;
-import com.darkweb.genesissearchengine.constants.keys;
+
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.eventObserver;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
 
 import org.mozilla.geckoview.ContentBlocking;
 
-import java.util.Arrays;
 import java.util.List;
-import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_ALL;
-import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
-import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_NONE;
-import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_NON_TRACKERS;
 
 class settingTrackingModel
 {
