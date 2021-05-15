@@ -7,4 +7,9 @@ settingLogModel
 settingLogViewController
 
 /* In Progress */
-OrbotLogs
+orbotLogAdapter
+orbotLogController
+orbotLogEnums
+orbotLogModel
+orbotLogStatus
+orbotLogViewController

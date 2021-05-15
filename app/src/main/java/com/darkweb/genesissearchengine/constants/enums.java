@@ -35,4 +35,10 @@ public class enums
         public static final int M_IMAGE_LOADED_SUCCESSFULLY = 1;
         public static final int M_IMAGE_LOADING_FAILED = 2;
     }
+
+    public static class ScrollDirection {
+        public static final int HORIZONTAL = 0;
+        public static final int VERTICAL = 1;
+    }
+
 }

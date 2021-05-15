@@ -4,6 +4,7 @@ import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import org.torproject.android.service.wrapper.logRowModel;
 import java.util.ArrayList;
+import java.util.List;
 
 class orbotLogModel
 {
@@ -24,8 +25,29 @@ class orbotLogModel
         }
     }
 
-    ArrayList<logRowModel> getList()
+    private ArrayList<logRowModel> getList()
     {
         return mModelList;
     }
+
+    private int getListSize()
+    {
+        return mModelList.size();
+    }
+
+    /*Triggers*/
+
+    public void onTrigger(orbotLogEnums.eOrbotLogViewCommands pCommands, List<Object> pData){
+    }
+
+    public Object onTrigger(orbotLogEnums.eOrbotLogModelCommands pCommands){
+        if(pCommands.equals(orbotLogEnums.eOrbotLogModelCommands.M_GET_LIST)){
+            return getList();
+        }
+        else if(pCommands.equals(orbotLogEnums.eOrbotLogModelCommands.M_GET_LIST_SIZE)){
+            return getListSize();
+        }
+        return null;
+    }
+
 }

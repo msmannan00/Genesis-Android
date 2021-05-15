@@ -23,7 +23,7 @@
     <string name="shortcut_erase_long_label">Erase browsing history</string>
     <string name="shortcut_erase_and_open_short_label">Erase &amp; open</string>
     <string name="shortcut_erase_and_open_long_label">Erase and open</string>
-    <string name="shortcut_open">Restart</string>
+    <string name="shortcut_open">Restart or Open</string>
     <string name="shortcut_open_long">Restart Application</string>
 
     <!-- Temp -->

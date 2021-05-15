@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.sharedUIMethod;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,19 +57,17 @@ class orbotLogViewController
 
     private void onUpdateLogs(String pLogs){
         pLogs = "~ " + pLogs;
-        mLogs.setText(String.format("%s%s",mLogs.getText() ,pLogs + "\n\n"));
+        mLogs.setText(String.format("%s%s",mLogs.getText() , "\n\n" + pLogs ));
     }
 
-    private void onScrollThemeUpdate(){
-        if(mNestedScrollView.canScrollVertically(1)){
-            if(mFloatingScroller.getAlpha()==0){
-                mFloatingScroller.setVisibility(View.VISIBLE);
-                mFloatingScroller.animate().cancel();
-                mFloatingScroller.animate().alpha(1);
-            }
+    private void onFloatButtonUpdate(){
+        if(mNestedScrollView.canScrollVertically(enums.ScrollDirection.VERTICAL)){
+            mFloatingScroller.setVisibility(View.VISIBLE);
+            mFloatingScroller.animate().cancel();
+            mFloatingScroller.animate().setDuration(250).alpha(1);
         }else {
             mFloatingScroller.animate().cancel();
-            mFloatingScroller.animate().alpha(0).withEndAction(() -> mFloatingScroller.setVisibility(View.GONE));
+            mFloatingScroller.animate().setDuration(250).alpha(0).withEndAction(() -> mFloatingScroller.setVisibility(View.GONE));
         }
     }
 
@@ -82,8 +81,8 @@ class orbotLogViewController
         else if(pCommands.equals(orbotLogEnums.eOrbotLogViewCommands.M_INIT_VIEWS)){
             initViews((boolean)pData.get(0));
         }
-        else if(pCommands.equals(orbotLogEnums.eOrbotLogViewCommands.M_SCROLL_THEME_UPDATE)){
-            onScrollThemeUpdate();
+        else if(pCommands.equals(orbotLogEnums.eOrbotLogViewCommands.M_FLOAT_BUTTON_UPDATE)){
+            onFloatButtonUpdate();
         }
     }
 

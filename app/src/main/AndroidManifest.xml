@@ -101,7 +101,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController"
-            android:configChanges="uiMode"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController"
@@ -145,10 +145,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.darkweb.genesissearchengine.externalNavigationManager.externalShortcuts"
+        <activity android:name="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts"
             android:launchMode="singleTop"/>
 
-        <activity android:name="com.darkweb.genesissearchengine.externalNavigationManager.externalNavigationController"
+        <activity android:name="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalNavigationController"
             android:launchMode="singleTask"
             >
             <intent-filter>

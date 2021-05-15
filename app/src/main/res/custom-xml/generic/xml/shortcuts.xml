@@ -4,39 +4,39 @@
     <shortcut
         android:shortcutId="Restart"
         android:enabled="true"
-        android:icon="@xml/ic_baseline_shortcut_erase"
+        android:icon="@xml/ic_baseline_shortcut_erase_back"
         android:shortcutShortLabel="@string/shortcut_open"
         android:shortcutLongLabel="@string/shortcut_open_long">
         <intent
             android:action="erase"
-            android:targetPackage="com.darkweb.genesissearchengine"
-            android:targetClass="com.darkweb.genesissearchengine.externalNavigationManager.externalShortcuts">
+            android:targetPackage="com.darkweb.genesissearchengine.dev"
+            android:targetClass="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts">
             <extra android:name="shortcut" android:value="open" />
         </intent>
     </shortcut>
     <shortcut
         android:shortcutId="erase_and_open"
         android:enabled="true"
-        android:icon="@xml/ic_baseline_shortcut_add_new"
+        android:icon="@xml/ic_baseline_shortcut_add_new_back"
         android:shortcutShortLabel="@string/shortcut_erase_and_open_short_label"
         android:shortcutLongLabel="@string/shortcut_erase_and_open_long_label">
         <intent
             android:action="erase"
-            android:targetPackage="com.darkweb.genesissearchengine"
-            android:targetClass="com.darkweb.genesissearchengine.externalNavigationManager.externalShortcuts">
+            android:targetPackage="com.darkweb.genesissearchengine.dev"
+            android:targetClass="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts">
             <extra android:name="shortcut" android:value="erase_and_open" />
         </intent>
     </shortcut>
     <shortcut
         android:shortcutId="erase"
         android:enabled="true"
-        android:icon="@xml/ic_baseline_shortcut_cross"
+        android:icon="@xml/ic_baseline_shortcut_cross_back"
         android:shortcutShortLabel="@string/shortcut_erase_short_label"
         android:shortcutLongLabel="@string/shortcut_erase_long_label">
         <intent
             android:action="erase"
-            android:targetPackage="com.darkweb.genesissearchengine"
-            android:targetClass="com.darkweb.genesissearchengine.externalNavigationManager.externalShortcuts">
+            android:targetPackage="com.darkweb.genesissearchengine.dev"
+            android:targetClass="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts">
             <extra android:name="shortcut" android:value="erase" />
         </intent>
     </shortcut>
