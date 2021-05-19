@@ -14,7 +14,7 @@
 	<string name="GENERAL_LOADING" translatable="true">libertà digitale</string>
 	<string name="GENERAL_RELOAD" translatable="true">ricaricare</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">stai affrontando uno dei seguenti problemi. la pagina web o il sito web potrebbero non funzionare. la tua connessione Internet potrebbe essere scarsa. potresti utilizzare un proxy. il sito Web potrebbe essere bloccato dal firewall</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.production.provider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israele colpisce ancora</string>
 
 

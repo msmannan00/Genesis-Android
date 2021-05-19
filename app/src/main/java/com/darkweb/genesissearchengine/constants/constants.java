@@ -10,11 +10,12 @@ public class constants
     public static final String CONST_SOFTWARE_URL = "https://genesishiddentechnologies.com/search?q=softwares+tools&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_SOFTWARE_FINANCE = "https://genesishiddentechnologies.com/search?q=finance&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_COMMUNITIES = "https://genesishiddentechnologies.com/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
-    public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine";
+    public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine.production";
     public static final String CONST_PRIVACY_POLICY_URL = "https://genesishiddentechnologies.com/privacy";
     public static final String CONST_REPORT_URL = "https://genesishiddentechnologies.com/reportus?url=";
     public static final String CONST_SITEMAP = "https://genesishiddentechnologies.com/create";
-    public static final String CONST_PACKAGE_NAME = "com.darkweb.genesissearchengine.dev";
+    public static final String CONST_PACKAGE_NAME = "com.darkweb.genesissearchengine.production";
+    public static final String CONST_WIDGET_NAME = "com.darkweb.genesissearchengine.widget";
 
     /*DRIVE URL DEV*/
 
@@ -47,7 +48,7 @@ public class constants
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com?q=$s&ia=web";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";
     public static final String CONST_BACKEND_WIKI_URL = "https://en.wikipedia.org/wiki/$s";
-    public static final String CONST_LOG_DUCKDUCK = "https://duckduckgo.com/?q=tor ";
+    public static final String CONST_LOG_DUCKDUCK = "https://duckduckgo.com/?q=tor";
 
     /*PROXY CONSTANTS*/
 

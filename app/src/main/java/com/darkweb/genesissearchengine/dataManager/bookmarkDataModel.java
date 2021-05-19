@@ -1,23 +1,32 @@
 package com.darkweb.genesissearchengine.dataManager;
 
-import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
-import com.darkweb.genesissearchengine.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.eventObserver;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class bookmarkDataModel {
 
+    /* Local Variables */
+
+    private eventObserver.eventListener mExternalEvents;
     private ArrayList<bookmarkRowModel> mBookmarks;
 
-    public bookmarkDataModel(){
+    /* Initializations */
+
+    public bookmarkDataModel(eventObserver.eventListener pExternalEvents){
         mBookmarks = new ArrayList<>();
+        mExternalEvents = pExternalEvents;
     }
 
     void initializebookmark(ArrayList<bookmarkRowModel> pBookmark){
         mBookmarks = pBookmark;
     }
+
+    /* Helper Methods */
 
     private ArrayList<bookmarkRowModel> getBookmark() {
         return mBookmarks;
@@ -32,7 +41,7 @@ public class bookmarkDataModel {
         int autoval = 0;
         if(mBookmarks.size()> constants.CONST_MAX_BOOKMARK_SIZE)
         {
-            databaseController.getInstance().execSQL("delete from bookmark where id="+ mBookmarks.get(mBookmarks.size()-1).getID(),null);
+            mExternalEvents.invokeObserver(Arrays.asList("delete from bookmark where id="+ mBookmarks.get(mBookmarks.size()-1).getID(),null), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
         }
 
         if(mBookmarks.size()>0)
@@ -50,7 +59,7 @@ public class bookmarkDataModel {
         params[1] = pURL;
 
         if(!pTitle.equals("loading")){
-            databaseController.getInstance().execSQL("REPLACE INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params);
+            mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
         }
         mBookmarks.add(0,new bookmarkRowModel(pTitle, pURL,autoval));
     }
@@ -65,8 +74,11 @@ public class bookmarkDataModel {
                 mBookmarks.remove(mCounter);
             }
         }
-        databaseController.getInstance().execSQL("delete from bookmark where id="+ pID,null);
+
+        mExternalEvents.invokeObserver(Arrays.asList("delete from bookmark where id="+ pID,null), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
     }
+
+    /* External Triggers */
 
     public Object onTrigger(dataEnums.eBookmarkCommands p_commands, List<Object> pData){
         if(p_commands == dataEnums.eBookmarkCommands.M_GET_BOOKMARK){

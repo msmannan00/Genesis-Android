@@ -23,7 +23,6 @@ import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -44,10 +43,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
-import com.darkweb.genesissearchengine.constants.sql;
-import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
-import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
+import com.darkweb.genesissearchengine.dataManager.models.historyRowModel;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.*;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
@@ -57,8 +54,8 @@ import com.darkweb.genesissearchengine.appManager.languageManager.languageContro
 import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.appManager.orbotManager.orbotController;
 import com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController;
-import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
-import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
+import com.darkweb.genesissearchengine.appManager.settingManager.settingHomeManager.settingHomeController;
+import com.darkweb.genesissearchengine.dataManager.models.tabRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -66,16 +63,14 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.KeyboardUtils;
-import com.darkweb.genesissearchengine.helperManager.clearAllRecentServices;
-import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
+import com.darkweb.genesissearchengine.libs.views.KeyboardUtils;
+import com.darkweb.genesissearchengine.appManager.activityStateManager;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.helperManager.theme;
-import com.darkweb.genesissearchengine.helperManager.trueTime;
+import com.darkweb.genesissearchengine.appManager.activityThemeManager;
+import com.darkweb.genesissearchengine.libs.trueTime.trueTime;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
-import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.ContentBlocking;
@@ -105,6 +100,7 @@ import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE_TAB_SINGLE;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB;
 import static com.darkweb.genesissearchengine.constants.enums.etype.open_new_tab;
+import static com.darkweb.genesissearchengine.constants.sql.SQL_CLEAR_HISTORY;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static java.lang.Character.isLetter;
@@ -116,7 +112,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private homeViewController mHomeViewController;
     private homeModel mHomeModel;
     private geckoClients mGeckoClient = null;
-    private GestureDetector mSwipeDirectionDetector;
 
     /*View Webviews*/
     private NestedGeckoView mGeckoView = null;
@@ -124,7 +119,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ConstraintLayout mWebViewContainer;
 
     /*View Objects*/
-    private AnimatedProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
     private ConstraintLayout mSplashScreen;
     private editTextManager mSearchbar;
     private ImageView mLoadingIcon;
@@ -191,7 +186,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             pluginController.getInstance().preInitialize(this);
             dataController.getInstance().initialize(this);
             status.initStatus(this);
-            databaseController.getInstance().initialize(this);
+            dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_INIT, Collections.singletonList(this));
             trueTime.getInstance().initTime();
 
             super.onCreate(savedInstanceState);
@@ -462,16 +457,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), false);
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if(inSignatureArea(event)){
-            try{
-                //mSwipeDirectionDetector.onTouchEvent(event);
-            }catch (Exception ignored){ }
-        }
-        return super.dispatchTouchEvent(event);
-    }
-
     public boolean inSignatureArea(MotionEvent ev) {
         float mEventY = ev.getY();
         return mEventY>mTopBar.getY()+mTopBar.getHeight() && mEventY<mConnectButton.getY();
@@ -516,7 +501,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         Prefs.setContext(base);
         orbotLocalConstants.mHomeContext = new WeakReference<>(base);
 
-        Context mContext = theme.getInstance().initTheme(base);
+        Context mContext = activityThemeManager.getInstance().initTheme(base);
         activityContextManager.getInstance().setApplicationContext(mContext.getApplicationContext());
         super.attachBaseContext(LocaleHelper.onAttach(mContext, Prefs.getDefaultLocale()));
     }
@@ -761,7 +746,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @SuppressLint("ClickableViewAccessibility")
     private void initializeLocalEventHandlers() {
 
-        startService(new Intent(getBaseContext(), clearAllRecentServices.class));
+        startService(new Intent(getBaseContext(), activityStateManager.class));
 
         registerReceiver(downloadStatus,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
@@ -790,8 +775,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     if(mFindText.getText().length()==0 && mGeckoClient!=null){
                             mGeckoClient.getSession().getFinder().clear();
                             mHomeViewController.onUpdateFindBarCount(0,0);
-                        }else {
-                        assert mGeckoClient != null;
+                        }else if(mGeckoClient!=null){
                         mGeckoClient.getSession().findInPage(mFindText.getText().toString(), GeckoSession.FINDER_FIND_MATCH_CASE & GeckoSession.FINDER_DISPLAY_HIGHLIGHT_ALL);
 
                     }
@@ -947,22 +931,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     isSuggestionChanged = true;
                     isSuggestionSearchOpened = false;
                 }
-            }
-        });
-
-        mSwipeDirectionDetector=new GestureDetector(this,new SimpleGestureFilter(){
-
-            @Override
-            public boolean onSwipe(Direction direction) {
-                if(mSplashScreen.getAlpha()>=1 && mSplashScreen.getVisibility()==View.VISIBLE){
-                    if (direction==Direction.left){
-                        helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this, true);
-                    }
-                    else if (direction==Direction.right){
-                        helperMethod.openActivity(orbotController.class, constants.CONST_LIST_HISTORY, homeController.this, true);
-                    }
-                }
-                return true;
             }
         });
 
@@ -1385,12 +1353,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.onExitFullScreen();
         mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), false);
         pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
-        pluginController.getInstance().onNotificationInvoke(Collections.singletonList(1296000000)  , pluginEnums.eNotificationManager.M_CREATE_NOTIFICATION);
+        pluginController.getInstance().onNotificationInvoke(Collections.singletonList(172800000)  , pluginEnums.eNotificationManager.M_CREATE_NOTIFICATION);
         mSearchBarWasBackButtonPressed = false;
         if(status.sSettingIsAppStarted){
             status.sUIInteracted = true;
         }
         mHomeViewController.onUpdateFindBar(false);
+        mHomeViewController.onClearSelections(isKeyboardOpened);
+        mTopBarContainer.getLayoutTransition().setDuration(0);
     }
 
     @Override
@@ -1885,7 +1855,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
 
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
-        databaseController.getInstance().execSQL(sql.SQL_CLEAR_HISTORY,null);
+        dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_HISTORY,null));
         dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
         activityContextManager.getInstance().getHomeController().onClearCache();
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
@@ -2009,11 +1979,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                    final Handler handler = new Handler();
                    Runnable runnable = () -> {
                        if(!status.sUIInteracted){
-                           mHomeViewController.closeMenu();
-                           mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true, true);
-                           mSearchbar.clearFocus();
-                           pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, homeController.this), M_WELCOME);
-                           status.sUIInteracted = true;
+                           if(mHomeViewController!=null){
+                               mHomeViewController.closeMenu();
+                               mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true, true);
+                               mSearchbar.clearFocus();
+                               pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, homeController.this), M_WELCOME);
+                               status.sUIInteracted = true;
+                           }
                        }
                    };
                    handler.postDelayed(runnable, 2500);

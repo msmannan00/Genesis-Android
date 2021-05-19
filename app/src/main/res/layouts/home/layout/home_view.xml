@@ -197,7 +197,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Live Build
+                <!-- Live Build -->
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/pAdView"
                     android:layout_width="match_parent"
@@ -209,9 +209,9 @@
                     app:adUnitId="ca-app-pub-9340927969469822/2860677803"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pTopbar" />-->
+                    app:layout_constraintTop_toBottomOf="@+id/pTopbar" />
 
-                <!-- Development Build -->
+                <!-- Development Build
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/pAdView"
                     android:layout_width="match_parent"
@@ -223,7 +223,7 @@
                     app:adUnitId="ca-app-pub-6985886044951738/2630126403"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pTopbar" />
+                    app:layout_constraintTop_toBottomOf="@+id/pTopbar" /> -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -266,7 +266,7 @@
 
                 </com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView>
 
-                <com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar
+                <ProgressBar
                     android:id="@+id/pProgressBar"
                     style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
@@ -281,8 +281,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shiftDuration="@integer/progress_shift_duration"
-                    app:wrapShiftDrawable="true"
                     tools:progress="0" />
 
                 <ImageView

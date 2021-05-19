@@ -25,12 +25,12 @@
             android:layout_height="52dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="2.5dp"
-            android:background="@xml/gx_ripple_default_round"
+            android:background="@color/clear_alpha"
             android:contentDescription="@string/GENERAL_TODO"
             android:padding="6dp"
             android:scaleType="fitCenter"
             android:src="@drawable/genesis"
-            android:translationZ="10dp"/>
+            android:translationZ="1dp"/>
 
         <TextView
             android:id="@+id/pSearchInputWidget"

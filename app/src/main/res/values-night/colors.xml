@@ -1,4 +1,7 @@
 <resources>
+
+    /* Customs Colors */
+
     <color name="c_background">#1c1b21</color>
     <color name="c_background_alpha">#60ffffff</color>
     <color name="c_background_keyboard">#091a2a</color>
@@ -67,11 +70,9 @@
     <color name="c_lock_text">#00b300</color>
     <color name="c_text_v6">#a6a6a6</color>
     <color name="c_home_side">#28282a</color>
-
     <color name="c_alert_text">#ffffff</color>
     <color name="c_alert_text_inverted">#242B64</color>
     <color name="c_long_button">#3c3946</color>
-
     <color name="c_button_warning">#f65555</color>
     <color name="c_rateus_warning">#b3b3b3</color>
     <color name="c_splash_buttons">#ffffff</color>
@@ -82,54 +83,5 @@
     <color name="c_list_remove_back">#0f0f0f</color>
     <color name="c_list_alpha_black">#90000000</color>
     <color name="c_ripple_light">#d9d9d9</color>
-
-    <color name="blue">#0066FF</color>
-    <color name="ease_blue_light">#fdfeff</color>
-    <color name="ease_blue">#4d88ff</color>
-    <color name="landing_ease_blue">#0A1727</color>
-    <color name="landing_ease_blue_light_1">#eef1f7</color>
-    <color name="landing_ease_blue_light_2">#eef1f7</color>
-    <color name="cursor_blue">#3385ff</color>
-    <color name="text_color_highlight_v1">#b3d1ff</color>
-    <color name="text_color_highlight_v3">#615c70</color>
-    <color name="blue_dark">#212d45</color>
-    <color name="blue_dark_v1">#212d45</color>
-    <color name="blue_dark_v2">#55212d45</color>
-
-    <color name="black_blue">#99bbff</color>
-    <color name="black_blue_dark">#ccdcff</color>
-    <color name="black">#000000</color>
-    <color name="headerblack">#212f45</color>
-    <color name="text_color_v1">#4d4d4d</color>
-    <color name="text_color_v2">#333333</color>
-    <color name="text_color_v3">#666666</color>
-    <color name="clear_alpha_white">#E6FFFFFF</color>
-    <color name="clear_alpha">#00000000 </color>
-    <color name="holo_dark_gray_alpha">#88000000</color>
-    <color name="holo_dark_gray_alpha_v1">#99000000</color>
-    <color name="holo_dark_gray">#999999</color>
-    <color name="holo_gray">#b3b3b3</color>
-    <color name="float_white">#bfbfbf</color>
-    <color name="button_gray">#d9d9d9</color>
-    <color name="button_light">#e3e3e3</color>
-    <color name="holo_gray_light">#f2f2f2</color>
-    <color name="holo_gray_light_row">#3b3946</color>
-    <color name="holo_light">#e6e6e6</color>
-    <color name="white_darker">#f8f8f8</color>
-    <color name="white_dark">#f2f2f2</color>
-    <color name="white">#ffffff</color>
-
-    <color name="dark_red">#910808</color>
-    <color name="dark_red_soft">#f76e6e</color>
-    <color name="green">#33cc33</color>
-    <color name="green_button">#00802b</color>
-    <color name="green_dark">#212d45</color>
-    <color name="green_dark_v2">#1c1b21</color>
-    <color name="dark_purple">#CC212d45</color>
-    <color name="warning">#ffc107</color>
-    <color name="colorProgressGradientStart">#00d9ff</color>
-    <color name="colorProgressGradientEnd">#00a4fd</color>
-    <color name="secondary">#00b3b3</color>
-
 
 </resources>

@@ -8,22 +8,24 @@ import com.android.volley.toolbox.Volley;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
-
 import java.util.Arrays;
 import java.util.List;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_REFERENCE_WEBSITES;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_REFERENCE_WEBSITES_DEV;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_SERVER;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_SERVER_DEV;
+import static com.darkweb.genesissearchengine.constants.constants.*;
 
 public class referenceWebsiteDataModel {
 
-    private String mReferenceWebsiteData = "null";
+    /* Local Variables */
+
+    private String mReferenceWebsiteData;
     private boolean mLoading = false;
+
+    /* Initializations */
 
     public referenceWebsiteDataModel(){
         mReferenceWebsiteData = status.sReferenceWebsites;
     }
+
+    /* Helper Methods */
 
     private void onLoad(Context pContext){
         if(!mLoading){
@@ -63,6 +65,8 @@ public class referenceWebsiteDataModel {
         }catch (Exception ignored){}
         return strings.GENERIC_EMPTY_SPACE;
     }
+
+    /* External Triggers */
 
     public Object onTrigger(dataEnums.eReferenceWebsiteCommands p_commands, List<Object> pData){
         if(p_commands == dataEnums.eReferenceWebsiteCommands.M_LOAD){

@@ -11,19 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
-import com.darkweb.genesissearchengine.constants.sql;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.helperManager.theme;
+import com.darkweb.genesissearchengine.appManager.activityThemeManager;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -34,6 +32,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static com.darkweb.genesissearchengine.constants.sql.SQL_CLEAR_BOOKMARK;
+import static com.darkweb.genesissearchengine.constants.sql.SQL_CLEAR_HISTORY;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_DATA_CLEARED;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
@@ -60,7 +61,7 @@ public class settingClearController extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         if(newConfig.uiMode != getResources().getConfiguration().uiMode){
             activityContextManager.getInstance().onResetTheme();
-            theme.getInstance().onConfigurationChanged(this);
+            activityThemeManager.getInstance().onConfigurationChanged(this);
         }
 
     }
@@ -113,13 +114,13 @@ public class settingClearController extends AppCompatActivity {
         if(mCheckBoxList.get(1).isChecked()){
             mCheckBoxList.get(1).setChecked(false);
             mCheckBoxList.get(1).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
-            databaseController.getInstance().execSQL(sql.SQL_CLEAR_HISTORY,null);
+            dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_HISTORY,null));
             dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
         }
         if(mCheckBoxList.get(2).isChecked()){
             mCheckBoxList.get(2).setChecked(false);
             mCheckBoxList.get(2).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
-            databaseController.getInstance().execSQL(sql.SQL_CLEAR_BOOKMARK,null);
+            dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_BOOKMARK,null));
             dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,null);
         }
         if(mCheckBoxList.get(3).isChecked()){

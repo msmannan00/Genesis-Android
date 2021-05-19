@@ -40,6 +40,4 @@ class homeModel
             return mURL;
         }
     }
-
-
 }

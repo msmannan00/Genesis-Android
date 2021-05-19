@@ -14,11 +14,20 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.pluginManager.adPluginManager.adManager;
+import com.darkweb.genesissearchengine.pluginManager.analyticPluginManager.analyticManager;
+import com.darkweb.genesissearchengine.pluginManager.downloadPluginManager.downloadManager;
+import com.darkweb.genesissearchengine.pluginManager.langPluginManager.langManager;
+import com.darkweb.genesissearchengine.pluginManager.messagePluginManager.messageManager;
+import com.darkweb.genesissearchengine.pluginManager.notificationPluginManager.notifictionManager;
+import com.darkweb.genesissearchengine.pluginManager.orbotPluginManager.orbotManager;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
@@ -28,7 +37,7 @@ public class pluginController
     /*Plugin Instance*/
 
     private adManager mAdManager;
-    private com.darkweb.genesissearchengine.pluginManager.analyticManager mAnalyticsManager;
+    private com.darkweb.genesissearchengine.pluginManager.analyticPluginManager.analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
     private notifictionManager mNotificationManager;
     private activityContextManager mContextManager;
@@ -70,7 +79,7 @@ public class pluginController
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
         mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), status.sPaidStatus);
-        mAnalyticsManager = new com.darkweb.genesissearchengine.pluginManager.analyticManager(mHomeController,new analyticManager());
+        mAnalyticsManager = new analyticManager(mHomeController,new analyticCallback());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
         mDownloadManager = new downloadManager(mHomeController,new downloadCallback());
@@ -109,7 +118,7 @@ public class pluginController
 
 
     /*Analytics Manager*/
-    private class analyticManager implements eventObserver.eventListener{
+    private class analyticCallback implements eventObserver.eventListener{
         @Override
         public Object invokeObserver(List<Object> data, Object event_type) { return null; }
     }
@@ -205,10 +214,7 @@ public class pluginController
                 ((homeController)mHomeController.get()).onLoadURL(pData.get(0).toString());
             }
             else if(pEventType.equals(M_PANIC_RESET)){
-                new Handler().postDelayed(() ->
-                {
-                    activityContextManager.getInstance().getHomeController().panicExitInvoked();
-                }, 300);
+                new Handler().postDelayed(() -> activityContextManager.getInstance().getHomeController().panicExitInvoked(), 300);
             }
             else if(pEventType.equals(M_DOWNLOAD_SINGLE)){
                 if(pData.size()<3){

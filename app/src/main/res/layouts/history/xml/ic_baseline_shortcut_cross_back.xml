@@ -3,10 +3,11 @@
     <item>
         <shape android:shape="oval">
             <size android:width="10dp" android:height="10dp"/>
-            <padding android:bottom="4dp" android:top="4dp"
-                android:left="4dp" android:right="4dp"/>
+            <solid android:color="@color/holo_gray_light" />
+            <padding android:bottom="13.5dp" android:top="13.5dp"
+                android:left="13.5dp" android:right="13.5dp"/>
         </shape>
     </item>
-    <item android:drawable="@xml/ic_baseline_shortcut_cross">
+    <item android:drawable="@xml/ic_baseline_bin">
     </item>
 </layer-list>

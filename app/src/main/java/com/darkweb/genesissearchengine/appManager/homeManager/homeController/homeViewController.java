@@ -41,10 +41,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.colorAnimationReciever;
+import com.darkweb.genesissearchengine.libs.views.ColorAnimator;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.widget.progressBar.AnimatedProgressBar;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
@@ -69,7 +68,7 @@ class homeViewController
     /*ViewControllers*/
     private com.google.android.material.appbar.AppBarLayout mAppBar;
     private ConstraintLayout mWebviewContainer;
-    private AnimatedProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
     private editTextManager mSearchbar;
     private ConstraintLayout mSplashScreen;
     private TextView mLoadingText;
@@ -117,7 +116,7 @@ class homeViewController
     private Runnable mTabDialogRunnable = null;
     private boolean mIsTopBarExpanded = true;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, AnimatedProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo,ImageButton pPanicButtonLandscape){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo,ImageButton pPanicButtonLandscape){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -211,6 +210,7 @@ class homeViewController
                 mGenesisLogo.setLayoutParams(newLayoutParams);
             }
         });
+
     }
 
     @SuppressLint("WrongConstant")
@@ -409,7 +409,9 @@ class homeViewController
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                mVoiceInput.setVisibility(View.VISIBLE);
+                if(status.sSettingIsAppStarted){
+                    mVoiceInput.setVisibility(View.VISIBLE);
+                }
                 mVoiceInput.setClickable(true);
                 mVoiceInput.setFocusable(true);
             }, 0);
@@ -489,7 +491,7 @@ class homeViewController
 
     public void initStatusBarColor(boolean mInstant) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            colorAnimationReciever oneToTwo = new colorAnimationReciever(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
+            ColorAnimator oneToTwo = new ColorAnimator(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
             int mDelay = 1350;
             if(status.mThemeApplying || mInstant){
@@ -931,19 +933,16 @@ class homeViewController
         if(!mSearchbar.hasFocus() || pClearText || pBypassFocus){
             if(mSearchEngineBar.getVisibility() == View.GONE || pBypassFocus){
                 int delay = 0;
-                 handlerLocalUrl = url;
+                handlerLocalUrl = url;
 
                 if(searchBarUpdateHandler.hasMessages(100)){
-                    return;
+                    searchBarUpdateHandler.removeMessages(100);
                 }
 
                 searchBarUpdateHandler.sendEmptyMessage(100);
-                searchBarUpdateHandler.postDelayed(() ->
-                {
-                    searchBarUpdateHandler.removeMessages(100);
-                    triggerUpdateSearchBar(handlerLocalUrl,showProtocol, pClearText);
-                    mSearchbar.setTag(R.id.msearchbarProcessing,false);
-                }, delay);
+                searchBarUpdateHandler.removeMessages(100);
+                triggerUpdateSearchBar(handlerLocalUrl,showProtocol, pClearText);
+                mSearchbar.setTag(R.id.msearchbarProcessing,false);
             }
         }
     }
@@ -1214,6 +1213,10 @@ class homeViewController
     }
 
     void onProgressBarUpdate(int value, boolean mForced){
+
+        if(progressAnimator!=null){
+            progressAnimator.cancel();
+        }
         if(mSearchbar.getText().toString().equals("genesis.onion") && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
@@ -1225,16 +1228,24 @@ class homeViewController
 
         if(value != mProgressBar.getProgress()){
             if(value<=5 && value>0){
-                mProgressBar.setProgress(5);
+                setProgressAnimate(5,70);
             }else {
-                mProgressBar.setProgress(value);
+                setProgressAnimate(value,200);
             }
             if(value >= 100 || value<=0){
-                mProgressBar.animate().alpha(0).withEndAction(() -> mProgressBar.setProgress(0));
+                mProgressBar.animate().alpha(0).setStartDelay(200).withEndAction(() -> mProgressBar.setProgress(0));
             }else {
                 mProgressBar.setAlpha(1);
             }
         }
+    }
+
+    ObjectAnimator progressAnimator = null;
+    private void setProgressAnimate(int pValue, int pSpeed)
+    {
+        progressAnimator = ObjectAnimator.ofInt(mProgressBar, "progress", pValue);
+        progressAnimator.setDuration(pSpeed);
+        progressAnimator.start();
     }
 
     public void onNewTabAnimation(List<Object> data, Object e_type){

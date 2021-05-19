@@ -6,10 +6,12 @@ settingLogEnums
 settingLogModel
 settingLogViewController
 
-/* In Progress */
 orbotLogAdapter
 orbotLogController
 orbotLogEnums
 orbotLogModel
 orbotLogStatus
 orbotLogViewController
+
+/* In Progress */
+external Navigation

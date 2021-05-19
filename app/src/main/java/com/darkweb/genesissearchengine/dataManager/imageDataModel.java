@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.dataManager.models.imageManagerModel;
+import com.darkweb.genesissearchengine.dataManager.models.imageRowModel;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,16 +15,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_PROXY_SOCKS;
-import static com.darkweb.genesissearchengine.constants.enums.ImageQueueStatus.M_IMAGE_LOADED_SUCCESSFULLY;
-import static com.darkweb.genesissearchengine.constants.enums.ImageQueueStatus.M_IMAGE_LOADING_FAILED;
+
+import static com.darkweb.genesissearchengine.constants.constants.*;
+import static com.darkweb.genesissearchengine.constants.enums.ImageQueueStatus.*;
 
 @SuppressLint("CommitPrefEdits")
 class imageDataModel
 {
-    private Map<String, imageManagerModel> mImageCache;
+
+    /* Local Variables */
+
+    private Map<String, imageRowModel> mImageCache;
     private Map<String, Integer> mParsedQueues;
     private ArrayList<String> mRequestQueue;
+
+    /* Initializations */
 
     public imageDataModel(){
         mImageCache = new HashMap<>();
@@ -34,6 +39,7 @@ class imageDataModel
         mBackgroundThread();
     }
 
+    /* Helper Methods */
 
     private void onRequestImage(String mURL){
         String mCraftedURL = helperMethod.completeURL(helperMethod.getDomainName(mURL))+"/favicon.ico";
@@ -61,10 +67,10 @@ class imageDataModel
                             mParsedQueues.put(mRequestQueue.get(0), enums.ImageQueueStatus.M_IMAGE_LOADING);
                             Bitmap mBitmap = getBitmapFromURL(mRequestQueue.get(0));
                             if(mBitmap==null){
-                                mParsedQueues.put(mRequestQueue.get(0), enums.ImageQueueStatus.M_IMAGE_LOADING_FAILED);
+                                mParsedQueues.put(mRequestQueue.get(0), M_IMAGE_LOADING_FAILED);
                             }else {
                                 mParsedQueues.put(mRequestQueue.get(0), M_IMAGE_LOADED_SUCCESSFULLY);
-                                mImageCache.put(mRequestQueue.get(0), new imageManagerModel(helperMethod.createRandomID(), "",mRequestQueue.get(0),mBitmap));
+                                mImageCache.put(mRequestQueue.get(0), new imageRowModel(helperMethod.createRandomID(), "",mRequestQueue.get(0),mBitmap));
                             }
                             mRequestQueue.remove(0);
                         }
@@ -93,7 +99,8 @@ class imageDataModel
         }
     }
 
-    /*List Suggestion*/
+    /* External Triggers */
+
     public Object onTrigger(dataEnums.eImageCommands pCommands, List<Object> pData){
 
         if(pCommands.equals(dataEnums.eImageCommands.M_REQUEST_IMAGE_URL)){

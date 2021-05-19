@@ -41,4 +41,9 @@ public class enums
         public static final int VERTICAL = 1;
     }
 
+    public static class WidgetCommands {
+        public static final String OPEN_APPLICATION = "mOpenApplication";
+        public static final String OPEN_VOICE = "mOpenVoice";
+    }
+
 }

@@ -1,21 +1,28 @@
 package com.darkweb.genesissearchengine.dataManager;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
 public class preferenceDataModel {
 
+    /* Local Variables */
+
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor mEdit;
 
+    /* Initializations */
+
+    @SuppressLint("CommitPrefEdits")
     public preferenceDataModel(AppCompatActivity pAppContext){
         mPrefs = PreferenceManager.getDefaultSharedPreferences(pAppContext);
         mEdit = mPrefs.edit();
     }
+
+    /* Helper Methods */
 
     void clearPrefs(){
         mEdit.clear();
@@ -50,6 +57,8 @@ public class preferenceDataModel {
     int getFloat(String pValueKey, int pValueDefault){
         return mPrefs.getInt(pValueKey, pValueDefault);
     }
+
+    /* External Triggers */
 
     public Object onTrigger(dataEnums.ePreferencesCommands pCommands, List<Object> pData){
         if(pCommands == dataEnums.ePreferencesCommands.M_GET_BOOL){

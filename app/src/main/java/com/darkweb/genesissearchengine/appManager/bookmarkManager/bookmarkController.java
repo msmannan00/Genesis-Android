@@ -23,19 +23,18 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.databaseManager.databaseController;
+import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
-import com.darkweb.genesissearchengine.constants.sql;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.helperManager.theme;
+import com.darkweb.genesissearchengine.appManager.activityThemeManager;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -45,6 +44,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.darkweb.genesissearchengine.constants.sql.SQL_CLEAR_BOOKMARK;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_BOOKMARK;
 
 
@@ -89,7 +89,7 @@ public class bookmarkController extends AppCompatActivity
 
         if(newConfig.uiMode != getResources().getConfiguration().uiMode){
             activityContextManager.getInstance().onResetTheme();
-            theme.getInstance().onConfigurationChanged(this);
+            activityThemeManager.getInstance().onConfigurationChanged(this);
         }
 
     }
@@ -319,7 +319,7 @@ public class bookmarkController extends AppCompatActivity
         mbookmarkModel.clearList();
         ((bookmarkAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).invokeFilter(true );
         mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_CLEAR_LIST, null);
-        databaseController.getInstance().execSQL(sql.SQL_CLEAR_BOOKMARK,null);
+        dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_BOOKMARK,null));
         mRecycleView.setAlpha(0);
     }
 
@@ -365,7 +365,7 @@ public class bookmarkController extends AppCompatActivity
                 mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mbookmarkModel.getList().size(),300));
             }
             else if(e_type.equals(enums.etype.remove_from_database)){
-                databaseController.getInstance().deleteFromList((int)data.get(0),strings.HISTORY_TITLE);
+                dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_DELETE_FROM_HISTORY, Arrays.asList(data.get(0),strings.HISTORY_TITLE));
             }
             else if(e_type.equals(enums.etype.on_verify_selected_url_menu)){
                 mbookmarkViewController.onTrigger(M_VERTIFY_SELECTION_MENU, data);

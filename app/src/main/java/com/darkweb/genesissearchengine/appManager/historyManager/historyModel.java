@@ -1,5 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.historyManager;
 
+import com.darkweb.genesissearchengine.dataManager.models.historyRowModel;
+
 import java.util.ArrayList;
 
 class historyModel

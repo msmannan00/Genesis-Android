@@ -14,7 +14,7 @@
     <string name="GENERAL_LOADING" translatable="true">Online Freedom</string>
     <string name="GENERAL_RELOAD" translatable="true">Reload</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
-    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.provider.dev</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.production.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
     <string name="GENERAL_HIDDEN_WEB" translatable="false">Search the web ...</string>
 

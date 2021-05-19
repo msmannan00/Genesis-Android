@@ -34,11 +34,11 @@ import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.internalFileDownloadManager;
-import com.darkweb.genesissearchengine.helperManager.downloadFileService;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.helperManager.trueTime;
+import com.darkweb.genesissearchengine.libs.trueTime.trueTime;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import org.json.JSONObject;
 import org.mozilla.gecko.util.ThreadUtils;
@@ -58,6 +58,7 @@ import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -201,7 +202,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if(!url.equals("about:blank") && !url.equals("about:config"))
             {
                 mProgress = 5;
-                event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update);
+                onProgressStart();
             }
             m_current_url_id = -1;
         }
@@ -290,8 +291,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             isPageLoading = true;
             if(!var2.equals("about:blank") && !mCurrentTitle.equals("loading")){
                 mProgress = 5;
-                event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update);
-                //mTheme = null;
+                mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
                 mThemeChanged = false;
             }
         }
@@ -327,20 +327,31 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         if(!mFullScreen){
             mProgress = progress;
 
-            if(progress==100){
-                if(!mIsProgressBarChanging){
-                    mIsProgressBarChanging = true;
-                    mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
-                    event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
-                }
-            }else {
+            if(progress<=20) {
                 mIsProgressBarChanging = false;
-                mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
+                mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
+            }else {
+                if(progress==100){
+                    if(!mIsProgressBarChanging){
+                        mIsProgressBarChanging = true;
+                        mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
+                        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
+                    }
+                }else {
+                    mIsProgressBarChanging = false;
+                    mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
+                }
             }
         }
 
         if(progress>=100){
             isPageLoading = false;
+        }
+    }
+
+    public void onProgressStart(){
+        if(!getCurrentURL().equals("about:blank") && !getCurrentURL().contains("genesishiddentechnologies.com") && !wasPreviousErrorPage() && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+            mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
         }
     }
 
@@ -491,9 +502,12 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             checkApplicationRate();
 
             /* Its Absence causes delay on first launch*/
+
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+
             if(!mCurrentURL.contains("genesishiddentechnologies.com")){
                 mProgress = 5;
-                event.invokeObserver(Arrays.asList(5, mSessionID, mCurrentURL), enums.etype.progress_update_forced);
+                onProgressStart();
             }
 
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
@@ -528,7 +542,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
         if(status.sSettingIsAppStarted){
-            pageErrorHandler handler = new pageErrorHandler();
+            errorHandler handler = new errorHandler();
             mProgress = 0;
             mPreviousErrorPage = true;
             event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
@@ -545,7 +559,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
 
             }
 
-            return GeckoResult.fromValue("data:text/html," + handler.loadErrorPage(var3.category, var3.code,mContext.get(),var2, mResourceURL));
+            return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2, mResourceURL));
         }
         return null;
     }
@@ -718,7 +732,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     {
         if(mDownloadManager.getDownloadURL()!=null && mDownloadManager.getDownloadFile()!=null){
             if(!createAndSaveFileFromBase64Url(mDownloadManager.getDownloadURL().toString())){
-                mContext.get().startService(downloadFileService.getDownloadService(mContext.get().getApplicationContext(), mDownloadManager.getDownloadURL()+"__"+mDownloadManager.getDownloadFile(), Environment.DIRECTORY_DOWNLOADS));
+                pluginController.getInstance().onDownloadInvoke(Arrays.asList(mDownloadManager.getDownloadURL()+"__"+mDownloadManager.getDownloadFile(), Environment.DIRECTORY_DOWNLOADS), pluginEnums.eDownloadManager.M_START_SERVICE);
             }
         }
     }
@@ -727,7 +741,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
     {
         if(downloadURL!=null && downloadFile!=null){
             if(!createAndSaveFileFromBase64Url(downloadURL.toString())){
-                mContext.get().startService(downloadFileService.getDownloadService(mContext.get().getApplicationContext(), downloadURL + "__" + downloadFile, Environment.DIRECTORY_DOWNLOADS));
+                pluginController.getInstance().onDownloadInvoke(Arrays.asList(downloadURL + "__" + downloadFile, Environment.DIRECTORY_DOWNLOADS), pluginEnums.eDownloadManager.M_START_SERVICE);
             }
         }
     }
@@ -775,7 +789,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             String filename;
 
             if(url.startsWith("blob")){
-                loadUri(internalFileDownloadManager.getBase64StringFromBlobUrl(url));
+                loadUri((String) pluginController.getInstance().onDownloadInvoke(Collections.singletonList(url), pluginEnums.eDownloadManager.M_DOWNLOAD_BLOB));
                 return true;
             }
 

@@ -19,7 +19,7 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.helperManager.theme;
+import com.darkweb.genesissearchengine.appManager.activityThemeManager;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -66,7 +66,7 @@ public class settingGeneralController extends AppCompatActivity {
         if(!mIsThemeChanging){
             if(newConfig.uiMode != getResources().getConfiguration().uiMode){
                 activityContextManager.getInstance().onResetTheme();
-                theme.getInstance().onConfigurationChanged(this);
+                activityThemeManager.getInstance().onConfigurationChanged(this);
             }
         }
 

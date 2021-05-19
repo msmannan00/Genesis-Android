@@ -45,7 +45,7 @@
             android:name="com.darkweb.genesissearchengine.appManager.proxyStatusManager.proxyStatusController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" />
         <activity
-            android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController"
+            android:name="com.darkweb.genesissearchengine.appManager.settingManager.settingHomeManager.settingHomeController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:label="@string/SETTING_HEADER"
             android:launchMode="singleTop"
@@ -145,10 +145,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts"
+        <activity android:name="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController"
             android:launchMode="singleTop"/>
 
-        <activity android:name="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalNavigationController"
+        <activity android:name="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalURLNavigationContoller"
             android:launchMode="singleTask"
             >
             <intent-filter>
@@ -194,27 +194,27 @@
             android:value="be76c64dae2519d4ab8daaed88298da14c7c294f" />
 
         <!-- Live Build -->
-        <!-- <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9340927969469822~8113004486" /> -->
-
-        <!-- Development Build -->
         <!-- --> <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6985886044951738~4177628900" />
+            android:value="ca-app-pub-9340927969469822~8113004486" />
+
+        <!-- Development Build -->
+        <!-- <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6985886044951738~4177628900" /> -->
 
         <service
-            android:name="com.darkweb.genesissearchengine.helperManager.downloadFileService"
+            android:name="com.darkweb.genesissearchengine.pluginManager.downloadPluginManager.downloadService"
             android:enabled="true"
             android:exported="false"
             android:stopWithTask="true" />
         <service
-            android:name="com.darkweb.genesissearchengine.helperManager.clearAllRecentServices"
+            android:name="com.darkweb.genesissearchengine.appManager.activityStateManager"
             android:stopWithTask="true" />
 
-        <receiver android:name="com.darkweb.genesissearchengine.helperManager.userEngagementNotification" />
+        <receiver android:name="com.darkweb.genesissearchengine.pluginManager.notificationPluginManager.localEngagementManager" />
         <receiver
-            android:name="com.darkweb.genesissearchengine.helperManager.downloadNotification"
+            android:name="com.darkweb.genesissearchengine.pluginManager.pluginReciever.downloadNotificationReciever"
             android:exported="false">
             <intent-filter>
                 <action android:name="Download_Cancelled" />
@@ -224,7 +224,7 @@
         <!-- Permissions File Provider Live
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.darkweb.genesissearchengine.provider.dev"
+            android:authorities="com.darkweb.genesissearchengine.production.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -233,15 +233,15 @@
         </provider>
 
         <provider
-            android:authorities="com.darkweb.genesissearchengine.dev.provider"
-            android:name="com.darkweb.genesissearchengine.clientauth.ClientAuthContentProvider"
+            android:authorities="com.darkweb.genesissearchengine.production.provider"
+            android:name="com.darkweb.genesissearchengine.libs.clientauth.ClientAuthContentProvider"
             android:exported="false"/>
         -->
 
         <!-- Permissions File Provider Dev -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.darkweb.genesissearchengine.provider.dev"
+            android:authorities="com.darkweb.genesissearchengine.production.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -250,8 +250,8 @@
         </provider>
 
         <provider
-            android:authorities="com.darkweb.genesissearchengine.provider.dev"
-            android:name="com.darkweb.genesissearchengine.clientauth.ClientAuthContentProvider"
+            android:authorities="com.darkweb.genesissearchengine.production.provider"
+            android:name="com.darkweb.genesissearchengine.libs.clientauth.ClientAuthContentProvider"
             android:exported="false"/>
 
         <provider

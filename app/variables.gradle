@@ -1,6 +1,6 @@
 /* Version */
 project.ext.vname = 'Build | Dark-Origin 1.0'
-project.ext.vcode = 35
+project.ext.vcode = 40
 project.ext.buildType = 'release'
 
 /* dimension */
@@ -33,7 +33,7 @@ project.ext.min_sdk_version = 21
 project.ext.target_sdk_version = 30
 project.ext.build_tool_version = '30.0.3'
 project.ext.ndk_version = '21.4.7075529'
-project.ext.application_id = "com.darkweb.genesissearchengine.dev"
+project.ext.application_id = "com.darkweb.genesissearchengine.production"
 project.ext.debugSymbolLevel = 'FULL'
 
 /* Splits */

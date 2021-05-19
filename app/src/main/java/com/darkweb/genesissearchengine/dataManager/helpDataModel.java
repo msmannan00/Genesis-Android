@@ -7,11 +7,17 @@ import java.util.List;
 @SuppressLint("CommitPrefEdits")
 class helpDataModel
 {
+    /* Local Variables */
+
     private ArrayList<helpDataModel> mHelpListModel;
+
+    /* Initializations */
 
     helpDataModel(){
         mHelpListModel = new ArrayList<>();
     }
+
+    /* Helper Methods */
 
     ArrayList<helpDataModel> getHelpModel(){
         return mHelpListModel;
@@ -22,10 +28,8 @@ class helpDataModel
         mHelpListModel.addAll(pHelpListModel);
     }
 
-    /*List Tabs*/
+    /* External Triggers */
 
-
-    /*List Suggestion*/
     public Object onTrigger(dataEnums.eHelpCommands pCommands, List<Object> pData){
         if(pCommands.equals(dataEnums.eHelpCommands.M_GET_HELP)){
             return getHelpModel();

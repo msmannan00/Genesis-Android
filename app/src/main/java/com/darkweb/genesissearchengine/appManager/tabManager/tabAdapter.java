@@ -24,7 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.helperManager.TopCropImageView;
+import com.darkweb.genesissearchengine.dataManager.models.tabRowModel;
+import com.darkweb.genesissearchengine.libs.views.ThumbnailCrop;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -288,7 +289,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         TextView mDate;
         ImageView mLoadSession;
         ImageButton mRemoveRow;
-        TopCropImageView mWebThumbnail;
+        ThumbnailCrop mWebThumbnail;
         FrameLayout mSelectedView;
         FrameLayout mItemSelectionMenu;
         Button mItemSelectionMenuButton;

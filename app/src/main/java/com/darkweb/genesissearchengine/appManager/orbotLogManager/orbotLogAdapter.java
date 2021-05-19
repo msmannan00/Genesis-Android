@@ -71,7 +71,7 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_LOG_DUCKDUCK + mModelList.get(this.getLayoutPosition()).getLog()));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_LOG_DUCKDUCK + Uri.encode(" " + mModelList.get(this.getLayoutPosition()).getLog())));
             intent.putExtra(SearchManager.QUERY, mDescription.getText());
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             activityContextManager.getInstance().getHomeController().startActivity(intent);

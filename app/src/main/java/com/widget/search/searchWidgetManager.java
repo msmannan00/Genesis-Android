@@ -3,27 +3,28 @@ package com.widget.search;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.appwidget.AppWidgetProviderInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
-
-import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
+
+import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_WIDGET_NAME;
 
 public class searchWidgetManager extends AppWidgetProvider {
 
-    private static final String SHARED_PREF_FILE = "com.example.android.appwidgetsample";
+    /* Local Variables */
+
+    private static final String SHARED_PREF_FILE = CONST_WIDGET_NAME;
     private static final String COUNT_KEY = "count";
     private static int mCurrentWidth = -1;
+
+    /* Navigator Initializations */
 
     private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
@@ -59,57 +60,72 @@ public class searchWidgetManager extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
 
         String action = intent.getAction();
-        if(action.equals("mOpenApplication")){
-            status.sWidgetResponse = enums.WidgetResponse.SEARCHBAR;
-            Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
-            launchIntent.putExtra("mOpenApplication",true);
-            context.startActivity(launchIntent);
-        }
-        else if(action.equals("mOpenVoice")){
-            status.sWidgetResponse = enums.WidgetResponse.VOICE;
-            Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.darkweb.genesissearchengine");
-            launchIntent.putExtra("mOpenApplication",true);
-            context.startActivity(launchIntent);
-        }
-        else if (AppWidgetManager.ACTION_APPWIDGET_UPDATE.equals(action)) {
-            Bundle extras = intent.getExtras();
-            if (extras != null) {
-                int[] appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
-                if (appWidgetIds != null && appWidgetIds.length > 0) {
-                    this.onUpdate(context, AppWidgetManager.getInstance(context), appWidgetIds);
+        switch (action) {
+            case enums.WidgetCommands.OPEN_APPLICATION: {
+                status.sWidgetResponse = enums.WidgetResponse.SEARCHBAR;
+                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
+                launchIntent.putExtra(enums.WidgetCommands.OPEN_APPLICATION, true);
+                context.startActivity(launchIntent);
+                break;
+            }
+            case enums.WidgetCommands.OPEN_VOICE: {
+                status.sWidgetResponse = enums.WidgetResponse.VOICE;
+                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
+                launchIntent.putExtra(enums.WidgetCommands.OPEN_APPLICATION, true);
+                context.startActivity(launchIntent);
+                break;
+            }
+            case AppWidgetManager.ACTION_APPWIDGET_UPDATE: {
+                Bundle extras = intent.getExtras();
+                if (extras != null) {
+                    int[] appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+                    if (appWidgetIds != null && appWidgetIds.length > 0) {
+                        this.onUpdate(context, AppWidgetManager.getInstance(context), appWidgetIds);
+                    }
                 }
+                break;
             }
-        } else if (AppWidgetManager.ACTION_APPWIDGET_DELETED.equals(action)) {
-            Bundle extras = intent.getExtras();
-            if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
-                final int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
-                this.onDeleted(context, new int[] { appWidgetId });
-            }
-        } else if (AppWidgetManager.ACTION_APPWIDGET_OPTIONS_CHANGED.equals(action)) {
-            Bundle extras = intent.getExtras();
-            if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)
-                    && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS)) {
-                int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
-                Bundle widgetExtras = extras.getBundle(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
-                this.onAppWidgetOptionsChanged(context, AppWidgetManager.getInstance(context),
-                        appWidgetId, widgetExtras);
-            }
-        } else if (AppWidgetManager.ACTION_APPWIDGET_ENABLED.equals(action)) {
-            this.onEnabled(context);
-        } else if (AppWidgetManager.ACTION_APPWIDGET_DISABLED.equals(action)) {
-            this.onDisabled(context);
-        } else if (AppWidgetManager.ACTION_APPWIDGET_RESTORED.equals(action)) {
-            Bundle extras = intent.getExtras();
-            if (extras != null) {
-                int[] oldIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_OLD_IDS);
-                int[] newIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
-                if (oldIds != null && oldIds.length > 0) {
-                    this.onRestored(context, oldIds, newIds);
-                    this.onUpdate(context, AppWidgetManager.getInstance(context), newIds);
+            case AppWidgetManager.ACTION_APPWIDGET_DELETED: {
+                Bundle extras = intent.getExtras();
+                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
+                    final int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
+                    this.onDeleted(context, new int[]{appWidgetId});
                 }
+                break;
+            }
+            case AppWidgetManager.ACTION_APPWIDGET_OPTIONS_CHANGED: {
+                Bundle extras = intent.getExtras();
+                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)
+                        && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS)) {
+                    int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
+                    Bundle widgetExtras = extras.getBundle(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
+                    this.onAppWidgetOptionsChanged(context, AppWidgetManager.getInstance(context),
+                            appWidgetId, widgetExtras);
+                }
+                break;
+            }
+            case AppWidgetManager.ACTION_APPWIDGET_ENABLED:
+                this.onEnabled(context);
+                break;
+            case AppWidgetManager.ACTION_APPWIDGET_DISABLED:
+                this.onDisabled(context);
+                break;
+            case AppWidgetManager.ACTION_APPWIDGET_RESTORED: {
+                Bundle extras = intent.getExtras();
+                if (extras != null) {
+                    int[] oldIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_OLD_IDS);
+                    int[] newIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+                    if (oldIds != null && oldIds.length > 0) {
+                        this.onRestored(context, oldIds, newIds);
+                        this.onUpdate(context, AppWidgetManager.getInstance(context), newIds);
+                    }
+                }
+                break;
             }
         }
     }
+
+    /* Local Overrides */
 
     @Override
     public void onAppWidgetOptionsChanged (Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle widgetInfo) {
@@ -118,10 +134,6 @@ public class searchWidgetManager extends AppWidgetProvider {
         int[] appWidgetIds = new int[1];
         appWidgetIds[0] = appWidgetId;
         onUpdate(context, appWidgetManager, appWidgetIds);
-    }
-
-    private int getColsNum (int size) {
-        return (int) Math.floor ((size - 30) / 70);
     }
 
     @Override
@@ -141,4 +153,11 @@ public class searchWidgetManager extends AppWidgetProvider {
             }
         }
     }
+
+    /* Helper Methods */
+
+    private int getColsNum (int size) {
+        return (int) Math.floor ((size - 30) / 70);
+    }
+
 }

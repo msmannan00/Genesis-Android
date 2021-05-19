@@ -1,5 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.bookmarkManager;
 
+import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
+
 import java.util.ArrayList;
 
 class bookmarkModel

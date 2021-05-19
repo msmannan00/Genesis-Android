@@ -3,7 +3,6 @@ package com.darkweb.genesissearchengine.appManager.orbotManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,10 +17,9 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
-import com.darkweb.genesissearchengine.helperManager.SimpleGestureFilter;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.helperManager.theme;
+import com.darkweb.genesissearchengine.appManager.activityThemeManager;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -39,7 +37,6 @@ public class orbotController extends AppCompatActivity {
     private SwitchMaterial mBridgeSwitch;
     private SwitchMaterial mVpnSwitch;
     private LinearLayout mCustomizableBridgeMenu;
-    private GestureDetector mSwipeDirectionDetector;
 
     /* INITIALIZATIONS */
 
@@ -65,7 +62,7 @@ public class orbotController extends AppCompatActivity {
 
         if(newConfig.uiMode != getResources().getConfiguration().uiMode){
             activityContextManager.getInstance().onResetTheme();
-            theme.getInstance().onConfigurationChanged(this);
+            activityThemeManager.getInstance().onConfigurationChanged(this);
         }
 
         super.onConfigurationChanged(newConfig);
@@ -88,16 +85,6 @@ public class orbotController extends AppCompatActivity {
     /* LISTENERS */
 
     private void onInitListener(){
-        mSwipeDirectionDetector=new GestureDetector(this,new SimpleGestureFilter(){
-
-            @Override
-            public boolean onSwipe(Direction direction) {
-                if (direction==Direction.left){
-                    onClose(null);
-                }
-                return true;
-            }
-        });
     }
 
     public class orbotModelCallback implements eventObserver.eventListener{
@@ -160,16 +147,6 @@ public class orbotController extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         onClose(null);
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if(inSignatureArea(event)){
-            try{
-                mSwipeDirectionDetector.onTouchEvent(event);
-            }catch (Exception ignored){ }
-        }
-        return super.dispatchTouchEvent(event);
     }
 
     public boolean inSignatureArea(MotionEvent ev) {

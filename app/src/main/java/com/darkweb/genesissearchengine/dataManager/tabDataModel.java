@@ -4,28 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
-import androidx.annotation.NonNull;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.databaseManager.databaseController;
 import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
-import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
+import com.darkweb.genesissearchengine.dataManager.models.tabRowModel;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
+import com.darkweb.genesissearchengine.eventObserver;
 import org.mozilla.geckoview.GeckoResult;
-import org.mozilla.geckoview.GeckoSession;
-import org.mozilla.geckoview.GeckoView;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -33,15 +25,26 @@ import java.util.Locale;
 @SuppressLint("CommitPrefEdits")
 class tabDataModel
 {
-    private ArrayList<tabRowModel> mTabs = new ArrayList<>();
-    ArrayList<tabRowModel> getTab(){
-        return mTabs;
+
+    /* Local Variables */
+
+    private eventObserver.eventListener mExternalEvents;
+
+    /* Initializations */
+
+    public tabDataModel(eventObserver.eventListener pExternalEvents){
+        mExternalEvents = pExternalEvents;
     }
 
-    /*List Tabs*/
-
+    private ArrayList<tabRowModel> mTabs = new ArrayList<>();
     void initializeTab(ArrayList<tabRowModel> pTabMdel){
         mTabs.addAll(pTabMdel);
+    }
+
+    /* Helper Methods */
+
+    ArrayList<tabRowModel> getTab(){
+        return mTabs;
     }
 
     geckoSession getHomePage(){
@@ -76,7 +79,7 @@ class tabDataModel
                 return enums.AddTabCallback.TAB_ADDED;
             }
 
-            databaseController.getInstance().execSQL("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params);
+            mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
         }
         return enums.AddTabCallback.TAB_ADDED;
     }
@@ -95,7 +98,7 @@ class tabDataModel
             mTabs.remove(0);
         }
 
-        databaseController.getInstance().execSQL("DELETE FROM tab WHERE 1",null);
+        mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE 1",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
 
     }
 
@@ -115,7 +118,8 @@ class tabDataModel
                     break;
                 }
             }
-            databaseController.getInstance().execSQL("DELETE FROM tab WHERE mid='" + mID + "'",null);
+
+            mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + mID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
         }else {
             for(int counter = 0; counter< mTabs.size(); counter++){
                 if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
@@ -126,7 +130,7 @@ class tabDataModel
                     break;
                 }
             }
-            databaseController.getInstance().execSQL("DELETE FROM tab WHERE mid='" + pID + "'",null);
+            mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + pID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
         }
     }
 
@@ -137,7 +141,8 @@ class tabDataModel
                 if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
                 {
                     String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
-                    databaseController.getInstance().execSQL("UPDATE tab SET date = '" + m_date + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null);
+
+                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET date = '" + m_date + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                     mTabs.add(0,mTabs.remove(counter));
                     break;
                 }
@@ -154,7 +159,7 @@ class tabDataModel
                 if(mTabs.get(counter).getSession().getSessionID().equals(mSessionID))
                 {
 
-                    databaseController.getInstance().execSQL("UPDATE tab SET session = '" + mSessionState + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null);
+                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET session = '" + mSessionState + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                     mTabs.add(0,mTabs.remove(counter));
                     break;
                 }
@@ -184,7 +189,7 @@ class tabDataModel
                     return false;
                 }
 
-                databaseController.getInstance().execSQL("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabs.get(counter).getmId() +"','" + m_date + "',?,?,?);",params);
+                mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabs.get(counter).getmId() +"','" + m_date + "',?,?,?);",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                 return true;
             }
         }
@@ -220,39 +225,8 @@ class tabDataModel
         }
     }
 
-    @SuppressLint("HandlerLeak")
-    static Handler handler = new Handler()
-    {
-        @Override
-        public void dispatchMessage(@NonNull Message msg) {
-            super.dispatchMessage(msg);
-        }
-
-        @NonNull
-        @Override
-        public String getMessageName(@NonNull Message message) {
-            return super.getMessageName(message);
-        }
-
-        @Override
-        public boolean sendMessageAtTime(@NonNull Message msg, long uptimeMillis) {
-            return super.sendMessageAtTime(msg, uptimeMillis);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString();
-        }
-
-        @Override
-        public void handleMessage(Message msg)
-        {
-            Log.i("FUCK","FUCK");
-        }
-    };
-
     // int isLoading = 0;
-    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, GeckoView pGeckoView, boolean pOpenTabView){
+    public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, boolean pOpenTabView){
 
         new Thread(){
             public void run(){
@@ -260,7 +234,6 @@ class tabDataModel
                     for(int counter = 0; counter< mTabs.size(); counter++) {
                         int finalCounter = counter;
                         if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID)) {
-                            GeckoResult<Bitmap> mResult = pBitmapManager.withHandler(handler);
                             Bitmap mBitmap = pBitmapManager.poll(0);
 
                             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -274,15 +247,13 @@ class tabDataModel
                                 mTabs.get(finalCounter).setmBitmap(decoded);
 
                                 if(pImageView!=null){
-                                    activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
-                                        pImageView.setImageBitmap(mBitmap);
-                                    });
+                                    activityContextManager.getInstance().getHomeController().runOnUiThread(() -> pImageView.setImageBitmap(mBitmap));
                                 }
 
                                 byte[] mThumbnail = out.toByteArray();
                                 ContentValues mContentValues = new  ContentValues();
                                 mContentValues.put("mThumbnail", mThumbnail);
-                                databaseController.getInstance().execTab("tab",mContentValues, mTabs.get(finalCounter).getmId());
+                                mExternalEvents.invokeObserver(Arrays.asList("tab",mContentValues, mTabs.get(finalCounter).getmId()), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                             }
                         }
                     }
@@ -360,7 +331,7 @@ class tabDataModel
             return getSuggestions((String) pData.get(0));
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_PIXEL){
-            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1),  (ImageView) pData.get(2), (GeckoView) pData.get(3), (Boolean) pData.get(4));
+            updatePixels((String)pData.get(0), (GeckoResult<Bitmap>)pData.get(1),  (ImageView) pData.get(2), (Boolean) pData.get(4));
         }
         else if(pCommands == dataEnums.eTabCommands.M_HOME_PAGE){
             return getHomePage();
@@ -368,5 +339,4 @@ class tabDataModel
 
         return null;
     }
-
 }

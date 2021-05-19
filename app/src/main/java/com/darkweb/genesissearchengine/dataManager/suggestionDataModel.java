@@ -4,14 +4,12 @@ import android.content.Context;
 import android.view.textservice.SentenceSuggestionsInfo;
 import android.view.textservice.SpellCheckerSession;
 import android.view.textservice.SuggestionsInfo;
-import android.view.textservice.TextServicesManager;
-import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkRowModel;
-import com.darkweb.genesissearchengine.appManager.historyManager.historyRowModel;
+
+import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
+import com.darkweb.genesissearchengine.dataManager.models.historyRowModel;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
-import org.mozilla.gecko.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +18,6 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
     /*Private Variables*/
 
-    private SpellCheckerSession mSpellCheckerSession;
-    private TextServicesManager mTextServicesManager;
     private ArrayList<historyRowModel> mHintListLocalCache;
     private ArrayList<historyRowModel> mCurrentList = new ArrayList<>();
 
@@ -29,16 +25,12 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
     /*Initializations*/
 
     public suggestionDataModel(Context mContext){
-        mTextServicesManager = (TextServicesManager) mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE);
-        mSpellCheckerSession = mTextServicesManager.newSpellCheckerSession(null, null, this, true);
         mHintListLocalCache = initSuggestions();
     }
 
     /*Helper Methods*/
 
-
-
-    private ArrayList<historyRowModel> getDefaultSuggestionsOnStart(String pQuery, int mSize, ArrayList<String> mDuplicationHandler, boolean pDefaultHostChaned){
+    private ArrayList<historyRowModel> getDefaultSuggestionsOnStart(String pQuery){
 
         if(pQuery.equals(strings.GENERIC_EMPTY_STR) || pQuery.trim().isEmpty()) {
             pQuery = "hidden web";
@@ -123,7 +115,6 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
 
         mCurrentList = new ArrayList<>();
-        mCurrentList.clear();
         String mQueryOriginal = pQuery;
         pQuery = pQuery.replace("+","%").replace(" ","+");
         ArrayList<historyRowModel> mHistory = pHistory;
@@ -354,7 +345,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
         else if(pCommands == dataEnums.eSuggestionCommands.M_GET_DEFAULT_SUGGESTION)
         {
-            return getDefaultSuggestionsOnStart((String) pData.get(0),0, null, false);
+            return getDefaultSuggestionsOnStart((String) pData.get(0));
         }
 
         return null;

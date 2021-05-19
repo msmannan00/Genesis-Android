@@ -2,9 +2,14 @@ package com.darkweb.genesissearchengine.dataManager;
 
 public class dataEnums
 {
-    /*Settings Manager*/
+    /* Triggers */
+
     public enum eHistoryCommands {
         M_GET_HISTORY, M_ADD_HISTORY, M_REMOVE_HISTORY, M_CLEAR_HISTORY,M_LOAD_MORE_HISTORY ,M_INITIALIZE_HISTORY, M_HISTORY_SIZE
+    }
+
+    public enum eSqlCipherCommands {
+        M_INIT, M_EXEC_SQL, M_SELECT_BOOKMARK, M_SELECT_HISTORY, M_SELECT_TABS, M_HISTORY_ID, M_DELETE_FROM_HISTORY
     }
 
     public enum eBookmarkCommands {
@@ -39,4 +44,17 @@ public class dataEnums
         M_GET_HELP, M_SET_HELP
     }
 
+    /* Callbacks */
+
+    public enum eHistoryCallbackCommands {
+        M_EXEC_SQL
+    }
+
+    public enum eTabCallbackCommands {
+        M_EXEC_SQL
+    }
+
+    public enum eBookmarkCallbackCommands {
+        M_EXEC_SQL
+    }
 }

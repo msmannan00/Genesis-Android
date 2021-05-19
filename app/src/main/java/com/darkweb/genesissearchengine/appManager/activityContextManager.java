@@ -9,9 +9,8 @@ import com.darkweb.genesissearchengine.appManager.historyManager.historyControll
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController;
-import com.darkweb.genesissearchengine.appManager.settingManager.settingHomePage.settingHomeController;
+import com.darkweb.genesissearchengine.appManager.settingManager.settingHomeManager.settingHomeController;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabController;
-import com.darkweb.genesissearchengine.helperManager.theme;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -174,7 +173,7 @@ public class activityContextManager
         for(int mCounter=0;mCounter<mStackList.size();mCounter++){
             try{
                 if(!mStackList.get(mCounter).get().isFinishing()){
-                    theme.getInstance().onConfigurationChanged(mStackList.get(mCounter).get());
+                    activityThemeManager.getInstance().onConfigurationChanged(mStackList.get(mCounter).get());
                 }
             }catch (Exception ignored){}
         }

@@ -2,10 +2,10 @@ package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
+import com.darkweb.genesissearchengine.dataManager.models.tabRowModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 class tabModel

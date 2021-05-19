@@ -1,9 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.homeManager.hintManager;
 
-import com.darkweb.genesissearchengine.appManager.tabManager.tabRowModel;
-
-import java.util.ArrayList;
-
 public class hintModel
 {
     /*Private Variables*/

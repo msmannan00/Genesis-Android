@@ -2,7 +2,7 @@
     android:startOffset="250">
     <alpha
         android:duration="350"
-        android:fromAlpha="1"
+        android:fromAlpha="0.4"
         android:interpolator="@android:anim/linear_interpolator"
         android:toAlpha="1.0" />
 </set>
