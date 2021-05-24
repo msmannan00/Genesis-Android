@@ -10,21 +10,19 @@ import android.content.Intent ;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
-
 import androidx.core.app.NotificationCompat;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.example.myapplication.R;
-
 import java.util.Random;
+import static com.darkweb.genesissearchengine.constants.constants.mUserEngagementNotificationID;
 
 public class localEngagementManager extends BroadcastReceiver {
 
 
     public void onReceive (Context context , Intent intent) {
         try{
-            final int NOTIFY_ID = status.mNotificationID;
+            final int NOTIFY_ID = mUserEngagementNotificationID;
             String pTitle = strings.NOTIFICATION_TITLE;
             String pBody = strings.NOTIFICATION_BODY[new Random().nextInt(strings.NOTIFICATION_BODY.length)];
 

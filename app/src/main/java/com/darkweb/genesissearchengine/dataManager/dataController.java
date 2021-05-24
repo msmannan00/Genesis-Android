@@ -125,6 +125,12 @@ public class dataController
         return mReferenceWebsiteDataModel.onTrigger(pCommands, null);
     }
 
+    /*Trigger Bridges*/
+
+    public Object invokeBridges(dataEnums.eBridgeWebsiteCommands pCommands, List<Object> pData){
+        return mBridgeWebsiteDataModel.onTrigger(pCommands, null);
+    }
+
     /*Trigger Preferences*/
 
     public Object invokePrefs(dataEnums.ePreferencesCommands pCommands, List<Object> pData){

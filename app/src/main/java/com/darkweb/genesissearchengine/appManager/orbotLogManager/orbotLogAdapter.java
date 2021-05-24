@@ -15,7 +15,7 @@ import com.darkweb.genesissearchengine.appManager.tabManager.tabEnums;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
-import org.torproject.android.service.wrapper.logRowModel;
+import org.torproject.android.proxy.wrapper.logRowModel;
 import java.util.ArrayList;
 import java.util.List;
 

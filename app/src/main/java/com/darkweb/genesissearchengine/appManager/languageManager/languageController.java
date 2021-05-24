@@ -154,7 +154,7 @@ public class languageController extends AppCompatActivity {
         getIntent().putExtra("activity_restarted",((LinearLayoutManager) Objects.requireNonNull(mRecycleView.getLayoutManager())).findFirstCompletelyVisibleItemPosition());
         helperMethod.restartActivity(getIntent(), this);
         overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_SET_LANGUAGE);
+        pluginController.getInstance().onLanguageInvoke(Arrays.asList(this, status.sSettingLanguage, status.sSettingLanguageRegion, status.sTheme), pluginEnums.eLangManager.M_SET_LANGUAGE);
 
         if(activityContextManager.getInstance().getSettingController()!=null && !activityContextManager.getInstance().getSettingController().isDestroyed()){
             activityContextManager.getInstance().getSettingController().onRedrawXML();
@@ -209,7 +209,7 @@ public class languageController extends AppCompatActivity {
                 mLanguageViewController.onTrigger(languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER, Collections.singletonList(true));
             }
             else if(e_type.equals(languageEnums.eLanguageAdapterCallback.M_SYSTEM_LANGUAGE_SUPPORT_INFO)){
-                return pluginController.getInstance().onLanguageInvoke(null, M_SUPPORTED_SYSTEM_LANGUAGE_INFO);
+                return pluginController.getInstance().onLanguageInvoke(Collections.singletonList(status.sSettingLanguage), M_SUPPORTED_SYSTEM_LANGUAGE_INFO);
             }
             return null;
         }

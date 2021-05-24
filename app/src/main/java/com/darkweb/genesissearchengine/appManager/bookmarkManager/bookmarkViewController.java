@@ -278,7 +278,7 @@ class bookmarkViewController
     }
 
     private void onLongPressMenu(View pView) {
-        mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.history_bookmark_menu);
+        mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.history_bookmark_menu, status.sSettingLanguageRegion);
     }
 
     private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {

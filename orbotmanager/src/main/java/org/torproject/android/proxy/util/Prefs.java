@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import org.torproject.android.proxy.OrbotConstants;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 
 import java.util.Locale;
 

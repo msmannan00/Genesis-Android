@@ -60,18 +60,16 @@
                         android:layout_weight="1"/>
 
                     <ImageView
-                        android:layout_width="47dp"
-                        android:layout_height="match_parent"
-                        android:padding="0dp"
-                        android:layout_marginEnd="0dp"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:paddingStart="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="6dp"
-                        android:paddingStart="7dp"
                         android:onClick="onOpenInfo"
                         android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_info"
                         app:tint="@color/c_icon_tint_light" />
+
                 </LinearLayout>
 
                 <!-- Title Header -->

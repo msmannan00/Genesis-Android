@@ -1,4 +1,4 @@
-package org.torproject.android.service.wrapper;
+package org.torproject.android.proxy.wrapper;
 
 public class logRowModel {
     /*Private Variables*/

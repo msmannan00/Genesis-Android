@@ -1,8 +1,6 @@
 package com.darkweb.genesissearchengine.pluginManager.analyticPluginManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.flurry.android.FlurryAgent;
@@ -14,17 +12,20 @@ public class analyticManager
     /*Private Variables*/
 
     private WeakReference<AppCompatActivity> mAppContext;
+    private boolean mIsDeveloperBuild;
 
     /*Initializations*/
 
-    public analyticManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent){
+    public analyticManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent, boolean pIsDeveloperBuild){
         this.mAppContext = pAppContext;
+        this.mIsDeveloperBuild = pIsDeveloperBuild;
+
         initialize();
     }
 
     private void initialize()
     {
-        if(status.sDeveloperBuild){
+        if(mIsDeveloperBuild){
             new FlurryAgent.Builder() .withLogEnabled(true) .build(mAppContext.get().getApplicationContext(), "4C4K4T5ND9RJKT4H47GQ");
         }else {
             new FlurryAgent.Builder() .withLogEnabled(true) .build(mAppContext.get().getApplicationContext(), "5RQYRV23928K6DXH8VWV");
@@ -43,6 +44,7 @@ public class analyticManager
     public void onTrigger(List<Object> pData, pluginEnums.eAnalyticManager pEventType) {
         if(pEventType.equals(pluginEnums.eAnalyticManager.M_LOG_EVENT))
         {
+
         }
     }
 }

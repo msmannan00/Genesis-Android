@@ -69,7 +69,7 @@ public class settingHomeController extends AppCompatActivity
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        if(activityThemeManager.getInstance().onInitTheme(this)){
+        if(activityThemeManager.getInstance().onInitTheme(this) && !status.mThemeApplying){
             activityContextManager.getInstance().onResetTheme();
         }
 

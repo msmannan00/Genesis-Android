@@ -128,12 +128,8 @@ public class settingAdvanceController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(mIsChanged){
-            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_UPDATE_PRIVACY);
-            activityContextManager.getInstance().getHomeController().initRuntimeSettings();
-        }
+        onClose(null);
         activityContextManager.getInstance().onRemoveStack(this);
-        finish();
     }
 
     /*UI Redirection*/
@@ -146,7 +142,7 @@ public class settingAdvanceController extends AppCompatActivity {
 
     public void onClose(View view){
         if(mIsChanged){
-            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_UPDATE_PRIVACY);
+            pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sShowImages, status.sClearOnExit), pluginEnums.eOrbotManager.M_UPDATE_PRIVACY);
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
         finish();

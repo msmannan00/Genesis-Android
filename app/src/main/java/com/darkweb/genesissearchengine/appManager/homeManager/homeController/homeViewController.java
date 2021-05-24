@@ -48,7 +48,7 @@ import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
 import org.mozilla.geckoview.GeckoView;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -493,7 +493,7 @@ class homeViewController
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ColorAnimator oneToTwo = new ColorAnimator(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-            int mDelay = 1350;
+            int mDelay = 500;
             if(status.mThemeApplying || mInstant){
                 mDelay = 0;
             }
@@ -503,8 +503,8 @@ class homeViewController
             animator.addUpdateListener(animation ->
             {
                 float v = (float) animation.getAnimatedValue();
-                mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
-                mContext.getWindow().setStatusBarColor(oneToTwo.with(v));
+                mSplashScreen.setAlpha(1-v);
+                mContext.getWindow().setStatusBarColor(oneToTwo.with(v*1f));
                 mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             });
             animator.addListener(new AnimatorListenerAdapter() {
@@ -526,7 +526,6 @@ class homeViewController
                     }
                 }
             });
-
             animator.start();
         }else {
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
@@ -651,8 +650,12 @@ class homeViewController
                 onClearSelections(false);
                 mGeckoView.requestFocus();
                 mProgressBarIndeterminate.animate().cancel();
-                mProgressBarIndeterminate.animate().setStartDelay(750).setDuration(250).alpha(0).withEndAction(() -> {
-                    mSplashScreen.animate().setDuration(250).setStartDelay(300).alpha(0).withEndAction(() -> {
+                mProgressBarIndeterminate.animate().setStartDelay(350).setDuration(250).alpha(0).withEndAction(() -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        initStatusBarColor(false);
+                    }
+
+                    mSplashScreen.animate().setDuration(0).setStartDelay(1000).alpha(0).withEndAction(() -> {
                         mProgressBarIndeterminate.setVisibility(View.GONE);
                         mSplashScreen.setClickable(false);
                         mSplashScreen.setFocusable(false);
@@ -671,9 +674,6 @@ class homeViewController
                 });
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    initStatusBarColor(false);
-                }
                 status.sSettingIsAppRestarting = true;
             }
         }
@@ -1161,7 +1161,7 @@ class homeViewController
 
         if(url.length()<=300){
             url = removeEndingSlash(url);
-            mSearchbar.setText(helperMethod.urlDesigner(url, mContext, mSearchbar.getCurrentTextColor()));
+            mSearchbar.setText(helperMethod.urlDesigner(url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme));
             mSearchbar.selectAll();
 
             if(isTextSelected){
@@ -1224,6 +1224,7 @@ class homeViewController
         }
 
         mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setAlpha(1);
         mProgressBar.animate().cancel();
 
         if(value != mProgressBar.getProgress()){
@@ -1234,8 +1235,6 @@ class homeViewController
             }
             if(value >= 100 || value<=0){
                 mProgressBar.animate().alpha(0).setStartDelay(200).withEndAction(() -> mProgressBar.setProgress(0));
-            }else {
-                mProgressBar.setAlpha(1);
             }
         }
     }

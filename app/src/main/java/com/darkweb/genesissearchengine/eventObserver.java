@@ -1,7 +1,5 @@
 package com.darkweb.genesissearchengine;
 
-import com.darkweb.genesissearchengine.constants.enums;
-
 import java.util.List;
 
 public class eventObserver

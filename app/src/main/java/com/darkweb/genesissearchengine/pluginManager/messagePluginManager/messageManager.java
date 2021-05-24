@@ -10,6 +10,7 @@ import android.graphics.drawable.InsetDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -19,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -260,6 +260,12 @@ public class messageManager
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
+    private void applicationCrashed()
+    {
+        initializeDialog(R.layout.application_crash, Gravity.BOTTOM);
+        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.setOnDismissListener(dialog -> onClearReference());
+    }
 
     private void openSecureConnectionPopup()
     {
@@ -327,11 +333,14 @@ public class messageManager
 
     private void onUpdateBridges()
     {
+        String mCustomBridge = (String) mEvent.invokeObserver(null, M_CUSTOM_BRIDGE);
+        String mBridgeType = (String) mEvent.invokeObserver(null, M_BRIDGE_TYPE);
+
         initializeDialog(R.layout.popup_update_bridges, Gravity.CENTER);
         mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-        if(!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4")){
-            ((EditText)mDialog.findViewById(R.id.pBridgeInput)).setText(status.sBridgeCustomBridge);
-            ((EditText)mDialog.findViewById(R.id.pBridgeType)).setText(status.sBridgeCustomType);
+        if(!mCustomBridge.equals("meek") && !mCustomBridge.equals("obfs4")){
+            ((EditText)mDialog.findViewById(R.id.pBridgeInput)).setText(mCustomBridge);
+            ((EditText)mDialog.findViewById(R.id.pBridgeType)).setText(mBridgeType);
         }
 
         mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
@@ -358,11 +367,41 @@ public class messageManager
             handler.postDelayed(runnable, 200);
         });
 
+        mDialog.findViewById(R.id.mClear).setOnClickListener(v -> {
+            EditText mBridges = mDialog.findViewById(R.id.pBridgeInput);
+            TextView mTextView = mDialog.findViewById(R.id.pDescriptionError);
+
+            mBridges.setText(strings.GENERIC_EMPTY_STR);
+            mTextView.animate().setDuration(250).alpha(0);
+        });
+
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
+            String mBridges = ((EditText)mDialog.findViewById(R.id.pBridgeInput)).getText().toString();
+
+            boolean mBridgeTypeExist = !mBridges.contains("obfs3") && !mBridges.contains("obfs4") && !mBridges.contains("fle") && !mBridges.contains("meek");
+            boolean mBridgeSize = mBridges.length()<10 || !mBridges.contains(".") || !mBridges.contains(" ");
+
+            if(mBridgeTypeExist || mBridgeSize){
+                TextView mTextView = mDialog.findViewById(R.id.pDescriptionError);
+                if(mTextView.getAlpha()==0 || mTextView.getAlpha()==1 || mTextView.getVisibility()!=View.VISIBLE){
+                    mTextView.setAlpha(0);
+
+                    mTextView.setVisibility(View.VISIBLE);
+                    mTextView.animate().setDuration(250).alpha(1);
+                    if(mBridgeTypeExist){
+                        mTextView.setText("➔  Invalid bridge string");
+                    }
+                    else if(mBridgeSize){
+                        mTextView.setText("➔  Invalid bridge type");
+                    }
+                }
+                return;
+            }
+
             mDialog.dismiss();
             mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             helperMethod.hideKeyboard(mContext);
-            mEvent.invokeObserver(Arrays.asList(((EditText)mDialog.findViewById(R.id.pBridgeInput)).getText().toString(), ((EditText)mDialog.findViewById(R.id.pBridgeType)).getText().toString()), M_SET_BRIDGES);
+            mEvent.invokeObserver(Arrays.asList(mBridges, ((EditText)mDialog.findViewById(R.id.pBridgeType)).getText().toString()), M_SET_BRIDGES);
         });
     }
 
@@ -673,6 +712,11 @@ public class messageManager
                 case M_DATA_CLEARED:
                     /*VERIFIED*/
                     dataClearedSuccessfully();
+                    break;
+
+                case M_APPLICATION_CRASH:
+                    /*VERIFIED*/
+                    applicationCrashed();
                     break;
 
                 case M_SECURE_CONNECTION:

@@ -11,7 +11,7 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 
 public class externalShortcutController extends AppCompatActivity {
 

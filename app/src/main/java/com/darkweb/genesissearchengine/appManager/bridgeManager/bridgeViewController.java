@@ -18,9 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
-import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.helperManager.sharedUIMethod;
 import com.example.myapplication.R;
 import java.util.List;
 
@@ -51,21 +51,7 @@ class bridgeViewController
     }
 
     private void initPostUI(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-            }
-        }
+        sharedUIMethod.updateStatusBar(mContext);
     }
 
     private void animateColor(TextView p_view, int p_from, int p_to, String p_command, int p_duration){
@@ -107,7 +93,7 @@ class bridgeViewController
         mCustomBridgeBlocker.setVisibility(View.GONE);
     }
 
-    private void initViews(String p_bridge, int p_duration, String pType){
+    private void initViews(String p_bridge, int p_duration){
         resetRadioButtons(p_duration);
         if(p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_OBFS4)){
             animateColor(mBridgeObfs, mBridgeObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
@@ -127,13 +113,13 @@ class bridgeViewController
             mCustomPort.setText(strings.GENERIC_EMPTY_STR);
         }else {
             onEnableCustomBridge();
-            mCustomPort.setText(("(Type) " + pType + " ➔ " + "(Config) "+p_bridge.replace("\n","")));
+            mCustomPort.setText(("(Config) ➔ "+p_bridge.replace("\n","")));
         }
     }
 
     public void onTrigger(bridgeEnums.eBridgeViewCommands p_commands, List<Object> p_data){
         if(p_commands == bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS){
-            initViews((String) p_data.get(0), (int)p_data.get(1), (String) p_data.get(2));
+            initViews((String) p_data.get(0), (int)p_data.get(1));
         }
         if(p_commands == bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE){
             onEnableCustomBridge();

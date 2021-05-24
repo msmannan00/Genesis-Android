@@ -77,7 +77,8 @@ import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessage
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
-public class geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSession.ScrollDelegate,GeckoSession.PermissionDelegate,GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate,GeckoSession.NavigationDelegate,GeckoSession.ContentDelegate
+public class
+geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSession.ScrollDelegate,GeckoSession.PermissionDelegate,GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate,GeckoSession.NavigationDelegate,GeckoSession.ContentDelegate
 {
     private eventObserver.eventListener event;
 
@@ -128,6 +129,7 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
         setScrollDelegate(this);
         mDownloadManager = new geckoDownloadManager();
         setPromptDelegate(new geckoPromptView(mContext));
+        setSelectionActionDelegate(new selectionActionDelegate(mContext, true));
     }
 
     public void onDestroy(){
@@ -408,12 +410,10 @@ public class geckoSession extends GeckoSession implements GeckoSession.MediaDele
             if(var2.equals("https://genesishiddentechnologies.com") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
                 if(var2.startsWith(CONST_GENESIS_URL_CACHED_DARK) && (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get()))){
                     isPageLoading = false;
-                    //stop();
                     event.invokeObserver(null, enums.etype.M_CHANGE_HOME_THEME);
                 }
                 else if(var2.startsWith(CONST_GENESIS_URL_CACHED) && (status.sTheme != enums.Theme.THEME_LIGHT && !helperMethod.isDayMode(mContext.get()))){
                     isPageLoading = false;
-                    //stop();
                     event.invokeObserver(null, enums.etype.M_CHANGE_HOME_THEME);
                 }
             }

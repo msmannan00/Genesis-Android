@@ -33,7 +33,7 @@ public class notifictionManager
 
     private void onNotificationClear(){
         NotificationManager notificationManager = (NotificationManager) mAppContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(status.mNotificationID);
+        notificationManager.cancel(mUserEngagementNotificationID);
     }
 
     private void onCreateUserEngagementNotification(int pDelay){

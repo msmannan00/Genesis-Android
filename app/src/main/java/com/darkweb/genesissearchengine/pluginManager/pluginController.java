@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangManager.M_ACTIVITY_CREATED;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangManager.M_RESUME;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
 
@@ -59,7 +61,7 @@ public class pluginController
     }
 
     public void preInitialize(homeController context){
-        mLangManager = new langManager(context,new langCallback(), new Locale(status.sSettingLanguage), status.mSystemLocale);
+        mLangManager = new langManager(context,new langCallback(), new Locale(status.sSettingLanguage), status.mSystemLocale, status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying);
     }
 
     public void initialize(){
@@ -79,7 +81,7 @@ public class pluginController
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
         mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), status.sPaidStatus);
-        mAnalyticsManager = new analyticManager(mHomeController,new analyticCallback());
+        mAnalyticsManager = new analyticManager(mHomeController,new analyticCallback(), status.sDeveloperBuild);
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
         mDownloadManager = new downloadManager(mHomeController,new downloadCallback());
@@ -187,6 +189,11 @@ public class pluginController
         if(mLangManager==null){
             return null;
         }
+
+        if(pEventType.equals(M_RESUME) || pEventType.equals(M_ACTIVITY_CREATED)){
+            return mLangManager.onTrigger(Arrays.asList(pData.get(0), status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying), pEventType);
+        }
+
         return mLangManager.onTrigger(pData, pEventType);
     }
 
@@ -194,6 +201,9 @@ public class pluginController
         @Override
         public Object invokeObserver(List<Object> data, Object event_type)
         {
+            if(event_type.equals(pluginEnums.eLangManager.M_UPDATE_LOCAL)){
+                status.mSystemLocale = (Locale)data.get(0);
+            }
             return null;
         }
     }
@@ -260,6 +270,12 @@ public class pluginController
             }
             else if(pEventType.equals(M_APP_RATED)){
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
+            }
+            else if(pEventType.equals(M_CUSTOM_BRIDGE)){
+                return status.sBridgeCustomBridge;
+            }
+            else if(pEventType.equals(M_BRIDGE_TYPE)){
+                return status.sBridgeCustomType;
             }
             else if(pEventType.equals(M_DOWNLOAD_FILE)){
                 ((homeController)mHomeController.get()).onDownloadFile();

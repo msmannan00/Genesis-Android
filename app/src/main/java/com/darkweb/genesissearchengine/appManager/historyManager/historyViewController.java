@@ -28,6 +28,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -268,7 +270,7 @@ class historyViewController
     }
 
     private void onLongPressMenu(View pView) {
-        mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.history_bookmark_menu);
+        mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.history_bookmark_menu, status.sSettingLanguageRegion);
     }
 
     private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {

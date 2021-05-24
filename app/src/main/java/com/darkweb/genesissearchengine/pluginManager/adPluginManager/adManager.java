@@ -80,9 +80,7 @@ public class adManager
 
                 @Override
                 public void onAdFailedToLoad(@NonNull LoadAdError var1) {
-                    Log.i("sadsa","");
                 }
-
             });
         }
     }

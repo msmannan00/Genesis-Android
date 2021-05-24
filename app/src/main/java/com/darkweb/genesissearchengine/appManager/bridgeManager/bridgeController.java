@@ -62,9 +62,8 @@ public class bridgeController extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if(activityThemeManager.getInstance().onInitTheme(this)){
             activityContextManager.getInstance().onResetTheme();
-            activityThemeManager.getInstance().onConfigurationChanged(this);
         }
 
         super.onConfigurationChanged(newConfig);
@@ -135,7 +134,7 @@ public class bridgeController extends AppCompatActivity {
     public void onUpdateBridges(String pBridge, String pType) {
         if(pBridge.length()>5){
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE, Arrays.asList(pBridge, pType));
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
         }else {
             if(status.sBridgeCustomBridge.equals("meek")){
                 mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);

@@ -60,9 +60,8 @@ public class orbotController extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
 
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if(activityThemeManager.getInstance().onInitTheme(this)){
             activityContextManager.getInstance().onResetTheme();
-            activityThemeManager.getInstance().onConfigurationChanged(this);
         }
 
         super.onConfigurationChanged(newConfig);
@@ -152,7 +151,6 @@ public class orbotController extends AppCompatActivity {
     public boolean inSignatureArea(MotionEvent ev) {
         float mEventY = ev.getY();
         float mEventX = ev.getX();
-        Log.i("FUCKSSSS", helperMethod.getScreenWidth(this)-ev.getX() + "----" + ev.getX());
         return mEventY>helperMethod.pxFromDp(500) || mEventX>helperMethod.getScreenWidth(this)-helperMethod.pxFromDp(80);
     }
 

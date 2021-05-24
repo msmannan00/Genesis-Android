@@ -17,8 +17,7 @@ public class status
     /*App Status*/
 
     public static boolean sPaidStatus = false;
-    public static boolean sDeveloperBuild = true;
-    public static int mNotificationID = 1001;
+    public static boolean sDeveloperBuild = false;
 
     /*Settings Status*/
     public static Locale mSystemLocale = null;

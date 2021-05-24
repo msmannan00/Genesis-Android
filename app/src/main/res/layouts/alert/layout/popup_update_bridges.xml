@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:paddingEnd="15dp"
             android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="@string/ALERT_UPDATE_BRIDGES"
             android:textAlignment="textStart"
             android:textColor="@color/c_text_setting_heading_v2"
@@ -38,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:alpha="0.6"
-            android:paddingEnd="15dp"
             android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="@string/ALERT_UPDATE_BRIDGES_INFO"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
@@ -49,20 +49,39 @@
             app:layout_constraintTop_toBottomOf="@+id/pHeader"
             tools:ignore="SmallSp" />
 
+        <TextView
+            android:id="@+id/pDescriptionError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:alpha="0.6"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="➔ Invalid Bridges ( Try Again )"
+            android:textAlignment="textStart"
+            android:textColor="@color/c_button_warning"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pBridgeType"
+            tools:ignore="SmallSp" />
+
         <EditText
             android:id="@+id/pBridgeInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="48dp"
             android:background="@xml/gx_generic_input"
-            android:ems="10"
             android:elevation="3dp"
-            android:hint="@string/ALERT_ADD_BRIDGES_HINT"
+            android:ems="10"
+            android:hint="@string/ALERT_ADD_BRIDGES_HINT_V1"
             android:importantForAutofill="no"
-            android:maxLines="1"
             android:inputType="text"
+            android:maxLines="1"
             android:padding="7dp"
             android:paddingStart="11dp"
             android:paddingEnd="8dp"
@@ -71,7 +90,7 @@
             android:textColorHint="@color/c_text_v2"
             android:textCursorDrawable="@xml/gx_search_cursor_state"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/pDivider"
+            app:layout_constraintEnd_toStartOf="@+id/mClear"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
@@ -82,10 +101,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
+            android:visibility="gone"
             android:background="@xml/gx_generic_input"
             android:elevation="3dp"
             android:ems="10"
-            android:hint="@string/ALERT_ADD_BRIDGES_TYPE_HINT"
+            android:hint="@string/ALERT_ADD_BRIDGES_TYPE_HINT_V1"
             android:importantForAutofill="no"
             android:inputType="text"
             android:maxLines="1"
@@ -101,15 +121,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
 
+        <ImageButton
+            android:id="@+id/mClear"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="4dp"
+            android:elevation="3dp"
+            android:background="@xml/hox_rounded_corner_splash"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:src="@xml/ic_baseline_cross"
+            app:layout_constraintBottom_toTopOf="@+id/pDescriptionError"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+
         <View
             android:id="@+id/pDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pBridgeType" />
+            app:layout_constraintTop_toBottomOf="@+id/pDescriptionError" />
 
         <LinearLayout
             android:id="@+id/pNavigationContainer"

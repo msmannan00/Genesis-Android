@@ -462,9 +462,9 @@
                     android:background="@xml/hox_rounded_corner_splash_right"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="panicExit"
-                    android:padding="5dp"
+                    android:padding="6dp"
                     android:scaleType="fitCenter"
-                    android:src="@xml/ic_baseline_error_home_v1"
+                    android:src="@xml/ic_baseline_repair"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

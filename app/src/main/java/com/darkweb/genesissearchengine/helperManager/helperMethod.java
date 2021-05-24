@@ -4,12 +4,10 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +23,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.text.SpannableString;
@@ -36,10 +33,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
@@ -53,16 +48,10 @@ import androidx.core.app.ShareCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
-
-import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.homeManager.FakeLauncherActivity;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
-import com.darkweb.genesissearchengine.constants.status;
 import com.example.myapplication.R;
-
 import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -77,7 +66,6 @@ import java.net.URLConnection;
 import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -86,7 +74,6 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.crypto.Cipher;
 import javax.net.ssl.HttpsURLConnection;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -216,10 +203,10 @@ public class helperMethod
         return size.x;
     }
 
-    public static SpannableString urlDesigner(String url, Context pContext, int pDefColor){
+    public static SpannableString urlDesigner(String url, Context pContext, int pDefColor, int pTheme){
 
         int mColor = 0;
-        if(status.sTheme == enums.Theme.THEME_DARK){
+        if(pTheme == enums.Theme.THEME_DARK){
             mColor = Color.argb(255, 0, 204, 71);
         }else {
             mColor = Color.argb(255, 0, 153, 54);
@@ -790,7 +777,7 @@ public class helperMethod
         return month + "/" + year + " | " + hour + ":" + minute + ":" + second;
     }
 
-    public static PopupWindow onCreateMenu(View p_view, int p_layout) {
+    public static PopupWindow onCreateMenu(View p_view, int p_layout, String pSettingLanguageRegion) {
         PopupWindow popupWindow;
 
         LayoutInflater layoutInflater
@@ -809,7 +796,7 @@ public class helperMethod
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popupWindow.setAnimationStyle(R.style.popup_window_animation);
 
-        if(status.sSettingLanguageRegion.equals("Ur")){
+        if(pSettingLanguageRegion.equals("Ur")){
             popupWindow.showAtLocation(p_view, Gravity.TOP|Gravity.START,0,0);
         }else {
             popupWindow.showAtLocation(p_view, Gravity.TOP|Gravity.END,0,0);

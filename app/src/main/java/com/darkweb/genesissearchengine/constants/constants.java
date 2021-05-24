@@ -83,10 +83,16 @@ public class constants
     public static final String CONST_NOTIFICATION_TITLE = "Genesis Browser";
     public static final int CONST_NOTIFICATION_ID_VALUE = 1;
     public static final int CONST_NOTIFICATION_REQUEST_CODE = 0;
+    public static final int mUserEngagementNotificationID = 1001;
 
     /*Language CONSTANTS*/
 
     public static final String CONST_LANGUAGE_DEFAULT_LANG = "default";
+
+    /*DOWNLOAD CONSTANTS*/
+
+    public static final String CONST_DOWNLOAD_COMMAND = "N_COMMAND";
+    public static final String CONST_DOWNLOAD_INTENT_KEY = "N_ID";
 
     /*Helper CONSTANTS*/
 
@@ -95,6 +101,7 @@ public class constants
     public static final String CONST_HELP_MODEL_ICON = "mIcon";
 
     /*ENCRYPTION KEY*/
+
     public static final String CONST_ENCRYPTION_KEY = "Zr4u7x!A%D*F-JaNdRgUkXp2s5v8y/B?";
     public static final String CONST_ENCRYPTION_KEY_DATABASE = "Zr4u7x!!A%D*F-JaNdsS@@gUbbp^^5v8y/B?";
 

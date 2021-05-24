@@ -112,7 +112,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 .addAction(R.drawable.ic_download, "Cancel",pendingIntent)
                 .setSmallIcon(android.R.drawable.stat_sys_download);
 
-        build.setOngoing(Prefs.persistNotifications());
+        // build.setOngoing(Prefs.persistNotifications());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(mID + "",

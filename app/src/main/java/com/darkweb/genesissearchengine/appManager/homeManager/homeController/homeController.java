@@ -1,7 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -78,8 +78,10 @@ import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.torproject.android.proxy.OrbotService;
 import org.torproject.android.proxy.util.Prefs;
-import org.torproject.android.service.wrapper.LocaleHelper;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.LocaleHelper;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+
+import java.io.StringWriter;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -91,6 +93,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
@@ -192,6 +195,19 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             super.onCreate(savedInstanceState);
             setContentView(R.layout.home_view);
 
+            Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+                status.sSettingIsAppStarted = false;
+                finishAndRemoveTask();
+
+                Intent intent = new Intent(this, homeController.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("crash",true);
+                this.startActivity(intent);
+                this.finish();
+
+                Runtime.getRuntime().exit(0);
+            });
+
             initPreFixes();
             activityContextManager.getInstance().setHomeController(this);
             pluginController.getInstance().initializeAllServices(this);
@@ -279,6 +295,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initSuggestionView(new ArrayList<>(), strings.GENERIC_EMPTY_STR);
     }
 
+
     public void onLoadTabFromTabController(){
 
             Object mTempModel = dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
@@ -323,8 +340,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateSearchBar(model.getSession().getCurrentURL(), false, false, false);
             }
             onLoadTab(model.getSession(),false,true);
-            //onLoadURL(model.getSession().getCurrentURL());
-            //mGeckoClient.onReload(mGeckoView, this);
         }else {
             onNewIntent(getIntent());
             onOpenLinkNewTab(helperMethod.getDomainName(mHomeModel.getSearchEngine()));
@@ -366,7 +381,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     private void initLocalLanguage() {
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this),pluginEnums.eLangManager.M_SET_LANGUAGE);
+        pluginController.getInstance().onLanguageInvoke(Arrays.asList(this, status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying),pluginEnums.eLangManager.M_SET_LANGUAGE);
     }
 
     @Override
@@ -464,6 +479,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void initPreFixes() {
         try {
+            if(getIntent().getBooleanExtra("crash", false)){
+                new Handler().postDelayed(() ->
+                {
+                    pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_APPLICATION_CRASH);
+                }, 2000);
+            }
+
             if(!status.mThemeApplying){
                 orbotLocalConstants.mTorLogsStatus = strings.GENERIC_EMPTY_STR;
             }
@@ -546,6 +568,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.getSession().close();
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,false);
     }
+
 
     public void onLoadURL(String url){
         if(mGeckoView.getSession()!=null && !mGeckoView.getSession().isOpen()){
@@ -698,7 +721,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             super.onDestroy();
             return;
         }
-        pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DESTROY);
+        pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
         mBackSplash.setImageDrawable(null);
         mBackSplash.setBackground(null);
 
@@ -963,6 +986,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mHomeViewController.onUpdateSearchBar(url,false,true, false);
         onLoadURL(url);
+    }
+
+    public void onSearchString(String pString){
+        String validated_url = mHomeModel.urlComplete(pString, mHomeModel.getSearchEngine());
+        pString = validated_url;
+
+        mHomeViewController.onUpdateSearchBar(pString,false,true, false);
+        onLoadURL(pString);
     }
 
     public void onSuggestionInvoked(View view){
@@ -1382,7 +1413,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             isFocusChanging = false;
             isSuggestionSearchOpened = false;
             mSearchbar.requestFocus();
-            mSearchbar.setText(helperMethod.urlDesigner(mSearchBarPreviousText, this, mSearchbar.getCurrentTextColor()));
+            mSearchbar.setText(helperMethod.urlDesigner(mSearchBarPreviousText, this, mSearchbar.getCurrentTextColor(), status.sTheme));
             mSearchbar.selectAll();
             mHomeViewController.initSearchBarFocus(true, isKeyboardOpened);
         }
@@ -1451,7 +1482,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             isFocusChanging = false;
             isSuggestionSearchOpened = false;
             mSearchbar.requestFocus();
-            mSearchbar.setText(helperMethod.urlDesigner(mSearchBarPreviousText, this, mSearchbar.getCurrentTextColor()));
+            mSearchbar.setText(helperMethod.urlDesigner(mSearchBarPreviousText, this, mSearchbar.getCurrentTextColor(), status.sTheme));
             mSearchbar.selectAll();
             mHomeViewController.initSearchBarFocus(true, isKeyboardOpened);
         }
@@ -1536,7 +1567,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onStartApplication(View view){
-        pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_START_ORBOT);
+        pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, (String)dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
         onInvokeProxyLoading();
         mHomeViewController.initHomePage();
     }
@@ -1709,7 +1740,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if (menuId == R.id.pMenuQuit)
             {
-                pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DESTROY);
+                pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
 
                 new Handler().postDelayed(() ->
                 {
@@ -1852,6 +1883,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_POPUP,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES,false));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,false));
 
 
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
@@ -1869,15 +1902,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DATA_CLEARED);
         activityContextManager.getInstance().getHomeController().onClearSettings();
 
-
         status.sSettingIsAppStarted = false;
         finishAndRemoveTask();
 
         Intent intent = new Intent(this, homeController.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_NO_ANIMATION);
         this.startActivity(intent);
-        overridePendingTransition(R.anim.popup_anim_in, R.anim.popup_anim_out);
-        ((Activity) this).finish();
+        overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
+        this.finish();
 
         Runtime.getRuntime().exit(0);
 
@@ -2214,7 +2246,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }
             }
             else if(e_type.equals(enums.etype.on_load_error)){
-                pluginController.getInstance().onLanguageInvoke(Collections.singletonList(homeController.this), pluginEnums.eLangManager.M_SET_LANGUAGE);
+                pluginController.getInstance().onLanguageInvoke(Arrays.asList(homeController.this, status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying), pluginEnums.eLangManager.M_SET_LANGUAGE);
                 initLocalLanguage();
                 mHomeViewController.onPageFinished();
                 mGeckoClient.onRedrawPixel(homeController.this);

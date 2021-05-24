@@ -10,7 +10,7 @@
         <intent
             android:action="erase"
             android:targetPackage="com.darkweb.genesissearchengine.production"
-            android:targetClass="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts">
+            android:targetClass="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController">
             <extra android:name="shortcut" android:value="open" />
         </intent>
     </shortcut>
@@ -23,7 +23,7 @@
         <intent
             android:action="erase"
             android:targetPackage="com.darkweb.genesissearchengine.production"
-            android:targetClass="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts">
+            android:targetClass="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController">
             <extra android:name="shortcut" android:value="erase_and_open" />
         </intent>
     </shortcut>
@@ -36,7 +36,7 @@
         <intent
             android:action="erase"
             android:targetPackage="com.darkweb.genesissearchengine.production"
-            android:targetClass="com.darkweb.genesissearchengine.appManager.externalNavigationManager.externalShortcuts">
+            android:targetClass="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController">
             <extra android:name="shortcut" android:value="erase" />
         </intent>
     </shortcut>

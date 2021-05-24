@@ -59,13 +59,10 @@
                     android:layout_weight="1"/>
 
                 <ImageView
-                    android:layout_width="47dp"
-                    android:layout_height="match_parent"
-                    android:padding="0dp"
-                    android:layout_marginEnd="0dp"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:paddingStart="8dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="6dp"
-                    android:paddingStart="3dp"
                     android:onClick="onOpenInfo"
                     android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
@@ -356,7 +353,6 @@
                         android:textCursorDrawable="@xml/gx_search_cursor_state"
                         android:id="@+id/pCustomPort"
                         android:layout_width="0dp"
-                        android:textColor="@color/c_text_v1"
                         android:layout_weight="11"
                         android:clickable="false"
                         android:onClick="onOpenCustomBridgeUpdater"
@@ -369,7 +365,8 @@
                         android:layout_marginStart="15dp"
                         android:ems="10"
                         android:maxLines="1"
-                        android:textColorHint="@color/c_button_text"
+                        android:textColor="@color/c_text_v1"
+                        android:textColorHint="@color/c_text_v2"
                         android:hint="@string/BRIDGE_PORT_HINT"
                         android:textSize="14.5sp"
                         android:text=""
@@ -381,10 +378,10 @@
                         android:textSize="13sp"
                         android:layout_width="0dp"
                         android:layout_weight="4"
-                        android:textColor="@color/c_button_text"
+                        android:textColor="@color/white"
                         android:onClick="requestBridges"
                         android:layout_height="45dp"
-                        android:background="@xml/hox_rounded_corner_suggestion_settings"
+                        android:background="@xml/hox_rounded_corner_bridge_settings"
                         android:layout_marginStart="5dp"
                         android:text="@string/BRIDGE_REQUEST" />
                 </LinearLayout>

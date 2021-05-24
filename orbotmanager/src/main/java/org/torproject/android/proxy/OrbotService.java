@@ -47,9 +47,9 @@ import net.freehaven.tor.control.TorControlConnection;
 
 import org.apache.commons.io.FileUtils;
 import org.torproject.android.service.R;
-import org.torproject.android.service.wrapper.localHelperMethod;
-import org.torproject.android.service.wrapper.logRowModel;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.localHelperMethod;
+import org.torproject.android.proxy.wrapper.logRowModel;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 import org.torproject.android.service.util.CustomShell;
 import org.torproject.android.service.util.CustomTorResourceInstaller;
 import org.torproject.android.service.util.DummyActivity;
@@ -71,6 +71,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StringReader;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1721,8 +1723,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             alBridges = new ArrayList<>();
 
             try {
+
                 BufferedReader in =
                         new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.bridges), "UTF-8"));
+
                 String str;
 
                 while ((str = in.readLine()) != null) {
@@ -1759,19 +1763,28 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
 
         if(orbotLocalConstants.mIsManualBridge){
-            List<String> mList = Arrays.asList(orbotLocalConstants.mBridges.split("\n "));
+            List<String> mList = Arrays.asList(orbotLocalConstants.mBridges.split("\n"));
             alBridges.clear();
 
             for(int e=0;e<mList.size();e++){
                 if(mList.get(e).length()<5){
                     continue;
                 }
-                List<String> mListTemp = Arrays.asList(mList.get(e).split(" "));
+                String mBridge = mList.get(e);
+                mBridge = mBridge.replace("\u00a0"," ");
+                mBridge = mBridge.trim();
+
                 int mIndex = 0;
-                while(mListTemp.get(mIndex).length()<3){
-                    mIndex+=1;
+                while (mBridge.charAt(mIndex) == ' '){
+                    mIndex+=2;
                 }
-                alBridges.add(new Bridge(mList.get(e).replace(mListTemp.get(mIndex),"") , orbotLocalConstants.mManualBridgeType));
+                mBridge  = mBridge.substring(mIndex);
+
+                String mBridgeType = mBridge.split(" ")[0];
+                mBridge = mBridge.replaceAll((mBridgeType + " ") , "");
+
+                mBridge = mBridge.trim();
+                alBridges.add(new Bridge(mBridge ,mBridgeType));
             }
         }
 

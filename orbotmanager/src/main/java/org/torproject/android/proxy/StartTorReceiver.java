@@ -24,7 +24,7 @@ public class StartTorReceiver extends BroadcastReceiver implements TorServiceCon
                 if (packageName != null) {
                     startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, packageName);
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && Prefs.persistNotifications()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     context.startForegroundService(startTorIntent);
                 } else {
                     context.startService(startTorIntent);

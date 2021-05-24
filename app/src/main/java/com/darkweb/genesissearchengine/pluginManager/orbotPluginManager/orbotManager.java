@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.proxy.OrbotService;
 import org.torproject.android.proxy.util.Prefs;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
-import com.darkweb.genesissearchengine.constants.*;
+
+import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
@@ -43,11 +46,12 @@ public class orbotManager
         this.mAppContext = null;
     }
 
-    private void onStartOrbot(){
-        orbotLocalConstants.mBridges = status.sBridgeCustomBridge;
-        orbotLocalConstants.mIsManualBridge = status.sBridgeGatewayManual;
-        orbotLocalConstants.mManualBridgeType = status.sBridgeCustomType;
-        Prefs.putBridgesEnabled(status.sBridgeStatus);
+    private void onStartOrbot(String pBridgeCustomBridge, boolean pBridgeGatewayManual, String pBridgeCustomType, boolean pBridgeStatus, int pShowImages, boolean mClearOnExit, String pBridgesDefault){
+        orbotLocalConstants.mBridges = pBridgeCustomBridge;
+        orbotLocalConstants.mIsManualBridge = pBridgeGatewayManual;
+        orbotLocalConstants.mManualBridgeType = pBridgeCustomType;
+        orbotLocalConstants.mBridgesDefault = pBridgesDefault;
+        Prefs.putBridgesEnabled(pBridgeStatus);
         Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -59,7 +63,7 @@ public class orbotManager
             mAppContext.get().startService(mServiceIntent);
         }
 
-        initializeProxy();
+        initializeProxy(pShowImages, mClearOnExit);
     }
 
     /*Helper Methods*/
@@ -93,29 +97,15 @@ public class orbotManager
     /*Proxy Manager*/
 
     private void onSetProxy(String url){
-        /* if(url.contains("genesishiddentechnologies.com")){
-            PrefsHelper.setPref(keys.PROXY_TYPE, 0);
-            PrefsHelper.setPref(keys.PROXY_SOCKS,null);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, null);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,null);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,null);
-        }
-        else {
-            PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-            PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
-        } */
 
         PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-        PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
+        PrefsHelper.setPref(keys.PROXY_SOCKS, constants.CONST_PROXY_SOCKS);
         PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
         PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
     }
 
-    private void initializeProxy()
+    private void initializeProxy(int pShowImages, boolean mClearOnExit)
     {
         PrefsHelper.setPref(keys.PROXY_TYPE, 0);
         PrefsHelper.setPref(keys.PROXY_SOCKS,null);
@@ -138,25 +128,26 @@ public class orbotManager
         PrefsHelper.setPref("browser.cache.memory.enable",true);
         PrefsHelper.setPref("browser.cache.disk.capacity",1000);
 
-        onUpdatePrivacyPreferences();
+        onUpdatePrivacyPreferences(pShowImages, mClearOnExit);
     }
 
-    private void onUpdatePrivacyPreferences()
+    private void onUpdatePrivacyPreferences(int pShowImages, boolean mClearOnExit)
     {
-        PrefsHelper.setPref(keys.PROXY_IMAGE, status.sShowImages);
+        PrefsHelper.setPref(keys.PROXY_IMAGE, pShowImages);
+        PrefsHelper.setPref("privacy.clearOnShutdown.cache",mClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.downloads",mClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.formdata",mClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.history",mClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.offlineApps",mClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.passwords",mClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.sessions",mClearOnExit);
+        PrefsHelper.setPref("privacy.clearOnShutdown.siteSettings",mClearOnExit);
+
         PrefsHelper.setPref("browser.display.show_image_placeholders",true);
         PrefsHelper.setPref("browser.cache.disk.enable",false);
         PrefsHelper.setPref("browser.cache.memory.enable",true);
         PrefsHelper.setPref("browser.cache.disk.capacity",0);
         PrefsHelper.setPref("privacy.resistFingerprinting",true);
-        PrefsHelper.setPref("privacy.clearOnShutdown.cache",status.sClearOnExit);
-        PrefsHelper.setPref("privacy.clearOnShutdown.downloads",status.sClearOnExit);
-        PrefsHelper.setPref("privacy.clearOnShutdown.formdata",status.sClearOnExit);
-        PrefsHelper.setPref("privacy.clearOnShutdown.history",status.sClearOnExit);
-        PrefsHelper.setPref("privacy.clearOnShutdown.offlineApps",status.sClearOnExit);
-        PrefsHelper.setPref("privacy.clearOnShutdown.passwords",status.sClearOnExit);
-        PrefsHelper.setPref("privacy.clearOnShutdown.sessions",status.sClearOnExit);
-        PrefsHelper.setPref("privacy.clearOnShutdown.siteSettings",status.sClearOnExit);
         PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
         PrefsHelper.setPref("privacy.donottrackheader.value",1);
         PrefsHelper.setPref("network.http.sendRefererHeader", 0);
@@ -174,6 +165,10 @@ public class orbotManager
 
         if(orbotLocalConstants.mTorLogsStatus.equals("No internet connection")){
             return "Warning | " + orbotLocalConstants.mTorLogsStatus;
+        }
+
+        else if(orbotLocalConstants.mTorLogsStatus.startsWith("Invalid Configuration")){
+            return orbotLocalConstants.mTorLogsStatus;
         }
 
         if(!logs.contains("Bootstrapped") && !mLogsStarted){
@@ -202,8 +197,8 @@ public class orbotManager
         return OrbotService.getServiceObject().getProxyStatus();
     }
 
-    private void onDestroy(){
-        if(!status.mThemeApplying) {
+    private void onDestroy(boolean pThemeApplying){
+        if(pThemeApplying) {
             OrbotService.getServiceObject().onDestroy();
         }
     }
@@ -233,11 +228,11 @@ public class orbotManager
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_PRIVACY))
         {
-            onUpdatePrivacyPreferences();
+            onUpdatePrivacyPreferences((int) pData.get(0),(boolean) pData.get(1));
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_START_ORBOT))
         {
-            onStartOrbot();
+            onStartOrbot((String) pData.get(0),(boolean) pData.get(1),(String) pData.get(2),(boolean) pData.get(3),(int) pData.get(4),(boolean) pData.get(5),(String) pData.get(6));
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING))
         {
@@ -273,7 +268,7 @@ public class orbotManager
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_DESTROY))
         {
-            onDestroy();
+            onDestroy((boolean) pData.get(0));
         }
         return null;
     }

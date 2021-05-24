@@ -83,5 +83,6 @@
     <color name="c_list_remove_back">#0f0f0f</color>
     <color name="c_list_alpha_black">#90000000</color>
     <color name="c_ripple_light">#d9d9d9</color>
+    <color name="green_dark_v2">#1c1b21</color>
 
 </resources>
