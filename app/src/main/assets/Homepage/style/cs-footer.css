@@ -1,0 +1,99 @@
+/*footer-bar style*/
+.fb_shared-footer-bar{
+    position: relative;
+    margin-top: -86px;
+}
+
+@media only screen and (max-width: 943px) {
+    .fb_shared-footer-bar {
+        display : none
+    }
+}
+
+.fb_footer-bar__content_bottom{
+    background-color:#5c5cd6;
+    border-style: solid;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-color:#3333cc;
+    border-bottom-width: 0;
+    width:100%;
+    text-align: center;
+    height: 43px;
+    padding: 10.5px 13px 8px;
+}
+
+.fb_footer-bar__content_top{
+    background-color:#5c5cd6;
+    border-style: solid;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-color:#3333cc;
+    border-bottom-width: 0;
+    width:100%;
+    text-align: center;
+    height: 43px;
+    padding: 10.5px 13px 8px;
+}
+
+.fb_footer-bar__border_bottom {
+    border-bottom-width: 1px;
+}
+
+.fb_footer-bar__text-bottom{
+    color:#767676;
+    font-size: 13px;
+    text-align:left;
+}
+
+.fb_footer-bar__catagories--padding{
+	padding: 15px 15px 8px;
+}
+
+.fb_footer-bar__catagories--padding:hover{
+    color: white !important;
+    text-decoration: none !important;
+    border-bottom: 4px solid whitesmoke !important;;
+}
+
+.fb_footer-bar__catagories--padding:focus {
+    color: white !important;
+    text-decoration: none !important;
+    border-bottom: 4px solid white !important;
+}
+
+.fb_footer-bar__catagories{
+    cursor: pointer;
+    color:white !important;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    height: 43px;
+}
+
+/*footer-bar events*/
+
+.fb_footer-bar__catagories:hover{
+}
+
+.fb_footer-bar__catagories-start:hover{
+    color: white !important;
+    text-decoration: none !important;
+    border-bottom: 4px solid white !important;
+}
+
+.fb_footer-bar__catagories-start:focus {
+    color: white !important;
+    text-decoration: none !important;
+    border-bottom: 4px solid white !important;
+}
+
+.fb_footer-bar__catagories-start{
+    cursor: pointer;
+    color:white !important;
+    display: inline-block;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    margin-left: 15px;
+}

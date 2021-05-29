@@ -1,0 +1,6 @@
+
+/*Strings*/
+
+var strings  = {
+    emptyString  : "",
+};
