@@ -21,7 +21,8 @@ public class NestedGeckoView extends GeckoView {
     private int mNestedOffsetY;
     private NestedScrollingChildHelper mChildHelper;
     private eventObserver.eventListener mEvent;
-
+    private boolean mScrollable = true;
+    private int mSwipeDistance = 0;
 
     public void onSetHomeEvent(eventObserver.eventListener pEvent){
         mEvent = pEvent;
@@ -58,8 +59,15 @@ public class NestedGeckoView extends GeckoView {
         switch (action) {
             case MotionEvent.ACTION_MOVE:
                 // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
-                final boolean allowScroll = status.sFullScreenBrowsing;
+
                 int deltaY = mLastY - eventY;
+                mSwipeDistance += deltaY;
+
+                if(mSwipeDistance>=100 || mSwipeDistance<=-150){
+                    mScrollable = true;
+                }
+
+                final boolean allowScroll = status.sFullScreenBrowsing && !status.sDisableExpandTemp && mScrollable;
 
 
                 if (allowScroll && dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset)) {
@@ -84,6 +92,8 @@ public class NestedGeckoView extends GeckoView {
                 break;
 
             case MotionEvent.ACTION_DOWN:
+                mSwipeDistance = 0;
+                mScrollable = false;
                 mLastY = eventY;
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
                 mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_DOWN);

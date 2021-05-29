@@ -85,7 +85,7 @@ class imageDataModel
     private Bitmap getBitmapFromURL(String src) {
         try {
             java.net.URL url = new java.net.URL(src);
-            Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(CONST_PROXY_SOCKS, 9050));
+            Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(CONST_PROXY_SOCKS, 9055));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection(proxy);
             connection.setConnectTimeout(10000);
             connection.setDoInput(true);

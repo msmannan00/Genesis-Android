@@ -37,6 +37,7 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.jaredrummler.android.shell.CommandResult;
@@ -221,6 +222,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         if (mEventHandler != null)
             mEventHandler.getNodes().clear();
 
+        NotificationManagerCompat.from(this).cancelAll();
         mNotificationShowing = false;
     }
 
@@ -318,17 +320,30 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     @Override
     public void onDestroy() {
+
         try {
-            isAppClosed = true;
+            disableNotification();
+            clearNotifications();
             unregisterReceiver(mNetworkStateReceiver);
             unregisterReceiver(mActionBroadcastReceiver);
-
-            stopTor();
-            clearNotifications();
-            killAllDaemons();
-        } catch (Exception ex) {
-            Log.i("", "");
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
+
+        new Thread(){
+            public void run(){
+                try {
+                    isAppClosed = true;
+
+                    stopTor();
+                    stopTorAsync();
+                    clearNotifications();
+                    killAllDaemons();
+                } catch (Exception ex) {
+                    Log.i("", "");
+                }
+            }
+        }.start();
 
         super.onDestroy();
     }
@@ -1195,6 +1210,9 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
                         conn.signal(TorControlCommands.SIGNAL_NEWNYM);
 
+                        sleep(1000);
+                        enableNotification();
+
                     } catch (Exception ioe) {
                         debug("error requesting newnym: " + ioe.getLocalizedMessage());
                     }
@@ -1361,10 +1379,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                 mConnectivity = newConnectivityState;
                 orbotLocalConstants.mNetworkState = mConnectivity;
 
-                if (mConnectivity)
+                if (mConnectivity){
                     newIdentity();
+                }
             }
-
 
             if (doNetworKSleep)
             {
@@ -1373,16 +1391,21 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                 {
                     //sendCallbackStatus(STATUS_OFF);
                     orbotLocalConstants.mTorLogsStatus = "No internet connection";
-                    showToolbarNotification(getString(R.string.newnym), getNotifyId(), R.drawable.ic_stat_tor_off);
-                    showToolbarNotification("Genesis is sleeping",NOTIFY_ID,R.drawable.ic_stat_tor_off);
+                    if(orbotLocalConstants.mNotificationStatus!=0){
+                        showToolbarNotification(getString(R.string.newnym), getNotifyId(), R.drawable.ic_stat_tor_off);
+                        showToolbarNotification("Genesis is sleeping",NOTIFY_ID,R.drawable.ic_stat_tor_off);
+                    }
                 }
                 else
                 {
                     //sendCallbackStatus(STATUS_STARTING);
-                    showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
+                    if(orbotLocalConstants.mNotificationStatus!=0){
+                        showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
+                    }
                 }
 
             }
+            orbotLocalConstants.mNetworkState = mConnectivity;
         }
     };
 

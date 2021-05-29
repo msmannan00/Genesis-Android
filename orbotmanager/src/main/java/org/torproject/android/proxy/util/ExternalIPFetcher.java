@@ -18,7 +18,7 @@ public class ExternalIPFetcher implements Runnable {
     private final static String ONIONOO_BASE_URL = "https://onionoo.torproject.org/details?fields=country_name,as_name,or_addresses&lookup=";
     private OrbotService mService;
     private TorEventHandler.Node mNode;
-    private int mLocalHttpProxyPort = 8118;
+    private int mLocalHttpProxyPort = 8125;
 
     public ExternalIPFetcher(OrbotService service, TorEventHandler.Node node, int localProxyPort) {
         mService = service;

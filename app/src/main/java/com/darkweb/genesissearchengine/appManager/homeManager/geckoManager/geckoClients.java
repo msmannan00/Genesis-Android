@@ -66,7 +66,6 @@ public class geckoClients
             mSession.getSettings().setFullAccessibilityTree(true);
             mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
             mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-            geckoView.releaseSession();
             geckoView.setSession(mSession);
         }
         mSession.onSetInitializeFromStartup();
@@ -140,6 +139,7 @@ public class geckoClients
     public void initRuntimeSettings(AppCompatActivity context){
         if(mRuntime==null){
             mRuntime = GeckoRuntime.getDefault(context.getApplicationContext());
+            mRuntime.getSettings().setAboutConfigEnabled(true);
             mRuntime.getSettings().setAboutConfigEnabled(true);
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
             mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);

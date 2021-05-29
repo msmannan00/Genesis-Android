@@ -154,7 +154,7 @@ public class languageController extends AppCompatActivity {
         getIntent().putExtra("activity_restarted",((LinearLayoutManager) Objects.requireNonNull(mRecycleView.getLayoutManager())).findFirstCompletelyVisibleItemPosition());
         helperMethod.restartActivity(getIntent(), this);
         overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
-        pluginController.getInstance().onLanguageInvoke(Arrays.asList(this, status.sSettingLanguage, status.sSettingLanguageRegion, status.sTheme), pluginEnums.eLangManager.M_SET_LANGUAGE);
+        pluginController.getInstance().onLanguageInvoke(Arrays.asList(this, status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying), pluginEnums.eLangManager.M_SET_LANGUAGE);
 
         if(activityContextManager.getInstance().getSettingController()!=null && !activityContextManager.getInstance().getSettingController().isDestroyed()){
             activityContextManager.getInstance().getSettingController().onRedrawXML();

@@ -4,7 +4,7 @@ import org.mozilla.gecko.AndroidGamepadManager;
 import org.mozilla.gecko.EventDispatcher;
 import org.mozilla.gecko.InputMethods;
 import org.mozilla.gecko.SurfaceViewWrapper;
-import org.mozilla.gecko.util.ActivityUtils;
+//import org.mozilla.gecko.util.ActivityUtils;
 import org.mozilla.gecko.util.ThreadUtils;
 import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.BasicSelectionActionDelegate;
@@ -238,10 +238,10 @@ public class extendedGeckoView extends FrameLayout {
 
         mSurfaceWrapper.setListener(mDisplay);
 
-        final Activity activity = ActivityUtils.getActivityFromContext(getContext());
-        if (activity != null) {
-            mSelectionActionDelegate = new BasicSelectionActionDelegate(activity);
-        }
+        //final Activity activity = ActivityUtils.getActivityFromContext(getContext());
+        //if (activity != null) {
+            //mSelectionActionDelegate = new BasicSelectionActionDelegate();
+        //}
 
         mAutofillDelegate = new AndroidAutofillDelegate();
     }

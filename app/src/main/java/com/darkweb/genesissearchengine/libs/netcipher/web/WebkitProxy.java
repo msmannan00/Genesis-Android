@@ -47,8 +47,8 @@ import ch.boye.httpclientandroidlib.HttpHost;
 public class WebkitProxy {
 
     private final static String DEFAULT_HOST = "localhost";//"127.0.0.1";
-    private final static int DEFAULT_PORT = 8118;
-    private final static int DEFAULT_SOCKS_PORT = 9050;
+    private final static int DEFAULT_PORT = 8125;
+    private final static int DEFAULT_SOCKS_PORT = 9055;
 
     private final static int REQUEST_CODE = 0;
 

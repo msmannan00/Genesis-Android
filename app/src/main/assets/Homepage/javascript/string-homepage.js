@@ -1,6 +1,0 @@
-
-/*Strings*/
-
-var strings  = {
-    emptyString  : "",
-};

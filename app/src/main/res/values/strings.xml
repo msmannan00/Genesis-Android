@@ -294,6 +294,8 @@
     <string name="ALERT_DATA_CLEARED_SHORTCUT" translatable="true">Data Cleared Successfully</string>
     <string name="ALERT_DATA_CLEARED_INFO_SHORTCUT" translatable="true">Private data cleared successfully. Application will close in a moment. Now you can safely continue browsing</string>
     <string name="ALERT_DATA_CLEARED_BUTTON" translatable="true">Closing Genesis Please Wait ...</string>
+    <string name="ALERT_ORBOT_LOADING" translatable="true">Genesis Connecting ...</string>
+    <string name="ALERT_ORBOT_LOADING_INFO" translatable="true">Genesis proxy connecting ...</string>
 
     <string name="ALERT_CRASH" translatable="true">Unexpected Error</string>
     <string name="ALERT_CRASH_INFO" translatable="true">Application crashed due to unexpected error. We are looking into the issue mean while you can continue with this application</string>

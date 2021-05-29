@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager.adPluginManager;
 
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.eventObserver;
@@ -80,6 +81,7 @@ public class adManager
 
                 @Override
                 public void onAdFailedToLoad(@NonNull LoadAdError var1) {
+                    Log.i("dsa","asd");
                 }
             });
         }

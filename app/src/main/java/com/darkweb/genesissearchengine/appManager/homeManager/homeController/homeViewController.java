@@ -598,7 +598,22 @@ class homeViewController
                     while (!orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState){
                         try
                         {
-                            sleep(1000);
+                            boolean mFastConnect = !status.sRestoreTabs && status.sAppInstalled && status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus;
+                            if(mFastConnect){
+                                if(orbotLocalConstants.mNetworkState){
+                                    sleep(1000);
+                                    orbotLocalConstants.mTorLogsStatus = "Starting Genesis | Please Wait ...";
+                                    mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.recheck_orbot);
+                                    startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
+                                    break;
+                                }
+                            }
+
+                            sleep(1500);
+                            if(mFastConnect){
+                                continue;
+                            }
+
                             mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.recheck_orbot);
                             if(temp_context.isDestroyed()){
                                 return;
@@ -612,9 +627,13 @@ class homeViewController
                     }
                     if(!status.sSettingIsAppStarted){
                         startPostTask(messages.MESSAGE_ON_URL_LOAD);
-                        mContext.runOnUiThread(() -> splashScreenDisable());
+                        mContext.runOnUiThread(() -> {
+                            splashScreenDisable();
+                        });
                     }else {
-                        mContext.runOnUiThread(() -> mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME));
+                        mContext.runOnUiThread(() -> {
+                            mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME);
+                        });
                     }
                 }
             }.start();
@@ -691,18 +710,18 @@ class homeViewController
     }
 
     public void disableExpand(){
-
         View child = mAppBar.getChildAt(0);
         AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
         params.setScrollFlags(0);
-
     }
 
     @SuppressLint("WrongConstant")
     private void enableCollapsing() {
-        View child = mAppBar.getChildAt(0);
-        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
-        params.setScrollFlags(1);
+        if(mProgressBar.getProgress()==0 || mProgressBar.getProgress()==100){
+            View child = mAppBar.getChildAt(0);
+            AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
+            params.setScrollFlags(1);
+        }
     }
     public void expandTopBar(boolean pForced, int pOffsetY){
 
@@ -727,7 +746,7 @@ class homeViewController
                 mIsTopBarExpanded = true;
                 Log.i("wwwwww1","wwwwww");
             }
-        }, 100);
+        }, 0);
 
     }
 
@@ -755,7 +774,7 @@ class homeViewController
                 mAppBar.setExpanded(false,true);
                 Log.i("wwwwww2","wwwwww");
             }
-        }, 100);
+        }, 0);
     }
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
@@ -922,7 +941,6 @@ class homeViewController
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
     void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText, boolean pBypassFocus){
-
         if(url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
             mSearchbar.setTag(R.id.msearchbarProcessing,true);
             url = CONST_GENESIS_DOMAIN_URL;
@@ -1214,9 +1232,21 @@ class homeViewController
 
     void onProgressBarUpdate(int value, boolean mForced){
 
+        if(value != 0 && value != 100){
+            mAppBar.setExpanded(true,true);
+            status.sDisableExpandTemp = true;
+        }else {
+            status.sDisableExpandTemp = false;
+        }
+
+        if(mProgressBar.getProgress() == value || mProgressBar.getProgress() == 0 && value == 100){
+            return;
+        }
+
         if(progressAnimator!=null){
             progressAnimator.cancel();
         }
+
         if(mSearchbar.getText().toString().equals("genesis.onion") && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
@@ -1234,9 +1264,14 @@ class homeViewController
                 setProgressAnimate(value,200);
             }
             if(value >= 100 || value<=0){
-                mProgressBar.animate().alpha(0).setStartDelay(200).withEndAction(() -> mProgressBar.setProgress(0));
+                mProgressBar.animate().alpha(0).setStartDelay(200).withEndAction(() -> {
+                    status.sDisableExpandTemp = false;
+                    mProgressBar.setProgress(0);
+                    enableCollapsing();
+                });
             }
         }
+
     }
 
     ObjectAnimator progressAnimator = null;

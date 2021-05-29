@@ -95,7 +95,7 @@ public class dataController
             int m_history_size = (int) mHistoryModel.onTrigger(dataEnums.eHistoryCommands.M_HISTORY_SIZE,null) - 1;
 
             ArrayList<Object> mHistory = (ArrayList<Object>)invokeSQLCipher(dataEnums.eSqlCipherCommands.M_SELECT_HISTORY, Arrays.asList(m_history_size+1,constants.CONST_FETCHABLE_LIST_SIZE));
-            return mHistoryModel.onTrigger(pCommands, mHistory);
+            return mHistoryModel.onTrigger(pCommands, Collections.singletonList(mHistory));
         }else {
             return mHistoryModel.onTrigger(pCommands, pData);
         }
@@ -233,6 +233,7 @@ public class dataController
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_OPEN_URL_IN_NEW_TAB,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_POPUP,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_INSTALLED,false));
 
         invokeSQLCipher(dataEnums.eSqlCipherCommands.M_INIT, Collections.singletonList(mContext));
         invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_HISTORY,null));

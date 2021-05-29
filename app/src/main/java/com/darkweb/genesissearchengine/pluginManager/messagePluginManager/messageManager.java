@@ -253,6 +253,26 @@ public class messageManager
         });
     }
 
+    private void orbotLoading()
+    {
+        final Handler handler = new Handler();
+        Runnable runnable = () -> mDialog.dismiss();
+
+        initializeDialog(R.layout.popup_orbot_connecting, Gravity.BOTTOM);
+        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> {
+            mDialog.dismiss();
+            handler.removeCallbacks(runnable);
+        });
+
+        mDialog.setOnDismissListener(dialog -> {
+            handler.removeCallbacks(runnable);
+            onClearReference();
+        });
+
+        handler.postDelayed(runnable, 3500);
+
+    }
+
     private void dataClearedSuccessfully()
     {
         initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
@@ -752,6 +772,11 @@ public class messageManager
                 case M_MAX_TAB_REACHED:
                     /*VERIFIED*/
                     maxTabReached();
+                    break;
+
+                case M_ORBOT_LOADING:
+                    /*VERIFIED*/
+                    orbotLoading();
                     break;
             }
         }

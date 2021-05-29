@@ -57,6 +57,7 @@ public class keys
     public static final String SETTING_FULL_SCREEN_BROWSIING = "SETTING_FULL_SCREEN_BROWSIING_V1";
     public static final String SETTING_OPEN_URL_IN_NEW_TAB = "SETTING_OPEN_URL_IN_NEW_TAB_V1";
     public static final String SETTING_LIST_VIEW = "SETTING_LIST_VIEW_V1";
+    public static final String SETTING_INSTALLED = "SETTING_INSTALLED_V1";
 
     /*Bridge Settings*/
 

@@ -50,6 +50,8 @@ import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
+import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -284,10 +286,10 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
         if(mIsLoaded){
+            event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
             if(!isPageLoading){
                 mCurrentTitle = "loading";
                 m_current_url_id = -1;
-                //mTheme = null;
                 mThemeChanged = false;
             }
             isPageLoading = true;
@@ -297,6 +299,11 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 mThemeChanged = false;
             }
         }
+    }
+
+    @UiThread
+    public  @Nullable GeckoResult<SlowScriptResponse> onSlowScript(@NonNull final GeckoSession geckoSession, @NonNull final String scriptFileName) {
+        return null;
     }
 
     @UiThread
@@ -541,7 +548,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
 
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
-        if(status.sSettingIsAppStarted){
+        if(status.sSettingIsAppStarted && orbotLocalConstants.mIsTorInitialized){
             errorHandler handler = new errorHandler();
             mProgress = 0;
             mPreviousErrorPage = true;
@@ -560,6 +567,10 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             }
 
             return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2, mResourceURL));
+        }else {
+            event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.M_ORBOT_LOADING);
+            mCurrentURL = mPrevURL;
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
         }
         return null;
     }
@@ -605,11 +616,6 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
         mPrevURL = mCurrentURL;
-    }
-
-    @UiThread
-    public GeckoResult<SlowScriptResponse> onSlowScript(@NonNull GeckoSession var1, @NonNull String var2) {
-        return null;
     }
 
     @UiThread
@@ -894,9 +900,6 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
 
     public String getCurrentURL(){
-        if(mCurrentURL.equals("resource://android/assets/Homepage/homepage.html") || mCurrentURL.equals("resource://android/assets/Homepage/homepage-dark.html")){
-            //setURL("https://genesishiddentechnologies.com");
-        }
         return mCurrentURL;
     }
 

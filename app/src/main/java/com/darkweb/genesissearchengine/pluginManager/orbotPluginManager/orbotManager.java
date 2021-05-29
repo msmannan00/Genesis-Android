@@ -96,11 +96,11 @@ public class orbotManager
 
     /*Proxy Manager*/
 
-    private void onSetProxy(String url){
+    private void onSetProxy(){
 
         PrefsHelper.setPref(keys.PROXY_TYPE, 1);
         PrefsHelper.setPref(keys.PROXY_SOCKS, constants.CONST_PROXY_SOCKS);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9055);
         PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
     }
@@ -115,7 +115,7 @@ public class orbotManager
 
         PrefsHelper.setPref(keys.PROXY_TYPE, 1);
         PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9055);
         PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
 
@@ -127,6 +127,48 @@ public class orbotManager
         PrefsHelper.setPref("browser.cache.disk.enable",true);
         PrefsHelper.setPref("browser.cache.memory.enable",true);
         PrefsHelper.setPref("browser.cache.disk.capacity",1000);
+        PrefsHelper.setPref("Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0","en-us,en;q=0.5");
+
+        PrefsHelper.setPref("browser.display.show_image_placeholders",true);
+        PrefsHelper.setPref("browser.cache.disk.enable",false);
+        PrefsHelper.setPref("browser.cache.memory.enable",true);
+        PrefsHelper.setPref("browser.cache.disk.capacity",0);
+        PrefsHelper.setPref("privacy.resistFingerprinting",true);
+        PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
+        PrefsHelper.setPref("privacy.donottrackheader.value",1);
+        PrefsHelper.setPref("network.http.sendRefererHeader", 0);
+        PrefsHelper.setPref("security.OCSP.require", false);
+        PrefsHelper.setPref("security.checkloaduri",false);
+        PrefsHelper.setPref("security.mixed_content.block_active_content",false);
+        PrefsHelper.setPref("security.mixed_content.block_display_content", false);
+        PrefsHelper.setPref("media.peerconnection.enabled",false); //webrtc disabled
+        PrefsHelper.setPref("Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0","en-us,en;q=0.5");
+
+        PrefsHelper.setPref("browser.cache.disk_cache_ssl",true);
+        PrefsHelper.setPref("signon.formlessCapture.enabled",true);
+        PrefsHelper.setPref("signon.storeWhenAutocompleteOff",true);
+        PrefsHelper.setPref("signon.storeWhenAutocompleteOff",true);
+        PrefsHelper.setPref("dom.event.contextmenu.enabled",true);
+        PrefsHelper.setPref("layout.css.visited_links_enabled",true);
+        PrefsHelper.setPref("security.ssl3.ecdhe_rsa_aes_128_sha",true);
+        PrefsHelper.setPref("security.ssl3.ecdhe_ecdsa_aes_128_sha",true);
+        PrefsHelper.setPref("security.ssl3.dhe_rsa_aes_128_sha",true);
+        PrefsHelper.setPref("security.ssl3.rsa_des_ede3_sha",true);
+        PrefsHelper.setPref("security.ssl3.dhe_rsa_aes_256_sha",true);
+
+        PrefsHelper.setPref("browser.send_pings.require_same_host",false);
+        PrefsHelper.setPref("webgl.disabled",false);
+        PrefsHelper.setPref("browser.safebrowsing.blockedURIs.enabled",false);
+        PrefsHelper.setPref("media.gmp-provider.enabled",false);
+        PrefsHelper.setPref("browser.send_pings.require_same_host",false);
+        PrefsHelper.setPref("webgl.disabled",false);
+        PrefsHelper.setPref("pdfjs.enableWebGL",false);
+        PrefsHelper.setPref("browser.safebrowsing.malware.enabled",false);
+        PrefsHelper.setPref("security.csp.experimentalEnabled",false);
+        PrefsHelper.setPref("network.http.referer.spoofSource",false);
+        PrefsHelper.setPref("security.OCSP.require",false);
+        PrefsHelper.setPref("security.ssl.treat_unsafe_negotiation_as_broken",	false);
+        PrefsHelper.setPref("security.ssl.require_safe_negotiation",false);
 
         onUpdatePrivacyPreferences(pShowImages, mClearOnExit);
     }
@@ -143,18 +185,6 @@ public class orbotManager
         PrefsHelper.setPref("privacy.clearOnShutdown.sessions",mClearOnExit);
         PrefsHelper.setPref("privacy.clearOnShutdown.siteSettings",mClearOnExit);
 
-        PrefsHelper.setPref("browser.display.show_image_placeholders",true);
-        PrefsHelper.setPref("browser.cache.disk.enable",false);
-        PrefsHelper.setPref("browser.cache.memory.enable",true);
-        PrefsHelper.setPref("browser.cache.disk.capacity",0);
-        PrefsHelper.setPref("privacy.resistFingerprinting",true);
-        PrefsHelper.setPref("privacy.donottrackheader.enabled",false);
-        PrefsHelper.setPref("privacy.donottrackheader.value",1);
-        PrefsHelper.setPref("network.http.sendRefererHeader", 0);
-        PrefsHelper.setPref("security.OCSP.require", true);
-        PrefsHelper.setPref("security.checkloaduri",true);
-        PrefsHelper.setPref("security.mixed_content.block_display_content", true);
-        PrefsHelper.setPref("media.peerconnection.enabled",false); //webrtc disabled
     }
 
     /*Log Manager*/
@@ -162,6 +192,10 @@ public class orbotManager
     private String getLogs()
     {
         String logs = orbotLocalConstants.mTorLogsStatus;
+
+        if(logs.equals("Starting Genesis | Please Wait ...")){
+            return logs;
+        }
 
         if(orbotLocalConstants.mTorLogsStatus.equals("No internet connection")){
             return "Warning | " + orbotLocalConstants.mTorLogsStatus;
@@ -252,7 +286,7 @@ public class orbotManager
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_SET_PROXY))
         {
-            onSetProxy((String)pData.get(0));
+            onSetProxy();
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_SHOW_NOTIFICATION_STATUS))
         {

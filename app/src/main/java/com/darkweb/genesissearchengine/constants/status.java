@@ -66,6 +66,7 @@ public class status
     public static boolean sVPNStatus = false;
     public static boolean sVPNPermission = false;
     public static boolean sBridgeStatus = false;
+    public static boolean sAppInstalled = false;
 
     public static int sTheme = enums.Theme.THEME_DEFAULT;
     public static int sSettingCookieStatus = ContentBlocking.AntiTracking.DEFAULT;
@@ -76,6 +77,8 @@ public class status
     public static int sRateCount = 0;
 
     public static float sSettingFontSize = 1;
+
+    public static boolean sDisableExpandTemp = false;
 
     private static void versionVerifier(Context pContext){
         status.sVersion = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_VERSION,strings.GENERIC_EMPTY_STR));
@@ -130,6 +133,7 @@ public class status
         status.sLogThemeStyleAdvanced = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
         status.sTabGridLayoutEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,true));
         status.sRateCount = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, 0));
+        status.sAppInstalled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_INSTALLED,false));
     }
 
 }

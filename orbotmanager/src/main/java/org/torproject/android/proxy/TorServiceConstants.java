@@ -26,8 +26,8 @@ public interface TorServiceConstants {
 
     int TOR_DNS_PORT_DEFAULT = 5400;
 
-    String HTTP_PROXY_PORT_DEFAULT = "8118"; // like Privoxy!
-    String SOCKS_PROXY_PORT_DEFAULT = "9050";
+    String HTTP_PROXY_PORT_DEFAULT = "8125"; // like Privoxy!
+    String SOCKS_PROXY_PORT_DEFAULT = "9055";
 
     //control port
     String LOG_NOTICE_HEADER = "NOTICE";

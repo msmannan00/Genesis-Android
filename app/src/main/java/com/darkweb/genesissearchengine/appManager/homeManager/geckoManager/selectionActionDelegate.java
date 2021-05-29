@@ -46,7 +46,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
     protected static final String ACTION_PROCESS_TEXT = Intent.ACTION_PROCESS_TEXT;
 
     private static final String[] FLOATING_TOOLBAR_ACTIONS = new String[] {
-            ACTION_CUT, ACTION_COPY, ACTION_PASTE, ACTION_SELECT_ALL, ACTION_PROCESS_TEXT, "SEARCH"
+            ACTION_CUT, ACTION_COPY, ACTION_PASTE, ACTION_SELECT_ALL, "SEARCH"
     };
     private static final String[] FIXED_TOOLBAR_ACTIONS = new String[] {
             ACTION_SELECT_ALL, ACTION_CUT, ACTION_COPY, ACTION_PASTE,"SEARCH"
@@ -158,7 +158,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
             return pm.resolveActivity(getProcessTextIntent(),
                     PackageManager.MATCH_DEFAULT_ONLY) != null;
         }
-        if(id.equals("SEARCH")){
+        if(id.equals("SEARCH") && !mSelection.text.isEmpty() && mExternalActionsEnabled){
             return true;
         }
 
@@ -233,6 +233,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
         }
         if (id.equals("SEARCH")) {
             activityContextManager.getInstance().getHomeController().onSearchString(mSelection.text);
+            clearSelection();
             mActionMode.finish();
             return false;
         }

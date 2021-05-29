@@ -66,6 +66,8 @@ public class langManager {
                     mLanguage = new Locale("en", "Us");
                 }
             }else {
+                Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
+                mEvent.invokeObserver(Collections.singletonList(mSystemLocale), pluginEnums.eLangManager.M_UPDATE_LOCAL);
                 return;
             }
         }else {

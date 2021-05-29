@@ -77,6 +77,9 @@ public class Prefs {
     }
 
     public static boolean persistNotifications() {
+        if(prefs==null){
+            return false;
+        }
         return prefs.getBoolean(PREF_PERSIST_NOTIFICATIONS, true);
     }
 

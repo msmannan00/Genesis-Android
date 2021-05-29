@@ -15,7 +15,7 @@ with Eclipse: http://eclipse.org/
 *** How to use ***
 Currently, Orbot will work with any application that supports using
 an HTTP or SOCKS Proxy. Once you start Tor using Orbot, you can then
-point your application to HTTP port 8118 or SOCKS port 9050 on localhost
+point your application to HTTP port 8125 or SOCKS port 9055 on localhost
 IP 127.0.0.1.
 
 If you have root access, and a version of Android with iptables that

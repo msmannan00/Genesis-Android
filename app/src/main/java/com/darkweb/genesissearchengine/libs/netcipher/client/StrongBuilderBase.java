@@ -173,7 +173,7 @@ abstract public class
     if (status.getStringExtra(OrbotHelper.EXTRA_STATUS)
       .equals(OrbotHelper.STATUS_ON)) {
       return(status.getIntExtra(OrbotHelper.EXTRA_PROXY_PORT_SOCKS,
-        9050));
+        9055));
     }
 
     return(-1);
@@ -183,7 +183,7 @@ abstract public class
     if (status.getStringExtra(OrbotHelper.EXTRA_STATUS)
       .equals(OrbotHelper.STATUS_ON)) {
       return(status.getIntExtra(OrbotHelper.EXTRA_PROXY_PORT_HTTP,
-        8118));
+        8125));
     }
 
     return(-1);

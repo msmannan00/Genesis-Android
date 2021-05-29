@@ -196,7 +196,7 @@
         <!-- Live Build -->
         <!-- --> <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9340927969469822~8113004486" />
+            android:value="ca-app-pub-6985886044951738~4671482729" />
 
         <!-- Development Build -->
         <!-- <meta-data

@@ -714,6 +714,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
     }
 
+    public void onDestroyExernal(){
+        pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onDestroy() {
@@ -721,7 +725,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             super.onDestroy();
             return;
         }
-        pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
         mBackSplash.setImageDrawable(null);
         mBackSplash.setBackground(null);
 
@@ -1262,7 +1265,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }else {
                 boolean mStatus = activityContextManager.getInstance().getTabController().onBackPressed();
                 onResumeDump();
-                activityContextManager.getInstance().getTabController().onPostExit();
                 if(!mStatus){
                     mHomeViewController.onHideTabContainer();
                 }
@@ -1493,6 +1495,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
             if(model==null){
                 mHomeViewController.onProgressBarUpdate(5, false);
+                mGeckoView.releaseSession();
                 initializeGeckoView(false,false);
                 onLoadURL(helperMethod.getDomainName(status.sSettingSearchStatus));
             }else {
@@ -1885,6 +1888,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES,false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,false));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_INSTALLED,false));
 
 
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
@@ -1931,7 +1935,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mSearchbar.getLocationOnScreen(locatiosn);
                     int ys = locatiosn[1];
                     if(ys!=0){
-                        if(ys<=50){
+                        if(ys<=8){
                             mHomeViewController.shrinkTopBar(true, mGeckoView.getMaxY());
                         }else {
                             mHomeViewController.expandTopBar(true, mGeckoView.getMaxY());
@@ -2004,6 +2008,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            }
            else if(e_type.equals(enums.etype.M_SPLASH_DISABLE))
            {
+               dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_INSTALLED,true));
+               status.sAppInstalled = true;
                initWidget();
            }
            else if(e_type.equals(enums.etype.M_WELCOME_MESSAGE)){
@@ -2321,6 +2327,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if(e_type.equals(enums.etype.M_RATE_COUNT)){
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, status.sRateCount));
+            }
+            else if(e_type.equals(enums.etype.M_ORBOT_LOADING)){
+                pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_ORBOT_LOADING);
             }
 
             return null;

@@ -151,10 +151,10 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 HttpURLConnection conection;
                 Proxy proxy;
                 if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
-                    proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, 9050));
+                    proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, 9055));
                     conection = (HttpURLConnection) url.openConnection(proxy);
                 }else {
-                    Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8118));
+                    Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8125));
                     URLConnection mURLConnection = new URI(f_url[0]).toURL().openConnection(mProxy);
                     conection = (HttpURLConnection) mURLConnection;
                 }
@@ -214,9 +214,9 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 StrongHttpsClient httpclient = new StrongHttpsClient(context);
 
                 if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
-                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9050);
+                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9055);
                 }else {
-                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9050);
+                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9055);
                 }
 
                 HttpGet httpget = new HttpGet(urlEncoded);
