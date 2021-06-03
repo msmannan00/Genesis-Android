@@ -1,9 +1,12 @@
 package com.darkweb.genesissearchengine.pluginManager.downloadPluginManager;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Environment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
@@ -14,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static org.webrtc.ContextUtils.getApplicationContext;
 
 public class downloadManager
 {
@@ -43,7 +48,25 @@ public class downloadManager
     }
 
     private void cancelDownload(int pID) {
-        Objects.requireNonNull(mDownloads.get(pID)).onCancel();
+        if(mDownloads!=null && mDownloads.containsKey(pID)){
+            downloadReciever mReciever = mDownloads.get(pID);
+            if(mReciever!=null){
+                mDownloads.get(pID).onCancel();
+            }else {
+                try {
+                    if(!status.sSettingIsAppRunning){
+                        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.cancelAll();
+                    }
+                }catch (Exception ignored){}
+            }
+        }
+    }
+
+    private void onSwipeDownload(int pID) {
+        if(mDownloads!=null && mDownloads.get(pID)!=null){
+            mDownloads.get(pID).onCancel();
+        }
     }
 
     private void onTriggerDownload(int pID) {
@@ -82,6 +105,10 @@ public class downloadManager
         else if(pEventType.equals(pluginEnums.eDownloadManager.M_DOWNLOAD_BLOB))
         {
             return downloadBlob((String) pData.get(0));
+        }
+        else if(pEventType.equals(pluginEnums.eDownloadManager.M_SWIPE))
+        {
+            onSwipeDownload((int) pData.get(0));
         }
 
         return null;

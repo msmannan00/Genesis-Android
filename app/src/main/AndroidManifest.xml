@@ -198,6 +198,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-6985886044951738~4671482729" />
 
+
         <!-- Development Build -->
         <!-- <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -273,6 +274,7 @@
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
+
 
     </application>
 

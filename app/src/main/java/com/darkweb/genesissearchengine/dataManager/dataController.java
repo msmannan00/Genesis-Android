@@ -167,6 +167,9 @@ public class dataController
     /*Trigger Tabs*/
 
     public Object invokeTab(dataEnums.eTabCommands pCommands, List<Object> pData){
+        if(mTabModel==null){
+            return null;
+        }
         return mTabModel.onTrigger(pCommands, pData);
     }
 

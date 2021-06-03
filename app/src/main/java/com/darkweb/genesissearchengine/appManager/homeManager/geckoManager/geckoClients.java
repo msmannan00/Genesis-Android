@@ -453,6 +453,10 @@ public class geckoClients
 
     }
 
+    public int getScrollOffset(){
+        return mSession.getScrollOffset();
+    }
+
     public class geckoViewClientCallback implements eventObserver.eventListener{
         @Override
         public Object invokeObserver(List<Object> data, Object e_type)
@@ -460,14 +464,15 @@ public class geckoClients
             if(e_type.equals(enums.etype.M_CHANGE_HOME_THEME)){
                 reinitHomeTheme();
             }
-            else if(mSession!=null && mSession.isClosed()){
-                return null;
-            }else if(mSession!=null) {
+            else if(mSession!=null) {
                 if(e_type.equals(enums.etype.SESSION_ID)){
                     return mSession.getSessionID();
                 }
                 else if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.M_RATE_COUNT) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
                 {
+                    if(mSession!=null && mSession.isClosed()){
+                        return null;
+                    }
                     if (e_type.equals(on_handle_external_intent))
                     {
                         try {

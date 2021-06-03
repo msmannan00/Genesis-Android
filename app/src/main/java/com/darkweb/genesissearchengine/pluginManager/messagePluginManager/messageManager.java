@@ -317,7 +317,7 @@ public class messageManager
             ((SwitchMaterial) mDialog.findViewById(R.id.pTPStatus)).setChecked(false);
         }
 
-        ((TextView) mDialog.findViewById(R.id.pHeaderSubpart)).setText(helperMethod.getDomainName(mData.get(0).toString()));
+        ((TextView) mDialog.findViewById(R.id.pHeaderSubpart)).setText(helperMethod.getDomainName(mData.get(0).toString().replace("genesishiddentechnologies.com", "genesis.onion")));
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 

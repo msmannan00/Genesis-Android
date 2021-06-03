@@ -232,7 +232,9 @@ public class selectionActionDelegate implements ActionMode.Callback,
             return false;
         }
         if (id.equals("SEARCH")) {
-            activityContextManager.getInstance().getHomeController().onSearchString(mSelection.text);
+            if(activityContextManager.getInstance()!=null && activityContextManager.getInstance().getHomeController()!=null){
+                activityContextManager.getInstance().getHomeController().onSearchString(mSelection.text);
+            }
             clearSelection();
             mActionMode.finish();
             return false;
@@ -415,12 +417,13 @@ public class selectionActionDelegate implements ActionMode.Callback,
             return;
         }
 
-        if (mUseFloatingToolbar) {
-            mActionMode = mActivity.startActionMode(new Callback2Wrapper(),
-                    ActionMode.TYPE_FLOATING);
-        } else {
-            mActionMode = mActivity.startActionMode(this);
-        }
+        try{
+            if (mUseFloatingToolbar) {
+                mActionMode = mActivity.startActionMode(new Callback2Wrapper(),ActionMode.TYPE_FLOATING);
+            } else {
+                mActionMode = mActivity.startActionMode(this);
+            }
+        }catch (Exception ignored){}
     }
 
     @Override

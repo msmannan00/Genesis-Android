@@ -23,11 +23,13 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.libs.netcipher.client.StrongHttpsClient;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
+import com.darkweb.genesissearchengine.pluginManager.pluginReciever.downloadNotificationReciever;
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import org.torproject.android.proxy.util.Prefs;
@@ -110,9 +112,9 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 .addAction(R.drawable.ic_download, "Cancel",pendingIntent)
-                .setSmallIcon(android.R.drawable.stat_sys_download);
-
-        // build.setOngoing(Prefs.persistNotifications());
+                .setSmallIcon(android.R.drawable.stat_sys_download)
+                .setDeleteIntent(pendingIntent)
+                .setOngoing(false);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(mID + "",
@@ -173,6 +175,9 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 long total = 0;
 
                 while ((count = mStream.read(data)) != -1) {
+                    if(!status.sSettingIsAppRunning){
+                        return null;
+                    }
                     total += count;
                     int cur = (int) ((total * 100) / lenghtOfFile);
                     if(lenghtOfFile<0){
@@ -236,6 +241,9 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 float lenghtOfFile = response.getEntity().getContentLength();
                 int read;
                 while ((read = mStream.read(data)) != -1) {
+                    if(!status.sSettingIsAppRunning){
+                        return null;
+                    }
                     total += read;
                     int cur = (int) ((total * 100) / response.getEntity().getContentLength());
                     mDownloadByte = cur;
@@ -309,6 +317,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         build.setOngoing(false);
         build.addAction(android.R.drawable.stat_sys_download, "Open",pendingIntent);
         build.addAction(R.drawable.ic_download, "Cancel",pendingIntent1);
+        build.setOngoing(false);
         build.setPriority(Notification.PRIORITY_LOW);
         mNotifyManager.notify(mID, build.build());
 

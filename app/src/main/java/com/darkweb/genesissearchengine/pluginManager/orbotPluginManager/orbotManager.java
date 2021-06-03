@@ -98,11 +98,6 @@ public class orbotManager
 
     private void onSetProxy(){
 
-        PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-        PrefsHelper.setPref(keys.PROXY_SOCKS, constants.CONST_PROXY_SOCKS);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9055);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
     }
 
     private void initializeProxy(int pShowImages, boolean mClearOnExit)
@@ -115,7 +110,7 @@ public class orbotManager
 
         PrefsHelper.setPref(keys.PROXY_TYPE, 1);
         PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9055);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
         PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
 

@@ -8,6 +8,7 @@ import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.google.android.gms.ads.*;
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
 import java.util.List;
 
 public class adManager
@@ -47,7 +48,8 @@ public class adManager
             {
                 bannerAdsLoading = true;
                 MobileAds.initialize(pAppContext.getApplicationContext(), initializationStatus -> { });
-
+                RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("B1CF10D1F74698381CFF7BF9C485085B")).build();
+                MobileAds.setRequestConfiguration(configuration);
                 initializeBannerAds();
             }
         }
@@ -82,6 +84,7 @@ public class adManager
                 @Override
                 public void onAdFailedToLoad(@NonNull LoadAdError var1) {
                     Log.i("dsa","asd");
+                    bannerAdsLoading = false;
                 }
             });
         }

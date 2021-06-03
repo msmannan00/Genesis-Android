@@ -31,7 +31,10 @@ public class activityStateManager extends Service {
     public void onDestroy() {
         Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
         this.stopService(mServiceIntent);
-        OrbotService.getServiceObject().onDestroy();
+
+        if(OrbotService.getServiceObject()!=null){
+            OrbotService.getServiceObject().onDestroy();
+        }
 
         status.sSettingIsAppStarted = false;
         super.onDestroy();
@@ -43,7 +46,9 @@ public class activityStateManager extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
         this.stopService(mServiceIntent);
-        OrbotService.getServiceObject().onDestroy();
+        if(OrbotService.getServiceObject()!=null){
+            OrbotService.getServiceObject().onDestroy();
+        }
 
         status.sSettingIsAppStarted = false;
 

@@ -101,6 +101,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     private boolean mPreviousErrorPage = false;
     private boolean mRemovableFromBackPressed = false;
     private boolean mThemeChanged = false;
+    private int mScollOffset = 0;
 
     /*Temp Variables*/
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
@@ -177,6 +178,10 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
 
     public void onSessionReinit(){
+        if(mClosed){
+            return;
+        }
+
         mCrashCount = 0;
         if(!isFirstPaintExecuted){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id), enums.etype.ON_SESSION_REINIT);
@@ -215,7 +220,19 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     /*Scroll Delegate*/
     @UiThread
     public void onScrollChanged(@NonNull GeckoSession session, int scrollX, int scrollY) {
+        mScollOffset = scrollY;
         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
+        if(scrollY<=3){
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_ON_SCROLL_TOP_BOUNDARIES);
+        }else if(scrollY<=helperMethod.pxFromDp(30)){
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_ON_SCROLL_BOUNDARIES);
+        }else {
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_ON_SCROLL_NO_BOUNDARIES);
+        }
+    }
+
+    public int getScrollOffset(){
+        return mScollOffset;
     }
 
     /*Autofill Delegate*/
@@ -462,6 +479,12 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
         mPreviousErrorPage = false;
+
+        if(var1.uri.endsWith("genesisconfigurenewidentity.com/")){
+            initURL(mPrevURL);
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY_MESSAGED);
+            return GeckoResult.fromValue(AllowOrDeny.DENY);
+        }
         if(!var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("https://genesishiddentechnologies.com") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
             String mVerificationURL = setGenesisVerificationToken(var1.uri);
             initURL(mVerificationURL);
@@ -548,6 +571,9 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
 
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
+        if(mCurrentURL.contains("genesis.onion")){
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY);
+        }
         if(status.sSettingIsAppStarted && orbotLocalConstants.mIsTorInitialized){
             errorHandler handler = new errorHandler();
             mProgress = 0;
@@ -651,15 +677,22 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     int mCrashCount = 0;
     @UiThread
     public void onCrash(@NonNull GeckoSession session) {
-        if(!mClosed){
-            String mSessionID = (String) event.invokeObserver(null, enums.etype.SESSION_ID);
+        if(!mClosed && status.sSettingIsAppStarted){
+            if(event!=null){
+                return;
+            }
+            Object mSessionObject = event.invokeObserver(null, enums.etype.SESSION_ID);
+            if(mSessionObject==null || getSessionID()==null){
+                return;
+            }
+            String mSessionID = (String) mSessionObject;
             if(mSessionID.equals(getSessionID())){
                 if(mCrashCount<=5){
                     final Handler handler = new Handler();
                     handler.postDelayed(() -> {
-                        if(!session.isOpen()){
+                        try {
                             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.M_OPEN_SESSION);
-                        }
+                        }catch (Exception ignored){}
                     }, mCrashCount*500);
                 }
                 mCrashCount+=1;
@@ -669,14 +702,25 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     @UiThread
     public void onKill(@NonNull GeckoSession session) {
-        if(!mClosed){
-            String mSessionID = (String) event.invokeObserver(null, enums.etype.SESSION_ID);
+        if(!mClosed && status.sSettingIsAppStarted){
+            if(event!=null){
+                return;
+            }
+            Object mSessionObject = event.invokeObserver(null, enums.etype.SESSION_ID);
+            if(mSessionObject==null || getSessionID()==null){
+                return;
+            }
+            String mSessionID = (String) mSessionObject;
+
+
             if(mSessionID.equals(getSessionID())){
                 if(mCrashCount<=5){
                     final Handler handler = new Handler();
                     handler.postDelayed(() -> {
-                        if(!session.isOpen()){
-                            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.M_OPEN_SESSION);
+                        if(status.sSettingIsAppStarted && !session.isOpen()){
+                            try {
+                                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.M_OPEN_SESSION);
+                            }catch (Exception ignored){}
                         }
                     }, mCrashCount*500);
                 }
@@ -971,7 +1015,10 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     public void closeSessionInstant(){
         mSessionID = "-1";
-        mClosed = true;
+        new Handler().postDelayed(() ->
+        {
+            mClosed = true;
+        }, 250);
         close();
     }
 
@@ -1013,6 +1060,11 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     void goBackSession(){
         wasBackPressed = true;
         goBack();
+
+        try {
+            if (mHistoryList!=null && mHistoryList.size()>=1)
+                event.invokeObserver(Arrays.asList(mHistoryList.get(mHistoryList.getCurrentIndex()-1).getUri(),mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+        }catch (Exception ignored){}
     }
 
     void goForwardSession(){
@@ -1053,7 +1105,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     private void checkApplicationRate(){
         if(status.sSettingIsAppStarted){
-            if(status.sRateCount==40){
+            if(status.sRateCount==10){
                 event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_APPLICATION);
             }
             status.sRateCount+=1;

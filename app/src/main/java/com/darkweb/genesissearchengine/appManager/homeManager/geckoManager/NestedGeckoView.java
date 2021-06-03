@@ -3,16 +3,29 @@ package com.darkweb.genesissearchengine.appManager.homeManager.geckoManager;
 import android.content.Context;
 import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.ViewCompat;
+
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewTreeObserver;
+
 import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import org.mozilla.geckoview.GeckoView;
+
+import java.util.Arrays;
 import java.util.Collections;
 
 import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_DOWN;
+import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_DOWN_MOVE;
+import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_UP;
 import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_UP_ALWAYS;
+import static com.darkweb.genesissearchengine.constants.enums.etype.GECKO_SCROLL_UP_MOVE;
+import static com.darkweb.genesissearchengine.constants.enums.etype.WAS_SCROLL_CHANGED;
 
 public class NestedGeckoView extends GeckoView {
     private int mLastY;
@@ -23,6 +36,10 @@ public class NestedGeckoView extends GeckoView {
     private eventObserver.eventListener mEvent;
     private boolean mScrollable = true;
     private int mSwipeDistance = 0;
+    private boolean mPressed = false;
+    private boolean mForcedScroll = false;
+    private int mScrollOffsetRoot = -1;
+    private int mBottomOffsetRange = 0;
 
     public void onSetHomeEvent(eventObserver.eventListener pEvent){
         mEvent = pEvent;
@@ -58,17 +75,34 @@ public class NestedGeckoView extends GeckoView {
 
         switch (action) {
             case MotionEvent.ACTION_MOVE:
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
+
+                boolean mBottomReached = false;
+                Object mTemp = mEvent.invokeObserver(Collections.singletonList(null), WAS_SCROLL_CHANGED);
 
                 int deltaY = mLastY - eventY;
                 mSwipeDistance += deltaY;
 
-                if(mSwipeDistance>=100 || mSwipeDistance<=-150){
+                if(mTemp!=null && (int)mTemp==mScrollOffsetRoot){
+                    mBottomOffsetRange += 1;
+                    if(mBottomOffsetRange>5){
+                        mBottomReached = true;
+                    }
+                }else {
+                    mBottomOffsetRange = 0;
+                    mBottomReached = false;
+                }
+
+                if(mTemp!=null){
+                    mScrollOffsetRoot = (int)mTemp;
+                }
+
+                Log.i("wow", eventY + " -- " + deltaY);
+
+                if(mSwipeDistance>=350 || mSwipeDistance<=-350){
                     mScrollable = true;
                 }
 
-                final boolean allowScroll = status.sFullScreenBrowsing && !status.sDisableExpandTemp && mScrollable;
-
+                final boolean allowScroll = status.sFullScreenBrowsing && !status.sDisableExpandTemp && (mScrollOffsetRoot>0 && mScrollable || mForcedScroll || mBottomReached);
 
                 if (allowScroll && dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset)) {
                     deltaY -= mScrollConsumed[1];
@@ -86,7 +120,6 @@ public class NestedGeckoView extends GeckoView {
                 }
 
                 if(status.sFullScreenBrowsing){
-                    Log.i("wow1", eventY + "");
                 }
 
                 break;
@@ -97,17 +130,34 @@ public class NestedGeckoView extends GeckoView {
                 mLastY = eventY;
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
                 mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_DOWN);
+                mPressed = true;
+
+                new Handler().postDelayed(() ->
+                {
+                    if(!mPressed && status.sFullScreenBrowsing && !status.sDisableExpandTemp){
+                        if(mSwipeDistance>75){
+                            mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_UP_MOVE);
+                            mScrollable = true;
+                        }
+                        else if(mSwipeDistance<-75){
+                            mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_DOWN_MOVE);
+                            mScrollable = true;
+                        }
+                    }
+                }, 100);
+
                 break;
 
             case MotionEvent.ACTION_UP:
+                mPressed = false;
                 mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_UP_ALWAYS);
             case MotionEvent.ACTION_CANCEL:
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
+                mPressed = false;
                 stopNestedScroll();
                 break;
 
             default:
-                // mEvent.invokeObserver(Collections.singletonList(null), GECKO_SCROLL_FINISHED);
+                mPressed = false;
         }
 
         // Execute event handler from parent class in all cases
@@ -161,6 +211,14 @@ public class NestedGeckoView extends GeckoView {
 
     public int getMaxY(){
         return 1;
+    }
+
+    public boolean getPressedState(){
+        return mPressed;
+    }
+
+    public void setmForcedScroll(boolean pScroll){
+        mForcedScroll = pScroll;
     }
 
 }

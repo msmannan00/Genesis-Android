@@ -16,6 +16,8 @@ public class downloadNotificationReciever extends BroadcastReceiver {
             pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_DOWNLOAD_INTENT_KEY)), pluginEnums.eDownloadManager.M_TRIGGER);
         }else if(mCommand==0 || mCommand==2) {
             pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_DOWNLOAD_INTENT_KEY)), pluginEnums.eDownloadManager.M_CANCEL);
+        }else if(mCommand==3) {
+            pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_DOWNLOAD_INTENT_KEY)), pluginEnums.eDownloadManager.M_CANCEL);
         }
     }
 }

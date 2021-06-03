@@ -42,6 +42,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static com.darkweb.genesissearchengine.appManager.tabManager.tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_FORCED;
+
 public class tabController extends Fragment
 {
     /*Private Views*/
@@ -591,6 +593,8 @@ public class tabController extends Fragment
 
 
     public boolean onBackPressed() {
+        mtabViewController.onTrigger(ON_HIDE_UNDO_DIALOG_FORCED, null);
+
         if(mTabAdapter!=null){
             boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
             onClearTabBackup();
@@ -631,7 +635,7 @@ public class tabController extends Fragment
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_LOAD_TAB)){
                 mClosed = true;
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HOLD_BLOCKER, null);
-                mHomeController.onLoadTab((geckoSession)data.get(0),(boolean)data.get(1),true);
+                mHomeController.onLoadTab((geckoSession)data.get(0),(boolean)data.get(1),true, true);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW)){
                 onInitRemoveView((Integer) data.get(0), true, true);

@@ -206,6 +206,16 @@ class tabViewController
         mUndoLayout.animate().alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
     }
 
+    private void onHideUndoDialogForced() {
+        if(mUndoLayout.getAlpha()<1){
+            mUndoLayout.animate().cancel();
+            mUndoLayout.setAlpha(0);
+            mUndoLayout.setVisibility(View.GONE);
+        }else {
+            mUndoLayout.animate().setDuration(200).alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
+        }
+    }
+
     private void onHideUndoDialogInit() {
         mUndoLayout.animate().cancel();
         mUndoLayout.setAlpha(0);
@@ -290,6 +300,9 @@ class tabViewController
         }
         else if(pCommands.equals(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER)){
             blockUI(false);
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_FORCED)){
+            onHideUndoDialogForced();
         }
         return null;
     }

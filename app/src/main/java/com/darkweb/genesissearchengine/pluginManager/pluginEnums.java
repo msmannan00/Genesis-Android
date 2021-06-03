@@ -36,7 +36,7 @@ public class pluginEnums
 
     /*Download Manager*/
     public enum eDownloadManager{
-        M_DOWNLOAD_FILE, M_CANCEL, M_TRIGGER, M_START_SERVICE, M_DOWNLOAD_BLOB
+        M_DOWNLOAD_FILE, M_CANCEL, M_TRIGGER, M_START_SERVICE, M_DOWNLOAD_BLOB, M_SWIPE
     }
 
     /*Notification Manager*/

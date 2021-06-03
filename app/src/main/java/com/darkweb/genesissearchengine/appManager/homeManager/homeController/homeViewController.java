@@ -305,7 +305,6 @@ class homeViewController
     public void onHideTabContainer(){
         onHideLoadTabDialog();
         if(mTabFragment.getAlpha()>0 || mTabFragment.getVisibility()!=View.GONE){
-            Log.i("SUPERFUCK4","SUPERFUCK");
             mNewTab.setPressed(false);
             new Handler().postDelayed(() ->
             {
@@ -384,13 +383,17 @@ class homeViewController
                 }else {
                     mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(5),0);
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
-                    params.rightMargin = helperMethod.pxFromDp(10);
+                    params.rightMargin = helperMethod.pxFromDp(5);
                 }
 
             });
         }else {
 
-            onUpdateSearchIcon(0);
+            if(!mSearchbar.getText().toString().contains(".")){
+                onUpdateSearchIcon(0);
+            }else {
+                onUpdateSearchIcon(2);
+            }
             mSearchbar.setMovementMethod(mSearchBarMovementMethod);
             mSearchbar.setFadingEdgeLength(helperMethod.pxFromDp(0));
 
@@ -600,12 +603,15 @@ class homeViewController
                         {
                             boolean mFastConnect = !status.sRestoreTabs && status.sAppInstalled && status.sSettingSearchStatus.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus;
                             if(mFastConnect){
+                                sleep(1000);
                                 if(orbotLocalConstants.mNetworkState){
-                                    sleep(1000);
                                     orbotLocalConstants.mTorLogsStatus = "Starting Genesis | Please Wait ...";
                                     mEvent.invokeObserver(Collections.singletonList(status.sSettingSearchStatus), enums.etype.recheck_orbot);
                                     startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                                     break;
+                                }else{
+                                    orbotLocalConstants.mTorLogsStatus = "No internet connection";
+                                    startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                                 }
                             }
 
@@ -750,6 +756,8 @@ class homeViewController
 
     }
 
+
+
     public void shrinkTopBar(boolean pForced, int pOffsetY){
 
         if(pOffsetY == -1){
@@ -823,7 +831,7 @@ class homeViewController
         desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
 
         String mExtention = helperMethod.getMimeType(mURL, mContext);
-        if(mExtention == null || mExtention.equals("text/html") || mExtention.equals("application/vnd.ms-htmlhelp") || mExtention.equals("application/vnd.sun.xml.writer") || mExtention.equals("application/vnd.sun.xml.writer.global") || mExtention.equals("application/vnd.sun.xml.writer.template") || mExtention.equals("application/xhtml+xml")){
+        if(!mURL.startsWith("data") && !mURL.startsWith("blob") && (mExtention == null || mExtention.equals("application/x-msdos-program") || mExtention.equals("text/html") || mExtention.equals("application/vnd.ms-htmlhelp") || mExtention.equals("application/vnd.sun.xml.writer") || mExtention.equals("application/vnd.sun.xml.writer.global") || mExtention.equals("application/vnd.sun.xml.writer.template") || mExtention.equals("application/xhtml+xml"))){
             mDownload.setEnabled(false);
             mDownload.setColorFilter(Color.argb(255, 191, 191, 191));
         }
@@ -941,11 +949,15 @@ class homeViewController
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
     void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText, boolean pBypassFocus){
+
+        if(url.endsWith("genesisconfigurenewidentity.com/")){
+            return;
+        }
+
         if(url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
             mSearchbar.setTag(R.id.msearchbarProcessing,true);
             url = CONST_GENESIS_DOMAIN_URL;
         }
-
 
         Log.i("FUCK::5",url);
         if(!mSearchbar.hasFocus() || pClearText || pBypassFocus){
@@ -1218,7 +1230,7 @@ class homeViewController
     }
 
     void progressBarReset(){
-        mProgressBar.setProgress(5);
+        mProgressBar.setProgress(0);
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -1239,15 +1251,15 @@ class homeViewController
             status.sDisableExpandTemp = false;
         }
 
-        if(mProgressBar.getProgress() == value || mProgressBar.getProgress() == 0 && value == 100){
-            return;
-        }
+        //if(mProgressBar.getProgress() == value || mProgressBar.getProgress() <=  && value == 100){
+          //  return;
+        //}
 
         if(progressAnimator!=null){
             progressAnimator.cancel();
         }
 
-        if(mSearchbar.getText().toString().equals("genesis.onion") && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
+        if((mSearchbar.getText().toString().equals("genesis.onion/search?q=$s&p_num=1&s_type=all") || mSearchbar.getText().toString().equals("genesis.onion")) && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
             return;
@@ -1468,13 +1480,6 @@ class homeViewController
     }
 
     void onSessionChanged(){
-    }
-
-    void onUpdateLogo(){
-
-        switch (status.sSettingSearchStatus)
-        {
-        }
     }
 
     /*-------------------------------------------------------POST UI TASK HANDLER-------------------------------------------------------*/
