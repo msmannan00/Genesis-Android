@@ -28,8 +28,9 @@ import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.torproject.android.proxy.wrapper.logRowModel;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+
+import org.torproject.android.service.wrapper.logRowModel;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.homeManager.homeController;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
-import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
@@ -11,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -78,10 +78,10 @@ import com.google.android.gms.ads.AdView;
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
-import org.torproject.android.proxy.OrbotService;
-import org.torproject.android.proxy.util.Prefs;
-import org.torproject.android.proxy.wrapper.LocaleHelper;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+import org.torproject.android.service.OrbotService;
+import org.torproject.android.service.util.Prefs;
+import org.torproject.android.service.wrapper.LocaleHelper;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
@@ -196,6 +196,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             status.initStatus(this);
             dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_INIT, Collections.singletonList(this));
             trueTime.getInstance().initTime();
+
+            helperMethod.updateResources(this, status.mSystemLocale.getLanguage());
+            pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.home_view);
@@ -734,8 +737,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             super.onDestroy();
             return;
         }
-        mBackSplash.setImageDrawable(null);
-        mBackSplash.setBackground(null);
 
         if(!status.mThemeApplying){
             if(!status.sSettingIsAppStarted){
@@ -746,32 +747,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
         }
 
-        KeyboardUtils.removeAllKeyboardToggleListeners();
-        mGatewaySplash.setOnTouchListener(null);
-
-        ((ConstraintLayout)mGatewaySplash.getParent()).removeView(mGatewaySplash);
-        ((ConstraintLayout)mGeckoView.getParent()).removeView(mGeckoView);
-        ((ConstraintLayout)mTabFragment.getParent()).removeView(mTabFragment);
-        ((LinearLayout)mSearchbar.getParent()).removeView(mSearchbar);
-
-        mTabFragment = null;
-        mNestedScroll = null;
-        mGeckoView.setOnFocusChangeListener(null);
-        mGeckoView.setOnTouchListener(null);
-        mGeckoView.destroyDrawingCache();
-        mGeckoView.releaseSession();
-        mGeckoClient.onDestroy();
-
-        mGeckoView.onDestroy();
-        mGeckoClient=null;
-        mHomeViewController = null;
-        activityContextManager.getInstance().setHomeController(null);
-        mGeckoView.releaseSession();
-        mGeckoView = null;
-
-        activityContextManager.getInstance().setHomeController(null);
-        activityContextManager.getInstance().setCurrentActivity(null);
-        pluginController.getInstance().onRemoveInstances();
+        // mGeckoClient.onDestroy();
+        // mGeckoView.onDestroy();
 
         unregisterReceiver(downloadStatus);
 
@@ -807,8 +784,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
             @Override
             public void onTextChanged(CharSequence s, int start,int before, int count) {
-                if(!mSearchbar.isFocused()){
-                    if(mFindText.getText().length()==0 && mGeckoClient!=null){
+                if(!mSearchbar.isFocused() && !status.mThemeApplying && mGeckoClient.getSession()!=null){
+                    if(mFindText.getText().length()==0 && mGeckoClient!=null && mGeckoClient.getSession()!=null){
                             mGeckoClient.getSession().getFinder().clear();
                             mHomeViewController.onUpdateFindBarCount(0,0);
                         }else if(mGeckoClient!=null){
@@ -1394,6 +1371,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onUpdateFindBar(false);
         mHomeViewController.onClearSelections(isKeyboardOpened);
         mTopBarContainer.getLayoutTransition().setDuration(0);
+
+        mSearchbar.clearFocus();
+        mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,false, true);
     }
 
     @Override
@@ -1583,9 +1563,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onStartApplication(View view){
-        pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, (String)dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
-        onInvokeProxyLoading();
         mHomeViewController.initHomePage();
+        new Handler().postDelayed(() ->
+        {
+            pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, (String)dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
+            onInvokeProxyLoading();
+        }, 1000);
     }
 
     public void onDownloadFile(){
@@ -1895,7 +1878,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,0));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME,true));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME, enums.Theme.THEME_DEFAULT));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,true));
@@ -1946,9 +1929,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mHomeViewController.onClearSelections(isKeyboardOpened);
                     mSearchbar.clearFocus();
                 }
-                else if(e_type.equals(GECKO_SCROLL_DOWN_MOVE)){
-                    mAppBar.setExpanded(true,false);
-                }
                 else if(e_type.equals(GECKO_SCROLL_UP_MOVE)){
                     mAppBar.setExpanded(false,false);
                 }
@@ -1960,12 +1940,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mAppBar.getLocalVisibleRect(rectf);
                     int height = mAppBar.getHeight();
 
-                    Log.i("asddasas","asdasd : " + rectf.top + " : " + height);
-                    if(rectf.top!=0 && rectf.top + height!=0)
-                    if(rectf.top<=height/2){
-                        mHomeViewController.expandTopBar(true, mGeckoView.getMaxY());
-                    }else {
-                        mHomeViewController.shrinkTopBar(true, mGeckoView.getMaxY());
+                    if(rectf.top>0 && rectf.top + height!=0){
+                        if(rectf.top<=height/2){
+                            mHomeViewController.expandTopBar(true, mGeckoView.getMaxY());
+                        }else {
+                            mHomeViewController.shrinkTopBar(true, mGeckoView.getMaxY());
+                        }
                     }
                 }
             }
@@ -2160,8 +2140,25 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(e_type.equals(enums.etype.fetch_favicon)){
                 mGeckoClient.onGetFavIcon((ImageView) data.get(0), (String) data.get(1), homeController.this);
             }
+            else if(e_type.equals(enums.etype.M_COPY_URL)){
+                mHomeViewController.onUpdateSearchBar((String) data.get(0), true, true, false);
+            }
             return null;
         }
+    }
+
+    public boolean updateResources(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Resources resources = context.getResources();
+
+        Configuration configuration = resources.getConfiguration();
+        configuration.locale = locale;
+
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
+        return true;
     }
 
     public void onDisableAdvert(){
@@ -2198,7 +2195,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }catch (Exception ignored){}
             new Handler().postDelayed(() ->
             {
-                if(mTabFragment!=null){
+                if(mTabFragment!=null && mGeckoClient.getSession()!=null){
                     if(mTabFragment.getVisibility()!=View.VISIBLE){
                         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, true));
                     }else {
@@ -2367,10 +2364,15 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.initTopBarPadding();
             }
             else if(e_type.equals(enums.etype.M_RATE_COUNT)){
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, status.sRateCount));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, status.sGlobalURLCount));
             }
             else if(e_type.equals(enums.etype.M_ORBOT_LOADING)){
                 pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_ORBOT_LOADING);
+            }
+            else if(e_type.equals(enums.etype.M_DEFAULT_BROWSER)){
+                if(helperMethod.isDefaultBrowserSet(homeController.this)){
+                    helperMethod.openDefaultBrowser(homeController.this);
+                }
             }
             else if(e_type.equals(enums.etype.M_NEW_IDENTITY)){
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);

@@ -1,7 +1,12 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.settingHomeManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
+import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.defaultBrowser;
 import com.darkweb.genesissearchengine.appManager.proxyStatusManager.proxyStatusController;
 import com.darkweb.genesissearchengine.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController;
@@ -37,6 +44,8 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 
 public class settingHomeController extends AppCompatActivity
@@ -73,6 +82,8 @@ public class settingHomeController extends AppCompatActivity
             activityContextManager.getInstance().onResetTheme();
         }
 
+        helperMethod.updateResources(this, status.mSystemLocale.getDisplayName());
+        activityContextManager.getInstance().getHomeController().updateResources(this, status.mSystemLocale.getDisplayName());
         super.onConfigurationChanged(newConfig);
     }
 
@@ -176,9 +187,9 @@ public class settingHomeController extends AppCompatActivity
 
     public void onDefaultBrowser(View view){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS));
+            helperMethod.openDefaultBrowser(this);
         }else{
-            //pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this),  M_NOT_SUPPORTED);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this),  M_NOT_SUPPORTED);
         }
     }
 

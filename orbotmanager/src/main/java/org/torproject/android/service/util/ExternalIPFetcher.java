@@ -2,8 +2,8 @@ package org.torproject.android.service.util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.torproject.android.proxy.OrbotService;
-import org.torproject.android.proxy.TorEventHandler;
+import org.torproject.android.service.OrbotService;
+import org.torproject.android.service.TorEventHandler;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -18,7 +18,7 @@ public class ExternalIPFetcher implements Runnable {
     private final static String ONIONOO_BASE_URL = "https://onionoo.torproject.org/details?fields=country_name,as_name,or_addresses&lookup=";
     private OrbotService mService;
     private TorEventHandler.Node mNode;
-    private int mLocalHttpProxyPort = 8125;
+    private int mLocalHttpProxyPort = 8118;
 
     public ExternalIPFetcher(OrbotService service, TorEventHandler.Node node, int localProxyPort) {
         mService = service;

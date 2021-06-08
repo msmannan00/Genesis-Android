@@ -50,7 +50,7 @@ import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -72,6 +72,7 @@ import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_DEFAULT_BROWSER;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_RATE_COUNT;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
@@ -102,6 +103,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     private boolean mRemovableFromBackPressed = false;
     private boolean mThemeChanged = false;
     private int mScollOffset = 0;
+    private selectionActionDelegate mSelectionActionDelegate;
 
     /*Temp Variables*/
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
@@ -131,8 +133,9 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         setPermissionDelegate(this);
         setScrollDelegate(this);
         mDownloadManager = new geckoDownloadManager();
+        mSelectionActionDelegate = new selectionActionDelegate(mContext, true);
         setPromptDelegate(new geckoPromptView(mContext));
-        setSelectionActionDelegate(new selectionActionDelegate(mContext, true));
+        setSelectionActionDelegate(mSelectionActionDelegate);
     }
 
     public void onDestroy(){
@@ -358,6 +361,9 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
             }else {
                 if(progress==100){
+                    if(!mCurrentURL.contains("genesis")){
+                        checkApplicationRate();
+                    }
                     if(!mIsProgressBarChanging){
                         mIsProgressBarChanging = true;
                         mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
@@ -529,7 +535,6 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.start_proxy);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID), enums.etype.search_update);
-            checkApplicationRate();
 
             /* Its Absence causes delay on first launch*/
 
@@ -732,6 +737,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     @Override
     public void onFullScreen(@NonNull GeckoSession var1, boolean var2) {
         mFullScreen = var2;
+        mSelectionActionDelegate.setFullScreen(mFullScreen);
         event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_full_screen);
     }
 
@@ -1105,10 +1111,15 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     private void checkApplicationRate(){
         if(status.sSettingIsAppStarted){
-            if(status.sRateCount==10){
+            if(status.sGlobalURLCount == 10){
                 event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_APPLICATION);
             }
-            status.sRateCount+=1;
+
+            else if(status.sGlobalURLCount == 20 || status.sGlobalURLCount == 80){
+                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_DEFAULT_BROWSER);
+            }
+
+            status.sGlobalURLCount +=1;
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), M_RATE_COUNT);
         }
     }

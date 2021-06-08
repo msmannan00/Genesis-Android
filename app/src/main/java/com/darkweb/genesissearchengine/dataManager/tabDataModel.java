@@ -158,8 +158,10 @@ class tabDataModel
             try{
                 if(mTabs.get(counter).getSession().getSessionID().equals(mSessionID))
                 {
+                    String[] params = new String[1];
+                    params[0] = mSessionState;
 
-                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET session = '" + mSessionState + "' WHERE mid='"+mTabs.get(counter).getmId() + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+                    mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET session = ? WHERE mid='"+mTabs.get(counter).getmId() + "'",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                     mTabs.add(0,mTabs.remove(counter));
                     break;
                 }

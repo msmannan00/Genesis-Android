@@ -25,7 +25,7 @@
             android:background="@color/c_background"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:layout_scrollFlags="enterAlwaysCollapsed"
             android:translationZ="3dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,7 +34,7 @@
                 app:scrimAnimationDuration="10"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:layout_scrollFlags="enterAlwaysCollapsed"
                 android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +45,7 @@
                 android:clipToPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:layout_scrollFlags="enterAlwaysCollapsed"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -246,6 +246,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pWebLayoutView"
+                android:paddingBottom="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="0dp"
@@ -742,6 +743,7 @@
                 android:background="@xml/hx_border_left"
                 android:ellipsize="end"
                 android:gravity="start"
+                android:alpha="0"
                 android:maxHeight="250dp"
                 android:maxLines="4"
                 android:minHeight="80dp"
@@ -754,7 +756,6 @@
                 android:textColor="@color/white"
                 android:textFontWeight="5"
                 android:textSize="14sp"
-                android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/pSettings"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.languageManager;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class languageController extends AppCompatActivity {
     private languageViewController mLanguageViewController;
     private languageModel mLanguageModel;
     private ImageView mBlocker;
+    private boolean mThemeApplied = false;
+    private Locale mLanguagePrevious = status.mSystemLocale;
 
     private RecyclerView mRecycleView;
     private languageAdapter mLanguageAdapter;
@@ -113,6 +116,7 @@ public class languageController extends AppCompatActivity {
             mRecycleView.scrollToPosition(mPosition);
         }else {
             int mPositionOffset = getIntent().getExtras().getInt("activity_restarted");
+            mThemeApplied = true;
             Objects.requireNonNull(mRecycleView.getLayoutManager()).scrollToPosition(mPositionOffset);
         }
     }
@@ -149,12 +153,6 @@ public class languageController extends AppCompatActivity {
         }
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,status.sSettingLanguage));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE_REGION,status.sSettingLanguageRegion));
-        finish();
-
-        getIntent().putExtra("activity_restarted",((LinearLayoutManager) Objects.requireNonNull(mRecycleView.getLayoutManager())).findFirstCompletelyVisibleItemPosition());
-        helperMethod.restartActivity(getIntent(), this);
-        overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
-        pluginController.getInstance().onLanguageInvoke(Arrays.asList(this, status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying), pluginEnums.eLangManager.M_SET_LANGUAGE);
 
         if(activityContextManager.getInstance().getSettingController()!=null && !activityContextManager.getInstance().getSettingController().isDestroyed()){
             activityContextManager.getInstance().getSettingController().onRedrawXML();
@@ -168,10 +166,14 @@ public class languageController extends AppCompatActivity {
         }
 
         status.mThemeApplying = true;
-        activityContextManager.getInstance().getHomeController().recreate();
-        if(activityContextManager.getInstance().getSettingGeneralController()!=null){
-            activityContextManager.getInstance().getSettingGeneralController().recreate();
-        }
+        mThemeApplied = true;
+
+        Intent intent = new Intent(this, languageController.class);
+        intent.putExtra("activity_restarted",((LinearLayoutManager) Objects.requireNonNull(mRecycleView.getLayoutManager())).findFirstCompletelyVisibleItemPosition());
+        this.startActivity(intent);
+
+        overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+        this.finish();
 
         return true;
     }
@@ -224,6 +226,22 @@ public class languageController extends AppCompatActivity {
         }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        if(mThemeApplied && !status.mThemeApplying){
+            helperMethod.updateResources(activityContextManager.getInstance().getHomeController(), status.mSystemLocale.getLanguage());
+            activityContextManager.getInstance().onResetTheme();
+
+            String mSystemLangugage = status.mSystemLocale.toString();
+            if(mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("ur_UR") || mLanguagePrevious.toString().equals("ur_PK") || mLanguagePrevious.toString().equals("ur_UR")){
+                activityContextManager.getInstance().getHomeController().recreate();
+            }
+            mLanguagePrevious = status.mSystemLocale;
+        }
+        status.mThemeApplying = false;
+        super.onPause();
     }
 
     @Override

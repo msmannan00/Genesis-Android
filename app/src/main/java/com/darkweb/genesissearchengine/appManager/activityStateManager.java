@@ -3,17 +3,9 @@ package com.darkweb.genesissearchengine.appManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-
-import androidx.core.app.NotificationManagerCompat;
-
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.pluginManager.pluginController;
-import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
-import org.torproject.android.proxy.OrbotService;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
-
-import java.util.Collections;
+import org.torproject.android.service.OrbotService;
 
 public class activityStateManager extends Service {
 

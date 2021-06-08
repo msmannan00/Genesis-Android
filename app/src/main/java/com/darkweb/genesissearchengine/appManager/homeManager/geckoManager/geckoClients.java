@@ -8,20 +8,24 @@ import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_REPORT_URL;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_APPLICATION_CRASH;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.COOKIES;
@@ -77,11 +81,8 @@ public class geckoClients
         if(mStatus){
             boolean mState = mSession.onRestoreState();
             if(!mState){
-                new Handler().postDelayed(() ->
-                {
-                    mSession.stop();
-                    mSession.loadUri(mSession.getCurrentURL());
-                }, 500);
+                mSession.stop();
+                loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
             }else {
                 String mURL = mSession.getCurrentURL();
                 if(mURL.equals("https://genesishiddentechnologies.com") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
@@ -139,7 +140,6 @@ public class geckoClients
     public void initRuntimeSettings(AppCompatActivity context){
         if(mRuntime==null){
             mRuntime = GeckoRuntime.getDefault(context.getApplicationContext());
-            mRuntime.getSettings().setAboutConfigEnabled(true);
             mRuntime.getSettings().setAboutConfigEnabled(true);
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
             mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
@@ -202,8 +202,10 @@ public class geckoClients
     public String getTheme(){
         if(mSessionID.equals(strings.GENERIC_EMPTY_STR)){
             return null;
-        }else {
+        }else if(mSession!=null && mSession.getTheme()!=null){
             return mSession.getTheme();
+        }else {
+            return null;
         }
     }
 
@@ -242,6 +244,8 @@ public class geckoClients
                         String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);
                         mSession.getSettings().setAllowJavascript(true);
                         mSession.initURL(mURL);
+
+                        mSession.stop();
                         mSession.loadUri(mURL);
                     }else {
                         String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData="+ dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH,null);

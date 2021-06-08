@@ -1,9 +1,14 @@
 package com.darkweb.genesissearchengine.pluginManager.adPluginManager;
 
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.darkweb.genesissearchengine.dataManager.dataController;
+import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.google.android.gms.ads.*;
@@ -83,8 +88,10 @@ public class adManager
 
                 @Override
                 public void onAdFailedToLoad(@NonNull LoadAdError var1) {
-                    Log.i("dsa","asd");
-                    bannerAdsLoading = false;
+                    new Handler().postDelayed(() ->
+                    {
+                        initializeBannerAds();
+                    }, 10000);
                 }
             });
         }

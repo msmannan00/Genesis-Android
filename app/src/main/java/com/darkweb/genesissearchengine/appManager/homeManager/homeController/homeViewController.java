@@ -47,8 +47,11 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import org.mozilla.geckoview.GeckoView;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -164,6 +167,8 @@ class homeViewController
         recreateStatusBar();
         initTopBarPadding();
         initializeViews();
+        stopScroll();
+        onFullScreen();
     }
 
     @SuppressLint("WrongConstant")
@@ -227,6 +232,7 @@ class homeViewController
                     View child = mAppBar.getChildAt(0);
                     AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
                     params.setScrollFlags(0);
+                    onFullScreen();
                     return;
                 }
             }
@@ -237,7 +243,7 @@ class homeViewController
             View child = mAppBar.getChildAt(0);
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
             params.setScrollFlags(0);
-
+            onFullScreen();
         }else {
             int paddingDp = 0;
             if(isFullScreen){
@@ -250,6 +256,7 @@ class homeViewController
             View child = mAppBar.getChildAt(0);
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
             params.setScrollFlags(1);
+            onFullScreen();
         }
     }
 
@@ -496,10 +503,12 @@ class homeViewController
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ColorAnimator oneToTwo = new ColorAnimator(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-            int mDelay = 500;
+            int mDelay = 1250;
             if(status.mThemeApplying || mInstant){
                 mDelay = 0;
             }
+
+            Log.i("asdadsshadkkasjd","asdasdasd");
 
             ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f);
             animator.setDuration(250).setStartDelay(mDelay);
@@ -531,16 +540,17 @@ class homeViewController
             });
             animator.start();
         }else {
-            mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+            mSplashScreen.animate().alpha(0).setDuration(250).setStartDelay(0);
         }
 
     }
 
     public void initSplashLoading(){
 
-        mLoadingText.setAlpha(0);
-        mLoadingText.setVisibility(View.VISIBLE);
-        mLoadingText.animate().setStartDelay(0).alpha(1);
+        if(mLoadingText.getAlpha()==0){
+            Log.i("sadads111","asdasdasd");
+            mLoadingText.animate().setStartDelay(0).setDuration(250).alpha(1);
+        }
 
         mProgressBarIndeterminate.setVisibility(View.VISIBLE);
         mProgressBarIndeterminate.animate().alpha(1);
@@ -615,7 +625,7 @@ class homeViewController
                                 }
                             }
 
-                            sleep(1500);
+                            sleep(500);
                             if(mFastConnect){
                                 continue;
                             }
@@ -632,13 +642,13 @@ class homeViewController
                         }
                     }
                     if(!status.sSettingIsAppStarted){
-                        startPostTask(messages.MESSAGE_ON_URL_LOAD);
                         mContext.runOnUiThread(() -> {
                             splashScreenDisable();
                         });
+                        startPostTask(messages.MESSAGE_ON_URL_LOAD);
                     }else {
                         mContext.runOnUiThread(() -> {
-                            mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME);
+                           mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME);
                         });
                     }
                 }
@@ -655,6 +665,9 @@ class homeViewController
         splashScreenDisable();
     }
 
+    public void stopScroll() {
+    }
+
     public void splashScreenDisableInstant() {
         mSplashScreen.setAlpha(0f);
         mSplashScreen.setVisibility(View.GONE);
@@ -669,18 +682,11 @@ class homeViewController
         if(mSplashScreen.getAlpha()==1){
             if(!mIsAnimating){
                 mIsAnimating = true;
-                triggerPostUI(2000);
-                mProgressBar.setVisibility(View.GONE);
-                mSplashScreen.animate().cancel();
-                onClearSelections(false);
-                mGeckoView.requestFocus();
-                mProgressBarIndeterminate.animate().cancel();
+                initStatusBarColor(false);
                 mProgressBarIndeterminate.animate().setStartDelay(350).setDuration(250).alpha(0).withEndAction(() -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        initStatusBarColor(false);
-                    }
 
-                    mSplashScreen.animate().setDuration(0).setStartDelay(1000).alpha(0).withEndAction(() -> {
+                    new Handler().postDelayed(() ->
+                    {
                         mProgressBarIndeterminate.setVisibility(View.GONE);
                         mSplashScreen.setClickable(false);
                         mSplashScreen.setFocusable(false);
@@ -695,7 +701,8 @@ class homeViewController
 
                         mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
                         mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
-                    });
+                    }, 2000);
+
                 });
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
@@ -1446,7 +1453,7 @@ class homeViewController
             params.setMargins(0, 0, 0,0);
             mNestedScroll.setLayoutParams(params);
 
-            com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,true));
+            com.darkweb.genesissearchengine.constants.status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,false));
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
@@ -1468,6 +1475,15 @@ class homeViewController
             mAppBar.invalidate();
         }
 
+    }
+
+    public void onFullScreen(){
+        if(status.sFullScreenBrowsing || isFullScreen){
+            mWebviewContainer.setPadding(0,0,0,0);
+        }
+        else {
+            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+        }
     }
 
     void onReDraw(){

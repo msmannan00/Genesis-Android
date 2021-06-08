@@ -119,9 +119,6 @@ public class NestedGeckoView extends GeckoView {
                     mNestedOffsetY += mScrollOffset[1];
                 }
 
-                if(status.sFullScreenBrowsing){
-                }
-
                 break;
 
             case MotionEvent.ACTION_DOWN:
@@ -186,7 +183,9 @@ public class NestedGeckoView extends GeckoView {
 
     @Override
     public void stopNestedScroll() {
-        mChildHelper.stopNestedScroll();
+        if(mChildHelper !=null){
+            mChildHelper.stopNestedScroll();
+        }
     }
 
     @Override

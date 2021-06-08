@@ -32,7 +32,6 @@ import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.darkweb.genesissearchengine.pluginManager.pluginReciever.downloadNotificationReciever;
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
-import org.torproject.android.proxy.util.Prefs;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;

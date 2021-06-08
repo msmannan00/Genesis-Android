@@ -9,14 +9,6 @@ public interface TorServiceConstants {
 
     String DIRECTORY_TOR_DATA = "tordata";
 
-    String TOR_CONTROL_PORT_FILE = "control.txt";
-    String TOR_PID_FILE = "torpid";
-
-    //torrc (tor config file)
-    String TORRC_ASSET_KEY = "torrc";
-
-    String TOR_CONTROL_COOKIE = "control_auth_cookie";
-
     //geoip data file asset key
     String GEOIP_ASSET_KEY = "geoip";
     String GEOIP6_ASSET_KEY = "geoip6";
@@ -26,8 +18,8 @@ public interface TorServiceConstants {
 
     int TOR_DNS_PORT_DEFAULT = 5400;
 
-    String HTTP_PROXY_PORT_DEFAULT = "8125"; // like Privoxy!
-    String SOCKS_PROXY_PORT_DEFAULT = "9055";
+    String HTTP_PROXY_PORT_DEFAULT = "8118"; // like Privoxy!
+    String SOCKS_PROXY_PORT_DEFAULT = "9050";
 
     //control port
     String LOG_NOTICE_HEADER = "NOTICE";
@@ -101,17 +93,16 @@ public interface TorServiceConstants {
     String STATUS_STARTS_DISABLED = "STARTS_DISABLED";
 
     // actions for internal command Intents
-    String CMD_SIGNAL_HUP = "signal_hup";
-    String CMD_NEWNYM = "newnym";
     String CMD_SET_EXIT = "setexit";
     String CMD_ACTIVE = "ACTIVE";
 
-    String PREF_BINARY_TOR_VERSION_INSTALLED = "BINARY_TOR_VERSION_INSTALLED";
-
+    String CMD_NEWNYM = "newnym";
+    String CMD_SETTING = "setting";
     //obfsproxy
     String OBFSCLIENT_ASSET_KEY = "obfs4proxy";
 
     String HIDDEN_SERVICES_DIR = "hidden_services";
-
+    String ONION_SERVICES_DIR = "v3_onion_services";
+    String V3_CLIENT_AUTH_DIR = "v3_client_auth";
 
 }

@@ -28,6 +28,7 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -227,10 +228,13 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
         @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if(v.getId() == mpHintListener.getId() || v.getId() == mMoveURL.getId()){
+            if(v.getId() == mpHintListener.getId()){
                 if(event.getAction() == MotionEvent.ACTION_MOVE){
                     helperMethod.hideKeyboard(mContext);
                 }
+            }
+            else if(v.getId() == mMoveURL.getId()){
+                mEvent.invokeObserver(Collections.singletonList(mMoveURL.getTag()), enums.etype.M_COPY_URL);
             }
             return false;
         }

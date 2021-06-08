@@ -13,6 +13,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -50,6 +51,8 @@ import androidx.core.app.ShareCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
+
+import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.defaultBrowser;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.example.myapplication.R;
@@ -587,6 +590,25 @@ public class helperMethod
         display.getRealSize(size);
 
         return size;
+    }
+
+    public static void openDefaultBrowser(AppCompatActivity mContext){
+        defaultBrowser mIconManager = new defaultBrowser();
+        mIconManager.openSetDefaultBrowserOption(mContext);
+    }
+
+    public static boolean isDefaultBrowserSet(AppCompatActivity mContext){
+        defaultBrowser mIconManager = new defaultBrowser();
+        return mIconManager.getabcEnabledValue(mContext);
+    }
+
+    public static void updateResources(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Resources resources = context.getResources();
+        Configuration configuration = resources.getConfiguration();
+        configuration.locale = locale;
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 
     public static void openActivity( Class<?> cls,int type,AppCompatActivity context,boolean animation){

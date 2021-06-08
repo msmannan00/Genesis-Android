@@ -3,6 +3,9 @@ package com.darkweb.genesissearchengine.appManager.homeManager.geckoManager;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
@@ -56,6 +59,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
     protected final boolean mUseFloatingToolbar;
     protected final @NonNull Matrix mTempMatrix = new Matrix();
     protected final @NonNull RectF mTempRect = new RectF();
+    private boolean mFullScreen = false;
 
     private boolean mExternalActionsEnabled;
 
@@ -63,6 +67,10 @@ public class selectionActionDelegate implements ActionMode.Callback,
     protected @Nullable GeckoSession mSession;
     protected @Nullable Selection mSelection;
     protected boolean mRepopulatedMenu;
+
+    public void setFullScreen(boolean pFullScreen){
+        mFullScreen = pFullScreen;
+    }
 
     @TargetApi(Build.VERSION_CODES.M)
     private class Callback2Wrapper extends ActionMode.Callback2 {
@@ -148,7 +156,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
      * @return True if the action is presently available.
      */
     protected boolean isActionAvailable(final @NonNull String id) {
-        if (mSelection == null) {
+        if (mSelection == null || mSelection.text.toString().length()<1) {
             return false;
         }
 
@@ -189,6 +197,9 @@ public class selectionActionDelegate implements ActionMode.Callback,
      */
     protected void prepareAction(final @NonNull String id, final @NonNull MenuItem item) {
 
+        if(mFullScreen){
+           return;
+        }
         switch (id) {
             case ACTION_CUT:
                 item.setTitle(android.R.string.cut);

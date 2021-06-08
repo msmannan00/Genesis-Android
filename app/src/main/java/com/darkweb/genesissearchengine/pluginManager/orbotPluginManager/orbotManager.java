@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import org.mozilla.gecko.PrefsHelper;
-import org.torproject.android.proxy.OrbotService;
-import org.torproject.android.proxy.util.Prefs;
-import org.torproject.android.proxy.wrapper.orbotLocalConstants;
+import org.torproject.android.service.OrbotService;
+import org.torproject.android.service.util.Prefs;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -17,7 +17,8 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
-import static org.torproject.android.proxy.TorServiceConstants.ACTION_START;
+import static org.torproject.android.service.TorServiceConstants.ACTION_START;
+
 
 // https://github.com/guardianproject/orbot/blob/8fca5f8ecddb4da9565ac3fd8936e4f28acdd352/BUILD.md
 public class orbotManager
@@ -60,6 +61,7 @@ public class orbotManager
         }
         else
         {
+            mAppContext.get().stopService(mServiceIntent);
             mAppContext.get().startService(mServiceIntent);
         }
 
@@ -219,7 +221,9 @@ public class orbotManager
     }
 
     private void newCircuit(){
-        OrbotService.getServiceObject().newIdentity();
+        if(OrbotService.getServiceObject()!=null){
+            OrbotService.getServiceObject().newIdentity();
+        }
     }
 
     private String getOrbotStatus(){

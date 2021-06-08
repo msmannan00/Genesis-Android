@@ -179,6 +179,16 @@ public class activityContextManager
         }
     }
 
+    public void onResetLanguage(){
+        for(int mCounter=0;mCounter<mStackList.size();mCounter++){
+            try{
+                if(!mStackList.get(mCounter).get().isFinishing()){
+                    activityThemeManager.getInstance().onConfigurationChanged(mStackList.get(mCounter).get());
+                }
+            }catch (Exception ignored){}
+        }
+    }
+
     public void onClearStack(){
         for(int mCounter=0;mCounter<mStackList.size();mCounter++){
             try{

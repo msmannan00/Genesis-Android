@@ -1,6 +1,8 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.generalManager;
 
+import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -27,6 +29,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class settingGeneralController extends AppCompatActivity {
 
@@ -70,6 +73,7 @@ public class settingGeneralController extends AppCompatActivity {
             }
         }
 
+        helperMethod.updateResources(this, status.mSystemLocale.getDisplayName());
     }
 
     private void viewsInitializations() {
