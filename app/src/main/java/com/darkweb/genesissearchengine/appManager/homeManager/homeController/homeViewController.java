@@ -58,6 +58,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_DOMAIN_URL;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
@@ -377,7 +379,7 @@ class homeViewController
                 mVoiceInput.setClickable(true);
                 mVoiceInput.setFocusable(true);
                 onUpdateSearchIcon(1);
-                mVoiceInput.setVisibility(View.GONE);
+                mVoiceInput.setVisibility(View.INVISIBLE);
                 mNewTab.setVisibility(View.VISIBLE);
                 mMenu.setVisibility(View.VISIBLE);
                 mSearchbar.setFadingEdgeLength(helperMethod.pxFromDp(20));
@@ -500,18 +502,16 @@ class homeViewController
     }
 
     public void initStatusBarColor(boolean mInstant) {
+        int mDelay = 2000;
+        if(status.mThemeApplying || mInstant){
+            mDelay = 0;
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ColorAnimator oneToTwo = new ColorAnimator(ContextCompat.getColor(mContext, R.color.landing_ease_blue), ContextCompat.getColor(mContext, R.color.green_dark_v2));
 
-            int mDelay = 1250;
-            if(status.mThemeApplying || mInstant){
-                mDelay = 0;
-            }
-
-            Log.i("asdadsshadkkasjd","asdasdasd");
-
             ValueAnimator animator = ObjectAnimator.ofFloat(0f, 1f);
-            animator.setDuration(250).setStartDelay(mDelay);
+            animator.setDuration(200).setStartDelay(mDelay);
             animator.addUpdateListener(animation ->
             {
                 float v = (float) animation.getAnimatedValue();
@@ -523,6 +523,7 @@ class homeViewController
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+                    onPostScreenDisable();
                 }
             });
             animator.addListener(new AnimatorListenerAdapter()
@@ -540,9 +541,25 @@ class homeViewController
             });
             animator.start();
         }else {
-            mSplashScreen.animate().alpha(0).setDuration(250).setStartDelay(0);
+           mSplashScreen.animate().alpha(0).setDuration(200).setStartDelay(mDelay).withEndAction(() -> onPostScreenDisable());
         }
+    }
 
+    public void onPostScreenDisable(){
+        mProgressBarIndeterminate.setVisibility(View.GONE);
+        mSplashScreen.setClickable(false);
+        mSplashScreen.setFocusable(false);
+        mSearchbar.setEnabled(true);
+        mBlocker.setEnabled(false);
+
+        mBlocker.setVisibility(View.GONE);
+        mGatewaySplash.setVisibility(View.GONE);
+        mConnectButton.setVisibility(View.GONE);
+        mPanicButton.setVisibility(View.GONE);
+        mPanicButtonLandscape.setVisibility(View.GONE);
+
+        mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
+        mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
     }
 
     public void initSplashLoading(){
@@ -674,7 +691,7 @@ class homeViewController
         mSplashScreen.setVisibility(View.GONE);
         mBlocker.setEnabled(false);
     }
-//C:\Users\MSi\AppData\Local\Android\ndk
+
     private boolean mIsAnimating = false;
     public void splashScreenDisable(){
         mTopBar.setAlpha(1);
@@ -683,27 +700,7 @@ class homeViewController
             if(!mIsAnimating){
                 mIsAnimating = true;
                 initStatusBarColor(false);
-                mProgressBarIndeterminate.animate().setStartDelay(350).setDuration(250).alpha(0).withEndAction(() -> {
 
-                    new Handler().postDelayed(() ->
-                    {
-                        mProgressBarIndeterminate.setVisibility(View.GONE);
-                        mSplashScreen.setClickable(false);
-                        mSplashScreen.setFocusable(false);
-                        mSearchbar.setEnabled(true);
-                        mBlocker.setEnabled(false);
-
-                        mBlocker.setVisibility(View.GONE);
-                        mGatewaySplash.setVisibility(View.GONE);
-                        mConnectButton.setVisibility(View.GONE);
-                        mPanicButton.setVisibility(View.GONE);
-                        mPanicButtonLandscape.setVisibility(View.GONE);
-
-                        mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
-                        mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
-                    }, 2000);
-
-                });
                 mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
                 status.sSettingIsAppRestarting = true;
@@ -933,6 +930,7 @@ class homeViewController
                 mBannerAds.setVisibility(View.GONE);
             }
         }
+        onFullScreen();
     }
 
     void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded){
@@ -1478,11 +1476,30 @@ class homeViewController
     }
 
     public void onFullScreen(){
+        Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
+        Object mCurrentURL = mEvent.invokeObserver(null, enums.etype.M_GET_CURRENT_URL);
+
         if(status.sFullScreenBrowsing || isFullScreen){
             mWebviewContainer.setPadding(0,0,0,0);
         }
         else {
-            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+            if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
+                if(mCurrentURL!=null){
+                    String mURL = (String) mCurrentURL;
+                    if(mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mURL.contains("genesishiddentechnologies.com")  || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                        mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+                    }else {
+                        int orientation = mContext.getResources().getConfiguration().orientation;
+                        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+                        } else {
+                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(110));
+                        }
+                    }
+                }
+            }else {
+                mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+            }
         }
     }
 

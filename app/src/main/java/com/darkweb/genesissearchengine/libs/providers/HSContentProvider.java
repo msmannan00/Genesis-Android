@@ -26,7 +26,7 @@ public class HSContentProvider extends ContentProvider {
             HiddenService.CREATED_BY_USER,
             HiddenService.ENABLED
     };
-    private static final String AUTH = "org.torproject.android.ui.hiddenservices.providers";
+    private static final String AUTH = "org.torproject.android.ui.hiddenservices.providers.genesis";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTH + "/hs");
     //UriMatcher
     private static final int ONIONS = 1;

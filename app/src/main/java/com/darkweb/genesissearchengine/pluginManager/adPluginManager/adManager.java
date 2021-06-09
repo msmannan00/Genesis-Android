@@ -53,7 +53,7 @@ public class adManager
             {
                 bannerAdsLoading = true;
                 MobileAds.initialize(pAppContext.getApplicationContext(), initializationStatus -> { });
-                RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("B1CF10D1F74698381CFF7BF9C485085B")).build();
+                RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("B1CF10D1F74698381CFF7BF9C485085B","D38EB6293679BC1D68FBDAC55A73DBA0")).build();
                 MobileAds.setRequestConfiguration(configuration);
                 initializeBannerAds();
             }

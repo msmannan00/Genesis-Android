@@ -234,7 +234,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             org.torproject.android.service.util.Prefs.setContext(activityContextManager.getInstance().getHomeController());
     }
 
-
     public void initWidget(){
         if(status.sWidgetResponse == enums.WidgetResponse.SEARCHBAR){
             if(!status.sSettingIsAppStarted){
@@ -912,6 +911,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mSearchbar.setEventHandler(new edittextManagerCallback());
 
         mSearchbar.setOnFocusChangeListener((v, hasFocus) -> {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
             status.sUIInteracted = true;
             if(!hasFocus)
             {
@@ -1320,7 +1320,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mHomeViewController.onSetBannerAdMargin(true,(boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
                 }
 
-                if(mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                if(mGeckoClient.getSession().wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                     mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
                 }else {
                     mHomeViewController.updateBannerAdvertStatus(true, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
@@ -1962,6 +1962,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            {
                initTabCountForced();
            }
+           else if(e_type.equals(enums.etype.M_ADVERT_LOADED))
+           {
+               return pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED);
+           }
            else if(e_type.equals(enums.etype.M_NEW_LINK_IN_NEW_TAB))
            {
                postNewLinkTabAnimationInBackground(dataToStr(data.get(0)));
@@ -2014,6 +2018,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            }
            else if(e_type.equals(enums.etype.M_GET_CURRENT_URL))
            {
+               if(mGeckoClient==null || mGeckoClient.getSession()==null){
+                   return null;
+               }
                return mGeckoClient.getSession().getCurrentURL();
            }
            else if(e_type.equals(enums.etype.M_SPLASH_DISABLE))
@@ -2281,6 +2288,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_BOOTSTRAPPED,true));
                 mHomeViewController.onPageFinished();
                 mGeckoClient.onRedrawPixel(homeController.this);
+                mHomeViewController.onFullScreen();
             }
             else if(e_type.equals(M_RATE_APPLICATION)){
                 if(!status.sSettingIsAppRated){

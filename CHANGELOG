@@ -303,7 +303,7 @@ f3211aca Fixes #236: Separate Constants For VPN, TOR and MAIN_APP
 cde49d1a Removes the refresh button on the VPN Selection screen
 351ef96f (bitmold-remove_orfox) Removes references to Orfox since it is being completely replaced with the Tor Browser for Android. Conversations surrounding this can be found here https://blog.torproject.org/comment/281767#comment-281767 and here https://trac.torproject.org/projects/tor/ticket/29955
 656d39b7 (tag: 16.1.0-BETA-5-tor-0.4.0.4-rc) update to 16.1.0-BETA-5-tor-0.4.0.4-rc
-814fbb31 reset default ports to 9055, 8125 but make them dynamic if needed - ports will be checked and if not available, increment +1 - new setting add to allow static setting of http port value
+814fbb31 reset default ports to 9050, 8118 but make them dynamic if needed - ports will be checked and if not available, increment +1 - new setting add to allow static setting of http port value
 827b905e ensure we are putting the right value in
 144a4ed5 small change to attempt to address localization glitches
 c4062678 Merge branch 'master' of github.com:n8fr8/orbot
@@ -366,7 +366,7 @@ a32452e7 Make text inputs in Orbot declare that they do want to opt out of IME p
 cd6560fa Merge pull request #202 from bitmold/no_constraint_layout
 a5d5c99f (public/master, gl/master) remove unused launcher art
 9257b66f don't shrink or minify for now
-56917567 (tag: 16.0.6-BETA-2-tor-0.3.5.8) many small changes to support new binary loading, startup and more - improved handling of port conflicts - fixed loading of tor binary on arm64-v8a - changed how we execute shell commands
+56905067 (tag: 16.0.6-BETA-2-tor-0.3.5.8) many small changes to support new binary loading, startup and more - improved handling of port conflicts - fixed loading of tor binary on arm64-v8a - changed how we execute shell commands
 8ed080f9 Removed Constraint Layout Dependency
 2a76b7af (tag: 16.0.6-BETA-1-tor-0.3.5.8) updated to SDK 28, added android.permission.FOREGROUND_SERVICE permission
 fb14c76c fixed strings with two many \\ escapes
@@ -914,8 +914,8 @@ Make the build process better and more reproduceable
 
 /** 15.1.0-RC-2 / 16-January-2016 / 9ed17b551c29b9edf94d64f5f013ad607c21bbc5 **/
 
-Quick fix for Samsung Galaxy devices which have a port conflict on the default SOCKS 9055 part
-* 6ffea9e add ability to check if configured SOCKS port is available Samsung devices like to use 9055 (Since their hardware model is i9
+Quick fix for Samsung Galaxy devices which have a port conflict on the default SOCKS 9050 part
+* 6ffea9e add ability to check if configured SOCKS port is available Samsung devices like to use 9050 (Since their hardware model is i9
 
 /** 15.1.0-RC-1 / 15-January-2016 / f541e9ffe14a2719863327bf262b48de135ee0fd **/
 
@@ -1455,7 +1455,7 @@ fc63929 ensure diag/test mode stop's Tor on activity exit
 4716696 make transport settings dynamic (remove from torrc)
 2fe57e8 pegging tor to 0.2.4.22
 00b535e updated to 14.0.2.1
-c2be4ac ensure polipo conf is updated; default to 9051 for ctrl port
+c2be4ac ensure polipo conf is updated; default to 9050 for ctrl port
 6ab9a7b reduce memory usage of polipo
 b26b9d4 update to 14.0.2
 aa8ff95 ensure readers are closed; ensure socks settings are applied
@@ -1470,7 +1470,7 @@ af51a98 allow support for adding custom lines to torrc
 98ea6d5 update changelog
 5776a87 update to 14.0.0-RC3
 bf6a1da update state when service connects
-451cfed keep SOCKS port as default 9055 (instead of 'auto')
+451cfed keep SOCKS port as default 9050 (instead of 'auto')
 f94e27a updated to 14.0.0-RC-1
 bedeb71 more fixes for hidden service configuration now multiple ports are properly configured and notification will display correctl
 051cce4 don't allow the tor control port socket to timeout

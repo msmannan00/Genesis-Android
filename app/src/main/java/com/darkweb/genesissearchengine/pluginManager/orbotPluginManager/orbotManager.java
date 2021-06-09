@@ -99,23 +99,31 @@ public class orbotManager
     /*Proxy Manager*/
 
     private void onSetProxy(){
+        PrefsHelper.setPref(keys.PROXY_TYPE, 1);
+        PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
+    }
 
+    private void onRestartProxy(){
+
+        Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
+        mServiceIntent.setAction(ACTION_START);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mAppContext.get().stopService(mServiceIntent);
+            mAppContext.get().startForegroundService(mServiceIntent);
+        }
+        else
+        {
+            mAppContext.get().stopService(mServiceIntent);
+            mAppContext.get().startService(mServiceIntent);
+        }
     }
 
     private void initializeProxy(int pShowImages, boolean mClearOnExit)
     {
-        PrefsHelper.setPref(keys.PROXY_TYPE, 0);
-        PrefsHelper.setPref(keys.PROXY_SOCKS,null);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, null);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,null);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,null);
-
-        PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-        PrefsHelper.setPref(keys.PROXY_SOCKS,constants.CONST_PROXY_SOCKS);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, 9050);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
-
         PrefsHelper.setPref(keys.PROXY_CACHE,constants.CONST_PROXY_CACHE);
         PrefsHelper.setPref(keys.PROXY_MEMORY,constants.CONST_PROXY_MEMORY);
         PrefsHelper.setPref(keys.PROXY_DO_NOT_TRACK_HEADER_ENABLED,constants.CONST_PROXY_DO_NOT_TRACK_HEADER_ENABLED);
@@ -302,6 +310,10 @@ public class orbotManager
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_DESTROY))
         {
             onDestroy((boolean) pData.get(0));
+        }
+        else if(pEventType.equals(pluginEnums.eOrbotManager.M_RESTART_PROXY))
+        {
+            onRestartProxy();
         }
         return null;
     }

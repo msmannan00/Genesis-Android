@@ -29,9 +29,10 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.libs.netcipher.client.StrongHttpsClient;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
-import com.darkweb.genesissearchengine.pluginManager.pluginReciever.downloadNotificationReciever;
 import com.example.myapplication.R;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -152,10 +153,10 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 HttpURLConnection conection;
                 Proxy proxy;
                 if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
-                    proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, 9055));
+                    proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(PROXY_ADDRESS, orbotLocalConstants.mSOCKSPort));
                     conection = (HttpURLConnection) url.openConnection(proxy);
                 }else {
-                    Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8125));
+                    Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", orbotLocalConstants.mHTTPPort));
                     URLConnection mURLConnection = new URI(f_url[0]).toURL().openConnection(mProxy);
                     conection = (HttpURLConnection) mURLConnection;
                 }
@@ -218,9 +219,9 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 StrongHttpsClient httpclient = new StrongHttpsClient(context);
 
                 if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
-                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9055);
+                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
                 }else {
-                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", 9055);
+                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
                 }
 
                 HttpGet httpget = new HttpGet(urlEncoded);

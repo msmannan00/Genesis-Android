@@ -6,6 +6,9 @@ import android.graphics.BitmapFactory;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.dataManager.models.imageRowModel;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
+import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -85,7 +88,7 @@ class imageDataModel
     private Bitmap getBitmapFromURL(String src) {
         try {
             java.net.URL url = new java.net.URL(src);
-            Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(CONST_PROXY_SOCKS, 9055));
+            Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(CONST_PROXY_SOCKS, orbotLocalConstants.mSOCKSPort));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection(proxy);
             connection.setConnectTimeout(10000);
             connection.setDoInput(true);

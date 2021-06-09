@@ -25,6 +25,8 @@ import android.util.Log;
 import com.darkweb.genesissearchengine.libs.netcipher.client.TlsOnlySocketFactory;
 import com.darkweb.genesissearchengine.libs.netcipher.proxy.OrbotHelper;
 
+import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -47,7 +49,7 @@ public class NetCipher {
     }
 
     public final static Proxy ORBOT_HTTP_PROXY = new Proxy(Proxy.Type.HTTP,
-            new InetSocketAddress("127.0.0.1", 8125));
+            new InetSocketAddress("127.0.0.1", orbotLocalConstants.mHTTPPort));
 
     private static Proxy proxy;
 

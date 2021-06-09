@@ -19,4 +19,7 @@ public class orbotLocalConstants
     public static String mManualBridgeType = "";
     public static boolean mNetworkState = true;
     public static String mBridgesDefault = "";
+
+    public static int mHTTPPort = 8118;
+    public static int mSOCKSPort = 9051;
 }

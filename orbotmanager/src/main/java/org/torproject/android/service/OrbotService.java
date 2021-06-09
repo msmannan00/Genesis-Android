@@ -94,10 +94,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     static final int NOTIFY_ID = 1;
     private static final int ERROR_NOTIFY_ID = 3;
     private static final int HS_NOTIFY_ID = 4;
-    private static final Uri V2_HS_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.hiddenservices.providers/hs");
-    private static final Uri V3_ONION_SERVICES_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.v3onionservice/v3");
-    private static final Uri COOKIE_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.hiddenservices.providers.cookie/cookie");
-    private static final Uri V3_CLIENT_AUTH_URI = Uri.parse("content://org.torproject.android.ui.v3onionservice.clientauth/v3auth");
+    private static final Uri V2_HS_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.hiddenservices.providers.genesis/hs");
+    private static final Uri V3_ONION_SERVICES_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.v3onionservice.genesis/v3");
+    private static final Uri COOKIE_CONTENT_URI = Uri.parse("content://org.torproject.android.ui.hiddenservices.providers.genesis.cookie/cookie");
+    private static final Uri V3_CLIENT_AUTH_URI = Uri.parse("content://org.torproject.android.ui.v3onionservice.genesis.clientauth/v3auth");
     private final static String NOTIFICATION_CHANNEL_ID = "orbot_channel_1";
     private static final String[] LEGACY_V2_ONION_SERVICE_PROJECTION = new String[]{
             OnionService._ID,
@@ -603,14 +603,23 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         if (socksPortPref.indexOf(':') != -1)
             socksPortPref = socksPortPref.split(":")[1];
 
-        socksPortPref = checkPortOrAuto(socksPortPref);
 
         String httpPortPref = prefs.getString(OrbotConstants.PREF_HTTP, (TorServiceConstants.HTTP_PROXY_PORT_DEFAULT));
 
         if (httpPortPref.indexOf(':') != -1)
             httpPortPref = httpPortPref.split(":")[1];
 
-        httpPortPref = checkPortOrAuto(httpPortPref);
+
+        try{
+            socksPortPref = "9051";
+            orbotLocalConstants.mSOCKSPort = 9051;
+            orbotLocalConstants.mSOCKSPort = Integer.parseInt(socksPortPref);
+            orbotLocalConstants.mHTTPPort = Integer.parseInt(httpPortPref);
+
+        }catch (Exception ex){
+            orbotLocalConstants.mSOCKSPort = 9050;
+            orbotLocalConstants.mHTTPPort = 8118;
+        }
 
         String isolate = "";
         if (prefs.getBoolean(OrbotConstants.PREF_ISOLATE_DEST, false)) {
@@ -692,6 +701,14 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         return fileTorRcCustom;
     }
 
+    public int getPortHTTP(){
+        return orbotLocalConstants.mHTTPPort;
+    }
+
+    public int getPortSOCKS(){
+        return orbotLocalConstants.mSOCKSPort;
+    }
+
     private String checkPortOrAuto(String portString) {
         if (!portString.equalsIgnoreCase("auto")) {
             boolean isPortUsed = true;
@@ -752,6 +769,14 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     /**
      * The entire process for starting tor and related services is run from this method.
      */
+    public void onRestart() {
+        try {
+            startTorService();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     private void startTor() {
         try {
 
@@ -896,44 +921,48 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         torServiceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                torService = ((TorService.LocalBinder) iBinder).getService();
-                try {
-                    conn = torService.getTorControlConnection();
-                    while (conn == null) {
-                        Log.v(TAG, "Waiting for Tor Control Connection...");
-                        Thread.sleep(500);
-                        conn = torService.getTorControlConnection();
-                    }
-                    mEventHandler = new TorEventHandler(OrbotService.this);
-                    logNotice("adding control port event handler");
-                    conn.setEventHandler(mEventHandler);
-                    ArrayList<String> events = new ArrayList<>(Arrays.asList(
-                            TorControlCommands.EVENT_OR_CONN_STATUS,
-                            TorControlCommands.EVENT_CIRCUIT_STATUS,
-                            TorControlCommands.EVENT_NOTICE_MSG,
-                            TorControlCommands.EVENT_WARN_MSG,
-                            TorControlCommands.EVENT_ERR_MSG,
-                            TorControlCommands.EVENT_BANDWIDTH_USED,
-                            TorControlCommands.EVENT_NEW_DESC,
-                            TorControlCommands.EVENT_ADDRMAP));
-                    if (Prefs.useDebugLogging()) {
-                        events.add(TorControlCommands.EVENT_DEBUG_MSG);
-                        events.add(TorControlCommands.EVENT_INFO_MSG);
-                    }
+                new Thread(){
+                    public void run(){
+                        torService = ((TorService.LocalBinder) iBinder).getService();
+                        try {
+                            conn = torService.getTorControlConnection();
+                            while (conn == null) {
+                                Log.v(TAG, "Waiting for Tor Control Connection...");
+                                Thread.sleep(500);
+                                conn = torService.getTorControlConnection();
+                            }
+                            mEventHandler = new TorEventHandler(OrbotService.this);
+                            logNotice("adding control port event handler");
+                            conn.setEventHandler(mEventHandler);
+                            ArrayList<String> events = new ArrayList<>(Arrays.asList(
+                                    TorControlCommands.EVENT_OR_CONN_STATUS,
+                                    TorControlCommands.EVENT_CIRCUIT_STATUS,
+                                    TorControlCommands.EVENT_NOTICE_MSG,
+                                    TorControlCommands.EVENT_WARN_MSG,
+                                    TorControlCommands.EVENT_ERR_MSG,
+                                    TorControlCommands.EVENT_BANDWIDTH_USED,
+                                    TorControlCommands.EVENT_NEW_DESC,
+                                    TorControlCommands.EVENT_ADDRMAP));
+                            if (Prefs.useDebugLogging()) {
+                                events.add(TorControlCommands.EVENT_DEBUG_MSG);
+                                events.add(TorControlCommands.EVENT_INFO_MSG);
+                            }
 
-                    int mDelay = 3000;
-                    if(orbotLocalConstants.mIsTorInitialized){
-                        mDelay = 0;
-                    }
-                    Thread.sleep(mDelay);
+                            int mDelay = 3000;
+                            if(orbotLocalConstants.mIsTorInitialized){
+                                mDelay = 0;
+                            }
+                            Thread.sleep(mDelay);
 
-                    conn.setEvents(events);
-                    logNotice("SUCCESS added control port event handler");
-                } catch (InterruptedException | IOException e) {
-                    e.printStackTrace();
-                    stopTorOnError(e.getLocalizedMessage());
-                    conn = null;
-                }
+                            conn.setEvents(events);
+                            logNotice("SUCCESS added control port event handler");
+                        } catch (InterruptedException | IOException e) {
+                            e.printStackTrace();
+                            stopTorOnError(e.getLocalizedMessage());
+                            conn = null;
+                        }
+                    }
+                }.start();
             }
 
             @Override

@@ -21,7 +21,7 @@ public class CookieContentProvider extends ContentProvider {
             ClientCookie.AUTH_COOKIE_VALUE,
             ClientCookie.ENABLED
     };
-    private static final String AUTH = "org.torproject.android.ui.hiddenservices.providers.cookie";
+    private static final String AUTH = "org.torproject.android.ui.hiddenservices.providers.genesis.cookie";
     public static final Uri CONTENT_URI =
             Uri.parse("content://" + AUTH + "/cookie");
     //UriMatcher

@@ -24,6 +24,8 @@ import android.content.Intent;
 import com.darkweb.genesissearchengine.libs.netcipher.proxy.OrbotHelper;
 
 import org.json.JSONObject;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.security.KeyManagementException;
@@ -173,7 +175,7 @@ abstract public class
     if (status.getStringExtra(OrbotHelper.EXTRA_STATUS)
       .equals(OrbotHelper.STATUS_ON)) {
       return(status.getIntExtra(OrbotHelper.EXTRA_PROXY_PORT_SOCKS,
-        9055));
+              orbotLocalConstants.mSOCKSPort));
     }
 
     return(-1);
@@ -183,7 +185,7 @@ abstract public class
     if (status.getStringExtra(OrbotHelper.EXTRA_STATUS)
       .equals(OrbotHelper.STATUS_ON)) {
       return(status.getIntExtra(OrbotHelper.EXTRA_PROXY_PORT_HTTP,
-        8125));
+              orbotLocalConstants.mHTTPPort));
     }
 
     return(-1);

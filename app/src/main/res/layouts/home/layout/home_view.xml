@@ -133,7 +133,7 @@
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="-60dp"
+                            android:layout_marginStart="-50dp"
                             android:layout_marginTop="-1dp"
                             android:layout_marginEnd="15dp"
                             android:background="@xml/hx_ripple_default_round"
@@ -145,7 +145,7 @@
                             android:scaleY="1.1"
                             android:src="@xml/ic_baseline_keyboard_voice"
                             android:tint="@color/c_text_v8"
-                            android:visibility="gone" />
+                            android:visibility="invisible" />
 
                         <Button
                             android:id="@+id/pNewTab"
@@ -207,7 +207,7 @@
                     android:background="@color/c_border_background_divider"
                     android:visibility="gone"
                     app:adSize="BANNER"
-                    app:adUnitId="ca-app-pub-6985886044951738/2756260661"
+                    app:adUnitId="ca-app-pub-3940256099942544/6300978111"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pTopbar" />
