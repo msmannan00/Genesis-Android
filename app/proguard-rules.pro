@@ -15,18 +15,20 @@
      public <init>(android.content.Context, android.util.AttributeSet, int);
  }
 
- -keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-  public static final *** NULL;
- }
+-dontobfuscate
+# https://stackoverflow.com/questions/9651703/using-proguard-with-android-without-obfuscation
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
 
- -keepnames @com.google.android.gms.common.annotation.KeepName class *
- -keepclassmembernames class * {
-    @com.google.android.gms.common.annotation.KeepName *;
-  }
+-keep class org.torproject.android.service.vpn.Tun2Socks {
+    void logTun2Socks(java.lang.String, java.lang.String, java.lang.String);
+}
 
- -keepnames class * implements android.os.Parcelable {
-  public static final ** CREATOR;
- }
+-keepattributes Signature
+-keepattributes Annotation
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+-dontwarn okio.**
 
- -dontobfuscate
- -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
+-dontoptimize
+-dontpreverify

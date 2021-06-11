@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Orbot</string>
-  <string name="app_description">Orbot is een gratis en vrije proxy-app die het andere apps mogelijk maakt het internet veiliger te gebruiken. Orbot gebruikt Tor om je internetverkeer te coderen en het vervolgens te verhullen het door het door een serie computers over de hele wereld te routeren. Tor is vrije software en een open netwerk dat je helpt te verdedigen tegen een vorm van netwerktoezicht die persoonlijke vrijheid en privacy, vertrouwelijke bedrijfsactiviteiten en relaties en staatsveiligheid genaamd \'traffic analyse\' bedreigt.</string>
-    <string name="status_starting_up">Orbot is bezig met starten…</string>
+  <string name="app_description">Genesis is een gratis en vrije proxy-app die het andere apps mogelijk maakt het internet veiliger te gebruiken. Orbot gebruikt Tor om je internetverkeer te coderen en het vervolgens te verhullen het door het door een serie computers over de hele wereld te routeren. Tor is vrije software en een open netwerk dat je helpt te verdedigen tegen een vorm van netwerktoezicht die persoonlijke vrijheid en privacy, vertrouwelijke bedrijfsactiviteiten en relaties en staatsveiligheid genaamd \'traffic analyse\' bedreigt.</string>
+    <string name="status_starting_up">Genesis is bezig met starten…</string>
   <string name="status_activated">Verbonden met het Tor-netwerk</string>
   <string name="status_disabled">Orbot is uitgeschakeld</string>
   <string name="status_shutting_down">TorService wordt afgesloten</string>

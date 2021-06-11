@@ -269,7 +269,7 @@
 	<string name="ORBOT_LOG_INFO" translatable="true">se você estiver enfrentando problemas de conectividade ao iniciar o Genesis, copie o código a seguir e encontre o problema online ou envie-o para nós, para que possamos tentar ajudá-lo</string>
 
 
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot logs</string>
+	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Genesis Logs</string>
 	<string name="HOME_MENU__NEW_TABS" translatable="true">novas guias</string>
 	<string name="HOME_MENU_CLOSE_TABS" translatable="true">aba fechada</string>
 	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">abrir abas recentes</string>

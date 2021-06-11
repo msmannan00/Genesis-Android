@@ -246,7 +246,7 @@
     <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Select E-mail below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start the application.</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">Language not supported</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">System language is not supported by this application. We are working to include it soon</string>
-    <string name="ALERT_ORBOT_INIT" translatable="true">Initializing Orbot</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">Initializing Genesis</string>
     <string name="ALERT_NOT_SUPPORTED" translatable="true">Action not supported</string>
     <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">No application found to handle the following command</string>
 
@@ -348,7 +348,7 @@
     <!-- Popup Menu -->
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
     <string name="HOME_MENU__NEW_CIRCUIT_CREATED" translatable="true">New identity created</string>
-    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot logs</string>
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Genesis Logs</string>
     <string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Open Recent Tabs</string>

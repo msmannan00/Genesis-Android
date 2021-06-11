@@ -1,5 +1,6 @@
 package com.darkweb.genesissearchengine.dataManager;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
@@ -46,7 +47,7 @@ public class sqlCipherDataModel
         {
             SQLiteDatabase.loadLibs(app_context);
             prepareDatabaseEnvironment(app_context);
-            sDatabaseInstance = SQLiteDatabase.openOrCreateDatabase(app_context.getDatabasePath(CONST_DATABASE_NAME + "_SECURE"), constants.CONST_ENCRYPTION_KEY_DATABASE,null, wrapHook(null));
+            sDatabaseInstance = SQLiteDatabase.openOrCreateDatabase(app_context.getDatabasePath(CONST_DATABASE_NAME + "_SECURE_V1"), constants.CONST_ENCRYPTION_KEY_DATABASE,null, wrapHook(null));
 
             sDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "history" + " (id  INT(4) PRIMARY KEY,date DATETIME,url VARCHAR,title VARCHAR);");
             sDatabaseInstance.execSQL("CREATE TABLE IF NOT EXISTS " + "bookmark" + " (id INT(4) PRIMARY KEY,title VARCHAR,url VARCHAR);");
@@ -94,15 +95,18 @@ public class sqlCipherDataModel
         }
     };
 
-    private void execSQL(String query,String[] params)
+    private void execSQL(String query,Object params,boolean pContentValues)
     {
         if(params==null)
         {
             sDatabaseInstance.execSQL(query);
         }
+        else if(pContentValues){
+            sDatabaseInstance.replace(query,null,(ContentValues)params);
+        }
         else
         {
-            sDatabaseInstance.execSQL(query,params);
+            sDatabaseInstance.execSQL(query,(String[])params);
         }
     }
 
@@ -194,17 +198,20 @@ public class sqlCipherDataModel
     }
 
     private void deleteFromList(int index,String table) {
-        execSQL("delete from "+table+" where id="+index,null);
+        execSQL("delete from "+table+" where id="+index,null, false);
     }
 
     /* External Triggers */
 
-    public Object onTrigger(dataEnums.eSqlCipherCommands pCommands, List<Object> pData){
+    public Object onTrigger(dataEnums.eSqlCipherCommands pCommands, List<Object> pData) {
         if(pCommands == dataEnums.eSqlCipherCommands.M_INIT){
             initialize((AppCompatActivity)pData.get(0));
         }
         else if(pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL){
-            execSQL((String)pData.get(0), (String[])pData.get(1));
+            execSQL((String)pData.get(0), pData.get(1), false);
+        }
+        else if(pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL_USING_CONTENT){
+            execSQL((String)pData.get(0), pData.get(1), true);
         }
         else if(pCommands == dataEnums.eSqlCipherCommands.M_SELECT_BOOKMARK){
             return selectBookmark();

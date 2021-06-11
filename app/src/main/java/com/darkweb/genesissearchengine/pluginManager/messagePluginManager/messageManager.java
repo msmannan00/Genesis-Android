@@ -463,21 +463,23 @@ public class messageManager
 
     private void downloadSingle()
     {
-        initializeDialog(R.layout.popup_download_url, Gravity.CENTER);
-        ((TextView) mDialog.findViewById(R.id.pDescription)).setText(mData.get(0).toString());
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            ArrayList<Object> tempData = new ArrayList<>();
-            if(mData!=null){
-                tempData.addAll(mData);
-            }
-            mDialog.dismiss();
-            final Handler handler = new Handler();
-            Runnable runnable = () -> mEvent.invokeObserver(tempData, M_DOWNLOAD_SINGLE);
-            handler.postDelayed(runnable, 1000);
-            onClearReference();
-        });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
+        if(mData.size()>0){
+            initializeDialog(R.layout.popup_download_url, Gravity.CENTER);
+            ((TextView) mDialog.findViewById(R.id.pDescription)).setText(mData.get(0).toString());
+            mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+            mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
+                ArrayList<Object> tempData = new ArrayList<>();
+                if(mData!=null){
+                    tempData.addAll(mData);
+                }
+                mDialog.dismiss();
+                final Handler handler = new Handler();
+                Runnable runnable = () -> mEvent.invokeObserver(tempData, M_DOWNLOAD_SINGLE);
+                handler.postDelayed(runnable, 1000);
+                onClearReference();
+            });
+            mDialog.setOnDismissListener(dialog -> onClearReference());
+        }
     }
 
     private void rateApp()

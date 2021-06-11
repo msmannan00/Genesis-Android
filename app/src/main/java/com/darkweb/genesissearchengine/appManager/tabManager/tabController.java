@@ -461,7 +461,7 @@ public class tabController extends Fragment
     public void onTabRowChanged(String pId){
         if(mListModel!=null){
             for(int mCounter=0; mCounter<mListModel.getList().size();mCounter++){
-                if(mListModel.getList().get(mCounter).getSession().getSessionID().equals(pId)){
+                if(mListModel.getList().get(mCounter)!=null && mListModel.getList().get(mCounter).getSession()!=null && mListModel.getList().get(mCounter).getSession().getSessionID()!=null && mListModel.getList().get(mCounter).getSession().getSessionID().equals(pId)){
                     if(mBlocker.getVisibility() != View.VISIBLE){
                         mTabAdapter.notifyItemChanged(mCounter);
                     }

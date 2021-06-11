@@ -9,7 +9,7 @@ public class dataEnums
     }
 
     public enum eSqlCipherCommands {
-        M_INIT, M_EXEC_SQL, M_SELECT_BOOKMARK, M_SELECT_HISTORY, M_SELECT_TABS, M_HISTORY_ID, M_DELETE_FROM_HISTORY
+        M_INIT, M_EXEC_SQL, M_EXEC_SQL_USING_CONTENT, M_SELECT_BOOKMARK, M_SELECT_HISTORY, M_SELECT_TABS, M_HISTORY_ID, M_DELETE_FROM_HISTORY
     }
 
     public enum eBookmarkCommands {
@@ -51,7 +51,7 @@ public class dataEnums
     }
 
     public enum eTabCallbackCommands {
-        M_EXEC_SQL
+        M_EXEC_SQL, M_EXEC_SQL_USING_CONTENT
     }
 
     public enum eBookmarkCallbackCommands {

@@ -611,8 +611,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
 
         try{
-            socksPortPref = "9051";
-            orbotLocalConstants.mSOCKSPort = 9051;
             orbotLocalConstants.mSOCKSPort = Integer.parseInt(socksPortPref);
             orbotLocalConstants.mHTTPPort = Integer.parseInt(httpPortPref);
 
@@ -926,7 +924,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                         torService = ((TorService.LocalBinder) iBinder).getService();
                         try {
                             conn = torService.getTorControlConnection();
-                            while (conn == null) {
+                            while (conn == null || !orbotLocalConstants.mIsTorInitialized) {
                                 Log.v(TAG, "Waiting for Tor Control Connection...");
                                 Thread.sleep(500);
                                 conn = torService.getTorControlConnection();
@@ -948,11 +946,6 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                                 events.add(TorControlCommands.EVENT_INFO_MSG);
                             }
 
-                            int mDelay = 3000;
-                            if(orbotLocalConstants.mIsTorInitialized){
-                                mDelay = 0;
-                            }
-                            Thread.sleep(mDelay);
 
                             conn.setEvents(events);
                             logNotice("SUCCESS added control port event handler");
@@ -1221,6 +1214,10 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     private void sendCallbackPorts(int socksPort, int httpPort, int dnsPort, int transPort) {
+
+        orbotLocalConstants.mSOCKSPort = socksPort;
+        orbotLocalConstants.mHTTPPort = httpPort;
+
         Intent intent = new Intent(LOCAL_ACTION_PORTS); // You can also include some extra data.
         intent.putExtra(EXTRA_SOCKS_PROXY_PORT, socksPort);
         intent.putExtra(EXTRA_HTTP_PROXY_PORT, httpPort);

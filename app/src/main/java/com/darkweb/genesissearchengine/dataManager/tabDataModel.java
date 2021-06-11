@@ -106,31 +106,35 @@ class tabDataModel
         mSession.stop();
         mSession.close();
 
-        if(pID == null){
-            String mID = strings.GENERIC_EMPTY_STR;
-            for(int counter = 0; counter< mTabs.size(); counter++){
-                if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
-                {
-                    mTabs.get(counter).getSession().stop();
-                    mTabs.get(counter).getSession().close();
-                    mTabs.remove(counter);
-                    mID = mTabs.get(counter).getmId();
-                    break;
+        try {
+            if(pID == null){
+                String mID = strings.GENERIC_EMPTY_STR;
+                for(int counter = 0; counter< mTabs.size(); counter++){
+                    if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
+                    {
+                        mTabs.get(counter).getSession().stop();
+                        mTabs.get(counter).getSession().close();
+                        mTabs.remove(counter);
+                        mID = mTabs.get(counter).getmId();
+                        break;
+                    }
                 }
-            }
 
-            mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + mID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
-        }else {
-            for(int counter = 0; counter< mTabs.size(); counter++){
-                if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
-                {
-                    mTabs.get(counter).getSession().stop();
-                    mTabs.get(counter).getSession().close();
-                    mTabs.remove(counter);
-                    break;
+                mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + mID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+            }else {
+                for(int counter = 0; counter< mTabs.size(); counter++){
+                    if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
+                    {
+                        mTabs.get(counter).getSession().stop();
+                        mTabs.get(counter).getSession().close();
+                        mTabs.remove(counter);
+                        break;
+                    }
                 }
+                mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + pID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
             }
-            mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + pID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 
@@ -233,10 +237,11 @@ class tabDataModel
         new Thread(){
             public void run(){
                 try {
+                    Log.i("FIZZAHFUCK3","asd : ");
                     for(int counter = 0; counter< mTabs.size(); counter++) {
                         int finalCounter = counter;
                         if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID)) {
-                            Bitmap mBitmap = pBitmapManager.poll(0);
+                            Bitmap mBitmap = pBitmapManager.poll(10000);
 
                             ByteArrayOutputStream out = new ByteArrayOutputStream();
                             mBitmap.compress(Bitmap.CompressFormat.PNG, 20, out);
@@ -255,11 +260,14 @@ class tabDataModel
                                 byte[] mThumbnail = out.toByteArray();
                                 ContentValues mContentValues = new  ContentValues();
                                 mContentValues.put("mThumbnail", mThumbnail);
-                                mExternalEvents.invokeObserver(Arrays.asList("tab",mContentValues, mTabs.get(finalCounter).getmId()), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+                                mExternalEvents.invokeObserver(Arrays.asList("tab",mContentValues, mTabs.get(finalCounter).getmId()), dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT);
                             }
                         }
                     }
-
+                    Log.i("FIZZAHFUCK4","asd : ");
+                } catch (Exception ex) {
+                    Log.i("FIZZAHFUCK2","asd : " + ex.getMessage());
+                    ex.printStackTrace();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }

@@ -86,7 +86,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     private eventObserver.eventListener event;
 
     private boolean wasBackPressed = false;
-    private String mSessionID;
+    private String mSessionID ;
     private boolean mCanGoBack = false;
     private boolean mCanGoForward = false;
     private boolean mFullScreen = false;
@@ -366,7 +366,9 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                     }
                     if(!mIsProgressBarChanging){
                         mIsProgressBarChanging = true;
-                        mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
+                        mContext.get().runOnUiThread(() -> {
+                            event.invokeObserver(Arrays.asList(mProgress, mSessionID), enums.etype.progress_update);
+                        });
                         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
                     }
                 }else {

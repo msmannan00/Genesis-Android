@@ -430,7 +430,11 @@ public class selectionActionDelegate implements ActionMode.Callback,
 
         try{
             if (mUseFloatingToolbar) {
-                mActionMode = mActivity.startActionMode(new Callback2Wrapper(),ActionMode.TYPE_FLOATING);
+                if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                    mActionMode = mActivity.startActionMode(this);
+                }else {
+                    mActionMode = mActivity.startActionMode(new Callback2Wrapper(),ActionMode.TYPE_FLOATING);
+                }
             } else {
                 mActionMode = mActivity.startActionMode(this);
             }

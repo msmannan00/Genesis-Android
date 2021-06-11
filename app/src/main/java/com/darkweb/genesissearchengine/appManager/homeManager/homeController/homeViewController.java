@@ -170,7 +170,7 @@ class homeViewController
         initTopBarPadding();
         initializeViews();
         stopScroll();
-        onFullScreen();
+        onFullScreen(false);
     }
 
     @SuppressLint("WrongConstant")
@@ -234,7 +234,7 @@ class homeViewController
                     View child = mAppBar.getChildAt(0);
                     AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
                     params.setScrollFlags(0);
-                    onFullScreen();
+                    onFullScreen(false);
                     return;
                 }
             }
@@ -245,7 +245,7 @@ class homeViewController
             View child = mAppBar.getChildAt(0);
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
             params.setScrollFlags(0);
-            onFullScreen();
+            onFullScreen(false);
         }else {
             int paddingDp = 0;
             if(isFullScreen){
@@ -258,7 +258,7 @@ class homeViewController
             View child = mAppBar.getChildAt(0);
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
             params.setScrollFlags(1);
-            onFullScreen();
+            onFullScreen(false);
         }
     }
 
@@ -930,7 +930,6 @@ class homeViewController
                 mBannerAds.setVisibility(View.GONE);
             }
         }
-        onFullScreen();
     }
 
     void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded){
@@ -1240,6 +1239,7 @@ class homeViewController
     }
 
     public void onFirstPaint(){
+        onFullScreen(true);
         mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.clear_alpha));
     }
 
@@ -1255,10 +1255,6 @@ class homeViewController
         }else {
             status.sDisableExpandTemp = false;
         }
-
-        //if(mProgressBar.getProgress() == value || mProgressBar.getProgress() <=  && value == 100){
-          //  return;
-        //}
 
         if(progressAnimator!=null){
             progressAnimator.cancel();
@@ -1285,10 +1281,10 @@ class homeViewController
                     status.sDisableExpandTemp = false;
                     mProgressBar.setProgress(0);
                     enableCollapsing();
+                    onFullScreen(false);
                 });
             }
         }
-
     }
 
     ObjectAnimator progressAnimator = null;
@@ -1475,9 +1471,15 @@ class homeViewController
 
     }
 
-    public void onFullScreen(){
+    public void onFullScreen(boolean pForced){
         Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
         Object mCurrentURL = mEvent.invokeObserver(null, enums.etype.M_GET_CURRENT_URL);
+        Object wasErrorPage = mEvent.invokeObserver(null, enums.etype.M_IS_ERROR_PAGE);
+
+        if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<100 && !pForced){
+            mWebviewContainer.setPadding(0,0,0,0);
+            return;
+        }
 
         if(status.sFullScreenBrowsing || isFullScreen){
             mWebviewContainer.setPadding(0,0,0,0);
@@ -1486,7 +1488,7 @@ class homeViewController
             if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
                 if(mCurrentURL!=null){
                     String mURL = (String) mCurrentURL;
-                    if(mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mURL.contains("genesishiddentechnologies.com")  || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                    if((wasErrorPage!=null && (boolean)wasErrorPage) || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mURL.contains("genesishiddentechnologies.com")  || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                         mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
                     }else {
                         int orientation = mContext.getResources().getConfiguration().orientation;

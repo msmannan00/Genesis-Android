@@ -181,6 +181,9 @@ public class dataController
             if(e_type.equals(dataEnums.eTabCallbackCommands.M_EXEC_SQL)){
                 invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, data);
             }
+            if(e_type.equals(dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT)){
+                invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL_USING_CONTENT, data);
+            }
             return null;
         }
     }
