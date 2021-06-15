@@ -65,6 +65,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StringReader;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,6 +88,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static org.torproject.android.service.wrapper.orbotLocalConstants.mBridgesDefault;
 
 public class OrbotService extends VpnService implements TorServiceConstants, OrbotConstants {
 
@@ -807,7 +810,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             startTorService();
 
-             /* if (Prefs.hostOnionServicesEnabled()) {
+             if (Prefs.hostOnionServicesEnabled()) {
                 try {
                     updateLegacyV2OnionNames();
                 } catch (SecurityException se) {
@@ -818,7 +821,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                 } catch (SecurityException se) {
                     logNotice("unable to upload v3 onion names");
                 }
-            } */
+            }
         } catch (Exception e) {
             Log.i("sad","asd");
             logException("Unable to start Tor: " + e.toString(), e);
@@ -924,7 +927,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                         torService = ((TorService.LocalBinder) iBinder).getService();
                         try {
                             conn = torService.getTorControlConnection();
-                            while (conn == null || !orbotLocalConstants.mIsTorInitialized) {
+                            while (conn == null) {
                                 Log.v(TAG, "Waiting for Tor Control Connection...");
                                 Thread.sleep(500);
                                 conn = torService.getTorControlConnection();
@@ -1656,9 +1659,12 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             try {
 
-                BufferedReader in =
-                        new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.bridges), "UTF-8"));
+                BufferedReader in = new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.bridges), "UTF-8"));
 
+                if(mBridgesDefault.length()>1){
+                    Reader inputString = new StringReader(mBridgesDefault);
+                    in = new BufferedReader(inputString);
+                }
                 String str;
 
                 while ((str = in.readLine()) != null) {
@@ -1691,7 +1697,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
         Collections.shuffle(alBridges, bridgeSelectRandom);
 
-        int maxBridges = 2;
+        int maxBridges = 12;
         int bridgeCount = 0;
 
 
@@ -1788,8 +1794,8 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             if (!TextUtils.isEmpty(action)) {
                 if (action.equals(ACTION_START) || action.equals(ACTION_START_ON_BOOT)) {
 
-                    //if (useIPtObfsMeekProxy())
-                    //    IPtProxy.startObfs4Proxy("DEBUG", true, false);
+                    if (useIPtObfsMeekProxy())
+                        IPtProxy.startObfs4Proxy("DEBUG", true, false);
 
                     if (useIPtSnowflakeProxy())
                         startSnowflakeClient();

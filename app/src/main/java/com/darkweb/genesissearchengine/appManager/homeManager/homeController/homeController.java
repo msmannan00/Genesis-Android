@@ -190,6 +190,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             onInitBooleans();
             orbotLocalConstants.mHomeIntent = getIntent();
 
+
             getWindow().getDecorView().setBackgroundColor(Color.WHITE);
             pluginController.getInstance().preInitialize(this);
             dataController.getInstance().initialize(this);

@@ -1,97 +1,54 @@
-package com.widget.search;
+package com.widget.Genesis.widgetManager;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.RemoteViews;
-import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.eventObserver;
 import com.example.myapplication.R;
-import com.widget.search.helperMethod.helperMethod;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
+import com.widget.Genesis.helperMethod.helperMethod;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-public class searchWidgetManager extends AppWidgetProvider {
+public class widgetController extends AppWidgetProvider {
+
+    /*Model Declaration*/
+    private widgetViewController mWidgetViewController;
+    private widgetModelController mWidgetModelController;
 
     /* Local Variables */
 
-    int mCurrentWidth;
+    private int mCurrentWidth;
+    private RemoteViews mViews;
 
     /* Navigator Initializations */
 
-    private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    private void initializeAppWidget(Context pContext, AppWidgetManager pAppWidgetManager, int pAppWidgetId) {
+        initializeModel(pContext);
+        initializeLocalEventHandler(pContext, pAppWidgetId);
+        pAppWidgetManager.updateAppWidget(pAppWidgetId, mViews);
+    }
 
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_search_controller);
+    private void initializeLocalEventHandler(Context pContext, int pAppWidgetId){
+        mViews.setOnClickPendingIntent(R.id.pTextInvoker, helperMethod.onCreatePendingIntent(pContext, pAppWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenApplication"));
+        mViews.setOnClickPendingIntent(R.id.pVoiceInvoker, helperMethod.onCreatePendingIntent(pContext, pAppWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenVoice"));
+    }
 
-        views.setOnClickPendingIntent(R.id.pTextInvoker, helperMethod.onCreatePendingIntent(context, appWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenApplication"));
-        views.setOnClickPendingIntent(R.id.pVoiceInvoker, helperMethod.onCreatePendingIntent(context, appWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenVoice"));
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+    private void initializeModel(Context pContext){
+        mViews = new RemoteViews(pContext.getPackageName(), R.layout.widget_search_controller);
+        mWidgetViewController = new widgetViewController(pContext, new widgetViewCallback(), mViews);
+        mWidgetModelController = new widgetModelController(new widgetModelCallback());
     }
 
     public void onReceive(Context context, Intent intent) {
-
-        String action = intent.getAction();
-        switch (action) {
-            case enums.WidgetCommands.OPEN_APPLICATION: {
-                status.sWidgetResponse = enums.WidgetResponse.SEARCHBAR;
-                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
-                launchIntent.putExtra(enums.WidgetCommands.OPEN_APPLICATION, true);
-                context.startActivity(launchIntent);
-                break;
-            }
-            case enums.WidgetCommands.OPEN_VOICE: {
-                status.sWidgetResponse = enums.WidgetResponse.VOICE;
-                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
-                launchIntent.putExtra(enums.WidgetCommands.OPEN_APPLICATION, true);
-                context.startActivity(launchIntent);
-                break;
-            }
-            case AppWidgetManager.ACTION_APPWIDGET_UPDATE: {
-                Bundle extras = intent.getExtras();
-                if (extras != null) {
-                    int[] appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
-                    if (appWidgetIds != null && appWidgetIds.length > 0) {
-                        this.onUpdate(context, AppWidgetManager.getInstance(context), appWidgetIds);
-                    }
-                }
-                break;
-            }
-            case AppWidgetManager.ACTION_APPWIDGET_DELETED: {
-                Bundle extras = intent.getExtras();
-                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
-                    final int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
-                    this.onDeleted(context, new int[]{appWidgetId});
-                }
-                break;
-            }
-            case AppWidgetManager.ACTION_APPWIDGET_OPTIONS_CHANGED: {
-                Bundle extras = intent.getExtras();
-                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)&& extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS)) {
-                    int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
-                    Bundle widgetExtras = extras.getBundle(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
-                    this.onAppWidgetOptionsChanged(context, AppWidgetManager.getInstance(context),appWidgetId, widgetExtras);
-                }
-                break;
-            }
-
-            case AppWidgetManager.ACTION_APPWIDGET_RESTORED: {
-                Bundle extras = intent.getExtras();
-                if (extras != null) {
-                    int[] oldIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_OLD_IDS);
-                    int[] newIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
-                    if (oldIds != null && oldIds.length > 0) {
-                        this.onRestored(context, oldIds, newIds);
-                        this.onUpdate(context, AppWidgetManager.getInstance(context), newIds);
-                    }
-                }
-                break;
-            }
-        }
+        initializeModel(context);
+        mWidgetModelController.onTrigger(widgetEnums.eModelViewController.M_ON_RECIEVE, Arrays.asList(context, intent));
     }
+
     /* Local Overrides */
 
     @Override
@@ -102,20 +59,41 @@ public class searchWidgetManager extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        initializeModel(context);
         if(mCurrentWidth!=0){
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_search_controller);
-            int size = (int) Math.floor ((mCurrentWidth - 30) / 70);;
-
-            if(size<=3){
-                views.setViewVisibility(R.id.pVoiceInput, View.GONE);
-                views.setViewVisibility(R.id.pSearchInputWidget, View.GONE);
-            }else {
-                views.setViewVisibility(R.id.pVoiceInput, View.VISIBLE);
-                views.setViewVisibility(R.id.pSearchInputWidget, View.VISIBLE);
-            }
-            appWidgetManager.updateAppWidget(appWidgetIds, views);
+            int size = (int) Math.floor ((mCurrentWidth - 30) / 70);
+            mWidgetViewController.onTrigger(widgetEnums.eWidgetViewController.M_INIT, Collections.singletonList(size));
+            appWidgetManager.updateAppWidget(appWidgetIds, mViews);
         }else {
-            updateAppWidget(context, appWidgetManager, appWidgetIds[0]);
+            initializeAppWidget(context, appWidgetManager, appWidgetIds[0]);
+        }
+    }
+
+    /* Callbacks */
+
+    public class widgetViewCallback implements eventObserver.eventListener {
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type) {
+            return null;
+        }
+    }
+
+    public class widgetModelCallback implements eventObserver.eventListener {
+        @Override
+        public Object invokeObserver(List<Object> data, Object e_type) {
+            if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_UPDATE)){
+                onUpdate((Context)data.get(0), (AppWidgetManager)data.get(1), (int[])data.get(2));
+            }
+            else if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_OPTION_CHANGE)){
+                onAppWidgetOptionsChanged((Context)data.get(0), (AppWidgetManager)data.get(1), (int)data.get(2), (Bundle)data.get(3));
+            }
+            else if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_RESTORE)){
+                onRestored((Context) data.get(0), (int[]) data.get(1), (int[]) data.get(2));
+            }
+            else if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_DELETE)){
+                onDeleted((Context) data.get(0), (int[]) data.get(1));
+            }
+            return null;
         }
     }
 }

@@ -567,7 +567,7 @@ public class tabController extends Fragment
             new Handler().postDelayed(() ->
             {
                 helperMethod.openActivity(settingAdvanceController.class, constants.CONST_LIST_HISTORY, activityContextManager.getInstance().getHomeController(),true);
-            }, 300);
+            }, 250);
         }
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);
     }

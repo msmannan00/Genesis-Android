@@ -402,7 +402,10 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     public GeckoResult<Boolean> onVisited(@NonNull GeckoSession var1, @NonNull String var2, @Nullable String var3, int var4) {
         if(var4==3 || var4==5 || var4==1){
             event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_url_load);
-            m_current_url_id = (int)event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
+            Object mID = event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
+            if(mID!=null){
+                m_current_url_id = (int)mID;
+            }
             isPageLoading = false;
         }
         return null;
@@ -438,7 +441,15 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         if(!mIsLoaded){
             return;
         }
-        if(wasBackPressed && mHistoryList.get(mHistoryList.getCurrentIndex()-1).getUri().equals(var2)){
+
+        boolean mPastURLVerify = false;
+        try {
+            if(mHistoryList.getCurrentIndex()-1>=0 && mHistoryList.getCurrentIndex()-1<mHistoryList.size()){
+                mPastURLVerify = mHistoryList.get(mHistoryList.getCurrentIndex()-1).getUri().equals(var2);
+            }
+        }catch (Exception ignored){}
+
+        if(wasBackPressed && mPastURLVerify){
             if(var2.equals("https://genesishiddentechnologies.com") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
                 if(var2.startsWith(CONST_GENESIS_URL_CACHED_DARK) && (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get()))){
                     isPageLoading = false;

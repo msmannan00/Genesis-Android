@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <receiver android:name="com.widget.search.searchWidgetManager">
+        <receiver android:name="com.widget.Genesis.widgetManager.widgetController">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

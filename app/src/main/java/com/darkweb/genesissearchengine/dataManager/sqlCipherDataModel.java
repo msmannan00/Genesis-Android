@@ -145,18 +145,16 @@ public class sqlCipherDataModel
                 tabRowModel model = new tabRowModel(c.getString(0), c.getString(1),c.getBlob(4));
                 GeckoSession.SessionState session = null;
                 try {
-                    // if(status.sRestoreTabs){
                         session = GeckoSession.SessionState.fromString(c.getString(6));
-                    // }
+                        model.setSession(mSession, c.getString(3),c.getString(2), c.getString(5), session);
+                        model.getSession().setSessionID(model.getmId());
+                        if(session != null){
+                            mTempListModel.add(0, model);
+                        }else {
+                            mTempListModel.add(model);
+                        }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                }
-                model.setSession(mSession, c.getString(3),c.getString(2), c.getString(5), session);
-                model.getSession().setSessionID(model.getmId());
-                if(session != null){
-                    mTempListModel.add(0, model);
-                }else {
-                    mTempListModel.add(model);
                 }
             } while(c.moveToNext());
         }

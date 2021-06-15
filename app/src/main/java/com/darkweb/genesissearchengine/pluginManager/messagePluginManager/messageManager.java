@@ -49,7 +49,6 @@ public class messageManager
 
     private void onClearReference(){
         mContext = null;
-        mData = null;
     }
 
     private void initializeDialog(int pLayout, int pGravity){
@@ -631,7 +630,7 @@ public class messageManager
     }
 
     void onReset(){
-        if(mDialog !=null){
+        if(mDialog !=null && !mDialog.isShowing()){
             mDialog.dismiss();
         }
     }
@@ -642,6 +641,7 @@ public class messageManager
     {
         if(!pEventType.equals(M_RATE_FAILURE) && !pEventType.equals(M_RATE_SUCCESS) && !pEventType.equals(M_NOT_SUPPORTED)){
             onClearReference();
+            mData = null;
         }
         if(pEventType.equals(pluginEnums.eMessageManager.M_RESET)){
             onReset();

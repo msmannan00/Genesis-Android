@@ -43,6 +43,10 @@ public class Prefs {
         return prefs.getBoolean(PREF_BRIDGES_ENABLED, bridgesEnabledDefault);
     }
 
+    public static boolean hostOnionServicesEnabled(){
+        return false;
+    }
+
     public static void putBridgesEnabled(boolean value) {
         putBoolean(PREF_BRIDGES_ENABLED, value);
     }

@@ -2,6 +2,9 @@ package com.darkweb.genesissearchengine.pluginManager.orbotPluginManager;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import org.mozilla.gecko.PrefsHelper;
 import org.torproject.android.service.OrbotService;
@@ -9,14 +12,20 @@ import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.lang.ref.WeakReference;
+import java.util.Collections;
 import java.util.List;
 
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_APPLICATION_CRASH;
 import static org.torproject.android.service.TorServiceConstants.ACTION_START;
 
 
