@@ -5,56 +5,31 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RemoteViews;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.example.myapplication.R;
-
+import com.widget.search.helperMethod.helperMethod;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_WIDGET_NAME;
 
 public class searchWidgetManager extends AppWidgetProvider {
 
     /* Local Variables */
 
-    private static final String SHARED_PREF_FILE = CONST_WIDGET_NAME;
-    private static final String COUNT_KEY = "count";
-    private static int mCurrentWidth = -1;
+    int mCurrentWidth;
 
     /* Navigator Initializations */
 
     private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
-        SharedPreferences prefs = context.getSharedPreferences(SHARED_PREF_FILE, 0);
-        int count = prefs.getInt(COUNT_KEY + appWidgetId, 0);
-        count++;
-
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_search_controller);
 
-        SharedPreferences.Editor prefEditor = prefs.edit();
-        prefEditor.putInt(COUNT_KEY + appWidgetId, count);
-        prefEditor.apply();
-
-        int[] idArray = new int[]{appWidgetId};
-        Intent intentUpdate = new Intent(context, searchWidgetManager.class);
-        intentUpdate.setAction("mOpenApplication");
-        intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
-        PendingIntent pendingUpdate = PendingIntent.getBroadcast(context, appWidgetId, intentUpdate, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Intent mintentUpdate = new Intent(context, searchWidgetManager.class);
-        mintentUpdate.setAction("mOpenVoice");
-        mintentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
-        PendingIntent mpintentUpdate = PendingIntent.getBroadcast(context, appWidgetId, mintentUpdate, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        views.setOnClickPendingIntent(R.id.pSearchLogo, pendingUpdate);
-        views.setOnClickPendingIntent(R.id.pTopBarContainer, pendingUpdate);
-        views.setOnClickPendingIntent(R.id.pSearchInputWidget, pendingUpdate);
-        views.setOnClickPendingIntent(R.id.pVoiceInput, mpintentUpdate);
+        views.setOnClickPendingIntent(R.id.pTextInvoker, helperMethod.onCreatePendingIntent(context, appWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenApplication"));
+        views.setOnClickPendingIntent(R.id.pVoiceInvoker, helperMethod.onCreatePendingIntent(context, appWidgetId, PendingIntent.FLAG_UPDATE_CURRENT, "mOpenVoice"));
         appWidgetManager.updateAppWidget(appWidgetId, views);
-
     }
 
     public void onReceive(Context context, Intent intent) {
@@ -95,21 +70,14 @@ public class searchWidgetManager extends AppWidgetProvider {
             }
             case AppWidgetManager.ACTION_APPWIDGET_OPTIONS_CHANGED: {
                 Bundle extras = intent.getExtras();
-                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)
-                        && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS)) {
+                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)&& extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS)) {
                     int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
                     Bundle widgetExtras = extras.getBundle(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
-                    this.onAppWidgetOptionsChanged(context, AppWidgetManager.getInstance(context),
-                            appWidgetId, widgetExtras);
+                    this.onAppWidgetOptionsChanged(context, AppWidgetManager.getInstance(context),appWidgetId, widgetExtras);
                 }
                 break;
             }
-            case AppWidgetManager.ACTION_APPWIDGET_ENABLED:
-                this.onEnabled(context);
-                break;
-            case AppWidgetManager.ACTION_APPWIDGET_DISABLED:
-                this.onDisabled(context);
-                break;
+
             case AppWidgetManager.ACTION_APPWIDGET_RESTORED: {
                 Bundle extras = intent.getExtras();
                 if (extras != null) {
@@ -124,40 +92,30 @@ public class searchWidgetManager extends AppWidgetProvider {
             }
         }
     }
-
     /* Local Overrides */
 
     @Override
     public void onAppWidgetOptionsChanged (Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle widgetInfo) {
-        int width = widgetInfo.getInt (AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
-        mCurrentWidth = width;
-        int[] appWidgetIds = new int[1];
-        appWidgetIds[0] = appWidgetId;
-        onUpdate(context, appWidgetManager, appWidgetIds);
+        mCurrentWidth = widgetInfo.getInt (AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
+        onUpdate(context, appWidgetManager, new int[]{appWidgetId});
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-
-            int size = getColsNum(mCurrentWidth);
+        if(mCurrentWidth!=0){
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_search_controller);
-            if(mCurrentWidth!=-1){
-                if(size<=2){
-                    views.setTextColor(R.id.pSearchInputWidget, Color.WHITE);
-                }else {
-                    views.setTextColor(R.id.pSearchInputWidget, Color.GRAY);
-                }
-                appWidgetManager.updateAppWidget(appWidgetIds, views);
+            int size = (int) Math.floor ((mCurrentWidth - 30) / 70);;
+
+            if(size<=3){
+                views.setViewVisibility(R.id.pVoiceInput, View.GONE);
+                views.setViewVisibility(R.id.pSearchInputWidget, View.GONE);
+            }else {
+                views.setViewVisibility(R.id.pVoiceInput, View.VISIBLE);
+                views.setViewVisibility(R.id.pSearchInputWidget, View.VISIBLE);
             }
+            appWidgetManager.updateAppWidget(appWidgetIds, views);
+        }else {
+            updateAppWidget(context, appWidgetManager, appWidgetIds[0]);
         }
     }
-
-    /* Helper Methods */
-
-    private int getColsNum (int size) {
-        return (int) Math.floor ((size - 30) / 70);
-    }
-
 }
