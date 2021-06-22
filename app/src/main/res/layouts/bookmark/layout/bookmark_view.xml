@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    tools:context="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController">
+    tools:context="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome.bookmarkController">
 
     <LinearLayout
         android:id="@+id/pHeaderContainer"

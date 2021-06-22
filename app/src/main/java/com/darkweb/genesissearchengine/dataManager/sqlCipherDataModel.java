@@ -101,8 +101,20 @@ public class sqlCipherDataModel
         {
             sDatabaseInstance.execSQL(query);
         }
+        else
+        {
+            sDatabaseInstance.execSQL(query,(String[])params);
+        }
+    }
+
+    private void execSQL(String query,Object params,boolean pContentValues,String whereClause, String[] whereArgs)
+    {
+        if(params==null)
+        {
+            sDatabaseInstance.execSQL(query);
+        }
         else if(pContentValues){
-            sDatabaseInstance.replace(query,null,(ContentValues)params);
+            sDatabaseInstance.update(query, (ContentValues)params, whereClause, whereArgs);
         }
         else
         {
@@ -209,7 +221,7 @@ public class sqlCipherDataModel
             execSQL((String)pData.get(0), pData.get(1), false);
         }
         else if(pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL_USING_CONTENT){
-            execSQL((String)pData.get(0), pData.get(1), true);
+            execSQL((String)pData.get(0), pData.get(1), true, (String)pData.get(3), (String[])pData.get(4));
         }
         else if(pCommands == dataEnums.eSqlCipherCommands.M_SELECT_BOOKMARK){
             return selectBookmark();

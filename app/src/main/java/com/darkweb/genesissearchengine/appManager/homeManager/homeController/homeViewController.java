@@ -595,8 +595,8 @@ class homeViewController
             initSplashLoading();
         });
         mGatewaySplash.animate().setDuration(350).alpha(0.4f);
-        mPanicButton.animate().setDuration(250).alpha(0f);
-        mPanicButtonLandscape.animate().setDuration(250).alpha(0f);
+        mPanicButtonLandscape.animate().setDuration(200).translationXBy(helperMethod.pxFromDp(50));
+        mPanicButton.animate().setDuration(200).translationXBy(helperMethod.pxFromDp(50));
     }
 
     private void initSplashScreen(){
@@ -930,10 +930,12 @@ class homeViewController
                 mBannerAds.setVisibility(View.GONE);
             }
         }
+        onFullScreen(false);
     }
 
     void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded){
-        if(status && pIsAdvertLoaded){
+        Object mCurrentURL = mEvent.invokeObserver(null, enums.etype.M_GET_CURRENT_URL);
+        if(status && pIsAdvertLoaded && !((String)mCurrentURL).contains("genesis")){
             if(mBannerAds.getAlpha()==0){
                 mBannerAds.animate().cancel();
                 mBannerAds.setAlpha(0);
@@ -941,18 +943,19 @@ class homeViewController
                 mBannerAds.setVisibility(View.VISIBLE);
             }
             onSetBannerAdMargin(true,true);
-        }else{
+        } /* else if(mBannerAds.getVisibility() != View.VISIBLE){
             if(mBannerAds.getAlpha()==1){
                 mBannerAds.animate().cancel();
                 mBannerAds.animate().alpha(0).withEndAction(() -> mBannerAds.setVisibility(View.GONE));
             }
             onSetBannerAdMargin(false,true);
-        }
+        } */
     }
 
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
     void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText, boolean pBypassFocus){
+
 
         if(url.endsWith("genesisconfigurenewidentity.com/")){
             return;
@@ -1397,7 +1400,10 @@ class homeViewController
         }
 
         if(pStatus){
-            onProgressBarUpdate(100, false);
+            if(mProgressBar.getAlpha()>0){
+                onProgressBarUpdate(100, false);
+            }
+
             this.mBlockerFullSceen.setVisibility(View.VISIBLE);
             this.mBlockerFullSceen.setAlpha(0f);
             this.mBlockerFullSceen.animate().setStartDelay(0).setDuration(200).alpha(1).withEndAction(() -> {

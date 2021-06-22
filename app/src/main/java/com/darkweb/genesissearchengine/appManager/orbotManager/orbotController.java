@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -107,7 +106,7 @@ public class orbotController extends AppCompatActivity {
     public void onVPNSwitch(View view){
         mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_VPN_SWITCH,Collections.singletonList(!mVpnSwitch.isChecked()));
         mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_VPN,Collections.singletonList(status.sVPNStatus));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.VPN_ENABLED,status.sVPNStatus));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED,status.sVPNStatus));
     }
 
     public void onClose(View view){

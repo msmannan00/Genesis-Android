@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.bookmarkManager;
+package com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome;
 
 import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
 
@@ -17,13 +17,13 @@ class bookmarkModel
         mModelList = model;
     }
 
-    private void removeFromMainList(int index)
+    private void removeFromList(int index)
     {
         mModelList.remove(index);
     }
 
     void onManualClear(int index){
-         removeFromMainList(index);
+         removeFromList(index);
     }
 
     void clearList(){

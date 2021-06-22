@@ -11,6 +11,7 @@ import com.example.myapplication.R;
 class landingViewController
 {
     /*Private Variables*/
+
     private AppCompatActivity mContext;
 
     /*Initializations*/
@@ -23,16 +24,6 @@ class landingViewController
     }
 
     private void initPostUI(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-        }
+        mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
     }
 }

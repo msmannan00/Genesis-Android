@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
-
     <!-- Permissions -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,19 +14,21 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        android:fullBackupContent="false"
         android:extractNativeLibs="true"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher_genesis"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/gx_network_security_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
+        <activity android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings.bookmarkSettingController"></activity>
+
         <receiver android:name="com.widget.Genesis.widgetManager.widgetController">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -55,7 +56,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController"
+            android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome.bookmarkController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -84,8 +85,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.notificationManager.settingNotificationController"
-            android:launchMode="singleTop"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController"
@@ -125,8 +126,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
-            <meta-data android:name="android.app.shortcuts"
+            <meta-data
+                android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
+
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
@@ -144,13 +147,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController"
-            android:launchMode="singleTop"/>
-
-        <activity android:name="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalURLNavigationContoller"
-            android:launchMode="singleTask"
-            >
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalURLNavigationContoller"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -191,19 +193,16 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="be76c64dae2519d4ab8daaed88298da14c7c294f" />
-
-        <!-- Live Build -->
-        <!-- --> <meta-data
+            android:value="be76c64dae2519d4ab8daaed88298da14c7c294f" /> <!-- Live Build -->
+        <!--  -->
+        <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5074525529134731~4717329156" />
-
-
-        <!-- Development Build -->
-        <!-- <meta-data
+            android:value="ca-app-pub-5074525529134731~4717329156" /> <!-- Development Build -->
+        <!--
+ <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6985886044951738~4177628900" /> -->
-
+            android:value="ca-app-pub-6985886044951738~4177628900" />
+        -->
         <service
             android:name="com.darkweb.genesissearchengine.pluginManager.downloadPluginManager.downloadService"
             android:enabled="true"
@@ -221,8 +220,8 @@
                 <action android:name="Download_Cancelled" />
             </intent-filter>
         </receiver>
-
-        <!-- Permissions File Provider Live
+        <!--
+ Permissions File Provider Live
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.darkweb.genesissearchengine.production.provider"
@@ -232,9 +231,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
         -->
-
         <!-- Permissions File Provider Dev -->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -245,28 +242,22 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
-
         <provider
             android:name="com.darkweb.genesissearchengine.libs.providers.HSContentProvider"
             android:authorities="org.torproject.android.ui.hiddenservices.providers.genesis"
             android:exported="false" />
-
         <provider
             android:name="com.darkweb.genesissearchengine.libs.providers.OnionServiceContentProvider"
             android:authorities="org.torproject.android.ui.v3onionservice.genesis"
             android:exported="false" />
-
         <provider
-            android:authorities="org.torproject.android.ui.v3onionservice.genesis.clientauth"
             android:name="com.darkweb.genesissearchengine.libs.providers.ClientAuthContentProviderGenesis"
-            android:exported="false"/>
-
+            android:authorities="org.torproject.android.ui.v3onionservice.genesis.clientauth"
+            android:exported="false" />
         <provider
             android:name="com.darkweb.genesissearchengine.libs.providers.CookieContentProvider"
             android:authorities="org.torproject.android.ui.hiddenservices.providers.genesis.cookie"
             android:exported="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -286,8 +277,6 @@
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
-
-
     </application>
 
 </manifest>

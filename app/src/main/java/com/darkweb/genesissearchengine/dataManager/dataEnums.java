@@ -13,7 +13,7 @@ public class dataEnums
     }
 
     public enum eBookmarkCommands {
-        M_ADD_BOOKMARK, M_GET_BOOKMARK, M_DELETE_BOOKMARK, M_CLEAR_BOOKMARK;
+        M_ADD_BOOKMARK, M_GET_BOOKMARK, M_DELETE_BOOKMARK, M_CLEAR_BOOKMARK, M_UPDATE_BOOKMARK;
     }
 
     public enum eReferenceWebsiteCommands {

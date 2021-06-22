@@ -64,7 +64,12 @@ public class keys
     public static final String BRIDGE_CUSTOM_BRIDGE_1 = "CLEAR_PREFS_V1";
     public static final String BRIDGE_CUSTOM_TYPE = "BRIDGE_CUSTOM_TYPE_V1";
     public static final String BRIDGE_ENABLES = "pref_bridges_enabled_V1";
-    public static final String VPN_ENABLED = "pref_vpn_V1";
+    public static final String BRIDGE_VPN_ENABLED = "pref_vpn_V1";
     public static final String BRIDGE_DEFAULT = "BRIDGE_DEFAULT";
 
+    /*Bookmark Settings*/
+
+    public static final String BOOKMARK_SETTING_NAME = "BOOKMARK_SETTING_NAME";
+    public static final String BOOKMARK_SETTING_URL = "BOOKMARK_SETTING_URL";
+    public static final String BOOKMARK_SETTING_ID = "BOOKMARK_SETTING_ID";
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.languageManager.languageController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -30,6 +32,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_APPLICATION_CRASH;
 
 public class settingGeneralController extends AppCompatActivity {
 
@@ -50,6 +54,7 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        onInitTheme();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         if(!status.mThemeApplying){
@@ -59,6 +64,23 @@ public class settingGeneralController extends AppCompatActivity {
         setContentView(R.layout.setting_general_view);
         activityContextManager.getInstance().setSettingGeneralController(this);
         viewsInitializations();
+    }
+
+    private void onInitTheme(){
+
+        if(status.mThemeApplying){
+            if(status.sTheme == enums.Theme.THEME_DARK){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }else if(status.sTheme == enums.Theme.THEME_LIGHT){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }else {
+                if(!status.sDefaultNightMode){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+            }
+        }
     }
 
     @Override
@@ -101,24 +123,20 @@ public class settingGeneralController extends AppCompatActivity {
                 boolean mIsThemeChangable = false;
                 if(status.sTheme == enums.Theme.THEME_DARK){
                     if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES){
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         mIsThemeChangable = true;
                     }
                 }
                 else if(status.sTheme == enums.Theme.THEME_LIGHT){
                     if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         mIsThemeChangable = true;
                     }
                 }else {
                     if(!status.sDefaultNightMode){
                         if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO){
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                             mIsThemeChangable = true;
                         }
                     }else {
                         if(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES){
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                             mIsThemeChangable = true;
                         }
                     }
@@ -128,9 +146,14 @@ public class settingGeneralController extends AppCompatActivity {
                     status.mThemeApplying = true;
                     onBackPressed();
                     overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
-                    activityContextManager.getInstance().getHomeController().onReInitTheme();
-                    activityContextManager.getInstance().getSettingController().onReInitTheme();
                     helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this,true);
+
+
+                    new Handler().postDelayed(() ->
+                    {
+                        activityContextManager.getInstance().getHomeController().onReInitTheme();
+                        activityContextManager.getInstance().getSettingController().onReInitTheme();
+                    }, 100);
                 }
             }
             return null;

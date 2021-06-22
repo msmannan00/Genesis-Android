@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -388,9 +389,10 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                             mWebThumbnail.setImageBitmap(model.getBitmap());
                         }else {
                             Drawable mDrawable = new BitmapDrawable(itemView.getContext().getResources(), model.getBitmap());
-                            helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable,250);
+                            helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable,150);
                         }
-                    }, 1 * getLayoutPosition());
+                        Log.i("SUPERFFF", "SUPERFFF : " + getLayoutPosition());
+                    }, getLayoutPosition());
                 }
 
                 if(mSelectedList.contains(model.getSession().getSessionID())){

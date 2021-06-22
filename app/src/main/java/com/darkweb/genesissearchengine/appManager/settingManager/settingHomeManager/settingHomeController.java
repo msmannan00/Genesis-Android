@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
@@ -28,6 +30,7 @@ import com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.
 import com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController;
 import com.darkweb.genesissearchengine.appManager.settingManager.trackingManager.settingTrackingController;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
@@ -46,6 +49,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 
 public class settingHomeController extends AppCompatActivity
@@ -85,6 +89,23 @@ public class settingHomeController extends AppCompatActivity
         helperMethod.updateResources(this, status.mSystemLocale.getDisplayName());
         activityContextManager.getInstance().getHomeController().updateResources(this, status.mSystemLocale.getDisplayName());
         super.onConfigurationChanged(newConfig);
+    }
+
+    private void onInitTheme(){
+
+        if(status.mThemeApplying){
+            if(status.sTheme == enums.Theme.THEME_DARK){
+                setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }else if(status.sTheme == enums.Theme.THEME_LIGHT){
+                setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }else {
+                if(!status.sDefaultNightMode){
+                    setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }else {
+                    setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+            }
+        }
     }
 
     private void viewsInitializations()

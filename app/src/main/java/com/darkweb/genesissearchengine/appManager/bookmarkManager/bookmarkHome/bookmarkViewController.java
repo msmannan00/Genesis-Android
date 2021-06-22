@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.bookmarkManager;
+package com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
-import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,15 +28,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

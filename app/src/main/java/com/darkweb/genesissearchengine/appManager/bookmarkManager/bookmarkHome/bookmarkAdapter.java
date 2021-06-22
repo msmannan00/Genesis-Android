@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.bookmarkManager;
+package com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,7 +19,6 @@ import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -158,7 +157,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
     @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mListHolderContext = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_bookmark_row_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bookmark_row_view, parent, false);
         return new listViewHolder(view);
     }
 
@@ -377,7 +376,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
 
 
     /*View Holder Extensions*/
-    class listViewHolder extends RecyclerView.ViewHolder
+    class listViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         TextView mHeader;
         TextView mDescription;
@@ -390,6 +389,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         LinearLayout mDateContainer;
         LinearLayout mLoadingContainer;
         ImageView mHindTypeIconTemp;
+        ImageButton mBookmarkEdit;
 
         listViewHolder(View itemView) {
             super(itemView);
@@ -406,6 +406,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             mWebLogo = itemView.findViewById(R.id.pWebLogo);
             mLoadingContainer = itemView.findViewById(R.id.pLoadingContainer);
             mFaviconLogo = itemView.findViewById(R.id.pFaviconLogo);
+            mBookmarkEdit = itemView.findViewById(R.id.pBookmarkEdit);
             mHindTypeIconTemp = new ImageView(mContext);
 
             if(model.getID() == -1){
@@ -442,7 +443,11 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mHeader.setText(model.getHeader());
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
                 String header = model.getHeader();
-                mDescription.setText(("https://"+model.getDescription()));
+                mDescription.setText(model.getDescription());
+                if(!model.getDescription().startsWith("http://") && !model.getDescription().startsWith("https://"))
+                {
+                    mDescription.setText("https://" + mDescription.getText().toString());
+                }
 
                 if(model.getDescription().contains("genesishiddentechnologies.com") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
@@ -475,6 +480,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                     }.start();
                 }
 
+                mRowMenu.setOnClickListener(this::onClick);
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
             }
 
@@ -490,6 +496,15 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
             }else if(mLogoImage.getAlpha()>0){
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
+            }
+
+            mBookmarkEdit.setOnClickListener(this::onClick);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId() == R.id.pBookmarkEdit){
+                mEvent.invokeObserver(Arrays.asList(mHeader.getText(), mDescription.getText(), mModelList.get(getLayoutPosition()).getID()), enums.etype.M_OPEN_BOOKMARK_SETTING);
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.bookmarkManager;
+package com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;

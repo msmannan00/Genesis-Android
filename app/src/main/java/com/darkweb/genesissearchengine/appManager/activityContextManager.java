@@ -3,7 +3,7 @@ package com.darkweb.genesissearchengine.appManager;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkController;
+import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome.bookmarkController;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;

@@ -38,6 +38,7 @@ class tabDataModel
 
     private ArrayList<tabRowModel> mTabs = new ArrayList<>();
     void initializeTab(ArrayList<tabRowModel> pTabMdel){
+        mTabs.clear();
         mTabs.addAll(pTabMdel);
     }
 
@@ -79,7 +80,9 @@ class tabDataModel
                 return enums.AddTabCallback.TAB_ADDED;
             }
 
-            mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+            if(mTabModel.getmId()!=null){
+                //mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+            }
         }
         return enums.AddTabCallback.TAB_ADDED;
     }
@@ -195,7 +198,9 @@ class tabDataModel
                     return false;
                 }
 
-                mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabs.get(counter).getmId() +"','" + m_date + "',?,?,?);",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+                if(mTabs.get(counter).getmId()!=null){
+                    mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabs.get(counter).getmId() +"','" + m_date + "',?,?,?);",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
+                }
                 return true;
             }
         }
@@ -260,7 +265,7 @@ class tabDataModel
                                 byte[] mThumbnail = out.toByteArray();
                                 ContentValues mContentValues = new  ContentValues();
                                 mContentValues.put("mThumbnail", mThumbnail);
-                                mExternalEvents.invokeObserver(Arrays.asList("tab",mContentValues, mTabs.get(finalCounter).getmId()), dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT);
+                                mExternalEvents.invokeObserver(Arrays.asList("tab",mContentValues, "mid = ?", new String[]{mTabs.get(finalCounter).getmId()}), dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT);
                             }
                         }
                     }

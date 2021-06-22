@@ -68,6 +68,22 @@ public class bookmarkDataModel {
         mBookmarks.clear();
     }
 
+    void updateBookmark(String pBookmarkName, String pBookmarkURL, int pBookmarkID){
+        for(int mCounter=0;mCounter<mBookmarks.size();mCounter++){
+            if(mBookmarks.get(mCounter).getID()==pBookmarkID){
+                mBookmarks.get(mCounter).setHeader(pBookmarkName);
+                mBookmarks.get(mCounter).setURL(pBookmarkURL);
+            }
+        }
+
+        int autoval = 0;
+        String[] params = new String[2];
+        params[0] = pBookmarkName;
+        params[1] = pBookmarkURL;
+
+        mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
+    }
+
     void deleteBookmark(int pID) {
         for(int mCounter=0;mCounter<mBookmarks.size();mCounter++){
             if(mBookmarks.get(mCounter).getID()==pID){
@@ -80,18 +96,21 @@ public class bookmarkDataModel {
 
     /* External Triggers */
 
-    public Object onTrigger(dataEnums.eBookmarkCommands p_commands, List<Object> pData){
-        if(p_commands == dataEnums.eBookmarkCommands.M_GET_BOOKMARK){
+    public Object onTrigger(dataEnums.eBookmarkCommands pCommands, List<Object> pData){
+        if(pCommands == dataEnums.eBookmarkCommands.M_GET_BOOKMARK){
             return getBookmark();
         }
-        else if(p_commands == dataEnums.eBookmarkCommands.M_ADD_BOOKMARK){
+        else if(pCommands == dataEnums.eBookmarkCommands.M_ADD_BOOKMARK){
             addBookmark((String)pData.get(0), (String)pData.get(1));
         }
-        else if(p_commands == dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK){
+        else if(pCommands == dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK){
             deleteBookmark((int)pData.get(0));
         }
-        else if(p_commands == dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK){
+        else if(pCommands == dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK){
             clearBookmark();
+        }
+        else if(pCommands == dataEnums.eBookmarkCommands.M_UPDATE_BOOKMARK){
+            updateBookmark((String) pData.get(0),(String) pData.get(1),(int) pData.get(2));
         }
 
         return null;

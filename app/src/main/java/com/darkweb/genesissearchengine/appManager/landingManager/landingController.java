@@ -21,14 +21,12 @@ import java.util.Collections;
 
 public class landingController extends AppIntro {
 
-    private landingViewController mLauncherViewController;
+    private landingViewController mLandingViewController;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Instead of fragments, you can also use our default slide
-        // Just set a title, description, background and image. AppIntro will do the rest.
         CustomSlideBigText welcome = CustomSlideBigText.newInstance(R.layout.landing_view);
         welcome.setTitle(getString(R.string.LANDING_HELLO));
         welcome.setSubTitle(getString(R.string.LANDING_WELCOME));
@@ -49,20 +47,16 @@ public class landingController extends AppIntro {
         });
         addSlide(cs2);
 
-
-        // OPTIONAL METHODS
-        // Override bar/separator color.
         setBarColor(getResources().getColor(R.color.landing_ease_blue));
         setSeparatorColor(getResources().getColor(R.color.headerblack));
 
-        // Hide Skip/Done button.
         showSkipButton(false);
         setProgressButtonEnabled(true);
         initConnections();
     }
 
     private void initConnections(){
-        mLauncherViewController = new landingViewController(this,null);
+        mLandingViewController = new landingViewController(this,null);
     }
 
 

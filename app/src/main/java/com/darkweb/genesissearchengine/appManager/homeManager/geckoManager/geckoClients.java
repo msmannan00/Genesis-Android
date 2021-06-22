@@ -192,7 +192,7 @@ public class geckoClients
         mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE );
         mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
         onUpdateFont();
-        onReload(mNestedGeckoView, pcontext);
+        onReload(mNestedGeckoView, pcontext,false);
     }
 
     public void resetSession(){
@@ -308,7 +308,7 @@ public class geckoClients
     public void onBackPressed(boolean isFinishAllowed, int mTabSize, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         if(mSession.canGoBack()){
             mSession.goBackSession();
-            mSession.onUpdateBannerAdvert();
+            //mSession.onUpdateBannerAdvert();
         }
         else if(isFinishAllowed){
             if(mSession.getRemovableFromBackPressed() && mTabSize>1){
@@ -362,12 +362,12 @@ public class geckoClients
         mSession.stop();
     }
 
-    public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
+    public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall){
         mSession.stop();
         String url = mSession.getCurrentURL();
         if(url.startsWith("https://genesishiddentechnologies.com/?pG") || url.startsWith("https://genesishiddentechnologies.com?pG") || url.endsWith("genesishiddentechnologies.com") ||  url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)){
             loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
-        }else{
+        }else if(!isThemeCall){
             mSession.reload();
         }
     }

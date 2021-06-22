@@ -35,6 +35,7 @@ import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.dataManager.models.tabRowModel;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.darkweb.genesissearchengine.appManager.tabManager.tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_FORCED;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_RESET;
+import static org.mozilla.gecko.util.ThreadUtils.runOnUiThread;
 
 public class tabController extends Fragment
 {
@@ -165,7 +168,7 @@ public class tabController extends Fragment
     }
 
     public void onInitFirstElement(){
-        mHomeController.runOnUiThread(() -> {
+        runOnUiThread(() -> {
             if(mTabAdapter!=null){
                 if(mBlocker.getVisibility() != View.VISIBLE){
                     mTabAdapter.notifyItemChanged(0);
