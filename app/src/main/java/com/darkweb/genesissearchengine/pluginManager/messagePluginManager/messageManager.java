@@ -18,7 +18,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
@@ -48,12 +47,12 @@ public class messageManager
     /*Initializations*/
 
     private void onClearReference(){
+        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog!=null && mDialog.isShowing()){
+            mDialog.dismiss();
+        }
         if(mContext != null){
             mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             mContext = null;
-        }
-        if(mDialog!=null){
-            mDialog.dismiss();
         }
     }
 
@@ -722,7 +721,7 @@ public class messageManager
     }
 
     void onReset(){
-        if(mDialog !=null && !mDialog.isShowing()){
+        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog!=null && mDialog.isShowing()){
             mDialog.dismiss();
         }
     }
@@ -785,6 +784,7 @@ public class messageManager
 
                 case M_RATE_APP:
                     /*VERIFIED*/
+                    //onClearReference();
                     rateApp();
                     break;
 

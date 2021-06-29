@@ -218,7 +218,7 @@
                     android:background="@color/c_border_background_divider"
                     android:visibility="gone"
                     app:adSize="BANNER"
-                    app:adUnitId="ca-app-pub-5074525529134731/9885895358"
+                    app:adUnitId="ca-app-pub-5074525529134731/7227708311"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pTopbar" />
