@@ -48,7 +48,13 @@ public class messageManager
     /*Initializations*/
 
     private void onClearReference(){
-        mContext = null;
+        if(mContext != null){
+            mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            mContext = null;
+        }
+        if(mDialog!=null){
+            mDialog.dismiss();
+        }
     }
 
     private void initializeDialog(int pLayout, int pGravity){
@@ -73,7 +79,7 @@ public class messageManager
             mDialog.setContentView(pLayout);
 
             ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-            InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(15),0,helperMethod.pxFromDp(15),0);
+            InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(10),0,helperMethod.pxFromDp(10),0);
             mDialog.getWindow().setBackgroundDrawable(inset);
             mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
             mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
@@ -143,7 +149,7 @@ public class messageManager
                 }
                 catch (Exception ex)
                 {
-                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
+                    onTrigger(Arrays.asList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE), mContext),M_NOT_SUPPORTED);
                     onClearReference();
                 }
             };
@@ -181,7 +187,13 @@ public class messageManager
             Runnable runnable = () -> mDialog.dismiss();
 
             initializeDialog(R.layout.popup_download_failure, Gravity.BOTTOM);
-            ((TextView)mDialog.findViewById(R.id.pDescription)).setText(("Request denied Error  " + mData.get(0)));
+            String mMessage;
+            if(mData == null || mData.get(0) == null || (mData.get(0)).equals("0")){
+                mMessage = "\"Unknown\"";
+            }else {
+                mMessage = (String) mData.get(0);
+            }
+            ((TextView)mDialog.findViewById(R.id.pDescription)).setText(("Request denied Error  " + mMessage));
             mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
 
             mDialog.setOnDismissListener(dialog -> {
@@ -202,6 +214,48 @@ public class messageManager
         initializeDialog(R.layout.popup_block_popup, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pOpenPrivacy).setOnClickListener(v -> {
             mEvent.invokeObserver(null, M_OPEN_PRIVACY);
+            mDialog.dismiss();
+            handler.removeCallbacks(runnable);
+        });
+
+        mDialog.setOnDismissListener(dialog -> {
+            handler.removeCallbacks(runnable);
+            onClearReference();
+        });
+
+        handler.postDelayed(runnable, 1500);
+    }
+
+    private void popupLoadNewTab()
+    {
+        final Handler handler = new Handler();
+        Runnable runnable = () -> mDialog.dismiss();
+
+        initializeDialog(R.layout.popup_load_new_tab, Gravity.BOTTOM);
+        mDialog.getWindow().setDimAmount(0.3f);
+        mDialog.findViewById(R.id.pRestore).setOnClickListener(v -> {
+            mEvent.invokeObserver(null, M_UNDO_SESSION);
+            mDialog.dismiss();
+            handler.removeCallbacks(runnable);
+        });
+
+        mDialog.setOnDismissListener(dialog -> {
+            handler.removeCallbacks(runnable);
+            onClearReference();
+        });
+
+        handler.postDelayed(runnable, 1500);
+    }
+
+    private void popupUndo()
+    {
+        final Handler handler = new Handler();
+        Runnable runnable = () -> mDialog.dismiss();
+
+        initializeDialog(R.layout.popup_undo, Gravity.BOTTOM);
+        mDialog.getWindow().setDimAmount(0.3f);
+        mDialog.findViewById(R.id.pUndo).setOnClickListener(v -> {
+            mEvent.invokeObserver(null, M_UNDO_TAB);
             mDialog.dismiss();
             handler.removeCallbacks(runnable);
         });
@@ -238,8 +292,17 @@ public class messageManager
     private void notSupportMessage()
     {
         initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pDismiss).setOnClickListener(view -> mDialog.dismiss());
         mDialog.setOnDismissListener(dialog -> onClearReference());
+
+        final Handler handler = new Handler();
+        Runnable runnable = () -> {
+            if(mDialog!=null){
+                mDialog.dismiss();
+                onClearReference();
+            }
+        };
+        handler.postDelayed(runnable, 2500);
     }
 
     private void onPanic(){
@@ -329,22 +392,19 @@ public class messageManager
         mDialog.setOnDismissListener(dialog -> {
             final Handler handler = new Handler();
             Runnable runnable = () -> {
-                helperMethod.hideKeyboard(activityContextManager.getInstance().getHomeController());
+                helperMethod.hideKeyboard(mContext);
                 dialog.dismiss();
-                mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 onClearReference();
             };
             handler.postDelayed(runnable, 50);
         });
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> {
             mDialog.dismiss();
-            mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-            helperMethod.hideKeyboard(activityContextManager.getInstance().getHomeController());
+            helperMethod.hideKeyboard(mContext);
         });
 
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             mDialog.dismiss();
-            mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             helperMethod.hideKeyboard(mContext);
             mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString().replace("genesis.onion","genesishiddentechnologies.com")+"split"+((EditText) mDialog.findViewById(R.id.pBridgeInput)).getText().toString()), M_BOOKMARK);
         });
@@ -366,9 +426,8 @@ public class messageManager
         mDialog.setOnDismissListener(dialog -> {
             final Handler handler = new Handler();
             Runnable runnable = () -> {
-                helperMethod.hideKeyboard(activityContextManager.getInstance().getHomeController());
+                helperMethod.hideKeyboard(mContext);
                 dialog.dismiss();
-                mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 onClearReference();
             };
             handler.postDelayed(runnable, 50);
@@ -506,8 +565,13 @@ public class messageManager
         });
     }
 
-    private void downloadFileLongPress()
+    private void
+    downloadFileLongPress()
     {
+        if(mData==null || mData.size()<1){
+            return;
+        }
+
         String title = mData.get(2).toString();
 
         if(title.length()>0){
@@ -518,20 +582,28 @@ public class messageManager
         ((TextView) mDialog.findViewById(R.id.pDescription)).setText((title + mData.get(0).toString()));
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_DOWNLOAD_FILE_MANUAL);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_DOWNLOAD_FILE_MANUAL);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption4).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
+                mDialog.dismiss();
+            }
         });
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
@@ -544,16 +616,22 @@ public class messageManager
         ((TextView) mDialog.findViewById(R.id.pDescription)).setText((title + mData.get(0)));
         mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
+                mDialog.dismiss();
+            }
         });
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
@@ -580,32 +658,46 @@ public class messageManager
         ((TextView) mDialog.findViewById(R.id.pHeader)).setText(mTitle);
         ((TextView) mDialog.findViewById(R.id.pDescription)).setText((data_local));
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(url), M_OPEN_LINK_NEW_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(url), M_OPEN_LINK_NEW_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(url), M_OPEN_LINK_CURRENT_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(url), M_OPEN_LINK_CURRENT_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(url), M_COPY_LINK);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(url), M_COPY_LINK);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption4).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(file), M_OPEN_LINK_NEW_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(file), M_OPEN_LINK_NEW_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption5).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(file), M_OPEN_LINK_CURRENT_TAB);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(file), M_OPEN_LINK_CURRENT_TAB);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption6).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(file), M_COPY_LINK);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(file), M_COPY_LINK);
+                mDialog.dismiss();
+            }
         });
         mDialog.findViewById(R.id.pOption7).setOnClickListener(v -> {
-            mEvent.invokeObserver(Collections.singletonList(file), M_DOWNLOAD_FILE_MANUAL);
-            mDialog.dismiss();
+            if(mData!=null){
+                mEvent.invokeObserver(Collections.singletonList(file), M_DOWNLOAD_FILE_MANUAL);
+                mDialog.dismiss();
+            }
         });
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
@@ -696,11 +788,6 @@ public class messageManager
                     rateApp();
                     break;
 
-                case M_DOWNLOAD_FILE :
-                    /*VERIFIED*/
-                    //downloadFileLongPress();
-                    break;
-
                 case M_LONG_PRESS_DOWNLOAD :
                     /*VERIFIED*/
                     downloadFileLongPress();
@@ -779,6 +866,16 @@ public class messageManager
                 case M_ORBOT_LOADING:
                     /*VERIFIED*/
                     orbotLoading();
+                    break;
+
+                case M_LOAD_NEW_TAB:
+                    /*VERIFIED*/
+                    popupLoadNewTab();
+                    break;
+
+                case M_UNDO:
+                    /*VERIFIED*/
+                    popupUndo();
                     break;
             }
         }

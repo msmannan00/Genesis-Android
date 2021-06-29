@@ -1,8 +1,12 @@
 package com.darkweb.genesissearchengine.pluginManager.orbotPluginManager;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Handler;
+import android.os.IBinder;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,19 +66,35 @@ public class orbotManager
         orbotLocalConstants.mManualBridgeType = pBridgeCustomType;
         orbotLocalConstants.mBridgesDefault = pBridgesDefault;
         Prefs.putBridgesEnabled(pBridgeStatus);
+
+        bindService();
+        initializeProxy(pShowImages, mClearOnExit);
+    }
+
+    private void bindService(){
+        ServiceConnection mServerConn = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder binder) {
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+            }
+        };
+
         Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
+
+        mAppContext.get().bindService(mServiceIntent, mServerConn, Context.BIND_AUTO_CREATE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mAppContext.get().stopService(mServiceIntent);
             mAppContext.get().startForegroundService(mServiceIntent);
         }
         else
         {
-            mAppContext.get().stopService(mServiceIntent);
             mAppContext.get().startService(mServiceIntent);
         }
 
-        initializeProxy(pShowImages, mClearOnExit);
     }
 
     /*Helper Methods*/
@@ -116,19 +136,7 @@ public class orbotManager
     }
 
     private void onRestartProxy(){
-
-        Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
-        mServiceIntent.setAction(ACTION_START);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mAppContext.get().stopService(mServiceIntent);
-            mAppContext.get().startForegroundService(mServiceIntent);
-        }
-        else
-        {
-            mAppContext.get().stopService(mServiceIntent);
-            mAppContext.get().startService(mServiceIntent);
-        }
+        bindService();
     }
 
     private void initializeProxy(int pShowImages, boolean mClearOnExit)

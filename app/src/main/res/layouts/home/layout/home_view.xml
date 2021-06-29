@@ -75,10 +75,10 @@
 
                         <ImageButton
                             android:id="@+id/pSearchLogo"
-                            android:layout_width="31dp"
-                            android:layout_height="31dp"
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="15dp"
+                            android:layout_marginStart="14dp"
                             android:background="@xml/gx_ripple_default_round"
                             android:contentDescription="@string/GENERAL_TODO"
                             android:onClick="onLockSecure"
@@ -89,11 +89,21 @@
                             app:tint="@color/c_lock_tint"
                             tools:ignore="RtlSymmetry" />
 
+                        <View
+                            android:id="@+id/pSearchDivider"
+                            android:layout_width="1px"
+                            android:translationZ="1dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@color/c_text_v6"
+                            tools:ignore="RtlSymmetry" />
+
                         <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
                             android:id="@+id/pSearchInput"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="-36dp"
+                            android:layout_marginStart="-41dp"
                             android:layout_marginTop="8dp"
                             android:imeOptions="flagNoExtractUi"
                             android:layout_marginEnd="5dp"
@@ -111,8 +121,9 @@
                             android:importantForAutofill="no"
                             android:inputType="textNoSuggestions"
                             android:maxLines="1"
-                            android:paddingStart="38dp"
+                            android:paddingStart="52dp"
                             android:paddingEnd="15dp"
+                            android:paddingBottom="2dp"
                             android:popupElevation="0dp"
                             android:requiresFadingEdge="horizontal"
                             android:selectAllOnFocus="true"
@@ -856,7 +867,7 @@
         android:id="@+id/pPopupLoadNewTab"
         layout="@layout/popup_load_new_tab"
         android:alpha="0"
-        android:translationZ="0dp"
+        android:elevation="5dp"
         android:visibility="gone" />
 
     <androidx.fragment.app.FragmentContainerView

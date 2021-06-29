@@ -512,9 +512,42 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
         super.onCreate();
 
         try {
+            if (Build.VERSION.SDK_INT <= 25) {
+                Intent notificationIntent = new Intent(this, OrbotService.class);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                        notificationIntent, 0);
+
+                Notification notification = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_stat_tor_logo)
+                        .setContentTitle("Starting Genesis")
+                        .setContentIntent(pendingIntent).build();
+
+                startForeground(11337, notification);
+            }else if(Build.VERSION.SDK_INT == 26){
+                String id = "_channel_01";
+                int importance = NotificationManager.IMPORTANCE_LOW;
+                NotificationChannel mChannel = new NotificationChannel(id, "notification", importance);
+                mChannel.enableLights(true);
+
+                Notification notification = new Notification.Builder(getApplicationContext(), id)
+                        .setSmallIcon(R.mipmap.ic_stat_tor_logo)
+                        .setContentTitle("Starting Genesis")
+                        .build();
+
+                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                if (mNotificationManager != null) {
+                    mNotificationManager.createNotificationChannel(mChannel);
+                    mNotificationManager.notify(11337, notification);
+                }
+
+                startForeground(11337, notification);
+            }
+
+
             mHandler = new Handler();
 
-            appBinHome = getFilesDir();//getDir(TorServiceConstants.DIRECTORY_TOR_BINARY, Application.MODE_PRIVATE);
+            appBinHome = getFilesDir();
             if (!appBinHome.exists())
                 appBinHome.mkdirs();
 

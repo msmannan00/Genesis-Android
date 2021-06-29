@@ -24,6 +24,7 @@ public class adManager
     private eventObserver.eventListener mEvent;
     private WeakReference<AdView> mBannerAds;
     private boolean mPaidStatus;
+    private int mRequestCount = 0;
 
     private boolean bannerAdsLoading = false;
     private boolean bannerAdsLoaded = false;
@@ -90,8 +91,12 @@ public class adManager
                 public void onAdFailedToLoad(@NonNull LoadAdError var1) {
                     new Handler().postDelayed(() ->
                     {
-                        initializeBannerAds();
-                    }, 10000);
+                        if(mRequestCount<2){
+                            mRequestCount+=1;
+                            initializeBannerAds();
+                        }
+
+                    }, 30000);
                 }
             });
         }

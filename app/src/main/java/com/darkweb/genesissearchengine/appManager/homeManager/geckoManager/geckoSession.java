@@ -420,12 +420,10 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     @UiThread
     public void onSessionStateChange(@NonNull GeckoSession session, @NonNull SessionState sessionState) {
-        mSessionState = sessionState;
-        // if(!status.sRestoreTabs){
-        //     mSessionState = null;
-        // }
-        // if(mSessionState!=null)
-        event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, mSessionState.toString()), enums.etype.M_UPDATE_SESSION_STATE);
+        try{
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, sessionState.toString()), enums.etype.M_UPDATE_SESSION_STATE);
+            mSessionState = sessionState;
+        }catch (Exception ignored){}
     }
 
     public boolean onRestoreState(){
@@ -764,8 +762,8 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         if(var4.title!=null){
             title = var4.title;
         }
-        if(var4.type!=0){
-            if(var4.linkUri!=null){
+        if(var4.type!=0 && var4.srcUri!=null){
+            if(1!=1 && var4.linkUri!=null){
                 event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, mContext.get()), M_LONG_PRESS_WITH_LINK);
             }
             else {
@@ -777,7 +775,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 }
             }
         }
-        else{
+        else if(var4.linkUri!=null){
             event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,title, mTheme, mContext.get()), M_LONG_PRESS_URL);
         }
     }

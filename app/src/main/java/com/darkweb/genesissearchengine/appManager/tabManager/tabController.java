@@ -44,7 +44,9 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.darkweb.genesissearchengine.appManager.tabManager.tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_FORCED;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LOAD_NEW_TAB;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_RESET;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_UNDO;
 import static org.mozilla.gecko.util.ThreadUtils.runOnUiThread;
 
 public class tabController extends Fragment
@@ -81,6 +83,7 @@ public class tabController extends Fragment
     private boolean mClosedByNewTab = false;
     private boolean mFirstLaunch = true;
     boolean mScrolled = true;
+    boolean mTouchable = true;
 
     /*Initializations*/
 
@@ -140,6 +143,7 @@ public class tabController extends Fragment
         if(mFirstLaunch){
             mRecycleView.setAlpha(0);
             mFirstLaunch = false;
+            mTouchable = true;
 
             ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mRecycleView, PropertyValuesHolder.ofFloat("alpha", 0, 1f));
             alpha.setDuration(300);
@@ -156,6 +160,7 @@ public class tabController extends Fragment
             mTabAdapter.notifyDataSetChanged();
             mEmptyView.animate().setStartDelay(1200).setDuration(0).alpha(1);
         }else {
+            mTouchable = true;
             initializeList();
             mRecycleView.setAlpha(1);
             mEmptyView.setAlpha(1);
@@ -217,6 +222,13 @@ public class tabController extends Fragment
             }
 
             return false;
+        });
+
+        mRecycleView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
+                return !mTouchable;
+            }
         });
 
         mNestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
@@ -387,7 +399,9 @@ public class tabController extends Fragment
             }, 500);
             return true;
         }else{
-            onShowUndoDialog();
+            if(pShowPopupOnClearAll){
+                onShowUndoDialog();
+            }
             mTabAdapter.notifyItemRangeChanged(pIndex, mTabAdapter.getItemCount() - pIndex);
             mTabAdapter.notifyItemChanged(0);
             new Handler().postDelayed(() -> {
@@ -424,11 +438,11 @@ public class tabController extends Fragment
 
     public void onRestoreTab(View view){
 
+        mTouchable = true;
         final Handler handler = new Handler();
         handler.postDelayed(() ->
         {
             ArrayList<tabRowModel> mBackup = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_LOAD_BACKUP,null);
-            mPopupUndo.findViewById(R.id.pBlockerUndo).setVisibility(View.VISIBLE);
             mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE,null);
 
             if(mRecycleView.getAlpha()==0){
@@ -450,7 +464,7 @@ public class tabController extends Fragment
     }
 
     public void onShowUndoDialog(){
-        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG, Collections.singletonList(mListModel.getList().size()));
+        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(mHomeController), M_UNDO);
     }
 
     public void onClearTabBackup(){
@@ -558,12 +572,11 @@ public class tabController extends Fragment
             mClosedByNewTab = true;
         }
         else if(pView.getId() == R.id.pCloseTab){
+            mTouchable = false;
             onClearTabBackup();
             mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE,null);
-            mRecycleView.animate().setDuration(250).alpha(0).withEndAction(() -> {
-                mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REMOVE_ALL, null);
-                onClearSelection(null);
-            });
+            mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REMOVE_ALL, null);
+            onClearSelection(null);
         }
         else if(pView.getId() == R.id.pOpenSetting){
             activityContextManager.getInstance().getHomeController().onBackPressed();
@@ -591,6 +604,7 @@ public class tabController extends Fragment
     public void onPause()
     {
         status.sSettingIsAppPaused = true;
+        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_RESET);
         super.onPause();
     }
 
@@ -646,6 +660,9 @@ public class tabController extends Fragment
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP)){
                 onInitRemoveView((Integer) data.get(0), false, (boolean)data.get(1));
+            }
+            else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_POPUP)){
+                onShowUndoDialog();
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.M_CLEAR_BACKUP)){
                 onExitAndClearBackup();

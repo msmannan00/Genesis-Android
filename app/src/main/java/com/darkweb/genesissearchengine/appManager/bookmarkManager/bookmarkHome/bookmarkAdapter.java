@@ -19,12 +19,14 @@ import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import systems.intelligo.slight.ImageLoader;
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listViewHolder>
@@ -40,7 +42,6 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
     private ArrayList<String> mLongSelectedIndex = new ArrayList<>();
     private ArrayList<Integer> mLongSelectedID = new ArrayList<>();
 
-    private ImageLoader imageLoader;
     private AppCompatActivity mContext;
     private bookmarkAdapterView mHistroyAdapterView;
     private Context mListHolderContext;
@@ -60,7 +61,6 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         this.mPassedList = pModelList;
         this.mContext = pMainContext;
         this.mHistroyAdapterView = new bookmarkAdapterView(mContext);
-        this.imageLoader = new ImageLoader(mContext);
 
         initializeModelWithDate(false);
     }
@@ -383,7 +383,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
         TextView mDate;
         TextView mWebLogo;
         ImageButton mRowMenu;
-        ImageView mLogoImage;
+        ImageView mSelectionImage;
         ImageView mFaviconLogo;
         LinearLayout mRowContainer;
         LinearLayout mDateContainer;
@@ -402,7 +402,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             mRowContainer = itemView.findViewById(R.id.pRowContainer);
             mRowMenu = itemView.findViewById(R.id.pRowMenu);
             mDate = itemView.findViewById(R.id.pDate);
-            mLogoImage = itemView.findViewById(R.id.pLogoImage);
+            mSelectionImage = itemView.findViewById(R.id.pLogoImage);
             mWebLogo = itemView.findViewById(R.id.pWebLogo);
             mLoadingContainer = itemView.findViewById(R.id.pLoadingContainer);
             mFaviconLogo = itemView.findViewById(R.id.pFaviconLogo);
@@ -452,36 +452,11 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 if(model.getDescription().contains("genesishiddentechnologies.com") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 }else{
-                    new Thread(){
-                        public void run(){
-                            try {
-                                mHindTypeIconTemp.setImageDrawable(null);
-                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "http://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                                while (true){
-                                    int mCounter=0;
-                                    if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                        sleep(50);
-                                        mCounter+=1;
-                                    }else {
-                                        break;
-                                    }
-                                    if(mCounter>6){
-                                        break;
-                                    }
-                                }
-                                mContext.runOnUiThread(() -> {
-                                    Bitmap mBitmap = helperMethod.drawableToBitmap(mHindTypeIconTemp.getDrawable());
-                                    mFaviconLogo.setImageBitmap(mBitmap);
-                                });
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
+                    mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "http://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
                 }
 
                 mRowMenu.setOnClickListener(this::onClick);
-                setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
+                setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mSelectionImage, model.getID(), model.getDate());
             }
 
             if(mLongSelectedID.size()>0){
@@ -493,9 +468,9 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             }
 
             if(mLongSelectedIndex.contains("https://" + model.getDescription()) && mLongSelectedID.contains(model.getID())){
-                mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
-            }else if(mLogoImage.getAlpha()>0){
-                mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
+                mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(mRowContainer, mRowMenu, mSelectionImage, true, false));
+            }else if(mSelectionImage.getAlpha()>0){
+                mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mSelectionImage, true, false));
             }
 
             mBookmarkEdit.setOnClickListener(this::onClick);

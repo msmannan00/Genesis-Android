@@ -2,6 +2,8 @@ package com.darkweb.genesissearchengine.dataManager;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
@@ -97,28 +99,36 @@ public class sqlCipherDataModel
 
     private void execSQL(String query,Object params,boolean pContentValues)
     {
-        if(params==null)
-        {
-            sDatabaseInstance.execSQL(query);
-        }
-        else
-        {
-            sDatabaseInstance.execSQL(query,(String[])params);
+        try {
+            if(params==null)
+            {
+                sDatabaseInstance.execSQL(query);
+            }
+            else
+            {
+                sDatabaseInstance.execSQL(query,(String[])params);
+            }
+        }catch (Exception ex){
+            Log.i("Memory Error", "Memory Full");
         }
     }
 
     private void execSQL(String query,Object params,boolean pContentValues,String whereClause, String[] whereArgs)
     {
-        if(params==null)
-        {
-            sDatabaseInstance.execSQL(query);
-        }
-        else if(pContentValues){
-            sDatabaseInstance.update(query, (ContentValues)params, whereClause, whereArgs);
-        }
-        else
-        {
-            sDatabaseInstance.execSQL(query,(String[])params);
+        try {
+            if(params==null)
+            {
+                sDatabaseInstance.execSQL(query);
+            }
+            else if(pContentValues){
+                sDatabaseInstance.update(query, (ContentValues)params, whereClause, whereArgs);
+            }
+            else
+            {
+                sDatabaseInstance.execSQL(query,(String[])params);
+            }
+        }catch (Exception ex){
+            Log.i("Memory Error", "Memory Full");
         }
     }
 
@@ -221,7 +231,7 @@ public class sqlCipherDataModel
             execSQL((String)pData.get(0), pData.get(1), false);
         }
         else if(pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL_USING_CONTENT){
-            execSQL((String)pData.get(0), pData.get(1), true, (String)pData.get(3), (String[])pData.get(4));
+            execSQL((String)pData.get(0), pData.get(1), true, (String)pData.get(2), (String[])pData.get(3));
         }
         else if(pCommands == dataEnums.eSqlCipherCommands.M_SELECT_BOOKMARK){
             return selectBookmark();

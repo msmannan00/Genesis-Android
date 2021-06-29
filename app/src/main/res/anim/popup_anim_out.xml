@@ -8,7 +8,7 @@
             android:fromXDelta="0%"
             android:fromYDelta="0%"
             android:toXDelta="0%"
-            android:toYDelta="-8%"
+            android:toYDelta="-10%"
             />
 
     <alpha android:fromAlpha="1.0"

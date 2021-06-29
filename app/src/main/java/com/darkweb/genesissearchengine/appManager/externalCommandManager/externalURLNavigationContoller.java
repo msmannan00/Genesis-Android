@@ -3,6 +3,8 @@ package com.darkweb.genesissearchengine.appManager.externalCommandManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -18,7 +20,9 @@ public class externalURLNavigationContoller extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Uri data = externalURLNavigationContoller.this.getIntent().getData();
-        if(data == null || status.sSettingIsAppStarted){
+        boolean mConnect = false;
+
+        if(activityContextManager.getInstance().getHomeController()!=null && (data == null || status.sSettingIsAppStarted)){
 
             /* Close Activity */
 
@@ -39,6 +43,7 @@ public class externalURLNavigationContoller extends AppCompatActivity {
             bringToForegroundIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(bringToForegroundIntent);
             overridePendingTransition(R.anim.fade_in_instant, R.anim.fade_out_instant);
+            mConnect = true;
         }
         else if(status.sSettingIsAppRunning){
 
@@ -66,6 +71,7 @@ public class externalURLNavigationContoller extends AppCompatActivity {
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage(CONST_PACKAGE_NAME);
             startActivity(launchIntent);
             overridePendingTransition(R.anim.fade_in_instant, R.anim.fade_out_instant);
+            mConnect = true;
 
             /* Close Activity */
 
@@ -73,6 +79,9 @@ public class externalURLNavigationContoller extends AppCompatActivity {
                 finish();
                 return null;
             });
+        }
+        if(mConnect){
+            new Handler().postDelayed(() -> activityContextManager.getInstance().getHomeController().onStartApplication(null), 3000);
         }
     }
 }

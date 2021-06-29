@@ -15,7 +15,11 @@
                     android:endColor="#264d73"
                     android:startColor="#264d73"
                     android:type="linear" />
-            <corners android:radius="5.5dp" />
+            <corners
+                android:bottomLeftRadius="8dp"
+                android:bottomRightRadius="8dp"
+                android:topLeftRadius="8dp"
+                android:topRightRadius="8dp"/>
         </shape>
     </item>
 </ripple>

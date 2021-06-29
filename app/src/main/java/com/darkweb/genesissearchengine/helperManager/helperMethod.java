@@ -70,6 +70,7 @@ import java.net.SocketException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.ByteBuffer;
 import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -242,16 +243,16 @@ public class helperMethod
             mColor = Color.argb(255, 0, 153, 54);
         }
 
-        if (url.contains("https://"))
+        if (url.startsWith("https://"))
         {
             SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(mColor), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(mColor), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ss.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ss;
-        } else if (url.contains("http://"))
+        } else if (url.startsWith("http://"))
         {
             SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(mColor), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ss.setSpan(new ForegroundColorSpan(Color.GRAY), 4, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ss;
         } else
@@ -361,12 +362,14 @@ public class helperMethod
     }
 
     public static void hideKeyboard(AppCompatActivity context) {
-        View view = context.findViewById(android.R.id.content);
-        if (view != null)
-        {
-            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            assert imm != null;
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if(context!=null){
+            View view = context.findViewById(android.R.id.content);
+            if (view != null)
+            {
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                assert imm != null;
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         }
     }
 
@@ -769,9 +772,11 @@ public class helperMethod
     }
 
     public static void showToastMessage(String message,Context context){
-        Toast toast=Toast.makeText(context.getApplicationContext(),message,Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 0);
-        toast.show();
+        if(context!=null){
+            Toast toast=Toast.makeText(context.getApplicationContext(),message,Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 0);
+            toast.show();
+        }
     }
 
     public static boolean checkPermissions(AppCompatActivity context) {

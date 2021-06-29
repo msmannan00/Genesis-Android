@@ -40,6 +40,7 @@
     <color name="c_checkbox_tint">#3385ff</color>
     <color name="c_checkbox_tint_default">#3385ff</color>
     <color name="c_border_background">#f9f9f9</color>
+    <color name="c_border_background_dark">#e2e7e9</color>
     <color name="c_border_background_divider">#f7f7f7</color>
     <color name="c_security_popup_background">#f5fff5</color>
     <color name="c_security_popup_divider">#e0ffe0</color>
@@ -83,6 +84,7 @@
     <color name="c_menu_drop_shadow_25">#25e6e6e6</color>
     <color name="c_alert_text">#212d45</color>
     <color name="c_alert_text_inverted">#ffffff</color>
+    <color name="c_alert_text_inverted_v1">#ffffff</color>
     <color name="c_long_button">#7591bd</color>
     <color name="c_ripple_light">#e6e6e6</color>
 

@@ -104,7 +104,7 @@
                 android:fadingEdgeLength="20dp"
                 android:hint="@string/BOOKMARK_SETTING_HEADER_NAME_HINT"
                 android:inputType="text"
-                android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopa sdfghjklyxcvbnm,_,-"
+                android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopa sdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM|+-,_,-"
                 android:maxLines="1"
                 android:paddingStart="18dp"
                 android:paddingEnd="15dp"

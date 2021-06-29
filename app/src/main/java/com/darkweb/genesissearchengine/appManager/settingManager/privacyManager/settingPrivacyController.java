@@ -119,7 +119,9 @@ public class settingPrivacyController extends AppCompatActivity {
     public void onBackPressed() {
         if(mSettingChanged){
             activityContextManager.getInstance().setCurrentActivity(this);
-            activityContextManager.getInstance().getHomeController().initRuntimeSettings();
+            if(activityContextManager.getInstance().getHomeController()!=null){
+                activityContextManager.getInstance().getHomeController().initRuntimeSettings();
+            }
         }
         finish();
     }

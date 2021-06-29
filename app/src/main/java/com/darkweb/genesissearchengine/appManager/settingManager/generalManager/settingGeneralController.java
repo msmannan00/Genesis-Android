@@ -151,8 +151,10 @@ public class settingGeneralController extends AppCompatActivity {
 
                     new Handler().postDelayed(() ->
                     {
-                        activityContextManager.getInstance().getHomeController().onReInitTheme();
-                        activityContextManager.getInstance().getSettingController().onReInitTheme();
+                        if(activityContextManager.getInstance().getHomeController() != null){
+                            activityContextManager.getInstance().getHomeController().onReInitTheme();
+                            activityContextManager.getInstance().getSettingController().onReInitTheme();
+                        }
                     }, 100);
                 }
             }

@@ -171,41 +171,6 @@ class tabViewController
         mNewTab.setFocusable(true);
     }
 
-    private void onShowUndoDialog(int pTabCount) {
-        mUndoLayout.findViewById(R.id.pBlockerUndo).setVisibility(View.GONE);
-        mUndoLayout.animate().cancel();
-        mUndoLayout.setVisibility(View.VISIBLE);
-
-        mUndoLayout.animate().cancel();
-
-        int mDuration = 220;
-        if(mUndoLayout.getAlpha()>0){
-            mUndoLayout.setTranslationY(360);
-            mDuration = 400;
-        }else {
-            mUndoLayout.setTranslationY(60);
-        }
-        mUndoLayout.setAlpha(0);
-
-        mUndoLayout.animate().withLayer()
-                .translationY(0)
-                .alpha(1f)
-                .setDuration(mDuration).start();
-
-
-        initTabCount(pTabCount);
-        mDelayHandler.removeCallbacksAndMessages(null);
-        mDelayHandler.postDelayed(() -> {
-            mUndoLayout.animate().cancel();
-            mUndoLayout.animate().alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
-        }, 3000);
-    }
-
-    private void onHideUndoDialog() {
-        mUndoLayout.animate().cancel();
-        mUndoLayout.animate().alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
-    }
-
     private void onHideUndoDialogForced() {
         if(mUndoLayout.getAlpha()<1){
             mUndoLayout.animate().cancel();
@@ -283,10 +248,6 @@ class tabViewController
         }
         else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_SELECTION)){
             onShowSelection();
-        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG)){
-            onShowUndoDialog((int)pData.get(0));
-        }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG)){
-            onHideUndoDialog();
         }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)){
             onDrawSwipableBackground((Canvas)pData.get(0), (RecyclerView.ViewHolder)pData.get(1), (float)pData.get(2), (int)pData.get(3));
         }else if(pCommands.equals(tabEnums.eTabViewCommands.ON_EXIT)){

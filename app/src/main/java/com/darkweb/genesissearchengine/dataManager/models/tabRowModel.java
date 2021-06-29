@@ -9,6 +9,7 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
 import org.mozilla.geckoview.GeckoSession;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.Deflater;
@@ -38,32 +39,8 @@ public class tabRowModel
                 mBitmap.recycle();
                 mBitmap = null;
             }
-            try {
-                byte[] pBlobTemp = compress(pBlob);
-                int mSize = pBlobTemp.length;
-                mBitmap = BitmapFactory.decodeByteArray(pBlobTemp,0,mSize);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            mBitmap = BitmapFactory.decodeStream(new ByteArrayInputStream(pBlob));
         }
-    }
-
-    public byte[] compress(byte[] data) throws IOException {
-        Deflater deflater = new Deflater();
-        deflater.setInput(data);
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-
-        deflater.finish();
-        byte[] buffer = new byte[1024];
-        while (!deflater.finished()) {
-            int count = deflater.deflate(buffer); // returns the generated code... index
-            outputStream.write(buffer, 0, count);
-        }
-        outputStream.close();
-        byte[] output = outputStream.toByteArray();
-
-        return output;
     }
 
     /*Helper Method*/
@@ -97,7 +74,7 @@ public class tabRowModel
         return mId;
     }
 
-    public void setmBitmap(Bitmap pBitmap) {
+    public void decodeByteArraysetmBitmap(Bitmap pBitmap) {
         mBitmap = null;
         mBitmap = pBitmap;
     }

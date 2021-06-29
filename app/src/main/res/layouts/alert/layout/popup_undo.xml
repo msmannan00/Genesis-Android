@@ -5,17 +5,15 @@
     android:id="@+id/pToastLayoutRoot"
     android:translationZ="5dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pMainLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="25dp"
-        android:background="@xml/ax_background_inverted"
+        android:layout_height="55dp"
+        android:layout_marginBottom="10dp"
+        android:background="@xml/ax_load_new_tab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -39,7 +37,7 @@
             tools:ignore="SmallSp" />
 
         <Button
-            android:id="@+id/pDismiss"
+            android:id="@+id/pUndo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -58,20 +56,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/pBlockerUndo"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:clickable="true"
-            android:contentDescription="@string/GENERAL_TODO"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:translationZ="211dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pMainLayout" />
 
         <View
             android:id="@+id/view6"
@@ -80,7 +64,7 @@
             android:layout_marginEnd="10dp"
             android:background="@color/c_border_background_divider"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pDismiss"
+            app:layout_constraintEnd_toStartOf="@+id/pUndo"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -274,33 +274,7 @@ class homeViewController
         }
     }
 
-    public void onShowLoadTabDialog() {
-        mPopupLoadNewTab.findViewById(R.id.pBlockerUndo).setVisibility(View.GONE);
-        mPopupLoadNewTab.animate().cancel();
-        mPopupLoadNewTab.setAlpha(0);
-        mPopupLoadNewTab.setVisibility(View.VISIBLE);
-        mPopupLoadNewTab.animate().setStartDelay(400).setDuration(250).alpha(1);
-
-        if(mTabDialogHandler!=null){
-            mTabDialogHandler.removeCallbacksAndMessages(null);
-        }
-
-        mTabDialogHandler = new Handler();
-        mTabDialogRunnable = this::onHideLoadTabDialog;
-        mTabDialogHandler.postDelayed(mTabDialogRunnable, 3500);
-    }
-
-    public void onHideLoadTabDialog() {
-        mPopupLoadNewTab.findViewById(R.id.pBlockerUndo).setVisibility(View.VISIBLE);
-        mPopupLoadNewTab.animate().cancel();
-
-        mPopupLoadNewTab.animate().setDuration(250).alpha(0).withEndAction(() -> {
-            mPopupLoadNewTab.setVisibility(View.GONE);
-        });
-    }
-
     public void onShowTabContainer(){
-        onHideLoadTabDialog();
         if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
 
             onUpdateStatusBarTheme(null, false);
@@ -312,7 +286,6 @@ class homeViewController
     }
 
     public void onHideTabContainer(){
-        onHideLoadTabDialog();
         if(mTabFragment.getAlpha()>0 || mTabFragment.getVisibility()!=View.GONE){
             mNewTab.setPressed(false);
             new Handler().postDelayed(() ->
@@ -386,11 +359,11 @@ class homeViewController
                 mSearchbar.setMovementMethod(null);
 
                 if(status.sSettingLanguageRegion.equals("Ur")){
-                    mSearchbar.setPadding(helperMethod.pxFromDp(17),0,mSearchbar.getPaddingRight(),0);
+                    mSearchbar.setPadding(helperMethod.pxFromDp(17),0,mSearchbar.getPaddingRight(),3);
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                     params.leftMargin = helperMethod.pxFromDp(5);
                 }else {
-                    mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(5),0);
+                    mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(5),3);
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                     params.rightMargin = helperMethod.pxFromDp(5);
                 }
@@ -432,11 +405,11 @@ class homeViewController
             this.mMenu.setVisibility(View.GONE);
 
             if(status.sSettingLanguageRegion.equals("Ur")){
-                mSearchbar.setPadding(helperMethod.pxFromDp(45),0,mSearchbar.getPaddingRight(),0);
+                mSearchbar.setPadding(helperMethod.pxFromDp(45),0,mSearchbar.getPaddingRight(),3);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                 params.leftMargin = helperMethod.pxFromDp(17);
             }else {
-                mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(45),0);
+                mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(45),3);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                 params.rightMargin = helperMethod.pxFromDp(17);
             }
@@ -595,8 +568,8 @@ class homeViewController
             initSplashLoading();
         });
         mGatewaySplash.animate().setDuration(350).alpha(0.4f);
-        mPanicButtonLandscape.animate().setDuration(200).translationXBy(helperMethod.pxFromDp(50));
-        mPanicButton.animate().setDuration(200).translationXBy(helperMethod.pxFromDp(50));
+        mPanicButtonLandscape.animate().setDuration(170).translationXBy(helperMethod.pxFromDp(55));
+        mPanicButton.animate().setDuration(170).translationXBy(helperMethod.pxFromDp(55));
     }
 
     private void initSplashScreen(){
@@ -625,6 +598,8 @@ class homeViewController
             new Thread(){
                 public void run(){
                     AppCompatActivity temp_context = mContext;
+                    int mCounter = 0;
+                    int mCounterInternet = 0;
                     while (!orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState){
                         try
                         {
@@ -639,10 +614,20 @@ class homeViewController
                                 }else{
                                     orbotLocalConstants.mTorLogsStatus = "No internet connection";
                                     startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
+                                    if(mCounterInternet>10){
+                                        // break;
+                                    }else {
+                                        mCounterInternet += 1;
+                                    }
                                 }
                             }
 
                             sleep(500);
+                            if(mCounter>20){
+                                break;
+                            }else {
+                                mCounter+=1;
+                            }
                             if(mFastConnect){
                                 continue;
                             }
@@ -1303,9 +1288,7 @@ class homeViewController
         mGeckoView.setPivotY(0);
 
         ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
-                PropertyValuesHolder.ofFloat("scaleX", 1, 0.8f),
-                PropertyValuesHolder.ofFloat("scaleY", 1, 0.8f));
-
+                PropertyValuesHolder.ofFloat("translationX", 0, helperMethod.pxFromDp(-50)));
         mNewTabBlocker.setVisibility(View.VISIBLE);
         ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mNewTabBlocker,
                 PropertyValuesHolder.ofFloat("alpha", 0, 1f));
@@ -1325,8 +1308,7 @@ class homeViewController
             public void onAnimationEnd(Animator animation, boolean isReverse) {
                 mEvent.invokeObserver(data, e_type);
                 ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
-                        PropertyValuesHolder.ofFloat("scaleX", 0.8f, 1f),
-                        PropertyValuesHolder.ofFloat("scaleY", 0.8f, 1f));
+                        PropertyValuesHolder.ofFloat("translationX", 0, 0));
 
                 scaleDown.setDuration(150);
                 scaleDown.setStartDelay(0);

@@ -3,18 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pToastLayoutRoot"
-    android:translationZ="5dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pMainLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="25dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="10dp"
         android:background="@xml/ax_load_new_tab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +27,7 @@
             android:paddingEnd="15dp"
             android:text="@string/ALERT_OPEN_NEW_TAB"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text_inverted"
+            android:textColor="@color/c_alert_text_inverted_v1"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +36,7 @@
             tools:ignore="SmallSp" />
 
         <Button
-            android:id="@+id/pDismiss"
+            android:id="@+id/pRestore"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -47,7 +44,6 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@xml/ax_ripple_default_round"
-            android:onClick="onLoadRecentTab"
             android:padding="0dp"
             android:text="@string/ALERT_OPEN_NEW_TAB_LOAD"
             android:textAllCaps="false"
@@ -58,21 +54,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/pBlockerUndo"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:clickable="true"
-            android:contentDescription="@string/GENERAL_TODO"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:translationZ="211dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pMainLayout" />
-
         <View
             android:id="@+id/view4"
             android:layout_width="1dp"
@@ -80,7 +61,7 @@
             android:layout_marginEnd="10dp"
             android:background="#3973ac"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pDismiss"
+            app:layout_constraintEnd_toStartOf="@+id/pRestore"
             app:layout_constraintTop_toTopOf="parent" />
 
 

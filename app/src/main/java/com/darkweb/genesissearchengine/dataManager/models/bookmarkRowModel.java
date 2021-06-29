@@ -12,7 +12,6 @@ public class bookmarkRowModel
     private String m_header;
     private String m_description;
     private Date m_date;
-    private ImageView m_logo;
 
     /*Initializations*/
 
@@ -31,9 +30,6 @@ public class bookmarkRowModel
     public void setURL(String p_url){
         this.m_description = p_url;
     }
-    public void setLogo(ImageView p_logo){
-        this.m_logo = p_logo;
-    }
     public void setDate(Date p_date) {
         m_date = p_date;
     }
@@ -51,9 +47,6 @@ public class bookmarkRowModel
     }
     public int getID() {
         return m_id;
-    }
-    public ImageView getLogo() {
-        return m_logo;
     }
     public Date getDate() {
         return m_date;

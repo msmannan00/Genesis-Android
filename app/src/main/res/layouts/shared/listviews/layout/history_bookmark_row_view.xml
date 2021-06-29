@@ -54,7 +54,7 @@
                     android:layout_width="37dp"
                     android:layout_height="37dp"
                     android:layout_marginTop="-1dp"
-                    android:background="@color/button_gray"
+                    android:src="@xml/ic_baseline_browser"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:textAlignment="center"
                     android:textColor="@color/white"

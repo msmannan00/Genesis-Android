@@ -272,7 +272,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 mStream.close();
             }catch (Exception ex){
                 if(mRequestCode!=200){
-                    pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Collections.singletonList(mRequestCode), activityContextManager.getInstance().getHomeController()), pluginEnums.eMessageManager.M_DOWNLOAD_FAILURE);
+                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
                     onCancel();
                 }
             }

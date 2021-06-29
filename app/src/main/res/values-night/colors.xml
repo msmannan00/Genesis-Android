@@ -57,6 +57,7 @@
     <color name="c_profile_radial_inner">#2c2b31</color>
     <color name="c_profile_radial_outer">#2c2b31</color>
     <color name="c_edittext_background">#3c3946</color>
+    <color name="c_border_background_dark">#2c2b31</color>
     <color name="c_edittext_background_error">#660b0b</color>
     <color name="c_edittext_background_dark">#24222a</color>
     <color name="c_menu_drop_shadow_05">#00000000</color>
@@ -73,6 +74,7 @@
     <color name="c_home_side">#28282a</color>
     <color name="c_alert_text">#ffffff</color>
     <color name="c_alert_text_inverted">#242B64</color>
+    <color name="c_alert_text_inverted_v1">#ffffff</color>
     <color name="c_long_button">#3c3946</color>
     <color name="c_button_warning">#f65555</color>
     <color name="c_rateus_warning">#b3b3b3</color>

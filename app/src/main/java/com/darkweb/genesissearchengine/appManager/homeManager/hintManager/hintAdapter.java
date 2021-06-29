@@ -33,6 +33,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
+
 public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder>
 {
     /*Private Variables*/
@@ -192,36 +194,25 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                 mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
             }else
             {
-                new Thread(){
+                String mURLPast = mURLLink;
+                mPastIconFlicker.put(getLayoutPosition(),mURLPast);
 
-                    public void run(){
-                        try {
-                            String mURLPast = mURLLink;
-                            mPastIconFlicker.put(getLayoutPosition(),mURLPast);
+                mHindTypeIconTemp.setImageDrawable(null);
+                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
 
-                            mHindTypeIconTemp.setImageDrawable(null);
-                            mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                            sleep(200);
-
-                            mContext.runOnUiThread(() -> new Handler().postDelayed(() ->
-                            {
-                                if(mHindTypeIconTemp.getDrawable() != null){
-                                    if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
-                                        mHintWebIcon.setImageTintList(null);
-                                        mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                                        mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
-                                    }
-                                    if(getLayoutPosition() == 1){
-                                        Log.i("FUSSSS1111","FUSSSS4444");
-                                    }
-                                }
-                            }, 200));
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                mContext.runOnUiThread(() -> new Handler().postDelayed(() ->
+                {
+                    if(mHindTypeIconTemp.getDrawable() != null){
+                        if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
+                            mHintWebIcon.setImageTintList(null);
+                            mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                            mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
+                        }
+                        if(getLayoutPosition() == 1){
+                            Log.i("FUSSSS1111","FUSSSS4444");
                         }
                     }
-                }.start();
+                }, 300));
             }
        }
 

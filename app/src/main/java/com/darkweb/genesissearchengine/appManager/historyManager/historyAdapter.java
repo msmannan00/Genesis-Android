@@ -529,48 +529,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                     mFaviconLogo.setImageDrawable(mWebIcon.get(model.getDescription()));
                 }
                 else{
-                    new Thread(){
-                        public void run(){
-                            try {
-                                mHindTypeIconTemp.setImageDrawable(null);
-                                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
-                                while (true){
-                                    int mCounter=0;
-                                    if(mHindTypeIconTemp.isAttachedToWindow() || mHindTypeIconTemp.getDrawable()==null){
-                                        sleep(10);
-                                        mCounter+=1;
-                                    }else {
-                                        Log.i("BREAK","");
-                                        break;
-                                    }
-                                    if(mCounter>6){
-                                        break;
-                                    }
-                                }
-
-                                mContext.runOnUiThread(() -> {
-                                    mFaviconLogo.setColorFilter(null);
-                                    mFaviconLogo.clearColorFilter();
-                                    mFaviconLogo.setImageTintList(null);
-                                    mFaviconLogo.setClipToOutline(true);
-                                    mWebIcon.put(model.getDescription(),mHindTypeIconTemp.getDrawable());
-                                    if(mHindTypeIconTemp.getDrawable() != null){
-                                        mFaviconLogo.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                                    }else {
-                                        Resources res = itemView.getContext().getResources();
-                                        try {
-                                            mFaviconLogo.setImageDrawable(Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser)));
-                                        } catch (Exception ignored) {
-                                        }
-                                    }
-
-                                });
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
+                    mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
                 }
 
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());

@@ -155,7 +155,7 @@ public class pluginController
         {
             if(event_type.equals(enums.etype.M_DOWNLOAD_FAILURE))
             {
-                mMessageManager.onTrigger(Arrays.asList(Collections.singletonList(pData.get(0).toString()), mHomeController.get()),M_DOWNLOAD_FAILURE);
+                mMessageManager.onTrigger(Arrays.asList(pData.get(0).toString(), mHomeController.get()),M_DOWNLOAD_FAILURE);
             }
             return null;
         }
@@ -302,6 +302,12 @@ public class pluginController
             }
             else if(pEventType.equals(M_SET_BRIDGES)){
                 activityContextManager.getInstance().getBridgeController().onUpdateBridges((String) pData.get(0), (String) pData.get(1));
+            }
+            else if(pEventType.equals(M_UNDO_SESSION)){
+                activityContextManager.getInstance().getHomeController().onLoadRecentTab(null);
+            }
+            else if(pEventType.equals(M_UNDO_TAB)){
+                activityContextManager.getInstance().getTabController().onRestoreTab(null);
             }
             return null;
         }

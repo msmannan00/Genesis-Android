@@ -221,7 +221,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/clear_alpha"
-        android:translationZ="2dp"
+        android:translationZ="112dp"
         android:clickable="true"
         android:focusable="true"
         android:contentDescription="@string/GENERAL_TODO" />
