@@ -44,6 +44,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings.bookmarkSettingController;
 import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome.bookmarkController;
 import com.darkweb.genesissearchengine.appManager.historyManager.historyController;
 import com.darkweb.genesissearchengine.dataManager.models.historyRowModel;
@@ -74,7 +75,8 @@ import com.darkweb.genesissearchengine.libs.trueTime.trueTime;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
-import com.google.android.gms.ads.AdView;
+import com.mopub.mobileads.MoPubView;
+
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
@@ -82,7 +84,6 @@ import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.LocaleHelper;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -93,6 +94,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+
+import mozilla.components.support.utils.DownloadUtils;
+
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
@@ -107,7 +111,11 @@ import static com.darkweb.genesissearchengine.constants.enums.etype.M_INITIALIZE
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB;
 import static com.darkweb.genesissearchengine.constants.enums.etype.WAS_SCROLL_CHANGED;
 import static com.darkweb.genesissearchengine.constants.enums.etype.open_new_tab;
+import static com.darkweb.genesissearchengine.constants.keys.M_ACTIVITY_RESPONSE;
+import static com.darkweb.genesissearchengine.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT;
+import static com.darkweb.genesissearchengine.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT;
 import static com.darkweb.genesissearchengine.constants.sql.SQL_CLEAR_HISTORY;
+import static com.darkweb.genesissearchengine.dataManager.dataEnums.eBookmarkCommands.M_INTENT_BOOKMARK;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static java.lang.Character.isLetter;
@@ -132,7 +140,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ImageView mLoadingIcon;
     private ImageView mBlocker;
     private TextView mLoadingText;
-    private AdView mBannerAds = null;
+    private MoPubView mBannerAds = null;
     private ImageButton mGatewaySplash;
     private ImageButton mPanicButton;
     private ImageButton mPanicButtonLandscape;
@@ -179,6 +187,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private String mSearchBarPreviousText = strings.GENERIC_EMPTY_STR;
     private Handler mScrollHandler = null;
     private Runnable mScrollRunnable = null;
+
+    private int mResponseRequestCode = 10112;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
@@ -255,7 +265,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void initAdmob(){
-        pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS);
+        new Handler().postDelayed(() ->
+        {
+            pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS);
+        }, 10000);
     }
 
     public void onInitBooleans(){
@@ -1204,7 +1217,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initLocalLanguage();
 
         helperMethod.hideKeyboard(this);
-        mHomeViewController.onOpenMenu(view,mGeckoClient.canGoForward(),!(mProgressBar.getAlpha()<=0 || mProgressBar.getVisibility() == View.INVISIBLE || mGeckoClient.isLoaded()),mGeckoClient.getUserAgent(), mGeckoClient.getSession().getCurrentURL());
+        boolean mBookmarked = (boolean) dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_BOOKMARK_AVAILABLE, Collections.singletonList(mGeckoClient.getSession().getCurrentURL()));
+        mHomeViewController.onOpenMenu(view,mGeckoClient.canGoForward(),!(mProgressBar.getAlpha()<=0 || mProgressBar.getVisibility() == View.INVISIBLE || mGeckoClient.isLoaded()),mGeckoClient.getUserAgent(), mGeckoClient.getSession().getCurrentURL(), mBookmarked);
 
         view.setClickable(false);
         new Handler().postDelayed(() ->
@@ -1298,21 +1312,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             handler.postDelayed(() -> mGeckoClient.onRedrawPixel(homeController.this), 300);
             if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 mHomeViewController.setOrientation(true);
-                if(mGeckoClient.getFullScreenStatus())
-                {
-                    mHomeViewController.onSetBannerAdMargin(false, true);
-                }
-
-
+                mHomeViewController.removeBanner();
             } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
                 mHomeViewController.setOrientation(false);
-                if(mGeckoClient.getFullScreenStatus())
-                {
-                    mHomeViewController.onSetBannerAdMargin(true,(boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
-                }
-
                 if(mGeckoClient.getSession().wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
-                    mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
+                    mHomeViewController.removeBanner();
                 }else {
                     mHomeViewController.updateBannerAdvertStatus(true, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
                 }
@@ -1328,11 +1332,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true, true);
 
             //mHomeViewController.initTopBarPadding();
-            mHomeViewController.onSetBannerAdMargin(!mGeckoClient.isLoading(),(boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED)&&!!mGeckoClient.isLoading());
+            //mHomeViewController.onSetBannerAdMargin(!mGeckoClient.isLoading(),(boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED)&&!!mGeckoClient.isLoading());
 
             mHomeViewController.expandTopBar(false, mGeckoView.getMaxY());
             status.sUIInteracted = true;
-            mHomeViewController.onFullScreen(false);
     }
 
     @Override
@@ -1404,7 +1407,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         if(status.sSettingIsAppStarted){
             mHomeViewController.onClearSelections(isKeyboardOpened);
-            pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
+            //pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         }
 
         if(mAppBar!=null){
@@ -1426,7 +1429,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_INIT_LOCALE);
             mHomeViewController.onUpdateSearchEngineBar(false, 0);
             mNewTab.setPressed(false);
-            pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
+            //pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         }
 
         if(status.sSettingIsAppStarted && !status.mThemeApplying){
@@ -1503,6 +1506,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode==mResponseRequestCode){
+            if(data!=null){
+                if(data.getExtras().getString(M_ACTIVITY_RESPONSE).equals(BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT)){
+                    pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_UPDATE_BOOKMARK);
+                }
+                else if(data.getExtras().getString(M_ACTIVITY_RESPONSE).equals(BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT)){
+                    pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DELETE_BOOKMARK);
+                }
+            }
+        }
+
         if(requestCode==100){
             if(resultCode == RESULT_OK && null != data){
                 mSearchbar.clearFocus();
@@ -1522,6 +1536,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+
+        // pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(activityContextManager.getInstance().getHomeController()), M_UPDATE_BOOKMARK);
+
     }
 
     public void onSetBannerAdMargin(){
@@ -1580,7 +1597,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.manualDownloadWithName(pURL,pPath,this);
     }
 
-    public AdView getBannerAd()
+    public MoPubView getBannerAd()
     {
         return mBannerAds;
     }
@@ -1678,7 +1695,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
         }
         else if (menuId == R.id.menuItem25) {
-            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(mGeckoClient.getSession().getCurrentURL(), this), M_DOWNLOAD_SINGLE);
+            String mFileName = DownloadUtils.guessFileName(null,"",mGeckoClient.getSession().getCurrentURL(),null);
+            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(mFileName, mGeckoClient.getSession().getSessionID(), mGeckoClient.getSession().getCurrentURL(), this), M_DOWNLOAD_SINGLE);
         }
         else {
             mSearchbar.clearFocus();
@@ -1791,8 +1809,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mGeckoClient.onForwardPressed();
             }
             if (menuId == R.id.menu23) {
-                helperMethod.hideKeyboard(this);
-                pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(mGeckoClient.getSession().getCurrentURL(), this), M_BOOKMARK);
+                if(view.getTag()!=null && view.getTag().equals("mMarked")){
+                    Intent intent = new Intent(getApplicationContext(), bookmarkSettingController.class);
+                    intent = (Intent)dataController.getInstance().invokeBookmark(M_INTENT_BOOKMARK, Arrays.asList(intent, mGeckoClient.getSession().getCurrentURL()));
+                    startActivityForResult(intent, mResponseRequestCode);
+                }else{
+                    helperMethod.hideKeyboard(this);
+                    pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(mGeckoClient.getSession().getCurrentURL(), this), M_BOOKMARK);
+                }
             }
             if (menuId == R.id.menu24) {
                 helperMethod.hideKeyboard(this);

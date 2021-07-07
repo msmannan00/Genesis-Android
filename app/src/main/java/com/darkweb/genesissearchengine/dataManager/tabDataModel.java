@@ -23,8 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import static java.lang.Thread.sleep;
 
@@ -272,17 +274,19 @@ class tabDataModel
                         Bitmap mBitmap = pBitmapManager.poll(10000);
 
                         ByteArrayOutputStream out = new ByteArrayOutputStream();
-                        mBitmap.compress(Bitmap.CompressFormat.JPEG, 40, out);
-                        mTabs.get(finalCounter).decodeByteArraysetmBitmap(mBitmap);
+                        mBitmap.compress(Bitmap.CompressFormat.JPEG, 35, out);
 
                         Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                         Bitmap emptyBitmap = Bitmap.createBitmap(decoded.getWidth(), decoded.getHeight(), decoded.getConfig());
                         if (!decoded.sameAs(emptyBitmap)) {
 
                             if(pImageView!=null){
-                                activityContextManager.getInstance().getHomeController().runOnUiThread(() -> pImageView.setImageBitmap(mBitmap));
+                                activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
+                                    pImageView.setImageBitmap(mBitmap);
+                                });
                             }
 
+                            mTabs.get(finalCounter).decodeByteArraysetmBitmap(decoded);
                             ContentValues mContentValues = new  ContentValues();
                             mContentValues.put("mThumbnail", out.toByteArray());
                             mExternalEvents.invokeObserver(Arrays.asList("tab",mContentValues, "mid = ?", new String[]{mTabs.get(finalCounter).getmId()}), dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT);

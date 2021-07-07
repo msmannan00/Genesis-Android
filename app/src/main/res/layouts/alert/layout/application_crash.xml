@@ -4,94 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="20dp">
+    android:layout_marginBottom="10dp">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pMainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:cardCornerRadius="5.5dp"
+        android:background="@xml/ax_round_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/pMainLayout"
+        <TextView
+            android:id="@+id/pDescription"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@xml/hox_rounded_corner">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:alpha="1"
+            android:lineSpacingExtra="3.5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/ALERT_CRASH_INFO"
+            android:textAlignment="textStart"
+            android:textColor="@color/c_text_v8"
+            android:textSize="13.5sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SmallSp" />
 
-            <TextView
-                android:id="@+id/pHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/ALERT_CRASH"
-                android:textAlignment="textStart"
-                android:textColor="@color/c_text_setting_heading_v2"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/pDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:alpha="0.6"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@string/ALERT_CRASH_INFO"
-                android:textAlignment="textStart"
-                android:textColor="@color/c_alert_text"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pHeader"
-                tools:ignore="SmallSp" />
+        <Button
+            android:id="@+id/pDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@xml/ax_ripple_default_round_bottom"
+            android:text="@string/ALERT_DISMISS"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
-            <View
-                android:id="@+id/pDivider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="25dp"
-                android:background="@color/c_view_divier_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/pNavigationContainer"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription">
-
-                <Button
-                    android:id="@+id/pDismiss"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@xml/ax_ripple_default_round_bottom"
-                    android:padding="0dp"
-                    android:paddingStart="15dp"
-                    android:layout_gravity="center"
-                    android:text="@string/ALERT_DISMISS"
-                    android:textAllCaps="false"
-                    android:textColor="@color/holo_gray"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

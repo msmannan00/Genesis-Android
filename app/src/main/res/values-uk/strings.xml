@@ -1,5 +1,19 @@
 <resources>
 
+	<!-- Bookmark Setting -->
+	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Редагувати закладку</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">URL-адреса закладки</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">URL-адреса закладки відображатиметься тут</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Назва закладки</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Назва URL-адреси із закладками буде показано тут</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Введіть назву закладки ...</string>
+
+
+
+
+
+
+
 	<!-- Application Strings -->
 	<string name="GENERAL_SEARCH_HINT" translatable="true">щось шукати або ввести веб-посилання</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">знайти на сторінці</string>

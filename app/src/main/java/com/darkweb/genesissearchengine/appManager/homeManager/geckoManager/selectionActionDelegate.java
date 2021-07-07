@@ -252,7 +252,6 @@ public class selectionActionDelegate implements ActionMode.Callback,
         }
         mSelection.execute(id);
 
-        // Android behavior is to clear selection on copy.
         if (ACTION_COPY.equals(id)) {
             if (mUseFloatingToolbar) {
                 clearSelection();
@@ -430,7 +429,8 @@ public class selectionActionDelegate implements ActionMode.Callback,
 
         try{
             if (mUseFloatingToolbar) {
-                if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                String strManufacturer = android.os.Build.MANUFACTURER;
+                if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1 || (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1 && strManufacturer.equals("samsung"))) {
                     mActionMode = mActivity.startActionMode(this);
                 }else {
                     mActionMode = mActivity.startActionMode(new Callback2Wrapper(),ActionMode.TYPE_FLOATING);

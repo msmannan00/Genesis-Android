@@ -32,7 +32,7 @@
                 <ImageButton
                     android:layout_width="45dp"
                     android:layout_height="50dp"
-                    android:onClick="onClose"
+                    android:onClick="onCloseTrigger"
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
                     android:tint="@color/c_navigation_tint"
@@ -41,7 +41,7 @@
                     android:contentDescription="@string/GENERAL_TODO"/>
                 <TextView
                     android:textColor="@color/c_text_v1"
-                    android:onClick="onClose"
+                    android:onClick="onCloseTrigger"
                     android:textSize="17sp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -67,7 +67,7 @@
                     android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_info"
-                    app:tint="@color/c_icon_tint_light" />
+                    app:tint="@color/c_header_icon_tint" />
 
             </LinearLayout>
 
@@ -107,7 +107,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="40"
-                        android:textColor="@color/c_text_setting_heading"
+                        android:textColor="@color/c_text_short_header"
                         android:layout_marginStart="15dp"
                         android:textStyle="bold"
                         android:text="@string/BRIDGE_AUTO"
@@ -215,7 +215,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="4dp"
-                        android:background="@color/c_view_divier_background_inner"/>
+                        android:background="@color/c_topbar_divider"/>
 
                     <LinearLayout
                         android:id="@+id/pOption2"
@@ -270,7 +270,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="4dp"
-                        android:background="@color/c_view_divier_background_inner"/>
+                        android:background="@color/c_topbar_divider"/>
 
                     <LinearLayout
                         android:id="@+id/pOption3"
@@ -326,7 +326,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:elevation="4dp"
-                        android:background="@color/c_view_divier_background_inner"/>
+                        android:background="@color/c_topbar_divider"/>
 
                 </LinearLayout>
 
@@ -349,7 +349,7 @@
                     tools:ignore="RtlSymmetry">
                     <EditText
                         android:background="@xml/gx_generic_input"
-                        android:textColorHighlight="@color/text_color_highlight_v1"
+                        android:textColorHighlight="@color/c_text_color_highlight_v1"
                         android:textCursorDrawable="@xml/gx_search_cursor_state"
                         android:id="@+id/pCustomPort"
                         android:layout_width="0dp"

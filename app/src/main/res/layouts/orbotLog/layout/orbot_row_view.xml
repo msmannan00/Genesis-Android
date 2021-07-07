@@ -76,7 +76,7 @@
                     android:ellipsize="end"
                     android:src="@xml/ic_baseline_clock"
                     android:textColor="@color/c_text_v1"
-                    app:tint="@color/c_view_divier_background_inner_v1" />
+                    app:tint="@color/c_divider_line_light" />
 
                 <TextView
                     android:id="@+id/pDescription"

@@ -10,7 +10,7 @@
         android:id="@+id/pMainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@xml/hox_rounded_corner"
+        android:background="@xml/ax_round_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -18,122 +18,104 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/pHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingStart="15dp"
-            android:text="@string/ALERT_CREATE_BOOKMARK"
-            android:textAlignment="textStart"
-            android:textColor="@color/c_text_setting_heading_v2"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/pDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:alpha="0.6"
+            android:layout_marginTop="18dp"
+            android:alpha="0.8"
+            android:paddingStart="15dp"
             android:paddingEnd="10dp"
             android:text="@string/ALERT_CREATE_BOOKMARK_INFO"
             android:textAlignment="textStart"
-            android:paddingStart="15dp"
             android:textColor="@color/c_alert_text"
+            android:lineSpacingExtra="3.5dp"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pHeader"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="14dp"
-            android:background="@color/c_view_divier_background"
-            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
-
         <EditText
-            android:id="@+id/pBridgeInput"
+            android:id="@+id/pBookmarkNameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             android:background="@xml/gx_generic_input_create_bookmark"
-            android:ems="10"
             android:elevation="3dp"
+            android:ems="10"
+            android:focusedByDefault="true"
             android:hint="@string/ALERT_TITLE_ADD"
             android:importantForAutofill="no"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
-            android:focusedByDefault="true"
             android:padding="7dp"
             android:paddingStart="11dp"
             android:paddingEnd="8dp"
-            android:textColor="@color/c_text_v1"
-            android:textColorHighlight="@color/text_color_highlight_v3"
+            android:textColor="@color/c_text_v8"
+            android:textColorHighlight="@color/c_text_color_highlight_v2"
             android:textColorHint="@color/c_text_v2"
             android:textCursorDrawable="@xml/gx_search_cursor_state"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/pDivider"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
-        <View
-            android:id="@+id/pDivider"
+        <TextView
+            android:id="@+id/pURL"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="14dp"
-            android:background="@color/c_view_divier_background"
-            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
-
-        <LinearLayout
-            android:id="@+id/pNavigationContainer"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:layout_height="35dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="13dp"
+            android:background="@xml/hx_ripple_default_round_bottom"
+            android:ellipsize="end"
+            android:gravity="center_vertical | start"
+            android:maxLines="1"
+            android:paddingStart="11dp"
+            android:paddingEnd="15dp"
+            android:text="@string/BOOKMARK_EMPTY"
+            android:textColor="@color/c_text_v2"
+            android:textSize="12.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDivider">
+            app:layout_constraintTop_toBottomOf="@+id/pBookmarkNameInput" />
 
-            <Button
-                android:id="@+id/pDismiss"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_left"
-                android:padding="0dp"
-                android:text="@string/ALERT_DISMISS"
-                android:textAllCaps="false"
-                android:textColor="@color/c_button_text_v2"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+        <Button
+            android:id="@+id/pNext"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@xml/ax_ripple_default_round_bottom"
+            android:text="@string/ALERT_ADD"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pURL" />
 
-            <View
-                android:id="@+id/pDividerHorizontal"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/c_view_divier_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+        <Button
+            android:id="@+id/pDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@xml/ax_ripple_default_round_bottom_secondary"
+            android:text="@string/ALERT_DISMISS"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pNext"
+            app:layout_constraintTop_toBottomOf="@+id/pURL" />
 
-            <Button
-                android:id="@+id/pNext"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_right"
-                android:padding="0dp"
-                android:text="@string/ALERT_ADD"
-                android:textAllCaps="false"
-                android:textColor="@color/c_button_text_v1"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

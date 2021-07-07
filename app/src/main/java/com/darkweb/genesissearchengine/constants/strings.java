@@ -66,8 +66,7 @@ public class strings
 
     /*Bookmark Setting Manager*/
 
-    public static final String BOOKMARK_SETTING_VALIDATION_ERROR_1 = "➔ bookmark name empty";
-    public static final String BOOKMARK_SETTING_VALIDATION_ERROR_2 = "➔ bookmark url empty";
+    public static final String BOOKMARK_SETTING_VALIDATION_ERROR_2 = "bookmark url empty";
 
 }
 

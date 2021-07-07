@@ -68,7 +68,7 @@
                         android:background="@xml/gx_ripple_gray_round_left"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_info"
-                        app:tint="@color/c_icon_tint_light" />
+                        app:tint="@color/c_header_icon_tint" />
 
                 </LinearLayout>
 

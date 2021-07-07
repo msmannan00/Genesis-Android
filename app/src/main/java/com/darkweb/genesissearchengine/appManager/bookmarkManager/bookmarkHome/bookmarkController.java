@@ -46,8 +46,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import static com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.darkweb.genesissearchengine.constants.keys.M_ACTIVITY_RESPONSE;
+import static com.darkweb.genesissearchengine.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT;
+import static com.darkweb.genesissearchengine.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT;
 import static com.darkweb.genesissearchengine.constants.sql.SQL_CLEAR_BOOKMARK;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_CLEAR_BOOKMARK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_DELETE_BOOKMARK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_UPDATE_BOOKMARK;
 
 
 public class bookmarkController extends AppCompatActivity
@@ -59,17 +64,20 @@ public class bookmarkController extends AppCompatActivity
     private bookmarkAdapter mbookmarkAdapter;
     private LinearLayout mHeaderContainer;
     private TextView mTitle;
+    private bookmarkViewController mbookmarkViewController;
 
     /*Private Views*/
 
-    private ImageView mEmptyListNotification;
+    private TextView mEmptyListNotification;
     private editTextManager mSearchInput;
     private RecyclerView mRecycleView;
     private Button mClearButton;
     private ImageButton mMenuButton;
     private ImageButton mSearchButton;
 
-    private bookmarkViewController mbookmarkViewController;
+    /*Local Variables*/
+
+    private int mResponseRequestCode = 10113;
 
     /*Initializations*/
 
@@ -98,6 +106,7 @@ public class bookmarkController extends AppCompatActivity
 
     public void initializeListModel(){
         mbookmarkModel = new bookmarkModel();
+        activityContextManager.getInstance().setBookmarkController(this);
         mHomeController = activityContextManager.getInstance().getHomeController();
     }
 
@@ -179,7 +188,8 @@ public class bookmarkController extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        activityContextManager.getInstance().setBookmarkController(null);
+        activityContextManager.getInstance().onRemoveStack(this);
+        activityContextManager.getInstance().setHistoryController(null);
         super.onDestroy();
     }
 
@@ -276,6 +286,23 @@ public class bookmarkController extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode==mResponseRequestCode){
+            if(data!=null){
+                if(data.getExtras().getString(M_ACTIVITY_RESPONSE).equals(BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT)){
+                    pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_UPDATE_BOOKMARK);
+                }
+                else if(data.getExtras().getString(M_ACTIVITY_RESPONSE).equals(BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT)){
+                    initializeList();
+                    pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DELETE_BOOKMARK);
+                }
+            }
+        }else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     /* UI Redirection */
 
     public void onBackPressed(View view){
@@ -328,11 +355,6 @@ public class bookmarkController extends AppCompatActivity
         mRecycleView.setAlpha(0);
     }
 
-    public void onOpenBookmarkSetting() {
-        Intent intent = new Intent(getApplicationContext(), bookmarkSettingController.class);
-        startActivity(intent);
-    }
-
     /*Event Observer*/
 
     public class edittextManagerCallback implements eventObserver.eventListener {
@@ -366,7 +388,7 @@ public class bookmarkController extends AppCompatActivity
             }
 
             else if(e_type.equals(enums.etype.url_clear)){
-                mbookmarkModel.onManualClear((int)data.get(0));
+                dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK ,data);
             }
             else if(e_type.equals(enums.etype.url_clear_at)){
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK ,data);
@@ -385,7 +407,7 @@ public class bookmarkController extends AppCompatActivity
                 intent.putExtra(keys.BOOKMARK_SETTING_NAME, (String) data.get(0));
                 intent.putExtra(keys.BOOKMARK_SETTING_URL, (String) data.get(1));
                 intent.putExtra(keys.BOOKMARK_SETTING_ID, (int) data.get(2));
-                startActivity(intent);
+                startActivityForResult(intent, mResponseRequestCode);
             }
             return null;
         }

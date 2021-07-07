@@ -53,6 +53,19 @@
                     android:tint="@color/c_navigation_tint" />
 
                 <ImageButton
+                    android:id="@+id/menu23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="47dp"
+                    android:layout_weight="1"
+                    android:background="@xml/gx_ripple_gray"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onMenuItemInvoked"
+                    android:scaleX="0.96"
+                    android:scaleY="0.96"
+                    android:src="@xml/ic_baseline_bookmark"
+                    android:tint="@color/c_navigation_tint" />
+
+                <ImageButton
                     android:id="@+id/menu22"
                     android:layout_width="wrap_content"
                     android:layout_height="47dp"
@@ -66,19 +79,6 @@
                     android:tint="@color/c_navigation_tint" />
 
                 <ImageButton
-                    android:id="@+id/menu23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="47dp"
-                    android:layout_weight="1"
-                    android:scaleX="0.96"
-                    android:scaleY="0.96"
-                    android:background="@xml/gx_ripple_gray"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:onClick="onMenuItemInvoked"
-                    android:src="@xml/ic_baseline_bookmark"
-                    android:tint="@color/c_navigation_tint" />
-
-                <ImageButton
                     android:id="@+id/menuItem25"
                     android:layout_width="wrap_content"
                     android:layout_height="47dp"
@@ -87,6 +87,7 @@
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onMenuItemInvoked"
                     android:scaleX="0.96"
+                    android:paddingTop="1.5dp"
                     android:scaleY="0.96"
                     android:src="@xml/ic_baseline_file_download"
                     android:tint="@color/c_navigation_tint" />

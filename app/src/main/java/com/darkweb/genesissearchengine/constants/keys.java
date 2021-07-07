@@ -2,6 +2,10 @@ package com.darkweb.genesissearchengine.constants;
 
 public class keys
 {
+    /*GENERIC*/
+
+    public static final String M_ACTIVITY_RESPONSE = "M_ACTIVITY_RESPONSE";
+
     /*Home page*/
 
     public static String HOME_LOW_MEMORY = "LOW_MEMORY";

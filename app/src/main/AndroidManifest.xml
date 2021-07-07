@@ -28,7 +28,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <activity android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings.bookmarkSettingController"></activity>
+        <activity
+            android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings.bookmarkSettingController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:windowSoftInputMode="adjustPan" />
 
         <receiver android:name="com.widget.Genesis.widgetManager.widgetController">
             <intent-filter>
@@ -278,16 +281,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-
         <service
             android:name="org.torproject.android.service.OrbotService"
             android:enabled="true"
-            android:permission="android.permission.BIND_VPN_SERVICE"
-            android:stopWithTask="false">
-            <intent-filter>
-                <action android:name="android.net.VpnService" />
-            </intent-filter>
-        </service>
+            android:exported="false"
+            android:stopWithTask="true" />
     </application>
 
 </manifest>

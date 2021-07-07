@@ -1,8 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -103,45 +101,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     }
 
     public void scaleView(View v, tabRowModel mTabRowModel) {
-        v.bringToFront();
-        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(v,
-                PropertyValuesHolder.ofFloat("scaleX", 1, 1f),
-                PropertyValuesHolder.ofFloat("scaleY", 1, 1f));
-        scaleDown.setDuration(0);
-        scaleDown.start();
-        v.setClickable(false);
-        v.setFocusable(false);
-        v.setEnabled(false);
 
         mEvent.invokeObserver(Arrays.asList(mTabRowModel.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
         onTriggerURL(mTabRowModel);
-
-        scaleDown.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation, boolean isReverse) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation, boolean isReverse) {
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-            }
-        });
 
     }
 
@@ -439,7 +401,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
                         mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_button_text_v1_inverted));
                     }else {
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.text_color_highlight_v3));
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_text_color_highlight_v2));
                     }
                 }else {
 

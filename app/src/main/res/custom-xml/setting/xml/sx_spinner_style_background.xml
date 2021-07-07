@@ -10,7 +10,7 @@
                         android:topLeftRadius="5dp" android:topRightRadius="5dp"/>
                 <stroke android:width="0dp"
                         android:color="#e6e6e6" />
-                <solid android:color="@color/button_gray" />
+                <solid android:color="@color/c_gray_light" />
             </shape>
         </inset>
     </item>
@@ -23,7 +23,7 @@
                         android:topLeftRadius="5dp" android:topRightRadius="5dp"/>
                 <stroke android:width="0dp"
                         android:color="#e6e6e6" />
-                <solid android:color="@color/button_gray" />
+                <solid android:color="@color/c_gray_light" />
 
             </shape>
         </inset>

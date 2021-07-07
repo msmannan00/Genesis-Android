@@ -105,28 +105,34 @@ public class settingClearController extends AppCompatActivity {
 
     public void onClearData(View view){
         boolean mHomeInvoked = false;
+        boolean mClearInvoked = false;
+
         if(mCheckBoxList.get(0).isChecked()){
             mCheckBoxList.get(0).setChecked(false);
             mCheckBoxList.get(0).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
             mHomeInvoked = true;
+            mClearInvoked = true;
         }
         if(mCheckBoxList.get(1).isChecked()){
             mCheckBoxList.get(1).setChecked(false);
             mCheckBoxList.get(1).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_HISTORY,null));
             dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
+            mClearInvoked = true;
         }
         if(mCheckBoxList.get(2).isChecked()){
             mCheckBoxList.get(2).setChecked(false);
             mCheckBoxList.get(2).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_BOOKMARK,null));
             dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK ,null);
+            mClearInvoked = true;
         }
         if(mCheckBoxList.get(3).isChecked()){
             mCheckBoxList.get(3).setChecked(false);
             mCheckBoxList.get(3).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             activityContextManager.getInstance().getHomeController().onClearCache();
+            mClearInvoked = true;
         }
         if(mCheckBoxList.get(4).isChecked()){
             mCheckBoxList.get(4).setChecked(false);
@@ -134,6 +140,7 @@ public class settingClearController extends AppCompatActivity {
             mCheckBoxList.get(4).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             activityContextManager.getInstance().getHomeController().onClearSiteData();
             mHomeInvoked = true;
+            mClearInvoked = true;
         }
         if(mCheckBoxList.get(5).isChecked()){
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
@@ -141,11 +148,13 @@ public class settingClearController extends AppCompatActivity {
             mCheckBoxList.get(5).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             activityContextManager.getInstance().getHomeController().onClearSession();
             mHomeInvoked = true;
+            mClearInvoked = true;
         }
         if(mCheckBoxList.get(6).isChecked()){
             mCheckBoxList.get(6).setChecked(false);
             mCheckBoxList.get(6).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             activityContextManager.getInstance().getHomeController().onClearCookies();
+            mClearInvoked = true;
         }
         if(mCheckBoxList.get(7).isChecked()){
             mCheckBoxList.get(7).setChecked(false);
@@ -154,15 +163,17 @@ public class settingClearController extends AppCompatActivity {
             status.initStatus(activityContextManager.getInstance().getHomeController());
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
             mHomeInvoked = true;
+            mClearInvoked = true;
         }
 
-        activityContextManager.getInstance().getHomeController().initRuntimeSettings();
-        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DATA_CLEARED);
+        if(mClearInvoked){
+            activityContextManager.getInstance().getHomeController().initRuntimeSettings();
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DATA_CLEARED);
 
-        if(mHomeInvoked){
-            activityContextManager.getInstance().getHomeController().onClearSettings();
+            if(mHomeInvoked){
+                activityContextManager.getInstance().getHomeController().onClearSettings();
+            }
         }
-
 
     }
 

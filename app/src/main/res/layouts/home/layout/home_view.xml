@@ -129,7 +129,7 @@
                             android:selectAllOnFocus="true"
                             android:text="@string/GENERAL_HOME_URL"
                             android:textColor="@color/c_text_v1"
-                            android:textColorHighlight="@color/text_color_highlight_v3"
+                            android:textColorHighlight="@color/c_text_color_highlight_v2"
                             android:textColorHint="@color/c_text_v2"
                             android:textCursorDrawable="@xml/gx_search_cursor_state"
                             android:textIsSelectable="false"
@@ -210,32 +210,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Live Build -->
-                <com.google.android.gms.ads.AdView
+                <com.mopub.mobileads.MoPubView
                     android:id="@+id/pAdView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width='320dp'
+                    android:layout_height='50dp'
                     android:alpha="0"
                     android:background="@color/c_border_background_divider"
                     android:visibility="gone"
-                    app:adSize="BANNER"
-                    app:adUnitId="ca-app-pub-5074525529134731/7227708311"
+                    app:moPubAdSize='match_view'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pTopbar" />
-
-                <!-- Development Build
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/pAdView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0"
-                    android:background="@color/c_border_background_divider"
-                    android:visibility="gone"
-                    app:adSize="BANNER"
-                    app:adUnitId="ca-app-pub-6985886044951738/2630126403"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pTopbar" /> -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -802,28 +787,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/pFloatingLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:alpha="0"
-        android:backgroundTint="@color/white"
-        android:clickable="true"
-        android:contentDescription="@string/GENERAL_TODO"
-        android:focusable="true"
-        android:src="@drawable/icon_ban"
-        android:visibility="gone"
-        app:borderWidth="0dp"
-        app:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="?attr/actionModeSelectAllDrawable"
-        tools:ignore="ExtraText" />
-
+    
     <include
         android:id="@+id/pFindBar"
         layout="@layout/popup_find"

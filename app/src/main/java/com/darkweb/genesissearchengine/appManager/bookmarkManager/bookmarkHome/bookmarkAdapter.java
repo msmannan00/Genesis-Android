@@ -359,7 +359,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
     }
 
     private void onClose(int pIndex){
-        mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
+        //mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.url_clear_at);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
 
@@ -415,6 +415,8 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mRowContainer.setVisibility(View.GONE);
                 mRowMenu.setVisibility(View.INVISIBLE);
                 mRowMenu.setClickable(false);
+                mBookmarkEdit.setVisibility(View.INVISIBLE);
+                mBookmarkEdit.setClickable(false);
                 mWebLogo.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.GONE);
             }
@@ -424,6 +426,8 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 mRowContainer.setVisibility(View.GONE);
                 mRowMenu.setVisibility(View.INVISIBLE);
                 mRowMenu.setClickable(false);
+                mBookmarkEdit.setVisibility(View.INVISIBLE);
+                mBookmarkEdit.setClickable(false);
                 mWebLogo.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.VISIBLE);
                 return;
@@ -435,9 +439,13 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 if(mLongSelectedID.size()>0){
                     mRowMenu.setVisibility(View.INVISIBLE);
                     mRowMenu.setClickable(false);
+                    mBookmarkEdit.setVisibility(View.INVISIBLE);
+                    mBookmarkEdit.setClickable(false);
                 }else {
                     mRowMenu.setVisibility(View.VISIBLE);
                     mRowMenu.setClickable(true);
+                    mBookmarkEdit.setVisibility(View.VISIBLE);
+                    mBookmarkEdit.setClickable(true);
                 }
                 mWebLogo.setVisibility(View.VISIBLE);
                 mHeader.setText(model.getHeader());
@@ -462,12 +470,17 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             if(mLongSelectedID.size()>0){
                 mRowMenu.setVisibility(View.INVISIBLE);
                 mRowMenu.setClickable(false);
+                mBookmarkEdit.setVisibility(View.INVISIBLE);
+                mBookmarkEdit.setClickable(false);
+                mBookmarkEdit.setClickable(false);
             }else {
                 mRowMenu.setVisibility(View.VISIBLE);
                 mRowMenu.setClickable(true);
+                mBookmarkEdit.setVisibility(View.VISIBLE);
+                mBookmarkEdit.setClickable(true);
             }
 
-            if(mLongSelectedIndex.contains("https://" + model.getDescription()) && mLongSelectedID.contains(model.getID())){
+            if(mLongSelectedID.contains(model.getID())){
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(mRowContainer, mRowMenu, mSelectionImage, true, false));
             }else if(mSelectionImage.getAlpha()>0){
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(bookmarkEnums.eBookmarkViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mSelectionImage, true, false));

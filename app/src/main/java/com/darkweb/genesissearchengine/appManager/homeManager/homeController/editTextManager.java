@@ -24,6 +24,7 @@ public class editTextManager  extends androidx.appcompat.widget.AppCompatAutoCom
         mContext = context;
     }
 
+
     public editTextManager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = context;

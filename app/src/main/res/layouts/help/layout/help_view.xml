@@ -120,7 +120,7 @@
             android:layout_marginTop="1dp"
             android:background="@xml/gx_ripple_default_round"
             android:contentDescription="@string/GENERAL_TODO"
-            android:onClick="onClose"
+            android:onClick="onCloseTrigger"
             android:src="@xml/ic_arrow_back"
             android:tint="@color/c_navigation_tint" />
 
@@ -130,7 +130,7 @@
             android:layout_marginTop="-3dp"
             android:layout_marginEnd="10dp"
             android:gravity="center_vertical|start"
-            android:onClick="onClose"
+            android:onClick="onCloseTrigger"
             android:text="@string/HELP_TITLE"
             android:textColor="@color/c_text_v1"
             android:textSize="17sp"
@@ -152,7 +152,7 @@
             android:onClick="onOpenHelp"
             android:padding="9dp"
             android:src="@xml/ic_baseline_chat"
-            app:tint="@color/c_icon_tint_light" />
+            app:tint="@color/c_header_icon_tint" />
 
     </LinearLayout>
 
@@ -195,7 +195,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="8dp"
                 android:textColor="@color/c_text_v1"
-                android:textColorHighlight="@color/text_color_highlight_v1"
+                android:textColorHighlight="@color/c_text_color_highlight_v1"
                 android:textColorHint="@color/c_text_v2"
                 android:textCursorDrawable="@xml/gx_search_cursor_state"
                 android:textSize="15sp"

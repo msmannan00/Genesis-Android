@@ -210,7 +210,7 @@
                 android:id="@+id/pBorder"
                 android:layout_width="30dp"
                 android:layout_height="12dp"
-                android:background="@color/c_view_divier_background_inner"
+                android:background="@color/c_topbar_divider"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:layout_gravity="end"
                 android:visibility="visible" />

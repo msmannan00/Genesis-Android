@@ -275,9 +275,9 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             Notification notification = mNotifyBuilder.build();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForeground(NOTIFY_ID, notification);
+                startForeground(11337, notification);
             } else if (Prefs.persistNotifications() && (!mNotificationShowing)) {
-                startForeground(NOTIFY_ID, notification);
+                startForeground(11337, notification);
                 logNotice("Set background service to FOREGROUND");
             } else {
                 mNotificationManager.notify(NOTIFY_ID, notification);
@@ -519,19 +519,19 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                         notificationIntent, 0);
 
                 Notification notification = new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_stat_tor_logo)
+                        .setSmallIcon(R.drawable.ic_stat_starting_tor_logo)
                         .setContentTitle("Starting Genesis")
                         .setContentIntent(pendingIntent).build();
 
                 startForeground(11337, notification);
-            }else if(Build.VERSION.SDK_INT == 26){
+            }else {
                 String id = "_channel_01";
                 int importance = NotificationManager.IMPORTANCE_LOW;
                 NotificationChannel mChannel = new NotificationChannel(id, "notification", importance);
                 mChannel.enableLights(true);
 
                 Notification notification = new Notification.Builder(getApplicationContext(), id)
-                        .setSmallIcon(R.mipmap.ic_stat_tor_logo)
+                        .setSmallIcon(R.drawable.ic_stat_starting_tor_logo)
                         .setContentTitle("Starting Genesis")
                         .build();
 

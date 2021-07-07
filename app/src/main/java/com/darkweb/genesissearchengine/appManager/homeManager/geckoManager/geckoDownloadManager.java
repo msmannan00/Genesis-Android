@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 
 import org.mozilla.geckoview.WebResponse;
 
@@ -45,17 +46,21 @@ class geckoDownloadManager
             return;
         }
 
+        String mURL = helperMethod.getHost(session.getCurrentURL());
         try{
+            if(mURL.length()>25){
+                mURL = mURL.substring(0,25);
+            }
+
             String mFileName = DownloadUtils.guessFileName(response.headers.get("Content-Disposition"),"",response.uri,null);
             downloadURL = Uri.parse(response.uri);
             downloadFile = mFileName;
         }catch (Exception ex){
             ex.printStackTrace();
-            Log.i("sadsad",ex.getMessage());
         }
 
         event.invokeObserver(Arrays.asList(0,session.getSessionID()), enums.etype.progress_update);
-        event.invokeObserver(Arrays.asList(downloadFile.toString(),session.getSessionID(),downloadURL.toString()), enums.etype.download_file_popup);
+        event.invokeObserver(Arrays.asList(downloadFile,session.getSessionID(),mURL), enums.etype.download_file_popup);
     }
 
     Uri getDownloadURL(){

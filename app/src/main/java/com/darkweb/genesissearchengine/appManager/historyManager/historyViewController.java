@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
-import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,7 +16,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -40,7 +38,7 @@ class historyViewController
 {
     /*Private Variables*/
     private AppCompatActivity mContext;
-    private ImageView mEmptyListNotification;
+    private TextView mEmptyListNotification;
     private EditText mSearchInput;
     private RecyclerView mRecycleView;
     private Button mClearButton;
@@ -55,7 +53,7 @@ class historyViewController
 
     /*Initializations*/
 
-    historyViewController(ImageView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton,AppCompatActivity pContext,ImageButton pMenuButton,ImageButton pSearchButton, LinearLayout pHeaderContainer, TextView pTitle)
+    historyViewController(TextView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton,AppCompatActivity pContext,ImageButton pMenuButton,ImageButton pSearchButton, LinearLayout pHeaderContainer, TextView pTitle)
     {
         this.mEmptyListNotification = pEmptyListNotification;
         this.mSearchInput = pSearchInput;
@@ -89,7 +87,7 @@ class historyViewController
 
     private void updateIfListEmpty(int pSize,int pDuration){
         if(pSize>0){
-            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
+            mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_short_header));
             mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
             mClearButton.setText(strings.HISTORY_CLEAR_HISTORY);
             mClearButton.setClickable(true);
@@ -115,6 +113,7 @@ class historyViewController
             mClearButton.getLayoutParams().height = 0;
             mClearButton.requestLayout();
             mRecycleView.setVisibility(View.GONE);
+            mClearButton.setVisibility(View.GONE);
         }
     }
 
@@ -139,7 +138,7 @@ class historyViewController
         }else {
             if (mSearchInput.getVisibility() != View.VISIBLE) {
                 mClearButton.setClickable(true);
-                mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_setting_heading));
+                mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_short_header));
             }
             mMenuButton.setVisibility(View.GONE);
             mSearchButton.setVisibility(View.VISIBLE);

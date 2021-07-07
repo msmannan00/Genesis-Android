@@ -1,35 +1,45 @@
 <resources>
 
+    /* Static Colors */
+
+    /* Generic Colors */
+
+    <color name="c_navigation_tint">#ffffff</color>
+    <color name="c_background">#1c1b21</color>
+    <color name="c_header_icon_tint">#a6a6a6</color>
+    <color name="c_divider_line_light">#666666</color>
+    <color name="c_topbar_divider">#0f0f0f</color>
+    <color name="c_edittext_border">#2c2b31</color>
+    <color name="c_edittext_error_border">#790606</color>
+    <color name="c_edittext_error_background">#300303</color>
+    <color name="c_text_short_header">#33cccc</color>
+
+    <color name="c_text_v1">#ffffff</color>
+    <color name="c_text_v2">#b3b3b3</color>
+
+
     /* Customs Colors */
 
-    <color name="c_background">#1c1b21</color>
     <color name="c_background_alpha">#60ffffff</color>
     <color name="c_background_keyboard">#091a2a</color>
     <color name="c_background_inverted">#ffffff</color>
-    <color name="c_view_divier_background_inner">#0f0f0f</color>
-    <color name="c_view_divier_background_inner_v1">#666666</color>
     <color name="c_view_divier_background">#141414</color>
-    <color name="c_text_v1">#ffffff</color>
-    <color name="c_text_v2">#b3b3b3</color>
     <color name="c_text_v3">#666666</color>
     <color name="c_text_v4">#a6a6a6</color>
     <color name="c_text_v5">#ffffff</color>
     <color name="c_text_v7">#248f8f</color>
     <color name="c_text_v8">#a6a6a6</color>
     <color name="c_text_v9">#e6e6e6</color>
-    <color name="c_icon_tint">#ffffff</color>
     <color name="c_security_popup_background">#121216</color>
     <color name="c_security_popup_divider">#121216</color>
-    <color name="c_icon_tint_light">#a6a6a6</color>
     <color name="c_lang_row">#293a56</color>
     <color name="c_lang_row_border">#3a5278</color>
-    <color name="c_text_setting_heading">#33cccc</color>
     <color name="c_button_text_v1">#ffffff</color>
     <color name="c_button_text_v1_inverted">#3385ff</color>
     <color name="c_button_text_v2">#ffffff</color>
     <color name="c_button_text_v3">#ffffff</color>
     <color name="c_text_setting_heading_v2">#33cccc</color>
-    <color name="c_navigation_tint">#ffffff</color>
+    <color name="c_edittext_background_form_inactive">#4d4d4d</color>
     <color name="c_navigation_medium">#bfbfbf</color>
     <color name="c_navigation_light">#999999</color>
     <color name="c_switch_theme">#33cccc</color>
@@ -57,8 +67,7 @@
     <color name="c_profile_radial_inner">#2c2b31</color>
     <color name="c_profile_radial_outer">#2c2b31</color>
     <color name="c_edittext_background">#3c3946</color>
-    <color name="c_border_background_dark">#2c2b31</color>
-    <color name="c_edittext_background_error">#660b0b</color>
+    <color name="c_edittext_background_blue">#3c3946</color>
     <color name="c_edittext_background_dark">#24222a</color>
     <color name="c_menu_drop_shadow_05">#00000000</color>
     <color name="c_menu_drop_shadow_10">#00000000</color>

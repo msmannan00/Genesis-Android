@@ -7,61 +7,88 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/pMainLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@xml/hox_rounded_corner"
+        android:background="@xml/ax_round_corner"
+        android:paddingBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/pHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingStart="15dp"
-            android:layout_marginEnd="30dp"
-            android:singleLine="true"
-            android:text="@string/ALERT_DOWNLOAD"
-            android:textAlignment="textStart"
-            android:textColor="@color/c_text_setting_heading_v2"
-            android:textSize="17sp"
-            android:textStyle="bold"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            app:cardCornerRadius="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/pFaviconLogo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:src="@xml/ic_baseline_browser"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="RtlCompat" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/pDescription"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="11dp"
             android:alpha="0.6"
-            android:gravity="start"
+            android:gravity="start |center_vertical"
+            android:maxLines="1"
             android:paddingStart="15dp"
-            android:paddingEnd="15dp"
+            android:paddingEnd="41dp"
             android:text="@string/GENERAL_DEFAULT_TEXT"
-            android:textAlignment="viewStart"
             android:textColor="@color/c_alert_text"
             android:textDirection="locale"
-            android:maxLines="5"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pHeader"
+            android:textSize="13.5sp"
+            android:translationY="-1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/pDescriptionShort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:alpha="0.6"
+            android:gravity="start |center_vertical"
+            android:maxLines="1"
+            android:paddingStart="16.6dp"
+            android:paddingEnd="41dp"
+            android:text="@string/GENERAL_DEFAULT_TEXT"
+            android:textColor="@color/c_alert_text"
+            android:textDirection="locale"
+            android:textSize="11sp"
+            android:translationY="-1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/pDescription"
             tools:ignore="SmallSp" />
 
         <View
             android:id="@+id/pDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@color/c_view_divier_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
         <LinearLayout
             android:id="@+id/pNavigationContainer"
@@ -104,11 +131,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
-                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -151,11 +178,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
-                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -197,12 +224,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:tint="@color/c_navigation_tint"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -247,11 +274,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    app:tint="@color/c_navigation_tint"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -296,11 +323,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    app:tint="@color/c_navigation_tint"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -345,11 +372,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    app:tint="@color/c_navigation_tint"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -365,7 +392,7 @@
                 android:id="@+id/pOption7"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@xml/gx_ripple_gray"
+                android:background="@xml/gx_ripple_gray_bottom"
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
@@ -394,23 +421,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
-                    app:tint="@color/c_navigation_tint"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:background="@color/c_view_divier_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
         </LinearLayout>
 

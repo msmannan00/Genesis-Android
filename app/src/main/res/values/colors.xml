@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    /* Static Colors */
+
+    <color name="c_text_color_highlight_v1">#b3d1ff</color>
+    <color name="c_text_color_highlight_v2">#99bbff</color>
+    <color name="c_error_text_color">#f32323</color>
+    <color name="c_gray_light">#d9d9d9</color>
+
+    /* Generic Colors */
+
+    <color name="c_navigation_tint">#000000</color>
+    <color name="c_background">#ffffff</color>
+    <color name="c_header_icon_tint">#7591bd</color>
+    <color name="c_divider_line_light">#e6e6e6</color>
+    <color name="c_topbar_divider">#ebebeb</color>
+    <color name="c_edittext_border">#e2e7e9</color>
+    <color name="c_edittext_error_border">#f32323</color>
+    <color name="c_edittext_error_background">#f9e2eb</color>
+    <color name="c_text_short_header">#3385ff</color>
+
+    <color name="c_text_v1">#111722</color>
+    <color name="c_text_v2">#999999</color>
+
     /* Customs Colors */
 
-    <color name="c_background">#ffffff</color>
     <color name="c_background_alpha">#601c1b21</color>
     <color name="c_background_keyboard">#999999</color>
     <color name="c_background_inverted">#302e38</color>
-    <color name="c_view_divier_background_inner">#ebebeb</color>
-    <color name="c_view_divier_background_inner_v1">#e6e6e6</color>
     <color name="c_view_divier_background">#e6e6e6</color>
-    <color name="c_text_v1">#111722</color>
-    <color name="c_text_v2">#999999</color>
     <color name="c_text_v3">#bfbfbf</color>
     <color name="c_text_v4">#425e8a</color>
     <color name="c_text_v5">#000000</color>
@@ -20,16 +37,13 @@
     <color name="c_text_v8">#666666</color>
     <color name="c_text_v9">#7591bd</color>
     <color name="c_icon_tint">#425e8a</color>
-    <color name="c_icon_tint_light">#7591bd</color>
     <color name="c_lang_row">#7591bd</color>
     <color name="c_lang_row_border">#3a5278</color>
-    <color name="c_text_setting_heading">#3385ff</color>
     <color name="c_button_text_v1">#3385ff</color>
     <color name="c_button_text_v1_inverted">#ffffff</color>
     <color name="c_button_text_v2">#b3b3b3</color>
     <color name="c_button_text_v3">#3385ff</color>
     <color name="c_text_setting_heading_v2">#00b3b3</color>
-    <color name="c_navigation_tint">#000000</color>
     <color name="c_navigation_medium">#999999</color>
     <color name="c_navigation_light">#bfbfbf</color>
     <color name="c_switch_theme">#3385ff</color>
@@ -39,8 +53,8 @@
     <color name="c_button">#0066FF</color>
     <color name="c_checkbox_tint">#3385ff</color>
     <color name="c_checkbox_tint_default">#3385ff</color>
+    <color name="c_edittext_background_blue">#f5f9ff</color>
     <color name="c_border_background">#f9f9f9</color>
-    <color name="c_border_background_dark">#e2e7e9</color>
     <color name="c_border_background_divider">#f7f7f7</color>
     <color name="c_security_popup_background">#f5fff5</color>
     <color name="c_security_popup_divider">#e0ffe0</color>
@@ -60,7 +74,7 @@
     <color name="c_profile_radial_inner">#000000</color>
     <color name="c_profile_radial_outer">#ffffff</color>
     <color name="c_edittext_background">#f1f3f4</color>
-    <color name="c_edittext_background_error">#f9e2eb</color>
+    <color name="c_edittext_background_form_inactive">#f6f7f8</color>
     <color name="c_edittext_background_dark">#f5f5f5</color>
     <color name="c_button_warning">#f65555</color>
     <color name="c_rateus_warning">#b3b3b3</color>
@@ -98,8 +112,6 @@
     <color name="landing_ease_blue_light_1">#eef1f7</color>
     <color name="landing_ease_blue_light_2">#eef1f7</color>
     <color name="cursor_blue">#3385ff</color>
-    <color name="text_color_highlight_v1">#b3d1ff</color>
-    <color name="text_color_highlight_v3">#99bbff</color>
     <color name="blue_dark">#ffffff</color>
     <color name="blue_dark_v1">#ffffff</color>
     <color name="blue_dark_v2">#ffffff</color>
@@ -117,7 +129,6 @@
     <color name="holo_dark_gray">#999999</color>
     <color name="holo_gray">#b3b3b3</color>
     <color name="float_white">#bfbfbf</color>
-    <color name="button_gray">#d9d9d9</color>
     <color name="button_gray_alpha">#AAffffff</color>
     <color name="button_light">#e3e3e3</color>
     <color name="holo_gray_light">#f2f2f2</color>
@@ -128,18 +139,21 @@
     <color name="white">#ffffff</color>
     <color name="clear_tint">#00000000 </color>
     <color name="dark_red">#910808</color>
-    <color name="dark_red_soft">#f32323</color>
     <color name="green">#33cc33</color>
     <color name="green_button">#00b33c</color>
     <color name="green_dark">#212d45</color>
+    <color name="green_alert">#006666</color>
+    <color name="green_alert_dark">#004d4d</color>
     <color name="green_dark_v1">#0A1727</color>
     <color name="green_dark_v2">#fafcff</color>
     <color name="dark_purple">#ffffff</color>
     <color name="warning">#ffc107</color>
+    <color name="warning_dark">#997300</color>
     <color name="connectors">#ffffff</color>
     <color name="colorProgressGradientStart">#00d9ff</color>
     <color name="colorProgressGradientEnd">#00a4fd</color>
     <color name="slate">#5A7585</color>
     <color name="secondary">#00b3b3</color>
+
 
 </resources>

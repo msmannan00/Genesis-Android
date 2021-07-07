@@ -10,7 +10,7 @@
         android:id="@+id/pMainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@xml/hox_rounded_corner"
+        android:background="@xml/ax_round_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -18,35 +18,21 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/pHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:text="@string/ALERT_UPDATE_BRIDGES"
-            android:textAlignment="textStart"
-            android:textColor="@color/c_text_setting_heading_v2"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/pDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:alpha="0.6"
+            android:layout_marginTop="18dp"
+            android:alpha="0.8"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             android:text="@string/ALERT_UPDATE_BRIDGES_INFO"
+            android:lineSpacingExtra="3.5dp"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pHeader"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp" />
 
         <TextView
@@ -74,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginEnd="60dp"
             android:background="@xml/gx_generic_input"
             android:elevation="3dp"
             android:ems="10"
@@ -86,7 +72,7 @@
             android:paddingStart="11dp"
             android:paddingEnd="8dp"
             android:textColor="@color/c_text_v1"
-            android:textColorHighlight="@color/text_color_highlight_v3"
+            android:textColorHighlight="@color/c_text_color_highlight_v2"
             android:textColorHint="@color/c_text_v2"
             android:textCursorDrawable="@xml/gx_search_cursor_state"
             android:textSize="14sp"
@@ -113,11 +99,10 @@
             android:paddingStart="11dp"
             android:paddingEnd="8dp"
             android:textColor="@color/c_text_v1"
-            android:textColorHighlight="@color/text_color_highlight_v3"
+            android:textColorHighlight="@color/c_text_color_highlight_v2"
             android:textColorHint="@color/c_text_v2"
             android:textCursorDrawable="@xml/gx_search_cursor_state"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/pDivider"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
 
@@ -126,7 +111,7 @@
             android:layout_width="33dp"
             android:layout_height="33dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="9dp"
+            android:layout_marginEnd="17dp"
             android:layout_marginBottom="4dp"
             android:elevation="3dp"
             android:background="@xml/hox_rounded_corner_splash"
@@ -136,60 +121,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDescription" />
 
-        <View
-            android:id="@+id/pDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/c_view_divier_background"
+        <Button
+            android:id="@+id/pBridgeRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@xml/ax_ripple_default_round_bottom"
+            android:text="@string/ALERT_SAVE_BRIDGE"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescriptionError" />
+            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
 
-        <LinearLayout
-            android:id="@+id/pNavigationContainer"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDivider">
-
-            <Button
-                android:id="@+id/pBridgeRequest"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_left"
-                android:padding="0dp"
-                android:text="@string/ALERT_REQUEST_BRIDGE"
-                android:textAllCaps="false"
-                android:textColor="@color/c_button_text_v1"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <View
-                android:id="@+id/pDividerHorizontal"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/c_view_divier_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
-
-            <Button
-                android:id="@+id/pNext"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_right"
-                android:padding="0dp"
-                android:text="@string/ALERT_SAVE_BRIDGE"
-                android:textAllCaps="false"
-                android:textColor="@color/c_button_text_v1"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/pNext"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@xml/ax_ripple_default_round_bottom_secondary"
+            android:text="@string/ALERT_REQUEST_BRIDGE"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pBridgeRequest"
+            app:layout_constraintTop_toBottomOf="@+id/pBridgeInput" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

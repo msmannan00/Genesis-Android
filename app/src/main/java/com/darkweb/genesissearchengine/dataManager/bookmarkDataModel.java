@@ -1,11 +1,16 @@
 package com.darkweb.genesissearchengine.dataManager;
 
+import android.content.Intent;
+import android.util.Log;
+
+import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class bookmarkDataModel {
@@ -14,6 +19,7 @@ public class bookmarkDataModel {
 
     private eventObserver.eventListener mExternalEvents;
     private ArrayList<bookmarkRowModel> mBookmarks;
+    private HashMap<String, Integer> mAvailableBookmark = new HashMap<>();
 
     /* Initializations */
 
@@ -24,6 +30,13 @@ public class bookmarkDataModel {
 
     void initializebookmark(ArrayList<bookmarkRowModel> pBookmark){
         mBookmarks = pBookmark;
+        for(int mCounter=0; mCounter<pBookmark.size();mCounter++){
+            if(mAvailableBookmark.containsKey(pBookmark.get(mCounter).getDescription())){
+                deleteBookmark(pBookmark.get(mCounter).getID());
+            }else {
+                mAvailableBookmark.put(pBookmark.get(mCounter).getDescription(), pBookmark.get(mCounter).getID());
+            }
+        }
     }
 
     /* Helper Methods */
@@ -62,10 +75,12 @@ public class bookmarkDataModel {
             mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO bookmark(id,title,url) VALUES("+autoval+",?,?);",params), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
         }
         mBookmarks.add(0,new bookmarkRowModel(pTitle, pURL,autoval));
+        mAvailableBookmark.put(pURL, autoval);
     }
 
     void clearBookmark(){
         mBookmarks.clear();
+        mAvailableBookmark.clear();
     }
 
     void updateBookmark(String pBookmarkName, String pBookmarkURL, int pBookmarkID){
@@ -73,6 +88,7 @@ public class bookmarkDataModel {
             if(mBookmarks.get(mCounter).getID()==pBookmarkID){
                 mBookmarks.get(mCounter).setHeader(pBookmarkName);
                 mBookmarks.get(mCounter).setURL(pBookmarkURL);
+                mAvailableBookmark.put(pBookmarkURL, pBookmarkID);
             }
         }
 
@@ -87,11 +103,31 @@ public class bookmarkDataModel {
     void deleteBookmark(int pID) {
         for(int mCounter=0;mCounter<mBookmarks.size();mCounter++){
             if(mBookmarks.get(mCounter).getID()==pID){
+                mAvailableBookmark.remove(mBookmarks.get(mCounter).getDescription());
                 mBookmarks.remove(mCounter);
+                Log.i("akldsjjkldsa","akldsjjkldsa : " + pID);
             }
         }
 
         mExternalEvents.invokeObserver(Arrays.asList("delete from bookmark where id="+ pID,null), dataEnums.eBookmarkCallbackCommands.M_EXEC_SQL);
+    }
+
+    boolean isURLBookmarked(String pURL){
+        return mAvailableBookmark.containsKey(pURL);
+    }
+
+    Intent getBookmarkedIntent(Intent intent, String pURL){
+
+        for(int mCounter=0; mCounter<mBookmarks.size();mCounter++){
+            if(mBookmarks.get(mCounter).getID() == mAvailableBookmark.get(pURL)){
+                bookmarkRowModel mBookmarkRowModel = mBookmarks.get(mCounter);
+                intent.putExtra(keys.BOOKMARK_SETTING_NAME, mBookmarkRowModel.getHeader());
+                intent.putExtra(keys.BOOKMARK_SETTING_URL, mBookmarkRowModel.getDescription());
+                intent.putExtra(keys.BOOKMARK_SETTING_ID, mBookmarkRowModel.getID());
+                return intent;
+            }
+        }
+        return null;
     }
 
     /* External Triggers */
@@ -103,6 +139,9 @@ public class bookmarkDataModel {
         else if(pCommands == dataEnums.eBookmarkCommands.M_ADD_BOOKMARK){
             addBookmark((String)pData.get(0), (String)pData.get(1));
         }
+        else if(pCommands == dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK_FROM_MENU){
+            deleteBookmark(mAvailableBookmark.get((String)pData.get(0)));
+        }
         else if(pCommands == dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK){
             deleteBookmark((int)pData.get(0));
         }
@@ -112,7 +151,12 @@ public class bookmarkDataModel {
         else if(pCommands == dataEnums.eBookmarkCommands.M_UPDATE_BOOKMARK){
             updateBookmark((String) pData.get(0),(String) pData.get(1),(int) pData.get(2));
         }
-
+        else if(pCommands == dataEnums.eBookmarkCommands.M_BOOKMARK_AVAILABLE){
+            return isURLBookmarked((String) pData.get(0));
+        }
+        else if(pCommands == dataEnums.eBookmarkCommands.M_INTENT_BOOKMARK){
+            return getBookmarkedIntent((Intent) pData.get(0), (String) pData.get(1));
+        }
         return null;
     }
 

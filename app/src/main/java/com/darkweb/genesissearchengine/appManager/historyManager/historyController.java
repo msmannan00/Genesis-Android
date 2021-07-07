@@ -60,7 +60,7 @@ public class historyController extends AppCompatActivity
 
     /*Private Views*/
 
-    private ImageView mEmptyListNotification;
+    private TextView mEmptyListNotification;
     private editTextManager mSearchInput;
     private RecyclerView mRecycleView;
     private Button mClearButton;

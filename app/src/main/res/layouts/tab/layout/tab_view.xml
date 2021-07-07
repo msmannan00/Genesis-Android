@@ -138,7 +138,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/c_view_divier_background_inner"
+            android:background="@color/c_topbar_divider"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
     </LinearLayout>
@@ -177,14 +177,18 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/pEmptyView"
+                android:id="@+id/pURL"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:gravity="center"
+                android:layout_marginTop="70dp"
                 android:text="@string/HOME_TAB_EMPTY"
                 android:textColor="@color/c_text_v2"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:background="@xml/hx_ripple_default_round_bottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

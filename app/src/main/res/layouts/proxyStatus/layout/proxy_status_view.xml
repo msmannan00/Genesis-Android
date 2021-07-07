@@ -26,7 +26,7 @@
                 <ImageButton
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:onClick="onClose"
+                    android:onClick="onCloseTrigger"
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
                     android:tint="@color/c_navigation_tint"
@@ -35,7 +35,7 @@
                     android:contentDescription="@string/GENERAL_TODO"/>
                 <TextView
                         android:textColor="@color/c_text_v1"
-                        android:onClick="onClose"
+                        android:onClick="onCloseTrigger"
                         android:textSize="17sp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -63,7 +63,7 @@
                     android:background="@xml/gx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_refresh"
-                    app:tint="@color/c_icon_tint_light" />
+                    app:tint="@color/c_header_icon_tint" />
 
                 <ImageButton
                     android:id="@+id/imageView4"
@@ -78,7 +78,7 @@
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:src="@xml/ic_baseline_bug"
-                    app:tint="@color/c_icon_tint_light" />
+                    app:tint="@color/c_header_icon_tint" />
 
             </LinearLayout>
 
@@ -90,7 +90,7 @@
                     android:orientation="horizontal"
                     android:layout_height="40dp">
                 <TextView
-                        android:textColor="@color/c_text_setting_heading"
+                        android:textColor="@color/c_text_short_header"
                         android:textSize="16sp"
                         android:layout_width="0dp"
                         android:textStyle="bold"

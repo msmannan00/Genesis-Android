@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.darkweb.genesissearchengine.appManager.tabManager.tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_FORCED;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LOAD_NEW_TAB;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_RESET;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_UNDO;
 import static org.mozilla.gecko.util.ThreadUtils.runOnUiThread;
@@ -193,7 +192,7 @@ public class tabController extends Fragment
     public void initializeViews(){
         mRecycleView = mRootView.findViewById(R.id.pRecycleView);
         mTabs = mRootView.findViewById(R.id.pTabs);
-        mEmptyView = mRootView.findViewById(R.id.pEmptyView);
+        mEmptyView = mRootView.findViewById(R.id.pURL);
         mRemoveSelection = mRootView.findViewById(R.id.pRemoveSelection);
         mMenuButton = mRootView.findViewById(R.id.pMenuButton);
         mClearSelection = mRootView.findViewById(R.id.pClearSelection);
@@ -235,7 +234,7 @@ public class tabController extends Fragment
             float scrollY = mNestedScrollView.getScrollY();
 
             minScroll = scrollY;
-            int orientation = this.getResources().getConfiguration().orientation;
+            int orientation = mContextManager.getHomeController().getResources().getConfiguration().orientation;
             if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 maxScroll = mRecycleView.computeVerticalScrollRange() - mScreenHeight*0.350f + helperMethod.pxFromDp(helperMethod.getNavigationBarSize(getContext()).y);
             } else {
@@ -512,21 +511,17 @@ public class tabController extends Fragment
         if(mSelectionSize >= mListModel.getList().size()){
             mRecycleView.animate().setDuration(200).alpha(0).withEndAction(() -> {
                 mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
-                //onShowUndoDialog();
-                onClearSelection(null);
             });
         }else {
             mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
         }
 
-        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU, Arrays.asList(false,0));
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_SELECTION, null);
-        new Handler().postDelayed(() -> {
-            activityContextManager.getInstance().getHomeController().onLoadTabFromTabController();
-        }, 500);
 
-        // mTabAdapter.notifyDataSetChanged();
+
         initTabCount(400);
+        onClearSelection(null);
+        onShowUndoDialog();
 
     }
 

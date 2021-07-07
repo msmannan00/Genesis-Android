@@ -696,7 +696,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     @UiThread
     public void onCrash(@NonNull GeckoSession session) {
         if(!mClosed && status.sSettingIsAppStarted){
-            if(event!=null){
+            if(event==null){
                 return;
             }
             Object mSessionObject = event.invokeObserver(null, enums.etype.SESSION_ID);
@@ -721,7 +721,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     @UiThread
     public void onKill(@NonNull GeckoSession session) {
         if(!mClosed && status.sSettingIsAppStarted){
-            if(event!=null){
+            if(event==null){
                 return;
             }
             Object mSessionObject = event.invokeObserver(null, enums.etype.SESSION_ID);
@@ -763,8 +763,8 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             title = var4.title;
         }
         if(var4.type!=0 && var4.srcUri!=null){
-            if(1!=1 && var4.linkUri!=null){
-                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, mContext.get()), M_LONG_PRESS_WITH_LINK);
+            if(var4.linkUri!=null){
+                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, var4.altText, mContext.get()), M_LONG_PRESS_WITH_LINK);
             }
             else {
                 try{

@@ -63,7 +63,9 @@ public class geckoClients
             mSession = (geckoSession) geckoView.getSession();
         }
         else {
-            geckoView.releaseSession();
+            if(geckoView.getSession()!=null){
+                geckoView.releaseSession();
+            }
             mSession = new geckoSession(new geckoViewClientCallback(),mSessionID,context, geckoView);
             mSession.open(mRuntime);
             mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);

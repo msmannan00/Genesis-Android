@@ -6,196 +6,185 @@
     android:background="@color/c_background"
     tools:context="com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings.bookmarkSettingController">
     <ScrollView
+        android:id="@+id/pScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/pScrollContainer"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <!-- Title Header -->
             <LinearLayout
                 android:id="@+id/pHeaderContainerTop"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:clickable="true"
-                android:elevation="8dp"
                 android:background="@color/c_background"
-                android:paddingStart="5dp"
-                android:focusable="true"
+                android:elevation="8dp"
                 android:orientation="horizontal"
+                android:paddingStart="5dp"
                 tools:ignore="RtlSymmetry">
 
                 <ImageButton
+                    android:id="@+id/pBack"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="1dp"
-                    android:background="@xml/gx_ripple_default_round"
+                    android:background="@xml/bx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
-                    android:onClick="onClose"
+                    android:onClick="onCloseTrigger"
                     android:src="@xml/ic_arrow_back"
-                    android:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint" />
 
                 <TextView
+                    android:id="@+id/pHeaderText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:onClick="onClose"
                     android:layout_marginTop="-3dp"
                     android:gravity="center_vertical|start"
+                    android:onClick="onCloseTrigger"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:text="@string/BOOKMARK_SETTING_HEADER"
                     android:textColor="@color/c_text_v1"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <View
+                    android:id="@+id/pSpace"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageView
+                    android:id="@+id/pRemoveBookmark"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
-                    android:padding="8dp"
-                    android:layout_marginEnd="3dp"
                     android:layout_gravity="center_vertical"
-                    android:onClick="onUpdateBookmark"
-                    android:background="@xml/gx_ripple_default_round"
+                    android:layout_marginEnd="3dp"
+                    android:background="@xml/bx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onUITrigger"
+                    android:padding="8dp"
+                    android:src="@xml/ic_baseline_delete"
+                    app:tint="@color/c_header_icon_tint" />
+
+                <View
+                    android:id="@+id/pDivier"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/c_divider_line_light" />
+
+                <ImageView
+                    android:id="@+id/pBookmarkUpdate"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="3dp"
+                    android:background="@xml/bx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onUITrigger"
+                    android:padding="8dp"
                     android:src="@xml/ic_baseline_done"
-                    app:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_header_icon_tint" />
 
             </LinearLayout>
 
             <!-- Title Header -->
 
             <View
+                android:id="@+id/pDivider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/c_view_divier_background" />
 
             <TextView
+                android:id="@+id/pFormHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:alpha="1"
                 android:background="@android:color/transparent"
                 android:clickable="false"
                 android:padding="0dp"
-                android:textStyle="bold"
                 android:paddingStart="15dp"
                 android:paddingEnd="5dp"
                 android:text="@string/BOOKMARK_SETTING_HEADER_URL"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
-                android:textColor="@color/c_text_v4"
-                android:textSize="13.5sp"
+                android:textColor="@color/c_text_short_header"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/pFormDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:alpha="1"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:padding="0dp"
+                android:text="@string/BOOKMARK_SETTING_HEADER_URL_INFO"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/c_text_v2"
+                android:textSize="13sp"
                 tools:ignore="RtlSymmetry" />
 
             <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
                 android:id="@+id/pBookmarkName"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@xml/gx_generic_input"
+                android:layout_height="47dp"
                 android:layout_margin="10dp"
+                android:layout_marginTop="230dp"
+                android:layout_marginEnd="15dp"
+                android:background="@xml/bx_input_field"
+                android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopa sdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM|+-,_,-"
                 android:fadingEdgeLength="20dp"
                 android:hint="@string/BOOKMARK_SETTING_HEADER_NAME_HINT"
                 android:inputType="text"
-                android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopa sdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM|+-,_,-"
-                android:maxLines="1"
-                android:paddingStart="18dp"
-                android:paddingEnd="15dp"
                 android:maxLength="100"
-                android:layout_marginTop="5dp"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:requiresFadingEdge="horizontal"
                 android:text="@string/GENERAL_HOME_URL"
-                android:textColor="@color/c_text_v8"
-                android:textColorHighlight="@color/text_color_highlight_v3"
-                android:textColorHint="@color/c_text_v2"
+                android:textColor="@color/c_text_v1"
+                android:textColorHighlight="@color/c_text_color_highlight_v2"
+                android:textColorHint="@color/c_error_text_color"
                 android:textCursorDrawable="@xml/gx_search_cursor_state"
-                android:textSize="16sp"
-                tools:targetApi="o"/>
+                android:textSize="14sp"
+                tools:targetApi="o" />
 
             <TextView
-                android:id="@+id/pBookmarkNameError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:textStyle="bold"
-                android:layout_marginTop="-5dp"
-                android:alpha="0"
-                android:background="@android:color/transparent"
-                android:text="@string/BOOKMARK_SETTING_HEADER_NAME_ERROR"
-                android:textAlignment="textStart"
-                android:textColor="@color/dark_red_soft"
-                android:textSize="12sp"
-                tools:ignore="RtlSymmetry" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/c_view_divier_background" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:alpha="1"
-                android:background="@android:color/transparent"
-                android:clickable="false"
-                android:padding="0dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="5dp"
-                android:text="@string/BOOKMARK_SETTING_HEADER_NAME"
-                android:textAlignment="textStart"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                android:textColor="@color/c_text_v4"
-                android:textSize="13.5sp"
-                tools:ignore="RtlSymmetry" />
-
-            <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
                 android:id="@+id/pBookmarkURL"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@xml/gx_generic_input"
-                android:layout_margin="10dp"
-                android:fadingEdgeLength="20dp"
-                android:hint="@string/BOOKMARK_SETTING_HEADER_URL_HINT"
-                android:maxLength="350"
-                android:inputType="textWebEmailAddress"
+                android:layout_height="47dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginEnd="11dp"
+                android:background="@xml/bx_form_inactive"
+                android:ellipsize="end"
+                android:gravity="center_vertical | start"
                 android:maxLines="1"
-                android:paddingStart="18dp"
-                android:layout_marginTop="5dp"
+                android:paddingStart="14dp"
                 android:paddingEnd="15dp"
-                android:requiresFadingEdge="horizontal"
-                android:text="@string/GENERAL_HOME_URL"
-                android:textColor="@color/c_text_v8"
-                android:textColorHighlight="@color/text_color_highlight_v3"
-                android:textColorHint="@color/c_text_v2"
-                android:textCursorDrawable="@xml/gx_search_cursor_state"
-                android:textSize="16sp"
-                tools:targetApi="o"/>
+                android:text="@string/GENERAL_TODO"
+                android:textColor="@color/c_text_v2"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/pBookmarkURLError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="-5dp"
-                android:alpha="0"
-                android:background="@android:color/transparent"
-                android:text="@string/BOOKMARK_SETTING_HEADER_URL_ERROR"
-                android:textAlignment="textStart"
-                android:textColor="@color/dark_red_soft"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                tools:ignore="RtlSymmetry" />
 
         </LinearLayout>
 

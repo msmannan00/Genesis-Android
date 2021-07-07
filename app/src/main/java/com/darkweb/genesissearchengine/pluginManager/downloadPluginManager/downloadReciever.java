@@ -126,7 +126,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             channel.setLightColor(Color.BLUE);
             channel.enableVibration(false);
             mNotifyManager.createNotificationChannel(channel);
-
         }
         build.setProgress(100, 0, false);
         mNotifyManager.notify(mID, build.build());
@@ -205,7 +204,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 mStream.close();
 
             } catch (Exception ex) {
-                Log.i("FIZZAHFUCK", ex.getMessage());
                 if(mRequestCode!=200){
                     mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
                     onCancel();
@@ -227,8 +225,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 HttpGet httpget = new HttpGet(urlEncoded);
                 HttpResponse response = httpclient.execute(httpget);
 
-                StringBuilder sb = new StringBuilder();
-                sb.append(response.getStatusLine()).append("\n\n");
 
                 InputStream mStream = response.getEntity().getContent();
 
@@ -334,9 +330,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             contentValues.put(MediaStore.Downloads.DISPLAY_NAME, mFileName);
             contentValues.put(MediaStore.Downloads.SIZE, mDownloadByte);
             contentValues.put(MediaStore.Downloads.MIME_TYPE, helperMethod.getMimeType(uri.toString(), context));
-
-            contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + "Temp");
-
+            contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + mFileName + "_" + helperMethod.createRandomID().substring(0,5));
             ContentResolver database = context.getContentResolver();
             database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
         } else {

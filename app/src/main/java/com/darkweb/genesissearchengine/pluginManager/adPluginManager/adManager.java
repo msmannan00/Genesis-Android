@@ -1,20 +1,20 @@
 package com.darkweb.genesissearchengine.pluginManager.adPluginManager;
 
+import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
-import com.google.android.gms.ads.*;
+import com.mopub.common.MoPub;
+import com.mopub.common.SdkConfiguration;
+import com.mopub.common.SdkInitializationListener;
+import com.mopub.mobileads.MoPubErrorCode;
+import com.mopub.mobileads.MoPubView;
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
 import java.util.List;
+import static com.mopub.common.logging.MoPubLog.LogLevel.INFO;
 
 public class adManager
 {
@@ -22,41 +22,45 @@ public class adManager
     /*Private Variables */
 
     private eventObserver.eventListener mEvent;
-    private WeakReference<AdView> mBannerAds;
-    private boolean mPaidStatus;
-    private int mRequestCount = 0;
+    private WeakReference<MoPubView> mBannerAds;
 
+    private int mRequestCount = 0;
+    private boolean mPaidStatus;
     private boolean bannerAdsLoading = false;
     private boolean bannerAdsLoaded = false;
 
     /*Initializations*/
 
-    public adManager(eventObserver.eventListener pEvent, AdView pBannerAds, boolean pPaidStatus) {
+    public adManager(eventObserver.eventListener pEvent, MoPubView pBannerAds, boolean pPaidStatus,Context pContext) {
         this.mEvent = pEvent;
         this.mPaidStatus = pPaidStatus;
         this.mBannerAds = new WeakReference(pBannerAds);
+        initializeBannerAds(pContext);
     }
 
-    private void initializeBannerAds(){
+    private void initializeBannerAds(Context pContext){
         if(!mPaidStatus){
-            AdRequest request = new AdRequest.Builder().build();
-            mBannerAds.get().loadAd(request);
+            final SdkConfiguration.Builder configBuilder = new SdkConfiguration.Builder("c122efbe224f46678800d2f73389d258");
+            configBuilder.withLogLevel(INFO);
+            MoPub.initializeSdk(pContext, configBuilder.build(), initSdkListener());
             admobListeners();
         }
     }
 
+    private SdkInitializationListener initSdkListener() {
+        return () -> {
+        };
+    }
     /*Local Helper Methods*/
 
-    private void loadAds(AppCompatActivity pAppContext){
+    private void loadAds(){
         if(!mPaidStatus)
         {
             if (!bannerAdsLoading)
             {
                 bannerAdsLoading = true;
-                MobileAds.initialize(pAppContext.getApplicationContext(), initializationStatus -> { });
-                RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("B1CF10D1F74698381CFF7BF9C485085B","D38EB6293679BC1D68FBDAC55A73DBA0")).build();
-                MobileAds.setRequestConfiguration(configuration);
-                initializeBannerAds();
+                mBannerAds.get().setAdUnitId("c122efbe224f46678800d2f73389d258");
+                mBannerAds.get().loadAd();
             }
         }
     }
@@ -69,34 +73,38 @@ public class adManager
 
     private void admobListeners(){
         if(!mPaidStatus){
-            mBannerAds.get().setAdListener(new AdListener() {
+            mBannerAds.get().setBannerAdListener(new MoPubView.BannerAdListener() {
                 @Override
-                public void onAdLoaded() {
+                public void onBannerLoaded(@NonNull MoPubView moPubView) {
                     bannerAdsLoaded = true;
                 }
 
                 @Override
-                public void onAdOpened() {
-                }
+                public void onBannerFailed(MoPubView moPubView, MoPubErrorCode moPubErrorCode) {
 
-                @Override
-                public void onAdClicked() {
-                }
-
-                @Override
-                public void onAdClosed() {
-                }
-
-                @Override
-                public void onAdFailedToLoad(@NonNull LoadAdError var1) {
                     new Handler().postDelayed(() ->
                     {
-                        if(mRequestCount<2){
+                        if(mRequestCount<10){
                             mRequestCount+=1;
-                            initializeBannerAds();
+                            mBannerAds.get().loadAd();
                         }
 
                     }, 30000);
+                }
+
+                @Override
+                public void onBannerClicked(MoPubView moPubView) {
+                    Log.i("asd","asd");
+                }
+
+                @Override
+                public void onBannerExpanded(MoPubView moPubView) {
+                    Log.i("asd","asd");
+                }
+
+                @Override
+                public void onBannerCollapsed(MoPubView moPubView) {
+                    Log.i("asd","asd");
                 }
             });
         }
@@ -107,7 +115,7 @@ public class adManager
     public Object onTrigger(List<Object> pData, pluginEnums.eAdManager pEventType) {
         if(pEventType.equals(pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS))
         {
-            loadAds((AppCompatActivity)pData.get(0));
+            loadAds();
         }
         else if(pEventType.equals(pluginEnums.eAdManager.M_IS_ADVERT_LOADED))
         {

@@ -1,5 +1,13 @@
 <resources>
 
+	<!-- Bookmark Setting -->
+	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Bladwijzer Bewerken</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">Bladwijzer-URL</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">De bladwijzer-URL wordt hier weergegeven</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Naam Bladwijzer</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">De naam van de url met bladwijzer wordt hier weergegeven</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Voer de naam van de bladwijzer in...</string>
+
 	<!-- Application Strings -->
 	<string name="GENERAL_SEARCH_HINT" translatable="true">zoek iets of typ een weblink</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">vind op pagina</string>
@@ -411,6 +419,9 @@
 		<item>Allow Visited</item>
 		<item>Allow Non Tracker</item>
 	</string-array>
+    <string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
+	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+	<string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
 
 </resources>

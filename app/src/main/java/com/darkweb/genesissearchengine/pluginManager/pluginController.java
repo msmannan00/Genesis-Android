@@ -1,10 +1,12 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
 import android.os.Handler;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
+import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -28,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import static com.darkweb.genesissearchengine.constants.enums.etype.fetch_favicon;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangManager.M_ACTIVITY_CREATED;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangManager.M_RESUME;
@@ -80,7 +83,7 @@ public class pluginController
         mContextManager = activityContextManager.getInstance();
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
-        mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), status.sPaidStatus);
+        mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), status.sPaidStatus, mHomeController.get());
         mAnalyticsManager = new analyticManager(mHomeController,new analyticCallback(), status.sDeveloperBuild);
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
@@ -262,11 +265,7 @@ public class pluginController
             }
             else if(pEventType.equals(M_BOOKMARK)){
                 String [] dataParser = pData.get(0).toString().split("split");
-                if(dataParser.length>1){
-                    dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_ADD_BOOKMARK ,Arrays.asList(dataParser[0],dataParser[1]));
-                }else {
-                    dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_ADD_BOOKMARK ,Arrays.asList(dataParser[0],""));
-                }
+                dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_ADD_BOOKMARK ,Arrays.asList(dataParser[0],pData.get(1).toString()));
             }
             else if(pEventType.equals(M_APP_RATED)){
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
@@ -274,8 +273,14 @@ public class pluginController
             else if(pEventType.equals(M_CUSTOM_BRIDGE)){
                 return status.sBridgeCustomBridge;
             }
+            else if(pEventType.equals(M_OPEN_LOGS)){
+                helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, mHomeController.get(),true);
+            }
             else if(pEventType.equals(M_BRIDGE_TYPE)){
                 return status.sBridgeCustomType;
+            }
+            else if(pEventType.equals(fetch_favicon)){
+                activityContextManager.getInstance().getHomeController().onGetFavIcon((ImageView) pData.get(0), (String) pData.get(1));
             }
             else if(pEventType.equals(M_DOWNLOAD_FILE)){
                 ((homeController)mHomeController.get()).onDownloadFile();

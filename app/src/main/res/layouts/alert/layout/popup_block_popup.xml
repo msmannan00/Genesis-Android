@@ -22,7 +22,7 @@
             android:id="@+id/pDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="10dp"
             android:alpha="0.8"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
@@ -62,7 +62,7 @@
             android:layout_width="1dp"
             android:layout_height="30dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/c_border_background_divider"
+            android:background="@color/c_navigation_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/pOpenPrivacy"
             app:layout_constraintTop_toTopOf="parent" />

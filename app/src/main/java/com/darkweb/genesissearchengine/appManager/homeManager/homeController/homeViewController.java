@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,13 +46,11 @@ import com.darkweb.genesissearchengine.libs.views.ColorAnimator;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
-import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.mopub.mobileads.MoPubView;
 
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -77,7 +76,7 @@ class homeViewController
     private editTextManager mSearchbar;
     private ConstraintLayout mSplashScreen;
     private TextView mLoadingText;
-    private AdView mBannerAds = null;
+    private com.mopub.mobileads.MoPubView mBannerAds = null;
     private Handler mUpdateUIHandler = null;
     private ImageButton mGatewaySplash;
     private LinearLayout mTopBar;
@@ -121,7 +120,7 @@ class homeViewController
     private Runnable mTabDialogRunnable = null;
     private boolean mIsTopBarExpanded = true;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, AdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo,ImageButton pPanicButtonLandscape){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MoPubView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, View pPopupLoadNewTab, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -568,8 +567,8 @@ class homeViewController
             initSplashLoading();
         });
         mGatewaySplash.animate().setDuration(350).alpha(0.4f);
-        mPanicButtonLandscape.animate().setDuration(170).translationXBy(helperMethod.pxFromDp(55));
-        mPanicButton.animate().setDuration(170).translationXBy(helperMethod.pxFromDp(55));
+        mPanicButtonLandscape.animate().setInterpolator(new AccelerateInterpolator()).setDuration(170).translationXBy(helperMethod.pxFromDp(55));
+        mPanicButton.animate().setDuration(170).setInterpolator(new AccelerateInterpolator()).translationXBy(helperMethod.pxFromDp(55));
     }
 
     private void initSplashScreen(){
@@ -776,7 +775,7 @@ class homeViewController
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
-    void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent, String mURL){
+    void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent, String mURL, boolean pIsBookmarked){
 
         if(popupWindow!=null){
             popupWindow.dismiss();
@@ -811,6 +810,7 @@ class homeViewController
             popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.END,0,0);
         }
 
+        ImageButton bookmark = popupView.findViewById(R.id.menu23);
         ImageButton back = popupView.findViewById(R.id.menu22);
         ImageButton close = popupView.findViewById(R.id.menu20);
         ImageButton mRefresh = popupView.findViewById(R.id.menu21);
@@ -818,6 +818,15 @@ class homeViewController
         CheckBox desktop = popupView.findViewById(R.id.menu27);
         LinearLayout newTab = popupView.findViewById(R.id.menu11);
         desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
+        if(pIsBookmarked){
+            try {
+                bookmark .setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_bookmark_filled));
+                bookmark.setColorFilter(ContextCompat.getColor(mContext, R.color.cursor_blue), android.graphics.PorterDuff.Mode.MULTIPLY);
+                bookmark.setTag("mMarked");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
 
         String mExtention = helperMethod.getMimeType(mURL, mContext);
         if(!mURL.startsWith("data") && !mURL.startsWith("blob") && (mExtention == null || mExtention.equals("application/x-msdos-program") || mExtention.equals("text/html") || mExtention.equals("application/vnd.ms-htmlhelp") || mExtention.equals("application/vnd.sun.xml.writer") || mExtention.equals("application/vnd.sun.xml.writer.global") || mExtention.equals("application/vnd.sun.xml.writer.template") || mExtention.equals("application/xhtml+xml"))){
@@ -928,13 +937,19 @@ class homeViewController
                 mBannerAds.setVisibility(View.VISIBLE);
             }
             onSetBannerAdMargin(true,true);
-        } /* else if(mBannerAds.getVisibility() != View.VISIBLE){
+        } else if(mBannerAds.getVisibility() != View.VISIBLE){
             if(mBannerAds.getAlpha()==1){
                 mBannerAds.animate().cancel();
                 mBannerAds.animate().alpha(0).withEndAction(() -> mBannerAds.setVisibility(View.GONE));
             }
             onSetBannerAdMargin(false,true);
-        } */
+        }
+    }
+
+    void removeBanner(){
+        mBannerAds.setVisibility(View.GONE);
+        mWebviewContainer.setPadding(0,0,0,0);
+        onFullScreen(false);
     }
 
     private Handler searchBarUpdateHandler = new Handler();
@@ -973,7 +988,7 @@ class homeViewController
     {
         if(total==0){
             mFindCount.setText("0/0");
-            mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.dark_red_soft));
+            mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.c_error_text_color));
         }else {
             mFindCount.setText((total + "/" + index));
             mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v6));
@@ -1229,6 +1244,7 @@ class homeViewController
     public void onFirstPaint(){
         onFullScreen(true);
         mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.clear_alpha));
+        onResetTabAnimation();
     }
 
     public void onSessionReinit(){
@@ -1251,6 +1267,10 @@ class homeViewController
         if((mSearchbar.getText().toString().equals("genesis.onion/search?q=$s&p_num=1&s_type=all") || mSearchbar.getText().toString().equals("genesis.onion")) && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        if(mSearchbar.getText().toString().equals("genesis.onion")){
             return;
         }
 
@@ -1287,6 +1307,10 @@ class homeViewController
         mGeckoView.setPivotX(0);
         mGeckoView.setPivotY(0);
 
+        if(mGeckoView.getAlpha()<1 || mGeckoView.getTranslationX()<0){
+            return;
+        }
+
         ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
                 PropertyValuesHolder.ofFloat("translationX", 0, helperMethod.pxFromDp(-50)));
         mNewTabBlocker.setVisibility(View.VISIBLE);
@@ -1307,15 +1331,6 @@ class homeViewController
             @Override
             public void onAnimationEnd(Animator animation, boolean isReverse) {
                 mEvent.invokeObserver(data, e_type);
-                ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
-                        PropertyValuesHolder.ofFloat("translationX", 0, 0));
-
-                scaleDown.setDuration(150);
-                scaleDown.setStartDelay(0);
-                mNewTabBlocker.animate().setStartDelay(250).setDuration(150).alpha(0f).withEndAction(() -> {
-                    mNewTabBlocker.setVisibility(View.GONE);
-                });
-                scaleDown.start();
             }
 
             @Override
@@ -1324,17 +1339,6 @@ class homeViewController
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                mEvent.invokeObserver(data, e_type);
-                ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
-                        PropertyValuesHolder.ofFloat("scaleX", 0.8f, 1f),
-                        PropertyValuesHolder.ofFloat("scaleY", 0.8f, 1f));
-
-                scaleDown.setDuration(150);
-                scaleDown.setStartDelay(0);
-                mNewTabBlocker.animate().setStartDelay(250).setDuration(150).alpha(0f).withEndAction(() -> {
-                    mNewTabBlocker.setVisibility(View.GONE);
-                });
-                scaleDown.start();
             }
 
             @Override
@@ -1346,6 +1350,20 @@ class homeViewController
             public void onAnimationRepeat(Animator animation) {
             }
         });
+    }
+
+    public void onResetTabAnimation(){
+        mGeckoView.setPivotX(0);
+        mGeckoView.setPivotY(0);
+
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView, PropertyValuesHolder.ofFloat("translationX", 0, helperMethod.pxFromDp(0)));
+
+        scaleDown.setDuration(0);
+        scaleDown.setStartDelay(0);
+        mNewTabBlocker.animate().setStartDelay(250).setDuration(250).alpha(0f).withEndAction(() -> {
+            mNewTabBlocker.setVisibility(View.GONE);
+        });
+        scaleDown.start();
     }
 
     void onClearSelections(boolean hideKeyboard){
