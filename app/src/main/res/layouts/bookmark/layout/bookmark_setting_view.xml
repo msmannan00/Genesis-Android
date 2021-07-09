@@ -37,10 +37,11 @@
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onCloseTrigger"
                     android:src="@xml/ic_arrow_back"
-                    app:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint"
+                    tools:ignore="UsingOnClickInXml" />
 
                 <TextView
-                    android:id="@+id/pHeaderText"
+                    android:id="@+id/pHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="-3dp"
@@ -51,7 +52,8 @@
                     android:text="@string/BOOKMARK_SETTING_HEADER"
                     android:textColor="@color/c_text_v1"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="UsingOnClickInXml" />
 
                 <View
                     android:id="@+id/pSpace"
@@ -68,9 +70,10 @@
                     android:background="@xml/bx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onUITrigger"
-                    android:padding="8dp"
-                    android:src="@xml/ic_baseline_delete"
-                    app:tint="@color/c_header_icon_tint" />
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_cross"
+                    app:tint="@color/c_bookmark_settings_header_icon_tint"
+                    tools:ignore="UsingOnClickInXml" />
 
                 <View
                     android:id="@+id/pDivier"
@@ -90,9 +93,10 @@
                     android:background="@xml/bx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onUITrigger"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:src="@xml/ic_baseline_done"
-                    app:tint="@color/c_header_icon_tint" />
+                    app:tint="@color/c_bookmark_settings_header_icon_tint"
+                    tools:ignore="UsingOnClickInXml" />
 
             </LinearLayout>
 
@@ -129,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="2dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
                 android:alpha="1"
                 android:background="@android:color/transparent"

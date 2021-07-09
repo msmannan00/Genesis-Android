@@ -68,5 +68,10 @@ public class strings
 
     public static final String BOOKMARK_SETTING_VALIDATION_ERROR_2 = "bookmark url empty";
 
+    /*Landing Manager*/
+
+    public static final String LANDING_LAYOUT_RESID = "layoutResId";
+
+
 }
 

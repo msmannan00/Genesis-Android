@@ -33,7 +33,7 @@
                 android:textSize="17sp"
                 android:text="A"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/c_white"
                 android:background="@xml/hx_circle_favicon"
                 android:gravity="center_vertical"
                 tools:ignore="RtlCompat" />
@@ -57,7 +57,7 @@
                     android:src="@xml/ic_baseline_browser"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
+                    android:textColor="@color/c_white"
                     tools:ignore="RtlCompat" />
             </androidx.cardview.widget.CardView>
             <ImageView

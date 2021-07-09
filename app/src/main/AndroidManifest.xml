@@ -120,7 +120,11 @@
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.landingManager.landingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:label="@string/SETTING_HEADER"
+            android:exported="true"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.trackingManager.settingTrackingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"

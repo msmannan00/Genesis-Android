@@ -13,17 +13,15 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.activityThemeManager;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.eventObserver;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
+import com.darkweb.genesissearchengine.helperManager.sharedUIMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static com.darkweb.genesissearchengine.constants.keys.M_ACTIVITY_RESPONSE;
 import static com.darkweb.genesissearchengine.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT;
 import static com.darkweb.genesissearchengine.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT;
@@ -32,7 +30,7 @@ public class bookmarkSettingController extends AppCompatActivity {
 
     /* Private Variables */
 
-    private bookmarkSettingModel mBookmarkSettingModel;
+    private bookmarkSettingModelController mBookmarkSettingModel;
     private bookmarkSettingViewController mBookmarkSettingViewController;
 
     /* UI Variables */
@@ -70,8 +68,8 @@ public class bookmarkSettingController extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String mBookmarkName = (String) mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_GET_BOOKMARK_NAME);
-
                 boolean mValidationStatus = (boolean)mBookmarkSettingModel.onTrigger(bookmarkSettingEnums.eBookmarkSettingModelCommands.M_VALIDATE_FORM, Collections.singletonList(mBookmarkName));
+
                 mBookmarkSettingModel.onTrigger(bookmarkSettingEnums.eBookmarkSettingModelCommands.M_SET_BOOOKMARK_CHANGED_STATUS, Collections.singletonList(true));
                 mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE, Collections.singletonList(mValidationStatus));
             }
@@ -82,10 +80,8 @@ public class bookmarkSettingController extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start,int before, int count) {
-
             }
         });
-
 
         mBookmarName.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus){
@@ -97,6 +93,7 @@ public class bookmarkSettingController extends AppCompatActivity {
             mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_CLEAR_FORM_FOCUS);
             return false;
         });
+
     }
 
     private void initializeModels(){
@@ -106,7 +103,7 @@ public class bookmarkSettingController extends AppCompatActivity {
 
         mBookmarkSettingViewController = new bookmarkSettingViewController(this, new bookmarkSettingViewCallback(), mBookmarName, mBookmarURL);
         mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_INITIALIZE, Arrays.asList(mBookmarkName,mBookmarkURL));
-        mBookmarkSettingModel = new bookmarkSettingModel(this, new bookmarkSettingModelCallback(), mBookmarkID, mBookmarkURL);
+        mBookmarkSettingModel = new bookmarkSettingModelController(this, new bookmarkSettingModelCallback(), mBookmarkID, mBookmarkURL);
     }
 
     private void initCallableResponse(bookmarkSettingEnums.eActivityResponseCommands pResponse){
@@ -124,13 +121,9 @@ public class bookmarkSettingController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        super.onConfigurationChanged(newConfig);
+        sharedUIMethod.onSharedConfigurationChanged(newConfig, this);
 
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
-            activityContextManager.getInstance().onResetTheme();
-            activityThemeManager.getInstance().onConfigurationChanged(this);
-        }
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -172,19 +165,20 @@ public class bookmarkSettingController extends AppCompatActivity {
                 if(mBookmarkChanged){
                     initCallableResponse(bookmarkSettingEnums.eActivityResponseCommands.M_OPEN_UPDATE_ALERT);
                 }
+                onCloseTrigger(null);
             }else {
                 mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE, Collections.singletonList(false));
             }
-            onCloseTrigger(null);
         }
         if(view.getId()==R.id.pRemoveBookmark){
+            mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_CLEAR_FORM_FOCUS);
             initCallableResponse(bookmarkSettingEnums.eActivityResponseCommands.M_OPEN_DELETE_ALERT);
             mBookmarkSettingModel.onTrigger(bookmarkSettingEnums.eBookmarkSettingModelCommands.M_DELETE_BOOKMARK);
             onCloseTrigger(null);
         }
     }
 
-    /* UI Callbacks */
+    /* Callbacks */
 
     private class bookmarkSettingViewCallback implements eventObserver.eventListener{
 

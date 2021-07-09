@@ -96,7 +96,7 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpVi
                 try {
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.gx_border_left));
                     mContainer.setBackground(mDrawable);
-                    mHeader.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    mHeader.setTextColor(ContextCompat.getColor(mContext, R.color.c_white));
                     mDescription.setTextColor(ContextCompat.getColor(mContext, R.color.white_darker));
                     mMarker.setVisibility(View.VISIBLE);
                     mCurrentIndex = getLayoutPosition();

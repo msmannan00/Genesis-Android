@@ -306,9 +306,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
                 if(model.getSession().getTheme()==null){
                     if(status.sTabGridLayoutEnabled){
-                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple));
+                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple_gray));
                     }else {
-                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple));
+                        mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple_gray));
                     }
                 }else {
                     try{

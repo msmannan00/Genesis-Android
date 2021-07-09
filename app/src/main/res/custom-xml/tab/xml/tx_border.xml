@@ -3,7 +3,7 @@
     <solid android:color="#ffffffff"/>
 
     <stroke android:width="3dp"
-        android:color="@color/c_button_text_v2"
+        android:color="@color/c_alert_toast_button_background"
         />
 
     <padding android:left="1dp"

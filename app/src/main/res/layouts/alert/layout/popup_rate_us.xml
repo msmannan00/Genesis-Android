@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:foregroundTint="@color/white"
+            android:foregroundTint="@color/c_white"
             android:progressBackgroundTint="@color/c_rateus_warning"
             android:rating="0.5"
             android:scaleX="0.65"
@@ -79,7 +79,7 @@
             android:background="@xml/ax_ripple_default_round_bottom"
             android:text="@string/ALERT_RATE"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pRating" />
 
         <Button
-            android:id="@+id/pDismiss"
+            android:id="@+id/pTrigger"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -97,7 +97,7 @@
             android:background="@xml/ax_ripple_default_round_bottom_secondary"
             android:text="@string/ALERT_DISMISS"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/pNext"
             app:layout_constraintHorizontal_bias="0.83"

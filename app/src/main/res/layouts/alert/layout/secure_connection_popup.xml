@@ -313,7 +313,7 @@
             app:layout_constraintTop_toBottomOf="@+id/infoContainer">
 
             <Button
-                android:id="@+id/pDismiss"
+                android:id="@+id/pTrigger"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -321,7 +321,7 @@
                 android:padding="0dp"
                 android:text="@string/ALERT_DISMISS"
                 android:textAllCaps="false"
-                android:textColor="@color/c_button_text_v2"
+                android:textColor="@color/c_alert_toast_button_background"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

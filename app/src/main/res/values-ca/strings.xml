@@ -3,16 +3,24 @@
 
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Edita El Marcador</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">URL Del Marcador</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">L\'URL del marcador es mostrarà aquí</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nom Del Marcador</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">El nom de l\'URL marcat es mostrarà aquí</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Introduïu el nom del marcador ...</string>
 
+	<!-- Bookmark Alerts -->
+	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">El marcador s\'ha eliminat</string>
+	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">S\'ha actualitzat el marcador</string>
 
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">acomiadar</string>
 
-
-
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"De vegades cal un Bridge per arribar a la xarxa Tor"</string>
+	<string name="LANDING_MORE" translatable="true">"EXPLICA\'M MÉS"</string>
+	<string name="LANDING_HELLO" translatable="true">"Hola"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Benvingut al Genesis al mòbil".</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"Navegueu per Internet amb seguretat."</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"Sense seguiment. Sense censura".</string>
 
 
 
@@ -198,14 +206,12 @@
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
 	<string name="ALERT_REQUEST_BRIDGE" translatable="true">sol·licitud</string>
 	<string name="ALERT_SAVE_BRIDGE" translatable="true">D\'acord</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">lloc web de marcadors</string>
 	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">afegiu aquesta pàgina als vostres marcadors</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">suprimiu els enllaços web i les dades navegats</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">neteja el marcador i les dades</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">en esborrar dades, s’eliminaran els enllaços web, les galetes i altres dades de navegació</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">suprimir dades eliminarà llocs web marcats</string>
-	<string name="ALERT_DISMISS" translatable="true">acomiadar</string>
 	<string name="ALERT_CLEAR" translatable="true">cancel · lar</string>
 	<string name="ALERT_ADD" translatable="true">D\'acord</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">nou marcador</string>
@@ -379,17 +385,6 @@
 	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">les pestanyes obertes es mostraran aquí</string>
-
-
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"de vegades necessiteu un Bridge per arribar a Tor"</string>
-	<string name="LANDING_MORE" translatable="true">"Explica\'m més"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"podeu activar qualsevol programari per Tor mitjançant Onion"</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"això no us farà anònim, però us ajudarà a evitar els tallafocs"</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"tria aplicacions"</string>
-	<string name="LANDING_HELLO" translatable="true">"Hola"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Benvingut al Tor al mòbil".</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"navega per Internet com esperes que hauries de fer."</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"sense protecció de vigilància de l\'usuari. sense censura."</string>
 
 
 	<string name="ERROR_M1" translatable="true">aquest lloc no és accessible</string>

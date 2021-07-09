@@ -35,7 +35,7 @@
 
 
         <Button
-            android:id="@+id/pDismiss"
+            android:id="@+id/pTrigger"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -45,7 +45,7 @@
             android:background="@xml/ax_ripple_default_round_bottom"
             android:text="@string/ALERT_DISMISS"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -2,14 +2,24 @@
 
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Bladwijzer Bewerken</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">Bladwijzer-URL</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">De bladwijzer-URL wordt hier weergegeven</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Naam Bladwijzer</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">De naam van de url met bladwijzer wordt hier weergegeven</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">De naam van de url met bladwijzer wordt hier getoond</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Voer de naam van de bladwijzer in...</string>
 
+	<!-- Bookmark Alerts -->
+	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bladwijzer is verwijderd</string>
+	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bladwijzer is bijgewerkt</string>
 
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">Sluiten</string>
 
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"Soms heb je een Bridge nodig om bij Tor-netwerk te komen"</string>
+	<string name="LANDING_MORE" translatable="true">"VERTEL ME MEER"</string>
+	<string name="LANDING_HELLO" translatable="true">"Hallo"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Welkom bij Genesis op mobiel."</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"Browse veilig op internet."</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"Geen tracking. Geen censuur."</string>
 
 
 	<!-- Application Strings -->
@@ -187,7 +197,6 @@
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Bladwijzer en gegevens wissen</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Als u gegevens wist, worden geschiedenis, cookies en andere browsegegevens verwijderd</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Als u gegevens wist, worden websites met bladwijzers verwijderd</string>
-	<string name="ALERT_DISMISS" translatable="true">Sluiten</string>
 	<string name="ALERT_CLEAR" translatable="true">Wissen</string>
 	<string name="ALERT_ADD" translatable="true">Klaar</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">Nieuwe Bladwijzer</string>
@@ -358,17 +367,6 @@
 	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="true">Genesis op standby op dit moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">Open tabbladen worden hier weergegeven</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"Soms heb je een brug nodig om bij Tor te komen"</string>
-	<string name="LANDING_MORE" translatable="true">"VERTEL ME MEER"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"Je kunt elke app inschakelen om door Tor te gaan met onze ingebouwde Onion"</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"Dit maakt je niet anoniem, maar het helpt wel om door firewalls heen te komen"</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"Kies Apps"</string>
-	<string name="LANDING_HELLO" translatable="true">"Hallo"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Welkom bij Tor op mobiel."​"Surf op internet zoals u verwacht dat u zou moeten."​\'Geen tracking. Geen censuur.\'​Deze site is niet bereikbaar</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">Er is een fout opgetreden tijdens een verbinding</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">De pagina die u probeert te bekijken, kan niet worden weergegeven omdat de authenticiteit van de ontvangen gegevens niet kon worden geverifieerd</string>
 
 	<!-- Error Page -->
 	<string name="ERROR_M1" translatable="true">De pagina is momenteel niet live of offline vanwege de een of andere reden</string>

@@ -158,7 +158,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="-1dp"
                         android:elevation="2dp"
-                        android:background="@color/white"/>
+                        android:background="@color/c_white"/>
 
                     <LinearLayout
                         android:id="@+id/pOption1"
@@ -378,7 +378,7 @@
                         android:textSize="13sp"
                         android:layout_width="0dp"
                         android:layout_weight="4"
-                        android:textColor="@color/white"
+                        android:textColor="@color/c_white"
                         android:onClick="requestBridges"
                         android:layout_height="45dp"
                         android:background="@xml/hox_rounded_corner_bridge_settings"

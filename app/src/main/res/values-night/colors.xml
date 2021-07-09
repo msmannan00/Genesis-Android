@@ -6,6 +6,7 @@
 
     <color name="c_navigation_tint">#ffffff</color>
     <color name="c_background">#1c1b21</color>
+    <color name="c_background_inverted">#ffffff</color>
     <color name="c_header_icon_tint">#a6a6a6</color>
     <color name="c_divider_line_light">#666666</color>
     <color name="c_topbar_divider">#0f0f0f</color>
@@ -13,16 +14,25 @@
     <color name="c_edittext_error_border">#790606</color>
     <color name="c_edittext_error_background">#300303</color>
     <color name="c_text_short_header">#33cccc</color>
+    <color name="c_alert_divider">#bfbfbf</color>
+    <color name="c_alert_toast_info_text">#4d4d4d</color>
+    <color name="c_ripple_gray">#808080</color>
+    <color name="c_alert_toast_button_background">#ffffff</color>
+    <color name="c_alert_toast_button_text">#3385ff</color>
+
+    /* Text Colors Version*/
 
     <color name="c_text_v1">#ffffff</color>
-    <color name="c_text_v2">#b3b3b3</color>
+    <color name="c_text_v2">#cccccc</color>
 
+    /* Bookmark Setting Controller Color */
+
+    <color name="c_bookmark_settings_header_icon_tint">#ffffff</color>
 
     /* Customs Colors */
 
     <color name="c_background_alpha">#60ffffff</color>
     <color name="c_background_keyboard">#091a2a</color>
-    <color name="c_background_inverted">#ffffff</color>
     <color name="c_view_divier_background">#141414</color>
     <color name="c_text_v3">#666666</color>
     <color name="c_text_v4">#a6a6a6</color>
@@ -36,11 +46,9 @@
     <color name="c_lang_row_border">#3a5278</color>
     <color name="c_button_text_v1">#ffffff</color>
     <color name="c_button_text_v1_inverted">#3385ff</color>
-    <color name="c_button_text_v2">#ffffff</color>
     <color name="c_button_text_v3">#ffffff</color>
     <color name="c_text_setting_heading_v2">#33cccc</color>
     <color name="c_edittext_background_form_inactive">#4d4d4d</color>
-    <color name="c_navigation_medium">#bfbfbf</color>
     <color name="c_navigation_light">#999999</color>
     <color name="c_switch_theme">#33cccc</color>
     <color name="c_border_left">#0c0c0d</color>
@@ -55,7 +63,6 @@
     <color name="c_font_change_foreground">#ffffff</color>
     <color name="c_seekbar_progress">#33cccc</color>
     <color name="c_seekbar_thumb">#33cccc</color>
-    <color name="c_ripple">#808080</color>
     <color name="c_ripple_v1">#0c0b0e</color>
     <color name="c_ripple_v2">#18171c</color>
     <color name="c_ripple_v3">#24222a</color>
@@ -82,7 +89,6 @@
     <color name="c_text_v6">#a6a6a6</color>
     <color name="c_home_side">#28282a</color>
     <color name="c_alert_text">#ffffff</color>
-    <color name="c_alert_text_inverted">#242B64</color>
     <color name="c_alert_text_inverted_v1">#ffffff</color>
     <color name="c_long_button">#3c3946</color>
     <color name="c_button_warning">#f65555</color>

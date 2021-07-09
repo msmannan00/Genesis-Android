@@ -2,13 +2,24 @@
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">编辑书签</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">书签网址</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">书签 URL 将显示在此处</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">书签名称</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">书签网址的名称将显示在此处</string>
     <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">输入书签名称...</string>
 
+    <!-- Bookmark Alerts -->
+    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">书签已删除</string>
+    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">书签已更新</string>
 
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">解雇</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">“有时你需要一个 桥 来访问 Tor 网络 ”</string>
+    <string name="LANDING_MORE" translatable="true">“告诉我更多”</string>
+    <string name="LANDING_HELLO" translatable="true">“你好”</string>
+    <string name="LANDING_WELCOME" translatable="true">“欢迎使用手机拨打 Genesis 。”</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">“安全可靠地浏览互联网。”</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">“没有跟踪。没有审查。”</string>
 
 
 
@@ -202,7 +213,6 @@
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">清除书签和数据</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">清除数据将删除浏览的Web链接，Cookie和其他浏览数据</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">删除数据将删除带有书签的网站</string>
-    <string name="ALERT_DISMISS" translatable="true">解雇</string>
     <string name="ALERT_CLEAR" translatable="true">取消</string>
     <string name="ALERT_ADD" translatable="true">好的</string>
     <string name="ALERT_TITLE_ADD" translatable="true">新书签</string>
@@ -377,16 +387,6 @@
     <string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">打开的标签将显示在这里</string>
 
-
-    <string name="LANDING_BRIDGES_INFO" translatable="true">“有时您需要Bridge才能达到Tor”</string>
-    <string name="LANDING_MORE" translatable="true">“告诉我更多”</string>
-    <string name="LANDING_VPN_SETUP" translatable="true">“您可以使用onion使任何软件都能通过Tor”</string>
-    <string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">“这不会使您匿名，但可以帮助您绕过防火墙”</string>
-    <string name="LANDING_VPN_CHOOSE_APPS" translatable="true">“选择应用”</string>
-    <string name="LANDING_HELLO" translatable="true">“你好”</string>
-    <string name="LANDING_WELCOME" translatable="true">“欢迎使用手机Tor。”</string>
-    <string name="LANDING_BROWSE_INFO" translatable="true">“向互联网浏览您的期望。”</string>
-    <string name="LANDING_NO_TRACKING" translatable="true">“没有用户监督保护。没有审查。”</string>
 
     <string name="ERROR_M1" translatable="true">该网站无法访问</string>
     <string name="ERROR_M2" translatable="true">与网站连接时发生错误</string>

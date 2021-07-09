@@ -409,7 +409,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void initLandingPage(){
-        if(status.sSettingFirstStart){
+        if(!status.sLandingPageStatus){
             helperMethod.openActivity(landingController.class, constants.CONST_LIST_HISTORY, homeController.this,false);
         }
     }

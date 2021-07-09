@@ -749,7 +749,7 @@
                 android:paddingBottom="15dp"
                 android:text="@string/HOME_LOADING"
                 android:textAlignment="textStart"
-                android:textColor="@color/white"
+                android:textColor="@color/c_white"
                 android:textFontWeight="5"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/pSettings"

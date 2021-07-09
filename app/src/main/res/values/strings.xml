@@ -1,5 +1,27 @@
 <resources>
 
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Edit Bookmark</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Bookmark Name</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Name of bookmarked url will be shown here</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
+
+    <!-- Bookmark Alerts -->
+    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bookmark removed</string>
+    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bookmark updated</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">Dismiss</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a Bridge to get to Tor Network"</string>
+    <string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
+    <string name="LANDING_HELLO" translatable="true">"Hello"</string>
+    <string name="LANDING_WELCOME" translatable="true">"Welcome to Genesis on mobile."</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
+
+
     <!-- Application Strings -->
     <string name="mode" translatable="false">Day</string>
     <string name="app_name" translatable="false">Genesis</string>
@@ -212,7 +234,6 @@
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">Clear Bookmark and Data</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Clearing data will remove history, cookies, and other browsing data</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Remove all bookmarks ?</string>
-    <string name="ALERT_DISMISS" translatable="true">Dismiss</string>
     <string name="ALERT_CLEAR" translatable="true">Clear</string>
     <string name="ALERT_CONFIRM" translatable="true">Confirm</string>
     <string name="ALERT_ADD" translatable="true">Done</string>
@@ -288,14 +309,6 @@
     <string name="ALERT_CRASH" translatable="true">Application closed unexpectedly</string>
     <string name="ALERT_CRASH_INFO" translatable="true"><b><font color='#f32323'>Request New Bridge &#160;</font></b>&#160;Application crashed due to unexpected error. We are looking into the issue mean while you can continue with this application</string>
 
-    <!-- Bookmark Setting -->
-    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Edit Bookmark</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">Bookmark URL</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">Bookmark URL will show here</string>
-    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Bookmark Name</string>
-    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Name of bookmarked url will show here</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
-
     <!-- Bridge Settings -->
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
     <string name="BRIDGE_SETTING" translatable="true">Bridge Settings</string>
@@ -318,8 +331,6 @@
     <!-- Popup Menu -->
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
     <string name="HOME_MENU__NEW_CIRCUIT_CREATED" translatable="true">New identity created</string>
-    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bookmark removed</string>
-    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bookmark updated</string>
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Genesis Logs</string>
     <string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>
@@ -418,17 +429,6 @@
     <string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
     <string name="HOME_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">Open tabs will show here</string>
-
-    <!-- Landing Page -->
-    <string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a Bridge to get to Tor"</string>
-    <string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
-    <string name="LANDING_VPN_SETUP" translatable="true">"You can enable any app to go through Tor using our built-in Onion"</string>
-    <string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"This won\'t make you anonymous, but it will help get through firewalls"</string>
-    <string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"Choose Apps"</string>
-    <string name="LANDING_HELLO" translatable="true">"Hello"</string>
-    <string name="LANDING_WELCOME" translatable="true">"Welcome to Tor on mobile."</string>
-    <string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
-    <string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
 
     <!-- Error Page -->
     <string name="ERROR_M1" translatable="true">This site can\'t be reached</string>

@@ -239,7 +239,7 @@
             android:background="@xml/hox_rounded_corner_suggestion_settings"
             android:elevation="7dp"
             android:text="@string/TAB_LIST_SELECT"
-            android:textColor="@color/white"
+            android:textColor="@color/c_white"
             android:visibility="visible" />
     </FrameLayout>
 

@@ -2,11 +2,24 @@
 
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Редагувати закладку</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">URL-адреса закладки</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">URL-адреса закладки відображатиметься тут</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Назва закладки</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Назва URL-адреси із закладками буде показано тут</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Введіть назву закладки ...</string>
+
+	<!-- Bookmark Alerts -->
+	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Закладка видалена</string>
+	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Закладка оновлена</string>
+
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">Звільнити</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"Іноді вам потрібен Міст, щоб дістатися до мережі Tor"</string>
+	<string name="LANDING_MORE" translatable="true">"РОЗКАЖІТЬ БІЛЬШЕ"</string>
+	<string name="LANDING_HELLO" translatable="true">"Привіт"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Ласкаво просимо до Genesis на мобільному."</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"Переглядайте Інтернет безпечно та надійно."</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"Без відстеження. Без цензури."</string>
 
 
 
@@ -191,7 +204,6 @@
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Очистити закладки та дані</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Очищення даних призведе до видалення історії, файлів cookie та інших даних перегляду</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Очищення даних призведе до видалення веб-сайтів із закладками</string>
-	<string name="ALERT_DISMISS" translatable="true">Звільнити</string>
 	<string name="ALERT_CLEAR" translatable="true">Очистити</string>
 	<string name="ALERT_ADD" translatable="true">Готово</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">Нова закладка</string>
@@ -362,17 +374,6 @@
 	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="true">Буття в режимі очікування на даний момент</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">Тут відкриються відкриті вкладки</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"Іноді потрібен міст, щоб дістатися до Тор"</string>
-	<string name="LANDING_MORE" translatable="true">"РОЗКАЖІТЬ БІЛЬШЕ"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"Ви можете дозволити будь-якому додатку проходити Tor через наш вбудований цибулю"</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"Це не зробить вас анонімним, але допоможе пройти через брандмауери"</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"Виберіть додатки"</string>
-	<string name="LANDING_HELLO" translatable="true">"Привіт"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Ласкаво просимо до Tor на мобільному."</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"Шукайте в Інтернеті, як ви очікуєте."</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"Без відстеження. Без цензури."</string>
 
 	<!-- Error Page -->
 	<string name="ERROR_M1" translatable="true">Не вдається отримати доступ до цього веб-сайту</string>

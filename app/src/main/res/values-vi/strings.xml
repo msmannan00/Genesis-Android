@@ -2,11 +2,24 @@
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Chỉnh Sửa Dấu Trang</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">URL đánh Dấu</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">URL đánh dấu sẽ hiển thị ở đây</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Tên Dấu Trang</string>
-    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Tên của url được đánh dấu sẽ hiển thị ở đây</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Tên của url được đánh dấu sẽ được hiển thị ở đây</string>
     <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Nhập tên dấu trang…</string>
+
+    <!-- Bookmark Alerts -->
+    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Dấu trang bị xóa</string>
+    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Dấu trang được cập nhật</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">bỏ qua</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">"Đôi khi bạn cần một Cầu nối để truy cập Mạng Tor"</string>
+    <string name="LANDING_MORE" translatable="true">"NÓI CHO TÔI THÊM"</string>
+    <string name="LANDING_HELLO" translatable="true">"Xin chào"</string>
+    <string name="LANDING_WELCOME" translatable="true">"Chào mừng bạn đến với Genesis trên điện thoại di động."</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">"Duyệt Internet một cách an toàn và bảo mật."</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">"Không theo dõi. Không kiểm duyệt."</string>
 
 
 
@@ -201,7 +214,6 @@
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">xóa dấu trang và dữ liệu</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">xóa dữ liệu sẽ xóa các liên kết web đã duyệt, cookie và dữ liệu duyệt web khác</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">xóa dữ liệu sẽ xóa các trang web được đánh dấu</string>
-    <string name="ALERT_DISMISS" translatable="true">bỏ qua</string>
     <string name="ALERT_CLEAR" translatable="true">hủy bỏ</string>
     <string name="ALERT_ADD" translatable="true">đồng ý</string>
     <string name="ALERT_TITLE_ADD" translatable="true">dấu trang mới</string>
@@ -375,17 +387,6 @@
     <string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
     <string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">các tab đang mở sẽ hiển thị ở đây</string>
-
-
-    <string name="LANDING_BRIDGES_INFO" translatable="true">"đôi khi bạn cần Bridge để đến Tor"</string>
-    <string name="LANDING_MORE" translatable="true">"cho tôi biết thêm"</string>
-    <string name="LANDING_VPN_SETUP" translatable="true">"bạn có thể kích hoạt bất kỳ phần mềm nào đi qua Tor bằng Onion"</string>
-    <string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"điều này sẽ không khiến bạn ẩn danh nhưng sẽ giúp bạn vượt qua tường lửa"</string>
-    <string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"chọn ứng dụng"</string>
-    <string name="LANDING_HELLO" translatable="true">"xin chào"</string>
-    <string name="LANDING_WELCOME" translatable="true">"chào mừng bạn đến với Tor trên điện thoại di động."</string>
-    <string name="LANDING_BROWSE_INFO" translatable="true">"duyệt internet theo cách bạn mong đợi."</string>
-    <string name="LANDING_NO_TRACKING" translatable="true">"Không có Bảo vệ Giám sát Người dùng. Không có Kiểm duyệt."</string>
 
 
     <string name="ERROR_M1" translatable="true">trang web này không thể truy cập được</string>

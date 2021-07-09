@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -99,14 +100,14 @@ public class messageManager
     {
         initializeDialog(R.layout.popup_language_support, Gravity.CENTER);
         // ((TextView) mDialog.findViewById(R.id.pLanguage)).setText((mData.get(0).toString()));
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
     private void rateFailure()
     {
         initializeDialog(R.layout.popup_rate_failure, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             mDialog.dismiss();
             final Handler handler = new Handler();
@@ -130,7 +131,7 @@ public class messageManager
         Runnable runnable = () -> mDialog.dismiss();
 
         initializeDialog(R.layout.popup_new_circuit, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
 
         mDialog.setOnDismissListener(dialog -> {
             handler.removeCallbacks(runnable);
@@ -154,7 +155,7 @@ public class messageManager
                 mMessage = (String) mData.get(0);
             }
             ((TextView)mDialog.findViewById(R.id.pDescription)).setText(("Request denied Error  " + mMessage));
-            mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+            mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
 
             mDialog.setOnDismissListener(dialog -> {
                 handler.removeCallbacks(runnable);
@@ -228,46 +229,30 @@ public class messageManager
         handler.postDelayed(runnable, 1500);
     }
 
-    private void deleteBookmark()
+    private void onShowToast(int mLayout, int mDelay, String mInfo, String mTriggerText, pluginEnums.eMessageManagerCallbacks pCallback)
     {
+        initializeDialog(mLayout, Gravity.BOTTOM);
+        ((TextView)mDialog.findViewById(R.id.pDescription)).setText(mInfo);
+        ((Button)mDialog.findViewById(R.id.pTrigger)).setText(mTriggerText);
+        mDialog.getWindow().setDimAmount(0.3f);
+
         final Handler handler = new Handler();
         Runnable runnable = () -> mDialog.dismiss();
-
-        initializeDialog(R.layout.popup_remove_bookmark, Gravity.BOTTOM);
-        mDialog.getWindow().setDimAmount(0.3f);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> {
-            mEvent.invokeObserver(null, M_UNDO_TAB);
-            mDialog.dismiss();
-            handler.removeCallbacks(runnable);
-        });
 
         mDialog.setOnDismissListener(dialog -> {
             handler.removeCallbacks(runnable);
             onClearReference();
         });
 
-        handler.postDelayed(runnable, 1500);
-    }
-
-    private void updateBookmark()
-    {
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        initializeDialog(R.layout.popup_update_bookmark, Gravity.BOTTOM);
-        mDialog.getWindow().setDimAmount(0.3f);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> {
-            mEvent.invokeObserver(null, M_UNDO_TAB);
-            mDialog.dismiss();
-            handler.removeCallbacks(runnable);
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
+            if(pCallback == null){
+                mEvent.invokeObserver(null, M_UNDO_TAB);
+                mDialog.dismiss();
+                handler.removeCallbacks(runnable);
+            }
         });
 
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 1500);
+        handler.postDelayed(runnable, mDelay);
     }
 
     private void maxTabReached()
@@ -277,7 +262,7 @@ public class messageManager
 
         initializeDialog(R.layout.popup_max_tab, Gravity.BOTTOM);
         mDialog.getWindow().setDimAmount(0);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> {
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
             mDialog.dismiss();
             handler.removeCallbacks(runnable);
         });
@@ -294,7 +279,7 @@ public class messageManager
     private void notSupportMessage()
     {
         initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(view -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(view -> mDialog.dismiss());
         mDialog.setOnDismissListener(dialog -> onClearReference());
 
         final Handler handler = new Handler();
@@ -309,7 +294,7 @@ public class messageManager
 
     private void onPanic(){
         initializeDialog(R.layout.popup_panic, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.setOnDismissListener(dialog -> onClearReference());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             mDialog.dismiss();
@@ -344,7 +329,7 @@ public class messageManager
         Runnable runnable = () -> mDialog.dismiss();
 
         initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
 
         mDialog.setOnDismissListener(dialog -> {
             handler.removeCallbacks(runnable);
@@ -357,7 +342,7 @@ public class messageManager
     private void applicationCrashed()
     {
         initializeDialog(R.layout.application_crash, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
@@ -372,7 +357,7 @@ public class messageManager
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.setCancelable(true);
         mDialog.setCanceledOnTouchOutside(true);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> mEvent.invokeObserver(null, M_SECURE_CONNECTION));
 
         if((boolean) mData.get(1)){
@@ -414,7 +399,7 @@ public class messageManager
         String pURL = mData.get(0).toString().replace("genesis.onion","genesishiddentechnologies.com");
         ((TextView)mDialog.findViewById(R.id.pURL)).setText(pURL);
 
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> {
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
             mDialog.dismiss();
             helperMethod.hideKeyboard(mContext);
         });
@@ -534,7 +519,7 @@ public class messageManager
 
             ((TextView) mDialog.findViewById(R.id.pDescription)).setText(mData.get(0).toString());
             ((TextView) mDialog.findViewById(R.id.pDescriptionLong)).setText(murl);
-            mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+            mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
             mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
                 mDialog.dismiss();
                 final Handler handler = new Handler();
@@ -551,7 +536,7 @@ public class messageManager
     private void rateApp()
     {
         initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             RatingBar mRatingBar = mDialog.findViewById(R.id.pRating);
             if(mRatingBar.getRating()>=3){
@@ -589,7 +574,7 @@ public class messageManager
         initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER);
         ((TextView) mDialog.findViewById(R.id.pDescription)).setText((title + mData.get(0).toString()));
         mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             if(mData!=null){
                 mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_DOWNLOAD_FILE_MANUAL);
@@ -624,7 +609,7 @@ public class messageManager
         initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
         ((TextView) mDialog.findViewById(R.id.pDescription)).setText((title + mData.get(0)));
         mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             if(mData!=null){
                 mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
@@ -727,7 +712,7 @@ public class messageManager
     private void sendBridgeMail()
     {
         initializeDialog(R.layout.popup_bridge_mail, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             mDialog.dismiss();
             final Handler handler = new Handler();
@@ -888,12 +873,12 @@ public class messageManager
 
                 case M_DELETE_BOOKMARK:
                     /*VERIFIED*/
-                    deleteBookmark();
+                    onShowToast(R.layout.popup_toast_generic, 2000, mContext.getString(R.string.HOME_MENU__BOOKMARK_REMOVED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_UPDATE_BOOKMARK:
                     /*VERIFIED*/
-                    updateBookmark();
+                    onShowToast(R.layout.popup_toast_generic, 2000, mContext.getString(R.string.HOME_MENU__BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
             }
         }

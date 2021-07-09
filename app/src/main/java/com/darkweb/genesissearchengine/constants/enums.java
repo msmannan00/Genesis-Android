@@ -46,4 +46,11 @@ public class enums
         public static final String OPEN_VOICE = "mOpenVoice";
     }
 
+    public static class LandingPageTypes {
+        public static final int M_LANDING_WELCOME = 0;
+        public static final int M_LANDING_INTRO = 1;
+        public static final int M_LANDING_START = 2;
+    }
+
+
 }

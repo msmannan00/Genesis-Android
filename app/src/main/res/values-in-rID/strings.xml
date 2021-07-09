@@ -1,12 +1,26 @@
 <resources>
 
 	<!-- Bookmark Setting -->
-	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Bladwijzer Bewerken</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">Bladwijzer-URL</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">De bladwijzer-URL wordt hier weergegeven</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Naam Bladwijzer</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">De naam van de url met bladwijzer wordt hier weergegeven</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Voer de naam van de bladwijzer in...</string>
+	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Sunting Penanda</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nama Penanda</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Nama url yang di-bookmark akan ditampilkan di sini</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Masukkan nama penanda…</string>
+
+	<!-- Bookmark Alerts -->
+	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bookmark dihapus</string>
+	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bookmark diperbarui</string>
+
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">ontslaan</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"Terkadang Anda memerlukan Jembatan untuk sampai ke jaringan Tor"</string>
+	<string name="LANDING_MORE" translatable="true">"KATAKAN LEBIH BANYAKNYA"</string>
+	<string name="LANDING_HELLO" translatable="true">"Halo"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Selamat datang di Genesis di ponsel."</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"Jelajahi internet dengan aman dan aman."</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"Tidak ada pelacakan. Tidak ada sensor."</string>
+
 
 	<!-- Application Strings -->
 	<string name="GENERAL_SEARCH_HINT" translatable="true">zoek iets of typ een weblink</string>
@@ -182,7 +196,6 @@
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">duidelijke bladwijzer en gegevens</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">als u gegevens wist, worden doorbladerde weblinks, cookies en andere browsegegevens verwijderd</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Als u gegevens verwijdert, worden websites met bladwijzers verwijderd</string>
-	<string name="ALERT_DISMISS" translatable="true">ontslaan</string>
 	<string name="ALERT_CLEAR" translatable="true">annuleren</string>
 	<string name="ALERT_ADD" translatable="true">oké</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">nieuwe bladwijzer</string>
@@ -351,17 +364,6 @@
 	<!-- Home View -->
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">geopende tabbladen worden hier weergegeven</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"soms heb je een Bridge nodig om bij Tor te komen"</string>
-	<string name="LANDING_MORE" translatable="true">"vertel me meer"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"u kunt alle software inschakelen om door Tor te gaan met Onion"</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"dit maakt je niet anoniem, maar het helpt je wel om firewalls te omzeilen"</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"apps kiezen"</string>
-	<string name="LANDING_HELLO" translatable="true">"hallo"</string>
-	<string name="LANDING_WELCOME" translatable="true">"welkom bij Tor op mobiel."​"Surfen op internet zoals u verwacht dat u zou moeten."​"geen bescherming van gebruikersbewaking. geen censuur."​deze site is niet bereikbaar</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">er is een fout opgetreden bij het verbinden met website</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">de pagina die u probeert te bekijken, kan niet worden weergegeven omdat de authenticiteit van de ontvangen gegevens niet kon worden geverifieerd</string>
 
 	<!-- Error Page -->
 	<string name="ERROR_M1" translatable="true">de pagina werkt momenteel niet vanwege de een of andere reden</string>

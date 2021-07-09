@@ -2,11 +2,24 @@
 
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Könyvjelző Szerkesztése</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">Könyvjelző URL</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">A könyvjelző URL itt jelenik meg Könyvjelző neve</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">A Könyvjelzővel Ellátott URL Neve Itt Jelenik Meg Írja Be A Könyvjelző Nevét…</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Name of bookmarked url will show here</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Könyvjelző Neve</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">A könyvjelzővel ellátott URL neve itt jelenik meg Írja be a könyvjelző nevét…</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
+
+	<!-- Bookmark Alerts -->
+	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">A könyvjelző eltávolítva</string>
+	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">A könyvjelző frissül</string>
+
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">elbocsátani</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"Néha szükség van egy hídra a Tor hálózat eléréséhez"</string>
+	<string name="LANDING_MORE" translatable="true">"TOVÁBBI MEGOLDÁS"</string>
+	<string name="LANDING_HELLO" translatable="true">"Hello"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Üdvözöljük a Genesis-es számmal mobilon."</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"Böngésszen biztonságosan és biztonságosan az interneten."</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"Nincs nyomkövetés. Nincs cenzúra."</string>
 
 
 
@@ -198,7 +211,6 @@
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">törölje a könyvjelzőt és az adatokat</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">az adatok törlése eltávolítja a böngészett weblinkeket, sütiket és egyéb böngészési adatokat</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">adatok törlésével a könyvjelzővel ellátott webhelyek is törlődnek</string>
-	<string name="ALERT_DISMISS" translatable="true">elbocsátani</string>
 	<string name="ALERT_CLEAR" translatable="true">megszünteti</string>
 	<string name="ALERT_ADD" translatable="true">ok</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">új könyvjelző</string>
@@ -372,17 +384,6 @@
 	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">a megnyitott lapok itt jelennek meg</string>
-
-
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"néha szükséged van egy Bridge-re a Tor-os eléréshez"</string>
-	<string name="LANDING_MORE" translatable="true">"mondj többet"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"a Onion használatával bármely szoftvert engedélyezhet a Tor átmenéshez"</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"ettől még nem leszel névtelen, de a tűzfalak megkerülésében segít"</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"alkalmazások kiválasztása"</string>
-	<string name="LANDING_HELLO" translatable="true">"Szia"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Üdvözöljük a Tor telefonon."</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"böngésszen az interneten, ahogy elvárja."</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"nincs felhasználói felügyeleti védelem. nincs cenzúra."</string>
 
 
 	<string name="ERROR_M1" translatable="true">ez az oldal nem érhető el</string>

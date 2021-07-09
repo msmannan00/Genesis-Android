@@ -160,7 +160,7 @@
         android:layout_marginBottom="16dp"
         android:onClick="onScrollBottomAnimated"
         android:clickable="true"
-        android:tint="@color/white"
+        android:tint="@color/c_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@xml/ic_baseline_keyboard_arrow_down"

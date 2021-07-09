@@ -46,7 +46,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/c_navigation_medium" />
+            app:tint="@color/c_alert_divider" />
 
         <TextView
             android:id="@+id/pErrorInfo"
@@ -75,7 +75,7 @@
             android:background="@xml/hox_rounded_corner_suggestion_settings"
             android:onClick="onReloadData"
             android:text="@string/HELP_RETRY"
-            android:textColor="@color/white"
+            android:textColor="@color/c_white"
             app:layout_constraintStart_toStartOf="@+id/pErrorInfo"
             app:layout_constraintTop_toBottomOf="@+id/pErrorInfo" />
 
@@ -91,8 +91,8 @@
             android:onClick="onOpenHelpExternal"
             android:src="@xml/ic_baseline_browser"
             android:text="@string/HELP_RETRY"
-            android:textColor="@color/white"
-            android:tint="@color/white"
+            android:textColor="@color/c_white"
+            android:tint="@color/c_white"
             app:layout_constraintStart_toEndOf="@+id/pReloadButton"
             app:layout_constraintTop_toTopOf="@+id/pReloadButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>

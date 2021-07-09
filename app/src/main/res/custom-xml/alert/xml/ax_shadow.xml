@@ -64,7 +64,7 @@
     </item>
     <item>
         <shape>
-            <solid android:color="@color/white" />
+            <solid android:color="@color/c_white" />
         </shape>
     </item>
 </layer-list>

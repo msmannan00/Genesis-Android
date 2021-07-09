@@ -2,12 +2,24 @@
 
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">แก้ไขบุ๊คมาร์ค</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">บุ๊คมาร์ค URL</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">บุ๊กมาร์ก URL จะแสดงที่นี่</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">ชื่อบุ๊คมาร์ค</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">ชื่อของ URL ที่คั่นไว้จะแสดงที่นี่</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">ใส่ชื่อบุ๊คมาร์ค...</string>
 
+	<!-- Bookmark Alerts -->
+	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">บุ๊กมาร์กถูกลบ</string>
+	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">บุ๊กมาร์กอัพเดทแล้ว</string>
+
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">ปิด</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"บางครั้งคุณต้องการ สะพาน เพื่อไปที่ เครือข่ายทอร์"</string>
+	<string name="LANDING_MORE" translatable="true">"บอกฉันเพิ่มเติม"</string>
+	<string name="LANDING_HELLO" translatable="true">"สวัสดี"</string>
+	<string name="LANDING_WELCOME" translatable="true">"ยินดีต้อนรับสู่ Genesis บนมือถือ"</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"ท่องอินเทอร์เน็ตอย่างปลอดภัย"</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"ไม่มีการติดตาม ไม่มีการเซ็นเซอร์"</string>
 
 
 
@@ -200,7 +212,6 @@
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">ล้างบุ๊คมาร์คและข้อมูล</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">การล้างข้อมูลจะลบลิงค์เว็บที่เรียกดูคุกกี้และข้อมูลการท่องเว็บอื่น ๆ</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">การลบข้อมูลจะเป็นการลบเว็บไซต์ที่บุ๊กมาร์ก</string>
-	<string name="ALERT_DISMISS" translatable="true">ปิด</string>
 	<string name="ALERT_CLEAR" translatable="true">ยกเลิก</string>
 	<string name="ALERT_ADD" translatable="true">ตกลง</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">บุ๊คมาร์คใหม่</string>
@@ -374,17 +385,6 @@
 	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">แท็บที่เปิดจะแสดงที่นี่</string>
-
-
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"บางครั้งคุณต้องใช้ Bridge เพื่อไปที่ Tor"</string>
-	<string name="LANDING_MORE" translatable="true">"บอกรายละเอียดฉันเพิ่มเตืม"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"คุณสามารถเปิดใช้งานซอฟต์แวร์ใด ๆ เพื่อผ่าน Tor โดยใช้ Onion"</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"สิ่งนี้จะไม่ทำให้คุณไม่เปิดเผยชื่อ แต่จะช่วยให้คุณข้ามไฟร์วอลล์ได้"</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"เลือกแอป"</string>
-	<string name="LANDING_HELLO" translatable="true">"สวัสดี"</string>
-	<string name="LANDING_WELCOME" translatable="true">"ยินดีต้อนรับสู่ Tor บนมือถือ"</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"ท่องอินเทอร์เน็ตตามที่คุณคาดหวัง"</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"ไม่มีการป้องกันการเฝ้าระวังผู้ใช้ไม่มีการเซ็นเซอร์"</string>
 
 
 	<string name="ERROR_M1" translatable="true">ไซต์นี้ไม่สามารถเข้าถึงได้</string>

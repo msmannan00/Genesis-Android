@@ -1,12 +1,25 @@
 <resources>
 
+	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">بُک مارک میں ترمیم کریں</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME" translatable="true">بک مارک یو آر ایل</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_INFO" translatable="true">بک مارک یو آر ایل یہاں دکھائے</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">گا بُک مارک کا نام</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">یہاں بک مارک یو آر ایل کا نام دکھائے گا</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">بُک مارک کا نام</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">بک مارک یو آر ایل کا نام یہاں دکھایا جائے گا</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">بک مارک کا نام درج کریں…</string>
 
+	<!-- Bookmark Alerts -->
+	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">بک مارک کو ہٹا دیا گیا ہے</string>
+	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">بک مارک کو اپ ڈیٹ کر دیا گیا ہے</string>
+
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">خارج کردیں</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"کبھی کبھی آپ کو ٹور نیٹ ورک جانے کے لئے برج کی ضرورت ہوتی ہے"</string>
+	<string name="LANDING_MORE" translatable="true">"مجھے مزید بتائیں"</string>
+	<string name="LANDING_HELLO" translatable="true">"ہیلو"</string>
+	<string name="LANDING_WELCOME" translatable="true">"موبائل پر Genesis میں خوش آمدید۔"</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"انٹرنیٹ کو محفوظ طریقے سے براؤز کریں۔"</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"کوئی ٹریکنگ نہیں۔ کوئی سنسرشپ نہیں ہے۔"</string>
 
 
 
@@ -199,7 +212,6 @@
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">بک مارک اور ڈیٹا کو صاف کریں</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">ڈیٹا کو صاف کرنا براؤزڈ ویب لنکس ، کوکیز اور دیگر براؤزنگ ڈیٹا کو ختم کردے گا</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">ڈیٹا کو حذف کرنا بک مارک کی ویب سائٹوں کو حذف کردے گا</string>
-	<string name="ALERT_DISMISS" translatable="true">خارج کردیں</string>
 	<string name="ALERT_CLEAR" translatable="true">منسوخ کریں</string>
 	<string name="ALERT_ADD" translatable="true">ٹھیک ہے</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">نیا بک مارک</string>
@@ -373,17 +385,6 @@
 	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
 	<string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">کھلی ٹیبز یہاں دکھائی دیں گی</string>
-
-
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"کبھی کبھی ڈور پر جانے کے لئے آپ کو برج کی ضرورت پڑتی ہے"</string>
-	<string name="LANDING_MORE" translatable="true">"مجھے اور بتاؤ"</string>
-	<string name="LANDING_VPN_SETUP" translatable="true">"آپ انین کا استعمال کرتے ہوئے کسی بھی سافٹ ویئر کو ڈور میں جانے کے قابل بنائیں گے"</string>
-	<string name="LANDING_VPN_SETUP_SUB_INFO" translatable="true">"یہ آپ کو گمنام نہیں بنائے گا ، لیکن اس سے فائر وال کو نظرانداز کرنے میں مدد ملے گی۔"</string>
-	<string name="LANDING_VPN_CHOOSE_APPS" translatable="true">"ایپس منتخب کریں"</string>
-	<string name="LANDING_HELLO" translatable="true">"ہیلو"</string>
-	<string name="LANDING_WELCOME" translatable="true">"موبائل پر ڈور میں خوش آمدید۔"</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"انٹرنیٹ کو براؤز کریں جس طرح آپ کی توقع ہے۔"</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"صارف کی نگرانی کا کوئی تحفظ نہیں۔ کوئی سنسرشپ نہیں ہے۔"</string>
 
 
 	<string name="ERROR_M1" translatable="true">یہ سائٹ قابل رسائ نہیں ہے</string>

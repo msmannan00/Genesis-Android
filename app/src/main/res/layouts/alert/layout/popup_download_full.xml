@@ -36,7 +36,7 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:src="@xml/ic_baseline_browser"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/c_white"
                 tools:ignore="RtlCompat" />
         </androidx.cardview.widget.CardView>
 

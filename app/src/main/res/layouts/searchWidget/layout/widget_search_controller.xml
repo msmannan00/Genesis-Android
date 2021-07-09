@@ -67,7 +67,7 @@
             android:layout_marginStart="-48dp"
             android:layout_marginTop="-1dp"
             android:layout_marginEnd="-5dp"
-            android:background="@color/white"
+            android:background="@color/c_white"
             android:clickable="false"
             android:contentDescription="@string/GENERAL_TODO"
             android:focusable="false"

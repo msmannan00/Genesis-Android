@@ -32,7 +32,7 @@ public class keys
     public static final String SETTING_LANGUAGE = "LANGUAGE_V1";
     public static final String SETTING_LANGUAGE_REGION = "LANGUAGE_REGION_V1";
     public static final String SETTING_SEARCH_ENGINE = "SEARCH_ENGINE_V1";
-    public static final String SETTING_FIRST_INSTALLED = "FIRST_INSTALLED_V1";
+    public static final String sLandingPageStatus = "FIRST_INSTALLED_V1";
     public static final String SETTING_JAVA_SCRIPT = "JAVA_SCRIPT_V1";
     public static final String SETTING_POPUP = "POPUP_V1";
     public static final String SETTING_HISTORY_CLEAR = "HISTORY_CLEAR_V1";
@@ -76,4 +76,11 @@ public class keys
     public static final String BOOKMARK_SETTING_NAME = "BOOKMARK_SETTING_NAME";
     public static final String BOOKMARK_SETTING_URL = "BOOKMARK_SETTING_URL";
     public static final String BOOKMARK_SETTING_ID = "BOOKMARK_SETTING_ID";
+
+    /*Landing Settings*/
+    public static final String LANDING_TITLE_KEY = "LANDING_TITLE_KEY";
+    public static final String LANDING_SUB_TITLE_KEY = "LANDING_SUB_TITLE_KEY";
+    public static final String LANDING_SUBMIT_KEY = "LANDING_SUBMIT_KEY";
+    public static final String LANDING_LAYOUT_RESID = "LANDING_LAYOUT_RESID";
+
 }

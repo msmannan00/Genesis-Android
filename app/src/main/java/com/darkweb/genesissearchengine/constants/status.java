@@ -49,7 +49,7 @@ public class status
     public static boolean sSettingIsAppRestarting = false;
     public static boolean sSettingIsAppRated = false;
     public static boolean sSettingFontAdjustable = true;
-    public static boolean sSettingFirstStart = true;
+    public static boolean sLandingPageStatus = false;
     public static boolean mThemeApplying = false;
     public static boolean sTabGridLayoutEnabled = true;
     public static boolean sStatusDoNotTrack = true;
@@ -107,7 +107,7 @@ public class status
         status.sVPNStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED,false));
         status.sBridgeStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES,false));
         status.sSettingFontAdjustable = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE,true));
-        status.sSettingFirstStart = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FIRST_INSTALLED,true));
+        status.sLandingPageStatus = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.sLandingPageStatus,false));
         status.sSettingEnableZoom = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_ZOOM,true));
         status.sSettingEnableVoiceInput = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_VOICE_INPUT,true));
         status.sSettingTrackingProtection = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_TRACKING_PROTECTION, ContentBlocking.AntiTracking.DEFAULT));

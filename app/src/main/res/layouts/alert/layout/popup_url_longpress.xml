@@ -36,7 +36,7 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:src="@xml/ic_baseline_browser"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/c_white"
                 tools:ignore="RtlCompat" />
         </androidx.cardview.widget.CardView>
 
@@ -229,7 +229,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
-                    android:id="@+id/pDismiss"
+                    android:id="@+id/pTrigger"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="1"

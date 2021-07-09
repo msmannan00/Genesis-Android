@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.helperManager;
 
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -8,7 +9,12 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.activityThemeManager;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
+import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
+import java.util.Collections;
 
 public class sharedUIMethod
 {
@@ -31,4 +37,14 @@ public class sharedUIMethod
             }
         }
     }
+
+    public static void onSharedConfigurationChanged(Configuration newConfig, AppCompatActivity pContext){
+        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(pContext), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+
+        if(newConfig.uiMode != pContext.getResources().getConfiguration().uiMode){
+            activityContextManager.getInstance().onResetTheme();
+            activityThemeManager.getInstance().onConfigurationChanged(pContext);
+        }
+    }
+
 }

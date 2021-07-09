@@ -139,7 +139,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_new_tab"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -183,7 +183,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_history"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -218,7 +218,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_arrow_down"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -253,7 +253,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_bookmark_menu"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -288,7 +288,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_star_fill"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -333,7 +333,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_vpn"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -368,7 +368,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_perm_identity"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -403,7 +403,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_language"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -438,7 +438,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_find"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -473,7 +473,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_desktop"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -534,7 +534,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_setting"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -569,7 +569,7 @@
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:src="@xml/ic_baseline_quit"
-                    app:tint="@color/c_navigation_medium" />
+                    app:tint="@color/c_alert_divider" />
 
                 <TextView
                     android:layout_width="0dp"

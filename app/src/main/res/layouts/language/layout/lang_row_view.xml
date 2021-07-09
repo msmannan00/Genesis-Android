@@ -68,7 +68,7 @@
             android:scaleX="0.5"
             android:scaleY="0.5"
             app:srcCompat="@xml/ic_baseline_done"
-            app:tint="@color/white" />
+            app:tint="@color/c_white" />
 
     </LinearLayout>
 
