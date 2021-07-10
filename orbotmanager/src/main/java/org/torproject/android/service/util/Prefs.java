@@ -2,8 +2,8 @@ package org.torproject.android.service.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import org.torproject.android.service.OrbotConstants;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.util.Locale;
 
@@ -21,6 +21,10 @@ public class Prefs {
     private final static String PREF_USE_VPN = "pref_vpn";
     private final static String PREF_EXIT_NODES = "pref_exit_nodes";
     private final static String PREF_BE_A_SNOWFLAKE = "pref_be_a_snowflake";
+    private final static String PREF_BE_A_SNOWFLAKE_LIMIT = "pref_be_a_snowflake_limit";
+
+    private final static String PREF_HOST_ONION_SERVICES = "pref_host_onionservices";
+
 
     private static SharedPreferences prefs;
 
@@ -37,14 +41,18 @@ public class Prefs {
         prefs.edit().putString(key, value).apply();
     }
 
+    public static boolean hostOnionServicesEnabled () {
+        return prefs.getBoolean(PREF_HOST_ONION_SERVICES, true);
+    }
+
+    public static void putHostOnionServicesEnabled(boolean value) {
+        putBoolean(PREF_HOST_ONION_SERVICES, value);
+    }
+
     public static boolean bridgesEnabled() {
         //if phone is in Farsi, enable bridges by default
         boolean bridgesEnabledDefault = Locale.getDefault().getLanguage().equals("fa");
         return prefs.getBoolean(PREF_BRIDGES_ENABLED, bridgesEnabledDefault);
-    }
-
-    public static boolean hostOnionServicesEnabled(){
-        return false;
     }
 
     public static void putBridgesEnabled(boolean value) {
@@ -55,24 +63,6 @@ public class Prefs {
         String defaultBridgeType = "obfs4";
         if (Locale.getDefault().getLanguage().equals("fa"))
             defaultBridgeType = "meek"; //if Farsi, use meek as the default bridge type
-        if(orbotLocalConstants.mIsManualBridge){
-            if(!orbotLocalConstants.mManualBridgeType.equals("")){
-                defaultBridgeType = orbotLocalConstants.mManualBridgeType;
-                putString(PREF_BRIDGES_LIST, defaultBridgeType);
-                return defaultBridgeType;
-            }
-        }else {
-            if(orbotLocalConstants.mBridges.equals("obfs4")){
-                defaultBridgeType = "obfs4";
-                putString(PREF_BRIDGES_LIST, defaultBridgeType);
-                return defaultBridgeType;
-            }else if(orbotLocalConstants.mBridges.equals("meek")){
-                defaultBridgeType = "meek";
-                putString(PREF_BRIDGES_LIST, defaultBridgeType);
-                return defaultBridgeType;
-            }
-        }
-
         return prefs.getString(PREF_BRIDGES_LIST, defaultBridgeType);
     }
 
@@ -92,6 +82,10 @@ public class Prefs {
         putBoolean(PREF_BE_A_SNOWFLAKE,beSnowflakeProxy);
     }
 
+    public static boolean limitSnowflakeProxying () {
+        return prefs.getBoolean(PREF_BE_A_SNOWFLAKE_LIMIT,true);
+    }
+
     public static void setDefaultLocale(String value) {
         putString(PREF_DEFAULT_LOCALE, value);
     }
@@ -101,7 +95,7 @@ public class Prefs {
     }
 
     public static boolean useDebugLogging() {
-        return false;//prefs.getBoolean(PREF_ENABLE_LOGGING, false);
+        return prefs.getBoolean(PREF_ENABLE_LOGGING, false);
     }
 
     public static boolean persistNotifications() {

@@ -50,7 +50,7 @@ public class Tun2Socks {
     private static HashMap<Integer, String> mAppUidBlacklist = new HashMap<>();
 
     static {
-        //System.loadLibrary("tun2socks");
+        System.loadLibrary("tun2socks");
     }
 
     public static void init() {

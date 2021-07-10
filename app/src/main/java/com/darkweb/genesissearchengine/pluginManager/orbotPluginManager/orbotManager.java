@@ -19,6 +19,7 @@ import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -26,6 +27,7 @@ import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 
@@ -85,15 +87,19 @@ public class orbotManager
         Intent mServiceIntent = new Intent(mAppContext.get().getApplicationContext(), OrbotService.class);
         mServiceIntent.setAction(ACTION_START);
 
-        mAppContext.get().bindService(mServiceIntent, mServerConn, Context.BIND_AUTO_CREATE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mAppContext.get().stopService(mServiceIntent);
-            mAppContext.get().startForegroundService(mServiceIntent);
-        }
-        else
-        {
-            mAppContext.get().startService(mServiceIntent);
-        }
+        helperMethod.onDelayHandler(activityContextManager.getInstance().getHomeController(), 3000, () -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                mAppContext.get().stopService(mServiceIntent);
+                mAppContext.get().startForegroundService(mServiceIntent);
+            }
+            else
+            {
+                mAppContext.get().stopService(mServiceIntent);
+                mAppContext.get().startService(mServiceIntent);
+            }
+            mAppContext.get().bindService(mServiceIntent, mServerConn, Context.BIND_AUTO_CREATE);
+            return null;
+        });
 
     }
 
