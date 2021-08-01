@@ -19,6 +19,7 @@
     <color name="c_ripple_gray">#808080</color>
     <color name="c_alert_toast_button_background">#ffffff</color>
     <color name="c_alert_toast_button_text">#3385ff</color>
+    <color name="c_icon_tint">#6483b4</color>
 
     /* Text Colors Version*/
 
@@ -28,6 +29,19 @@
     /* Bookmark Setting Controller Color */
 
     <color name="c_bookmark_settings_header_icon_tint">#ffffff</color>
+
+    /* Alerts */
+
+    <color name="c_secure_alert_start">#1c1b21</color>
+    <color name="c_secure_alert_end">#1c1b21</color>
+    <color name="c_secure_alert_border">#2d2d39</color>
+    <color name="c_secure_alert_background">#99000000</color>
+    <color name="c_secure_alert_button">#2d2d39</color>
+    <color name="c_secure_alert_button_pressed">#16161d</color>
+
+    /* Orbot Logs */
+
+    <color name="c_orbot_background">#18171c</color>
 
     /* Customs Colors */
 
@@ -57,8 +71,8 @@
     <color name="c_button">#33cccc</color>
     <color name="c_checkbox_tint">#33cccc</color>
     <color name="c_checkbox_tint_default">#ffffff</color>
-    <color name="c_border_background">#18161d</color>
     <color name="c_border_background_divider">#808080</color>
+    <color name="c_border_background">#18161d</color>
     <color name="c_font_change_background">#161618</color>
     <color name="c_font_change_foreground">#ffffff</color>
     <color name="c_seekbar_progress">#33cccc</color>
@@ -83,6 +97,7 @@
     <color name="c_menu_drop_shadow_25">#00000000</color>
     <color name="c_text_home_menu">#ffffff</color>
     <color name="c_hint_text">#b3b3b3</color>
+    <color name="c_setting_icon_tint">#8c8c8c</color>
     <color name="c_list_item_current">#161519</color>
     <color name="c_lock_tint">#f2f2f2</color>
     <color name="c_lock_text">#00b300</color>

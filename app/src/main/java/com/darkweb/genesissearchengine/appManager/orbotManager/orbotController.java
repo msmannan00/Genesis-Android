@@ -42,10 +42,10 @@ public class orbotController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_settings_view);
+        initializeStartupAnimation();
 
         if(!status.mThemeApplying){
             activityContextManager.getInstance().onStack(this);
@@ -111,8 +111,14 @@ public class orbotController extends AppCompatActivity {
 
     public void onClose(View view){
         finish();
+        initializeStartupAnimation();
         activityContextManager.getInstance().onRemoveStack(this);
-        overridePendingTransition(R.anim.push_anim_out_reverse, R.anim.push_anim_in_reverse);
+    }
+
+    public void initializeStartupAnimation(){
+        if(activityContextManager.getInstance().getHomeController().isSplashScreenLoading()){
+            overridePendingTransition(R.anim.translate_fade_left_reverse, R.anim.translate_fade_right_reverse);
+        }
     }
 
     /* LOCAL OVERRIDES */

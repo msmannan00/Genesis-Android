@@ -198,7 +198,7 @@ public class tabController extends Fragment
         mClearSelection = mRootView.findViewById(R.id.pClearSelection);
         mPopupUndo = mRootView.findViewById(R.id.pPopupUndo);
         mSelectionCount = mRootView.findViewById(R.id.pSelectionCount);
-        mBlocker = mRootView.findViewById(R.id.pBlocker);
+        mBlocker = mRootView.findViewById(R.id.pSecureRootBlocker);
         mNestedScrollView = mRootView.findViewById(R.id.pNestedScroll);
         mNewTab = mRootView.findViewById(R.id.pNewTab);
 
@@ -234,7 +234,10 @@ public class tabController extends Fragment
             float scrollY = mNestedScrollView.getScrollY();
 
             minScroll = scrollY;
-            int orientation = mContextManager.getHomeController().getResources().getConfiguration().orientation;
+            if(activityContextManager.getInstance().getHomeController()==null){
+                return;
+            }
+            int orientation = activityContextManager.getInstance().getHomeController().getResources().getConfiguration().orientation;
             if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 maxScroll = mRecycleView.computeVerticalScrollRange() - mScreenHeight*0.350f + helperMethod.pxFromDp(helperMethod.getNavigationBarSize(getContext()).y);
             } else {

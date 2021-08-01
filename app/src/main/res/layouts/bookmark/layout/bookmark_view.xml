@@ -37,9 +37,10 @@
                 android:layout_marginTop="1dp"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:onClick="onBackPressed"
+                android:onClick="onClose"
                 android:src="@xml/ic_arrow_back"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="UsingOnClickInXml" />
 
             <TextView
                 android:id="@+id/pTitle"
@@ -49,11 +50,12 @@
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center_vertical|start"
-                android:onClick="onBackPressed"
+                android:onClick="onClose"
                 android:text="@string/BOOKMARK_TITLE"
                 android:textColor="@color/c_text_v1"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="UsingOnClickInXml" />
 
             <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
                 android:id="@+id/pSearchInput"
@@ -99,7 +101,8 @@
                 android:paddingBottom="10dp"
                 android:scaleType="fitCenter"
                 android:src="@xml/ic_search"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="UsingOnClickInXml" />
 
             <ImageButton
                 android:id="@+id/pMenuButton"
@@ -115,7 +118,8 @@
                 android:paddingBottom="14dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="UsingOnClickInXml" />
         </LinearLayout>
 
     </LinearLayout>

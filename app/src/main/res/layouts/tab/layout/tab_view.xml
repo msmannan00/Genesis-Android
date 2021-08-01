@@ -47,7 +47,7 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onMenuTrigger"
                 android:src="@xml/ic_baseline_add"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint" />
 
             <TextView
                 android:id="@+id/pSelectionCount"
@@ -101,7 +101,7 @@
                 android:paddingBottom="15dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint" />
 
             <ImageButton
                 android:id="@+id/pRemoveSelection"
@@ -115,8 +115,8 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onRemoveSelection"
                 android:src="@xml/ic_baseline_delete"
-                android:tint="@color/c_navigation_tint"
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:tint="@color/c_navigation_tint" />
 
             <ImageButton
                 android:id="@+id/pClearSelection"
@@ -130,8 +130,8 @@
                 android:layout_gravity="center_vertical"
                 android:onClick="onClearSelection"
                 android:src="@xml/ic_refresh"
-                android:tint="@color/c_navigation_tint"
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:tint="@color/c_navigation_tint" />
 
         </LinearLayout>
 
@@ -221,7 +221,7 @@
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/pBlocker"
+        android:id="@+id/pSecureRootBlocker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/clear_alpha"

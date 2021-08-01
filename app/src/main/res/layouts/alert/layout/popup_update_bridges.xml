@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pMainLayout"
+        android:id="@+id/pSecureRootLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@xml/ax_round_corner"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/pDescription"
+            android:id="@+id/pOrbotRowDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
@@ -78,7 +78,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/mClear"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
         <EditText
             android:id="@+id/pBridgeType"
@@ -119,7 +119,7 @@
             android:src="@xml/ic_baseline_cross"
             app:layout_constraintBottom_toTopOf="@+id/pDescriptionError"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
         <Button
             android:id="@+id/pBridgeRequest"

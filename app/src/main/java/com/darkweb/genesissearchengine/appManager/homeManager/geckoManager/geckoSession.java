@@ -106,6 +106,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     private boolean mThemeChanged = false;
     private int mScollOffset = 0;
     private selectionActionDelegate mSelectionActionDelegate;
+    private SecurityInformation securityInfo = null;
 
     /*Temp Variables*/
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
@@ -305,10 +306,18 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
     /*Progress Delegate*/
 
+    @UiThread
+    public void onSecurityChange(@NonNull final GeckoSession session,@NonNull final SecurityInformation securityInfo) {
+        this.securityInfo = securityInfo;
+    }
+
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
         if(mIsLoaded){
-            event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+            mCurrentURL = var2;
+            if(!var2.equals("about:blank")){
+                event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+            }
             if(!isPageLoading){
                 mCurrentTitle = "loading";
                 m_current_url_id = -1;
@@ -333,7 +342,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         if(var2){
             if(mProgress>=100){
                 //event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
-                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.on_update_favicon);
+                //event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.on_update_favicon);
                 event.invokeObserver(Arrays.asList(null,mSessionID), enums.etype.on_page_loaded);
 
                 if(!mThemeChanged){
@@ -382,6 +391,30 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
         if(progress>=100){
             isPageLoading = false;
+        }
+    }
+
+    public String getSecurityInfo(){
+        if(securityInfo!=null && securityInfo.certificate!=null){
+
+            String mAlternativeNames = strings.GENERIC_EMPTY_STR;
+            try{
+                for (List name : securityInfo.certificate.getSubjectAlternativeNames()){
+                    mAlternativeNames = mAlternativeNames + name.get(1) + "<br>";
+                }
+
+            }catch (Exception ignored) {}
+
+            return "<br><b>Website</b><br>"+securityInfo.host + "<br><br>" +
+                    "<b>Serial Number</b><br>" + securityInfo.certificate.getSerialNumber() + "<br><br>" +
+                    "<b>Algorithm Name</b><br>" + securityInfo.certificate.getSigAlgName() + "<br><br>" +
+                    "<b>Issued On</b><br>" + securityInfo.certificate.getNotBefore() + "<br><br>" +
+                    "<b>Expires On</b><br>" + securityInfo.certificate.getNotAfter() + "<br><br>" +
+                    "<b>Organization (O)</b><br>" + securityInfo.certificate.getSubjectDN().getName() + "<br><br>" +
+                    "<b>Common Name (CN)</b><br>" + securityInfo.certificate.getIssuerDN().getName() + "<br><br>" +
+                    "<b>Subject Alternative Names</b><br>" + mAlternativeNames;
+        }else {
+            return "Onion Secured Connection";
         }
     }
 
@@ -606,8 +639,8 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 }else {
                     mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
                 }
-            }catch (Exception ignored){
-
+            }catch (Exception ex){
+                Log.i("asd","asd : " + ex.getMessage());
             }
 
             return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2, mResourceURL));

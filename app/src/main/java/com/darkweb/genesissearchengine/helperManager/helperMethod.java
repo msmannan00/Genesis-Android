@@ -13,6 +13,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -52,9 +53,12 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
 
+import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
+import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.defaultBrowser;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
+import com.darkweb.genesissearchengine.constants.strings;
 import com.example.myapplication.R;
 import org.xmlpull.v1.XmlPullParserException;
 import java.io.ByteArrayInputStream;
@@ -87,7 +91,10 @@ import javax.net.ssl.HttpsURLConnection;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_LIST_EXTERNAL_SHORTCUT;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_PLAYSTORE_URL;
+import static com.darkweb.genesissearchengine.constants.keys.M_ACTIVITY_NAVIGATION_BUNDLE_KEY;
 
 public class helperMethod
 {
@@ -170,6 +177,21 @@ public class helperMethod
     public static void onOpenHelpExternal(AppCompatActivity context, String pURL){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pURL));
         context.startActivity(browserIntent);
+    }
+
+    public static geckoSession deepCopy(geckoSession object) {
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ObjectOutputStream outputStrm = new ObjectOutputStream(outputStream);
+            outputStrm.writeObject(object);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+            ObjectInputStream objInputStream = new ObjectInputStream(inputStream);
+            return (geckoSession)objInputStream.readObject();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static String completeURL(String pURL){
@@ -260,6 +282,36 @@ public class helperMethod
             SpannableString ss = new SpannableString(url);
             return ss;
         }
+    }
+
+    public static String getDefaultBrowser(AppCompatActivity context){
+        Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://"));
+        ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(browserIntent,PackageManager.MATCH_DEFAULT_ONLY);
+        return resolveInfo.activityInfo.packageName;
+    }
+
+    public static void openURLInCustomBrowser(String pData, AppCompatActivity pContext){
+        String mBrowser = helperMethod.getSystemBrowser(pContext);
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(pData));
+        intent.setPackage(mBrowser);
+        pContext.startActivity(intent);
+    }
+
+    public static String getSystemBrowser(AppCompatActivity context){
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("http://www.google.com"));
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_ALL);
+        String mBrowser = strings.GENERIC_EMPTY_STR;
+        for (ResolveInfo info : list) {
+            if(!info.activityInfo.packageName.contains(CONST_PACKAGE_NAME)){
+                mBrowser = info.activityInfo.packageName;
+                if(info.activityInfo.packageName.contains("chrome") || info.activityInfo.packageName.contains("google") || info.activityInfo.packageName.contains("firefox")){
+                    return mBrowser;
+                }
+            }
+        }
+        return mBrowser;
     }
 
     public static void sendIssueEmail(Context context){
@@ -621,6 +673,15 @@ public class helperMethod
             myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
         }
         context.startActivity(myIntent);
+    }
+
+    public static void openIntent(Intent pIntent,AppCompatActivity pContext, int pType){
+        if(pType == CONST_LIST_EXTERNAL_SHORTCUT){
+            pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            pIntent.putExtra(M_ACTIVITY_NAVIGATION_BUNDLE_KEY, pType);
+            pContext.startActivity(pIntent);
+            pContext.overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+        }
     }
 
     public static void openActivityReverse( Class<?> cls,int type,AppCompatActivity context,boolean animation){

@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.darkweb.genesissearchengine.production",
+  "variantName": "genesisRelease",
+  "elements": [
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86_64"
+        }
+      ],
+      "versionCode": 178,
+      "versionName": "Build | Dark-Origin 1.4.7.1",
+      "outputFile": "app-genesis-x86_64-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "armeabi-v7a"
+        }
+      ],
+      "versionCode": 175,
+      "versionName": "Build | Dark-Origin 1.4.7.1",
+      "outputFile": "app-genesis-armeabi-v7a-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "arm64-v8a"
+        }
+      ],
+      "versionCode": 176,
+      "versionName": "Build | Dark-Origin 1.4.7.1",
+      "outputFile": "app-genesis-arm64-v8a-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86"
+        }
+      ],
+      "versionCode": 177,
+      "versionName": "Build | Dark-Origin 1.4.7.1",
+      "outputFile": "app-genesis-x86-release.apk"
+    }
+  ]
+}

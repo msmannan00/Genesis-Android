@@ -74,9 +74,7 @@ $(window).on('load', function() {
 	// var mResponseJson = '[{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://wikileaks.org/static/img/wl-logo.png", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"}]';
 	// setTimeout(mHomepageLoader.onLoadReferenceWebsites, 500);
 	// setTimeout(mHomepageLoader.onLoadReferenceWebsiteContent, 1000, mResponseJson);
-	$(document).ready(function() {
-	    $('body').hide().fadeIn('fast');
-	});
+	document.getElementById("pBody").classList.toggle('body_fadein');
 
 	setTimeout(function (){
 	onTriggerScriptHandler(Commands.onLoadReferenceWebsites, null)

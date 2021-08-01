@@ -1,4 +1,4 @@
-package com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings;
+package com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkSettings;
 
 import android.widget.EditText;
 import android.widget.TextView;

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.darkweb.genesissearchengine.dataManager.models.historyRowModel;
@@ -63,12 +64,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             mHintList.clear();
             mHintList.add( new historyRowModel("Genesis Search", "genesis.onion",-1));
         }
-
         notifyDataSetChanged();
     }
 
     public void onClearAdapter(){
-        //mPastWebIcon.clear();
         mPastWebIcon.remove(0);
         mPastWebIcon.remove(1);
         mPastWebIcon.remove(2);
@@ -103,7 +102,8 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
         TextView mURL;
         ImageButton mMoveURL;
         ImageView mHindTypeIcon;
-        ImageView mHintWebIcon = null;
+        CardView mHintWebIcon = null;
+        ImageView pHintWebIconImage = null;
         LinearLayout mpHintListener;
         ImageView mHindTypeIconTemp;
 
@@ -113,22 +113,23 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
         @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
         void bindListView(historyRowModel model) {
-            mHeader = itemView.findViewById(R.id.pHeader);
+            mHeader = itemView.findViewById(R.id.pOrbotRowHeader);
             mHeaderSingle = itemView.findViewById(R.id.pHeaderSingle);
             mURL = itemView.findViewById(R.id.pURL);
             mHindTypeIcon = itemView.findViewById(R.id.pHindTypeIcon);
             mpHintListener = itemView.findViewById(R.id.pHintListener);
             mMoveURL = itemView.findViewById(R.id.pMoveURL);
             mHintWebIcon = itemView.findViewById(R.id.pHintWebIcon);
+            pHintWebIconImage = itemView.findViewById(R.id.pHintWebIconImage);
             mHindTypeIconTemp = new ImageView(mContext);
 
-            mHintWebIcon.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v6)));
+            pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v6)));
 
             if(mPastWebIcon.containsKey(getLayoutPosition())){
-                mHintWebIcon.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
-                mHintWebIcon.setImageTintList(null);
+                pHintWebIconImage.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
+                pHintWebIconImage.setImageTintList(null);
             }else {
-                mHintWebIcon.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
+                pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
 
                 Drawable mDrawable;
                 Resources res = itemView.getContext().getResources();
@@ -136,7 +137,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser));
                     mMoveURL.setVisibility(View.VISIBLE);
                     mMoveURL.setOnTouchListener(listViewHolder.this);
-                    mHintWebIcon.setImageDrawable(mDrawable);
+                    pHintWebIconImage.setImageDrawable(mDrawable);
                 } catch (Exception ignored) {
                 }
 
@@ -189,9 +190,9 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
             if(mURLLink.contains("genesishiddentechnologies.com") || mURLLink.contains("genesis.onion")){
-                mHintWebIcon.setImageTintList(null);
-                mHintWebIcon.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
+                pHintWebIconImage.setImageTintList(null);
+                pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                mPastWebIcon.put(getLayoutPosition(),pHintWebIconImage.getDrawable());
             }else
             {
                 String mURLPast = mURLLink;
@@ -204,9 +205,9 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                 {
                     if(mHindTypeIconTemp.getDrawable() != null){
                         if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
-                            mHintWebIcon.setImageTintList(null);
-                            mHintWebIcon.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                            mPastWebIcon.put(getLayoutPosition(),mHintWebIcon.getDrawable());
+                            pHintWebIconImage.setImageTintList(null);
+                            pHintWebIconImage.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                            mPastWebIcon.put(getLayoutPosition(),pHintWebIconImage.getDrawable());
                         }
                         if(getLayoutPosition() == 1){
                             Log.i("FUSSSS1111","FUSSSS4444");

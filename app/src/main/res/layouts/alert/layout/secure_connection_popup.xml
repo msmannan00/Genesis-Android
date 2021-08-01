@@ -4,77 +4,111 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="2100dp">
+
+    <ImageView
+        android:id="@+id/pSecureRootBlocker"
+        android:layout_width="match_parent"
+        android:layout_height="2100dp"
+        android:alpha="0"
+        android:background="@color/c_secure_alert_background"
+        android:contentDescription="@string/GENERAL_TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pSecureRoot"
+        app:layout_constraintVertical_weight="1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pMainLayout"
+        android:id="@+id/pSecureRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@xml/hox_rounded_corner_bottom"
+        android:paddingBottom="7dp"
+        android:background="@xml/ax_round_corner_secure"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/pLock"
+            android:id="@+id/pSecureLock"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="14dp"
             android:layout_marginTop="15dp"
             android:contentDescription="@string/GENERAL_TODO"
-            android:src="@xml/ic_baseline_lock"
+            android:src="@drawable/onion"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/c_lock_text" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pHeader"
+            android:id="@+id/pSecureHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="12dp"
             android:paddingStart="5dp"
-            android:text="onion:"
+            android:text="@string/ALERT_SECURE_INFO_HEADER"
             android:textAlignment="textStart"
             android:textColor="@color/green_button"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pLock"
+            app:layout_constraintStart_toEndOf="@+id/pSecureLock"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlSymmetry" />
 
         <TextView
-            android:id="@+id/pHeaderSubpart"
+            android:id="@+id/pSecureSubHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
             android:alpha="0.8"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="www.bbc.com"
+            android:text="@string/GENERAL_TODO"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/pHeader"
+            app:layout_constraintStart_toEndOf="@+id/pSecureHeader"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/pSecureDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:alpha="0.6"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/ALERT_SECURE_INFO_DETAIL"
+            android:textAlignment="textStart"
+            android:textColor="@color/c_alert_text"
+            android:textSize="14sp"
+            android:translationZ="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pSecureLock"
+            tools:ignore="SmallSp" />
+
         <LinearLayout
-            android:id="@+id/infoContainer"
+            android:id="@+id/pSecureInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@xml/ax_border_top"
             android:orientation="vertical"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription2">
+            app:layout_constraintTop_toBottomOf="@+id/pSecureDescription">
 
             <LinearLayout
+                android:id="@+id/pSecureJavascript"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -87,36 +121,36 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/pJavaScript"
+                        android:id="@+id/pSecureJavasciptHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
-                        android:text="Javascript"
+                        android:text="@string/ALERT_SECURE_INFO_JAVASCRIPT_HEADER"
                         android:textAlignment="textStart"
                         android:textColor="@color/c_alert_text"
                         android:textSize="14sp"
                         android:translationZ="2dp" />
 
                     <TextView
-                        android:id="@+id/pJavaScriptInfo"
+                        android:id="@+id/pSecureJavasciptDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:alpha="1"
+                        android:alpha="0.6"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:text="@string/SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO"
+                        android:text="@string/ALERT_SECURE_INFO_JAVASCRIPT_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="@color/c_alert_text"
                         android:textSize="12sp"
                         android:translationZ="2dp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pJSStatus"
+                    android:id="@+id/pSecureJavascriptStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -128,13 +162,78 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:alpha="0.8"
+                android:background="@color/c_security_popup_divider"
+                app:layout_constraintBottom_toTopOf="@+id/pSecureNavigation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/pInfoDonottrack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pSecureNonTrackingHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_NONTRACKING_HEADER"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/c_alert_text"
+                        android:textSize="14sp"
+                        android:translationZ="2dp" />
+
+                    <TextView
+                        android:id="@+id/pSecureNonTrackingDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_NONTRACKING_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_alert_text"
+                        android:textSize="12sp"
+                        android:translationZ="2dp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/pSecureTrackingStatus"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.2"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:theme="@style/SCBSwitchSecurity" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:alpha="1"
                 android:background="@color/c_security_popup_divider"
-                app:layout_constraintBottom_toTopOf="@+id/pNavigationContainer"
+                app:layout_constraintBottom_toTopOf="@+id/pSecureNavigation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -151,100 +250,36 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/pDonotTrack"
+                        android:id="@+id/pSecureTrackingProtectionHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
-                        android:text="Do not track"
+                        android:text="@string/ALERT_SECURE_INFO_TRACKING_HEADER"
                         android:textAlignment="textStart"
                         android:textColor="@color/c_alert_text"
                         android:textSize="14sp"
                         android:translationZ="2dp" />
 
                     <TextView
-                        android:id="@+id/pDonotTrackInfo"
+                        android:id="@+id/pSecureTrackingProtectionSubHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:alpha="1"
+                        android:alpha="0.6"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:text="@string/SETTING_PRIVACY_DONOT_TRACK_INFO"
+                        android:text="@string/ALERT_SECURE_INFO_TRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
-                        android:textSize="12sp"
-                        android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
-                </LinearLayout>
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pDTStatus"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:alpha="0.2"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:theme="@style/SCBSwitchSecurity" />
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="3dp"
-                android:alpha="1"
-                android:background="@color/c_security_popup_divider"
-                app:layout_constraintBottom_toTopOf="@+id/pNavigationContainer"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/pTrackingProtection"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="0dp"
-                        android:paddingBottom="0dp"
-                        android:text="Tracking Protection"
-                        android:textAlignment="textStart"
                         android:textColor="@color/c_alert_text"
-                        android:textSize="14sp"
-                        android:translationZ="2dp" />
-
-                    <TextView
-                        android:id="@+id/pTrackingProtectionInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/SETTING_PRIVACY_TRACKING_PROTECTION_INFO"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
                         android:textSize="12sp"
                         android:translationZ="2dp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pTPStatus"
+                    android:id="@+id/pSecureTrackingProtectionStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -257,94 +292,67 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/pDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:alpha="0.6"
-            android:visibility="gone"
-            android:paddingEnd="10dp"
-            android:text="@string/ALERT_SECURE_INFO"
-            android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text"
-            android:textSize="16sp"
-            android:translationZ="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pLock"
-            tools:ignore="SmallSp" />
-
-        <TextView
-            android:id="@+id/pDescription2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:layout_marginTop="12dp"
-            android:alpha="0.6"
-            android:paddingEnd="10dp"
-            android:text="@string/ALERT_SECURE_INFO_DETAIL"
-            android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text"
-            android:textSize="14sp"
-            android:translationZ="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription"
-            tools:ignore="SmallSp" />
-
         <View
-            android:id="@+id/pNavigationContainerTopBorder"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:alpha="1"
             android:background="@color/c_view_divier_background"
-            app:layout_constraintBottom_toTopOf="@+id/pNavigationContainer"
+            app:layout_constraintBottom_toTopOf="@+id/pSecureNavigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
-            android:id="@+id/pNavigationContainer"
+            android:id="@+id/pSecureNavigation"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:layout_marginTop="30dp"
+            android:gravity="end"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/infoContainer">
+            app:layout_constraintTop_toBottomOf="@+id/pSecureInfo">
 
             <Button
-                android:id="@+id/pTrigger"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/pSecurePrivacy"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_left"
+                android:background="@xml/ax_ripple_default_round_bottom_neutral"
                 android:padding="0dp"
-                android:text="@string/ALERT_DISMISS"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/ALERT_SECURE_INFO_SETTINGS"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textAllCaps="false"
-                android:textColor="@color/c_alert_toast_button_background"
-                android:textSize="14sp"
+                android:textColor="@color/c_white"
+                android:textSize="13.5sp"
                 android:textStyle="bold" />
 
-            <View
-                android:id="@+id/pDividerHorizontal"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/c_view_divier_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
-
             <Button
-                android:id="@+id/pNext"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/pSecureCertificate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@xml/ax_ripple_default_round_right"
+                android:background="@xml/ax_ripple_default_round_bottom_neutral"
                 android:padding="0dp"
-                android:text="@string/ALERT_SECURE_INFO_SETTINGS"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="@string/ALERT_SECURE_INFO_CERTIFICATE"
                 android:textAllCaps="false"
-                android:textColor="@color/c_button_text_v3"
-                android:textSize="14sp"
+                android:textColor="@color/c_white"
+                android:textSize="13.5sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

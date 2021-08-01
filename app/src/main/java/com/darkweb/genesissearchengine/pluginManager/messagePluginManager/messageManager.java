@@ -9,14 +9,16 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -60,33 +62,28 @@ public class messageManager
     }
 
     private void initializeDialog(int pLayout, int pGravity){
+        mDialog = new Dialog(mContext);
+        mDialog.getWindow().setGravity(pGravity);
+        mDialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
+
+        Drawable myDrawable;
+        Resources res = mContext.getResources();
         try {
-            if(mDialog !=null && mDialog.isShowing()){
-                mDialog.dismiss();
-            }
+            myDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hox_rounded_corner));
+            mDialog.getWindow().setBackgroundDrawable(myDrawable);
+        } catch (Exception ignored) {
+        }
 
-            mDialog = new Dialog(mContext);
-            mDialog.getWindow().setGravity(pGravity);
-            mDialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
+        mDialog.setCancelable(true);
+        mDialog.setContentView(pLayout);
 
-            Drawable myDrawable;
-            Resources res = mContext.getResources();
-            try {
-                myDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hox_rounded_corner));
-                mDialog.getWindow().setBackgroundDrawable(myDrawable);
-            } catch (Exception ignored) {
-            }
+        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
+        InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(10),0,helperMethod.pxFromDp(10),0);
+        mDialog.getWindow().setBackgroundDrawable(inset);
+        mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
+        mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
 
-            mDialog.setCancelable(true);
-            mDialog.setContentView(pLayout);
-
-            ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-            InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(10),0,helperMethod.pxFromDp(10),0);
-            mDialog.getWindow().setBackgroundDrawable(inset);
-            mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
-            mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-            mDialog.show();
-        }catch (Exception ignored){}
+        mDialog.show();
     }
 
     public messageManager(eventObserver.eventListener event)
@@ -100,7 +97,7 @@ public class messageManager
     {
         initializeDialog(R.layout.popup_language_support, Gravity.CENTER);
         // ((TextView) mDialog.findViewById(R.id.pLanguage)).setText((mData.get(0).toString()));
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
+        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
@@ -127,10 +124,10 @@ public class messageManager
 
     private void newIdentityCreated()
     {
+        initializeDialog(R.layout.popup_new_circuit, Gravity.BOTTOM);
         final Handler handler = new Handler();
         Runnable runnable = () -> mDialog.dismiss();
 
-        initializeDialog(R.layout.popup_new_circuit, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
 
         mDialog.setOnDismissListener(dialog -> {
@@ -144,17 +141,17 @@ public class messageManager
     private void mDownloadFailure()
     {
         mContext.runOnUiThread(() -> {
+            initializeDialog(R.layout.popup_download_failure, Gravity.BOTTOM);
             final Handler handler = new Handler();
             Runnable runnable = () -> mDialog.dismiss();
 
-            initializeDialog(R.layout.popup_download_failure, Gravity.BOTTOM);
             String mMessage;
             if(mData == null || mData.get(0) == null || (mData.get(0)).equals("0")){
                 mMessage = "\"Unknown\"";
             }else {
                 mMessage = (String) mData.get(0);
             }
-            ((TextView)mDialog.findViewById(R.id.pDescription)).setText(("Request denied Error  " + mMessage));
+            ((TextView)mDialog.findViewById(R.id.pOrbotRowDescription)).setText(("Request denied Error  " + mMessage));
             mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
 
             mDialog.setOnDismissListener(dialog -> {
@@ -169,10 +166,10 @@ public class messageManager
 
     private void popupBlocked()
     {
+        initializeDialog(R.layout.popup_block_popup, Gravity.BOTTOM);
         final Handler handler = new Handler();
         Runnable runnable = () -> mDialog.dismiss();
 
-        initializeDialog(R.layout.popup_block_popup, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pOpenPrivacy).setOnClickListener(v -> {
             mEvent.invokeObserver(null, M_OPEN_PRIVACY);
             mDialog.dismiss();
@@ -189,10 +186,10 @@ public class messageManager
 
     private void popupLoadNewTab()
     {
+        initializeDialog(R.layout.popup_load_new_tab, Gravity.BOTTOM);
         final Handler handler = new Handler();
         Runnable runnable = () -> mDialog.dismiss();
 
-        initializeDialog(R.layout.popup_load_new_tab, Gravity.BOTTOM);
         mDialog.getWindow().setDimAmount(0.3f);
         mDialog.findViewById(R.id.pRestore).setOnClickListener(v -> {
             mEvent.invokeObserver(null, M_UNDO_SESSION);
@@ -210,10 +207,10 @@ public class messageManager
 
     private void popupUndo()
     {
+        initializeDialog(R.layout.popup_undo, Gravity.BOTTOM);
         final Handler handler = new Handler();
         Runnable runnable = () -> mDialog.dismiss();
 
-        initializeDialog(R.layout.popup_undo, Gravity.BOTTOM);
         mDialog.getWindow().setDimAmount(0.3f);
         mDialog.findViewById(R.id.pUndo).setOnClickListener(v -> {
             mEvent.invokeObserver(null, M_UNDO_TAB);
@@ -232,7 +229,37 @@ public class messageManager
     private void onShowToast(int mLayout, int mDelay, String mInfo, String mTriggerText, pluginEnums.eMessageManagerCallbacks pCallback)
     {
         initializeDialog(mLayout, Gravity.BOTTOM);
-        ((TextView)mDialog.findViewById(R.id.pDescription)).setText(mInfo);
+        ((TextView)mDialog.findViewById(R.id.pOrbotRowDescription)).setText(mInfo);
+        ((Button)mDialog.findViewById(R.id.pTrigger)).setText(mTriggerText);
+        mDialog.getWindow().setDimAmount(0.3f);
+
+        final Handler handler = new Handler();
+        Runnable runnable = () -> mDialog.dismiss();
+
+        mDialog.setOnDismissListener(dialog -> {
+            handler.removeCallbacks(runnable);
+            onClearReference();
+        });
+
+        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
+            if(pCallback == null){
+                mEvent.invokeObserver(null, M_UNDO_TAB);
+                mDialog.dismiss();
+                handler.removeCallbacks(runnable);
+            }
+            else {
+                mDialog.dismiss();
+                mEvent.invokeObserver(Collections.singletonList(mContext), pCallback);
+            }
+        });
+
+        handler.postDelayed(runnable, mDelay);
+    }
+
+    private void onShowToastWithCallback(int mLayout, int mDelay, String mInfo, String mTriggerText, pluginEnums.eMessageManagerCallbacks pCallback)
+    {
+        initializeDialog(mLayout, Gravity.BOTTOM);
+        ((TextView)mDialog.findViewById(R.id.pOrbotRowDescription)).setText(mInfo);
         ((Button)mDialog.findViewById(R.id.pTrigger)).setText(mTriggerText);
         mDialog.getWindow().setDimAmount(0.3f);
 
@@ -257,10 +284,10 @@ public class messageManager
 
     private void maxTabReached()
     {
+        initializeDialog(R.layout.popup_max_tab, Gravity.BOTTOM);
         final Handler handler = new Handler();
         Runnable runnable = () -> mDialog.dismiss();
 
-        initializeDialog(R.layout.popup_max_tab, Gravity.BOTTOM);
         mDialog.getWindow().setDimAmount(0);
         mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
             mDialog.dismiss();
@@ -304,10 +331,10 @@ public class messageManager
 
     private void orbotLoading()
     {
+        initializeDialog(R.layout.popup_orbot_connecting, Gravity.BOTTOM);
         final Handler handler = new Handler();
         Runnable runnable = () -> mDialog.dismiss();
 
-        initializeDialog(R.layout.popup_orbot_connecting, Gravity.BOTTOM);
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             mDialog.dismiss();
             handler.removeCallbacks(runnable);
@@ -323,22 +350,6 @@ public class messageManager
 
     }
 
-    private void dataClearedSuccessfully()
-    {
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        initializeDialog(R.layout.popup_data_cleared, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 1500);
-    }
-
     private void applicationCrashed()
     {
         initializeDialog(R.layout.application_crash, Gravity.BOTTOM);
@@ -346,38 +357,97 @@ public class messageManager
         mDialog.setOnDismissListener(dialog -> onClearReference());
     }
 
+    private void openSecurityInfo()
+    {
+        String mInfo = mData.get(0).toString();
+        initializeDialog(R.layout.certificate_info, Gravity.TOP);
+        InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0,0,0,-1);
+        mDialog.getWindow().setBackgroundDrawable(inset);
+        mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+
+        ((TextView)mDialog.findViewById(R.id.pCertificateDesciption)).setText(Html.fromHtml((String)mData.get(0)));
+        mDialog.findViewById(R.id.pCertificateRootBackground).animate().setStartDelay(100).setDuration(400).alpha(1);
+
+        if(mInfo.equals("Onion Secured Connection")){
+            ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
+
+            ViewGroup.LayoutParams params = mCertificateScrollView.getLayoutParams();
+            params.height = helperMethod.pxFromDp(60);
+            mCertificateScrollView.requestLayout();
+            mCertificateScrollView.requestDisallowInterceptTouchEvent(false);
+        }else {
+            mDialog.findViewById(R.id.pCertificateRootBlocker).setVisibility(View.GONE);
+        }
+
+
+        mDialog.findViewById(R.id.pCertificateDesciption).setOnClickListener(v -> {
+            mDialog.findViewById(R.id.pCertificateRootBackground).animate().setDuration(150).alpha(0);
+            mDialog.dismiss();
+        });
+
+        mDialog.findViewById(R.id.pCertificateRootBackground).setOnClickListener(v -> {
+            mDialog.dismiss();
+        });
+
+        mDialog.setOnDismissListener(dialogInterface -> {
+            mDialog.findViewById(R.id.pCertificateRootBlocker).animate().setDuration(200).alpha(0);
+        });
+    }
+
     private void openSecureConnectionPopup()
     {
         initializeDialog(R.layout.secure_connection_popup, Gravity.TOP);
-        Window window = mDialog.getWindow();
-        window.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-
-        ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, 0,0,0,0);
+        InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0,0,0,-1);
         mDialog.getWindow().setBackgroundDrawable(inset);
-        mDialog.setCancelable(true);
-        mDialog.setCanceledOnTouchOutside(true);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> mEvent.invokeObserver(null, M_SECURE_CONNECTION));
+        mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+
+
+        mDialog.findViewById(R.id.pSecureRootBlocker).animate().setStartDelay(100).setDuration(400).alpha(1);
+        ((TextView) mDialog.findViewById(R.id.pSecureSubHeader)).setText(helperMethod.getDomainName(mData.get(0).toString().replace("genesishiddentechnologies.com", "genesis.onion")));
+        mDialog.setOnDismissListener(dialog -> onClearReference());
 
         if((boolean) mData.get(1)){
-            ((SwitchMaterial) mDialog.findViewById(R.id.pJSStatus)).setChecked(true);
+            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureJavascriptStatus)).setChecked(true);
         }else {
-            ((SwitchMaterial) mDialog.findViewById(R.id.pJSStatus)).setChecked(false);
+            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureJavascriptStatus)).setChecked(false);
         }
         if((boolean) mData.get(2)){
-            ((SwitchMaterial) mDialog.findViewById(R.id.pDTStatus)).setChecked(true);
+            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingStatus)).setChecked(true);
         }else {
-            ((SwitchMaterial) mDialog.findViewById(R.id.pDTStatus)).setChecked(false);
+            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingStatus)).setChecked(false);
         }
         if((int) mData.get(3) != ContentBlocking.AntiTracking.NONE){
-            ((SwitchMaterial) mDialog.findViewById(R.id.pTPStatus)).setChecked(true);
+            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingProtectionStatus)).setChecked(true);
         }else {
-            ((SwitchMaterial) mDialog.findViewById(R.id.pTPStatus)).setChecked(false);
+            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingProtectionStatus)).setChecked(false);
         }
 
-        ((TextView) mDialog.findViewById(R.id.pHeaderSubpart)).setText(helperMethod.getDomainName(mData.get(0).toString().replace("genesishiddentechnologies.com", "genesis.onion")));
-        mDialog.setOnDismissListener(dialog -> onClearReference());
+        mDialog.findViewById(R.id.pSecureRootBlocker).setOnClickListener(v -> {
+            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(150).alpha(0);
+            mDialog.dismiss();
+        });
+
+        mDialog.findViewById(R.id.pSecureCertificate).setOnClickListener(v -> {
+            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(150).alpha(0);
+            mDialog.dismiss();
+            new Handler().postDelayed(() ->
+            {
+                mEvent.invokeObserver(null, M_SECURITY_INFO);
+            }, 500);
+        });
+
+        mDialog.findViewById(R.id.pSecurePrivacy).setOnClickListener(v -> {
+            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(150).alpha(0);
+            helperMethod.onDelayHandler(mContext, 250, () -> {
+                mEvent.invokeObserver(null, M_SECURE_CONNECTION);
+                mDialog.dismiss();
+                return null;
+            });
+        });
+
+        mDialog.setOnDismissListener(dialogInterface -> {
+            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(200).alpha(0);
+        });
     }
 
     private void bookmark()
@@ -517,7 +587,7 @@ public class messageManager
                 murl = "https://" + murl;
             }
 
-            ((TextView) mDialog.findViewById(R.id.pDescription)).setText(mData.get(0).toString());
+            ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText(mData.get(0).toString());
             ((TextView) mDialog.findViewById(R.id.pDescriptionLong)).setText(murl);
             mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
             mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
@@ -536,6 +606,7 @@ public class messageManager
     private void rateApp()
     {
         initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
+        mDialog.setCancelable(false);
         mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
             RatingBar mRatingBar = mDialog.findViewById(R.id.pRating);
@@ -572,7 +643,7 @@ public class messageManager
         }
 
         initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER);
-        ((TextView) mDialog.findViewById(R.id.pDescription)).setText((title + mData.get(0).toString()));
+        ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText((title + mData.get(0).toString()));
         mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
         mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
@@ -607,7 +678,7 @@ public class messageManager
         String title = mData.get(2).toString();
 
         initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
-        ((TextView) mDialog.findViewById(R.id.pDescription)).setText((title + mData.get(0)));
+        ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText((title + mData.get(0)));
         mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
         mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
@@ -662,7 +733,7 @@ public class messageManager
         initializeDialog(R.layout.popup_download_full, Gravity.CENTER);
         mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(data_local)), enums.etype.fetch_favicon);
 
-        ((TextView) mDialog.findViewById(R.id.pDescription)).setText((mDescription));
+        ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText((mDescription));
         ((TextView) mDialog.findViewById(R.id.pDescriptionShort)).setText((mDescriptionShort));
         mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
             if(mData!=null){
@@ -811,11 +882,6 @@ public class messageManager
                     onPanic();
                     break;
 
-                case M_DATA_CLEARED:
-                    /*VERIFIED*/
-                    dataClearedSuccessfully();
-                    break;
-
                 case M_APPLICATION_CRASH:
                     /*VERIFIED*/
                     applicationCrashed();
@@ -824,6 +890,11 @@ public class messageManager
                 case M_SECURE_CONNECTION:
                     /*VERIFIED*/
                     openSecureConnectionPopup();
+                    break;
+
+                case M_SECURITY_INFO:
+                    /*VERIFIED*/
+                    openSecurityInfo();
                     break;
 
                 case M_DOWNLOAD_SINGLE:
@@ -871,6 +942,11 @@ public class messageManager
                     popupUndo();
                     break;
 
+                case M_DATA_CLEARED:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_data_cleared, 2500, mContext.getString(R.string.ALERT_DISMISS), mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
                 case M_DELETE_BOOKMARK:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, 2000, mContext.getString(R.string.HOME_MENU__BOOKMARK_REMOVED), mContext.getString(R.string.ALERT_DISMISS), null);
@@ -879,6 +955,11 @@ public class messageManager
                 case M_UPDATE_BOOKMARK:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, 2000, mContext.getString(R.string.HOME_MENU__BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
+                case M_IMAGE_UPDATE:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic, 4000, mContext.getString(R.string.ALERT_IMAGE_STATUS), mContext.getString(R.string.ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
                     break;
             }
         }

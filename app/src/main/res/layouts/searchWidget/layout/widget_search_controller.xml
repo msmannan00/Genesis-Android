@@ -76,8 +76,8 @@
             android:scaleX="1.1"
             android:scaleY="1.1"
             android:src="@xml/ic_baseline_keyboard_voice"
-            android:tint="@color/c_navigation_tint"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:tint="@color/c_navigation_tint" />
 
     </LinearLayout>
 

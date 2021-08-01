@@ -25,11 +25,12 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:debuggable="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <activity
-            android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings.bookmarkSettingController"
+            android:name="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
 
@@ -117,13 +118,6 @@
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.searchEngineManager.settingSearchController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.darkweb.genesissearchengine.appManager.landingManager.landingController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:label="@string/SETTING_HEADER"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.darkweb.genesissearchengine.appManager.settingManager.trackingManager.settingTrackingController"
@@ -133,7 +127,7 @@
             android:name="com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController"
             android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.shortcuts"
@@ -206,7 +200,7 @@
         <!--  -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5074525529134731~8620681036" /> <!-- Development Build -->
+            android:value="ca-app-pub-5074525529134731~4717329156" /> <!-- Development Build -->
         <!--
  <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -238,19 +232,7 @@
                 <action android:name="org.torproject.android.intent.action.START" />
             </intent-filter>
         </receiver>
-        <!--
- Permissions File Provider Live
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.darkweb.genesissearchengine.production.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
-        -->
-        <!-- Permissions File Provider Dev -->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.darkweb.genesissearchengine.production.provider"

@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.homeManager.geckoManager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -8,24 +9,23 @@ import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.darkweb.genesissearchengine.constants.*;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.pluginManager.pluginController;
 
 import java.io.File;
-import java.util.Collections;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_REPORT_URL;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_APPLICATION_CRASH;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.COOKIES;
@@ -35,8 +35,10 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.NETWORK_CACHE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
+
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
+import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.WebResponse;
 
@@ -45,7 +47,11 @@ public class geckoClients
     /*Gecko Variables*/
 
     private geckoSession mSession = null;
-    private GeckoRuntime mRuntime = null;
+    private geckoSession mSession1 = null;
+    private geckoSession mSession2 = null;
+    int mCounter = 0;
+
+    private static GeckoRuntime mRuntime = null;
     private BrowserIconManager mIconManager;
     private eventObserver.eventListener event;
 
@@ -66,6 +72,7 @@ public class geckoClients
             if(geckoView.getSession()!=null){
                 geckoView.releaseSession();
             }
+
             mSession = new geckoSession(new geckoViewClientCallback(),mSessionID,context, geckoView);
             mSession.open(mRuntime);
             mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
@@ -77,6 +84,7 @@ public class geckoClients
         mSession.onSetInitializeFromStartup();
         onUpdateFont();
     }
+
 
     public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         boolean mStatus = mSession.onValidateInitializeFromStartup();
@@ -138,25 +146,66 @@ public class geckoClients
         return mSession.getUserAgentMode();
     }
 
+
+    public String getAssetsCacheFile(Context context, String fileName) {
+        File cacheFile = new File(context.getCacheDir(), fileName);
+        try {
+            InputStream inputStream = context.getAssets().open(fileName);
+            try {
+                FileOutputStream outputStream = new FileOutputStream(cacheFile);
+                try {
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while ((len = inputStream.read(buf)) > 0) {
+                        outputStream.write(buf, 0, len);
+                    }
+                } finally {
+                    outputStream.close();
+                }
+            } finally {
+                inputStream.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cacheFile.getAbsolutePath();
+    }
+
+
+    static boolean mCreated = false;
     @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context){
         if(mRuntime==null){
-            mRuntime = GeckoRuntime.getDefault(context.getApplicationContext());
+            GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
+            if(status.sShowImages == 2){
+                mSettings.configFilePath(getAssetsCacheFile(context, "config/geckoview-config-noimage.yaml"));
+            }else {
+                mSettings.configFilePath(getAssetsCacheFile(context, "config/geckoview-config.yaml"));
+            }
+            mSettings.build();
+
+            mRuntime = GeckoRuntime.create(context, mSettings.build());
+            mCreated = true;
+            onClearAll();
             mRuntime.getSettings().setAboutConfigEnabled(true);
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
             mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
             mRuntime.getSettings().setForceUserScalableEnabled(status.sSettingEnableZoom);
             mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
             mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
-            mIconManager = new BrowserIconManager();
 
             if(status.sSettingTrackingProtection == 1){
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.DEFAULT);
             }else if(status.sSettingTrackingProtection == 2){
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.STRICT);
             }
+
         }
+
+        mIconManager = new BrowserIconManager();
     }
+
+
 
     public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext){
         pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
@@ -174,6 +223,14 @@ public class geckoClients
 
     @SuppressLint("WrongConstant")
     public void updateSetting(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
+        GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
+        if(status.sShowImages == 2){
+            mSettings.configFilePath(getAssetsCacheFile(pcontext, "config/geckoview-config-noimage.yaml"));
+        }else {
+            mSettings.configFilePath(getAssetsCacheFile(pcontext, "config/geckoview-config.yaml"));
+        }
+        mSettings.build();
+
         mRuntime.getSettings().setRemoteDebuggingEnabled(false);
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
         mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
@@ -287,6 +344,15 @@ public class geckoClients
        return mSession.isLoaded();
     }
 
+    public void onClearAll(){
+        mRuntime.getStorageController().clearData(NETWORK_CACHE);
+        mRuntime.getStorageController().clearData(IMAGE_CACHE);
+        mRuntime.getStorageController().clearData(DOM_STORAGES);
+        mRuntime.getStorageController().clearData(COOKIES);
+        mRuntime.getStorageController().clearData(SITE_SETTINGS);
+        mRuntime.getStorageController().clearData(SITE_DATA);
+    }
+
     public void onClearSiteData(){
         mRuntime.getStorageController().clearData(SITE_SETTINGS);
         mRuntime.getStorageController().clearData(SITE_DATA);
@@ -319,6 +385,10 @@ public class geckoClients
                 event.invokeObserver(null, enums.etype.back_list_empty);
             }
         }
+    }
+
+    public String getSecurityInfo(){
+        return mSession.getSecurityInfo();
     }
 
     public boolean wasPreviousErrorPage(){

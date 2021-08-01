@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/application_crash.xml" value="0.33" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/certificate_info.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_block_popup.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_bridge_mail.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_clear_bookmark.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_clear_history.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_create_bookmark.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_data_cleared.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_load_new_tab.xml" value="0.33" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_max_tab.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_new_circuit.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_not_supported.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_orbot_connecting.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_panic.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_rate_failure.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_rate_us.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_toast_generic.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_undo.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_update_bridges.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_url_longpress.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/setting/layout/setting.xml" value="0.33" />
+        <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/setting/layout/setting_advance_view.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
@@ -25,7 +53,7 @@
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="13">
+        <list size="14">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="1" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
           <item index="2" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
@@ -39,6 +67,7 @@
           <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
           <item index="11" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
           <item index="12" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
+          <item index="13" class="java.lang.String" itemvalue="lombok.NonNull" />
         </list>
       </value>
     </option>

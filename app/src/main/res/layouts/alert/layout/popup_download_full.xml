@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pMainLayout"
+        android:id="@+id/pSecureRootLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@xml/ax_round_corner"
@@ -41,7 +41,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/pDescription"
+            android:id="@+id/pOrbotRowDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
@@ -77,7 +77,7 @@
             android:translationY="-1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView2"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription"
+            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription"
             tools:ignore="SmallSp" />
 
         <View
@@ -145,7 +145,7 @@
                 android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
                 android:id="@+id/pOption2"
@@ -192,7 +192,7 @@
                 android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
                 android:id="@+id/pOption3"
@@ -239,7 +239,7 @@
                 android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
                 android:id="@+id/pOption4"
@@ -288,7 +288,7 @@
                 android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
                 android:id="@+id/pOption5"
@@ -337,7 +337,7 @@
                 android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
                 android:id="@+id/pOption6"
@@ -386,7 +386,7 @@
                 android:background="@color/c_view_divier_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
                 android:id="@+id/pOption7"

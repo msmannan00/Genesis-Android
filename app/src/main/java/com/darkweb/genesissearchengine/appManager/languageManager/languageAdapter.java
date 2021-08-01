@@ -72,8 +72,8 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpVi
 
         void bindListView(languageDataModel model) {
             boolean mIsDefaultSupported = true;
-            mHeader = itemView.findViewById(R.id.pHeader);
-            mDescription = itemView.findViewById(R.id.pDescription);
+            mHeader = itemView.findViewById(R.id.pOrbotRowHeader);
+            mDescription = itemView.findViewById(R.id.pOrbotRowDescription);
             mContainer = itemView.findViewById(R.id.pContainer);
             mMarker = itemView.findViewById(R.id.pMarker);
 

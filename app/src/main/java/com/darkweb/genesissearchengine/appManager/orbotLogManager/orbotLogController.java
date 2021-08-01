@@ -27,38 +27,38 @@ import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-
 import org.torproject.android.service.wrapper.logRowModel;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
+import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_FLOATING_BUTTON;
+import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_LOGS;
+import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_RECYCLE_VIEW;
 import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCommands.M_GET_LIST;
 import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCommands.M_GET_LIST_SIZE;
 import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogViewCommands.M_FLOAT_BUTTON_UPDATE;
+import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogViewCommands.M_SCROLL_BOTTOM;
+import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogViewCommands.M_SCROLL_TOP;
+import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogViewCommands.M_SCROLL_TO_POSITION;
+import static com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogEnums.eOrbotLogViewCommands.M_SHOW_FLOATING_TOOLBAR;
 
 
-public class orbotLogController extends AppCompatActivity {
+public class orbotLogController extends AppCompatActivity implements ViewTreeObserver.OnScrollChangedListener, ViewTreeObserver.OnGlobalLayoutListener {
 
     /* PRIVATE VARIABLES */
 
     private orbotLogModel mOrbotModel;
     private orbotLogViewController mOrbotLogViewController;
     private orbotLogAdapter mOrbotAdapter;
-    private boolean mActivityClosed = false;
-    private int mLogCounter = 1;
-    private boolean mIsRecycleviewInteracting = false;
 
     /* UI VARIABLES */
 
-    private TextView mLogs;
-    private RecyclerView mLogRecycleView;
-    private NestedScrollView mNestedScrollView;
-    private FloatingActionButton mFloatingScroller;
+    private TextView mOrbotLogLoadingText;
+    private RecyclerView mOrbotLogRecycleView;
+    private NestedScrollView mOrbotLogNestedScroll;
+    private FloatingActionButton mOrbotLogFloatingToolbar;
+    private boolean mIsRecycleviewInteracting = false;
 
     /* INITIALIZATIONS */
 
@@ -66,17 +66,22 @@ public class orbotLogController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        overridePendingTransition(R.anim.push_anim_out_reverse, R.anim.push_anim_in_reverse);
         activityContextManager.getInstance().setOrbotLogController(this);
         activityContextManager.getInstance().onStack(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orbot_log_view);
+        initializeStartupAnimation();
 
         initializeViews();
         initializeLogs();
         initListener();
-        updateLogs();
+    }
+
+    public void initializeStartupAnimation(){
+        if(activityContextManager.getInstance().getHomeController().isSplashScreenLoading()){
+            overridePendingTransition(R.anim.translate_fade_left, R.anim.translate_fade_right);
+        }
     }
 
     @Override
@@ -87,242 +92,208 @@ public class orbotLogController extends AppCompatActivity {
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
 
-        mNestedScrollView.stopNestedScroll();
-
-        helperMethod.onDelayHandler(orbotLogController.this, 150, () -> {
-            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE || newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                if(!orbotLogStatus.sUIInteracted && ((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE)>1)){
-                    if(mNestedScrollView.canScrollVertically(enums.ScrollDirection.VERTICAL)){
-                        mNestedScrollView.stopNestedScroll();
-                        onScrollBottom();
-                        mNestedScrollView.stopNestedScroll();
-                        orbotLogStatus.sScrollPosition = -1;
-                    }
-                }else {
-                    mNestedScrollView.stopNestedScroll();
-                    mNestedScrollView.scrollTo(0,0);
-                    mNestedScrollView.smoothScrollTo(0,0);
-                    mNestedScrollView.stopNestedScroll();
-                    orbotLogStatus.sScrollPosition = 0;
-                }
-            }
-
-            return null;
-        });
+        mOrbotLogNestedScroll.stopNestedScroll();
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE || newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            initScrollPositionOnConfigurationChanged();
+        }
 
         super.onConfigurationChanged(newConfig);
     }
 
-    private void initializeViews() {
-        mLogRecycleView = findViewById(R.id.pLogRecycleView);
-        mLogs = findViewById(R.id.pLogs);
-        mNestedScrollView = findViewById(R.id.pNestedScrollView);
-        mFloatingScroller = findViewById(R.id.pFloatingScroller);
+    private void initScrollPositionOnConfigurationChanged(){
+        helperMethod.onDelayHandler(orbotLogController.this, 150, () -> {
+                if(!orbotLogStatus.sUIInteracted && ((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE)>1)){
+                    if(mOrbotLogNestedScroll.canScrollVertically(enums.ScrollDirection.VERTICAL)){
+                        mOrbotLogViewController.onTrigger(M_SCROLL_BOTTOM);
+                        orbotLogStatus.sScrollPosition = -1;
+                        onScrollBottom();
+                    }
+                }else {
+                    mOrbotLogViewController.onTrigger(M_SCROLL_TOP);
+                    orbotLogStatus.sScrollPosition = 0;
+                }
+                return null;
+        });
+    }
 
-        mOrbotLogViewController = new orbotLogViewController(this, new orbotLogViewCallback() , mLogs, mLogRecycleView, mNestedScrollView, mFloatingScroller);
-        mOrbotModel = new orbotLogModel();
+    private void initializeViews() {
+        mOrbotLogRecycleView = findViewById(R.id.pOrbotLogRecycleView);
+        mOrbotLogLoadingText = findViewById(R.id.pOrbotLogLoadingText);
+        mOrbotLogNestedScroll = findViewById(R.id.pOrbotLogNestedScroll);
+        mOrbotLogFloatingToolbar = findViewById(R.id.pOrbotLogFloatingToolbar);
+
+        mOrbotLogViewController = new orbotLogViewController(this, new orbotLogViewCallback() , mOrbotLogLoadingText, mOrbotLogRecycleView, mOrbotLogNestedScroll, mOrbotLogFloatingToolbar);
+        mOrbotModel = new orbotLogModel(this, new orbotModelCallback());
     }
 
     private void initializeLogs(){
-        mLogCounter = 0;
-        mOrbotModel.setList(orbotLocalConstants.mTorLogsHistory);
         if(status.sLogThemeStyleAdvanced){
-            mLogCounter = (int)mOrbotModel.onTrigger(M_GET_LIST_SIZE);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(orbotLogController.this);
             orbotLogAdapter adapter = new orbotLogAdapter(((ArrayList)mOrbotModel.onTrigger(M_GET_LIST)),new orbotLogController.orbotModelCallback());
             mOrbotAdapter = adapter;
-            layoutManager.setReverseLayout(true);
 
-            mLogRecycleView.setAdapter(adapter);
-            Objects.requireNonNull(mLogRecycleView.getItemAnimator()).setAddDuration(350);
-
-            mLogRecycleView.setNestedScrollingEnabled(false);
-            mLogRecycleView.setLayoutManager(new LinearLayoutManager(orbotLogController.this));
-
+            Objects.requireNonNull(mOrbotLogRecycleView.getItemAnimator()).setAddDuration(350);
+            mOrbotLogRecycleView.setAdapter(adapter);
+            mOrbotLogRecycleView.setNestedScrollingEnabled(false);
+            mOrbotLogRecycleView.setLayoutManager(new LinearLayoutManager(orbotLogController.this));
             mOrbotAdapter.notifyDataSetChanged();
 
         }else {
             logToString();
         }
         mOrbotLogViewController.onTrigger(orbotLogEnums.eOrbotLogViewCommands.M_INIT_VIEWS, Collections.singletonList(status.sLogThemeStyleAdvanced));
-        mLogRecycleView.smoothScrollToPosition((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE));
+        mOrbotLogRecycleView.smoothScrollToPosition((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE));
     }
 
 
     /* LISTENERS */
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onGlobalLayout() {
+        if(orbotLogStatus.sOrientation==-1){
+            orbotLogStatus.sOrientation = getResources().getConfiguration().orientation;
+        }
+
+        if(orbotLogStatus.sOrientation != getResources().getConfiguration().orientation && orbotLogStatus.sScrollPosition!=-1 && orbotLogStatus.sScrollPosition!=0){
+            orbotLogStatus.sScrollPosition = 0;
+            orbotLogStatus.sOrientation = getResources().getConfiguration().orientation;
+
+            mOrbotLogNestedScroll.stopNestedScroll();
+            mOrbotLogViewController.onTrigger(M_SCROLL_TO_POSITION, Collections.singletonList(orbotLogStatus.sScrollPosition));
+        }else {
+            if(orbotLogStatus.sScrollPosition!=-1 && orbotLogStatus.sUIInteracted){
+                mOrbotLogViewController.onTrigger(M_SCROLL_TO_POSITION, Collections.singletonList(orbotLogStatus.sScrollPosition));
+            }else if(mOrbotLogNestedScroll.canScrollVertically(enums.ScrollDirection.VERTICAL)){
+                if(orbotLogStatus.sScrollPosition==-1){
+                    onScrollBottom();
+                }else {
+                    mOrbotLogViewController.onTrigger(M_SCROLL_TO_POSITION, Collections.singletonList((int)(mOrbotModel.onTrigger(M_GET_LIST_SIZE))*100));
+                }
+            }
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            mOrbotLogNestedScroll.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+                orbotLogStatus.sScrollPosition = scrollY;
+                if(!mOrbotLogNestedScroll.canScrollVertically(1)){
+                    orbotLogStatus.sScrollPosition = -1;
+                }
+            });
+        }
+
+        Log.i("SUPERFUCK1","1");
+        mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
+        mOrbotLogRecycleView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        orbotLogStatus.sOrientation = getResources().getConfiguration().orientation;
+    }
+
+    @Override
+    public void onScrollChanged() {
+        if (mOrbotLogNestedScroll.getChildAt(0).getBottom() <= (mOrbotLogNestedScroll.getHeight() + mOrbotLogNestedScroll.getScrollY())) {
+            Log.i("SUPERFUCK1","2");
+            mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
+            if(!mIsRecycleviewInteracting){
+                Log.i("asdjaslkdjlasd","asd");
+                orbotLogStatus.sUIInteracted = false;
+            }
+        }
+       else  if(mOrbotLogNestedScroll.getScrollY() == 0){
+            Log.i("SUPERFUCK1111","2");
+            helperMethod.onDelayHandler(orbotLogController.this, 300, () -> {
+                if(mOrbotLogNestedScroll.getScrollY() == 0){
+                    mOrbotLogViewController.onTrigger(M_SHOW_FLOATING_TOOLBAR);
+                }
+                return null;
+            });
+        }
+    }
+
+
+    public void onScrollStateChange(RecyclerView recyclerView, int newState){
+        if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
+            mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private void initListener(){
 
-        mLogRecycleView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @SuppressLint("NewApi") @SuppressWarnings("deprecation")
-            @Override
-            public void onGlobalLayout() {
+        mOrbotLogRecycleView.getViewTreeObserver().addOnGlobalLayoutListener(this);
 
-                if(orbotLogStatus.sOrientation==-1){
-                    orbotLogStatus.sOrientation = getResources().getConfiguration().orientation;
-                }
+        mOrbotLogNestedScroll.getViewTreeObserver().addOnScrollChangedListener(this);
 
-                if(orbotLogStatus.sOrientation != getResources().getConfiguration().orientation && orbotLogStatus.sScrollPosition!=-1 && orbotLogStatus.sScrollPosition!=0){
-                    mNestedScrollView.stopNestedScroll();
-                    orbotLogStatus.sScrollPosition = 0;
-                    mNestedScrollView.scrollTo(0, orbotLogStatus.sScrollPosition);
-                    orbotLogStatus.sOrientation = getResources().getConfiguration().orientation;
-                }else {
-                    if(orbotLogStatus.sScrollPosition!=-1 && orbotLogStatus.sUIInteracted){
-                        mNestedScrollView.scrollTo(0, orbotLogStatus.sScrollPosition);
-                    }else if(mNestedScrollView.canScrollVertically(enums.ScrollDirection.VERTICAL)){
-                        onScrollBottom();
-                    }
-                }
-
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    mNestedScrollView.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                        orbotLogStatus.sScrollPosition = scrollY;
-                    });
-                }
-
-                mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
-                mLogRecycleView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                orbotLogStatus.sOrientation = getResources().getConfiguration().orientation;
-            }
-        });
-
-        mLogRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mOrbotLogRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
-                    mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
-                }
+                onScrollStateChange(recyclerView, newState);
             }
         });
 
-        mLogRecycleView.setOnTouchListener((v, event) -> onTouch(event));
+        mOrbotLogRecycleView.setOnTouchListener((v, event) -> onTouch(event));
 
-        mNestedScrollView.setOnTouchListener((v, event) -> onTouch(event));
+        mOrbotLogNestedScroll.setOnTouchListener((v, event) -> onTouch(event));
 
-        mLogRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
-                    mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
-                }
-            }
-        });
-
-        mNestedScrollView.getViewTreeObserver() .addOnScrollChangedListener(() -> {
-
-            if (mNestedScrollView.getChildAt(0).getBottom() <= (mNestedScrollView.getHeight() + mNestedScrollView.getScrollY())) {
-                mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
-                if(!mIsRecycleviewInteracting){
-                    orbotLogStatus.sUIInteracted = false;
-                }
-            }
-            if(mNestedScrollView.getScrollY() == 0){
-                mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
-            }
-        });
     }
+
+    /* Helper Methods */
 
     public boolean onTouch(MotionEvent event){
         if(event.getAction() == MotionEvent.ACTION_UP){
             mIsRecycleviewInteracting = false;
 
-            if(mNestedScrollView.canScrollVertically(enums.ScrollDirection.VERTICAL)){
+            if(mOrbotLogNestedScroll.canScrollVertically(enums.ScrollDirection.VERTICAL)){
+                Log.i("asdjaslkdjlasd","asd3");
                 orbotLogStatus.sUIInteracted = true;
             }
-        }else if(event.getAction() == MotionEvent.ACTION_DOWN){
+        }else if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE){
             mIsRecycleviewInteracting = true;
         }
 
+        Log.i("SUPERFUCK1","5");
         mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
 
         return false;
     }
 
+
     private void logToString(){
         if((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE)>1){
             for(int mCounter=0;mCounter<(int)mOrbotModel.onTrigger(M_GET_LIST_SIZE);mCounter++){
                 mOrbotLogViewController.onTrigger(orbotLogEnums.eOrbotLogViewCommands.M_UPDATE_LOGS, Collections.singletonList(((ArrayList<logRowModel>)mOrbotModel.onTrigger(M_GET_LIST)).get(mCounter).getLog()));
-                mLogCounter+=1;
             }
         }
     }
 
-    private void updateLogs(){
-        new Thread(){
-            public void run(){
-                try {
-                sleep(1000);
-                while (!mActivityClosed){
-                        if(status.sLogThemeStyleAdvanced){
-                            sleep(800);
-                        }else {
-                            sleep(100);
-                        }
-
-                        if(mLogCounter>0){
-                            runOnUiThread(() -> {
-                                if(orbotLocalConstants.mTorLogsHistory.size()>mLogCounter){
-                                    ((ArrayList<logRowModel>)mOrbotModel.onTrigger(M_GET_LIST)).add(orbotLocalConstants.mTorLogsHistory.get(mLogCounter));
-                                    if(!status.sLogThemeStyleAdvanced){
-                                        mOrbotLogViewController.onTrigger(orbotLogEnums.eOrbotLogViewCommands.M_UPDATE_LOGS, Collections.singletonList(((ArrayList<logRowModel>)mOrbotModel.onTrigger(M_GET_LIST)).get(mLogCounter).getLog()));
-                                    }else {
-                                        if(mOrbotAdapter!=null){
-                                            mOrbotAdapter.notifyItemInserted((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE)-1);
-                                        }
-                                    }
-
-                                    if(!orbotLogStatus.sUIInteracted){
-                                        helperMethod.onDelayHandler(orbotLogController.this, 150, () -> {
-                                            Log.i("SUPFUCK4", orbotLogStatus.sUIInteracted + "");
-                                            if(!orbotLogStatus.sUIInteracted){
-                                                onScrollBottomAnimated(null);
-                                            }
-                                            return null;
-                                        });
-                                    }
-                                    mLogCounter+=1;
-                                }
-                            });
-                        }
-                    }
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
     private void onScrollBottom() {
-        mNestedScrollView.scrollTo(0,helperMethod.pxFromDp((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE)*100));
+        mOrbotLogNestedScroll.scrollTo(0,helperMethod.pxFromDp((int)mOrbotModel.onTrigger(M_GET_LIST_SIZE)*100));
     }
 
     /* View Callback */
 
-    public void onScrollBottomAnimated(View view) {
-        mNestedScrollView.fullScroll(View.FOCUS_DOWN);
-        orbotLogStatus.sUIInteracted = false;
-        Log.i("SUPFUCK5", orbotLogStatus.sUIInteracted + "");
-
-        if(view!=null){
-            mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
+    public void onUITriggered(View view){
+        if(view.getId() == R.id.pOrbotLogFloatingToolbar){
+            if(!orbotLogStatus.sUIInteracted || view!=null){
+                onScrollDownByFloatingToolabar();
+            }
+            if(view!=null){
+                mOrbotLogViewController.onTrigger(M_FLOAT_BUTTON_UPDATE);
+            }
+        }else if(view.getId() == R.id.pOrbotLogSettings){
+            helperMethod.openActivity(settingLogController.class, constants.CONST_LIST_HISTORY, this,true);
         }
     }
 
-    public void onOpenInfo(View view) {
-        helperMethod.openActivity(settingLogController.class, constants.CONST_LIST_HISTORY, this,true);
+    public void onScrollDownByFloatingToolabar(){
+        if(!mIsRecycleviewInteracting){
+            orbotLogStatus.sUIInteracted = false;
+            mOrbotLogNestedScroll.fullScroll(View.FOCUS_DOWN);
+        }
     }
 
-    public void onClose(View view){
+    public void onCloseTriggered(View view){
         finish();
         activityContextManager.getInstance().onRemoveStack(this);
-        overridePendingTransition(R.anim.push_anim_in, R.anim.push_anim_out);
-        mActivityClosed = true;
+        initializeStartupAnimation();
     }
 
     /* View Callback */
@@ -330,7 +301,7 @@ public class orbotLogController extends AppCompatActivity {
     private class orbotLogViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
+        public Object invokeObserver(List<Object> pData, Object pType)
         {
             return null;
         }
@@ -340,8 +311,21 @@ public class orbotLogController extends AppCompatActivity {
 
     public class orbotModelCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
+        public Object invokeObserver(List<Object> pData, Object pType)
         {
+            if(pType.equals(M_UPDATE_FLOATING_BUTTON)){
+                if(!orbotLogStatus.sUIInteracted){
+                    onScrollDownByFloatingToolabar();
+                }
+            }
+            else if(pType.equals(M_UPDATE_LOGS)){
+                mOrbotLogViewController.onTrigger(orbotLogEnums.eOrbotLogViewCommands.M_UPDATE_LOGS, Collections.singletonList(((ArrayList<logRowModel>)mOrbotModel.onTrigger(M_GET_LIST)).get((int)pData.get(0)).getLog()));
+            }
+            else if(pType.equals(M_UPDATE_RECYCLE_VIEW)){
+                if(mOrbotAdapter!=null){
+                    mOrbotAdapter.notifyItemInserted((int)pData.get(0));
+                }
+            }
             return null;
         }
     }
@@ -359,7 +343,7 @@ public class orbotLogController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        onClose(null);
+        onCloseTriggered(null);
     }
 
     @Override
@@ -367,7 +351,6 @@ public class orbotLogController extends AppCompatActivity {
         super.onDestroy();
         activityContextManager.getInstance().onRemoveStack(this);
         activityContextManager.getInstance().setOrbotLogController(null);
-        mActivityClosed = true;
     }
 
     /* External Calls */

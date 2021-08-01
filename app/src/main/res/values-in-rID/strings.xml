@@ -1,5 +1,24 @@
 <resources>
 
+	<!-- Application Strings -->
+	<string name="GENERAL_SEARCH_HINT" translatable="true">zoek iets of typ een weblink</string>
+	<string name="GENERAL_FIND_HINT" translatable="true">vind op pagina</string>
+	<string name="GENERAL_SEARCH_ENGINE" translatable="true">zoekmachine</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! er is iets misgegaan</string>
+	<string name="GENERAL_TODO" translatable="true">todo</string>
+	<string name="GENERAL_LOADING" translatable="true">digitale vrijheid</string>
+	<string name="GENERAL_RELOAD" translatable="true">herladen</string>
+	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">u wordt geconfronteerd met een van de volgende problemen. webpagina of website werkt mogelijk niet. uw internetverbinding is mogelijk slecht. misschien gebruikt u een proxy. website wordt mogelijk geblokkeerd door firewall</string>
+	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC, Israël Slaat Weer Toe</string>
+
+	<!-- Shortcuts -->
+	<string name="shortcut_erase_short_label" translatable="false">Browsercache wissen</string>
+	<string name="shortcut_erase_long_label" translatable="false">Doorbladerde website wissen</string>
+	<string name="shortcut_erase_and_open_short_label" translatable="false">Wis uw gegevens en open browser</string>
+	<string name="shortcut_erase_and_open_long_label" translatable="false">Browsercache wissen</string>
+	<string name="shortcut_open" translatable="false">Start Genesis-browser opnieuw</string>
+	<string name="shortcut_open_long" translatable="false">Herstart Je Browser</string>
+
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Sunting Penanda</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nama Penanda</string>
@@ -21,17 +40,50 @@
 	<string name="LANDING_BROWSE_INFO" translatable="true">"Jelajahi internet dengan aman dan aman."</string>
 	<string name="LANDING_NO_TRACKING" translatable="true">"Tidak ada pelacakan. Tidak ada sensor."</string>
 
+	<!-- Alert Secure -->
+	<string name="ALERT_SECURE_INFO" translatable="true">Koneksi aman</string>
+	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Informasi Anda (misalnya, kata sandi atau nomor kartu kredit) aman saat dikirim ke situs ini</string>
+	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Pengaturan Keamanan</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Amankan identitas Anda dan gunakan opsi di bawah</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Jangan Lacak</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Kami akan memberi tahu situs untuk tidak melacak Anda</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Perlindungan Pelacakan</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Aktifkan perlindungan pelacakan yang disediakan oleh kami</string>
+	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Sertifikat</string>
 
-	<!-- Application Strings -->
-	<string name="GENERAL_SEARCH_HINT" translatable="true">zoek iets of typ een weblink</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">vind op pagina</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">zoekmachine</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! er is iets misgegaan</string>
-	<string name="GENERAL_TODO" translatable="true">todo</string>
-	<string name="GENERAL_LOADING" translatable="true">digitale vrijheid</string>
-	<string name="GENERAL_RELOAD" translatable="true">herladen</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">u wordt geconfronteerd met een van de volgende problemen. webpagina of website werkt mogelijk niet. uw internetverbinding is mogelijk slecht. misschien gebruikt u een proxy. website wordt mogelijk geblokkeerd door firewall</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC, Israël Slaat Weer Toe</string>
+	<!-- Alert Certificate -->
+	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Informasi Sertifikat</string>
+
+	<!-- Orbot Log -->
+	<string name="ORBOT_LOG" translatable="true">als u een verbindingsprobleem ondervindt bij het starten van Genesis, kopieer dan de volgende code en zoek het probleem online of stuur het naar ons, zodat we kunnen proberen u te helpen</string>
+	<string name="ORBOT_LOG_HEADER" translatable="true">Orbot logboeken</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">if you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
+	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- Settings -->
 	<string name="SETTING_BASIC_SETTING" translatable="true">Systeeminstelling</string>
@@ -199,9 +251,6 @@
 	<string name="ALERT_CLEAR" translatable="true">annuleren</string>
 	<string name="ALERT_ADD" translatable="true">oké</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">nieuwe bladwijzer</string>
-	<string name="ALERT_SECURE_INFO" translatable="true">verbinding is beveiligd</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">uw informatie (bijvoorbeeld wachtwoord of creditcardnummers) is privé wanneer deze naar deze site wordt verzonden</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Instelling voor systeem- en gebruikersbewaking</string>
 	<string name="ALERT_REPORT" translatable="true">rapport</string>
 	<string name="ALERT_REPORT_URL" translatable="true">rapport website</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">als u denkt dat deze URL illegaal of storend is, meld dit dan aan ons, zodat we juridische stappen kunnen ondernemen</string>
@@ -268,9 +317,6 @@
 	<string name="BRIDGE_OBFS4" translatable="true">proxy-logboeken</string>
 
 	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">als u een verbindingsprobleem ondervindt bij het starten van Genesis, kopieer dan de volgende code en zoek het probleem online of stuur het naar ons, zodat we kunnen proberen u te helpen</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Orbot logboeken</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">if you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
 
 	<!-- Popup Menu -->
 	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">tabblad sluiten</string>
@@ -423,7 +469,6 @@
 	</string-array>
     <string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
-	<string name="HOME_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
 
 </resources>

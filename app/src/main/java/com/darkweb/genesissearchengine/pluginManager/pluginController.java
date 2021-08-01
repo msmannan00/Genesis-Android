@@ -1,8 +1,8 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -16,32 +16,35 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.pluginManager.adPluginManager.adManager;
+import com.darkweb.genesissearchengine.pluginManager.adPluginManager.admobManager;
+import com.darkweb.genesissearchengine.pluginManager.adPluginManager.facebookAdsManager;
 import com.darkweb.genesissearchengine.pluginManager.analyticPluginManager.analyticManager;
 import com.darkweb.genesissearchengine.pluginManager.downloadPluginManager.downloadManager;
 import com.darkweb.genesissearchengine.pluginManager.langPluginManager.langManager;
 import com.darkweb.genesissearchengine.pluginManager.messagePluginManager.messageManager;
 import com.darkweb.genesissearchengine.pluginManager.notificationPluginManager.notifictionManager;
 import com.darkweb.genesissearchengine.pluginManager.orbotPluginManager.orbotManager;
+import com.example.myapplication.R;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
 import static com.darkweb.genesissearchengine.constants.enums.etype.fetch_favicon;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_SHOW_LOADED_ADS;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangManager.M_ACTIVITY_CREATED;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangManager.M_RESUME;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
+import static org.webrtc.ContextUtils.getApplicationContext;
 
 public class pluginController
 {
     /*Plugin Instance*/
 
-    private adManager mAdManager;
+    private facebookAdsManager mAdManager;
     private com.darkweb.genesissearchengine.pluginManager.analyticPluginManager.analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
     private notifictionManager mNotificationManager;
@@ -74,7 +77,6 @@ public class pluginController
 
     public void onRemoveInstances(){
         mHomeController = null;
-        mOrbotManager.onRemoveInstances();
     }
 
     private void instanceObjectInitialization()
@@ -83,7 +85,7 @@ public class pluginController
         mContextManager = activityContextManager.getInstance();
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
-        mAdManager = new adManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), status.sPaidStatus, mHomeController.get());
+        mAdManager = new facebookAdsManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), mHomeController.get());
         mAnalyticsManager = new analyticManager(mHomeController,new analyticCallback(), status.sDeveloperBuild);
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
@@ -108,15 +110,19 @@ public class pluginController
         @Override
         public Object invokeObserver(List<Object> data, Object event_type)
         {
-            if(event_type.equals(M_SHOW_LOADED_ADS))
-                ((homeController)mHomeController.get()).onSetBannerAdMargin();
+            if(event_type.equals(M_ON_AD_CLICK)){
+                helperMethod.onMinimizeApp(mHomeController.get());
+            }
+            else if(event_type.equals(M_ON_AD_LOAD)){
+                activityContextManager.getInstance().getHomeController().onUpdateBannerAdvert();
+            }
             return null;
         }
     }
 
     public Object onAdsInvoke(List<Object> pData, pluginEnums.eAdManager pEventType){
         if(mAdManager !=null){
-            return mAdManager.onTrigger(pData, pEventType);
+            return mAdManager.onTrigger(pEventType);
         }
         return null;
     }
@@ -313,6 +319,24 @@ public class pluginController
             }
             else if(pEventType.equals(M_UNDO_TAB)){
                 activityContextManager.getInstance().getTabController().onRestoreTab(null);
+            }
+            else if(pEventType.equals(M_SECURITY_INFO)){
+                mMessageManager.onTrigger(Arrays.asList(activityContextManager.getInstance().getHomeController().getSecurityInfo(),mHomeController.get()),M_SECURITY_INFO);
+            }
+            else if(pEventType.equals(M_IMAGE_UPDATE_RESTART)){
+                ((AppCompatActivity)pData.get(0)).finish();
+                activityContextManager.getInstance().getSettingController().finish();
+                activityContextManager.getInstance().getHomeController().quitApplication();
+                new Thread(){
+                    public void run(){
+                        try {
+                            sleep(500);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
             }
             return null;
         }

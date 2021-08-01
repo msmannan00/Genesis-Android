@@ -95,7 +95,7 @@ public class Prefs {
     }
 
     public static boolean useDebugLogging() {
-        return prefs.getBoolean(PREF_ENABLE_LOGGING, false);
+        return false;
     }
 
     public static boolean persistNotifications() {

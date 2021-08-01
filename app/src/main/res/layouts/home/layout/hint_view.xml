@@ -40,24 +40,30 @@
                 app:srcCompat="@xml/ic_baseline_search"
                 app:tint="@color/c_navigation_tint" />
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/pHintWebIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="3dp"
-                android:background="@xml/hox_round_outline"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:src="@xml/ic_baseline_browser"
+                android:layout_marginLeft="14dp"
+                app:cardCornerRadius="3dp"
+                android:background="@color/c_background"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/pHindTypeIcon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.578"
-                app:tint="@color/c_text_v6" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/pHintWebIconImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/c_background"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_browser"
+                    app:tint="@color/c_text_v6" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/pHeader"
+                android:id="@+id/pOrbotRowHeader"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -131,9 +137,9 @@
             android:onClick="onSuggestionMove"
             android:layout_margin="2dp"
             android:background="@xml/gx_ripple_default_round"
-            android:tint="@color/c_navigation_tint"
             android:rotation="225"
-            android:contentDescription="@string/GENERAL_TODO" />
+            android:contentDescription="@string/GENERAL_TODO"
+            app:tint="@color/c_navigation_tint" />
 
 
     </LinearLayout>

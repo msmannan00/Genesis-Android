@@ -92,9 +92,9 @@
             android:src="@xml/ic_baseline_browser"
             android:text="@string/HELP_RETRY"
             android:textColor="@color/c_white"
-            android:tint="@color/c_white"
             app:layout_constraintStart_toEndOf="@+id/pReloadButton"
-            app:layout_constraintTop_toTopOf="@+id/pReloadButton" />
+            app:layout_constraintTop_toTopOf="@+id/pReloadButton"
+            app:tint="@color/c_white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -120,9 +120,9 @@
             android:layout_marginTop="1dp"
             android:background="@xml/gx_ripple_default_round"
             android:contentDescription="@string/GENERAL_TODO"
-            android:onClick="onCloseTrigger"
+            android:onClick="onClose"
             android:src="@xml/ic_arrow_back"
-            android:tint="@color/c_navigation_tint" />
+            app:tint="@color/c_navigation_tint" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
             android:layout_marginTop="-3dp"
             android:layout_marginEnd="10dp"
             android:gravity="center_vertical|start"
-            android:onClick="onCloseTrigger"
+            android:onClick="onClose"
             android:text="@string/HELP_TITLE"
             android:textColor="@color/c_text_v1"
             android:textSize="17sp"

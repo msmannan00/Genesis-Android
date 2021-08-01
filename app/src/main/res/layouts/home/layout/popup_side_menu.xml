@@ -8,6 +8,7 @@
         android:layout_height="wrap_content">
 
     <ScrollView
+        android:id="@+id/pScrollView"
         android:textDirection="locale"
         android:textAlignment="viewStart"
         android:layout_width="260dp"

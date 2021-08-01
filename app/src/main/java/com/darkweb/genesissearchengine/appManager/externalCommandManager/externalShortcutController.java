@@ -2,64 +2,71 @@ package com.darkweb.genesissearchengine.appManager.externalCommandManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
-import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
+import static com.darkweb.genesissearchengine.constants.constants.CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE;
+import static com.darkweb.genesissearchengine.constants.keys.EXTERNAL_SHORTCUT_COMMAND;
 
 public class externalShortcutController extends AppCompatActivity {
+
+    /* Initialize */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        status.sSettingIsAppStarted = false;
-        orbotLocalConstants.mIsTorInitialized = false;
-        boolean mConnect = false;
 
-        if (getIntent() != null && getIntent().getStringExtra("shortcut") != null) {
-            String bundleString = getIntent().getStringExtra("shortcut");
-            switch (bundleString) {
-                case "erase":
-                    setContentView(R.layout.popup_data_cleared_shortcut);
-                    panicExitInvoked();
-                    new Handler().postDelayed(this::finish, 3000);
-                    return;
-                case "erase_and_open":
-                    panicExitInvoked();
-                    mConnect = true;
-                    break;
-                case "Restart":
-                    break;
+        orbotLocalConstants.mIsTorInitialized = false;
+        Intent mIntent = new Intent(this, homeController.class);
+
+        if(getIntent() != null){
+            String mShortcutCommands = getIntent().getStringExtra(EXTERNAL_SHORTCUT_COMMAND);
+
+            if(mShortcutCommands!=null){
+                mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND, mShortcutCommands);
+                switch (mShortcutCommands) {
+                    case CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE:
+                        setContentView(R.layout.popup_data_cleared_shortcut);
+                        panicExitInvoked();
+                        return;
+                    case constants.CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN:
+                        setContentView(R.layout.empty_view);
+                        panicExitInvoked();
+                        break;
+                    case constants.CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART:
+                        break;
+                }
             }
         }
 
-        setContentView(R.layout.empty_view);
+        /* Start Required Activity */
 
-        if(mConnect){
-            new Handler().postDelayed(() -> activityContextManager.getInstance().getHomeController().onStartApplication(null), 3000);
-        }
-
-        helperMethod.onDelayHandler(activityContextManager.getInstance().getHomeController(), 800, () -> {
-
-            /* Start Required Activity */
-
-            Intent intent = new Intent(this.getIntent());
-            intent.setClassName(this.getApplicationContext(), homeController.class.getName());
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            this.startActivity(intent);
-            overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
-
-            return null;
-        });
+        helperMethod.openIntent(mIntent, this, constants.CONST_LIST_EXTERNAL_SHORTCUT);
     }
 
+    /* UI TRIGGERS */
+
+    public void onUITrigger(View view){
+        if(view.getId() == R.id.pTDDismiss){
+            finishAffinity();
+        }
+    }
+
+    /* Helper Methods */
+
     public void panicExitInvoked() {
+
         dataController.getInstance().clearData(this);
+
+        helperMethod.onDelayHandler(this, 3000, () -> {
+            finish();
+            return null;
+        });
     }
 }

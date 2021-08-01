@@ -234,6 +234,7 @@ public class settingClearController extends AppCompatActivity {
             status.mThemeApplying = true;
             onBackPressed();
             overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+            activityContextManager.getInstance().getHomeController().onResetData();
             activityContextManager.getInstance().getHomeController().onReInitTheme();
             activityContextManager.getInstance().getSettingController().onReInitTheme();
             helperMethod.openActivity(settingClearController.class, constants.CONST_LIST_HISTORY, settingClearController.this, true);

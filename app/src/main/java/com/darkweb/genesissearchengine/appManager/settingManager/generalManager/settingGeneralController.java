@@ -1,8 +1,6 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.generalManager;
 
-import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.languageManager.languageController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
@@ -31,9 +28,6 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_APPLICATION_CRASH;
 
 public class settingGeneralController extends AppCompatActivity {
 
@@ -100,7 +94,7 @@ public class settingGeneralController extends AppCompatActivity {
 
     private void viewsInitializations() {
 
-        mFullScreenMode = findViewById(R.id.pJSStatus);
+        mFullScreenMode = findViewById(R.id.pSecureJavascriptStatus);
         mThemeLight = findViewById(R.id.pThemeLight);
         mThemeDark = findViewById(R.id.pThemeDark);
         mThemeDefault = findViewById(R.id.pThemeDefault);

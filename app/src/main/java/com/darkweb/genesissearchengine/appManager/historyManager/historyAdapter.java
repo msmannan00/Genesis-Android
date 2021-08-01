@@ -2,10 +2,8 @@ package com.darkweb.genesissearchengine.appManager.historyManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -474,8 +472,8 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         @SuppressLint("UseCompatLoadingForDrawables")
         void bindListView(historyRowModel model, int p_position) {
             mDateContainer = itemView.findViewById(R.id.pDateContainer);
-            mHeader = itemView.findViewById(R.id.pHeader);
-            mDescription = itemView.findViewById(R.id.pDescription);
+            mHeader = itemView.findViewById(R.id.pOrbotRowHeader);
+            mDescription = itemView.findViewById(R.id.pOrbotRowDescription);
             mRowContainer = itemView.findViewById(R.id.pRowContainer);
             mRowMenu = itemView.findViewById(R.id.pRowMenu);
             mDate = itemView.findViewById(R.id.pDate);

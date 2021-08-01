@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
-import com.darkweb.genesissearchengine.appManager.bookmarkManager.BookmarkSettings.bookmarkSettingController;
+import com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController;
 import com.darkweb.genesissearchengine.dataManager.models.bookmarkRowModel;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
@@ -305,7 +305,7 @@ public class bookmarkController extends AppCompatActivity
 
     /* UI Redirection */
 
-    public void onBackPressed(View view){
+    public void onClose(View view){
         onBackPressed();
     }
 
@@ -322,7 +322,7 @@ public class bookmarkController extends AppCompatActivity
         for(int m_counter=0;m_counter<m_long_selected_urk.size();m_counter++){
             mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter), false);
         }
-        onBackPressed(null);
+        onClose(null);
         mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.M_CLEAR_LONG_SELECTED_URL,null);
         mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_CLOSE_MENU, null);
     }

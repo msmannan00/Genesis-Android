@@ -2,7 +2,7 @@
 
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
-        android:shortcutId="Restart"
+        android:shortcutId="CONST_SHORTCUT_RESTART"
         android:enabled="true"
         android:icon="@xml/ic_baseline_shortcut_erase_back"
         android:shortcutShortLabel="@string/shortcut_open"
@@ -11,11 +11,11 @@
             android:action="erase"
             android:targetPackage="com.darkweb.genesissearchengine.production"
             android:targetClass="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController">
-            <extra android:name="shortcut" android:value="open" />
+            <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_RESTART" />
         </intent>
     </shortcut>
     <shortcut
-        android:shortcutId="erase_and_open"
+        android:shortcutId="CONST_SHORTCUT_ERASE_OPEN"
         android:enabled="true"
         android:icon="@xml/ic_baseline_shortcut_add_new_back"
         android:shortcutShortLabel="@string/shortcut_erase_and_open_short_label"
@@ -24,11 +24,11 @@
             android:action="erase"
             android:targetPackage="com.darkweb.genesissearchengine.production"
             android:targetClass="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController">
-            <extra android:name="shortcut" android:value="erase_and_open" />
+            <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN" />
         </intent>
     </shortcut>
     <shortcut
-        android:shortcutId="erase"
+        android:shortcutId="CONST_SHORTCUT_ERASE"
         android:enabled="true"
         android:icon="@xml/ic_baseline_shortcut_cross_back"
         android:shortcutShortLabel="@string/shortcut_erase_short_label"
@@ -37,7 +37,7 @@
             android:action="erase"
             android:targetPackage="com.darkweb.genesissearchengine.production"
             android:targetClass="com.darkweb.genesissearchengine.appManager.externalCommandManager.externalShortcutController">
-            <extra android:name="shortcut" android:value="erase" />
+            <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE" />
         </intent>
     </shortcut>
 </shortcuts>

@@ -86,7 +86,7 @@ public class languageController extends AppCompatActivity {
     {
         activityContextManager.getInstance().onStack(this);
         mRecycleView = findViewById(R.id.pRecycleView);
-        mBlocker = findViewById(R.id.pBlocker);
+        mBlocker = findViewById(R.id.pSecureRootBlocker);
 
         mLanguageViewController.initialization(new languageViewCallback(),this, mBlocker);
     }

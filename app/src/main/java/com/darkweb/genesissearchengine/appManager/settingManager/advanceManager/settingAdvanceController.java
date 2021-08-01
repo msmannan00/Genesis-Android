@@ -1,5 +1,8 @@
 package com.darkweb.genesissearchengine.appManager.settingManager.advanceManager;
 
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_IMAGE_UPDATE;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_UPDATE_BOOKMARK;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -155,11 +158,16 @@ public class settingAdvanceController extends AppCompatActivity {
     }
 
     public void onShowImages(View view) {
+        if(status.sShowImages == 0 && view.getId() == R.id.pAdvanceOption2 && !mImageOption.get(1).isChecked() || status.sShowImages == 2 && view.getId() == R.id.pAdvanceOption1 && !mImageOption.get(0).isChecked()){
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_IMAGE_UPDATE);
+        }
+
         mIsChanged = true;
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_IMAGE, Collections.singletonList(null));
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_SHOW_IMAGE, Collections.singletonList(view));
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_SET_IMAGE, Collections.singletonList(view));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES,status.sShowImages));
+
     }
 
     public void onGridView(View view) {

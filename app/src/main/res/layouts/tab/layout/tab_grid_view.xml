@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/pRowContainerInner"
+            android:id="@+id/pTABRowContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
@@ -120,13 +120,13 @@
                 android:orientation="vertical"
                 android:paddingEnd="8dp"
                 android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/pRemoveRow"
+                app:layout_constraintEnd_toStartOf="@+id/pOrbotRowRemove"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="NestedWeights,RtlSymmetry">
 
                 <TextView
-                    android:id="@+id/pDescription"
+                    android:id="@+id/pOrbotRowDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -142,7 +142,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/pHeader"
+                    android:id="@+id/pOrbotRowHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -216,7 +216,7 @@
                 android:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/pRemoveRow"
+                android:id="@+id/pOrbotRowRemove"
                 android:layout_width="39dp"
                 android:layout_height="39dp"
                 android:background="@xml/tx_ripple_light"

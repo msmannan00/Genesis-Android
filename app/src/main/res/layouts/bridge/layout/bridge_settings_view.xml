@@ -32,16 +32,16 @@
                 <ImageButton
                     android:layout_width="45dp"
                     android:layout_height="50dp"
-                    android:onClick="onCloseTrigger"
+                    android:onClick="onClose"
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
-                    android:tint="@color/c_navigation_tint"
                     android:src="@xml/ic_arrow_back"
                     android:background="@xml/gx_ripple_default_round"
-                    android:contentDescription="@string/GENERAL_TODO"/>
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_tint" />
                 <TextView
                     android:textColor="@color/c_text_v1"
-                    android:onClick="onCloseTrigger"
+                    android:onClick="onClose"
                     android:textSize="17sp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

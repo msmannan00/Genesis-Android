@@ -681,19 +681,7 @@ public class extendedGeckoView extends FrameLayout {
      * @param event A {@link MotionEvent}
      * @return One of the {@link PanZoomController#INPUT_RESULT_UNHANDLED INPUT_RESULT_*}) indicating how the event was handled.
      */
-    public @NonNull GeckoResult<Integer> onTouchEventForResult(final @NonNull MotionEvent event) {
-        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-            requestFocus();
-        }
 
-        if (mSession == null) {
-            return GeckoResult.fromValue(PanZoomController.INPUT_RESULT_UNHANDLED);
-        }
-
-        // NOTE: Treat mouse events as "touch" rather than as "mouse", so mouse can be
-        // used to pan/zoom. Call onMouseEvent() instead for behavior similar to desktop.
-        return mSession.getPanZoomController().onTouchEventForResult(event);
-    }
 
     @Override
     public boolean onGenericMotionEvent(final MotionEvent event) {

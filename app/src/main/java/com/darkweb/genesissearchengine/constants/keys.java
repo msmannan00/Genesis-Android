@@ -5,6 +5,7 @@ public class keys
     /*GENERIC*/
 
     public static final String M_ACTIVITY_RESPONSE = "M_ACTIVITY_RESPONSE";
+    public static final String M_ACTIVITY_NAVIGATION_BUNDLE_KEY = "M_ACTIVITY_NAVIGATION_BUNDLE_KEY";
 
     /*Home page*/
 
@@ -77,10 +78,9 @@ public class keys
     public static final String BOOKMARK_SETTING_URL = "BOOKMARK_SETTING_URL";
     public static final String BOOKMARK_SETTING_ID = "BOOKMARK_SETTING_ID";
 
-    /*Landing Settings*/
-    public static final String LANDING_TITLE_KEY = "LANDING_TITLE_KEY";
-    public static final String LANDING_SUB_TITLE_KEY = "LANDING_SUB_TITLE_KEY";
-    public static final String LANDING_SUBMIT_KEY = "LANDING_SUBMIT_KEY";
-    public static final String LANDING_LAYOUT_RESID = "LANDING_LAYOUT_RESID";
+    /*External Shortcut Settings*/
+    public static final String EXTERNAL_SHORTCUT_COMMAND = "EXTERNAL_SHORTCUT_COMMAND";
+    public static final String EXTERNAL_SHORTCUT_COMMAND_NAVIGATE = "EXTERNAL_SHORTCUT_COMMAND";
+
 
 }

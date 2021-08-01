@@ -1,27 +1,5 @@
 <resources>
 
-    <!-- Bookmark Setting -->
-    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Edit Bookmark</string>
-    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Bookmark Name</string>
-    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Name of bookmarked url will be shown here</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
-
-    <!-- Bookmark Alerts -->
-    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bookmark removed</string>
-    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bookmark updated</string>
-
-    <!-- Alerts General -->
-    <string name="ALERT_DISMISS" translatable="true">Dismiss</string>
-
-    <!-- Landing Page -->
-    <string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a Bridge to get to Tor Network"</string>
-    <string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
-    <string name="LANDING_HELLO" translatable="true">"Hello"</string>
-    <string name="LANDING_WELCOME" translatable="true">"Welcome to Genesis on mobile."</string>
-    <string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
-    <string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
-
-
     <!-- Application Strings -->
     <string name="mode" translatable="false">Day</string>
     <string name="app_name" translatable="false">Genesis</string>
@@ -47,6 +25,61 @@
     <string name="shortcut_erase_and_open_long_label" translatable="false">Erase and open</string>
     <string name="shortcut_open" translatable="false">Restart or Open</string>
     <string name="shortcut_open_long" translatable="false">Restart Application</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Edit Bookmark</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Bookmark Name</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Name of bookmarked url will be shown here</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
+
+    <!-- Bookmark Alerts -->
+    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bookmark removed</string>
+    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bookmark updated</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">Dismiss</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a Bridge to get to Tor Network"</string>
+    <string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
+    <string name="LANDING_HELLO" translatable="true">"Hello"</string>
+    <string name="LANDING_WELCOME" translatable="true">"Welcome to Genesis on mobile."</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_SECURE_INFO_HEADER" translatable="false">onion:</string>
+    <string name="ALERT_SECURE_INFO_Header" translatable="false">onion:</string>
+    <string name="ALERT_SECURE_INFO" translatable="true">Connection is secure</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Your information (for example, password or credit card numbers) is private when it is sent to this site</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy Settings</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Keep your identity safe and use the options below</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Do Not Track</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Genesis will tell sites that you do not want to be tracked</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Tracking Protection</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Enable tracking protection provided by Genesis</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificate</string>
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">Certificate Information</string>
+
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="true">Proxy Logs</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">Logs Info</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
+    <string name="ORBOT_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Settings -->
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
@@ -235,13 +268,10 @@
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Clearing data will remove history, cookies, and other browsing data</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Remove all bookmarks ?</string>
     <string name="ALERT_CLEAR" translatable="true">Clear</string>
+    <string name="ALERT_IMAGE_STATUS" translatable="true">Restart required after changes</string>
     <string name="ALERT_CONFIRM" translatable="true">Confirm</string>
     <string name="ALERT_ADD" translatable="true">Done</string>
     <string name="ALERT_TITLE_ADD" translatable="true">bookmark name...</string>
-    <string name="ALERT_SECURE" translatable="false">https://</string>
-    <string name="ALERT_SECURE_INFO" translatable="true">Connection is secure</string>
-    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Your information(for example, password or credit card numbers) is private when it is sent to this site</string>
-    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy Settings</string>
     <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Waiting to download ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Download</string>
     <string name="ALERT_REPORT" translatable="true">Report</string>
@@ -254,6 +284,7 @@
     <string name="ALERT_RATE" translatable="true">Rate</string>
     <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true"><b><font color='#00b3b3'>SORRY TO HEAR THAT ! &#160;</font></b>&#160;If you are having difficulty while using this application please reach out to us via email. We will try to solve your problem as soon as possible</string>
     <string name="ALERT_MAIL" translatable="true">Mail</string>
+    <string name="ALERT_RESTART" translatable="true">Restart</string>
     <string name="ALERT_BRIDGE_MAIL" translatable="true">Request New Bridge</string>
     <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true"><b><font color='#00b3b3'>REQUEST BRIDGE &#160;</font></b>&#160;Select E-mail below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start the application.</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">Language not supported</string>
@@ -322,11 +353,6 @@
     <string name="BRIDGE_REQUEST" translatable="true">Request</string>
     <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
     <string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
-
-    <!-- Orbot Log -->
-    <string name="ORBOT_LOG" translatable="true">Proxy Logs</string>
-    <string name="ORBOT_LOG_HEADER" translatable="true">Logs Info</string>
-    <string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
 
     <!-- Popup Menu -->
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
@@ -427,7 +453,6 @@
     <string name="HOME_CONNECT" translatable="false">Connect</string>
     <string name="HOME_COPYRIGHT" translatable="false">Copyright © by Genesis Technologies | Built 1.0.2.2</string>
     <string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
-    <string name="HOME_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">Open tabs will show here</string>
 
     <!-- Error Page -->

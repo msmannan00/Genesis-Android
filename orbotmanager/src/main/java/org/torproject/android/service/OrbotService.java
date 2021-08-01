@@ -321,20 +321,16 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             ex.printStackTrace();
         }
 
-        new Thread(){
-            public void run(){
-                try {
-                    isAppClosed = true;
+        isAppClosed = true;
 
-                    stopTor();
-                    stopTorAsync();
-                    clearNotifications();
-                    killAllDaemons();
-                } catch (Exception ex) {
-                    Log.i("", "");
-                }
-            }
-        }.start();
+        try {
+            stopTor();
+            stopTorAsync();
+            clearNotifications();
+            killAllDaemons();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
         super.onDestroy();
     }
@@ -958,6 +954,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                                 Thread.sleep(500);
                                 conn = torService.getTorControlConnection();
                             }
+                            sleep(2000);
                             mEventHandler = new TorEventHandler(OrbotService.this);
                             logNotice("adding control port event handler");
                             conn.setEventHandler(mEventHandler);
@@ -1216,8 +1213,14 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
     }
 
     int e=0;
+    String mPrevLogs = "";
     private void sendCallbackLogMessage(String logMessage)
     {
+        if(mPrevLogs.equals(logMessage)){
+            return;
+        }else {
+            mPrevLogs = logMessage;
+        }
         if(logMessage.contains("Bootstrapped 100%")){
             orbotLocalConstants.mIsTorInitialized = true;
         }

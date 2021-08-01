@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pMainLayout"
+        android:id="@+id/pSecureRootLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -40,7 +40,7 @@
             app:tint="@color/c_icon_tint" />
 
         <TextView
-            android:id="@+id/pHeader"
+            android:id="@+id/pOrbotRowHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pDescription"
+            android:id="@+id/pOrbotRowDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -73,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/pHeader"
+            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowHeader"
             tools:ignore="SmallSp" />
 
         <TextView
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription"
+            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription"
             tools:ignore="SmallSp" />
 
         <Button

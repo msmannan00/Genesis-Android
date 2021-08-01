@@ -2,7 +2,6 @@ package com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,7 +19,6 @@ import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -397,8 +395,8 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
 
         void bindListView(bookmarkRowModel model, int p_position) {
             mDateContainer = itemView.findViewById(R.id.pDateContainer);
-            mHeader = itemView.findViewById(R.id.pHeader);
-            mDescription = itemView.findViewById(R.id.pDescription);
+            mHeader = itemView.findViewById(R.id.pOrbotRowHeader);
+            mDescription = itemView.findViewById(R.id.pOrbotRowDescription);
             mRowContainer = itemView.findViewById(R.id.pRowContainer);
             mRowMenu = itemView.findViewById(R.id.pRowMenu);
             mDate = itemView.findViewById(R.id.pDate);

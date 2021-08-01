@@ -1,20 +1,18 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pRowContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
     android:layout_marginStart="10dp"
-    android:paddingStart="5dp"
+    android:layout_marginTop="8dp"
     android:background="@xml/sx_border_left"
     android:orientation="horizontal"
+    android:paddingStart="5dp"
     android:weightSum="10"
     tools:ignore="RtlSymmetry">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pRowContainerInner"
+        android:id="@+id/pOrbotRowContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@xml/gx_ripple_gray"
@@ -39,22 +37,23 @@
             android:paddingEnd="8dp"
             android:paddingBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pRemoveRow"
+            app:layout_constraintEnd_toStartOf="@+id/pOrbotRowRemove"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="NestedWeights,RtlSymmetry">
 
             <TextView
-                android:id="@+id/pHeader"
+                android:id="@+id/pOrbotRowHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:clickable="false"
-                android:text="test header"
+                android:text="@string/GENERAL_TODO"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
             <LinearLayout
+                android:id="@+id/pOrbotRowFooter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -67,6 +66,7 @@
                 tools:layout_editor_absoluteX="114dp">
 
                 <ImageView
+                    android:id="@+id/pOrbotRowClock"
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
                     android:layout_marginStart="-5dp"
@@ -79,14 +79,14 @@
                     app:tint="@color/c_divider_line_light" />
 
                 <TextView
-                    android:id="@+id/pDescription"
+                    android:id="@+id/pOrbotRowDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:layout_marginTop="0dp"
                     android:clickable="false"
                     android:ellipsize="end"
-                    android:text="test description"
+                    android:text="@string/GENERAL_TODO"
                     android:textColor="@color/c_text_v3"
                     android:textSize="13sp" />
 
@@ -95,7 +95,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/pRemoveRow"
+            android:id="@+id/pOrbotRowRemove"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="15dp"
@@ -104,11 +104,11 @@
             android:longClickable="true"
             android:scaleType="fitCenter"
             android:src="@xml/ic_baseline_keyboard_arrow_right"
-            android:tint="@color/c_text_v3"
             android:translationZ="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/c_text_v3"
             tools:ignore="RtlSymmetry" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

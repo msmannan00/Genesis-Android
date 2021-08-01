@@ -9,7 +9,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pMainLayout"
+        android:id="@+id/pSecureRootLayout"
         android:layout_width="0dp"
         app:layout_constraintHorizontal_weight="1"
         android:maxWidth="400dp"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/pDescription"
+            android:id="@+id/pOrbotRowDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -35,7 +35,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/pMainLayout"
+            app:layout_constraintStart_toStartOf="@+id/pSecureRootLayout"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp" />
 

@@ -66,8 +66,9 @@ public class constants
 
     /*MENU CONSTANTS*/
 
-    public static final int CONST_LIST_HISTORY = 1;
-    public static final int CONST_LIST_BOOKMARK = 2;
+    public static final int CONST_LIST_EXTERNAL_SHORTCUT = 1;
+    public static final int CONST_LIST_HISTORY = 2;
+    public static final int CONST_LIST_BOOKMARK = 3;
 
     /*SETTINGS CONSTANTS*/
 
@@ -105,5 +106,10 @@ public class constants
     public static final String CONST_ENCRYPTION_KEY = "Zr4u7x!A%D*F-JaNdRgUkXp2s5v8y/B?";
     public static final String CONST_ENCRYPTION_KEY_DATABASE = "Zr4u7x!!A%D*F-JaNdsS@@gUbbp^^5v8y/B?";
 
+    /*SHORTCUT CONSTANTS*/
+    public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE = "EXTERNAL_SHORTCUT_COMMAND_ERASE";
+    public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN = "EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN";
+    public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART = "EXTERNAL_SHORTCUT_COMMAND_RESTART";
+    public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_NAVIGATE = "EXTERNAL_SHORTCUT_COMMAND_NAVIGATE";
 
 }

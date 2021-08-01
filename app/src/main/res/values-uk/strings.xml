@@ -1,5 +1,24 @@
 <resources>
 
+	<!-- Application Strings -->
+	<string name="GENERAL_SEARCH_HINT" translatable="true">щось шукати або ввести веб-посилання</string>
+	<string name="GENERAL_FIND_HINT" translatable="true">знайти на сторінці</string>
+	<string name="GENERAL_SEARCH_ENGINE" translatable="true">пошукова система</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">Опс! щось пішло не так</string>
+	<string name="GENERAL_TODO" translatable="true">todo</string>
+	<string name="GENERAL_LOADING" translatable="true">цифрова свобода</string>
+	<string name="GENERAL_RELOAD" translatable="true">перезавантажити</string>
+	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Ви стикаєтесь із однією з наведених нижче проблем. веб-сторінка або веб-сайт можуть не працювати. з’єднання з Інтернетом може бути поганим. можливо, ви використовуєте проксі. веб-сайт може бути заблокований брандмауером</string>
+	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">ВВС, Ізраїль знову страйкує Ru</string>
+
+	<!-- Shortcuts -->
+	<string name="shortcut_erase_short_label" translatable="false">Стерти кеш браузера</string>
+	<string name="shortcut_erase_long_label" translatable="false">Стерти веб-сайт, що переглядався</string>
+	<string name="shortcut_erase_and_open_short_label" translatable="false">Видаліть свої дані та відкрийте браузер</string>
+	<string name="shortcut_erase_and_open_long_label" translatable="false">Стерти кеш браузера</string>
+	<string name="shortcut_open" translatable="false">Перезапустіть браузер Genesis</string>
+	<string name="shortcut_open_long" translatable="false">Перезапустіть браузер</string>
+
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Редагувати закладку</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Назва закладки</string>
@@ -21,22 +40,42 @@
 	<string name="LANDING_BROWSE_INFO" translatable="true">"Переглядайте Інтернет безпечно та надійно."</string>
 	<string name="LANDING_NO_TRACKING" translatable="true">"Без відстеження. Без цензури."</string>
 
+	<!-- Alert Secure -->
+	<string name="ALERT_SECURE_INFO" translatable="true">З\'єднання безпечне</string>
+	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Ваша інформація (наприклад, пароль або номери кредитних карток) захищена, коли вона надсилається на цей сайт</string>
+	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Налаштування безпеки</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Бережіть свою ідентичність і використовуйте наведені нижче варіанти</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Не відстежувати</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Ми скажемо сайтам не відстежувати вас</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Захист від відстеження</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Увімкніть захист від відстеження, наданий нами</string>
+	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Свідоцтво</string>
+
+	<!-- Alert Certificate -->
+	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Інформація про сертифікат</string>
+
+	<!-- Orbot Log -->
+	<string name="ORBOT_LOG" translatable="true">Журнали проксі</string>
+	<string name="ORBOT_LOG_HEADER" translatable="true">Інформація про журнали</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
+	<string name="ORBOT_LOADING_STATIC" translatable="true">Буття в режимі очікування на даний момент</string>
 
 
 
 
 
 
-	<!-- Application Strings -->
-	<string name="GENERAL_SEARCH_HINT" translatable="true">щось шукати або ввести веб-посилання</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">знайти на сторінці</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">пошукова система</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">Опс! щось пішло не так</string>
-	<string name="GENERAL_TODO" translatable="true">todo</string>
-	<string name="GENERAL_LOADING" translatable="true">цифрова свобода</string>
-	<string name="GENERAL_RELOAD" translatable="true">перезавантажити</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Ви стикаєтесь із однією з наведених нижче проблем. веб-сторінка або веб-сайт можуть не працювати. з’єднання з Інтернетом може бути поганим. можливо, ви використовуєте проксі. веб-сайт може бути заблокований брандмауером</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">ВВС, Ізраїль знову страйкує Ru</string>
+
+
+
+
+
+
+
+
+
+
 
 	<!-- Settings -->
 	<string name="SETTING_BASIC_SETTING" translatable="true">Зробити 1111 браузером за замовчуванням</string>
@@ -207,9 +246,6 @@
 	<string name="ALERT_CLEAR" translatable="true">Очистити</string>
 	<string name="ALERT_ADD" translatable="true">Готово</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">Нова закладка</string>
-	<string name="ALERT_SECURE_INFO" translatable="true">З\'єднання безпечне</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Ваша інформація (наприклад, пароль або номери кредитних карток) є приватною, коли вона надсилається на цей сайт</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Налаштування конфіденційності</string>
 	<string name="ALERT_REPORT" translatable="true">Звіт</string>
 	<string name="ALERT_REPORT_URL" translatable="true">Веб-сайт звітів</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">Якщо ви вважаєте, що ця URL-адреса є незаконною або тривожною, повідомте про це нам, щоб ми могли вжити юридичних заходів</string>
@@ -276,9 +312,6 @@
 	<string name="BRIDGE_MEEK" translatable="true">Лагідність (Китай)</string>
 
 	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">Журнали проксі</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Інформація про журнали</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
 
 	<!-- Popup Menu -->
 	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Журнали Orbot</string>
@@ -372,7 +405,6 @@
 	<!-- Home View -->
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
 	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
-	<string name="HOME_LOADING_STATIC" translatable="true">Буття в режимі очікування на даний момент</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">Тут відкриються відкриті вкладки</string>
 
 	<!-- Error Page -->

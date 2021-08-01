@@ -7,7 +7,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pMainLayout"
+        android:id="@+id/pSecureRootLayout"
         android:layout_width="wrap_content"
         android:maxWidth="450dp"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@ android:layout_height="match_parent">
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/pDescription"
+            android:id="@+id/pOrbotRowDescription"
             android:maxWidth="450dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@ android:layout_height="match_parent">
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
         <Button
             android:id="@+id/pTrigger"
@@ -69,7 +69,7 @@ android:layout_height="match_parent">
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/pNext"
-            app:layout_constraintTop_toBottomOf="@+id/pDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

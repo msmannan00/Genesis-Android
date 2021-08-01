@@ -1,5 +1,24 @@
 <resources>
 
+	<!-- Application Strings -->
+	<string name="GENERAL_SEARCH_HINT" translatable="true">Zoek of typ een webadres</string>
+	<string name="GENERAL_FIND_HINT" translatable="true">Zoek op pagina</string>
+	<string name="GENERAL_SEARCH_ENGINE" translatable="true">Zoekmachine</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">\ U0020 \ U0020 \ U0020Opps! Er Is Iets Misgegaan</string>
+	<string name="GENERAL_TODO" translatable="true">TODO</string>
+	<string name="GENERAL_LOADING" translatable="true">Online Vrijheid</string>
+	<string name="GENERAL_RELOAD" translatable="true">Opnieuw laden</string>
+	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Dit kunnen de problemen zijn waarmee u wordt geconfronteerd \ n \ n • De webpagina of website is mogelijk niet beschikbaar \ n • Uw internetverbinding is mogelijk slecht \ n • U gebruikt mogelijk een proxy \ n • De website is mogelijk geblokkeerd door een firewall</string>
+	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
+
+	<!-- Shortcuts -->
+	<string name="shortcut_erase_short_label" translatable="false">Browsercache wissen</string>
+	<string name="shortcut_erase_long_label" translatable="false">Doorbladerde website wissen</string>
+	<string name="shortcut_erase_and_open_short_label" translatable="false">Wis uw gegevens en open browser</string>
+	<string name="shortcut_erase_and_open_long_label" translatable="false">Browsercache wissen</string>
+	<string name="shortcut_open" translatable="false">Start Genesis-browser opnieuw</string>
+	<string name="shortcut_open_long" translatable="false">Herstart Je Browser</string>
+
 	<!-- Bookmark Setting -->
 	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Bladwijzer Bewerken</string>
 	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Naam Bladwijzer</string>
@@ -21,17 +40,58 @@
 	<string name="LANDING_BROWSE_INFO" translatable="true">"Browse veilig op internet."</string>
 	<string name="LANDING_NO_TRACKING" translatable="true">"Geen tracking. Geen censuur."</string>
 
+	<!-- Alert Secure -->
+	<string name="ALERT_SECURE_INFO" translatable="true">Verbinding is beveiligd</string>
+	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Uw informatie (bijvoorbeeld wachtwoord of creditcardnummers) is veilig wanneer deze naar deze site wordt verzonden</string>
+	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Beveiligingsinstelling</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Houd uw identiteit veilig en gebruik de onderstaande opties</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Niet Volgen</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">We zullen sites vertellen u niet te volgen</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Bescherming Tegen Volgen</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Door ons geleverde trackingbeveiliging inschakelen</string>
+	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificaat</string>
 
-	<!-- Application Strings -->
-	<string name="GENERAL_SEARCH_HINT" translatable="true">Zoek of typ een webadres</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">Zoek op pagina</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">Zoekmachine</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">\ U0020 \ U0020 \ U0020Opps! Er Is Iets Misgegaan</string>
-	<string name="GENERAL_TODO" translatable="true">TODO</string>
-	<string name="GENERAL_LOADING" translatable="true">Online Vrijheid</string>
-	<string name="GENERAL_RELOAD" translatable="true">Opnieuw laden</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Dit kunnen de problemen zijn waarmee u wordt geconfronteerd \ n \ n • De webpagina of website is mogelijk niet beschikbaar \ n • Uw internetverbinding is mogelijk slecht \ n • U gebruikt mogelijk een proxy \ n • De website is mogelijk geblokkeerd door een firewall</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
+	<!-- Alert Certificate -->
+	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Informatie Over Het Certificaat</string>
+
+	<!-- Orbot Log -->
+	<string name="ORBOT_LOG" translatable="true">Proxylogboeken</string>
+	<string name="ORBOT_LOG_HEADER" translatable="true">Logboeken Info</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
+	<string name="ORBOT_LOADING_STATIC" translatable="true">Genesis op standby op dit moment</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- Settings -->
 	<string name="SETTING_BASIC_SETTING" translatable="true">Basisinstellingen</string>
@@ -200,9 +260,6 @@
 	<string name="ALERT_CLEAR" translatable="true">Wissen</string>
 	<string name="ALERT_ADD" translatable="true">Klaar</string>
 	<string name="ALERT_TITLE_ADD" translatable="true">Nieuwe Bladwijzer</string>
-	<string name="ALERT_SECURE_INFO" translatable="true">Verbinding is veilig</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Uw informatie (bijvoorbeeld wachtwoord of creditcardnummers) is privé wanneer deze naar deze site wordt verzonden</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Privacy-instellingen</string>
 	<string name="ALERT_REPORT" translatable="true">Rapport</string>
 	<string name="ALERT_REPORT_URL" translatable="true">Website Melden</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">Als u denkt dat deze URL illegaal of storend is, meld dit dan aan ons, zodat we juridische stappen kunnen ondernemen</string>
@@ -268,10 +325,6 @@
 	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
 	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
 
-	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">Proxylogboeken</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Logboeken Info</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
 
 	<!-- Popup Menu -->
 	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot-logboeken</string>
@@ -365,7 +418,6 @@
 	<!-- Home View -->
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
 	<string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
-	<string name="HOME_LOADING_STATIC" translatable="true">Genesis op standby op dit moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">Open tabbladen worden hier weergegeven</string>
 
 	<!-- Error Page -->

@@ -39,7 +39,7 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onBackPressed"
                 android:src="@xml/ic_arrow_back"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint" />
 
             <TextView
                 android:id="@+id/pTitle"
@@ -99,7 +99,7 @@
                 android:paddingBottom="10dp"
                 android:scaleType="fitCenter"
                 android:src="@xml/ic_search"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint" />
 
             <ImageButton
                 android:id="@+id/pMenuButton"
@@ -115,7 +115,7 @@
                 android:paddingBottom="14dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
-                android:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint" />
         </LinearLayout>
 
     </LinearLayout>

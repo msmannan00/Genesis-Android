@@ -19,8 +19,10 @@ public class errorHandler
         this.mContext = mContext;
         if (mErrorTemplate == null) {
             StringBuilder builder = new StringBuilder();
-            try (InputStream stream = mResourceURL; BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+            try  {
 
+                InputStream stream = mResourceURL;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     builder.append(line);

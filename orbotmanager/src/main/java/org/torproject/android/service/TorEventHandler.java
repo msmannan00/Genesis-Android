@@ -83,10 +83,7 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
 
         if (lastWritten > BW_THRESDHOLD || lastRead > BW_THRESDHOLD) {
 
-            int iconId = R.drawable.ic_stat_starting_tor_logo;
-
-            if (read > 0 || written > 0)
-                iconId = R.mipmap.ic_stat_tor_logo;
+            int iconId = R.mipmap.ic_stat_tor_logo;
 
             String sb = OrbotService.formatBandwidthCount(mService, read) + " \u2193" + " / " +
                     OrbotService.formatBandwidthCount(mService, written) + " \u2191";

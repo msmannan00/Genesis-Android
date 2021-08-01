@@ -1,8 +1,8 @@
 /*Search*/
 body{ 
     opacity: 0;
-    transition: opacity 2s;
-    -webkit-transition: opacity 2s; /* Safari */
+    transition: opacity 0s;
+    -webkit-transition: opacity 0s; /* Safari */
 }
 
 .body_fadein {

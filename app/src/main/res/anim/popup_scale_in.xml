@@ -4,7 +4,7 @@
     android:fillEnabled="true">
 
     <scale
-        android:duration="200"
+        android:duration="150"
         android:fromXScale="0.95"
         android:fromYScale="0.95"
         android:pivotX="50%"
@@ -16,6 +16,6 @@
     <alpha android:fromAlpha="0"
         android:toAlpha="1.0"
         android:interpolator="@android:anim/accelerate_interpolator"
-        android:duration="200"
+        android:duration="100"
         android:repeatCount="0"/>
 </set>

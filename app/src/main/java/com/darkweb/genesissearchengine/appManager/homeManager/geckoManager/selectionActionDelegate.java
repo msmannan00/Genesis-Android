@@ -156,15 +156,14 @@ public class selectionActionDelegate implements ActionMode.Callback,
      * @return True if the action is presently available.
      */
     protected boolean isActionAvailable(final @NonNull String id) {
-        if (mSelection == null || mSelection.text.toString().length()<1) {
+        if (mSelection == null || mSelection.text.length()<1 || mSelection.text.getBytes().length >= 500000) {
             return false;
         }
 
         if (mExternalActionsEnabled && !mSelection.text.isEmpty() &&
                 ACTION_PROCESS_TEXT.equals(id)) {
             final PackageManager pm = mActivity.getPackageManager();
-            return pm.resolveActivity(getProcessTextIntent(),
-                    PackageManager.MATCH_DEFAULT_ONLY) != null;
+            return pm.resolveActivity(getProcessTextIntent(),PackageManager.MATCH_DEFAULT_ONLY) != null;
         }
         if(id.equals("SEARCH") && !mSelection.text.isEmpty() && mExternalActionsEnabled){
             return true;
@@ -430,7 +429,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
         try{
             if (mUseFloatingToolbar) {
                 String strManufacturer = android.os.Build.MANUFACTURER;
-                if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1 || (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1 && strManufacturer.equals("samsung"))) {
+                if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1 || (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1 && (strManufacturer.toLowerCase().contains("samsung") || android.os.Build.MODEL.toLowerCase().contains("samsung") || Build.PRODUCT.toLowerCase().contains("samsung")))) {
                     mActionMode = mActivity.startActionMode(this);
                 }else {
                     mActionMode = mActivity.startActionMode(new Callback2Wrapper(),ActionMode.TYPE_FLOATING);

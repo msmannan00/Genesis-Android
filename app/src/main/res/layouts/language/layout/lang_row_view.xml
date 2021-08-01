@@ -33,7 +33,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pHeader"
+                android:id="@+id/pOrbotRowHeader"
                 android:layout_marginTop="10dp"
                 android:textSize="15.5sp"
                 android:paddingStart="7dp"
@@ -46,7 +46,7 @@
                 android:text="@string/GENERAL_TODO" />
 
             <TextView
-                android:id="@+id/pDescription"
+                android:id="@+id/pOrbotRowDescription"
                 android:textSize="12sp"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"

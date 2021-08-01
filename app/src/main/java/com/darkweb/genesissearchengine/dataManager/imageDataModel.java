@@ -61,7 +61,7 @@ class imageDataModel
     }
 
     public void mBackgroundThread(){
-        new Thread(){
+        /*new Thread(){
             public void run(){
                 while (true) {
                     try {
@@ -82,7 +82,7 @@ class imageDataModel
                     }
                 }
             }
-        }.start();
+        }.start();*/
     }
 
     private Bitmap getBitmapFromURL(String src) {

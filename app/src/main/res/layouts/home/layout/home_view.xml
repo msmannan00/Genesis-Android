@@ -2,229 +2,228 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pRootLayout"
+    android:id="@+id/pSecureRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background_keyboard"
     tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController">
 
+    <LinearLayout
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:adUnitId="ca-app-pub-5074525529134731/8952142500"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/pCoordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/c_background_keyboard"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/adView">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/pAppbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/c_background"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="enterAlwaysCollapsed"
-            android:translationZ="3dp">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:translationZ="3dp"
+            app:layout_scrollFlags="enterAlwaysCollapsed">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/fProfilCollapsing"
                 android:layout_width="match_parent"
-                app:scrimAnimationDuration="10"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:orientation="vertical"
                 app:layout_scrollFlags="enterAlwaysCollapsed"
-                android:orientation="vertical">
+                app:scrimAnimationDuration="10">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/pTopLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/c_background"
-                android:clipToPadding="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_scrollFlags="enterAlwaysCollapsed"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:id="@+id/pTopbar"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/pTopLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/c_background"
-                    android:elevation="4dp"
-                    android:gravity="start"
-                    android:orientation="vertical"
+                    android:clipToPadding="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="RtlHardcoded,UselessParent">
+                    app:layout_scrollFlags="enterAlwaysCollapsed">
 
                     <LinearLayout
-                        android:id="@+id/pTopBarContainer"
+                        android:id="@+id/pTopbar"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:animateLayoutChanges="true"
+                        android:layout_height="wrap_content"
+                        android:background="@color/c_background"
+                        android:elevation="4dp"
                         android:gravity="start"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlHardcoded,UselessParent">
 
-                        <ImageButton
-                            android:id="@+id/pSearchLogo"
-                            android:layout_width="33dp"
-                            android:layout_height="33dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="14dp"
-                            android:background="@xml/gx_ripple_default_round"
-                            android:contentDescription="@string/GENERAL_TODO"
-                            android:onClick="onLockSecure"
-                            android:padding="6dp"
-                            android:scaleType="fitCenter"
-                            android:src="@xml/ic_baseline_lock"
-                            android:translationZ="10dp"
-                            app:tint="@color/c_lock_tint"
-                            tools:ignore="RtlSymmetry" />
-
-                        <View
-                            android:id="@+id/pSearchDivider"
-                            android:layout_width="1px"
-                            android:translationZ="1dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="3dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@color/c_text_v6"
-                            tools:ignore="RtlSymmetry" />
-
-                        <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
-                            android:id="@+id/pSearchInput"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="-41dp"
-                            android:layout_marginTop="8dp"
-                            android:imeOptions="flagNoExtractUi"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
+                        <LinearLayout
+                            android:id="@+id/pTopBarContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
                             android:animateLayoutChanges="true"
-                            android:background="@xml/gx_generic_input"
-                            android:completionHintView="@layout/hint_view"
-                            android:dropDownAnchor="@id/pSearchEngineBar"
-                            android:ems="10"
-                            android:fadingEdgeLength="20dp"
-                            android:focusableInTouchMode="true"
-                            android:focusedByDefault="false"
-                            android:hint="@string/GENERAL_SEARCH_HINT"
-                            android:importantForAutofill="no"
-                            android:inputType="textNoSuggestions"
-                            android:maxLines="1"
-                            android:paddingStart="52dp"
-                            android:paddingEnd="15dp"
-                            android:paddingBottom="2dp"
-                            android:popupElevation="0dp"
-                            android:requiresFadingEdge="horizontal"
-                            android:selectAllOnFocus="true"
-                            android:text="@string/GENERAL_HOME_URL"
-                            android:textColor="@color/c_text_v1"
-                            android:textColorHighlight="@color/c_text_color_highlight_v2"
-                            android:textColorHint="@color/c_text_v2"
-                            android:textCursorDrawable="@xml/gx_search_cursor_state"
-                            android:textIsSelectable="false"
-                            android:textSize="16sp"
-                            app:hintAnimationEnabled="false"
-                            tools:targetApi="o">
+                            android:gravity="start"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="RtlHardcoded,UselessParent">
 
-                        </com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager>
+                            <ImageButton
+                                android:id="@+id/pSearchLogo"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="14dp"
+                                android:background="@xml/gx_ripple_default_round"
+                                android:contentDescription="@string/GENERAL_TODO"
+                                android:onClick="onLockSecure"
+                                android:padding="6dp"
+                                android:scaleType="fitCenter"
+                                android:src="@xml/ic_baseline_lock"
+                                android:translationZ="10dp"
+                                app:tint="@color/c_lock_tint"
+                                tools:ignore="RtlSymmetry" />
 
-                        <ImageButton
-                            android:id="@+id/pVoiceInput"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="-50dp"
-                            android:layout_marginTop="-1dp"
-                            android:layout_marginEnd="15dp"
-                            android:background="@xml/hx_ripple_default_round"
-                            android:contentDescription="@string/GENERAL_TODO"
-                            android:onClick="onVoiceClick"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:scaleX="1.1"
-                            android:scaleY="1.1"
-                            android:src="@xml/ic_baseline_keyboard_voice"
-                            android:tint="@color/c_text_v8"
-                            android:visibility="invisible" />
+                            <View
+                                android:id="@+id/pSearchDivider"
+                                android:layout_width="1px"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="3dp"
+                                android:background="@color/c_home_side"
+                                android:translationZ="1dp"
+                                tools:ignore="RtlSymmetry" />
 
-                        <Button
-                            android:id="@+id/pNewTab"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="-1dp"
-                            android:layout_marginBottom="0dp"
-                            android:background="@xml/gx_generic_tab_button"
-                            android:contentDescription="@string/GENERAL_TODO"
-                            android:scaleType="fitCenter"
-                            android:text="@string/HOME_TAB_TEXT"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="12.5sp"
-                            android:tint="@color/black" />
+                            <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
+                                android:id="@+id/pSearchInput"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="-41dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_weight="1"
+                                android:animateLayoutChanges="true"
+                                android:background="@xml/gx_generic_input"
+                                android:completionHintView="@layout/hint_view"
+                                android:dropDownAnchor="@id/pSearchEngineBar"
+                                android:ems="10"
+                                android:fadingEdgeLength="20dp"
+                                android:focusableInTouchMode="true"
+                                android:focusedByDefault="false"
+                                android:hint="@string/GENERAL_SEARCH_HINT"
+                                android:imeOptions="flagNoExtractUi"
+                                android:importantForAutofill="no"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:paddingStart="52dp"
+                                android:paddingEnd="15dp"
+                                android:paddingBottom="2dp"
+                                android:popupElevation="0dp"
+                                android:requiresFadingEdge="horizontal"
+                                android:selectAllOnFocus="true"
+                                android:text="@string/GENERAL_HOME_URL"
+                                android:textColor="@color/c_text_v1"
+                                android:textColorHighlight="@color/c_text_color_highlight_v2"
+                                android:textColorHint="@color/c_text_v2"
+                                android:textCursorDrawable="@xml/gx_search_cursor_state"
+                                android:textIsSelectable="false"
+                                android:textSize="16sp"
+                                app:hintAnimationEnabled="false"
+                                tools:targetApi="o">
 
-                        <ImageButton
-                            android:id="@+id/pMenu"
-                            android:layout_width="35dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="-3dp"
-                            android:layout_marginEnd="0dp"
-                            android:background="@xml/gx_ripple_gray"
-                            android:contentDescription="@string/GENERAL_TODO"
-                            android:onClick="onOpenMenuItem"
-                            android:paddingStart="8dp"
-                            android:paddingTop="15dp"
-                            android:paddingEnd="8dp"
-                            android:paddingBottom="15dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/menu_item"
-                            android:tint="@color/c_navigation_tint" />
+                            </com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager>
+
+                            <ImageButton
+                                android:id="@+id/pVoiceInput"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="-50dp"
+                                android:layout_marginTop="-1dp"
+                                android:layout_marginEnd="15dp"
+                                android:background="@xml/hx_ripple_default_round"
+                                android:contentDescription="@string/GENERAL_TODO"
+                                android:onClick="onVoiceClick"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:scaleX="1.1"
+                                android:scaleY="1.1"
+                                android:src="@xml/ic_baseline_keyboard_voice"
+                                android:visibility="invisible"
+                                app:tint="@color/c_text_v8" />
+
+                            <Button
+                                android:id="@+id/pNewTab"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="-1dp"
+                                android:layout_marginBottom="0dp"
+                                android:background="@xml/gx_generic_tab_button"
+                                android:contentDescription="@string/GENERAL_TODO"
+                                android:scaleType="fitCenter"
+                                android:text="@string/HOME_TAB_TEXT"
+                                android:textColor="@color/c_text_v1"
+                                android:textSize="12.5sp"
+                                android:tint="@color/black" />
+
+                            <ImageButton
+                                android:id="@+id/pMenu"
+                                android:layout_width="35dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-3dp"
+                                android:layout_marginEnd="0dp"
+                                android:background="@xml/gx_ripple_gray"
+                                android:contentDescription="@string/GENERAL_TODO"
+                                android:onClick="onOpenMenuItem"
+                                android:paddingStart="8dp"
+                                android:paddingTop="15dp"
+                                android:paddingEnd="8dp"
+                                android:paddingBottom="15dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/menu_item"
+                                app:tint="@color/c_navigation_tint" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <ImageView
+                        android:id="@+id/pTopBarHider"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:alpha="0"
+                        android:background="@color/c_background"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:focusable="false"
+                        android:translationZ="4dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/pTopBarHider"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:alpha="0"
-                    android:background="@color/c_background"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:focusable="false"
-                    android:translationZ="4dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Live Build -->
-                <com.mopub.mobileads.MoPubView
-                    android:id="@+id/pAdView"
-                    android:layout_width='320dp'
-                    android:layout_height='50dp'
-                    android:alpha="0"
-                    android:background="@color/c_border_background_divider"
-                    android:visibility="gone"
-                    app:moPubAdSize='match_view'
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pTopbar" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -242,11 +241,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pWebLayoutView"
-                android:paddingBottom="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="0dp"
                 android:background="@color/c_background"
+                android:paddingBottom="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
@@ -256,6 +255,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="1"
+                    android:visibility="gone"
                     android:background="@color/c_background"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -736,10 +736,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginBottom="20dp"
+                android:alpha="0"
                 android:background="@xml/hx_border_left"
                 android:ellipsize="end"
                 android:gravity="start"
-                android:alpha="0"
                 android:maxHeight="250dp"
                 android:maxLines="4"
                 android:minHeight="80dp"
@@ -769,7 +769,7 @@
                 app:srcCompat="@drawable/icon_loading" />
 
             <ImageView
-                android:id="@+id/pBlocker"
+                android:id="@+id/pSecureRootBlocker"
                 android:layout_width="189dp"
                 android:layout_height="65dp"
                 android:layout_marginTop="14dp"
@@ -787,7 +787,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-    
+
     <include
         android:id="@+id/pFindBar"
         layout="@layout/popup_find"
@@ -797,7 +797,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/adView" />
 
     <include
         android:id="@+id/pSearchEngineBar"
@@ -808,7 +808,8 @@
         android:elevation="8dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adView" />
 
     <ImageView
         android:id="@+id/pBlockerFullSceen"
@@ -844,7 +845,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/pCoordinatorLayout"
+        app:layout_constraintTop_toTopOf="@+id/pSplashLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

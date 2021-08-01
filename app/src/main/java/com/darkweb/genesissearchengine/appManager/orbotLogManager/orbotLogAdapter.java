@@ -53,28 +53,28 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
 
     /*View Holder Extensions*/
     class listViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView mHeader;
-        TextView mDescription;
-        ConstraintLayout mRowContainerInner;
+        TextView mOrbotRowHeader;
+        TextView mOrbotRowDescription;
+        ConstraintLayout mOrbotRowContainer;
 
         listViewHolder(View itemView) {
             super(itemView);
         }
 
         void bindListView(logRowModel model) {
-            mHeader = itemView.findViewById(R.id.pHeader);
-            mDescription = itemView.findViewById(R.id.pDescription);
-            mRowContainerInner = itemView.findViewById(R.id.pRowContainerInner);
+            mOrbotRowHeader = itemView.findViewById(R.id.pOrbotRowHeader);
+            mOrbotRowDescription = itemView.findViewById(R.id.pOrbotRowDescription);
+            mOrbotRowContainer = itemView.findViewById(R.id.pOrbotRowContainer);
 
-            mHeader.setText((this.getLayoutPosition() + ". " + model.getLog()));
-            mDescription.setText(model.getDate());
-            mRowContainerInner.setOnClickListener(this);
+            mOrbotRowHeader.setText((this.getLayoutPosition() + ". " + model.getLog()));
+            mOrbotRowDescription.setText(model.getDate());
+            mOrbotRowContainer.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_LOG_DUCKDUCK + Uri.encode(" " + mModelList.get(this.getLayoutPosition()).getLog())));
-            intent.putExtra(SearchManager.QUERY, mDescription.getText());
+            intent.putExtra(SearchManager.QUERY, mOrbotRowDescription.getText());
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             activityContextManager.getInstance().getHomeController().startActivity(intent);
         }

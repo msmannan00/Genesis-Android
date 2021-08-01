@@ -39,7 +39,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:onClick="onNavigationBackPressed"
                         android:src="@xml/ic_arrow_back"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:src="@xml/ic_baseline_browser"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -132,7 +132,7 @@
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:src="@xml/ic_baseline_home"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -181,8 +181,8 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:tint="@color/c_navigation_tint"
-                        android:src="@xml/ic_arrow_right"/>
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -208,7 +208,7 @@
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:src="@xml/ic_baseline_search"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -256,8 +256,8 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
-                        android:tint="@color/c_navigation_tint"
-                        android:src="@xml/ic_arrow_right" />
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -281,7 +281,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:src="@xml/ic_baseline_privacy"
@@ -331,8 +331,8 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
-                        android:tint="@color/c_navigation_tint"
-                        android:src="@xml/ic_arrow_right" />
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -351,7 +351,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:src="@xml/ic_baseline_remove_red_eye"
@@ -401,8 +401,8 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
-                        android:tint="@color/c_navigation_tint"
-                        android:src="@xml/ic_arrow_right" />
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -425,7 +425,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -473,9 +473,9 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
-                        android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        android:contentDescription="@string/GENERAL_TODO"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -501,7 +501,7 @@
                         android:padding="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:src="@xml/ic_baseline_accessibility"
                         android:contentDescription="@string/GENERAL_TODO" />
 
@@ -547,9 +547,9 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
-                        android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        android:contentDescription="@string/GENERAL_TODO"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -573,7 +573,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:src="@xml/ic_baseline_clear"
@@ -621,9 +621,9 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
-                        android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        android:contentDescription="@string/GENERAL_TODO"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -644,7 +644,7 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        app:tint="@color/c_icon_tint"
+                        app:tint="@color/c_setting_icon_tint"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="10dp"
@@ -695,9 +695,9 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:layout_marginEnd="5dp"
-                        android:tint="@color/c_navigation_tint"
                         android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        android:contentDescription="@string/GENERAL_TODO"
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -726,7 +726,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_vpn"
-                        app:tint="@color/c_icon_tint" />
+                        app:tint="@color/c_setting_icon_tint" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -773,7 +773,7 @@
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_arrow_right"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -802,7 +802,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_rate"
-                        app:tint="@color/c_icon_tint" />
+                        app:tint="@color/c_setting_icon_tint" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -849,7 +849,7 @@
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_arrow_right"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -872,7 +872,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_share"
-                        app:tint="@color/c_icon_tint" />
+                        app:tint="@color/c_setting_icon_tint" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -919,7 +919,7 @@
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_arrow_right"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -949,7 +949,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_policy"
-                        app:tint="@color/c_icon_tint" />
+                        app:tint="@color/c_setting_icon_tint" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -996,7 +996,7 @@
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_arrow_right"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -1019,7 +1019,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_report"
-                        app:tint="@color/c_icon_tint" />
+                        app:tint="@color/c_setting_icon_tint" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -1066,7 +1066,7 @@
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_arrow_right"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -1089,7 +1089,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_sitemap"
-                        app:tint="@color/c_icon_tint" />
+                        app:tint="@color/c_setting_icon_tint" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -1136,7 +1136,7 @@
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_arrow_right"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
@@ -1167,7 +1167,7 @@
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@xml/ic_baseline_fingerprint"
-                        app:tint="@color/c_icon_tint" />
+                        app:tint="@color/c_setting_icon_tint" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -1214,7 +1214,7 @@
                         android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:src="@xml/ic_arrow_right"
-                        android:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 

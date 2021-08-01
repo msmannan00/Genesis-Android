@@ -91,7 +91,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     {
         holder.bindListView(mModelList.get(position));
         holder.itemView.setTag(position);
-        holder.itemView.findViewById(R.id.pRemoveRow).setTag(position);
+        holder.itemView.findViewById(R.id.pOrbotRowRemove).setTag(position);
         holder.itemView.findViewById(R.id.pLoadSession).setTag(position);
 
         if(position == 0 && status.sTabGridLayoutEnabled && !mViewLoaded){
@@ -268,10 +268,10 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         }
 
         void bindListView(tabRowModel model) {
-            mHeader = itemView.findViewById(R.id.pHeader);
-            mDescription = itemView.findViewById(R.id.pDescription);
+            mHeader = itemView.findViewById(R.id.pOrbotRowHeader);
+            mDescription = itemView.findViewById(R.id.pOrbotRowDescription);
             mLoadSession = itemView.findViewById(R.id.pLoadSession);
-            mRemoveRow = itemView.findViewById(R.id.pRemoveRow);
+            mRemoveRow = itemView.findViewById(R.id.pOrbotRowRemove);
             mWebThumbnail = itemView.findViewById(R.id.pWebThumbnail);
             mDate = itemView.findViewById(R.id.pDate);
             mSelectedView = itemView.findViewById(R.id.pSelectedView);
@@ -340,6 +340,15 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     mHeader.setText("about:blank");
                 }
 
+                if(mHeadText.startsWith("resource")){
+                    if(mHeadText.equals(CONST_GENESIS_URL_CACHED) || mHeadText.equals(CONST_GENESIS_URL_CACHED_DARK)){
+                        mHeader.setText(CONST_GENESIS_DOMAIN_URL);
+                    }
+                    else if(mHeadText.equals(CONST_GENESIS_HELP_URL_CACHE) || mHeadText.equals(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                        mHeader.setText(CONST_GENESIS_HELP_URL);
+                    }
+                }
+
                 if(mDescText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")){
                     mDescription.setText(mURL);
                 }
@@ -388,7 +397,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 }
 
             if(status.sTabGridLayoutEnabled){
-                CardView mLayout = itemView.findViewById(R.id.pRowContainerInner);
+                CardView mLayout = itemView.findViewById(R.id.pTABRowContainer);
                 CardView mCardView = itemView.findViewById(R.id.pCardViewParent);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLayout.getLayoutParams();
 
@@ -477,7 +486,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     onSelectionClear(mSelectedView);
                     notifyItemChanged(mModelList.size()-1);
                 }
-            }else if(v.getId() == R.id.pRemoveRow){
+            }else if(v.getId() == R.id.pOrbotRowRemove){
                 v.setEnabled(false);
                 onRemoveRowCross(this.getLayoutPosition());
             }
