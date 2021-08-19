@@ -21,7 +21,7 @@ class settingSearchModel
     /*Helper Methods*/
 
     private void onSetSearchEngine(String pUrl){
-        status.sSettingSearchStatus = pUrl;
+        status.sSettingDefaultSearchEngine = pUrl;
     }
 
     private void setSearchHistory(boolean pStatus){

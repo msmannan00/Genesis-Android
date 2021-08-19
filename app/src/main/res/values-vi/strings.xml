@@ -29,10 +29,6 @@
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Tên của url được đánh dấu sẽ được hiển thị ở đây</string>
     <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Nhập tên dấu trang…</string>
 
-    <!-- Bookmark Alerts -->
-    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Dấu trang bị xóa</string>
-    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Dấu trang được cập nhật</string>
-
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">bỏ qua</string>
 
@@ -63,19 +59,110 @@
     <string name="ORBOT_LOG" translatable="true">nhật ký proxy</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">Thông tin nhật ký hệ thống</string>
     <string name="ORBOT_LOG_INFO" translatable="true">nếu bạn gặp sự cố kết nối khi khởi động Genesis, vui lòng sao chép mã sau và tìm sự cố trực tuyến hoặc gửi cho chúng tôi, để chúng tôi có thể cố gắng giúp bạn</string>
-    <string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">tùy chỉnh proxy</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">chúng tôi kết nối bạn với mạng Tor do hàng nghìn tình nguyện viên trên khắp thế giới điều hành! Những tùy chọn này có thể giúp bạn không</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">Internet được kiểm duyệt ở đây (vượt tường lửa)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">vượt tường lửa</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges khiến Internet chạy rất chậm. chỉ sử dụng chúng nếu internet bị kiểm duyệt ở quốc gia của bạn hoặc mạng Tor bị chặn</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">tùy chỉnh bảo mật</string>
 
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">Cài đặt Bảo Mật</string>
+    <string name="BRIDGE_SETTING" translatable="true">Thay đổi Cài đặt "BRIDGE"</string>
+    <string name="BRIDGE_AUTO" translatable="true">Tạo Tự động</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">Tự động định cấu hình cài đặt "BRIDGE"</string>
+    <string name="BRIDGE_MANUAL" translatable="true">Cung cấp một "BRIDGE" mà tôi biết</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Dán tùy chỉnh "BRIDGE"</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">"BRIDGE" là các rơ le Tor không được liệt kê khiến việc chặn các kết nối vào mạng Tor trở nên khó khăn hơn. Vì cách một số quốc gia cố gắng chặn Tor, "BRIDGE" nhất định hoạt động ở một số quốc gia nhưng không hoạt động ở một số quốc gia khác</string>
+    <string name="BRIDGE_TITLE" translatable="true">Chọn Mặc định "BRIDGE"</string>
+    <string name="BRIDGE_REQUEST" translatable="true">Yêu cầu</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Khuyến nghị)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (Trung Quốc)</string>
+    
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">thay đổi cách hiển thị Nhật ký hệ thống</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">hiển thị Nhật ký bằng chế độ xem danh sách hiện đại</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle giữa chế độ xem danh sách cổ điển và hiện đại</string>
 
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Đã xóa dấu trang</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Đã cập nhật dấu trang</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Đã xóa dữ liệu thành công</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL được sao chép vào khay nhớ tạm</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Không tìm thấy ứng dụng nào</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Yêu cầu khởi động lại sau khi thay đổi</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">Khởi động lại</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Bị đóng</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Tab mới đã mở</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy kết nối ...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Bộ nhớ đầy ➔ Xóa tab</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Cửa sổ bật lên bị chặn</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Mở Nhật Ký Lỗi</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Chuyển đổi</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Hoàn tác</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Danh tính mới được tạo</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">mở cài đặt</string>
 
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Yêu Cầu Mới Bridge</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Chọn E-mail bên dưới để yêu cầu địa chỉ Bridge. Sau khi bạn có địa chỉ, hãy sao chép và dán nó vào ô trên và khởi động ứng dụng.</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">Thư tín</string>
 
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">XIN LỖI KHI NGHE RỒI</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Nếu bạn gặp khó khăn khi sử dụng ứng dụng này, vui lòng liên hệ với chúng tôi qua email. Chúng tôi sẽ cố gắng giải quyết vấn đề của bạn càng sớm càng tốt</string>
 
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">KHẮC PHỤC SỰ CỐ</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Đặt lại ứng dụng trong trường hợp nó không hoạt động. Chúng tôi sẽ cố gắng cấu hình lại nó để nó có thể hoạt động trở lại.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Đặt lại</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Loại bỏ</string>
 
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Đang chờ tải xuống ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Tải xuống</string>
 
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">Đánh Giá US</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">Cho người khác biết suy nghĩ của bạn về ứng dụng này</string>
+    <string name="ALERT_RATE" translatable="true">Đánh giá</string>
 
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Đã xong</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge kiểu (obfs4, meek, ...)</string>
 
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Đánh Dấu Trang Web</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Thêm trang này vào dấu trang của bạn</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bookmark tên ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Đã xong</string>
 
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">Thông Báo URL</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Mở Trong Tab Mới</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Mở Trong Tab Hiện Tại</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Sao chép vào Clipboard</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Tải Xuống Tệp</string>
 
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Mở url trong tab mới</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Mở url trong tab hiện tại</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Sao chép url vào khay nhớ tạm</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Mở hình ảnh trong tab mới</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Mở tab hình ảnh hiện tại</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Sao chép hình ảnh vào khay nhớ tạm</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Tải xuống tệp hình ảnh</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">cung cấp một Bridge bạn biết</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">nhập thông tin bridge từ một nguồn đáng tin cậy</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">yêu cầu</string>
 
 
 
@@ -115,9 +202,6 @@
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">thông báo địa phương</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">tùy chỉnh thông báo phần mềm</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">thông báo hệ thống</string>
-    <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">thay đổi cách hiển thị Nhật ký hệ thống</string>
-    <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">hiển thị Nhật ký bằng chế độ xem danh sách hiện đại</string>
-    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">toogle giữa chế độ xem danh sách cổ điển và hiện đại</string>
     <string name="SETTING_SEARCH" translatable="true">Quản lý công cụ tìm kiếm</string>
     <string name="SETTING_SEARCH_INFO" translatable="true">thêm, đặt mặc định. hiển thị đề xuất</string>
     <string name="SETTING_NOTIFICATION" translatable="true">quản lý thông báo</string>
@@ -255,35 +339,18 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">loại bỏ tùy chỉnh trình duyệt</string>
 
 
-    <string name="ALERT_UPDATE_BRIDGES" translatable="true">cung cấp một Bridge bạn biết</string>
-    <string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">nhập thông tin bridge từ một nguồn đáng tin cậy</string>
-    <string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-    <string name="ALERT_REQUEST_BRIDGE" translatable="true">yêu cầu</string>
-    <string name="ALERT_SAVE_BRIDGE" translatable="true">đồng ý</string>
-
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">bookmark website</string>
-    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">thêm trang này vào dấu trang của bạn</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">xóa các liên kết web đã duyệt và Dữ liệu</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">xóa dấu trang và dữ liệu</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">xóa dữ liệu sẽ xóa các liên kết web đã duyệt, cookie và dữ liệu duyệt web khác</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">xóa dữ liệu sẽ xóa các trang web được đánh dấu</string>
     <string name="ALERT_CLEAR" translatable="true">hủy bỏ</string>
-    <string name="ALERT_ADD" translatable="true">đồng ý</string>
-    <string name="ALERT_TITLE_ADD" translatable="true">dấu trang mới</string>
     <string name="ALERT_SECURE" translatable="false">https://</string>
     <string name="ALERT_REPORT" translatable="true">báo cáo</string>
     <string name="ALERT_REPORT_URL" translatable="true">báo cáo trang web</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">nếu bạn cho rằng URL này bất hợp pháp hoặc đáng lo ngại, hãy báo cáo cho chúng tôi để chúng tôi có thể thực hiện hành động pháp lý</string>
     <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">đã được báo cáo thành công</string>
     <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">url đã được báo cáo thành công. nếu một cái gì đó được tìm thấy, hành động pháp lý sẽ được thực hiện</string>
-    <string name="ALERT_RATEUS" translatable="true">đánh giá chúng tôi</string>
-    <string name="ALERT_RATEUS_INFO" translatable="true">cho người khác biết suy nghĩ của bạn về ứng dụng này</string>
-    <string name="ALERT_RATE" translatable="true">tỷ lệ</string>
-    <string name="ALERT_RATEUS_FAILURE" translatable="true">Chúng tôi càm thấy rất buồn khi nghe điều đó!</string>
-    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Nếu bạn gặp khó khăn khi sử dụng phần mềm này, vui lòng liên hệ với chúng tôi qua email. chúng tôi sẽ cố gắng giải quyết vấn đề của bạn càng sớm càng tốt</string>
-    <string name="ALERT_MAIL" translatable="true">thư</string>
-    <string name="ALERT_BRIDGE_MAIL" translatable="true">yêu cầu mới Bridge</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">chọn thư để yêu cầu địa chỉ bridge. khi bạn nhận được nó, hãy sao chép và dán nó vào hộp bên trên và khởi động phần mềm.</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">ngôn ngữ không được hỗ trợ</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">ngôn ngữ hệ thống không được phần mềm này hỗ trợ. chúng tôi đang làm việc để sớm đưa nó vào</string>
     <string name="ALERT_ORBOT_INIT" translatable="true">khởi tạo Orbot</string>
@@ -300,42 +367,16 @@
     <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">xã hội xã hội</string>
     <string name="ALERT_LOCAL_UPGRADE" translatable="true">sổ tay</string>
     <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">Cửa hang tro chơi</string>
-    <string name="ALERT_LONG_URL" translatable="true">thông báo liên kết web</string>
-    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">mở trang mới</string>
-    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">mở trong tab hiện tại</string>
-    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">sao chép vào clipboard</string>
     <string name="ALERT_LONG_FILE" translatable="true">thông báo tệp</string>
     <string name="ALERT_DOWNLOAD" translatable="true">thông báo tải xuống</string>
-    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">mở url trong tab mới</string>
-    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">mở url trong tab hiện tại</string>
-    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">sao chép url vào khay nhớ tạm</string>
-    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Mở hình ảnh trong trang mới</string>
-    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">mở hình ảnh trong tab hiện tại</string>
-    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">sao chép hình ảnh vào khay nhớ tạm</string>
-    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">tải xuống tệp hình ảnh</string>
     <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">thông báo tải xuống</string>
     <string name="ALERT_LONG_URL_TITLE" translatable="true">thông báo liên kết web</string>
     <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">không tìm thấy phần mềm để xử lý email</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">tải tập tin |</string>
     <string name="ALERT_DATA_CLEARED" translatable="true">dữ liệu bị xóa | yêu cầu khởi động lại</string>
-    <string name="ALERT_DATA_CLEARED_INFO" translatable="true">dữ liệu cá nhân đã được xóa thành công. một số cài đặt hệ thống mặc định sẽ yêu cầu phần mềm này khởi động lại. bây giờ bạn có thể tiếp tục duyệt một cách an toàn</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">tab đã đóng</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Hoàn tác</string>
 
 
-    <string name="BRIDGE_BASIC_SETTING" translatable="true">tùy chỉnh bảo mật</string>
-    <string name="BRIDGE_SETTING" translatable="true">Bridge tùy chỉnh</string>
-    <string name="BRIDGE_AUTO" translatable="true">tạo tự động</string>
-    <string name="BRIDGE_AUTO_INFO" translatable="true">tự động cấu hình tùy chỉnh bridge</string>
-    <string name="BRIDGE_MANUAL" translatable="true">cung cấp một bridge mà bạn biết</string>
-    <string name="BRIDGE_PORT_HINT" translatable="true">dán tùy chỉnh bridge</string>
-    <string name="BRIDGE_HEADER" translatable="true">tùy chỉnh proxy | Bridge</string>
-    <string name="BRIDGE_DESC" translatable="true">Bridges là các rơ le Tor không công khai khiến việc chặn các kết nối vào mạng Tor trở nên khó khăn hơn. vì cách một số quốc gia cố gắng chặn Tor, một số bridges hoạt động ở một số quốc gia nhưng không hoạt động ở những quốc gia khác</string>
-    <string name="BRIDGE_TITLE" translatable="true">chọn mặc định bridge</string>
-    <string name="BRIDGE_REQUEST" translatable="true">yêu cầu</string>
-    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (khuyến nghị)</string>
-    <string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -418,11 +459,6 @@
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">bạn có thể thay đổi proxy bằng cách khởi động lại phần mềm và chuyển đến trình quản lý proxy. nó có thể được mở bằng cách nhấp vào biểu tượng bánh răng ở dưới cùng</string>
 
 
-    <string name="ORBOT_HEADER" translatable="true">tùy chỉnh proxy</string>
-    <string name="ORBOT_DESCRIPTION" translatable="true">chúng tôi kết nối bạn với mạng Tor do hàng nghìn tình nguyện viên trên khắp thế giới điều hành! Những tùy chọn này có thể giúp bạn không</string>
-    <string name="ORBOT_TITLE" translatable="true">Internet được kiểm duyệt ở đây (vượt tường lửa)</string>
-    <string name="ORBOT_OPTION_DESCRIPTION" translatable="true">vượt tường lửa</string>
-    <string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges khiến Internet chạy rất chậm. chỉ sử dụng chúng nếu internet bị kiểm duyệt ở quốc gia của bạn hoặc mạng Tor bị chặn</string>
 
 
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

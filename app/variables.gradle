@@ -1,6 +1,6 @@
 /* Version */
-project.ext.vname = 'Build | Dark-Origin 1.4.7.2'
-project.ext.vcode = 180
+project.ext.vname = 'Build | Dark-Origin 1.4.7.9'
+project.ext.vcode = 245
 project.ext.buildType = 'release'
 
 /* dimension */
@@ -73,6 +73,7 @@ project.ext.resource_directories = [
         'src/main/res/custom-xml/orbot',
         'src/main/res/custom-xml/orbot_log',
         'src/main/res/custom-xml/setting',
+        'src/main/res/custom-xml/bridge',
         'src/main/res/layouts',
         'src/main/res/images',
         'src/main/res'

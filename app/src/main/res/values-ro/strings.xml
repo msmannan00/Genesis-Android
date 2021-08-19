@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Numele adresei URL marcate va fi afișat aici</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Introduceți numele marcajului ...</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Marcajul este eliminat</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Marcajul este actualizat</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">renunța</string>
 
@@ -63,11 +59,113 @@
 	<string name="ORBOT_LOG" translatable="true">jurnale proxy</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Informații jurnal sistem</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">dacă vă confruntați cu o problemă de conectivitate în timp ce începeți Genesis, vă rugăm să copiați următorul cod și să găsiți problema online sau să ni-l trimiteți, astfel încât să putem încerca să vă ajutăm</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">personalizare proxy</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">vă conectăm la rețeaua Tor condusă de mii de voluntari din întreaga lume! Vă pot ajuta aceste opțiuni</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">internetul este cenzurat aici (bypass firewall)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">ocolire firewall</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges face ca internetul să funcționeze foarte lent. folosiți-le numai dacă internetul este cenzurat în țara dvs. sau dacă rețeaua Tor este blocată</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">personalizare securitate</string>
 
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Setări De Securitate</string>
+	<string name="BRIDGE_SETTING" translatable="true">Modificați Setările „BRIDGE”</string>
+	<string name="BRIDGE_AUTO" translatable="true">Creați Automat</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Configurați automat setările „BRIDGE”</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Furnizați un „BRIDGE” pe care îl știu</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Inserați „BRIDGE” personalizat</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">„BRIDGE” sunt relee Tor nelistate care fac mai dificilă blocarea conexiunilor în rețeaua Tor. Datorită modului în care unele țări încearcă să blocheze Tor, anumite „PODURI” funcționează în unele țări, dar nu în altele</string>
+	<string name="BRIDGE_TITLE" translatable="true">Selectați „BRIDGE” implicit</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Cerere</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recomandat)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
 
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">schimba modul în care apar jurnalul de sistem</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">afișează Jurnal folosind vizualizarea listă modernă</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">comutați între vizualizarea listă clasică și modernă</string>
 
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Marcaj eliminat</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Marcaj actualizat</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Datele au fost șterse cu succes</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL copiat în clipboard</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Nu a fost găsită nicio aplicație</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Reporniți necesarul după modificări</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Reporniți</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Fila Este închisă</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">S-a deschis o filă nouă</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Conectarea proxy-ului Genesis ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memoria este plină tab fila Clearing</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup blocat</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Deschideți Jurnalele De Erori</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Comutare</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Anula</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Nouă identitate creată</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">deschide setările</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Cerere Nouă Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Selectați E-mailul de mai jos pentru a solicita o adresă Bridge. După ce aveți o adresă, copiați-o și lipiți-o în caseta de mai sus și porniți aplicația.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">SCUZĂ-MĂ SĂ ASCULTĂ CĂ</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Dacă întâmpinați dificultăți în timpul utilizării acestei aplicații, vă rugăm să ne contactați prin e-mail. Vom încerca să vă rezolvăm problema cât mai curând posibil DEPANARE</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">Resetați aplicația în caz că nu funcționează. Vom încerca să-l reconfigurăm, astfel încât să funcționeze din nou.</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Resetați</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Renunță</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Se așteaptă descărcarea ...</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Descărcați</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Evaluează SUA</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Spuneți Altora Ce Părere Aveți Despre Această Aplicație</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Tarif</string>
+	<string name="ALERT_RATE" translatable="true">Gata</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Bridge șir (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Tip Bridge (obfs4, blând, ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Site de marcaje</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Adăugați Această Pagină La Marcajele Dvs.</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">numele marcajului ...</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">Gata</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Notificare URL</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">Deschideți în Filă Nouă</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Deschideți în Fila Curentă</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Copiați în Clipboard</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Descărcați fișierul Deschideți adresa URL în fila nouă</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Deschideți Adresa URL în Fila Curentă</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Copiați adresa URL în clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Deschideți imaginea într-o filă nouă</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Deschideți fila curentă a imaginii</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Copiați imaginea în clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Descărcați fișierul imagine</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Furnizați un Bridge știu</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">OFERI A Bridge</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">oferiți un Bridge pe care îl cunoașteți</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">introduceți bridge informații dintr-o sursă de încredere</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">cerere</string>
+	
+	
+	
 
 
 
@@ -106,9 +204,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">notificări locale</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">personalizați notificarea software-ului</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">notificări de sistem</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">schimba modul în care apar jurnalul de sistem</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">afișează Jurnal folosind vizualizarea listă modernă</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">comutați între vizualizarea listă clasică și modernă</string>
 	<string name="SETTING_SEARCH" translatable="true">gestionați motorul de căutare</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">adăugați, setați implicit. arată sugestii</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">gestionați notificările</string>
@@ -246,35 +341,20 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">eliminați personalizarea browserului</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">oferiți un Bridge pe care îl cunoașteți</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">introduceți bridge informații dintr-o sursă de încredere</string>
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">cerere</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">Bine</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">site de marcaje</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">adăugați această pagină la marcajele dvs.</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">ștergeți linkurile web și datele navigate</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">marcaj clar și date</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">ștergerea datelor va elimina linkurile web navigate, cookie-urile și alte date de navigare</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">ștergerea datelor va șterge site-urile marcate</string>
 	<string name="ALERT_CLEAR" translatable="true">Anulare</string>
-	<string name="ALERT_ADD" translatable="true">Bine</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">semn de carte nou</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">raport</string>
 	<string name="ALERT_REPORT_URL" translatable="true">raportați site-ul web</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">dacă credeți că această adresă URL este ilegală sau deranjantă, raportați-ne, astfel încât să putem acționa în justiție</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">a fost raportat cu succes</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">adresa URL a fost raportată cu succes. dacă se va găsi ceva, vor fi luate măsuri legale</string>
-	<string name="ALERT_RATEUS" translatable="true">ne evalua</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">spuneți altora ce părere aveți despre această aplicație</string>
-	<string name="ALERT_RATE" translatable="true">rată</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">ne pare rău să auzim asta!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">dacă aveți dificultăți în timpul utilizării acestui software, vă rugăm să ne contactați prin e-mail. vom încerca să vă rezolvăm problema cât mai curând posibil</string>
-	<string name="ALERT_MAIL" translatable="true">Poștă</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">solicitați Bridge nou</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">selectați e-mail pentru a solicita o adresă bridge. după ce îl primiți, copiați-l și lipiți-l în caseta de mai sus și porniți software-ul.</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">limba nu este acceptată</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">limba de sistem nu este acceptată de acest software. lucrăm să-l includem în curând</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">inițializarea Orbot</string>
@@ -291,42 +371,16 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">societățile sociale</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">manual</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">magazin de joacă</string>
-	<string name="ALERT_LONG_URL" translatable="true">notificare legătură web</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">deschideți într-o filă nouă</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">deschideți în fila curentă</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">copiați în clipboard</string>
 	<string name="ALERT_LONG_FILE" translatable="true">notificare fișier</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">notificarea de descărcare</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">deschideți adresa URL în fila nouă</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">deschideți adresa URL în fila curentă</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">copiați adresa URL în clipboard</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">deschideți imaginea într-o filă nouă</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">deschideți imaginea în fila curentă</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">copiați imaginea în clipboard</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">descărcați fișierul imagine</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">notificarea de descărcare</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">notificare legătură web</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">nu s-a găsit niciun software care să gestioneze e-mailul</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">descărcare fișier |</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">date șterse | repornire necesară</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">datele private au fost șterse cu succes. unele setări implicite ale sistemului vor necesita repornirea acestui software. acum puteți continua navigarea în siguranță</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">fila închisă</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Anula</string>
 
 
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">personalizare securitate</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge personalizați</string>
-	<string name="BRIDGE_AUTO" translatable="true">creați automat</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">configurați automat bridge de personalizare</string>
-	<string name="BRIDGE_MANUAL" translatable="true">furnizați un bridge pe care îl cunoașteți</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">paste custom bridge</string>
-	<string name="BRIDGE_HEADER" translatable="true">personalizare proxy | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">Bridges sunt relee Tor nelistate care fac mai dificilă blocarea conexiunilor în rețeaua Tor. din cauza modului în care unele țări încearcă să blocheze Tor, anumite bridges funcționează în unele țări, dar nu în altele</string>
-	<string name="BRIDGE_TITLE" translatable="true">selectați bridge implicit</string>
-	<string name="BRIDGE_REQUEST" translatable="true">cerere</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (recomandat)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -409,11 +463,6 @@
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">puteți schimba proxy prin repornirea software-ului și accesând managerul proxy. poate fi deschis făcând clic pe o pictogramă roată din partea de jos</string>
 
 
-	<string name="ORBOT_HEADER" translatable="true">personalizare proxy</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">vă conectăm la rețeaua Tor condusă de mii de voluntari din întreaga lume! Vă pot ajuta aceste opțiuni</string>
-	<string name="ORBOT_TITLE" translatable="true">internetul este cenzurat aici (bypass firewall)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">ocolire firewall</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges face ca internetul să funcționeze foarte lent. folosiți-le numai dacă internetul este cenzurat în țara dvs. sau dacă rețeaua Tor este blocată</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">implicit.jpg</string>
@@ -458,7 +507,8 @@
 		<item>70 la sută</item>
 		<item>85 la sută</item>
 		<item>100 la sută</item>
-		<item>115 la sută</item>
+		<item>11
+			5 la sută</item>
 		<item>130 la sută</item>
 		<item>145 la sută</item>
 	</string-array>

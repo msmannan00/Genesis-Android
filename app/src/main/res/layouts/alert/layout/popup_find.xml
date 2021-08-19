@@ -2,12 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pPopupFindContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/pNavigationContainer"
+        android:id="@+id/pPopupFindNavigationContainer"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="2dp"
@@ -20,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/pFindText"
+            android:id="@+id/pPopupFindNext"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -33,21 +34,23 @@
             android:padding="15dp"
             android:textColor="@color/c_text_v1"
             android:textColorHint="@color/c_hint_text"
-            android:textSize="16sp">
+            android:textSize="16sp"
+            tools:ignore="TextContrastCheck"
+            tools:targetApi="o">
 
         </EditText>
 
         <TextView
-            android:id="@+id/pFindCount"
+            android:id="@+id/pPopupFindCount"
             android:layout_width="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
-            android:singleLine="true"
-            android:width="60dp"
-            android:text="0/0"
-            android:textColor="@color/c_text_v6"
             android:layout_height="wrap_content"
-            android:textAlignment="center"/>
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:width="60dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="@color/c_text_v6"
+            tools:ignore="TextContrastCheck" />
 
         <View
             android:layout_width="1dp"
@@ -56,40 +59,43 @@
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="5dp"
             android:background="@color/c_divider_line_light"
-            app:layout_constraintBottom_toTopOf="@+id/pNavigationContainer" />
+            app:layout_constraintBottom_toTopOf="@+id/pPopupFindNavigationContainer" />
 
         <ImageButton
-            android:id="@+id/pFindPrevious"
+            android:id="@+id/pPopupFindTop"
             android:layout_width="50dp"
-            android:layout_gravity="center"
             android:layout_height="50dp"
-            android:onClick="onFindPrev"
+            android:layout_gravity="center"
             android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="onFindPrev"
             android:src="@xml/ic_baseline_keyboard_arrow_up"
-            android:tint="@color/c_navigation_tint"
-            android:contentDescription="@string/GENERAL_TODO" />
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="DuplicateSpeakableTextCheck,UsingOnClickInXml" />
 
         <ImageButton
-            android:id="@+id/pFindNext"
+            android:id="@+id/pPopupFindBottom"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:onClick="onFindNext"
             android:layout_gravity="center"
             android:background="@xml/gx_ripple_default_round"
             android:src="@xml/ic_baseline_keyboard_arrow_down"
-            android:tint="@color/c_navigation_tint"
-            android:contentDescription="@string/GENERAL_TODO" />
+            android:contentDescription="@string/GENERAL_TODO"
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="UsingOnClickInXml" />
 
         <ImageButton
-            android:id="@+id/pClose"
+            android:id="@+id/pPopupFindClose"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:onClick="onHideFindBar"
             android:background="@xml/gx_ripple_default_round"
             android:src="@xml/ic_close"
-            android:tint="@color/c_navigation_tint"
-            android:contentDescription="@string/GENERAL_TODO" />
+            android:contentDescription="@string/GENERAL_TODO"
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="UsingOnClickInXml" />
 
     </LinearLayout>
 

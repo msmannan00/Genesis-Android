@@ -1,7 +1,5 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +7,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.eventObserver;
-import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.helperManager.sharedUIMethod;
-import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 

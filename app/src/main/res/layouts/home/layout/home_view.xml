@@ -5,21 +5,22 @@
     android:id="@+id/pSecureRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c_background_keyboard"
+    android:background="@color/black"
     tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController">
 
-    <LinearLayout
+    <com.mopub.mobileads.MoPubView
         android:id="@+id/adView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:moPubAdSize = "match_view"
         android:layout_centerHorizontal="true"
-        app:adUnitId="ca-app-pub-5074525529134731/8952142500"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/pCoordinatorLayout"
@@ -146,6 +147,7 @@
                                 android:textCursorDrawable="@xml/gx_search_cursor_state"
                                 android:textIsSelectable="false"
                                 android:textSize="16sp"
+                                android:maxLength="200"
                                 app:hintAnimationEnabled="false"
                                 tools:targetApi="o">
 
@@ -227,12 +229,11 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/pNestedScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="fill_vertical"
-            android:layout_marginTop="0dp"
             android:background="@color/clear_alpha"
             android:fillViewport="true"
             android:isScrollContainer="true"
@@ -243,9 +244,7 @@
                 android:id="@+id/pWebLayoutView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="0dp"
                 android:background="@color/c_background"
-                android:paddingBottom="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
@@ -253,10 +252,10 @@
                 <com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:alpha="1"
-                    android:visibility="gone"
                     android:background="@color/c_background"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -711,9 +710,9 @@
                 android:elevation="2dp"
                 android:onClick="onLoadProxy"
                 android:src="@xml/ic_gear"
-                android:tint="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/pDivider1"
-                app:layout_constraintStart_toEndOf="@+id/Connect" />
+                app:layout_constraintStart_toEndOf="@+id/Connect"
+                app:tint="@color/black" />
 
             <ImageButton
                 android:id="@+id/pOrbotLogManager"
@@ -726,9 +725,9 @@
                 android:elevation="2dp"
                 android:onClick="onOrbotLog"
                 android:src="@xml/ic_baseline_bug"
-                android:tint="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/pDivider1"
-                app:layout_constraintStart_toEndOf="@+id/pSettings" />
+                app:layout_constraintStart_toEndOf="@+id/pSettings"
+                app:tint="@color/black" />
 
             <TextView
                 android:id="@+id/pOrbotLogs"
@@ -797,7 +796,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView" />
+        app:layout_constraintTop_toBottomOf="@id/adView" />
 
     <include
         android:id="@+id/pSearchEngineBar"
@@ -809,7 +808,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/pBlockerFullSceen"
@@ -828,24 +827,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include
-        android:id="@+id/pPopupLoadNewTab"
-        layout="@layout/popup_load_new_tab"
-        android:alpha="0"
-        android:elevation="5dp"
-        android:visibility="gone" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mTabFragment"
         android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:alpha="0"
         android:background="@color/c_background"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pCoordinatorLayout"
-        app:layout_constraintTop_toTopOf="@+id/pSplashLayout" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adView"
+        app:layout_constraintVertical_weight="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

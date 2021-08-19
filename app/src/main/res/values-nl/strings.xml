@@ -25,10 +25,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">De naam van de url met bladwijzer wordt hier getoond</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Voer de naam van de bladwijzer in...</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bladwijzer is verwijderd</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bladwijzer is bijgewerkt</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">Sluiten</string>
 
@@ -59,13 +55,110 @@
 	<string name="ORBOT_LOG" translatable="true">Proxylogboeken</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Logboeken Info</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
-	<string name="ORBOT_LOADING_STATIC" translatable="true">Genesis op standby op dit moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="true">Genesis op standby op dit moment</string>
 
+	<!-- Orbot View -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">Te Drukken Proxy-instellingen</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">We verbinden je met het Tor-netwerk dat wordt gerund door duizenden vrijwilligers over de hele wereld! Kunnen deze opties u helpen</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">Internet wordt hier gecensureerd (Bypass Firewall)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">Firewall Omzeilen</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges zorgt ervoor dat internet erg traag werkt. Gebruik ze alleen als internet in uw land wordt gecensureerd of als het Tor-netwerk is geblokkeerd</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">Automatisch Maken</string>
 
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Beveiligingsinstellingen</string>
+	<string name="BRIDGE_SETTING" translatable="true">"BRIDGE" Instellingen Wijzigen</string>
+	<string name="BRIDGE_AUTO" translatable="true">Automatisch Aanmaken</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Configureer automatisch de "BRIDGE"-instellingen</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Geef een "BRIDGE" op die ik ken</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Aangepaste "BRIDGE" plakken</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">"BRIDGE" zijn niet-beursgenoteerde Tor-relais die het moeilijker maken om verbindingen met het Tor-netwerk te blokkeren. Vanwege de manier waarop sommige landen Tor proberen te blokkeren, werken bepaalde "BRIDGE" in sommige landen, maar niet in andere</string>
+	<string name="BRIDGE_TITLE" translatable="true">Selecteer standaard "BRIDGE"</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Aanvraag</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (aanbevolen)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Zacht-azuurblauw (China)</string>
 
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Logboekinstellingen</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">Toon logboeken in geavanceerde lijstweergave</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">Toogle tussen klassieke en geavanceerde weergave</string>
 
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Bladwijzer verwijderd</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Bladwijzer bijgewerkt</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Gegevens succesvol gewist</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL gekopieerd naar klembord</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Geen applicatie gevonden</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Opnieuw opstarten vereist na wijzigingen</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Herstart</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tabblad Is Gesloten</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Nieuw tabblad geopend</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis-proxy verbindt ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Geheugen is vol ➔ Tabblad Wissen</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Pop-up geblokkeerd</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Open Foutenlogboeken</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Schakelaar</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Ongedaan maken</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Nieuwe identiteit gecreëerd</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">open instellingen</string>
 
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Nieuw Bridge Aanvragen</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Selecteer E-mail hieronder om een ​​Bridge-adres aan te vragen. Zodra u een adres heeft, kopieert en plakt u het in het bovenstaande vak en start u de aanvraag.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
 
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">Sorry Hoor Dat</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Als u problemen ondervindt bij het gebruik van deze applicatie, neem dan contact met ons op via e-mail. We zullen proberen uw probleem zo snel mogelijk op te lossen</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">PROBLEEMOPLOSSING</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Reset de applicatie voor het geval het niet werkt. We zullen proberen het opnieuw te configureren, zodat het mogelijk weer werkt.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Reset</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Sluiten</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Wachten om te downloaden ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Downloaden</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Beoordeel VS</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Vertel anderen wat je van deze app vindt</string>
+	<string name="ALERT_RATE" translatable="true">Beoordeel</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Klaar</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge-tekenreeks (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge type (obfs4, zachtmoedig, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Bladwijzer Website</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Voeg deze pagina toe aan uw bladwijzers</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bladwijzernaam...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Klaar</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">URL-melding</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Openen In Nieuw Tabblad</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Openen In Huidig ​​tabblad</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Kopiëren naar klembord</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Bestand Downloaden</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">URL openen in nieuw tabblad</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">URL openen in huidig ​​tabblad</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Kopieer url naar klembord</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Afbeelding openen in nieuw tabblad</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Open afbeelding huidig ​​tabblad</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Kopieer afbeelding naar klembord</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Afbeeldingsbestand downloaden</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">Zorg voor een brug die ik ken</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">Voer bridge-informatie van een vertrouwde bron in</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">Verzoek</string>
 
 
 
@@ -112,9 +205,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">Lokale Meldingen</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Instellingen Voor Apparaatmeldingen</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">Systeemmeldingen</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Logboekinstellingen</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Toon logboeken in geavanceerde lijstweergave</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">Toogle tussen klassieke en geavanceerde weergave</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">Toevoegen, standaard instellen. suggesties weergeven</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">Meldingen Beheren</string>
 	<string name="SETTING_NOTIFICATION_INFO" translatable="true">Nieuwe functies, netwerkstatus</string>
@@ -245,34 +335,19 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">Browserinstellingen wissen</string>
 
 	<!-- Alerts -->
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">Zorg voor een brug die ik ken</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">Voer bridge-informatie van een vertrouwde bron in</string>
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="true">brug snaar ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">Verzoek</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">Klaar</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">Bookmark Website</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Voeg deze pagina toe aan uw bladwijzers</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">Geschiedenis en gegevens wissen</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Bladwijzer en gegevens wissen</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Als u gegevens wist, worden geschiedenis, cookies en andere browsegegevens verwijderd</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Als u gegevens wist, worden websites met bladwijzers verwijderd</string>
 	<string name="ALERT_CLEAR" translatable="true">Wissen</string>
-	<string name="ALERT_ADD" translatable="true">Klaar</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">Nieuwe Bladwijzer</string>
 	<string name="ALERT_REPORT" translatable="true">Rapport</string>
 	<string name="ALERT_REPORT_URL" translatable="true">Website Melden</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">Als u denkt dat deze URL illegaal of storend is, meld dit dan aan ons, zodat we juridische stappen kunnen ondernemen</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">Succesvol Gerapporteerd</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL is succesvol gerapporteerd. Als er iets wordt gevonden, wordt juridische actie ondernomen</string>
-	<string name="ALERT_RATEUS" translatable="true">Beoordeel US</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">Vertel anderen wat je van deze app vindt</string>
-	<string name="ALERT_RATE" translatable="true">Tarief</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">Sorry Dat Te Horen!​Als U Problemen Ondervindt Bij Het Gebruik Van Deze Applicatie, Neem Dan Contact Met Ons Op Via E-mail. We Zullen Proberen Uw Probleem Zo Snel Mogelijk Op Te Lossen</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">E-mail</string>
-	<string name="ALERT_MAIL" translatable="true">Nieuwe brug aanvragen</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">Selecteer E-mail Hieronder Om Een ​​bridge-adres Aan Te Vragen. \ N \ NZodra Je Een Adres Hebt, Kopieer Plak Het In Het Bovenstaande Vak En Start De Applicatie.​Taal Niet Ondersteund</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Systeemtaal wordt niet ondersteund door deze applicatie. We werken eraan om het binnenkort op te nemen</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">Orbot initialiseren</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">Actie niet ondersteund</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">Geen Toepassing Gevonden Om De Volgende Opdracht Te Verwerken</string>
@@ -289,41 +364,16 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">Openen in nieuw tabblad</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">URL-melding</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">Playstore</string>
-	<string name="ALERT_LONG_URL" translatable="true">Openen In Huidig ​​tabblad</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Kopiëren Naar Klembord</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Bestandsmelding</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Melding downloaden</string>
 	<string name="ALERT_LONG_FILE" translatable="true">Open Url In Nieuw Tabblad</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">Open Url In Huidig ​​tabblad</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Kopieer url naar klembord</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Afbeelding openen op nieuw tabblad</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Open afbeelding huidige tabblad</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Kopieer afbeelding naar klembord</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Download afbeeldingsbestand</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Melding downloaden</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">URL-melding</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">Geen Applicatie Gevonden Om E-mail Te Verwerken</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">Bestand Downloaden</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">​Gegevens gewist</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">Download File | </string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">Data Cleared | Restart Required</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">Ongedaan maken</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">Beveiligingsinstellingen</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Bridge-instellingen</string>
 
 	<!-- Bridge Settings -->
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">Automatisch Maken</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bruginstellingen Automatisch Configureren</string>
-	<string name="BRIDGE_AUTO" translatable="true">Zorg Voor Een Brug Die Ik Ken</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">Plak aangepaste bridge</string>
-	<string name="BRIDGE_MANUAL" translatable="true">Proxy-instellingen</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">Verzoek</string>
-	<string name="BRIDGE_TITLE" translatable="true">obfs4 (aanbevolen)</string>
-	<string name="BRIDGE_REQUEST" translatable="true">Meek-azuur (China)</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
-	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
 
 
 	<!-- Popup Menu -->
@@ -404,12 +454,6 @@
 	<string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">Om de proxy-instellingen te wijzigen, start u deze applicatie opnieuw en navigeert u naar proxybeheer. Het kan worden geopend door op het GEAR-pictogram onderaan</string>
 
-	<!-- Orbot View -->
-	<string name="ORBOT_HEADER" translatable="true">Te Drukken Proxy-instellingen</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">We verbinden je met het Tor-netwerk dat wordt gerund door duizenden vrijwilligers over de hele wereld! Kunnen deze opties u helpen</string>
-	<string name="ORBOT_TITLE" translatable="true">Internet wordt hier gecensureerd (Bypass Firewall)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">Firewall Omzeilen</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges zorgt ervoor dat internet erg traag werkt. Gebruik ze alleen als internet in uw land wordt gecensureerd of als het Tor-netwerk is geblokkeerd</string>
 
 	<!-- Notification Menu -->
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

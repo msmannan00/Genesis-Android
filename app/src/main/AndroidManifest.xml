@@ -25,7 +25,6 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:debuggable="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
@@ -200,7 +199,7 @@
         <!--  -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5074525529134731~4717329156" /> <!-- Development Build -->
+            android:value="ca-app-pub-9270431839140630~7031430442" /> <!-- Development Build -->
         <!--
  <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

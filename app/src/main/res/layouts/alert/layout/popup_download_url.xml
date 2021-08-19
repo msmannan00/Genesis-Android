@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pSecureRootLayout"
+        android:id="@+id/pDownloadPopup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/pDownloadPopupProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="185dp"
             android:layout_height="14dp"
@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/pDownloadPopupIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="14dp"
@@ -37,10 +37,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@xml/ic_baseline_downloading"
-            app:tint="@color/c_icon_tint" />
+            app:tint="@color/c_icon_tint"
+            android:contentDescription="@string/GENERAL_TODO" />
 
         <TextView
-            android:id="@+id/pOrbotRowHeader"
+            android:id="@+id/pDownloadPopuHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -50,14 +51,15 @@
             android:singleLine="true"
             android:text="@string/ALERT_DOWNLOAD_SINGLE"
             android:textAlignment="textStart"
-            android:textColor="@color/c_text_setting_heading_v2"
+            android:textColor="@color/c_alert_rateus_header"
             android:textSize="14.5sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/pDownloadPopupIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/pOrbotRowDescription"
+            android:id="@+id/pDownloadPopuInfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -66,18 +68,18 @@
             android:maxLines="1"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="hello_kitty_sample.mp4"
+            android:text="@string/GENERAL_DEFAULT_TEXT"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="12.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowHeader"
-            tools:ignore="SmallSp" />
+            app:layout_constraintStart_toEndOf="@+id/pDownloadPopupIcon"
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuHeader"
+            tools:ignore="SmallSp,TextContrastCheck" />
 
         <TextView
-            android:id="@+id/pDescriptionLong"
+            android:id="@+id/pDownloadPopuInfoLong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -86,18 +88,18 @@
             android:maxLines="1"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="hello_kitty_sample.mp4"
+            android:text="@string/GENERAL_DEFAULT_TEXT"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription"
-            tools:ignore="SmallSp" />
+            app:layout_constraintStart_toEndOf="@+id/pDownloadPopupIcon"
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuInfo"
+            tools:ignore="SmallSp,TextContrastCheck" />
 
         <Button
-            android:id="@+id/pNext"
+            android:id="@+id/pDownloadPopuInfoNext"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -111,10 +113,11 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDescriptionLong" />
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuInfoLong"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <Button
-            android:id="@+id/pTrigger"
+            android:id="@+id/pDownloadPopuInfoDismiss"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -127,8 +130,9 @@
             android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pNext"
-            app:layout_constraintTop_toBottomOf="@+id/pDescriptionLong" />
+            app:layout_constraintEnd_toStartOf="@+id/pDownloadPopuInfoNext"
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuInfoLong"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

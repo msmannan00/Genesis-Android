@@ -39,7 +39,11 @@ public class tabRowModel
                 mBitmap.recycle();
                 mBitmap = null;
             }
-            mBitmap = BitmapFactory.decodeStream(new ByteArrayInputStream(pBlob));
+            if(pBlob.length>1000000){
+                mBitmap = null;
+            }else {
+                mBitmap = BitmapFactory.decodeStream(new ByteArrayInputStream(pBlob));
+            }
         }
     }
 

@@ -73,25 +73,25 @@ public class widgetController extends AppWidgetProvider {
 
     public class widgetViewCallback implements eventObserver.eventListener {
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type) {
+        public Object invokeObserver(List<Object> pData, Object pCommand) {
             return null;
         }
     }
 
     public class widgetModelCallback implements eventObserver.eventListener {
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type) {
-            if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_UPDATE)){
-                onUpdate((Context)data.get(0), (AppWidgetManager)data.get(1), (int[])data.get(2));
+        public Object invokeObserver(List<Object> pData, Object pCommand) {
+            if(pCommand.equals(widgetEnums.eWidgetControllerCallback.M_UPDATE)){
+                onUpdate((Context)pData.get(0), (AppWidgetManager)pData.get(1), (int[])pData.get(2));
             }
-            else if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_OPTION_CHANGE)){
-                onAppWidgetOptionsChanged((Context)data.get(0), (AppWidgetManager)data.get(1), (int)data.get(2), (Bundle)data.get(3));
+            else if(pCommand.equals(widgetEnums.eWidgetControllerCallback.M_OPTION_CHANGE)){
+                onAppWidgetOptionsChanged((Context)pData.get(0), (AppWidgetManager)pData.get(1), (int)pData.get(2), (Bundle)pData.get(3));
             }
-            else if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_RESTORE)){
-                onRestored((Context) data.get(0), (int[]) data.get(1), (int[]) data.get(2));
+            else if(pCommand.equals(widgetEnums.eWidgetControllerCallback.M_RESTORE)){
+                onRestored((Context) pData.get(0), (int[]) pData.get(1), (int[]) pData.get(2));
             }
-            else if(e_type.equals(widgetEnums.eWidgetControllerCallback.M_DELETE)){
-                onDeleted((Context) data.get(0), (int[]) data.get(1));
+            else if(pCommand.equals(widgetEnums.eWidgetControllerCallback.M_DELETE)){
+                onDeleted((Context) pData.get(0), (int[]) pData.get(1));
             }
             return null;
         }

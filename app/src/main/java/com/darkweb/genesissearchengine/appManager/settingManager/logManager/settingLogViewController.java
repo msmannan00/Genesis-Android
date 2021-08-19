@@ -13,13 +13,13 @@ class settingLogViewController
     private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
 
-    private SwitchMaterial mLogThemeToggle;
+    private SwitchMaterial mSettingLogStatusSwitch;
 
     /*Initializations*/
 
-    settingLogViewController(settingLogController pContext, eventObserver.eventListener pEvent, SwitchMaterial pLogThemeToggle)
+    settingLogViewController(settingLogController pContext, eventObserver.eventListener pEvent, SwitchMaterial pSettingLogStatusSwitch)
     {
-        this.mLogThemeToggle = pLogThemeToggle;
+        this.mSettingLogStatusSwitch = pSettingLogStatusSwitch;
         this.mEvent = pEvent;
         this.mContext = pContext;
 
@@ -29,9 +29,9 @@ class settingLogViewController
     private void initViews(boolean pLogThemeStyle)
     {
         if(pLogThemeStyle){
-            mLogThemeToggle.setChecked(true);
+            mSettingLogStatusSwitch.setChecked(true);
         }else {
-            mLogThemeToggle.setChecked(false);
+            mSettingLogStatusSwitch.setChecked(false);
         }
     }
 
@@ -39,7 +39,7 @@ class settingLogViewController
 
     private void toggleLogThemeStyle()
     {
-        mLogThemeToggle.toggle();
+        mSettingLogStatusSwitch.toggle();
     }
 
     private void initPostUI(){

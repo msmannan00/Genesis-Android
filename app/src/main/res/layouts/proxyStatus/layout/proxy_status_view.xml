@@ -118,7 +118,7 @@
                         android:background="@color/clear_alpha"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
-                        android:text="@string/ORBOT_DESCRIPTION"
+                        android:text="@string/ORBOT_SETTING_DESCRIPTION"
                         />
             </LinearLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:background="@color/c_view_divier_background" />
+                android:background="@color/c_orbot_setting_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -189,7 +189,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="15dp"
-                android:background="@color/c_view_divier_background" />
+                android:background="@color/c_orbot_setting_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"

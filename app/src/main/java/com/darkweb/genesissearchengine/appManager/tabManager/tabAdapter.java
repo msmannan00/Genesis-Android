@@ -427,7 +427,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         params.topMargin = helperMethod.pxFromDp(0f);
                         params.bottomMargin = helperMethod.pxFromDp(0f);
 
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_view_divier_background));
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_orbot_setting_divider));
                     }
                 }
             }
@@ -462,13 +462,15 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         notifyItemChanged(mModelList.size()-1);
 
                     }else {
-                        v.setFocusable(false);
-                        v.setClickable(false);
-                        v.setEnabled(false);
-                        if(status.sTabGridLayoutEnabled){
-                            scaleView(itemView, mModelList.get(this.getLayoutPosition()));
-                        }else {
-                            onTriggerURL(mModelList.get(this.getLayoutPosition()));
+                        if(v.getAlpha()==1){
+                            if(status.sTabGridLayoutEnabled){
+                                v.setEnabled(false);
+                                v.setClickable(false);
+                                v.setFocusable(false);
+                                scaleView(itemView, mModelList.get(this.getLayoutPosition()));
+                            }else {
+                                onTriggerURL(mModelList.get(this.getLayoutPosition()));
+                            }
                         }
                     }
                 }else {

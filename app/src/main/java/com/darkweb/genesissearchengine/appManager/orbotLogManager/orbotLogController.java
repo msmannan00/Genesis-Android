@@ -79,7 +79,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
     }
 
     public void initializeStartupAnimation(){
-        if(activityContextManager.getInstance().getHomeController().isSplashScreenLoading()){
+        if(activityContextManager.getInstance().getHomeController()==null || activityContextManager.getInstance().getHomeController().isSplashScreenLoading()){
             overridePendingTransition(R.anim.translate_fade_left, R.anim.translate_fade_right);
         }
     }
@@ -126,6 +126,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
         mOrbotModel = new orbotLogModel(this, new orbotModelCallback());
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void initializeLogs(){
         if(status.sLogThemeStyleAdvanced){
             orbotLogAdapter adapter = new orbotLogAdapter(((ArrayList)mOrbotModel.onTrigger(M_GET_LIST)),new orbotLogController.orbotModelCallback());

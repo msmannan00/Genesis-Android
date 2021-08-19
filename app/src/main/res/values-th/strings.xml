@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">ชื่อของ URL ที่คั่นไว้จะแสดงที่นี่</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">ใส่ชื่อบุ๊คมาร์ค...</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">บุ๊กมาร์กถูกลบ</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">บุ๊กมาร์กอัพเดทแล้ว</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">ปิด</string>
 
@@ -63,7 +59,118 @@
 	<string name="ORBOT_LOG" translatable="true">บันทึกพร็อกซี</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">ข้อมูลบันทึกระบบ</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">หากคุณประสบปัญหาการเชื่อมต่อในขณะที่เริ่มต้น Genesis โปรดคัดลอกรหัสต่อไปนี้และค้นหาปัญหาทางออนไลน์หรือส่งมาให้เราเพื่อที่เราจะได้ช่วยเหลือคุณ</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">ปรับแต่งพร็อกซี</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">เราเชื่อมต่อคุณกับเครือข่าย Tor ที่ดำเนินการโดยอาสาสมัครหลายพันคนทั่วโลก! ตัวเลือกเหล่านี้สามารถช่วยคุณได้</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">อินเทอร์เน็ตถูกเซ็นเซอร์ที่นี่ (เลี่ยงไฟร์วอลล์)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">บายพาสไฟร์วอลล์</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges ทำให้อินเทอร์เน็ตทำงานช้ามาก ใช้เฉพาะเมื่ออินเทอร์เน็ตถูกเซ็นเซอร์ในประเทศของคุณหรือเครือข่าย Tor ถูกบล็อก</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">ปรับแต่งความปลอดภัย</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">การตั้งค่าความปลอดภัย</string>
+	<string name="BRIDGE_SETTING" translatable="true">เปลี่ยนการตั้งค่า "BRIDGE"</string>
+	<string name="BRIDGE_AUTO" translatable="true">สร้างโดยอัตโนมัติ</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">กำหนดการตั้งค่า "BRIDGE" โดยอัตโนมัติ</string>
+	<string name="BRIDGE_MANUAL" translatable="true">ให้ "BRIDGE" ที่ฉันรู้</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">วาง "BRIDGE" ที่กำหนดเอง</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">"BRIDGE" เป็นรีเลย์ของ Tor ที่ไม่อยู่ในรายการ ซึ่งทำให้ยากต่อการบล็อกการเชื่อมต่อในเครือข่าย Tor เนื่องจากบางประเทศพยายามบล็อก Tor บาง "BRIDGE" จึงใช้งานได้ในบางประเทศ แต่ไม่ใช่ประเทศอื่น</string>
+	<string name="BRIDGE_TITLE" translatable="true">เลือกค่าเริ่มต้น "BRIDGE"</string>
+	<string name="BRIDGE_REQUEST" translatable="true">ขอ</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (แนะนำ)</string>
+	<string name="BRIDGE_MEEK" translatable="true">อ่อนหวาน (จีน)</string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">เปลี่ยนวิธีการแสดงบันทึกระบบ</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">แสดงบันทึกโดยใช้มุมมองรายการที่ทันสมัย</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle ระหว่างมุมมองรายการแบบคลาสสิกและสมัยใหม่</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">บุ๊กมาร์กถูกลบ</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">อัปเดตบุ๊กมาร์กแล้ว</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">ล้างข้อมูลสำเร็จ</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">คัดลอก URL ไปยังคลิปบอร์ดแล้ว</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">ไม่พบแอปพลิเคชัน</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">จำเป็นต้องรีสตาร์ทหลังจากการเปลี่ยนแปลง</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">เริ่มใหม่</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">แท็บถูกปิด</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">เปิดแท็บใหม่แล้ว</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">การเชื่อมต่อพร็อกซี Genesis ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">หน่วยความจำเต็ม ➔ กำลังล้างแท็บ</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">ป๊อปอัปถูกบล็อก</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">เปิดบันทึกข้อผิดพลาด</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">สวิตช์</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">เลิกทำ</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">สร้างเอกลักษณ์ใหม่แล้ว</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">เปิดการตั้งค่า</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">ขอใหม่ Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">เลือกอีเมลด้านล่างเพื่อขอที่อยู่ Bridge เมื่อคุณมีที่อยู่แล้ว ให้คัดลอกและวางลงในช่องด้านบนแล้วเริ่มแอปพลิเคชัน</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">จดหมาย</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">ขอโทษที่ได้ยินว่า</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">หากคุณประสบปัญหาขณะใช้แอปพลิเคชันนี้ โปรดติดต่อเราทางอีเมล เราจะพยายามแก้ปัญหาของคุณโดยเร็วที่สุด</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">แก้ไขปัญหา</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">รีเซ็ตแอปพลิเคชันในกรณีที่ใช้งานไม่ได้ เราจะพยายามกำหนดค่าใหม่เพื่อให้ทำงานได้อีกครั้ง</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">รีเซ็ต</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">ปิด</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">รอดาวน์โหลด ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">ดาวน์โหลด</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">ให้คะแนนเรา</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">บอกคนอื่นว่าคุณคิดอย่างไรเกี่ยวกับแอปนี้</string>
+	<string name="ALERT_RATE" translatable="true">อัตรา</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">เสร็จแล้ว</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">ประเภท Bridge (obfs4, อ่อนโยน, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">บุ๊คมาร์คเว็บไซต์</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">เพิ่มหน้านี้ในบุ๊คมาร์คของคุณ</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">บุ๊คมาร์คชื่อ...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">เสร็จแล้ว</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">การแจ้งเตือน URL</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">เปิดในแท็บใหม่</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">เปิดในแท็บปัจจุบัน</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">คัดลอกไปที่คลิปบอร์ด</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">ดาวน์โหลดไฟล์</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">เปิด url ในแท็บใหม่</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">เปิด url ในแท็บปัจจุบัน</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">คัดลอก URL ไปยังคลิปบอร์ด</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">เปิดรูปภาพในแท็บใหม่</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">เปิดแท็บรูปภาพปัจจุบัน</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">คัดลอกรูปภาพไปยังคลิปบอร์ด</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">ดาวน์โหลดไฟล์ภาพ</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">ระบุ Bridge ที่คุณรู้จัก</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">ป้อนข้อมูล bridge จากแหล่งที่เชื่อถือได้</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">คำขอ</string>
+
+
+
+
+
+
+
+	
 
 
 
@@ -102,9 +209,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">การแจ้งเตือนในท้องถิ่น</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">ปรับแต่งการแจ้งเตือนซอฟต์แวร์</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">การแจ้งเตือนระบบ</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">เปลี่ยนวิธีการแสดงบันทึกระบบ</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">แสดงบันทึกโดยใช้มุมมองรายการที่ทันสมัย</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">toogle ระหว่างมุมมองรายการแบบคลาสสิกและสมัยใหม่</string>
 	<string name="SETTING_SEARCH" translatable="true">จัดการเครื่องมือค้นหา</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">เพิ่มตั้งค่าเริ่มต้น แสดงข้อเสนอแนะ</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">จัดการการแจ้งเตือน</string>
@@ -242,35 +346,20 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">ลบการปรับแต่งเบราว์เซอร์</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">ระบุ Bridge ที่คุณรู้จัก</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">ป้อนข้อมูล bridge จากแหล่งที่เชื่อถือได้</string>
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">คำขอ</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">ตกลง</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">เว็บไซต์บุ๊คมาร์ค</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">เพิ่มหน้านี้ในบุ๊กมาร์กของคุณ</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">ลบเว็บลิงค์และข้อมูลที่เรียกดู</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">ล้างบุ๊คมาร์คและข้อมูล</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">การล้างข้อมูลจะลบลิงค์เว็บที่เรียกดูคุกกี้และข้อมูลการท่องเว็บอื่น ๆ</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">การลบข้อมูลจะเป็นการลบเว็บไซต์ที่บุ๊กมาร์ก</string>
 	<string name="ALERT_CLEAR" translatable="true">ยกเลิก</string>
-	<string name="ALERT_ADD" translatable="true">ตกลง</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">บุ๊คมาร์คใหม่</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">รายงาน</string>
 	<string name="ALERT_REPORT_URL" translatable="true">รายงานเว็บไซต์</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">หากคุณคิดว่า URL นี้ผิดกฎหมายหรือเป็นการรบกวนโปรดรายงานให้เราทราบเพื่อให้เราดำเนินการทางกฎหมายได้</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">ได้รับรายงานเรียบร้อยแล้ว</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">รายงาน url เรียบร้อยแล้ว หากพบสิ่งผิดปกติจะดำเนินการตามกฎหมาย</string>
-	<string name="ALERT_RATEUS" translatable="true">ให้คะแนนเรา</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">บอกผู้อื่นว่าคุณคิดอย่างไรเกี่ยวกับแอปนี้</string>
-	<string name="ALERT_RATE" translatable="true">ประเมินค่า</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">เราจะเสียใจที่ได้ทราบว่า!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">หากคุณประสบปัญหาในการใช้ซอฟต์แวร์นี้โปรดติดต่อเราทางอีเมล เราจะพยายามแก้ปัญหาของคุณโดยเร็วที่สุด</string>
-	<string name="ALERT_MAIL" translatable="true">จดหมาย</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">ขอใหม่ Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">เลือกเมลเพื่อขอที่อยู่ bridge เมื่อคุณได้รับแล้วให้คัดลอกและวางลงในช่องด้านบนและเริ่มซอฟต์แวร์</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">ไม่รองรับภาษา</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">ซอฟต์แวร์นี้ไม่รองรับภาษาของระบบ เรากำลังดำเนินการเพื่อรวมไว้ในเร็ว ๆ นี้</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">เริ่มต้น Orbot</string>
@@ -287,42 +376,16 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">สังคมโซเชียล</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">คู่มือ</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">ร้านขายของเล่น</string>
-	<string name="ALERT_LONG_URL" translatable="true">การแจ้งเตือนเว็บลิงค์</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">เปิดในแท็บใหม่</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">เปิดในแท็บปัจจุบัน</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">คัดลอกไปที่คลิปบอร์ด</string>
 	<string name="ALERT_LONG_FILE" translatable="true">การแจ้งเตือนไฟล์</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">ดาวน์โหลดการแจ้งเตือน</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">เปิด url ในแท็บใหม่</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">เปิด url ในแท็บปัจจุบัน</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">คัดลอก url ไปยังคลิปบอร์ด</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">เปิดภาพในแท็บใหม่</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">เปิดภาพในแท็บปัจจุบัน</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">คัดลอกภาพไปยังคลิปบอร์ด</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">ดาวน์โหลดไฟล์รูปภาพ</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">ดาวน์โหลดการแจ้งเตือน</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">การแจ้งเตือนเว็บลิงค์</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">ไม่พบซอฟต์แวร์สำหรับจัดการอีเมล</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">ดาวน์โหลดไฟล์ |</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">ล้างข้อมูล | จำเป็นต้องรีสตาร์ท</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">ล้างข้อมูลส่วนตัวเรียบร้อยแล้ว การตั้งค่าระบบเริ่มต้นบางอย่างจะต้องใช้ซอฟต์แวร์นี้ในการรีสตาร์ท ตอนนี้คุณสามารถท่องเว็บต่อได้อย่างปลอดภัย</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">ปิดแท็บ</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">เลิกทำ</string>
 
 
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">ปรับแต่งความปลอดภัย</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge ปรับแต่ง</string>
-	<string name="BRIDGE_AUTO" translatable="true">สร้างโดยอัตโนมัติ</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">กำหนดค่า bridge ปรับแต่งโดยอัตโนมัติ</string>
-	<string name="BRIDGE_MANUAL" translatable="true">ให้ bridge ที่คุณรู้จัก</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">วาง bridge ที่กำหนดเอง</string>
-	<string name="BRIDGE_HEADER" translatable="true">ปรับแต่งพร็อกซี | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">Bridges เป็นรีเลย์ Tor ที่ไม่อยู่ในรายการซึ่งทำให้ยากต่อการบล็อกการเชื่อมต่อในเครือข่าย Tor เพราะบางประเทศพยายามปิดกั้น Tor บางประเทศ bridges ใช้ได้ในบางประเทศ แต่ไม่ใช่ประเทศอื่น</string>
-	<string name="BRIDGE_TITLE" translatable="true">เลือกค่าเริ่มต้น bridge</string>
-	<string name="BRIDGE_REQUEST" translatable="true">คำขอ</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (แนะนำ)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -405,11 +468,6 @@
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">คุณสามารถเปลี่ยนพร็อกซีได้โดยการรีสตาร์ทซอฟต์แวร์และไปที่ตัวจัดการพร็อกซี สามารถเปิดได้โดยคลิกที่ไอคอนรูปเฟืองที่ด้านล่าง</string>
 
 
-	<string name="ORBOT_HEADER" translatable="true">ปรับแต่งพร็อกซี</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">เราเชื่อมต่อคุณกับเครือข่าย Tor ที่ดำเนินการโดยอาสาสมัครหลายพันคนทั่วโลก! ตัวเลือกเหล่านี้สามารถช่วยคุณได้</string>
-	<string name="ORBOT_TITLE" translatable="true">อินเทอร์เน็ตถูกเซ็นเซอร์ที่นี่ (เลี่ยงไฟร์วอลล์)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">บายพาสไฟร์วอลล์</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges ทำให้อินเทอร์เน็ตทำงานช้ามาก ใช้เฉพาะเมื่ออินเทอร์เน็ตถูกเซ็นเซอร์ในประเทศของคุณหรือเครือข่าย Tor ถูกบล็อก</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

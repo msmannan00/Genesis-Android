@@ -195,7 +195,7 @@
                     android:layout_height="1dp"
                     android:paddingTop="10dp"
                     android:layout_marginStart="15dp"
-                    android:background="@color/c_view_divier_background"/>
+                    android:background="@color/c_orbot_setting_divider"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -259,7 +259,7 @@
                         android:background="@color/c_white"/>
 
                     <LinearLayout
-                        android:id="@+id/pOption1"
+                        android:id="@+id/pBridgeSettingOption1"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"
@@ -317,7 +317,7 @@
                         android:background="@color/c_topbar_divider"/>
 
                     <LinearLayout
-                        android:id="@+id/pOption2"
+                        android:id="@+id/pBridgeSettingOption2"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"

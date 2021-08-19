@@ -7,7 +7,7 @@
     android:layout_height="2100dp">
 
     <ImageView
-        android:id="@+id/pSecureRootBlocker"
+        android:id="@+id/pSecurePopupRootBlocker"
         android:layout_width="match_parent"
         android:layout_height="2100dp"
         android:alpha="0"
@@ -16,11 +16,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pSecureRoot"
+        app:layout_constraintTop_toBottomOf="@+id/pSecurePopupRoot"
         app:layout_constraintVertical_weight="1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pSecureRoot"
+        android:id="@+id/pSecurePopupRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="7dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/pSecureLock"
+            android:id="@+id/pSecurePopupLock"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginStart="14dp"
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pSecureHeader"
+            android:id="@+id/pSecurePopupHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -52,12 +52,12 @@
             android:textColor="@color/green_button"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pSecureLock"
+            app:layout_constraintStart_toEndOf="@+id/pSecurePopupLock"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlSymmetry" />
 
         <TextView
-            android:id="@+id/pSecureSubHeader"
+            android:id="@+id/pSecurePopupSubHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -72,11 +72,11 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/pSecureHeader"
+            app:layout_constraintStart_toEndOf="@+id/pSecurePopupHeader"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pSecureDescription"
+            android:id="@+id/pSecurePopupDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -92,11 +92,11 @@
             android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pSecureLock"
+            app:layout_constraintTop_toBottomOf="@+id/pSecurePopupLock"
             tools:ignore="SmallSp" />
 
         <LinearLayout
-            android:id="@+id/pSecureInfo"
+            android:id="@+id/pSecurePopupInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -105,10 +105,10 @@
             android:paddingEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pSecureDescription">
+            app:layout_constraintTop_toBottomOf="@+id/pSecurePopupDescription">
 
             <LinearLayout
-                android:id="@+id/pSecureJavascript"
+                android:id="@+id/pSecurePopupJavascript"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -121,7 +121,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/pSecureJavasciptHeader"
+                        android:id="@+id/pSecurePopupJavasciptHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
@@ -133,7 +133,7 @@
                         android:translationZ="2dp" />
 
                     <TextView
-                        android:id="@+id/pSecureJavasciptDescription"
+                        android:id="@+id/pSecurePopupJavasciptDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.6"
@@ -150,7 +150,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pSecureJavascriptStatus"
+                    android:id="@+id/pSecurePopupJavascriptStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -168,7 +168,7 @@
                 android:layout_marginEnd="10dp"
                 android:alpha="0.8"
                 android:background="@color/c_security_popup_divider"
-                app:layout_constraintBottom_toTopOf="@+id/pSecureNavigation"
+                app:layout_constraintBottom_toTopOf="@+id/pSecurePopupNavigation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -186,7 +186,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/pSecureNonTrackingHeader"
+                        android:id="@+id/pSecurePopupNonTrackingHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
@@ -198,7 +198,7 @@
                         android:translationZ="2dp" />
 
                     <TextView
-                        android:id="@+id/pSecureNonTrackingDescription"
+                        android:id="@+id/pSecurePopupNonTrackingDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.6"
@@ -215,7 +215,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pSecureTrackingStatus"
+                    android:id="@+id/pSecurePopupTrackingStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -233,7 +233,7 @@
                 android:layout_marginEnd="10dp"
                 android:alpha="1"
                 android:background="@color/c_security_popup_divider"
-                app:layout_constraintBottom_toTopOf="@+id/pSecureNavigation"
+                app:layout_constraintBottom_toTopOf="@+id/pSecurePopupNavigation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -250,7 +250,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/pSecureTrackingProtectionHeader"
+                        android:id="@+id/pSecurePopupTrackingProtectionHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
@@ -262,7 +262,7 @@
                         android:translationZ="2dp" />
 
                     <TextView
-                        android:id="@+id/pSecureTrackingProtectionSubHeader"
+                        android:id="@+id/pSecurePopupTrackingProtectionSubHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.6"
@@ -279,7 +279,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pSecureTrackingProtectionStatus"
+                    android:id="@+id/pSecurePopupTrackingProtectionStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -296,13 +296,13 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:alpha="1"
-            android:background="@color/c_view_divier_background"
-            app:layout_constraintBottom_toTopOf="@+id/pSecureNavigation"
+            android:background="@color/c_orbot_setting_divider"
+            app:layout_constraintBottom_toTopOf="@+id/pSecurePopupNavigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
-            android:id="@+id/pSecureNavigation"
+            android:id="@+id/pSecurePopupNavigation"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginTop="30dp"
@@ -310,10 +310,10 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pSecureInfo">
+            app:layout_constraintTop_toBottomOf="@+id/pSecurePopupInfo">
 
             <Button
-                android:id="@+id/pSecurePrivacy"
+                android:id="@+id/pSecurePopupPrivacy"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="38dp"
@@ -335,7 +335,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/pSecureCertificate"
+                android:id="@+id/pSecurePopupCertificate"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="38dp"

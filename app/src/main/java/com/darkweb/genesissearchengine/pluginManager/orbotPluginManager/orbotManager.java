@@ -92,10 +92,14 @@ public class orbotManager
             return orbotLocalConstants.mNotificationStatus;
         }
         else if(pCommands.equals(pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION)){
-            OrbotService.getServiceObject().enableNotification();
+            if(OrbotService.getServiceObject()!=null){
+                OrbotService.getServiceObject().enableNotification();
+            }
         }
         else if(pCommands.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION)){
-            OrbotService.getServiceObject().disableNotification();
+            if(OrbotService.getServiceObject()!=null){
+                OrbotService.getServiceObject().disableNotification();
+            }
         }
         else if(pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES)){
             Prefs.putBridgesEnabled((boolean)pData.get(0));
@@ -109,7 +113,9 @@ public class orbotManager
             }
         }
         else if(pCommands.equals(pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS)){
-            return OrbotService.getServiceObject().getProxyStatus();
+            if(OrbotService.getServiceObject()!=null){
+                return OrbotService.getServiceObject().getProxyStatus();
+            }
         }
 
         return null;

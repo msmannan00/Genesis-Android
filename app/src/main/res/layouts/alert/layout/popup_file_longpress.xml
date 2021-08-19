@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:id="@+id/pSecureRootLayout"
+        android:id="@+id/pPopupLongPressContainer"
         android:layout_height="wrap_content"
         android:background="@xml/ax_round_corner"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/pPopupLongPressImageContainer"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginStart="14dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/pFaviconLogo"
+                android:id="@+id/pPopupLongPressImage"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:contentDescription="@string/GENERAL_TODO"
@@ -41,12 +41,13 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/pOrbotRowDescription"
+            android:id="@+id/pPopupLongPressDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:alpha="0.6"
             android:gravity="start |center_vertical"
+            android:lineSpacingExtra="4dp"
             android:maxLines="2"
             android:paddingStart="15dp"
             android:paddingEnd="41dp"
@@ -56,7 +57,7 @@
             android:textSize="12sp"
             android:translationY="-1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView2"
+            app:layout_constraintStart_toEndOf="@+id/pPopupLongPressImageContainer"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp" />
 
@@ -66,22 +67,22 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
-            android:background="@color/c_view_divier_background"
+            android:background="@color/c_orbot_setting_divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            app:layout_constraintTop_toBottomOf="@+id/pPopupLongPressImageContainer" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pNavigationContainer"
+            android:id="@+id/pPopupLongPressNavigationController"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pDivider"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/pOption1"
+                android:id="@+id/pPopupLongPressOptionDownload"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@xml/gx_ripple_gray"
@@ -92,6 +93,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -100,6 +102,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_LONG_URL_OPTION_4"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -107,14 +110,16 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
-                    app:tint="@color/cursor_blue"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -122,13 +127,13 @@
                 android:id="@+id/view5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption2"
+                android:id="@+id/pPopupLongPressOptionNewTab"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -139,6 +144,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption1"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -147,6 +153,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_LONG_URL_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -154,27 +161,29 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
-                    app:tint="@color/cursor_blue"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption3"
+                android:id="@+id/pPopupLongPressOptionCurrentTab"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -185,6 +194,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption2"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -193,6 +203,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_LONG_URL_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -200,27 +211,29 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
-                    app:tint="@color/cursor_blue"
                     android:scaleY="0.5"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption4"
+                android:id="@+id/pPopupLongPressOptionCopy"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -231,6 +244,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption3"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -239,6 +253,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_LONG_URL_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -246,14 +261,16 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
                     android:scaleX="0.5"
                     android:scaleY="0.5"
-                    app:tint="@color/cursor_blue"
-                    app:srcCompat="@xml/ic_arrow_right" />
+                    app:srcCompat="@xml/ic_arrow_right"
+                    app:tint="@color/cursor_blue" />
 
             </LinearLayout>
 
@@ -262,7 +279,7 @@
                 android:layout_height="1dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -277,18 +294,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
-                    android:id="@+id/pTrigger"
+                    android:id="@+id/pPopupLongPressDismiss"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="1"
+                    android:background="@xml/gx_ripple_gray_bottom"
                     android:padding="0dp"
                     android:text="@string/ALERT_DISMISS"
-                    android:background="@xml/gx_ripple_gray_bottom"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/c_button_text_v1"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck" />
 
 
             </LinearLayout>

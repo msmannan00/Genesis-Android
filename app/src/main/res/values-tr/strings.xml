@@ -29,10 +29,6 @@
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">İşaretli URL\'nin adı burada gösterilecek</string>
     <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Yer imi adını girin…</string>
 
-    <!-- Bookmark Alerts -->
-    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Yer işareti kaldırıldı</string>
-    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Yer işareti güncellendi</string>
-
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">Reddet</string>
 
@@ -63,9 +59,110 @@
     <string name="ORBOT_LOG" translatable="true">proxy günlükleri</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">Sistem Günlüğü bilgisi</string>
     <string name="ORBOT_LOG_INFO" translatable="true">Genesis\'e başlarken bağlantı sorunu yaşıyorsanız, lütfen aşağıdaki kodu kopyalayın ve çevrimiçi sorunu bulun veya bize gönderin, böylece size yardımcı olmaya çalışabiliriz</string>
-    <string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">proxy özelleştirmek</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">Sizi dünya çapında binlerce gönüllünün yönettiği Tor ağına bağlıyoruz! Bu seçenekler size yardımcı olabilir mi</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">İnternet burada sansürlenir (güvenlik duvarını atlayın)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">güvenlik duvarını atla</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges internetin çok yavaş çalışmasına neden olur. bunları yalnızca ülkenizde internet sansürlenmişse veya Tor ağı engellenmişse kullanın</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">güvenlik özelleştir</string>
 
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">Güvenlik Ayarları</string>
+    <string name="BRIDGE_SETTING" translatable="true">"BRIDGE" Ayarlarını Değiştir</string>
+    <string name="BRIDGE_AUTO" translatable="true">Otomatik Olarak Oluştur</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">"KÖPRÜ" ayarlarını otomatik olarak yapılandır</string>
+    <string name="BRIDGE_MANUAL" translatable="true">Bildiğim bir "BRIDGE" sağlayın</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Özel "BRIDGE" yapıştır</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">"BRIDGE", Tor ağına yapılan bağlantıları engellemeyi zorlaştıran, listelenmemiş Tor röleleridir. Bazı ülkelerin Tor\'u engellemeye çalışması nedeniyle, bazı "BRIDGE" bazı ülkelerde çalışır, ancak bazılarında çalışmaz</string>
+    <string name="BRIDGE_TITLE" translatable="true">Varsayılan "BRIDGE"yü Seç</string>
+    <string name="BRIDGE_REQUEST" translatable="true">Talep</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Önerilen)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-masmavi (Çin)</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">bildiğiniz bir Bridge sağlayın</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">güvenilir bir kaynaktan bridge bilgi girin</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">istek</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Sistem Günlüğünün görünme şeklini değiştirin</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">modern liste görünümünü kullanarak Günlüğü göster</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">klasik ve modern liste görünümü arasında geçiş yap</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Yer işareti kaldırıldı</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Yer imi güncellendi</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Veriler başarıyla temizlendi</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL Panoya kopyalandı</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Uygulama bulunamadı</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Değişikliklerden sonra yeniden başlatma gerekli</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">Yeniden Başlat</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Sekme Kapalı</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Yeni sekme açıldı</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy bağlanıyor...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Bellek dolu ➔ Sekme temizleniyor</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Pop-up engellendi</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Hata Günlüklerini Aç</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Anahtar</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Geri al</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Yeni kimlik oluşturuldu</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">ayarları aç</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">BUNU DUYDUĞUM İÇİN ÜZGÜNÜM</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Bu uygulamayı kullanırken zorluk yaşıyorsanız, lütfen bize e-posta yoluyla ulaşın. Sorununuzu en kısa sürede çözmeye çalışacağız</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">SORUN GİDERME</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Çalışmıyorsa, uygulamayı sıfırlayın. Yeniden çalışabilmesi için yeniden yapılandırmayı deneyeceğiz.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Sıfırla</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Kapat</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">İndirmek için bekleniyor...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">İndir</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">ABD\'yi Değerlendir</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">Başkalarına bu uygulama hakkında ne düşündüğünüzü söyleyin</string>
+    <string name="ALERT_RATE" translatable="true">Puan</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Bitti</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge dize (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge tipi (obfs4, meek, ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Yer İşareti Web Sitesi</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Bu sayfayı yer imlerinize ekleyin</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">yer imi adı...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Bitti</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">URL Bildirimi</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Yeni Sekmede Aç</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Geçerli Sekmede Aç</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Panoya Kopyala</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Dosyayı İndir</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">URL\'yi yeni sekmede aç</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">URL\'yi geçerli sekmede aç</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URL\'yi panoya kopyala</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Resmi yeni sekmede aç</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Görüntü geçerli sekmesini aç</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Resmi panoya kopyala</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Resim dosyasını indirin</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Yeni Bridge Talebi</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Bridge adresi istemek için aşağıdaki E-posta\'yı seçin. Bir adresiniz olduğunda, kopyalayıp yukarıdaki kutuya yapıştırın ve uygulamayı başlatın.</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">Posta</string>
 
 
 
@@ -105,9 +202,6 @@
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">yerel bildirimler</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Yazılım bildirimini özelleştirin</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">sistem bildirimleri</string>
-    <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Sistem Günlüğünün görünme şeklini değiştirin</string>
-    <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">modern liste görünümünü kullanarak Günlüğü göster</string>
-    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">klasik ve modern liste görünümü arasında geçiş yap</string>
     <string name="SETTING_SEARCH" translatable="true">arama motorunu yönet</string>
     <string name="SETTING_SEARCH_INFO" translatable="true">ekle, varsayılan ayarla. Önerileri göster</string>
     <string name="SETTING_NOTIFICATION" translatable="true">bildirimleri yönet</string>
@@ -245,35 +339,19 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">tarayıcı özelleştirmesini kaldır</string>
 
 
-    <string name="ALERT_UPDATE_BRIDGES" translatable="true">bildiğiniz bir Bridge sağlayın</string>
-    <string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">güvenilir bir kaynaktan bridge bilgi girin</string>
-    <string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-    <string name="ALERT_REQUEST_BRIDGE" translatable="true">istek</string>
-    <string name="ALERT_SAVE_BRIDGE" translatable="true">Tamam mı</string>
 
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">yer imi web sitesi</string>
-    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">bu sayfayı yer imlerinize ekleyin</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">taranan web bağlantılarını ve Verileri sil</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">yer imini ve Verileri temizle</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">verileri temizlemek, göz atılan web bağlantılarını, çerezleri ve diğer tarama verilerini kaldırır</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">verilerin silinmesi, yer imi eklenmiş web sitelerinin silinmesine neden olur</string>
     <string name="ALERT_CLEAR" translatable="true">iptal etmek</string>
-    <string name="ALERT_ADD" translatable="true">Tamam mı</string>
-    <string name="ALERT_TITLE_ADD" translatable="true">yeni yer imi</string>
     <string name="ALERT_SECURE" translatable="false">https://</string>
     <string name="ALERT_REPORT" translatable="true">bildiri</string>
     <string name="ALERT_REPORT_URL" translatable="true">web sitesini bildir</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">Bu URL\'nin yasa dışı veya rahatsız edici olduğunu düşünüyorsanız, bize bildirin, böylece yasal işlem yapabiliriz</string>
     <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">başarıyla rapor edildi</string>
     <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">url başarıyla rapor edildi. bir şey bulunursa yasal işlem yapılacaktır</string>
-    <string name="ALERT_RATEUS" translatable="true">Bizi değerlendirin</string>
-    <string name="ALERT_RATEUS_INFO" translatable="true">başkalarına bu uygulama hakkında ne düşündüğünüzü söyleyin</string>
-    <string name="ALERT_RATE" translatable="true">oran</string>
-    <string name="ALERT_RATEUS_FAILURE" translatable="true">bunu duyduğumuza üzüldük!</string>
-    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Bu yazılımı kullanırken zorluk yaşıyorsanız, lütfen bize e-posta yoluyla ulaşın. sorununuzu mümkün olan en kısa sürede çözmeye çalışacağız</string>
-    <string name="ALERT_MAIL" translatable="true">posta</string>
-    <string name="ALERT_BRIDGE_MAIL" translatable="true">yeni Bridge talep et</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">bridge adres istemek için postayı seçin. bir kez aldıktan sonra, kopyalayıp yukarıdaki kutuya yapıştırın ve yazılımı başlatın.</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">dil desteklenmiyor</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">sistem dili bu yazılım tarafından desteklenmemektedir. yakında dahil etmek için çalışıyoruz</string>
     <string name="ALERT_ORBOT_INIT" translatable="true">Orbot başlatılıyor</string>
@@ -290,42 +368,16 @@
     <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">sosyal toplumlar</string>
     <string name="ALERT_LOCAL_UPGRADE" translatable="true">Manuel</string>
     <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">oyun mağazası</string>
-    <string name="ALERT_LONG_URL" translatable="true">web bağlantısı bildirimi</string>
-    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">yeni sekmede aç</string>
-    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">mevcut sekmede aç</string>
-    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">panoya kopyala</string>
     <string name="ALERT_LONG_FILE" translatable="true">dosya bildirimi</string>
     <string name="ALERT_DOWNLOAD" translatable="true">indirme bildirimi</string>
-    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">url\'yi yeni sekmede aç</string>
-    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">mevcut sekmede url aç</string>
-    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">url\'yi panoya kopyala</string>
-    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">resmi yeni sekmede aç</string>
-    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">geçerli sekmede resmi aç</string>
-    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">resmi panoya kopyala</string>
-    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">resim dosyasını indir</string>
     <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">indirme bildirimi</string>
     <string name="ALERT_LONG_URL_TITLE" translatable="true">web bağlantısı bildirimi</string>
     <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">e-postayı işleyecek yazılım bulunamadı</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">dosya indirme |</string>
     <string name="ALERT_DATA_CLEARED" translatable="true">veriler temizlendi | yeniden başlatma gerekiyor</string>
-    <string name="ALERT_DATA_CLEARED_INFO" translatable="true">özel veriler başarıyla temizlendi. bazı varsayılan sistem ayarları bu yazılımın yeniden başlatılmasını gerektirecektir. artık güvenle göz atmaya devam edebilirsiniz</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">sekme kapatıldı</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">geri alma</string>
 
 
-    <string name="BRIDGE_BASIC_SETTING" translatable="true">güvenlik özelleştir</string>
-    <string name="BRIDGE_SETTING" translatable="true">Bridge özelleştir</string>
-    <string name="BRIDGE_AUTO" translatable="true">otomatik olarak oluştur</string>
-    <string name="BRIDGE_AUTO_INFO" translatable="true">otomatik olarak yapılandır bridge özelleştir</string>
-    <string name="BRIDGE_MANUAL" translatable="true">bildiğiniz bir bridge sağlayın</string>
-    <string name="BRIDGE_PORT_HINT" translatable="true">özel bridge yapıştır</string>
-    <string name="BRIDGE_HEADER" translatable="true">proxy özelleştirme | Bridge</string>
-    <string name="BRIDGE_DESC" translatable="true">Bridges, Tor ağına bağlantıları engellemeyi daha zor hale getiren listelenmemiş Tor rölelerdir. Bazı ülkelerin Tor\'yı engellemeye çalışması nedeniyle, bazı ülkelerde bridges işe yararken diğerlerinde çalışmıyor</string>
-    <string name="BRIDGE_TITLE" translatable="true">varsayılanı seçin bridge</string>
-    <string name="BRIDGE_REQUEST" translatable="true">istek</string>
-    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (önerilir)</string>
-    <string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -408,11 +460,6 @@
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">yazılımı yeniden başlatıp proxy yöneticisine giderek proxy\'yi değiştirebilirsiniz. alttaki dişli çark simgesine tıklayarak açılabilir</string>
 
 
-    <string name="ORBOT_HEADER" translatable="true">proxy özelleştirmek</string>
-    <string name="ORBOT_DESCRIPTION" translatable="true">Sizi dünya çapında binlerce gönüllünün yönettiği Tor ağına bağlıyoruz! Bu seçenekler size yardımcı olabilir mi</string>
-    <string name="ORBOT_TITLE" translatable="true">İnternet burada sansürlenir (güvenlik duvarını atlayın)</string>
-    <string name="ORBOT_OPTION_DESCRIPTION" translatable="true">güvenlik duvarını atla</string>
-    <string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges internetin çok yavaş çalışmasına neden olur. bunları yalnızca ülkenizde internet sansürlenmişse veya Tor ağı engellenmişse kullanın</string>
 
 
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

@@ -215,11 +215,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <include
-        android:id="@+id/pPopupUndo"
-        layout="@layout/popup_undo"
-        android:visibility="gone" />
-
     <ImageView
         android:id="@+id/pSecureRootBlocker"
         android:layout_width="match_parent"

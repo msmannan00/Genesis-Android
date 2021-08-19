@@ -12,13 +12,11 @@ public class analyticManager
     /*Private Variables*/
 
     private WeakReference<AppCompatActivity> mAppContext;
-    private boolean mIsDeveloperBuild;
 
     /*Initializations*/
 
-    public analyticManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent, boolean pIsDeveloperBuild){
+    public analyticManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent){
         this.mAppContext = pAppContext;
-        this.mIsDeveloperBuild = pIsDeveloperBuild;
 
         initialize();
     }
@@ -40,7 +38,7 @@ public class analyticManager
     public void onTrigger(List<Object> pData, pluginEnums.eAnalyticManager pEventType) {
         if(pEventType.equals(pluginEnums.eAnalyticManager.M_LOG_EVENT))
         {
-
+            logEvent((String)pData.get(0));
         }
     }
 }

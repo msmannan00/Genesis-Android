@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Der Name der mit einem Lesezeichen versehenen URL wird hier angezeigt</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Lesezeichennamen eingeben…</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Lesezeichen wurde entfernt</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Lesezeichen wurde aktualisiert</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">entlassen</string>
 
@@ -63,7 +59,120 @@
 	<string name="ORBOT_LOG" translatable="true">Proxy-Protokolle</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Systemprotokollinformationen</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">Wenn beim Starten von Genesis Konnektivitätsprobleme auftreten, kopieren Sie bitte den folgenden Code und suchen Sie das Problem online oder senden Sie es an uns, damit wir versuchen können, Ihnen zu helfen</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">Proxy anpassen</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">Wir verbinden Sie mit dem Tor-Netzwerk, das von Tausenden von Freiwilligen auf der ganzen Welt betrieben wird! Können Ihnen diese Optionen helfen?</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">Internet wird hier zensiert (Bypass-Firewall)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">Firewall umgehen</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges führt dazu, dass das Internet sehr langsam läuft. Verwenden Sie sie nur, wenn das Internet in Ihrem Land zensiert oder das Tor-Netzwerk blockiert ist</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">Sicherheit anpassen</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Sicherheitseinstellungen</string>
+	<string name="BRIDGE_SETTING" translatable="true">"BRIDGE"-Einstellungen ändern</string>
+	<string name="BRIDGE_AUTO" translatable="true">Automatisch Erstellen</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">"BRIDGE"-Einstellungen automatisch konfigurieren</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Geben Sie eine "BRIDGE" an, die ich kenne</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Benutzerdefinierte "BRIDGE" einfügen</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">"BRIDGE" sind nicht aufgeführte Tor-Relays, die das Blockieren von Verbindungen in das Tor-Netzwerk erschweren. Aufgrund der Art und Weise, wie einige Länder versuchen, Tor zu blockieren, funktionieren bestimmte "BRIDGE" in einigen Ländern, aber nicht in anderen</string>
+	<string name="BRIDGE_TITLE" translatable="true">Standard "BRIDGE" auswählen</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Anfrage</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (empfohlen)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Sanft-Azur (China)</string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Ändern Sie die Darstellung des Systemprotokolls</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">Protokoll mit moderner Listenansicht anzeigen</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">Google zwischen klassischer und moderner Listenansicht</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Lesezeichen entfernt</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Lesezeichen aktualisiert</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Daten erfolgreich gelöscht</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL in Zwischenablage kopiert</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Keine Anwendung gefunden</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Neustart nach Änderungen erforderlich</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Neustart</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Registerkarte Ist Geschlossen</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Neuer Tab geöffnet</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis-Proxy verbindet ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Speicher ist voll ➔ Registerkarte Löschen</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup blockiert</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Fehlerprotokolle öffnen</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Schalter</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Rückgängig</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Neue Identität erstellt</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">Einstellungen öffnen</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Anfrage Neu Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Wählen Sie unten E-Mail aus, um eine Bridge-Adresse anzufordern. Sobald Sie eine Adresse haben, kopieren Sie sie und fügen Sie sie in das obige Feld ein und starten Sie die Anwendung.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">E-Mail</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">ENTSCHULDIGUNG ZU HÖREN</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Wenn Sie bei der Verwendung dieser Anwendung Schwierigkeiten haben, wenden Sie sich bitte per E-Mail an uns. Wir werden versuchen, Ihr Problem so schnell wie möglich zu lösen</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">FEHLERBEHEBUNG</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Setzen Sie die Anwendung zurück, falls sie nicht funktioniert. Wir werden versuchen, es neu zu konfigurieren, damit es wieder funktioniert.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Zurücksetzen</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Entlassen</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Warten auf Download ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Herunterladen</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">US Bewerten</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Sagen Sie anderen, was Sie über diese App denken</string>
+	<string name="ALERT_RATE" translatable="true">Preis</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Fertig</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge Zeichenfolge (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Typ Bridge (obfs4, sanftmütig, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Lesezeichen Website</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Diese Seite zu Ihren Lesezeichen hinzufügen</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">Lesezeichenname...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Fertig</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">URL-Benachrichtigung</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">In Neuem Tab öffnen</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">In Aktueller Registerkarte öffnen</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">In Zwischenablage kopieren</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Datei Herunterladen</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">URL in neuem Tab öffnen</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">URL im aktuellen Tab öffnen</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URL in Zwischenablage kopieren</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Bild in neuem Tab öffnen</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Aktuellen Tab des Bildes öffnen</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Bild in Zwischenablage kopieren</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Bilddatei herunterladen</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">Geben Sie einen Bridge an, den Sie kennen</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">Geben Sie bridge Informationen aus einer vertrauenswürdigen Quelle ein</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">Geben Sie eine Bridge an Ich weiß</string>
+
+
+
+	
+
+
+
+
+
+
 
 
 
@@ -101,9 +210,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">lokale Benachrichtigungen</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Software-Benachrichtigung anpassen</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">Systembenachrichtigungen</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Ändern Sie die Darstellung des Systemprotokolls</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Protokoll mit moderner Listenansicht anzeigen</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">Google zwischen klassischer und moderner Listenansicht</string>
 	<string name="SETTING_SEARCH" translatable="true">Suchmaschine verwalten</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">Hinzufügen, Standard festlegen. zeige Vorschläge</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">Benachrichtigungen verwalten</string>
@@ -241,35 +347,19 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">Entfernen Sie die Browseranpassung</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">Geben Sie einen Bridge an, den Sie kennen</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">Geben Sie bridge Informationen aus einer vertrauenswürdigen Quelle ein</string>
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">Anfrage</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">OK</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">bookmark website</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Fügen Sie diese Seite Ihren Lesezeichen hinzu</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">gelöschte Weblinks und Daten löschen</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Lesezeichen und Daten löschen</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Durch das Löschen von Daten werden durchsuchte Weblinks, Cookies und andere Browserdaten entfernt</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Durch das Löschen von Daten werden Websites mit Lesezeichen gelöscht</string>
 	<string name="ALERT_CLEAR" translatable="true">stornieren</string>
-	<string name="ALERT_ADD" translatable="true">OK</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">neues Lesezeichen</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">Bericht</string>
 	<string name="ALERT_REPORT_URL" translatable="true">report website</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">Wenn Sie der Meinung sind, dass diese URL illegal oder störend ist, melden Sie sie uns, damit wir rechtliche Schritte einleiten können</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">wurde erfolgreich gemeldet</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL wurde erfolgreich gemeldet. Wenn etwas gefunden wird, werden rechtliche Schritte eingeleitet</string>
-	<string name="ALERT_RATEUS" translatable="true">bewerten Sie uns</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">Sagen Sie anderen, was Sie über diese App denken</string>
-	<string name="ALERT_RATE" translatable="true">Bewertung</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">Es tut uns leid, das zu hören!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Wenn Sie Schwierigkeiten bei der Verwendung dieser Software haben, wenden Sie sich bitte per E-Mail an uns. Wir werden versuchen, Ihr Problem so schnell wie möglich zu lösen</string>
-	<string name="ALERT_MAIL" translatable="true">mail</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">neue Bridge anfordern</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Wählen Sie Mail aus, um eine bridge-Adresse anzufordern. Sobald Sie es erhalten haben, kopieren Sie es, fügen Sie es in das obige Feld ein und starten Sie die Software.</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">Sprache wird nicht unterstützt</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">Die Systemsprache wird von dieser Software nicht unterstützt. Wir arbeiten daran, es bald aufzunehmen</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">Initialisierung von Orbot</string>
@@ -286,42 +376,15 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">soziale Gesellschaften</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">Handbuch</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">Spielladen</string>
-	<string name="ALERT_LONG_URL" translatable="true">Weblink-Benachrichtigung</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">in neuem Tab öffnen</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">in der aktuellen Registerkarte öffnen</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">in die Zwischenablage kopieren</string>
 	<string name="ALERT_LONG_FILE" translatable="true">Datei-Benachrichtigung</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">Benachrichtigung herunterladen</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">URL in neuem Tab öffnen</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">URL im aktuellen Tab öffnen</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URL in Zwischenablage kopieren</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Öffne das Bild in einem neuen Tab</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Bild in der aktuellen Registerkarte öffnen</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Bild in Zwischenablage kopieren</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Bilddatei herunterladen</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">Benachrichtigung herunterladen</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">Weblink-Benachrichtigung</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">Es wurde keine Software gefunden, die E-Mails verarbeiten kann</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">Datei herunterladen |</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">Daten gelöscht | Neustart erforderlich</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">private Daten erfolgreich gelöscht. Für einige Standardsystemeinstellungen muss diese Software neu gestartet werden. Jetzt können Sie sicher weiter surfen</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">Tab geschlossen</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">rückgängig machen</string>
 
-
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">Sicherheit anpassen</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge anpassen</string>
-	<string name="BRIDGE_AUTO" translatable="true">automatisch erstellen</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">bridge automatisch anpassen anpassen</string>
-	<string name="BRIDGE_MANUAL" translatable="true">Geben Sie einen bridge an, den Sie kennen</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">Benutzerdefinierte bridge einfügen</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy anpassen | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">Bridges sind nicht aufgeführte Tor-Relais, die das Blockieren von Verbindungen in das Tor-Netzwerk erschweren. Aufgrund der Art und Weise, wie einige Länder versuchen, Tor zu blockieren, funktionieren bestimmte bridges in einigen Ländern, andere jedoch nicht</string>
-	<string name="BRIDGE_TITLE" translatable="true">Wählen Sie Standard bridge</string>
-	<string name="BRIDGE_REQUEST" translatable="true">Anfrage</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (empfohlen)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -402,13 +465,6 @@
 	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge Proxy-Bedingung</string>
 	<string name="PROXY_SUB_HEADER3" translatable="true">info | Systemeinstellung ändern</string>
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">Sie können den Proxy ändern, indem Sie die Software neu starten und zum Proxy-Manager wechseln. Sie kann durch Klicken auf ein Zahnradsymbol unten geöffnet werden</string>
-
-
-	<string name="ORBOT_HEADER" translatable="true">Proxy anpassen</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">Wir verbinden Sie mit dem Tor-Netzwerk, das von Tausenden von Freiwilligen auf der ganzen Welt betrieben wird! Können Ihnen diese Optionen helfen?</string>
-	<string name="ORBOT_TITLE" translatable="true">Internet wird hier zensiert (Bypass-Firewall)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">Firewall umgehen</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges führt dazu, dass das Internet sehr langsam läuft. Verwenden Sie sie nur, wenn das Internet in Ihrem Land zensiert oder das Tor-Netzwerk blockiert ist</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

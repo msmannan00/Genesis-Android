@@ -118,32 +118,19 @@ class tabDataModel
         mSession.close();
 
         try {
-            if(pID == null){
-                String mID = strings.GENERIC_EMPTY_STR;
-                for(int counter = 0; counter< mTabs.size(); counter++){
-                    if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
-                    {
-                        mTabs.get(counter).getSession().stop();
-                        mTabs.get(counter).getSession().close();
-                        mTabs.remove(counter);
-                        mID = mTabs.get(counter).getmId();
-                        break;
-                    }
+            String mID = strings.GENERIC_EMPTY_STR;
+            for(int counter = 0; counter< mTabs.size(); counter++){
+                if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
+                {
+                    mTabs.get(counter).getSession().stop();
+                    mTabs.get(counter).getSession().close();
+                    mID = mTabs.get(counter).getmId();
+                    mTabs.remove(counter);
+                    break;
                 }
-
-                mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + mID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
-            }else {
-                for(int counter = 0; counter< mTabs.size(); counter++){
-                    if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
-                    {
-                        mTabs.get(counter).getSession().stop();
-                        mTabs.get(counter).getSession().close();
-                        mTabs.remove(counter);
-                        break;
-                    }
-                }
-                mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + pID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
             }
+
+            mExternalEvents.invokeObserver(Arrays.asList("DELETE FROM tab WHERE mid='" + mID + "'",null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
         }catch (Exception ex){
             ex.printStackTrace();
         }

@@ -4,18 +4,13 @@ public class constants
 {
     /*LOCAL URL CONSTANTS*/
 
-    public static final String CONST_BLACK_MARKET_URL = "https://genesishiddentechnologies.com/search?q=black+market&p_num=1&s_type=all";
-    public static final String CONST_LEAKED_DOCUMENT_URL = "https://genesishiddentechnologies.com/search?q=leaked+document&p_num=1&s_type=all&p_num=1&s_type=all";
-    public static final String CONST_NEWS_URL = "https://genesishiddentechnologies.com/search?q=latest%20news&p_num=1&s_type=news";
-    public static final String CONST_SOFTWARE_URL = "https://genesishiddentechnologies.com/search?q=softwares+tools&p_num=1&s_type=all&p_num=1&s_type=all";
-    public static final String CONST_SOFTWARE_FINANCE = "https://genesishiddentechnologies.com/search?q=finance&p_num=1&s_type=all&p_num=1&s_type=all";
-    public static final String CONST_COMMUNITIES = "https://genesishiddentechnologies.com/search?q=news&p_num=1&s_type=all&p_num=1&s_type=all";
     public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine.production";
     public static final String CONST_PRIVACY_POLICY_URL = "https://genesishiddentechnologies.com/privacy";
     public static final String CONST_REPORT_URL = "https://genesishiddentechnologies.com/reportus?url=";
     public static final String CONST_SITEMAP = "https://genesishiddentechnologies.com/create";
     public static final String CONST_PACKAGE_NAME = "com.darkweb.genesissearchengine.production";
-    public static final String CONST_WIDGET_NAME = "com.darkweb.genesissearchengine.widget";
+    public static final String CONST_GENESIS_ONION = "genesis.onion";
+    public static final String CONST_GENESIS_ONION_V2 = "genesishiddentechnologies.com";
 
     /*DRIVE URL DEV*/
 
@@ -53,12 +48,9 @@ public class constants
     /*PROXY CONSTANTS*/
 
     public static final String CONST_PROXY_SOCKS = "127.0.0.1";
+    public static final int CONST_PROXY_SOCKS_VERSION = 5;
     public static final boolean CONST_PROXY_SOCKS_REMOTE_DNS = true;
     public static final boolean CONST_PROXY_CACHE = true;
-    public static final boolean CONST_PROXY_MEMORY = true;
-    public static final boolean CONST_PROXY_DO_NOT_TRACK_HEADER_ENABLED = false;
-    public static final int CONST_PROXY_DO_NOT_TRACK_HEADER_VALUE = 1;
-    public static final int CONST_PROXY_SOCKS_VERSION = 5;
 
     /*LOG CONSTANTS*/
 
@@ -110,6 +102,5 @@ public class constants
     public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE = "EXTERNAL_SHORTCUT_COMMAND_ERASE";
     public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN = "EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN";
     public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART = "EXTERNAL_SHORTCUT_COMMAND_RESTART";
-    public static final String CONST_EXTERNAL_SHORTCUT_COMMAND_NAVIGATE = "EXTERNAL_SHORTCUT_COMMAND_NAVIGATE";
 
 }

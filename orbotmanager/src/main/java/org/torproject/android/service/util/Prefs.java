@@ -42,6 +42,9 @@ public class Prefs {
     }
 
     public static boolean hostOnionServicesEnabled () {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_HOST_ONION_SERVICES, true);
     }
 
@@ -50,6 +53,9 @@ public class Prefs {
     }
 
     public static boolean bridgesEnabled() {
+        if(prefs == null){
+            return false;
+        }
         //if phone is in Farsi, enable bridges by default
         boolean bridgesEnabledDefault = Locale.getDefault().getLanguage().equals("fa");
         return prefs.getBoolean(PREF_BRIDGES_ENABLED, bridgesEnabledDefault);
@@ -75,6 +81,9 @@ public class Prefs {
     }
 
     public static boolean beSnowflakeProxy () {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_BE_A_SNOWFLAKE,false);
     }
 
@@ -83,6 +92,9 @@ public class Prefs {
     }
 
     public static boolean limitSnowflakeProxying () {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_BE_A_SNOWFLAKE_LIMIT,true);
     }
 
@@ -91,6 +103,9 @@ public class Prefs {
     }
 
     public static boolean expandedNotifications() {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_EXPANDED_NOTIFICATIONS, true);
     }
 
@@ -99,19 +114,28 @@ public class Prefs {
     }
 
     public static boolean persistNotifications() {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_PERSIST_NOTIFICATIONS, true);
     }
 
     public static boolean allowBackgroundStarts() {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_ALLOW_BACKGROUND_STARTS, true);
     }
 
     public static boolean openProxyOnAllInterfaces() {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_OPEN_PROXY_ON_ALL_INTERFACES, false);
     }
 
     public static boolean useVpn() {
-        return prefs.getBoolean(PREF_USE_VPN, false);
+        return false;
     }
 
     public static void putUseVpn(boolean value) {
@@ -119,6 +143,9 @@ public class Prefs {
     }
 
     public static boolean startOnBoot() {
+        if(prefs == null){
+            return false;
+        }
         return prefs.getBoolean(PREF_START_ON_BOOT, true);
     }
 

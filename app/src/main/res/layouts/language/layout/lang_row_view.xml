@@ -76,7 +76,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/c_view_divier_background"
+        android:background="@color/c_orbot_setting_divider"
         app:layout_constraintBottom_toBottomOf="@+id/pContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

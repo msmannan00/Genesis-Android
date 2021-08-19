@@ -35,6 +35,7 @@ class languageModel
         mSupportedLanaguage.add(new languageDataModel("русский","Russian", "ru","Ru"));
         mSupportedLanaguage.add(new languageDataModel("ไทย","Thai", "th","Th"));
         mSupportedLanaguage.add(new languageDataModel("Türk","Turkish", "tr","Tr"));
+        mSupportedLanaguage.add(new languageDataModel("عربى","Arabic", "ar","Ar"));
         mSupportedLanaguage.add(new languageDataModel("Український","Ukrainian", "uk","Ua"));
         mSupportedLanaguage.add(new languageDataModel("Tiếng Việt","Vietnamese", "vi","Vn"));
     }

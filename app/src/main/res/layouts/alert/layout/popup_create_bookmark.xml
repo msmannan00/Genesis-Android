@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pSecureRootLayout"
+        android:id="@+id/pPopupCreateBookmark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@xml/ax_round_corner"
@@ -17,36 +17,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
-            android:id="@+id/pOrbotRowDescription"
+            android:id="@+id/pPopupCreateDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginTop="18dp"
-            android:alpha="0.8"
+            android:layout_marginStart="15dp"
+            android:alpha="1"
+            android:lineSpacingExtra="3.5dp"
+            android:maxWidth="450dp"
             android:paddingStart="15dp"
-            android:paddingEnd="10dp"
+            android:paddingEnd="15dp"
+            android:textStyle="bold"
+            android:background="@xml/ax_border_left"
             android:text="@string/ALERT_CREATE_BOOKMARK_INFO"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text"
-            android:lineSpacingExtra="3.5dp"
-            android:textSize="13sp"
+            android:textColor="@color/c_alert_rateus_header"
+            android:textSize="13.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp" />
 
         <EditText
-            android:id="@+id/pBookmarkNameInput"
+            android:id="@+id/pPopupCreateBookmarkInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
             android:background="@xml/gx_generic_input_create_bookmark"
             android:elevation="3dp"
             android:ems="10"
             android:focusedByDefault="true"
-            android:hint="@string/ALERT_TITLE_ADD"
+            android:hint="@string/ALERT_CREATE_BOOKMARK_TITLE_ADD"
             android:importantForAutofill="no"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
@@ -60,10 +65,12 @@
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/pPopupCreateDescription"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            tools:targetApi="o" />
 
         <TextView
-            android:id="@+id/pURL"
+            android:id="@+id/pPopupCreateBookmarkURL"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginStart="14dp"
@@ -80,10 +87,11 @@
             android:textSize="12.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pBookmarkNameInput" />
+            app:layout_constraintTop_toBottomOf="@+id/pPopupCreateBookmarkInput"
+            tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/pNext"
+            android:id="@+id/pPopupCreateBookmarkNext"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -91,16 +99,17 @@
             android:layout_marginEnd="14dp"
             android:layout_marginBottom="20dp"
             android:background="@xml/ax_ripple_default_round_bottom"
-            android:text="@string/ALERT_ADD"
+            android:text="@string/ALERT_CREATE_BOOKMARK_DONE"
             android:textAllCaps="false"
             android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pURL" />
+            app:layout_constraintTop_toBottomOf="@+id/pPopupCreateBookmarkURL"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <Button
-            android:id="@+id/pTrigger"
+            android:id="@+id/pPopupCreateBookmarkDismiss"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -113,8 +122,9 @@
             android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pNext"
-            app:layout_constraintTop_toBottomOf="@+id/pURL" />
+            app:layout_constraintEnd_toStartOf="@+id/pPopupCreateBookmarkNext"
+            app:layout_constraintTop_toBottomOf="@+id/pPopupCreateBookmarkURL"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

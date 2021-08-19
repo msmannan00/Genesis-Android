@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
@@ -20,11 +24,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_REPORT_URL;
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_INDEX_WEBSITE;
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB;
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB_LOAD;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
@@ -36,11 +45,19 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mozilla.gecko.PrefsHelper;
 import org.mozilla.geckoview.ContentBlocking;
+import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.GeckoWebExecutor;
+import org.mozilla.geckoview.WebExtension;
+import org.mozilla.geckoview.WebRequest;
 import org.mozilla.geckoview.WebResponse;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 public class geckoClients
 {
@@ -172,19 +189,90 @@ public class geckoClients
     }
 
 
+    @SuppressLint("WrongThread")
+    public void installExtension(){
+
+        mRuntime.getWebExtensionController()
+                .ensureBuiltIn("resource://android/assets/parser/", "messaging@example.com")
+                .accept(
+                        extension -> {
+                            Log.i("MessageDelegate", "Extension installed: " + extension);
+                            extension.setMessageDelegate(mMessagingDelegate, "browser");
+                        },
+                        e -> Log.e("MessageDelegate", "Error registering WebExtension", e)
+                );
+    }
+
+    private final WebExtension.MessageDelegate mMessagingDelegate = new WebExtension.MessageDelegate() {
+
+        @Nullable
+        @Override
+        public void onConnect(@NonNull WebExtension.Port port) {
+            Log.e("MessageDelegate", "onConnect");
+            mPort = port;
+            mPort.setDelegate(mPortDelegate);
+        }
+    };
+
+    private final WebExtension.PortDelegate mPortDelegate = new WebExtension.PortDelegate() {
+        @Override
+        public void onPortMessage(final @NonNull Object message,
+                                  final @NonNull WebExtension.Port port) {
+            if(message!=null){
+                event.invokeObserver(Arrays.asList(message, mSession.getCurrentURL()), M_INDEX_WEBSITE);
+            }
+        }
+
+        @Override
+        public void onDisconnect(final @NonNull WebExtension.Port port) {
+            Log.e("MessageDelegate:", "onDisconnect");
+            if (port == mPort) {
+                mPort = null;
+            }
+        }
+    };
+
+    private WebExtension.Port mPort;
+    public void onExtentionClicked(){
+        try {
+            long id = System.currentTimeMillis();
+            Log.e("evalJavascript:id:", id + "");
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("action", "evalJavascript");
+            jsonObject.put("data", "evalJavascript");
+            jsonObject.put("id", id);
+            Log.e("evalJavascript:", jsonObject.toString());
+            mPort.postMessage(jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     static boolean mCreated = false;
     @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context){
         if(mRuntime==null){
             GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
             if(status.sShowImages == 2){
-                mSettings.configFilePath(getAssetsCacheFile(context, "config/geckoview-config-noimage.yaml"));
+                mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config-noimage.yaml"));
             }else {
-                mSettings.configFilePath(getAssetsCacheFile(context, "config/geckoview-config.yaml"));
+                mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config.yaml"));
             }
             mSettings.build();
 
+            PrefsHelper.setPref("browser.cache.disk.enable",true);
+            PrefsHelper.setPref("browser.cache.memory.enable",true);
+            PrefsHelper.setPref("browser.cache.disk.capacity",1000);
+            PrefsHelper.setPref(keys.PROXY_TYPE, 1);
+            PrefsHelper.setPref(keys.PROXY_SOCKS,"127.0.0.1");
+            PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
+            PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,5);
+            PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,true);
+
             mRuntime = GeckoRuntime.create(context, mSettings.build());
+            mRuntime.getSettings().setRemoteDebuggingEnabled(true);
+            installExtension();
+
             mCreated = true;
             onClearAll();
             mRuntime.getSettings().setAboutConfigEnabled(true);
@@ -225,13 +313,14 @@ public class geckoClients
     public void updateSetting(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
         if(status.sShowImages == 2){
-            mSettings.configFilePath(getAssetsCacheFile(pcontext, "config/geckoview-config-noimage.yaml"));
+            mSettings.configFilePath(getAssetsCacheFile(pcontext, "geckoview-config-noimage.yaml"));
         }else {
-            mSettings.configFilePath(getAssetsCacheFile(pcontext, "config/geckoview-config.yaml"));
+            mSettings.configFilePath(getAssetsCacheFile(pcontext, "geckoview-config.yaml"));
         }
         mSettings.build();
 
-        mRuntime.getSettings().setRemoteDebuggingEnabled(false);
+        mRuntime.getSettings().setRemoteDebuggingEnabled(true);
+
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
         mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
         mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
@@ -376,11 +465,10 @@ public class geckoClients
     public void onBackPressed(boolean isFinishAllowed, int mTabSize, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         if(mSession.canGoBack()){
             mSession.goBackSession();
-            //mSession.onUpdateBannerAdvert();
         }
         else if(isFinishAllowed){
             if(mSession.getRemovableFromBackPressed() && mTabSize>1){
-                event.invokeObserver(null, enums.etype.M_CLOSE_TAB);
+                event.invokeObserver(null, enums.etype.M_CLOSE_TAB_BACK);
             }else {
                 event.invokeObserver(null, enums.etype.back_list_empty);
             }

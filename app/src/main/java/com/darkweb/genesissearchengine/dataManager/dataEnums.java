@@ -44,6 +44,10 @@ public class dataEnums
         M_GET_HELP, M_SET_HELP
     }
 
+    public enum eCrawlerCommands {
+        M_INDEX_URL
+    }
+
     /* Callbacks */
 
     public enum eHistoryCallbackCommands {

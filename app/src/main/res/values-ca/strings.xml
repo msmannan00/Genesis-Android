@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">El nom de l\'URL marcat es mostrarà aquí</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Introduïu el nom del marcador ...</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">El marcador s\'ha eliminat</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">S\'ha actualitzat el marcador</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">acomiadar</string>
 
@@ -63,7 +59,101 @@
 	<string name="ORBOT_LOG" translatable="true">registres de proxy</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Informació del registre del sistema</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">si teniu problemes de connectivitat mentre comenceu el Genesis, copieu el codi següent i cerqueu el problema en línia o envieu-nos-el perquè puguem intentar ajudar-vos</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">personalitzar el servidor intermediari</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">us connectem a la xarxa Tor gestionada per milers de voluntaris a tot el món. Aquestes opcions us poden ajudar?</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">Internet està censurat aquí (ignora el tallafoc)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">ignora el tallafoc</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges fa que Internet funcioni molt lent. utilitzeu-los només si Internet està censurat al vostre país o si la xarxa Tor està bloquejada</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">personalitzar la seguretat</string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">canvieu la forma en què apareix el registre del sistema</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">mostra Registre mitjançant la vista de llista moderna</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">canvia entre la visualització de llista clàssica i moderna</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Marcador eliminat</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Marcador actualitzat</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Les dades s\'han esborrat correctament</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL copiat al porta-retalls</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">No s\'ha trobat cap aplicació</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Reinicieu el dispositiu després dels canvis</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Reinicia</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">La Pestanya Està Tancada</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">S\'ha obert una nova pestanya</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Connexió de proxy Genesis ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">La memòria està plena tab Pestanya d\'esborrar</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup bloquejat</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Registres D\'errors Oberts</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Canvia</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Desfés</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Nova identitat creada</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">obre la configuració</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Sol·licita Un Nou Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Seleccioneu el correu electrònic següent per sol·licitar una adreça Bridge. Un cop tingueu una adreça, copieu-la i enganxeu-la al quadre anterior i inicieu l\'aplicació.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Correu</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">DISCULPI ESCOLTAR-HO</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Si teniu dificultats en utilitzar aquesta aplicació, contacteu amb nosaltres per correu electrònic. Intentarem resoldre el vostre problema el més aviat possible</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">RESOLUCIÓ DE PROBLEMES</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Restableix l\'aplicació per si no funciona. Intentarem reconfigurar-lo perquè pugui tornar a funcionar.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Restableix</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Ignora</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">S\'està esperant per descarregar ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Descarregar</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Valora Els EUA</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Digueu als altres què en penseu sobre aquesta aplicació</string>
+	<string name="ALERT_RATE" translatable="true">Taxa</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Fet</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Tipus Bridge (obfs4, mansuet, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Lloc Web De Marcadors</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Afegiu aquesta pàgina als vostres marcadors</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nom del marcador ...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Fet</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">Notificació D\'URL</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Obre En Una Pestanya Nova</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Obre A La Pestanya Actual</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copia al porta-retalls</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Descarregar Fitxer</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Obre l\'URL a la pestanya nova</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Obre l\'URL a la pestanya actual</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copia l\'URL al porta-retalls</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Obre la imatge en una nova pestanya</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Obre la pestanya actual de la imatge</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copia la imatge al porta-retalls</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Descarregar fitxer d\'imatges</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">proporcioneu un Bridge que ja sabeu</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">introduïu bridge informació d\'una font de confiança</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">Proporcioneu un Bridge que sé</string>
+
+
+
+
+
 
 
 
@@ -95,9 +185,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">notificacions locals</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">personalitzar la notificació de programari</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">notificacions del sistema</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">canvieu la forma en què apareix el registre del sistema</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">mostra Registre mitjançant la vista de llista moderna</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">canvia entre la visualització de llista clàssica i moderna</string>
 	<string name="SETTING_SEARCH" translatable="true">gestiona el motor de cerca</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">afegir, establir per defecte. mostra suggeriments</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">gestionar les notificacions</string>
@@ -235,34 +322,19 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">elimineu la personalització del navegador</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">proporcioneu un Bridge que ja sabeu</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">introduïu bridge informació d\'una font de confiança</string>
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">sol·licitud</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">D\'acord</string>
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">lloc web de marcadors</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">afegiu aquesta pàgina als vostres marcadors</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">suprimiu els enllaços web i les dades navegats</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">neteja el marcador i les dades</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">en esborrar dades, s’eliminaran els enllaços web, les galetes i altres dades de navegació</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">suprimir dades eliminarà llocs web marcats</string>
 	<string name="ALERT_CLEAR" translatable="true">cancel · lar</string>
-	<string name="ALERT_ADD" translatable="true">D\'acord</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">nou marcador</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">informe</string>
 	<string name="ALERT_REPORT_URL" translatable="true">lloc web d\'informes</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">si creieu que aquest URL és il·legal o inquietant, informeu-nos-el perquè puguem emprendre accions legals</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">s\'ha informat correctament</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">l\'URL s\'ha informat correctament. si es troba alguna cosa, es prendran mesures legals</string>
-	<string name="ALERT_RATEUS" translatable="true">puntua\'ns</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">digueu als altres què en penseu sobre aquesta aplicació</string>
-	<string name="ALERT_RATE" translatable="true">taxa</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">ens sap greu escoltar-ho!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">si teniu dificultats mentre utilitzeu aquest programari, contacteu amb nosaltres per correu electrònic. intentarem resoldre el vostre problema al més aviat possible</string>
-	<string name="ALERT_MAIL" translatable="true">correu electrònic</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">sol·licita Bridge nou</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">seleccioneu el correu per sol·licitar una adreça bridge. un cop rebut, copieu-lo i enganxeu-lo al quadre anterior i inicieu el programari.</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">no s\'admet l\'idioma</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">aquest programari no admet l\'idioma del sistema. estem treballant per incloure-ho aviat</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">inicialitzant Orbot</string>
@@ -279,43 +351,28 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">societats socials</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">manual</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">Play Store</string>
-	<string name="ALERT_LONG_URL" translatable="true">notificació d’enllaç web</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">obriu en una pestanya nova</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">obriu a la pestanya actual</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">copiar al portapapers</string>
 	<string name="ALERT_LONG_FILE" translatable="true">notificació d’arxiu</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">notificació de descàrrega</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">obre l\'URL a la pestanya nova</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">obre l\'URL a la pestanya actual</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">copia l’URL al porta-retalls</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">obre la imatge a la pestanya nova</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">obre la imatge a la pestanya actual</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">copia la imatge al porta-retalls</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">descarregar fitxer d\'imatges</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">notificació de descàrrega</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">notificació d’enllaç web</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">no s\'ha trobat cap programari per gestionar el correu electrònic</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">Descarrega l\'arxiu ,</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">dades esborrades, cal reiniciar-les</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">les dades privades s\'han esborrat correctament. alguns paràmetres del sistema per defecte requeriran que aquest programari es reiniciï. ara podeu continuar navegant amb seguretat</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">pestanya tancada</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">desfer</string>
 
 
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">personalitzar la seguretat</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge personalitzar</string>
-	<string name="BRIDGE_AUTO" translatable="true">crear automàticament</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">configurar automàticament bridge personalitzar</string>
-	<string name="BRIDGE_MANUAL" translatable="true">proporcioneu un bridge que coneixeu</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">enganxa el bridge personalitzat</string>
-	<string name="BRIDGE_HEADER" translatable="true">personalització de proxy, Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">Bridges són Tor relés no cotitzats que fan que sigui més difícil bloquejar les connexions a la xarxa Tor. a causa de com alguns països intenten bloquejar Tor, alguns bridges funcionen en alguns països, però no en d\'altres</string>
-	<string name="BRIDGE_TITLE" translatable="true">seleccioneu bridge per defecte</string>
-	<string name="BRIDGE_REQUEST" translatable="true">sol·licitud</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (recomanat)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
-
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Configuració De Seguretat</string>
+	<string name="BRIDGE_SETTING" translatable="true">Canvia La Configuració De "BRIDGE"</string>
+	<string name="BRIDGE_AUTO" translatable="true">Crea Automàticament</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Configureu automàticament la configuració de "BRIDGE"</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Proporcioneu un "BRIDGE" que conec</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Enganxa "BRIDGE" personalitzat</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">"BRIDGE" són relés Tor no cotitzats que fan que sigui més difícil bloquejar les connexions a la xarxa Tor. A causa de com alguns països intenten bloquejar Tor, certs "BRIDGE" funcionen en alguns països, però no en d\'altres Seleccioneu "PONT" per defecte</string>
+	<string name="BRIDGE_TITLE" translatable="true">Sol·licitud</string>
+	<string name="BRIDGE_REQUEST" translatable="true">obfs4 (recomanat)</string>
+	<string name="BRIDGE_OBFS4" translatable="true">Meek-azure (Xina)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
 
 
 
@@ -397,11 +454,6 @@
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">Podeu canviar el servidor intermediari reiniciant el programari i anar al gestor de servidor intermediari. es pot obrir fent clic a una icona d\'engranatge a la part inferior</string>
 
 
-	<string name="ORBOT_HEADER" translatable="true">personalitzar el servidor intermediari</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">us connectem a la xarxa Tor gestionada per milers de voluntaris a tot el món. Aquestes opcions us poden ajudar?</string>
-	<string name="ORBOT_TITLE" translatable="true">Internet està censurat aquí (ignora el tallafoc)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">ignora el tallafoc</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges fa que Internet funcioni molt lent. utilitzeu-los només si Internet està censurat al vostre país o si la xarxa Tor està bloquejada</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

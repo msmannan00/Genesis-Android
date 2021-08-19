@@ -32,10 +32,6 @@
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Name of bookmarked url will be shown here</string>
     <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
 
-    <!-- Bookmark Alerts -->
-    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bookmark removed</string>
-    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bookmark updated</string>
-
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">Dismiss</string>
 
@@ -61,16 +57,117 @@
     <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Tracking Protection</string>
     <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Enable tracking protection provided by Genesis</string>
     <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificate</string>
+
+    <!-- Alert Certificate -->
     <string name="ALERT_CERTIFICATE_HEADER" translatable="true">Certificate Information</string>
 
-    <!-- Orbot Log -->
+    <!-- Orbot Logs -->
     <string name="ORBOT_LOG" translatable="true">Proxy Logs</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">Logs Info</string>
     <string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
-    <string name="ORBOT_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
 
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">Proxy Settings</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">We connect you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">Internet is censored here (Bypass Firewall)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">Bypass Firewall</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
 
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
+    <string name="BRIDGE_SETTING" translatable="true">Bridge Settings</string>
+    <string name="BRIDGE_AUTO" translatable="true">Create Automatically</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">Automatically configure bridge settings</string>
+    <string name="BRIDGE_MANUAL" translatable="true">Provide a bridge I know</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Paste custom bridge</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
+    <string name="BRIDGE_TITLE" translatable="true">Select Default bridge</string>
+    <string name="BRIDGE_REQUEST" translatable="true">Request</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
 
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Log Settings</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">Show Logs in Advance List View</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">Toogle between classic and advance view</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Bookmark removed</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Bookmark updated</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Data cleared successfully</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL Copied to clipboard</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">No application found</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Restart required after changes</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">Restart</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Closed</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">New tab opened</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy connecting ...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memory full &#160; ➔ &#160; Clearing tab</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup blocked</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Open Logs</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Switch</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Undo</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">New identity created</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">Settings</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST BRIDGE</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Select E-mail below to request a bridge address.Once you have an address, copy &amp; paste it into the above box and start the application.</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true"><b><font color='#00b3b3'>SORRY TO HEAR THAT\n</font></b></string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">If you are having difficulty while using this application please reach out to us via email. We will try to solve your problem as soon as possible</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true"><b><font color='#00b3b3'>TROUBLESHOOT &#160;</font></b></string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Reset application in case if its not working. We will try to reconfigure it so it might work again.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Reset</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Dismiss</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Waiting to download ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Download</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">Rate US</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">Tell others what you think about this app</string>
+    <string name="ALERT_RATE" translatable="true">Rate</string>
+
+    <!-- Alert Bridge -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Done</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="true">bridge string (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="true">bridge type (obfs4, meek, ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>BOOKMARK WEBSITE &#160;</font></b>&#160;</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Add this page to your bookmarks</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bookmark name...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Done</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">URL Notification</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Open In New Tab</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Open In Current Tab</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copy to Clipboard</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Download File</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Open url in new tab</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Open url in current tab</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copy url to clipboard</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Open image in new tab</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Open image current tab</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copy image to clipboard</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Provide a Bridge I know</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">Enter bridge information from a trusted source</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">Request</string>
 
 
 
@@ -101,9 +198,6 @@
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">Local Notifications</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Device Notification Settings</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">System Notifications</string>
-    <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">Log Settings</string>
-    <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">Show Logs in Advance List View</string>
-    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">Toogle between classic and advance view</string>
     <string name="SETTING_SEARCH" translatable="false">Manage Search</string>
     <string name="SETTING_SEARCH_INFO" translatable="true">Add, set default. show suggestions</string>
     <string name="SETTING_NOTIFICATION" translatable="true">Manage Notifications</string>
@@ -183,8 +277,6 @@
     <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Disable java scripting for various script attacks</string>
     <string name="SETTING_PRIVACY_POPUP" translatable="true">Block Popup | Toggle to Disable Popup Advert</string>
     <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Remove popup advertizement. Might break functionaly of some websites</string>
-    <string name="SETTING_PRIVACY_POPUP_INFO_ALERT" translatable="true">Popup blocked</string>
-    <string name="SETTING_MAX_TAB_POPUP_INFO_ALERT" translatable="true">Memory full &#160; ➔ &#160; Clearing tab</string>
     <string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Restore tabs</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Don\'t restore after quitting browser</string>
@@ -255,46 +347,23 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">Clear browser settings</string>
 
     <!-- Alerts -->
-    <string name="ALERT_UPDATE_BRIDGES" translatable="true">Provide a Bridge I know</string>
-    <string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true"><b><font color='#00b3b3'>PROVIDE A BRIDGE &#160;</font></b>&#160;Enter bridge information from a trusted source</string>
-    <string name="ALERT_ADD_BRIDGES_HINT_V1" translatable="true">bridge string (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_ADD_BRIDGES_TYPE_HINT_V1" translatable="true">bridge type (obfs4, meek, ...)</string>
-    <string name="ALERT_REQUEST_BRIDGE" translatable="true">Request</string>
-    <string name="ALERT_SAVE_BRIDGE" translatable="true">Done</string>
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">Bookmark Website</string>
-    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true"><b><font color='#00b3b3'>BOOKMARK WEBSITE &#160;</font></b>&#160;Add this page to your bookmarks</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">Remove browser history ?</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">Clear Bookmark and Data</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Clearing data will remove history, cookies, and other browsing data</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Remove all bookmarks ?</string>
     <string name="ALERT_CLEAR" translatable="true">Clear</string>
-    <string name="ALERT_IMAGE_STATUS" translatable="true">Restart required after changes</string>
     <string name="ALERT_CONFIRM" translatable="true">Confirm</string>
-    <string name="ALERT_ADD" translatable="true">Done</string>
-    <string name="ALERT_TITLE_ADD" translatable="true">bookmark name...</string>
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Waiting to download ...</string>
-    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Download</string>
     <string name="ALERT_REPORT" translatable="true">Report</string>
     <string name="ALERT_REPORT_URL" translatable="true">Report Website</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">If you think this URL is illegal or disturbing, report it to us, so we can take legal action</string>
     <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">Reported Successfully</string>
     <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL was reported successfully. If something found, legal action will be taken</string>
-    <string name="ALERT_RATEUS" translatable="true">Rate US</string>
-    <string name="ALERT_RATEUS_INFO" translatable="true">Tell others what you think about this app</string>
-    <string name="ALERT_RATE" translatable="true">Rate</string>
-    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true"><b><font color='#00b3b3'>SORRY TO HEAR THAT ! &#160;</font></b>&#160;If you are having difficulty while using this application please reach out to us via email. We will try to solve your problem as soon as possible</string>
-    <string name="ALERT_MAIL" translatable="true">Mail</string>
-    <string name="ALERT_RESTART" translatable="true">Restart</string>
-    <string name="ALERT_BRIDGE_MAIL" translatable="true">Request New Bridge</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true"><b><font color='#00b3b3'>REQUEST BRIDGE &#160;</font></b>&#160;Select E-mail below to request a bridge address.\n\nOnce you have an address, copy &amp; paste it into the above box and start the application.</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">Language not supported</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">System language is not supported by this application. We are working to include it soon</string>
     <string name="ALERT_ORBOT_INIT" translatable="true">Initializing Genesis</string>
     <string name="ALERT_NOT_SUPPORTED" translatable="true">Action not supported</string>
     <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">No application found to handle the following command</string>
-    <string name="ALERT_PANIC_INFO" translatable="true"><b><font color='#f32323'>TROUBLESHOOT &#160;</font></b>&#160; Reset application in case if its not working. We will try to reconfigure it so it might work again. <b><font color='#000000'>Warning!</font></b> it will clear Genesis app data</string>
-    <string name="ALERT_PANIC_BT_1" translatable="true">Reset</string>
-    <string name="ALERT_PANIC_BT_2" translatable="true">Dismiss</string>
     <string name="ALERT_WELCOME_MESSAGE" translatable="true">Welcome | Hidden  Web Gateway</string>
     <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">This application provide you a platform to search and open hidden web urls. Here are few suggestions\n</string>
     <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">Deep Web Online Market</string>
@@ -306,57 +375,23 @@
     <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">Social Communities</string>
     <string name="ALERT_LOCAL_UPGRADE" translatable="true">Manual</string>
     <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">Playstore</string>
-    <string name="ALERT_LONG_URL" translatable="true">URL Notification</string>
-    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Open In New Tab</string>
-    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Open In Current Tab</string>
-    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copy to Clipboard</string>
-    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Download File</string>
     <string name="ALERT_LONG_FILE" translatable="true">File Notification</string>
     <string name="ALERT_DOWNLOAD" translatable="true">Download Notification</string>
-    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Open url in new tab</string>
-    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Open url in current tab</string>
-    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copy url to clipboard</string>
-    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Open image in new tab</string>
-    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Open image current tab</string>
-    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copy image to clipboard</string>
-    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
     <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">Download Notification</string>
     <string name="ALERT_LONG_URL_TITLE" translatable="true">URL Notification</string>
     <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">No application found to handle email</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">Download File | </string>
     <string name="ALERT_DATA_CLEARED" translatable="true">Data Cleared | Restart Required</string>
-    <string name="ALERT_DATA_CLEARED_INFO" translatable="true">Data cleared successfully</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">Tab Closed</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Undo</string>
-    <string name="ALERT_OPEN_NEW_TAB" translatable="true">New tab opened</string>
-    <string name="ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Switch</string>
     <string name="ALERT_DATA_CLEARED_SHORTCUT" translatable="true">Data Cleared Successfully</string>
     <string name="ALERT_DATA_CLEARED_INFO_SHORTCUT" translatable="true">Private data cleared successfully. Application will close in a moment. Now you can safely continue browsing</string>
     <string name="ALERT_DATA_CLEARED_BUTTON" translatable="true">Closing Genesis Please Wait ...</string>
     <string name="ALERT_ORBOT_LOADING" translatable="true">Genesis Connecting ...</string>
-    <string name="ALERT_ORBOT_LOADING_INFO" translatable="true">Genesis proxy connecting ...</string>
-    <string name="ALERT_ORBOT_LOADING_BUTTON" translatable="true">Open Logs</string>
     <string name="ALERT_CRASH" translatable="true">Application closed unexpectedly</string>
     <string name="ALERT_CRASH_INFO" translatable="true"><b><font color='#f32323'>Request New Bridge &#160;</font></b>&#160;Application crashed due to unexpected error. We are looking into the issue mean while you can continue with this application</string>
 
-    <!-- Bridge Settings -->
-    <string name="BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
-    <string name="BRIDGE_SETTING" translatable="true">Bridge Settings</string>
-    <string name="BRIDGE_AUTO" translatable="true">Create Automatically</string>
-    <string name="BRIDGE_AUTO_INFO" translatable="true">Automatically configure bridge settings</string>
-    <string name="BRIDGE_MANUAL" translatable="true">Provide a bridge I know</string>
-    <string name="BRIDGE_PORT_HINT" translatable="false">Paste custom bridge</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-    <string name="BRIDGE_DESC" translatable="true">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
-    <string name="BRIDGE_TITLE" translatable="true">Select Default bridge</string>
-    <string name="BRIDGE_REQUEST" translatable="true">Request</string>
-    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
-    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
-
     <!-- Popup Menu -->
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
-    <string name="HOME_MENU__NEW_CIRCUIT_CREATED" translatable="true">New identity created</string>
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Genesis Logs</string>
     <string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>
@@ -365,6 +400,7 @@
     <string name="HOME_MENU_DOWNLOAD" translatable="true">Downloads</string>
     <string name="HOME_MENU_HISTORY" translatable="true">History</string>
     <string name="HOME_MENU_SETTING" translatable="true">Settings</string>
+    <string name="HOME_MENU__NEW_CIRCUIT_CREATED" translatable="true">New identity created</string>
     <string name="HOME_MENU_DESKTOP" translatable="true">Desktop site</string>
     <string name="HOME_MENU_BOOKMARK" translatable="true">Bookmark This Page</string>
     <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">Bookmarks</string>
@@ -436,13 +472,6 @@
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge connectivity status</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">To change proxy settings please restart this application and navigate to proxy manager. It can be opened by pressing on GEAR icon at bottom</string>
-
-    <!-- Orbot View -->
-    <string name="ORBOT_HEADER" translatable="true">Proxy Settings</string>
-    <string name="ORBOT_DESCRIPTION" translatable="true">We connect you to the Tor Network run by thousands of volunteers around the world! Can these options help you</string>
-    <string name="ORBOT_TITLE" translatable="true">Internet is censored here (Bypass Firewall)</string>
-    <string name="ORBOT_OPTION_DESCRIPTION" translatable="true">Bypass Firewall</string>
-    <string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges causes internet to run very slow. Use them only if internet is censored in your country or Tor network is blocked</string>
 
     <!-- Notification Menu -->
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

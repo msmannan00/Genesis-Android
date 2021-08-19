@@ -48,19 +48,20 @@ class geckoDownloadManager
 
         String mURL = helperMethod.getHost(session.getCurrentURL());
         try{
-            if(mURL.length()>25){
-                mURL = mURL.substring(0,25);
-            }
-
             String mFileName = DownloadUtils.guessFileName(response.headers.get("Content-Disposition"),"",response.uri,null);
-            downloadURL = Uri.parse(response.uri);
+            String murl = response.uri;
+            if(!murl.startsWith("http")){
+                murl = "https://" + murl;
+            }
+            downloadURL = Uri.parse(murl);
             downloadFile = mFileName;
         }catch (Exception ex){
             ex.printStackTrace();
         }
 
+
         event.invokeObserver(Arrays.asList(0,session.getSessionID()), enums.etype.progress_update);
-        event.invokeObserver(Arrays.asList(downloadFile,session.getSessionID(),mURL), enums.etype.download_file_popup);
+        event.invokeObserver(Arrays.asList(downloadFile,session.getSessionID(),downloadURL), enums.etype.download_file_popup);
     }
 
     Uri getDownloadURL(){

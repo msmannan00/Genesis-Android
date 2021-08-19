@@ -76,7 +76,7 @@ class settingSearchViewController
 
     private void initSearchEngine(){
         resetSearchEngine();
-        switch (status.sSettingSearchStatus) {
+        switch (status.sSettingDefaultSearchEngine) {
             case constants.CONST_BACKEND_GOOGLE_URL:
                 mSearchEngines.get(2).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
                 mSearchEngines.get(2).setChecked(true);

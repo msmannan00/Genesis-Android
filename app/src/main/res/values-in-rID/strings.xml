@@ -25,10 +25,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Nama url yang di-bookmark akan ditampilkan di sini</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Masukkan nama penanda…</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Bookmark dihapus</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Bookmark diperbarui</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">ontslaan</string>
 
@@ -59,7 +55,117 @@
 	<string name="ORBOT_LOG" translatable="true">als u een verbindingsprobleem ondervindt bij het starten van Genesis, kopieer dan de volgende code en zoek het probleem online of stuur het naar ons, zodat we kunnen proberen u te helpen</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Orbot logboeken</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">if you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Setting -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">te klikken proxy aanpassen</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">we verbinden je met het Tor-netwerk dat wordt gerund door duizenden vrijwilligers over de hele wereld! Kunnen deze opties u helpen</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">internet wordt hier gecensureerd (bypass firewall)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">omzeil firewall</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges zorgt ervoor dat internet erg traag werkt. gebruik ze alleen als internet in uw land wordt gecensureerd of als het Tor-netwerk is geblokkeerd</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">automatisch aanmaken</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Pengaturan Keamanan</string>
+	<string name="BRIDGE_SETTING" translatable="true">Ubah Pengaturan "BRIDGE"</string>
+	<string name="BRIDGE_AUTO" translatable="true">Buat Secara Otomatis</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Konfigurasikan pengaturan "BRIDGE" secara otomatis</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Berikan "BRIDGE" yang saya tahu</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Tempel "BRIDGE" khusus</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">"BRIDGE" adalah relay Tor tidak terdaftar yang mempersulit pemblokiran koneksi ke jaringan Tor. Karena beberapa negara mencoba memblokir Tor, "BRIDGE" tertentu berfungsi di beberapa negara tetapi tidak di negara lain</string>
+	<string name="BRIDGE_TITLE" translatable="true">Pilih Default "BRIDGE"</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Permintaan</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Disarankan)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-biru (Cina)</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">aanvragen selecteer mail om een ​​bridge-adres aan te vragen. Zodra u het heeft ontvangen, kopieert en plakt u het in het bovenstaande vak en start u de software.​taal niet ondersteund</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">systeemtaal wordt niet ondersteund door deze software. we werken eraan om het binnenkort op te nemen</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">mail</string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">de manier wijzigen waarop het systeemlogboek wordt weergegeven</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">logboek weergeven met moderne lijstweergave</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">schakelen tussen klassieke en moderne lijstweergave</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Bookmark dihapus</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Bookmark diperbarui</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Data berhasil dihapus</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL Disalin ke papan klip</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Tidak ada aplikasi yang ditemukan</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Mulai ulang diperlukan setelah perubahan</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Mulai ulang</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Ditutup</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Tab baru dibuka</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proksi Genesis menghubungkan ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memori penuh Menghapus tab</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Munculan diblokir</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Buka Log Kesalahan</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Beralih</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Urungkan</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Identitas baru dibuat</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">buka pengaturan</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">MAAF MENDENGARNYA</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Jika Anda mengalami kesulitan saat menggunakan aplikasi ini, silakan hubungi kami melalui email. Kami akan mencoba menyelesaikan masalah Anda sesegera mungkin</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">PEMECAHAN MASALAH</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Setel ulang aplikasi jika tidak berfungsi. Kami akan mencoba mengonfigurasi ulang agar dapat berfungsi kembali.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Setel ulang</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Tutup</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Menunggu untuk mengunduh ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Unduh</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Nilai AS</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Beri tahu orang lain pendapat Anda tentang aplikasi ini</string>
+	<string name="ALERT_RATE" translatable="true">Nilai</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Selesai</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge tipe (obfs4, lemah lembut, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Tandai Situs Web</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Tambahkan halaman ini ke bookmark Anda</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nama penanda...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Selesai</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">Pemberitahuan URL</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Buka Di Tab Baru</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Buka Di Tab Saat Ini</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Salin ke Papan Klip</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Unduh Berkas</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Buka url di tab baru</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Buka url di tab saat ini</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Salin url ke papan klip</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Buka gambar di tab baru</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Buka tab gambar saat ini</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Salin gambar ke papan klip</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Unduh file gambar</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">geef een Bridge weet je</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">voer bridge informatie in van een vertrouwde bron</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">verzoek</string>
+
+
+
+
+
 
 
 
@@ -104,9 +210,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">lokale meldingen</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Softwaremelding aanpassen</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">systeemmeldingen</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">de manier wijzigen waarop het systeemlogboek wordt weergegeven</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">logboek weergeven met moderne lijstweergave</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">schakelen tussen klassieke en moderne lijstweergave</string>
 	<string name="SETTING_SEARCH" translatable="true">zoekmachine beheren</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">toevoegen, standaard instellen. suggesties weergeven</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">meldingen beheren</string>
@@ -237,33 +340,18 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">browseraanpassing verwijderen</string>
 
 	<!-- Alerts -->
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">geef een Bridge weet je</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">voer bridge informatie in van een vertrouwde bron</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">verzoek</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">OK</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">bladwijzerwebsite</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">voeg deze pagina toe aan je bladwijzers</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">verwijder doorbladerde weblinks en gegevens</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">duidelijke bladwijzer en gegevens</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">als u gegevens wist, worden doorbladerde weblinks, cookies en andere browsegegevens verwijderd</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Als u gegevens verwijdert, worden websites met bladwijzers verwijderd</string>
 	<string name="ALERT_CLEAR" translatable="true">annuleren</string>
-	<string name="ALERT_ADD" translatable="true">oké</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">nieuwe bladwijzer</string>
 	<string name="ALERT_REPORT" translatable="true">rapport</string>
 	<string name="ALERT_REPORT_URL" translatable="true">rapport website</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">als u denkt dat deze URL illegaal of storend is, meld dit dan aan ons, zodat we juridische stappen kunnen ondernemen</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">is met succes gerapporteerd</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">url is succesvol gerapporteerd. als er iets wordt gevonden, wordt juridische actie ondernomen</string>
-	<string name="ALERT_RATEUS" translatable="true">beoordeel ons</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">vertel anderen wat je van deze app vindt</string>
-	<string name="ALERT_RATE" translatable="true">tarief</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">het spijt ons dat te horen!​Als u problemen ondervindt bij het gebruik van deze software, neem dan contact met ons op via e-mail. wij zullen proberen uw probleem zo snel mogelijk op te lossen</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">nieuwe Bridge</string>
-	<string name="ALERT_MAIL" translatable="true">mail</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">aanvragen selecteer mail om een ​​bridge-adres aan te vragen. Zodra u het heeft ontvangen, kopieert en plakt u het in het bovenstaande vak en start u de software.​taal niet ondersteund</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">systeemtaal wordt niet ondersteund door deze software. we werken eraan om het binnenkort op te nemen</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">initialiseren Orbot</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">actie niet ondersteund</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">geen software gevonden om de volgende opdracht</string>
@@ -280,43 +368,14 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">speelwinkel</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">melding weblink</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">open in nieuw tabblad</string>
-	<string name="ALERT_LONG_URL" translatable="true">open in huidig ​​tabblad</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">kopiëren naar klembord</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">bestandsmelding</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">download melding</string>
 	<string name="ALERT_LONG_FILE" translatable="true">open url in nieuw tabblad</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">open url in huidig ​​tabblad</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">kopieer url naar klembord</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">open afbeelding in nieuw tabblad</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">afbeelding openen in huidig ​​tabblad</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">kopieer afbeelding naar klembord</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">download afbeeldingsbestand</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">download melding</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">melding weblink</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">geen software gevonden om e-mail te verwerken</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">downloadbestand,</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">gegevens gewist, herstart vereist</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">download file , </string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">tabblad gesloten</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">ongedaan maken</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">beveiliging aanpassen</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">Bridge aanpassen</string>
-
-	<!-- Bridge Settings -->
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">automatisch aanmaken</string>
-	<string name="BRIDGE_SETTING" translatable="true">automatisch configureren bridge aanpassen</string>
-	<string name="BRIDGE_AUTO" translatable="true">geef een bridge waarvan u weet</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">plak custom bridge</string>
-	<string name="BRIDGE_MANUAL" translatable="true">proxy aanpassen, Bridge</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">Bridges zijn niet-vermelde Tor-relais die het moeilijker maken om verbindingen in het Tor-netwerk te blokkeren. vanwege hoe sommige landen Tor proberen te blokkeren, werken sommige bridges in sommige landen maar niet in andere</string>
-	<string name="BRIDGE_HEADER" translatable="true">selecteer standaard bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">verzoek</string>
-	<string name="BRIDGE_TITLE" translatable="true">obfs4 (aanbevolen)</string>
-	<string name="BRIDGE_REQUEST" translatable="true">meek-azuur (china)</string>
-	<string name="BRIDGE_OBFS4" translatable="true">proxy-logboeken</string>
-
-	<!-- Orbot Log -->
 
 	<!-- Popup Menu -->
 	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">tabblad sluiten</string>
@@ -396,12 +455,6 @@
 	<string name="PROXY_SUB_HEADER3" translatable="true">info, wijzig Systeeminstelling</string>
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">u kunt de proxy wijzigen door de software opnieuw te starten en naar proxymanager te gaan. het kan worden geopend door op een tandwielpictogram onderaan</string>
 
-	<!-- Orbot View -->
-	<string name="ORBOT_HEADER" translatable="true">te klikken proxy aanpassen</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">we verbinden je met het Tor-netwerk dat wordt gerund door duizenden vrijwilligers over de hele wereld! Kunnen deze opties u helpen</string>
-	<string name="ORBOT_TITLE" translatable="true">internet wordt hier gecensureerd (bypass firewall)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">omzeil firewall</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges zorgt ervoor dat internet erg traag werkt. gebruik ze alleen als internet in uw land wordt gecensureerd of als het Tor-netwerk is geblokkeerd</string>
 
 	<!-- Notification Menu -->
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
@@ -467,7 +520,6 @@
 		<item>Allow Visited</item>
 		<item>Allow Non Tracker</item>
 	</string-array>
-    <string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
 
 

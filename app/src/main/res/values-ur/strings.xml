@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">بک مارک یو آر ایل کا نام یہاں دکھایا جائے گا</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">بک مارک کا نام درج کریں…</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">بک مارک کو ہٹا دیا گیا ہے</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">بک مارک کو اپ ڈیٹ کر دیا گیا ہے</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">خارج کردیں</string>
 
@@ -63,7 +59,124 @@
 	<string name="ORBOT_LOG" translatable="true">پراکسی لاگز</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">سسٹم لاگ انفارمیشن</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">اگر آپ جینیسز کو شروع کرتے وقت رابطہ کے مسئلے کا سامنا کر رہے ہیں تو ، براہ کرم مندرجہ ذیل کوڈ کو کاپی کریں اور مسئلہ آن لائن تلاش کریں یا ہمیں بھیجیں ، لہذا ہم آپ کی مدد کرنے کی کوشش کر سکتے ہیں</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">پراکسی اپنی مرضی کے مطابق بنائیں</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">ہم آپ کو ڈور نیٹ ورک سے منسلک کرتے ہیں جو دنیا بھر میں ہزاروں رضاکاروں کے ذریعہ چلتا ہے! کیا یہ آپشن آپ کی مدد کرسکتے ہیں؟</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">انٹرنیٹ یہاں سنسر ہے (فائروال کو بائی پاس)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">بائی پاس فائر وال</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">برج انٹرنیٹ بہت سست چلانے کا سبب بنتا ہے۔ ان کو صرف اس صورت میں استعمال کریں جب آپ کے ملک میں انٹرنیٹ سنسر ہے یا ڈور نیٹ ورک مسدود ہے</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">سیکورٹی کو بہتر بنائیں</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">سیکورٹی کی ترتیبات</string>
+	<string name="BRIDGE_SETTING" translatable="true">"BRIDGE" کی ترتیبات کو تبدیل کریں۔ خودکار بنائیں</string>
+	<string name="BRIDGE_AUTO" translatable="true">"BRIDGE" کی ترتیبات کو خودکار طور پر ترتیب دیں۔ ایک "برج" فراہم کریں جو میں جانتا ہوں</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">اپنی مرضی کے مطابق "برج" چسپاں کریں</string>
+	<string name="BRIDGE_MANUAL" translatable="true">پراکسی ترتیبات</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">"برج"</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">درخواست</string>
+	<string name="BRIDGE_TITLE" translatable="true">obfs4 (تجویز کردہ)</string>
+	<string name="BRIDGE_REQUEST" translatable="true">میک ایزور (چین)</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>ل Bridge کی درخواست کریں۔</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">ایک Bridge پتے کی درخواست کے لئے میل کا انتخاب کریں۔ ایک بار جب آپ اسے حاصل کرلیں تو ، اسے اوپر والے خانے میں کاپی کرکے پیسٹ کریں اور سافٹ ویئر شروع کریں۔</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">میل</string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">سسٹم لاگ ظاہر ہونے کا طریقہ تبدیل کریں</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">جدید فہرست کے نظارے کا استعمال کرتے ہوئے لاگ دکھائیں</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">کلاسیکی اور جدید فہرست کے نظارے کے درمیان ٹوگل</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">بک مارک ہٹا دیا گیا</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">بک مارک اپ ڈیٹ کیا گیا</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">ڈیٹا کامیابی سے صاف ہو گیا</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">یو آر ایل کو کلپ بورڈ پر کاپی کیا گیا</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">کوئی درخواست نہیں ملی</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">تبدیلیوں کے بعد دوبارہ شروع کرنا ضروری ہے</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">دوبارہ شروع کریں</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">ٹیب بند ہے</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">نیا ٹیب کھولا گیا</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">پیدائشی پراکسی منسلک ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">میموری بھری ہوئی ہے ➔ کلیئرنگ ٹیب</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">پاپ اپ بلاک کر دیا گیا</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">اوپن ایرر لاگز</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">سوئچ</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">کالعدم</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">نئی شناخت بنائی گئی</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">ترتیبات کھولیں</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">اگر آپ کو اس ایپلیکیشن کو استعمال کرتے ہوئے دشواری ہو رہی ہے تو براہ کرم ہم سے ای میل کے ذریعے رابطہ کریں۔ ہم آپ کے مسئلے کو جلد از جلد حل کرنے کی کوشش کریں گے۔ ٹروبل شاٹ</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">اگر یہ کام نہیں کررہا ہے تو درخواست کو دوبارہ ترتیب دیں۔ ہم اسے دوبارہ ترتیب دینے کی کوشش کریں گے تاکہ یہ دوبارہ کام کرے۔</string>
+
+		<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">دوبارہ ترتیب دیں برطرف</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">ڈاؤن لوڈ کرنے کا انتظار ...</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">ڈاؤنلوڈ کریں شرح امریکی</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">دوسروں کو بتائیں کہ آپ اس ایپ کے بارے میں کیا سوچتے ہیں۔ شرح</string>
+
+		<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">ہو گیا</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Bridge سٹرنگ (obfs4 212.21.66.66:20621 ...)</string>
+
+		<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Bridge ٹائپ (obfs4، Meek، ...)</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">بک مارک ویب سائٹ</string>
+	<string name="ALERT_RATE" translatable="true">اس صفحے کو اپنے بُک مارکس میں شامل کریں۔ بک مارک کا نام ...</string>
+
+		<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">ہو گیا</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">یو آر ایل نوٹیفیکیشن</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">نئے ٹیب میں کھولیں</string>
+
+		<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">موجودہ ٹیب میں کھولیں</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">کلپ بورڈ پر کاپی کریں فائل ڈاؤن لوڈ کریں url کو نئے ٹیب میں کھولیں۔ یو آر ایل کو موجودہ ٹیب میں کھولیں۔ یو آر ایل کو کلپ بورڈ میں کاپی کریں۔ تصویر کو نئے ٹیب میں کھولیں۔ تصویر کا موجودہ ٹیب کھولیں۔ تصویر کو کلپ بورڈ میں کاپی کریں۔ تصویر فائل ڈاؤن لوڈ کریں ایک Bridge فراہم کریں جو میں جانتا ہوں۔ ایک Bridge فراہم کریں۔ ایک قابل اعتماد ذریعہ سے Bridge معلومات درج کریں۔ درخواست کریں۔</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bookmark name...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Done</string>
+
+		<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">URL Notification</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Open In New Tab</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Open In Current Tab</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copy to Clipboard</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Download File</string>
+
+		<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Open url in new tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Open url in current tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copy url to clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Open image in new tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Open image current tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copy image to clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">ایک برج فراہم کریں جو آپ جانتے ہو</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">کسی قابل اعتماد ذریعہ سے برج معلومات درج کریں</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">درخواست</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -99,9 +212,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">مقامی اطلاعات</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">سافٹ ویئر کی اطلاع کو کسٹمائز کریں</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">سسٹم کی اطلاعات</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">سسٹم لاگ ظاہر ہونے کا طریقہ تبدیل کریں</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">جدید فہرست کے نظارے کا استعمال کرتے ہوئے لاگ دکھائیں</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">کلاسیکی اور جدید فہرست کے نظارے کے درمیان ٹوگل</string>
 	<string name="SETTING_SEARCH" translatable="true">سرچ انجن کا نظم کریں</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">شامل کریں ، طے شدہ طے کریں۔ تجاویز دکھائیں</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">اطلاعات کا نظم کریں</string>
@@ -239,35 +349,18 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">براؤزر کی تخصیص کو دور کریں</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">ایک برج فراہم کریں جو آپ جانتے ہو</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">کسی قابل اعتماد ذریعہ سے برج معلومات درج کریں</string>
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">برج ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">درخواست</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">ٹھیک ہے</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">بک مارک ویب سائٹ</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">اس صفحے کو اپنے بُک مارکس میں شامل کریں</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">براؤزڈ ویب لنکس اور ڈیٹا کو حذف کریں</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">بک مارک اور ڈیٹا کو صاف کریں</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">ڈیٹا کو صاف کرنا براؤزڈ ویب لنکس ، کوکیز اور دیگر براؤزنگ ڈیٹا کو ختم کردے گا</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">ڈیٹا کو حذف کرنا بک مارک کی ویب سائٹوں کو حذف کردے گا</string>
 	<string name="ALERT_CLEAR" translatable="true">منسوخ کریں</string>
-	<string name="ALERT_ADD" translatable="true">ٹھیک ہے</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">نیا بک مارک</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">رپورٹ</string>
 	<string name="ALERT_REPORT_URL" translatable="true">رپورٹ ویب سائٹ</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">اگر آپ کو لگتا ہے کہ یہ یو آر ایل غیر قانونی یا پریشان کن ہے تو ہمیں اس کی اطلاع دیں ، لہذا ہم قانونی کارروائی کرسکتے ہیں</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">کامیابی کے ساتھ اطلاع دی گئی</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">یو آر ایل کی کامیابی کے ساتھ اطلاع دی گئی۔ اگر کچھ مل گیا تو قانونی کارروائی کی جائے گی</string>
-	<string name="ALERT_RATEUS" translatable="true">ہمیں شرح دیں</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">دوسروں کو بتائیں کہ آپ اس ایپ کے بارے میں کیا سوچتے ہیں</string>
-	<string name="ALERT_RATE" translatable="true">شرح</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">ہمیں یہ سن کر افسوس ہوا!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">اگر آپ کو یہ سافٹ ویئر استعمال کرتے وقت دشواری کا سامنا کرنا پڑتا ہے تو براہ کرم ای میل کے ذریعہ ہم تک پہنچیں۔ ہم آپ کے مسئلے کو جلد سے جلد حل کرنے کی کوشش کریں گے</string>
-	<string name="ALERT_MAIL" translatable="true">میل</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">نیا برج درخواست کریں</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">ایک برج پتے کی درخواست کے لئے میل کا انتخاب کریں۔ ایک بار جب آپ اسے حاصل کرلیں تو ، اسے اوپر والے خانے میں کاپی کرکے پیسٹ کریں اور سافٹ ویئر شروع کریں۔</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">زبان کی سہولت نہیں ہے</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">سسٹم لینگوئج اس سافٹ ویر کے ذریعہ معاون نہیں ہے۔ ہم جلد ہی اسے شامل کرنے کے لئے کام کر رہے ہیں</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">جینیسز شروع کر رہا ہے</string>
@@ -284,42 +377,15 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">سماجی معاشرے</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">دستی</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">پلےسٹور</string>
-	<string name="ALERT_LONG_URL" translatable="true">ویب لنک نوٹیفکیشن</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">نئی ٹیب میں کھولیں</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">موجودہ ٹیب میں کھولیں</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">کلپ بورڈ میں کاپی کریں</string>
 	<string name="ALERT_LONG_FILE" translatable="true">فائل کی اطلاع</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">ڈاؤن لوڈ کی اطلاع</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">نئے ٹیب میں یو آر ایل کھولیں</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">موجودہ ٹیب میں یو آر ایل کھولیں</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">یو آر ایل کو کلپ بورڈ میں کاپی کریں</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">نئی ٹیب میں تصویر کھولیں</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">موجودہ ٹیب میں تصویر کھولیں</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">کلپ بورڈ میں تصویر کاپی کریں</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">تصویری فائل ڈاؤن لوڈ کریں</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">ڈاؤن لوڈ کی اطلاع</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">ویب لنک نوٹیفکیشن</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">ای میل کو ہینڈل کرنے کیلئے کوئی سافٹ ویئر نہیں ملا</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">فائل ڈاؤن لوڈ |</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">ڈیٹا صاف | دوبارہ شروع کرنا ضروری ہے</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">نجی ڈیٹا کامیابی کے ساتھ صاف ہوگیا۔ کچھ پہلے سے طے شدہ نظام کی ترتیبات میں اس سافٹ ویئر کو دوبارہ شروع کرنے کی ضرورت ہوگی۔ اب آپ محفوظ طریقے سے براؤزنگ جاری رکھ سکتے ہیں</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">ٹیب بند ہے</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">کالعدم کریں</string>
 
-
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">سیکورٹی کو بہتر بنائیں</string>
-	<string name="BRIDGE_SETTING" translatable="true">برج تخصیص کریں</string>
-	<string name="BRIDGE_AUTO" translatable="true">خود بخود تخلیق کریں</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">خود بخود برج تشکیل دیں</string>
-	<string name="BRIDGE_MANUAL" translatable="true">ایک برج فراہم کریں جو آپ جانتے ہو</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">کسٹم برج چسپاں کریں</string>
-	<string name="BRIDGE_HEADER" translatable="true">پراکسی اپنی مرضی کے مطابق | برج</string>
-	<string name="BRIDGE_DESC" translatable="true">برج غیر لسٹ شدہ ڈور ریلے ہیں جو ڈور نیٹ ورک میں رابطوں کو روکنا زیادہ مشکل بنا دیتے ہیں۔ کچھ ممالک ڈور کو روکنے کی کوشش کی وجہ سے ، کچھ ممالک میں برج کام کرتے ہیں لیکن دوسرے نہیں</string>
-	<string name="BRIDGE_TITLE" translatable="true">پہلے سے طے شدہ برج منتخب کریں</string>
-	<string name="BRIDGE_REQUEST" translatable="true">درخواست</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (تجویز کردہ)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -402,11 +468,6 @@
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">آپ سافٹ ویئر کو دوبارہ شروع کرکے اور پراکسی منیجر کے پاس جاکر پراکسی تبدیل کرسکتے ہیں۔ نیچے دیئے گئے گیئر آئیکون پر کلک کرکے اسے کھولا جاسکتا ہے</string>
 
 
-	<string name="ORBOT_HEADER" translatable="true">پراکسی اپنی مرضی کے مطابق بنائیں</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">ہم آپ کو ڈور نیٹ ورک سے منسلک کرتے ہیں جو دنیا بھر میں ہزاروں رضاکاروں کے ذریعہ چلتا ہے! کیا یہ آپشن آپ کی مدد کرسکتے ہیں؟</string>
-	<string name="ORBOT_TITLE" translatable="true">انٹرنیٹ یہاں سنسر ہے (فائروال کو بائی پاس)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">بائی پاس فائر وال</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">برج انٹرنیٹ بہت سست چلانے کا سبب بنتا ہے۔ ان کو صرف اس صورت میں استعمال کریں جب آپ کے ملک میں انٹرنیٹ سنسر ہے یا ڈور نیٹ ورک مسدود ہے</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
@@ -474,6 +535,7 @@
 		<item>دیکھنے کی اجازت دیں</item>
 		<item>نان ٹریکر کی اجازت دیں</item>
 	</string-array>
+
 
 	<!-- Generated by Automatic String Resource Translation -->
 	<!--          https://asrt.gluege.boerde.de             -->

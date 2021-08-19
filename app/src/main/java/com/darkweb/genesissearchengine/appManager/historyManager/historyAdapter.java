@@ -55,7 +55,6 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     private eventObserver.eventListener mEvent;
     private String mFilter = strings.GENERIC_EMPTY_STR;
     private boolean mLongPressedMenuActive = false;
-    private Map<String, Drawable> mWebIcon = new HashMap<>();
 
     /*Local Variables*/
 
@@ -291,7 +290,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     }
 
     public void onClearAdapter(){
-        mWebIcon.clear();
+
     }
 
     public void notifyFilter(){
@@ -522,9 +521,6 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
                 if(model.getDescription().contains("genesishiddentechnologies.com") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                }
-                else if(mWebIcon.containsKey(model.getDescription())){
-                    mFaviconLogo.setImageDrawable(mWebIcon.get(model.getDescription()));
                 }
                 else{
                     mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);

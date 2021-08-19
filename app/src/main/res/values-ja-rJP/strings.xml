@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">ブックマークされたURLの名前がここに表示されます</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">ブックマーク名を入力…</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">ブックマークが削除されました</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">ブックマークが更新されました</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">退出させる</string>
 
@@ -63,9 +59,109 @@
 	<string name="ORBOT_LOG" translatable="true">プロキシログ</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">システムログ情報</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">Genesisの開始中に接続の問題が発生した場合は、次のコードをコピーしてオンラインで問題を見つけるか、送信してください。サポートを提供します。</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">プロキシのカスタマイズ</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">世界中の何千人ものボランティアが運営するTorネットワークに接続します。これらのオプションはあなたを助けることができますか</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">インターネットはここで検閲されます（ファイアウォールをバイパスします）</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">ファイアウォールをバイパスする</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridgesを使用すると、インターネットの実行速度が非常に遅くなります。お住まいの国でインターネットが検閲されているか、Torネットワークがブロックされている場合にのみ使用してください</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">セキュリティのカスタマイズ</string>
 
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">セキュリティ設定</string>
+	<string name="BRIDGE_SETTING" translatable="true">「BRIDGE」設定を変更する</string>
+	<string name="BRIDGE_AUTO" translatable="true">自動作成</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">「BRIDGE」設定を自動的に構成する</string>
+	<string name="BRIDGE_MANUAL" translatable="true">私が知っている「ブリッジ」を提供する</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">カスタム「BRIDGE」を貼り付け</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">「BRIDGE」は、Torネットワークへの接続をブロックすることをより困難にするリストされていないTorリレーです。 一部の国ではTorをブロックしようとしているため、特定の「BRIDGE」は一部の国では機能しますが、他の国では機能しません。 デフォルトの「BRIDGE」を選択</string>
+	<string name="BRIDGE_TITLE" translatable="true">リクエスト</string>
+	<string name="BRIDGE_REQUEST" translatable="true">obfs4（推奨）</string>
+	<string name="BRIDGE_OBFS4" translatable="true">Meek-azure（中国）</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
+	
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">システムログの表示方法を変更する</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">最新のリストビューを使用してログを表示</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">クラシックとモダンのリストビューを切り替えます</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">ブックマークが削除されました</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">ブックマークが更新されました</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">データが正常にクリアされました</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">クリップボードにコピーされたURL</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">アプリケーションが見つかりません</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">変更後に再起動が必要</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">再起動</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">タブが閉じています</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新しいタブが開きました</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">ジェネシスプロキシ接続...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">メモリがいっぱいです➔[クリア]タブ</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">ポップアップがブロックされました</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">エラーログを開く</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">スイッチ</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">元に戻す</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">新しいアイデンティティが作成されました</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">設定を開く</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Bridgeアドレスをリクエストするには、以下の[電子メール]を選択します。アドレスを取得したら、それをコピーして上記のボックスに貼り付け、アプリケーションを起動します。</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">メール</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">それを聞いて申し訳ありません</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">このアプリケーションの使用中に問題が発生した場合は、電子メールでご連絡ください。私たちはあなたの問題をできるだけ早く解決しようとします</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">トラブルシューティング</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">動作しない場合は、アプリケーションをリセットしてください。再び機能するように、再構成を試みます。</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">リセット</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">却下</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">ダウンロードを待っています...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">ダウンロード</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">米国を評価する</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">このアプリについてどう思うかを他の人に教えてください</string>
+	<string name="ALERT_RATE" translatable="true">レート</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">完了</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge文字列（obfs4 212.21.66.66：20621 ...）</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridgeタイプ（obfs4、meek、...）</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">ブックマークウェブサイト</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">このページをブックマークに追加する</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">ブックマーク名...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">完了</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">URL通知</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">新しいタブで開く</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">現在のタブで開く</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">クリップボードにコピー</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">ファイルのダウンロード</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">新しいタブでURLを開く</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">現在のタブでURLを開く</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URLをクリップボードにコピー</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">新しいタブで画像を開く</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">画像の現在のタブを開く</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">画像をクリップボードにコピー</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">画像ファイルをダウンロード</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">あなたが知っているBridgeを提供する</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">信頼できるソースからのbridge情報を入力します</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">リクエスト</string>
 
 
 
@@ -105,9 +201,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">ローカル通知</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">ソフトウェア通知をカスタマイズする</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">システム通知</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">システムログの表示方法を変更する</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">最新のリストビューを使用してログを表示</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">クラシックとモダンのリストビューを切り替えます</string>
 	<string name="SETTING_SEARCH" translatable="true">検索エンジンを管理する</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">追加、デフォルトを設定します。提案を表示する</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">通知を管理する</string>
@@ -245,35 +338,20 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">ブラウザのカスタマイズを削除する</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">あなたが知っているBridgeを提供する</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">信頼できるソースからのbridge情報を入力します</string>
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">リクエスト</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">OK</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">ブックマークのウェブサイト</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">このページをブックマークに追加します</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">閲覧したウェブリンクとデータを削除する</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">ブックマークとデータをクリアする</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">データを消去すると、閲覧されたWebリンク、Co​​okie、およびその他の閲覧データが削除されます</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">データを削除すると、ブックマークされたWebサイトが削除されます</string>
 	<string name="ALERT_CLEAR" translatable="true">キャンセル</string>
-	<string name="ALERT_ADD" translatable="true">OK</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">新しいブックマーク</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">報告する</string>
 	<string name="ALERT_REPORT_URL" translatable="true">レポートのウェブサイト</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">このURLが違法または迷惑であると思われる場合は、Googleに報告してください。そうすれば、法的措置を取ることができます。</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">正常に報告されました</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URLが正常に報告されました。何かが見つかった場合、法的措置が取られます</string>
-	<string name="ALERT_RATEUS" translatable="true">私たちを評価してください</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">このアプリについてどう思うかを他の人に伝える</string>
-	<string name="ALERT_RATE" translatable="true">割合</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">ご不便をおかけして申し訳ございません。</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">このソフトウェアの使用中に問題が発生した場合は、電子メールでご連絡ください。私たちはあなたの問題をできるだけ早く解決しようとします</string>
-	<string name="ALERT_MAIL" translatable="true">郵便物</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">新しいBridgeをリクエスト</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">メールを選択してbridgeアドレスをリクエストします。受け取ったら、コピーして上のボックスに貼り付け、ソフトウェアを起動します。</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">言語はサポートされていません</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">システム言語は、このソフトウェアではサポートされていません。私たちはすぐにそれを含めるように取り組んでいます</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">Orbotの初期化</string>
@@ -290,42 +368,16 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">社会社会</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">マニュアル</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">プレイストア</string>
-	<string name="ALERT_LONG_URL" translatable="true">Webリンク通知</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">新しいタブで開く</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">現在のタブで開く</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">クリップボードにコピー</string>
 	<string name="ALERT_LONG_FILE" translatable="true">ファイル通知</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">ダウンロード通知</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">新しいタブでURLを開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">現在のタブでURLを開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URLをクリップボードにコピーする</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">新しいタブで画像を開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">現在のタブで画像を開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">画像をクリップボードにコピーする</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">画像ファイルをダウンロード</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">ダウンロード通知</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">Webリンク通知</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">メールを処理するソフトウェアが見つかりません</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">ファイルのダウンロード|</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">クリアされたデータ|再起動が必要</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">プライベートデータは正常にクリアされました。一部のデフォルトのシステム設定では、このソフトウェアを再起動する必要があります。これで、安全にブラウジングを続けることができます</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">タブが閉じています</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">undo</string>
 
 
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">セキュリティのカスタマイズ</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridgeカスタマイズ</string>
-	<string name="BRIDGE_AUTO" translatable="true">自動的に作成</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">自動的に構成bridgeカスタマイズ</string>
-	<string name="BRIDGE_MANUAL" translatable="true">あなたが知っているbridgeを提供する</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">カスタムbridgeを貼り付けます</string>
-	<string name="BRIDGE_HEADER" translatable="true">プロキシカスタマイズ| Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">BridgesはリストにないTorリレーであり、Torネットワークへの接続をブロックすることをより困難にします。一部の国がTorをブロックしようとする方法のため、特定のbridgesは一部の国では機能しますが、他の国では機能しません</string>
-	<string name="BRIDGE_TITLE" translatable="true">デフォルトのbridgeを選択</string>
-	<string name="BRIDGE_REQUEST" translatable="true">リクエスト</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4（推奨）</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -408,11 +460,6 @@
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">ソフトウェアを再起動してプロキシマネージャに移動すると、プロキシを変更できます。下部にある歯車のアイコンをクリックすると開くことができます</string>
 
 
-	<string name="ORBOT_HEADER" translatable="true">プロキシのカスタマイズ</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">世界中の何千人ものボランティアが運営するTorネットワークに接続します。これらのオプションはあなたを助けることができますか</string>
-	<string name="ORBOT_TITLE" translatable="true">インターネットはここで検閲されます（ファイアウォールをバイパスします）</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">ファイアウォールをバイパスする</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridgesを使用すると、インターネットの実行速度が非常に遅くなります。お住まいの国でインターネットが検閲されているか、Torネットワークがブロックされている場合にのみ使用してください</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

@@ -75,7 +75,7 @@
                 <!-- Title Header -->
 
                 <LinearLayout
-                    android:id="@+id/pOption1"
+                    android:id="@+id/pBridgeSettingOption1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@xml/gx_ripple_gray"
@@ -142,7 +142,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption2"
+                    android:id="@+id/pBridgeSettingOption2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="11dp"

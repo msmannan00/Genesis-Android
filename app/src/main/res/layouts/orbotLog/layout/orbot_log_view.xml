@@ -144,7 +144,7 @@
                 android:textColor="@color/c_text_v4"
                 android:textSize="14sp"
                 android:visibility="gone"
-                android:text="@string/ORBOT_LOADING_STATIC"
+                android:text="@string/ORBOT_LOG_LOADING_STATIC"
                 tools:ignore="RtlSymmetry" />
 
             <androidx.recyclerview.widget.RecyclerView

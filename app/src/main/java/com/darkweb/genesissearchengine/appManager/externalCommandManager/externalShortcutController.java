@@ -53,7 +53,7 @@ public class externalShortcutController extends AppCompatActivity {
     /* UI TRIGGERS */
 
     public void onUITrigger(View view){
-        if(view.getId() == R.id.pTDDismiss){
+        if(view.getId() == R.id.pDataClearedDismiss){
             finishAffinity();
         }
     }
@@ -61,9 +61,7 @@ public class externalShortcutController extends AppCompatActivity {
     /* Helper Methods */
 
     public void panicExitInvoked() {
-
         dataController.getInstance().clearData(this);
-
         helperMethod.onDelayHandler(this, 3000, () -> {
             finish();
             return null;

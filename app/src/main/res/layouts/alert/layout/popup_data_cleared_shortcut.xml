@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/pToastLayoutRoot"
+    android:id="@+id/pDataCleared"
     android:translationZ="5dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/c_background_alpha"
@@ -10,19 +10,19 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pTDialog"
+        android:id="@+id/pDataClearedContainer"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
-        android:background="@xml/ax_toast_alert_background"
+        android:background="@xml/ax_background_generic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/pTDDescription"
+            android:id="@+id/pDataClearedDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -35,20 +35,20 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/pTDialog"
+            app:layout_constraintStart_toStartOf="@+id/pDataClearedContainer"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp" />
 
         <Button
-            android:id="@+id/pTDDismiss"
+            android:id="@+id/pDataClearedDismiss"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:onClick="onUITrigger"
             android:layout_weight="1"
             android:background="@xml/ax_toast_alert_button"
+            android:onClick="onUITrigger"
             android:padding="0dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -60,16 +60,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UsingOnClickInXml" />
+            tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
 
         <View
-            android:id="@+id/pTDDivider"
             android:layout_width="1dp"
             android:layout_height="30dp"
             android:layout_marginEnd="10dp"
             android:background="@color/c_alert_divider"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pTDDismiss"
+            app:layout_constraintEnd_toStartOf="@+id/pDataClearedDismiss"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

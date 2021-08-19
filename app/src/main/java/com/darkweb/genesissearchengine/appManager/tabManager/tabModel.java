@@ -38,7 +38,7 @@ class tabModel
 
     private void onClearBackupWithoutClose(){
         for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
-            dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mBackupIndex.get(mCounter).getSession(), mBackupIndex.get(mCounter).getmId()));
+            dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mBackupIndex.get(mCounter).getSession(), mBackupIndex.get(mCounter).getSession()));
         }
         mBackupIndex.clear();
     }

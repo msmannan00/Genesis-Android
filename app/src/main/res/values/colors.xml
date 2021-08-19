@@ -2,16 +2,15 @@
 <resources>
 
     /* Static Colors */
-
     <color name="c_text_color_highlight_v1">#b3d1ff</color>
     <color name="c_text_color_highlight_v2">#99bbff</color>
     <color name="c_error_text_color">#f32323</color>
     <color name="c_gray_light">#d9d9d9</color>
     <color name="c_holo_gray">#b3b3b3</color>
     <color name="c_white">#ffffff</color>
+    <color name="clear_alpha">#00000000 </color>
 
     /* Generic Colors */
-
     <color name="c_navigation_tint">#000000</color>
     <color name="c_background">#ffffff</color>
     <color name="c_background_inverted">#302e38</color>
@@ -22,28 +21,31 @@
     <color name="c_edittext_error_border">#f32323</color>
     <color name="c_edittext_error_background">#f9e2eb</color>
     <color name="c_text_short_header">#3385ff</color>
-    <color name="c_alert_divider">#999999</color>
-    <color name="c_alert_toast_info_text">#ffffff</color>
     <color name="c_ripple_gray">#d9d9d9</color>
-    <color name="c_alert_toast_button_background">#b3b3b3</color>
-    <color name="c_alert_toast_button_text">#ffffff</color>
     <color name="c_icon_tint">#425e8a</color>
 
     /* Text Colors Version*/
-
     <color name="c_text_v1">#111722</color>
     <color name="c_text_v2">#999999</color>
+    <color name="c_text_v8">#666666</color>
 
     /* Bookmark Setting Controller Color */
-
     <color name="c_bookmark_settings_header_icon_tint">#7591bd</color>
 
     /* Landing Controller Color */
-
     <color name="c_landing_page_background">#0A1727</color>
 
     /* Alerts */
+    <color name="c_alert_toast_info_text">#ffffff</color>
+    <color name="c_alert_divider">#999999</color>
+    <color name="c_alert_toast_button_background">#b3b3b3</color>
+    <color name="c_alert_toast_button_text">#ffffff</color>
+    <color name="c_alert_rateus_warning">#b3b3b3</color>
+    <color name="c_alert_rateus_header">#00b3b3</color>
+    <color name="c_alert_text">#212d45</color>
+    <color name="c_alert_warning">#f65555</color>
 
+    /* Secure Alerts */
     <color name="c_secure_alert_start">#ffffff</color>
     <color name="c_secure_alert_end">#e8ebf8</color>
     <color name="c_secure_alert_border">#7e7e9a</color>
@@ -52,27 +54,25 @@
     <color name="c_secure_alert_button_pressed">#7e7e9a</color>
 
     /* Orbot Logs */
-
     <color name="c_orbot_background">#f9f9f9</color>
 
-    /* Customs Colors */
+    /* Orbot Setting */
+    <color name="c_orbot_setting_divider">#e6e6e6</color>
 
+    /* Customs Colors */
     <color name="c_background_alpha">#601c1b21</color>
     <color name="c_background_keyboard">#999999</color>
-    <color name="c_view_divier_background">#e6e6e6</color>
     <color name="c_text_v3">#bfbfbf</color>
     <color name="c_text_v4">#425e8a</color>
     <color name="c_text_v5">#000000</color>
     <color name="c_text_v6">#8c8c8c</color>
     <color name="c_text_v7">#7591bd</color>
-    <color name="c_text_v8">#666666</color>
     <color name="c_text_v9">#7591bd</color>
     <color name="c_lang_row">#7591bd</color>
     <color name="c_lang_row_border">#3a5278</color>
     <color name="c_button_text_v1">#3385ff</color>
     <color name="c_button_text_v1_inverted">#ffffff</color>
     <color name="c_button_text_v3">#3385ff</color>
-    <color name="c_text_setting_heading_v2">#00b3b3</color>
     <color name="c_navigation_light">#bfbfbf</color>
     <color name="c_switch_theme">#3385ff</color>
     <color name="c_border_left">#123456</color>
@@ -103,8 +103,6 @@
     <color name="c_edittext_background">#f1f3f4</color>
     <color name="c_edittext_background_form_inactive">#f6f7f8</color>
     <color name="c_edittext_background_dark">#f5f5f5</color>
-    <color name="c_button_warning">#f65555</color>
-    <color name="c_rateus_warning">#b3b3b3</color>
     <color name="c_splash_buttons">#ffffff</color>
     <color name="c_tab">#dde3ee</color>
     <color name="c_tab_background">#212d45</color>
@@ -123,13 +121,11 @@
     <color name="c_menu_drop_shadow_15">#15e6e6e6</color>
     <color name="c_menu_drop_shadow_20">#20e6e6e6</color>
     <color name="c_menu_drop_shadow_25">#25e6e6e6</color>
-    <color name="c_alert_text">#212d45</color>
     <color name="c_alert_text_inverted_v1">#ffffff</color>
     <color name="c_long_button">#7591bd</color>
     <color name="c_ripple_light">#e6e6e6</color>
 
     /* Shared Colors */
-
     <color name="blue">#0066FF</color>
     <color name="ease_blue_light">#fdfeff</color>
     <color name="ease_blue">#4d88ff</color>
@@ -149,7 +145,6 @@
     <color name="text_color_v2">#999999</color>
     <color name="text_color_v3">#666666</color>
     <color name="clear_alpha_white">#E6FFFFFF</color>
-    <color name="clear_alpha">#00000000 </color>
     <color name="holo_dark_gray_alpha">#88000000</color>
     <color name="holo_dark_gray_alpha_v1">#99000000</color>
     <color name="holo_dark_gray">#999999</color>

@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Здесь будет показано имя URL-адреса, отмеченного закладкой</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Введите название закладки…</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Закладка удалена</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Закладка обновлена</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">увольнять</string>
 
@@ -63,17 +59,110 @@
 	<string name="ORBOT_LOG" translatable="true">журналы прокси</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Информация системного журнала</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">Если вы столкнулись с проблемой подключения при запуске Genesis, скопируйте следующий код и найдите проблему в Интернете или отправьте ее нам, чтобы мы могли помочь вам</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">прокси настроить</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">мы подключаем вас к сети Tor, которой руководят тысячи волонтеров по всему миру! Могут ли вам помочь эти варианты</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">Интернет здесь подвергается цензуре (обход файрвола)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">обход брандмауэра</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges приводит к очень медленной работе Интернета. используйте их только в том случае, если в вашей стране интернет подвергся цензуре или сеть Tor заблокирована</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">безопасность настроить</string>
 
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Настройки безопасности</string>
+	<string name="BRIDGE_SETTING" translatable="true">Изменить настройки «BRIDGE»</string>
+	<string name="BRIDGE_AUTO" translatable="true">Создавать автоматически</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Автоматическая настройка параметров «BRIDGE»</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Обеспечьте "BRIDGE" я знаю</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Вставить "BRIDGE"</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">«BRIDGE» - это не указанные в списке реле Tor, которые затрудняют блокировку подключений к сети Tor. Из-за того, что некоторые страны пытаются заблокировать Tor, некоторые «МОСТ» работают в некоторых странах, но не работают в других</string>
+	<string name="BRIDGE_TITLE" translatable="true">Выберите "BRIDGE" по умолчанию</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Запрос</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (рекомендуется)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Кроткая лазурь (Китай)</string>
 
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">изменить способ отображения системного журнала</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">показать журнал с использованием современного списка</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">переключаться между классическим и современным списком</string>
 
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Закладка удалена</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Закладка обновлена</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Данные успешно очищены</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL скопирован в буфер обмена</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Приложение не найдено</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">После изменений требуется перезагрузка</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Перезагрузка</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Вкладка закрыта</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Открыта новая вкладка</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Прокси Genesis подключается ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Память заполнена ➔ Вкладка «Очистка»</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Всплывающее окно заблокировано</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Открыть журнал ошибок</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Переключатель</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Отменить</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Создана новая личность</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">открыть настройки</string>
 
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Запросить новый Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Выберите адрес электронной почты ниже, чтобы запросить адрес Bridge. Как только у вас есть адрес, скопируйте и вставьте его в поле выше и запустите приложение.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Почта</string>
 
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">ИЗВИНИТЕ ЭТО</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Если у вас возникли трудности при использовании этого приложения, напишите нам по электронной почте. Мы постараемся решить вашу проблему в кратчайшие сроки</string>
 
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">УСТРАНЕНИЕ НЕИСПРАВНОСТЕЙ</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Сбросьте приложение, если оно не работает. Мы попытаемся перенастроить его, чтобы он снова заработал.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Сбросить</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Закрыть</string>
 
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Жду загрузки ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Скачать</string>
 
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Оцените США</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Расскажите другим, что вы думаете об этом приложении</string>
+	<string name="ALERT_RATE" translatable="true">Оценить</string>
 
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Готово</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge строка (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Типа Bridge (obfs4, кроткий, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Добавить сайт в закладки</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Добавьте эту страницу в закладки</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">имя закладки ...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Готово</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">Уведомление по URL</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Открыть в новой вкладке</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Открыть в текущей вкладке</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Копировать в буфер обмена</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Скачать файл</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Открыть URL в новой вкладке</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Открыть url в текущей вкладке</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Скопировать url в буфер обмена</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Открыть изображение в новой вкладке</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Открыть текущую вкладку изображения</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Копировать изображение в буфер обмена</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Скачать файл изображения</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">предоставьте Bridge вы знаете</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">введите bridge информацию из надежного источника</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">запрос</string>
 
 
 
@@ -110,9 +199,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">местные уведомления</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">настроить уведомление о программном обеспечении</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">системные уведомления</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">изменить способ отображения системного журнала</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">показать журнал с использованием современного списка</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">переключаться между классическим и современным списком</string>
 	<string name="SETTING_SEARCH" translatable="true">управлять поисковой системой</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">добавить, установить по умолчанию. показать предложения</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">управлять уведомлениями</string>
@@ -250,35 +336,20 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">удалить настройки браузера</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">предоставьте Bridge вы знаете</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">введите bridge информацию из надежного источника</string>
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">запрос</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">Ok</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">сайт закладок</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">добавить эту страницу в закладки</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">удалить просмотренные веб-ссылки и данные</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">очистить закладку и данные</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">при очистке данных будут удалены просмотренные веб-ссылки, файлы cookie и другие данные просмотра</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">удаление данных приведет к удалению сайтов из закладок</string>
 	<string name="ALERT_CLEAR" translatable="true">Отмена</string>
-	<string name="ALERT_ADD" translatable="true">Ok</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">новая закладка</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">отчет</string>
 	<string name="ALERT_REPORT_URL" translatable="true">веб-сайт отчета</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">если вы считаете, что этот URL является незаконным или тревожным, сообщите нам об этом, и мы примем меры в суд.</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">было сообщено успешно</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL-адрес был успешно отправлен. если что-то будет найдено, будет возбуждено судебное дело</string>
-	<string name="ALERT_RATEUS" translatable="true">оцените нас</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">расскажи другим, что ты думаешь об этом приложении</string>
-	<string name="ALERT_RATE" translatable="true">ставка</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">нам очень жаль это слышать!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">если у вас возникли трудности при использовании этого программного обеспечения, напишите нам по электронной почте. мы постараемся решить вашу проблему в кратчайшие сроки</string>
-	<string name="ALERT_MAIL" translatable="true">Почта</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">запросить новый Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">выберите почту, чтобы запросить адрес bridge. как только вы его получите, скопируйте и вставьте его в поле выше и запустите программное обеспечение.</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">язык не поддерживается</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">системный язык не поддерживается данным программным обеспечением. мы работаем над тем, чтобы включить его в ближайшее время</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">инициализация Orbot</string>
@@ -295,43 +366,14 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">социальные общества</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">руководство</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">магазин игр</string>
-	<string name="ALERT_LONG_URL" translatable="true">уведомление о веб-ссылке</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">открыть в новой вкладке</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">открыть в текущей вкладке</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">скопировать в буфер обмена</string>
 	<string name="ALERT_LONG_FILE" translatable="true">уведомление о файле</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">уведомление о загрузке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">открыть URL в новой вкладке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">открыть URL в текущей вкладке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">скопировать URL в буфер обмена</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">открыть изображение в новой вкладке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">открыть изображение в текущей вкладке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">скопировать изображение в буфер обмена</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">скачать файл изображения</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">уведомление о загрузке</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">уведомление о веб-ссылке</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">не найдено программного обеспечения для обработки электронной почты</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">скачать файл |</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">данные очищены | требуется перезагрузка</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">личные данные успешно удалены. некоторые настройки системы по умолчанию потребуют перезапуска этого программного обеспечения. теперь вы можете спокойно продолжать просмотр</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">вкладка закрыта</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">отменить</string>
-
-
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">безопасность настроить</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge настроить</string>
-	<string name="BRIDGE_AUTO" translatable="true">создавать автоматически</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">автоматически настроить bridge настроить</string>
-	<string name="BRIDGE_MANUAL" translatable="true">предоставьте bridge, который вы знаете</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">вставить обычай bridge</string>
-	<string name="BRIDGE_HEADER" translatable="true">прокси настроить | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">Bridges - это не указанные в списке реле Tor, которые затрудняют блокировку подключений к сети Tor. из-за того, что некоторые страны пытаются заблокировать Tor, некоторые bridges работают в некоторых странах, но не работают в других</string>
-	<string name="BRIDGE_TITLE" translatable="true">выберите по умолчанию bridge</string>
-	<string name="BRIDGE_REQUEST" translatable="true">запрос</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (рекомендуется)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
-
 
 
 
@@ -412,12 +454,6 @@
 	<string name="PROXY_SUB_HEADER3" translatable="true">информация | изменить настройки системы</string>
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">вы можете изменить прокси, перезапустив программу и перейдя в менеджер прокси. его можно открыть, нажав на значок шестеренки внизу</string>
 
-
-	<string name="ORBOT_HEADER" translatable="true">прокси настроить</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">мы подключаем вас к сети Tor, которой руководят тысячи волонтеров по всему миру! Могут ли вам помочь эти варианты</string>
-	<string name="ORBOT_TITLE" translatable="true">Интернет здесь подвергается цензуре (обход файрвола)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">обход брандмауэра</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges приводит к очень медленной работе Интернета. используйте их только в том случае, если в вашей стране интернет подвергся цензуре или сеть Tor заблокирована</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

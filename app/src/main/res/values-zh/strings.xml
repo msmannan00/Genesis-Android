@@ -29,10 +29,6 @@
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">书签网址的名称将显示在此处</string>
     <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">输入书签名称...</string>
 
-    <!-- Bookmark Alerts -->
-    <string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">书签已删除</string>
-    <string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">书签已更新</string>
-
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">解雇</string>
 
@@ -63,7 +59,110 @@
     <string name="ORBOT_LOG" translatable="true">代理日志</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">系统日志信息</string>
     <string name="ORBOT_LOG_INFO" translatable="true">如果您在开始Genesis时遇到连接问题，请复制以下代码并在线查找问题或发送给我们，以便我们为您提供帮助</string>
-    <string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">代理自定义</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">我们将您连接到由全球数千名志愿者运营的Tor网络！这些选项可以帮助您吗</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">互联网在这里进行了审查（绕过防火墙）</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">绕过防火墙</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges导致Internet运行非常缓慢。仅在您的国家/地区检查过互联网或Tor网络被阻止时才使用它们</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">安全定制</string>
+
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">安全设置</string>
+    <string name="BRIDGE_SETTING" translatable="true">更改“BRIDGE”设置</string>
+    <string name="BRIDGE_AUTO" translatable="true">自动创建</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">自动配置“BRIDGE”设置</string>
+    <string name="BRIDGE_MANUAL" translatable="true">提供一个我知道的“BRIDGE”</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">粘贴自定义“BRIDGE”</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">“BRIDGE”是未列出的 Tor 中继，这使得阻止连接到 Tor 网络变得更加困难。 由于某些国家/地区试图阻止 Tor 的方式，某些“BRIDGE”在某些国家/地区有效但在其他国家/地区无效</string>
+    <string name="BRIDGE_TITLE" translatable="true">选择默认“桥”</string>
+    <string name="BRIDGE_REQUEST" translatable="true">请求</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4（推荐）</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (中国)</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">更改系统日志的显示方式</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">使用现代列表视图显示日志</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">在经典列表视图和现代列表视图之间切换</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">书签已移除</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">书签已更新</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">数据清除成功</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL 复制到剪贴板</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">没有找到应用程序</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">修改后需要重启</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">重启</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">标签已关闭</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新标签打开</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis 代理连接...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">内存已满 ➔ 清除选项卡</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">弹出窗口被阻止</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">打开错误日志</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">开关</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">撤消</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">新身份创建</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">打开设置</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">请求新的 Bridge</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">选择下面的电子邮件以请求 Bridge 地址。获得地址后，将其复制并粘贴到上面的框中并启动应用程序。</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">邮件</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">很抱歉听到这个消息</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">如果您在使用此应用程序时遇到困难，请通过电子邮件与我们联系。我们会尽快解决您的问题</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">故障排除</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">如果它不起作用，请重置应用程序。我们将尝试重新配置它，以便它可以再次工作。</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">重置</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">解雇</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">等待下载...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">下载</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">评价我们</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">告诉其他人您对此应用的看法</string>
+    <string name="ALERT_RATE" translatable="true">评价</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">完成</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge 字符串 (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge 类型 (obfs4, meek, ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">书签网站</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">将此页面添加到您的书签</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">书签名称...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">完成</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">网址通知</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">在新标签页中打开</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">在当前选项卡中打开</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">复制到剪贴板</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">下载文件</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">在新标签页中打开网址</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">在当前选项卡中打开 url</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">复制网址到剪贴板</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">在新标签页中打开图片</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">打开图像当前选项卡</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">将图像复制到剪贴板</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">下载图像文件</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">提供您知道的Bridge</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">输入来自可信来源的bridge信息</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">要求</string>
 
 
 
@@ -105,9 +204,6 @@
     <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">本地通知</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">自定义软件通知</string>
     <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">系统通知</string>
-    <string name="SETTING_ORBOT_LOG_HEADER" translatable="true">更改系统日志的显示方式</string>
-    <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">使用现代列表视图显示日志</string>
-    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">在经典列表视图和现代列表视图之间切换</string>
     <string name="SETTING_SEARCH" translatable="true">管理搜索引擎</string>
     <string name="SETTING_SEARCH_INFO" translatable="true">添加，设置默认值。显示建议</string>
     <string name="SETTING_NOTIFICATION" translatable="true">管理通知</string>
@@ -245,35 +341,20 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">删除浏览器自定义</string>
 
 
-    <string name="ALERT_UPDATE_BRIDGES" translatable="true">提供您知道的Bridge</string>
-    <string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">输入来自可信来源的bridge信息</string>
     <string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-    <string name="ALERT_REQUEST_BRIDGE" translatable="true">要求</string>
-    <string name="ALERT_SAVE_BRIDGE" translatable="true">好的</string>
 
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">书签网站</string>
-    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">将此页面添加到书签</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">删除浏览的网页链接和数据</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">清除书签和数据</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">清除数据将删除浏览的Web链接，Cookie和其他浏览数据</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">删除数据将删除带有书签的网站</string>
     <string name="ALERT_CLEAR" translatable="true">取消</string>
-    <string name="ALERT_ADD" translatable="true">好的</string>
-    <string name="ALERT_TITLE_ADD" translatable="true">新书签</string>
     <string name="ALERT_SECURE" translatable="false">https://</string>
     <string name="ALERT_REPORT" translatable="true">报告</string>
     <string name="ALERT_REPORT_URL" translatable="true">报告网站</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">如果您认为此网址不合法或令人不安，请向我们报告，以便我们采取法律措施</string>
     <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">被成功报告</string>
     <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">网址已成功报告。如果发现问题，将采取法律行动</string>
-    <string name="ALERT_RATEUS" translatable="true">评价我们</string>
-    <string name="ALERT_RATEUS_INFO" translatable="true">告诉其他人您对此应用的看法</string>
-    <string name="ALERT_RATE" translatable="true">速度</string>
-    <string name="ALERT_RATEUS_FAILURE" translatable="true">我们很抱歉听到这个消息！</string>
-    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">如果您在使用此软件时遇到困难，请通过电子邮件与我们联系。我们将尝试尽快解决您的问题</string>
-    <string name="ALERT_MAIL" translatable="true">邮件</string>
-    <string name="ALERT_BRIDGE_MAIL" translatable="true">请求新Bridge</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">选择邮件以请求bridge地址。收到后，将其复制并粘贴到上面的框中，然后启动软件。</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">不支援的语言</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">该软件不支持系统语言。我们正在努力将其纳入</string>
     <string name="ALERT_ORBOT_INIT" translatable="true">初始化Orbot</string>
@@ -290,42 +371,16 @@
     <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">社会社会</string>
     <string name="ALERT_LOCAL_UPGRADE" translatable="true">手动的</string>
     <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">应用商店</string>
-    <string name="ALERT_LONG_URL" translatable="true">网络链接通知</string>
-    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">在新标签页中打开</string>
-    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">在当前标签页中打开</string>
-    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">复制到剪贴板</string>
     <string name="ALERT_LONG_FILE" translatable="true">文件通知</string>
     <string name="ALERT_DOWNLOAD" translatable="true">下载通知</string>
-    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">在新标签页中打开网址</string>
-    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">在当前标签页中打开网址</string>
-    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">将网址复制到剪贴板</string>
-    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">在新标签页中打开图片</string>
-    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">在当前标签页中打开图像</string>
-    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">将图像复制到剪贴板</string>
-    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">下载图片文件</string>
     <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">下载通知</string>
     <string name="ALERT_LONG_URL_TITLE" translatable="true">网络链接通知</string>
     <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">找不到用于处理电子邮件的软件</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">下载文件|</string>
     <string name="ALERT_DATA_CLEARED" translatable="true">数据已清除|需要重启</string>
-    <string name="ALERT_DATA_CLEARED_INFO" translatable="true">私人数据已成功清除。某些默认系统设置将要求此软件重新启动。现在您可以安全地继续浏览</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">标签页关闭</string>
-    <string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">撤消</string>
 
 
-    <string name="BRIDGE_BASIC_SETTING" translatable="true">安全定制</string>
-    <string name="BRIDGE_SETTING" translatable="true">Bridge自定义</string>
-    <string name="BRIDGE_AUTO" translatable="true">自动创建</string>
-    <string name="BRIDGE_AUTO_INFO" translatable="true">自动配置bridge自定义</string>
-    <string name="BRIDGE_MANUAL" translatable="true">提供您知道的bridge</string>
-    <string name="BRIDGE_PORT_HINT" translatable="true">粘贴自定义bridge</string>
-    <string name="BRIDGE_HEADER" translatable="true">代理自定义| Bridge</string>
-    <string name="BRIDGE_DESC" translatable="true">Bridges是未列出的Tor中继，这使得阻止连接到Tor网络的难度更大。由于某些国家/地区尝试阻止Tor，某些bridges在某些国家/地区有效，而其他国家/地区则无法</string>
-    <string name="BRIDGE_TITLE" translatable="true">选择默认值bridge</string>
-    <string name="BRIDGE_REQUEST" translatable="true">要求</string>
-    <string name="BRIDGE_OBFS4" translatable="true">obfs4（推荐）</string>
-    <string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -408,11 +463,6 @@
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">您可以通过重新启动软件并转到代理管理器来更改代理。可以通过单击底部的齿轮图标来打开它</string>
 
 
-    <string name="ORBOT_HEADER" translatable="true">代理自定义</string>
-    <string name="ORBOT_DESCRIPTION" translatable="true">我们将您连接到由全球数千名志愿者运营的Tor网络！这些选项可以帮助您吗</string>
-    <string name="ORBOT_TITLE" translatable="true">互联网在这里进行了审查（绕过防火墙）</string>
-    <string name="ORBOT_OPTION_DESCRIPTION" translatable="true">绕过防火墙</string>
-    <string name="ORBOT_BRIDGE_WARNING" translatable="true">Bridges导致Internet运行非常缓慢。仅在您的国家/地区检查过互联网或Tor网络被阻止时才使用它们</string>
 
 
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>

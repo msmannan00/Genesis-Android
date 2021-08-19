@@ -28,7 +28,7 @@ public class settingLogController extends AppCompatActivity {
 
     /* UI Variables */
 
-    private SwitchMaterial mLogThemeToggle;
+    private SwitchMaterial mSettingLogStatusSwitch;
 
     /* Private Variables */
 
@@ -60,9 +60,9 @@ public class settingLogController extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        mLogThemeToggle = findViewById(R.id.pLogThemeToggle);
+        mSettingLogStatusSwitch = findViewById(R.id.pSettingLogStatusSwitch);
 
-        mSettingLogViewController = new settingLogViewController(this, new settingLogViewCallback(), mLogThemeToggle);
+        mSettingLogViewController = new settingLogViewController(this, new settingLogViewCallback(), mSettingLogStatusSwitch);
         mSettingLogViewController.onTrigger(settingLogEnums.eLogViewController.M_INIT_VIEW, Collections.singletonList(status.sLogThemeStyleAdvanced));
         mSettingLogModel = new settingLogModel(new settingLogModelCallback());
     }
@@ -72,7 +72,7 @@ public class settingLogController extends AppCompatActivity {
     private class settingLogViewCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
+        public Object invokeObserver(List<Object> pData, Object pCommands)
         {
             return null;
         }
@@ -83,7 +83,7 @@ public class settingLogController extends AppCompatActivity {
     private class settingLogModelCallback implements eventObserver.eventListener{
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
+        public Object invokeObserver(List<Object> pData, Object pCommands)
         {
             return null;
         }
@@ -116,15 +116,17 @@ public class settingLogController extends AppCompatActivity {
         finish();
     }
 
-    public void onSwitchLogUIMode(View view){
-        mSettingLogModel.onTrigger(settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW, Collections.singletonList(!mLogThemeToggle.isChecked()));
-        mSettingLogViewController.onTrigger(M_TOOGLE_LOG_VIEW);
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogThemeStyleAdvanced));
+    public void onTriggerUI(View view){
+        if(view.getId() == R.id.pSettingLogStatus){
+            mSettingLogModel.onTrigger(settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW, Collections.singletonList(!mSettingLogStatusSwitch.isChecked()));
+            mSettingLogViewController.onTrigger(M_TOOGLE_LOG_VIEW);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogThemeStyleAdvanced));
 
-        helperMethod.onDelayHandler(this, 250, () -> {
-            activityContextManager.getInstance().getOrbotLogController().onRefreshLayoutTheme();
-            return null;
-        });
+            helperMethod.onDelayHandler(this, 250, () -> {
+                activityContextManager.getInstance().getOrbotLogController().onRefreshLayoutTheme();
+                return null;
+            });
+        }
     }
 
     public void onOpenInfo(View view) {

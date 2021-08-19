@@ -59,6 +59,7 @@ import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.defaultB
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.strings;
+import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.example.myapplication.R;
 import org.xmlpull.v1.XmlPullParserException;
 import java.io.ByteArrayInputStream;
@@ -79,6 +80,7 @@ import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -95,6 +97,8 @@ import static com.darkweb.genesissearchengine.constants.constants.CONST_LIST_EXT
 import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_PLAYSTORE_URL;
 import static com.darkweb.genesissearchengine.constants.keys.M_ACTIVITY_NAVIGATION_BUNDLE_KEY;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_IMAGE_UPDATE;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_OPEN_ACTIVITY_FAILED;
 
 public class helperMethod
 {
@@ -292,9 +296,11 @@ public class helperMethod
 
     public static void openURLInCustomBrowser(String pData, AppCompatActivity pContext){
         String mBrowser = helperMethod.getSystemBrowser(pContext);
-        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(pData));
-        intent.setPackage(mBrowser);
-        pContext.startActivity(intent);
+        if(!mBrowser.equals(strings.GENERIC_EMPTY_STR)){
+            Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(pData));
+            intent.setPackage(mBrowser);
+            pContext.startActivity(intent);
+        }
     }
 
     public static String getSystemBrowser(AppCompatActivity context){
@@ -807,7 +813,7 @@ public class helperMethod
                 intent.setDataAndType(uri, Uri.parse(url.toString()).getScheme());
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                Toast.makeText(context, "No application found which can open the file", Toast.LENGTH_SHORT).show();
+                pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(context), M_OPEN_ACTIVITY_FAILED);
             }
         } else{
             try {
@@ -818,7 +824,7 @@ public class helperMethod
                 intent.setDataAndType(Uri.fromFile(url), getMimeType(uri.toString(),context));
                 context.startActivity(intent);
             } catch (ActivityNotFoundException ex) {
-                Toast.makeText(context, "No application found which can open the file", Toast.LENGTH_SHORT).show();
+                pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(context), M_OPEN_ACTIVITY_FAILED);
             }
         }
     }
@@ -828,7 +834,6 @@ public class helperMethod
         ClipData clip = ClipData.newPlainText("link", url);
         clipboard.setPrimaryClip(clip);
 
-        showToastMessage("Copied to Clipboard",context);
 
     }
 
@@ -868,12 +873,15 @@ public class helperMethod
         return sdf.format(date);
     }
 
-    public static Drawable getDrawableXML(Context pContext, int pSrc) throws IOException, XmlPullParserException {
-        Drawable mDrawable;
-        Resources res = pContext.getResources();
-        mDrawable = Drawable.createFromXml(res, res.getXml(pSrc));
-
-        return mDrawable;
+    public static Drawable getDrawableXML(Context pContext, int pSrc)  {
+        try {
+            Drawable mDrawable;
+            Resources res = pContext.getResources();
+            mDrawable = Drawable.createFromXml(res, res.getXml(pSrc));
+            return mDrawable;
+        }catch (Exception ex){
+            return null;
+        }
     }
 
 

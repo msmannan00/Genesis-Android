@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pSecureRootLayout"
+        android:id="@+id/pPopupPanicContainer"
         android:layout_width="wrap_content"
         android:maxWidth="450dp"
         android:layout_height="wrap_content"
@@ -19,30 +19,68 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/pOrbotRowDescription"
-            android:maxWidth="450dp"
+            android:id="@+id/pPopupPanicHeader"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="18dp"
             android:alpha="1"
+            android:background="@xml/ax_border_left"
+            android:gravity="start"
+            android:lineSpacingExtra="3.5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/ALERT_PANIC_HEADER"
+            android:textAlignment="textStart"
+            android:textColor="@color/c_text_v8"
+            android:textSize="13.5sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SmallSp,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/pPopupPanicInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="1"
+            android:lineSpacingExtra="3.5dp"
+            android:maxWidth="450dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             android:text="@string/ALERT_PANIC_INFO"
             android:textAlignment="textStart"
             android:textColor="@color/c_text_v8"
-            android:lineSpacingExtra="3.5dp"
             android:textSize="13.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pPopupPanicHeader"
             tools:ignore="SmallSp" />
 
         <Button
-            android:id="@+id/pNext"
+            android:id="@+id/pPopupPanicDismiss"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@xml/ax_ripple_default_round_bottom_secondary"
+            android:text="@string/ALERT_DISMISS"
+            android:textAllCaps="false"
+            android:textColor="@color/c_white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pPopupPanicReset"
+            app:layout_constraintTop_toBottomOf="@+id/pPopupPanicInfo"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/pPopupPanicReset"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="25dp"
             android:background="@xml/ax_ripple_default_round_bottom"
@@ -52,24 +90,8 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
-
-        <Button
-            android:id="@+id/pTrigger"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="25dp"
-            android:background="@xml/ax_ripple_default_round_bottom_secondary"
-            android:text="@string/ALERT_DISMISS"
-            android:textAllCaps="false"
-            android:textColor="@color/c_white"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pNext"
-            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/pPopupPanicInfo"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

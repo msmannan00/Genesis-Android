@@ -12,18 +12,18 @@ class orbotViewController
     /*Private Variables*/
 
     private AppCompatActivity mContext;
-    private SwitchMaterial mBridgeSwitch;
-    private SwitchMaterial mVpnSwitch;
-    private LinearLayout mCustomizableBridgeMenu;
+    private SwitchMaterial mOrbotSettingBridgeSwitch;
+    private SwitchMaterial mOrbotSettingVPNSwitch;
+    private LinearLayout mOrbotSettingWarning;
 
     /*Initializations*/
 
-    orbotViewController(SwitchMaterial pBridgeSwitch, SwitchMaterial pVpnSwitch, AppCompatActivity pContext, LinearLayout pCustomizableBridgeMenu)
+    orbotViewController(SwitchMaterial pOrbotSettingBridgeSwitch, SwitchMaterial pOrbotSettingVPNSwitch, AppCompatActivity pContext, LinearLayout pOrbotSettingWarning)
     {
         this.mContext = pContext;
-        this.mBridgeSwitch = pBridgeSwitch;
-        this.mCustomizableBridgeMenu = pCustomizableBridgeMenu;
-        this.mVpnSwitch = pVpnSwitch;
+        this.mOrbotSettingBridgeSwitch = pOrbotSettingBridgeSwitch;
+        this.mOrbotSettingWarning = pOrbotSettingWarning;
+        this.mOrbotSettingVPNSwitch = pOrbotSettingVPNSwitch;
 
         initPostUI();
     }
@@ -37,27 +37,27 @@ class orbotViewController
     }
 
     private void updateVPN(boolean pStatus){
-        mVpnSwitch.setChecked(pStatus);
+        mOrbotSettingVPNSwitch.setChecked(pStatus);
     }
 
     private void updateBridgeViews(boolean pStatus,boolean pIsInvoked){
-        mBridgeSwitch.setChecked(pStatus);
+        mOrbotSettingBridgeSwitch.setChecked(pStatus);
         if(pStatus){
-            mCustomizableBridgeMenu.setClickable(true);
-            mCustomizableBridgeMenu.setAlpha(0);
-            mCustomizableBridgeMenu.setVisibility(View.VISIBLE);
+            mOrbotSettingWarning.setClickable(true);
+            mOrbotSettingWarning.setAlpha(0);
+            mOrbotSettingWarning.setVisibility(View.VISIBLE);
             if(pIsInvoked){
-                mCustomizableBridgeMenu.animate().alpha(1);
+                mOrbotSettingWarning.animate().alpha(1);
             }else {
-                mCustomizableBridgeMenu.setAlpha(1);
+                mOrbotSettingWarning.setAlpha(1);
             }
         }else {
-            mCustomizableBridgeMenu.setClickable(false);
+            mOrbotSettingWarning.setClickable(false);
             if(pIsInvoked){
-                mCustomizableBridgeMenu.animate().alpha(0).withEndAction(() -> mCustomizableBridgeMenu.setVisibility(View.GONE));
+                mOrbotSettingWarning.animate().alpha(0).withEndAction(() -> mOrbotSettingWarning.setVisibility(View.GONE));
             }else {
-                mCustomizableBridgeMenu.setAlpha(0);
-                mCustomizableBridgeMenu.setVisibility(View.GONE);
+                mOrbotSettingWarning.setAlpha(0);
+                mOrbotSettingWarning.setVisibility(View.GONE);
             }
         }
     }

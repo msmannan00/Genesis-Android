@@ -50,25 +50,17 @@ class bookmarkSettingViewController
     }
 
     private void mBookmarkNameValidationError(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands, boolean pStatus){
-        try {
-            if(pCommands.equals(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE)){
-                if(!pStatus){
-                    mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.gx_generic_input_error));
-                }else {
-                    mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
-                }
+        if(pCommands.equals(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE)){
+            if(!pStatus){
+                mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.gx_generic_input_error));
+            }else {
+                mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
             }
-        } catch (IOException | XmlPullParserException e) {
-            e.printStackTrace();
         }
     }
 
     private void onClearForm(){
-        try {
-            mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
-        } catch (IOException | XmlPullParserException e) {
-            e.printStackTrace();
-        }
+        mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
     }
 
     private void onClearFormFocus(){

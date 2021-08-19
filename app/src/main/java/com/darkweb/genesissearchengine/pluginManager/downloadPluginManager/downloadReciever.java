@@ -148,7 +148,8 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         int mRequestCode = 0;
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             try {
-                URL url = new URL(f_url[0]);
+                String fURL = f_url[0];
+                URL url = new URL(fURL);
                 HttpURLConnection conection;
                 Proxy proxy;
                 if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
@@ -205,7 +206,13 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
             } catch (Exception ex) {
                 if(mRequestCode!=200){
-                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
+                    String mRequestCodeResponse = String.valueOf(mRequestCode);
+                    if(mRequestCodeResponse == null || mRequestCodeResponse.equals("0")){
+                        mRequestCodeResponse = "\"Unknown\"";
+                    }
+
+
+                    mEvent.invokeObserver(Collections.singletonList("Request Error | " + mRequestCodeResponse), M_DOWNLOAD_FAILURE);
                     onCancel();
                 }
             }
@@ -267,10 +274,13 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 output.close();
                 mStream.close();
             }catch (Exception ex){
-                if(mRequestCode!=200){
-                    mEvent.invokeObserver(Collections.singletonList(mRequestCode), M_DOWNLOAD_FAILURE);
-                    onCancel();
+                String mRequestCodeResponse = String.valueOf(mRequestCode);
+                if(mRequestCodeResponse == null || mRequestCodeResponse.equals("0")){
+                    mRequestCodeResponse = "\"Unknown\"";
                 }
+
+                mEvent.invokeObserver(Collections.singletonList("Request Error | " + mRequestCodeResponse), M_DOWNLOAD_FAILURE);
+                onCancel();
             }
         }
         return null;
@@ -355,7 +365,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//","content://");
             File mFile = new File(mPath);
 
-            new Handler().postDelayed(() -> helperMethod.openFile(mFile, context), 500);
+            new Handler().postDelayed(() -> helperMethod.openFile(mFile, activityContextManager.getInstance().getHomeController()), 500);
         }
     }
 }

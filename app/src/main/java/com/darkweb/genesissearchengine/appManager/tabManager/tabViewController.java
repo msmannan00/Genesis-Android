@@ -172,19 +172,19 @@ class tabViewController
     }
 
     private void onHideUndoDialogForced() {
-        if(mUndoLayout.getAlpha()<1){
-            mUndoLayout.animate().cancel();
-            mUndoLayout.setAlpha(0);
-            mUndoLayout.setVisibility(View.GONE);
-        }else {
-            mUndoLayout.animate().setDuration(200).alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
-        }
+        //if(mUndoLayout.getAlpha()<1){
+            //mUndoLayout.animate().cancel();
+            //mUndoLayout.setAlpha(0);
+            //mUndoLayout.setVisibility(View.GONE);
+        //}else {
+            //mUndoLayout.animate().setDuration(200).alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
+        //}
     }
 
     private void onHideUndoDialogInit() {
-        mUndoLayout.animate().cancel();
-        mUndoLayout.setAlpha(0);
-        mUndoLayout.setVisibility(View.GONE);
+        //mUndoLayout.animate().cancel();
+        //mUndoLayout.setAlpha(0);
+        //mUndoLayout.setVisibility(View.GONE);
     }
 
     public void blockUI(boolean pStatus){

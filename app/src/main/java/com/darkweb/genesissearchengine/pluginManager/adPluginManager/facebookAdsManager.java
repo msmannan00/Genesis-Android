@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.facebook.ads.*;
+import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import java.lang.ref.WeakReference;
 
 public class facebookAdsManager implements AdListener  {
@@ -30,6 +31,7 @@ public class facebookAdsManager implements AdListener  {
     /*Local Overrides*/
     @Override
     public void onError(Ad ad, AdError adError) {
+        Log.i("asd","asd");
     }
 
     @Override
@@ -52,7 +54,7 @@ public class facebookAdsManager implements AdListener  {
 
     private void loadAds(AppCompatActivity pContext, LinearLayout pLinearLayout){
         AudienceNetworkAds.initialize(pContext);
-        adView = new AdView(pContext, "856646331639727_856654334972260", AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(pContext, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
         pLinearLayout.addView(adView);
         adView.loadAd(adView.buildLoadAdConfig().withAdListener(this).build());
     }

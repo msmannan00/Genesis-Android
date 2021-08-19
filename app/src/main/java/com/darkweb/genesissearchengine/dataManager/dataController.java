@@ -35,6 +35,7 @@ public class dataController
     private referenceWebsiteDataModel mReferenceWebsiteDataModel;
     private bridgesDataModel mBridgeWebsiteDataModel;
     private sqlCipherDataModel mSqlCipherDataModel;
+    private crawlerDataModel mCrawlerDataModel;
 
     /*Private Declarations*/
 
@@ -57,6 +58,7 @@ public class dataController
         mReferenceWebsiteDataModel = new referenceWebsiteDataModel();
         mBridgeWebsiteDataModel = new bridgesDataModel();
         mSqlCipherDataModel = new sqlCipherDataModel();
+        mCrawlerDataModel = new crawlerDataModel(pAppContext);
     }
     public void initializeListData(){
         mReferenceWebsiteDataModel.onTrigger(dataEnums.eReferenceWebsiteCommands.M_LOAD,Collections.singletonList(activityContextManager.getInstance().getHomeController()));
@@ -113,6 +115,12 @@ public class dataController
         }
     }
 
+    /*Trigger Crawler*/
+
+    public Object invokeCrawler(dataEnums.eCrawlerCommands pCommands, List<Object> pData){
+        return mCrawlerDataModel.onTrigger(pCommands, pData);
+    }
+
     /*Trigger Suggestions*/
 
     public Object invokeSuggestions(dataEnums.eSuggestionCommands pCommands, List<Object> pData){
@@ -143,6 +151,9 @@ public class dataController
     /*Trigger Help*/
 
     public Object invokeHelp(dataEnums.eHelpCommands pCommands, List<Object> pData){
+        if(mPreferenceModel==null){
+            return new ArrayList<helpDataModel>();
+        }
         return mHelpDataModel.onTrigger(pCommands, pData);
     }
 

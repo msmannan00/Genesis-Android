@@ -147,7 +147,6 @@ public class settingGeneralController extends AppCompatActivity {
                     {
                         if(activityContextManager.getInstance().getHomeController() != null){
                             activityContextManager.getInstance().getHomeController().onReInitTheme();
-                            activityContextManager.getInstance().getSettingController().onReInitTheme();
                         }
                     }, 100);
                 }
@@ -226,7 +225,7 @@ public class settingGeneralController extends AppCompatActivity {
     public void onSelectTheme(View view){
         if(!mIsThemeChanging){
             mIsThemeChanging = true;
-            if(view.getId() == R.id.pOption1){
+            if(view.getId() == R.id.pBridgeSettingOption1){
                 if(status.sTheme != enums.Theme.THEME_DARK) {
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_RESET_THEME, null);
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_SET_THEME, Collections.singletonList(enums.Theme.THEME_DARK));
@@ -237,7 +236,7 @@ public class settingGeneralController extends AppCompatActivity {
                 }else {
                     mIsThemeChanging = false;
                 }
-            }else if(view.getId() == R.id.pOption2) {
+            }else if(view.getId() == R.id.pBridgeSettingOption2) {
                 if(status.sTheme != enums.Theme.THEME_LIGHT) {
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_RESET_THEME, null);
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_SET_THEME, Collections.singletonList(enums.Theme.THEME_LIGHT));

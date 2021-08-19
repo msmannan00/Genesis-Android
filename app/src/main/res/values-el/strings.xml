@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Το όνομα του σελιδοδείκτη url θα εμφανίζεται εδώ</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Εισαγάγετε το όνομα σελιδοδείκτη…</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">Ο σελιδοδείκτης αφαιρείται</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">Ο σελιδοδείκτης ενημερώνεται</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">απολύω</string>
 
@@ -63,7 +59,114 @@
 	<string name="ORBOT_LOG" translatable="true">αρχεία καταγραφής διακομιστή μεσολάβησης</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Πληροφορίες καταγραφής συστήματος</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">εάν αντιμετωπίζετε πρόβλημα συνδεσιμότητας κατά την έναρξη του Genesis, αντιγράψτε τον ακόλουθο κώδικα και βρείτε το πρόβλημα στο διαδίκτυο ή στείλτε τον σε εμάς, ώστε να μπορούμε να σας βοηθήσουμε</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">προσαρμογή διακομιστή μεσολάβησης</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">σας συνδέουμε με το δίκτυο Tor που διαχειρίζονται χιλιάδες εθελοντές σε όλο τον κόσμο! Μπορούν αυτές οι επιλογές να σας βοηθήσουν</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">Το Διαδίκτυο λογοκρίνεται εδώ (τείχος προστασίας παράκαμψης)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">παράκαμψη τείχους προστασίας</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Το Bridges κάνει το Διαδίκτυο να λειτουργεί πολύ αργά. Χρησιμοποιήστε τα μόνο εάν το Διαδίκτυο λογοκρίνεται στη χώρα σας ή έχει αποκλειστεί το δίκτυο Tor</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">προσαρμογή ασφαλείας</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Ρυθμίσεις ασφαλείας</string>
+	<string name="BRIDGE_SETTING" translatable="true">Αλλάξτε τις ρυθμίσεις "BRIDGE"</string>
+	<string name="BRIDGE_AUTO" translatable="true">Δημιουργία αυτόματα</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Αυτόματη διαμόρφωση των ρυθμίσεων "BRIDGE"</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Δώστε ένα "BRIDGE" που ξέρω</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Επικόλληση προσαρμοσμένου "BRIDGE"</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">Τα "BRIDGE" είναι μη καταχωρισμένα ρελέ Tor που καθιστούν πιο δύσκολο τον αποκλεισμό συνδέσεων στο δίκτυο Tor. Λόγω του τρόπου με τον οποίο ορισμένες χώρες προσπαθούν να αποκλείσουν το Tor, ορισμένα "BRIDGE" λειτουργούν σε ορισμένες χώρες αλλά όχι σε άλλες</string>
+	<string name="BRIDGE_TITLE" translatable="true">Επιλέξτε Προεπιλογή "BRIDGE"</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Αίτημα</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Συνιστάται)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (Κίνα)</string>
+	
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">δώστε ένα Bridge που γνωρίζετε</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">εισαγάγετε bridge πληροφορίες από μια αξιόπιστη πηγή</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">αίτηση</string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">αλλάξτε τον τρόπο εμφάνισης του αρχείου καταγραφής συστήματος</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">εμφάνιση Log χρησιμοποιώντας σύγχρονη προβολή λίστας</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle μεταξύ κλασικής και σύγχρονης προβολής λίστας</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Ο σελιδοδείκτης καταργήθηκε</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Ο σελιδοδείκτης ενημερώθηκε</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Τα δεδομένα εκκαθαρίστηκαν με επιτυχία</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">Η διεύθυνση URL αντιγράφηκε στο πρόχειρο</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Δεν βρέθηκε εφαρμογή</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Απαιτείται επανεκκίνηση μετά από αλλαγές</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Επανεκκίνηση</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Η καρτέλα είναι κλειστή</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Άνοιξε η νέα καρτέλα</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy που συνδέει ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Η μνήμη είναι πλήρης tab Καρτέλα Εκκαθάριση</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Το αναδυόμενο παράθυρο αποκλείστηκε</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Άνοιγμα αρχείων καταγραφής σφαλμάτων</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Διακόπτης</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Αναίρεση</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Δημιουργήθηκε νέα ταυτότητα</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">ανοίξτε τις ρυθμίσεις</string>
+	
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">ΣΥΓΝΩΜΗ ΝΑ ΤΟ ΑΚΟΥΩ</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Εάν αντιμετωπίζετε δυσκολίες κατά τη χρήση αυτής της εφαρμογής, επικοινωνήστε μαζί μας μέσω email. Θα προσπαθήσουμε να λύσουμε το πρόβλημά σας το συντομότερο δυνατό</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">ΑΝΤΙΜΕΤΩΠΙΣΗ ΠΡΟΒΛΗΜΑΤΩΝ</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Επαναφέρετε την εφαρμογή σε περίπτωση που δεν λειτουργεί. Θα προσπαθήσουμε να το διαμορφώσουμε ξανά, ώστε να λειτουργήσει ξανά.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Επαναφορά</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Παράβλεψη</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Αναμονή για λήψη ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Λήψη</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Τιμή ΗΠΑ</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Πείτε στους άλλους τι πιστεύετε για αυτήν την εφαρμογή</string>
+	<string name="ALERT_RATE" translatable="true">Ποσοστό</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Έγινε</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Συμβολοσειρά Bridge (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Τύπος Bridge (obfs4, πράος, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Ιστότοπος σελιδοδείκτη</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Προσθέστε αυτήν τη σελίδα στους σελιδοδείκτες σας</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">όνομα σελιδοδείκτη ...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Έγινε</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">Ειδοποίηση URL</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Άνοιγμα σε νέα καρτέλα</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Άνοιγμα στην τρέχουσα καρτέλα</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Αντιγραφή στο Πρόχειρο</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Λήψη αρχείου</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Άνοιγμα url σε νέα καρτέλα</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Άνοιγμα url στην τρέχουσα καρτέλα</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Αντιγραφή url στο πρόχειρο</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Άνοιγμα εικόνας σε νέα καρτέλα</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Άνοιγμα καρτέλας τρέχουσας εικόνας</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Αντιγραφή εικόνας στο πρόχειρο</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Λήψη αρχείου εικόνας</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Αίτημα Νέο Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Επιλέξτε E-mail παρακάτω για να ζητήσετε μια διεύθυνση Bridge. Μόλις έχετε μια διεύθυνση, αντιγράψτε και επικολλήστε την στο παραπάνω πλαίσιο και ξεκινήστε την εφαρμογή.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Αλληλογραφία</string>
+
+
+
+
 
 
 
@@ -97,9 +200,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">τοπικές ειδοποιήσεις</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">προσαρμογή ειδοποίησης λογισμικού</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">ειδοποιήσεις συστήματος</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">αλλάξτε τον τρόπο εμφάνισης του αρχείου καταγραφής συστήματος</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">εμφάνιση Log χρησιμοποιώντας σύγχρονη προβολή λίστας</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">toogle μεταξύ κλασικής και σύγχρονης προβολής λίστας</string>
 	<string name="SETTING_SEARCH" translatable="true">διαχείριση μηχανής αναζήτησης</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">προσθήκη, ορισμός προεπιλογής. εμφάνιση προτάσεων</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">διαχείριση ειδοποιήσεων</string>
@@ -237,35 +337,18 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">αφαιρέστε την προσαρμογή του προγράμματος περιήγησης</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">δώστε ένα Bridge που γνωρίζετε</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">εισαγάγετε bridge πληροφορίες από μια αξιόπιστη πηγή</string>
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">αίτηση</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">Εντάξει</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">ιστότοπος σελιδοδεικτών</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">προσθέστε αυτήν τη σελίδα στους σελιδοδείκτες σας</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">διαγράψτε συνδέσμους ιστού και δεδομένα</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">διαγραφή σελιδοδείκτη και Δεδομένων</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Η εκκαθάριση δεδομένων θα καταργήσει τους περιηγημένους συνδέσμους ιστού, τα cookie και άλλα δεδομένα περιήγησης</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Η διαγραφή δεδομένων θα διαγράψει τους ιστότοπους με σελιδοδείκτη</string>
 	<string name="ALERT_CLEAR" translatable="true">Ματαίωση</string>
-	<string name="ALERT_ADD" translatable="true">Εντάξει</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">νέος σελιδοδείκτης</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">κανω ΑΝΑΦΟΡΑ</string>
 	<string name="ALERT_REPORT_URL" translatable="true">αναφέρετε τον ιστότοπο</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">εάν πιστεύετε ότι αυτή η διεύθυνση URL είναι παράνομη ή ενοχλητική, αναφέρετέ την σε εμάς, ώστε να μπορέσουμε να λάβουμε νομικά μέτρα</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">αναφέρθηκε με επιτυχία</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">Η διεύθυνση url αναφέρθηκε με επιτυχία. Αν βρεθεί κάτι, θα ληφθούν νομικά μέτρα</string>
-	<string name="ALERT_RATEUS" translatable="true">Βαθμολογήστε μας</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">πείτε στους άλλους τη γνώμη σας για αυτήν την εφαρμογή</string>
-	<string name="ALERT_RATE" translatable="true">τιμή</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">Λυπόμαστε που το ακούμε αυτό!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">εάν αντιμετωπίζετε δυσκολίες κατά τη χρήση αυτού του λογισμικού επικοινωνήστε μαζί μας μέσω email. θα προσπαθήσουμε να λύσουμε το πρόβλημά σας το συντομότερο δυνατό</string>
-	<string name="ALERT_MAIL" translatable="true">ταχυδρομείο</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">ζητήστε νέο Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">επιλέξτε αλληλογραφία για να ζητήσετε μια διεύθυνση bridge. Μόλις το λάβετε, αντιγράψτε και επικολλήστε το στο παραπάνω πλαίσιο και ξεκινήστε το λογισμικό.</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">η γλώσσα δεν υποστηρίζεται</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">Η γλώσσα συστήματος δεν υποστηρίζεται από αυτό το λογισμικό. εργαζόμαστε για να το συμπεριλάβουμε σύντομα</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">αρχικοποίηση Orbot</string>
@@ -282,42 +365,16 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">κοινωνικές κοινωνίες</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">εγχειρίδιο</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">παιδότοπο</string>
-	<string name="ALERT_LONG_URL" translatable="true">ειδοποίηση συνδέσμου ιστού</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">ανοίξτε σε νέα καρτέλα</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">ανοίξτε στην τρέχουσα καρτέλα</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Αντιγραφή στο πρόχειρο</string>
 	<string name="ALERT_LONG_FILE" translatable="true">κοινοποίηση αρχείου</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">λήψη ειδοποίησης</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">άνοιγμα url σε νέα καρτέλα</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">άνοιγμα url στην τρέχουσα καρτέλα</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">αντιγράψτε τη διεύθυνση url στο πρόχειρο</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">ανοίξτε την εικόνα σε νέα καρτέλα</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">ανοίξτε την εικόνα στην τρέχουσα καρτέλα</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">αντιγράψτε την εικόνα στο πρόχειρο</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">λήψη αρχείου εικόνας</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">λήψη ειδοποίησης</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">ειδοποίηση συνδέσμου ιστού</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">δεν βρέθηκε λογισμικό για τη διαχείριση email</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">λήψη αρχείου |</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">διαγράφηκαν δεδομένα | απαιτείται επανεκκίνηση</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">τα ιδιωτικά δεδομένα διαγράφηκαν με επιτυχία. Ορισμένες προεπιλεγμένες ρυθμίσεις συστήματος θα απαιτήσουν την επανεκκίνηση αυτού του λογισμικού. τώρα μπορείτε να συνεχίσετε με ασφάλεια την περιήγηση</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">κλειστή καρτέλα</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">ξεκάνω</string>
 
 
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">προσαρμογή ασφαλείας</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge προσαρμογή</string>
-	<string name="BRIDGE_AUTO" translatable="true">δημιουργείτε αυτόματα</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">αυτόματη ρύθμιση παραμέτρων bridge customize</string>
-	<string name="BRIDGE_MANUAL" translatable="true">δώστε ένα bridge που γνωρίζετε</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">επικόλληση προσαρμοσμένο bridge</string>
-	<string name="BRIDGE_HEADER" translatable="true">προσαρμογή διακομιστή μεσολάβησης | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">Τα Bridges είναι μη καταχωρημένα Tor ρελέ που καθιστούν δυσκολότερη την αποτροπή συνδέσεων στο δίκτυο Tor λόγω του τρόπου με τον οποίο ορισμένες χώρες προσπαθούν να μπλοκάρουν το Tor, ορισμένα bridges λειτουργούν σε ορισμένες χώρες αλλά όχι σε άλλες</string>
-	<string name="BRIDGE_TITLE" translatable="true">επιλέξτε προεπιλογή bridge</string>
-	<string name="BRIDGE_REQUEST" translatable="true">αίτηση</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (συνιστάται)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -399,12 +456,6 @@
 	<string name="PROXY_SUB_HEADER3" translatable="true">πληροφορίες | αλλαγή ρύθμισης συστήματος</string>
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">μπορείτε να αλλάξετε διακομιστή μεσολάβησης επανεκκίνηση του λογισμικού και μεταβαίνοντας στη διαχείριση διακομιστή μεσολάβησης. μπορεί να ανοίξει κάνοντας κλικ σε ένα εικονίδιο με το γρανάζι στο κάτω μέρος</string>
 
-
-	<string name="ORBOT_HEADER" translatable="true">προσαρμογή διακομιστή μεσολάβησης</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">σας συνδέουμε με το δίκτυο Tor που διαχειρίζονται χιλιάδες εθελοντές σε όλο τον κόσμο! Μπορούν αυτές οι επιλογές να σας βοηθήσουν</string>
-	<string name="ORBOT_TITLE" translatable="true">Το Διαδίκτυο λογοκρίνεται εδώ (τείχος προστασίας παράκαμψης)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">παράκαμψη τείχους προστασίας</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">Το Bridges κάνει το Διαδίκτυο να λειτουργεί πολύ αργά. Χρησιμοποιήστε τα μόνο εάν το Διαδίκτυο λογοκρίνεται στη χώρα σας ή έχει αποκλειστεί το δίκτυο Tor</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">προεπιλογή. jpg</string>

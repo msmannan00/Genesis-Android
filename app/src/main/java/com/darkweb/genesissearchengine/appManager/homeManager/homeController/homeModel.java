@@ -11,10 +11,13 @@ class homeModel
 {
 
     String getSearchEngine(){
-        return status.sSettingSearchStatus;
+        return status.sSettingDefaultSearchEngine;
     }
 
     String urlComplete(String pURL, String pSearchEngine){
+        if(pURL.startsWith("data")){
+            return pURL;
+        }
         if(pURL.equals("about:blank")){
             return helperMethod.completeURL("genesishiddentechnologies.com");
         }

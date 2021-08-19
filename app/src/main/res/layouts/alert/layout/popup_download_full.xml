@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pSecureRootLayout"
+        android:id="@+id/pPopupDownloadFullContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@xml/ax_round_corner"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/pPopupDownloadFullImageContainer"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginStart="14dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/pFaviconLogo"
+                android:id="@+id/pPopupDownloadFullImage"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:contentDescription="@string/GENERAL_TODO"
@@ -41,10 +41,10 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/pOrbotRowDescription"
+            android:id="@+id/pPopupDownloadFullDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="10dp"
             android:alpha="0.6"
             android:gravity="start |center_vertical"
             android:maxLines="1"
@@ -56,12 +56,12 @@
             android:textSize="13.5sp"
             android:translationY="-1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView2"
+            app:layout_constraintStart_toEndOf="@+id/pPopupDownloadFullImageContainer"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp,TextContrastCheck" />
 
         <TextView
-            android:id="@+id/pDescriptionShort"
+            android:id="@+id/pPopupDownloadFullDescriptionShort"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -76,22 +76,22 @@
             android:textSize="11sp"
             android:translationY="-1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView2"
-            app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription"
-            tools:ignore="SmallSp" />
+            app:layout_constraintStart_toEndOf="@+id/pPopupDownloadFullImageContainer"
+            app:layout_constraintTop_toBottomOf="@+id/pPopupDownloadFullDescription"
+            tools:ignore="SmallSp,TextContrastCheck" />
 
         <View
             android:id="@+id/pDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
-            android:background="@color/c_view_divier_background"
+            android:background="@color/c_orbot_setting_divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            app:layout_constraintTop_toBottomOf="@+id/pPopupDownloadFullImageContainer" />
 
         <LinearLayout
-            android:id="@+id/pNavigationContainer"
+            android:id="@+id/pPopupDownloadFullNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -101,7 +101,7 @@
 
 
             <LinearLayout
-                android:id="@+id/pOption1"
+                android:id="@+id/pPopupDownloadFullNewTab"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -112,6 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption1"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -120,6 +121,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_DOWNLOAD_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -127,6 +129,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -142,13 +145,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption2"
+                android:id="@+id/pPopupDownloadFullCurrentTab"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -159,6 +162,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption2"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -167,6 +171,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_DOWNLOAD_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -174,6 +179,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -189,13 +195,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption3"
+                android:id="@+id/pPopupDownloadFullCopy"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -206,6 +212,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pDivider">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption3"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -214,6 +221,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_DOWNLOAD_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -221,6 +229,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -236,13 +245,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption4"
+                android:id="@+id/pPopupDownloadFullImageNewTab"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -252,9 +261,11 @@
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDivider">
+                app:layout_constraintTop_toBottomOf="@+id/pDivider"
+                tools:ignore="TouchTargetSizeCheck">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption4"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -263,6 +274,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_DOWNLOAD_OPTION_4"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -270,6 +282,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -285,13 +298,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption5"
+                android:id="@+id/pPopupDownloadFullImageCurrentTab"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -301,9 +314,11 @@
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDivider">
+                app:layout_constraintTop_toBottomOf="@+id/pDivider"
+                tools:ignore="TouchTargetSizeCheck">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption5"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -312,6 +327,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_DOWNLOAD_OPTION_5"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -319,6 +335,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation5"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -334,13 +351,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption6"
+                android:id="@+id/pPopupDownloadFullImageCopy"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray"
@@ -350,9 +367,11 @@
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDivider">
+                app:layout_constraintTop_toBottomOf="@+id/pDivider"
+                tools:ignore="TouchTargetSizeCheck">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption6"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -361,6 +380,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_DOWNLOAD_OPTION_6"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -368,6 +388,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressnNavigation6"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -383,13 +404,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"
+                android:background="@color/c_orbot_setting_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
 
             <LinearLayout
-                android:id="@+id/pOption7"
+                android:id="@+id/pPopupDownloadFullImageDownload"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@xml/gx_ripple_gray_bottom"
@@ -399,9 +420,11 @@
                 android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pDivider">
+                app:layout_constraintTop_toBottomOf="@+id/pDivider"
+                tools:ignore="TouchTargetSizeCheck">
 
                 <Button
+                    android:id="@+id/pPopupLongPressOption7"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="6"
@@ -410,6 +433,7 @@
                     android:clickable="false"
                     android:padding="0dp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ALERT_DOWNLOAD_OPTION_7"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
@@ -417,6 +441,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/pPopupLongPressNavigation7"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -425,7 +450,8 @@
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    app:tint="@color/cursor_blue" />
+                    app:tint="@color/cursor_blue"
+                    tools:ignore="ImageContrastCheck" />
 
             </LinearLayout>
 

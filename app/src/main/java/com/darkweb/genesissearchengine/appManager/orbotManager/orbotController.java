@@ -2,20 +2,15 @@ package com.darkweb.genesissearchengine.appManager.orbotManager;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.bridgeManager.bridgeController;
 import com.darkweb.genesissearchengine.appManager.helpManager.helpController;
 import com.darkweb.genesissearchengine.constants.constants;
-import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.appManager.activityThemeManager;
@@ -33,9 +28,9 @@ public class orbotController extends AppCompatActivity {
     private com.darkweb.genesissearchengine.appManager.orbotManager.orbotModel mOrbotModel;
     private com.darkweb.genesissearchengine.appManager.orbotManager.orbotViewController mOrbotViewController;
 
-    private SwitchMaterial mBridgeSwitch;
-    private SwitchMaterial mVpnSwitch;
-    private LinearLayout mCustomizableBridgeMenu;
+    private SwitchMaterial mOrbotSettingBridgeSwitch;
+    private SwitchMaterial mOrbotSettingVPNSwitch;
+    private LinearLayout mOrbotSettingWarning;
 
     /* INITIALIZATIONS */
 
@@ -67,17 +62,13 @@ public class orbotController extends AppCompatActivity {
     }
 
     public void viewsInitializations() {
-        mBridgeSwitch = findViewById(R.id.pBridgeSwitch);
-        mVpnSwitch = findViewById(R.id.pVpnSwitch);
-        mCustomizableBridgeMenu = findViewById(R.id.pCustomizableBridgeMenu);
+        mOrbotSettingBridgeSwitch = findViewById(R.id.pOrbotSettingBridgeSwitch);
+        mOrbotSettingVPNSwitch = findViewById(R.id.pOrbotSettingVPNSwitch);
+        mOrbotSettingWarning = findViewById(R.id.pOrbotSettingWarning);
 
-        mOrbotViewController = new com.darkweb.genesissearchengine.appManager.orbotManager.orbotViewController(mBridgeSwitch, mVpnSwitch, this, mCustomizableBridgeMenu);
+        mOrbotViewController = new orbotViewController(mOrbotSettingBridgeSwitch, mOrbotSettingVPNSwitch, this, mOrbotSettingWarning);
         mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sVPNStatus,status.sBridgeStatus));
-        mOrbotModel = new com.darkweb.genesissearchengine.appManager.orbotManager.orbotModel(new orbotModelCallback());
-    }
-
-    public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        mOrbotModel = new orbotModel(new orbotModelCallback());
     }
 
     /* LISTENERS */
@@ -87,32 +78,34 @@ public class orbotController extends AppCompatActivity {
 
     public class orbotModelCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
+        public Object invokeObserver(List<Object> pData, Object pCommands)
         {
             return null;
         }
     }
 
-    public void onBridgeSwitch(View view){
-        mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH,Collections.singletonList(!mBridgeSwitch.isChecked()));
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(status.sBridgeStatus));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES,status.sBridgeStatus));
-    }
-
-    public void openBridgeSettings(View view){
-        helperMethod.openActivity(bridgeController.class, constants.CONST_LIST_HISTORY, orbotController.this, true);
-    }
-
-    public void onVPNSwitch(View view){
-        mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_VPN_SWITCH,Collections.singletonList(!mVpnSwitch.isChecked()));
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_VPN,Collections.singletonList(status.sVPNStatus));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED,status.sVPNStatus));
+    public void onUITriggered(View view){
+        if(view.getId() == R.id.pOrbotSettingBridge){
+            mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH,Collections.singletonList(!mOrbotSettingBridgeSwitch.isChecked()));
+            mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(status.sBridgeStatus));
+        }
+        else if(view.getId() == R.id.pOrbotSettingWarning){
+            helperMethod.openActivity(bridgeController.class, constants.CONST_LIST_HISTORY, orbotController.this, true);
+        }
+        else if(view.getId() == R.id.pOrbotSettingVPN){
+            mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_VPN_SWITCH,Collections.singletonList(!mOrbotSettingVPNSwitch.isChecked()));
+            mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_VPN,Collections.singletonList(status.sVPNStatus));
+        }
     }
 
     public void onClose(View view){
         finish();
         initializeStartupAnimation();
         activityContextManager.getInstance().onRemoveStack(this);
+    }
+
+    public void onOpenInfo(View view) {
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
     public void initializeStartupAnimation(){
@@ -151,12 +144,6 @@ public class orbotController extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         onClose(null);
-    }
-
-    public boolean inSignatureArea(MotionEvent ev) {
-        float mEventY = ev.getY();
-        float mEventX = ev.getX();
-        return mEventY>helperMethod.pxFromDp(500) || mEventX>helperMethod.getScreenWidth(this)-helperMethod.pxFromDp(80);
     }
 
 }

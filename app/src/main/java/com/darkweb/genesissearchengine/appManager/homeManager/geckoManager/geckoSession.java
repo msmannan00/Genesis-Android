@@ -32,6 +32,7 @@ import androidx.core.content.FileProvider;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.keys;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
@@ -41,7 +42,10 @@ import com.darkweb.genesissearchengine.libs.trueTime.trueTime;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.mozilla.gecko.PrefsHelper;
 import org.mozilla.gecko.util.ThreadUtils;
 import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.Autofill;
@@ -49,6 +53,7 @@ import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.SlowScriptResponse;
+import org.mozilla.geckoview.WebExtension;
 import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
@@ -74,6 +79,7 @@ import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_DEFAULT_BROWSER;
+import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_RATE_COUNT;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_APPLICATION_CRASH;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
@@ -313,6 +319,12 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
+        PrefsHelper.setPref(keys.PROXY_TYPE, 1);
+        PrefsHelper.setPref(keys.PROXY_SOCKS,"127.0.0.1");
+        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,5);
+        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,true);
+
         if(mIsLoaded){
             mCurrentURL = var2;
             if(!var2.equals("about:blank")){
@@ -372,7 +384,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
             }else {
                 if(progress==100){
-                    if(!mCurrentURL.contains("genesis")){
+                    if(!mCurrentURL.contains("genesis") && helperMethod.getHost(mCurrentURL).contains(".onion")){
                         checkApplicationRate();
                     }
                     if(!mIsProgressBarChanging){
@@ -498,7 +510,10 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
         String newUrl = Objects.requireNonNull(var2).split("#")[0];
         if(!mCurrentTitle.equals("loading")){
-            m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
+            Object mURL = event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
+            if(mURL!=null){
+                m_current_url_id = (int)mURL;
+            }
         }
         if(newUrl.startsWith(CONST_GENESIS_URL_CACHED) || newUrl.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
             setURL(constants.CONST_GENESIS_DOMAIN_URL);
@@ -701,6 +716,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             mThemeChanged = true;
             mTheme = var2.getString("theme_color");
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
+            // event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_INDEX_WEBSITE);
         } catch (Exception ex) {
             mTheme = null;
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
@@ -709,11 +725,31 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.ON_UPDATE_TAB_TITLE);
     }
 
+    @Nullable
+    public GeckoResult<Object> onMessage(final @NonNull String nativeApp, final @NonNull Object message, final @NonNull WebExtension.MessageSender sender) {
+        if (message instanceof JSONObject) {
+            JSONObject json = (JSONObject) message;
+            try {
+                if (json.has("type") && "WPAManifest".equals(json.getString("type"))) {
+                    JSONObject manifest = json.getJSONObject("manifest");
+                    Log.d("MessageDelegate", "Found WPA manifest: " + manifest);
+                }
+            } catch (JSONException ex) {
+                Log.e("MessageDelegate", "Invalid manifest", ex);
+            }
+        }
+        return null;
+    }
+
     @UiThread
     public void onTitleChange(@NonNull GeckoSession var1, @Nullable String var2) {
         if(var2!=null && !var2.equals(strings.GENERIC_EMPTY_STR) && var2.length()>2 && !var2.equals("about:blank") && mIsLoaded){
             mCurrentTitle = var2;
-            m_current_url_id = (int)event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
+            Object mID = event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
+            if(mID!=null){
+                m_current_url_id = (int)mID;
+            }
+
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_TAB_TITLE);
         }
     }
@@ -801,7 +837,12 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             }
             else {
                 try{
-                    event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,title, mTheme, mContext.get()), enums.etype.on_long_press);
+                    String mTitle = var4.title;
+                    if(mTitle==null || mTitle.length()<=0)
+                    {
+                        mTitle = helperMethod.getDomainName(mCurrentURL) + "\n" + var4.srcUri;
+                    }
+                    event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,mTitle, mTheme, mContext.get()), enums.etype.on_long_press);
                 }catch (Exception ex){
                     ex.printStackTrace();
                     Log.i("","");
@@ -1020,7 +1061,11 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
 
     public boolean getRemovableFromBackPressed(){
-        return mRemovableFromBackPressed;
+        if(mCurrentURL.startsWith("data") || mCurrentURL.startsWith("blob")){
+            return true;
+        }else {
+            return mRemovableFromBackPressed;
+        }
     }
 
     public void setTheme(String pTheme){

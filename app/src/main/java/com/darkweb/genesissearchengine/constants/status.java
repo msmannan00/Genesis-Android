@@ -22,7 +22,7 @@ public class status
     /*Settings Status*/
     public static Locale mSystemLocale = null;
 
-    public static String sSettingSearchStatus = constants.CONST_BACKEND_GENESIS_URL;
+    public static String sSettingDefaultSearchEngine = constants.CONST_BACKEND_GENESIS_URL;
     public static String sSettingRedirectStatus = strings.GENERIC_EMPTY_STR;
     public static String sSettingLanguage = "en";
     public static String sSettingLanguageRegion = "Us";
@@ -117,7 +117,7 @@ public class status
         status.sSettingLanguage = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,strings.SETTING_DEFAULT_LANGUAGE));
         status.sReferenceWebsites = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.HOME_REFERENCE_WEBSITES,strings.HOME_REFERENCE_WEBSITES_DEFAULT));
         status.sSettingLanguageRegion = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE_REGION,strings.SETTING_DEFAULT_LANGUAGE_REGION));
-        status.sSettingSearchStatus = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
+        status.sSettingDefaultSearchEngine = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE,constants.CONST_BACKEND_GENESIS_URL));
         status.sBridgeCustomBridge = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
         status.sBridgeCustomType = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE,strings.GENERIC_EMPTY_SPACE));
         status.sBridgesDefault = (String)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_DEFAULT,strings.BRIDGES_DEFAULT));

@@ -1,161 +1,155 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/c_background">
+
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:id="@+id/pOrbotSettingScrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="70dp"
-                android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="70dp">
 
             <!-- Title Header -->
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="0dp"
-                    android:elevation="8dp"
-                    android:background="@color/c_background"
-                    android:orientation="horizontal"
-                    android:layout_height="52dp">
+                android:id="@+id/pOrbotSettingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/c_background"
+                android:elevation="8dp"
+                android:orientation="horizontal">
+
                 <ImageButton
+                    android:id="@+id/pOrbotSettingBack"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:onClick="onClose"
-                    android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
-                    android:src="@xml/ic_arrow_back"
+                    android:layout_marginTop="3dp"
                     android:background="@xml/gx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
-                    app:tint="@color/c_navigation_tint" />
+                    android:onClick="onClose"
+                    android:src="@xml/ic_arrow_back"
+                    app:tint="@color/c_navigation_tint"
+                    tools:ignore="UsingOnClickInXml" />
+
                 <TextView
-                        android:textColor="@color/c_text_v1"
-                        android:onClick="onClose"
-                        android:textSize="17sp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="40"
-                        android:layout_marginTop="-3dp"
-                        android:gravity="center_vertical|start"
-                        android:textStyle="bold"
-                        android:text="@string/ORBOT_HEADER"
-                        />
+                    android:id="@+id/pOrbotSettingToolbarHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-3dp"
+                    android:layout_weight="40"
+                    android:gravity="center_vertical|start"
+                    android:onClick="onClose"
+                    android:text="@string/ORBOT_SETTING_HEADER"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:ignore="UsingOnClickInXml" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageView
+                    android:id="@+id/pOrbotSettingInfo"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:paddingStart="8dp"
                     android:layout_gravity="center_vertical"
-                    android:onClick="onOpenInfo"
                     android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onOpenInfo"
+                    android:paddingStart="8dp"
                     android:src="@xml/ic_info"
-                    app:tint="@color/c_header_icon_tint" />
+                    app:tint="@color/c_header_icon_tint"
+                    tools:ignore="UsingOnClickInXml" />
 
             </LinearLayout>
 
             <!-- Title Header -->
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/c_background"
-                    android:layout_marginBottom="0dp"
-                    android:orientation="horizontal"
-                    android:layout_height="40dp">
-                <TextView
-                        android:textColor="@color/c_text_short_header"
-                        android:textSize="16sp"
-                        android:layout_width="0dp"
-                        android:paddingEnd="15dp"
-                        android:paddingStart="15dp"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/BRIDGE_BASIC_SETTING"
-                        />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/pOrbotSettingHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="11dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/ORBOT_SETTING_BRIDGE_BASIC_SETTING"
+                android:textColor="@color/c_text_short_header"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginEnd = "15dp"
-                    android:layout_marginStart = "15dp"
-                    android:orientation="horizontal"
-                    android:layout_height="65dp">
-                <TextView
-                        android:textSize="14sp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:textColor="@color/c_text_v1"
-                        android:background="@color/clear_alpha"
-                        android:text="@string/ORBOT_DESCRIPTION"
-                        />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/pOrbotSettingDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/clear_alpha"
+                android:text="@string/ORBOT_SETTING_DESCRIPTION"
+                android:textColor="@color/c_text_v1"
+                android:textSize="14sp" />
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginEnd = "15dp"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-                <TextView
-                        android:textSize="14sp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:textColor="@color/c_text_v1"
-                        android:layout_marginStart="15dp"
-                        android:textStyle="bold"
-                        android:text="@string/ORBOT_TITLE"
-                        />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/pOrbotSettingSubDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/ORBOT_SETTING_TITLE"
+                android:textColor="@color/c_text_v1"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="15dp"
-                android:background="@color/c_view_divier_background"/>
+                android:background="@color/c_orbot_setting_divider" />
+
             <LinearLayout
+                android:id="@+id/pOrbotSettingVPN"
                 android:layout_width="match_parent"
-                android:background="@xml/gx_ripple_blue"
-                android:layout_marginEnd = "0dp"
-                android:paddingEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:orientation="horizontal"
-                android:onClick="onVPNSwitch"
                 android:layout_height="wrap_content"
-                tools:ignore="RtlSymmetry">
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@xml/gx_ripple_blue"
+                android:onClick="onUITriggered"
+                android:orientation="horizontal"
+                android:paddingTop="14dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="14dp"
+                tools:ignore="RtlSymmetry,UsingOnClickInXml">
+
                 <TextView
-                    android:textSize="14sp"
+                    android:id="@+id/pOrbotSettingVPNHeader"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="15dp"
-                    android:paddingStart="15dp"
                     android:layout_weight="1"
-                    android:textColor="@color/c_text_v1"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ORBOT_SETTING_ENABLE_VPN"
-                    />
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="14sp" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pVpnSwitch"
+                    android:id="@+id/pOrbotSettingVPNSwitch"
                     android:layout_width="wrap_content"
-                    android:clickable="false"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd = "10dp"
+                    android:layout_marginEnd="10dp"
+                    android:clickable="false"
                     android:theme="@style/SCBSwitch"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
@@ -164,145 +158,153 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
-                android:background="@color/c_view_divier_background"/>
+                android:background="@color/c_orbot_setting_divider" />
 
-                <LinearLayout
+            <LinearLayout
+                android:id="@+id/pOrbotSettingBridge"
                 android:layout_width="match_parent"
-                android:background="@xml/gx_ripple_blue"
-                android:layout_marginEnd = "0dp"
-                android:paddingEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:paddingTop="14dp"
-                android:onClick="onBridgeSwitch"
-                android:paddingBottom="14dp"
-                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                tools:ignore="RtlSymmetry">
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@xml/gx_ripple_blue"
+                android:onClick="onUITriggered"
+                android:orientation="horizontal"
+                android:paddingTop="14dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="14dp"
+                tools:ignore="RtlSymmetry,UsingOnClickInXml">
+
                 <TextView
-                    android:textSize="14sp"
-                    android:paddingEnd="15dp"
-                    android:paddingStart="15dp"
+                    android:id="@+id/pOrbotSettingBridgeHeader"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/c_text_v1"
                     android:layout_weight="1"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/ORBOT_SETTING_BRIDGE_ENABLE"
-                    />
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="14sp" />
 
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/pBridgeSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_marginEnd = "10dp"
-                        android:clickable="false"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/SCBSwitch"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/pOrbotSettingBridgeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:clickable="false"
+                    android:theme="@style/SCBSwitch" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_marginStart="15dp"
                 android:layout_height="1dp"
-                android:background="@color/c_view_divier_background"/>
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
 
             <LinearLayout
+                android:id="@+id/pOrbotSettingWarning"
                 android:layout_width="match_parent"
-                android:id="@+id/pCustomizableBridgeMenu"
-                android:background="@xml/gx_ripple_blue"
-                android:onClick="openBridgeSettings"
-                android:layout_marginEnd = "0dp"
-                android:paddingEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:clickable="false"
-                android:orientation="vertical"
                 android:layout_height="wrap_content"
-                tools:ignore="RtlSymmetry">
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@xml/gx_ripple_blue"
+                android:clickable="false"
+                android:onClick="onUITriggered"
+                android:orientation="vertical"
+                android:paddingEnd="0dp"
+                tools:ignore="RtlSymmetry,UsingOnClickInXml">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_marginEnd = "0dp"
-                    android:paddingEnd="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:paddingTop="20dp"
-                    android:clickable="false"
-                    android:paddingBottom="14dp"
-                    android:orientation="horizontal"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:clickable="false"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="0dp"
+                    android:paddingBottom="14dp"
                     tools:ignore="RtlSymmetry">
+
                     <ImageView
+                        android:id="@+id/pOrbotSettingGear"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="-3dp"
                         android:layout_marginBottom="0dp"
                         android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:focusable="false"
                         android:paddingTop="2dp"
-                        android:layout_marginTop="-3dp"
                         android:scaleType="fitCenter"
                         android:src="@xml/ic_gear"
-                        android:contentDescription="@string/GENERAL_TODO"
                         app:tint="@color/c_navigation_tint" />
 
                     <TextView
-                        android:textSize="14sp"
+                        android:id="@+id/pOrbotSettingNavigationHeader"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="1dp"
-                        android:textColor="@color/c_text_v1"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_weight="40"
                         android:text="@string/ORBOT_SETTING_CUSTOM_BRIDGE"
-                        />
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="14sp" />
 
                     <ImageView
+                        android:id="@+id/pOrbotSettingNavigation"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginBottom="0dp"
                         android:layout_marginTop="-4dp"
-                        android:clickable="false"
-                        android:scaleType="fitCenter"
-                        android:padding="2dp"
-                        android:src="@xml/ic_arrow_right"
                         android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="0dp"
+                        android:clickable="false"
                         android:contentDescription="@string/GENERAL_TODO"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@xml/ic_arrow_right"
                         app:tint="@color/c_navigation_tint" />
 
                 </LinearLayout>
 
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@xml/ox_rounded_corner_warning"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:id="@+id/pOrbotSettingWarningHeader"
                         android:layout_width="match_parent"
-                        android:layout_marginEnd = "10dp"
-                        android:layout_marginStart = "15dp"
-                        android:paddingTop="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="15dp"
-                        android:paddingBottom="12dp"
-                        android:background="@xml/ox_rounded_corner_warning"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="40"
+                        android:paddingEnd="7dp"
+                        android:text="@string/ORBOT_SETTING_WARNING"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
                     <TextView
-                            android:textSize="16sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:paddingEnd="7dp"
-                            android:layout_weight="40"
-                            android:layout_marginStart="8dp"
-                            android:textColor="@color/c_text_v1"
-                            android:textStyle="bold"
-                            android:text="@string/ORBOT_SETTING_WARNING"
-                            />
-                    <TextView
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/c_text_v2"
-                            android:paddingEnd="8dp"
-                            android:text="@string/ORBOT_BRIDGE_WARNING"
-                            tools:ignore="RtlSymmetry" />
+                        android:id="@+id/pOrbotSettingWarningInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="@string/ORBOT_SETTING_BRIDGE_WARNING"
+                        android:textColor="@color/c_text_v2"
+                        android:textSize="14sp"
+                        tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
             </LinearLayout>

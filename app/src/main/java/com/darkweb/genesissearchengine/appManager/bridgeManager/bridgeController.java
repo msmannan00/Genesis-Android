@@ -31,19 +31,19 @@ import java.util.List;
 
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_BRIDGE_MAIL;
 
-public class bridgeController extends AppCompatActivity {
+public class bridgeController extends AppCompatActivity implements View.OnFocusChangeListener, TextWatcher {
 
 
     /*Private Variables*/
     private bridgeModel mBridgeModel;
     private bridgeViewController mBridgeViewController;
 
-    private RadioButton mBridgeObfs;
-    private RadioButton mBridgeChina;
-    private RadioButton mBridgeCustom;
-    private EditText mCustomPort;
-    private Button mBridgeButton;
-    private ImageView mCustomBridgeBlocker;
+    private RadioButton mBridgeSettingObfs;
+    private RadioButton mBridgeSettingBridgeChina;
+    private RadioButton mBridgeSettingBridgeCustom;
+    private EditText mBridgeSettingCustomPort;
+    private Button mBridgeSettingBridgeRequest;
+    private ImageView mBridgeSettingCustomBridgeBlocker;
 
     /*Initializations*/
 
@@ -56,7 +56,6 @@ public class bridgeController extends AppCompatActivity {
 
         initializeAppModel();
         initializeConnections();
-        initializeLocalEventHandlers();
     }
 
     @Override
@@ -79,44 +78,48 @@ public class bridgeController extends AppCompatActivity {
 
     public void initializeConnections()
     {
-        mBridgeObfs = findViewById(R.id.pBridgeObfs);
-        mBridgeChina = findViewById(R.id.pBridgeChina);
-        mCustomPort = findViewById(R.id.pCustomPort);
-        mBridgeButton = findViewById(R.id.pBridgeButton);
-        mBridgeCustom = findViewById(R.id.pBridgeCustom);
-        mCustomBridgeBlocker = findViewById(R.id.pCustomBridgeBlocker);
+        mBridgeSettingObfs = findViewById(R.id.pBridgeSettingObfs);
+        mBridgeSettingBridgeChina = findViewById(R.id.pBridgeSettingBridgeChina);
+        mBridgeSettingCustomPort = findViewById(R.id.pBridgeSettingCustomPort);
+        mBridgeSettingBridgeRequest = findViewById(R.id.pBridgeSettingBridgeRequest);
+        mBridgeSettingBridgeCustom = findViewById(R.id.pBridgeSettingBridgeCustom);
+        mBridgeSettingCustomBridgeBlocker = findViewById(R.id.pBridgeSettingCustomBridgeBlocker);
 
-        mBridgeViewController.initialization(mCustomPort, mBridgeButton,this, mBridgeObfs, mBridgeChina, mBridgeCustom, mCustomBridgeBlocker);
+        mBridgeSettingCustomPort.setOnFocusChangeListener(this);
+        mBridgeSettingCustomPort.addTextChangedListener(this);
+
+        mBridgeViewController.initialization(mBridgeSettingCustomPort, mBridgeSettingBridgeRequest,this, mBridgeSettingObfs, mBridgeSettingBridgeChina, mBridgeSettingBridgeCustom, mBridgeSettingCustomBridgeBlocker);
         mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,0,status.sBridgeCustomType));
         mBridgeModel = new bridgeModel(new bridgeController.bridgeModelCallback(), this);
     }
 
-    private void initializeLocalEventHandlers()
-    {
-        mCustomPort.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
+
+    /*Local Listeners*/
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(view.getId() == R.id.pBridgeSettingCustomPort){
+            if (!b) {
                 helperMethod.hideKeyboard(this);
             }
-        });
+        }
+    }
 
-        mCustomPort.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
-            }
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
-            }
+    }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length()<=5){
-                    mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
-                }
-            }
-        });
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if(!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length()<=5){
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
+        }
     }
 
     /* VIEW LISTENERS */
@@ -125,8 +128,33 @@ public class bridgeController extends AppCompatActivity {
         helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
     }
 
-    public void onOpenCustomBridgeUpdater(View view) {
-        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_UPDATE_BRIDGES);
+    public void onClose(View view){
+        finish();
+    }
+
+    public void onUITrigger(View view){
+        if(view.getId() == R.id.pBridgeSettingCustomPort){
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_UPDATE_BRIDGES);
+        }
+        else if(view.getId() == R.id.pBridgeSettingCustomBridgeBlocker){
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE,null);
+        }
+        else if(view.getId() == R.id.pBridgeSettingBridgeRequest){
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_REQUEST_BRIDGE, null);
+            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
+        }
+        else if(view.getId() == R.id.pBridgeSettingOption2){
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
+        }
+        else if(view.getId() == R.id.pBridgeSettingOption1){
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
+        }
+        else if(view.getId() == R.id.pBridgeSettingOption3){
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE,null);
+        }
+
     }
 
     /* EXTERNAL LISTENERS */
@@ -148,7 +176,7 @@ public class bridgeController extends AppCompatActivity {
 
     public class bridgeModelCallback implements eventObserver.eventListener{
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
+        public Object invokeObserver(List<Object> pData, Object pCommands)
         {
             return null;
         }
@@ -193,28 +221,4 @@ public class bridgeController extends AppCompatActivity {
         finish();
     }
 
-
-
-    /*Helper Method*/
-
-    public void onClose(View view){
-        finish();
-    }
-
-    public void onCustomChecked(View view) {
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE,null);
-    }
-
-    public void requestBridges(View view){
-        mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_REQUEST_BRIDGE, null);
-        pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
-    }
-    public void onMeekChecked(View view){
-        mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
-    }
-    public void onObfsChecked(View view){
-        mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
-    }
 }

@@ -29,10 +29,6 @@
 	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">A könyvjelzővel ellátott URL neve itt jelenik meg Írja be a könyvjelző nevét…</string>
 	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
 
-	<!-- Bookmark Alerts -->
-	<string name="HOME_MENU__BOOKMARK_REMOVED" translatable="true">A könyvjelző eltávolítva</string>
-	<string name="HOME_MENU__BOOKMARK_UPDATE" translatable="true">A könyvjelző frissül</string>
-
 	<!-- Alerts General -->
 	<string name="ALERT_DISMISS" translatable="true">elbocsátani</string>
 
@@ -63,12 +59,110 @@
 	<string name="ORBOT_LOG" translatable="true">proxy naplók</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Rendszernapló információ</string>
 	<string name="ORBOT_LOG_INFO" translatable="true">Ha kapcsolódási problémával néz szembe az Genesis indítása közben, kérjük, másolja a következő kódot, és keresse meg online a problémát, vagy küldje el nekünk, így megpróbálhatunk segíteni</string>
-	<string name="ORBOT_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
 
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">proxy testreszabása</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">csatlakoztatjuk Önt a Tor hálózathoz, amelyet önkéntesek ezrei üzemeltetnek a világ minden tájáról! Segíthetnek ezek a lehetőségek</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">itt cenzúrázzák az internetet (bypass tűzfal)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">bypass tűzfal</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">A Bridges miatt az internet nagyon lassan fut. csak akkor használja őket, ha az internetet cenzúrázzák az Ön országában, vagy ha a Tor hálózat le van tiltva</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">biztonság testreszabása</string>
 
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Biztonsági Beállítások</string>
+	<string name="BRIDGE_SETTING" translatable="true">Módosítsa A "BRIDGE" Beállításokat</string>
+	<string name="BRIDGE_AUTO" translatable="true">Automatikus Létrehozás</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">A "BRIDGE" beállítások automatikus konfigurálása</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Adj egy "BRIDGE", amit tudok</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Illessze be az egyéni "BRIDGE"</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">A "BRIDGE" a tőzsdén nem jegyzett Tor relék, amelyek megnehezítik a Tor hálózathoz való csatlakozások blokkolását. Mivel egyes országok megpróbálják blokkolni a Tor -t, bizonyos "BRIDGE" működik bizonyos országokban, mások nem.</string>
+	<string name="BRIDGE_TITLE" translatable="true">Válassza az Alapértelmezett "BRIDGE"</string>
+	<string name="BRIDGE_REQUEST" translatable="true">lehetőséget Kérés</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Ajánlott)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Szelídezöld (Kína)</string>
 
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">megváltoztathatja a rendszernapló megjelenésének módját</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">show Napló modern listanézet segítségével</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">váltson a klasszikus és a modern listanézet között</string>
 
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Könyvjelző eltávolítva</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Könyvjelző frissítve</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Az adatok sikeresen törölve</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL a vágólapra másolva</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Nem található alkalmazás</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">A változtatások után újra kell indítani</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Újraindítás</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">A Lap Bezárva</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Új lap megnyílt</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy összekötő ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">A memória megtelt ➔ Törlés fül</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Előugró ablak</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Hiba Naplók Megnyitása</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Váltás</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Visszavonás</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Új identitás létrehozva</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">nyisd meg a beállításokat</string>
 
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Új Kérés Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Válassza ki az alábbi e-mailt az Bridge-es cím kéréséhez. Ha megvan a címe, másolja ki és illessze be a fenti mezőbe, és indítsa el az alkalmazást.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">Sajnálom, Hogy Hallom, Hogy</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Ha problémái vannak az alkalmazás használata során, kérjük, vegye fel velünk a kapcsolatot e -mailben. Igyekszünk mihamarabb megoldani a problémát</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">HIBAELHÁRÍTÁS</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Állítsa vissza az alkalmazást, ha nem működik. Megpróbáljuk újrakonfigurálni, hogy újra működjön.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Visszaállítás</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Elvetés</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Várakozás a letöltésre ...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Letöltés</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Értékeljen Minket</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Mondja el másoknak, mit gondol erről az alkalmazásról</string>
+	<string name="ALERT_RATE" translatable="true">Értékelés</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Kész</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge karakterlánc (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge típus (obfs4, szelíd, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Könyvjelző Weboldal</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Adja hozzá ezt az oldalt a könyvjelzőihez</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">könyvjelző neve ...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Kész</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">URL -értesítés</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Megnyitás új Lapon</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Megnyitás Az Aktuális Lapon</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Másolás a vágólapra</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Fájl Letöltése</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Nyissa meg az URL -t az új lapon</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">URL megnyitása az aktuális lapon</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URL másolása a vágólapra</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Nyissa meg a képet az új lapon</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">A kép aktuális lapjának megnyitása</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Kép másolása a vágólapra</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Képfájl letöltése</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">adja meg az Ön által ismert Bridge-est</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">adja meg bridge információt megbízható forrásból</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">kérés</string>
 
 
 
@@ -107,9 +201,6 @@
 	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">helyi értesítések</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">testreszabhatja a szoftveres értesítéseket</string>
 	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">a rendszer értesítései</string>
-	<string name="SETTING_ORBOT_LOG_HEADER" translatable="true">megváltoztathatja a rendszernapló megjelenésének módját</string>
-	<string name="SETTING_ORBOT_LIST_VIEW" translatable="true">show Napló modern listanézet segítségével</string>
-	<string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">váltson a klasszikus és a modern listanézet között</string>
 	<string name="SETTING_SEARCH" translatable="true">a keresőmotor kezelése</string>
 	<string name="SETTING_SEARCH_INFO" translatable="true">add, alapértelmezett beállítás. javaslatok megjelenítése</string>
 	<string name="SETTING_NOTIFICATION" translatable="true">értesítések kezelése</string>
@@ -247,35 +338,20 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">távolítsa el a böngésző testreszabását</string>
 
 
-	<string name="ALERT_UPDATE_BRIDGES" translatable="true">adja meg az Ön által ismert Bridge-est</string>
-	<string name="ALERT_UPDATE_BRIDGES_INFO" translatable="true">adja meg bridge információt megbízható forrásból</string>
 	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-	<string name="ALERT_REQUEST_BRIDGE" translatable="true">kérés</string>
-	<string name="ALERT_SAVE_BRIDGE" translatable="true">ok</string>
 
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">könyvjelző weboldal</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">adja hozzá ezt az oldalt a könyvjelzőihez</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">törölje a böngészett weblinkeket és az adatokat</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">törölje a könyvjelzőt és az adatokat</string>
 	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">az adatok törlése eltávolítja a böngészett weblinkeket, sütiket és egyéb böngészési adatokat</string>
 	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">adatok törlésével a könyvjelzővel ellátott webhelyek is törlődnek</string>
 	<string name="ALERT_CLEAR" translatable="true">megszünteti</string>
-	<string name="ALERT_ADD" translatable="true">ok</string>
-	<string name="ALERT_TITLE_ADD" translatable="true">új könyvjelző</string>
 	<string name="ALERT_SECURE" translatable="false">https://</string>
 	<string name="ALERT_REPORT" translatable="true">jelentés</string>
 	<string name="ALERT_REPORT_URL" translatable="true">jelentés honlapja</string>
 	<string name="ALERT_REPORT_URL_INFO" translatable="true">ha úgy gondolja, hogy ez az URL illegális vagy zavaró, jelezze nekünk, hogy jogi lépéseket tegyünk</string>
 	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">sikeresen jelentették</string>
 	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">Az URL-t sikeresen jelentették. ha valamit találnak, jogi lépéseket tesznek</string>
-	<string name="ALERT_RATEUS" translatable="true">értékelj minket</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">mondja el másoknak, mit gondol erről az alkalmazásról</string>
-	<string name="ALERT_RATE" translatable="true">mérték</string>
-	<string name="ALERT_RATEUS_FAILURE" translatable="true">sajnáljuk, hogy ezt hallottuk!</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">ha nehézségei vannak a szoftver használata közben, kérjük, forduljon hozzánk e-mailben. megpróbáljuk a lehető leghamarabb megoldani a problémáját</string>
-	<string name="ALERT_MAIL" translatable="true">levél</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">kérjen új Bridge-et</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">válasszon e-mailt bridge-as cím kéréséhez. miután megkapta, másolja és illessze be a fenti mezőbe, és indítsa el a szoftvert.</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">a nyelv nem támogatott</string>
 	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">a rendszer nyelvét ez a szoftver nem támogatja. azon dolgozunk, hogy hamarosan felvegyük</string>
 	<string name="ALERT_ORBOT_INIT" translatable="true">inicializálása Orbot</string>
@@ -292,42 +368,15 @@
 	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">társadalmi társadalmak</string>
 	<string name="ALERT_LOCAL_UPGRADE" translatable="true">kézikönyv</string>
 	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">A Play Áruház</string>
-	<string name="ALERT_LONG_URL" translatable="true">weblink értesítés</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">új lapon nyissa meg</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">nyissa meg az aktuális lapon</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">másolja a vágólapra</string>
 	<string name="ALERT_LONG_FILE" translatable="true">fájl értesítés</string>
 	<string name="ALERT_DOWNLOAD" translatable="true">letöltési értesítés</string>
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">nyissa meg az URL-t az új lapon</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">nyissa meg az URL-t az aktuális fülön</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">másolja az URL-t a vágólapra</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">kép megnyitása új lapon</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">kép megnyitása az aktuális fülön</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">másolja a képet a vágólapra</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">képfájl letöltése</string>
 	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">letöltési értesítés</string>
 	<string name="ALERT_LONG_URL_TITLE" translatable="true">weblink értesítés</string>
 	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
 	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">nem található szoftver az e-mailek kezelésére</string>
 	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">fájl letöltése |</string>
 	<string name="ALERT_DATA_CLEARED" translatable="true">adatok törölve | újraindítás szükséges</string>
-	<string name="ALERT_DATA_CLEARED_INFO" translatable="true">a magánadatok sikeresen törölve. egyes alapértelmezett rendszerbeállítások esetén a szoftver újra kell indulnia. most már nyugodtan folytathatja a böngészést</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_INFO" translatable="true">fül zárva</string>
-	<string name="ALERT_UNDO_TAB_REMOVE_BUTTON" translatable="true">visszavonás</string>
 
-
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">biztonság testreszabása</string>
-	<string name="BRIDGE_SETTING" translatable="true">Bridge testreszabása</string>
-	<string name="BRIDGE_AUTO" translatable="true">automatikusan létrehozni</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">automatikusan konfigurálja a bridge testreszabást</string>
-	<string name="BRIDGE_MANUAL" translatable="true">adjon meg egy bridge-at, amelyet ismer</string>
-	<string name="BRIDGE_PORT_HINT" translatable="true">illessze be az egyedi bridge</string>
-	<string name="BRIDGE_HEADER" translatable="true">proxy testreszabása | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">A Bridges nem jegyzett Tor relé, amely megnehezíti a Tor hálózatba való kapcsolatok blokkolását. mivel egyes országok megpróbálják blokkolni a Tor-ot, bizonyos országok bridges-ösek működnek egyes országokban, mások viszont nem</string>
-	<string name="BRIDGE_TITLE" translatable="true">válassza az alapértelmezett bridge-at</string>
-	<string name="BRIDGE_REQUEST" translatable="true">kérés</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (ajánlott)</string>
-	<string name="BRIDGE_MEEK" translatable="false">meek-azure (china)</string>
 
 
 
@@ -410,11 +459,6 @@
 	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">a proxyt megváltoztathatja a szoftver újraindításával és a proxy-kezelőhöz. alul található fogaskerék ikonra kattintva nyitható meg</string>
 
 
-	<string name="ORBOT_HEADER" translatable="true">proxy testreszabása</string>
-	<string name="ORBOT_DESCRIPTION" translatable="true">csatlakoztatjuk Önt a Tor hálózathoz, amelyet önkéntesek ezrei üzemeltetnek a világ minden tájáról! Segíthetnek ezek a lehetőségek</string>
-	<string name="ORBOT_TITLE" translatable="true">itt cenzúrázzák az internetet (bypass tűzfal)</string>
-	<string name="ORBOT_OPTION_DESCRIPTION" translatable="true">bypass tűzfal</string>
-	<string name="ORBOT_BRIDGE_WARNING" translatable="true">A Bridges miatt az internet nagyon lassan fut. csak akkor használja őket, ha az internetet cenzúrázzák az Ön országában, vagy ha a Tor hálózat le van tiltva</string>
 
 
 	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">alapértelmezett.jpg</string>

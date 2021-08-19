@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.pluginManager.messagePluginManager;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -16,7 +17,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -36,11 +39,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import static com.darkweb.genesissearchengine.constants.constants.*;
+import static com.darkweb.genesissearchengine.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE;
+import static com.darkweb.genesissearchengine.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE_STRING;
+import static com.darkweb.genesissearchengine.constants.strings.GENERIC_EMPTY_DOT;
 import static com.darkweb.genesissearchengine.constants.strings.MESSAGE_PLAYSTORE_NOT_FOUND;
+import static com.darkweb.genesissearchengine.constants.strings.MESSAGE_SECURE_ONION_SERVICE;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_BOOKMARK;
 
-public class messageManager
+public class messageManager implements View.OnClickListener, DialogInterface.OnDismissListener
 {
     /*Private Variables*/
 
@@ -48,6 +56,7 @@ public class messageManager
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
     private Dialog mDialog = null;
+    private pluginEnums.eMessageManagerCallbacks mCallbackInstance;
 
     /*Initializations*/
 
@@ -56,8 +65,20 @@ public class messageManager
             mDialog.dismiss();
         }
         if(mContext != null){
-            mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            mEvent.invokeObserver(null, M_ADJUST_INPUT_RESIZE);
             mContext = null;
+        }
+    }
+
+    private void onDismiss(){
+        if(mContext!=null && !mContext.isFinishing() && !mContext.isDestroyed()){
+            mDialog.dismiss();
+        }
+    }
+
+    void onReset(){
+        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog!=null && mDialog.isShowing()){
+            mDialog.dismiss();
         }
     }
 
@@ -83,7 +104,9 @@ public class messageManager
         mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
         mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
 
-        mDialog.show();
+        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing()){
+            mDialog.show();
+        }
     }
 
     public messageManager(eventObserver.eventListener event)
@@ -93,268 +116,48 @@ public class messageManager
 
     /*Helper Methods*/
 
-    private void languageSupportFailure()
-    {
-        initializeDialog(R.layout.popup_language_support, Gravity.CENTER);
-        // ((TextView) mDialog.findViewById(R.id.pLanguage)).setText((mData.get(0).toString()));
-        mDialog.findViewById(R.id.pDismiss).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.setOnDismissListener(dialog -> onClearReference());
-    }
-
     private void rateFailure()
     {
         initializeDialog(R.layout.popup_rate_failure, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            mDialog.dismiss();
-            final Handler handler = new Handler();
-            Runnable runnable = () -> {
-                try{
-                    helperMethod.sendIssueEmail(mContext);
-                }
-                catch (Exception ex)
-                {
-                    onTrigger(Arrays.asList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE), mContext),M_NOT_SUPPORTED);
-                    onClearReference();
-                }
-            };
-            handler.postDelayed(runnable, 1000);
-        });
+
+        Button mPopupRateFailureDismiss = mDialog.findViewById(R.id.pPopupRateFailureDismiss);
+        Button mPopupRateFailureNext = mDialog.findViewById(R.id.pPopupRateFailureNext);
+
+        mPopupRateFailureDismiss.setOnClickListener(this);
+        mPopupRateFailureNext.setOnClickListener(this);
     }
 
-    private void newIdentityCreated()
+    private void onShowToast(int pLayout,int pBackground ,int pDelay, String pInfo, String pTriggerText, pluginEnums.eMessageManagerCallbacks pCallback)
     {
-        initializeDialog(R.layout.popup_new_circuit, Gravity.BOTTOM);
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 1500);
-    }
-
-    private void mDownloadFailure()
-    {
-        mContext.runOnUiThread(() -> {
-            initializeDialog(R.layout.popup_download_failure, Gravity.BOTTOM);
-            final Handler handler = new Handler();
-            Runnable runnable = () -> mDialog.dismiss();
-
-            String mMessage;
-            if(mData == null || mData.get(0) == null || (mData.get(0)).equals("0")){
-                mMessage = "\"Unknown\"";
-            }else {
-                mMessage = (String) mData.get(0);
-            }
-            ((TextView)mDialog.findViewById(R.id.pOrbotRowDescription)).setText(("Request denied Error  " + mMessage));
-            mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-
-            mDialog.setOnDismissListener(dialog -> {
-                handler.removeCallbacks(runnable);
-                onClearReference();
-            });
-
-            handler.postDelayed(runnable, 20000);
-
-        });
-    }
-
-    private void popupBlocked()
-    {
-        initializeDialog(R.layout.popup_block_popup, Gravity.BOTTOM);
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        mDialog.findViewById(R.id.pOpenPrivacy).setOnClickListener(v -> {
-            mEvent.invokeObserver(null, M_OPEN_PRIVACY);
-            mDialog.dismiss();
-            handler.removeCallbacks(runnable);
-        });
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 1500);
-    }
-
-    private void popupLoadNewTab()
-    {
-        initializeDialog(R.layout.popup_load_new_tab, Gravity.BOTTOM);
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
+        initializeDialog(pLayout, Gravity.BOTTOM);
         mDialog.getWindow().setDimAmount(0.3f);
-        mDialog.findViewById(R.id.pRestore).setOnClickListener(v -> {
-            mEvent.invokeObserver(null, M_UNDO_SESSION);
-            mDialog.dismiss();
-            handler.removeCallbacks(runnable);
+        mCallbackInstance = pCallback;
+
+        ConstraintLayout mPopupToastContainer = mDialog.findViewById(R.id.pPopupToastContainer);
+        TextView mPopupToastInfo = mDialog.findViewById(R.id.pPopupToastInfo);
+        Button mPopupToastNext = mDialog.findViewById(R.id.pPopupToastTrigger);
+
+        mPopupToastInfo.setText(pInfo);
+        mPopupToastNext.setText(pTriggerText);
+        mPopupToastNext.setOnClickListener(this);
+        mDialog.setOnDismissListener(this);
+        mPopupToastContainer.setBackground(helperMethod.getDrawableXML(mContext, pBackground));
+
+        helperMethod.onDelayHandler(mContext, pDelay, () -> {
+            onDismiss();
+            return null;
         });
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 1500);
-    }
-
-    private void popupUndo()
-    {
-        initializeDialog(R.layout.popup_undo, Gravity.BOTTOM);
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        mDialog.getWindow().setDimAmount(0.3f);
-        mDialog.findViewById(R.id.pUndo).setOnClickListener(v -> {
-            mEvent.invokeObserver(null, M_UNDO_TAB);
-            mDialog.dismiss();
-            handler.removeCallbacks(runnable);
-        });
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 1500);
-    }
-
-    private void onShowToast(int mLayout, int mDelay, String mInfo, String mTriggerText, pluginEnums.eMessageManagerCallbacks pCallback)
-    {
-        initializeDialog(mLayout, Gravity.BOTTOM);
-        ((TextView)mDialog.findViewById(R.id.pOrbotRowDescription)).setText(mInfo);
-        ((Button)mDialog.findViewById(R.id.pTrigger)).setText(mTriggerText);
-        mDialog.getWindow().setDimAmount(0.3f);
-
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
-            if(pCallback == null){
-                mEvent.invokeObserver(null, M_UNDO_TAB);
-                mDialog.dismiss();
-                handler.removeCallbacks(runnable);
-            }
-            else {
-                mDialog.dismiss();
-                mEvent.invokeObserver(Collections.singletonList(mContext), pCallback);
-            }
-        });
-
-        handler.postDelayed(runnable, mDelay);
-    }
-
-    private void onShowToastWithCallback(int mLayout, int mDelay, String mInfo, String mTriggerText, pluginEnums.eMessageManagerCallbacks pCallback)
-    {
-        initializeDialog(mLayout, Gravity.BOTTOM);
-        ((TextView)mDialog.findViewById(R.id.pOrbotRowDescription)).setText(mInfo);
-        ((Button)mDialog.findViewById(R.id.pTrigger)).setText(mTriggerText);
-        mDialog.getWindow().setDimAmount(0.3f);
-
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
-            if(pCallback == null){
-                mEvent.invokeObserver(null, M_UNDO_TAB);
-                mDialog.dismiss();
-                handler.removeCallbacks(runnable);
-            }
-        });
-
-        handler.postDelayed(runnable, mDelay);
-    }
-
-    private void maxTabReached()
-    {
-        initializeDialog(R.layout.popup_max_tab, Gravity.BOTTOM);
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
-
-        mDialog.getWindow().setDimAmount(0);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
-            mDialog.dismiss();
-            handler.removeCallbacks(runnable);
-        });
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 1500);
-
-    }
-
-    private void notSupportMessage()
-    {
-        initializeDialog(R.layout.popup_not_supported, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(view -> mDialog.dismiss());
-        mDialog.setOnDismissListener(dialog -> onClearReference());
-
-        final Handler handler = new Handler();
-        Runnable runnable = () -> {
-            if(mDialog!=null){
-                mDialog.dismiss();
-                onClearReference();
-            }
-        };
-        handler.postDelayed(runnable, 2500);
     }
 
     private void onPanic(){
         initializeDialog(R.layout.popup_panic, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.setOnDismissListener(dialog -> onClearReference());
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            mDialog.dismiss();
-            mEvent.invokeObserver(null, M_PANIC_RESET);
-        });
-    }
 
-    private void orbotLoading()
-    {
-        initializeDialog(R.layout.popup_orbot_connecting, Gravity.BOTTOM);
-        final Handler handler = new Handler();
-        Runnable runnable = () -> mDialog.dismiss();
+        Button mPopupRateFailureDismiss = mDialog.findViewById(R.id.pPopupPanicDismiss);
+        Button mPopupRateFailureNext = mDialog.findViewById(R.id.pPopupPanicReset);
 
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            mDialog.dismiss();
-            handler.removeCallbacks(runnable);
-            mEvent.invokeObserver(null, M_OPEN_LOGS);
-        });
-
-        mDialog.setOnDismissListener(dialog -> {
-            handler.removeCallbacks(runnable);
-            onClearReference();
-        });
-
-        handler.postDelayed(runnable, 5000);
-
-    }
-
-    private void applicationCrashed()
-    {
-        initializeDialog(R.layout.application_crash, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.setOnDismissListener(dialog -> onClearReference());
+        mPopupRateFailureDismiss.setOnClickListener(this);
+        mPopupRateFailureNext.setOnClickListener(this);
+        mDialog.setOnDismissListener(this);
     }
 
     private void openSecurityInfo()
@@ -365,33 +168,111 @@ public class messageManager
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
-        ((TextView)mDialog.findViewById(R.id.pCertificateDesciption)).setText(Html.fromHtml((String)mData.get(0)));
-        mDialog.findViewById(R.id.pCertificateRootBackground).animate().setStartDelay(100).setDuration(400).alpha(1);
+        TextView mCertificateDesciption = mDialog.findViewById(R.id.pCertificateDesciption);
+        ImageView mCertificateRootBackground = mDialog.findViewById(R.id.pCertificateRootBackground);
+        ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
+        ImageView mCertificateRootBlocker = mDialog.findViewById(R.id.pCertificateRootBlocker);
 
-        if(mInfo.equals("Onion Secured Connection")){
-            ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
+        mCertificateDesciption.setText(Html.fromHtml((String)mData.get(0)));
+        mCertificateRootBackground.animate().setStartDelay(100).setDuration(400).alpha(1);
 
+        mDialog.setOnDismissListener(this);
+        mCertificateRootBackground.setOnClickListener(this);
+        mCertificateDesciption.setOnClickListener(this);
+
+        if(mInfo.equals(MESSAGE_SECURE_ONION_SERVICE)){
             ViewGroup.LayoutParams params = mCertificateScrollView.getLayoutParams();
             params.height = helperMethod.pxFromDp(60);
             mCertificateScrollView.requestLayout();
             mCertificateScrollView.requestDisallowInterceptTouchEvent(false);
         }else {
-            mDialog.findViewById(R.id.pCertificateRootBlocker).setVisibility(View.GONE);
+            mCertificateRootBlocker.setVisibility(View.GONE);
         }
+    }
 
+    private void rateApp()
+    {
+        initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
+        mDialog.setCancelable(false);
 
-        mDialog.findViewById(R.id.pCertificateDesciption).setOnClickListener(v -> {
-            mDialog.findViewById(R.id.pCertificateRootBackground).animate().setDuration(150).alpha(0);
-            mDialog.dismiss();
-        });
+        Button mPopupRateusNext = mDialog.findViewById(R.id.pPopupRateusNext);
+        Button mPopupRateusDismiss = mDialog.findViewById(R.id.pPopupRateusDismiss);
 
-        mDialog.findViewById(R.id.pCertificateRootBackground).setOnClickListener(v -> {
-            mDialog.dismiss();
-        });
+        mPopupRateusNext.setOnClickListener(this);
+        mPopupRateusDismiss.setOnClickListener(this);
+    }
 
-        mDialog.setOnDismissListener(dialogInterface -> {
-            mDialog.findViewById(R.id.pCertificateRootBlocker).animate().setDuration(200).alpha(0);
-        });
+    private void sendBridgeMail()
+    {
+        initializeDialog(R.layout.popup_bridge_mail, Gravity.BOTTOM);
+
+        ConstraintLayout mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pBridgeMailPopupDismiss);
+        Button mBridgeMailPopupNext = mDialog.findViewById(R.id.pBridgeMailPopupNext);
+
+        mBridgeMailPopupDismiss.setOnClickListener(this);
+        mBridgeMailPopupNext.setOnClickListener(this);
+    }
+
+    private void bookmark()
+    {
+        initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER);
+        mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+
+        TextView mPopupCreateBookmarkURL = mDialog.findViewById(R.id.pPopupCreateBookmarkURL);
+        Button mPopupCreateBookmarkDismiss = mDialog.findViewById(R.id.pPopupCreateBookmarkDismiss);
+        Button mPopupCreateBookmarkNext = mDialog.findViewById(R.id.pPopupCreateBookmarkNext);
+
+        mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
+        String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION,CONST_GENESIS_ONION_V2);
+        mPopupCreateBookmarkURL.setText(mURL);
+
+        mDialog.setOnDismissListener(this);
+        mPopupCreateBookmarkDismiss.setOnClickListener(this);
+        mPopupCreateBookmarkNext.setOnClickListener(this);
+    }
+
+    private void onUpdateBridges()
+    {
+        initializeDialog(R.layout.popup_bridge_setting_custom, Gravity.CENTER);
+        mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+
+        String mCustomBridge = (String) mEvent.invokeObserver(null, M_CUSTOM_BRIDGE);
+        String mBridgeType = (String) mEvent.invokeObserver(null, M_BRIDGE_TYPE);
+        EditText mBridgeSettingCustomInput = mDialog.findViewById(R.id.pBridgeSettingCustomInput);
+        EditText mBridgeSettingBridgeType = mDialog.findViewById(R.id.pBridgeSettingBridgeType);
+        Button mBridgeSettingCustomRequest = mDialog.findViewById(R.id.pBridgeSettingCustomRequest);
+        ImageButton mBridgeSettingCustomClear = mDialog.findViewById(R.id.pBridgeSettingCustomClear);
+        Button mBridgeSettingCustomNext = mDialog.findViewById(R.id.pBridgeSettingCustomNext);
+
+        mDialog.setOnDismissListener(this);
+        mBridgeSettingCustomRequest.setOnClickListener(this);
+        mBridgeSettingCustomClear.setOnClickListener(this);
+        mBridgeSettingCustomNext.setOnClickListener(this);
+        mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
+
+        if(!mCustomBridge.equals("meek") && !mCustomBridge.equals("obfs4")){
+            mBridgeSettingCustomInput.setText(mCustomBridge);
+            mBridgeSettingBridgeType.setText(mBridgeType);
+        }
+    }
+
+    private void downloadSingle()
+    {
+        if(mData.size()>0){
+            initializeDialog(R.layout.popup_download_url, Gravity.BOTTOM);
+
+            Button mDownloadPopuInfoNext = mDialog.findViewById(R.id.pDownloadPopuInfoNext);
+            Button mDownloadPopuInfoDismiss = mDialog.findViewById(R.id.pDownloadPopuInfoDismiss);
+            TextView mDownloadPopuInfo = mDialog.findViewById(R.id.pDownloadPopuInfo);
+            TextView mDownloadPopuInfoLong = mDialog.findViewById(R.id.pDownloadPopuInfoLong);
+
+            mDownloadPopuInfoDismiss.setOnClickListener(this);
+            mDownloadPopuInfoNext.setOnClickListener(this);
+            mDialog.setOnDismissListener(this);
+
+            mDownloadPopuInfo.setText(mData.get(0).toString());
+            mDownloadPopuInfoLong.setText(mData.get(2).toString());
+        }
     }
 
     private void openSecureConnectionPopup()
@@ -401,232 +282,38 @@ public class messageManager
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
+        ImageView pSecurePopupRootBlocker = mDialog.findViewById(R.id.pSecurePopupRootBlocker);
+        TextView pSecurePopupSubHeader = mDialog.findViewById(R.id.pSecurePopupSubHeader);
+        Button mSecurePopupCertificate = mDialog.findViewById(R.id.pSecurePopupCertificate);
+        Button mSecurePopupPrivacy = mDialog.findViewById(R.id.pSecurePopupPrivacy);
+        SwitchMaterial mSecureJavascriptStatus = mDialog.findViewById(R.id.pSecurePopupJavascriptStatus);
+        SwitchMaterial mSecureTrackingStatus = mDialog.findViewById(R.id.pSecurePopupTrackingStatus);
+        SwitchMaterial mSecureTrackingProtectionStatus = mDialog.findViewById(R.id.pSecurePopupTrackingProtectionStatus);
 
-        mDialog.findViewById(R.id.pSecureRootBlocker).animate().setStartDelay(100).setDuration(400).alpha(1);
-        ((TextView) mDialog.findViewById(R.id.pSecureSubHeader)).setText(helperMethod.getDomainName(mData.get(0).toString().replace("genesishiddentechnologies.com", "genesis.onion")));
-        mDialog.setOnDismissListener(dialog -> onClearReference());
+        pSecurePopupRootBlocker.animate().setStartDelay(100).setDuration(400).alpha(1);
+        pSecurePopupSubHeader.setText(helperMethod.getDomainName(mData.get(0).toString().replace("genesishiddentechnologies.com", "genesis.onion")));
+
+        mDialog.setOnDismissListener(this);
+        pSecurePopupRootBlocker.setOnClickListener(this);
+        mSecurePopupCertificate.setOnClickListener(this);
+        mSecurePopupPrivacy.setOnClickListener(this);
+
 
         if((boolean) mData.get(1)){
-            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureJavascriptStatus)).setChecked(true);
+            mSecureJavascriptStatus.setChecked(true);
         }else {
-            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureJavascriptStatus)).setChecked(false);
+            mSecureJavascriptStatus.setChecked(false);
         }
         if((boolean) mData.get(2)){
-            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingStatus)).setChecked(true);
+            mSecureTrackingStatus.setChecked(true);
         }else {
-            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingStatus)).setChecked(false);
+            mSecureTrackingStatus.setChecked(false);
         }
         if((int) mData.get(3) != ContentBlocking.AntiTracking.NONE){
-            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingProtectionStatus)).setChecked(true);
+            mSecureTrackingProtectionStatus.setChecked(true);
         }else {
-            ((SwitchMaterial) mDialog.findViewById(R.id.pSecureTrackingProtectionStatus)).setChecked(false);
+            mSecureTrackingProtectionStatus.setChecked(false);
         }
-
-        mDialog.findViewById(R.id.pSecureRootBlocker).setOnClickListener(v -> {
-            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(150).alpha(0);
-            mDialog.dismiss();
-        });
-
-        mDialog.findViewById(R.id.pSecureCertificate).setOnClickListener(v -> {
-            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(150).alpha(0);
-            mDialog.dismiss();
-            new Handler().postDelayed(() ->
-            {
-                mEvent.invokeObserver(null, M_SECURITY_INFO);
-            }, 500);
-        });
-
-        mDialog.findViewById(R.id.pSecurePrivacy).setOnClickListener(v -> {
-            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(150).alpha(0);
-            helperMethod.onDelayHandler(mContext, 250, () -> {
-                mEvent.invokeObserver(null, M_SECURE_CONNECTION);
-                mDialog.dismiss();
-                return null;
-            });
-        });
-
-        mDialog.setOnDismissListener(dialogInterface -> {
-            mDialog.findViewById(R.id.pSecureRootBlocker).animate().setDuration(200).alpha(0);
-        });
-    }
-
-    private void bookmark()
-    {
-        initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER);
-        mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-
-        mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
-        mDialog.setOnDismissListener(dialog -> {
-            final Handler handler = new Handler();
-            Runnable runnable = () -> {
-                helperMethod.hideKeyboard(mContext);
-                dialog.dismiss();
-                onClearReference();
-            };
-            handler.postDelayed(runnable, 50);
-        });
-
-        String pURL = mData.get(0).toString().replace("genesis.onion","genesishiddentechnologies.com");
-        ((TextView)mDialog.findViewById(R.id.pURL)).setText(pURL);
-
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> {
-            mDialog.dismiss();
-            helperMethod.hideKeyboard(mContext);
-        });
-
-
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            mDialog.dismiss();
-            helperMethod.hideKeyboard(mContext);
-            String mBookmarkName = ((EditText)mDialog.findViewById(R.id.pBookmarkNameInput)).getText().toString();
-            mEvent.invokeObserver(Arrays.asList(pURL, mBookmarkName), M_BOOKMARK);
-        });
-
-    }
-
-    private void onUpdateBridges()
-    {
-        String mCustomBridge = (String) mEvent.invokeObserver(null, M_CUSTOM_BRIDGE);
-        String mBridgeType = (String) mEvent.invokeObserver(null, M_BRIDGE_TYPE);
-
-        initializeDialog(R.layout.popup_update_bridges, Gravity.CENTER);
-        mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-        if(!mCustomBridge.equals("meek") && !mCustomBridge.equals("obfs4")){
-            ((EditText)mDialog.findViewById(R.id.pBridgeInput)).setText(mCustomBridge);
-            ((EditText)mDialog.findViewById(R.id.pBridgeType)).setText(mBridgeType);
-        }
-
-        mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
-        mDialog.setOnDismissListener(dialog -> {
-            final Handler handler = new Handler();
-            Runnable runnable = () -> {
-                helperMethod.hideKeyboard(mContext);
-                dialog.dismiss();
-                onClearReference();
-            };
-            handler.postDelayed(runnable, 50);
-        });
-        mDialog.findViewById(R.id.pBridgeRequest).setOnClickListener(v -> {
-            final Handler handler = new Handler();
-            Runnable runnable = () -> {
-                try{
-                    helperMethod.sendBridgeEmail(mContext);
-                }
-                catch (Exception ex){
-                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
-                }
-            };
-            handler.postDelayed(runnable, 200);
-        });
-
-        mDialog.findViewById(R.id.mClear).setOnClickListener(v -> {
-            EditText mBridges = mDialog.findViewById(R.id.pBridgeInput);
-            TextView mTextView = mDialog.findViewById(R.id.pDescriptionError);
-
-            mBridges.setText(strings.GENERIC_EMPTY_STR);
-            mTextView.animate().setDuration(250).alpha(0);
-        });
-
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            String mBridges = ((EditText)mDialog.findViewById(R.id.pBridgeInput)).getText().toString();
-
-            boolean mBridgeTypeExist = !mBridges.contains("obfs3") && !mBridges.contains("obfs4") && !mBridges.contains("fle") && !mBridges.contains("meek");
-            boolean mBridgeSize = mBridges.length()<10 || !mBridges.contains(".") || !mBridges.contains(" ");
-
-            if(mBridgeTypeExist || mBridgeSize){
-                TextView mTextView = mDialog.findViewById(R.id.pDescriptionError);
-                if(mTextView.getAlpha()==0 || mTextView.getAlpha()==1 || mTextView.getVisibility()!=View.VISIBLE){
-                    mTextView.setAlpha(0);
-
-                    mTextView.setVisibility(View.VISIBLE);
-                    mTextView.animate().setDuration(250).alpha(1);
-                    if(mBridgeTypeExist){
-                        mTextView.setText("➔  Invalid bridge string");
-                    }
-                    else if(mBridgeSize){
-                        mTextView.setText("➔  Invalid bridge type");
-                    }
-                }
-                return;
-            }
-
-            mDialog.dismiss();
-            mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-            helperMethod.hideKeyboard(mContext);
-            mEvent.invokeObserver(Arrays.asList(mBridges, ((EditText)mDialog.findViewById(R.id.pBridgeType)).getText().toString()), M_SET_BRIDGES);
-        });
-    }
-
-    private void clearHistory()
-    {
-        initializeDialog(R.layout.popup_clear_history, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            mDialog.dismiss();
-            mEvent.invokeObserver(null, M_CLEAR_HISTORY);
-        });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
-    }
-
-    private void clearBookmark()
-    {
-        initializeDialog(R.layout.popup_clear_bookmark, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            mEvent.invokeObserver(null, M_CLEAR_BOOKMARK);
-            mDialog.dismiss();
-        });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
-    }
-
-    private void downloadSingle()
-    {
-        if(mData.size()>0){
-            initializeDialog(R.layout.popup_download_url, Gravity.BOTTOM);
-            String murl = mData.get(2).toString();
-
-            if(!murl.startsWith("http")){
-                murl = "https://" + murl;
-            }
-
-            ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText(mData.get(0).toString());
-            ((TextView) mDialog.findViewById(R.id.pDescriptionLong)).setText(murl);
-            mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-            mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-                mDialog.dismiss();
-                final Handler handler = new Handler();
-                Runnable runnable = () -> {
-                    mEvent.invokeObserver(mData, M_DOWNLOAD_SINGLE);
-                };
-                handler.postDelayed(runnable, 1000);
-                onClearReference();
-            });
-            mDialog.setOnDismissListener(dialog -> onClearReference());
-        }
-    }
-
-    private void rateApp()
-    {
-        initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
-        mDialog.setCancelable(false);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            RatingBar mRatingBar = mDialog.findViewById(R.id.pRating);
-            if(mRatingBar.getRating()>=3){
-                mEvent.invokeObserver(null, M_APP_RATED);
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CONST_PLAYSTORE_URL));
-                try {
-                    mContext.startActivity(intent);
-                } catch (Exception ignored) {
-                    helperMethod.showToastMessage(MESSAGE_PLAYSTORE_NOT_FOUND, mContext);
-                }
-
-                mDialog.dismiss();
-            }else if(mRatingBar.getRating()>0) {
-                mEvent.invokeObserver(null, M_APP_RATED);
-                final Handler handler = new Handler();
-                handler.postDelayed(() -> onTrigger(Arrays.asList(strings.GENERIC_EMPTY_STR, mContext),M_RATE_FAILURE), 1000);
-                mDialog.dismiss();
-            }
-        });
     }
 
     private void
@@ -637,80 +324,65 @@ public class messageManager
         }
 
         String title = mData.get(2).toString();
-
         if(title.length()>0){
             title = title + " | ";
         }
 
         initializeDialog(R.layout.popup_file_longpress, Gravity.CENTER);
-        ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText((title + mData.get(0).toString()));
-        mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_DOWNLOAD_FILE_MANUAL);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption4).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
+
+        TextView mPopupLongPressDescription = mDialog.findViewById(R.id.pPopupLongPressDescription);
+        ImageView mPopupLongPressImage = mDialog.findViewById(R.id.pPopupLongPressImage);
+        Button mPopupLongPressDismiss = mDialog.findViewById(R.id.pPopupLongPressDismiss);
+        LinearLayout mPopupLongPressOptionDownload = mDialog.findViewById(R.id.pPopupLongPressOptionDownload);
+        LinearLayout mPopupLongPressOptionNewTab = mDialog.findViewById(R.id.pPopupLongPressOptionNewTab);
+        LinearLayout mPopupLongPressOptionCurrentTab = mDialog.findViewById(R.id.pPopupLongPressOptionCurrentTab);
+        LinearLayout mPopupLongPressOptionCopy = mDialog.findViewById(R.id.pPopupLongPressOptionCopy);
+
+        mPopupLongPressDescription.setText((title));
+        mEvent.invokeObserver(Arrays.asList((mPopupLongPressImage), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
+
+        mDialog.setOnDismissListener(this);
+        mPopupLongPressDismiss.setOnClickListener(this);
+
+        if(mData!=null){
+            mPopupLongPressOptionDownload.setOnClickListener(this);
+            mPopupLongPressOptionNewTab.setOnClickListener(this);
+            mPopupLongPressOptionCurrentTab.setOnClickListener(this);
+            mPopupLongPressOptionCopy.setOnClickListener(this);
+        }
     }
 
     private void openURLLongPress()
     {
         String title = mData.get(2).toString();
-
         initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
-        ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText((title + mData.get(0)));
-        mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
+        TextView mPopupURLLongPressHeader = (TextView)mDialog.findViewById(R.id.pPopupURLLongPressHeader);
+        ImageView mPopupURLLongPressImage = mDialog.findViewById(R.id.pPopupURLLongPressImage);
+        LinearLayout mPopupURLLongPressNewTab = mDialog.findViewById(R.id.pPopupURLLongPressNewTab);
+        LinearLayout mPopupURLLongPressCurrentTab = mDialog.findViewById(R.id.pPopupURLLongPressCurrentTab);
+        LinearLayout mPopupURLLongPressClipboard = mDialog.findViewById(R.id.pPopupURLLongPressClipboard);
+        Button mPopupURLLongPressDismiss = mDialog.findViewById(R.id.pPopupURLLongPressDismiss);
+
+        mPopupURLLongPressHeader.setText((title + mData.get(0)));
+        mEvent.invokeObserver(Arrays.asList(mPopupURLLongPressImage, helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
+
+        mDialog.setOnDismissListener(this);
+        if(mData!=null){
+            mPopupURLLongPressNewTab.setOnClickListener(this);
+            mPopupURLLongPressCurrentTab.setOnClickListener(this);
+            mPopupURLLongPressClipboard.setOnClickListener(this);
+            mPopupURLLongPressDismiss.setOnClickListener(this);
+        }
     }
 
     private void popupDownloadFull(){
         String url = mData.get(0).toString();
         String file = mData.get(2).toString();
         String title = mData.get(3).toString();
-        String altText = strings.GENERIC_EMPTY_STR;
-        String mDescription = strings.GENERIC_EMPTY_STR;
+        String mDescription;
         String mDescriptionShort = strings.GENERIC_EMPTY_STR;
 
-        String data_local = mContext.getString(R.string.ALERT_LONG_URL_MESSAGE);
+        String data_local = strings.GENERIC_EMPTY_STR;
 
         if(!url.equals(strings.GENERIC_EMPTY_STR)){
             data_local = title + url;
@@ -718,10 +390,7 @@ public class messageManager
         else if(!file.equals(strings.GENERIC_EMPTY_STR)){
             data_local = file;
         }
-        String mTitle = title;
-        if(mTitle.length()<=1){
-            mTitle = mData.get(0).toString();
-        }
+
         if(mData.get(5) != null){
             mDescription = mData.get(5).toString();
             mDescriptionShort = data_local;
@@ -731,79 +400,273 @@ public class messageManager
 
 
         initializeDialog(R.layout.popup_download_full, Gravity.CENTER);
-        mEvent.invokeObserver(Arrays.asList(((ImageView) mDialog.findViewById(R.id.pFaviconLogo)), helperMethod.getDomainName(data_local)), enums.etype.fetch_favicon);
 
-        ((TextView) mDialog.findViewById(R.id.pOrbotRowDescription)).setText((mDescription));
-        ((TextView) mDialog.findViewById(R.id.pDescriptionShort)).setText((mDescriptionShort));
-        mDialog.findViewById(R.id.pOption1).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(url), M_OPEN_LINK_NEW_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption2).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(url), M_OPEN_LINK_CURRENT_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption3).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(url), M_COPY_LINK);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption4).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(file), M_OPEN_LINK_NEW_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption5).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(file), M_OPEN_LINK_CURRENT_TAB);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption6).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(file), M_COPY_LINK);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.findViewById(R.id.pOption7).setOnClickListener(v -> {
-            if(mData!=null){
-                mEvent.invokeObserver(Collections.singletonList(file), M_DOWNLOAD_FILE_MANUAL);
-                mDialog.dismiss();
-            }
-        });
-        mDialog.setOnDismissListener(dialog -> onClearReference());
+        TextView mPopupDownloadFullDescription = mDialog.findViewById(R.id.pPopupDownloadFullDescription);
+        TextView mPopupDownloadFullDescriptionShort = mDialog.findViewById(R.id.pPopupDownloadFullDescriptionShort);
+        LinearLayout mPopupDownloadFullNewTab = mDialog.findViewById(R.id.pPopupDownloadFullNewTab);
+        LinearLayout mPopupDownloadFullCurrentTab = mDialog.findViewById(R.id.pPopupDownloadFullCurrentTab);
+        LinearLayout mPopupDownloadFullCopy = mDialog.findViewById(R.id.pPopupDownloadFullCopy);
+        ImageView mPopupDownloadFullImage = mDialog.findViewById(R.id.pPopupDownloadFullImage);
+        LinearLayout mPopupDownloadFullImageNewTab = mDialog.findViewById(R.id.pPopupDownloadFullImageNewTab);
+        LinearLayout mPopupDownloadFullImageCurrentTab = mDialog.findViewById(R.id.pPopupDownloadFullImageCurrentTab);
+        LinearLayout mPopupDownloadFullImageCopy = mDialog.findViewById(R.id.pPopupDownloadFullImageCopy);
+        LinearLayout mPopupDownloadFullImageDownload = mDialog.findViewById(R.id.pPopupDownloadFullImageDownload);
+
+        mPopupDownloadFullDescription.setText((mDescription));
+        mPopupDownloadFullDescriptionShort.setText((mDescriptionShort));
+        mEvent.invokeObserver(Arrays.asList((mPopupDownloadFullImage), helperMethod.getDomainName(data_local)), enums.etype.fetch_favicon);
+
+        if(mData!=null){
+            mDialog.setOnDismissListener(this);
+            mPopupDownloadFullNewTab.setOnClickListener(this);
+            mPopupDownloadFullCurrentTab.setOnClickListener(this);
+            mPopupDownloadFullCopy.setOnClickListener(this);
+            mPopupDownloadFullImageNewTab.setOnClickListener(this);
+            mPopupDownloadFullImageCurrentTab.setOnClickListener(this);
+            mPopupDownloadFullImageCopy.setOnClickListener(this);
+            mPopupDownloadFullImageDownload.setOnClickListener(this);
+        }
     }
 
-    private void sendBridgeMail()
-    {
-        initializeDialog(R.layout.popup_bridge_mail, Gravity.BOTTOM);
-        mDialog.findViewById(R.id.pTrigger).setOnClickListener(v -> mDialog.dismiss());
-        mDialog.findViewById(R.id.pNext).setOnClickListener(v -> {
-            mDialog.dismiss();
-            final Handler handler = new Handler();
-            Runnable runnable = () -> {
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.pPopupToastTrigger ||
+           view.getId() == R.id.pBridgeMailPopupDismiss ||
+           view.getId() == R.id.pPopupRateFailureDismiss ||
+           view.getId() == R.id.pPopupPanicDismiss ||
+           view.getId() == R.id.pDownloadPopuInfoDismiss ||
+           view.getId() == R.id.pPopupURLLongPressDismiss ||
+           view.getId() == R.id.pPopupPanicReset ||
+           view.getId() == R.id.pPopupLongPressDismiss ||
+           view.getId() == R.id.pCertificateDesciption ||
+           view.getId() == R.id.pCertificateRootBackground ||
+           view.getId() == R.id.pPopupRateusDismiss
+        ){
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pDownloadPopuInfoNext){
+            onDismiss();
+            helperMethod.onDelayHandler(mContext, 1000, () -> {
+                mEvent.invokeObserver(mData, M_DOWNLOAD_SINGLE);
+                onClearReference();
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pPopupCreateBookmarkDismiss){
+            onDismiss();
+            helperMethod.hideKeyboard(mContext);
+        }
+        else if(view.getId() == R.id.pSecurePopupPrivacy){
+            mDialog.findViewById(R.id.pSecurePopupRootBlocker).animate().setDuration(150).alpha(0);
+            helperMethod.onDelayHandler(mContext, 250, () -> {
+                mEvent.invokeObserver(null, M_SECURE_CONNECTION);
+                onDismiss();
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pPopupLongPressOptionDownload){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_DOWNLOAD_FILE_MANUAL);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupLongPressOptionNewTab){
+            onDismiss();
+            helperMethod.onDelayHandler(mContext, 200, () -> {
+                mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pPopupURLLongPressNewTab){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupLongPressOptionCurrentTab){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupLongPressOptionCopy){
+            onDismiss();
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
+
+            helperMethod.onDelayHandler(mContext, 200, () -> {
+                onTrigger(mData, M_COPY);
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pSecurePopupRootBlocker){
+            ImageView mSecurePopupRootBlocker = mDialog.findViewById(R.id.pSecurePopupRootBlocker);
+            mSecurePopupRootBlocker.animate().setDuration(150).alpha(0);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pSecurePopupCertificate){
+            mDialog.findViewById(R.id.pSecurePopupRootBlocker).animate().setDuration(150).alpha(0);
+            onDismiss();
+            new Handler().postDelayed(() ->
+            {
+                mEvent.invokeObserver(null, M_SECURITY_INFO);
+            }, 500);
+        }
+        else if(view.getId() == R.id.pPopupCreateBookmarkNext){
+            onDismiss();
+            helperMethod.hideKeyboard(mContext);
+            EditText mPopupCreateBookmarkInput = mDialog.findViewById(R.id.pPopupCreateBookmarkInput);
+            String mBookmarkName = mPopupCreateBookmarkInput.getText().toString();
+            String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION,CONST_GENESIS_ONION_V2);
+            mEvent.invokeObserver(Arrays.asList(mURL, mBookmarkName), M_BOOKMARK);
+        }
+        else if(view.getId() == R.id.pPopupRateusNext){
+            RatingBar mPopupRateusRating = mDialog.findViewById(R.id.pPopupRateusRating);
+            if(mPopupRateusRating.getRating()>=3){
+                mEvent.invokeObserver(null, M_APP_RATED);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CONST_PLAYSTORE_URL));
+                try {
+                    mContext.startActivity(intent);
+                } catch (Exception ignored) {
+                    helperMethod.showToastMessage(MESSAGE_PLAYSTORE_NOT_FOUND, mContext);
+                }
+                onDismiss();
+            }else if(mPopupRateusRating.getRating()>0) {
+                mEvent.invokeObserver(null, M_APP_RATED);
+                final Handler handler = new Handler();
+                handler.postDelayed(() -> onTrigger(Arrays.asList(strings.GENERIC_EMPTY_STR, mContext),M_RATE_FAILURE), 1000);
+                onDismiss();
+            }
+        }
+        else if(view.getId() == R.id.pBridgeSettingCustomRequest){
+            helperMethod.onDelayHandler(mContext, 200, () -> {
                 try{
+                    onDismiss();
                     helperMethod.sendBridgeEmail(mContext);
                 }
                 catch (Exception ex){
                     onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
                 }
-            };
-            handler.postDelayed(runnable, 1000);
-        });
-    }
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pBridgeSettingCustomClear){
+            EditText mBridges = mDialog.findViewById(R.id.pBridgeSettingCustomInput);
+            TextView mTextView = mDialog.findViewById(R.id.pBridgeSettingCustomError);
 
-    void onReset(){
-        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog!=null && mDialog.isShowing()){
-            mDialog.dismiss();
+            mBridges.setText(strings.GENERIC_EMPTY_STR);
+            mTextView.animate().setDuration(250).alpha(0);
+        }
+        else if(view.getId() == R.id.pBridgeSettingCustomNext){
+            String mBridges = ((EditText)mDialog.findViewById(R.id.pBridgeSettingCustomInput)).getText().toString();
+
+            boolean mBridgeTypeExist = !mBridges.contains("obfs3") && !mBridges.contains("obfs4") && !mBridges.contains("fle") && !mBridges.contains("meek");
+            boolean mBridgeSize = mBridges.length()<10 || !mBridges.contains(GENERIC_EMPTY_DOT) || !mBridges.contains(strings.GENERIC_EMPTY_SPACE);
+
+            if(mBridgeTypeExist || mBridgeSize){
+                TextView mTextView = mDialog.findViewById(R.id.pBridgeSettingCustomError);
+                if(mTextView.getAlpha()==0 || mTextView.getAlpha()==1 || mTextView.getVisibility()!=View.VISIBLE){
+                    mTextView.setAlpha(0);
+
+                    mTextView.setVisibility(View.VISIBLE);
+                    mTextView.animate().setDuration(250).alpha(1);
+                    if(mBridgeTypeExist){
+                        mTextView.setText(BRIDGE_CUSTOM_INVALID_TYPE_STRING);
+                    }
+                    else if(mBridgeSize){
+                        mTextView.setText(BRIDGE_CUSTOM_INVALID_TYPE);
+                    }
+                }
+                return;
+            }
+
+            onDismiss();
+            mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            helperMethod.hideKeyboard(mContext);
+            mEvent.invokeObserver(Arrays.asList(mBridges, ((EditText)mDialog.findViewById(R.id.pBridgeSettingBridgeType)).getText().toString()), M_SET_BRIDGES);
+        }
+        else if(view.getId() == R.id.pPopupRateFailureNext){
+            onDismiss();
+            helperMethod.onDelayHandler(mContext, 1000, () -> {
+                try{
+                    onDismiss();
+                    helperMethod.sendIssueEmail(mContext);
+                }
+                catch (Exception ex)
+                {
+                    onTrigger(Arrays.asList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE), mContext),M_NOT_SUPPORTED);
+                    onClearReference();
+                }
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pBridgeMailPopupNext){
+            onDismiss();
+            helperMethod.onDelayHandler(mContext, 200, () -> {
+                try{
+                    onDismiss();
+                    helperMethod.sendBridgeEmail(mContext);
+                }
+                catch (Exception ex){
+                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
+                }
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pPopupURLLongPressCurrentTab){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupURLLongPressClipboard){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
+            onDismiss();
+
+            helperMethod.onDelayHandler(mContext, 200, () -> {
+                onTrigger(mData, M_COPY);
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pPopupDownloadFullNewTab){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString()), M_OPEN_LINK_NEW_TAB);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupDownloadFullCurrentTab){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString()), M_OPEN_LINK_CURRENT_TAB);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupDownloadFullCopy){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
+            onDismiss();
+
+            helperMethod.onDelayHandler(mContext, 200, () -> {
+                onTrigger(mData, M_COPY);
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pPopupDownloadFullImageNewTab){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(2).toString()), M_OPEN_LINK_NEW_TAB);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupDownloadFullImageCurrentTab){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(2).toString()), M_OPEN_LINK_CURRENT_TAB);
+            onDismiss();
+        }
+        else if(view.getId() == R.id.pPopupDownloadFullImageCopy){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(2)), M_COPY_LINK);
+            onDismiss();
+
+            helperMethod.onDelayHandler(mContext, 200, () -> {
+                onTrigger(mData, M_COPY);
+                return null;
+            });
+        }
+        else if(view.getId() == R.id.pPopupDownloadFullImageDownload){
+            mEvent.invokeObserver(Collections.singletonList(mData.get(2).toString()), M_DOWNLOAD_FILE_MANUAL);
+            onDismiss();
+        }
+        if(mCallbackInstance!=null){
+            mEvent.invokeObserver(null, mCallbackInstance);
         }
     }
+
+    @Override
+    public void onDismiss(DialogInterface dialogInterface) {
+        onClearReference();
+    }
+
 
     /*External Triggers*/
 
@@ -829,7 +692,7 @@ public class messageManager
 
                 case M_LANGUAGE_SUPPORT_FAILURE:
                     /*VERIFIED*/
-                    languageSupportFailure();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.ALERT_LANGUAGE_SUPPORT_FAILURE), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_BOOKMARK:
@@ -839,12 +702,12 @@ public class messageManager
 
                 case M_CLEAR_HISTORY:
                     /*VERIFIED*/
-                    clearHistory();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_HISTORY), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_BOOKMARK);
                     break;
 
                 case M_CLEAR_BOOKMARK:
                     /*VERIFIED*/
-                    clearBookmark();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_BOOKMARK_INFO), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_BOOKMARK);
                     break;
 
                 case M_RATE_APP:
@@ -874,17 +737,12 @@ public class messageManager
 
                 case M_NOT_SUPPORTED:
                     /*VERIFIED*/
-                    notSupportMessage();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.ALERT_NOT_SUPPORTED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_PANIC_RESET:
                     /*VERIFIED*/
                     onPanic();
-                    break;
-
-                case M_APPLICATION_CRASH:
-                    /*VERIFIED*/
-                    applicationCrashed();
                     break;
 
                 case M_SECURE_CONNECTION:
@@ -909,59 +767,70 @@ public class messageManager
 
                 case M_NEW_IDENTITY:
                     /*VERIFIED*/
-                    newIdentityCreated();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_NEW_CIRCUIT_CREATED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_DOWNLOAD_FAILURE:
                     /*VERIFIED*/
-                    mDownloadFailure();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, (String) mData.get(0), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_POPUP_BLOCKED:
                     /*VERIFIED*/
-                    popupBlocked();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_SETTING_PRIVACY_POPUP), mContext.getString(R.string.TOAST_ALERT_SETTING), M_OPEN_PRIVACY);
                     break;
 
                 case M_MAX_TAB_REACHED:
                     /*VERIFIED*/
-                    maxTabReached();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_MAX_TAB_POPUP), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_ORBOT_LOADING:
                     /*VERIFIED*/
-                    orbotLoading();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING), mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING_BUTTON), M_OPEN_LOGS);
                     break;
 
                 case M_LOAD_NEW_TAB:
                     /*VERIFIED*/
-                    popupLoadNewTab();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), M_UNDO_SESSION);
                     break;
 
                 case M_UNDO:
                     /*VERIFIED*/
-                    popupUndo();
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2500, mContext.getString(R.string.TOAST_ALERT_UNDO_INFO), mContext.getString(R.string.TOAST_ALERT_UNDO_TRIGGER), M_UNDO_TAB);
                     break;
 
                 case M_DATA_CLEARED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_data_cleared, 2500, mContext.getString(R.string.ALERT_DISMISS), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CLEARED_INFO), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_DELETE_BOOKMARK:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic, 2000, mContext.getString(R.string.HOME_MENU__BOOKMARK_REMOVED), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_REMOVED), mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
+                case M_COPY:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_URL_COPIED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_UPDATE_BOOKMARK:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic, 2000, mContext.getString(R.string.HOME_MENU__BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_IMAGE_UPDATE:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic, 4000, mContext.getString(R.string.ALERT_IMAGE_STATUS), mContext.getString(R.string.ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 4000, mContext.getString(R.string.TOAST_ALERT_IMAGE_STATUS), mContext.getString(R.string.TOAST_ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
+                    break;
+
+                case M_OPEN_ACTIVITY_FAILED:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_OPEN_ACTIVITY_FAILED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
             }
         }
     }
+
 }

@@ -104,6 +104,7 @@ public class NestedGeckoView extends GeckoView {
 
                 final boolean allowScroll = status.sFullScreenBrowsing && !status.sDisableExpandTemp && (mScrollOffsetRoot>0 && mScrollable || mForcedScroll || mBottomReached);
 
+
                 if (allowScroll && dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset)) {
                     deltaY -= mScrollConsumed[1];
                     event.offsetLocation(0, -mScrollOffset[1]);

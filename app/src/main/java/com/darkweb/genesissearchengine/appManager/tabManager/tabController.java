@@ -196,7 +196,7 @@ public class tabController extends Fragment
         mRemoveSelection = mRootView.findViewById(R.id.pRemoveSelection);
         mMenuButton = mRootView.findViewById(R.id.pMenuButton);
         mClearSelection = mRootView.findViewById(R.id.pClearSelection);
-        mPopupUndo = mRootView.findViewById(R.id.pPopupUndo);
+        //mPopupUndo = mRootView.findViewById(R.id.pPopupUndo);
         mSelectionCount = mRootView.findViewById(R.id.pSelectionCount);
         mBlocker = mRootView.findViewById(R.id.pSecureRootBlocker);
         mNestedScrollView = mRootView.findViewById(R.id.pNestedScroll);
@@ -261,7 +261,7 @@ public class tabController extends Fragment
     }
 
     public void onSwipeBounce(int mDuration){
-        if(!mClosed){
+        if(!mClosed && mRecycleView!=null){
             if(minScroll > maxScroll){
                 if(mScrollHandler!=null){
                     mScrollHandler.removeCallbacksAndMessages(null);
@@ -386,7 +386,7 @@ public class tabController extends Fragment
             return false;
         }
         mListModel.onTrigger(tabEnums.eModelCallback.M_REMOVE_TAB,Collections.singletonList(pIndex));
-        mListModel.getList().remove(pIndex);
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mListModel.getList().get(pIndex).getSession(), mListModel.getList().get(pIndex).getSession()));
         if(mListModel.getList().size()<1){
             mRecycleView.animate().setDuration(200).alpha(0).withEndAction(() -> {
                 if(pShowPopupOnClearAll){
@@ -473,7 +473,7 @@ public class tabController extends Fragment
         ArrayList<tabRowModel> mBackupIndex = (ArrayList<tabRowModel>)mListModel.onTrigger(tabEnums.eModelCallback.M_GET_BACKUP,null);
         for(int mCounter=0;mCounter<mBackupIndex.size();mCounter++){
             mBackupIndex.get(mCounter).getSession().closeSessionInstant();
-            dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mBackupIndex.get(mCounter).getSession(), mBackupIndex.get(mCounter).getmId()));
+            dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mBackupIndex.get(mCounter).getSession(), mBackupIndex.get(mCounter).getSession()));
         }
     }
 
@@ -514,18 +514,18 @@ public class tabController extends Fragment
         if(mSelectionSize >= mListModel.getList().size()){
             mRecycleView.animate().setDuration(200).alpha(0).withEndAction(() -> {
                 mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
+                onClearSelection(null);
             });
         }else {
             mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
+            onClearSelection(null);
         }
 
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_SELECTION, null);
 
 
         initTabCount(400);
-        onClearSelection(null);
         onShowUndoDialog();
-
     }
 
     public void onClearSelection(View view) {
@@ -657,7 +657,7 @@ public class tabController extends Fragment
                 initTabCount(400);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP)){
-                onInitRemoveView((Integer) data.get(0), false, (boolean)data.get(1));
+                onInitRemoveView((Integer) data.get(0), false, false);
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_UNDO_POPUP)){
                 onShowUndoDialog();
