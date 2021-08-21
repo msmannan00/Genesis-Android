@@ -5,10 +5,12 @@ import android.annotation.SuppressLint;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -16,6 +18,9 @@ import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.models.crawlerRowModel;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -37,6 +42,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.client.HttpClient;
+import ch.boye.httpclientandroidlib.client.methods.HttpPost;
+import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
 @SuppressLint("CommitPrefEdits")
 class crawlerDataModel
@@ -96,29 +106,40 @@ class crawlerDataModel
                             mTitle = doc.title();
                             mKeywords = metas.get("keywords");
 
+                            if(mDescription==null){
+                                mDescription = strings.GENERIC_EMPTY_null;
+                            }
+                            if(mTitle==null){
+                                mTitle = strings.GENERIC_EMPTY_null;
+                            }
+                            if(mKeywords==null){
+                                mKeywords = strings.GENERIC_EMPTY_null;
+                            }
+
+
                             if(mDescription.length()<200){
                                 Elements p= doc.getElementsByTag("h1");
                                 for (Element x: p) {
-                                    mDescription+= x.text();
+                                    mDescription+= " " + x.text();
                                 }
                             }
                             if(mDescription.length()<200){
                                 Elements p= doc.getElementsByTag("p");
                                 for (Element x: p) {
-                                    mDescription+= x.text();
+                                    mDescription+= " " + x.text();
                                 }
                             }
                             mDescription = mDescription.trim().replaceAll(" +", " ");
                             mDescription = mDescription.trim().replaceAll("\n", "");
 
                             if(mTitle!=null && mTitle.length()>500){
-                                mTitle.substring(0,500);
+                                mTitle = mTitle.substring(0,500);
                             }
                             if(mDescription!=null && mDescription.length()>1000){
-                                mDescription.substring(0,1000);
+                                mDescription = mDescription.substring(0,1000);
                             }
                             if(mKeywords!=null && mKeywords.length()>500){
-                                mKeywords.substring(0,500);
+                                mKeywords = mKeywords.substring(0,500);
                             }
                             if(mDescription.length()<=10){
                                 return;
@@ -141,6 +162,9 @@ class crawlerDataModel
                             }
                             mKeywords = URLEncoder.encode(mKeywords);
 
+                            mDescription = "Sad";
+                            mTitle = "asd";
+                            mKeywords = "asd";
                             String mURL_POST = "https://www.genesishiddentechnologies.com/update_cache?url="+mURL+"&key_word="+mKeywords+"&desc="+mDescription+"&title="+mTitle+"&s_type="+mtype;
 
                             StringRequest stringRequest = new StringRequest(Request.Method.GET, mURL_POST,
@@ -153,8 +177,6 @@ class crawlerDataModel
 
                             RequestQueue requestQueue = Volley.newRequestQueue(mContext);
                             requestQueue.add(stringRequest);
-
-
 
                         }
                     } catch (Exception ex) {

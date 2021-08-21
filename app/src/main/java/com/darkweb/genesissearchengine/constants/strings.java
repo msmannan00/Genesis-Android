@@ -45,6 +45,7 @@ public class strings
     public static final String GENERIC_EMPTY_STR = "";
     public static final String GENERIC_EMPTY_SPACE = " ";
     public static final String GENERIC_EMPTY_DOT = ".";
+    public static final String GENERIC_EMPTY_null = "null";
 
     /*Language Manager*/
     public static final String LANGUAGE_NOT_SUPPORTED = "is unsupported";

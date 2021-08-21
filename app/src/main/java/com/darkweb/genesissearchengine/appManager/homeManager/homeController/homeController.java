@@ -193,6 +193,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private boolean mSearchBarLoading = false;
     private boolean mSearchBarLoadingOpening = false;
     private boolean mSearchBarWasBackButtonPressed = false;
+    private boolean mWasEdittextChanged = false;
     private String mSearchBarPreviousText = strings.GENERIC_EMPTY_STR;
     private Handler mScrollHandler = null;
     private Runnable mScrollRunnable = null;
@@ -377,7 +378,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onUpdateBannerAdvert(){
         mHomeViewController.updateBannerAdvertStatus(true, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
-        mHomeViewController.initSearchEngineView();
+
+        new Handler().postDelayed(() ->
+        {
+            mHomeViewController.initSearchEngineView();
+        }, 100);
     }
 
     public void onLoadTabOnResume(){
@@ -864,7 +869,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE)
             {
                 onSearchBarInvoked(v);
-                mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true, false);
+                if(!mSearchBarPreviousText.equals(mSearchbar.getText())){
+                    mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true, false);
+                }
                 mHomeViewController.onClearSelections(true);
                 mGeckoClient.setLoading(true);
 
@@ -930,6 +937,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mWasEdittextChanged = true;
                 new Handler().postDelayed(() ->
                 {
                     String mText = mSearchbar.getText().toString();
@@ -946,6 +954,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                         }
                         if(mSearchBarLoadingOpening){
                             mSuggestions = (ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestions(dataEnums.eSuggestionCommands.M_GET_DEFAULT_SUGGESTION, Collections.singletonList(mText));
+                            mSearchBarPreviousText = mSearchbar.getText().toString();
                             mHomeViewController.onUpdateSearchEngineBar(true, 0);
                             onUpdateSuggestionList(mSuggestions);
                             mEdittextChanged.postDelayed(postToServerRunnable, 0);
@@ -953,7 +962,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                             mSearchBarLoading = false;
 
                             mEdittextChanged.removeCallbacks(postToServerRunnable);
-                            mSuggestions = (ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestions(dataEnums.eSuggestionCommands.M_GET_SUGGESTIONS, Collections.singletonList(mText));
+                            mSuggestions =     (ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestions(dataEnums.eSuggestionCommands.M_GET_SUGGESTIONS, Collections.singletonList(mText));
                             mEdittextChanged.postDelayed(postToServerRunnable, 150);
                             return;
                         }
@@ -994,6 +1003,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             status.sUIInteracted = true;
             if(!hasFocus)
             {
+                mWasEdittextChanged = false;
                 mSearchBarWasBackButtonPressed = true;
                 new Handler().postDelayed(() ->
                 {
@@ -1044,6 +1054,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onSearchBarInvoked(View view){
         String url = mGeckoClient.getSession().getCurrentURL();
+        if(!mSearchBarPreviousText.equals(mSearchbar.getText().toString())){
+            url = mSearchbar.getText().toString();
+        }else {
+            url = mGeckoClient.getSession().getCurrentURL();
+        }
+
         String validated_url = mHomeModel.urlComplete(url, mHomeModel.getSearchEngine());
         url = validated_url;
 
@@ -1087,7 +1103,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.getSession().setTheme(null);
         mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), true);
         mHomeViewController.onNewTabAnimation(Collections.singletonList(helperMethod.getDomainName(mHomeModel.getSearchEngine())), M_HOME_BUTTON_PRESSED);
-        mGeckoClient.onExtentionClicked();
     }
 
     /*TAB CONTROLLER EVENTS*/
@@ -1148,7 +1163,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.progressBarReset();
         mHomeViewController.onUpdateSearchBar(url,false,true, false);
         mGeckoClient.loadURL(url, mGeckoView, homeController.this);
-        Log.i("superman2222","superman2222");
         if(isRemovable){
             mGeckoClient.setRemovableFromBackPressed(true);
         }
@@ -1168,18 +1182,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mAppBar.setTag(R.id.expandableBar,false);
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView,false));
 
-        geckoSession mSession = mGeckoClient.getSession();
-        mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,true);
-        geckoSession mNewSession = mGeckoClient.getSession();
+        geckoSession mNewSession = mGeckoClient.initializeBackground(mGeckoView, new geckoViewCallback(), this,true);
+        onSaveCurrentTab(mNewSession,false);
 
-        mGeckoClient.initURL(url);
-        mGeckoClient.getSession().setURL(url);
-        onSaveCurrentTab(mGeckoClient.getSession(),false);
-        onLoadTab(mSession,false,false, false);
+        mNewSession.setURL(url);
         mHomeViewController.progressBarReset();
-
         initTabCountForced();
-        mHomeViewController.onUpdateSearchBar(mSession.getCurrentURL(),false,true, false);
         mNewSession.loadUri(url);
 
         mAppBar.setTag(R.id.expandableBar,true);
@@ -2402,6 +2410,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             else if(e_type.equals(enums.etype.ON_FIRST_PAINT)){
                 mHomeViewController.onFirstPaint();
+            }
+            else if(e_type.equals(enums.etype.ON_INVOKE_PARSER)){
                 mGeckoClient.onExtentionClicked();
             }
             else if(e_type.equals(enums.etype.ON_SESSION_REINIT)){

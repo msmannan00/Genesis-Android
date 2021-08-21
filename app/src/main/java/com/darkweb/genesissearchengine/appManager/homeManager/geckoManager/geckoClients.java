@@ -102,6 +102,17 @@ public class geckoClients
         onUpdateFont();
     }
 
+    public geckoSession initializeBackground(GeckoView geckoView, eventObserver.eventListener event, AppCompatActivity context, boolean isForced)
+    {
+        geckoSession mSessionTemp;
+        mSessionTemp = new geckoSession(new geckoViewClientCallback(),helperMethod.createRandomID(),context, geckoView);
+        mSessionTemp.open(mRuntime);
+        mSessionTemp.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
+        mSessionTemp.getSettings().setFullAccessibilityTree(true);
+        mSessionTemp.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
+        mSessionTemp.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        return mSessionTemp;
+    }
 
     public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         boolean mStatus = mSession.onValidateInitializeFromStartup();
@@ -632,7 +643,7 @@ public class geckoClients
                 if(e_type.equals(enums.etype.SESSION_ID)){
                     return mSession.getSessionID();
                 }
-                else if (mSessionID!=null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.M_RATE_COUNT) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
+                else if (mSessionID!=null && mSessionID.equals(data.get(1))  || e_type.equals(enums.etype.ON_INVOKE_PARSER) || e_type.equals(enums.etype.M_RATE_COUNT) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) ||e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url))
                 {
                     if(mSession!=null && mSession.isClosed()){
                         return null;

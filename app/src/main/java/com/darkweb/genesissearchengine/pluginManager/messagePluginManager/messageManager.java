@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.darkweb.genesissearchengine.constants.enums;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -57,6 +58,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
     private eventObserver.eventListener mEvent;
     private Dialog mDialog = null;
     private pluginEnums.eMessageManagerCallbacks mCallbackInstance;
+    private Handler mToastHandler = new Handler();
 
     /*Initializations*/
 
@@ -143,10 +145,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.setOnDismissListener(this);
         mPopupToastContainer.setBackground(helperMethod.getDrawableXML(mContext, pBackground));
 
-        helperMethod.onDelayHandler(mContext, pDelay, () -> {
+        mToastHandler.postDelayed(() ->
+        {
             onDismiss();
-            return null;
-        });
+        }, pDelay);
     }
 
     private void onPanic(){
@@ -672,6 +674,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
     public void onTrigger(List<Object> pData, pluginEnums.eMessageManager pEventType)
     {
+        mToastHandler.removeCallbacksAndMessages(null);
         if(!pEventType.equals(M_RATE_FAILURE) && !pEventType.equals(M_RATE_SUCCESS) && !pEventType.equals(M_NOT_SUPPORTED)){
             onClearReference();
             mData = null;
@@ -792,7 +795,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_LOAD_NEW_TAB:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), M_UNDO_SESSION);
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), null);
                     break;
 
                 case M_UNDO:

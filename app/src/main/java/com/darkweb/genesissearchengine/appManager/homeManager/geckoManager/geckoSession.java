@@ -384,6 +384,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
             }else {
                 if(progress==100){
+                    event.invokeObserver(Arrays.asList(mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_INVOKE_PARSER);
                     if(!mCurrentURL.contains("genesis") && helperMethod.getHost(mCurrentURL).contains(".onion")){
                         checkApplicationRate();
                     }

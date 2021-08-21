@@ -87,10 +87,6 @@ class tabDataModel
             if(mTabModel.getSession().getCurrentURL().equals("about:blank") || mTabModel.getSession().getCurrentURL().equals("$TITLE") || mTabModel.getSession().getCurrentURL().startsWith("http://loading") || mTabModel.getSession().getCurrentURL().startsWith("loading")){
                 return enums.AddTabCallback.TAB_ADDED;
             }
-
-            if(mTabModel.getmId()!=null){
-                //mExternalEvents.invokeObserver(Arrays.asList("REPLACE INTO tab(mid,date,title,url,theme) VALUES('"+ mTabModel.getmId() +"','" + m_date + "',?,?,?);",params), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
-            }
         }
         return enums.AddTabCallback.TAB_ADDED;
     }
@@ -338,7 +334,7 @@ class tabDataModel
         }
         else if(pCommands == dataEnums.eTabCommands.M_ADD_TAB){
             int mTabs = addTabs((geckoSession)pData.get(0), (boolean)pData.get(1));
-            activityContextManager.getInstance().getHomeController().initTabCountForced();
+            //activityContextManager.getInstance().getHomeController().initTabCountForced();
 
             return mTabs;
         }

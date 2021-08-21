@@ -83,7 +83,7 @@ public class keys
     public static final String EXTERNAL_SHORTCUT_COMMAND_NAVIGATE = "EXTERNAL_SHORTCUT_COMMAND";
 
     /*Admanager*/
-    public static final String ADMANAGER_APPID_KEY = "c122efbe224f46678800d2f73389d258";
+    public static final String ADMANAGER_APPID_KEY = "0ac59b0996d947309c33f59d6676399f";
 
 
 }

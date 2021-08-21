@@ -244,6 +244,8 @@ class homeViewController
 
                     mBannerAds.setMinimumHeight(mBannerAds.getHeight());
                     layoutParams.setMargins(0, mBannerAds.getHeight() + mTopBar.getHeight(), 0, 0);
+
+                    initTopBarPadding();
                 }else {
                     layoutParams.setMargins(0, helperMethod.pxFromDp(60), 0, 0);
                 }
@@ -258,29 +260,9 @@ class homeViewController
             return;
         }
         if(!status.sFullScreenBrowsing){
-            /*int paddingDp = 110;
-            if(isFullScreen){
-                paddingDp = 60;
-            }else {
-                if(mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-                    paddingDp = 0;
-                }else {
-                    mGeckoView.setPadding(0,0,0,0);
-                    View child = mAppBar.getChildAt(0);
-                    AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
-                    params.setScrollFlags(0);
-                    onFullScreen(false);
-                    return;
-                }
-            }
-            float density = mContext.getResources().getDisplayMetrics().density;
-            int paddingPixel = (int)(paddingDp * density);
-            mGeckoView.setPadding(0,0,0,paddingPixel);
 
-            View child = mAppBar.getChildAt(0);
-            AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
-            params.setScrollFlags(0);
-            onFullScreen(false);*/
+
+
         }else {
             int paddingDp = 0;
             if(isFullScreen){
@@ -1655,7 +1637,7 @@ class homeViewController
                         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
                         } else {
-                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(110));
+                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
                         }
                     }
                 }
@@ -1674,7 +1656,7 @@ class homeViewController
                         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
                         } else {
-                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + mBannerAds.getHeight() + 10));
+                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60) + mBannerAds.getHeight() + mTopBar.getHeight());
                         }
                     }
                 }
