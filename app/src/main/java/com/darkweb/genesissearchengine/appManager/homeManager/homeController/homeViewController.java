@@ -235,6 +235,7 @@ class homeViewController
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mSearchEngineBar.getLayoutParams();
             if(isLandscape){
                 layoutParams.setMargins(0, helperMethod.pxFromDp(60), 0, 0);
+                mGeckoView.setPadding(0,0,0,0);
             }else {
                 Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
                 if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
@@ -243,11 +244,12 @@ class homeViewController
                     int y = location[1];
 
                     mBannerAds.setMinimumHeight(mBannerAds.getHeight());
-                    layoutParams.setMargins(0, mBannerAds.getHeight() + mTopBar.getHeight(), 0, 0);
+                    layoutParams.setMargins(0, mBannerAds.getHeight() + mTopBar.getHeight(), 0, (mBannerAds.getHeight() + mTopBar.getHeight())*-1);
 
                     initTopBarPadding();
                 }else {
                     layoutParams.setMargins(0, helperMethod.pxFromDp(60), 0, 0);
+                    mGeckoView.setPadding(0,0,0,0);
                 }
             }
             mSearchEngineBar.setLayoutParams(layoutParams);
@@ -260,9 +262,6 @@ class homeViewController
             return;
         }
         if(!status.sFullScreenBrowsing){
-
-
-
         }else {
             int paddingDp = 0;
             if(isFullScreen){
@@ -695,12 +694,14 @@ class homeViewController
         mSplashScreen.setVisibility(View.GONE);
         mSplashScreen.setVisibility(View.GONE);
         mBlocker.setEnabled(false);
+        disableCoordinatorSwipe();
     }
 
     private boolean mIsAnimating = false;
     public void splashScreenDisable(){
         mTopBar.setAlpha(1);
         mGeckoView.setVisibility(View.VISIBLE);
+        disableCoordinatorSwipe();
 
         if(mSplashScreen.getAlpha()==1){
             if(!mIsAnimating){
@@ -1205,6 +1206,7 @@ class homeViewController
     public void onUpdateSearchEngineBar(boolean pStatus, int delay)
     {
         if(pStatus){
+            initSearchEngineView();
             if(mSearchEngineBar.getAlpha() == 0 || mSearchEngineBar.getVisibility() == View.GONE && mSplashScreen.getAlpha()<=0){
                 onUpdateStatusBarTheme(null, false);
                 mSearchEngineBar.animate().cancel();
@@ -1353,18 +1355,17 @@ class homeViewController
     }
 
     public void onNewTabAnimation(List<Object> data, Object e_type){
-        mGeckoView.setPivotX(0);
-        mGeckoView.setPivotY(0);
 
-        if(mGeckoView.getAlpha()<1 || mGeckoView.getTranslationX()<0){
+        if(mNewTabBlocker.getAlpha()!=0){
             return;
         }
 
-        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView,
-                PropertyValuesHolder.ofFloat("translationX", 0, helperMethod.pxFromDp(-50)));
+        mGeckoView.setPivotX(0);
+        mGeckoView.setPivotY(0);
+
         mNewTabBlocker.setVisibility(View.VISIBLE);
-        ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mNewTabBlocker,
-                PropertyValuesHolder.ofFloat("alpha", 0, 1f));
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView, PropertyValuesHolder.ofFloat("translationX", 0, helperMethod.pxFromDp(-50)));
+        ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mNewTabBlocker, PropertyValuesHolder.ofFloat("alpha", 0, 1f));
 
         scaleDown.setDuration(150);
         alpha.setDuration(150);
@@ -1630,7 +1631,7 @@ class homeViewController
             if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
                 if(mCurrentURL!=null){
                     String mURL = (String) mCurrentURL;
-                    if((wasErrorPage!=null && (boolean)wasErrorPage) || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mURL.contains("genesishiddentechnologies.com")  || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                    if((wasErrorPage!=null && (boolean)wasErrorPage)){
                         mWebviewContainer.setPadding(0,0,0,0);
                     }else {
                         int orientation = mContext.getResources().getConfiguration().orientation;
@@ -1649,7 +1650,7 @@ class homeViewController
             if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
                 if(mCurrentURL!=null){
                     String mURL = (String) mCurrentURL;
-                    if((wasErrorPage!=null && (boolean)wasErrorPage) || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mURL.contains("genesishiddentechnologies.com")  || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                    if((wasErrorPage!=null && (boolean)wasErrorPage)){
                         mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
                     }else {
                         int orientation = mContext.getResources().getConfiguration().orientation;

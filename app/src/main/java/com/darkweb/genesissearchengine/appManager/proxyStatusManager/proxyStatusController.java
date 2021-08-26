@@ -4,10 +4,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.constants.constants;
@@ -19,7 +17,6 @@ import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +35,9 @@ public class proxyStatusController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
+        if(!status.sSettingIsAppStarted){
+            overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.proxy_status_view);
@@ -93,7 +92,9 @@ public class proxyStatusController extends AppCompatActivity {
     public void onClose(View view){
         finish();
         activityContextManager.getInstance().onRemoveStack(this);
-        overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
+        if(!status.sSettingIsAppStarted){
+            overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
+        }
     }
 
     /* LOCAL OVERRIDES */

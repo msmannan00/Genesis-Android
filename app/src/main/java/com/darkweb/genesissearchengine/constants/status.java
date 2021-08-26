@@ -134,6 +134,10 @@ public class status
         status.sTabGridLayoutEnabled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID,true));
         status.sGlobalURLCount = (int)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, 0));
         status.sAppInstalled = (boolean)dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_INSTALLED,false));
+
+        if(status.sGlobalURLCount <=10 && status.sGlobalURLCount>=8){
+            status.sGlobalURLCount = 6;
+        }
     }
 
 }

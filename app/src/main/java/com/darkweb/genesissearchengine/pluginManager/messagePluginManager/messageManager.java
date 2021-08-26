@@ -48,6 +48,7 @@ import static com.darkweb.genesissearchengine.constants.strings.MESSAGE_SECURE_O
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_BOOKMARK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_LOAD_NEW_TAB;
 
 public class messageManager implements View.OnClickListener, DialogInterface.OnDismissListener
 {
@@ -208,7 +209,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
     {
         initializeDialog(R.layout.popup_bridge_mail, Gravity.BOTTOM);
 
-        ConstraintLayout mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pBridgeMailPopupDismiss);
+        Button mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pBridgeMailPopupDismiss);
         Button mBridgeMailPopupNext = mDialog.findViewById(R.id.pBridgeMailPopupNext);
 
         mBridgeMailPopupDismiss.setOnClickListener(this);
@@ -438,7 +439,6 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
            view.getId() == R.id.pPopupPanicDismiss ||
            view.getId() == R.id.pDownloadPopuInfoDismiss ||
            view.getId() == R.id.pPopupURLLongPressDismiss ||
-           view.getId() == R.id.pPopupPanicReset ||
            view.getId() == R.id.pPopupLongPressDismiss ||
            view.getId() == R.id.pCertificateDesciption ||
            view.getId() == R.id.pCertificateRootBackground ||
@@ -454,6 +454,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 return null;
             });
         }
+        else if(view.getId() == R.id.pPopupPanicReset){
+            onDismiss();
+            mEvent.invokeObserver(mData, M_PANIC_RESET);
+            onClearReference();
+        }
         else if(view.getId() == R.id.pPopupCreateBookmarkDismiss){
             onDismiss();
             helperMethod.hideKeyboard(mContext);
@@ -461,7 +466,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         else if(view.getId() == R.id.pSecurePopupPrivacy){
             mDialog.findViewById(R.id.pSecurePopupRootBlocker).animate().setDuration(150).alpha(0);
             helperMethod.onDelayHandler(mContext, 250, () -> {
-                mEvent.invokeObserver(null, M_SECURE_CONNECTION);
+                mEvent.invokeObserver(null, M_OPEN_PRIVACY);
                 onDismiss();
                 return null;
             });
@@ -660,7 +665,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
         }
         if(mCallbackInstance!=null){
-            mEvent.invokeObserver(null, mCallbackInstance);
+            mEvent.invokeObserver(mData, mCallbackInstance);
         }
     }
 
@@ -674,6 +679,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
     public void onTrigger(List<Object> pData, pluginEnums.eMessageManager pEventType)
     {
+        mCallbackInstance = null;
         mToastHandler.removeCallbacksAndMessages(null);
         if(!pEventType.equals(M_RATE_FAILURE) && !pEventType.equals(M_RATE_SUCCESS) && !pEventType.equals(M_NOT_SUPPORTED)){
             onClearReference();
@@ -795,7 +801,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_LOAD_NEW_TAB:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), null);
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), M_LOAD_NEW_TAB);
                     break;
 
                 case M_UNDO:
@@ -826,6 +832,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 case M_IMAGE_UPDATE:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 4000, mContext.getString(R.string.TOAST_ALERT_IMAGE_STATUS), mContext.getString(R.string.TOAST_ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
+                    break;
+
+                case M_OPEN_CICADA:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CICADA), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_OPEN_ACTIVITY_FAILED:

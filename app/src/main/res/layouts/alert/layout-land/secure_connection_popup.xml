@@ -7,7 +7,7 @@
     android:layout_height="2000dp">
 
     <ImageView
-        android:id="@+id/pSecureRootBlocker"
+        android:id="@+id/pSecurePopupRootBlocker"
         android:layout_width="0dp"
         android:layout_height="2000dp"
         android:alpha="0"
@@ -56,7 +56,7 @@
             tools:ignore="RtlSymmetry" />
 
         <TextView
-            android:id="@+id/pSecureSubHeader"
+            android:id="@+id/pSecurePopupSubHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -149,7 +149,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pSecureJavascriptStatus"
+                    android:id="@+id/pSecurePopupJavascriptStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -214,7 +214,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pSecureTrackingStatus"
+                    android:id="@+id/pSecurePopupTrackingStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -278,7 +278,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pSecureTrackingProtectionStatus"
+                    android:id="@+id/pSecurePopupTrackingProtectionStatus"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -313,7 +313,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pSecureInfo">
 
             <Button
-                android:id="@+id/pSecurePrivacy"
+                android:id="@+id/pSecurePopupPrivacy"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="43dp"
@@ -335,7 +335,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/pSecureCertificate"
+                android:id="@+id/pSecurePopupCertificate"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="43dp"

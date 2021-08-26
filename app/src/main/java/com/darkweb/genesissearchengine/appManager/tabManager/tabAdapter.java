@@ -1,6 +1,7 @@
 package com.darkweb.genesissearchengine.appManager.tabManager;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -261,12 +262,14 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         FrameLayout mItemSelectionMenu;
         Button mItemSelectionMenuButton;
         ConstraintLayout mItemSelectionMenuReference;
+        ImageView mLogo;
         ImageView mBorder;
 
         listViewHolder(View itemView) {
             super(itemView);
         }
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         void bindListView(tabRowModel model) {
             mHeader = itemView.findViewById(R.id.pOrbotRowHeader);
             mDescription = itemView.findViewById(R.id.pOrbotRowDescription);
@@ -279,6 +282,10 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             mItemSelectionMenuButton = itemView.findViewById(R.id.pItemSelectionMenuButton);
             mItemSelectionMenuReference = itemView.findViewById(R.id.pRowContainer);
             mBorder = itemView.findViewById(R.id.pBorder);
+
+            if(status.sTabGridLayoutEnabled){
+                mLogo = itemView.findViewById(R.id.pLogo);
+            }
 
             itemView.setScaleX(1);
             itemView.setScaleY(1);
@@ -335,6 +342,17 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
                 String mHeadText = mHeader.getText().toString();
                 String mDescText = mDescription.getText().toString();
+
+                if(status.sTabGridLayoutEnabled){
+                    if(model.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || model.getSession().getCurrentURL().contains("genesis.onion")){
+                        mLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                    }
+                    else{
+                        if(mLogo.getDrawable() == null){
+                            mEvent.invokeObserver(Arrays.asList(mLogo, "https://" + helperMethod.getDomainName(model.getSession().getCurrentURL())), enums.etype.fetch_favicon);
+                        }
+                    }
+                }
 
                 if(mHeadText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")){
                     mHeader.setText("about:blank");
@@ -400,19 +418,33 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 CardView mLayout = itemView.findViewById(R.id.pTABRowContainer);
                 CardView mCardView = itemView.findViewById(R.id.pCardViewParent);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLayout.getLayoutParams();
+                ViewGroup.MarginLayoutParams params_main = (ViewGroup.MarginLayoutParams) mItemSelectionMenuReference.getLayoutParams();
+
+                params_main.leftMargin = helperMethod.pxFromDp(2f);
+                params_main.rightMargin = helperMethod.pxFromDp(2f);
+                params_main.topMargin = helperMethod.pxFromDp(2f);
+                params_main.bottomMargin = helperMethod.pxFromDp(0f);
 
                 if(getLayoutPosition() == 0){
-                    params.leftMargin = helperMethod.pxFromDp(2.5f);
-                    params.rightMargin = helperMethod.pxFromDp(2.5f);
-                    params.topMargin = helperMethod.pxFromDp(2.5f);
-                    params.bottomMargin = helperMethod.pxFromDp(2.5f);
+                    params.leftMargin = helperMethod.pxFromDp(3.5f);
+                    params.rightMargin = helperMethod.pxFromDp(3.5f);
+                    params.topMargin = helperMethod.pxFromDp(3.5f);
+                    params.bottomMargin = helperMethod.pxFromDp(3.5f);
+                    params_main.topMargin = helperMethod.pxFromDp(3f);
+                    //params_main.bottomMargin = helperMethod.pxFromDp(1f);
 
                     if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
                         mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_button_text_v1_inverted));
                     }else {
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_text_color_highlight_v2));
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_alert_rateus_header));
                     }
+
+                    //params_main.leftMargin = helperMethod.pxFromDp(9f);
                 }else {
+
+                    if(getLayoutPosition() == 0){
+                        //params_main.rightMargin = helperMethod.pxFromDp(9f);
+                    }
 
                     if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
                         params.leftMargin = helperMethod.pxFromDp(2.5f);
@@ -422,14 +454,32 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
                         mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_tab_background));
                     }else {
-                        params.leftMargin = helperMethod.pxFromDp(0f);
-                        params.rightMargin = helperMethod.pxFromDp(0f);
-                        params.topMargin = helperMethod.pxFromDp(0f);
-                        params.bottomMargin = helperMethod.pxFromDp(0f);
+                        params.leftMargin = helperMethod.pxFromDp(2.5f);
+                        params.rightMargin = helperMethod.pxFromDp(2.5f);
+                        params.topMargin = helperMethod.pxFromDp(2.5f);
+                        params.bottomMargin = helperMethod.pxFromDp(2.5f);
 
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_orbot_setting_divider));
+                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.clear_alpha));
+                    }
+
+                    if(getLayoutPosition() == 1){
+                        //params_main.leftMargin = helperMethod.pxFromDp(3f);
+                        //params_main.rightMargin = helperMethod.pxFromDp(9f);
+                        //params_main.topMargin = helperMethod.pxFromDp(14f);
+                        //params_main.bottomMargin = helperMethod.pxFromDp(1f);
+                    }else {
+                        if(getLayoutPosition()%2==0){
+                            //params_main.leftMargin = helperMethod.pxFromDp(9f);
+                            //params_main.rightMargin = helperMethod.pxFromDp(3f);
+                            //params_main.topMargin = helperMethod.pxFromDp(3f);
+                        }else {
+                            //params_main.leftMargin = helperMethod.pxFromDp(3f);
+                            //params_main.rightMargin = helperMethod.pxFromDp(9f);
+                            //params_main.topMargin = helperMethod.pxFromDp(3f);
+                        }
                     }
                 }
+
             }
 
             if(this.getLayoutPosition()==mModelList.size()-1){

@@ -37,10 +37,10 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_weight="2"
-            app:cardBackgroundColor="@color/c_tab_image_border"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="7dp"
             android:clipChildren="true"
+            app:cardBackgroundColor="@color/c_tab_image_border"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="0dp"
             app:contentPadding="1.5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -52,12 +52,13 @@
                 app:cardCornerRadius="6dp"
                 app:cardElevation="0dp"
                 app:contentPadding="0dp">
+
                 <com.darkweb.genesissearchengine.libs.views.ThumbnailCrop
                     android:id="@+id/pWebThumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:adjustViewBounds="true"
                     android:layout_marginEnd="-2dp"
+                    android:adjustViewBounds="true"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:elevation="10dp"
                     android:scaleType="fitCenter" />
@@ -75,11 +76,11 @@
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
-                    android:alpha="0.7"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:alpha="0.7"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:padding="12dp"
-                    android:layout_marginTop="5dp"
                     android:src="@drawable/tick_recycler_view" />
             </FrameLayout>
 
@@ -201,8 +202,8 @@
             android:translationZ="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry"
-            app:tint="@color/c_navigation_tint" />
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/pBorder"
@@ -220,28 +221,39 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:visibility="gone"
-        android:translationZ="100dp"
         android:id="@+id/pItemSelectionMenu"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/c_background"
-        android:layout_height="match_parent">
+        android:translationZ="100dp"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/pItemSelectionMenuButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="20dp"
-            android:textSize="14.5sp"
-            android:textAllCaps="false"
+            android:layout_marginEnd="10dp"
             android:background="@xml/hox_rounded_corner_suggestion_settings"
             android:elevation="7dp"
             android:text="@string/TAB_LIST_SELECT"
+            android:textAllCaps="false"
             android:textColor="@color/c_white"
+            android:textSize="14.5sp"
             android:visibility="visible" />
     </FrameLayout>
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/c_orbot_setting_divider"
+        app:layout_constraintBottom_toBottomOf="@+id/pTabRowContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

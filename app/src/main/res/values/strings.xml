@@ -95,6 +95,7 @@
     <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">Toogle between classic and advance view</string>
 
     <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_CICADA" translatable="false">Authorization Failed</string>
     <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Bookmark removed</string>
     <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Bookmark updated</string>
     <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Data cleared successfully</string>

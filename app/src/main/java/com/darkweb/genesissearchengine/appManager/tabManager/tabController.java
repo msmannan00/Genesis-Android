@@ -29,6 +29,7 @@ import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.gecko
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.settingManager.advanceManager.settingAdvanceController;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
@@ -168,6 +169,7 @@ public class tabController extends Fragment
             mNestedScrollView.scrollTo(0,0);
             mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
             mTabAdapter.notifyDataSetChanged();
+            mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_INIT_UI, null);
         }
     }
 
@@ -196,7 +198,7 @@ public class tabController extends Fragment
         mRemoveSelection = mRootView.findViewById(R.id.pRemoveSelection);
         mMenuButton = mRootView.findViewById(R.id.pMenuButton);
         mClearSelection = mRootView.findViewById(R.id.pClearSelection);
-        //mPopupUndo = mRootView.findViewById(R.id.pPopupUndo);
+        mPopupUndo = mRootView.findViewById(R.id.pPopupUndo);
         mSelectionCount = mRootView.findViewById(R.id.pSelectionCount);
         mBlocker = mRootView.findViewById(R.id.pSecureRootBlocker);
         mNestedScrollView = mRootView.findViewById(R.id.pNestedScroll);
@@ -370,7 +372,7 @@ public class tabController extends Fragment
     public void onRemoveTab(int pIndex){
         mListModel.onTrigger(tabEnums.eModelCallback.M_REMOVE_TAB,Collections.singletonList(pIndex));
         if(mListModel.getList().size()<1){
-            mRecycleView.animate().setDuration(200).alpha(0);
+            mRecycleView.animate().setDuration(0).alpha(0);
             onClearSelection(null);
         }
         initTabCount(400);
@@ -388,7 +390,7 @@ public class tabController extends Fragment
         mListModel.onTrigger(tabEnums.eModelCallback.M_REMOVE_TAB,Collections.singletonList(pIndex));
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mListModel.getList().get(pIndex).getSession(), mListModel.getList().get(pIndex).getSession()));
         if(mListModel.getList().size()<1){
-            mRecycleView.animate().setDuration(200).alpha(0).withEndAction(() -> {
+            mRecycleView.animate().setDuration(0).alpha(0).withEndAction(() -> {
                 if(pShowPopupOnClearAll){
                     onShowUndoDialog();
                 }
@@ -440,6 +442,7 @@ public class tabController extends Fragment
 
     public void onRestoreTab(View view){
 
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG, null);
         mTouchable = true;
         final Handler handler = new Handler();
         handler.postDelayed(() ->
@@ -466,7 +469,8 @@ public class tabController extends Fragment
     }
 
     public void onShowUndoDialog(){
-        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(mHomeController), M_UNDO);
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG, null);
+        //pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(mHomeController), M_UNDO);
     }
 
     public void onClearTabBackup(){
@@ -512,7 +516,7 @@ public class tabController extends Fragment
     public void onRemoveSelection(View view) {
         int mSelectionSize = (int)mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.GET_SELECTION_SIZE,null);
         if(mSelectionSize >= mListModel.getList().size()){
-            mRecycleView.animate().setDuration(200).alpha(0).withEndAction(() -> {
+            mRecycleView.animate().setDuration(0).alpha(0).withEndAction(() -> {
                 mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION, null);
                 onClearSelection(null);
             });
@@ -575,6 +579,7 @@ public class tabController extends Fragment
             mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE,null);
             mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.REMOVE_ALL, null);
             onClearSelection(null);
+            onShowUndoDialog();
         }
         else if(pView.getId() == R.id.pOpenSetting){
             activityContextManager.getInstance().getHomeController().onBackPressed();
@@ -664,6 +669,9 @@ public class tabController extends Fragment
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.M_CLEAR_BACKUP)){
                 onExitAndClearBackup();
+            }
+            else if(e_type.equals(enums.etype.fetch_favicon)){
+                mHomeController.onGetFavIcon((ImageView) data.get(0), (String) data.get(1));
             }
             else if(e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU)){
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU, data);

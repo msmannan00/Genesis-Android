@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pRowContainer"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
-    android:layout_marginTop="-5dp"
-    android:layout_marginStart="0dp"
+    android:layout_height="230dp"
     android:clickable="true"
     android:scaleX="1"
     android:scaleY="1"
     android:background="@color/clear_alpha"
+    android:layout_margin="4dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="0dp"
     android:focusable="true"
     android:orientation="horizontal"
     tools:ignore="RtlSymmetry">
@@ -24,6 +25,8 @@
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/blue"
         app:cardCornerRadius="4dp"
+        android:outlineAmbientShadowColor="@color/c_tab_border_v1"
+        android:outlineSpotShadowColor="@color/c_tab_border_v1"
         app:cardPreventCornerOverlap="false"
         android:clipChildren="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,31 +36,31 @@
             android:id="@+id/pTABRowContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
-            android:background="@xml/tx_card_corner"
-            app:cardBackgroundColor="@color/c_background"
             android:layout_margin="2dp"
-            android:focusable="true"
+            android:background="@xml/tx_card_corner"
+            android:clickable="true"
             android:clipChildren="true"
+            android:focusable="true"
             android:longClickable="true"
             android:orientation="horizontal"
+            app:cardCornerRadius="3dp"
             android:paddingEnd="0dp"
+            app:cardBackgroundColor="@color/c_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry">
+            tools:ignore="RtlSymmetry,DuplicateClickableBoundsCheck">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="39dp"
-                app:cardBackgroundColor="@color/c_background"
+                android:layout_marginTop="33dp"
                 android:background="@xml/tx_border"
                 android:clipChildren="true"
-                android:layout_marginBottom="8dp"
                 android:elevation="0dp"
+                app:cardBackgroundColor="@color/c_background"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -90,6 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
+                    android:layout_gravity="center"
                     android:alpha="9"
                     android:background="@xml/tx_border_image_dark_no_corner"
                     android:translationZ="15dp"
@@ -97,29 +101,105 @@
 
                     <ImageView
                         android:id="@+id/imageView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:alpha="0.7"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:alpha="0.9"
+                        android:padding="2dp"
                         android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="54dp"
                         android:src="@drawable/tick_recycler_view" />
                 </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="31dp"
+                android:background="@color/c_orbot_setting_divider"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <ImageView
+                android:id="@+id/pBorder"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="start"
+                android:background="@color/c_background"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:visibility="visible" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:cardElevation="0dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center_vertical"
+                app:cardCornerRadius="3dp">
+
+                <ImageView
+                    android:alpha="0.9"
+                    android:id="@+id/pLogo"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:textAlignment="center"
+                    android:textColor="@color/c_white"
+                    tools:ignore="RtlCompat" />
+            </androidx.cardview.widget.CardView>
+
+            <ImageButton
+                android:id="@+id/pOrbotRowRemove"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:background="@xml/tx_ripple_light"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:elevation="11dp"
+                android:layout_gravity="end"
+                android:longClickable="true"
+                android:outlineProvider="none"
+                android:padding="7dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:scaleType="fitCenter"
+                android:src="@xml/ic_baseline_cross"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry"
+                app:tint="@color/c_navigation_tint" />
+
+            <ImageView
+                android:id="@+id/pLoadSession"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_light"
+                android:clickable="true"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:focusable="true"
+                android:longClickable="true"
+                android:translationZ="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="6"
-                android:layout_marginEnd="25dp"
-                android:background="@color/c_background"
                 android:clickable="false"
                 android:focusable="false"
                 android:orientation="vertical"
-                android:paddingEnd="8dp"
+                android:paddingEnd="0dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/pOrbotRowRemove"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
@@ -131,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="0dp"
                     android:clickable="false"
                     android:ellipsize="end"
@@ -140,7 +220,8 @@
                     android:singleLine="true"
                     android:text="@string/SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE"
                     android:textColor="@color/c_text_v1"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/pOrbotRowHeader"
@@ -163,7 +244,7 @@
                     android:clickable="false"
                     android:focusable="false"
                     android:orientation="horizontal"
-                    android:paddingEnd="8dp"
+                    android:paddingEnd="0dp"
                     android:visibility="gone"
                     tools:ignore="NestedWeights,RtlSymmetry"
                     tools:layout_editor_absoluteX="114dp">
@@ -198,59 +279,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <View
-                android:id="@+id/view7"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="38dp"
-                android:background="@color/c_orbot_setting_divider"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <ImageView
-                android:id="@+id/pBorder"
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:background="@color/c_topbar_divider"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:layout_gravity="bottom"
-                android:visibility="visible" />
-
-            <ImageButton
-                android:id="@+id/pOrbotRowRemove"
-                android:layout_width="39dp"
-                android:layout_height="39dp"
-                android:background="@xml/tx_ripple_light"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:elevation="11dp"
-                android:longClickable="true"
-                android:outlineProvider="none"
-                android:padding="10dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="22dp"
-                android:scaleType="fitCenter"
-                android:src="@xml/ic_baseline_cross"
-                android:tint="@color/c_navigation_tint"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlSymmetry" />
-
-            <ImageView
-                android:id="@+id/pLoadSession"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:contentDescription="@string/GENERAL_TODO"
-                android:focusable="true"
-                android:longClickable="true"
-                android:translationZ="10dp"
-                android:background="@xml/gx_ripple_light"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/cardView"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.cardview.widget.CardView>

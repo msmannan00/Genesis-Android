@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -27,7 +28,7 @@ public class externalShortcutController extends AppCompatActivity {
 
         if(getIntent() != null){
             String mShortcutCommands = getIntent().getStringExtra(EXTERNAL_SHORTCUT_COMMAND);
-
+            status.sSettingIsAppStarted = false;
             if(mShortcutCommands!=null){
                 mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND, mShortcutCommands);
                 switch (mShortcutCommands) {

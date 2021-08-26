@@ -48,8 +48,12 @@
     /* Orbot Setting */
     <color name="c_orbot_setting_divider">#141414</color>
 
+    /* Tab */
+    <color name="c_tab_border_v1">#993a5278</color>
+
     /* Customs Colors */
-    <color name="c_background_alpha">#60ffffff</color>
+    <color name="c_background_tab">#503a5278</color>
+    <color name="c_background_text">#90000000</color>
     <color name="c_background_keyboard">#091a2a</color>
     <color name="c_text_v3">#666666</color>
     <color name="c_text_v4">#a6a6a6</color>
@@ -108,7 +112,7 @@
     <color name="c_long_button">#3c3946</color>
     <color name="c_splash_buttons">#ffffff</color>
     <color name="c_tab">#212d45</color>
-    <color name="c_tab_background">#212d45</color>
+    <color name="c_tab_background">#425e8a</color>
     <color name="c_tab_border">#425e8a</color>
     <color name="c_tab_image_border">#324467</color>
     <color name="c_list_remove_back">#0f0f0f</color>

@@ -110,8 +110,8 @@ dependencies {
     /* Ads Manager */
 
     implementation 'com.android.support:support-annotations:29.0.0'
-    implementation 'com.facebook.android:audience-network-sdk:6.5.1'
-    implementation 'com.mopub.mediation:facebookaudiencenetwork:5.9.0.1'
+    implementation 'com.facebook.android:audience-network-sdk:6.6.0'
+    implementation 'com.mopub.mediation:facebookaudiencenetwork:6.6.0.0'
     implementation('com.mopub:mopub-sdk:5.17.0@aar') {
         transitive = true
     }

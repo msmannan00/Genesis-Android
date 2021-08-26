@@ -2,21 +2,17 @@ package com.darkweb.genesissearchengine.pluginManager.adPluginManager;
 
 import android.content.Context;
 import android.os.Handler;
-
 import androidx.annotation.NonNull;
 import com.darkweb.genesissearchengine.constants.keys;
-import com.darkweb.genesissearchengine.dataManager.dataController;
-import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
+import com.facebook.ads.AudienceNetworkAds;
 import com.mopub.common.MoPub;
 import com.mopub.common.SdkConfiguration;
 import com.mopub.common.SdkInitializationListener;
 import com.mopub.mobileads.MoPubErrorCode;
 import com.mopub.mobileads.MoPubView;
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
-
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 import static com.mopub.common.logging.MoPubLog.LogLevel.INFO;
 
@@ -43,6 +39,8 @@ public class mopubManager implements MoPubView.BannerAdListener
     private void initializeBannerAds(Context pContext){
         final SdkConfiguration.Builder configBuilder = new SdkConfiguration.Builder(keys.ADMANAGER_APPID_KEY);
         configBuilder.withLogLevel(INFO);
+
+        AudienceNetworkAds.initialize(pContext);
         MoPub.initializeSdk(pContext, configBuilder.build(), initSdkListener());
     }
 
@@ -66,6 +64,7 @@ public class mopubManager implements MoPubView.BannerAdListener
             if(mRequestCount<=10){
                 mRequestCount +=1;
                 mBannerAds.get().setAdUnitId(keys.ADMANAGER_APPID_KEY);
+                mBannerAds.get().setAdSize(MoPubView.MoPubAdSize.HEIGHT_50);
                 mBannerAds.get().loadAd();
                 mBannerAds.get().setBannerAdListener(this);
             }

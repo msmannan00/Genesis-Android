@@ -45,7 +45,7 @@ public class dataEnums
     }
 
     public enum eCrawlerCommands {
-        M_INDEX_URL
+        M_INDEX_URL, M_INIT
     }
 
     /* Callbacks */

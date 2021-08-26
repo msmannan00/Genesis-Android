@@ -1,0 +1,31 @@
+{
+"description": "something something dark side",
+"manifest_version": 2,
+"name": "Interceptz",
+"version": "1.0",
+"icons": {
+    "48": "icons/border-48.png"
+},
+
+"applications": {
+    "gecko": {
+        "id": "borderify@mozilla.org",
+        "strict_min_version": "45.0"
+    }
+},
+
+"permissions": [
+    "webRequest"
+],
+
+"background": {
+  "scripts": ["background.js"]
+ },
+
+"content_scripts": [
+    {
+        "matches": ["*://*.mozilla.org/*"],
+        "js": ["intercept.js"]
+    }
+]
+}

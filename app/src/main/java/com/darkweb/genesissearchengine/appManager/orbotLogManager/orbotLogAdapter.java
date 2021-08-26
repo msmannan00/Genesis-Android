@@ -1,8 +1,11 @@
 package com.darkweb.genesissearchengine.appManager.orbotLogManager;
 
+import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
+
 import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.tabManager.tabEnums;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.eventObserver;
+import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 
 import org.torproject.android.service.wrapper.logRowModel;
@@ -73,10 +77,7 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(constants.CONST_LOG_DUCKDUCK + Uri.encode(" " + mModelList.get(this.getLayoutPosition()).getLog())));
-            intent.putExtra(SearchManager.QUERY, mOrbotRowDescription.getText());
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            activityContextManager.getInstance().getHomeController().startActivity(intent);
+            helperMethod.openURLInCustomBrowser(Uri.parse(constants.CONST_LOG_DUCKDUCK + Uri.encode(" " + mModelList.get(this.getLayoutPosition()).getLog())).toString(), activityContextManager.getInstance().getHomeController());
         }
     }
 

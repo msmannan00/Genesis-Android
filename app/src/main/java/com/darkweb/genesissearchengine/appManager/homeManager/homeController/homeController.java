@@ -253,7 +253,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     onStartApplication(null);
                 }
             }
-            if(mShortcutCommandNavigate!=null){
+            else if(mShortcutCommandNavigate!=null){
                 status.sExternalWebsite = mShortcutCommandNavigate;
                 onStartApplication(null);
             }
@@ -374,6 +374,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
                 }
             }
+            mHomeViewController.onFullScreen(true);
+            mHomeViewController.onUpdateStatusBarTheme(null, true);
     }
 
     public void onUpdateBannerAdvert(){
@@ -779,6 +781,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 Log.i("wow : ", "trim memory requested: app is not showing UI anymore");
                 break;
         }
+    }
+
+    public void onUndo(View view){
+        activityContextManager.getInstance().getTabController().onRestoreTab(null);
     }
 
     public void onDestroyExernal(){
@@ -1189,6 +1195,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.progressBarReset();
         initTabCountForced();
         mNewSession.loadUri(url);
+        pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(mNewSession, homeController.this), M_LOAD_NEW_TAB);
+
 
         mAppBar.setTag(R.id.expandableBar,true);
     }
@@ -1672,7 +1680,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, (String)dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
             onInvokeProxyLoading();
         }, 1000);
-        mHomeViewController.disableCoordinatorSwipe();
     }
 
     public void onDownloadFile(){
@@ -2100,7 +2107,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            }
            else if(e_type.equals(enums.etype.M_NEW_LINK_IN_NEW_TAB))
            {
-               pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_LOAD_NEW_TAB);
                postNewLinkTabAnimationInBackground(dataToStr(data.get(0)));
            }
            else if(e_type.equals(M_NEW_LINK_IN_NEW_TAB_LOAD))
@@ -2176,6 +2182,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                initWidget();
            }
            else if(e_type.equals(enums.etype.M_WELCOME_MESSAGE)){
+
+               new Handler().postDelayed(() ->
+               {
+                   dataController.getInstance().invokeCrawler(dataEnums.eCrawlerCommands.M_INIT, data);
+               }, 1000);
+
                if(status.sSettingIsWelcomeEnabled){
                    final Handler handler = new Handler();
                    Runnable runnable = () -> {

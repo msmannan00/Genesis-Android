@@ -1,12 +1,10 @@
 package com.darkweb.genesissearchengine.pluginManager;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
+import com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.geckoSession;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.appManager.orbotLogManager.orbotLogController;
 import com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController;
@@ -18,8 +16,6 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.pluginManager.adPluginManager.admobManager;
-import com.darkweb.genesissearchengine.pluginManager.adPluginManager.facebookAdsManager;
 import com.darkweb.genesissearchengine.pluginManager.adPluginManager.mopubManager;
 import com.darkweb.genesissearchengine.pluginManager.analyticPluginManager.analyticManager;
 import com.darkweb.genesissearchengine.pluginManager.downloadPluginManager.downloadManager;
@@ -27,11 +23,7 @@ import com.darkweb.genesissearchengine.pluginManager.langPluginManager.langManag
 import com.darkweb.genesissearchengine.pluginManager.messagePluginManager.messageManager;
 import com.darkweb.genesissearchengine.pluginManager.notificationPluginManager.notifictionManager;
 import com.darkweb.genesissearchengine.pluginManager.orbotPluginManager.orbotManager;
-import com.example.myapplication.R;
-import com.google.android.gms.ads.AdView;
-
 import java.lang.ref.WeakReference;
-import java.net.URI;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -45,7 +37,7 @@ import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangMan
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_BOOKMARK;
-import static org.webrtc.ContextUtils.getApplicationContext;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_LOAD_NEW_TAB;
 
 public class pluginController
 {
@@ -249,7 +241,10 @@ public class pluginController
                 ((homeController)mHomeController.get()).onLoadURL(pData.get(0).toString());
             }
             else if(pEventType.equals(M_PANIC_RESET)){
-                new Handler().postDelayed(() -> activityContextManager.getInstance().getHomeController().panicExitInvoked(), 300);
+                helperMethod.onDelayHandler(mHomeController.get(), 150, () -> {
+                    activityContextManager.getInstance().getHomeController().panicExitInvoked();
+                    return null;
+                });
             }
             else if(pEventType.equals(M_DOWNLOAD_SINGLE)){
                 if(pData!=null){
@@ -263,9 +258,6 @@ public class pluginController
                         }
                     }
                 }
-            }
-            else if(pEventType.equals(M_SECURE_CONNECTION)){
-                helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController.get(),true);
             }
             else if(pEventType.equals(M_CANCEL_WELCOME)){
                 status.sSettingIsWelcomeEnabled = false;
@@ -315,6 +307,9 @@ public class pluginController
             }
             else if(pEventType.equals(M_DOWNLOAD_FILE_MANUAL)){
                 ((homeController)mHomeController.get()).onManualDownload(pData.get(0).toString());
+            }
+            else if(pEventType.equals(M_LOAD_NEW_TAB)){
+                ((homeController)mHomeController.get()).onLoadTab((geckoSession) pData.get(pData.size()-2),false,false,false);
             }
             else if(pEventType.equals(M_OPEN_LINK_NEW_TAB)){
 

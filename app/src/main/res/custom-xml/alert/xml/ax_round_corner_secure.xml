@@ -12,7 +12,7 @@
     </item>
 
     <!-- White Top color -->
-    <item android:bottom="4dp" android:left="0px" android:right="0px" android:top="0px">
+    <item android:bottom="0dp" android:left="0px" android:right="0px" android:top="0px">
 
         <shape  android:shape="rectangle">
 

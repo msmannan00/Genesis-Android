@@ -8,7 +8,8 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.darkweb.genesissearchengine.appManager.tabManager.tabController">
+    tools:context="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
+    tools:ignore="DuplicateClickableBoundsCheck">
 
     <LinearLayout
         android:id="@+id/pHeaderContainer"
@@ -26,12 +27,12 @@
         <LinearLayout
             android:id="@+id/pHeaderContainerTop"
             android:layout_width="match_parent"
-            android:paddingTop="5dp"
             android:layout_height="60dp"
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal"
             android:paddingStart="5dp"
+            android:paddingTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -41,8 +42,8 @@
                 android:id="@+id/pNewTab"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="0dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="0dp"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onMenuTrigger"
@@ -53,13 +54,13 @@
                 android:id="@+id/pSelectionCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 Selected"
-                android:visibility="gone"
-                android:textSize="18sp"
-                android:paddingStart="20dp"
                 android:layout_marginTop="-3dp"
+                android:paddingStart="20dp"
+                android:text="0 Selected"
                 android:textColor="@color/c_navigation_tint"
-                android:textStyle="bold"/>
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +76,6 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:visibility="gone"
                 android:layout_marginTop="-3.5dp"
                 android:layout_marginBottom="0dp"
                 android:background="@xml/gx_generic_tab_button"
@@ -84,7 +84,8 @@
                 android:text="@string/HOME_TAB_TEXT"
                 android:textColor="@color/c_text_v1"
                 android:textSize="12.5sp"
-                android:tint="@color/black" />
+                android:tint="@color/black"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/pMenuButton"
@@ -107,10 +108,10 @@
                 android:id="@+id/pRemoveSelection"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="-5dp"
                 android:layout_marginTop="-3dp"
                 android:layout_marginEnd="1dp"
-                android:layout_marginStart="-5dp"
-                android:layout_gravity="center_vertical"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onRemoveSelection"
@@ -122,12 +123,12 @@
                 android:id="@+id/pClearSelection"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="-10dp"
                 android:layout_marginTop="-3dp"
                 android:layout_marginEnd="1dp"
-                android:layout_marginStart="-10dp"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:layout_gravity="center_vertical"
                 android:onClick="onClearSelection"
                 android:src="@xml/ic_refresh"
                 android:visibility="gone"
@@ -181,14 +182,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:gravity="center"
                 android:layout_marginTop="70dp"
+                android:layout_marginEnd="15dp"
+                android:background="@xml/hx_ripple_default_round_bottom"
+                android:gravity="center"
                 android:text="@string/HOME_TAB_EMPTY"
                 android:textColor="@color/c_text_v2"
                 android:textSize="15sp"
+                android:alpha="0"
                 android:textStyle="bold"
-                android:background="@xml/hx_ripple_default_round_bottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -200,10 +202,10 @@
                 android:alpha="0"
                 android:background="@color/c_background"
                 android:clickable="true"
-                android:paddingTop="10dp"
                 android:clipToPadding="false"
                 android:focusable="true"
                 android:onClick="onClearSelection"
+                android:paddingTop="0dp"
                 android:paddingBottom="300dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -215,14 +217,27 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <include
+        android:id="@+id/pPopupUndo"
+        layout="@layout/popup_toast_undo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="59dp"
+        android:elevation="8dp"
+        android:alpha="0"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
     <ImageView
         android:id="@+id/pSecureRootBlocker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/clear_alpha"
-        android:translationZ="112dp"
         android:clickable="true"
+        android:contentDescription="@string/GENERAL_TODO"
         android:focusable="true"
-        android:contentDescription="@string/GENERAL_TODO" />
+        android:translationZ="112dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

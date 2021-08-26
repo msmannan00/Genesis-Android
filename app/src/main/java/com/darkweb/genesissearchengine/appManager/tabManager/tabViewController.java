@@ -30,12 +30,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import java.util.List;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
+import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 
 class tabViewController
 {
@@ -95,7 +98,9 @@ class tabViewController
         mMenuButton.animate().setStartDelay(200).setDuration(350).alpha(1);
         mMenuButton.setVisibility(View.VISIBLE);
 
-        if(!status.sTabGridLayoutEnabled){
+        if(status.sTabGridLayoutEnabled){
+            mNestedScrollView.setPadding(helperMethod.pxFromDp(7),helperMethod.pxFromDp(7),helperMethod.pxFromDp(7),helperMethod.pxFromDp(0));
+        }else {
             mNestedScrollView.setPadding(0,0,0,0);
         }
 
@@ -121,9 +126,9 @@ class tabViewController
         mTabOptionMenu.setAnimationStyle(R.style.popup_window_animation);
         mTabOptionMenu.setElevation(7);
         if(status.sSettingLanguageRegion.equals("Ur")){
-            mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-45), helperMethod.pxFromDp(-45));
+            mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-45), helperMethod.pxFromDp(-55));
         }else {
-            mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-125), helperMethod.pxFromDp(-45));
+            mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-125), helperMethod.pxFromDp(-55));
         }
     }
 
@@ -172,19 +177,34 @@ class tabViewController
     }
 
     private void onHideUndoDialogForced() {
-        //if(mUndoLayout.getAlpha()<1){
-            //mUndoLayout.animate().cancel();
-            //mUndoLayout.setAlpha(0);
-            //mUndoLayout.setVisibility(View.GONE);
-        //}else {
-            //mUndoLayout.animate().setDuration(200).alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
-        //}
+        if(mUndoLayout.getAlpha()<1){
+            mUndoLayout.animate().cancel();
+            mUndoLayout.setAlpha(0);
+            mUndoLayout.setVisibility(View.GONE);
+        }else {
+            mUndoLayout.animate().setDuration(200).alpha(0).withEndAction(() -> mUndoLayout.setVisibility(View.GONE));
+        }
+        mDelayHandler.removeCallbacksAndMessages(null);
+    }
+
+    private void onShowUndoDialog() {
+        if(mUndoLayout.getAlpha()==0){
+            Log.i("ASdasdads","ASdasdads");
+            mUndoLayout.setAlpha(0);
+            mUndoLayout.setVisibility(View.VISIBLE);
+            mDelayHandler.removeCallbacksAndMessages(null);
+            mUndoLayout.animate().setDuration(200).alpha(1).withEndAction(() -> {
+                mDelayHandler.postDelayed(() -> {
+                    mUndoLayout.animate().setDuration(200).alpha(0);
+                }, 2000);
+            });
+        }
     }
 
     private void onHideUndoDialogInit() {
-        //mUndoLayout.animate().cancel();
-        //mUndoLayout.setAlpha(0);
-        //mUndoLayout.setVisibility(View.GONE);
+        mUndoLayout.animate().cancel();
+        mUndoLayout.setAlpha(0);
+        mUndoLayout.setVisibility(View.GONE);
     }
 
     public void blockUI(boolean pStatus){
@@ -262,8 +282,14 @@ class tabViewController
         else if(pCommands.equals(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER)){
             blockUI(false);
         }
-        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_FORCED)){
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_SHOW_UNDO_DIALOG)){
+            onShowUndoDialog();
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG)){
             onHideUndoDialogForced();
+        }
+        else if(pCommands.equals(tabEnums.eTabViewCommands.ON_INIT_UI)){
+            initUI();
         }
         return null;
     }

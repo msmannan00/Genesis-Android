@@ -23,16 +23,6 @@ public class externalURLNavigationContoller extends AppCompatActivity {
             mData = Uri.parse(constants.CONST_BACKEND_GENESIS_URL);
         }
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && getReferrer().getHost().equals(CONST_PACKAGE_NAME) || !helperMethod.getHost(mData.toString()).contains(".onion")){
-            helperMethod.openURLInCustomBrowser(mData.toString(), this);
-            finish();
-            return;
-        }
-        else if(!helperMethod.getHost(mData.toString()).contains(".onion")){
-            helperMethod.openURLInCustomBrowser(mData.toString(), this);
-            finish();
-            return;
-        }
         if(activityContextManager.getInstance().getHomeController()==null){
             Intent mIntent = new Intent(this, homeController.class);
             mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND_NAVIGATE, mData.toString());

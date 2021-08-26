@@ -59,7 +59,12 @@
     /* Orbot Setting */
     <color name="c_orbot_setting_divider">#e6e6e6</color>
 
+    /* Tab */
+    <color name="c_tab_border_v1">#993a5278</color>
+
     /* Customs Colors */
+    <color name="c_background_tab">#503a5278</color>
+    <color name="c_background_text">#90000000</color>
     <color name="c_background_alpha">#601c1b21</color>
     <color name="c_background_keyboard">#999999</color>
     <color name="c_text_v3">#bfbfbf</color>

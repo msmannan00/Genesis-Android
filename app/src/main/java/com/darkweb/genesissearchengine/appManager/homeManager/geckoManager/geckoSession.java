@@ -385,7 +385,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             }else {
                 if(progress==100){
                     event.invokeObserver(Arrays.asList(mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_INVOKE_PARSER);
-                    if(!mCurrentURL.contains("genesis") && helperMethod.getHost(mCurrentURL).contains(".onion")){
+                    if(!mCurrentURL.contains("genesis") && !wasPreviousErrorPage()){
                         checkApplicationRate();
                     }
                     if(!mIsProgressBarChanging){
@@ -395,6 +395,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                         });
                         event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
                     }
+                    mPreviousErrorPage = false;
                 }else {
                     mIsProgressBarChanging = false;
                     mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(mProgress,mSessionID), enums.etype.progress_update));
@@ -546,7 +547,6 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
 
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
-        mPreviousErrorPage = false;
 
         if(var1.uri.endsWith("genesisconfigurenewidentity.com/")){
             initURL(mPrevURL);
@@ -834,7 +834,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         }
         if(var4.type!=0 && var4.srcUri!=null){
             if(var4.linkUri!=null){
-                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, var4.altText, mContext.get()), M_LONG_PRESS_WITH_LINK);
+                event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,var4.srcUri,title, mTheme, var4.altText, this, mContext.get()), M_LONG_PRESS_WITH_LINK);
             }
             else {
                 try{
@@ -843,7 +843,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                     {
                         mTitle = helperMethod.getDomainName(mCurrentURL) + "\n" + var4.srcUri;
                     }
-                    event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,mTitle, mTheme, mContext.get()), enums.etype.on_long_press);
+                    event.invokeObserver(Arrays.asList(var4.srcUri,mSessionID,mTitle, mTheme, this, mContext.get()), enums.etype.on_long_press);
                 }catch (Exception ex){
                     ex.printStackTrace();
                     Log.i("","");
@@ -851,7 +851,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             }
         }
         else if(var4.linkUri!=null){
-            event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,title, mTheme, mContext.get()), M_LONG_PRESS_URL);
+            event.invokeObserver(Arrays.asList(var4.linkUri,mSessionID,title, mTheme, this, mContext.get()), M_LONG_PRESS_URL);
         }
     }
 

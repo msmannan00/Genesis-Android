@@ -210,7 +210,21 @@ public class geckoClients
                             Log.i("MessageDelegate", "Extension installed: " + extension);
                             extension.setMessageDelegate(mMessagingDelegate, "browser");
                         },
-                        e -> Log.e("MessageDelegate", "Error registering WebExtension", e)
+                        e -> {
+                            Log.e("MessageDelegate", "Error registering WebExtension", e);
+                        }
+                );
+
+        mRuntime.getWebExtensionController()
+                .ensureBuiltIn("resource://android/assets/adblock/", "messaging@example.com")
+                .accept(
+                        extension -> {
+                            Log.i("MessageDelegate", "Extension installed: " + extension);
+                            extension.setMessageDelegate(mMessagingDelegate, "browser");
+                        },
+                        e -> {
+                            Log.e("MessageDelegate", "Error registering WebExtension", e);
+                        }
                 );
     }
 
