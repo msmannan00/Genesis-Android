@@ -258,6 +258,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 onStartApplication(null);
             }
         }
+        getIntent().setData(null);
     }
 
     public boolean isSplashScreenLoading(){
@@ -1556,7 +1557,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
 
         if(status.sSettingIsAppStarted && mAppRestarted) {
-            activityContextManager.getInstance().onClearStack();
+            //activityContextManager.getInstance().onClearStack();
 
             tabRowModel model = (tabRowModel)dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
             if(model==null){
@@ -1932,6 +1933,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     private void onInitTheme(){
 
+        if(status.sSettingIsAppStarted){
+            status.sExternalWebsite = strings.GENERIC_EMPTY_STR;
+        }
+
         if(status.mThemeApplying){
             if(status.sTheme == enums.Theme.THEME_DARK){
                 setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -2243,6 +2248,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            }
            else if(e_type.equals(enums.etype.open_new_tab_instant)){
                postNewLinkTabAnimation(dataToStr(data.get(0)), true);
+               //status.sExternalWebsite = strings.GENERIC_EMPTY_STR;
            }
            else if(e_type.equals(enums.etype.M_HOME_PAGE)){
                geckoSession mSession = (geckoSession)dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_HOME_PAGE, null);

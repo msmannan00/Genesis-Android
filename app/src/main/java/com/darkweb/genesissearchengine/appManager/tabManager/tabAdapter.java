@@ -431,7 +431,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     params.topMargin = helperMethod.pxFromDp(3.5f);
                     params.bottomMargin = helperMethod.pxFromDp(3.5f);
                     params_main.topMargin = helperMethod.pxFromDp(3f);
-                    //params_main.bottomMargin = helperMethod.pxFromDp(1f);
 
                     if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
                         mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_button_text_v1_inverted));
@@ -439,12 +438,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_alert_rateus_header));
                     }
 
-                    //params_main.leftMargin = helperMethod.pxFromDp(9f);
                 }else {
-
-                    if(getLayoutPosition() == 0){
-                        //params_main.rightMargin = helperMethod.pxFromDp(9f);
-                    }
 
                     if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
                         params.leftMargin = helperMethod.pxFromDp(2.5f);
@@ -462,22 +456,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                         mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.clear_alpha));
                     }
 
-                    if(getLayoutPosition() == 1){
-                        //params_main.leftMargin = helperMethod.pxFromDp(3f);
-                        //params_main.rightMargin = helperMethod.pxFromDp(9f);
-                        //params_main.topMargin = helperMethod.pxFromDp(14f);
-                        //params_main.bottomMargin = helperMethod.pxFromDp(1f);
-                    }else {
-                        if(getLayoutPosition()%2==0){
-                            //params_main.leftMargin = helperMethod.pxFromDp(9f);
-                            //params_main.rightMargin = helperMethod.pxFromDp(3f);
-                            //params_main.topMargin = helperMethod.pxFromDp(3f);
-                        }else {
-                            //params_main.leftMargin = helperMethod.pxFromDp(3f);
-                            //params_main.rightMargin = helperMethod.pxFromDp(9f);
-                            //params_main.topMargin = helperMethod.pxFromDp(3f);
-                        }
-                    }
                 }
 
             }

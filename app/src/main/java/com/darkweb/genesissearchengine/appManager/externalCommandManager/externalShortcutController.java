@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -23,6 +26,7 @@ public class externalShortcutController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        status.sExternalWebsite = strings.GENERIC_EMPTY_STR;
         orbotLocalConstants.mIsTorInitialized = false;
         Intent mIntent = new Intent(this, homeController.class);
 
@@ -41,6 +45,7 @@ public class externalShortcutController extends AppCompatActivity {
                         panicExitInvoked();
                         break;
                     case constants.CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART:
+                        activityContextManager.getInstance().onClearStack();
                         break;
                 }
             }
@@ -48,6 +53,7 @@ public class externalShortcutController extends AppCompatActivity {
 
         /* Start Required Activity */
 
+        finish();
         helperMethod.openIntent(mIntent, this, constants.CONST_LIST_EXTERNAL_SHORTCUT);
     }
 

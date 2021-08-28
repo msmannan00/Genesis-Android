@@ -31,7 +31,6 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -51,7 +50,6 @@ import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.material.appbar.AppBarLayout;
 import com.mopub.mobileads.MoPubView;
-
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.Arrays;
@@ -60,8 +58,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_DOMAIN_URL;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
@@ -490,7 +486,7 @@ class homeViewController
 
     public void initStatusBarColor(boolean mInstant) {
         int mDelay = 1500;
-        if(status.mThemeApplying || mInstant){
+        if(status.mThemeApplying || mInstant || status.sSettingIsAppStarted){
             mDelay = 0;
         }
 
@@ -614,7 +610,7 @@ class homeViewController
             while (!orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState){
                 try
                 {
-                    boolean mFastConnect = !status.sRestoreTabs && status.sAppInstalled && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus && status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR);
+                    boolean mFastConnect = status.sSettingIsAppStarted || !status.sRestoreTabs && status.sAppInstalled && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus && status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR);
                     if(mFastConnect){
                         sleep(1000);
                         if(orbotLocalConstants.mNetworkState){
@@ -651,7 +647,7 @@ class homeViewController
             }
             if(!status.sSettingIsAppStarted){
                 mContext.runOnUiThread(() -> {
-                    splashScreenDisable();
+                    onDisableSplashScreen();
                 });
                 startPostTask(messages.MESSAGE_ON_URL_LOAD);
             }else {
@@ -683,7 +679,7 @@ class homeViewController
         mSearchbar.setEnabled(true);
         mProgressBar.bringToFront();
         mSplashScreen.bringToFront();
-        splashScreenDisable();
+        onDisableSplashScreen();
     }
 
     public void stopScroll() {
@@ -694,11 +690,11 @@ class homeViewController
         mSplashScreen.setVisibility(View.GONE);
         mSplashScreen.setVisibility(View.GONE);
         mBlocker.setEnabled(false);
-        disableCoordinatorSwipe();
+        //disableCoordinatorSwipe();
     }
 
     private boolean mIsAnimating = false;
-    public void splashScreenDisable(){
+    public void onDisableSplashScreen(){
         mTopBar.setAlpha(1);
         mGeckoView.setVisibility(View.VISIBLE);
         disableCoordinatorSwipe();

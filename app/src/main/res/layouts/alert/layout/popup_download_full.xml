@@ -51,7 +51,7 @@
             android:paddingStart="15dp"
             android:paddingEnd="41dp"
             android:text="@string/GENERAL_DEFAULT_TEXT"
-            android:textColor="@color/c_alert_text"
+            android:textColor="@color/c_alert_text_static"
             android:textDirection="locale"
             android:textSize="13.5sp"
             android:translationY="-1dp"
@@ -71,7 +71,7 @@
             android:paddingStart="16.6dp"
             android:paddingEnd="41dp"
             android:text="@string/GENERAL_DEFAULT_TEXT"
-            android:textColor="@color/c_alert_text"
+            android:textColor="@color/c_alert_text_static"
             android:textDirection="locale"
             android:textSize="11sp"
             android:translationY="-1dp"
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
-            android:background="@color/c_orbot_setting_divider"
+            android:background="@color/c_orbot_setting_divider_static"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pPopupDownloadFullImageContainer" />
@@ -125,7 +125,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="@color/c_alert_text_static"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -145,7 +145,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider"
+                android:background="@color/c_orbot_setting_divider_static"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -175,7 +175,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="@color/c_alert_text_static"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -195,7 +195,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider"
+                android:background="@color/c_orbot_setting_divider_static"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -225,7 +225,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="@color/c_alert_text_static"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -245,7 +245,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider"
+                android:background="@color/c_orbot_setting_divider_static"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -278,7 +278,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_4"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="@color/c_alert_text_static"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -298,7 +298,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider"
+                android:background="@color/c_orbot_setting_divider_static"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -331,7 +331,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_5"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="@color/c_alert_text_static"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -351,7 +351,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider"
+                android:background="@color/c_orbot_setting_divider_static"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -384,7 +384,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_6"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="@color/c_alert_text_static"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -404,7 +404,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider"
+                android:background="@color/c_orbot_setting_divider_static"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -437,7 +437,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_7"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="@color/c_alert_text_static"
                     android:textSize="14sp" />
 
                 <ImageView

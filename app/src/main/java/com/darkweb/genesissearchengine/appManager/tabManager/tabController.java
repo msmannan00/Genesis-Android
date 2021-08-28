@@ -502,7 +502,8 @@ public class tabController extends Fragment
     }
 
     public void openTabMenu(View view) {
-        mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_SHOW_MENU, Collections.singletonList(view));
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
+        mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_SHOW_MENU, Arrays.asList(view, mListModel.getList().size()));
     }
 
     public int getSelectionCount(){

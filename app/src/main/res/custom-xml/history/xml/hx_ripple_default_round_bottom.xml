@@ -4,7 +4,7 @@
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
             <corners android:radius="4.5dp" />
-            <stroke android:width="1dip" android:color="@color/c_edittext_border"/>
+            <stroke android:width="1dip" android:color="@color/c_edittext_border_static"/>
         </shape>
     </item>
 </ripple>

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
+import com.darkweb.genesissearchengine.constants.status;
+import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
 import static com.darkweb.genesissearchengine.constants.keys.EXTERNAL_SHORTCUT_COMMAND_NAVIGATE;
@@ -18,6 +20,8 @@ public class externalURLNavigationContoller extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        status.sExternalWebsite = strings.GENERIC_EMPTY_STR;
         Uri mData = externalURLNavigationContoller.this.getIntent().getData();
         if(mData == null){
             mData = Uri.parse(constants.CONST_BACKEND_GENESIS_URL);
@@ -27,6 +31,14 @@ public class externalURLNavigationContoller extends AppCompatActivity {
             Intent mIntent = new Intent(this, homeController.class);
             mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND_NAVIGATE, mData.toString());
             helperMethod.openIntent(mIntent, this, constants.CONST_LIST_EXTERNAL_SHORTCUT);
+
+            Uri finalMData = mData;
+            helperMethod.onDelayHandler(this, 3000, () -> {
+                activityContextManager.getInstance().getHomeController().onStartApplication(null);
+                activityContextManager.getInstance().getHomeController().onExternalURLInvoke(finalMData.toString());
+                return null;
+            });
+
         }
         else {
             activityContextManager.getInstance().getHomeController().onExternalURLInvoke(mData.toString());

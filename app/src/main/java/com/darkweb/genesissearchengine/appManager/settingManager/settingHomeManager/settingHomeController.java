@@ -78,7 +78,7 @@ public class settingHomeController extends AppCompatActivity
         super.onConfigurationChanged(newConfig);
     }
 
-    private void onInitTheme(){
+    public void onInitTheme(){
 
         if(status.mThemeApplying){
             if(status.sTheme == enums.Theme.THEME_DARK){
@@ -93,6 +93,7 @@ public class settingHomeController extends AppCompatActivity
                 }
             }
         }
+        recreate();
     }
 
     private void viewsInitializations()
@@ -149,7 +150,7 @@ public class settingHomeController extends AppCompatActivity
         if(status.mThemeApplying){
             // activityContextManager.getInstance().onStack(this);
         }
-
+        //onInitTheme();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         status.sSettingIsAppPaused = false;

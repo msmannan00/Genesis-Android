@@ -18,6 +18,7 @@
     <color name="c_divider_line_light">#e6e6e6</color>
     <color name="c_topbar_divider">#ebebeb</color>
     <color name="c_edittext_border">#e2e7e9</color>
+    <color name="c_edittext_border_static">#e2e7e9</color>
     <color name="c_edittext_error_border">#f32323</color>
     <color name="c_edittext_error_background">#f9e2eb</color>
     <color name="c_text_short_header">#3385ff</color>
@@ -25,9 +26,13 @@
     <color name="c_icon_tint">#425e8a</color>
 
     /* Text Colors Version*/
+    <color name="c_black_light">#212d45</color>
     <color name="c_text_v1">#111722</color>
+    <color name="c_text_v1_static">#111722</color>
     <color name="c_text_v2">#999999</color>
+    <color name="c_text_v2_static">#999999</color>
     <color name="c_text_v8">#666666</color>
+    <color name="c_text_v8_static">#666666</color>
 
     /* Bookmark Setting Controller Color */
     <color name="c_bookmark_settings_header_icon_tint">#7591bd</color>
@@ -42,8 +47,11 @@
     <color name="c_alert_toast_button_text">#ffffff</color>
     <color name="c_alert_rateus_warning">#b3b3b3</color>
     <color name="c_alert_rateus_header">#00b3b3</color>
+    <color name="c_alert_rateus_header_static">#00b3b3</color>
     <color name="c_alert_text">#212d45</color>
+    <color name="c_alert_text_static">#212d45</color>
     <color name="c_alert_warning">#f65555</color>
+    <color name="c_alert_text_v2">#3385ff</color>
 
     /* Secure Alerts */
     <color name="c_secure_alert_start">#ffffff</color>
@@ -58,6 +66,7 @@
 
     /* Orbot Setting */
     <color name="c_orbot_setting_divider">#e6e6e6</color>
+    <color name="c_orbot_setting_divider_static">#e6e6e6</color>
 
     /* Tab */
     <color name="c_tab_border_v1">#993a5278</color>
@@ -75,7 +84,6 @@
     <color name="c_text_v9">#7591bd</color>
     <color name="c_lang_row">#7591bd</color>
     <color name="c_lang_row_border">#3a5278</color>
-    <color name="c_button_text_v1">#3385ff</color>
     <color name="c_button_text_v1_inverted">#ffffff</color>
     <color name="c_button_text_v3">#3385ff</color>
     <color name="c_navigation_light">#bfbfbf</color>

@@ -43,7 +43,7 @@
             android:paddingEnd="10dp"
             android:text="@string/ALERT_RATEUS_INFO"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text"
+            android:textColor="@color/c_alert_text_static"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

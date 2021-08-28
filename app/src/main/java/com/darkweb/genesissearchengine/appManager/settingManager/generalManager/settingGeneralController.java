@@ -147,6 +147,8 @@ public class settingGeneralController extends AppCompatActivity {
                     {
                         if(activityContextManager.getInstance().getHomeController() != null){
                             activityContextManager.getInstance().getHomeController().onReInitTheme();
+                            activityContextManager.getInstance().getSettingController().onInitTheme();
+
                         }
                     }, 100);
                 }

@@ -19,6 +19,7 @@ import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -94,8 +95,8 @@ class tabViewController
     }
 
     public void initUI(){
-        mMenuButton.setAlpha(0f);
-        mMenuButton.animate().setStartDelay(200).setDuration(350).alpha(1);
+        // mMenuButton.setAlpha(0f);
+        // mMenuButton.animate().setStartDelay(200).setDuration(350).alpha(1);
         mMenuButton.setVisibility(View.VISIBLE);
 
         if(status.sTabGridLayoutEnabled){
@@ -114,7 +115,7 @@ class tabViewController
     private void initPostUI(){
     }
 
-    public void onOpenTabMenu(View view) {
+    public void onOpenTabMenu(View view, int pSize) {
         onCloseTabMenu();
         LayoutInflater layoutInflater = (LayoutInflater) view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.tab_menu, null);
@@ -129,6 +130,12 @@ class tabViewController
             mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-45), helperMethod.pxFromDp(-55));
         }else {
             mTabOptionMenu.showAsDropDown(view,helperMethod.pxFromDp(-125), helperMethod.pxFromDp(-55));
+        }
+        if(pSize<=0){
+            Button mTabClear = mPopupView.findViewById(R.id.pCloseTabTrigger);
+            LinearLayout mCloseTab = mPopupView.findViewById(R.id.pCloseTab);
+            mTabClear.setAlpha(0.35f);
+            mCloseTab.setEnabled(false);
         }
     }
 
@@ -255,7 +262,7 @@ class tabViewController
 
     public Object onTrigger(tabEnums.eTabViewCommands pCommands, List<Object> pData){
         if(pCommands.equals(tabEnums.eTabViewCommands.M_SHOW_MENU)){
-            onOpenTabMenu((View) pData.get(0));
+            onOpenTabMenu((View) pData.get(0), (int) pData.get(1));
         }else if(pCommands.equals(tabEnums.eTabViewCommands.M_DISMISS_MENU)){
             onCloseTabMenu();
         }else if(pCommands.equals(tabEnums.eTabViewCommands.INIT_TAB_COUNT)){

@@ -58,7 +58,7 @@
             android:padding="7dp"
             android:paddingStart="11dp"
             android:paddingEnd="8dp"
-            android:textColor="@color/c_text_v8"
+            android:textColor="@color/c_text_v8_static"
             android:textColorHighlight="@color/c_text_color_highlight_v2"
             android:textColorHint="@color/c_text_v2"
             android:textCursorDrawable="@xml/gx_search_cursor_state"
