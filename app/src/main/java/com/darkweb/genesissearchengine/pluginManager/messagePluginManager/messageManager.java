@@ -146,8 +146,8 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.setOnDismissListener(this);
         mPopupToastContainer.setBackground(helperMethod.getDrawableXML(mContext, pBackground));
         if(pBackground == R.xml.ax_background_important){
-            mPopupToastInfo.setText(Color.WHITE);
-            mPopupToastNext.setText(Color.WHITE);
+            mPopupToastInfo.setTextColor(Color.WHITE);
+            mPopupToastNext.setTextColor(Color.WHITE);
         }
 
         mToastHandler.postDelayed(() ->
