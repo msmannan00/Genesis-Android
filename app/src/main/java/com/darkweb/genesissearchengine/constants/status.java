@@ -44,6 +44,7 @@ public class status
     public static boolean sSettingIsAppPaused = false;
     public static boolean sSettingIsWelcomeEnabled = true;
     public static boolean sSettingIsAppStarted = false;
+    public static boolean sCrawlerStatusStarted = false;
     public static boolean sSettingIsAppRunning = false;
     public static boolean sSettingIsAppRedirected = false;
     public static boolean sSettingIsAppRestarting = false;

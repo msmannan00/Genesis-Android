@@ -37,6 +37,7 @@ import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eLangMan
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_BOOKMARK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_HISTORY;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_LOAD_NEW_TAB;
 
 public class pluginController
@@ -347,7 +348,6 @@ public class pluginController
             else if(pEventType.equals(M_IMAGE_UPDATE_RESTART)){
                 if(pData!=null && pData.get(0)!=null){
                     ((AppCompatActivity)pData.get(0)).finish();
-                    activityContextManager.getInstance().getSettingController().finish();
                     activityContextManager.getInstance().getHomeController().quitApplication();
                 }
                 new Thread(){

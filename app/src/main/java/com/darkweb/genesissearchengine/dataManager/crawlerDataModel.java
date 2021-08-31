@@ -1,13 +1,12 @@
 package com.darkweb.genesissearchengine.dataManager;
 
-import static java.lang.Thread.sleep;
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.darkweb.genesissearchengine.constants.status;
 import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.models.crawlerRowModel;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
@@ -15,6 +14,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
+
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,10 @@ class crawlerDataModel
     }
 
     private void onInit(){
-        onExecute();
+        if(!status.sCrawlerStatusStarted){
+            status.sCrawlerStatusStarted = true;
+            onExecute();
+        }
     }
 
     private void onParseHTML(String pHtml, String pURL){
@@ -113,8 +117,10 @@ class crawlerDataModel
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, mURL_POST,
                         response -> {
+                            Log.i("adsa","asd");
                         },
                         error -> {
+                            Log.i("adsa","asd");
                         });
 
                 RequestQueue requestQueue = Volley.newRequestQueue(mContext);

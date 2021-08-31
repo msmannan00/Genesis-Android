@@ -48,6 +48,7 @@ import static com.darkweb.genesissearchengine.constants.strings.MESSAGE_SECURE_O
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.*;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_BOOKMARK;
+import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_HISTORY;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_LOAD_NEW_TAB;
 
 public class messageManager implements View.OnClickListener, DialogInterface.OnDismissListener
@@ -538,7 +539,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             }else if(mPopupRateusRating.getRating()>0) {
                 mEvent.invokeObserver(null, M_APP_RATED);
                 final Handler handler = new Handler();
-                handler.postDelayed(() -> onTrigger(Arrays.asList(strings.GENERIC_EMPTY_STR, mContext),M_RATE_FAILURE), 1000);
+                handler.postDelayed(() -> {
+                    if(mContext!=null){
+                        onTrigger(Arrays.asList(strings.GENERIC_EMPTY_STR, mContext), M_RATE_FAILURE);
+                    }
+                }, 1000);
                 onDismiss();
             }
         }
@@ -715,7 +720,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_CLEAR_HISTORY:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_HISTORY), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_BOOKMARK);
+                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_HISTORY), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_HISTORY);
                     break;
 
                 case M_CLEAR_BOOKMARK:
