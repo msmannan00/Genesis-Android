@@ -133,10 +133,8 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpVi
                     if(!mClickable){
                         mClickable = true;
                         mEvent.invokeObserver(null,M_ENABLE_VIEW_CLICK);
-                        // notifyItemChanged(mCurrentIndex);
                         mCurrentLanguage = v.getTag(R.id.LaguageID).toString();
                         mCurrentIndex = getLayoutPosition();
-                        // notifyItemChanged(mCurrentIndex);
 
                         final Handler handler = new Handler();
                         handler.postDelayed(() -> {
