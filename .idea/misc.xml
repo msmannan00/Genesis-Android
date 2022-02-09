@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.18645833333333334" />
         <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/application_crash.xml" value="0.33" />
         <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/certificate_info.xml" value="0.20260416666666667" />
         <entry key="..\:/Workspace/Genesis Android/app/src/main/res/layouts/alert/layout/popup_block_popup.xml" value="0.20260416666666667" />
@@ -73,6 +74,8 @@
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_menu.xml" value="0.16875" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_row_view.xml" value="0.5" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_view.xml" value="0.203125" />
+        <entry key="app/src/main/res/layouts/home/layout/home_view.xml" value="0.15833333333333333" />
+        <entry key="app/src/main/res/layouts/home/layout/popup_search_view.xml" value="0.67" />
       </map>
     </option>
   </component>

@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.darkweb.genesissearchengine.appManager.activityContextManager;
 import com.darkweb.genesissearchengine.appManager.kotlinHelperLibraries.BrowserIconManager;
@@ -19,21 +16,16 @@ import com.darkweb.genesissearchengine.dataManager.dataController;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_REPORT_URL;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_INDEX_WEBSITE;
-import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB;
-import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB_LOAD;
 import static com.darkweb.genesissearchengine.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
@@ -44,18 +36,13 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.NETWORK_CACHE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.mozilla.gecko.PrefsHelper;
 import org.mozilla.geckoview.ContentBlocking;
-import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
-import org.mozilla.geckoview.GeckoWebExecutor;
 import org.mozilla.geckoview.WebExtension;
-import org.mozilla.geckoview.WebRequest;
 import org.mozilla.geckoview.WebResponse;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
@@ -64,9 +51,6 @@ public class geckoClients
     /*Gecko Variables*/
 
     private geckoSession mSession = null;
-    private geckoSession mSession1 = null;
-    private geckoSession mSession2 = null;
-    int mCounter = 0;
 
     private static GeckoRuntime mRuntime = null;
     private BrowserIconManager mIconManager;
@@ -178,20 +162,14 @@ public class geckoClients
     public String getAssetsCacheFile(Context context, String fileName) {
         File cacheFile = new File(context.getCacheDir(), fileName);
         try {
-            InputStream inputStream = context.getAssets().open(fileName);
-            try {
-                FileOutputStream outputStream = new FileOutputStream(cacheFile);
-                try {
+            try (InputStream inputStream = context.getAssets().open(fileName)) {
+                try (FileOutputStream outputStream = new FileOutputStream(cacheFile)) {
                     byte[] buf = new byte[1024];
                     int len;
                     while ((len = inputStream.read(buf)) > 0) {
                         outputStream.write(buf, 0, len);
                     }
-                } finally {
-                    outputStream.close();
                 }
-            } finally {
-                inputStream.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -230,7 +208,6 @@ public class geckoClients
 
     private final WebExtension.MessageDelegate mMessagingDelegate = new WebExtension.MessageDelegate() {
 
-        @Nullable
         @Override
         public void onConnect(@NonNull WebExtension.Port port) {
             Log.e("MessageDelegate", "onConnect");

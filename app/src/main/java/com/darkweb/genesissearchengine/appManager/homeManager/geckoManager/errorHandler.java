@@ -30,7 +30,7 @@ public class errorHandler
                 }
 
                 mErrorTemplate = builder.toString();
-            } catch (IOException e) {
+            } catch (Exception ex) {
                 return null;
             }
         }

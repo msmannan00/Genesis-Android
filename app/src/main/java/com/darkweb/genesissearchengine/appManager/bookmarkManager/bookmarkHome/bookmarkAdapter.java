@@ -393,6 +393,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
             super(itemView);
         }
 
+        @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
         void bindListView(bookmarkRowModel model, int p_position) {
             mDateContainer = itemView.findViewById(R.id.pDateContainer);
             mHeader = itemView.findViewById(R.id.pOrbotRowHeader);

@@ -132,7 +132,7 @@
                                 android:hint="@string/GENERAL_SEARCH_HINT"
                                 android:imeOptions="flagNoExtractUi"
                                 android:importantForAutofill="no"
-                                android:inputType="textNoSuggestions"
+                                android:inputType="textWebEmailAddress"
                                 android:maxLines="1"
                                 android:paddingStart="52dp"
                                 android:paddingEnd="15dp"

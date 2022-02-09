@@ -90,10 +90,33 @@
                     android:onClick="onClearSearchBar"
                     android:background="@xml/gx_ripple_default_round"
                     android:src="@xml/ic_close"
-                    android:tint="@color/c_navigation_tint"
-                    android:contentDescription="@string/GENERAL_TODO" />
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_tint" />
 
-        </LinearLayout>
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/c_orbot_setting_divider"
+                    tools:ignore="RtlHardcoded" />
+
+                <ImageButton
+                    android:id="@+id/PopoupFindCopy"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onCopySearch"
+                    android:src="@xml/ic_baseline_clipboard"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pHistListView"

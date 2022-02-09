@@ -743,7 +743,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             Cursor c= Objects.requireNonNull(dMgr).query(new DownloadManager.Query().setFilterById(id));
 
             if(c.moveToFirst()){
-                String url = c.getString(c.getColumnIndex(DownloadManager.COLUMN_URI));
+                @SuppressLint("Range") String url = c.getString(c.getColumnIndex(DownloadManager.COLUMN_URI));
                 onNotificationInvoked(URLUtil.guessFileName(url, null, null), enums.etype.download_folder);
             }
         }
@@ -1763,6 +1763,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onClearSearchBar(View view){
         mHomeViewController.onUpdateSearchBar(strings.GENERIC_EMPTY_STR, false, true, true);
+    }
+
+    public void onCopySearch(View view){
+        if(mSearchBarPreviousText.length()==0){
+            helperMethod.copyURL(mSearchbar.getText().toString(),this);
+        }else {
+            helperMethod.copyURL(mSearchBarPreviousText,this);
+        }
     }
 
     public void onFindNext(View view){

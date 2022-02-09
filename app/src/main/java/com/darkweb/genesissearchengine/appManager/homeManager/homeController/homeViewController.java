@@ -115,8 +115,6 @@ class homeViewController
     private boolean isLandscape = false;
     private boolean isFullScreen = false;
     private MovementMethod mSearchBarMovementMethod = null;
-    private Handler mTabDialogHandler = null;
-    private Runnable mTabDialogRunnable = null;
     private boolean mIsTopBarExpanded = true;
 
     void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MoPubView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape){
@@ -435,7 +433,7 @@ class homeViewController
     void initTab(int count, boolean pForced, enums.etype pEvent, List<Object> pData){
         if(!pForced){
             ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mNewTab,
-                    PropertyValuesHolder.ofFloat("scaleX", 1, 0.70f, 1),
+                    PropertyValuesHolder.ofFloat("scale" + "X", 1, 0.70f, 1),
                     PropertyValuesHolder.ofFloat("scaleY", 1, 0.70f, 1));
             scaleDown.setDuration(250);
             scaleDown.start();
@@ -1544,7 +1542,12 @@ class homeViewController
                         params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
                     }else {
                         if(mBannerAds.getHeight()>0){
-                            params.setMargins(0, 0, 0,-helperMethod.pxFromDp(70) - helperMethod.pxFromDp(mBannerAds.getHeight()));
+                            Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
+                            if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
+                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(35) - helperMethod.pxFromDp(mBannerAds.getHeight()));
+                            }else {
+                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(70) - helperMethod.pxFromDp(mBannerAds.getHeight()));
+                            }
                         }else {
                             params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
                         }
@@ -1634,7 +1637,8 @@ class homeViewController
                         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
                         } else {
-                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+                            helperMethod.showToastMessage("sadadsasd",mContext);
+                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(0));
                         }
                     }
                 }
