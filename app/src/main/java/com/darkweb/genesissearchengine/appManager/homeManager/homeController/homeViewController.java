@@ -1233,7 +1233,7 @@ class homeViewController
             url=url.replace("http://","");
         }
 
-        url = url.replace("genesishiddentechnologies.com","genesis.onion");
+        url = url.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion","genesis.onion");
         boolean isTextSelected = false;
 
         if(mSearchbar.isSelected()){

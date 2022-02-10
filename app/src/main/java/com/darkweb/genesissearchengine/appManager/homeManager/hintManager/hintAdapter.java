@@ -189,7 +189,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
-            if(mURLLink.contains("genesishiddentechnologies.com") || mURLLink.contains("genesis.onion")){
+            if(mURLLink.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURLLink.contains("genesis.onion")){
                 pHintWebIconImage.setImageTintList(null);
                 pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 mPastWebIcon.put(getLayoutPosition(),pHintWebIconImage.getDrawable());

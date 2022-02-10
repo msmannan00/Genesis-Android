@@ -5,12 +5,12 @@ public class constants
     /*LOCAL URL CONSTANTS*/
 
     public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.darkweb.genesissearchengine.production";
-    public static final String CONST_PRIVACY_POLICY_URL = "https://genesishiddentechnologies.com/privacy";
-    public static final String CONST_REPORT_URL = "https://genesishiddentechnologies.com/reportus?url=";
-    public static final String CONST_SITEMAP = "https://genesishiddentechnologies.com/create";
+    public static final String CONST_PRIVACY_POLICY_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy";
+    public static final String CONST_REPORT_URL = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/reportus?url=";
+    public static final String CONST_SITEMAP = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/create";
     public static final String CONST_PACKAGE_NAME = "com.darkweb.genesissearchengine.production";
     public static final String CONST_GENESIS_ONION = "genesis.onion";
-    public static final String CONST_GENESIS_ONION_V2 = "genesishiddentechnologies.com";
+    public static final String CONST_GENESIS_ONION_V2 = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
 
     /*DRIVE URL DEV*/
 
@@ -30,15 +30,15 @@ public class constants
     public static final String CONST_GENESIS_URL_CACHED_DARK = "resource://android/assets/Homepage/homepage-dark.html";
     public static final String CONST_GENESIS_ERROR_CACHED = "Error/error.html";
     public static final String CONST_GENESIS_ERROR_CACHED_DARK = "Error/error-dark.html";
-    public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://genesishiddentechnologies.com/";
-    public static final String CONST_GENESIS_DOMAIN_URL = "https://genesishiddentechnologies.com";
+    public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/";
+    public static final String CONST_GENESIS_DOMAIN_URL = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
     public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pGlobalTimeVerificationToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/Help/help.html";
     public static final String CONST_GENESIS_HELP_URL_CACHE_DARK = "resource://android/assets/Help/help-dark.html";
     public static final String CONST_GENESIS_HELP_URL = "https://genesis.onion/help";
-    public static final String CONST_GENESIS_HELP_URL_SUB = "genesishiddentechnologies.com/help";
-    public static final String CONST_BACKEND_GENESIS_URL = "https://genesishiddentechnologies.com/search?q=$s&p_num=1&s_type=all";
+    public static final String CONST_GENESIS_HELP_URL_SUB = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/help";
+    public static final String CONST_BACKEND_GENESIS_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/search?q=$s&p_num=1&s_type=all";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com?q=$s&ia=web";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";

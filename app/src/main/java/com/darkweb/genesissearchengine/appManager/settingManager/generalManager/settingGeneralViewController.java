@@ -98,7 +98,7 @@ class settingGeneralViewController
             mOpenURLInNewTab.setChecked(false);
         }
 
-        mHomePageText.setText(helperMethod.getDomainName(status.sSettingDefaultSearchEngine.replace("genesishiddentechnologies.com","genesis.onion")));
+        mHomePageText.setText(helperMethod.getDomainName(status.sSettingDefaultSearchEngine.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion","genesis.onion")));
     }
 
     private void updateThemeChanger(){

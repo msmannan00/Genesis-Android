@@ -40,7 +40,7 @@ public class bookmarkRowModel
         return m_header;
     }
     public String getDescription() {
-        if(m_description!=null && m_description.equals("genesishiddentechnologies.com")){
+        if(m_description!=null && m_description.equals("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
             return "genesis.onion";
         }
         return m_description;

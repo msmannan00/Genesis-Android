@@ -19,7 +19,7 @@ class homeModel
             return pURL;
         }
         if(pURL.equals("about:blank")){
-            return helperMethod.completeURL("genesishiddentechnologies.com");
+            return helperMethod.completeURL("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion");
         }
         else if(pURL.equals("about:config")){
             return pURL;

@@ -361,7 +361,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mGeckoClient.onSessionReinit();
                 }
 
-                if(mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                if(mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                     mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
                     if(model.getSession().onGetInitializeFromStartup()) {
                         mHomeViewController.progressBarReset();
@@ -639,7 +639,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mAppBar.animate().cancel();
         Objects.requireNonNull(mGeckoView.getSession()).stop();
-        mGeckoClient.loadURL(url.replace("genesis.onion","genesishiddentechnologies.com"),mGeckoView, homeController.this);
+        mGeckoClient.loadURL(url.replace("genesis.onion","trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion"),mGeckoView, homeController.this);
     }
 
     public String getSecurityInfo(){
@@ -691,7 +691,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.expandTopBar(false, mGeckoView.getMaxY());
         }
 
-        if(mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+        if(mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
         }else {
             mHomeViewController.updateBannerAdvertStatus(true, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
@@ -1211,7 +1211,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         new Handler().postDelayed(() ->
         {
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, false));
-            if(status.sSettingDefaultSearchEngine.startsWith("https://genesishiddentechnologies.com") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+            if(status.sSettingDefaultSearchEngine.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                 mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
             }
 
@@ -1219,7 +1219,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mGeckoClient.resetSession();
                 mHomeViewController.onUpdateSearchBar(helperMethod.getDomainName(mHomeModel.getSearchEngine()), false, false,false);
 
-                if(status.sSettingDefaultSearchEngine.startsWith("https://genesishiddentechnologies.com")){
+                if(status.sSettingDefaultSearchEngine.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
                     mHomeViewController.progressBarReset();
                 }else {
                     mHomeViewController.onProgressBarUpdate(5, true);
@@ -1235,7 +1235,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onNewTabBackground(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened){
-        if(status.sSettingDefaultSearchEngine.startsWith("https://genesishiddentechnologies.com") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+        if(status.sSettingDefaultSearchEngine.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
         }
 
@@ -1243,7 +1243,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mGeckoClient.resetSession();
             mHomeViewController.onUpdateSearchBar(helperMethod.getDomainName(mHomeModel.getSearchEngine()), false, false,false);
 
-            if(status.sSettingDefaultSearchEngine.startsWith("https://genesishiddentechnologies.com")){
+            if(status.sSettingDefaultSearchEngine.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
                 mHomeViewController.progressBarReset();
             }else {
                 mHomeViewController.onProgressBarUpdate(5, true);
@@ -1264,7 +1264,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         handler.postDelayed(() -> {
             onGetThumbnail(null, false);
             mHomeViewController.expandTopBar(false,mGeckoView.getMaxY());
-            if(status.sSettingDefaultSearchEngine.startsWith("https://genesishiddentechnologies.com") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("genesishiddentechnologies.com") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+            if(status.sSettingDefaultSearchEngine.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || !status.sOpenURLInNewTab || mGeckoClient.getSession().getCurrentURL().equals("about:blank") || mGeckoClient.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mGeckoClient.wasPreviousErrorPage() || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) || mGeckoClient.getSession().getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                 mHomeViewController.updateBannerAdvertStatus(false, (boolean)pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
             }
             mHomeViewController.onNewTabAnimation(Collections.singletonList(url), M_INITIALIZE_TAB_LINK);
@@ -2456,7 +2456,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onNewTabAnimation(Collections.singletonList(mGeckoClient.getSession()), M_CLOSE_TAB_BACK);
             }
             else if(e_type.equals(enums.etype.M_ADMOB_BANNER_RECHECK)){
-                if(data.get(2).toString().startsWith(CONST_GENESIS_URL_CACHED) || data.get(2).toString().startsWith(CONST_GENESIS_URL_CACHED_DARK) || helperMethod.getHost(data.get(2).toString()).contains("genesishiddentechnologies.com")  || data.get(2).toString().startsWith(CONST_GENESIS_HELP_URL_CACHE) || data.get(2).toString().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                if(data.get(2).toString().startsWith(CONST_GENESIS_URL_CACHED) || data.get(2).toString().startsWith(CONST_GENESIS_URL_CACHED_DARK) || helperMethod.getHost(data.get(2).toString()).contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")  || data.get(2).toString().startsWith(CONST_GENESIS_HELP_URL_CACHE) || data.get(2).toString().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
                     mHomeViewController.updateBannerAdvertStatus(false,true);
                 }
             }

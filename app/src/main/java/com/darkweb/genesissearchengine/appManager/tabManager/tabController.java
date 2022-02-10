@@ -209,7 +209,9 @@ public class tabController extends Fragment
 
     @SuppressLint("ClickableViewAccessibility")
     public void initializeLocalEventHandlers(){
-
+        if(mRecycleView == null){
+            return;
+        }
         mTabs.setOnTouchListener((v, event) -> {
             if(event.getAction() == MotionEvent.ACTION_DOWN){
                 onBackPressedInvoked(null);

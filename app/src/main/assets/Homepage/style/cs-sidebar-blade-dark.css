@@ -1,11 +1,11 @@
 /* General */
 .sidebar__menu{
     display: none;
-    background:#fcfcfc;
+    background:#18171c;
     width: 100%;
     height: 50px;
     padding-top: 0.2em;
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid #0c0b0e;
 }
 .sidebar_sidebar-header{
     float: right;
@@ -16,23 +16,23 @@
     cursor: pointer;
     font-size: 0.90em;
     padding: 15px 10px 10px;
-	border-bottom: 4px solid #fcfcfc;
+	border-bottom: 4px solid #18171c;
 }
 .sidebar__catagory:hover{
     text-decoration: none;
 	animation-name: sidebar__catagory_animate_hover;
 	animation-duration: 2s;
-	border-bottom: 4px solid #548ec4;
+	border-bottom: 4px solid #e6e6e6;
 	transition: border-bottom-color 0.25s ease-in-out;
     -webkit-animation-fill-mode: forwards;
 }
 @keyframes sidebar__catagory_animate_hover {
   10% {
-    background: #f0f0f0;
+    background: #18171c;
     color: #336699;
   }
   100% {
-    background: #f0f0f0;
+    background: #0c0b0e;
     color: #336699;
   }
 }
@@ -41,7 +41,7 @@
     margin-right: 4px !important;
 }
 .sidebar__vertical-line {
-  border-left: 1px solid #e6e6e6;
+  border-left: 1px solid #000000;
   height: 25px;
   margin-bottom: -8px;
   margin-right: 5px;
@@ -52,7 +52,11 @@
     margin-top: 100px !important;
 }
 .sidebar__menu-icon {
-    padding: 8px 8px;
+    padding: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 4px;
+
     z-index: 100;
     color: black;
     font-size: 22px;
@@ -65,14 +69,15 @@
 .sidebar__menu-icon:hover{
     border-radius: 5px;
     animation-name: sidebar__menu-icon-hover;
+    background: #0c0b0e;
     animation-duration: 3s;
 }
 @keyframes sidebar__menu-icon-hover {
     3% {
-        background: #ebebeb;
+        background: #24222a;
     }
     14% {
-        background: #ffffff;
+        background: #0c0b0e;
     }
 }
 .sidebar__navigation{
@@ -118,13 +123,13 @@
     border: none;
 }
 .sidebar__menu-container{
-    background: #204060;
+    background: #24222a;
     padding-right: 10px;
     min-height: 100%;
     padding-bottom: 20px;
     max-width: 270px;
     width: 100%;
-    box-shadow: 0 8px 8px 0 #cccccc;
+    box-shadow: 0 8px 8px 0 #44404f;
     scrollbar-width: none;
     height: 150px;
     overflow-y: scroll;
@@ -153,7 +158,7 @@
 }
 .sidebar__list-info{
     text-decoration: none !important;
-    background: #1d3b58;
+    background: #18171c;
     padding-left: 5px;
     padding-top: 10px;
     padding-bottom: 15px;
@@ -172,7 +177,7 @@
 }
 
 .sidebar__line-divider{
-    background: #1d3b58;
+    background: #18171c;
     border: 0;
     display: block;
     width:auto;
@@ -229,7 +234,7 @@
 @media only screen and (max-width: 943px) {
     .sidebar__menu-icon{
         display: block;
-        margin-top: -43px;
+        margin-top: -41px;
         margin-bottom: 7vh;
         margin-right: 5px;
     }

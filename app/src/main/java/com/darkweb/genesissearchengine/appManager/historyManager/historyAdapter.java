@@ -519,7 +519,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 String header = model.getHeader();
                 mDescription.setText(("https://"+model.getDescription()));
 
-                if(model.getDescription().contains("genesishiddentechnologies.com") || model.getDescription().contains("genesis.onion")){
+                if(model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 }
                 else{

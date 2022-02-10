@@ -456,7 +456,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                     mDescription.setText("https://" + mDescription.getText().toString());
                 }
 
-                if(model.getDescription().contains("genesishiddentechnologies.com") || model.getDescription().contains("genesis.onion")){
+                if(model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 }else{
                     mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "http://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);

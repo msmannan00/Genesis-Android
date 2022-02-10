@@ -113,7 +113,7 @@ class crawlerDataModel
             }
 
             private void onSendRequest(){
-                String mURL_POST = "https://www.genesishiddentechnologies.com/update_cache?url="+mURL+"&key_word="+mKeywords+"&desc="+mDescription+"&title="+mTitle+"&s_type="+mtype;
+                String mURL_POST = "https://www.trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/update_cache?url="+mURL+"&key_word="+mKeywords+"&desc="+mDescription+"&title="+mTitle+"&s_type="+mtype;
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, mURL_POST,
                         response -> {

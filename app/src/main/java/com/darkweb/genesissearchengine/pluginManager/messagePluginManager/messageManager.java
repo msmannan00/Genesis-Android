@@ -299,7 +299,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         SwitchMaterial mSecureTrackingProtectionStatus = mDialog.findViewById(R.id.pSecurePopupTrackingProtectionStatus);
 
         pSecurePopupRootBlocker.animate().setStartDelay(100).setDuration(400).alpha(1);
-        pSecurePopupSubHeader.setText(helperMethod.getDomainName(mData.get(0).toString().replace("genesishiddentechnologies.com", "genesis.onion")));
+        pSecurePopupSubHeader.setText(helperMethod.getDomainName(mData.get(0).toString().replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion", "genesis.onion")));
 
         mDialog.setOnDismissListener(this);
         pSecurePopupRootBlocker.setOnClickListener(this);

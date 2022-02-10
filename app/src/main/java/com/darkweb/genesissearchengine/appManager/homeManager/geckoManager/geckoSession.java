@@ -329,6 +329,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             mCurrentURL = var2;
             if(!var2.equals("about:blank")){
                 event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+                mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
             }
             if(!isPageLoading){
                 mCurrentTitle = "loading";
@@ -433,7 +434,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
 
     public void onProgressStart(){
-        if(!getCurrentURL().equals("about:blank") && !getCurrentURL().contains("genesishiddentechnologies.com") && !wasPreviousErrorPage() && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+        if(!getCurrentURL().equals("about:blank") && !getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !wasPreviousErrorPage() && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
         }
     }
@@ -497,7 +498,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         }catch (Exception ignored){}
 
         if(wasBackPressed && mPastURLVerify){
-            if(var2.equals("https://genesishiddentechnologies.com") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+            if(var2.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
                 if(var2.startsWith(CONST_GENESIS_URL_CACHED_DARK) && (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get()))){
                     isPageLoading = false;
                     event.invokeObserver(null, enums.etype.M_CHANGE_HOME_THEME);
@@ -553,7 +554,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY_MESSAGED);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        if(!var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("https://genesishiddentechnologies.com") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
+        if(!var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
             String mVerificationURL = setGenesisVerificationToken(var1.uri);
             initURL(mVerificationURL);
             loadUri(mVerificationURL);
@@ -563,11 +564,11 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.M_ON_MAIL);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }
-        else if(var1.uri.contains("genesishiddentechnologies.com/advert__")){
+        else if(var1.uri.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/advert__")){
             event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.on_playstore_load);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        else if(var1.uri.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED) || var1.uri.startsWith("https://genesishiddentechnologies.com/?")){
+        else if(var1.uri.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED) || var1.uri.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?")){
             initURL(constants.CONST_GENESIS_DOMAIN_URL);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
@@ -602,7 +603,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
 
-            if(!mCurrentURL.contains("genesishiddentechnologies.com")){
+            if(!mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
                 mProgress = 5;
                 onProgressStart();
             }
@@ -693,7 +694,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     public void onFirstContentfulPaint(@NonNull GeckoSession var1) {
 
         isFirstPaintExecuted = true;
-        if(mPreviousErrorPage || mCurrentURL.contains("genesishiddentechnologies.com") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.toString().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+        if(mPreviousErrorPage || mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.toString().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
         }else {
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, true), enums.etype.M_ON_BANNER_UPDATE);
