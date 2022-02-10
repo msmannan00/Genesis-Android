@@ -33,7 +33,7 @@ public class constants
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/";
     public static final String CONST_GENESIS_DOMAIN_URL = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
     public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
-    public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pGlobalTimeVerificationToken";
+    public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pSecretToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/Help/help.html";
     public static final String CONST_GENESIS_HELP_URL_CACHE_DARK = "resource://android/assets/Help/help-dark.html";
     public static final String CONST_GENESIS_HELP_URL = "https://genesis.onion/help";

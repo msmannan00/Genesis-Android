@@ -139,6 +139,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    implementation group: 'com.macasaet.fernet', name: 'fernet-java8', version: '1.4.2'
 }
 
 /* Automated APK Generation */

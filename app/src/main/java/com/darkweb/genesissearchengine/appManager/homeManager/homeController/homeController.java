@@ -73,7 +73,7 @@ import com.darkweb.genesissearchengine.appManager.activityStateManager;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
 import com.darkweb.genesissearchengine.appManager.activityThemeManager;
-import com.darkweb.genesissearchengine.libs.trueTime.trueTime;
+import com.darkweb.genesissearchengine.libs.trueTime.trueTimeEncryption;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -216,7 +216,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             dataController.getInstance().initialize(this);
             status.initStatus(this);
             dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_INIT, Collections.singletonList(this));
-            trueTime.getInstance().initTime();
+            trueTimeEncryption.getInstance().initTime();
 
             helperMethod.updateResources(this, status.mSystemLocale.getLanguage());
             pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);

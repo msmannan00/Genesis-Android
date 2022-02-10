@@ -29,7 +29,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
-import com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController;
 import com.darkweb.genesissearchengine.constants.constants;
 import com.darkweb.genesissearchengine.constants.enums;
 import com.darkweb.genesissearchengine.constants.keys;
@@ -38,7 +37,7 @@ import com.darkweb.genesissearchengine.constants.strings;
 import com.darkweb.genesissearchengine.dataManager.dataEnums;
 import com.darkweb.genesissearchengine.eventObserver;
 import com.darkweb.genesissearchengine.helperManager.helperMethod;
-import com.darkweb.genesissearchengine.libs.trueTime.trueTime;
+import com.darkweb.genesissearchengine.libs.trueTime.trueTimeEncryption;
 import com.darkweb.genesissearchengine.pluginManager.pluginController;
 import com.darkweb.genesissearchengine.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -63,14 +62,12 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.crypto.spec.SecretKeySpec;
 
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_ERROR_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_ERROR_CACHED_DARK;
@@ -79,9 +76,7 @@ import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.darkweb.genesissearchengine.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_DEFAULT_BROWSER;
-import static com.darkweb.genesissearchengine.constants.enums.etype.M_NEW_LINK_IN_NEW_TAB;
 import static com.darkweb.genesissearchengine.constants.enums.etype.M_RATE_COUNT;
-import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_APPLICATION_CRASH;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
 import static com.darkweb.genesissearchengine.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
@@ -538,8 +533,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     private String setGenesisVerificationToken(String pString){
         try{
             Uri built = Uri.parse(pString).buildUpon()
-                    .appendQueryParameter(constants.CONST_GENESIS_GMT_TIME_GET_KEY, URLEncoder.encode(helperMethod.caesarCipherEncrypt(trueTime.getInstance().getGMT(),new SecretKeySpec(constants.CONST_ENCRYPTION_KEY.getBytes(), "AES")),  "utf-8"))
-                    .appendQueryParameter(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY, URLEncoder.encode(helperMethod.caesarCipherEncrypt(trueTime.getInstance().getLTZ(),new SecretKeySpec(constants.CONST_ENCRYPTION_KEY.getBytes(), "AES")),  "utf-8"))
+                    .appendQueryParameter(constants.CONST_GENESIS_GMT_TIME_GET_KEY, trueTimeEncryption.getInstance().getSecretToken())
                     .build();
             return built.toString();
         }catch (Exception ex){
@@ -554,7 +548,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY_MESSAGED);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        if(!var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
+        if(!var1.uri.contains(constants.CONST_GENESIS_GMT_TIME_GET_KEY) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
             String mVerificationURL = setGenesisVerificationToken(var1.uri);
             initURL(mVerificationURL);
             loadUri(mVerificationURL);
