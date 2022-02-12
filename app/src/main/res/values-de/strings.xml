@@ -12,7 +12,7 @@
 	<string name="GENERAL_LOADING" translatable="true">digitale Freiheit</string>
 	<string name="GENERAL_RELOAD" translatable="true">neu laden</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Sie stehen vor einem der folgenden Probleme. Webseite oder Website funktioniert möglicherweise nicht. Ihre Internetverbindung ist möglicherweise schlecht. Möglicherweise verwenden Sie einen Proxy. Die Website wird möglicherweise von der Firewall blockiert</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.production.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.genesissearchengine.production.provider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel schlägt erneut zu</string>
 
 	<!-- Shortcuts -->

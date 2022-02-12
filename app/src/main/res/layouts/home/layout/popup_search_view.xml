@@ -64,7 +64,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
-                        android:paddingTop="11dp"
+                        android:paddingTop="13dp"
                         android:text="@string/GENERAL_SEARCH_ENGINE"
                         android:textColor="@color/c_text_v1"
                         android:textSize="15sp" />
@@ -73,10 +73,10 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginStart="1dp"
-                    android:background="@color/c_orbot_setting_divider"
+                    android:background="@color/c_icon_divider"
                     android:layout_marginBottom="5dp"
                     tools:ignore="RtlHardcoded" />
 
@@ -96,11 +96,11 @@
                 <View
                     android:id="@+id/view2"
                     android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="30dp"
                     android:layout_marginStart="1dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@color/c_orbot_setting_divider"
+                    android:background="@color/c_icon_divider"
                     tools:ignore="RtlHardcoded" />
 
                 <ImageButton

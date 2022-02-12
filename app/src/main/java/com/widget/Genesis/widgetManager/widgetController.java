@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RemoteViews;
-import com.darkweb.genesissearchengine.eventObserver;
+import com.hiddenservices.genesissearchengine.production.eventObserver;
 import com.example.myapplication.R;
 import com.widget.Genesis.helperMethod.helperMethod;
 import java.util.Arrays;

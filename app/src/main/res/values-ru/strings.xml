@@ -12,7 +12,7 @@
 	<string name="GENERAL_LOADING" translatable="true">цифровая свобода</string>
 	<string name="GENERAL_RELOAD" translatable="true">перезагрузить</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">вы столкнулись с одной из следующих проблем. веб-страница или веб-сайт могут не работать. ваше интернет-соединение может быть плохим. вы можете использовать прокси. веб-сайт может быть заблокирован брандмауэром</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.darkweb.genesissearchengine.production.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.genesissearchengine.production.provider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Израиль снова наносит удар</string>
 
 	<!-- Shortcuts -->

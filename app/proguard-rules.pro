@@ -19,7 +19,7 @@
 # https://stackoverflow.com/questions/9651703/using-proguard-with-android-without-obfuscation
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
 
--keep class org.torproject.android.service.vpn.Tun2Socks {
+-keep class org.orbotproject.android.service.vpn.Tun2Socks {
     void logTun2Socks(java.lang.String, java.lang.String, java.lang.String);
 }
 

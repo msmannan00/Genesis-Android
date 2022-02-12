@@ -4,13 +4,13 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.darkweb.genesissearchengine.constants.enums;
-import com.darkweb.genesissearchengine.constants.status;
-import com.darkweb.genesissearchengine.eventObserver;
+import com.hiddenservices.genesissearchengine.production.constants.enums;
+import com.hiddenservices.genesissearchengine.production.constants.status;
+import com.hiddenservices.genesissearchengine.production.eventObserver;
 import com.widget.Genesis.helperMethod.helperMethod;
 import java.util.Arrays;
 import java.util.List;
-import static com.darkweb.genesissearchengine.constants.constants.CONST_PACKAGE_NAME;
+import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_PACKAGE_NAME;
 
 public class widgetModelController {
 

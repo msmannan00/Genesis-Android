@@ -64,7 +64,6 @@
     <color name="c_security_popup_divider">#121216</color>
     <color name="c_lang_row">#293a56</color>
     <color name="c_lang_row_border">#3a5278</color>
-    <color name="c_button_text_v1">#ffffff</color>
     <color name="c_button_text_v1_inverted">#3385ff</color>
     <color name="c_button_text_v3">#ffffff</color>
     <color name="c_edittext_background_form_inactive">#4d4d4d</color>
@@ -116,8 +115,8 @@
     <color name="c_tab_border">#425e8a</color>
     <color name="c_tab_image_border">#324467</color>
     <color name="c_list_remove_back">#0f0f0f</color>
-    <color name="c_list_alpha_black">#90000000</color>
     <color name="c_ripple_light">#d9d9d9</color>
     <color name="green_dark_v2">#1c1b21</color>
+    <color name="c_icon_divider">#141414</color>
 
 </resources>

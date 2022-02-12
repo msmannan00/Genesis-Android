@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    tools:context="com.darkweb.genesissearchengine.appManager.settingManager.privacyManager.settingPrivacyController">
+    tools:context="com.hiddenservices.genesissearchengine.production.appManager.settingManager.privacyManager.settingPrivacyController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

@@ -137,6 +137,7 @@
     <color name="c_alert_text_inverted_v1">#ffffff</color>
     <color name="c_long_button">#7591bd</color>
     <color name="c_ripple_light">#e6e6e6</color>
+    <color name="c_icon_divider">#f0f0f0</color>
 
     /* Shared Colors */
     <color name="blue">#0066FF</color>

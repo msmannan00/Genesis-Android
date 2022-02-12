@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
+    tools:context="com.hiddenservices.genesissearchengine.production.appManager.tabManager.tabController"
     tools:ignore="DuplicateClickableBoundsCheck">
 
     <LinearLayout

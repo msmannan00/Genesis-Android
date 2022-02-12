@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/c_background"
-    tools:context="com.darkweb.genesissearchengine.appManager.settingManager.generalManager.settingGeneralController">
+    tools:context="com.hiddenservices.genesissearchengine.production.appManager.settingManager.generalManager.settingGeneralController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

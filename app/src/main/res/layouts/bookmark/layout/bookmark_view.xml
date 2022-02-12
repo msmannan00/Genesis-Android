@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    tools:context="com.darkweb.genesissearchengine.appManager.bookmarkManager.bookmarkHome.bookmarkController">
+    tools:context="com.hiddenservices.genesissearchengine.production.appManager.bookmarkManager.bookmarkHome.bookmarkController">
 
     <LinearLayout
         android:id="@+id/pHeaderContainer"
@@ -57,7 +57,7 @@
                 android:textStyle="bold"
                 tools:ignore="UsingOnClickInXml" />
 
-            <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
+            <com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.editTextManager
                 android:id="@+id/pSearchInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

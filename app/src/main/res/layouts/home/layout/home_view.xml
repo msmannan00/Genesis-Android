@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="com.darkweb.genesissearchengine.appManager.homeManager.homeController.homeController">
+    tools:context="com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.homeController">
 
     <com.mopub.mobileads.MoPubView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:moPubAdSize = "match_view"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
@@ -112,7 +112,7 @@
                                 android:translationZ="1dp"
                                 tools:ignore="RtlSymmetry" />
 
-                            <com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager
+                            <com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.editTextManager
                                 android:id="@+id/pSearchInput"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -151,7 +151,7 @@
                                 app:hintAnimationEnabled="false"
                                 tools:targetApi="o">
 
-                            </com.darkweb.genesissearchengine.appManager.homeManager.homeController.editTextManager>
+                            </com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.editTextManager>
 
                             <ImageButton
                                 android:id="@+id/pVoiceInput"
@@ -249,7 +249,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
 
-                <com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView
+                <com.hiddenservices.genesissearchengine.production.appManager.homeManager.geckoManager.NestedGeckoView
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -261,7 +261,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                </com.darkweb.genesissearchengine.appManager.homeManager.geckoManager.NestedGeckoView>
+                </com.hiddenservices.genesissearchengine.production.appManager.homeManager.geckoManager.NestedGeckoView>
 
                 <ProgressBar
                     android:id="@+id/pProgressBar"
@@ -829,7 +829,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mTabFragment"
-        android:name="com.darkweb.genesissearchengine.appManager.tabManager.tabController"
+        android:name="com.hiddenservices.genesissearchengine.production.appManager.tabManager.tabController"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:alpha="0"
