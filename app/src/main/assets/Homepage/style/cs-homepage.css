@@ -612,11 +612,11 @@
 .hi_reference_header{
 	margin-left: 50px;
 	padding-left: 10px;
-	border-left: 5px solid #fcfcfc !important;
+	border-left: 5px solid #f0f0f0 !important;
 	font-weight: bold;
 	font-size: 16px;
 	margin-top: 10px;
-	color: #8cb3d9;
+	color: #6699cc;
 	padding-top:3px;
 	padding-bottom: 3px;
 }
