@@ -22,7 +22,7 @@ class homepage {
 	var mIDCounter = 0;
 	Object.keys(mOBJ).forEach(function(key) {
 		var mObject = mOBJ[key];
-		mReferenceHTML += '<div id="'+ mIDCounter +'" class="hi_reference" onclick="onTriggerScriptHandler(\'onClickReferenceWebsite\',[\''+ mIDCounter +'\',\''+ mObject[ReferenceWebsitesDataID.mUrl] +'\'])"><div class="hi_reference_website content-heading"> <div class="hi_image_container"><img class="hi_reference_image" alt="&#10063;" src="'+mObject[ReferenceWebsitesDataID.mIcon]+'"/></div><h6 class="hi_reference_header">'+mObject[ReferenceWebsitesDataID.mHeader]+'</h5><p class="hi_reference_body">'+mObject[ReferenceWebsitesDataID.mBody]+'</p></div></div>'
+		mReferenceHTML += '<a href="'+mObject[ReferenceWebsitesDataID.mUrl]+'" class="gc--clear-selection" style="text-decoration:none;"> <div class="home__reference"> <h6 class="home__reference--header">'+mObject[ReferenceWebsitesDataID.mHeader]+'</h6> <p class="home__reference_info">' + mObject[ReferenceWebsitesDataID.mBody] + '</p><div class="home__reference-image-container"> <img class="home__reference-image" alt="" src="'+ mObject[ReferenceWebsitesDataID.mIcon] +'"/> </div><p class="home__reference-status"><b>Status | <span class="home__reference-status--color">running</span></b></p></div></a>'
 		mIDCounter+=1;
 	});
 
