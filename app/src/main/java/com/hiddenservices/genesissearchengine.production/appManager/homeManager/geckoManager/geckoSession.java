@@ -115,10 +115,12 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     private int m_current_url_id = -1;
     private GeckoView mGeckoView;
     private boolean mIsLoaded = false;
-    private boolean isFirstPaintExecuted = false;
+    public boolean isFirstPaintExecuted = false;
     private boolean mIsProgressBarChanging = false;
     private Handler mFindHandler;
     private boolean mClosed = false;
+    public boolean mCloseRequested = false;
+    public boolean mOnBackPressed = false;
     public SessionState mSessionState;
 
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
@@ -314,6 +316,9 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
+        mCloseRequested = false;
+        isFirstPaintExecuted = false;
+
         PrefsHelper.setPref(keys.PROXY_TYPE, 1);
         PrefsHelper.setPref(keys.PROXY_SOCKS,"127.0.0.1");
         PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
@@ -347,10 +352,9 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     @UiThread
     public void onPageStop(@NonNull GeckoSession var1, boolean var2) {
+        mCloseRequested = !var2;
         if(var2){
             if(mProgress>=100){
-                //event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
-                //event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme), enums.etype.on_update_favicon);
                 event.invokeObserver(Arrays.asList(null,mSessionID), enums.etype.on_page_loaded);
 
                 if(!mThemeChanged){
@@ -760,6 +764,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     @UiThread
     public void onCloseRequest(@NonNull GeckoSession var1) {
         if(!canGoBack() && !mClosed){
+            mCloseRequested = true;
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle), enums.etype.back_list_empty);
         }
     }
@@ -767,6 +772,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     int mCrashCount = 0;
     @UiThread
     public void onCrash(@NonNull GeckoSession session) {
+        mCloseRequested = true;
         if(!mClosed && status.sSettingIsAppStarted){
             if(event==null){
                 return;
@@ -792,6 +798,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     @UiThread
     public void onKill(@NonNull GeckoSession session) {
+        mCloseRequested = true;
         if(!mClosed && status.sSettingIsAppStarted){
             if(event==null){
                 return;
@@ -1159,6 +1166,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     void goBackSession(){
         wasBackPressed = true;
+        mOnBackPressed = true;
         goBack();
 
         try {

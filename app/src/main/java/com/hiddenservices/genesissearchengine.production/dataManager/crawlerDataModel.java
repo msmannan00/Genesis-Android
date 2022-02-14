@@ -80,9 +80,6 @@ class crawlerDataModel
             String mURL = strings.GENERIC_EMPTY_STR;
 
             private void onSendRequest(){
-                if (mHTML.size()<100){
-                    return;
-                }
                 RequestQueue mRequestQueue = Volley.newRequestQueue(mContext, new ProxiedHurlStack());
 
                 String url = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/user_index/";
@@ -116,10 +113,9 @@ class crawlerDataModel
                             crawlerRowModel mModel = mHTML.remove(0);
                             mHtml = mModel.getHTML();
                             mURL = mModel.getURL();
-
-                            onParseHTML(mHtml, mURL);
-                            onSendRequest();
-
+                            if (mHTML.size()<100){
+                                onSendRequest();
+                            }
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();

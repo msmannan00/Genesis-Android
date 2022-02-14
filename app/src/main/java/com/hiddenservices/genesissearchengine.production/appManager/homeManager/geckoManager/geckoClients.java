@@ -218,11 +218,11 @@ public class geckoClients
 
     private final WebExtension.PortDelegate mPortDelegate = new WebExtension.PortDelegate() {
         @Override
-        public void onPortMessage(final @NonNull Object message,
-                                  final @NonNull WebExtension.Port port) {
-            if(message!=null && mSession.getProgress()==100){
+        public void onPortMessage(final @NonNull Object message,final @NonNull WebExtension.Port port) {
+            if(message!=null && mSession.getProgress()==100 && !mSession.mCloseRequested && mSession.isFirstPaintExecuted && !mSession.mOnBackPressed){
                 event.invokeObserver(Arrays.asList(message, mSession.getCurrentURL()), M_INDEX_WEBSITE);
             }
+            mSession.mOnBackPressed = false;
         }
 
         @Override
