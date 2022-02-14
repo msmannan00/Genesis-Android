@@ -37,7 +37,7 @@
   }
 }
 .sidebar__catagory--general{
-    color: #999999;
+    color: #999999 !important;
     margin-right: 4px !important;
 }
 .sidebar__vertical-line {
@@ -47,7 +47,7 @@
   margin-right: 5px;
 }
 .sidebar__catagory--highlight{
-    color: #00689D;
+    color: #00689D !important;
     margin-right: 10px !important;
     margin-top: 100px !important;
 }
