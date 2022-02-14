@@ -1,7 +1,6 @@
 package com.hiddenservices.genesissearchengine.production.dataManager;
 
 import android.annotation.SuppressLint;
-import android.text.TextUtils;
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -13,14 +12,12 @@ import com.hiddenservices.genesissearchengine.production.constants.status;
 import com.hiddenservices.genesissearchengine.production.constants.strings;
 import com.hiddenservices.genesissearchengine.production.dataManager.models.crawlerRowModel;
 import com.hiddenservices.genesissearchengine.production.helperManager.helperMethod;
-
 import org.apache.commons.text.StringEscapeUtils;
 import org.mozilla.thirdparty.com.google.android.exoplayer2.util.Log;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,14 +49,15 @@ class crawlerDataModel
 
     private void onParseHTML(String pHtml, String pURL){
         String mHost = helperMethod.getHost(pURL);
-        try {
+        if (mHost != null){
+            if(!helperMethod.isValidURL(pURL)){
+                return;
+            }
             pURL = helperMethod.normalize(pURL);
             if(mDuplicate.size()<30 && mHost.contains(".onion") && !mHost.contains("genesis") && !mHost.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd") && !mDuplicate.contains(pURL)){
                 mHTML.add(new crawlerRowModel(pURL, pHtml));
                 mDuplicate.add(pURL);
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
         }
     }
 
@@ -82,13 +80,16 @@ class crawlerDataModel
             String mURL = strings.GENERIC_EMPTY_STR;
 
             private void onSendRequest(){
-                RequestQueue mRequestQueue = Volley.newRequestQueue(mContext);
+                if (mHTML.size()<100){
+                    return;
+                }
+                RequestQueue mRequestQueue = Volley.newRequestQueue(mContext, new ProxiedHurlStack());
 
                 String url = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/user_index/";
                 StringRequest mRequestData = new StringRequest(Request.Method.POST, url, response -> {
                     Log.d("",response);
                 }, error -> {
-                     Log.d("",error.toString());
+                    Log.d("",error.toString());
                 }) {
                     protected Map<String, String> getParams() {
                         mHtml = StringEscapeUtils.escapeXml11(mHtml);

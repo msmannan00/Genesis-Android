@@ -1,5 +1,9 @@
 /*Search*/
-body{ 
+a {
+   text-decoration:none !important;
+   color: #ffffff !important;
+}
+body{
     opacity: 0;
     transition: opacity 0s;
     -webkit-transition: opacity 0s; /* Safari */

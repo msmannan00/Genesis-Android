@@ -1,3 +1,18 @@
+a {
+   text-decoration:none !important;
+   color: #ffffff !important;
+}
+body{
+    opacity: 0;
+    transition: opacity 0s;
+    -webkit-transition: opacity 0s; /* Safari */
+}
+
+.body_fadein {
+    opacity: 1;
+    transition-duration: 0.5s;
+    transition-property: opacity;
+}
 .home
 {
 	margin-left: -2px;

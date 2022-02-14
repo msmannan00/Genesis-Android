@@ -5,6 +5,7 @@
     /* Generic Colors */
     <color name="c_navigation_tint">#ffffff</color>
     <color name="c_background">#1c1b21</color>
+    <color name="c_text_color_highlight_v2">#1f1e25</color>
     <color name="c_background_inverted">#ffffff</color>
     <color name="c_header_icon_tint">#a6a6a6</color>
     <color name="c_divider_line_light">#666666</color>

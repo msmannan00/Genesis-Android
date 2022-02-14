@@ -220,7 +220,7 @@ public class geckoClients
         @Override
         public void onPortMessage(final @NonNull Object message,
                                   final @NonNull WebExtension.Port port) {
-            if(message!=null){
+            if(message!=null && mSession.getProgress()==100){
                 event.invokeObserver(Arrays.asList(message, mSession.getCurrentURL()), M_INDEX_WEBSITE);
             }
         }

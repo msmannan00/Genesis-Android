@@ -511,32 +511,36 @@ public class helperMethod
         }
     }
 
-    public static String normalize(String url) throws URISyntaxException, NullPointerException {
-        String pathSeparator = "/";
+    public static String normalize(String url) {
+        try{
+            String pathSeparator = "/";
 
-        URI uri = new URI(url);
-        uri = uri.normalize();
+            URI uri = new URI(url);
+            uri = uri.normalize();
 
-        String path = uri.getPath();
+            String path = uri.getPath();
 
-        if (!path.startsWith(pathSeparator)) {
-            path = pathSeparator + path;
+            if (!path.startsWith(pathSeparator)) {
+                path = pathSeparator + path;
+            }
+
+            if (path.endsWith(pathSeparator)) {
+                path = path.substring(0, path.length() - 1);
+            }
+
+            String urlStr = uri.getScheme() + "://" + uri.getHost();
+            int port = uri.getPort();
+
+            if (port != -1) {
+                urlStr = urlStr + ":" + port;
+            }
+
+            urlStr = urlStr + path;
+
+            return urlStr;
+        }catch (Exception ex){
+            return null;
         }
-
-        if (path.endsWith(pathSeparator)) {
-            path = path.substring(0, path.length() - 1);
-        }
-
-        String urlStr = uri.getScheme() + "://" + uri.getHost();
-        int port = uri.getPort();
-
-        if (port != -1) {
-            urlStr = urlStr + ":" + port;
-        }
-
-        urlStr = urlStr + path;
-
-        return urlStr;
     }
 
     static public String getHost(String link){

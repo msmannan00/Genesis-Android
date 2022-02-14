@@ -548,7 +548,14 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY_MESSAGED);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
+        String mNormalizeURL = helperMethod.normalize(var1.uri);
+        if(mNormalizeURL!=null && mNormalizeURL.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
+            initURL(constants.CONST_GENESIS_DOMAIN_URL);
+            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_LOAD_HOMEPAGE_GENESIS);
+            return GeckoResult.fromValue(AllowOrDeny.DENY);
+        }
         if(!var1.uri.contains(constants.CONST_GENESIS_GMT_TIME_GET_KEY) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
+
             String mVerificationURL = setGenesisVerificationToken(var1.uri);
             initURL(mVerificationURL);
             loadUri(mVerificationURL);
