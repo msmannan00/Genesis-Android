@@ -18,6 +18,19 @@
             text-align: center;
         }
     </style>
+    <script type="text/javascript">
+        var advancedVisible = false;
+    
+        function acceptAndContinue(temporary) {
+            document.addCertException(temporary).then(() => {
+                    location.reload();
+                },
+                err => {
+                    console.error("Unexpected error: " + err)
+                }
+            );
+        }
+    </script>
 </head>
 <body style="background : black">
     <div class="container">

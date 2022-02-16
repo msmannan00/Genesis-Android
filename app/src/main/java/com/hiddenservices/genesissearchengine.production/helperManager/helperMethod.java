@@ -218,14 +218,17 @@ public class helperMethod
             if(pURL.startsWith("www")){
                 pURL = "http://"+pURL;
             }else {
-                pURL = "http://www."+pURL;
+                pURL = "http://"+pURL;
             }
         }else {
+            if(pURL.startsWith("https://")){
+                return pURL;
+            }
             pURL = pURL.replace("https://","").replace("http://","");
             if(pURL.startsWith("www")){
                 pURL = "http://"+pURL;
             }else {
-                pURL = "http://www."+pURL;
+                pURL = "http://"+pURL;
             }
         }
         return pURL;

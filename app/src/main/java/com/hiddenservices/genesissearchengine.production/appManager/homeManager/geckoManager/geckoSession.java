@@ -22,6 +22,8 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
+
+import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -69,6 +71,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_BADCERT_CACHED;
+import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_BADCERT_CACHED_DARK;
 import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_ERROR_CACHED;
 import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_ERROR_CACHED_DARK;
 import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
@@ -326,9 +330,14 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,true);
 
         if(mIsLoaded){
+            if(helperMethod.getHost(var2).endsWith(".onion")){
+                var2 = var2.replace("www.","");
+            }
+
             mCurrentURL = var2;
-            if(!var2.equals("about:blank")){
-                event.invokeObserver(Arrays.asList(var2,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+
+            if(!mCurrentURL.equals("about:blank")){
+                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
             }
             if(!isPageLoading){
@@ -337,7 +346,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 mThemeChanged = false;
             }
             isPageLoading = true;
-            if(!var2.equals("about:blank") && !mCurrentTitle.equals("loading")){
+            if(!mCurrentURL.equals("about:blank") && !mCurrentTitle.equals("loading")){
                 mProgress = 5;
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
                 mThemeChanged = false;
@@ -497,7 +506,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         }catch (Exception ignored){}
 
         if(wasBackPressed && mPastURLVerify){
-            if(var2.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+            if(var2.equals("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
                 if(var2.startsWith(CONST_GENESIS_URL_CACHED_DARK) && (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get()))){
                     isPageLoading = false;
                     event.invokeObserver(null, enums.etype.M_CHANGE_HOME_THEME);
@@ -547,48 +556,53 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
 
-        if(var1.uri.endsWith("genesisconfigurenewidentity.com/")){
+        String m_url = var1.uri;
+        if(helperMethod.getHost(m_url).endsWith(".onion")){
+            m_url = m_url.replace("www.","");
+        }
+
+        if(m_url.endsWith("genesisconfigurenewidentity.com/")){
             initURL(mPrevURL);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY_MESSAGED);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        String mNormalizeURL = helperMethod.normalize(var1.uri);
+        String mNormalizeURL = helperMethod.normalize(m_url);
         if(mNormalizeURL!=null && mNormalizeURL.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
             initURL(constants.CONST_GENESIS_DOMAIN_URL);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        if(!var1.uri.contains(constants.CONST_GENESIS_GMT_TIME_GET_KEY) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED) && !var1.uri.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
+        if(!m_url.contains(constants.CONST_GENESIS_GMT_TIME_GET_KEY) && !m_url.startsWith(CONST_GENESIS_URL_CACHED) && !m_url.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)){
 
-            String mVerificationURL = setGenesisVerificationToken(var1.uri);
+            String mVerificationURL = setGenesisVerificationToken(m_url);
             initURL(mVerificationURL);
             loadUri(mVerificationURL);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        else if(var1.uri.startsWith("mailto")){
-            event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.M_ON_MAIL);
+        else if(m_url.startsWith("mailto")){
+            event.invokeObserver(Arrays.asList(m_url,mSessionID), enums.etype.M_ON_MAIL);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }
-        else if(var1.uri.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/advert__")){
-            event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.on_playstore_load);
+        else if(m_url.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/advert__")){
+            event.invokeObserver(Arrays.asList(m_url,mSessionID), enums.etype.on_playstore_load);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        else if(var1.uri.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED) || var1.uri.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?")){
+        else if(m_url.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED) || m_url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?")){
             initURL(constants.CONST_GENESIS_DOMAIN_URL);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        else if(var1.uri.equals("about:blank") && mIsLoaded){
+        else if(m_url.equals("about:blank") && mIsLoaded){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         }
         else if(var1.target==2){
-            event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.open_new_tab);
+            event.invokeObserver(Arrays.asList(m_url,mSessionID), enums.etype.open_new_tab);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        else if(!var1.uri.equals("about:blank")){
+        else if(!m_url.equals("about:blank")){
             if(mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
                 setURL(constants.CONST_GENESIS_DOMAIN_URL);
             }else if(mCurrentURL.equals(constants.CONST_GENESIS_HELP_URL_CACHE)){
@@ -597,11 +611,11 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
                 }else {
                     setURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
                 }
-            }else if(!var1.uri.startsWith("resource://android/assets/homepage/")){
-                setURL(var1.uri);
+            }else if(!m_url.startsWith("resource://android/assets/homepage/")){
+                setURL(m_url);
             }
 
-            event.invokeObserver(Arrays.asList(var1.uri,mSessionID), enums.etype.start_proxy);
+            event.invokeObserver(Arrays.asList(m_url,mSessionID), enums.etype.start_proxy);
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID), enums.etype.search_update);
 
             /* Its Absence causes delay on first launch*/
@@ -644,6 +658,15 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
 
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
+
+        if(helperMethod.getHost(var2).endsWith(".onion")){
+            var2 = var2.replace("www.","");
+        }
+
+        if(var2.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd")){
+            var2 = var2.replace("https","http");
+            mCurrentURL = var2;
+        }
         if(mCurrentURL.contains("genesis.onion")){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY);
         }
@@ -656,10 +679,19 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
             InputStream mResourceURL = null;
             try {
-                if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
-                    mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED);
-                }else {
-                    mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
+                if(var3.code==50){
+                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
+                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_BADCERT_CACHED);
+                    }else {
+                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_BADCERT_CACHED_DARK);
+                    }
+                }
+                else {
+                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
+                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED);
+                    }else {
+                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
+                    }
                 }
             }catch (Exception ex){
                 Log.i("asd","asd : " + ex.getMessage());
@@ -1063,6 +1095,9 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
 
     public void setURL(String pURL){
+        if(helperMethod.getHost(pURL).endsWith(".onion")){
+            pURL = pURL.replace("www.","");
+        }
         mCurrentURL = pURL;
     }
 

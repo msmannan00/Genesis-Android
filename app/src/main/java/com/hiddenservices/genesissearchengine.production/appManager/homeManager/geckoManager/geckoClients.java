@@ -107,7 +107,7 @@ public class geckoClients
                 loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
             }else {
                 String mURL = mSession.getCurrentURL();
-                if(mURL.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+                if(mURL.equals("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
                     if(!mSession.canGoBack()){
                         mNestedGeckoView.releaseSession();
                         mSession.close();
@@ -116,7 +116,7 @@ public class geckoClients
                     }else {
                         mSession.goBack();
                     }
-                    loadURL("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion", mNestedGeckoView, pcontext);
+                    loadURL("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion", mNestedGeckoView, pcontext);
                 }
             }
         }
@@ -381,13 +381,14 @@ public class geckoClients
     }
 
     public void loadURL(String url, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
+        url = helperMethod.completeURL(url);
         mSession = (geckoSession)mNestedGeckoView.getSession();
         if(mSession==null){
             return;
         }
         if(mSession.onGetInitializeFromStartup()){
             mSession.initURL(url);
-            if(!url.startsWith(CONST_REPORT_URL) && (url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))){
+            if(!url.startsWith(CONST_REPORT_URL) && (url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))){
                 try{
                     mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
                     if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)){
@@ -527,7 +528,7 @@ public class geckoClients
     public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall){
         mSession.stop();
         String url = mSession.getCurrentURL();
-        if(url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") ||  url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)){
+        if(url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") ||  url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)){
             loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
         }else if(!isThemeCall){
             mSession.reload();

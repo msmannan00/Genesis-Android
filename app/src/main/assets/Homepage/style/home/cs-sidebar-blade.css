@@ -16,6 +16,7 @@
     cursor: pointer;
     font-size: 0.90em;
     padding: 15px 10px 10px;
+    padding-bottom: 12px;
 	border-bottom: 4px solid #fcfcfc;
 }
 .sidebar__catagory:hover{

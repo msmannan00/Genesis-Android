@@ -9,8 +9,8 @@ public class constants
     public static final String CONST_SAMSUNG_URL = "http://www.samsungapps.com/appquery/appDetail.as?appId=com.hiddenservices.genesissearchengine.production";
 
     public static final String CONST_PRIVACY_POLICY_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy";
-    public static final String CONST_REPORT_URL = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/reportus?url=";
-    public static final String CONST_SITEMAP = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/create";
+    public static final String CONST_REPORT_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/reportus?url=";
+    public static final String CONST_SITEMAP = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/create";
     public static final String CONST_PACKAGE_NAME = "com.hiddenservices.genesissearchengine.production";
     public static final String CONST_GENESIS_ONION = "genesis.onion";
     public static final String CONST_GENESIS_ONION_V2 = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
@@ -33,8 +33,10 @@ public class constants
     public static final String CONST_GENESIS_URL_CACHED_DARK = "resource://android/assets/homepage/homepage-dark.html";
     public static final String CONST_GENESIS_ERROR_CACHED = "error/error.html";
     public static final String CONST_GENESIS_ERROR_CACHED_DARK = "error/error-dark.html";
-    public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/";
-    public static final String CONST_GENESIS_DOMAIN_URL = "https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
+    public static final String CONST_GENESIS_BADCERT_CACHED = "error/badcert.html";
+    public static final String CONST_GENESIS_BADCERT_CACHED_DARK = "error/badcert-dark.html";
+    public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/";
+    public static final String CONST_GENESIS_DOMAIN_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
     public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pSecretToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
