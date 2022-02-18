@@ -1,6 +1,6 @@
 /* Version */
-project.ext.vname = 'Build | Dark-Origin 1.4.8.6'
-project.ext.vcode = 285
+project.ext.vname = 'Build | Dark-Origin 1.0.0.6'
+project.ext.vcode = 6
 project.ext.buildType = 'release'
 
 /* dimension */

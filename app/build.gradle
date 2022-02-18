@@ -1,4 +1,4 @@
-//import com.android.build.OutputFile
+import com.android.build.OutputFile
 
 apply from: 'variables.gradle'
 apply plugin: 'com.android.application'
@@ -54,11 +54,15 @@ android {
 
     splits {
         abi {
-            enable project.ext.splitEnabled
-
             reset()
-
+            enable project.ext.splitEnabled
             include project.ext.abi_x86, project.ext.abi_x86_x64, project.ext.abi_arm64, project.ext.abi_armeabi
+        }
+    }
+
+    bundle {
+        abi {
+            enableSplit = true
         }
     }
 
@@ -152,7 +156,7 @@ android.applicationVariants.all { variant ->
     if (buildType == project.ext.buildType) {
         def baseVersionCode = project.ext.vcode
 
-        /*variant.outputs.each { output ->
+        variant.outputs.each { output ->
             def abi = output.getFilter(OutputFile.ABI)
 
             def versionCodeOverride = baseVersionCode
@@ -169,6 +173,6 @@ android.applicationVariants.all { variant ->
             }
 
             output.versionCodeOverride = versionCodeOverride
-        }*/
+        }
     }
 }

@@ -147,7 +147,7 @@
                                 android:textCursorDrawable="@xml/gx_search_cursor_state"
                                 android:textIsSelectable="false"
                                 android:textSize="16sp"
-                                android:maxLength="200"
+                                android:maxLength="1000"
                                 app:hintAnimationEnabled="false"
                                 tools:targetApi="o">
 
