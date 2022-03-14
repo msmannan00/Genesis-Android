@@ -18,7 +18,7 @@ public class status
 
     public static boolean sPaidStatus = false;
     public static boolean sDeveloperBuild = false;
-    public static int sStoreType = enums.StoreType.GOOGLE_PLAY;
+    public static int sStoreType = enums.StoreType.SAMSUNG;
 
     /*Settings Status*/
     public static Locale mSystemLocale = null;

@@ -5,13 +5,14 @@ public class constants
     /*LOCAL URL CONSTANTS*/
 
     public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.hiddenservices.genesissearchengine.production";
-    public static final String CONST_AMAZON_URL = "http://www.amazon.com/gp/mas/dl/android?p=com.hiddenservices.genesissearchengine.production";
-    public static final String CONST_SAMSUNG_URL = "http://www.samsungapps.com/appquery/appDetail.as?appId=com.hiddenservices.genesissearchengine.production";
+    public static final String CONST_AMAZON_URL = "http://www.amazon.com/gp/mas/dl/android?p=com.darkweb.genesissearchengine.production";
+    public static final String CONST_SAMSUNG_URL = "http://www.samsungapps.com/appquery/appDetail.as?appId=com.darkweb.genesissearchengine.production";
+    public static final String CONST_HUAWEI_URL = "https://appgallery.cloud.huawei.com/uowap/index.html#/detailApp/C105664271?appId=C105664271";
 
     public static final String CONST_PRIVACY_POLICY_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy";
-    public static final String CONST_REPORT_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/reportus?url=";
+    public static final String CONST_REPORT_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/report?url=";
     public static final String CONST_SITEMAP = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/create";
-    public static final String CONST_PACKAGE_NAME = "com.hiddenservices.genesissearchengine.production";
+    public static final String CONST_PACKAGE_NAME = "com.darkweb.genesissearchengine.production";
     public static final String CONST_GENESIS_ONION = "genesis.onion";
     public static final String CONST_GENESIS_ONION_V2 = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
 

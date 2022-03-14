@@ -23,10 +23,13 @@ public class externalURLNavigationContoller extends AppCompatActivity {
 
         status.sExternalWebsite = strings.GENERIC_EMPTY_STR;
         Uri mData = externalURLNavigationContoller.this.getIntent().getData();
+        if(mData.toString().contains("applovin")){
+            helperMethod.openURLInCustomBrowser(mData.toString(), activityContextManager.getInstance().getHomeController());
+            return;
+        }
         if(mData == null){
             mData = Uri.parse(constants.CONST_BACKEND_GENESIS_URL);
         }
-
         if(activityContextManager.getInstance().getHomeController()==null){
             Intent mIntent = new Intent(this, homeController.class);
             mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND_NAVIGATE, mData.toString());

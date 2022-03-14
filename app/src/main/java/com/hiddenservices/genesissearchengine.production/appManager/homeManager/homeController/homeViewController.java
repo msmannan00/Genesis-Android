@@ -41,6 +41,8 @@ import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.applovin.mediation.ads.MaxAdView;
 import com.hiddenservices.genesissearchengine.production.constants.*;
 import com.hiddenservices.genesissearchengine.production.dataManager.dataController;
 import com.hiddenservices.genesissearchengine.production.dataManager.dataEnums;
@@ -49,7 +51,6 @@ import com.hiddenservices.genesissearchengine.production.eventObserver;
 import com.hiddenservices.genesissearchengine.production.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.material.appbar.AppBarLayout;
-import com.mopub.mobileads.MoPubView;
 import org.mozilla.geckoview.GeckoView;
 import org.orbotproject.android.service.wrapper.orbotLocalConstants;
 import java.util.Arrays;
@@ -76,7 +77,7 @@ class homeViewController
     private editTextManager mSearchbar;
     private ConstraintLayout mSplashScreen;
     private TextView mLoadingText;
-    private MoPubView mBannerAds = null;
+    private MaxAdView mBannerAds = null;
     private Handler mUpdateUIHandler = null;
     private ImageButton mGatewaySplash;
     private LinearLayout mTopBar;
@@ -117,7 +118,7 @@ class homeViewController
     private MovementMethod mSearchBarMovementMethod = null;
     private boolean mIsTopBarExpanded = true;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MoPubView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;

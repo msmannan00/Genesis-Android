@@ -16,6 +16,7 @@ public class enums
         public static final int GOOGLE_PLAY = 0;
         public static final int AMAZON = 1;
         public static final int SAMSUNG = 2;
+        public static final int HUAWEI = 0;
     }
 
     public static class AddTabCallback {

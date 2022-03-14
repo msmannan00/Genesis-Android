@@ -1,6 +1,6 @@
 /* Version */
-project.ext.vname = 'Build | Dark-Origin 1.0.0.6'
-project.ext.vcode = 6
+project.ext.vname = 'Build | Dark-Origin 1.0.2.1'
+project.ext.vcode = 365
 project.ext.buildType = 'release'
 
 /* dimension */
@@ -31,9 +31,11 @@ project.ext.splitEnabled = true
 project.ext.compile_sdk_version = 31
 project.ext.min_sdk_version = 21
 project.ext.target_sdk_version = 30
-project.ext.build_tool_version = '30.0.3'
+project.ext.build_tool_version = '31'
 project.ext.ndk_version = '21.4.7075529'
-project.ext.application_id = "com.hiddenservices.genesissearchengine.production"
+// project.ext.application_id = "com.hiddenservices.genesissearchengine.production"
+project.ext.application_id = "com.darkweb.genesissearchengine.production"
+
 project.ext.debugSymbolLevel = 'FULL'
 
 /* Splits */

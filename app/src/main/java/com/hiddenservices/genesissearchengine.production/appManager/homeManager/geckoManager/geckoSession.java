@@ -22,15 +22,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
-
-import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
-
 import com.hiddenservices.genesissearchengine.production.constants.constants;
 import com.hiddenservices.genesissearchengine.production.constants.enums;
 import com.hiddenservices.genesissearchengine.production.constants.keys;
@@ -43,7 +40,6 @@ import com.hiddenservices.genesissearchengine.production.libs.trueTime.trueTimeE
 import com.hiddenservices.genesissearchengine.production.pluginManager.pluginController;
 import com.hiddenservices.genesissearchengine.production.pluginManager.pluginEnums;
 import com.example.myapplication.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.mozilla.gecko.PrefsHelper;
@@ -53,12 +49,12 @@ import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.MediaSession;
 import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebExtension;
 import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
 import org.orbotproject.android.service.wrapper.orbotLocalConstants;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -70,7 +66,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_BADCERT_CACHED;
 import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_BADCERT_CACHED_DARK;
 import static com.hiddenservices.genesissearchengine.production.constants.constants.CONST_GENESIS_ERROR_CACHED;
@@ -88,7 +83,7 @@ import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
 public class
-geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSession.ScrollDelegate,GeckoSession.PermissionDelegate,GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate,GeckoSession.NavigationDelegate,GeckoSession.ContentDelegate
+geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.MediaDelegate,GeckoSession.ScrollDelegate,GeckoSession.PermissionDelegate,GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate,GeckoSession.NavigationDelegate,GeckoSession.ContentDelegate
 {
     private eventObserver.eventListener event;
 
@@ -99,6 +94,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     private boolean mFullScreen = false;
     private boolean isPageLoading = false;
     private int mProgress = 0;
+    private boolean isMediaRunning = false;
     private String mPrevURL = "about:blank";
     private String mCurrentTitle = "loading";
     private String mCurrentURL = "about:blank";
@@ -126,6 +122,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     public boolean mCloseRequested = false;
     public boolean mOnBackPressed = false;
     public SessionState mSessionState;
+    MediaSession.Delegate mMediaSession;
 
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
@@ -142,10 +139,63 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         setAutoFillDelegate();
         setPermissionDelegate(this);
         setScrollDelegate(this);
+        setMediaSessionDelegate(this);
+
+
+        setMediaDelegate(new mediaDelegate(mContext, mContext));
         mDownloadManager = new geckoDownloadManager();
         mSelectionActionDelegate = new selectionActionDelegate(mContext, true);
         setPromptDelegate(new geckoPromptView(mContext));
         setSelectionActionDelegate(mSelectionActionDelegate);
+    }
+
+    @Override
+    public void onActivated(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
+        MediaSession.Delegate.super.onActivated(session, mediaSession);
+    }
+
+    @Override
+    public void onDeactivated(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
+        MediaSession.Delegate.super.onDeactivated(session, mediaSession);
+        isMediaRunning = false;
+    }
+
+    @Override
+    public void onMetadata(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, @NonNull MediaSession.Metadata meta) {
+        MediaSession.Delegate.super.onMetadata(session, mediaSession, meta);
+    }
+
+    @Override
+    public void onFeatures(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, long features) {
+        MediaSession.Delegate.super.onFeatures(session, mediaSession, features);
+    }
+
+    @Override
+    public void onPlay(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
+        MediaSession.Delegate.super.onPlay(session, mediaSession);
+        isMediaRunning = true;
+    }
+
+    @Override
+    public void onPause(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
+        MediaSession.Delegate.super.onPause(session, mediaSession);
+        isMediaRunning = false;
+    }
+
+    @Override
+    public void onStop(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
+        MediaSession.Delegate.super.onStop(session, mediaSession);
+        isMediaRunning = false;
+    }
+
+    @Override
+    public void onPositionState(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, @NonNull MediaSession.PositionState state) {
+        MediaSession.Delegate.super.onPositionState(session, mediaSession, state);
+    }
+
+    @Override
+    public void onFullscreen(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, boolean enabled, @Nullable @org.jetbrains.annotations.Nullable MediaSession.ElementMetadata meta) {
+        MediaSession.Delegate.super.onFullscreen(session, mediaSession, enabled, meta);
     }
 
     public void onDestroy(){
@@ -188,6 +238,12 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
         geckoPromptView mPromptDelegate = (geckoPromptView)getPromptDelegate();
         Objects.requireNonNull(mPromptDelegate).onFileCallbackResult(resultCode,data);
+    }
+
+    public void onStopMedia(){
+        if(isMediaRunning){
+            close();
+        }
     }
 
     public void onSessionReinit(){
@@ -330,7 +386,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,true);
 
         if(mIsLoaded){
-            if(helperMethod.getHost(var2).endsWith(".onion")){
+            if(!var2.equals("about:blank") && helperMethod.getHost(var2).endsWith(".onion")){
                 var2 = var2.replace("www.","");
             }
 
@@ -545,10 +601,12 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
 
     private String setGenesisVerificationToken(String pString){
         try{
-            Uri built = Uri.parse(pString).buildUpon()
-                    .appendQueryParameter(constants.CONST_GENESIS_GMT_TIME_GET_KEY, trueTimeEncryption.getInstance().getSecretToken())
-                    .build();
-            return built.toString();
+            if (pString.contains("?")){
+                pString += "&"+constants.CONST_GENESIS_GMT_TIME_GET_KEY+"="+trueTimeEncryption.getInstance().getSecretToken();
+            }else {
+                pString += "?"+constants.CONST_GENESIS_GMT_TIME_GET_KEY+"="+trueTimeEncryption.getInstance().getSecretToken();
+            }
+            return pString;
         }catch (Exception ex){
             return pString;
         }
@@ -657,53 +715,57 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     }
 
 
-    public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, WebRequestError var3) {
+    public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, @NonNull WebRequestError var3) {
 
-        if(helperMethod.getHost(var2).endsWith(".onion")){
-            var2 = var2.replace("www.","");
-        }
-
-        if(var2.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd")){
-            var2 = var2.replace("https","http");
-            mCurrentURL = var2;
-        }
-        if(mCurrentURL.contains("genesis.onion")){
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY);
-        }
-        if(status.sSettingIsAppStarted && orbotLocalConstants.mIsTorInitialized){
-            errorHandler handler = new errorHandler();
-            mProgress = 0;
-            mPreviousErrorPage = true;
-            event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
-
-            InputStream mResourceURL = null;
-            try {
-                if(var3.code==50){
-                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
-                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_BADCERT_CACHED);
-                    }else {
-                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_BADCERT_CACHED_DARK);
-                    }
-                }
-                else {
-                    if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
-                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED);
-                    }else {
-                        mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
-                    }
-                }
-            }catch (Exception ex){
-                Log.i("asd","asd : " + ex.getMessage());
+        try {
+            if(helperMethod.getHost(var2).endsWith(".onion")){
+                var2 = var2.replace("www.","");
             }
 
-            return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2, mResourceURL));
-        }else {
-            event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.M_ORBOT_LOADING);
-            mCurrentURL = mPrevURL;
-            event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+            if(var2.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd")){
+                var2 = var2.replace("https","http");
+                mCurrentURL = var2;
+            }
+            if(mCurrentURL.contains("genesis.onion")){
+                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY);
+            }
+            if(status.sSettingIsAppStarted && orbotLocalConstants.mIsTorInitialized){
+                errorHandler handler = new errorHandler();
+                mProgress = 0;
+                mPreviousErrorPage = true;
+                event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.on_load_error);
+                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.ON_UPDATE_THEME);
+
+                InputStream mResourceURL = null;
+                try {
+                    if(var3.code==50){
+                        if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
+                            mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_BADCERT_CACHED);
+                        }else {
+                            mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_BADCERT_CACHED_DARK);
+                        }
+                    }
+                    else {
+                        if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get())){
+                            mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED);
+                        }else {
+                            mResourceURL = mContext.get().getResources().getAssets().open(CONST_GENESIS_ERROR_CACHED_DARK);
+                        }
+                    }
+                }catch (Exception ex){
+                    Log.i("asd","asd : " + ex.getMessage());
+                }
+
+                return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code,mContext.get(),var2, mResourceURL));
+            }else {
+                event.invokeObserver(Arrays.asList(var2,mSessionID), enums.etype.M_ORBOT_LOADING);
+                mCurrentURL = mPrevURL;
+                event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+            }
+            return null;
+        }catch (Exception ex){
+            return null;
         }
-        return null;
     }
 
     /*Content Delegate*/
@@ -731,7 +793,7 @@ geckoSession extends GeckoSession implements GeckoSession.MediaDelegate,GeckoSes
     public void onFirstContentfulPaint(@NonNull GeckoSession var1) {
 
         isFirstPaintExecuted = true;
-        if(mPreviousErrorPage || mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.toString().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+        if(mPreviousErrorPage || mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
         }else {
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, true), enums.etype.M_ON_BANNER_UPDATE);

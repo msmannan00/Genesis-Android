@@ -29,12 +29,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <meta-data android:name="applovin.sdk.key"
+            android:value="hGlhanpemGqPOKKAgaXvhyxwZaG9uD68csy1OadWTNhEgKvBWR7-7KSpyFr6nfZ4KMOuBBV5J49s2LLSg-SVxg"/>
+
         <activity
             android:name="com.hiddenservices.genesissearchengine.production.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
 
-        <receiver android:name="com.widget.Genesis.widgetManager.widgetController">
+        <receiver android:name="com.widget.Genesis.widgetManager.widgetController"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

@@ -25,24 +25,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    aaptOptions {
-        cruncherEnabled = false
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError true
-
-        htmlReport true
-        xmlReport false
-        textReport false
-
-        lintConfig file("../lint.xml")
-    }
-
     packagingOptions {
-        exclude 'META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version'
+        resources {
+            excludes += ['META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version']
+        }
+    }
+
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds false
+        htmlReport true
+        lintConfig file('../lint.xml')
+        textReport false
+        xmlReport false
     }
 }
 

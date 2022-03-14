@@ -23,7 +23,7 @@ public class analyticManager
 
     private void initialize()
     {
-        new FlurryAgent.Builder() .withLogEnabled(false) .build(mAppContext.get().getApplicationContext(), "4C4K4T5ND9RJKT4H47GQ");
+        new FlurryAgent.Builder() .withLogEnabled(false) .build(mAppContext.get().getApplicationContext(), "ND6QCR4JSHSJ25VWC8DN");
     }
 
     /*External Triggers*/

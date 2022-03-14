@@ -46,6 +46,8 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.applovin.mediation.ads.MaxAdView;
 import com.hiddenservices.genesissearchengine.production.appManager.activityContextManager;
 import com.hiddenservices.genesissearchengine.production.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController;
 import com.hiddenservices.genesissearchengine.production.appManager.bookmarkManager.bookmarkHome.bookmarkController;
@@ -77,7 +79,6 @@ import com.hiddenservices.genesissearchengine.production.libs.trueTime.trueTimeE
 import com.hiddenservices.genesissearchengine.production.pluginManager.pluginController;
 import com.hiddenservices.genesissearchengine.production.pluginManager.pluginEnums;
 import com.example.myapplication.R;
-import com.mopub.mobileads.MoPubView;
 import com.widget.Genesis.widgetManager.widgetController;
 
 import org.mozilla.geckoview.ContentBlocking;
@@ -88,7 +89,6 @@ import org.orbotproject.android.service.util.Prefs;
 import org.orbotproject.android.service.wrapper.LocaleHelper;
 import org.orbotproject.android.service.wrapper.orbotLocalConstants;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -150,7 +150,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ImageView mLoadingIcon;
     private ImageView mBlocker;
     private TextView mLoadingText;
-    private MoPubView mBannerAds = null;
+    private MaxAdView mBannerAds = null;
     private ImageButton mGatewaySplash;
     private ImageButton mPanicButton;
     private ImageButton mPanicButtonLandscape;
@@ -549,10 +549,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             Method method = Objects.requireNonNull(clazz.getSuperclass()).getDeclaredMethod("stop");
             method.setAccessible(true);
 
-            Field field = clazz.getDeclaredField("INSTANCE");
-            field.setAccessible(true);
+            // Field field = clazz.getDeclaredField("INSTANCE");
+            // field.setAccessible(true);
 
-            method.invoke(field.get(null));
+            // method.invoke(field.get(null));
         }
         catch (Throwable e) {
             e.printStackTrace();
@@ -1460,6 +1460,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mSearchbar.clearFocus();
         mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,false, true);
+
+        if (mGeckoClient.getSession()!=null && mGeckoClient!=null) {
+            mGeckoClient.onStopMedia();
+        }
+
     }
 
     @Override
@@ -1699,7 +1704,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.manualDownloadWithName(pURL,pPath,this);
     }
 
-    public MoPubView getBannerAd()
+    public MaxAdView getBannerAd()
     {
         return mBannerAds;
     }

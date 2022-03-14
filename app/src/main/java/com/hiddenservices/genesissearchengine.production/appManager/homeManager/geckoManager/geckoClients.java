@@ -368,6 +368,10 @@ public class geckoClients
         return mSession;
     }
 
+    public void onStopMedia(){
+        mSession.onStopMedia();
+    }
+
     public void onUploadRequest(int resultCode,Intent data){
         mSession.onFileUploadRequest(resultCode,data);
     }

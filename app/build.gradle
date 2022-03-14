@@ -39,10 +39,6 @@ android {
         }
     }
 
-    lintOptions {
-        checkReleaseBuilds project.ext.checkReleaseBuilds
-        abortOnError project.ext.abortOnError
-    }
 
     flavorDimensions project.ext.dimen
 
@@ -102,23 +98,23 @@ dependencies {
 
     implementation "org.mozilla.components:browser-engine-gecko:75.0.0"
     implementation "org.mozilla.components:browser-icons:91.0.6"
-    implementation "org.mozilla.geckoview:geckoview: 97.0.20220202182137"
+    implementation "org.mozilla.geckoview:geckoview: 98.0.20220313140707"
     implementation "org.mozilla.components:concept-fetch:91.0.6"
     implementation "org.mozilla.components:concept-base:91.0.6"
     implementation "org.mozilla.components:support-utils:91.0.6"
     /*Crashlytics*/
 
-    implementation 'com.flurry.android:analytics:12.13.0@aar'
+    implementation 'com.flurry.android:analytics:13.1.0@aar'
 
     /* Ads Manager */
 
     implementation 'com.android.support:support-annotations:29.0.0'
     implementation 'com.facebook.android:audience-network-sdk:6.6.0'
     implementation 'com.mopub.mediation:facebookaudiencenetwork:6.6.0.0'
-    implementation('com.mopub:mopub-sdk:5.17.0@aar') {
-        transitive = true
-    }
-
+    implementation 'com.applovin:applovin-sdk:+'
+    implementation 'com.applovin.mediation:facebook-adapter:+'
+    implementation 'com.android.support:recyclerview-v7:28.+'
+    implementation 'com.android.support:appcompat-v7:28.+'
     /* Crawler Service */
 
     implementation 'org.jsoup:jsoup:1.13.1'
@@ -142,8 +138,6 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'com.google.android.material:material:1.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
-    implementation group: 'com.macasaet.fernet', name: 'fernet-java8', version: '1.4.2'
     implementation 'org.apache.commons:commons-text:1.3'
 }
 

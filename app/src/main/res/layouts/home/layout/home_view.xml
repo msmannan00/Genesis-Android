@@ -8,19 +8,20 @@
     android:background="@color/black"
     tools:context="com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.homeController">
 
-    <com.mopub.mobileads.MoPubView
+    <com.applovin.mediation.ads.MaxAdView
+        maxads:adUnitId="6afabb72c853c683"
+        xmlns:maxads="http://schemas.applovin.com/android/1.0"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        app:moPubAdSize = "match_view"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/c_background_inverted"
         android:visibility="gone"/>
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/pCoordinatorLayout"

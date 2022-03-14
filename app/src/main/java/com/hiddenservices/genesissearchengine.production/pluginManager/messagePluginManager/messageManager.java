@@ -441,6 +441,9 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         else if(status.sStoreType == enums.StoreType.AMAZON){
             return CONST_AMAZON_URL;
         }
+        else if(status.sStoreType == enums.StoreType.HUAWEI){
+            return CONST_HUAWEI_URL;
+        }
         else {
             return CONST_SAMSUNG_URL;
         }

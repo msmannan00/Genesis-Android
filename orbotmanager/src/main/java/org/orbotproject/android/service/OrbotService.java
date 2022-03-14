@@ -947,11 +947,13 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
                     public void run(){
                         torService = ((TorService.LocalBinder) iBinder).getService();
                         try {
-                            conn = torService.getTorControlConnection();
-                            while (conn == null) {
-                                Log.v(TAG, "Waiting for Tor Control Connection...");
-                                Thread.sleep(500);
-                                conn = torService.getTorControlConnection();
+                            while ((conn = torService.getTorControlConnection())==null)
+                            {
+                                try {
+                                    Thread.sleep(500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                             }
                             sleep(2000);
                             mEventHandler = new TorEventHandler(OrbotService.this);
