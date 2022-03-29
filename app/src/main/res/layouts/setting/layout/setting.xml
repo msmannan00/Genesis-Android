@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/c_background"
-        tools:context="com.hiddenservices.genesissearchengine.production.appManager.settingManager.settingHomeManager.settingHomeController">
+        tools:context="com.hiddenservices.onionservices.appManager.settingManager.settingHomeManager.settingHomeController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

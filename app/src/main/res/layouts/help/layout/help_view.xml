@@ -7,7 +7,7 @@
     android:clickable="true"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    tools:context="com.hiddenservices.genesissearchengine.production.appManager.helpManager.helpController">
+    tools:context="com.hiddenservices.onionservices.appManager.helpManager.helpController">
 
     <!-- Title Header -->
     <ProgressBar
@@ -177,7 +177,7 @@
             android:clickable="true"
             android:orientation="vertical">
 
-            <com.hiddenservices.genesissearchengine.production.appManager.helpManager.editViewController
+            <com.hiddenservices.onionservices.appManager.helpManager.editViewController
                 android:id="@+id/pSearchInput"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

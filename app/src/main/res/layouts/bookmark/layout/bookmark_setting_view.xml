@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    tools:context="com.hiddenservices.genesissearchengine.production.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController">
+    tools:context="com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController">
     <ScrollView
         android:id="@+id/pScrollView"
         android:layout_width="match_parent"
@@ -146,7 +146,7 @@
                 android:textSize="13sp"
                 tools:ignore="RtlSymmetry" />
 
-            <com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.editTextManager
+            <com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager
                 android:id="@+id/pBookmarkName"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"

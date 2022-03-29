@@ -60,12 +60,15 @@
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_url_longpress.xml" value="0.33" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/secure_connection_popup.xml" value="0.33" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/bookmark/layout/bookmark_view.xml" value="0.16875" />
+        <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/history/layout/activity_adview_controller.xml" value="0.9" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/history/layout/history_view.xml" value="0.22083333333333333" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/home/layout/home_view.xml" value="0.22" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/home/layout/popup_search_view.xml" value="0.2" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/orbot/layout/orbot_settings_view.xml" value="0.33" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/orbotLog/layout/orbot_log_view.xml" value="0.33" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/proxyStatus/layout/proxy_status_view.xml" value="0.20260416666666667" />
+        <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/searchWidget/layout/widget_search_controller.xml" value="0.2531847133757962" />
+        <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting_accessibility_view.xml" value="0.18541666666666667" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting_log_view.xml" value="0.33" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting_privacy_view.xml" value="0.16875" />
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/shared/listviews/layout/history_bookmark_row_view.xml" value="0.20416666666666666" />

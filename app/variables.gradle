@@ -30,7 +30,7 @@ project.ext.splitEnabled = true
 /* Application Preferences */
 project.ext.compile_sdk_version = 31
 project.ext.min_sdk_version = 21
-project.ext.target_sdk_version = 30
+project.ext.target_sdk_version = 31
 project.ext.build_tool_version = '31'
 project.ext.ndk_version = '21.4.7075529'
 // project.ext.application_id = "com.hiddenservices.genesissearchengine.production"

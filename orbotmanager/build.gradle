@@ -25,21 +25,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    packagingOptions {
-        resources {
-            excludes += ['META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version']
-        }
-    }
 
-
-    lint {
-        abortOnError true
-        checkReleaseBuilds false
-        htmlReport true
-        lintConfig file('../lint.xml')
-        textReport false
-        xmlReport false
-    }
 }
 
 dependencies {
@@ -60,4 +46,5 @@ dependencies {
     implementation 'info.guardianproject:tor-android:0.4.5.9'
 
     implementation 'com.github.tladesignz:IPtProxy:1.0.0'
+    implementation 'androidx.work:work-runtime-ktx:2.7.0-alpha05'
 }

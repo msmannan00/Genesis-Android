@@ -24,6 +24,7 @@
             <option value="$PROJECT_DIR$/intentintegrator" />
             <option value="$PROJECT_DIR$/orbotmanager" />
             <option value="$PROJECT_DIR$/orbotservicemanagers" />
+            <option value="$PROJECT_DIR$/service-telemetry" />
             <option value="$PROJECT_DIR$/shutterbug" />
           </set>
         </option>

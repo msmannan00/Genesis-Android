@@ -77,7 +77,7 @@
                     app:cardElevation="0dp"
                     app:contentPadding="0dp">
 
-                    <com.hiddenservices.genesissearchengine.production.libs.views.ThumbnailCrop
+                    <com.hiddenservices.onionservices.libs.views.ThumbnailCrop
                         android:id="@+id/pWebThumbnail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    tools:context="com.hiddenservices.genesissearchengine.production.appManager.settingManager.advanceManager.settingAdvanceController">
+    tools:context="com.hiddenservices.onionservices.appManager.settingManager.advanceManager.settingAdvanceController">
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

@@ -235,7 +235,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             }
             PackageManager pm = getPackageManager();
             Intent intent = pm.getLaunchIntentForPackage(getPackageName());
-            PendingIntent pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, 0);
+            PendingIntent pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
             if (mNotifyBuilder == null) {
                 mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -250,11 +250,11 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             mNotifyBuilder.mActions.clear();
             if (conn != null && orbotLocalConstants.mIsTorInitialized) {
                 Intent intentRefresh = new Intent(CMD_NEWNYM);
-                PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_IMMUTABLE);
                 mNotifyBuilder.addAction(R.mipmap.ic_stat_tor_logo, getString(R.string.menu_new_identity), pendingIntentNewNym);
 
                 Intent intentSetting = new Intent(CMD_SETTING);
-                PendingIntent pendingIntentSetting = PendingIntent.getBroadcast(this, 0, intentSetting, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntentSetting = PendingIntent.getBroadcast(this, 0, intentSetting, PendingIntent.FLAG_IMMUTABLE);
                 mNotifyBuilder.addAction(0, "Notification Settings", pendingIntentSetting);
             }
 
@@ -269,9 +269,16 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForeground(11337, notification);
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+                    mNotificationManager.cancel(11337);
+                    stopForeground(true);
+                }
             } else if (Prefs.persistNotifications() && (!mNotificationShowing)) {
                 startForeground(11337, notification);
-                logNotice("Set background service to FOREGROUND");
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+                    mNotificationManager.cancel(11337);
+                    stopForeground(true);
+                }
             } else {
                 mNotificationManager.notify(NOTIFY_ID, notification);
             }
@@ -501,35 +508,7 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
         try {
             if (Build.VERSION.SDK_INT <= 25) {
-                Intent notificationIntent = new Intent(this, OrbotService.class);
-
-                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                        notificationIntent, 0);
-
-                Notification notification = new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_stat_starting_tor_logo)
-                        .setContentTitle("Starting Genesis")
-                        .setContentIntent(pendingIntent).build();
-
-                startForeground(11337, notification);
             }else {
-                String id = "_channel_01";
-                int importance = NotificationManager.IMPORTANCE_LOW;
-                NotificationChannel mChannel = new NotificationChannel(id, "notification", importance);
-                mChannel.enableLights(true);
-
-                Notification notification = new Notification.Builder(getApplicationContext(), id)
-                        .setSmallIcon(R.drawable.ic_stat_starting_tor_logo)
-                        .setContentTitle("Starting Genesis")
-                        .build();
-
-                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                if (mNotificationManager != null) {
-                    mNotificationManager.createNotificationChannel(mChannel);
-                    mNotificationManager.notify(11337, notification);
-                }
-
-                startForeground(11337, notification);
             }
 
 

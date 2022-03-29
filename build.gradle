@@ -1,35 +1,64 @@
-
 buildscript {
     ext {
         kotlin_version = '1.5.30'
+        mozilla_components_version_telemetry = '57.0.9'
     }
+
     repositories {
         google()
-        mavenLocal()
         mavenCentral()
+        mavenLocal()
+        maven {
+            url "https://maven.mozilla.org/maven2"
+        }
+        maven {
+            url "https://nightly.maven.mozilla.org/maven2"
+        }
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:7.1.2'
         classpath 'com.google.gms:google-services:4.3.10'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+        classpath "org.mozilla.components:tooling-glean-gradle:100.0.20220327143103"
     }
 }
+
+
 
 allprojects {
     repositories {
         google()
+        mavenLocal()
         mavenCentral()
-        maven { url 'https://maven.mozilla.org/maven2/' }
+        maven {
+            url "https://nightly.maven.mozilla.org/maven2"
+        }
+        maven {
+            url "https://maven.mozilla.org/maven2"
+        }
         maven {
             url "https://jitpack.io"
             credentials { username "48a9b4c06b5dabbc03328ddcdbb7dfd8fab253ae" }
         }
         maven { url 'https://jitpack.io' }
-        mavenLocal()
         maven { url "https://raw.githubusercontent.com/guardianproject/gpmaven/master" }
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

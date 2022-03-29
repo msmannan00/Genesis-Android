@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c_background"
-    tools:context="com.hiddenservices.genesissearchengine.production.appManager.historyManager.historyController">
+    tools:context="com.hiddenservices.onionservices.appManager.historyManager.historyController">
 
     <LinearLayout
         android:id="@+id/pHeaderContainer"
@@ -55,7 +55,7 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.editTextManager
+            <com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager
                 android:id="@+id/pSearchInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

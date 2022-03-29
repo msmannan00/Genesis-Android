@@ -12,16 +12,14 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:extractNativeLibs="true"
-        android:largeHeap = "false"
-        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher_genesis"
         android:label="@string/app_name"
+        android:largeHeap="false"
         android:networkSecurityConfig="@xml/gx_network_security_config"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -29,17 +27,27 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <meta-data android:name="applovin.sdk.key"
-            android:value="hGlhanpemGqPOKKAgaXvhyxwZaG9uD68csy1OadWTNhEgKvBWR7-7KSpyFr6nfZ4KMOuBBV5J49s2LLSg-SVxg"/>
+        <activity
+            android:launchMode="singleTask"
+            android:name="com.hiddenservices.onionservices.appManager.advertManager.advertController"
+            android:exported="true" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="applovin.sdk.key"
+            android:value="hGlhanpemGqPOKKAgaXvhyxwZaG9uD68csy1OadWTNhEgKvBWR7-7KSpyFr6nfZ4KMOuBBV5J49s2LLSg-SVxg" />
 
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController"
+            android:name="com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
 
-        <receiver android:name="com.widget.Genesis.widgetManager.widgetController"
-            android:exported="false">
+        <receiver
+            android:name="com.widget.onionservices.widgetManager.widgetController"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -50,87 +58,87 @@
         </receiver>
 
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.orbotManager.orbotController"
+            android:name="com.hiddenservices.onionservices.appManager.orbotManager.orbotController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.proxyStatusManager.proxyStatusController"
+            android:name="com.hiddenservices.onionservices.appManager.proxyStatusManager.proxyStatusController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.settingHomeManager.settingHomeController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.settingHomeManager.settingHomeController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:label="@string/SETTING_HEADER"
             android:exported="true"
+            android:label="@string/SETTING_HEADER"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.historyManager.historyController"
+            android:name="com.hiddenservices.onionservices.appManager.historyManager.historyController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.bookmarkManager.bookmarkHome.bookmarkController"
+            android:name="com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.languageManager.languageController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:label="@string/SETTING_HEADER"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.helpManager.helpController"
+            android:name="com.hiddenservices.onionservices.appManager.languageManager.languageController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:label="@string/SETTING_HEADER"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.accessibilityManager.settingAccessibilityController"
+            android:name="com.hiddenservices.onionservices.appManager.helpManager.helpController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:label="@string/SETTING_HEADER"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.clearManager.settingClearController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.accessibilityManager.settingAccessibilityController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:label="@string/SETTING_HEADER"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.bridgeManager.bridgeController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.clearManager.settingClearController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:label="@string/SETTING_HEADER"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.hiddenservices.onionservices.appManager.bridgeManager.bridgeController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.notificationManager.settingNotificationController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.notificationManager.settingNotificationController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.privacyManager.settingPrivacyController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.privacyManager.settingPrivacyController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.logManager.settingLogController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.logManager.settingLogController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.advanceManager.settingAdvanceController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.advanceManager.settingAdvanceController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.orbotLogManager.orbotLogController"
+            android:name="com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.generalManager.settingGeneralController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.generalManager.settingGeneralController"
             android:configChanges="uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.searchEngineManager.settingSearchController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.settingManager.trackingManager.settingTrackingController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.searchEngineManager.settingSearchController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.homeManager.homeController.homeController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.trackingManager.settingTrackingController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController"
             android:configChanges="keyboard|keyboardHidden|mcc|mnc|orientation|screenSize|locale|layoutDirection|smallestScreenSize|screenLayout"
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan">
@@ -146,8 +154,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.homeManager.FakeLauncherActivity"
-            android:enabled="false">
+            android:name="com.hiddenservices.onionservices.appManager.homeManager.FakeLauncherActivity"
+            android:enabled="false"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -156,11 +165,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.externalCommandManager.externalShortcutController"
+            android:name="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.externalCommandManager.externalURLNavigationContoller"
-            android:launchMode="singleTask">
+            android:name="com.hiddenservices.onionservices.appManager.externalCommandManager.externalURLNavigationContoller"
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -169,25 +179,6 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:mimeType="text/html" />
-                <data android:mimeType="text/plain" />
-                <data android:mimeType="application/xhtml+xml" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="text/plain" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.ASSIST" />
@@ -212,23 +203,26 @@
             android:value="ca-app-pub-6985886044951738~4177628900" />
         -->
         <service
-            android:name="com.hiddenservices.genesissearchengine.production.pluginManager.downloadPluginManager.downloadService"
+            android:name="com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadService"
             android:enabled="true"
-            android:exported="false"
+            android:exported="true"
             android:stopWithTask="true" />
         <service
-            android:name="com.hiddenservices.genesissearchengine.production.appManager.activityStateManager"
+            android:name="com.hiddenservices.onionservices.appManager.activityStateManager"
             android:stopWithTask="true" />
 
-        <receiver android:name="com.hiddenservices.genesissearchengine.production.pluginManager.notificationPluginManager.localEngagementManager" />
         <receiver
-            android:name="com.hiddenservices.genesissearchengine.production.pluginManager.pluginReciever.downloadNotificationReciever"
-            android:exported="false">
+            android:name="com.hiddenservices.onionservices.pluginManager.notificationPluginManager.localEngagementManager"
+            android:exported="true"
+            android:permission="TODO"
+            tools:ignore="ExportedReceiver" />
+        <receiver
+            android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.downloadNotificationReciever"
+            android:exported="true">
             <intent-filter>
                 <action android:name="Download_Cancelled" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="org.orbotproject.android.service.StartTorReceiver"
             android:exported="true"
@@ -240,7 +234,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.hiddenservices.genesissearchengine.production.provider"
+            android:authorities="com.hiddenservices.onionservices.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -248,34 +242,35 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <provider
-            android:name="com.hiddenservices.genesissearchengine.production.libs.providers.HSContentProvider"
+            android:name="com.hiddenservices.onionservices.libs.providers.HSContentProvider"
             android:authorities="org.torproject.android.ui.hiddenservices.providers.genesishiddenservices"
-            android:exported="false" />
+            android:exported="true" />
         <provider
-            android:name="com.hiddenservices.genesissearchengine.production.libs.providers.OnionServiceContentProvider"
+            android:name="com.hiddenservices.onionservices.libs.providers.OnionServiceContentProvider"
             android:authorities="org.torproject.android.ui.v3onionservice.genesishiddenservices"
-            android:exported="false" />
+            android:exported="true" />
         <provider
-            android:name="com.hiddenservices.genesissearchengine.production.libs.providers.ClientAuthContentProviderGenesis"
+            android:name="com.hiddenservices.onionservices.libs.providers.ClientAuthContentProviderGenesis"
             android:authorities="org.torproject.android.ui.v3onionservice.genesishiddenservices.clientauth"
-            android:exported="false" />
+            android:exported="true" />
         <provider
-            android:name="com.hiddenservices.genesissearchengine.production.libs.providers.CookieContentProvider"
+            android:name="com.hiddenservices.onionservices.libs.providers.CookieContentProvider"
             android:authorities="org.torproject.android.ui.hiddenservices.providers.genesishiddenservices.cookie"
-            android:exported="false" />
+            android:exported="true" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
+            android:exported="true"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
+
         <service
             android:name="org.orbotproject.android.service.OrbotService"
             android:enabled="true"
-            android:exported="false"
+            android:exported="true"
             android:stopWithTask="true" />
     </application>
 

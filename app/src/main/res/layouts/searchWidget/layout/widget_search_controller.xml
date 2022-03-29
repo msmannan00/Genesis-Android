@@ -50,7 +50,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@xml/gx_generic_input_white"
                 android:paddingStart="60dp"
-                android:paddingTop="13dp"
+                android:paddingTop="15dp"
                 android:paddingEnd="15dp"
                 android:maxLines="1"
                 android:ellipsize="end"
