@@ -16,16 +16,17 @@ import java.util.Date;
 
 public class blobDownloader {
 
-    private Context context;
-    private NotificationManager nm;
+    private Context mContext;
+    private NotificationManager mNotificationManager;
     public blobDownloader(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     @JavascriptInterface
     public void getBase64FromBlobData(String base64Data) throws IOException {
         convertBase64StringToPdfAndStoreIt(base64Data);
     }
+
     public static String getBase64StringFromBlobUrl(String blobUrl){
         if(blobUrl.startsWith("blob")){
             return "javascript: var xhr = new XMLHttpRequest();" +
@@ -60,18 +61,18 @@ public class blobDownloader {
         os.flush();
 
         if(dwldsPath.exists()) {
-            NotificationCompat.Builder b = new NotificationCompat.Builder(context, "MY_DL")
+            NotificationCompat.Builder b = new NotificationCompat.Builder(mContext, "MY_DL")
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.xml.ic_download)
-                    .setContentTitle("MY TITLE")
-                    .setContentText("MY TEXT CONTENT");
-            nm = (NotificationManager) this.context.getSystemService(Context.NOTIFICATION_SERVICE);
-            if(nm != null) {
-                nm.notify(notificationId, b.build());
+                    .setContentTitle("IMAGE_TITLE")
+                    .setContentText("IMAGE_CONTENT");
+            mNotificationManager = (NotificationManager) this.mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            if(mNotificationManager != null) {
+                mNotificationManager.notify(notificationId, b.build());
                 Handler h = new Handler();
                 long delayInMilliseconds = 5000;
-                h.postDelayed(() -> nm.cancel(notificationId), delayInMilliseconds);
+                h.postDelayed(() -> mNotificationManager.cancel(notificationId), delayInMilliseconds);
             }
         }
     }

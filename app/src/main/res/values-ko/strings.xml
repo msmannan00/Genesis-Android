@@ -12,7 +12,7 @@
 	<string name="GENERAL_LOADING" translatable="true">디지털 자유</string>
 	<string name="GENERAL_RELOAD" translatable="true">재 장전</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">다음 문제 중 하나에 직면하고 있습니다. 웹 페이지 또는 웹 사이트가 작동하지 않을 수 있습니다. 인터넷 연결 상태가 좋지 않을 수 있습니다. 프록시를 사용하고있을 수 있습니다. 웹 사이트가 방화벽에 의해 차단 될 수 있음</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.genesissearchengine.production.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | 이스라엘이 다시 공격하다</string>
 
 	<!-- Shortcuts -->

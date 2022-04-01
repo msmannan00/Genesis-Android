@@ -12,7 +12,7 @@
     <string name="GENERAL_LOADING" translatable="true">dijital özgürlük</string>
     <string name="GENERAL_RELOAD" translatable="true">Tekrar yükle</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">aşağıdaki problemlerden biriyle karşı karşıyasınız. web sayfası veya web sitesi çalışmıyor olabilir. İnternet bağlantınız zayıf olabilir. bir proxy kullanıyor olabilirsiniz. web sitesi güvenlik duvarı tarafından engelleniyor olabilir</string>
-    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.genesissearchengine.production.provider</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | İsrail Yeniden Grevde</string>
 
     <!-- Shortcuts -->

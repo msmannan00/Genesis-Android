@@ -1,8 +1,15 @@
 package com.hiddenservices.onionservices.pluginManager;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
@@ -16,7 +23,7 @@ import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.hiddenservices.onionservices.pluginManager.adPluginManager.mopubManager;
+import com.hiddenservices.onionservices.pluginManager.adPluginManager.appLovinManager;
 import com.hiddenservices.onionservices.pluginManager.analyticPluginManager.analyticManager;
 import com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadManager;
 import com.hiddenservices.onionservices.pluginManager.langPluginManager.langManager;
@@ -44,7 +51,7 @@ public class pluginController
 {
     /*Plugin Instance*/
 
-    private mopubManager mAdManager;
+    private appLovinManager mAdManager;
     private analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
     private notifictionManager mNotificationManager;
@@ -85,7 +92,7 @@ public class pluginController
         mContextManager = activityContextManager.getInstance();
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
-        mAdManager = new mopubManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), mHomeController.get());
+        mAdManager = new appLovinManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), mHomeController.get());
         mAnalyticsManager = new analyticManager(mHomeController,new analyticCallback());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
@@ -168,12 +175,7 @@ public class pluginController
         {
             if(event_type.equals(enums.etype.M_DOWNLOAD_FAILURE))
             {
-                mHomeController.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mMessageManager.onTrigger(Arrays.asList(pData.get(0).toString(), mHomeController.get()),M_DOWNLOAD_FAILURE);
-                    }
-                });
+                mMessageManager.onTrigger(Arrays.asList(pData.get(0).toString(), mHomeController.get()),M_DOWNLOAD_FAILURE);
             }
             return null;
         }
@@ -346,20 +348,21 @@ public class pluginController
                 mHomeController.get().runOnUiThread(() -> mHomeController.get().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE));
             }
             else if(pEventType.equals(M_IMAGE_UPDATE_RESTART)){
-                if(pData!=null && pData.get(0)!=null){
-                    ((AppCompatActivity)pData.get(0)).finish();
-                    activityContextManager.getInstance().getHomeController().quitApplication();
+                Intent mStartActivity = new Intent(mHomeController.get(), homeController.class);
+                int mPendingIntentId = 123456;
+                PendingIntent mPendingIntent = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    mPendingIntent = PendingIntent.getActivity(mHomeController.get(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_IMMUTABLE);
+                }else {
+                    mPendingIntent = PendingIntent.getActivity(mHomeController.get(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
                 }
-                new Thread(){
-                    public void run(){
-                        try {
-                            sleep(500);
-                            android.os.Process.killProcess(android.os.Process.myPid());
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
+                AlarmManager mgr = (AlarmManager)mHomeController.get().getSystemService(Context.ALARM_SERVICE);
+                mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 500, mPendingIntent);
+
+                pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
+                activityContextManager.getInstance().getHomeController().onResetData();
+                status.sSettingIsAppStarted = false;
+                mHomeController.get().finishAndRemoveTask();
             }
             return null;
         }

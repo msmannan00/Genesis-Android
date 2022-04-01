@@ -41,7 +41,7 @@ public class orbotManager
         this.mAppContext = new WeakReference(pAppContext);
         this.mLogManger = new orbotLogManager();
 
-        onInitNotificationStatus(pNotificationStatus);
+        orbotLocalConstants.mNotificationStatus = pNotificationStatus;
     }
 
     private void onInitlizeOrbot(String pBridgeCustomBridge, boolean pBridgeGatewayManual, String pBridgeCustomType, boolean pBridgeStatus, String pBridgesDefault){
@@ -76,10 +76,6 @@ public class orbotManager
         editor.putBoolean(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
         editor.apply();
 
-    }
-
-    private void onInitNotificationStatus(int status){
-        orbotLocalConstants.mNotificationStatus = status;
     }
 
     /*Helper Methods*/

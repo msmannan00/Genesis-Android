@@ -12,7 +12,7 @@
     <string name="GENERAL_LOADING" translatable="true">الحرية الرقمية</string>
     <string name="GENERAL_RELOAD" translatable="true">إعادة تحميل</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">لديك واحدة من المشاكل التالية. قد لا تعمل صفحة الويب أو موقع الويب. قد يكون اتصالك بالإنترنت معطلاً. ربما كنت تستخدم وكيل. قد يتم حظر موقع الويب بواسطة جدار حماية</string>
-    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.genesissearchengine.production.provider</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">بي بي سي | هاجمت إسرائيل مرة أخرى</string>
 
     <!-- Shortcuts -->

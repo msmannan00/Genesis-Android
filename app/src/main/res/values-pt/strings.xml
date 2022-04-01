@@ -12,7 +12,7 @@
 	<string name="GENERAL_LOADING" translatable="true">digital freedom</string>
 	<string name="GENERAL_RELOAD" translatable="true">recarregar</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">você está enfrentando um dos seguintes problemas. página da Web ou site pode não estar funcionando. sua conexão com a internet pode estar ruim. você pode estar usando um proxy. site pode estar bloqueado por firewall</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.genesissearchengine.production.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel ataca novamente</string>
 
 	<!-- Shortcuts -->

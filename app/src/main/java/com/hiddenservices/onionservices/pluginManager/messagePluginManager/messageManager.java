@@ -368,8 +368,9 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         LinearLayout mPopupURLLongPressCurrentTab = mDialog.findViewById(R.id.pPopupURLLongPressCurrentTab);
         LinearLayout mPopupURLLongPressClipboard = mDialog.findViewById(R.id.pPopupURLLongPressClipboard);
         Button mPopupURLLongPressDismiss = mDialog.findViewById(R.id.pPopupURLLongPressDismiss);
+        String mText = title + mData.get(0);
 
-        mPopupURLLongPressHeader.setText((title + mData.get(0)));
+        mPopupURLLongPressHeader.setText(mText);
         mEvent.invokeObserver(Arrays.asList(mPopupURLLongPressImage, helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
 
         mDialog.setOnDismissListener(this);

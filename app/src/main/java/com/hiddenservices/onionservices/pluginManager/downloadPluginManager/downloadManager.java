@@ -3,15 +3,11 @@ package com.hiddenservices.onionservices.pluginManager.downloadPluginManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Environment;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.hiddenservices.onionservices.pluginManager.pluginReciever.downloadNotificationReciever;
-
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
@@ -32,82 +28,62 @@ public class downloadManager
     public downloadManager(WeakReference<AppCompatActivity> pAppContext, eventObserver.eventListener pEvent){
         this.mAppContext = pAppContext;
         this.mEvent = pEvent;
-
-        initialize();
     }
 
-    private void initialize()
-    {
+    private void onStartDownload(String pPath, String pFile) {
+        int mNotificationID = helperMethod.createUniqueNotificationID();
+        downloadReciever mFileDownloader = (downloadReciever)new downloadReciever(mAppContext.get(),pPath, pFile, mNotificationID, mEvent, downloadNotificationReciever.class).execute(pPath);
+        mDownloads.put(mNotificationID,mFileDownloader);
     }
 
-    private void startDownload(String pPath,String pFile) {
-        int mID = helperMethod.createNotificationID();
-        downloadReciever mFileDownloader = (downloadReciever)new downloadReciever(mAppContext.get().getApplicationContext(),pPath, pFile, mID, mEvent, downloadNotificationReciever.class).execute(pPath);
-        mDownloads.put(mID,mFileDownloader);
-    }
-
-    private void cancelDownload(int pID) {
+    private void onCancelDownload(int pID) {
         if(mDownloads!=null && mDownloads.containsKey(pID)){
             downloadReciever mReciever = mDownloads.get(pID);
             if(mReciever!=null){
                 mDownloads.get(pID).onCancel();
             }else {
-                try {
-                    if(!status.sSettingIsAppRunning){
-                        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                        notificationManager.cancelAll();
-                    }
-                }catch (Exception ignored){}
+                NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancelAll();
             }
         }
     }
 
-    private void onSwipeDownload(int pID) {
-        if(mDownloads!=null && mDownloads.get(pID)!=null){
-            mDownloads.get(pID).onCancel();
-        }
-    }
-
-    private void onTriggerDownload(int pID) {
+    private void onDownloadURLRequest(int pID) {
         if(mDownloads!=null && mDownloads.get(pID)!=null){
             mDownloads.get(pID).onTrigger();
         }
     }
 
-    private void  onStartSercvice(String mURL, String mPath){
-        mAppContext.get().startService(downloadService.getDownloadService(mAppContext.get().getApplicationContext(), mURL + "__" + mPath, Environment.DIRECTORY_DOWNLOADS));
+    private void onDownloadWebRequest(String mURL, String mPath){
+        mAppContext.get().startService(downloadService.getDownloadService(mAppContext.get().getApplicationContext(), mURL, mPath));
     }
 
-    private String downloadBlob(String pURL){
+    private String onDownloadBlobFile(String pURL){
         return blobDownloader.getBase64StringFromBlobUrl(pURL);
     }
 
     /* External Triggers */
 
     public Object onTrigger(List<Object> pData, pluginEnums.eDownloadManager pEventType) {
-        if(pEventType.equals(pluginEnums.eDownloadManager.M_DOWNLOAD_FILE))
+        if(pEventType.equals(pluginEnums.eDownloadManager.M_START_DOWNLOAD))
         {
-            startDownload((String) pData.get(0),(String)pData.get(1));
+            onStartDownload((String) pData.get(0),(String)pData.get(1));
         }
-        else if(pEventType.equals(pluginEnums.eDownloadManager.M_CANCEL))
+        else if(pEventType.equals(pluginEnums.eDownloadManager.M_CANCEL_DOWNLOAD))
         {
-            cancelDownload((int) pData.get(0));
+            onCancelDownload((int) pData.get(0));
         }
-        else if(pEventType.equals(pluginEnums.eDownloadManager.M_TRIGGER))
+        else if(pEventType.equals(pluginEnums.eDownloadManager.M_URL_DOWNLOAD_REQUEST))
         {
-            onTriggerDownload((int) pData.get(0));
+            onDownloadURLRequest((int) pData.get(0));
         }
-        else if(pEventType.equals(pluginEnums.eDownloadManager.M_START_SERVICE))
+        else if(pEventType.equals(pluginEnums.eDownloadManager.M_WEB_DOWNLOAD_REQUEST))
         {
-            onStartSercvice((String) pData.get(0), (String) pData.get(1));
+            onDownloadWebRequest(pData.get(0).toString(), (String) pData.get(1));
         }
-        else if(pEventType.equals(pluginEnums.eDownloadManager.M_DOWNLOAD_BLOB))
+        else if(pEventType.equals(pluginEnums.eDownloadManager.M_BLOB_DOWNLOAD_REQUEST))
         {
-            return downloadBlob((String) pData.get(0));
-        }
-        else if(pEventType.equals(pluginEnums.eDownloadManager.M_SWIPE))
-        {
-            onSwipeDownload((int) pData.get(0));
+            return onDownloadBlobFile((String) pData.get(0));
         }
 
         return null;

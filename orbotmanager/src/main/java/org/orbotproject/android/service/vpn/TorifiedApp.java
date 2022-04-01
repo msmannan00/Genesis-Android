@@ -1,21 +1,9 @@
 package org.orbotproject.android.service.vpn;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.StringTokenizer;
-
-import static org.orbotproject.android.service.vpn.VpnPrefs.PREFS_KEY_TORIFIED;
 
 public class TorifiedApp implements Comparable {
 
@@ -33,97 +21,7 @@ public class TorifiedApp implements Comparable {
 
     public static ArrayList<TorifiedApp> getApps(Context context, SharedPreferences prefs) {
 
-        String tordAppString = prefs.getString(PREFS_KEY_TORIFIED, "");
-        String[] tordApps;
-
-        StringTokenizer st = new StringTokenizer(tordAppString, "|");
-        tordApps = new String[st.countTokens()];
-        int tordIdx = 0;
-        while (st.hasMoreTokens()) {
-            tordApps[tordIdx++] = st.nextToken();
-        }
-
-        Arrays.sort(tordApps);
-
-        //else load the apps up
-        PackageManager pMgr = context.getPackageManager();
-
-        List<ApplicationInfo> lAppInfo = pMgr.getInstalledApplications(0);
-
-        Iterator<ApplicationInfo> itAppInfo = lAppInfo.iterator();
-
-        ArrayList<TorifiedApp> apps = new ArrayList<>();
-
-        ApplicationInfo aInfo;
-
-        int appIdx = 0;
-        TorifiedApp app;
-
-        while (itAppInfo.hasNext()) {
-            aInfo = itAppInfo.next();
-
-            app = new TorifiedApp();
-
-            try {
-                PackageInfo pInfo = pMgr.getPackageInfo(aInfo.packageName, PackageManager.GET_PERMISSIONS);
-
-                if (pInfo != null && pInfo.requestedPermissions != null) {
-                    for (String permInfo : pInfo.requestedPermissions) {
-                        if (permInfo.equals(Manifest.permission.INTERNET)) {
-                            app.setUsesInternet(true);
-
-                        }
-                    }
-
-                }
-
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            if ((aInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) {
-                //System app
-                app.setUsesInternet(true);
-            }
-
-
-            if (!app.usesInternet())
-                continue;
-            else {
-                apps.add(app);
-            }
-
-
-            app.setEnabled(aInfo.enabled);
-            app.setUid(aInfo.uid);
-            app.setUsername(pMgr.getNameForUid(app.getUid()));
-            app.setProcname(aInfo.processName);
-            app.setPackageName(aInfo.packageName);
-
-            try {
-                app.setName(pMgr.getApplicationLabel(aInfo).toString());
-            } catch (Exception e) {
-                app.setName(aInfo.packageName);
-            }
-
-
-            //app.setIcon(pMgr.getApplicationIcon(aInfo));
-
-            // check if this application is allowed
-            if (Arrays.binarySearch(tordApps, app.getUsername()) >= 0) {
-                app.setTorified(true);
-            } else {
-                app.setTorified(false);
-            }
-
-            appIdx++;
-        }
-
-        Collections.sort(apps);
-
-        return apps;
+        return new ArrayList<>();
     }
 
     public boolean usesInternet() {
@@ -243,11 +141,6 @@ public class TorifiedApp implements Comparable {
     @Override
     public int compareTo(Object another) {
         return this.toString().compareToIgnoreCase(another.toString());
-    }
-
-    @Override
-    public String toString() {
-        return getName();
     }
 
     public String getPackageName() {

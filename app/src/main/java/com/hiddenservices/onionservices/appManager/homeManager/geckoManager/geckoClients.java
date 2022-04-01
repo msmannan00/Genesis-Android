@@ -37,7 +37,6 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
 import org.json.JSONObject;
-//import org.mozilla.gecko.PrefsHelper;
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoRuntimeSettings;
@@ -64,25 +63,32 @@ public class geckoClients
     {
         this.event = event;
         mSessionID = helperMethod.createRandomID();
-        initRuntimeSettings(context);
+        //initRuntimeSettings(context);
 
         if(!isForced && geckoView.getSession()!=null && geckoView.getSession().isOpen()){
             mSession = (geckoSession) geckoView.getSession();
         }
         else {
             if(geckoView.getSession()!=null){
-                geckoView.releaseSession();
+                //geckoView.releaseSession();
             }
 
             mSession = new geckoSession(new geckoViewClientCallback(),mSessionID,context, geckoView);
-            mSession.open(mRuntime);
+            //mSession.open(mRuntime);
             mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
             mSession.getSettings().setFullAccessibilityTree(true);
             mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
             mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-            geckoView.setSession(mSession);
+            //geckoView.setSession(mSession);
         }
         mSession.onSetInitializeFromStartup();
+        //onUpdateFont();
+    }
+
+    public void postInitRuntime(GeckoView geckoView, AppCompatActivity context){
+        initRuntimeSettings(context);
+        mSession.open(mRuntime);
+        geckoView.setSession(mSession);
         onUpdateFont();
     }
 
@@ -174,6 +180,19 @@ public class geckoClients
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        String mYAML = helperMethod.readFromFile(cacheFile.getPath());
+        mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"","network.proxy.socks:  \"127.0.0.1\"");
+        mYAML = mYAML.replace("# network.proxy.socks_port:  9050","network.proxy.socks_port:  9050");
+        mYAML = mYAML.replace("network.proxy.socks:  \"127.0.0.1\"","network.proxy.socks:  \"127.0.0.1\"");
+
+        StringBuilder buf = new StringBuilder(mYAML);
+        int portIndex = mYAML.indexOf("network.proxy.socks_port");
+        int breakIndex = mYAML.indexOf("\n",portIndex);
+        mYAML = buf.replace(portIndex, breakIndex,"network.proxy.socks_port:  "+ orbotLocalConstants.mSOCKSPort).toString();
+        helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+
+
         return cacheFile.getAbsolutePath();
     }
 
@@ -262,15 +281,6 @@ public class geckoClients
             }
             mSettings.build();
 
-            /*PrefsHelper.setPref("browser.cache.disk.enable",true);
-            PrefsHelper.setPref("browser.cache.memory.enable",true);
-            PrefsHelper.setPref("browser.cache.disk.capacity",1000);
-            PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-            PrefsHelper.setPref(keys.PROXY_SOCKS,"127.0.0.1");
-            PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,5);
-            PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,true);*/
-
             mRuntime = GeckoRuntime.create(context, mSettings.build());
             mRuntime.getSettings().setRemoteDebuggingEnabled(true);
             installExtension();
@@ -312,7 +322,7 @@ public class geckoClients
     }
 
     @SuppressLint("WrongConstant")
-    public void updateSetting(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
+    public void updateSetting(NestedGeckoView mNestedGeckoView,AppCompatActivity pcontext){
         GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
         if(status.sShowImages == 2){
             mSettings.configFilePath(getAssetsCacheFile(pcontext, "geckoview-config-noimage.yaml"));
@@ -320,7 +330,7 @@ public class geckoClients
             mSettings.configFilePath(getAssetsCacheFile(pcontext, "geckoview-config.yaml"));
         }
         mSettings.build();
-
+        mRuntime.getSettings().setRemoteDebuggingEnabled(true);
         mRuntime.getSettings().setRemoteDebuggingEnabled(true);
 
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);

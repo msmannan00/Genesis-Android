@@ -619,7 +619,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void initRuntimeSettings()
     {
-        mGeckoClient.updateSetting(mGeckoView, homeController.this);
+        mGeckoClient.updateSetting(mGeckoView, this);
     }
 
     public void onReDrawGeckoview(){
@@ -1894,7 +1894,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             {
                 pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
 
-                finishAffinity();
+                finishAndRemoveTask();
                 overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
                 activityContextManager.getInstance().getHomeController().onResetData();
                 mGeckoClient.onClearAll();
@@ -2126,6 +2126,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
            if(e_type.equals(enums.etype.M_INIT_TAB_COUNT_FORCED))
            {
                initTabCountForced();
+           }
+           else if(e_type.equals(enums.etype.M_INIT_RUNTIME_SETTINGS)){
+               mGeckoClient.postInitRuntime(mGeckoView, homeController.this);
            }
            else if(e_type.equals(enums.etype.M_IS_ERROR_PAGE))
            {

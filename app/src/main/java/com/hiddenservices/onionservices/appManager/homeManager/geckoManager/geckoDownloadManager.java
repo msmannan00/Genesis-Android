@@ -28,9 +28,7 @@ class geckoDownloadManager
     }
 
     void downloadFile(WebResponse response, geckoSession session, AppCompatActivity context, eventObserver.eventListener event) {
-        session
-                .getUserAgent()
-                .accept(userAgent -> downloadFile(response, userAgent,context,session,event),
+        session.getUserAgent().accept(userAgent -> downloadFile(response, userAgent,context,session,event),
                         exception -> {
                             throw new IllegalStateException("Could not get UserAgent string.");
                         });

@@ -270,8 +270,8 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForeground(11337, notification);
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
-                    mNotificationManager.cancel(11337);
-                    stopForeground(true);
+                    // mNotificationManager.cancel(11337);
+                    // stopForeground(true);
                 }
             } else if (Prefs.persistNotifications() && (!mNotificationShowing)) {
                 startForeground(11337, notification);
@@ -614,12 +614,12 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
 
         try{
-            orbotLocalConstants.mSOCKSPort = Integer.parseInt(socksPortPref);
-            orbotLocalConstants.mHTTPPort = Integer.parseInt(httpPortPref);
+            //orbotLocalConstants.mSOCKSPort = Integer.parseInt(socksPortPref);
+            //orbotLocalConstants.mHTTPPort = Integer.parseInt(httpPortPref);
 
         }catch (Exception ex){
-            orbotLocalConstants.mSOCKSPort = 9050;
-            orbotLocalConstants.mHTTPPort = 8118;
+            //orbotLocalConstants.mSOCKSPort = 9050;
+            //orbotLocalConstants.mHTTPPort = 8118;
         }
 
         String isolate = "";

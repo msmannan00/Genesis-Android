@@ -43,6 +43,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.applovin.mediation.ads.MaxAdView;
+import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.*;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
@@ -610,7 +611,7 @@ class homeViewController
         protected Void doInBackground(Void...arg0) {
             AppCompatActivity temp_context = mContext;
             int mCounter = 0;
-            while (!orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState){
+            while (orbotLocalConstants.mSOCKSPort==-1 && (!orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)){
                 try
                 {
                     boolean mFastConnect = status.sSettingIsAppStarted || !status.sRestoreTabs && status.sAppInstalled && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus && status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR);
@@ -620,7 +621,9 @@ class homeViewController
                             orbotLocalConstants.mTorLogsStatus = "Starting Genesis | Please Wait ...";
                             mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
                             startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
-                            break;
+                            if (orbotLocalConstants.mSOCKSPort!=-1){
+                                break;
+                            }
                         }else{
                             orbotLocalConstants.mTorLogsStatus = "No internet connection";
                             startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
@@ -628,7 +631,7 @@ class homeViewController
                     }
 
                     sleep(500);
-                    if(mCounter>20){
+                    if(mCounter>20 && orbotLocalConstants.mSOCKSPort!=-1){
                         break;
                     }else {
                         mCounter+=1;
@@ -648,6 +651,10 @@ class homeViewController
                     e.printStackTrace();
                 }
             }
+            mContext.runOnUiThread(() -> {
+                mEvent.invokeObserver(null, enums.etype.M_INIT_RUNTIME_SETTINGS);
+            });
+
             if(!status.sSettingIsAppStarted){
                 mContext.runOnUiThread(() -> {
                     onDisableSplashScreen();
@@ -1637,6 +1644,12 @@ class homeViewController
         }
 
         if(status.sFullScreenBrowsing){
+            int orientation = mContext.getResources().getConfiguration().orientation;
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
+            } else {
+                mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(110));
+            }
         }
         else {
             if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){

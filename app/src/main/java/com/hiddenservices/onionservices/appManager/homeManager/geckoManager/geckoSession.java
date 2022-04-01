@@ -30,7 +30,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
-import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
@@ -388,13 +387,12 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
         PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,true);*/
 
         if(mIsLoaded){
-            if(!var2.equals("about:blank") && helperMethod.getHost(var2).endsWith(".onion")){
+            if(!mCurrentURL.equals("about:config") && !var2.equals("about:blank") && helperMethod.getHost(var2).endsWith(".onion")){
                 var2 = var2.replace("www.","");
             }
 
             mCurrentURL = var2;
-
-            if(!mCurrentURL.equals("about:blank")){
+            if(!mCurrentURL.equals("about:config") && !mCurrentURL.equals("about:blank")){
                 event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
             }
@@ -404,7 +402,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
                 mThemeChanged = false;
             }
             isPageLoading = true;
-            if(!mCurrentURL.equals("about:blank") && !mCurrentTitle.equals("loading")){
+            if(!mCurrentURL.equals("about:config") && !mCurrentURL.equals("about:blank") && !mCurrentTitle.equals("loading")){
                 mProgress = 5;
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
                 mThemeChanged = false;
@@ -500,7 +498,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
     }
 
     public void onProgressStart(){
-        if(!getCurrentURL().equals("about:blank") && !getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !wasPreviousErrorPage() && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+        if(!getCurrentURL().equals("about:config") && !getCurrentURL().equals("about:blank") && !getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !wasPreviousErrorPage() && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
             mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5,mSessionID), enums.etype.progress_update));
         }
     }
@@ -682,7 +680,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
 
             event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
 
-            if(!mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
+            if(!m_url.equals("about:config") && !mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
                 mProgress = 5;
                 onProgressStart();
             }
@@ -784,11 +782,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
             event.invokeObserver(Arrays.asList(response,mSessionID), enums.etype.on_handle_external_intent);
             stop();
         }
-    }
-
-    @UiThread
-    public void onExternalResponse(@NonNull  GeckoSession session, @NonNull GeckoSession.WebResponseInfo response){
-
     }
 
     @UiThread
@@ -981,7 +974,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
     {
         if(mDownloadManager.getDownloadURL()!=null && mDownloadManager.getDownloadFile()!=null){
             if(!createAndSaveFileFromBase64Url(mDownloadManager.getDownloadURL().toString())){
-                pluginController.getInstance().onDownloadInvoke(Arrays.asList(mDownloadManager.getDownloadURL()+"__"+mDownloadManager.getDownloadFile(), Environment.DIRECTORY_DOWNLOADS), pluginEnums.eDownloadManager.M_START_SERVICE);
+                pluginController.getInstance().onDownloadInvoke(Arrays.asList(mDownloadManager.getDownloadURL(), mDownloadManager.getDownloadFile()), pluginEnums.eDownloadManager.M_WEB_DOWNLOAD_REQUEST);
             }
         }
     }
@@ -990,7 +983,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
     {
         if(downloadURL!=null && downloadFile!=null){
             if(!createAndSaveFileFromBase64Url(downloadURL.toString())){
-                pluginController.getInstance().onDownloadInvoke(Arrays.asList(downloadURL + "__" + downloadFile, Environment.DIRECTORY_DOWNLOADS), pluginEnums.eDownloadManager.M_START_SERVICE);
+                pluginController.getInstance().onDownloadInvoke(Arrays.asList(downloadURL, downloadFile), pluginEnums.eDownloadManager.M_WEB_DOWNLOAD_REQUEST);
             }
         }
     }
@@ -1038,7 +1031,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
             String filename;
 
             if(url.startsWith("blob")){
-                loadUri((String) pluginController.getInstance().onDownloadInvoke(Collections.singletonList(url), pluginEnums.eDownloadManager.M_DOWNLOAD_BLOB));
+                loadUri((String) pluginController.getInstance().onDownloadInvoke(Collections.singletonList(url), pluginEnums.eDownloadManager.M_BLOB_DOWNLOAD_REQUEST));
                 return true;
             }
 

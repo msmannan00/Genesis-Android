@@ -21,5 +21,5 @@ public class orbotLocalConstants
     public static String mBridgesDefault = "";
 
     public static int mHTTPPort = 8118;
-    public static int mSOCKSPort = 9050;
+    public static int mSOCKSPort = -1;
 }

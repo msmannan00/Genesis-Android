@@ -6,6 +6,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.DownloadManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -60,18 +61,27 @@ import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.example.myapplication.R;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -97,6 +107,33 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 public class helperMethod
 {
     /*Helper Methods General*/
+
+    public static String getFileSizeBadge(long size) {
+        if (size <= 0)
+            return "0";
+
+        final String[] units = new String[] { "B Downloaded", "KB ⇣", "MB ⇣", "GB ⇣", "TB ⇣" };
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
+    @SuppressLint({"UnspecifiedImmutableFlag", "LaunchActivityFromNotification"})
+    public static PendingIntent onCreateActionIntent(Context pContext, Class<?> pBroadcastReciever, int pNotificationID, String pTitle, int pCommandID){
+        PendingIntent pendingIntent;
+        Intent pendingIntentTrigger = new Intent(pContext, pBroadcastReciever);
+        pendingIntentTrigger.setAction(pTitle);
+        pendingIntentTrigger.putExtra("N_ID", pNotificationID);
+        pendingIntentTrigger.putExtra("N_COMMAND", pCommandID);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            pendingIntent = PendingIntent.getBroadcast(pContext, pNotificationID, pendingIntentTrigger, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        }else{
+            pendingIntent = PendingIntent.getBroadcast(pContext, pNotificationID, pendingIntentTrigger, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+        return pendingIntent;
+    }
 
     public static int getResId(String resName, Class<?> c) {
 
@@ -128,6 +165,8 @@ public class helperMethod
         byte[] data = bos.toByteArray();
         return data;
     }
+
+
 
     public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException {
         ByteArrayInputStream in = new ByteArrayInputStream(data);
@@ -192,8 +231,36 @@ public class helperMethod
         }
     }
 
+    public static void writeToFile(String pFilePath, String content){
+        Writer writer;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pFilePath), StandardCharsets.UTF_8));
+            writer.write(content);
+            writer.close();
+        } catch (Exception ex) {
+        }
+    }
+
+    public static String readFromFile(String pFilePath){
+        File file = new File(pFilePath);
+        StringBuilder text = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+            return text.toString();
+        }
+        catch (IOException e) {
+            return "";
+        }
+    }
+
     public static String completeURL(String pURL){
-        if(pURL.equals("about:blank")){
+        if(pURL.equals("about:blank") || pURL.equals("about:config")){
             return pURL;
         }
         URL weburl;
@@ -237,7 +304,7 @@ public class helperMethod
         return UUID.randomUUID().toString();
     }
 
-    public static int createNotificationID(){
+    public static int createUniqueNotificationID(){
         Date now = new Date();
         int id = Integer.parseInt(new SimpleDateFormat("ddHHmmss",  Locale.US).format(now));
         return id;
@@ -835,7 +902,7 @@ public class helperMethod
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
             try {
 
-                Uri uri = FileProvider.getUriForFile(context, "com.hiddenservices.genesissearchengine.production.provider", url);
+                Uri uri = FileProvider.getUriForFile(context, "com.hiddenservices.onionservices.provider", url);
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -846,7 +913,7 @@ public class helperMethod
             }
         } else{
             try {
-                Uri uri = FileProvider.getUriForFile(context, "com.hiddenservices.genesissearchengine.production.provider", url);
+                Uri uri = FileProvider.getUriForFile(context, "com.hiddenservices.onionservices.provider", url);
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url.toString()));
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

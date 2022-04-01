@@ -12,7 +12,7 @@
 	<string name="GENERAL_LOADING" translatable="true">ψηφιακή ελευθερία</string>
 	<string name="GENERAL_RELOAD" translatable="true">φορτώνω πάλι</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">αντιμετωπίζετε ένα από τα ακόλουθα προβλήματα. η ιστοσελίδα ή ο ιστότοπος ενδέχεται να μην λειτουργούν. η σύνδεσή σας στο Διαδίκτυο μπορεί να είναι κακή. μπορεί να χρησιμοποιείτε διακομιστή μεσολάβησης. Ο ιστότοπος ενδέχεται να αποκλειστεί από το τείχος προστασίας</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.genesissearchengine.production.provider</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
 	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Το Ισραήλ χτυπά ξανά</string>
 
 	<!-- Shortcuts -->

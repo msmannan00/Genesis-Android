@@ -12,7 +12,7 @@ public class constants
     public static final String CONST_PRIVACY_POLICY_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy";
     public static final String CONST_REPORT_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/report?url=";
     public static final String CONST_SITEMAP = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/create";
-    public static final String CONST_PACKAGE_NAME = "com.darkweb.genesissearchengine.production";
+    public static final String CONST_PACKAGE_NAME = "com.hiddenservices.onionservices";
     public static final String CONST_GENESIS_ONION = "genesis.onion";
     public static final String CONST_GENESIS_ONION_V2 = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
 

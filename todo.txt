@@ -1,0 +1,8 @@
+1. gradle shared
+2. gradle app
+3. manifest
+4. downloadNotificationReciever
+5. App Lovin Manager
+6. Analytics Manager
+7. Plugin enums
+8. blob downloader
