@@ -69,20 +69,24 @@ public class geckoClients
             mSession = (geckoSession) geckoView.getSession();
         }
         else {
-            if(geckoView.getSession()!=null){
-                //geckoView.releaseSession();
-            }
 
             mSession = new geckoSession(new geckoViewClientCallback(),mSessionID,context, geckoView);
-            //mSession.open(mRuntime);
             mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
             mSession.getSettings().setFullAccessibilityTree(true);
             mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
             mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-            //geckoView.setSession(mSession);
+            if(geckoView.getSession()!=null){
+                geckoView.releaseSession();
+                mSession.open(mRuntime);
+                geckoView.setSession(mSession);
+                onUpdateFont();
+            }else if(status.sSettingIsAppStarted){
+                mSession.open(mRuntime);
+                geckoView.setSession(mSession);
+                onUpdateFont();
+            }
         }
         mSession.onSetInitializeFromStartup();
-        //onUpdateFont();
     }
 
     public void postInitRuntime(GeckoView geckoView, AppCompatActivity context){
@@ -313,8 +317,10 @@ public class geckoClients
     }
 
     public void onLoadFavIcon(AppCompatActivity pcontext){
-        BrowserIconManager mIconManager = new BrowserIconManager();
-        mIconManager.onLoadIcon(pcontext.getApplicationContext(), mRuntime);
+        if(mRuntime!=null){
+            BrowserIconManager mIconManager = new BrowserIconManager();
+            mIconManager.onLoadIcon(pcontext.getApplicationContext(), mRuntime);
+        }
     }
 
     private int getCookiesBehaviour(){
@@ -356,6 +362,7 @@ public class geckoClients
     }
 
     public void resetSession(){
+        mSession.onStopMedia();
         mSessionID = strings.GENERIC_EMPTY_STR;
     }
 
@@ -371,6 +378,7 @@ public class geckoClients
 
     public void initSession(geckoSession mSession){
         mSessionID = mSession.getSessionID();
+        this.mSession.onStopMedia();
         this.mSession = mSession;
     }
 

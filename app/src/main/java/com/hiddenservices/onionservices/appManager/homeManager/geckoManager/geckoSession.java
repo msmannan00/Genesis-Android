@@ -120,7 +120,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
     public boolean mCloseRequested = false;
     public boolean mOnBackPressed = false;
     public SessionState mSessionState;
-    MediaSession.Delegate mMediaSession;
+    MediaSession mMediaSession = null;
 
     geckoSession(eventObserver.eventListener event,String mSessionID,AppCompatActivity mContext, GeckoView pGeckoView){
 
@@ -150,12 +150,14 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
     @Override
     public void onActivated(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
         MediaSession.Delegate.super.onActivated(session, mediaSession);
+        mMediaSession = mediaSession;
     }
 
     @Override
     public void onDeactivated(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
         MediaSession.Delegate.super.onDeactivated(session, mediaSession);
         isMediaRunning = false;
+        mMediaSession = null;
     }
 
     @Override
@@ -239,8 +241,8 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
     }
 
     public void onStopMedia(){
-        if(isMediaRunning){
-            close();
+        if(isMediaRunning && mMediaSession!=null){
+            mMediaSession.stop();
         }
     }
 

@@ -113,7 +113,22 @@
                     android:background="@xml/gx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onCopySearch"
+                    android:visibility="gone"
                     android:src="@xml/ic_baseline_clipboard"
+                    app:tint="@color/c_navigation_tint" />
+
+                <ImageButton
+                    android:id="@+id/pPopoupFindPaste"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onCopyPaste"
+                    android:visibility="gone"
+                    android:src="@xml/ic_baseline_content_paste"
                     app:tint="@color/c_navigation_tint" />
 
             </LinearLayout>

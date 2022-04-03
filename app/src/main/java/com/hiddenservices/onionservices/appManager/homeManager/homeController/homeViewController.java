@@ -43,7 +43,6 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.applovin.mediation.ads.MaxAdView;
-import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.*;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
@@ -118,6 +117,7 @@ class homeViewController
     private boolean isFullScreen = false;
     private MovementMethod mSearchBarMovementMethod = null;
     private boolean mIsTopBarExpanded = true;
+    private NestedScrollView.MarginLayoutParams mDefaultMargin = null;
 
     void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape){
         this.mContext = context;
@@ -225,6 +225,8 @@ class homeViewController
         }
         params1.setMargins(0, 0, 0,(helperMethod.pxFromDp(60)+mBannerHeight)*-1);
         mNestedScroll.setLayoutParams(params1);
+
+
     }
 
     public void initSearchEngineView(){
@@ -259,6 +261,9 @@ class homeViewController
             return;
         }
         if(!status.sFullScreenBrowsing){
+            //View child = mAppBar.getChildAt(0);
+            //AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
+            //params.setMargins(0, 0, 0,helperMethod.pxFromDp(0));
         }else {
             int paddingDp = 0;
             if(isFullScreen){
@@ -525,7 +530,7 @@ class homeViewController
             });
             animator.start();
         }else {
-           mSplashScreen.animate().alpha(0).setDuration(200).setStartDelay(mDelay).withEndAction(() -> onPostScreenDisable());
+            mSplashScreen.animate().alpha(0).setDuration(200).setStartDelay(mDelay).withEndAction(() -> onPostScreenDisable());
         }
     }
 
@@ -880,12 +885,12 @@ class homeViewController
         }
 
         if(!canGoForward){
-           back.setEnabled(false);
-           back.setColorFilter(Color.argb(255, 191, 191, 191));
+            back.setEnabled(false);
+            back.setColorFilter(Color.argb(255, 191, 191, 191));
         }
         if(!isLoading){
-           close.setVisibility(View.GONE);
-           mRefresh.setVisibility(View.VISIBLE);
+            close.setVisibility(View.GONE);
+            mRefresh.setVisibility(View.VISIBLE);
         }else {
             close.setVisibility(View.VISIBLE);
             mRefresh.setVisibility(View.GONE);
@@ -997,11 +1002,11 @@ class homeViewController
     void removeBanner(){
         if(!isFullScreen){
             if(isLandscape){
-                 mBannerAds.setVisibility(View.GONE);
-             }else {
+                mBannerAds.setVisibility(View.GONE);
+            }else {
                 mEvent.invokeObserver(null, enums.etype.M_ON_BANNER_UPDATE);
-             }
-             onFullScreen(false);
+            }
+            onFullScreen(false);
         }
     }
 
@@ -1499,6 +1504,7 @@ class homeViewController
 
     private int mDefaultColor = 0;
     private int mBannerHeight = 0;
+    private boolean mFullScreenBrowsingTemp = false;
     void onFullScreenUpdate(boolean pStatus){
         int value = !pStatus ? 1 : 0;
 
@@ -1508,12 +1514,18 @@ class homeViewController
         mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.black));
 
         if(pStatus){
+            mDefaultMargin = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
 
             mDefaultColor = mContext.getWindow().getNavigationBarColor();
             mContext.getWindow().setNavigationBarColor(Color.BLACK);
 
             new Handler().postDelayed(() ->
             {
+                NestedScrollView.MarginLayoutParams params = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
+                mFullScreenBrowsingTemp = true;
+                status.sFullScreenBrowsing = false;
+                onFullScreen(false);
+
                 final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -1522,9 +1534,7 @@ class homeViewController
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
                 mContext.getWindow().getDecorView().setSystemUiVisibility(flags);
                 mContext.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                mBannerAds.setVisibility(View.GONE);
 
-                NestedScrollView.MarginLayoutParams params = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
 
                 params.setMargins(0, 0, 0,0);
                 mNestedScroll.setLayoutParams(params);
@@ -1548,8 +1558,6 @@ class homeViewController
                 mGeckoView.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT));
 
 
-                initTopBarPadding();
-
                 this.mBlockerFullSceen.animate().setStartDelay(250).setDuration(200).alpha(0).withEndAction(() -> {
                     mBlockerFullSceen.setVisibility(View.GONE);
                 });
@@ -1558,12 +1566,12 @@ class homeViewController
                     if(isLandscape){
                         params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
                     }else {
-                        if(mBannerAds.getHeight()>0){
+                        if(mBannerAds.getHeight()>0 && mBannerAds.getVisibility()==View.VISIBLE){
                             Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
                             if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
-                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(35) - helperMethod.pxFromDp(mBannerAds.getHeight()));
+                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(170));
                             }else {
-                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(70) - helperMethod.pxFromDp(mBannerAds.getHeight()));
+                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
                             }
                         }else {
                             params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
@@ -1573,21 +1581,21 @@ class homeViewController
                     if(isLandscape){
                         params.setMargins(0, 0, 0,-helperMethod.pxFromDp(60));
                     }else {
-                        if(mBannerAds.getHeight()>0){
+                        if(mBannerAds.getHeight()>0 && mBannerAds.getVisibility()==View.VISIBLE){
                             params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
                         }else {
-                            params.setMargins(0, 0, 0,-helperMethod.pxFromDp(0));
+                            params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
                         }
                     }
                 }
-                status.sFullScreenBrowsing = false;
-
                 mNestedScroll.setLayoutParams(params);
+                mBannerAds.setVisibility(View.GONE);
+                initTopBarPadding();
 
             }, 200);
         }else {
 
-
+            mFullScreenBrowsingTemp = false;
             NestedScrollView.MarginLayoutParams params = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
             params.setMargins(0, 0, 0,helperMethod.pxFromDp(60)*-1);
             mNestedScroll.setLayoutParams(params);
@@ -1610,6 +1618,7 @@ class homeViewController
 
                 status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,false));
 
+                params.setMargins(mDefaultMargin.leftMargin,mDefaultMargin.topMargin,mDefaultMargin.rightMargin,mDefaultMargin.bottomMargin);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
                         mContext.getWindow().getDecorView().setSystemUiVisibility(0);
@@ -1621,7 +1630,7 @@ class homeViewController
                 }
 
                 mContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                initTopBarPadding();
+                //initTopBarPadding();
 
                 mIsTopBarExpanded = false;
                 mAppBar.setExpanded(true,false);
@@ -1644,11 +1653,18 @@ class homeViewController
         }
 
         if(status.sFullScreenBrowsing){
-            int orientation = mContext.getResources().getConfiguration().orientation;
-            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
-            } else {
-                mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(110));
+            if(!mFullScreenBrowsingTemp){
+                View child = mAppBar.getChildAt(0);
+                AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
+                if(isLandscape){
+                    mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+                }else {
+                    if(mBannerAds.getHeight()>0 && mBannerAds.getVisibility() == View.VISIBLE){
+                        mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(110));
+                    }else {
+                        mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+                    }
+                }
             }
         }
         else {
@@ -1662,7 +1678,7 @@ class homeViewController
                         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
                         } else {
-                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60) + mBannerAds.getHeight() + mTopBar.getHeight());
+                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60) + helperMethod.pxFromDp(50) + mTopBar.getHeight());
                         }
                     }
                 }

@@ -5,6 +5,8 @@ import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
 import android.content.Context;
@@ -46,7 +48,6 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.applovin.mediation.ads.MaxAdView;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController;
@@ -79,7 +80,6 @@ import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.widget.onionservices.widgetManager.widgetController;
-
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
@@ -96,9 +96,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-
 import mozilla.components.support.utils.DownloadUtils;
-
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
@@ -181,6 +179,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private CoordinatorLayout mCoordinatorLayout;
     private ImageView mImageDivider;
     private ImageButton mPopoupFindCopy;
+    private ImageButton mPopoupFindPaste;
 
     /*Redirection Objects*/
     private GeckoResult<Bitmap> mRenderedBitmap = null;
@@ -197,8 +196,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private String mSearchBarPreviousText = strings.GENERIC_EMPTY_STR;
     private Handler mScrollHandler = null;
     private Runnable mScrollRunnable = null;
+    private String clipboard = "";
 
     private int mResponseRequestCode = 10112;
+    private boolean msearchstatuscopy = false;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
@@ -509,6 +510,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mPanicButtonLandscape = findViewById(R.id.pPanicButtonLandscape);
         mGenesisLogo = findViewById(R.id.pGenesisLogo);
         mPopoupFindCopy = findViewById(R.id.pPopoupFindCopy);
+        mPopoupFindPaste = findViewById(R.id.pPopoupFindPaste);
 
         mGeckoView.setSaveEnabled(false);
         mGeckoView.setSaveFromParentEnabled(false);
@@ -998,12 +1000,25 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(mSearchbar.getText().length()==0){
-                    mPopoupFindCopy.setEnabled(false);
-                    mPopoupFindCopy.setAlpha(0.2f);
-                }else {
-                    mPopoupFindCopy.setEnabled(true);
-                    mPopoupFindCopy.setAlpha(1f);
+                if(msearchstatuscopy){
+                    if(mSearchbar.getText().length()==0){
+                        mPopoupFindCopy.setVisibility(View.GONE);
+                    }else {
+                        mPopoupFindCopy.setVisibility(View.VISIBLE);
+                        mPopoupFindCopy.setAlpha(1f);
+                        mPopoupFindCopy.setEnabled(true);
+                    }
+
+                    if(mSearchbar.getText().toString().equals(clipboard) || clipboard.length()<=0){
+                        mPopoupFindPaste.setVisibility(View.GONE);
+                        if(mPopoupFindCopy.getVisibility() == View.GONE){
+                            mPopoupFindCopy.setVisibility(View.VISIBLE);
+                            mPopoupFindCopy.setEnabled(false);
+                            mPopoupFindCopy.setAlpha(0.2f);
+                        }
+                    }else {
+                        mPopoupFindPaste.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -1020,6 +1035,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             status.sUIInteracted = true;
             if(!hasFocus)
             {
+                msearchstatuscopy = false;
                 mWasEdittextChanged = false;
                 mSearchBarWasBackButtonPressed = true;
                 new Handler().postDelayed(() ->
@@ -1043,6 +1059,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }
                 mSearchbar.setSelection(0);
             }else {
+                msearchstatuscopy = true;
                 mSearchBarWasBackButtonPressed = false;
                 if(!isFocusChanging){
                     if(!status.mThemeApplying){
@@ -1467,7 +1484,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onUpdateFindBar(false);
         mHomeViewController.onClearSelections(isKeyboardOpened);
         mTopBarContainer.getLayoutTransition().setDuration(0);
-
         mSearchbar.clearFocus();
         mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,false, true);
 
@@ -1791,10 +1807,27 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onCopySearch(View view){
         if(mSearchBarPreviousText.length()==0){
             helperMethod.copyURL(mSearchbar.getText().toString(),this);
+            clipboard = mSearchbar.getText().toString();
         }else {
             helperMethod.copyURL(mSearchBarPreviousText,this);
+            clipboard = mSearchBarPreviousText;
         }
         helperMethod.showToastMessage("copied to clipboard", this);
+
+        if(mSearchbar.getText().toString().length()>0 || mSearchbar.getText().toString().equals(clipboard) || clipboard.length()<=0){
+            mPopoupFindPaste.setVisibility(View.GONE);
+        }else {
+            mPopoupFindPaste.setVisibility(View.VISIBLE);
+        }
+     }
+
+    public void onCopyPaste(View view){
+        ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData pasteData = manager.getPrimaryClip();
+        ClipData.Item item = pasteData.getItemAt(0);
+        String paste = item.getText().toString();
+        mSearchbar.setText(paste);
+        mSearchbar.selectAll();
     }
 
     public void onFindNext(View view){
@@ -2329,6 +2362,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                         mHomeViewController.onUpdateSearchEngineBar(false, 150);
                         ((hintAdapter) Objects.requireNonNull(mHintListView.getAdapter())).onClearAdapter();
                     }
+                    msearchstatuscopy = false;
                     mHomeViewController.initSearchBarFocus(false, isKeyboardOpened);
                     mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(),false,true, true);
                     helperMethod.hideKeyboard(homeController.this);

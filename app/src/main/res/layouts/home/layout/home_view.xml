@@ -12,7 +12,7 @@
         maxads:adUnitId="6afabb72c853c683"
         xmlns:maxads="http://schemas.applovin.com/android/1.0"
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
@@ -37,7 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/c_background"
-            android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:translationZ="3dp"
             app:layout_scrollFlags="enterAlwaysCollapsed">
@@ -47,7 +46,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:overScrollMode="never"
                 android:orientation="vertical"
                 app:layout_scrollFlags="enterAlwaysCollapsed"
                 app:scrimAnimationDuration="10">
@@ -236,10 +234,8 @@
             android:id="@+id/pNestedScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"
             android:background="@color/clear_alpha"
             android:fillViewport="true"
-
             android:isScrollContainer="true"
             android:measureAllChildren="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -248,20 +244,18 @@
                 android:id="@+id/pWebLayoutView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/c_background"
+                android:background="@color/c_white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:overScrollMode="never"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
 
                 <com.hiddenservices.onionservices.appManager.homeManager.geckoManager.NestedGeckoView
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:alpha="1"
-                    android:background="@color/c_background"
+                    android:background="@color/c_white"
                     android:visibility="visible"
-                    android:overScrollMode="never"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

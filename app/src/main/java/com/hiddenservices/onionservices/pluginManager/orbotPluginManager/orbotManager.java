@@ -13,6 +13,7 @@ import java.util.List;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.eventObserver;
+import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import static android.content.Context.MODE_PRIVATE;
 import static com.hiddenservices.onionservices.pluginManager.orbotPluginManager.orbotPluginEnums.eLogManager.M_GET_CLEANED_LOGS;
@@ -45,6 +46,11 @@ public class orbotManager
     }
 
     private void onInitlizeOrbot(String pBridgeCustomBridge, boolean pBridgeGatewayManual, String pBridgeCustomType, boolean pBridgeStatus, String pBridgesDefault){
+
+        if(helperMethod.availablePort(9050)){
+            orbotLocalConstants.mSOCKSPort = 9050;
+        }
+
         orbotLocalConstants.mBridges = pBridgeCustomBridge;
         orbotLocalConstants.mIsManualBridge = pBridgeGatewayManual;
         orbotLocalConstants.mManualBridgeType = pBridgeCustomType;
