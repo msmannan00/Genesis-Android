@@ -25,6 +25,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
@@ -547,6 +549,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mStoreURL));
                 try {
                     mContext.startActivity(intent);
+                    helperMethod.onDelayHandler(mContext, 500, () -> {
+                        mContext.finish();
+                        return null;
+                    });
                 } catch (Exception ignored) {
                     helperMethod.showToastMessage(MESSAGE_PLAYSTORE_NOT_FOUND, mContext);
                 }

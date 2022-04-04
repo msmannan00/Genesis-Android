@@ -28,8 +28,8 @@ public class widgetViewController extends AppWidgetProvider {
 
     private void initialize(int pSize){
         if(pSize<=3){
-            mViews.setViewVisibility(R.id.pVoiceInput, View.GONE);
-            mViews.setViewVisibility(R.id.pSearchInputWidget, View.GONE);
+            mViews.setViewVisibility(R.id.pVoiceInput, View.VISIBLE);
+            mViews.setViewVisibility(R.id.pSearchInputWidget, View.VISIBLE);
         }else {
             mViews.setViewVisibility(R.id.pVoiceInput, View.VISIBLE);
             mViews.setViewVisibility(R.id.pSearchInputWidget, View.VISIBLE);

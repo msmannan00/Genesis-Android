@@ -28,6 +28,7 @@ import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.appManager.activityThemeManager;
+import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -241,7 +242,7 @@ public class settingHomeController extends AppCompatActivity
     public void onReportWebsite(View view) {
         try {
             finish();
-            activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_REPORT_URL + URLEncoder.encode(activityContextManager.getInstance().getHomeController().onGetCurrentURL(), "UTF-8"));
+            activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_REPORT_URL + URLEncoder.encode(activityContextManager.getInstance().getHomeController().onGetCurrentURL(), "UTF-8")));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -249,12 +250,12 @@ public class settingHomeController extends AppCompatActivity
 
     public void onSitemap(View view) {
         finish();
-        activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_SITEMAP);
+        activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_SITEMAP));
     }
 
     public void onPrivacyPolicy(View view) {
         finish();
-        activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_PRIVACY_POLICY_URL);
+        activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL));
     }
 
     public void onRateApplication(View view) {

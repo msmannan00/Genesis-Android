@@ -75,9 +75,8 @@
             android:paddingEnd="10dp"
             android:scaleX="1.1"
             android:scaleY="1.1"
-            android:src="@xml/ic_baseline_keyboard_voice"
-            android:visibility="visible"
-            app:tint="@color/c_navigation_tint" />
+            android:src="@drawable/mike"
+            android:visibility="visible"/>
 
     </LinearLayout>
 

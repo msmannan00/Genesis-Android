@@ -29,16 +29,14 @@ public class widgetModelController {
 
     private void initialize(Context context, Intent intent){
         String action = intent.getAction();
-        Log.i("22adsasdasddas","22asdasdsadasdadsasd");
+        Log.i("FUCK5","adsdsadasdasdas");
         switch (action) {
             case enums.WidgetCommands.OPEN_APPLICATION: {
-                Log.i("33adsasdasddas","33asdasdsadasdadsasd");
                 status.sWidgetResponse = enums.WidgetResponse.SEARCHBAR;
                 helperMethod.onStartApplication(context, CONST_PACKAGE_NAME);
                 break;
             }
             case enums.WidgetCommands.OPEN_VOICE: {
-                Log.i("44adsasdasddas","44asdasdsadasdadsasd");
                 status.sWidgetResponse = enums.WidgetResponse.VOICE;
                 helperMethod.onStartApplication(context, CONST_PACKAGE_NAME);
                 break;
@@ -87,8 +85,8 @@ public class widgetModelController {
     }
 
     public Object onTrigger(widgetEnums.eModelViewController pCommands, List<Object> pData){
+        Log.i("FUCK6","adsdsadasdasdas");
         if(pCommands.equals(widgetEnums.eModelViewController.M_ON_RECIEVE)){
-            Log.i("11adsasdasddas","11asdasdsadasdadsasd");
             initialize((Context)pData.get(0), (Intent) pData.get(1));
         }
         return null;

@@ -129,7 +129,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
     @SuppressLint("NotifyDataSetChanged")
     private void initializeLogs(){
         if(status.sLogThemeStyleAdvanced){
-            orbotLogAdapter adapter = new orbotLogAdapter(((ArrayList)mOrbotModel.onTrigger(M_GET_LIST)),new orbotLogController.orbotModelCallback());
+            orbotLogAdapter adapter = new orbotLogAdapter(((ArrayList)mOrbotModel.onTrigger(M_GET_LIST)),new orbotLogController.orbotAdapterCallback());
             mOrbotAdapter = adapter;
 
             Objects.requireNonNull(mOrbotLogRecycleView.getItemAnimator()).setAddDuration(350);
@@ -304,6 +304,22 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
         @Override
         public Object invokeObserver(List<Object> pData, Object pType)
         {
+            return null;
+        }
+    }
+
+    /* Adapter Callback*/
+
+    public class orbotAdapterCallback implements eventObserver.eventListener{
+        @Override
+        public Object invokeObserver(List<Object> pData, Object pType)
+        {
+            if(pType.equals(orbotLogEnums.eOrbotLogAdapterCommands.M_CLOSE)){
+                helperMethod.onDelayHandler(orbotLogController.this, 500, () -> {
+                    finish();
+                    return null;
+                });
+            }
             return null;
         }
     }

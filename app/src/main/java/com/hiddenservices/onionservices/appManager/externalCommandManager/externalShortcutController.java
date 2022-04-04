@@ -53,8 +53,8 @@ public class externalShortcutController extends AppCompatActivity {
 
         /* Start Required Activity */
 
-        finish();
         helperMethod.openIntent(mIntent, this, constants.CONST_LIST_EXTERNAL_SHORTCUT);
+
     }
 
     /* UI TRIGGERS */

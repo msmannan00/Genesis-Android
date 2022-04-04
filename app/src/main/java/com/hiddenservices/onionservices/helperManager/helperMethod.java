@@ -55,9 +55,11 @@ import androidx.core.graphics.ColorUtils;
 
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.defaultBrowser;
+import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.strings;
+import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.example.myapplication.R;
 
@@ -137,6 +139,19 @@ public class helperMethod
         }
 
         return pendingIntent;
+    }
+
+    public static String setGenesisVerificationToken(String pString){
+        try{
+            if (pString.contains("?")){
+                pString += "&"+ constants.CONST_GENESIS_GMT_TIME_GET_KEY+"="+ trueTimeEncryption.getInstance().getSecretToken();
+            }else {
+                pString += "?"+constants.CONST_GENESIS_GMT_TIME_GET_KEY+"="+trueTimeEncryption.getInstance().getSecretToken();
+            }
+            return pString;
+        }catch (Exception ex){
+            return pString;
+        }
     }
 
     public static int getResId(String resName, Class<?> c) {
@@ -420,7 +435,7 @@ public class helperMethod
         selectorIntent.setData(Uri.parse("mailto:"));
 
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"gamesolstudios@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"genesishiddentechnologies@gmail.com"});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Issue Report");
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Write Message Here....");
         emailIntent.setSelector( selectorIntent );

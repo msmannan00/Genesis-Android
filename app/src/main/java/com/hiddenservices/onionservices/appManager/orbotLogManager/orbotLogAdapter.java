@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.appManager.orbotLogManager;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,8 @@ import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.tabManager.tabEnums;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.eventObserver;
-import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
-
 import org.orbotproject.android.service.wrapper.logRowModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,14 +63,17 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
             mOrbotRowDescription = itemView.findViewById(R.id.pOrbotRowDescription);
             mOrbotRowContainer = itemView.findViewById(R.id.pOrbotRowContainer);
 
-            mOrbotRowHeader.setText((this.getLayoutPosition() + ". " + model.getLog()));
+            String mLog = (this.getLayoutPosition() + ". " + model.getLog());
+            mOrbotRowHeader.setText(mLog);
             mOrbotRowDescription.setText(model.getDate());
             mOrbotRowContainer.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            helperMethod.openURLInCustomBrowser(Uri.parse(constants.CONST_LOG_DUCKDUCK + Uri.encode(" " + mModelList.get(this.getLayoutPosition()).getLog())).toString(), activityContextManager.getInstance().getHomeController());
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Uri.parse(constants.CONST_LOG_DUCKDUCK + Uri.encode(" " + mModelList.get(this.getLayoutPosition()).getLog())).toString()));
+            activityContextManager.getInstance().getHomeController().startActivity(intent);
+            mEvent.invokeObserver(null, orbotLogEnums.eOrbotLogAdapterCommands.M_CLOSE);
         }
     }
 

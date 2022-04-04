@@ -9,8 +9,8 @@
         android:shortcutLongLabel="@string/shortcut_open_long">
         <intent
             android:action="erase"
-            android:targetPackage="com.hiddenservices.genesissearchengine.production"
-            android:targetClass="com.hiddenservices.genesissearchengine.production.appManager.externalCommandManager.externalShortcutController">
+            android:targetPackage="com.hiddenservices.onionservices"
+            android:targetClass="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController">
             <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_RESTART" />
         </intent>
     </shortcut>
@@ -22,8 +22,8 @@
         android:shortcutLongLabel="@string/shortcut_erase_and_open_long_label">
         <intent
             android:action="erase"
-            android:targetPackage="com.hiddenservices.genesissearchengine.production"
-            android:targetClass="com.hiddenservices.genesissearchengine.production.appManager.externalCommandManager.externalShortcutController">
+            android:targetPackage="com.hiddenservices.onionservices"
+            android:targetClass="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController">
             <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN" />
         </intent>
     </shortcut>
@@ -35,8 +35,8 @@
         android:shortcutLongLabel="@string/shortcut_erase_long_label">
         <intent
             android:action="erase"
-            android:targetPackage="com.hiddenservices.genesissearchengine.production"
-            android:targetClass="com.hiddenservices.genesissearchengine.production.appManager.externalCommandManager.externalShortcutController">
+            android:targetPackage="com.hiddenservices.onionservices"
+            android:targetClass="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController">
             <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE" />
         </intent>
     </shortcut>

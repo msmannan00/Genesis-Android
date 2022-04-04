@@ -2,6 +2,8 @@ package com.hiddenservices.onionservices.appManager.externalCommandManager;
 
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
+import android.app.ActivityManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -61,12 +63,23 @@ public class externalURLNavigationContoller extends AppCompatActivity {
 
             }
             else {
-                Intent intent = new Intent(this, homeController.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
+                finish();
 
-                activityContextManager.getInstance().getHomeController().onExternalURLInvoke(mData.toString());
+                Uri finalMData1 = mData;
+                helperMethod.onDelayHandler(this, 100, () -> {
+                    activityContextManager.getInstance().getHomeController().onExternalURLInvoke(finalMData1.toString());
+                    return null;
+                });
+
+                helperMethod.onDelayHandler(this, 500, () -> {
+                    Intent intent = new Intent(this, homeController.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
+                    return null;
+                });
+
+                return;
             }
         }
 

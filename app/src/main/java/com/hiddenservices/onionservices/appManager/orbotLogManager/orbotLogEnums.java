@@ -19,4 +19,10 @@ public class orbotLogEnums
     public enum eOrbotLogModelCallbackCommands {
         M_UPDATE_FLOATING_BUTTON, M_UPDATE_LOGS, M_UPDATE_RECYCLE_VIEW
     }
+
+    /*Orbot Log Model Manager*/
+    public enum eOrbotLogAdapterCommands {
+        M_CLOSE
+    }
+
 }

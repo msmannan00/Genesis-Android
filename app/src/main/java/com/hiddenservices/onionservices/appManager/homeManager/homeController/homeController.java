@@ -1136,7 +1136,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS);
         mGeckoClient.getSession().setTheme(null);
         mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), true);
-        mHomeViewController.onNewTabAnimation(Collections.singletonList(helperMethod.getDomainName(mHomeModel.getSearchEngine())), M_HOME_BUTTON_PRESSED);
+        if(status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL)){
+            mHomeViewController.onNewTabAnimation(Collections.singletonList(helperMethod.getDomainName(mHomeModel.getSearchEngine())), M_HOME_BUTTON_PRESSED);
+        }else {
+            onLoadURL(helperMethod.getHost(status.sSettingDefaultSearchEngine));
+        }
     }
 
     /*TAB CONTROLLER EVENTS*/

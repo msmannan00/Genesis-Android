@@ -92,7 +92,6 @@ class orbotLogModel
                         runOnUiThread(() -> {
                             if(orbotLocalConstants.mTorLogsHistory.size()>mLogCounter){
                                 mModelList.add(orbotLocalConstants.mTorLogsHistory.get(mLogCounter));
-                                Log.i("asdasd : ",orbotLocalConstants.mTorLogsHistory.get(mLogCounter).getLog());
                                 if(!status.sLogThemeStyleAdvanced){
                                     mEvent.invokeObserver(Collections.singletonList(mLogCounter), M_UPDATE_LOGS);
                                 }else {
