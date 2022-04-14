@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import com.hiddenservices.onionservices.constants.status;
 
-import org.orbotproject.android.service.OrbotService;
+import org.torproject.android.service.OrbotService;
 
 public class activityStateManager extends Service {
 

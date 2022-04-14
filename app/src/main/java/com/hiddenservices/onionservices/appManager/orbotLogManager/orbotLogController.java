@@ -27,7 +27,7 @@ import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import org.orbotproject.android.service.wrapper.logRowModel;
+import org.torproject.android.service.wrapper.logRowModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

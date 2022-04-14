@@ -5,6 +5,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -348,21 +350,7 @@ public class pluginController
                 mHomeController.get().runOnUiThread(() -> mHomeController.get().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE));
             }
             else if(pEventType.equals(M_IMAGE_UPDATE_RESTART)){
-                Intent mStartActivity = new Intent(mHomeController.get(), homeController.class);
-                int mPendingIntentId = 123456;
-                PendingIntent mPendingIntent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    mPendingIntent = PendingIntent.getActivity(mHomeController.get(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_IMMUTABLE);
-                }else {
-                    mPendingIntent = PendingIntent.getActivity(mHomeController.get(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-                }
-                AlarmManager mgr = (AlarmManager)mHomeController.get().getSystemService(Context.ALARM_SERVICE);
-                mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 500, mPendingIntent);
-
-                pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
-                activityContextManager.getInstance().getHomeController().onResetData();
-                status.sSettingIsAppStarted = false;
-                mHomeController.get().finishAndRemoveTask();
+                ((homeController)mHomeController.get()).onRestartApp();
             }
             return null;
         }

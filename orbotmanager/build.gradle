@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
+apply from: "../commons.gradle"
+apply from : '../dependencies.gradle'
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion '30.0.3'
     ndkVersion '21.3.6528147'
 
     sourceSets {
@@ -15,10 +15,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 32
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,6 +23,20 @@ android {
         }
     }
 
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError true
+        htmlReport true
+        xmlReport false
+        textReport false
+        lintConfig file("../lint.xml")
+        disable "InvalidPackage"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+    }
 }
 
 dependencies {
@@ -43,8 +54,11 @@ dependencies {
     implementation 'info.guardianproject:geoip:20191217'
 
     api 'info.guardianproject:jtorctl:0.4.5.7'
-    implementation 'info.guardianproject:tor-android:0.4.5.9'
+    implementation 'info.guardianproject:tor-android:0.4.6.10'
 
-    implementation 'com.github.tladesignz:IPtProxy:1.0.0'
-    implementation 'androidx.work:work-runtime-ktx:2.8.0-alpha01'
+    implementation 'androidx.work:work-runtime-ktx:2.8.0-alpha02'
+    api libs.guardian_jtorctl
+    implementation(
+            libs.ipt_proxy,
+    )
 }

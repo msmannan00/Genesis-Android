@@ -42,7 +42,7 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.webkit.WebView;
 
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import ch.boye.httpclientandroidlib.HttpHost;
 

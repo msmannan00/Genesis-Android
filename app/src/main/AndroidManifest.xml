@@ -220,7 +220,7 @@
             android:stopWithTask="true" />
 
         <service
-            android:name="org.orbotproject.android.service.OrbotService"
+            android:name="org.torproject.android.service.OrbotService"
             android:enabled="true"
             android:exported="false"
             android:stopWithTask="true" />
@@ -242,7 +242,7 @@
         </receiver>
 
         <receiver
-            android:name="org.orbotproject.android.service.StartTorReceiver"
+            android:name="org.torproject.android.service.StartTorReceiver"
             android:exported="true"
             tools:ignore="ExportedReceiver">
             <intent-filter>

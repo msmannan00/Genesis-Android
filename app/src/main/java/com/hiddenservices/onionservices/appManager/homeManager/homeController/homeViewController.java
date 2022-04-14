@@ -52,7 +52,7 @@ import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.material.appbar.AppBarLayout;
 import org.mozilla.geckoview.GeckoView;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

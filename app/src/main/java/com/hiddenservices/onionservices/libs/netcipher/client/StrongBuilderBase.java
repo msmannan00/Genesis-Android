@@ -24,7 +24,7 @@ import android.content.Intent;
 import com.hiddenservices.onionservices.libs.netcipher.proxy.OrbotHelper;
 
 import org.json.JSONObject;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;

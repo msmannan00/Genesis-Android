@@ -2,11 +2,10 @@ package com.hiddenservices.onionservices.pluginManager.orbotPluginManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
-import org.orbotproject.android.service.OrbotService;
-import org.orbotproject.android.service.util.Prefs;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.OrbotService;
+import org.torproject.android.service.util.Prefs;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +16,8 @@ import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import static android.content.Context.MODE_PRIVATE;
 import static com.hiddenservices.onionservices.pluginManager.orbotPluginManager.orbotPluginEnums.eLogManager.M_GET_CLEANED_LOGS;
-import static org.orbotproject.android.service.TorServiceConstants.ACTION_START;
-import static org.orbotproject.android.service.TorServiceConstants.ACTION_STOP;
+import static org.torproject.android.service.TorServiceConstants.ACTION_START;
+import static org.torproject.android.service.TorServiceConstants.ACTION_STOP;
 
 // https://github.com/guardianproject/orbot/blob/8fca5f8ecddb4da9565ac3fd8936e4f28acdd352/BUILD.md
 
@@ -67,11 +66,7 @@ public class orbotManager
         if (mAppContext.get().getPackageName() != null) {
             startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, mAppContext.get().getPackageName());
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && Prefs.persistNotifications()) {
-            mAppContext.get().startService(startTorIntent);
-        } else {
-            mAppContext.get().startService(startTorIntent);
-        }
+        mAppContext.get().startService(startTorIntent);
 
         SharedPreferences settings = mAppContext.get().getSharedPreferences("se", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
@@ -102,6 +97,9 @@ public class orbotManager
         }
         else if(pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES)){
             Prefs.putBridgesEnabled((boolean)pData.get(0));
+        }
+        else if(pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)){
+            Prefs.setBridgesList((String) pData.get(0));
         }
         else if(pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN)){
             Prefs.putUseVpn((boolean)pData.get(0));
@@ -138,16 +136,13 @@ public class orbotManager
     /*External Triggers*/
 
     public Object onTrigger(List<Object> pData, pluginEnums.eOrbotManager pEventType) {
-        if(pEventType.equals(pluginEnums.eOrbotManager.M_GET_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION_NO_BANDWIDTH) || pEventType.equals(pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES) || pEventType.equals(pluginEnums.eOrbotManager.M_SHOW_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT))
+        if(pEventType.equals(pluginEnums.eOrbotManager.M_GET_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION_NO_BANDWIDTH) || pEventType.equals(pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES) || pEventType.equals(pluginEnums.eOrbotManager.M_SHOW_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST))
         {
             return onTriggerCommands(pData, pEventType);
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_GET_LOGS))
         {
             return getLogs();
-        }
-        else if(pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_PRIVACY))
-        {
         }
         else if(pEventType.equals(pluginEnums.eOrbotManager.M_START_ORBOT))
         {

@@ -27,6 +27,7 @@ public class strings
     public static final String BRIDGE_CUSTOM_INVALID_TYPE = "➔  Invalid bridge type";
     public static final String BRIDGE_CUSTOM_INVALID_TYPE_STRING = "➔  Invalid bridge string";
     public static final String BRIDGE_CUSTOM_BRIDGE_OBFS4 = "obfs4";
+    public static final String BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES = "snowflake";
     public static final String BRIDGE_CUSTOM_BRIDGE_MEEK = "meek";
     public static final String BRIDGES_DEFAULT = "obfs4 78.215.187.186:45675 AE907EE5FAA5D0D27E0C83EFA6ADF8E79FCC0FF1 cert=/TRjMo+RinKaixARMjMtZZBhystaBe+aDaapPrbiITFtWx3M/AJcvpjHjO54tJqLd1+IWQ iat-mode=0\n" +
             "obfs4 107.160.7.24:443 7A0904F6D182B81BEFE0DEDAFEC974494672627B cert=a5/IlZMnDvb8d92LTHMfsBIgL7QlDLPiXiLwe85uedC80mGD0QerygzmsWnMEdwG9ER9Eg iat-mode=0\n" +

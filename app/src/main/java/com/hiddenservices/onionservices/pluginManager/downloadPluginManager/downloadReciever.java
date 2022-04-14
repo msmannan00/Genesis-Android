@@ -25,7 +25,7 @@ import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.libs.netcipher.client.StrongHttpsClient;
 import com.example.myapplication.R;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

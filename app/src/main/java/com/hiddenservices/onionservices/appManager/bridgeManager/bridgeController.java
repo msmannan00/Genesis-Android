@@ -40,6 +40,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
     private RadioButton mBridgeSettingObfs;
     private RadioButton mBridgeSettingBridgeChina;
+    private RadioButton mBridgeSettingBridgeSnowflake;
     private RadioButton mBridgeSettingBridgeCustom;
     private EditText mBridgeSettingCustomPort;
     private Button mBridgeSettingBridgeRequest;
@@ -80,6 +81,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
     {
         mBridgeSettingObfs = findViewById(R.id.pBridgeSettingObfs);
         mBridgeSettingBridgeChina = findViewById(R.id.pBridgeSettingBridgeChina);
+        mBridgeSettingBridgeSnowflake = findViewById(R.id.pBridgeSettingSnowFlakes);
         mBridgeSettingCustomPort = findViewById(R.id.pBridgeSettingCustomPort);
         mBridgeSettingBridgeRequest = findViewById(R.id.pBridgeSettingBridgeRequest);
         mBridgeSettingBridgeCustom = findViewById(R.id.pBridgeSettingBridgeCustom);
@@ -88,7 +90,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
         mBridgeSettingCustomPort.setOnFocusChangeListener(this);
         mBridgeSettingCustomPort.addTextChangedListener(this);
 
-        mBridgeViewController.initialization(mBridgeSettingCustomPort, mBridgeSettingBridgeRequest,this, mBridgeSettingObfs, mBridgeSettingBridgeChina, mBridgeSettingBridgeCustom, mBridgeSettingCustomBridgeBlocker);
+        mBridgeViewController.initialization(mBridgeSettingBridgeSnowflake, mBridgeSettingCustomPort, mBridgeSettingBridgeRequest,this, mBridgeSettingObfs, mBridgeSettingBridgeChina, mBridgeSettingBridgeCustom, mBridgeSettingCustomBridgeBlocker);
         mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,0,status.sBridgeCustomType));
         mBridgeModel = new bridgeModel(new bridgeController.bridgeModelCallback(), this);
     }
@@ -145,6 +147,10 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
         }
         else if(view.getId() == R.id.pBridgeSettingOption2){
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
+        }
+        else if(view.getId() == R.id.pBridgeSettingOption4){
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE, null);
             mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
         }
         else if(view.getId() == R.id.pBridgeSettingOption1){

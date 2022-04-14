@@ -88,6 +88,7 @@
     <string name="BRIDGE_REQUEST" translatable="true">Request</string>
     <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
     <string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
+    <string name="BRIDGE_SNOWFLAKES" translatable="false">Snowflakes (New)</string>
 
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Log Settings</string>

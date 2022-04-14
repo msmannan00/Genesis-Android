@@ -52,7 +52,7 @@ import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebExtension;
 import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;

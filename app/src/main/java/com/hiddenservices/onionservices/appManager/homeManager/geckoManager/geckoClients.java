@@ -43,7 +43,7 @@ import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.WebExtension;
 import org.mozilla.geckoview.WebResponse;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 public class geckoClients
 {
@@ -459,32 +459,42 @@ public class geckoClients
     }
 
     public void onClearAll(){
-        mRuntime.getStorageController().clearData(NETWORK_CACHE);
-        mRuntime.getStorageController().clearData(IMAGE_CACHE);
-        mRuntime.getStorageController().clearData(DOM_STORAGES);
-        mRuntime.getStorageController().clearData(COOKIES);
-        mRuntime.getStorageController().clearData(SITE_SETTINGS);
-        mRuntime.getStorageController().clearData(SITE_DATA);
+        if(mRuntime!=null){
+            mRuntime.getStorageController().clearData(NETWORK_CACHE);
+            mRuntime.getStorageController().clearData(IMAGE_CACHE);
+            mRuntime.getStorageController().clearData(DOM_STORAGES);
+            mRuntime.getStorageController().clearData(COOKIES);
+            mRuntime.getStorageController().clearData(SITE_SETTINGS);
+            mRuntime.getStorageController().clearData(SITE_DATA);
+        }
     }
 
     public void onClearSiteData(){
-        mRuntime.getStorageController().clearData(SITE_SETTINGS);
-        mRuntime.getStorageController().clearData(SITE_DATA);
+        if(mRuntime!=null){
+            mRuntime.getStorageController().clearData(SITE_SETTINGS);
+            mRuntime.getStorageController().clearData(SITE_DATA);
+        }
     }
 
     public void onClearSession(){
-        mRuntime.getStorageController().clearData(AUTH_SESSIONS);
-        mRuntime.getStorageController().clearData(PERMISSIONS);
+        if(mRuntime!=null){
+            mRuntime.getStorageController().clearData(AUTH_SESSIONS);
+            mRuntime.getStorageController().clearData(PERMISSIONS);
+        }
     }
 
     public void onClearCache(){
-        mRuntime.getStorageController().clearData(NETWORK_CACHE);
-        mRuntime.getStorageController().clearData(IMAGE_CACHE);
-        mRuntime.getStorageController().clearData(DOM_STORAGES);
+        if(mRuntime!=null){
+            mRuntime.getStorageController().clearData(NETWORK_CACHE);
+            mRuntime.getStorageController().clearData(IMAGE_CACHE);
+            mRuntime.getStorageController().clearData(DOM_STORAGES);
+        }
     }
 
     public void onClearCookies(){
-        mRuntime.getStorageController().clearData(COOKIES);
+        if(mRuntime!=null){
+            mRuntime.getStorageController().clearData(COOKIES);
+        }
     }
 
     public void onBackPressed(boolean isFinishAllowed, int mTabSize, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){

@@ -2,7 +2,9 @@ package com.hiddenservices.onionservices.appManager.homeManager.homeController;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
 import android.app.DownloadManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
@@ -83,10 +85,10 @@ import com.widget.onionservices.widgetManager.widgetController;
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
-import org.orbotproject.android.service.OrbotService;
-import org.orbotproject.android.service.util.Prefs;
-import org.orbotproject.android.service.wrapper.LocaleHelper;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.OrbotService;
+import org.torproject.android.service.util.Prefs;
+import org.torproject.android.service.wrapper.LocaleHelper;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -644,7 +646,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
 
         mAppBar.animate().cancel();
-        Objects.requireNonNull(mGeckoView.getSession()).stop();
+        if(mGeckoView.getSession()!=null){
+            mGeckoView.getSession().stop();
+        }
         mGeckoClient.loadURL(url.replace("genesis.onion","trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion"),mGeckoView, homeController.this);
     }
 
@@ -926,6 +930,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setOnFocusChangeListener((v, hasFocus) -> {
             if(hasFocus)
             {
+                if(mGeckoClient.getSession()==null){
+                    return;
+                }
                 pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
                 if (!mGeckoClient.getSession().getCurrentURL().equals("about:blank")){
                     mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, true, false);
@@ -1463,6 +1470,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     public void onPause(){
         super.onPause();
+        if(mGeckoClient.getSession()==null)
+            return;
         if(mHomeViewController!=null){
             mHomeViewController.closeMenu();
             helperMethod.hideKeyboard(this);
@@ -2051,7 +2060,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         status.sSettingIsAppStarted = false;
     }
 
+
     public void panicExitInvoked() {
+        orbotLocalConstants.mForcedQuit = true;
+
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION,true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,true));
@@ -2089,35 +2101,44 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES,false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_INSTALLED,false));
-        mGeckoClient.onClearAll();
-
-
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
         dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_HISTORY,null));
         dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY ,null);
-        activityContextManager.getInstance().getHomeController().onClearCache();
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
+
+        mGeckoClient.onClearAll();
+        activityContextManager.getInstance().getHomeController().onClearCache();
         activityContextManager.getInstance().getHomeController().onClearSiteData();
         activityContextManager.getInstance().getHomeController().onClearSession();
         activityContextManager.getInstance().getHomeController().onClearCookies();
+
         onClearSettings();
         status.initStatus(activityContextManager.getInstance().getHomeController());
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
-        activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DATA_CLEARED);
-        activityContextManager.getInstance().getHomeController().onClearSettings();
 
-        status.sSettingIsAppStarted = false;
-        finishAndRemoveTask();
+        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_CLOSE);
 
-        Intent intent = new Intent(this, homeController.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_NO_ANIMATION);
-        this.startActivity(intent);
-        overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
+        onRestartApp();
+    }
+
+    public void onRestartApp(){
+        final PackageManager pm = homeController.this.getPackageManager();
+        final Intent intent = pm.getLaunchIntentForPackage(homeController.this.getPackageName());
+
+        activityContextManager.getInstance().onClearStack();
         this.finish();
 
-        Runtime.getRuntime().exit(0);
+        pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
+        new Handler().postDelayed(() ->
+        {
+            orbotLocalConstants.mIsTorInitialized = false;
+            orbotLocalConstants.mSOCKSPort = -1;
+            status.sSettingIsAppStarted = false;
 
+            orbotLocalConstants.mForcedQuit = false;
+            homeController.this.startActivity(intent);
+        }, 2000);
     }
 
     public class nestedGeckoViewCallback implements eventObserver.eventListener{

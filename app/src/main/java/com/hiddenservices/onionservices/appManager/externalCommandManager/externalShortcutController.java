@@ -14,7 +14,7 @@ import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import static com.hiddenservices.onionservices.constants.constants.CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE;
 import static com.hiddenservices.onionservices.constants.keys.EXTERNAL_SHORTCUT_COMMAND;
 

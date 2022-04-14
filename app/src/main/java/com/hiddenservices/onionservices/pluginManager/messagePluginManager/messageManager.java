@@ -86,7 +86,15 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }
     }
 
+    boolean m_app_closed = true;
+    void onClose(){
+        m_app_closed = false;
+    }
+
     private void initializeDialog(int pLayout, int pGravity){
+        if (!m_app_closed){
+            return;
+        }
         mDialog = new Dialog(mContext);
         mDialog.getWindow().setGravity(pGravity);
         mDialog.getWindow().getAttributes().windowAnimations = R.style.dialiog_animation;
@@ -108,7 +116,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
         mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
 
-        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing()){
+        if(mDialog!=null &&  mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing()){
             mDialog.show();
         }
     }
@@ -724,9 +732,9 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
             switch (pEventType) {
 
-                case M_RATE_FAILURE:
+                case M_CLOSE:
                     /*VERIFIED*/
-                    rateFailure();
+                    onClose();
                     break;
 
                 case M_LANGUAGE_SUPPORT_FAILURE:

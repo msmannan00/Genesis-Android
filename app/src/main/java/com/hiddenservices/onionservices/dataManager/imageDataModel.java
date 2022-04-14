@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import com.hiddenservices.onionservices.dataManager.models.imageRowModel;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 
-import org.orbotproject.android.service.wrapper.orbotLocalConstants;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
