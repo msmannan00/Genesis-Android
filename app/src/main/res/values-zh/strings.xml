@@ -1,0 +1,535 @@
+<resources>
+
+    <!-- Application Strings -->
+    <string name="app_name" translatable="false">Genesis</string>
+    <string name="GENERAL_SEARCH_HINT" translatable="true">搜索内容或输入网络链接</string>
+    <string name="GENERAL_FIND_HINT" translatable="true">在页面中查找</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="true">搜索引擎</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">哎呀！出问题了</string>
+    <string name="GENERAL_TODO" translatable="true">一切</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
+    <string name="GENERAL_LOADING" translatable="true">数字自由</string>
+    <string name="GENERAL_RELOAD" translatable="true">重装</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">您正面临以下问题之一。网页或网站可能无法正常工作。您的互联网连接可能不佳。您可能正在使用代理。网站可能被防火墙阻止</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">英国广播公司|以色列再次罢工</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label" translatable="false">清除浏览器缓存</string>
+    <string name="shortcut_erase_long_label" translatable="false">擦除浏览过的网站</string>
+    <string name="shortcut_erase_and_open_short_label" translatable="false">清除您的数据并打开浏览器</string>
+    <string name="shortcut_erase_and_open_long_label" translatable="false">清除浏览器缓存</string>
+    <string name="shortcut_open" translatable="false">重启创世浏览器</string>
+    <string name="shortcut_open_long" translatable="false">重新启动浏览器</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">编辑书签</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">书签名称</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">书签网址的名称将显示在此处</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">输入书签名称...</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">解雇</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">“有时你需要一个 桥 来访问 Tor 网络 ”</string>
+    <string name="LANDING_MORE" translatable="true">“告诉我更多”</string>
+    <string name="LANDING_HELLO" translatable="true">“你好”</string>
+    <string name="LANDING_WELCOME" translatable="true">“欢迎使用手机拨打 Genesis 。”</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">“安全可靠地浏览互联网。”</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">“没有跟踪。没有审查。”</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE_INFO" translatable="true">连接是安全的</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">您的信息（例如密码或信用卡号）在发送到本网站时是安全的</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">安全设置</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">确保您的身份ήλθατεity 安全并使用以下选项</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">不跟踪</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">我们会告诉网站不要跟踪您</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">跟踪保护</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">启用我们提供的跟踪保护</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">证书</string>
+
+    <!-- Alert Certificate -->
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">证书信息</string>
+
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="true">代理日志</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">系统日志信息</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">如果您在开始Genesis时遇到连接问题，请复制以下代码并在线查找问题或发送给我们，以便我们为您提供帮助</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">代理自定义</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">我们将您连接到由全球数千名志愿者运营的Tor网络！这些选项可以帮助您吗</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">互联网在这里进行了审查（绕过防火墙）</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">绕过防火墙</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges导致Internet运行非常缓慢。仅在您的国家/地区检查过互联网或Tor网络被阻止时才使用它们</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">安全定制</string>
+
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">安全设置</string>
+    <string name="BRIDGE_SETTING" translatable="true">更改“BRIDGE”设置</string>
+    <string name="BRIDGE_AUTO" translatable="true">自动创建</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">自动配置“BRIDGE”设置</string>
+    <string name="BRIDGE_MANUAL" translatable="true">提供一个我知道的“BRIDGE”</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">粘贴自定义“BRIDGE”</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">“BRIDGE”是未列出的 Tor 中继，这使得阻止连接到 Tor 网络变得更加困难。 由于某些国家/地区试图阻止 Tor 的方式，某些“BRIDGE”在某些国家/地区有效但在其他国家/地区无效</string>
+    <string name="BRIDGE_TITLE" translatable="true">选择默认“桥”</string>
+    <string name="BRIDGE_REQUEST" translatable="true">请求</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4（推荐）</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (中国)</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">更改系统日志的显示方式</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">使用现代列表视图显示日志</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">在经典列表视图和现代列表视图之间切换</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">书签已移除</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">书签已更新</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">数据清除成功</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL 复制到剪贴板</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">没有找到应用程序</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">修改后需要重启</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">重启</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">标签已关闭</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新标签打开</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis 代理连接...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">内存已满 ➔ 清除选项卡</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">弹出窗口被阻止</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">打开错误日志</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">开关</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">撤消</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">新身份创建</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">打开设置</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">请求新的 Bridge</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">选择下面的电子邮件以请求 Bridge 地址。获得地址后，将其复制并粘贴到上面的框中并启动应用程序。</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">邮件</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">很抱歉听到这个消息</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">如果您在使用此应用程序时遇到困难，请通过电子邮件与我们联系。我们会尽快解决您的问题</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">故障排除</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">如果它不起作用，请重置应用程序。我们将尝试重新配置它，以便它可以再次工作。</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">重置</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">解雇</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">等待下载...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">下载</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">评价我们</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">告诉其他人您对此应用的看法</string>
+    <string name="ALERT_RATE" translatable="true">评价</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">完成</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge 字符串 (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge 类型 (obfs4, meek, ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">书签网站</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">将此页面添加到您的书签</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">书签名称...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">完成</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">网址通知</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">在新标签页中打开</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">在当前选项卡中打开</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">复制到剪贴板</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">下载文件</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">在新标签页中打开网址</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">在当前选项卡中打开 url</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">复制网址到剪贴板</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">在新标签页中打开图片</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">打开图像当前选项卡</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">将图像复制到剪贴板</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">下载图像文件</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">提供您知道的Bridge</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">输入来自可信来源的bridge信息</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">要求</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+    <string name="SETTING_BASIC_SETTING" translatable="true">系统设定</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">将Genesis设为您的默认浏览器</string>
+    <string name="SETTING_HEADER" translatable="true">系统设定</string>
+    <string name="SETTING_SEARCH_ENGINE" translatable="true">搜索引擎</string>
+    <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_CLEAR_HISTORY" translatable="true">删除浏览的网页链接</string>
+    <string name="SETTING_FONT_TITLE" translatable="true">字体自定义</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">系统字体配置</string>
+    <string name="SETTING_MANUAL_FONT" translatable="true">自动更改字体</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie设置</string>
+    <string name="SETTING_COOKIE" translatable="true">饼干</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">系统设置。通知</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">通知</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">更改通知首选项</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">网络状况和通知</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">本地通知</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">自定义软件通知</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">系统通知</string>
+    <string name="SETTING_SEARCH" translatable="true">管理搜索引擎</string>
+    <string name="SETTING_SEARCH_INFO" translatable="true">添加，设置默认值。显示建议</string>
+    <string name="SETTING_NOTIFICATION" translatable="true">管理通知</string>
+    <string name="SETTING_NOTIFICATION_INFO" translatable="true">新功能，网络状况</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">定制软件。搜索引擎</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="true">支持的搜索引擎</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">选择默认搜索引擎</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">定制软件。搜索引擎</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">更改网络搜索的显示方式</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+    <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="true">显示浏览的网页链接</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">在搜索过程中显示建议</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">当您在搜索栏中键入内容时，将显示来自浏览的Web链接的建议</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">当您在搜索栏中键入内容时，会显示针对性的建议</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="true">可及性</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">文字大小，缩放，语音输入</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">定制|可及性</string>
+    <string name="SETTING_CLEAR" translatable="true">清除私人数据</string>
+    <string name="SETTING_CLEAR_INFO" translatable="true">标签，浏览的Web链接，书签，Cookie，缓存</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">更改系统设置。清除系统数据</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="true">清除资料</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">删除所有标签</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">删除浏览的网页链接</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">删除书签</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">删除缓存</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">删除建议</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">删除资料</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">删除会话</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">删除cookies</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">删除自定义</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">字体缩放</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">根据系统字体大小缩放Web内容</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">开启缩放</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">打开并强制缩放所有网页</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">使用语音输入</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">在网址列中允许语音听写</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">选择自定义字体缩放</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">拖动滑块，直到您可以轻松阅读为止。双击段落后，文本至少应看起来如此大</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+    <string name="SETTING_INTERACTION" translatable="true">互动</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">改变与网站内容的互动方式</string>
+    <string name="SETTING_PRIVACY" translatable="true">用户开启</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">用户监视，登录名，数据选择</string>
+    <string name="SETTING_TRACKING" translatable="true">用户监控保护</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">adblock，跟踪器，指纹</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">系统设置。隐私</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">系统设置。用户监控</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">保护您的在线身份</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">保密您的身份。我们可以保护您免受网上跟踪您的多个跟踪器的侵害。该系统设置也可以用来阻止广告</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">从用户Survelance Protection中解脱出来</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis会告诉网站不要追踪我</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">告诉网站不要追踪我</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">用户监控保护</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">启用Genesis提供的用户Survelance Protection</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">网站cookie</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">根据您的安全需求选择网站Cookie偏好设置</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">退出时清除私人数据</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">关闭软件后自动清除数据</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">私人浏览</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">确保您的身份安全并使用以下选项</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">已启用</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">已启用，不包括网站跟踪Cookie</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">已启用，不包括第三方</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">残障人士</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">禁用保护</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">允许身份Survelance Protection。这可能会导致您的在线身份被盗</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">默认（推荐）</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">阻止在线广告和社交网络用户Survelance。页面将默认加载</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">严格的政策</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">停止所有已知的跟踪器，页面将加载得更快，但某些功能可能无法正常工作</string>
+
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">为各种脚本攻击禁用Java脚本</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">系统设置。复杂的系统设置</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">恢复标签</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">退出浏览器后无法还原</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">工具栏主题</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">设置网站中定义的工具栏主题</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">显示图片</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">始终加载网站图片</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">显示网络字体</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">加载页面时下载远程字体</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="true">允许自动播放</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">允许媒体自动启动</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">数据保护器</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="true">标签</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">重新启动软件后更改选项卡的行为方式</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">媒体</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">更改默认数据保护程序自定义</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">更改默认媒体自定义</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">总是显示图像</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">仅在使用wifi时显示图像</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">封锁所有图片</string>
+    <string name="SETTING_ADVANCE" translatable="true">进阶系统设定</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="true">还原标签，数据保护程序，开发人员工具</string>
+    <string name="SETTING_PROXY" translatable="true">onion代理条件</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">检查onion网络状况</string>
+    <string name="SETTING_REPORT" translatable="true">报告网站</string>
+    <string name="SETTING_REPORT_INFO" translatable="true">举报滥用网站</string>
+    <string name="SETTING_RATEUS" translatable="true">为这个应用软件评分</string>
+    <string name="SETTING_RATEUS_INFO" translatable="true">在Playstore上评分和评论</string>
+    <string name="SETTING_SHARE" translatable="true">分享这个应用程式</string>
+    <string name="SETTING_SHARE_INFO" translatable="true">与您的朋友分享此软件</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">系统设置。一般定制</string>
+    <string name="SETTING_GENERAL" translatable="true">默认系统设置</string>
+    <string name="SETTING_GENERAL_INFO" translatable="true">主页，语言</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">全屏浏览</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">向下滚动页面时隐藏浏览器工具栏</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="true">语言</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">更改浏览器的语言</string>
+    <string name="SETTING_GENERAL_THEME" translatable="true">软件主题</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="true">选择明暗主题</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">主题明亮</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="true">黑暗主题</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">更改全屏浏览和语言</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">系统默认</string>
+    <string name="SETTING_GENERAL_HOME" translatable="true">主页</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">新标签</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">在新标签页中打开首页</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">删除所有标签</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">删除浏览的网页链接</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">删除书签</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">删除浏览缓存</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">删除建议</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">删除网站数据</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">删除会话数据</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">删除网页浏览Cookie</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">删除浏览器自定义</string>
+
+
+    <string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
+
+    <string name="ALERT_CREATE_BOOKMARK" translatable="true">书签网站</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">删除浏览的网页链接和数据</string>
+    <string name="ALERT_CLEAR_BOOKMARK" translatable="true">清除书签和数据</string>
+    <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">清除数据将删除浏览的Web链接，Cookie和其他浏览数据</string>
+    <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">删除数据将删除带有书签的网站</string>
+    <string name="ALERT_CLEAR" translatable="true">取消</string>
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_REPORT" translatable="true">报告</string>
+    <string name="ALERT_REPORT_URL" translatable="true">报告网站</string>
+    <string name="ALERT_REPORT_URL_INFO" translatable="true">如果您认为此网址不合法或令人不安，请向我们报告，以便我们采取法律措施</string>
+    <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">被成功报告</string>
+    <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">网址已成功报告。如果发现问题，将采取法律行动</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">不支援的语言</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">该软件不支持系统语言。我们正在努力将其纳入</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">初始化Orbot</string>
+    <string name="ALERT_NOT_SUPPORTED" translatable="true">不支持的动作</string>
+    <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">找不到可处理以下命令的软件</string>
+    <string name="ALERT_WELCOME_MESSAGE" translatable="true">欢迎|隐藏的网页Genesis3</string>
+    <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">该软件为您提供了一个搜索和打开隐藏的网址的平台。这是一些建议\n</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">隐藏的网络在线市场</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">泄漏的文件和书籍</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">暗网新闻和文章</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">秘密软件和黑客工具</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">不再显示</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">财务与金钱</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">社会社会</string>
+    <string name="ALERT_LOCAL_UPGRADE" translatable="true">手动的</string>
+    <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">应用商店</string>
+    <string name="ALERT_LONG_FILE" translatable="true">文件通知</string>
+    <string name="ALERT_DOWNLOAD" translatable="true">下载通知</string>
+    <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">下载通知</string>
+    <string name="ALERT_LONG_URL_TITLE" translatable="true">网络链接通知</string>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
+    <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">找不到用于处理电子邮件的软件</string>
+    <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">下载文件|</string>
+    <string name="ALERT_DATA_CLEARED" translatable="true">数据已清除|需要重启</string>
+
+
+
+
+
+
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot日志</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">新标签</string>
+    <string name="HOME_MENU_CLOSE_TABS" translatable="true">关闭标签</string>
+    <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">打开最近的标签页</string>
+    <string name="HOME_MENU_LANGUAGE" translatable="true">语言</string>
+    <string name="HOME_MENU_DOWNLOAD" translatable="true">资料下载</string>
+    <string name="HOME_MENU_HISTORY" translatable="true">浏览的网页链接</string>
+    <string name="HOME_MENU_SETTING" translatable="true">系统设定</string>
+    <string name="HOME_MENU_DESKTOP" translatable="true">桌面网站</string>
+    <string name="HOME_MENU_BOOKMARK" translatable="true">保存此页面</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">书签</string>
+    <string name="HOME_MENU_REPORT" translatable="true">报告网站</string>
+    <string name="HOME_MENU_RATE" translatable="true">为这个应用软件评分</string>
+    <string name="HOME_MENU_FIND" translatable="true">在页面中查找</string>
+    <string name="HOME_MENU_QUIT" translatable="true">出口</string>
+    <string name="HOME_MENU_SHARE" translatable="true">分享</string>
+
+
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">新标签</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="true">关闭所有标签</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">系统设定</string>
+    <string name="TAB_LIST_SELECT" translatable="true">选择标签</string>
+
+
+    <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">打开标签</string>
+    <string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">复制</string>
+    <string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">分享</string>
+    <string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">清空选项</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">在当前标签页中打开</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">在新标签页中打开</string>
+    <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">删除</string>
+
+
+    <string name="HISTORY_TITLE" translatable="true">浏览的网页链接</string>
+    <string name="HISTORY_CLEAR" translatable="true">删除这个</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true">搜索 ...</string>
+
+
+    <string name="BOOKMARK_TITLE" translatable="true">书签</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">删除这个</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true">搜索 ...</string>
+
+
+    <string name="HELP_RETRY" translatable="true">重试</string>
+    <string name="HELP_RETRY_INFO" translatable="true">哎呀！网络连接错误。网络未连接</string>
+    <string name="HELP_TITLE" translatable="true">帮助和支持</string>
+
+
+    <string name="LANGUAGE_TITLE" translatable="true">语言</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">改变语言</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">我们仅在以下语言上运行。我们会尽快添加</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">英语（美国）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">德语（德国）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">义大利文（义大利）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">葡萄牙语（巴西）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">俄语（俄罗斯）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">乌克兰文（乌克兰）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">简体中文（中国大陆）</string>
+
+
+    <string name="ORBOT_SETTING_WARNING" translatable="true">warning️警告</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">定制Bridges</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">启用Bridges</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">启用VPN服务</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">启用Bridge Gateway</string>
+    <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">启用 Gateway</string>
+
+
+    <string name="PROXY_STATUS_HEADER" translatable="true">委托条件</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Gateway 代理的当前状况</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot委托条件</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">Orbot</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">VPN的连接条件</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge代理条件</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">信息|更改系统设置</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">您可以通过重新启动软件并转到代理管理器来更改代理。可以通过单击底部的齿轮图标来打开它</string>
+
+
+
+
+    <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+    <string name="NOTIFICATION_OPEN_TEXT" translatable="true">打开这个</string>
+
+
+    <string name="HOME_TAB_TEXT" translatable="true">1</string>
+    <string name="HOME_CONNECT" translatable="false">connect</string>
+    <string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+    <string name="HOME_TAB_EMPTY" translatable="true">打开的标签将显示在这里</string>
+
+
+    <string name="ERROR_M1" translatable="true">该网站无法访问</string>
+    <string name="ERROR_M2" translatable="true">与网站连接时发生错误</string>
+    <string name="ERROR_M3" translatable="true">您尝试查看的页面无法显示，因为无法验证所接收数据的真实性</string>
+    <string name="ERROR_M4" translatable="true">由于某种原因该页面当前无法正常工作</string>
+    <string name="ERROR_M5" translatable="true">请与网站所有者联系，以告知他们该问题。</string>
+    <string name="ERROR_M6" translatable="true">重装</string>
+
+    <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+    <string name="invalid_package_signature" translatable="true">无效的包裹签名</string>
+    <string name="autofill_sign_in_prompt" translatable="true">单击以登录。</string>
+    <string name="autofill_manual_prompt" translatable="true">单击以手动选择数据。</string>
+    <string name="security_exception" translatable="true">Web域安全异常。</string>
+    <string name="dal_exception" translatable="true">DAL验证失败。</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">最近的标签</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">新身份</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">隐私政策</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser 隐私政策</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">报告网站</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">举报非法网站</string>
+    <string name="SETTING_SITEMAP" translatable="true">发布您的网站</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">将您的网站添加到我们的搜索引擎</string>
+
+    <item name="LaguageID" type="id"/>
+    <item name="LaguageRegion" type="id"/>
+
+    <string-array name="ARRAY_FONTS" translatable="true">
+        <item>55％</item>
+        <item>70％</item>
+        <item>85％</item>
+        <item>100％的</item>
+        <item>115％</item>
+        <item>130％</item>
+        <item>145％</item>
+    </string-array>
+
+    <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+        <item>已启用</item>
+        <item>残障人士</item>
+    </string-array>
+
+    <string-array name="ARRAY_NOTIFICATION" translatable="true">
+        <item>全部启用</item>
+        <item>禁用所有</item>
+        <item>无带宽</item>
+    </string-array>
+
+    <string-array name="ARRAY_COOKIES" translatable="true">
+        <item>允许全部</item>
+        <item>允许信任</item>
+        <item>不允许无</item>
+        <item>允许访问</item>
+        <item>允许非追踪者</item>
+    </string-array>
+
+    <!-- Generated by Automatic String Resource Translation -->
+    <!--          https://asrt.gluege.boerde.de             -->
+</resources>

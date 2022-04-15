@@ -1,0 +1,6 @@
+<resources>
+
+    <!-- Application Strings -->
+    <string name="mode" translatable="false">Night</string>
+
+</resources>

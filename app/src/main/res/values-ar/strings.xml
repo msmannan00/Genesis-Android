@@ -1,0 +1,535 @@
+<resources>
+
+    <!-- Application Strings -->
+    <string name="app_name" translatable="false">جینیسز</string>
+    <string name="GENERAL_SEARCH_HINT" translatable="true">ابحث عن شيء ما أو اكتب رابط الويب</string>
+    <string name="GENERAL_FIND_HINT" translatable="true">ابحث في الصفحة</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="true">محرك البحث</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">وجه الفتاة! هناك خطأ ما</string>
+    <string name="GENERAL_TODO" translatable="true">كل شىء</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Genesis Search Engine</string>
+    <string name="GENERAL_LOADING" translatable="true">الحرية الرقمية</string>
+    <string name="GENERAL_RELOAD" translatable="true">إعادة تحميل</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">لديك واحدة من المشاكل التالية. قد لا تعمل صفحة الويب أو موقع الويب. قد يكون اتصالك بالإنترنت معطلاً. ربما كنت تستخدم وكيل. قد يتم حظر موقع الويب بواسطة جدار حماية</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">بي بي سي | هاجمت إسرائيل مرة أخرى</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label" translatable="false">برائوزر کیشے مٹا دیں</string>
+    <string name="shortcut_erase_long_label" translatable="false">برائوزڈ ویب سائٹ کو مٹا دیں</string>
+    <string name="shortcut_erase_and_open_short_label" translatable="false">اپنا ڈیٹا مٹا دیں اور براؤزر کھولیں</string>
+    <string name="shortcut_erase_and_open_long_label" translatable="false">برائوزر کیشے مٹا دیں جینیسیس براؤزر کو دوبارہ شروع کریں</string>
+    <string name="shortcut_open" translatable="false">اپنے براؤزر کو دوبارہ شروع کریں</string>
+    <string name="shortcut_open_long" translatable="false">Restart Application</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">تحرير الإشارة المرجعية</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">اسم المرجعية</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">سيتم عرض اسم عنوان URL للإشارة هنا</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">أدخل اسم الإشارة المرجعية</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">حذف</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">"في بعض الأحيان تحتاج إلى جسر للذهاب إلى شبكة الرحلات."</string>
+    <string name="LANDING_MORE" translatable="true">"اخبرني المزيد"</string>
+    <string name="LANDING_HELLO" translatable="true">"سلام"</string>
+    <string name="LANDING_WELCOME" translatable="true">"مرحبًا بك في Genesis on Mobile."</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">"تصفح الإنترنت بأمان."</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">"لا تتبع ولا رقابة".</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE_INFO" translatable="true">الاتصال آمن</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">تتم حماية معلوماتك (مثل كلمات المرور أو أرقام بطاقات الائتمان) عندما يتم إرسالك إلى هذا الموقع.</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">جافا سكريبت</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">احمِ هويتك واستخدم الخيارات أدناه لا تتبع</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">سنخبر المواقع بعدم تتبعك</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">حماية التتبع</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">قم بتمكين حماية التتبع التي توفرها شهادتنا</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">معلومات الشهادة</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">تمكين الحماية من التعقب المقدمة من Genesis</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">شهادة</string>
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">معلومات الشهادة</string>
+
+    <!-- Orbot Logs -->
+    <string name="ORBOT_LOG" translatable="true">سجلات الوكيل</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">معلومات سجل النظام</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">إذا كنت تواجه مشكلة في الاتصال عند بدء Genesis ، فالرجاء نسخ الكود التالي والعثور على المشكلة عبر الإنترنت أو إرسالها إلينا ، حتى نتمكن من محاولة مساعدتك</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">تخصيص الوكيل</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">نحن نوصلك بشبكة داخلية تعمل من خلال آلاف المتطوعين حول العالم! هل يمكن أن يساعدك هذا الخيار؟</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">رقابة الإنترنت هنا (تجاوز جدار الحماية)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">تجاوز جدار الحماية</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">الجسر يجعل الإنترنت يعمل ببطء شديد. استخدمها فقط إذا كان بلدك يخضع للرقابة على الإنترنت أو تم حظر شبكة الباب</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">تحسين الأمن</string>
+
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">إعدادات الأمان</string>
+    <string name="BRIDGE_SETTING" translatable="true">تغيير إعدادات "BRIDGE"</string>
+    <string name="BRIDGE_AUTO" translatable="true">إنشاء تلقائيًا</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">تكوين إعدادات "BRIDGE" تلقائيًا</string>
+    <string name="BRIDGE_MANUAL" translatable="true">توفير "جسر" أعرف</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">لصق "BRIDGE" المخصص</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">"BRIDGE" هي مرحلات Tor غير مدرجة تجعل من الصعب حظر الاتصالات في شبكة Tor. بسبب الطريقة التي تحاول بها بعض الدول حجب Tor ، فإن بعض "BRIDGE" تعمل في بعض البلدان ولكن ليس في بلدان أخرى</string>
+    <string name="BRIDGE_TITLE" translatable="true">حدد الافتراضي "BRIDGE"</string>
+    <string name="BRIDGE_REQUEST" translatable="true">طلب</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (موصى به)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (الصين)</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">قم بتغيير طريقة ظهور سجلات النظام</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">عرض السجلات باستخدام طريقة عرض القائمة الحديثة</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">التبديل بين عرض القائمة الكلاسيكي والحديث</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">تمت إزالة الإشارة المرجعية</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">تم تحديث الإشارة المرجعية</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">تم مسح البيانات بنجاح</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">تم نسخ URL إلى الحافظة</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">لم يتم العثور على تطبيق</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">مطلوب إعادة التشغيل بعد التغييرات</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">إعادة التشغيل</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">علامة التبويب مغلقة</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">تم فتح علامة تبويب جديدة</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">اتصال وكيل Genesis ...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">الذاكرة ممتلئة ➔ علامة التبويب مسح</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">المنبثقة منعت</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">فتح سجلات الأخطاء</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">التبديل</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">تراجع</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">إنشاء هوية جديدة</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">أفتح الإعدادات</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">طلب جديد Bridge</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">حدد البريد الإلكتروني أدناه لطلب عنوان Bridge بمجرد أن يكون لديك عنوان ، انسخه والصقه في المربع أعلاه وابدأ التطبيق.</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">البريد</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">نأسف لسماع ذلك</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">إذا كنت تواجه صعوبة أثناء استخدام هذا التطبيق ، فيرجى التواصل معنا عبر البريد الإلكتروني. سنحاول حل مشكلتك في أقرب وقت ممكن</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">استكشاف الأخطاء وإصلاحها</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">إعادة التطبيق في حالة إذا كان لا يعمل. سنحاول إعادة تكوينه حتى يعمل مرة أخرى.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">إعادة تعيين</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">استبعاد</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">في انتظار التنزيل ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">تحميل</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">قيم الولايات المتحدة</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">أخبر الآخرين برأيك حول هذا التطبيق</string>
+    <string name="ALERT_RATE" translatable="true">معدل</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">تم</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">سلسلة Bridge (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">نوع Bridge (obfs4 ، وديع ، ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">احفظ الموقع</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">أضف هذه الصفحة إلى المواقع المفضلة لديك</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">اسم الإشارة المرجعية ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">تم</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">إشعار URL</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">فتح في علامة تبويب جديدة</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">فتح في علامة التبويب الحالية</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">نسخ إلى الحافظة</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">تحميل الملف</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">فتح عنوان url في علامة تبويب جديدة</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">فتح عنوان url في علامة التبويب الحالية</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">انسخ عنوان url إلى الحافظة</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">فتح الصورة في علامة تبويب جديدة</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">فتح علامة التبويب الحالية للصورة</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">نسخ الصورة إلى الحافظة</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">تحميل ملف الصورة</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Provide a Bridge I know</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true"><b><font color='#00b3b3'> تقديم "Bridge"</font></b>&#160;أدخل معلومات "Bridge" من مصدر موثوق</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">طلب</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+    <string name="SETTING_BASIC_SETTING" translatable="true">اعدادات النظام</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">اجعل Genesis متصفحك الافتراضي</string>
+    <string name="SETTING_HEADER" translatable="true">اعدادات النظام</string>
+    <string name="SETTING_SEARCH_ENGINE" translatable="true">محرك البحث</string>
+    <string name="SETTING_JAVASCRIPT" translatable="true">جافا سكريبت</string>
+    <string name="SETTING_CLEAR_HISTORY" translatable="true">قم بإزالة روابط الويب المستعرضة</string>
+    <string name="SETTING_FONT_TITLE" translatable="true">تخصيص الخط</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">تكوين خط النظام</string>
+    <string name="SETTING_MANUAL_FONT" translatable="true">قم بتغيير الخط تلقائيًا</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">إعداد ملفات تعريف الارتباط</string>
+    <string name="SETTING_COOKIE" translatable="true">بسكويت</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">اعدادات النظام. إشعار</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">معلومة</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">تغيير تفضيلات الإعلام</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">حالة الشبكة والإخطار</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">المعلومات المحلية</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">تخصيص إخطارات البرامج</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">إخطارات النظام</string>
+    <string name="SETTING_SEARCH" translatable="true">إدارة محركات البحث</string>
+    <string name="SETTING_SEARCH_INFO" translatable="true">إضافة ، تعيين الافتراضي. إظهار اقتراحات</string>
+    <string name="SETTING_NOTIFICATION" translatable="true">إدارة الإخطارات</string>
+    <string name="SETTING_NOTIFICATION_INFO" translatable="true">الميزات الجديدة ، حالة الشبكة</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">تخصيص البرنامج. محرك البحث</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="true">محرك البحث المدعوم</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">حدد محرك البحث الافتراضي</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">تخصيص البرنامج. محرك البحث</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">تغيير طريقة ظهور عمليات بحث الويب</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">جینیسز</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+    <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="true">إظهار روابط الويب التي تم تصفحها</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">إظهار الاقتراحات أثناء البحث</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">تظهر اقتراحات روابط الويب المستعرضة أثناء الكتابة في شريط البحث</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">تظهر الاقتراحات المركزة أثناء الكتابة في شريط البحث</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="true">وصول</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">الإدخال باستخدام حجم النص والتكبير والصوت</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">التخصيص | وصول</string>
+    <string name="SETTING_CLEAR" translatable="true">مسح البيانات الخاصة</string>
+    <string name="SETTING_CLEAR_INFO" translatable="true">علامات التبويب ، روابط الويب التي تم تصفحها ، الإشارات المرجعية ، ملفات تعريف الارتباط ، ذاكرة التخزين المؤقت</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">تغيير إعدادات النظام. مسح بيانات النظام</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="true">إحصائيات واضحة</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">احذف كل علامات التبويب</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">حذف روابط الويب المستعرضة</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">حذف الإشارات المرجعية</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">احذف ذاكرة التخزين المؤقت</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">حذف الاقتراحات</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">حذف البيانات</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">حذف الجلسة</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">حذف ملفات تعريف الارتباط</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">احذف حسب الحاجة</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">تحجيم الخط</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">مقياس محتوى الويب وفقًا لحجم خط النظام</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">تكبير</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">تكبير وتشغيل جميع صفحات الويب بالقوة</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">الإدخال باستخدام الصوت</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">السماح بالإملاء الصوتي في شريط URL</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">حدد تحجيم الخط المخصص</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">اسحب شريط التمرير حتى تتمكن من قراءته بسهولة. يجب أن يظهر هذا النص على الأقل بعد النقر المزدوج على فقرة</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200٪</string>
+    <string name="SETTING_INTERACTION" translatable="true">محادثة</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">غيّر طريقة تفاعلك مع محتوى الموقع</string>
+    <string name="SETTING_PRIVACY" translatable="true">مستخدم على</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">مراقبة المستخدم ، والسجلات ، واختيار البيانات</string>
+    <string name="SETTING_TRACKING" translatable="true">حماية مراقبة المستخدم</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">كتل إعلانية ، متتبعات ، بصمات الأصابع</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">اعدادات النظام. سرية</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">اعدادات النظام. حماية مراقبة المستخدم</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">حماية هويتك على الإنترنت</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">حافظ على هويتك خاصة. يمكننا حمايتك من العديد من أجهزة التتبع التي تتابعك على الإنترنت. يمكن أيضًا استخدام إعداد النظام هذا لمنع الإعلانات</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">حماية نفسك من حماية مراقبة المستخدم</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">سيقول جينيسيس للمواقع ألا تتعقبني</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">أخبر الموقع ألا يتتبعني</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">حماية مراقبة المستخدم</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">توفير حماية مراقبة المستخدم من خلال Genesis</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">ملفات تعريف الارتباط الخاصة بالموقع</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">اختر تفضيلات ملفات تعريف الارتباط لموقع الويب وفقًا لاحتياجات الأمان الخاصة بك</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">امسح البيانات الخاصة عند الخروج</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">امسح البيانات تلقائيًا عندما يكون البرنامج معطلاً</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">تصفح خاص</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">احم هويتك واستخدم الخيارات أدناه</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">نشيط</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">باستثناء ملفات تعريف الارتباط لتتبع موقع الويب</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">نشط ، باستثناء الأطراف الثالثة</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">غير وظيفي</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">الحماية السلبية</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">السماح بحماية مراقبة الهوية. يمكن أن يؤدي ذلك إلى سرقة هويتك عبر الإنترنت</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">افتراضي (موصى به)</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">منع الإعلان عبر الإنترنت ومراقبة مستخدمي الويب الاجتماعي. سيتم تحميل الصفحات بشكل افتراضي</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">سياسة صارمة</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">أوقف مؤقتًا جميع برامج التتبع الشائعة ، سيتم تحميل الصفحات بشكل أسرع ولكن قد لا تعمل بعض الوظائف</string>
+
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">جافا سكريبت</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">قم بتعطيل JavaScript للعديد من هجمات البرامج النصية</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">اعدادات النظام. تكوين النظام المعقد</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">استعادة علامات التبويب</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">لا تستعيد بعد الخروج من المتصفح</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">موضوع شريط الأدوات</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">قم بتعيين سمة شريط الأدوات المحددة في موقع الويب</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">اعرض الصور</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">قم دائمًا بتحميل صور الموقع</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">إظهار خطوط الويب</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">تنزيل الخطوط البعيدة عند تحميل الصفحة</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="true">السماح بالتشغيل التلقائي</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">دع الوسائط تبدأ تلقائيًا</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">حافظ البيانات</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="true">فاتورة غير مدفوعة</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">قم بتغيير الطريقة التي تتصرف بها علامة التبويب بعد إعادة تشغيل البرنامج</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">وسائل الإعلام</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">تخصيص موفر البيانات الافتراضي</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">تخصيص الوسائط الافتراضية</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">اعرض الصور دائمًا</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">عرض الصور فقط عند استخدام Wi-Fi</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">منع جميع الصور</string>
+    <string name="SETTING_ADVANCE" translatable="true">إعدادات النظام المتقدمة</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="true">استعادة علامات التبويب ، وحفظ البيانات ، وأدوات المطور</string>
+    <string name="SETTING_PROXY" translatable="true">هذا هو شرط الوكيل</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">تحقق من حالة الشبكة</string>
+    <string name="SETTING_REPORT" translatable="true">تقرير الموقع</string>
+    <string name="SETTING_REPORT_INFO" translatable="true">الإبلاغ عن موقع إساءة الاستخدام</string>
+    <string name="SETTING_RATEUS" translatable="true">قيم هذا التطبيق</string>
+    <string name="SETTING_RATEUS_INFO" translatable="true">الأسعار والتعليقات على متجر Play</string>
+    <string name="SETTING_SHARE" translatable="true">شارك هذا التطبيق</string>
+    <string name="SETTING_SHARE_INFO" translatable="true">شارك هذا البرنامج مع أصدقائك</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">اعدادات النظام. تخصيص عام</string>
+    <string name="SETTING_GENERAL" translatable="true">إعدادات النظام الافتراضية</string>
+    <string name="SETTING_GENERAL_INFO" translatable="true">الصفحة الرئيسية ، اللغة</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">تصفح ملء الشاشة</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">إخفاء شريط أدوات المتصفح عند التمرير خلال الصفحة</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="true">لغة</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">قم بتغيير لغة متصفحك</string>
+    <string name="SETTING_GENERAL_THEME" translatable="true">موضوع البرنامج</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="true">اختر مظهرًا ساطعًا وداكنًا</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">موضوع مشرق</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="true">موضوع الظلام</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">تغيير التصفح بملء الشاشة واللغة</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">النظام الافتراضي</string>
+    <string name="SETTING_GENERAL_HOME" translatable="true">الصفحة الرئيسية</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">علامة تبويب جديدة</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">افتح الصفحة الرئيسية في علامة تبويب جديدة</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">قم بإزالة كافة علامات التبويب</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">قم بإزالة روابط الويب المستعرضة</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">إزالة الإشارات المرجعية</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">قم بإزالة ذاكرة التخزين المؤقت للتصفح</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">إزالة الاقتراحات</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">إزالة بيانات الموقع</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">إزالة بيانات الجلسة</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">قم بإزالة ملفات تعريف الارتباط الخاصة بتصفح الويب</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">قم بإزالة تخصيص المتصفح</string>
+
+
+
+    <string name="ALERT_CREATE_BOOKMARK" translatable="true">احفظ الويب</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">حذف روابط وبيانات الويب التي تم تصفحها</string>
+    <string name="ALERT_CLEAR_BOOKMARK" translatable="true">مسح الإشارات والبيانات</string>
+    <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">سيؤدي مسح البيانات إلى إزالة روابط الويب التي تم تصفحها وملفات تعريف الارتباط وبيانات التصفح الأخرى</string>
+    <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">سيؤدي حذف البيانات إلى حذف المواقع التي تم وضع إشارة مرجعية عليها</string>
+    <string name="ALERT_CLEAR" translatable="true">ألغها</string>
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_REPORT" translatable="true">التقارير</string>
+    <string name="ALERT_REPORT_URL" translatable="true">تقرير الموقع</string>
+    <string name="ALERT_REPORT_URL_INFO" translatable="true">أخبرنا إذا كنت تعتقد أن عنوان URL هذا غير قانوني أو مزعج ، حتى نتمكن من اتخاذ إجراء قانوني</string>
+    <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">تم الإبلاغ بنجاح</string>
+    <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">تم الإبلاغ عن عنوان URL بنجاح. إذا تم العثور على أي شيء ، سيتم اتخاذ الإجراءات القانونية</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">لا يوجد دعم لغوي</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">لغة النظام غير مدعومة من قبل هذا البرنامج. نحن نعمل على إضافته قريبًا</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">يبدأ سفر التكوين</string>
+    <string name="ALERT_NOT_SUPPORTED" translatable="true">الإجراء غير مدعوم</string>
+    <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">لم يتم العثور على برنامج للتعامل مع الأمر التالي</string>
+    <string name="ALERT_WELCOME_MESSAGE" translatable="true">مرحبا بكم | بوابة الويب المخفية</string>
+    <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">يوفر لك هذا البرنامج نظامًا أساسيًا للعثور على عناوين URL المخفية على الويب وفتحها. هذه بعض الاقتراحات</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">سوق مخفي على شبكة الإنترنت</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">تم تسريب وثائق وكتب</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">أخبار ومقالات الويب الأسود</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">البرمجيات السرية وأدوات القرصنة</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">لن تظهر مرة أخرى</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">التمويل والمال</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">المجتمع الاجتماعي</string>
+    <string name="ALERT_LOCAL_UPGRADE" translatable="true">يدوي</string>
+    <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">بلاي ستور</string>
+    <string name="ALERT_LONG_FILE" translatable="true">إخطار الملف</string>
+    <string name="ALERT_DOWNLOAD" translatable="true">إشعار التنزيل</string>
+    <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">إشعار التنزيل</string>
+    <string name="ALERT_LONG_URL_TITLE" translatable="true">إشعار ارتباط الويب</string>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
+    <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">لم يتم العثور على برنامج للتعامل مع البريد الإلكتروني</string>
+    <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">تحميل ملف |</string>
+    <string name="ALERT_DATA_CLEARED" translatable="true">البيانات واضحة | السيرة الذاتية مطلوبة</string>
+
+
+
+
+
+
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">سجل التكوين</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">علامات تبويب جديدة</string>
+    <string name="HOME_MENU_CLOSE_TABS" translatable="true">إغلاق علامة التبويب</string>
+    <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">افتح علامات التبويب الأخيرة</string>
+    <string name="HOME_MENU_LANGUAGE" translatable="true">لغة</string>
+    <string name="HOME_MENU_DOWNLOAD" translatable="true">تحميل</string>
+    <string name="HOME_MENU_HISTORY" translatable="true">تصفح روابط الويب</string>
+    <string name="HOME_MENU_SETTING" translatable="true">اعدادات النظام</string>
+    <string name="HOME_MENU_DESKTOP" translatable="true">موقع سطح المكتب</string>
+    <string name="HOME_MENU_BOOKMARK" translatable="true">احفظ هذه الصفحة</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">إشارات مرجعية</string>
+    <string name="HOME_MENU_REPORT" translatable="true">تقرير الموقع</string>
+    <string name="HOME_MENU_RATE" translatable="true">قيم هذا التطبيق</string>
+    <string name="HOME_MENU_FIND" translatable="true">ابحث في الصفحة</string>
+    <string name="HOME_MENU_QUIT" translatable="true">اخرج</string>
+    <string name="HOME_MENU_SHARE" translatable="true">يشارك</string>
+
+
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">علامات تبويب جديدة</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="true">أغلق كل علامات التبويب</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">اعدادات النظام</string>
+    <string name="TAB_LIST_SELECT" translatable="true">حدد علامات التبويب</string>
+
+
+    <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">فتح علامات التبويب</string>
+    <string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">ينسخ</string>
+    <string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">يشارك</string>
+    <string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">اختيار واضح</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">افتح في علامة التبويب الحالية</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">افتح في علامة تبويب جديدة</string>
+    <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">حذف</string>
+
+
+    <string name="HISTORY_TITLE" translatable="true">تصفح روابط الويب</string>
+    <string name="HISTORY_CLEAR" translatable="true">تخلص منه</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true">يجد ...</string>
+
+
+    <string name="BOOKMARK_TITLE" translatable="true">المرجعية</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">تخلص منه</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true">يجد ...</string>
+
+
+    <string name="HELP_RETRY" translatable="true">حاول مجددا</string>
+    <string name="HELP_RETRY_INFO" translatable="true">وجه الفتاة! خطأ في الاتصال بالشبكة. الشبكة غير متصلة</string>
+    <string name="HELP_TITLE" translatable="true">مساعدة و دعم</string>
+
+
+    <string name="LANGUAGE_TITLE" translatable="true">لغة</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">تغيير اللغة</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">نحن نستخدم اللغة التالية فقط. سنضيف المزيد قريبا</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">الإنجليزية الأمريكية)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">الألمانية ألمانيا)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">الإيطالية (إيطاليا)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">البرتغالية (البرازيل).</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">الروسية (روسيا)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">تحقيق (أوكرانيا)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">الصينية سهلة (بر الصين الرئيسي)</string>
+
+
+    <string name="ORBOT_SETTING_WARNING" translatable="true">تحذير</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">كوكبة مخصصة</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">تفعيل الجسر</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">تمكين خادم VPN</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">قم بتمكين Bridge Gateway</string>
+    <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">قم بتنشيط البوابة</string>
+
+
+    <string name="PROXY_STATUS_HEADER" translatable="true">حالة الوكيل</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">الحالة الحالية للوكيل المداري</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">حالة وكيل Genesis</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">انین</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">شرط الاتصال بالسلاح</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">شرط وكيل الجسر</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">المعلومات | تغيير إعدادات النظام</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">يمكنك تغيير الوكيل عن طريق إعادة تشغيل البرنامج والانتقال إلى Proxy Manager. يمكن فتحه من خلال النقر على رمز الترس أدناه</string>
+
+
+
+    <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+    <string name="NOTIFICATION_OPEN_TEXT" translatable="true">افتحه</string>
+
+
+    <string name="HOME_TAB_TEXT" translatable="true">1</string>
+    <string name="HOME_CONNECT" translatable="false">connect</string>
+    <string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+    <string name="HOME_TAB_EMPTY" translatable="true">ستظهر هنا علامات التبويب المفتوحة</string>
+
+
+    <string name="ERROR_M1" translatable="true">هذا الموقع لا يمكن الوصول إليه</string>
+    <string name="ERROR_M2" translatable="true">حدث خطأ أثناء محاولة الاتصال بالموقع</string>
+    <string name="ERROR_M3" translatable="true">الصفحة التي تحاول عرضها لا يمكن عرضها لأن دقة البيانات المتلقاة لا يمكن التحقق منها</string>
+    <string name="ERROR_M4" translatable="true">الصفحة لا تعمل حاليا لسبب ما</string>
+    <string name="ERROR_M5" translatable="true">يرجى الاتصال بمالكي الموقع للإبلاغ عن هذه المشكلة.</string>
+    <string name="ERROR_M6" translatable="true">إعادة تحميل</string>
+
+
+    <string name="PREF_LANGUAGE" translatable="true">Pre_language</string>
+    <string name="invalid_package_signature" translatable="true">توقيع الحزمة غير صالح</string>
+    <string name="autofill_sign_in_prompt" translatable="true">انقر لتسجيل الدخول.</string>
+    <string name="autofill_manual_prompt" translatable="true">انقر لتحديد البيانات يدويًا.</string>
+    <string name="security_exception" translatable="true">خصم أمان مجال الويب.</string>
+    <string name="dal_exception" translatable="true">فشل مصادقة DAL.</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">العلامات الاخيرة</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">هوية جديدة</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">سياسة الخصوصية</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">سياسة الخصوصية</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">تقرير الموقع</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">الإبلاغ عن موقع ويب غير قانوني</string>
+    <string name="SETTING_SITEMAP" translatable="true">انشر موقعك على الويب</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">أضف موقع الويب الخاص بك إلى محرك البحث الخاص بنا</string>
+
+    <item name="LaguageID" type="id"/>
+    <item name="LaguageRegion" type="id"/>
+
+    <string-array name="ARRAY_FONTS" translatable="true">
+        <item>55٪</item>
+        <item>70٪</item>
+        <item>85٪</item>
+        <item>100٪</item>
+        <item>115٪</item>
+        <item>130٪</item>
+        <item>145٪</item>
+    </string-array>
+
+    <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+        <item>نشيط</item>
+        <item>غير وظيفي</item>
+    </string-array>
+
+    <string-array name="ARRAY_NOTIFICATION" translatable="true">
+        <item>تمكين الجميع</item>
+        <item>أوقف عمل الكل</item>
+        <item>لا يوجد عرض النطاق الترددي</item>
+    </string-array>
+
+    <string-array name="ARRAY_COOKIES" translatable="true">
+        <item>اسمح للجميع</item>
+        <item>اسمح بالثقة</item>
+        <item>لا تسمح لأي شخص</item>
+        <item>السماح بالمشاهدة</item>
+        <item>السماح غير المتعقب</item>
+    </string-array>
+
+
+
+
+    <!-- Generated by Automatic String Resource Translation -->
+    <!--          https://asrt.gluege.boerde.de             -->
+</resources>

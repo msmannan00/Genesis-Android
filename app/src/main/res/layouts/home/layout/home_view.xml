@@ -558,7 +558,7 @@
                     android:onClick="panicExit"
                     android:padding="7dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/reset"
+                    android:src="@xml/ic_baseline_repair"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

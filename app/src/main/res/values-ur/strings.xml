@@ -1,0 +1,542 @@
+<resources>
+
+	<!-- Application Strings -->
+	<string name="app_name" translatable="false">جینیسز</string>
+	<string name="GENERAL_SEARCH_HINT" translatable="true">کچھ تلاش کریں یا ویب لنک ٹائپ کریں</string>
+	<string name="GENERAL_FIND_HINT" translatable="true">صفحے میں تلاش کریں</string>
+	<string name="GENERAL_SEARCH_ENGINE" translatable="true">سرچ انجن</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">اوپپس! کچھ غلط ہو گیا ہے</string>
+	<string name="GENERAL_TODO" translatable="true">سب کچھ</string>
+	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis Search Engine</string>
+	<string name="GENERAL_LOADING" translatable="true">ڈیجیٹل آزادی</string>
+	<string name="GENERAL_RELOAD" translatable="true">دوبارہ لوڈ کریں</string>
+	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">آپ کو مندرجہ ذیل میں سے ایک مسئلہ درپیش ہے۔ ہوسکتا ہے کہ ویب صفحہ یا ویب سائٹ کام نہیں کررہی ہے۔ ہوسکتا ہے کہ آپ کا انٹرنیٹ کنیکشن خراب ہو۔ آپ شاید ایک پراکسی استعمال کر رہے ہوں گے۔ ہوسکتا ہے کہ ویب سائٹ فائر وال کے ذریعے مسدود کردی جائے</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">بی بی سی | اسرائیل نے ایک بار پھر حملہ کیا</string>
+
+	<!-- Shortcuts -->
+	<string name="shortcut_erase_short_label" translatable="false">برائوزر کیشے مٹا دیں</string>
+	<string name="shortcut_erase_long_label" translatable="false">برائوزڈ ویب سائٹ کو مٹا دیں</string>
+	<string name="shortcut_erase_and_open_short_label" translatable="false">اپنا ڈیٹا مٹا دیں اور براؤزر کھولیں</string>
+	<string name="shortcut_erase_and_open_long_label" translatable="false">برائوزر کیشے مٹا دیں جینیسیس براؤزر کو دوبارہ شروع کریں</string>
+	<string name="shortcut_open" translatable="false">اپنے براؤزر کو دوبارہ شروع کریں</string>
+	<string name="shortcut_open_long" translatable="false">Restart Application</string>
+
+	<!-- Bookmark Setting -->
+	<string name="BOOKMARK_SETTING_HEADER" translatable="true">بُک مارک میں ترمیم کریں</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">بُک مارک کا نام</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">بک مارک یو آر ایل کا نام یہاں دکھایا جائے گا</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">بک مارک کا نام درج کریں…</string>
+
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">خارج کردیں</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"کبھی کبھی آپ کو ٹور نیٹ ورک جانے کے لئے برج کی ضرورت ہوتی ہے"</string>
+	<string name="LANDING_MORE" translatable="true">"مجھے مزید بتائیں"</string>
+	<string name="LANDING_HELLO" translatable="true">"ہیلو"</string>
+	<string name="LANDING_WELCOME" translatable="true">"موبائل پر Genesis میں خوش آمدید۔"</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">"انٹرنیٹ کو محفوظ طریقے سے براؤز کریں۔"</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"کوئی ٹریکنگ نہیں۔ کوئی سنسرشپ نہیں ہے۔"</string>
+
+	<!-- Alert Secure -->
+	<string name="ALERT_SECURE_INFO" translatable="true">رابطہ محفوظ ہے</string>
+	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">جب آپ کو اس سائٹ پر بھیجا جاتا ہے تو آپ کی معلومات (مثال کے طور پر پاس ورڈ یا کریڈٹ کارڈ نمبرز) محفوظ ہوتی ہیں سیکیورٹی کی ترتیب</string>
+	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">جاوا اسکرپٹ</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">اپنی شناخت کو محفوظ رکھیں اور نیچے کے اختیارات استعمال کریں ٹریک نہ کریں</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">ہم سائٹوں کو بتائیں گے کہ آپ کو ٹریک نہ کریں</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">ٹریکنگ پروٹیکشن</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">ہمارے ذریعہ فراہم کردہ ٹریکنگ تحفظ کو فعال کریں سند</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">سرٹیفکیٹ سے متعلق معلومات</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Enable tracking protection provided by Genesis</string>
+	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificate</string>
+
+	<!-- Alert Certificate -->
+	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Certificate Information</string>
+
+	<!-- Orbot Log -->
+	<string name="ORBOT_LOG" translatable="true">پراکسی لاگز</string>
+	<string name="ORBOT_LOG_HEADER" translatable="true">سسٹم لاگ انفارمیشن</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">اگر آپ جینیسز کو شروع کرتے وقت رابطہ کے مسئلے کا سامنا کر رہے ہیں تو ، براہ کرم مندرجہ ذیل کوڈ کو کاپی کریں اور مسئلہ آن لائن تلاش کریں یا ہمیں بھیجیں ، لہذا ہم آپ کی مدد کرنے کی کوشش کر سکتے ہیں</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">پراکسی اپنی مرضی کے مطابق بنائیں</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">ہم آپ کو ڈور نیٹ ورک سے منسلک کرتے ہیں جو دنیا بھر میں ہزاروں رضاکاروں کے ذریعہ چلتا ہے! کیا یہ آپشن آپ کی مدد کرسکتے ہیں؟</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">انٹرنیٹ یہاں سنسر ہے (فائروال کو بائی پاس)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">بائی پاس فائر وال</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">برج انٹرنیٹ بہت سست چلانے کا سبب بنتا ہے۔ ان کو صرف اس صورت میں استعمال کریں جب آپ کے ملک میں انٹرنیٹ سنسر ہے یا ڈور نیٹ ورک مسدود ہے</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">سیکورٹی کو بہتر بنائیں</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">سیکورٹی کی ترتیبات</string>
+	<string name="BRIDGE_SETTING" translatable="true">"BRIDGE" کی ترتیبات کو تبدیل کریں۔ خودکار بنائیں</string>
+	<string name="BRIDGE_AUTO" translatable="true">"BRIDGE" کی ترتیبات کو خودکار طور پر ترتیب دیں۔ ایک "برج" فراہم کریں جو میں جانتا ہوں</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">اپنی مرضی کے مطابق "برج" چسپاں کریں</string>
+	<string name="BRIDGE_MANUAL" translatable="true">پراکسی ترتیبات</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">"برج"</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">درخواست</string>
+	<string name="BRIDGE_TITLE" translatable="true">obfs4 (تجویز کردہ)</string>
+	<string name="BRIDGE_REQUEST" translatable="true">میک ایزور (چین)</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Recommended)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>ل Bridge کی درخواست کریں۔</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">ایک Bridge پتے کی درخواست کے لئے میل کا انتخاب کریں۔ ایک بار جب آپ اسے حاصل کرلیں تو ، اسے اوپر والے خانے میں کاپی کرکے پیسٹ کریں اور سافٹ ویئر شروع کریں۔</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">میل</string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">سسٹم لاگ ظاہر ہونے کا طریقہ تبدیل کریں</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">جدید فہرست کے نظارے کا استعمال کرتے ہوئے لاگ دکھائیں</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">کلاسیکی اور جدید فہرست کے نظارے کے درمیان ٹوگل</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">بک مارک ہٹا دیا گیا</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">بک مارک اپ ڈیٹ کیا گیا</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">ڈیٹا کامیابی سے صاف ہو گیا</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">یو آر ایل کو کلپ بورڈ پر کاپی کیا گیا</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">کوئی درخواست نہیں ملی</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">تبدیلیوں کے بعد دوبارہ شروع کرنا ضروری ہے</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">دوبارہ شروع کریں</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">ٹیب بند ہے</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">نیا ٹیب کھولا گیا</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">پیدائشی پراکسی منسلک ...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">میموری بھری ہوئی ہے ➔ کلیئرنگ ٹیب</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">پاپ اپ بلاک کر دیا گیا</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">اوپن ایرر لاگز</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">سوئچ</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">کالعدم</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">نئی شناخت بنائی گئی</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">ترتیبات کھولیں</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">اگر آپ کو اس ایپلیکیشن کو استعمال کرتے ہوئے دشواری ہو رہی ہے تو براہ کرم ہم سے ای میل کے ذریعے رابطہ کریں۔ ہم آپ کے مسئلے کو جلد از جلد حل کرنے کی کوشش کریں گے۔ ٹروبل شاٹ</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">اگر یہ کام نہیں کررہا ہے تو درخواست کو دوبارہ ترتیب دیں۔ ہم اسے دوبارہ ترتیب دینے کی کوشش کریں گے تاکہ یہ دوبارہ کام کرے۔</string>
+
+		<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">دوبارہ ترتیب دیں برطرف</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">ڈاؤن لوڈ کرنے کا انتظار ...</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">ڈاؤنلوڈ کریں شرح امریکی</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">دوسروں کو بتائیں کہ آپ اس ایپ کے بارے میں کیا سوچتے ہیں۔ شرح</string>
+
+		<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">ہو گیا</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Bridge سٹرنگ (obfs4 212.21.66.66:20621 ...)</string>
+
+		<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Bridge ٹائپ (obfs4، Meek، ...)</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">بک مارک ویب سائٹ</string>
+	<string name="ALERT_RATE" translatable="true">اس صفحے کو اپنے بُک مارکس میں شامل کریں۔ بک مارک کا نام ...</string>
+
+		<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">ہو گیا</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">یو آر ایل نوٹیفیکیشن</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">نئے ٹیب میں کھولیں</string>
+
+		<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">موجودہ ٹیب میں کھولیں</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">کلپ بورڈ پر کاپی کریں فائل ڈاؤن لوڈ کریں url کو نئے ٹیب میں کھولیں۔ یو آر ایل کو موجودہ ٹیب میں کھولیں۔ یو آر ایل کو کلپ بورڈ میں کاپی کریں۔ تصویر کو نئے ٹیب میں کھولیں۔ تصویر کا موجودہ ٹیب کھولیں۔ تصویر کو کلپ بورڈ میں کاپی کریں۔ تصویر فائل ڈاؤن لوڈ کریں ایک Bridge فراہم کریں جو میں جانتا ہوں۔ ایک Bridge فراہم کریں۔ ایک قابل اعتماد ذریعہ سے Bridge معلومات درج کریں۔ درخواست کریں۔</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bookmark name...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Done</string>
+
+		<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">URL Notification</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Open In New Tab</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Open In Current Tab</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copy to Clipboard</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Download File</string>
+
+		<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Open url in new tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Open url in current tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copy url to clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Open image in new tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Open image current tab</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copy image to clipboard</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">ایک برج فراہم کریں جو آپ جانتے ہو</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">کسی قابل اعتماد ذریعہ سے برج معلومات درج کریں</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">درخواست</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+	<string name="SETTING_BASIC_SETTING" translatable="true">سسٹم سیٹنگ</string>
+	<string name="SETTING_DEFAULT_BROWSER" translatable="true">جینیسز کو اپنا ڈیفالٹ براؤزر بنائیں</string>
+	<string name="SETTING_HEADER" translatable="true">سسٹم سیٹنگ</string>
+	<string name="SETTING_SEARCH_ENGINE" translatable="true">سرچ انجن</string>
+	<string name="SETTING_JAVASCRIPT" translatable="true">جاوا اسکرپٹ</string>
+	<string name="SETTING_CLEAR_HISTORY" translatable="true">براؤزڈ ویب لنکس کو ہٹا دیں</string>
+	<string name="SETTING_FONT_TITLE" translatable="true">فونٹ کی تخصیص کریں</string>
+	<string name="SETTING_ADJUST_FONT" translatable="true">سسٹم فونٹ کی تشکیل</string>
+	<string name="SETTING_MANUAL_FONT" translatable="true">خود بخود فونٹ تبدیل کریں</string>
+	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">کوکی سیٹنگ</string>
+	<string name="SETTING_COOKIE" translatable="true">کوکیز</string>
+	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">سسٹم سیٹنگ۔ اطلاع</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">اطلاعات</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">اطلاع کی ترجیحات کو تبدیل کریں</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">نیٹ ورک اور اطلاعات کی حالت</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">مقامی اطلاعات</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">سافٹ ویئر کی اطلاع کو کسٹمائز کریں</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">سسٹم کی اطلاعات</string>
+	<string name="SETTING_SEARCH" translatable="true">سرچ انجن کا نظم کریں</string>
+	<string name="SETTING_SEARCH_INFO" translatable="true">شامل کریں ، طے شدہ طے کریں۔ تجاویز دکھائیں</string>
+	<string name="SETTING_NOTIFICATION" translatable="true">اطلاعات کا نظم کریں</string>
+	<string name="SETTING_NOTIFICATION_INFO" translatable="true">نئی خصوصیات ، نیٹ ورک کی حالت</string>
+	<string name="SETTING_SEARCH_HEADER" translatable="true">سافٹ ویئر کو کسٹمائز کریں۔ سرچ انجن</string>
+	<string name="SETTING_SEARCH_HEADER_1" translatable="true">تائید شدہ سرچ انجن</string>
+	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">ڈیفالٹ سرچ انجن منتخب کریں</string>
+	<string name="SETTING_SEARCH_HEADER_2" translatable="true">سافٹ ویئر کو کسٹمائز کریں۔ سرچ انجن</string>
+	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">ویب کی تلاشیں ظاہر ہونے کا طریقہ تبدیل کریں</string>
+	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+	<string name="SETTING_SEARCH_GENESIS" translatable="false">جینیسز</string>
+	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+	<string name="SETTING_SEARCH_HISTORY" translatable="true">براؤزڈ ویب لنکس دکھائیں</string>
+	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">تلاش کے دوران تجاویز دکھائیں</string>
+	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">جب آپ سرچ بار میں ٹائپ کرتے ہیں تو براؤزڈ ویب لنکس کی تجاویز ظاہر ہوتی ہیں</string>
+	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">جب آپ سرچ بار میں ٹائپ کرتے ہو تو فوکسڈ مشورے ظاہر ہوتے ہیں</string>
+	<string name="SETTING_ACCESSIBILITY" translatable="true">رسائ</string>
+	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">متن کا سائز ، زوم ، آواز کا استعمال کرتے ہوئے ان پٹ</string>
+	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">تخصیص | رسائ</string>
+	<string name="SETTING_CLEAR" translatable="true">نجی ڈیٹا کو صاف کریں</string>
+	<string name="SETTING_CLEAR_INFO" translatable="true">ٹیبز ، براؤزڈ ویب لنکس ، بک مارک ، کوکیز ، کیشے</string>
+	<string name="SETTING_CLEAR_HEADER" translatable="true">سسٹم کی سیٹنگ کو تبدیل کریں۔ سسٹم کا ڈیٹا صاف کریں</string>
+	<string name="SETTING_CLEAR_BUTTON" translatable="true">واضح اعداد و شمار</string>
+	<string name="SETTING_CLEAR_OPTION_1" translatable="true">تمام ٹیبز کو حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_2" translatable="true">براؤزڈ ویب لنکس کو حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_3" translatable="true">بُک مارکس کو حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_4" translatable="true">کیشے کو حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_5" translatable="true">تجاویز کو حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_6" translatable="true">ڈیٹا حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_7" translatable="true">سیشن کو حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_8" translatable="true">کوکیز کو حذف کریں</string>
+	<string name="SETTING_CLEAR_OPTION_9" translatable="true">حذف کریں حسب ضرورت</string>
+	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">فونٹ اسکیلنگ</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">سسٹم فونٹ سائز کے مطابق ویب مواد اسکیل کریں</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">زوم آن کریں</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">تمام ویب صفحات کیلئے زوم آن کریں اور جبری طور پر چلائیں</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">آواز کا استعمال کرتے ہوئے ان پٹ</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">یو آر ایل بار میں آواز ڈکٹیشن کی اجازت دیں</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">کسٹم فونٹ اسکیلنگ منتخب کریں</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">سلائیڈر کو گھسیٹیں جب تک کہ آپ اسے آرام سے نہیں پڑھ سکتے ہیں۔ کسی پیراگراف پر ڈبل ٹیپ کرنے کے بعد کم از کم یہ متن نظر آنا چاہئے</string>
+	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+	<string name="SETTING_INTERACTION" translatable="true">بات چیت</string>
+	<string name="SETTING_INTERACTION_INFO" translatable="true">ویب سائٹ کے مواد کے ساتھ تعامل کا طریقہ تبدیل کریں</string>
+	<string name="SETTING_PRIVACY" translatable="true">صارف آن</string>
+	<string name="SETTING_PRIVACY_INFO" translatable="true">صارف کی نگرانی ، لاگ انز ، ڈیٹا انتخاب</string>
+	<string name="SETTING_TRACKING" translatable="true">صارف کی نگرانی کا تحفظ</string>
+	<string name="SETTING_TRACKING_INFO" translatable="true">ایڈ بلاک ، ٹریکرز ، فنگر پرنٹ کرنا</string>
+	<string name="SETTING_PRIVACY_HEADER" translatable="true">سسٹم سیٹنگ۔ رازداری</string>
+	<string name="SETTING_TRACKING_HEADER" translatable="true">سسٹم سیٹنگ۔ صارف کی نگرانی کا تحفظ</string>
+	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">اپنی آن لائن شناخت کی حفاظت کریں</string>
+	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">اپنی شناخت کو نجی رکھیں۔ ہم آپ کو متعدد ٹریکروں سے بچا سکتے ہیں جو آپ کی آن لائن پیروی کرتے ہیں۔ اس سسٹم سیٹنگ کا استعمال اشتہار کو مسدود کرنے کے لئے بھی کیا جاسکتا ہے</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">اپنے آپ کو صارف کی نگرانی کے تحفظ سے بچائیں</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">جینیسز سائٹوں کو بتائے گا کہ مجھے ٹریک نہ کریں</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">ویب سائٹ سے کہو کہ مجھے ٹریک نہ کریں</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">صارف کی نگرانی کا تحفظ</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">صارف کی نگرانی کے تحفظ کو جینیسز کے ذریعہ فراہم کریں</string>
+	<string name="SETTING_PRIVACY_COOKIES" translatable="true">ویب سائٹ کوکیز</string>
+	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">اپنی سیکیورٹی کی ضروریات کے مطابق ویب سائٹ کوکیز کی ترجیحات منتخب کریں</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">باہر نکلنے پر نجی ڈیٹا صاف کریں</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">سافٹ ویئر بند ہونے کے بعد خود بخود ڈیٹا صاف کردیں</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">نجی براؤزنگ</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">اپنی شناخت کو محفوظ رکھیں اور ذیل میں اختیارات استعمال کریں</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">فعال</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">قابل ، ویب سائٹ سے باخبر رہنے والی کوکیز کو چھوڑ کر</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">فعال ، تیسری پارٹی کو چھوڑ کر</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">غیر فعال</string>
+
+	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">غیر فعال تحفظ</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">شناخت کی نگرانی کے تحفظ کی اجازت دیں۔ اس کی وجہ سے آپ کی آن لائن شناخت چوری ہوسکتی ہے</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">پہلے سے طے شدہ (تجویز کردہ)</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">آن لائن اشتہار اور سوشل ویب صارف کی نگرانی کو مسدود کریں۔ صفحات بطور ڈیفالٹ لوڈ ہوں گے</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">سخت پالیسی</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">تمام معروف ٹریکروں کو روکیں ، صفحات تیزی سے لوڈ ہوں گے لیکن کچھ فعالیت کام نہیں کرسکتی ہے</string>
+
+	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">جاوا اسکرپٹ</string>
+	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">مختلف اسکرپٹ حملوں کیلئے جاوا اسکرپٹنگ کو غیر فعال کریں</string>
+	<string name="SETTING_ADVANCE_HEADER" translatable="true">سسٹم سیٹنگ۔ پیچیدہ نظام کی ترتیب</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">ٹیبز کو بحال کریں</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">براؤزر سے باہر نکلنے کے بعد دوبارہ بحال نہ کریں</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">ٹول بار تھیم</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">ویب سائٹ میں بیان کردہ ٹول بار تھیم مقرر کریں</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">تصاویر دکھائیں</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">ہمیشہ ویب سائٹ کی تصاویر لوڈ کریں</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">ویب فونٹس دکھائیں</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">کسی صفحے کو لوڈ کرتے وقت ریموٹ فونٹس ڈاؤن لوڈ کریں</string>
+	<string name="SETTING_ADVANCE_MEDIA" translatable="true">آٹو پلے کی اجازت دیں</string>
+	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">میڈیا کو خود بخود شروع ہونے دیں</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">ڈیٹا سیور</string>
+	<string name="SETTING_ADVANCE_TAB" translatable="true">ٹیب</string>
+	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">سافٹ ویئر کو دوبارہ شروع کرنے کے بعد ٹیب کا برتاؤ کرنے کا طریقہ تبدیل کریں</string>
+	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">میڈیا</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">پہلے سے طے شدہ ڈیٹا سیور کو اپنی مرضی کے مطابق تبدیل کریں</string>
+	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">ڈیفالٹ میڈیا کو اپنی مرضی کے مطابق تبدیل کریں</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">ہمیشہ تصاویر دکھائیں</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">صرف وائی فائی استعمال کرتے وقت تصاویر دکھائیں</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">تمام تصاویر کو مسدود کریں</string>
+	<string name="SETTING_ADVANCE" translatable="true">ایڈوانس سسٹم سیٹنگ</string>
+	<string name="SETTING_ADVANCE_INFO" translatable="true">ٹیب ، ڈیٹا سیور ، ڈویلپر ٹولز کو بحال کریں</string>
+	<string name="SETTING_PROXY" translatable="true">انین پراکسی کی شرط</string>
+	<string name="SETTING_PROXY_INFO" translatable="true">انین نیٹ ورک کی حالت چیک کریں</string>
+	<string name="SETTING_REPORT" translatable="true">رپورٹ ویب سائٹ</string>
+	<string name="SETTING_REPORT_INFO" translatable="true">بدسلوکی والی ویب سائٹ کی اطلاع دیں</string>
+	<string name="SETTING_RATEUS" translatable="true">اس ایپ کی درجہ بندی کریں</string>
+	<string name="SETTING_RATEUS_INFO" translatable="true">پلے اسٹور پر شرح اور تبصرے</string>
+	<string name="SETTING_SHARE" translatable="true">اس ایپ کا اشتراک کریں</string>
+	<string name="SETTING_SHARE_INFO" translatable="true">یہ سافٹ ویئر اپنے دوستوں کے ساتھ شیئر کریں</string>
+	<string name="SETTING_GENERAL_HEADER" translatable="true">سسٹم سیٹنگ۔ عمومی تخصیص کریں</string>
+	<string name="SETTING_GENERAL" translatable="true">ڈیفالٹ سسٹم سیٹنگ</string>
+	<string name="SETTING_GENERAL_INFO" translatable="true">ہوم پیج ، زبان</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">فل سکرین براؤزنگ</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">کسی صفحے کو سکرول کرتے وقت براؤزر ٹول بار کو چھپائیں</string>
+	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">زبان</string>
+	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">اپنے براؤزر کی زبان کو تبدیل کریں</string>
+	<string name="SETTING_GENERAL_THEME" translatable="true">سافٹ ویئر تھیم</string>
+	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">روشن اور سیاہ تھیم کا انتخاب کریں</string>
+	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">تھیم روشن</string>
+	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">تھیم ڈارک</string>
+	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">فل سکرین براؤزنگ اور زبان کو تبدیل کریں</string>
+	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">سسٹم ڈیفالٹ</string>
+	<string name="SETTING_GENERAL_HOME" translatable="true">ہوم پیج</string>
+	<string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">نیا ٹیب</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">ہوم پیج کو نئے ٹیب میں کھولیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">تمام ٹیبز کو ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">براؤزڈ ویب لنکس کو ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">بُک مارکس کو ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">براؤزنگ کیشے کو ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">تجاویز کو ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">سائٹ کا ڈیٹا ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">سیشن ڈیٹا کو ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">ویب براؤزنگ کوکیز کو ہٹا دیں</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">براؤزر کی تخصیص کو دور کریں</string>
+
+
+	<string name="ALERT_CREATE_BOOKMARK" translatable="true">بک مارک ویب سائٹ</string>
+	<string name="ALERT_CLEAR_HISTORY" translatable="true">براؤزڈ ویب لنکس اور ڈیٹا کو حذف کریں</string>
+	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">بک مارک اور ڈیٹا کو صاف کریں</string>
+	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">ڈیٹا کو صاف کرنا براؤزڈ ویب لنکس ، کوکیز اور دیگر براؤزنگ ڈیٹا کو ختم کردے گا</string>
+	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">ڈیٹا کو حذف کرنا بک مارک کی ویب سائٹوں کو حذف کردے گا</string>
+	<string name="ALERT_CLEAR" translatable="true">منسوخ کریں</string>
+	<string name="ALERT_SECURE" translatable="false">https://</string>
+	<string name="ALERT_REPORT" translatable="true">رپورٹ</string>
+	<string name="ALERT_REPORT_URL" translatable="true">رپورٹ ویب سائٹ</string>
+	<string name="ALERT_REPORT_URL_INFO" translatable="true">اگر آپ کو لگتا ہے کہ یہ یو آر ایل غیر قانونی یا پریشان کن ہے تو ہمیں اس کی اطلاع دیں ، لہذا ہم قانونی کارروائی کرسکتے ہیں</string>
+	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">کامیابی کے ساتھ اطلاع دی گئی</string>
+	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">یو آر ایل کی کامیابی کے ساتھ اطلاع دی گئی۔ اگر کچھ مل گیا تو قانونی کارروائی کی جائے گی</string>
+	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">زبان کی سہولت نہیں ہے</string>
+	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">سسٹم لینگوئج اس سافٹ ویر کے ذریعہ معاون نہیں ہے۔ ہم جلد ہی اسے شامل کرنے کے لئے کام کر رہے ہیں</string>
+	<string name="ALERT_ORBOT_INIT" translatable="true">جینیسز شروع کر رہا ہے</string>
+	<string name="ALERT_NOT_SUPPORTED" translatable="true">کارروائی معاون نہیں ہے</string>
+	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">مندرجہ ذیل کمانڈ کو سنبھالنے کے لئے کوئی سافٹ ویئر نہیں ملا</string>
+	<string name="ALERT_WELCOME_MESSAGE" translatable="true">استقبال | پوشیدہ ویب گیٹوے</string>
+	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">یہ سافٹ ویئر آپ کو پوشیدہ ویب یو آر ایل کو تلاش کرنے اور کھولنے کے لئے ایک پلیٹ فارم مہیا کرتا ہے۔ یہاں کچھ تجاویز ہیں</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">پوشیدہ ویب آن لائن مارکیٹ</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">دستاویزات اور کتابیں لیک کردی گئیں</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">سیاہ ویب خبریں اور مضامین</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">خفیہ سافٹ ویئر اور ہیکنگ ٹولز</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">دوبارہ نہیں دکھائیں گے</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">فنانس اور پیسہ</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">سماجی معاشرے</string>
+	<string name="ALERT_LOCAL_UPGRADE" translatable="true">دستی</string>
+	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">پلےسٹور</string>
+	<string name="ALERT_LONG_FILE" translatable="true">فائل کی اطلاع</string>
+	<string name="ALERT_DOWNLOAD" translatable="true">ڈاؤن لوڈ کی اطلاع</string>
+	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">ڈاؤن لوڈ کی اطلاع</string>
+	<string name="ALERT_LONG_URL_TITLE" translatable="true">ویب لنک نوٹیفکیشن</string>
+	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
+	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">ای میل کو ہینڈل کرنے کیلئے کوئی سافٹ ویئر نہیں ملا</string>
+	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">فائل ڈاؤن لوڈ |</string>
+	<string name="ALERT_DATA_CLEARED" translatable="true">ڈیٹا صاف | دوبارہ شروع کرنا ضروری ہے</string>
+
+
+
+
+
+	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">جینیسز لاگ</string>
+	<string name="HOME_MENU__NEW_TABS" translatable="true">نئی ٹیبز</string>
+	<string name="HOME_MENU_CLOSE_TABS" translatable="true">ٹیب بند کریں</string>
+	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">حالیہ ٹیبز کھولیں</string>
+	<string name="HOME_MENU_LANGUAGE" translatable="true">زبان</string>
+	<string name="HOME_MENU_DOWNLOAD" translatable="true">ڈاؤن لوڈ</string>
+	<string name="HOME_MENU_HISTORY" translatable="true">براؤز ویب لنکس</string>
+	<string name="HOME_MENU_SETTING" translatable="true">سسٹم سیٹنگ</string>
+	<string name="HOME_MENU_DESKTOP" translatable="true">ڈیسک ٹاپ سائٹ</string>
+	<string name="HOME_MENU_BOOKMARK" translatable="true">اس صفحے کو محفوظ کریں</string>
+	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">بُک مارکس</string>
+	<string name="HOME_MENU_REPORT" translatable="true">رپورٹ ویب سائٹ</string>
+	<string name="HOME_MENU_RATE" translatable="true">اس ایپ کی درجہ بندی کریں</string>
+	<string name="HOME_MENU_FIND" translatable="true">صفحے میں تلاش کریں</string>
+	<string name="HOME_MENU_QUIT" translatable="true">باہر نکلیں</string>
+	<string name="HOME_MENU_SHARE" translatable="true">بانٹیں</string>
+
+
+	<string name="TAB_MENU_OPEN_TAB" translatable="true">نئی ٹیبز</string>
+	<string name="TAB_MENU_CLOSE_TAB" translatable="true">تمام ٹیبز کو بند کریں</string>
+	<string name="TAB_MENU_SETTINGS" translatable="true">سسٹم سیٹنگ</string>
+	<string name="TAB_LIST_SELECT" translatable="true">ٹیبز کو منتخب کریں</string>
+
+
+	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">ٹیبز کھولیں</string>
+	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">کاپی</string>
+	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">بانٹیں</string>
+	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">واضح انتخاب</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">موجودہ ٹیب میں کھولیں</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">نئی ٹیب میں کھولیں</string>
+	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">حذف کریں</string>
+
+
+	<string name="HISTORY_TITLE" translatable="true">براؤز ویب لنکس</string>
+	<string name="HISTORY_CLEAR" translatable="true">اسے ختم کریں</string>
+	<string name="HISTORY_SEARCH_HINT" translatable="true">تلاش کریں ...</string>
+
+
+	<string name="BOOKMARK_TITLE" translatable="true">بک مارک</string>
+	<string name="BOOKMARK_CLEAR" translatable="true">اسے ختم کریں</string>
+	<string name="BOOKMARK_SEARCH_HINT" translatable="true">تلاش کریں ...</string>
+
+
+	<string name="HELP_RETRY" translatable="true">دوبارہ کوشش کریں</string>
+	<string name="HELP_RETRY_INFO" translatable="true">اوپپس! نیٹ ورک کنکشن کی خرابی۔ نیٹ ورک منسلک نہیں ہے</string>
+	<string name="HELP_TITLE" translatable="true">مدد اور حمایت</string>
+
+
+	<string name="LANGUAGE_TITLE" translatable="true">زبان</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">زبان تبدیل کریں</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">ہم صرف درج ذیل زبان پر چلتے ہیں۔ ہم جلد ہی مزید اضافہ کریں گے</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">امریکی انگریزی)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">جرمن (جرمنی)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">اطالوی (اٹلی)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">پرتگالی (برازیل)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">روسی (روس)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">تحقیقات (یوکرین)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">چینی آسان (مینلینڈ چین)</string>
+
+
+	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ انتباہ</string>
+	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">برج اپنی مرضی کے مطابق</string>
+	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">برج کو فعال کریں</string>
+	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">ویپین سرور فعال کریں</string>
+	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">برج گیٹوے کو قابل بنائیں</string>
+	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">گیٹوے کو فعال کریں</string>
+
+
+	<string name="PROXY_STATUS_HEADER" translatable="true">پراکسی کی حالت</string>
+	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">آرباٹ پراکسی کی موجودہ حالت</string>
+	<string name="PROXY_SUB_HEADER1" translatable="true">جینیسز پراکسی کی حالت </string>
+	<string name="PROXY_SUB_HEADER2" translatable="true">انین</string>
+	<string name="PROXY_VPN_STATUS" translatable="true">ویپین رابطے کی شرط</string>
+	<string name="PROXY_BRIDGE_STATUS" translatable="true">برج پراکسی کی شرط</string>
+	<string name="PROXY_SUB_HEADER3" translatable="true">معلومات | سسٹم کی سیٹنگ کو تبدیل کریں</string>
+	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">آپ سافٹ ویئر کو دوبارہ شروع کرکے اور پراکسی منیجر کے پاس جاکر پراکسی تبدیل کرسکتے ہیں۔ نیچے دیئے گئے گیئر آئیکون پر کلک کرکے اسے کھولا جاسکتا ہے</string>
+
+
+
+
+	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">اسے کھولیں</string>
+
+
+	<string name="HOME_TAB_TEXT" translatable="true">1</string>
+	<string name="HOME_CONNECT" translatable="false">connect</string>
+	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+	<string name="HOME_TAB_EMPTY" translatable="true">کھلی ٹیبز یہاں دکھائی دیں گی</string>
+
+
+	<string name="ERROR_M1" translatable="true">یہ سائٹ قابل رسائ نہیں ہے</string>
+	<string name="ERROR_M2" translatable="true">ویب سائٹ سے رابطہ قائم کرتے وقت ایک خرابی پیش آگئی</string>
+	<string name="ERROR_M3" translatable="true">آپ جس صفحے کو دیکھنے کی کوشش کر رہے ہیں وہ نہیں دکھایا جاسکتا ہے کیونکہ موصولہ اعداد و شمار کی صداقت کی تصدیق نہیں ہوسکی</string>
+	<string name="ERROR_M4" translatable="true">صفحہ فی الحال کسی وجہ سے کام نہیں کررہا ہے</string>
+	<string name="ERROR_M5" translatable="true">براہ کرم اس مسئلے سے آگاہ کرنے کے لئے ویب سائٹ کے مالکان سے رابطہ کریں۔</string>
+	<string name="ERROR_M6" translatable="true">دوبارہ لوڈ کریں</string>
+
+
+	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+	<string name="invalid_package_signature" translatable="true">غلط پیکیج کے دستخط</string>
+	<string name="autofill_sign_in_prompt" translatable="true">سائن ان کرنے کے لئے کلک کریں۔</string>
+	<string name="autofill_manual_prompt" translatable="true">دستی طور پر ڈیٹا منتخب کرنے کے لئے کلک کریں۔</string>
+	<string name="security_exception" translatable="true">ویب ڈومین سیکیورٹی کی رعایت۔</string>
+	<string name="dal_exception" translatable="true">DAL تصدیق میں ناکامی۔</string>
+
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">حالیہ ٹیبز</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">نئی شناخت</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">رازداری کی پالیسی</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true"> رازداری کی پالیسی</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">رپورٹ ویب سائٹ</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">غیر قانونی ویب سائٹ کی اطلاع دیں</string>
+	<string name="SETTING_SITEMAP" translatable="true">اپنی ویب سائٹ شائع کریں</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">اپنی ویب سائٹ کو ہمارے سرچ انجن میں شامل کریں</string>
+
+	<item name="LaguageID" type="id"/>
+	<item name="LaguageRegion" type="id"/>
+
+	<string-array name="ARRAY_FONTS" translatable="true">
+		<item>55 فیصد</item>
+		<item>70 فیصد</item>
+		<item>85 فیصد</item>
+		<item>100 فیصد</item>
+		<item>115 فیصد</item>
+		<item>130 فیصد</item>
+		<item>145 فیصد</item>
+	</string-array>
+
+	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+		<item>فعال</item>
+		<item>غیر فعال</item>
+	</string-array>
+
+	<string-array name="ARRAY_NOTIFICATION" translatable="true">
+		<item>سب کو قابل بنائیں</item>
+		<item>سب کو غیر فعال کریں</item>
+		<item>کوئی بینڈوتھ نہیں ہے</item>
+	</string-array>
+
+	<string-array name="ARRAY_COOKIES" translatable="true">
+		<item>سب کی اجازت دیں</item>
+		<item>بھروسے کی اجازت دیں</item>
+		<item>کسی کو بھی اجازت نہیں دیں</item>
+		<item>دیکھنے کی اجازت دیں</item>
+		<item>نان ٹریکر کی اجازت دیں</item>
+	</string-array>
+
+
+	<!-- Generated by Automatic String Resource Translation -->
+	<!--          https://asrt.gluege.boerde.de             -->
+</resources>

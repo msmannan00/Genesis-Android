@@ -1,0 +1,545 @@
+<resources>
+
+	<!-- Application Strings -->
+	<string name="app_name" translatable="false">Genesis</string>
+	<string name="GENERAL_SEARCH_HINT" translatable="true">rechercher quelque chose ou saisir un lien Web</string>
+	<string name="GENERAL_FIND_HINT" translatable="true">trouver en page</string>
+	<string name="GENERAL_SEARCH_ENGINE" translatable="true">moteur de recherche</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! quelque chose s\'est mal passé</string>
+	<string name="GENERAL_TODO" translatable="true">tout</string>
+	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
+	<string name="GENERAL_LOADING" translatable="true">liberté numérique</string>
+	<string name="GENERAL_RELOAD" translatable="true">recharger</string>
+	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">vous êtes confronté à l\'un des problèmes suivants. la page Web ou le site Web peut ne pas fonctionner. votre connexion Internet est peut-être mauvaise. vous utilisez peut-être un proxy. le site Web peut être bloqué par le pare-feu</string>
+	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israël frappe à nouveau</string>
+
+	<!-- Shortcuts -->
+	<string name="shortcut_erase_short_label" translatable="false">Effacer le cache du navigateur</string>
+	<string name="shortcut_erase_long_label" translatable="false">Effacer le site Web consulté</string>
+	<string name="shortcut_erase_and_open_short_label" translatable="false">Effacez vos données et ouvrez le navigateur</string>
+	<string name="shortcut_erase_and_open_long_label" translatable="false">Effacer le cache du navigateur</string>
+	<string name="shortcut_open" translatable="false">Redémarrer le navigateur Genesis</string>
+	<string name="shortcut_open_long" translatable="false">Redémarrez Votre Navigateur</string>
+
+	<!-- Bookmark Setting -->
+	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Modifier Le Signet</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nom Du Signet</string>
+	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Le nom de l\'url mis en signet sera affiché ici</string>
+	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Saisissez le nom du signet…</string>
+
+	<!-- Alerts General -->
+	<string name="ALERT_DISMISS" translatable="true">rejeter</string>
+
+	<!-- Landing Page -->
+	<string name="LANDING_BRIDGES_INFO" translatable="true">"Parfois, vous avez besoin d'un Pont pour accéder au Réseau Tor"</string>
+	<string name="LANDING_MORE" translatable="true">"DITES MOI PLUS"</string>
+	<string name="LANDING_HELLO" translatable="true">"Bonjour"</string>
+	<string name="LANDING_WELCOME" translatable="true">"Bienvenue au Genesis sur mobile."</string>
+	<string name="LANDING_BROWSE_INFO" translatable="true">« Naviguer sur Internet en toute sécurité. »</string>
+	<string name="LANDING_NO_TRACKING" translatable="true">"Pas de suivi. Pas de censure."</string>
+
+	<!-- Alert Secure -->
+	<string name="ALERT_SECURE_INFO" translatable="true">La connexion est sécurisée</string>
+	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Vos informations (par exemple, mot de passe ou numéros de carte de crédit) sont sécurisées lorsqu\'elles sont envoyées sur ce site</string>
+	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Paramètre De Sécurité</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Protégez votre identité et utilisez les options ci-dessous</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Ne Pas Suivre</string>
+	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Nous dirons aux sites de ne pas vous suivre</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Protection Contre Le Pistage</string>
+	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Activer la protection de suivi fournie par nous</string>
+	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificat</string>
+
+	<!-- Alert Certificate -->
+	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Informations Sur Le Certificat</string>
+
+	<!-- Orbot Log -->
+	<string name="ORBOT_LOG" translatable="true">journaux proxy</string>
+	<string name="ORBOT_LOG_HEADER" translatable="true">Informations du journal système</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">si vous rencontrez un problème de connectivité lors du démarrage de Genesis, veuillez copier le code suivant et trouver le problème en ligne ou nous l\'envoyer, afin que nous puissions essayer de vous aider</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+
+	<!-- Orbot Settings -->
+	<string name="ORBOT_SETTING_HEADER" translatable="true">proxy personnaliser</string>
+	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">nous vous connectons au réseau Tor géré par des milliers de bénévoles à travers le monde! Ces options peuvent-elles vous aider</string>
+	<string name="ORBOT_SETTING_TITLE" translatable="true">Internet est censuré ici (contourner le pare-feu)</string>
+	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">contourner le pare-feu</string>
+	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges rend Internet très lent. utilisez-les uniquement si Internet est censuré dans votre pays ou si le réseau Tor est bloqué</string>
+	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">sécurité personnaliser</string>
+
+	<!-- Bridge Settings -->
+	<string name="BRIDGE_BASIC_SETTING" translatable="true">Paramètres De Sécurité</string>
+	<string name="BRIDGE_SETTING" translatable="true">Modifier Les Paramètres "BRIDGE"</string>
+	<string name="BRIDGE_AUTO" translatable="true">Créer Automatiquement</string>
+	<string name="BRIDGE_AUTO_INFO" translatable="true">Configurer automatiquement les paramètres "BRIDGE"</string>
+	<string name="BRIDGE_MANUAL" translatable="true">Fournir un "BRIDGE" que je connais</string>
+	<string name="BRIDGE_PORT_HINT" translatable="false">Coller personnalisé "BRIDGE"</string>
+	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+	<string name="BRIDGE_DESC" translatable="true">Les "BRIDGE" sont des relais Tor non répertoriés qui rendent plus difficile le blocage des connexions au réseau Tor. En raison de la façon dont certains pays essaient de bloquer Tor, certains "BRIDGE" fonctionnent dans certains pays mais pas dans d\'autres</string>
+	<string name="BRIDGE_TITLE" translatable="true">Sélectionnez "BRIDGE" par défaut</string>
+	<string name="BRIDGE_REQUEST" translatable="true">Demande</string>
+	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (recommandé)</string>
+	<string name="BRIDGE_MEEK" translatable="true">Meek-azur (Chine)</string>
+
+	<!-- Alert Bridge Mail -->
+	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">demander nouveau Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">sélectionnez mail pour demander une adresse bridge. une fois que vous l\'avez reçu, copiez-le et collez-le dans la case ci-dessus et démarrez le logiciel.</string>
+	<string name="ALERT_BRIDGE_MAIL" translatable="true">mail</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+
+	<!-- Alert Advance Log -->
+	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">changer la façon dont le journal système apparaît</string>
+	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">afficher le journal en utilisant la vue de liste moderne</string>
+	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle entre l\'affichage de liste classique et moderne</string>
+
+	<!-- Generic Toast Alerts -->
+	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Signet supprimé</string>
+	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Marque-page mis à jour</string>
+	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Données effacées avec succès</string>
+	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL copiée dans le presse-papiers</string>
+	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Aucune application trouvée</string>
+	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Redémarrage requis après les modifications</string>
+	<string name="TOAST_ALERT_RESTART" translatable="true">Redémarrer</string>
+	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">L\'onglet Est Fermé</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Nouvel onglet ouvert</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Connexion proxy Genesis...</string>
+	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">La mémoire est pleine ➔ Onglet Effacement</string>
+	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Pop-up bloqué</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Ouvrir Les Journaux D\'erreur</string>
+	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Commutateur</string>
+	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Annuler</string>
+	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Nouvelle identité créée</string>
+	<string name="TOAST_ALERT_SETTING" translatable="true">ouvrir les paramètres</string>
+
+	<!-- Alert Rate Failure -->
+	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">DÉSOLÉ D\'ENTENDRE ÇA</string>
+	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Si vous rencontrez des difficultés lors de l\'utilisation de cette application, veuillez nous contacter par e-mail. Nous essaierons de résoudre votre problème dans les plus brefs délais</string>
+
+	<!-- Alert Panic -->
+	<string name="ALERT_PANIC_HEADER" translatable="true">DÉPANNAGE</string>
+	<string name="ALERT_PANIC_INFO" translatable="true">Réinitialisez l\'application au cas où cela ne fonctionnerait pas. Nous allons essayer de le reconfigurer pour qu\'il puisse fonctionner à nouveau.</string>
+	<string name="ALERT_PANIC_BT_1" translatable="true">Réinitialiser</string>
+	<string name="ALERT_PANIC_BT_2" translatable="true">Ignorer</string>
+
+	<!-- Alert Download Single -->
+	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">En attente de téléchargement...</string>
+	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Télécharger</string>
+
+	<!-- Alert Rateus -->
+	<string name="ALERT_RATEUS" translatable="true">Évaluez Les États-Unis</string>
+	<string name="ALERT_RATEUS_INFO" translatable="true">Dites aux autres ce que vous pensez de cette application</string>
+	<string name="ALERT_RATE" translatable="true">Taux</string>
+
+	<!-- Alert BRIDGE -->
+	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Terminé</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge chaîne (obfs4 212.21.66.66:20621 ...)</string>
+	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge type (obfs4, doux, ...)</string>
+
+	<!-- Alert Create Bookmark -->
+	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Marquer Le Site Web</string>
+	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Ajouter cette page à vos favoris</string>
+	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nom du signet...</string>
+	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Terminé</string>
+
+	<!-- Alert Long Download -->
+	<string name="ALERT_LONG_URL" translatable="true">Notification D\'URL</string>
+	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Ouvrir Dans Un Nouvel Onglet</string>
+	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Ouvrir Dans L\'onglet Actuel</string>
+	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Copier dans le presse-papiers</string>
+	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Télécharger Le Fichier</string>
+
+	<!-- Alert Full Download -->
+	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Ouvrir l\'url dans un nouvel onglet</string>
+	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Ouvrir l\'url dans l\'onglet actuel</string>
+	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Copier l\'url dans le presse-papiers</string>
+	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Ouvrir l\'image dans un nouvel onglet</string>
+	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Ouvrir l\'onglet actuel de l\'image</string>
+	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Copier l\'image dans le presse-papiers</string>
+	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Télécharger le fichier image</string>
+
+	<!-- Alert Bridge Custom -->
+	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">fournir un Bridge que vous connaissez</string>
+	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">entrez bridge informations provenant d\'une source fiable</string>
+	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">demander</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+	<string name="SETTING_BASIC_SETTING" translatable="true">Paramètres système</string>
+	<string name="SETTING_DEFAULT_BROWSER" translatable="true">faire de Genesis votre navigateur par défaut</string>
+	<string name="SETTING_HEADER" translatable="true">Paramètres système</string>
+	<string name="SETTING_SEARCH_ENGINE" translatable="true">moteur de recherche</string>
+	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
+	<string name="SETTING_CLEAR_HISTORY" translatable="true">supprimer les liens Web consultés</string>
+	<string name="SETTING_FONT_TITLE" translatable="true">police personnaliser</string>
+	<string name="SETTING_ADJUST_FONT" translatable="true">System Font Constomization</string>
+	<string name="SETTING_MANUAL_FONT" translatable="true">change font automatically</string>
+	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Paramètres des cookies</string>
+	<string name="SETTING_COOKIE" translatable="true">biscuits</string>
+	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">Paramètres système. Notification</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">notifications</string>
+	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">modifier les préférences de notification</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">état du réseau et notifications</string>
+	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">local notifications</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">personnaliser la notification du logiciel</string>
+	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">notifications système</string>
+	<string name="SETTING_SEARCH" translatable="true">gérer le moteur de recherche</string>
+	<string name="SETTING_SEARCH_INFO" translatable="true">ajouter, définir la valeur par défaut. afficher les suggestions</string>
+	<string name="SETTING_NOTIFICATION" translatable="true">manage notifications</string>
+	<string name="SETTING_NOTIFICATION_INFO" translatable="true">nouvelles fonctionnalités, état du réseau</string>
+	<string name="SETTING_SEARCH_HEADER" translatable="true">Personnalisez le logiciel. Moteur de recherche</string>
+	<string name="SETTING_SEARCH_HEADER_1" translatable="true">moteurs de recherche pris en charge</string>
+	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">choisissez le moteur de recherche par défaut</string>
+	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Personnalisez le logiciel. Moteur de recherche</string>
+	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">modifier l\'apparence des recherches sur le Web</string>
+	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+	<string name="SETTING_SEARCH_HISTORY" translatable="true">afficher les liens Web consultés</string>
+	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">afficher des suggestions pendant la recherche</string>
+	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">des suggestions de liens Web consultés s\'affichent lorsque vous tapez dans la barre de recherche</string>
+	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">des suggestions ciblées apparaissent lorsque vous tapez dans la barre de recherche</string>
+	<string name="SETTING_ACCESSIBILITY" translatable="true">accessibilité</string>
+	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">taille du texte, zoom, saisie vocale</string>
+	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">personnaliser | accessibilité</string>
+	<string name="SETTING_CLEAR" translatable="true">effacer les données privées</string>
+	<string name="SETTING_CLEAR_INFO" translatable="true">onglets, liens Web consultés, signet, cookies, cache</string>
+	<string name="SETTING_CLEAR_HEADER" translatable="true">Modifier les paramètres système. Effacer les données système</string>
+	<string name="SETTING_CLEAR_BUTTON" translatable="true">effacer les données</string>
+	<string name="SETTING_CLEAR_OPTION_1" translatable="true">supprimer tous les onglets</string>
+	<string name="SETTING_CLEAR_OPTION_2" translatable="true">supprimer les liens Web consultés</string>
+	<string name="SETTING_CLEAR_OPTION_3" translatable="true">supprimer des favoris</string>
+	<string name="SETTING_CLEAR_OPTION_4" translatable="true">delete cache</string>
+	<string name="SETTING_CLEAR_OPTION_5" translatable="true">supprimer des suggestions</string>
+	<string name="SETTING_CLEAR_OPTION_6" translatable="true">Suprimmer les données</string>
+	<string name="SETTING_CLEAR_OPTION_7" translatable="true">supprimer la session</string>
+	<string name="SETTING_CLEAR_OPTION_8" translatable="true">supprimer les cookies</string>
+	<string name="SETTING_CLEAR_OPTION_9" translatable="true">supprimer personnaliser</string>
+	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">font scaling</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">mettre à l\'échelle le contenu Web en fonction de la taille de la police du système</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">activer le zoom</string>
+	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">activer et forcer le zoom pour toutes les pages Web</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">entrée en utilisant la voix</string>
+	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">autoriser la dictée vocale dans la barre d\'URL</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">sélectionner une mise à l\'échelle de police personnalisée</string>
+	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">faites glisser le curseur jusqu\'à ce que vous puissiez lire ceci confortablement. le texte doit au moins avoir l\'air aussi grand après avoir tapoté deux fois sur un paragraphe</string>
+	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+	<string name="SETTING_INTERACTION" translatable="true">interactions</string>
+	<string name="SETTING_INTERACTION_INFO" translatable="true">changer la façon d\'interagir avec le contenu du site Web</string>
+	<string name="SETTING_PRIVACY" translatable="true">User Sur</string>
+	<string name="SETTING_PRIVACY_INFO" translatable="true">survelance des utilisateurs, connexions, choix de données</string>
+	<string name="SETTING_TRACKING" translatable="true">User Surveillance Protection</string>
+	<string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackers, empreintes digitales</string>
+	<string name="SETTING_PRIVACY_HEADER" translatable="true">Paramètres système. intimité</string>
+	<string name="SETTING_TRACKING_HEADER" translatable="true">Paramètres système. protection de survelance de l\'utilisateur</string>
+	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">protégez votre identité en ligne</string>
+	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">gardez votre identité privée. nous pouvons vous protéger de plusieurs trackers qui vous suivent en ligne. ce paramètre système peut également être utilisé pour bloquer la publicité</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">vous épargner de la protection de surveillance des utilisateurs</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis dira aux sites de ne pas me suivre</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">dire au site Web de ne pas me suivre</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">User Surveillance Protection</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">activer la protection de survelance de l\'utilisateur fournie par Genesis</string>
+	<string name="SETTING_PRIVACY_COOKIES" translatable="true">cookies de site Web</string>
+	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">sélectionnez les préférences de cookies du site Web en fonction de vos besoins de sécurité</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">effacer les données privées à la sortie</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">effacer automatiquement les données une fois le logiciel fermé</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">navigation privée</string>
+	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">gardez votre identité en sécurité et utilisez les options ci-dessous</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">activé</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">activé, à l\'exclusion des cookies de suivi du site Web</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">activé, à l\'exclusion de tiers</string>
+	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">désactivée</string>
+
+	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">disable protection</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">permettre la protection de la surveillance de l\'identité. cela pourrait entraîner le vol de votre identité en ligne</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">par défaut (recommandé)</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">bloquer la publicité en ligne et l\'internaute social Survelance. les pages se chargeront par défaut</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">politique stricte</string>
+	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">arrêter tous les trackers connus, les pages se chargeront plus rapidement mais certaines fonctionnalités peuvent ne pas fonctionner</string>
+
+	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
+	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">désactiver le script java pour diverses attaques de script</string>
+	<string name="SETTING_ADVANCE_HEADER" translatable="true">Paramètres système. Configuration système complexe</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">restaurer les onglets</string>
+	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">ne pas restaurer après avoir quitté le navigateur</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">thème de la barre d\'outils</string>
+	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">définir le thème de la barre d\'outils comme défini dans le site Web</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">show images</string>
+	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">toujours charger les images du site Web</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">show web fonts</string>
+	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">télécharger des polices distantes lors du chargement d\'une page</string>
+	<string name="SETTING_ADVANCE_MEDIA" translatable="true">autoriser la lecture automatique</string>
+	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">permettre au média de démarrer automatiquement</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">économiseur de données</string>
+	<string name="SETTING_ADVANCE_TAB" translatable="true">languette</string>
+	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">modifier le comportement de l\'onglet après le redémarrage du logiciel</string>
+	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">médias</string>
+	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">modifier l\'économiseur de données par défaut personnaliser</string>
+	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">modifier le média par défaut personnaliser</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">toujours montrer des images</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">afficher uniquement les images lors de l\'utilisation du wifi</string>
+	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">bloquer toutes les images</string>
+	<string name="SETTING_ADVANCE" translatable="true">Paramètres système avancés</string>
+	<string name="SETTING_ADVANCE_INFO" translatable="true">onglets de restauration, économiseur de données, outils de développement</string>
+	<string name="SETTING_PROXY" translatable="true">onion condition de proxy</string>
+	<string name="SETTING_PROXY_INFO" translatable="true">vérifier l\'état onion du réseau</string>
+	<string name="SETTING_REPORT" translatable="true">rapport site Web</string>
+	<string name="SETTING_REPORT_INFO" translatable="true">signaler un site Web abusif</string>
+	<string name="SETTING_RATEUS" translatable="true">évaluer l\'application</string>
+	<string name="SETTING_RATEUS_INFO" translatable="true">noter et commenter sur le Playstore</string>
+	<string name="SETTING_SHARE" translatable="true">partager cette appli</string>
+	<string name="SETTING_SHARE_INFO" translatable="true">partagez ce logiciel avec vos amis</string>
+	<string name="SETTING_GENERAL_HEADER" translatable="true">Paramètres système. personnalisation générale</string>
+	<string name="SETTING_GENERAL" translatable="true">Paramètres système par défaut</string>
+	<string name="SETTING_GENERAL_INFO" translatable="true">page d\'accueil, langue</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">navigation plein écran</string>
+	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">masquer la barre d\'outils du navigateur lors du défilement d\'une page</string>
+	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">Langue</string>
+	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">changer la langue de votre navigateur</string>
+	<string name="SETTING_GENERAL_THEME" translatable="true">thème du logiciel</string>
+	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">choisissez un thème clair et sombre</string>
+	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">thème lumineux</string>
+	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">thème Dark</string>
+	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">changer la navigation en plein écran et la langue</string>
+	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">défaut du système</string>
+	<string name="SETTING_GENERAL_HOME" translatable="true">page d\'accueil</string>
+	<string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">nouvel onglet</string>
+	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">ouvrir la page d\'accueil dans un nouvel onglet</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">supprimer tous les onglets</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">supprimer les liens Web consultés</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">supprimer les favoris</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">supprimer le cache de navigation</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">supprimer des suggestions</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">supprimer les données du site</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">supprimer les données de session</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">supprimer les cookies de navigation Web</string>
+	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">supprimer la personnalisation du navigateur</string>
+
+
+
+	<string name="ALERT_CREATE_BOOKMARK" translatable="true">site Web de signets</string>
+	<string name="ALERT_CLEAR_HISTORY" translatable="true">supprimer les liens Web et les données consultés</string>
+	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">Effacer le signet et les données</string>
+	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">l\'effacement des données supprimera les liens Web consultés, les cookies et autres données de navigation</string>
+	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">la suppression des données supprimera les sites Web favoris</string>
+	<string name="ALERT_CLEAR" translatable="true">Annuler</string>
+	<string name="ALERT_SECURE" translatable="false">https://</string>
+	<string name="ALERT_REPORT" translatable="true">rapport</string>
+	<string name="ALERT_REPORT_URL" translatable="true">rapport site Web</string>
+	<string name="ALERT_REPORT_URL_INFO" translatable="true">si vous pensez que cette URL est illégale ou dérangeante, signalez-la-nous afin que nous puissions intenter une action en justice</string>
+	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">a été signalé avec succès</string>
+	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL a été signalée avec succès. si quelque chose est trouvé, une action en justice sera engagée</string>
+	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">langue non prise en charge</string>
+	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">la langue du système n\'est pas prise en charge par ce logiciel. nous travaillons pour l\'inclure bientôt</string>
+	<string name="ALERT_ORBOT_INIT" translatable="true">initialisation Orbot</string>
+	<string name="ALERT_NOT_SUPPORTED" translatable="true">action non prise en charge</string>
+	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">aucun logiciel trouvé pour gérer la commande suivante</string>
+	<string name="ALERT_WELCOME_MESSAGE" translatable="true">bienvenue | web caché Gateway</string>
+	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">ce logiciel vous fournit une plate-forme pour rechercher et ouvrir des URL Web cachées. voici quelques suggestions \n</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">marché en ligne Web caché</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">documents et livres divulgués</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">actualités et articles sur le dark web</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">logiciels secrets et outils de piratage</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">ne plus montrer</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">finances et argent</string>
+	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">sociétés sociales</string>
+	<string name="ALERT_LOCAL_UPGRADE" translatable="true">Manuel</string>
+	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">playstore</string>
+	<string name="ALERT_LONG_FILE" translatable="true">file notification</string>
+	<string name="ALERT_DOWNLOAD" translatable="true">download notification</string>
+	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">download notification</string>
+	<string name="ALERT_LONG_URL_TITLE" translatable="true">web link notification</string>
+	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
+	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">aucun logiciel trouvé pour gérer les e-mails</string>
+	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">télécharger le fichier |</string>
+	<string name="ALERT_DATA_CLEARED" translatable="true">données effacées | redémarrage requis</string>
+
+
+
+
+	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot journaux</string>
+	<string name="HOME_MENU__NEW_TABS" translatable="true">nouveaux onglets</string>
+	<string name="HOME_MENU_CLOSE_TABS" translatable="true">fermer l\'onglet</string>
+	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">ouvrir les onglets récents</string>
+	<string name="HOME_MENU_LANGUAGE" translatable="true">Langue</string>
+	<string name="HOME_MENU_DOWNLOAD" translatable="true">téléchargements</string>
+	<string name="HOME_MENU_HISTORY" translatable="true">liens Web parcourus</string>
+	<string name="HOME_MENU_SETTING" translatable="true">Paramètres système</string>
+	<string name="HOME_MENU_DESKTOP" translatable="true">desktop site</string>
+	<string name="HOME_MENU_BOOKMARK" translatable="true">enregistrer cette page</string>
+	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">signets</string>
+	<string name="HOME_MENU_REPORT" translatable="true">rapport site Web</string>
+	<string name="HOME_MENU_RATE" translatable="true">évaluer l\'application</string>
+	<string name="HOME_MENU_FIND" translatable="true">trouver en page</string>
+	<string name="HOME_MENU_QUIT" translatable="true">sortir</string>
+	<string name="HOME_MENU_SHARE" translatable="true">partager</string>
+
+
+	<string name="TAB_MENU_OPEN_TAB" translatable="true">nouveaux onglets</string>
+	<string name="TAB_MENU_CLOSE_TAB" translatable="true">fermer tous les onglets</string>
+	<string name="TAB_MENU_SETTINGS" translatable="true">Paramètres système</string>
+	<string name="TAB_LIST_SELECT" translatable="true">sélectionner des onglets</string>
+
+
+	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">onglets ouverts</string>
+	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">copie</string>
+	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">partager</string>
+	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">effacer la sélection</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">ouvrir dans l\'onglet actuel</string>
+	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">ouvrir dans un nouvel onglet</string>
+	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">effacer</string>
+
+
+	<string name="HISTORY_TITLE" translatable="true">liens Web parcourus</string>
+	<string name="HISTORY_CLEAR" translatable="true">enlève ça</string>
+	<string name="HISTORY_SEARCH_HINT" translatable="true">chercher ...</string>
+
+
+	<string name="BOOKMARK_TITLE" translatable="true">signet</string>
+	<string name="BOOKMARK_CLEAR" translatable="true">enlève ça</string>
+	<string name="BOOKMARK_SEARCH_HINT" translatable="true">chercher ...</string>
+
+
+	<string name="HELP_RETRY" translatable="true">recommencez</string>
+	<string name="HELP_RETRY_INFO" translatable="true">opps! erreur de connexion réseau. réseau non connecté</string>
+	<string name="HELP_TITLE" translatable="true">aide et soutien</string>
+
+
+	<string name="LANGUAGE_TITLE" translatable="true">Langue</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">changer de langue</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">nous ne fonctionnons que sur les langues suivantes. nous ajouterions plus bientôt</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">États Unis Anglais)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">allemand Allemagne)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">italien (italie)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">portugais (brésil)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">russe (russie)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">ukrainien (ukraine)</string>
+	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">chinois simplifié (Chine continentale)</string>
+
+
+	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ avertissement</string>
+	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">personnaliser Bridges</string>
+	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">activer Bridges</string>
+	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">activer VPN services</string>
+	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">activer Bridge Gateway</string>
+	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">activer Gateway</string>
+
+
+	<string name="PROXY_STATUS_HEADER" translatable="true">condition du proxy</string>
+	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">état actuel du proxy orbot</string>
+	<string name="PROXY_SUB_HEADER1" translatable="true">Orbot condition de procuration</string>
+	<string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+	<string name="PROXY_VPN_STATUS" translatable="true">VPN état de la connectivité</string>
+	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condition de procuration</string>
+	<string name="PROXY_SUB_HEADER3" translatable="true">info | modifier les paramètres système</string>
+	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">vous pouvez changer de proxy en redémarrant le logiciel et en accédant au gestionnaire de proxy. il peut être ouvert en cliquant sur une icône d\'engrenage en bas</string>
+
+
+
+	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">ouvre Ceci</string>
+
+
+	<string name="HOME_TAB_TEXT" translatable="true">1</string>
+	<string name="HOME_CONNECT" translatable="false">connect</string>
+	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+	<string name="HOME_TAB_EMPTY" translatable="true">les onglets ouverts s\'afficheront ici</string>
+
+
+	<string name="ERROR_M1" translatable="true">ce site n\'est pas accessible</string>
+	<string name="ERROR_M2" translatable="true">une erreur s\'est produite lors de la connexion au site Web</string>
+	<string name="ERROR_M3" translatable="true">la page que vous essayez d\'afficher ne peut pas être affichée car l\'authenticité des données reçues n\'a pas pu être vérifiée</string>
+	<string name="ERROR_M4" translatable="true">la page ne fonctionne pas actuellement pour une raison quelconque</string>
+	<string name="ERROR_M5" translatable="true">veuillez contacter les propriétaires du site Web pour les informer de ce problème.</string>
+	<string name="ERROR_M6" translatable="true">recharger</string>
+
+
+	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+	<string name="invalid_package_signature" translatable="true">Signature de package non valide</string>
+	<string name="autofill_sign_in_prompt" translatable="true">cliquez pour vous connecter.</string>
+	<string name="autofill_manual_prompt" translatable="true">cliquez pour sélectionner manuellement les données.</string>
+	<string name="security_exception" translatable="true">Exception de sécurité de domaine Web.</string>
+	<string name="dal_exception" translatable="true">Échec de la vérification DAL.</string>
+
+	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Onglets récents</string>
+	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nouvelle identité</string>
+	<string name="SETTING_PRIVACY_POLICY" translatable="true">Politique de confidentialité</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser Politique de confidentialité</string>
+	<string name="SETTING_REPORT_WEBSITE" translatable="true">Signaler le site Web</string>
+	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Signaler un site Web illégal</string>
+	<string name="SETTING_SITEMAP" translatable="true">publier votre site web</string>
+	<string name="SETTING_SITEMAP_INFO" translatable="true">Ajoutez votre site Web à notre moteur de recherche</string>
+
+	<item name="LaguageID" type="id"/>
+	<item name="LaguageRegion" type="id"/>
+
+	<string-array name="ARRAY_FONTS" translatable="true">
+		<item>55 pour cent</item>
+		<item>70 pour cent</item>
+		<item>85 pour cent</item>
+		<item>100 pourcent</item>
+		<item>115 pour cent</item>
+		<item>130 pour cent</item>
+		<item>145 pour cent</item>
+	</string-array>
+
+	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+		<item>Activé</item>
+		<item>Désactivée</item>
+	</string-array>
+
+	<string-array name="ARRAY_NOTIFICATION" translatable="true">
+		<item>Tout activer</item>
+		<item>Désactiver tous les</item>
+		<item>Pas de bande passante</item>
+	</string-array>
+
+	<string-array name="ARRAY_COOKIES" translatable="true">
+		<item>Autorise tout</item>
+		<item>Autoriser Trusted</item>
+		<item>N\'autoriser aucun</item>
+		<item>Autoriser les visites</item>
+		<item>Allow Non Tracker</item>
+	</string-array>
+
+	<!-- Generated by Automatic String Resource Translation -->
+	<!--          https://asrt.gluege.boerde.de             -->
+</resources>

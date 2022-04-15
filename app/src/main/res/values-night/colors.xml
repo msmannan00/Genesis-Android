@@ -1,0 +1,123 @@
+<resources>
+
+    /* Static Colors */
+
+    /* Generic Colors */
+    <color name="c_navigation_tint">#ffffff</color>
+    <color name="c_background">#1c1b21</color>
+    <color name="c_text_color_highlight_v2">#1f1e25</color>
+    <color name="c_background_inverted">#ffffff</color>
+    <color name="c_header_icon_tint">#a6a6a6</color>
+    <color name="c_divider_line_light">#666666</color>
+    <color name="c_topbar_divider">#0f0f0f</color>
+    <color name="c_edittext_border">#2c2b31</color>
+    <color name="c_edittext_error_border">#790606</color>
+    <color name="c_edittext_error_background">#300303</color>
+    <color name="c_text_short_header">#33cccc</color>
+    <color name="c_ripple_gray">#808080</color>
+    <color name="c_icon_tint">#6483b4</color>
+
+    /* Text Colors Version*/
+    <color name="c_text_v1">#ffffff</color>
+    <color name="c_text_v2">#cccccc</color>
+    <color name="c_text_v8">#666666</color>
+
+    /* Bookmark Setting Controller Color */
+    <color name="c_bookmark_settings_header_icon_tint">#ffffff</color>
+
+    /* Alerts */
+    <color name="c_alert_divider">#bfbfbf</color>
+    <color name="c_alert_toast_info_text">#4d4d4d</color>
+    <color name="c_alert_toast_button_background">#ffffff</color>
+    <color name="c_alert_toast_button_text">#3385ff</color>
+    <color name="c_alert_rateus_warning">#b3b3b3</color>
+    <color name="c_alert_rateus_header">#33cccc</color>
+    <color name="c_alert_text">#ffffff</color>
+    <color name="c_alert_warning">#f65555</color>
+
+    /* Secure Alerts */
+    <color name="c_secure_alert_start">#1c1b21</color>
+    <color name="c_secure_alert_end">#1c1b21</color>
+    <color name="c_secure_alert_border">#2d2d39</color>
+    <color name="c_secure_alert_background">#99000000</color>
+    <color name="c_secure_alert_button">#2d2d39</color>
+    <color name="c_secure_alert_button_pressed">#16161d</color>
+
+    /* Orbot Logs */
+    <color name="c_orbot_background">#18171c</color>
+
+    /* Orbot Setting */
+    <color name="c_orbot_setting_divider">#141414</color>
+
+    /* Tab */
+    <color name="c_tab_border_v1">#993a5278</color>
+
+    /* Customs Colors */
+    <color name="c_background_tab">#503a5278</color>
+    <color name="c_background_text">#90000000</color>
+    <color name="c_background_keyboard">#091a2a</color>
+    <color name="c_text_v3">#666666</color>
+    <color name="c_text_v4">#a6a6a6</color>
+    <color name="c_text_v5">#ffffff</color>
+    <color name="c_text_v7">#248f8f</color>
+    <color name="c_text_v9">#e6e6e6</color>
+    <color name="c_security_popup_background">#121216</color>
+    <color name="c_security_popup_divider">#121216</color>
+    <color name="c_lang_row">#293a56</color>
+    <color name="c_lang_row_border">#3a5278</color>
+    <color name="c_button_text_v1_inverted">#3385ff</color>
+    <color name="c_button_text_v3">#ffffff</color>
+    <color name="c_edittext_background_form_inactive">#4d4d4d</color>
+    <color name="c_navigation_light">#999999</color>
+    <color name="c_switch_theme">#33cccc</color>
+    <color name="c_border_left">#0c0c0d</color>
+    <color name="c_radio_tint">#33cccc</color>
+    <color name="c_radio_tint_default">#ffffff</color>
+    <color name="c_button">#33cccc</color>
+    <color name="c_checkbox_tint">#33cccc</color>
+    <color name="c_checkbox_tint_default">#ffffff</color>
+    <color name="c_border_background_divider">#808080</color>
+    <color name="c_border_background">#18161d</color>
+    <color name="c_font_change_background">#161618</color>
+    <color name="c_font_change_foreground">#ffffff</color>
+    <color name="c_seekbar_progress">#33cccc</color>
+    <color name="c_seekbar_thumb">#33cccc</color>
+    <color name="c_ripple_v1">#0c0b0e</color>
+    <color name="c_ripple_v2">#18171c</color>
+    <color name="c_ripple_v3">#24222a</color>
+    <color name="c_button_text">#b3b3b3</color>
+    <color name="c_button_background">#3c3946</color>
+    <color name="c_alert_background">#3c3946</color>
+    <color name="c_view_divier_background_v1">#24222a</color>
+    <color name="c_view_divier_background_v2">#302e38</color>
+    <color name="c_profile_radial_inner">#2c2b31</color>
+    <color name="c_profile_radial_outer">#2c2b31</color>
+    <color name="c_edittext_background">#3c3946</color>
+    <color name="c_edittext_background_blue">#3c3946</color>
+    <color name="c_edittext_background_dark">#24222a</color>
+    <color name="c_menu_drop_shadow_05">#00000000</color>
+    <color name="c_menu_drop_shadow_10">#00000000</color>
+    <color name="c_menu_drop_shadow_15">#00000000</color>
+    <color name="c_menu_drop_shadow_20">#00000000</color>
+    <color name="c_menu_drop_shadow_25">#00000000</color>
+    <color name="c_text_home_menu">#ffffff</color>
+    <color name="c_hint_text">#b3b3b3</color>
+    <color name="c_setting_icon_tint">#8c8c8c</color>
+    <color name="c_list_item_current">#161519</color>
+    <color name="c_lock_tint">#f2f2f2</color>
+    <color name="c_lock_text">#00b300</color>
+    <color name="c_text_v6">#a6a6a6</color>
+    <color name="c_home_side">#28282a</color>
+    <color name="c_alert_text_inverted_v1">#ffffff</color>
+    <color name="c_long_button">#3c3946</color>
+    <color name="c_splash_buttons">#ffffff</color>
+    <color name="c_tab">#212d45</color>
+    <color name="c_tab_background">#425e8a</color>
+    <color name="c_tab_border">#425e8a</color>
+    <color name="c_tab_image_border">#324467</color>
+    <color name="c_list_remove_back">#0f0f0f</color>
+    <color name="c_ripple_light">#d9d9d9</color>
+    <color name="green_dark_v2">#1c1b21</color>
+    <color name="c_icon_divider">#141414</color>
+
+</resources>
