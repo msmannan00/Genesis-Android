@@ -452,7 +452,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
             }else {
                 if(progress==100){
                     event.invokeObserver(Arrays.asList(mSessionID,mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_INVOKE_PARSER);
-                    if(!mCurrentURL.contains("genesis") && !wasPreviousErrorPage()){
+                    if(!mCurrentURL.startsWith(constants.CONST_GENESIS_DOMAIN_URL) && !mCurrentURL.contains("genesis") && !wasPreviousErrorPage()){
                         checkApplicationRate();
                     }
                     if(!mIsProgressBarChanging){
