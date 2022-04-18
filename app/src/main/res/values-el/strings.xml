@@ -159,8 +159,7 @@
 	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Λήψη αρχείου εικόνας</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Αίτημα Νέο Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Αίτημα Νέο Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Επιλέξτε E-mail παρακάτω για να ζητήσετε μια διεύθυνση Bridge. Μόλις έχετε μια διεύθυνση, αντιγράψτε και επικολλήστε την στο παραπάνω πλαίσιο και ξεκινήστε την εφαρμογή.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">Αλληλογραφία</string>
 
@@ -388,6 +387,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">περιηγημένοι σύνδεσμοι ιστού</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Ρυθμίσεις συστήματος</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">επιτραπέζιος ιστότοπος</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Σύνδεση</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">αποθηκεύστε αυτήν τη σελίδα</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">σελιδοδείκτες</string>
 	<string name="HOME_MENU_REPORT" translatable="true">αναφέρετε τον ιστότοπο</string>

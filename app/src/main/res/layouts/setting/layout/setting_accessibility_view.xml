@@ -93,7 +93,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption3"
+                    android:id="@+id/pSearchSettingOption3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@xml/gx_ripple_gray"
@@ -232,7 +232,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption4"
+                    android:id="@+id/pSearchSettingOption4"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:background="@xml/gx_ripple_gray"
@@ -297,7 +297,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption5"
+                    android:id="@+id/pSearchSettingOption5"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:background="@xml/gx_ripple_gray"

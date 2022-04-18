@@ -74,7 +74,7 @@
 
                 <!-- Title Header -->
                 <LinearLayout
-                    android:id="@+id/pBridgeSettingOption2"
+                    android:id="@+id/pSearchSettingOption2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
@@ -192,7 +192,7 @@
                     android:background="@color/c_orbot_setting_divider" />
 
                 <LinearLayout
-                    android:id="@+id/pOption4"
+                    android:id="@+id/pSearchSettingOption4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
@@ -412,7 +412,7 @@
                     android:background="@color/c_orbot_setting_divider" />
 
                 <LinearLayout
-                    android:id="@+id/pOption3"
+                    android:id="@+id/pSearchSettingOption3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
@@ -485,7 +485,7 @@
                     android:background="@color/c_orbot_setting_divider"/>
 
                 <LinearLayout
-                    android:id="@+id/pOption5"
+                    android:id="@+id/pSearchSettingOption5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"

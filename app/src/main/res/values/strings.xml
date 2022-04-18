@@ -279,15 +279,15 @@
     <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">Stop all known trackers, Pages will load faster but some functionality might not work</string>
     <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">Allow Javascript | Toggle to Enable Javascript</string>
     <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Disable java scripting for various script attacks</string>
-    <string name="SETTING_PRIVACY_POPUP" translatable="true">Block Popup | Toggle to Disable Popup Advert</string>
-    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Remove popup advertizement. Might break functionaly of some websites</string>
+    <string name="SETTING_PRIVACY_POPUP" translatable="false">Block Popup | Toggle to Disable Popup Advert</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="false">Remove popup advertizement. Might break functionaly of some websites</string>
     <string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Restore tabs</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Don\'t restore after quitting browser</string>
     <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">Toolbar Theme</string>
     <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Set toolbar theme as defined in website</string>
-    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Tab view</string>
-    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Switch between Tab manager Grid Layout and List Layout</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="false">Tab view</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="false">Switch between Tab manager Grid Layout and List Layout</string>
     <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">Show Images</string>
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Always load website images</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Show web fonts</string>
@@ -300,8 +300,8 @@
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">Media</string>
     <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">Change default data saver settings</string>
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">Change default media settings</string>
-    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Grid Design</string>
-    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">List Design</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="false">Grid Design</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="false">List Design</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">Always show images</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Only show images over WI-FI</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Block all images</string>
@@ -326,8 +326,6 @@
     <string name="SETTING_GENERAL_INFO" translatable="true">Home, language</string>
     <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">Full-screen browsing</string>
     <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">Hide the browser toolbar when scrolling down a page</string>
-    <string name="SETTING_GENERAL_TOOLBAR_THEME" translatable="true">Searchbar theme</string>
-    <string name="SETTING_GENERAL_TOOLBAR_THEME_INFO" translatable="true">Automatically change search bar theme according to website</string>
     <string name="SETTING_GENERAL_LANGUAGE" translatable="true">Language</string>
     <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">Change the language of your browser</string>
     <string name="SETTING_GENERAL_THEME" translatable="true">Theme</string>
@@ -337,7 +335,7 @@
     <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">Change full-screen browsing and language settings</string>
     <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">System Default</string>
     <string name="SETTING_GENERAL_HOME" translatable="true">Home</string>
-    <string name="SETTING_GENERAL_HOME_INFO" translatable="true">about:blank</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
     <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">New Tab</string>
     <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">Open homepage in new tab</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">Clear all tabs</string>
@@ -357,7 +355,7 @@
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Clearing data will remove history, cookies, and other browsing data</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Remove all bookmarks ?</string>
     <string name="ALERT_CLEAR" translatable="true">Clear</string>
-    <string name="ALERT_CONFIRM" translatable="true">Confirm</string>
+    <string name="ALERT_CONFIRM" translatable="false">Confirm</string>
     <string name="ALERT_REPORT" translatable="true">Report</string>
     <string name="ALERT_REPORT_URL" translatable="true">Report Website</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">If you think this URL is illegal or disturbing, report it to us, so we can take legal action</string>
@@ -387,12 +385,12 @@
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">No application found to handle email</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">Download File | </string>
     <string name="ALERT_DATA_CLEARED" translatable="true">Data Cleared | Restart Required</string>
-    <string name="ALERT_DATA_CLEARED_SHORTCUT" translatable="true">Data Cleared Successfully</string>
-    <string name="ALERT_DATA_CLEARED_INFO_SHORTCUT" translatable="true">Private data cleared successfully. Application will close in a moment. Now you can safely continue browsing</string>
-    <string name="ALERT_DATA_CLEARED_BUTTON" translatable="true">Closing Genesis Please Wait ...</string>
-    <string name="ALERT_ORBOT_LOADING" translatable="true">Genesis Connecting ...</string>
-    <string name="ALERT_CRASH" translatable="true">Application closed unexpectedly</string>
-    <string name="ALERT_CRASH_INFO" translatable="true"><b><font color='#f32323'>Request New Bridge &#160;</font></b>&#160;Application crashed due to unexpected error. We are looking into the issue mean while you can continue with this application</string>
+    <string name="ALERT_DATA_CLEARED_SHORTCUT" translatable="false">Data Cleared Successfully</string>
+    <string name="ALERT_DATA_CLEARED_INFO_SHORTCUT" translatable="false">Private data cleared successfully. Application will close in a moment. Now you can safely continue browsing</string>
+    <string name="ALERT_DATA_CLEARED_BUTTON" translatable="false">Closing Genesis Please Wait ...</string>
+    <string name="ALERT_ORBOT_LOADING" translatable="false">Genesis Connecting ...</string>
+    <string name="ALERT_CRASH" translatable="false">Application closed unexpectedly</string>
+    <string name="ALERT_CRASH_INFO" translatable="false"><b><font color='#f32323'>Request New Bridge &#160;</font></b>&#160;Application crashed due to unexpected error. We are looking into the issue mean while you can continue with this application</string>
 
     <!-- Popup Menu -->
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
@@ -404,8 +402,9 @@
     <string name="HOME_MENU_DOWNLOAD" translatable="true">Downloads</string>
     <string name="HOME_MENU_HISTORY" translatable="true">History</string>
     <string name="HOME_MENU_SETTING" translatable="true">Settings</string>
-    <string name="HOME_MENU__NEW_CIRCUIT_CREATED" translatable="true">New identity created</string>
+    <string name="HOME_MENU__NEW_CIRCUIT_CREATED" translatable="false">New identity created</string>
     <string name="HOME_MENU_DESKTOP" translatable="true">Desktop site</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Connection</string>
     <string name="HOME_MENU_BOOKMARK" translatable="true">Bookmark This Page</string>
     <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">Bookmarks</string>
     <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Recent tabs</string>
@@ -433,14 +432,14 @@
     <!-- History Popup Menu -->
     <string name="HISTORY_TITLE" translatable="true">History</string>
     <string name="HISTORY_CLEAR" translatable="true">Clear</string>
-    <string name="HISTORY_EMPTY" translatable="true">Pages that you visit appear here</string>
+    <string name="HISTORY_EMPTY" translatable="false">Pages that you visit appear here</string>
     <string name="HISTORY_SEARCH_HINT" translatable="true">Search ...</string>
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="true">Bookmark</string>
     <string name="BOOKMARK_CLEAR" translatable="true">Clear</string>
     <string name="BOOKMARK_SEARCH_HINT" translatable="true">Search ...</string>
-    <string name="BOOKMARK_EMPTY" translatable="true">Pages that you bookmark appear here</string>
+    <string name="BOOKMARK_EMPTY" translatable="false">Pages that you bookmark appear here</string>
 
     <!-- Help -->
     <string name="HELP_RETRY" translatable="true">Retry</string>

@@ -92,6 +92,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
         mNotifyManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationBuilder = new NotificationCompat.Builder(mContext.get());
+        mNotificationBuilder = new NotificationCompat.Builder(mContext.get());
         mNotificationBuilder.setContentTitle(mFileName)
                 .setContentText("starting...")
                 .setChannelId(mNotificationID + "")
@@ -134,12 +135,21 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 HttpURLConnection conection;
                 Proxy proxy;
                 if(helperMethod.getDomainName(fURL).contains(".onion")){
-                    proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved("localhost", orbotLocalConstants.mSOCKSPort));
-                    conection = (HttpURLConnection) url.openConnection(proxy);
+                    if(orbotLocalConstants.mSOCKSPort==-1){
+                        proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved("localhost", orbotLocalConstants.mSOCKSPort));
+                        conection = (HttpURLConnection) url.openConnection(proxy);
+                    }else {
+                        conection = (HttpURLConnection) url.openConnection();
+                    }
                 }else {
-                    Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", orbotLocalConstants.mHTTPPort));
-                    URLConnection mURLConnection = new URI(fURL).toURL().openConnection(mProxy);
-                    conection = (HttpURLConnection) mURLConnection;
+                    if(orbotLocalConstants.mSOCKSPort==-1){
+                        Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", orbotLocalConstants.mHTTPPort));
+                        URLConnection mURLConnection = new URI(fURL).toURL().openConnection(mProxy);
+                        conection = (HttpURLConnection) mURLConnection;
+                    }else{
+                        URLConnection mURLConnection = new URI(fURL).toURL().openConnection();
+                        conection = (HttpURLConnection) mURLConnection;
+                    }
                 }
 
                 conection.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0");
@@ -156,10 +166,12 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 String urlEncoded = Uri.encode(f_url[0], ALLOWED_URI_CHARS);
                 StrongHttpsClient httpclient = new StrongHttpsClient(mContext.get());
 
-                if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
-                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
-                }else {
-                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
+                if(orbotLocalConstants.mSOCKSPort!=-1){
+                    if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
+                        httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
+                    }else {
+                        httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
+                    }
                 }
 
                 HttpGet httpget = new HttpGet(urlEncoded);

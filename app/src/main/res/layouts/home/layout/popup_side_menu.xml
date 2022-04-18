@@ -315,7 +315,7 @@
                 android:background="@color/c_home_side" />
 
             <LinearLayout
-                android:id="@+id/menu12"
+                android:id="@+id/menu29"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginTop="1dp"
@@ -328,27 +328,43 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/markerTab"
                     android:layout_width="21dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_baseline_vpn"
-                    app:tint="@color/c_alert_divider" />
+                    android:src="@drawable/tor_logo"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_marginStart="17dp"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:gravity="start|center_vertical"
                     android:paddingStart="3dp"
-                    android:text="@string/HOME_MENU__ORBOT_LOGS"
+                    android:text="@string/HOME_MENU_TOR_CONNECTION"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/menu30"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/clear_alpha"
+                    android:buttonTint="@color/c_checkbox_tint"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="0dp"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="16sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/menu28"
@@ -384,6 +400,51 @@
                     android:textSize="15sp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu12"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_side_item"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onMenuItemInvoked"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/markerTab"
+                    android:layout_width="21dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_vpn"
+                    app:tint="@color/c_alert_divider" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="@string/HOME_MENU__ORBOT_LOGS"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/c_home_side" />
 
             <LinearLayout
                 android:id="@+id/menu25"

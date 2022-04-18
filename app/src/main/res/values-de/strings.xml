@@ -108,8 +108,7 @@
 	<string name="TOAST_ALERT_SETTING" translatable="true">Einstellungen öffnen</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Anfrage Neu Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Anfrage Neu Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Wählen Sie unten E-Mail aus, um eine Bridge-Adresse anzufordern. Sobald Sie eine Adresse haben, kopieren Sie sie und fügen Sie sie in das obige Feld ein und starten Sie die Anwendung.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">E-Mail</string>
 
@@ -398,6 +397,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">durchsuchte Weblinks</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Systemeinstellung</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">Desktop-Site</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Verbindung</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">Speichern Sie diese Seite</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">Lesezeichen</string>
 	<string name="HOME_MENU_REPORT" translatable="true">report website</string>

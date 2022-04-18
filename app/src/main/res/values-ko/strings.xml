@@ -108,8 +108,7 @@
 	<string name="TOAST_ALERT_SETTING" translatable="true">설정 열기</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">새로운 요청 Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">새로운 요청 Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Bridge 주소를 요청하려면 아래 이메일을 선택하십시오. 주소가 있으면 복사하여 위의 상자에 붙여넣고 응용 프로그램을 시작하십시오.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">메일</string>
 
@@ -343,8 +342,6 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">브라우저 사용자 정의 제거</string>
 
 
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">북마크 웹 사이트</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">탐색 한 웹 링크 및 데이터 삭제</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">책갈피 및 데이터 지우기</string>
@@ -396,6 +393,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">탐색 한 웹 링크</string>
 	<string name="HOME_MENU_SETTING" translatable="true">시스템 설정</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">데스크탑 사이트</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor 연결</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">이 페이지 저장</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">북마크</string>
 	<string name="HOME_MENU_REPORT" translatable="true">웹 사이트 신고</string>

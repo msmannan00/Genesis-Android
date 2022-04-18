@@ -94,9 +94,8 @@
 	<string name="TOAST_ALERT_SETTING" translatable="true">obre la configuració</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Sol·licita Un Nou Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Seleccioneu el correu electrònic següent per sol·licitar una adreça Bridge. Un cop tingueu una adreça, copieu-la i enganxeu-la al quadre anterior i inicieu l\'aplicació.</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Sol·licita Un Nou Bridge</string>
+\	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Seleccioneu el correu electrònic següent per sol·licitar una adreça Bridge. Un cop tingueu una adreça, copieu-la i enganxeu-la al quadre anterior i inicieu l\'aplicació.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">Correu</string>
 
 	<!-- Alert Rate Failure -->
@@ -322,7 +321,6 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">elimineu la personalització del navegador</string>
 
 
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">lloc web de marcadors</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">suprimiu els enllaços web i les dades navegats</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">neteja el marcador i les dades</string>
@@ -385,6 +383,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">enllaços web navegats</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Configuració del sistema</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">lloc d\'escriptori</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Connexió</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">deseu aquesta pàgina</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">marcadors</string>
 	<string name="HOME_MENU_REPORT" translatable="true">lloc web d\'informes</string>

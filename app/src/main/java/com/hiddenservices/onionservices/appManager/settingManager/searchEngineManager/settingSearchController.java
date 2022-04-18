@@ -3,6 +3,7 @@ package com.hiddenservices.onionservices.appManager.settingManager.searchEngineM
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class settingSearchController extends AppCompatActivity {
     private SwitchMaterial mSearchSuggestions;
     private settingSearchModel mSettingSearchModel;
     private settingSearchViewController mSettingSearchViewController;
+    private LinearLayout mSearchSettingOption1 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +65,10 @@ public class settingSearchController extends AppCompatActivity {
         mSearchEngines.add(findViewById(R.id.mRadioSearch_5));
         mSearchHistory = findViewById(R.id.pSearchHistory);
         mSearchSuggestions = findViewById(R.id.pSearchSuggestions);
+        mSearchSettingOption1 = findViewById(R.id.pSearchSettingOption1);
 
         activityContextManager.getInstance().onStack(this);
-        mSettingSearchViewController = new settingSearchViewController(this, new settingSearchViewCallback(), mSearchEngines, mSearchHistory, mSearchSuggestions);
+        mSettingSearchViewController = new settingSearchViewController(this, new settingSearchViewCallback(), mSearchEngines, mSearchHistory, mSearchSuggestions, mSearchSettingOption1);
         mSettingSearchModel = new settingSearchModel(new settingSearchModelCallback());
     }
 
@@ -127,23 +130,23 @@ public class settingSearchController extends AppCompatActivity {
     }
 
     public void onSelectSearchEngine(View view) {
-        if(view.getId() == R.id.pBridgeSettingOption1){
+        if(view.getId() == R.id.pSearchSettingOption1){
             mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_ENGINE, Collections.singletonList(constants.CONST_BACKEND_GENESIS_URL));
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, status.sSettingDefaultSearchEngine));
         }
-        else if(view.getId() == R.id.pBridgeSettingOption2){
+        else if(view.getId() == R.id.pSearchSettingOption2){
             mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_ENGINE, Collections.singletonList(constants.CONST_BACKEND_DUCK_DUCK_GO_URL));
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, status.sSettingDefaultSearchEngine));
         }
-        else if(view.getId() == R.id.pOption3){
+        else if(view.getId() == R.id.pSearchSettingOption3){
             mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_ENGINE, Collections.singletonList(constants.CONST_BACKEND_GOOGLE_URL));
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, status.sSettingDefaultSearchEngine));
         }
-        else if(view.getId() == R.id.pOption4){
+        else if(view.getId() == R.id.pSearchSettingOption4){
             mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_ENGINE, Collections.singletonList(constants.CONST_BACKEND_BING_URL));
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, status.sSettingDefaultSearchEngine));
         }
-        else if(view.getId() == R.id.pOption5){
+        else if(view.getId() == R.id.pSearchSettingOption5){
             mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_ENGINE, Collections.singletonList(constants.CONST_BACKEND_WIKI_URL));
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, status.sSettingDefaultSearchEngine));
         }

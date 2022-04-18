@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import android.os.Vibrator;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -53,6 +55,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
 
+import com.example.myapplication.BuildConfig;
+import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.defaultBrowser;
 import com.hiddenservices.onionservices.constants.constants;
@@ -108,6 +112,7 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_LIST_EX
 import static com.hiddenservices.onionservices.constants.constants.CONST_PACKAGE_NAME;
 import static com.hiddenservices.onionservices.constants.constants.CONST_PLAYSTORE_URL;
 import static com.hiddenservices.onionservices.constants.keys.M_ACTIVITY_NAVIGATION_BUNDLE_KEY;
+import static com.hiddenservices.onionservices.constants.keys.M_RESTART_APP_KEY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_OPEN_ACTIVITY_FAILED;
 
 public class helperMethod
@@ -306,7 +311,7 @@ public class helperMethod
     }
 
     public static String completeURL(String pURL){
-        if(pURL.equals("about:blank") || pURL.equals("about:config")){
+        if(pURL.equals("about:blank") || pURL.equals("about:config") || pURL.startsWith("resource://")){
             return pURL;
         }
         URL weburl;
@@ -1069,6 +1074,34 @@ public class helperMethod
         popupWindow.setElevation(7);
 
         return popupWindow;
+    }
+
+    public static void restartAndOpen(boolean pOpenOnRestart) {
+        ActivityManager manager = (ActivityManager) activityContextManager.getInstance().getHomeController().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningProcesses = manager
+                .getRunningAppProcesses();
+        if (runningProcesses != null) {
+            for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
+                if (!BuildConfig.APPLICATION_ID.equalsIgnoreCase(processInfo.processName)) {
+                    android.os.Process.killProcess(processInfo.pid);
+                }
+            }
+        }
+
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                PackageManager packageManager = activityContextManager.getInstance().getHomeController().getPackageManager();
+                Intent intent = packageManager.getLaunchIntentForPackage(activityContextManager.getInstance().getHomeController().getPackageName());
+                ComponentName componentName = intent.getComponent();
+                Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+                mainIntent.putExtra(M_RESTART_APP_KEY, pOpenOnRestart);
+                activityContextManager.getInstance().getHomeController().getApplicationContext().startActivity(mainIntent);
+            }
+        });
+        Runtime.getRuntime().exit(0);
     }
 
 }

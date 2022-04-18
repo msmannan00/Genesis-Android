@@ -110,6 +110,7 @@ class homeViewController
     private ImageButton mPanicButton;
     private ImageButton mPanicButtonLandscape;
     private ImageView mGenesisLogo;
+    private ImageView mTorDisabled;
 
     /*Local Variables*/
     private Callable<String> mLogs = null;
@@ -119,7 +120,7 @@ class homeViewController
     private boolean mIsTopBarExpanded = true;
     private NestedScrollView.MarginLayoutParams mDefaultMargin = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled){
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -161,6 +162,7 @@ class homeViewController
         this.mGenesisLogo = pGenesisLogo;
         this.mPanicButtonLandscape = pPanicButtonLandscape;
         this.mLogHandler = new LogHandler();
+        this.mTorDisabled = pTorDisabled;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -225,7 +227,14 @@ class homeViewController
         }
         params1.setMargins(0, 0, 0,(helperMethod.pxFromDp(60)+mBannerHeight)*-1);
         mNestedScroll.setLayoutParams(params1);
-
+        if(!status.sTorBrowsing){
+            mTorDisabled.setAlpha(1);
+            mTorDisabled.setVisibility(View.VISIBLE);
+            mConnectButton.setVisibility(View.GONE);
+            mOrbotLogManager.setVisibility(View.GONE);
+            mGatewaySplash.setVisibility(View.GONE);
+            mCopyright.setVisibility(View.GONE);
+        }
 
     }
 
@@ -492,7 +501,7 @@ class homeViewController
 
     public void initStatusBarColor(boolean mInstant) {
         int mDelay = 1000;
-        if(status.mThemeApplying || mInstant || status.sSettingIsAppStarted){
+        if(!status.sTorBrowsing || status.mThemeApplying || mInstant || status.sSettingIsAppStarted){
             mDelay = 0;
         }
 
@@ -616,7 +625,7 @@ class homeViewController
         protected Void doInBackground(Void...arg0) {
             AppCompatActivity temp_context = mContext;
             int mCounter = 0;
-            while (orbotLocalConstants.mSOCKSPort==-1 && (!orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)){
+            while (status.sTorBrowsing && (orbotLocalConstants.mSOCKSPort==-1 || !orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)){
                 try
                 {
                     boolean mFastConnect = status.sSettingIsAppStarted || !status.sRestoreTabs && status.sAppInstalled && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus && status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR);
@@ -638,7 +647,7 @@ class homeViewController
                     sleep(500);
                     if(mCounter>20 && orbotLocalConstants.mSOCKSPort!=-1){
                         break;
-                    }else {
+                    }else if (orbotLocalConstants.mNetworkState && status.sBridgeStatus){
                         mCounter+=1;
                     }
                     if(mFastConnect){
@@ -853,8 +862,22 @@ class homeViewController
         ImageButton mRefresh = popupView.findViewById(R.id.menu21);
         ImageButton mDownload = popupView.findViewById(R.id.menuItem25);
         CheckBox desktop = popupView.findViewById(R.id.menu27);
+        CheckBox torBrowsing = popupView.findViewById(R.id.menu30);
+        LinearLayout newIdentity = popupView.findViewById(R.id.menu28);
         LinearLayout newTab = popupView.findViewById(R.id.menu11);
+        LinearLayout genesisLogs = popupView.findViewById(R.id.menu12);
         desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
+
+        if(status.sTorBrowsing){
+            torBrowsing.setChecked(true);
+            newIdentity.setVisibility(View.VISIBLE);
+            genesisLogs.setVisibility(View.VISIBLE);
+        }
+        else {
+            torBrowsing.setChecked(false);
+            newIdentity.setVisibility(View.GONE);
+            genesisLogs.setVisibility(View.GONE);
+        }
         if(pIsBookmarked){
             try {
                 bookmark .setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_bookmark_filled));

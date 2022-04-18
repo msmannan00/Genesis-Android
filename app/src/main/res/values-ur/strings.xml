@@ -399,6 +399,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">براؤز ویب لنکس</string>
 	<string name="HOME_MENU_SETTING" translatable="true">سسٹم سیٹنگ</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">ڈیسک ٹاپ سائٹ</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor کنکشن</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">اس صفحے کو محفوظ کریں</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">بُک مارکس</string>
 	<string name="HOME_MENU_REPORT" translatable="true">رپورٹ ویب سائٹ</string>

@@ -5,6 +5,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -26,16 +27,18 @@ class settingSearchViewController
     private ArrayList<RadioButton> mSearchEngines;
     private SwitchMaterial mSearchHistory;
     private SwitchMaterial mSearchSuggestions;
+    private LinearLayout mSearchSettingOption1 = null;
 
     /*Initializations*/
 
-    settingSearchViewController(settingSearchController pContext, eventObserver.eventListener pEvent, ArrayList<RadioButton> pSearchEngines, SwitchMaterial pSearchHistory, SwitchMaterial pSearchSuggestions)
+    settingSearchViewController(settingSearchController pContext, eventObserver.eventListener pEvent, ArrayList<RadioButton> pSearchEngines, SwitchMaterial pSearchHistory, SwitchMaterial pSearchSuggestions, LinearLayout pSearchSettingOption1)
     {
         this.mEvent = pEvent;
         this.mContext = pContext;
         this.mSearchEngines = pSearchEngines;
         this.mSearchHistory = pSearchHistory;
         this.mSearchSuggestions = pSearchSuggestions;
+        this.mSearchSettingOption1 = pSearchSettingOption1;
 
         initViews();
         initPostUI();
@@ -48,21 +51,24 @@ class settingSearchViewController
     }
 
     private void initPostUI(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        Window window = mContext.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-            }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
+            mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         }
+        else {
+            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
+            mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+        }
+
+        if(!status.sTorBrowsing){
+            mSearchSettingOption1.setVisibility(View.GONE);
+        }
+
     }
 
     private void initSearchViews(){

@@ -108,8 +108,7 @@
 	<string name="TOAST_ALERT_SETTING" translatable="true">เปิดการตั้งค่า</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">ขอใหม่ Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">ขอใหม่ Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">เลือกอีเมลด้านล่างเพื่อขอที่อยู่ Bridge เมื่อคุณมีที่อยู่แล้ว ให้คัดลอกและวางลงในช่องด้านบนแล้วเริ่มแอปพลิเคชัน</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">จดหมาย</string>
 
@@ -346,8 +345,6 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">ลบการปรับแต่งเบราว์เซอร์</string>
 
 
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">เว็บไซต์บุ๊คมาร์ค</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">ลบเว็บลิงค์และข้อมูลที่เรียกดู</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">ล้างบุ๊คมาร์คและข้อมูล</string>
@@ -399,6 +396,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">ลิงก์เว็บที่เรียกดู</string>
 	<string name="HOME_MENU_SETTING" translatable="true">การตั้งค่าระบบ</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">ไซต์เดสก์ท็อป</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor การเชื่อมต่อ</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">บันทึกหน้านี้</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">บุ๊คมาร์ค</string>
 	<string name="HOME_MENU_REPORT" translatable="true">รายงานเว็บไซต์</string>

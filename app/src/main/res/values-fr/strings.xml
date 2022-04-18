@@ -84,10 +84,9 @@
 	<string name="BRIDGE_MEEK" translatable="true">Meek-azur (Chine)</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">demander nouveau Bridge</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">demander nouveau Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">sélectionnez mail pour demander une adresse bridge. une fois que vous l\'avez reçu, copiez-le et collez-le dans la case ci-dessus et démarrez le logiciel.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">mail</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
 
 	<!-- Alert Advance Log -->
 	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">changer la façon dont le journal système apparaît</string>
@@ -404,6 +403,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">liens Web parcourus</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Paramètres système</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">desktop site</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Lien</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">enregistrer cette page</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">signets</string>
 	<string name="HOME_MENU_REPORT" translatable="true">rapport site Web</string>

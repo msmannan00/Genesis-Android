@@ -2,6 +2,8 @@ package com.hiddenservices.onionservices.appManager.externalCommandManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,21 +41,23 @@ public class externalShortcutController extends AppCompatActivity {
                     case CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE:
                         setContentView(R.layout.popup_data_cleared_shortcut);
                         panicExitInvoked();
+                        helperMethod.onDelayHandler(this, 3000, () -> {
+                            finishAndRemoveTask();
+                            return null;
+                        });
+
                         return;
                     case constants.CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN:
-                        setContentView(R.layout.empty_view);
                         panicExitInvoked();
+                        helperMethod.restartAndOpen(true);
+
                         break;
                     case constants.CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART:
-                        activityContextManager.getInstance().onClearStack();
+                        helperMethod.restartAndOpen(false);
                         break;
                 }
             }
         }
-
-        /* Start Required Activity */
-
-        helperMethod.openIntent(mIntent, this, constants.CONST_LIST_EXTERNAL_SHORTCUT);
 
     }
 
@@ -61,7 +65,7 @@ public class externalShortcutController extends AppCompatActivity {
 
     public void onUITrigger(View view){
         if(view.getId() == R.id.pDataClearedDismiss){
-            finishAffinity();
+            finishAndRemoveTask();
         }
     }
 
@@ -69,9 +73,5 @@ public class externalShortcutController extends AppCompatActivity {
 
     public void panicExitInvoked() {
         dataController.getInstance().clearData(this);
-        helperMethod.onDelayHandler(this, 3000, () -> {
-            finish();
-            return null;
-        });
     }
 }

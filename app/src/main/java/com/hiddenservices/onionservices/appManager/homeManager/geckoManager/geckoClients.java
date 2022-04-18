@@ -186,15 +186,17 @@ public class geckoClients
         }
 
         String mYAML = helperMethod.readFromFile(cacheFile.getPath());
-        mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"","network.proxy.socks:  \"127.0.0.1\"");
-        mYAML = mYAML.replace("# network.proxy.socks_port:  9050","network.proxy.socks_port:  9050");
-        mYAML = mYAML.replace("network.proxy.socks:  \"127.0.0.1\"","network.proxy.socks:  \"127.0.0.1\"");
+        if(status.sTorBrowsing){
+            mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"","network.proxy.socks:  \"127.0.0.1\"");
+            mYAML = mYAML.replace("# network.proxy.socks_port:  9050","network.proxy.socks_port:  9050");
 
-        StringBuilder buf = new StringBuilder(mYAML);
-        int portIndex = mYAML.indexOf("network.proxy.socks_port");
-        int breakIndex = mYAML.indexOf("\n",portIndex);
-        mYAML = buf.replace(portIndex, breakIndex,"network.proxy.socks_port:  "+ orbotLocalConstants.mSOCKSPort).toString();
-        helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+            StringBuilder buf = new StringBuilder(mYAML);
+            int portIndex = mYAML.indexOf("network.proxy.socks_port");
+            int breakIndex = mYAML.indexOf("\n",portIndex);
+            mYAML = buf.replace(portIndex, breakIndex,"network.proxy.socks_port:  "+ orbotLocalConstants.mSOCKSPort).toString();
+            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+        }
+
 
 
         return cacheFile.getAbsolutePath();
@@ -408,6 +410,7 @@ public class geckoClients
         if(mSession==null){
             return;
         }
+        Log.i("FERROR : ", "FERROR" + url);
         if(mSession.onGetInitializeFromStartup()){
             mSession.initURL(url);
             if(!url.startsWith(CONST_REPORT_URL) && (url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))){

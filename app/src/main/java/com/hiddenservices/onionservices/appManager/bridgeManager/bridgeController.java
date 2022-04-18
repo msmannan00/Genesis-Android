@@ -145,7 +145,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_REQUEST_BRIDGE, null);
             pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
         }
-        else if(view.getId() == R.id.pBridgeSettingOption2){
+        else if(view.getId() == R.id.pSearchSettingOption2){
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
             mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
         }
@@ -153,7 +153,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE, null);
             mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
         }
-        else if(view.getId() == R.id.pBridgeSettingOption1){
+        else if(view.getId() == R.id.pSearchSettingOption1){
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
             mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
         }

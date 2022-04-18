@@ -80,7 +80,7 @@
 	<string name="BRIDGE_MEEK" translatable="true">Meek-biru (Cina)</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">aanvragen selecteer mail om een ​​bridge-adres aan te vragen. Zodra u het heeft ontvangen, kopieert en plakt u het in het bovenstaande vak en start u de software.​taal niet ondersteund</string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">REQUEST BRIDGE</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">systeemtaal wordt niet ondersteund door deze software. we werken eraan om het binnenkort op te nemen</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">mail</string>
 
@@ -107,9 +107,6 @@
 	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Urungkan</string>
 	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Identitas baru dibuat</string>
 	<string name="TOAST_ALERT_SETTING" translatable="true">buka pengaturan</string>
-
-	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
 
 	<!-- Alert Rate Failure -->
 	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">MAAF MENDENGARNYA</string>
@@ -386,7 +383,8 @@
 	<string name="HOME_MENU_DOWNLOAD" translatable="true">downloads</string>
 	<string name="HOME_MENU_HISTORY" translatable="true">bladwijzers</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Sla Deze Pagina Op</string>
-	<string name="HOME_MENU_DESKTOP" translatable="true">desktop site</string>
+	<string name="HOME_MENU_DESKTOP" translatable="true">desktop Verbinding</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Connection</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">rapport website</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">beoordeel deze app</string>
 	<string name="HOME_MENU_REPORT" translatable="true">vind op pagina</string>

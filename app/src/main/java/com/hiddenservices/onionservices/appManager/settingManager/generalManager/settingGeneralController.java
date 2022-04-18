@@ -227,7 +227,7 @@ public class settingGeneralController extends AppCompatActivity {
     public void onSelectTheme(View view){
         if(!mIsThemeChanging){
             mIsThemeChanging = true;
-            if(view.getId() == R.id.pBridgeSettingOption1){
+            if(view.getId() == R.id.pSearchSettingOption1){
                 if(status.sTheme != enums.Theme.THEME_DARK) {
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_RESET_THEME, null);
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_SET_THEME, Collections.singletonList(enums.Theme.THEME_DARK));
@@ -238,7 +238,7 @@ public class settingGeneralController extends AppCompatActivity {
                 }else {
                     mIsThemeChanging = false;
                 }
-            }else if(view.getId() == R.id.pBridgeSettingOption2) {
+            }else if(view.getId() == R.id.pSearchSettingOption2) {
                 if(status.sTheme != enums.Theme.THEME_LIGHT) {
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_RESET_THEME, null);
                     mSettingGeneralViewController.onTrigger(settingGeneralEnums.eGeneralViewController.M_SET_THEME, Collections.singletonList(enums.Theme.THEME_LIGHT));

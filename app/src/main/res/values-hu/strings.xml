@@ -108,8 +108,7 @@
 	<string name="TOAST_ALERT_SETTING" translatable="true">nyisd meg a beállításokat</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Új Kérés Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Új Kérés Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Válassza ki az alábbi e-mailt az Bridge-es cím kéréséhez. Ha megvan a címe, másolja ki és illessze be a fenti mezőbe, és indítsa el az alkalmazást.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
 
@@ -338,8 +337,6 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">távolítsa el a böngésző testreszabását</string>
 
 
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">könyvjelző weboldal</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">törölje a böngészett weblinkeket és az adatokat</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">törölje a könyvjelzőt és az adatokat</string>
@@ -390,6 +387,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">böngészett weblinkek</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Rendszerbeállítás</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">asztali webhely</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Kapcsolat</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">mentsd el ezt az oldalt</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">könyvjelzők</string>
 	<string name="HOME_MENU_REPORT" translatable="true">jelentés honlapja</string>

@@ -6,6 +6,8 @@ package org.torproject.android.service;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static org.torproject.android.service.TorServiceConstants.CMD_SETTING;
 import static org.torproject.android.service.TorServiceConstants.CMD_NEWNYM;
+import static java.lang.Thread.sleep;
+
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.Notification;
@@ -106,7 +108,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     Handler mHandler;
 
     final Random bridgeSelectRandom = new Random(System.nanoTime());
-    ActionBroadcastReceiver mActionBroadcastReceiver;
+    ActionBroadcastReceiver mActionBroadcastReceiver = null;
     private String mCurrentStatus = STATUS_OFF;
     TorControlConnection conn = null;
     private ServiceConnection torServiceConnection;
@@ -148,8 +150,8 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     private void showConnectedToTorNetworkNotification() {
-        mNotifyBuilder.setProgress(0, 0, false);
-        showToolbarNotification(getString(R.string.status_activated), NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+        // mNotifyBuilder.setProgress(0, 0, false);
+        // showToolbarNotification(getString(R.string.status_activated), NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
     }
 
     @Override
@@ -209,15 +211,15 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
             mNotifyBuilder.mActions.clear();
             if (conn != null && orbotLocalConstants.mIsTorInitialized) {
-                Intent intentRefresh = new Intent(CMD_NEWNYM);
-                PendingIntent pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, intentRefresh, PendingIntent.FLAG_IMMUTABLE);
-                mNotifyBuilder.addAction(R.mipmap.ic_stat_tor_logo, getString(R.string.menu_new_identity), pendingIntentNewNym);
 
-                Intent intentSetting = new Intent(CMD_SETTING);
-                PendingIntent pendingIntentSetting = PendingIntent.getBroadcast(this, 0, intentSetting, PendingIntent.FLAG_IMMUTABLE);
-                mNotifyBuilder.addAction(0, "Notification Settings", pendingIntentSetting);
+                if (conn != null && mCurrentStatus.equals(STATUS_ON)) {
+                    var pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, new Intent(TorControlCommands.SIGNAL_NEWNYM), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+                    mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
+
+                    var pendingIntentNotification = PendingIntent.getBroadcast(this, 0, new Intent(CMD_SETTING), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+                    mNotifyBuilder.addAction(0, "Notification Settings", pendingIntentNotification);
+                }
             }
-
             mNotifyBuilder.setContentText(notifyMsg)
                     .setSmallIcon(icon)
                     .setTicker(notifyType != NOTIFY_ID ? notifyMsg : null);
@@ -249,6 +251,10 @@ public class OrbotService extends VpnService implements OrbotConstants {
     public int onStartCommand(Intent intent, int flags, int startId) {
         showToolbarNotification(getString(org.torproject.android.service.R.string.newnym), NOTIFY_ID, org.torproject.android.service.R.drawable.ic_stat_starting_tor_logo);
 
+        createNetworkStateReciever();
+        IntentFilter mNetworkStateFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(mNetworkStateReceiver , mNetworkStateFilter);
+
         self = this;
         if (intent != null)
             mExecutor.execute(new org.torproject.android.service.OrbotService.IncomingIntentRouter(intent));
@@ -259,7 +265,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     private void showDeactivatedNotification() {
-        showToolbarNotification(getString(R.string.open_orbot_to_connect_to_tor), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
+        //showToolbarNotification(getString(R.string.open_orbot_to_connect_to_tor), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
     }
 
     @Override
@@ -268,8 +274,12 @@ public class OrbotService extends VpnService implements OrbotConstants {
         try {
             disableNotification();
             clearNotifications();
-            //unregisterReceiver(mNetworkStateReceiver);
-            //unregisterReceiver(mActionBroadcastReceiver);
+            if(mNetworkStateReceiver!=null){
+                unregisterReceiver(mNetworkStateReceiver);
+            }
+            if(mActionBroadcastReceiver!=null){
+                unregisterReceiver(mActionBroadcastReceiver);
+            }
         }catch (Exception ex){
             Log.i("sad","asd");
             ex.printStackTrace();
@@ -288,60 +298,73 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
         super.onDestroy();
     }
-    private final BroadcastReceiver mNetworkStateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
+    private BroadcastReceiver mNetworkStateReceiver = null;
+    private void createNetworkStateReciever(){
+        try {
+            mNetworkStateReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
 
-            SharedPreferences prefs = org.torproject.android.service.util.Prefs.getSharedPrefs(getApplicationContext());
+                    SharedPreferences prefs = org.torproject.android.service.util.Prefs.getSharedPrefs(getApplicationContext());
 
-            boolean doNetworKSleep = prefs.getBoolean(PREF_DISABLE_NETWORK, true);
+                    boolean doNetworKSleep = prefs.getBoolean(PREF_DISABLE_NETWORK, true);
 
-            final ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            final NetworkInfo netInfo = cm.getActiveNetworkInfo();
+                    final ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    final NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
-            boolean newConnectivityState;
-            if(netInfo != null && netInfo.isConnected()) {
-                // WE ARE CONNECTED: DO SOMETHING
-                newConnectivityState = true;
-            }
-            else {
-                // WE ARE NOT: DO SOMETHING ELSE
-                newConnectivityState = false;
-            }
-
-            if (newConnectivityState != mConnectivity) {
-                mConnectivity = newConnectivityState;
-                orbotLocalConstants.mNetworkState = mConnectivity;
-
-                if (mConnectivity){
-                    newIdentity();
-                }
-            }
-
-            if (doNetworKSleep)
-            {
-                //setTorNetworkEnabled (mConnectivity);
-                if (!mConnectivity)
-                {
-                    //sendCallbackStatus(STATUS_OFF);
-                    orbotLocalConstants.mTorLogsStatus = "No internet connection";
-                    if(orbotLocalConstants.mNotificationStatus!=0){
-                        showToolbarNotification(getString(R.string.newnym), getNotifyId(), R.drawable.ic_stat_tor_off);
-                        showToolbarNotification("Genesis is sleeping | Internet connectivity issue",NOTIFY_ID,R.drawable.ic_stat_tor_off);
+                    boolean newConnectivityState;
+                    if(netInfo != null && netInfo.isConnected()) {
+                        // WE ARE CONNECTED: DO SOMETHING
+                        newConnectivityState = true;
                     }
-                }
-                else
-                {
-                    //sendCallbackStatus(STATUS_STARTING);
-                    if(orbotLocalConstants.mNotificationStatus!=0){
-                        showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
+                    else {
+                        // WE ARE NOT: DO SOMETHING ELSE
+                        newConnectivityState = false;
                     }
-                }
 
-            }
-            orbotLocalConstants.mNetworkState = mConnectivity;
+                    if (newConnectivityState != mConnectivity) {
+                        mConnectivity = newConnectivityState;
+                        orbotLocalConstants.mNetworkState = mConnectivity;
+
+                        if (mConnectivity){
+                            newIdentity();
+                        }
+                    }
+                    try {
+                        sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (doNetworKSleep)
+                    {
+                        //setTorNetworkEnabled (mConnectivity);
+                        if (!mConnectivity)
+                        {
+                            //sendCallbackStatus(STATUS_OFF);
+                            orbotLocalConstants.mTorLogsStatus = "No internet connection";
+                            if(orbotLocalConstants.mNotificationStatus!=0){
+                                showToolbarNotification(getString(R.string.newnym), getNotifyId(), R.drawable.ic_stat_tor_off);
+                                showToolbarNotification("Genesis is sleeping | Internet connectivity issue",NOTIFY_ID,R.drawable.ic_stat_tor_off);
+                            }
+                        }
+                        else
+                        {
+                            //sendCallbackStatus(STATUS_STARTING);
+
+                            if(orbotLocalConstants.mNotificationStatus!=0){
+                                showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
+                            }
+                        }
+
+                    }
+                    orbotLocalConstants.mNetworkState = mConnectivity;
+                }
+            };
+        }catch (Exception ex){
+            Log.i("asd","asd");
         }
-    };
+        Log.i("asd","asd");
+    }
     public int getNotifyId() {
         return NOTIFY_ID;
     }
@@ -579,6 +602,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
             IntentFilter filter = new IntentFilter(TorControlCommands.SIGNAL_NEWNYM);
             filter.addAction(CMD_ACTIVE);
+            filter.addAction(CMD_SETTING);
             filter.addAction(ACTION_STATUS);
             filter.addAction(LOCAL_ACTION_NOTIFICATION_START);
 
@@ -869,14 +893,14 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 while ((conn = torService.getTorControlConnection())==null)
                 {
                     try {
-                        Thread.sleep(500);
+                        sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
 
                 try {
-                    Thread.sleep(1000);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -1214,7 +1238,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     void showBandwidthNotification(String message, boolean isActiveTransfer) {
-        if (!mCurrentStatus.equals(STATUS_ON)) return;
+        if (!mCurrentStatus.equals(STATUS_ON) || !mConnectivity) return;
         var icon = !isActiveTransfer ? R.mipmap.ic_stat_tor_logo : R.mipmap.ic_stat_tor_logo;
         showToolbarNotification(message, NOTIFY_ID, icon);
     }
@@ -1270,7 +1294,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         if (v3auths != null) {
             for (File file : mV3AuthBasePath.listFiles()) {
                 if (!file.isDirectory())
-                    file.delete(); // todo the adapter should maybe just write these files and not do this in service...
+                    file.delete();
             }
             torrc.append("ClientOnionAuthDir " + mV3AuthBasePath.getAbsolutePath()).append('\n');
             try {
@@ -1569,6 +1593,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 case TorControlCommands.SIGNAL_NEWNYM:
                     newIdentity();
                     break;
+                case CMD_SETTING:
+                    onSettingRegister();
+                    break;
                 case CMD_ACTIVE:
                     sendSignalActive();
                     break;
@@ -1594,6 +1621,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
     private class ActionBroadcastReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
+
             switch (intent.getAction()) {
                 case TorControlCommands.SIGNAL_NEWNYM: {
                     newIdentity();
@@ -1609,6 +1637,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 }
                 case CMD_SETTING: {
                     onSettingRegister();
+                    sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
                     break;
                 }
                 case ACTION_STATUS: {

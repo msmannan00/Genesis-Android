@@ -1,17 +1,9 @@
 package com.hiddenservices.onionservices.pluginManager;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
@@ -350,7 +342,8 @@ public class pluginController
                 mHomeController.get().runOnUiThread(() -> mHomeController.get().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE));
             }
             else if(pEventType.equals(M_IMAGE_UPDATE_RESTART)){
-                ((homeController)mHomeController.get()).onRestartApp();
+                onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
+                helperMethod.restartAndOpen(false);
             }
             return null;
         }

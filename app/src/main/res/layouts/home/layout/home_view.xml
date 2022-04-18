@@ -534,6 +534,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/pInfo3"
                     tools:ignore="UnusedAttribute" />
 
+                <ImageView
+                    android:id="@+id/pTorDisabled"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/landing_ease_blue"
+                    android:visibility="gone"
+                    android:padding="109dp"
+                    android:layout_marginTop="-20dp"
+                    android:translationZ="100dp"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

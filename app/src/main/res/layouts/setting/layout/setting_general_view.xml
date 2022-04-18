@@ -259,7 +259,7 @@
                         android:background="@color/c_white"/>
 
                     <LinearLayout
-                        android:id="@+id/pBridgeSettingOption1"
+                        android:id="@+id/pSearchSettingOption1"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"
@@ -317,7 +317,7 @@
                         android:background="@color/c_topbar_divider"/>
 
                     <LinearLayout
-                        android:id="@+id/pBridgeSettingOption2"
+                        android:id="@+id/pSearchSettingOption2"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"
@@ -374,7 +374,7 @@
                         android:background="@color/c_topbar_divider"/>
 
                     <LinearLayout
-                        android:id="@+id/pOption3"
+                        android:id="@+id/pSearchSettingOption3"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"

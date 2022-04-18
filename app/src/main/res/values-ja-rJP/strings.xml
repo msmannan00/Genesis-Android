@@ -338,8 +338,6 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">ブラウザのカスタマイズを削除する</string>
 
 
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">ブックマークのウェブサイト</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">閲覧したウェブリンクとデータを削除する</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">ブックマークとデータをクリアする</string>
@@ -391,6 +389,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">閲覧したWebリンク</string>
 	<string name="HOME_MENU_SETTING" translatable="true">システム設定</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">デスクトップサイト</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor 繋がり</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">このページを保存する</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">ブックマーク</string>
 	<string name="HOME_MENU_REPORT" translatable="true">レポートのウェブサイト</string>

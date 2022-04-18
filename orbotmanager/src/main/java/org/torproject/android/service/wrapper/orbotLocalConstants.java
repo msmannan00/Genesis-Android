@@ -10,7 +10,7 @@ public class orbotLocalConstants
 {
     public static ArrayList<logRowModel> mTorLogsHistory = new ArrayList<>();
     public static String mTorLogsStatus = "Loading...";
-    public static boolean mIsTorInitialized = true;
+    public static boolean mIsTorInitialized = false;
     public static boolean mForcedQuit = false;
     public static int mNotificationStatus = 0;
     public static WeakReference<Context> mHomeContext;

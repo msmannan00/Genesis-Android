@@ -108,8 +108,7 @@
 	<string name="TOAST_ALERT_SETTING" translatable="true">deschide setările</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Cerere Nouă Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Cerere Nouă Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Selectați E-mailul de mai jos pentru a solicita o adresă Bridge. După ce aveți o adresă, copiați-o și lipiți-o în caseta de mai sus și porniți aplicația.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
 
@@ -341,8 +340,6 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">eliminați personalizarea browserului</string>
 
 
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">site de marcaje</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">ștergeți linkurile web și datele navigate</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">marcaj clar și date</string>
@@ -394,6 +391,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">legături web navigate</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Setarea sistemului</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">desktop site</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Conexiune</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">salvați această pagină</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">marcaje</string>
 	<string name="HOME_MENU_REPORT" translatable="true">raportați site-ul web</string>

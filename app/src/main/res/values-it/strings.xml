@@ -108,8 +108,7 @@
 	<string name="TOAST_ALERT_SETTING" translatable="true">apri impostazioni</string>
 
 	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Richiedi Nuovo Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Richiedi Nuovo Bridge</string>
 	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Seleziona E-mail qui sotto per richiedere un indirizzo Bridge. Una volta che hai un indirizzo, copialo e incollalo nella casella sopra e avvia l\'applicazione.</string>
 	<string name="ALERT_BRIDGE_MAIL" translatable="true">Posta</string>
 
@@ -355,8 +354,6 @@
 	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">rimuovere la personalizzazione del browser</string>
 
 
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
 	<string name="ALERT_CREATE_BOOKMARK" translatable="true">sito web di segnalibro</string>
 	<string name="ALERT_CLEAR_HISTORY" translatable="true">eliminare i collegamenti Web ei dati esplorati</string>
 	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">segnalibro chiaro e dati</string>
@@ -408,6 +405,7 @@
 	<string name="HOME_MENU_HISTORY" translatable="true">collegamenti Web visitati</string>
 	<string name="HOME_MENU_SETTING" translatable="true">Impostazioni di sistema</string>
 	<string name="HOME_MENU_DESKTOP" translatable="true">sito desktop</string>
+	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Connessione</string>
 	<string name="HOME_MENU_BOOKMARK" translatable="true">salva questa pagina</string>
 	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">segnalibri</string>
 	<string name="HOME_MENU_REPORT" translatable="true">sito web di report</string>

@@ -108,8 +108,7 @@
     <string name="TOAST_ALERT_SETTING" translatable="true">打开设置</string>
 
     <!-- Alert Bridge Mail -->
-    <string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">请求新的 Bridge</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">请求新的 Bridge</string>
     <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">选择下面的电子邮件以请求 Bridge 地址。获得地址后，将其复制并粘贴到上面的框中并启动应用程序。</string>
     <string name="ALERT_BRIDGE_MAIL" translatable="true">邮件</string>
 
@@ -341,8 +340,6 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">删除浏览器自定义</string>
 
 
-    <string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">书签网站</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">删除浏览的网页链接和数据</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">清除书签和数据</string>
@@ -394,6 +391,7 @@
     <string name="HOME_MENU_HISTORY" translatable="true">浏览的网页链接</string>
     <string name="HOME_MENU_SETTING" translatable="true">系统设定</string>
     <string name="HOME_MENU_DESKTOP" translatable="true">桌面网站</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor 联系</string>
     <string name="HOME_MENU_BOOKMARK" translatable="true">保存此页面</string>
     <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">书签</string>
     <string name="HOME_MENU_REPORT" translatable="true">报告网站</string>

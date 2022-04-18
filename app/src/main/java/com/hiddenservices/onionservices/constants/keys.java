@@ -6,6 +6,7 @@ public class keys
 
     public static final String M_ACTIVITY_RESPONSE = "M_ACTIVITY_RESPONSE";
     public static final String M_ACTIVITY_NAVIGATION_BUNDLE_KEY = "M_ACTIVITY_NAVIGATION_BUNDLE_KEY";
+    public static final String M_RESTART_APP_KEY = "M_RESTART_APP_KEY";
 
     /*Home Manager*/
 
@@ -22,13 +23,8 @@ public class keys
     public static final String PROXY_SOCKS_PORT = "network.proxy.socks_port";
     public static final String PROXY_SOCKS_VERSION = "network.proxy.socks_version";
     public static final String PROXY_SOCKS_REMOTE_DNS = "network.proxy.socks_remote_dns";
-    public static final String PROXY_CACHE = "browser.cache.disk.enable";
-    public static final String PROXY_MEMORY = "browser.cache.memory.enable";
-    public static final String PROXY_DO_NOT_TRACK_HEADER_ENABLED = "privacy.donottrackheader.enabled";
-    public static final String PROXY_DO_NOT_TRACK_HEADER_VALUE = "privacy.donottrackheader.value";
     public static final String PROXY_IS_APP_RATED = "IS_APP_RATED";
     public static final String PROXY_LIST_TYPE = "list_type";
-    public static final String PROXY_IMAGE = "permissions.default.image";
 
     /*Settings*/
 
@@ -41,6 +37,7 @@ public class keys
     public static final String SETTING_POPUP = "POPUP_V1";
     public static final String SETTING_HISTORY_CLEAR = "HISTORY_CLEAR_V1";
     public static final String SETTING_GATEWAY = "pref_bridges_enabled_auto_V1";
+    public static final String SETTING_TOR_BROWSING = "pref_tor_browsing_V1";
     public static final String SETTING_GATEWAY_MANUAL = "pref_bridges_enabled_manual_V1";
     public static final String SETTING_IS_BOOTSTRAPPED = "IS_BOOTSTRAPPED_V1";
     public static final String SETTING_IS_WELCOME_ENABLED = "IS_WELCOME_ENABLED_V1";

@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.keys;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
@@ -60,22 +61,25 @@ public class orbotManager
     }
 
     private void onInitailizeService(){
+        if(status.sTorBrowsing){
+            Intent startTorIntent = new Intent(mAppContext.get(), OrbotService.class);
+            startTorIntent.setAction(ACTION_START);
+            if (mAppContext.get().getPackageName() != null) {
+                startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, mAppContext.get().getPackageName());
+            }
+            mAppContext.get().startService(startTorIntent);
 
-        Intent startTorIntent = new Intent(mAppContext.get(), OrbotService.class);
-        startTorIntent.setAction(ACTION_START);
-        if (mAppContext.get().getPackageName() != null) {
-            startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, mAppContext.get().getPackageName());
+            SharedPreferences settings = mAppContext.get().getSharedPreferences("se", MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt(keys.PROXY_TYPE, 1);
+            editor.putString(keys.PROXY_SOCKS, constants.CONST_PROXY_SOCKS);
+            editor.putInt(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
+            editor.putInt(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
+            editor.putBoolean(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
+            editor.apply();
+        }else {
+            orbotLocalConstants.mIsTorInitialized = true;
         }
-        mAppContext.get().startService(startTorIntent);
-
-        SharedPreferences settings = mAppContext.get().getSharedPreferences("se", MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt(keys.PROXY_TYPE, 1);
-        editor.putString(keys.PROXY_SOCKS, constants.CONST_PROXY_SOCKS);
-        editor.putInt(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
-        editor.putInt(keys.PROXY_SOCKS_VERSION,constants.CONST_PROXY_SOCKS_VERSION);
-        editor.putBoolean(keys.PROXY_SOCKS_REMOTE_DNS,constants.CONST_PROXY_SOCKS_REMOTE_DNS);
-        editor.apply();
 
     }
 

@@ -108,8 +108,7 @@
     <string name="TOAST_ALERT_SETTING" translatable="true">mở cài đặt</string>
 
     <!-- Alert Bridge Mail -->
-    <string name="ALERT_BRIDGE_MAIL_HEADER" translatable="true">Yêu Cầu Mới Bridge</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Yêu Cầu Mới Bridge</string>
     <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Chọn E-mail bên dưới để yêu cầu địa chỉ Bridge. Sau khi bạn có địa chỉ, hãy sao chép và dán nó vào ô trên và khởi động ứng dụng.</string>
     <string name="ALERT_BRIDGE_MAIL" translatable="true">Thư tín</string>
 
@@ -390,6 +389,7 @@
     <string name="HOME_MENU_HISTORY" translatable="true">liên kết web đã duyệt</string>
     <string name="HOME_MENU_SETTING" translatable="true">Thiết lập hệ thống</string>
     <string name="HOME_MENU_DESKTOP" translatable="true">trang máy tính để bàn</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Sự liên quan</string>
     <string name="HOME_MENU_BOOKMARK" translatable="true">lưu trang này</string>
     <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">dấu trang</string>
     <string name="HOME_MENU_REPORT" translatable="true">báo cáo trang web</string>

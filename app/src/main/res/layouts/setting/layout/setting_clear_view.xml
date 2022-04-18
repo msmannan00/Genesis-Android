@@ -75,7 +75,7 @@
                 <!-- Title Header -->
 
                 <LinearLayout
-                    android:id="@+id/pBridgeSettingOption1"
+                    android:id="@+id/pSearchSettingOption1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@xml/gx_ripple_gray"
@@ -142,7 +142,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pBridgeSettingOption2"
+                    android:id="@+id/pSearchSettingOption2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="11dp"
@@ -209,7 +209,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption3"
+                    android:id="@+id/pSearchSettingOption3"
                     android:tag="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -275,7 +275,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pOption4"
+                    android:id="@+id/pSearchSettingOption4"
                     android:tag="3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -342,7 +342,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/pOption5"
+                    android:id="@+id/pSearchSettingOption5"
                     android:tag="4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

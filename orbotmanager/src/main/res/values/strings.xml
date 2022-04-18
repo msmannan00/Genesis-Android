@@ -25,8 +25,8 @@
     <string name="waiting_for_control_port">Waiting for control port…</string>
     <string name="connecting_to_control_port">Connecting to control port:</string>
 
-    <string name="kibibyte_per_second">KiB/s</string>
-    <string name="mebibyte_per_second">MiB/s</string>
+    <string name="kibibyte_per_second">KB/s</string>
+    <string name="mebibyte_per_second">MB/s</string>
 
     <string name="snowflake_proxy_client_connected_msg">%s Your snowflake proxy helped someone circumvent censorship %s</string>
 
