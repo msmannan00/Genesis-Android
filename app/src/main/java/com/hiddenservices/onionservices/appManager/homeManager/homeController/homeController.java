@@ -1588,7 +1588,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(status.sSettingIsAppStarted && !status.mThemeApplying){
             if(mGeckoClient.getSession().wasPreviousErrorPage()){
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);
-                mGeckoClient.onReload(mGeckoView, this, false);
+                mGeckoClient.onReloadDelay(mGeckoView, this, false);
             }
         }
 
@@ -1965,7 +1965,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             {
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);
                 pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_NEW_IDENTITY);
-                mGeckoClient.onReload(mGeckoView, this, false);
+                mGeckoClient.onReloadDelay(mGeckoView, this, false);
                 onLoadURL(mSearchbar.getText().toString());
             }
             else if (menuId == R.id.pMenuOpenCurrentTab)
@@ -2705,7 +2705,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             else if(e_type.equals(enums.etype.M_NEW_IDENTITY_MESSAGED)){
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);
                 pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_NEW_IDENTITY);
-                mGeckoClient.onReload(mGeckoView, homeController.this, false);
+                mGeckoClient.onReloadDelay(mGeckoView, homeController.this, false);
             }
             else if(e_type.equals(enums.etype.M_INDEX_WEBSITE)){
                 dataController.getInstance().invokeCrawler(dataEnums.eCrawlerCommands.M_INDEX_URL, data);

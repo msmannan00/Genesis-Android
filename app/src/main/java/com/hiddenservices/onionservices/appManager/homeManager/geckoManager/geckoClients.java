@@ -570,6 +570,19 @@ public class geckoClients
         }
     }
 
+    public void onReloadDelay(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall){
+        new Handler().postDelayed(() ->
+        {
+            mSession.stop();
+            String url = mSession.getCurrentURL();
+            if(url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") ||  url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+            }else if(!isThemeCall){
+                mSession.reload();
+            }
+        }, 1000);
+    }
+
     public void onReloadStatic(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         ///mSession.stop();
         loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);

@@ -1027,27 +1027,22 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     public void newIdentity() {
-        //it is possible to not have a connection yet, and someone might try to newnym
-        if (conn != null) {
-            new Thread() {
-                public void run() {
-                    try {
-                        if (conn != null && mCurrentStatus.equals(STATUS_ON))
-                            showToolbarNotification(getString(R.string.newnym), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
-
+        if (conn == null) return;
+        new Thread() {
+            public void run() {
+                try {
+                    if (conn != null && mCurrentStatus.equals(STATUS_ON)) {
+                        mNotifyBuilder.setSubText(null); // clear previous exit node info if present
+                        showToolbarNotification(getString(R.string.newnym), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
                         conn.signal(TorControlCommands.SIGNAL_NEWNYM);
-
-                        sleep(1000);
-                        if(mConnectivity)
-                            enableNotification();
-
-                    } catch (Exception ioe) {
-                        debug("error requesting newnym: " + ioe.getLocalizedMessage());
                     }
+                } catch (Exception ioe) {
+                    debug("error requesting newnym: " + ioe.getLocalizedMessage());
                 }
-            }.start();
-        }
+            }
+        }.start();
     }
+
     protected void sendCallbackBandwidth(long lastWritten, long lastRead, long totalWritten, long totalRead) {
         Intent intent = new Intent(LOCAL_ACTION_BANDWIDTH);
 
