@@ -29,6 +29,9 @@ class settingSearchModel
     }
     private void setSearchSuggestionStatus(boolean pStatus){
         status.sSearchSuggestionStatus = pStatus;
+        if(!pStatus){
+            setSearchHistory(false);
+        }
     }
 
     public Object onTrigger(settingSearchEnums.eSearchModel pCommands, List<Object> pData){

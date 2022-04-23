@@ -342,8 +342,19 @@ public class pluginController
                 mHomeController.get().runOnUiThread(() -> mHomeController.get().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE));
             }
             else if(pEventType.equals(M_IMAGE_UPDATE_RESTART)){
-                onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
-                helperMethod.restartAndOpen(false);
+                helperMethod.onDelayHandler(mHomeController.get(), 250, () -> {
+                    onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
+                    helperMethod.restartAndOpen(false);
+                    return null;
+                });
+            }
+            else if(pEventType.equals(M_TOR_SWITCH_RESTART)){
+                activityContextManager.getInstance().getHomeController().torSwitch();
+                helperMethod.onDelayHandler(mHomeController.get(), 250, () -> {
+                    onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
+                    helperMethod.restartAndOpen(false);
+                    return null;
+                });
             }
             return null;
         }

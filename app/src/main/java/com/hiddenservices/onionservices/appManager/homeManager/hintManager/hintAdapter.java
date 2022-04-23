@@ -1,5 +1,7 @@
 package com.hiddenservices.onionservices.appManager.homeManager.hintManager;
 
+import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
+
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -20,6 +22,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hiddenservices.onionservices.appManager.tabManager.tabEnums;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.strings;
@@ -168,7 +171,12 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                 mMoveURL.setTag(model.getDescription());
             }
 
-            mURL.setText(model.getDescription());
+            String m_url = model.getDescription().toString();
+            if(!status.sTorBrowsing && (m_url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || m_url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))){
+                m_url = "https://genesis.onion/privacy";
+            }
+
+            mURL.setText(m_url);
             Drawable mDrawable = null;
             Resources res = itemView.getContext().getResources();
             try {

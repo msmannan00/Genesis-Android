@@ -285,7 +285,7 @@ public class geckoClients
         if(mRuntime==null){
             GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
             if(status.sShowImages == 2){
-                //mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config-noimage.yaml"));
+                mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config-noimage.yaml"));
             }else {
                 mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config.yaml"));
             }
@@ -419,7 +419,9 @@ public class geckoClients
         if(url.startsWith("https://genesis.onion/privacy")){
             url=CONST_PRIVACY_POLICY_URL_NON_TOR;
         }
-
+        if(!status.sTorBrowsing && url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy")){
+            url = CONST_PRIVACY_POLICY_URL_NON_TOR;
+        }
 
         url = helperMethod.completeURL(url);
         mSession = (geckoSession)mNestedGeckoView.getSession();

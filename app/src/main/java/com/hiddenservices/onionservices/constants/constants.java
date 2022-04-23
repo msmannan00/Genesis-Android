@@ -4,7 +4,7 @@ public class constants
 {
     /*LOCAL URL CONSTANTS*/
 
-    public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.hiddenservices.genesissearchengine.production";
+    public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.hiddenservices.onionservices";
     public static final String CONST_AMAZON_URL = "http://www.amazon.com/gp/mas/dl/android?p=com.darkweb.genesissearchengine.production";
     public static final String CONST_SAMSUNG_URL = "http://www.samsungapps.com/appquery/appDetail.as?appId=com.darkweb.genesissearchengine.production";
     public static final String CONST_HUAWEI_URL = "https://appgallery.cloud.huawei.com/uowap/index.html#/detailApp/C105664271?appId=C105664271";

@@ -2,13 +2,8 @@ package com.hiddenservices.onionservices.appManager.externalCommandManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
@@ -49,11 +44,11 @@ public class externalShortcutController extends AppCompatActivity {
                         return;
                     case constants.CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN:
                         panicExitInvoked();
-                        helperMethod.restartAndOpen(true);
+                        helperMethod.restart(true, this);
 
                         break;
                     case constants.CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART:
-                        helperMethod.restartAndOpen(false);
+                        helperMethod.restart(false, this);
                         break;
                 }
             }

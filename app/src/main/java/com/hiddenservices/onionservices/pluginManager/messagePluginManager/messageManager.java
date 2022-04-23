@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
@@ -229,6 +230,17 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mBridgeMailPopupNext.setOnClickListener(this);
     }
 
+    private void switchTorBrowsing()
+    {
+        initializeDialog(R.layout.popup_tor_change, Gravity.BOTTOM);
+
+        Button mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pTorSwtichPopupDismiss);
+        Button mBridgeMailPopupNext = mDialog.findViewById(R.id.pTorSwtichPopupNext);
+
+        mBridgeMailPopupDismiss.setOnClickListener(this);
+        mBridgeMailPopupNext.setOnClickListener(this);
+    }
+
     private void bookmark()
     {
         initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER);
@@ -240,6 +252,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
         mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
         String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION,CONST_GENESIS_ONION_V2);
+
+        if(mURL.startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)){
+            mURL = "https://genesis.onion/privacy";
+        }
         mPopupCreateBookmarkURL.setText(mURL);
 
         mDialog.setOnDismissListener(this);
@@ -467,6 +483,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
            view.getId() == R.id.pPopupRateFailureDismiss ||
            view.getId() == R.id.pPopupPanicDismiss ||
            view.getId() == R.id.pDownloadPopuInfoDismiss ||
+           view.getId() == R.id.pTorSwtichPopupDismiss ||
            view.getId() == R.id.pPopupURLLongPressDismiss ||
            view.getId() == R.id.pPopupLongPressDismiss ||
            view.getId() == R.id.pCertificateDesciption ||
@@ -487,6 +504,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
             mEvent.invokeObserver(mData, M_PANIC_RESET);
             onClearReference();
+        }
+        else if(view.getId() == R.id.pTorSwtichPopupNext){
+            onDismiss();
+            mEvent.invokeObserver(null, M_TOR_SWITCH_RESTART);
         }
         else if(view.getId() == R.id.pPopupCreateBookmarkDismiss){
             onDismiss();
@@ -547,6 +568,9 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             EditText mPopupCreateBookmarkInput = mDialog.findViewById(R.id.pPopupCreateBookmarkInput);
             String mBookmarkName = mPopupCreateBookmarkInput.getText().toString();
             String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION,CONST_GENESIS_ONION_V2);
+            if(mURL.startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)){
+                mURL = "https://genesis.onion/privacy";
+            }
             mEvent.invokeObserver(Arrays.asList(mURL, mBookmarkName), M_BOOKMARK);
         }
         else if(view.getId() == R.id.pPopupRateusNext){
@@ -557,10 +581,6 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mStoreURL));
                 try {
                     mContext.startActivity(intent);
-                    helperMethod.onDelayHandler(mContext, 500, () -> {
-                        mContext.finish();
-                        return null;
-                    });
                 } catch (Exception ignored) {
                     helperMethod.showToastMessage(MESSAGE_PLAYSTORE_NOT_FOUND, mContext);
                 }
@@ -875,6 +895,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 case M_OPEN_CICADA:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CICADA), mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
+                case M_TOR_SWITCH:
+                    /*VERIFIED*/
+                    switchTorBrowsing();
                     break;
 
                 case M_OPEN_ACTIVITY_FAILED:

@@ -77,6 +77,8 @@ class settingSearchViewController
         }
         if(status.sSearchSuggestionStatus){
             mSearchSuggestions.setChecked(true);
+        }else {
+            mSearchHistory.setChecked(false);
         }
     }
 

@@ -41,14 +41,18 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             int sepPos = pQuery.indexOf(".");
             if (sepPos == -1) {
                 mCurrentList.add( 0, new historyRowModel(pQuery+".com", strings.GENERIC_EMPTY_STR,-1));
-                mCurrentList.add( 0, new historyRowModel(pQuery+".onion", strings.GENERIC_EMPTY_STR,-1));
+                if(status.sTorBrowsing){
+                    mCurrentList.add( 0, new historyRowModel(pQuery+".onion", strings.GENERIC_EMPTY_STR,-1));
+                }
             }else
             {
                 if(!pQuery.equals(pQuery.substring(0,sepPos)+".com")){
                     mCurrentList.add( 0, new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
                 }
                 if(!pQuery.equals(pQuery.substring(0,sepPos)+".onion")){
-                    mCurrentList.add( 0, new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
+                    if(status.sTorBrowsing){
+                        mCurrentList.add( 0, new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
+                    }
                 }
             }
         }
@@ -102,7 +106,9 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
 
         if(mCurrentList.size()<=0) {
-            mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
+            if(status.sTorBrowsing){
+                mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
+            }
         }
 
         return mCurrentList;
@@ -223,7 +229,9 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
         if(mCurrentList.size()<=0) {
-            mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
+            if(status.sTorBrowsing){
+                mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
+            }
         }
 
         return mCurrentList;

@@ -264,7 +264,7 @@ public class settingHomeController extends AppCompatActivity
     public void onPrivacyPolicy(View view) {
         finish();
         if(!status.sTorBrowsing){
-            activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL_NON_TOR));
+            activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_PRIVACY_POLICY_URL_NON_TOR);
         }else {
             activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL));
         }

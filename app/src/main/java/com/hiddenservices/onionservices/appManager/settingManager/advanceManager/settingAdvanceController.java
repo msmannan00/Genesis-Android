@@ -161,7 +161,6 @@ public class settingAdvanceController extends AppCompatActivity {
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_IMAGE_UPDATE);
         }
 
-        mIsChanged = true;
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_IMAGE, Collections.singletonList(null));
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_SHOW_IMAGE, Collections.singletonList(view));
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_SET_IMAGE, Collections.singletonList(view));

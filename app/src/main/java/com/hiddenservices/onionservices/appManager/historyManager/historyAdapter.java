@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
@@ -508,11 +509,20 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                     mRowMenu.setClickable(true);
                 }
 
+                if(model.getDescription().startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)){
+                    String m_title = model.getDescription().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://genesis.onion/privacy");
+                    String m_description = model.getHeader().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://genesis.onion/privacy");
+
+                    mHeader.setText(m_title);
+                    mDescription.setText(m_description);
+                }else {
+                    mHeader.setText(model.getHeader());
+                    mDescription.setText(("https://"+model.getDescription()));
+                }
+
                 mWebLogo.setVisibility(View.VISIBLE);
-                mHeader.setText(model.getHeader());
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
                 String header = model.getHeader();
-                mDescription.setText(("https://"+model.getDescription()));
 
                 if(model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("genesis.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));

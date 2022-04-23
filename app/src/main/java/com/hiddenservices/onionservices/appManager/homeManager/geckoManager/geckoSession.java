@@ -380,13 +380,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
         mCloseRequested = false;
         isFirstPaintExecuted = false;
-        //status.sExternalWebsite = "";
-
-        /*PrefsHelper.setPref(keys.PROXY_TYPE, 1);
-        PrefsHelper.setPref(keys.PROXY_SOCKS,"127.0.0.1");
-        PrefsHelper.setPref(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_VERSION,5);
-        PrefsHelper.setPref(keys.PROXY_SOCKS_REMOTE_DNS,true);*/
 
         if(mIsLoaded){
             if(!mCurrentURL.equals("about:config") && !var2.equals("about:blank") && helperMethod.getHost(var2).endsWith(".onion")){
@@ -959,23 +952,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
         }
     }
 
-    /*Permission Delegate*/
-
-    /*@Override
-    public void onContentPermissionRequest(final GeckoSession session, final String uri,
-                                           final int type, final Callback callback) {
-        if (PERMISSION_AUTOPLAY_AUDIBLE == type || PERMISSION_AUTOPLAY_INAUDIBLE == type) {
-            if (!status.sToolbarTheme) {
-                callback.reject();
-            } else {
-                callback.grant();
-            }
-        }else {
-            callback.reject();
-        }
-    }*/
-    /*Download Manager*/
-
     void downloadRequestedFile()
     {
         if(mDownloadManager.getDownloadURL()!=null && mDownloadManager.getDownloadFile()!=null){
@@ -991,27 +967,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
             if(!createAndSaveFileFromBase64Url(downloadURL.toString())){
                 pluginController.getInstance().onDownloadInvoke(Arrays.asList(downloadURL, downloadFile), pluginEnums.eDownloadManager.M_WEB_DOWNLOAD_REQUEST);
             }
-        }
-    }
-
-    private void saveImage(Bitmap finalBitmap) {
-
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/saved_images");
-        myDir.mkdirs();
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String fname = "Shutta_"+ timeStamp +".jpg";
-
-        File file = new File(myDir, fname);
-        if (file.exists()) file.delete ();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

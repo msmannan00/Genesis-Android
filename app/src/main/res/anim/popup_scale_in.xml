@@ -4,9 +4,9 @@
     android:fillEnabled="true">
 
     <scale
-        android:duration="150"
-        android:fromXScale="0.95"
-        android:fromYScale="0.95"
+        android:duration="200"
+        android:fromXScale="1.20"
+        android:fromYScale="1.20"
         android:pivotX="50%"
         android:pivotY="50%"
         android:toXScale="1"

@@ -4,13 +4,13 @@
     android:fillEnabled="true">
 
     <scale
-        android:duration="150"
-        android:fromXScale="1"
-        android:fromYScale="1"
+        android:duration="200"
+        android:fromXScale="0.85"
+        android:fromYScale="0.85"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:toXScale="0.95"
-        android:toYScale="0.95"
+        android:toXScale="1"
+        android:toYScale="1"
         />
 
     <alpha android:fromAlpha="1.0"

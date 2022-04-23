@@ -108,6 +108,7 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
+import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
 import static com.hiddenservices.onionservices.constants.enums.etype.GECKO_SCROLL_DOWN;
 import static com.hiddenservices.onionservices.constants.enums.etype.GECKO_SCROLL_UP_MOVE;
 import static com.hiddenservices.onionservices.constants.enums.etype.M_CLOSE_TAB_BACK;
@@ -1168,6 +1169,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }else {
             onLoadURL(helperMethod.getHost(status.sSettingDefaultSearchEngine));
         }
+        mHomeViewController.onUpdateSearchBar(status.sSettingDefaultSearchEngine, false, false, false);
     }
 
     /*TAB CONTROLLER EVENTS*/
@@ -1370,7 +1372,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initLocalLanguage();
 
         helperMethod.hideKeyboard(this);
-        boolean mBookmarked = (boolean) dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_BOOKMARK_AVAILABLE, Collections.singletonList(mGeckoClient.getSession().getCurrentURL()));
+        String url = mGeckoClient.getSession().getCurrentURL();
+        if(!status.sTorBrowsing && (url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))){
+            url = "https://genesis.onion/privacy";
+        }
+
+        boolean mBookmarked = (boolean) dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_BOOKMARK_AVAILABLE, Collections.singletonList(url));
         mHomeViewController.onOpenMenu(view,mGeckoClient.canGoForward(),!(mProgressBar.getAlpha()<=0 || mProgressBar.getVisibility() == View.INVISIBLE || mGeckoClient.isLoaded()),mGeckoClient.getUserAgent(), mGeckoClient.getSession().getCurrentURL(), mBookmarked);
 
         view.setClickable(false);
@@ -1490,9 +1497,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     public void onPause(){
         super.onPause();
-        if(mGeckoClient.getSession()!=null){
-            mGeckoClient.getSession().setActive(false);
-        }
         if(mGeckoClient.getSession()==null)
             return;
         if(mHomeViewController!=null){
@@ -1532,9 +1536,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     public void onResume()
     {
-        if(mGeckoClient.getSession()!=null){
-            mGeckoClient.getSession().setActive(true);
-        }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
 
@@ -1907,17 +1908,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
         }
         else if (menuId == R.id.menu29) {
-            if(status.sTorBrowsing){
-                status.sTorBrowsing = false;
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_DUCK_DUCK_GO_URL));
-            }else {
-                status.sTorBrowsing = true;
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_GENESIS_URL));
-            }
-            mGeckoClient.getSession().purgeHistory();
-            onClearSettings();
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOR_BROWSING,status.sTorBrowsing));
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_IMAGE_UPDATE);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_TOR_SWITCH);
+
         }
         else if (menuId == R.id.menuItem25) {
             String mFileName = DownloadUtils.guessFileName(null,"",mGeckoClient.getSession().getCurrentURL(),null);
@@ -2031,7 +2023,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if (menuId == R.id.menu23) {
                 if(view.getTag()!=null && view.getTag().equals("mMarked")){
                     Intent intent = new Intent(getApplicationContext(), bookmarkSettingController.class);
-                    intent = (Intent)dataController.getInstance().invokeBookmark(M_INTENT_BOOKMARK, Arrays.asList(intent, mGeckoClient.getSession().getCurrentURL()));
+                    String url = mGeckoClient.getSession().getCurrentURL();
+                    if(!status.sTorBrowsing && (url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))){
+                        url = "https://genesis.onion/privacy";
+                    }
+
+                    intent = (Intent)dataController.getInstance().invokeBookmark(M_INTENT_BOOKMARK, Arrays.asList(intent, url));
                     startActivityForResult(intent, mResponseRequestCode);
                 }else{
                     helperMethod.hideKeyboard(this);
@@ -2106,6 +2103,18 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         status.sSettingIsAppStarted = false;
     }
 
+    public void torSwitch(){
+        if(status.sTorBrowsing){
+            status.sTorBrowsing = false;
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_DUCK_DUCK_GO_URL));
+        }else {
+            status.sTorBrowsing = true;
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_GENESIS_URL));
+        }
+        mGeckoClient.getSession().purgeHistory();
+        onClearSettings();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOR_BROWSING,status.sTorBrowsing));
+    }
 
     public void panicExitInvoked() {
         orbotLocalConstants.mForcedQuit = true;

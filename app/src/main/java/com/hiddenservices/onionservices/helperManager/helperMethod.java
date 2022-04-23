@@ -440,7 +440,7 @@ public class helperMethod
         selectorIntent.setData(Uri.parse("mailto:"));
 
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"genesishiddentechnologies@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"connectionslimited5@gmail.com"});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Issue Report");
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Write Message Here....");
         emailIntent.setSelector( selectorIntent );
@@ -1076,10 +1076,38 @@ public class helperMethod
         return popupWindow;
     }
 
-    public static void restartAndOpen(boolean pOpenOnRestart) {
-        ActivityManager manager = (ActivityManager) activityContextManager.getInstance().getHomeController().getSystemService(Context.ACTIVITY_SERVICE);
+    public static void restart(boolean pOpenOnRestart, Context pContext) {
+        ActivityManager manager = (ActivityManager) pContext.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> runningProcesses = manager
                 .getRunningAppProcesses();
+        if (runningProcesses != null) {
+            for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
+                if (!BuildConfig.APPLICATION_ID.equalsIgnoreCase(processInfo.processName)) {
+                    android.os.Process.killProcess(processInfo.pid);
+                }
+            }
+        }
+
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                PackageManager packageManager = pContext.getPackageManager();
+                Intent intent = packageManager.getLaunchIntentForPackage(pContext.getPackageName());
+                ComponentName componentName = intent.getComponent();
+                Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+                mainIntent.putExtra(M_RESTART_APP_KEY, pOpenOnRestart);
+                pContext.getApplicationContext().startActivity(mainIntent);
+            }
+        });
+        Runtime.getRuntime().exit(0);
+        System.exit(1);
+    }
+
+    public static void restartAndOpen(boolean pOpenOnRestart) {
+        ActivityManager manager = (ActivityManager) activityContextManager.getInstance().getHomeController().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningProcesses = manager.getRunningAppProcesses();
         if (runningProcesses != null) {
             for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
                 if (!BuildConfig.APPLICATION_ID.equalsIgnoreCase(processInfo.processName)) {
@@ -1103,6 +1131,7 @@ public class helperMethod
             }
         });
         Runtime.getRuntime().exit(0);
+        System.exit(1);
     }
 
 }

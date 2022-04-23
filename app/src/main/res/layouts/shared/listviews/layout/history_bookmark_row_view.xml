@@ -63,7 +63,7 @@
             <ImageView
                 android:id="@+id/pLogoImage"
                 android:layout_width="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="9dp"
                 android:layout_marginStart="-47dp"
                 android:layout_marginEnd="-1dp"
                 android:layout_height="48dp"

@@ -159,12 +159,22 @@ public class settingSearchController extends AppCompatActivity {
         mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_HISTORY, Collections.singletonList(!mSearchHistory.isChecked()));
         mSearchHistory.toggle();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY, status.sSettingSearchHistory));
+        if(status.sSettingSearchHistory){
+            mSearchSuggestions.setChecked(true);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION, true));
+            mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_SUGGESTION_STATUS, Collections.singletonList(true));
+        }
     }
 
     public void setSuggestionStatus(View view){
         mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_SUGGESTION_STATUS, Collections.singletonList(!mSearchSuggestions.isChecked()));
         mSearchSuggestions.toggle();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_SUGGESTION, status.sSearchSuggestionStatus));
+        if(!status.sSearchSuggestionStatus){
+            mSearchHistory.setChecked(false);
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SEARCH_HISTORY, false));
+            mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_HISTORY, Collections.singletonList(false));
+        }
     }
 
     public void onOpenInfo(View view) {
