@@ -43,6 +43,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.applovin.mediation.ads.MaxAdView;
+import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.*;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
@@ -61,6 +62,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_DOMAIN_URL;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
+import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static java.lang.Thread.sleep;
 
@@ -1041,6 +1043,9 @@ class homeViewController
         if(url.endsWith("genesisconfigurenewidentity.com/")){
             return;
         }
+        if(url.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)){
+            url="https://genesis.onion/privacy";
+        }
 
         if(url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
             mSearchbar.setTag(R.id.msearchbarProcessing,true);
@@ -1338,6 +1343,7 @@ class homeViewController
 
     void onProgressBarUpdate(int value, boolean mForced){
 
+        mProgressBar = activityContextManager.getInstance().getHomeController().mProgressBar;
         if(value != 0 && value != 100){
             mAppBar.setExpanded(true,true);
             status.sDisableExpandTemp = true;

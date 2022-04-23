@@ -1,6 +1,8 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -56,6 +58,13 @@ public class errorHandler
         message = message.replace("$ERROR_M4",mContext.getString(R.string.ERROR_M4));
         message = message.replace("$ERROR_M5",mContext.getString(R.string.ERROR_M5));
         message = message.replace("$ERROR_M6",mContext.getString(R.string.ERROR_M6));
+
+        if(status.sTorBrowsing){
+            message = message.replace("$ERROR_M7","block");
+        }else {
+            message = message.replace("$ERROR_M7","none");
+        }
+
         message = message.replace("$ERROR", error);
 
         return message;

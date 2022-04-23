@@ -144,7 +144,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ConstraintLayout mWebViewContainer;
 
     /*View Objects*/
-    private ProgressBar mProgressBar;
+    public ProgressBar mProgressBar;
     private ConstraintLayout mSplashScreen;
     private editTextManager mSearchbar;
     private ImageView mLoadingIcon;
@@ -247,6 +247,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             initPreFixes();
             initBundle();
             initTor();
+
 
     }
 
@@ -541,7 +542,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this,false);
         mGeckoClient.onValidateInitializeFromStartup(mGeckoView, homeController.this);
-        dataController.getInstance().initializeListData();
     }
 
     public void onUpdateStatusBarTheme(){
@@ -581,8 +581,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         catch (Throwable e) {
             e.printStackTrace();
         }
+    }
 
-
+    public void onCloseAllTabs(){
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_ALL_TABS, null);
     }
 
     public void initializeGeckoView(boolean isForced, boolean pDatabaseSavable){
@@ -1488,6 +1490,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     public void onPause(){
         super.onPause();
+        if(mGeckoClient.getSession()!=null){
+            mGeckoClient.getSession().setActive(false);
+        }
         if(mGeckoClient.getSession()==null)
             return;
         if(mHomeViewController!=null){
@@ -1527,6 +1532,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @Override
     public void onResume()
     {
+        if(mGeckoClient.getSession()!=null){
+            mGeckoClient.getSession().setActive(true);
+        }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
 
@@ -1906,7 +1914,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 status.sTorBrowsing = true;
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_GENESIS_URL));
             }
-
+            mGeckoClient.getSession().purgeHistory();
+            onClearSettings();
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOR_BROWSING,status.sTorBrowsing));
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_IMAGE_UPDATE);
         }

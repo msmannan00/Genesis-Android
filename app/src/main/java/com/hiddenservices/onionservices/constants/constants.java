@@ -9,6 +9,10 @@ public class constants
     public static final String CONST_SAMSUNG_URL = "http://www.samsungapps.com/appquery/appDetail.as?appId=com.darkweb.genesissearchengine.production";
     public static final String CONST_HUAWEI_URL = "https://appgallery.cloud.huawei.com/uowap/index.html#/detailApp/C105664271?appId=C105664271";
 
+    public static final String CONST_PRIVACY_POLICY_URL_NON_TOR = "resource://android/assets/policy/policy.html";
+    public static final String CONST_REPORT_URL_NON_TOR = "http://http://167.86.99.31/report?url=";
+    public static final String CONST_SITEMAP_NON_TOR = "http://http://167.86.99.31/sitemap";
+
     public static final String CONST_PRIVACY_POLICY_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy";
     public static final String CONST_REPORT_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/report?url=";
     public static final String CONST_SITEMAP = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/sitemap";

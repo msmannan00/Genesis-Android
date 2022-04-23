@@ -48,7 +48,7 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        onInitTheme();
+        //onInitTheme();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
         if(!status.mThemeApplying){
@@ -138,9 +138,6 @@ public class settingGeneralController extends AppCompatActivity {
 
                 if(mIsThemeChangable){
                     status.mThemeApplying = true;
-                    onBackPressed();
-                    overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
-                    helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this,true);
 
 
                     new Handler().postDelayed(() ->
@@ -148,6 +145,12 @@ public class settingGeneralController extends AppCompatActivity {
                         if(activityContextManager.getInstance().getHomeController() != null){
                             activityContextManager.getInstance().getHomeController().onReInitTheme();
                             activityContextManager.getInstance().getSettingController().onInitTheme();
+                            activityContextManager.getInstance().getHomeController().onCloseAllTabs();
+                            activityContextManager.getInstance().getHomeController().onReload(null);
+
+                            onBackPressed();
+                            overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+                            helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this,true);
 
                         }
                     }, 100);

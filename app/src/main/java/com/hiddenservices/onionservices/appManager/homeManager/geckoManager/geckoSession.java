@@ -699,7 +699,11 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
 
     public void onClose(){
         stop();
-        mCurrentURL = mPrevURL;
+        if(!mPrevURL.equals("about:blank")){
+            mCurrentURL = mPrevURL;
+        }else {
+            mPrevURL = mCurrentURL;
+        }
         //mIsLoaded = false;
         //isPageLoading = false;
     }

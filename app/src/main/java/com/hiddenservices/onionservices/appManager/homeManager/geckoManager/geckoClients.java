@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
+import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
 import static com.hiddenservices.onionservices.constants.constants.CONST_REPORT_URL;
 import static com.hiddenservices.onionservices.constants.enums.etype.M_INDEX_WEBSITE;
 import static com.hiddenservices.onionservices.constants.enums.etype.on_handle_external_intent;
@@ -110,6 +111,7 @@ public class geckoClients
 
     public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext){
         boolean mStatus = mSession.onValidateInitializeFromStartup();
+
         if(mStatus){
             boolean mState = mSession.onRestoreState();
             if(!mState){
@@ -189,15 +191,17 @@ public class geckoClients
         if(status.sTorBrowsing){
             mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"","network.proxy.socks:  \"127.0.0.1\"");
             mYAML = mYAML.replace("# network.proxy.socks_port:  9050","network.proxy.socks_port:  9050");
+            mYAML = mYAML.replace("browser.cache.memory.enable: true","browser.cache.memory.enable: true");
 
             StringBuilder buf = new StringBuilder(mYAML);
             int portIndex = mYAML.indexOf("network.proxy.socks_port");
             int breakIndex = mYAML.indexOf("\n",portIndex);
             mYAML = buf.replace(portIndex, breakIndex,"network.proxy.socks_port:  "+ orbotLocalConstants.mSOCKSPort).toString();
             helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+        }else {
+            mYAML = mYAML.replace("browser.cache.memory.enable: true","browser.cache.memory.enable: false");
+            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
         }
-
-
 
         return cacheFile.getAbsolutePath();
     }
@@ -281,7 +285,7 @@ public class geckoClients
         if(mRuntime==null){
             GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
             if(status.sShowImages == 2){
-                mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config-noimage.yaml"));
+                //mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config-noimage.yaml"));
             }else {
                 mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config.yaml"));
             }
@@ -306,14 +310,21 @@ public class geckoClients
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.STRICT);
             }
 
+            dataController.getInstance().initializeListData();
         }
+        initBrowserManager();
+    }
 
-        mIconManager = new BrowserIconManager();
+    public void initBrowserManager(){
+        if(mIconManager == null){
+            mIconManager = new BrowserIconManager();
+        }
     }
 
 
 
     public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext){
+        initBrowserManager();
         pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
         mIconManager.onLoadIconIntoView(pcontext,mRuntime, pImageView, pURL);
     }
@@ -405,6 +416,11 @@ public class geckoClients
     }
 
     public void loadURL(String url, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
+        if(url.startsWith("https://genesis.onion/privacy")){
+            url=CONST_PRIVACY_POLICY_URL_NON_TOR;
+        }
+
+
         url = helperMethod.completeURL(url);
         mSession = (geckoSession)mNestedGeckoView.getSession();
         if(mSession==null){

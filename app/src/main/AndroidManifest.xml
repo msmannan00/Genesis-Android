@@ -43,7 +43,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" />
 
         <activity
-            android:name="com.hiddenservices.onionservices.appManager.proxyStatusManager.proxyStatusController"
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.proxyStatusManager.proxyStatusController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" />
 
         <activity

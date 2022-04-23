@@ -42,6 +42,13 @@ class tabDataModel
 
     private ArrayList<tabRowModel> mTabs = new ArrayList<>();
     void initializeTab(ArrayList<tabRowModel> pTabMdel){
+        for(int counter=0;counter<mTabs.size();counter++){
+            if(mTabs.get(counter).getSession()!=null){
+                mTabs.get(counter).getSession().setActive(false);
+                mTabs.get(counter).getSession().purgeHistory();
+                mTabs.get(counter).getSession().close();
+            }
+        }
         mTabs.clear();
         mTabs.addAll(pTabMdel);
     }
@@ -50,6 +57,12 @@ class tabDataModel
 
     ArrayList<tabRowModel> getTab(){
         return mTabs;
+    }
+
+    private void closeAllTabs(){
+        for(int mCounter=0;mCounter<mTabs.size();mCounter++){
+            mTabs.get(mCounter).getSession().close();
+        }
     }
 
     geckoSession getHomePage(){
@@ -92,11 +105,15 @@ class tabDataModel
         for(int counter = 0; counter< size; counter++){
             if(mTabs.size()>0){
                 mTabs.get(0).getSession().stop();
+                mTabs.get(0).getSession().setActive(false);
+                mTabs.get(0).getSession().purgeHistory();
                 mTabs.get(0).getSession().close();
                 mTabs.remove(0);
             }
         }
         if(mTabs.size()>0){
+            mTabs.get(0).getSession().setActive(false);
+            mTabs.get(0).getSession().purgeHistory();
             mTabs.get(0).getSession().close();
             mTabs.remove(0);
         }
@@ -107,6 +124,8 @@ class tabDataModel
 
     void closeTab(geckoSession mSession,Object pID) {
         mSession.stop();
+        mSession.setActive(false);
+        mSession.purgeHistory();
         mSession.close();
 
         try {
@@ -114,6 +133,8 @@ class tabDataModel
             for(int counter = 0; counter< mTabs.size(); counter++){
                 if(mTabs.get(counter).getSession().getSessionID().equals(mSession.getSessionID()))
                 {
+                    mTabs.get(counter).getSession().setActive(false);
+                    mTabs.get(counter).getSession().purgeHistory();
                     mTabs.get(counter).getSession().stop();
                     mTabs.get(counter).getSession().close();
                     mID = mTabs.get(counter).getmId();
@@ -166,7 +187,7 @@ class tabDataModel
     }
 
     boolean updateTab(String mSessionID, geckoSession pSession) {
-
+        boolean mChanged = false;
         for(int counter = 0; counter< mTabs.size(); counter++){
 
             if(mTabs.get(counter).getSession().getSessionID().equals(mSessionID))
@@ -308,6 +329,9 @@ class tabDataModel
         if(pCommands == dataEnums.eTabCommands.GET_TOTAL_TAB){
             return getTotalTabs();
         }
+        if(pCommands == dataEnums.eTabCommands.CLOSE_ALL_TABS){
+            closeAllTabs();
+        }
         else if(pCommands == dataEnums.eTabCommands.GET_CURRENT_TAB){
             return getCurrentTab();
         }
@@ -331,7 +355,6 @@ class tabDataModel
         else if(pCommands == dataEnums.eTabCommands.M_ADD_TAB){
             int mTabs = addTabs((geckoSession)pData.get(0), (boolean)pData.get(1));
             //activityContextManager.getInstance().getHomeController().initTabCountForced();
-
             return mTabs;
         }
         else if(pCommands == dataEnums.eTabCommands.M_UPDATE_SESSION_STATE){

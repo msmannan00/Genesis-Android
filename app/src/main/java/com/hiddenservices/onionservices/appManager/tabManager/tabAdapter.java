@@ -257,7 +257,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         TextView mDate;
         ImageView mLoadSession;
         ImageButton mRemoveRow;
-        ThumbnailCrop mWebThumbnail;
+        ImageView mWebThumbnail;
         FrameLayout mSelectedView;
         FrameLayout mItemSelectionMenu;
         Button mItemSelectionMenuButton;

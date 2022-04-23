@@ -82,7 +82,6 @@ public class tabRowModel
     public Bitmap getBitmap() {
         return mBitmap;
     }
-
     public String getDate(){
         return mDate;
     }

@@ -1099,6 +1099,7 @@ public class helperMethod
                 Intent mainIntent = Intent.makeRestartActivityTask(componentName);
                 mainIntent.putExtra(M_RESTART_APP_KEY, pOpenOnRestart);
                 activityContextManager.getInstance().getHomeController().getApplicationContext().startActivity(mainIntent);
+                activityContextManager.getInstance().getHomeController().overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
             }
         });
         Runtime.getRuntime().exit(0);

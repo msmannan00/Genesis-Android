@@ -1,0 +1,149 @@
+/*global styles*/
+
+/* visited link */
+a:visited {
+  color: darkblue;
+}
+
+
+/* mouse over link */
+a:hover {
+  color: blue;
+}
+
+a:active {
+    color: darkblue;
+    text-decoration: underline;
+}
+
+#load{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+    background:url("https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif") no-repeat center center rgba(0,0,0,0.25)
+}
+
+button:focus {
+    outline:0 !important;
+}
+input:focus {
+    outline:0 !important;
+}
+
+html{
+    overflow-x: hidden;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+
+.delay-load{
+    -webkit-animation: fadein 0; /* Firefox < 16 */
+    -moz-animation: fadein 0s; /* Firefox < 16 */
+    -ms-animation: fadein 0s; /* Internet Explorer */
+    -o-animation: fadein 0s; /* Opera < 12.1 */
+    -animation: fadein 0s;
+           
+    -webkit-animation-delay: 0s;
+    -moz-animation-delay: 0s;
+    -ms-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    -animation-delay: 0s;
+    
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -animation-fill-mode: forwards;
+
+
+}
+
+.body-wrap{
+    max-height: 90%;
+}
+
+.gs-disable-highlight
+{
+	-webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;;
+    -khtml-user-select: none !important;;
+    -moz-user-select: none !important;;
+    -ms-user-select: none !important;;
+    outline:none !important;;
+}
+
+.gs-disable-decoration
+{
+    text-decoration: none !important;
+}
+
+.gs_container_size
+{
+    min-height: 100%;
+    margin-top: -28px;
+}
+
+.hi_search__logo{
+    margin-left: 36%;
+}
+
+/*light-header style*/
+.dark_header{
+    color:#000000;
+    height: 60px;
+    text-align: right;
+    background-image: linear-gradient(to right, #e6e6e6, #ffffff);
+    border-bottom-color:#cfe2e2;
+    border-style: solid;border-right-width: 0;
+    border-left-width: 0;border-top-width: 0;
+    border-bottom-width: 1px;
+}
+
+
+.scroller {
+    height: 100px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+
+@keyframes fadein {
+    from { opacity: 1; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0.2; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0.2; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0.2; }
+    to   { opacity: 1; }
+}
+/* Placeholder Text Color */
+::-webkit-input-placeholder { /* Edge */
+  color: #b3b3b3 !important;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #b3b3b3 !important;
+}
+
+::placeholder {
+  color: #b3b3b3 !important;
+}

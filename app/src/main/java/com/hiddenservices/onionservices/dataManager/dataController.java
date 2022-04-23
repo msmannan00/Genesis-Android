@@ -25,7 +25,7 @@ public class dataController
 {
     /*Private Variables*/
 
-    private tabDataModel mTabModel;
+    private tabDataModel mTabModel = null;
     private preferenceDataModel mPreferenceModel;
     private historyDataModel mHistoryModel;
     private imageDataModel mImageDataModel;
@@ -48,17 +48,19 @@ public class dataController
     /*Initializations*/
 
     public void initialize(AppCompatActivity pAppContext){
-        mHistoryModel = new historyDataModel(new invokeHistoryCallbacks());
-        mTabModel = new tabDataModel(new invokeTabCallbacks());
-        mPreferenceModel = new preferenceDataModel(pAppContext);
-        mImageDataModel = new imageDataModel();
-        mBookmarkDataModel = new bookmarkDataModel(new invokeBookmarkCallbacks());
-        mSuggestionDataModel = new suggestionDataModel(pAppContext);
-        mHelpDataModel = new helpDataModel();
-        mReferenceWebsiteDataModel = new referenceWebsiteDataModel();
-        mBridgeWebsiteDataModel = new bridgesDataModel();
-        mSqlCipherDataModel = new sqlCipherDataModel();
-        mCrawlerDataModel = new crawlerDataModel(pAppContext);
+        if(mTabModel == null){
+            mHistoryModel = new historyDataModel(new invokeHistoryCallbacks());
+            mTabModel = new tabDataModel(new invokeTabCallbacks());
+            mPreferenceModel = new preferenceDataModel(pAppContext);
+            mImageDataModel = new imageDataModel();
+            mBookmarkDataModel = new bookmarkDataModel(new invokeBookmarkCallbacks());
+            mSuggestionDataModel = new suggestionDataModel(pAppContext);
+            mHelpDataModel = new helpDataModel();
+            mReferenceWebsiteDataModel = new referenceWebsiteDataModel();
+            mBridgeWebsiteDataModel = new bridgesDataModel();
+            mSqlCipherDataModel = new sqlCipherDataModel();
+            mCrawlerDataModel = new crawlerDataModel(pAppContext);
+        }
     }
     public void initializeListData(){
         mReferenceWebsiteDataModel.onTrigger(dataEnums.eReferenceWebsiteCommands.M_LOAD,Collections.singletonList(activityContextManager.getInstance().getHomeController()));

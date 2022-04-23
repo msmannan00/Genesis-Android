@@ -4,11 +4,19 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+
+import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.constants.constants;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.example.myapplication.R;
+import com.hiddenservices.onionservices.helperManager.helperMethod;
+
 import java.util.List;
 
 class settingHomeViewController
@@ -18,12 +26,18 @@ class settingHomeViewController
     private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
 
+    private LinearLayout mOption15;
+    private LinearLayout mOption16;
+
     /*Initializations*/
 
-    settingHomeViewController(settingHomeController mContext, eventObserver.eventListener mEvent)
+    settingHomeViewController(settingHomeController mContext, eventObserver.eventListener mEvent, LinearLayout pOption15, LinearLayout pOption16)
     {
         this.mEvent = mEvent;
         this.mContext = mContext;
+
+        this.mOption15 = pOption15;
+        this.mOption16 = pOption16;
 
         initPostUI();
     }
@@ -44,6 +58,12 @@ class settingHomeViewController
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
             }
         }
+
+        if(!status.sTorBrowsing){
+            this.mOption15.setVisibility(View.GONE);
+            this.mOption16.setVisibility(View.GONE);
+        }
+
     }
 
     public Object onTrigger(settingHomeEnums.eHomeViewController pCommands, List<Object> pData){

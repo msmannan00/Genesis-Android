@@ -1,5 +1,7 @@
 package com.hiddenservices.onionservices.appManager.homeManager.homeController;
 
+import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
+
 import android.util.Patterns;
 
 import com.hiddenservices.onionservices.constants.status;
@@ -15,6 +17,9 @@ class homeModel
     }
 
     String urlComplete(String pURL, String pSearchEngine){
+        if(pURL.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)){
+            return CONST_PRIVACY_POLICY_URL_NON_TOR;
+        }
         if(pURL.startsWith("data")){
             return pURL;
         }

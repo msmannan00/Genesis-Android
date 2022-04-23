@@ -33,5 +33,4 @@ dependencies {
     implementation "org.mozilla.components:support-base:100.0.20220327143103"
     implementation "org.mozilla.components:concept-fetch:100.0.20220327143103"
     testImplementation "org.mozilla.components:lib-fetch-httpurlconnection:100.0.20220327143103"
-    testImplementation "org.mozilla.components:lib-fetch-okhttp:100.0.20220327143103"
 }

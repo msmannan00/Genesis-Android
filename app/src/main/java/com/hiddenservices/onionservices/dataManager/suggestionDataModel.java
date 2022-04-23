@@ -194,14 +194,18 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
                 int sepPos = pQuery.indexOf(".");
                 if (sepPos == -1) {
                     mCurrentList.add( mSize, new historyRowModel(mQueryOriginal+".com", strings.GENERIC_EMPTY_STR,-1));
-                    mCurrentList.add( mSize, new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
+                    if(status.sTorBrowsing){
+                        mCurrentList.add( mSize, new historyRowModel(mQueryOriginal+".onion", strings.GENERIC_EMPTY_STR,-1));
+                    }
                 }else
                 {
                     if(!pQuery.equals(pQuery.substring(0,sepPos)+".com")){
                         mCurrentList.add( mSize, new historyRowModel(pQuery.substring(0,sepPos)+".com", strings.GENERIC_EMPTY_STR,-1));
                     }
                     if(!pQuery.equals(pQuery.substring(0,sepPos)+".onion")){
-                        mCurrentList.add( mSize, new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
+                        if(status.sTorBrowsing){
+                            mCurrentList.add( mSize, new historyRowModel(pQuery.substring(0,sepPos)+".onion", strings.GENERIC_EMPTY_STR,-1));
+                        }
                     }
                 }
             }
@@ -330,7 +334,10 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         mHintListLocalCache.add(new historyRowModel("Wow Head","https://wowhead.com",-1 ));
         mHintListLocalCache.add(new historyRowModel("Bing","https://bing.com",-1 ));
         mHintListLocalCache.add(new historyRowModel("Google","https://google.com",-1 ));
-        mHintListLocalCache.add(new historyRowModel("Genesis Search","https://genesis.onion",-1 ));
+
+        if(status.sTorBrowsing){
+            mHintListLocalCache.add(new historyRowModel("Genesis Search","https://genesis.onion",-1 ));
+        }
 
         return mHintListLocalCache;
     }

@@ -84,33 +84,10 @@ class imageDataModel
         }.start();*/
     }
 
-    private Bitmap getBitmapFromURL(String src) {
-        try {
-            java.net.URL url = new java.net.URL(src);
-            Proxy proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved(CONST_PROXY_SOCKS, orbotLocalConstants.mSOCKSPort));
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection(proxy);
-            connection.setConnectTimeout(10000);
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
     /* External Triggers */
 
     public Object onTrigger(dataEnums.eImageCommands pCommands, List<Object> pData){
 
-        if(pCommands.equals(dataEnums.eImageCommands.M_REQUEST_IMAGE_URL)){
-            onRequestImage((String) pData.get(0));
-        }
-        else if(pCommands.equals(dataEnums.eImageCommands.M_GET_IMAGE)){
-            return getImage((String) pData.get(0));
-        }
 
         return null;
     }

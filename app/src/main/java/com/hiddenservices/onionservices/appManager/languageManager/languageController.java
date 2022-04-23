@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
@@ -37,6 +40,8 @@ import static com.hiddenservices.onionservices.appManager.languageManager.langua
 import static com.hiddenservices.onionservices.constants.constants.CONST_LANGUAGE_DEFAULT_LANG;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_SUPPORTED_SYSTEM_LANGUAGE_INFO;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LANGUAGE_SUPPORT_FAILURE;
+
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 public class languageController extends AppCompatActivity {
 
@@ -141,7 +146,8 @@ public class languageController extends AppCompatActivity {
             String mSystemLangugage = mSystemLocale.toString();
             status.sSettingLanguage = CONST_LANGUAGE_DEFAULT_LANG;
             status.sSettingLanguageRegion = CONST_LANGUAGE_DEFAULT_LANG;
-            if(!mSystemLangugage.equals("cs_CZ") && !mSystemLangugage.equals("en_US") && !mSystemLangugage.equals("ur_PK") && !mSystemLangugage.equals("de_DE") && !mSystemLangugage.equals("ca_ES") && !mSystemLangugage.equals("zh_CN") && !mSystemLangugage.equals("ch_CZ") && !mSystemLangugage.equals("nl_NL") && !mSystemLangugage.equals("fr_FR") && !mSystemLangugage.equals("el_GR") && !mSystemLangugage.equals("hu_HU") && !mSystemLangugage.equals("in_ID") && !mSystemLangugage.equals("it_IT") && !mSystemLangugage.equals("ja_JP") && !mSystemLangugage.equals("ko_KR") && !mSystemLangugage.equals("pt_PT") && !mSystemLangugage.equals("ro_RO") && !mSystemLangugage.equals("ru_RU") && !mSystemLangugage.equals("th_TH") && !mSystemLangugage.equals("tr_TR") && !mSystemLangugage.equals("uk_UA") && !mSystemLangugage.equals("vi_VN")){
+            Log.i("MFUCKER",mSystemLangugage);
+            if(!mSystemLangugage.equals("en_GB") && !mSystemLangugage.equals("cs_CZ") && !mSystemLangugage.equals("en_US") && !mSystemLangugage.equals("ur_PK") && !mSystemLangugage.equals("de_DE") && !mSystemLangugage.equals("ca_ES") && !mSystemLangugage.equals("zh_CN") && !mSystemLangugage.equals("ch_CZ") && !mSystemLangugage.equals("nl_NL") && !mSystemLangugage.equals("fr_FR") && !mSystemLangugage.equals("el_GR") && !mSystemLangugage.equals("hu_HU") && !mSystemLangugage.equals("in_ID") && !mSystemLangugage.equals("it_IT") && !mSystemLangugage.equals("ja_JP") && !mSystemLangugage.equals("ko_KR") && !mSystemLangugage.equals("pt_PT") && !mSystemLangugage.equals("ro_RO") && !mSystemLangugage.equals("ru_RU") && !mSystemLangugage.equals("th_TH") && !mSystemLangugage.equals("tr_TR") && !mSystemLangugage.equals("uk_UA") && !mSystemLangugage.equals("vi_VN")){
                 mDefaultLanguageNotSupported = true;
             }
         }else {
@@ -162,7 +168,7 @@ public class languageController extends AppCompatActivity {
         }
 
         if(mDefaultLanguageNotSupported){
-            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Resources.getSystem().getConfiguration().locale.getDisplayName(), this),M_LANGUAGE_SUPPORT_FAILURE);
+            //pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Resources.getSystem().getConfiguration().locale.getDisplayName(), languageController.this),M_LANGUAGE_SUPPORT_FAILURE);
         }
 
         status.mThemeApplying = true;

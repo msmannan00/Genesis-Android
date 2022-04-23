@@ -4,13 +4,14 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
-import com.hiddenservices.onionservices.appManager.proxyStatusManager.proxyStatusController;
+import com.hiddenservices.onionservices.appManager.settingManager.proxyStatusManager.proxyStatusController;
 import com.hiddenservices.onionservices.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.hiddenservices.onionservices.appManager.settingManager.advanceManager.settingAdvanceController;
 import com.hiddenservices.onionservices.appManager.settingManager.clearManager.settingClearController;
@@ -28,7 +29,6 @@ import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.appManager.activityThemeManager;
-import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
@@ -46,6 +46,10 @@ public class settingHomeController extends AppCompatActivity
 
     private settingHomeViewController mSettingViewController;
     private settingHomeModel mSettingModel;
+    private LinearLayout mOption15;
+    private LinearLayout mOption16;
+
+
 
     /*Initializations*/
 
@@ -66,6 +70,7 @@ public class settingHomeController extends AppCompatActivity
         viewsInitializations();
         listenersInitializations();
     }
+
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
@@ -100,7 +105,10 @@ public class settingHomeController extends AppCompatActivity
     private void viewsInitializations()
     {
         activityContextManager.getInstance().setSettingController(this);
-        mSettingViewController = new settingHomeViewController(this, new settingViewCallback());
+        mOption15 = findViewById(R.id.pOption15);
+        mOption16 = findViewById(R.id.pOption16);
+
+        mSettingViewController = new settingHomeViewController(this, new settingViewCallback(), mOption15, mOption16);
     }
 
     private void listenersInitializations()
@@ -255,7 +263,11 @@ public class settingHomeController extends AppCompatActivity
 
     public void onPrivacyPolicy(View view) {
         finish();
-        activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL));
+        if(!status.sTorBrowsing){
+            activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL_NON_TOR));
+        }else {
+            activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL));
+        }
     }
 
     public void onRateApplication(View view) {
