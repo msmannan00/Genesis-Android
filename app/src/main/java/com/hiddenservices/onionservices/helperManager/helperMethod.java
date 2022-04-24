@@ -440,7 +440,7 @@ public class helperMethod
         selectorIntent.setData(Uri.parse("mailto:"));
 
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"connectionslimited5@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"orionhiddentechnologies@gmail.com"});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Issue Report");
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Write Message Here....");
         emailIntent.setSelector( selectorIntent );
