@@ -551,7 +551,7 @@ public class helperMethod
                 .setType("text/plain")
                 .setChooserTitle("Hi! Check out this Awesome App")
                 .setSubject("Hi! Check out this Awesome App")
-                .setText("Genesis | Onion Search | " + CONST_PLAYSTORE_URL)
+                .setText("Orion | Onion Search | " + CONST_PLAYSTORE_URL)
                 .startChooser();
     }
 

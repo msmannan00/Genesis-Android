@@ -5,7 +5,7 @@
 	<string name="GENERAL_SEARCH_HINT" translatable="true">ค้นหาบางสิ่งหรือพิมพ์เว็บลิงค์</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">ค้นหาในหน้า</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">เครื่องมือค้นหา</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">อป! มีบางอย่างผิดพลาด</string>
 	<string name="GENERAL_TODO" translatable="true">ทุกอย่าง</string>
 	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>

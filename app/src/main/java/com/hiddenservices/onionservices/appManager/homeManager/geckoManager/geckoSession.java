@@ -725,7 +725,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate,GeckoSession.
                 var2 = var2.replace("https","http");
                 mCurrentURL = var2;
             }
-            if(mCurrentURL.contains("genesis.onion")){
+            if(mCurrentURL.contains("orion.onion")){
                 event.invokeObserver(Arrays.asList(mCurrentURL,mSessionID,mCurrentTitle, mTheme), enums.etype.M_NEW_IDENTITY);
             }
             if(status.sSettingIsAppStarted && orbotLocalConstants.mIsTorInitialized){

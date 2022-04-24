@@ -344,7 +344,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 String mDescText = mDescription.getText().toString();
 
                 if(status.sTabGridLayoutEnabled){
-                    if(model.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getSession().getCurrentURL().contains("genesis.onion")){
+                    if(model.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getSession().getCurrentURL().contains("orion.onion")){
                         mLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                     }
                     else{

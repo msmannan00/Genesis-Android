@@ -107,7 +107,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
 
         if(mCurrentList.size()<=0) {
             if(status.sTorBrowsing){
-                mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
+                mCurrentList.add( mSize,new historyRowModel("Orion Search", "orion.onion",-1));
             }
         }
 
@@ -230,7 +230,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         }
         if(mCurrentList.size()<=0) {
             if(status.sTorBrowsing){
-                mCurrentList.add( mSize,new historyRowModel("Genesis Search", "genesis.onion",-1));
+                mCurrentList.add( mSize,new historyRowModel("Orion Search", "orion.onion",-1));
             }
         }
 
@@ -344,7 +344,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         mHintListLocalCache.add(new historyRowModel("Google","https://google.com",-1 ));
 
         if(status.sTorBrowsing){
-            mHintListLocalCache.add(new historyRowModel("Genesis Search","https://genesis.onion",-1 ));
+            mHintListLocalCache.add(new historyRowModel("Orion Search","https://orion.onion",-1 ));
         }
 
         return mHintListLocalCache;

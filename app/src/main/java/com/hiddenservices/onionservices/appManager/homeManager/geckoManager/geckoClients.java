@@ -416,7 +416,7 @@ public class geckoClients
     }
 
     public void loadURL(String url, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
-        if(url.startsWith("https://genesis.onion/privacy")){
+        if(url.startsWith("https://orion.onion/privacy")){
             url=CONST_PRIVACY_POLICY_URL_NON_TOR;
         }
         if(!status.sTorBrowsing && url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy")){

@@ -11,7 +11,7 @@ public class orbotLogManager
     {
         String logs = pLogs;
 
-        if(logs.equals("Starting Genesis | Please Wait ...")){
+        if(logs.equals("Starting Orion | Please Wait ...")){
             return logs;
         }
 

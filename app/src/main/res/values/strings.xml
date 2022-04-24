@@ -2,15 +2,15 @@
 
     <!-- Application Strings -->
     <string name="mode" translatable="false">Day</string>
-    <string name="app_name" translatable="false">Genesis</string>
+    <string name="app_name" translatable="false">Orion Browser</string>
     <string name="GENERAL_DEFAULT_TEXT" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="GENERAL_SEARCH_HINT" translatable="true">Search or type a web address</string>
     <string name="GENERAL_FIND_HINT" translatable="true">Find in page</string>
     <string name="GENERAL_SEARCH_ENGINE" translatable="true">Search Engine</string>
-    <string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="true">\u0020\u0020\u0020Opps! Something Went Wrong</string>
     <string name="GENERAL_TODO" translatable="true">TODO</string>
-    <string name="GENERAL_PROJECT_NAME" translatable="false">Genesis Search Engine</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion Search Engine</string>
     <string name="GENERAL_LOADING" translatable="true">Online Freedom</string>
     <string name="GENERAL_RELOAD" translatable="true">Reload</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
@@ -39,7 +39,7 @@
     <string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a Bridge to get to Tor Network"</string>
     <string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
     <string name="LANDING_HELLO" translatable="true">"Hello"</string>
-    <string name="LANDING_WELCOME" translatable="true">"Welcome to Genesis on mobile."</string>
+    <string name="LANDING_WELCOME" translatable="true">"Welcome to Orion on mobile."</string>
     <string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
 
@@ -53,9 +53,9 @@
     <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
     <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Keep your identity safe and use the options below</string>
     <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Do Not Track</string>
-    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Genesis will tell sites that you do not want to be tracked</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Orion will tell sites that you do not want to be tracked</string>
     <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Tracking Protection</string>
-    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Enable tracking protection provided by Genesis</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Enable tracking protection provided by Orion</string>
     <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificate</string>
 
     <!-- Alert Certificate -->
@@ -64,8 +64,8 @@
     <!-- Orbot Logs -->
     <string name="ORBOT_LOG" translatable="true">Proxy Logs</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">Logs Info</string>
-    <string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
-    <string name="ORBOT_LOG_LOADING_STATIC" translatable="true">~&#160;Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">If you are facing connectivity issue while starting Orion please copy the following code and find issue online or send it to us, so we can try to help you out </string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="true">~&#160;Orion on standby at the moment</string>
 
     <!-- Orbot Settings -->
     <string name="ORBOT_SETTING_HEADER" translatable="true">Proxy Settings</string>
@@ -106,7 +106,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Restart</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Closed</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">New tab opened</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy connecting ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy connecting ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memory full &#160; ➔ &#160; Clearing tab</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup blocked</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Open Logs</string>
@@ -185,7 +185,7 @@
     <!-- Settings -->
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Basic Settings</string>
-    <string name="SETTING_DEFAULT_BROWSER" translatable="true">Make Genesis your default browser</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">Make Orion your default browser</string>
     <string name="SETTING_HEADER" translatable="true">Settings</string>
     <string name="SETTING_SEARCH_ENGINE" translatable="true">Search Engine</string>
     <string name="SETTING_JAVASCRIPT" translatable="true">Javascript</string>
@@ -212,7 +212,7 @@
     <string name="SETTING_SEARCH_HEADER_2" translatable="true">Search setting</string>
     <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Manage how searches appear</string>
     <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default</string>
-    <string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
     <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
     <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
     <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
@@ -257,10 +257,10 @@
     <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">Protect your online identity</string>
     <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">Keep your identity to your self. We can protect you from several trackers that follow what you do online. Tracking protection can also be used to block advertisement</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">Do Not Track</string>
-    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis will tell sites that you do not want to be tracked</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion will tell sites that you do not want to be tracked</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">Do not track marker for website</string>
     <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Tracking Protection</string>
-    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Enable tracking protection provided by Genesis</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Enable tracking protection provided by Orion</string>
     <string name="SETTING_PRIVACY_COOKIES" translatable="true">Cookies</string>
     <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">Select cookies preferences according to your security needs</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">Clear private data on exit</string>
@@ -311,7 +311,7 @@
     <string name="SETTING_PROXY_INFO" translatable="true">Check onion network or status</string>
     <string name="SETTING_REPORT" translatable="true">Report website</string>
     <string name="SETTING_PRIVACY_POLICY" translatable="true">Privacy Policy</string>
-    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis browser privacy policy</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion browser privacy policy</string>
     <string name="SETTING_REPORT_WEBSITE" translatable="true">Report Website</string>
     <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Report website you find disturbing</string>
     <string name="SETTING_SITEMAP" translatable="true">Sitemap</string>
@@ -363,7 +363,7 @@
     <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL was reported successfully. If something found, legal action will be taken</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">Language not supported</string>
     <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">System language is not supported by this application. We are working to include it soon</string>
-    <string name="ALERT_ORBOT_INIT" translatable="true">Initializing Genesis</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">Initializing Orion</string>
     <string name="ALERT_NOT_SUPPORTED" translatable="true">Action not supported</string>
     <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">No application found to handle the following command</string>
     <string name="ALERT_WELCOME_MESSAGE" translatable="true">Welcome | Hidden  Web Gateway</string>
@@ -387,14 +387,14 @@
     <string name="ALERT_DATA_CLEARED" translatable="true">Data Cleared | Restart Required</string>
     <string name="ALERT_DATA_CLEARED_SHORTCUT" translatable="false">Data Cleared Successfully</string>
     <string name="ALERT_DATA_CLEARED_INFO_SHORTCUT" translatable="false">Private data cleared successfully. Application will close in a moment. Now you can safely continue browsing</string>
-    <string name="ALERT_DATA_CLEARED_BUTTON" translatable="false">Closing Genesis Please Wait ...</string>
-    <string name="ALERT_ORBOT_LOADING" translatable="false">Genesis Connecting ...</string>
+    <string name="ALERT_DATA_CLEARED_BUTTON" translatable="false">Closing Orion Please Wait ...</string>
+    <string name="ALERT_ORBOT_LOADING" translatable="false">Orion Connecting ...</string>
     <string name="ALERT_CRASH" translatable="false">Application closed unexpectedly</string>
     <string name="ALERT_CRASH_INFO" translatable="false"><b><font color='#f32323'>Request New Bridge &#160;</font></b>&#160;Application crashed due to unexpected error. We are looking into the issue mean while you can continue with this application</string>
 
     <!-- Popup Menu -->
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
-    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Genesis Logs</string>
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orion Logs</string>
     <string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Open Recent Tabs</string>
@@ -443,7 +443,7 @@
 
     <!-- Help -->
     <string name="HELP_RETRY" translatable="true">Retry</string>
-    <string name="HELP_RETRY_INFO" translatable="true">Opps! Network  connection error\nGenesis not connected</string>
+    <string name="HELP_RETRY_INFO" translatable="true">Opps! Network  connection error\Orion not connected</string>
     <string name="HELP_TITLE" translatable="true">Support</string>
 
     <!-- Language Manager Manager -->
@@ -483,8 +483,8 @@
     <!-- Home View -->
     <string name="HOME_TAB_TEXT" translatable="true">1</string>
     <string name="HOME_CONNECT" translatable="false">Connect</string>
-    <string name="HOME_COPYRIGHT" translatable="false">Copyright © by Genesis Technologies | Built 1.0.2.2</string>
-    <string name="HOME_LOADING" translatable="true">Idle | Genesis on standby at the moment</string>
+    <string name="HOME_COPYRIGHT" translatable="false">Copyright © by Orion Technologies | Built 1.0.2.2</string>
+    <string name="HOME_LOADING" translatable="true">Idle | Orion on standby at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">Open tabs will show here</string>
 
     <!-- Error Page -->

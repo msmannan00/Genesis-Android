@@ -5,7 +5,7 @@
 	<string name="GENERAL_SEARCH_HINT" translatable="true">rechercher quelque chose ou saisir un lien Web</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">trouver en page</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">moteur de recherche</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! quelque chose s\'est mal passé</string>
 	<string name="GENERAL_TODO" translatable="true">tout</string>
 	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
@@ -103,7 +103,7 @@
 	<string name="TOAST_ALERT_RESTART" translatable="true">Redémarrer</string>
 	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">L\'onglet Est Fermé</string>
 	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Nouvel onglet ouvert</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Connexion proxy Genesis...</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Connexion proxy Orion...</string>
 	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">La mémoire est pleine ➔ Onglet Effacement</string>
 	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Pop-up bloqué</string>
 	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Ouvrir Les Journaux D\'erreur</string>

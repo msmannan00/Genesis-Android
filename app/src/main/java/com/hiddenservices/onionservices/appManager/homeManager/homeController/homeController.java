@@ -670,7 +670,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(mGeckoView.getSession()!=null){
             mGeckoView.getSession().stop();
         }
-        mGeckoClient.loadURL(url.replace("genesis.onion","trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion"),mGeckoView, homeController.this);
+        mGeckoClient.loadURL(url.replace("orion.onion","trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion"),mGeckoView, homeController.this);
     }
 
     public String getSecurityInfo(){
@@ -1374,7 +1374,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         helperMethod.hideKeyboard(this);
         String url = mGeckoClient.getSession().getCurrentURL();
         if(!status.sTorBrowsing && (url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))){
-            url = "https://genesis.onion/privacy";
+            url = "https://orion.onion/privacy";
         }
 
         boolean mBookmarked = (boolean) dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_BOOKMARK_AVAILABLE, Collections.singletonList(url));
@@ -2025,7 +2025,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     Intent intent = new Intent(getApplicationContext(), bookmarkSettingController.class);
                     String url = mGeckoClient.getSession().getCurrentURL();
                     if(!status.sTorBrowsing && (url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))){
-                        url = "https://genesis.onion/privacy";
+                        url = "https://orion.onion/privacy";
                     }
 
                     intent = (Intent)dataController.getInstance().invokeBookmark(M_INTENT_BOOKMARK, Arrays.asList(intent, url));

@@ -5,7 +5,7 @@
 	<string name="GENERAL_SEARCH_HINT" translatable="true">무언가를 검색하거나 웹 링크를 입력</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">페이지에서 찾기</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">검색 엔진</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! 뭔가 잘못 됐어</string>
 	<string name="GENERAL_TODO" translatable="true">모두</string>
 	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>

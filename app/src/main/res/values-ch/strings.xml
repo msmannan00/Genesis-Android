@@ -1,14 +1,14 @@
 <resources>
 
 	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Genesis</string>
+	<string name="app_name" translatable="false">Orion Browser</string>
 	<string name="GENERAL_SEARCH_HINT" translatable="true">prohledat něco nebo napsat webový odkaz</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">najít na stránce</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">vyhledávač</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">operace! něco se pokazilo</string>
 	<string name="GENERAL_TODO" translatable="true">všechno</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
+	<string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
 	<string name="GENERAL_LOADING" translatable="true">digitální svoboda</string>
 	<string name="GENERAL_RELOAD" translatable="true">Znovu načíst</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">čelíte jednomu z následujících problémů. webová stránka nebo web nemusí fungovat. vaše připojení k internetu může být špatné. možná používáte proxy. web může být blokován bránou firewall</string>
@@ -20,7 +20,7 @@
 	<string name="shortcut_erase_long_label" translatable="false">Vymazat procházený web</string>
 	<string name="shortcut_erase_and_open_short_label" translatable="false">Vymažte svá data a otevřete prohlížeč</string>
 	<string name="shortcut_erase_and_open_long_label" translatable="false">Vymazat mezipaměť prohlížeče</string>
-	<string name="shortcut_open" translatable="false">Restartujte prohlížeč Genesis</string>
+	<string name="shortcut_open" translatable="false">Restartujte prohlížeč Orion</string>
 	<string name="shortcut_open_long" translatable="false">Restartujte Prohlížeč</string>
 
 	<!-- Bookmark Setting -->
@@ -36,7 +36,7 @@
 	<string name="LANDING_BRIDGES_INFO" translatable="true">"Někdy potřebujete Bridge, abyste se dostali do Tor network"</string>
 	<string name="LANDING_MORE" translatable="true">"ŘEKNĚTE VÍCE"</string>
 	<string name="LANDING_HELLO" translatable="true">"Ahoj"</string>
-	<string name="LANDING_WELCOME" translatable="true">„Vítejte na Genesis v mobilu.“</string>
+	<string name="LANDING_WELCOME" translatable="true">„Vítejte na Orion v mobilu.“</string>
 	<string name="LANDING_BROWSE_INFO" translatable="true">„Bezpečně a bezpečně procházejte internet.“</string>
 	<string name="LANDING_NO_TRACKING" translatable="true">„Žádné sledování. Žádná cenzura.“</string>
 
@@ -58,8 +58,8 @@
 	<!-- Orbot Log -->
 	<string name="ORBOT_LOG" translatable="true">protokoly proxy</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Informace o systémovém protokolu</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">pokud se při spuštění Genesis potýkáte s problémem s připojením, zkopírujte prosím následující kód a vyhledejte problém online nebo nám jej pošlete, abychom se vám mohli pokusit pomoci</string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">pokud se při spuštění Orion potýkáte s problémem s připojením, zkopírujte prosím následující kód a vyhledejte problém online nebo nám jej pošlete, abychom se vám mohli pokusit pomoci</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
 
 	<!-- Orbot Settings -->
 	<string name="ORBOT_SETTING_HEADER" translatable="true">přizpůsobit proxy</string>
@@ -97,7 +97,7 @@
 	<string name="TOAST_ALERT_RESTART" translatable="true">Restartovat</string>
 	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Karta Je Zavřená</string>
 	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Otevřena nová karta</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proxy server Genesis se připojuje ...</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proxy server Orion se připojuje ...</string>
 	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Paměť je plná ➔ Karta Vymazání</string>
 	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Vyskakovací okno blokováno</string>
 	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Otevřít Chybové Protokoly</string>
@@ -188,7 +188,7 @@
 
 	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
 	<string name="SETTING_BASIC_SETTING" translatable="true">Systémové nastavení</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">nastav si Genesis jako výchozí prohlížeč</string>
+	<string name="SETTING_DEFAULT_BROWSER" translatable="true">nastav si Orion jako výchozí prohlížeč</string>
 	<string name="SETTING_HEADER" translatable="true">Systémové nastavení</string>
 	<string name="SETTING_SEARCH_ENGINE" translatable="true">vyhledávač</string>
 	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
@@ -215,7 +215,7 @@
 	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Přizpůsobte software. Vyhledávač</string>
 	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">změnit vzhled vyhledávání na webu</string>
 	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+	<string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
 	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
 	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
 	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
@@ -260,10 +260,10 @@
 	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">chránit vaši online identitu</string>
 	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">udržujte svoji identitu v soukromí. můžeme vás chránit před několika sledovači, kteří vás sledují online. toto nastavení systému lze také použít k blokování reklamy</string>
 	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">zachraňte se před ochranou Survelance uživatele</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis řekne webům, aby mě nesledovaly</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion řekne webům, aby mě nesledovaly</string>
 	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">řekni webu, aby mě nesledoval</string>
 	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Ochrana sledování uživatele</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">povolit uživateli Survelance Protection poskytovanou Genesis</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">povolit uživateli Survelance Protection poskytovanou Orion</string>
 	<string name="SETTING_PRIVACY_COOKIES" translatable="true">soubory cookie webových stránek</string>
 	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">vyberte předvolby cookies webových stránek podle svých bezpečnostních potřeb</string>
 	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">vymazat soukromá data na výstupu</string>
@@ -473,7 +473,7 @@
 
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
 	<string name="HOME_CONNECT" translatable="false">connect</string>
-	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+	<string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">zde se zobrazí otevřené karty</string>
 
 
@@ -495,7 +495,7 @@
 	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Nedávné karty</string>
 	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nová identita</string>
 	<string name="SETTING_PRIVACY_POLICY" translatable="true">Zásady ochrany osobních údajů</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Zásady ochrany osobních údajů Genesis Browser</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Zásady ochrany osobních údajů Orion Browser</string>
 	<string name="SETTING_REPORT_WEBSITE" translatable="true">Nahlásit web</string>
 	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Nahlásit nelegální web</string>
 	<string name="SETTING_SITEMAP" translatable="true">zveřejněte svůj web</string>

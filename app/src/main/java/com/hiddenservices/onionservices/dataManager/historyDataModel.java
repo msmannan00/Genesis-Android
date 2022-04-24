@@ -92,7 +92,7 @@ public class historyDataModel {
     private int addHistory(String pUrl,String pHeader, int pID) {
 
         if(pUrl.startsWith(constants.CONST_GENESIS_URL_CACHED) || pUrl.startsWith(constants.CONST_GENESIS_URL_CACHED_DARK)){
-            pUrl = "https://genesis.onion";
+            pUrl = "https://orion.onion";
         }
 
         if(pUrl.length()>1500 || pUrl.equals("about:blank") || pHeader.equals("$TITLE")){

@@ -510,8 +510,8 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 }
 
                 if(model.getDescription().startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)){
-                    String m_title = model.getDescription().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://genesis.onion/privacy");
-                    String m_description = model.getHeader().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://genesis.onion/privacy");
+                    String m_title = model.getDescription().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://orion.onion/privacy");
+                    String m_description = model.getHeader().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://orion.onion/privacy");
 
                     mHeader.setText(m_title);
                     mDescription.setText(m_description);
@@ -524,7 +524,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
                 String header = model.getHeader();
 
-                if(model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("genesis.onion")){
+                if(model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("orion.onion")){
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 }
                 else{

@@ -5,7 +5,7 @@
 	<string name="GENERAL_SEARCH_HINT" translatable="true">cerqueu alguna cosa o escriviu un enllaç web</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">trobar a la pàgina</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">motor de cerca</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! alguna cosa ha fallat</string>
 	<string name="GENERAL_TODO" translatable="true">tot</string>
 	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>

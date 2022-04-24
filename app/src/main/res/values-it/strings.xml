@@ -5,8 +5,8 @@
 	<string name="GENERAL_SEARCH_HINT" translatable="true">cerca qualcosa o digita un collegamento web</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">trova nella pagina</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">motore di ricerca</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! qualcosa è andato storto</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
+	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! orion è andato storto</string>
 	<string name="GENERAL_TODO" translatable="true">qualunque cosa</string>
 	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
 	<string name="GENERAL_LOADING" translatable="true">libertà digitale</string>

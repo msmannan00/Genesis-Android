@@ -634,7 +634,7 @@ class homeViewController
                     if(mFastConnect){
                         sleep(1000);
                         if(orbotLocalConstants.mNetworkState){
-                            orbotLocalConstants.mTorLogsStatus = "Starting Genesis | Please Wait ...";
+                            orbotLocalConstants.mTorLogsStatus = "Starting Orion | Please Wait ...";
                             mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
                             startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                             if (orbotLocalConstants.mSOCKSPort!=-1){
@@ -1044,7 +1044,7 @@ class homeViewController
             return;
         }
         if(url.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)){
-            url="https://genesis.onion/privacy";
+            url="https://orion.onion/privacy";
         }
 
         if(url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
@@ -1278,7 +1278,7 @@ class homeViewController
             url=url.replace("http://","");
         }
 
-        url = url.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion","genesis.onion");
+        url = url.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion","orion.onion");
         boolean isTextSelected = false;
 
         if(mSearchbar.isSelected()){
@@ -1355,13 +1355,13 @@ class homeViewController
             progressAnimator.cancel();
         }
 
-        if((mSearchbar.getText().toString().equals("genesis.onion/search?q=$s&p_num=1&s_type=all") || mSearchbar.getText().toString().equals("genesis.onion")) && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
+        if((mSearchbar.getText().toString().equals("orion.onion/search?q=$s&p_num=1&s_type=all") || mSearchbar.getText().toString().equals("orion.onion")) && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
             return;
         }
 
-        if(mSearchbar.getText().toString().equals("genesis.onion")){
+        if(mSearchbar.getText().toString().equals("orion.onion")){
             return;
         }
 

@@ -65,7 +65,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
         mHintList = pHintList;
         if(mHintList.size()==1 && mHintList.get(0).getHeader().equals("about:blank")) {
             mHintList.clear();
-            mHintList.add( new historyRowModel("Genesis Search", "genesis.onion",-1));
+            mHintList.add( new historyRowModel("Orion Search", "orion.onion",-1));
         }
         notifyDataSetChanged();
     }
@@ -173,7 +173,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             String m_url = model.getDescription().toString();
             if(!status.sTorBrowsing && (m_url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || m_url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))){
-                m_url = "https://genesis.onion/privacy";
+                m_url = "https://orion.onion/privacy";
             }
 
             mURL.setText(m_url);
@@ -197,7 +197,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
-            if(mURLLink.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURLLink.contains("genesis.onion")){
+            if(mURLLink.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURLLink.contains("orion.onion")){
                 pHintWebIconImage.setImageTintList(null);
                 pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 mPastWebIcon.put(getLayoutPosition(),pHintWebIconImage.getDrawable());

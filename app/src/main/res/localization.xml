@@ -5,7 +5,7 @@
     <string name="GENERAL_SEARCH_HINT" translatable="true">search something or type a weblink</string>
     <string name="GENERAL_FIND_HINT" translatable="true">find in page</string>
     <string name="GENERAL_SEARCH_ENGINE" translatable="true">search engine</string>
-    <string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="true">opps! something has went wrong</string>
     <string name="GENERAL_TODO" translatable="true">todo</string>
     <string name="GENERAL_PROJECT_NAME" translatable="false">1111 search engine</string>
@@ -48,7 +48,7 @@
     <string name="SETTING_SEARCH_HEADER_2" translatable="true">Customize Software . Search Engine</string>
     <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">change how Web Searches appear</string>
     <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-    <string name="SETTING_SEARCH_GENESIS" translatable="false">1111</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
     <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
     <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
     <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>

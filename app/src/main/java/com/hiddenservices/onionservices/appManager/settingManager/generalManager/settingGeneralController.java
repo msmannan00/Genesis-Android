@@ -146,7 +146,6 @@ public class settingGeneralController extends AppCompatActivity {
                             activityContextManager.getInstance().getHomeController().onReInitTheme();
                             activityContextManager.getInstance().getSettingController().onInitTheme();
                             activityContextManager.getInstance().getHomeController().onCloseAllTabs();
-                            activityContextManager.getInstance().getHomeController().onReload(null);
 
                             onBackPressed();
                             overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
@@ -154,7 +153,8 @@ public class settingGeneralController extends AppCompatActivity {
 
                         }
                     }, 100);
-                }
+
+                 }
             }
             return null;
         }

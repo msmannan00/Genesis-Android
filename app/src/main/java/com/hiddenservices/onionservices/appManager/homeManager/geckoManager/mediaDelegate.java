@@ -69,7 +69,7 @@ class mediaDelegate implements GeckoSession.MediaDelegate {
 
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(mActivity.getApplicationContext(), "GeckoChannel")
-                        .setContentTitle("Genesis Browser")
+                        .setContentTitle("Orion Browser")
                         .setContentText(message)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(pendingIntent)

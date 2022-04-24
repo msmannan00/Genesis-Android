@@ -83,6 +83,8 @@
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_create_bookmark.xml" value="0.20989583333333334" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_tor_change.xml" value="0.7655913978494624" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/bookmark/layout/bookmark_row_view.xml" value="0.18541666666666667" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/bookmark/layout/bookmark_view.xml" value="0.18541666666666667" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/history/layout/history_view.xml" value="0.20989583333333334" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/home/layout/hint_view.xml" value="0.14791666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/home/layout/home_view.xml" value="0.33" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/home/layout/notification_menu.xml" value="0.14791666666666667" />

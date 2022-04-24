@@ -60,7 +60,7 @@ class proxyStatusViewController
 
     private void initViews(String pOrbotStatus, boolean pVPNStatus, boolean pGatewayStatus){
         if(!status.sTorBrowsing){
-            mOrbotStatus.setText("In Active");
+            mOrbotStatus.setText("Disabled");
         }else {
             mOrbotStatus.setText(pOrbotStatus);
         }

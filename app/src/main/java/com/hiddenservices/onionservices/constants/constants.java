@@ -17,7 +17,7 @@ public class constants
     public static final String CONST_REPORT_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/report?url=";
     public static final String CONST_SITEMAP = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/sitemap";
     public static final String CONST_PACKAGE_NAME = "com.hiddenservices.onionservices";
-    public static final String CONST_GENESIS_ONION = "genesis.onion";
+    public static final String CONST_GENESIS_ONION = "orion.onion";
     public static final String CONST_GENESIS_ONION_V2 = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
 
     /*DRIVE URL DEV*/
@@ -46,7 +46,7 @@ public class constants
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pSecretToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
     public static final String CONST_GENESIS_HELP_URL_CACHE_DARK = "resource://android/assets/help/help-dark.html";
-    public static final String CONST_GENESIS_HELP_URL = "https://genesis.onion/help";
+    public static final String CONST_GENESIS_HELP_URL = "https://orion.onion/help";
     public static final String CONST_GENESIS_HELP_URL_SUB = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/help";
     public static final String CONST_BACKEND_GENESIS_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/search?q=$s&p_num=1&s_type=all";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
@@ -64,7 +64,7 @@ public class constants
 
     /*LOG CONSTANTS*/
 
-    public static final String CONST_LOGS_DEFAULT_MESSAGE = "Genesis on standby at the moment";
+    public static final String CONST_LOGS_DEFAULT_MESSAGE = "Orion on standby at the moment";
 
     /*MENU CONSTANTS*/
 
@@ -77,13 +77,13 @@ public class constants
     public static final int CONST_MAX_LIST_DATA_SIZE =5000;
     public static final int CONST_FETCHABLE_LIST_SIZE =100;
     public static final int CONST_MAX_BOOKMARK_SIZE =500;
-    public static final String CONST_DATABASE_NAME ="genesis_dbase";
+    public static final String CONST_DATABASE_NAME ="orion_dbase";
     public static final String CONST_PERCENTAGE_SIGN ="%";
 
     /*Notification Manager*/
 
     public static final String CONST_NOTIFICATION_ID_NAME = "NOTIFICATION:INDENTIFIER:1001";
-    public static final String CONST_NOTIFICATION_TITLE = "Genesis Browser";
+    public static final String CONST_NOTIFICATION_TITLE = "Orion Browser";
     public static final int CONST_NOTIFICATION_ID_VALUE = 1;
     public static final int CONST_NOTIFICATION_REQUEST_CODE = 0;
     public static final int mUserEngagementNotificationID = 1001;

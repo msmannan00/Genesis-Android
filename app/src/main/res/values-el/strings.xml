@@ -5,7 +5,7 @@
 	<string name="GENERAL_SEARCH_HINT" translatable="true">αναζήτηση κάτι ή πληκτρολογήστε έναν σύνδεσμο ιστού</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">βρείτε στη σελίδα</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">μηχανή αναζήτησης</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">αντίθετα! κάτι πήγε στραβά</string>
 	<string name="GENERAL_TODO" translatable="true">τα παντα</string>
 	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>

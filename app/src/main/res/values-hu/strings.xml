@@ -1,14 +1,14 @@
 <resources>
 
 	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Genesis</string>
+	<string name="app_name" translatable="false">Orion Browser</string>
 	<string name="GENERAL_SEARCH_HINT" translatable="true">keresni valamiben, vagy beírni egy weblinket</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">megtalálja az oldalon</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">keresőmotor</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! valami elromlott</string>
 	<string name="GENERAL_TODO" translatable="true">minden</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
+	<string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
 	<string name="GENERAL_LOADING" translatable="true">digitális szabadság</string>
 	<string name="GENERAL_RELOAD" translatable="true">újratöltés</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">a következő probléma egyikével áll szemben. előfordulhat, hogy egy weboldal vagy webhely nem működik. gyenge lehet az internetkapcsolat. lehet, hogy proxyt használ. előfordulhat, hogy a webhelyet tűzfal blokkolja</string>
@@ -36,7 +36,7 @@
 	<string name="LANDING_BRIDGES_INFO" translatable="true">"Néha szükség van egy hídra a Tor hálózat eléréséhez"</string>
 	<string name="LANDING_MORE" translatable="true">"TOVÁBBI MEGOLDÁS"</string>
 	<string name="LANDING_HELLO" translatable="true">"Hello"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Üdvözöljük a Genesis-es számmal mobilon."</string>
+	<string name="LANDING_WELCOME" translatable="true">"Üdvözöljük a Orion-es számmal mobilon."</string>
 	<string name="LANDING_BROWSE_INFO" translatable="true">"Böngésszen biztonságosan és biztonságosan az interneten."</string>
 	<string name="LANDING_NO_TRACKING" translatable="true">"Nincs nyomkövetés. Nincs cenzúra."</string>
 
@@ -58,8 +58,8 @@
 	<!-- Orbot Log -->
 	<string name="ORBOT_LOG" translatable="true">proxy naplók</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Rendszernapló információ</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">Ha kapcsolódási problémával néz szembe az Genesis indítása közben, kérjük, másolja a következő kódot, és keresse meg online a problémát, vagy küldje el nekünk, így megpróbálhatunk segíteni</string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">Ha kapcsolódási problémával néz szembe az Orion indítása közben, kérjük, másolja a következő kódot, és keresse meg online a problémát, vagy küldje el nekünk, így megpróbálhatunk segíteni</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
 
 	<!-- Orbot Settings -->
 	<string name="ORBOT_SETTING_HEADER" translatable="true">proxy testreszabása</string>
@@ -98,7 +98,7 @@
 	<string name="TOAST_ALERT_RESTART" translatable="true">Újraindítás</string>
 	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">A Lap Bezárva</string>
 	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Új lap megnyílt</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy összekötő ...</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy összekötő ...</string>
 	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">A memória megtelt ➔ Törlés fül</string>
 	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Előugró ablak</string>
 	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Hiba Naplók Megnyitása</string>
@@ -183,7 +183,7 @@
 
 	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
 	<string name="SETTING_BASIC_SETTING" translatable="true">Rendszerbeállítás</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">tegye az Genesis-et az alapértelmezett böngészővé</string>
+	<string name="SETTING_DEFAULT_BROWSER" translatable="true">tegye az Orion-et az alapértelmezett böngészővé</string>
 	<string name="SETTING_HEADER" translatable="true">Rendszerbeállítás</string>
 	<string name="SETTING_SEARCH_ENGINE" translatable="true">keresőmotor</string>
 	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
@@ -210,7 +210,7 @@
 	<string name="SETTING_SEARCH_HEADER_2" translatable="true">A szoftver testreszabása. Keresőmotor</string>
 	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">módosíthatja az internetes keresések megjelenési módját</string>
 	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+	<string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
 	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
 	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
 	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
@@ -255,10 +255,10 @@
 	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">védje online identitását</string>
 	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">személyazonosságát tartsa magán. megvédhetünk több nyomkövetőtől, amelyek online nyomon követnek. ez a rendszerbeállítás a reklám blokkolására is használható</string>
 	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">mentse meg magát a Survelance Protection felhasználójától</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Az Genesis megmondja az oldalaknak, hogy ne kövessenek engem</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Az Orion megmondja az oldalaknak, hogy ne kövessenek engem</string>
 	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">mondd a weboldalnak, hogy ne kövessen nyomon</string>
 	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Felhasználói felügyeleti védelem</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">engedélyezze a felhasználói Survelance Protection szolgáltatást, amelyet az Genesis biztosít</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">engedélyezze a felhasználói Survelance Protection szolgáltatást, amelyet az Orion biztosít</string>
 	<string name="SETTING_PRIVACY_COOKIES" translatable="true">weboldal sütik</string>
 	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">a biztonsági igényeinek megfelelően válassza ki a weboldal sütik beállításait</string>
 	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">törölje a személyes adatokat a kilépéskor</string>
@@ -465,7 +465,7 @@
 
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
 	<string name="HOME_CONNECT" translatable="false">connect</string>
-	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+	<string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">a megnyitott lapok itt jelennek meg</string>
 
 
@@ -486,7 +486,7 @@
 	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Legutóbbi lapok</string>
 	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Új identitás</string>
 	<string name="SETTING_PRIVACY_POLICY" translatable="true">Adatvédelmi irányelvek</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser adatvédelmi irányelvek</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser adatvédelmi irányelvek</string>
 	<string name="SETTING_REPORT_WEBSITE" translatable="true">Webhely jelentése</string>
 	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Illegális weboldal bejelentése</string>
 	<string name="SETTING_SITEMAP" translatable="true">tegye közzé webhelyét</string>

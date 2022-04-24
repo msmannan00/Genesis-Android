@@ -45,7 +45,7 @@ public class historyRowModel
     }
     public String getDescription() {
         if(mDescription!=null && mDescription.equals("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")){
-            return "genesis.onion";
+            return "orion.onion";
         }
         return mDescription;
     }

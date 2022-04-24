@@ -1,14 +1,14 @@
 <resources>
 
 	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Genesis</string>
+	<string name="app_name" translatable="false">Orion Browser</string>
 	<string name="GENERAL_SEARCH_HINT" translatable="true">pesquise algo ou digite um link da web</string>
 	<string name="GENERAL_FIND_HINT" translatable="true">encontrar na página</string>
 	<string name="GENERAL_SEARCH_ENGINE" translatable="true">motor de busca</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://genesis.onion</string>
+	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
 	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! algo deu errado</string>
 	<string name="GENERAL_TODO" translatable="true">todo</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
+	<string name="GENERAL_PROJECT_NAME" translatable="false">Orion Search Engine</string>
 	<string name="GENERAL_LOADING" translatable="true">digital freedom</string>
 	<string name="GENERAL_RELOAD" translatable="true">recarregar</string>
 	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">você está enfrentando um dos seguintes problemas. página da Web ou site pode não estar funcionando. sua conexão com a internet pode estar ruim. você pode estar usando um proxy. site pode estar bloqueado por firewall</string>
@@ -20,7 +20,7 @@
 	<string name="shortcut_erase_long_label" translatable="false">Apagar site navegado</string>
 	<string name="shortcut_erase_and_open_short_label" translatable="false">Apague seus dados e abra o navegador</string>
 	<string name="shortcut_erase_and_open_long_label" translatable="false">Apagar o cache do navegador</string>
-	<string name="shortcut_open" translatable="false">Reinicie o navegador genesis</string>
+	<string name="shortcut_open" translatable="false">Reinicie o navegador orion</string>
 	<string name="shortcut_open_long" translatable="false">Reinicie O Seu Navegador</string>
 
 	<!-- Bookmark Setting -->
@@ -36,7 +36,7 @@
 	<string name="LANDING_BRIDGES_INFO" translatable="true">"Às vezes você precisa de uma ponte para chegar ao Tor"</string>
 	<string name="LANDING_MORE" translatable="true">"DIGA-ME MAIS"</string>
 	<string name="LANDING_HELLO" translatable="true">"Olá"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Bem-vindo ao Genesis no celular."</string>
+	<string name="LANDING_WELCOME" translatable="true">"Bem-vindo ao Orion no celular."</string>
 	<string name="LANDING_BROWSE_INFO" translatable="true">"Navegue na Internet com segurança e segurança."</string>
 	<string name="LANDING_NO_TRACKING" translatable="true">"Sem rastreamento. Sem censura."</string>
 
@@ -58,8 +58,8 @@
 	<!-- Orbot Log -->
 	<string name="ORBOT_LOG" translatable="true">logs de proxy</string>
 	<string name="ORBOT_LOG_HEADER" translatable="true">Informações de registro do sistema</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">se você estiver enfrentando problemas de conectividade ao iniciar o Genesis, copie o código a seguir e encontre o problema online ou envie-o para nós, para que possamos tentar ajudá-lo</string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+	<string name="ORBOT_LOG_INFO" translatable="true">se você estiver enfrentando problemas de conectividade ao iniciar o Orion, copie o código a seguir e encontre o problema online ou envie-o para nós, para que possamos tentar ajudá-lo</string>
+	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
 
 	<!-- Orbot Settings -->
 	<string name="ORBOT_SETTING_HEADER" translatable="true">personalização de proxy</string>
@@ -98,7 +98,7 @@
 	<string name="TOAST_ALERT_RESTART" translatable="true">Reiniciar</string>
 	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">A Guia Está Fechada</string>
 	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Nova guia aberta</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proxy Genesis conectando ...</string>
+	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proxy Orion conectando ...</string>
 	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">A memória está cheia ➔ Guia Limpar</string>
 	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup bloqueado</string>
 	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Abrir Registros De Erros</string>
@@ -192,7 +192,7 @@
 
 	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
 	<string name="SETTING_BASIC_SETTING" translatable="true">Configuração de sistema</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">faça do Genesis seu navegador padrão</string>
+	<string name="SETTING_DEFAULT_BROWSER" translatable="true">faça do Orion seu navegador padrão</string>
 	<string name="SETTING_HEADER" translatable="true">Configuração de sistema</string>
 	<string name="SETTING_SEARCH_ENGINE" translatable="true">motor de busca</string>
 	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
@@ -219,7 +219,7 @@
 	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Personalize o software. Motor de busca</string>
 	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">mudar a forma como as pesquisas na web aparecem</string>
 	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+	<string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
 	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
 	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
 	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
@@ -264,10 +264,10 @@
 	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">proteja sua identidade online</string>
 	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">mantenha sua identidade privada. podemos protegê-lo de vários rastreadores que o seguem online. esta configuração do sistema também pode ser usada para bloquear anúncios</string>
 	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">salve-se do usuário Survelance Protection</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis dirá aos sites para não me rastrear</string>
+	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion dirá aos sites para não me rastrear</string>
 	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">diga ao site para não me rastrear</string>
 	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Proteção de Vigilância do Usuário</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">habilitar o usuário Survelance Protection fornecido pelo Genesis</string>
+	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">habilitar o usuário Survelance Protection fornecido pelo Orion</string>
 	<string name="SETTING_PRIVACY_COOKIES" translatable="true">cookies do site</string>
 	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">selecione as preferências de cookies do site de acordo com suas necessidades de segurança</string>
 	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">limpar dados privados ao sair</string>
@@ -387,7 +387,7 @@
 
 
 
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Genesis Logs</string>
+	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orion Logs</string>
 	<string name="HOME_MENU__NEW_TABS" translatable="true">novas guias</string>
 	<string name="HOME_MENU_CLOSE_TABS" translatable="true">aba fechada</string>
 	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">abrir abas recentes</string>
@@ -474,7 +474,7 @@
 
 	<string name="HOME_TAB_TEXT" translatable="true">1</string>
 	<string name="HOME_CONNECT" translatable="false">connect</string>
-	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+	<string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
 	<string name="HOME_TAB_EMPTY" translatable="true">abas abertas serão mostradas aqui</string>
 
 
@@ -488,7 +488,7 @@
 	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Guia recente</string>
 	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nova identidade</string>
 	<string name="SETTING_PRIVACY_POLICY" translatable="true">Política de privacidade</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser política de privacidade</string>
+	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser política de privacidade</string>
 	<string name="SETTING_REPORT_WEBSITE" translatable="true">Site Do Relatório</string>
 	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Denunciar sites ilegais</string>
 	<string name="SETTING_SITEMAP" translatable="true">publique seu site</string>

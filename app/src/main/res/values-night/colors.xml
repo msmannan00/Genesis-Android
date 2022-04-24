@@ -16,6 +16,7 @@
     <color name="c_text_short_header">#33cccc</color>
     <color name="c_ripple_gray">#808080</color>
     <color name="c_icon_tint">#6483b4</color>
+    <color name="c_edittext_border_static">#4d4d4d</color>
 
     /* Text Colors Version*/
     <color name="c_text_v1">#ffffff</color>
