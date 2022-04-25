@@ -81,9 +81,9 @@ class crawlerDataModel
             String mURL = strings.GENERIC_EMPTY_STR;
 
             private void onSendRequest(){
-                RequestQueue mRequestQueue = Volley.newRequestQueue(mContext);
+                RequestQueue mRequestQueue = Volley.newRequestQueue(mContext, new ProxiedHurlStack());
 
-                String url = "http://192.168.10.2:8000/user_index/";
+                String url = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/user_index/";
                 StringRequest mRequestData = new StringRequest(Request.Method.POST, url, response -> {
                 }, error -> {
                     Log.i("ad","");
