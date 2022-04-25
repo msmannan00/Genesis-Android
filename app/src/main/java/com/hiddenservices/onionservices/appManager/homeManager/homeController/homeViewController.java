@@ -821,7 +821,7 @@ class homeViewController
     public PopupWindow getMenuPopup(){
         return popupWindow;
     }
-
+    @SuppressLint("InflateParams") View popupView = null;
     void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent, String mURL, boolean pIsBookmarked){
 
         if(popupWindow!=null){
@@ -831,7 +831,7 @@ class homeViewController
         LayoutInflater layoutInflater
                 = (LayoutInflater) mContext
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
-        @SuppressLint("InflateParams") final View popupView = layoutInflater.inflate(R.layout.popup_side_menu, null);
+        popupView = layoutInflater.inflate(R.layout.popup_side_menu, null);
 
 
         int height = helperMethod.getScreenHeight(mContext)*90 /100;
@@ -929,6 +929,21 @@ class homeViewController
             close.setClickable(true);
         }, 300);
 
+    }
+
+    private void changeRefreshMenu(){
+        if(popupView!=null){
+            ImageButton mRefresh = popupView.findViewById(R.id.menu21);
+            ImageButton close = popupView.findViewById(R.id.menu20);
+            close.setVisibility(View.GONE);
+            mRefresh.setVisibility(View.VISIBLE);
+            mRefresh.animate().alpha(0.1f);
+            close.animate().alpha(0);
+            new Handler().postDelayed(() ->
+            {
+                mRefresh.animate().setDuration(250).alpha(1f);
+            }, 300);
+        }
     }
 
     void downloadNotification(String message, enums.etype e_type){
@@ -1343,6 +1358,9 @@ class homeViewController
 
     void onProgressBarUpdate(int value, boolean mForced){
 
+        if(value == 100){
+            changeRefreshMenu();
+        }
         mProgressBar = activityContextManager.getInstance().getHomeController().mProgressBar;
         if(value != 0 && value != 100){
             mAppBar.setExpanded(true,true);

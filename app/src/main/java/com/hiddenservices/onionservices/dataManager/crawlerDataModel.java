@@ -1,6 +1,8 @@
 package com.hiddenservices.onionservices.dataManager;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -84,6 +86,7 @@ class crawlerDataModel
                 String url = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/user_index/";
                 StringRequest mRequestData = new StringRequest(Request.Method.POST, url, response -> {
                 }, error -> {
+                    Log.i("ad","");
                 }) {
                     protected Map<String, String> getParams() {
                         mHtml = StringEscapeUtils.escapeXml11(mHtml);
