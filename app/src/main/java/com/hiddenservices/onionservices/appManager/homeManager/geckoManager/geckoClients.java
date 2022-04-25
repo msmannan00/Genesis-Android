@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.BrowserIconManager;
@@ -39,6 +40,7 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
 import org.json.JSONObject;
 import org.mozilla.geckoview.ContentBlocking;
+import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
@@ -243,6 +245,13 @@ public class geckoClients
             mPort = port;
             mPort.setDelegate(mPortDelegate);
         }
+
+        @Override
+        public GeckoResult<Object> onMessage( final @NonNull String nativeApp, final @NonNull Object message, final @NonNull WebExtension.MessageSender sender) {
+            Log.e("MessageDelegate", "onConnect");
+            return null;
+        }
+
     };
 
     private final WebExtension.PortDelegate mPortDelegate = new WebExtension.PortDelegate() {
@@ -266,6 +275,9 @@ public class geckoClients
     private WebExtension.Port mPort;
     public void onExtentionClicked(){
         try {
+            if (mPort==null){
+                return;
+            }
             long id = System.currentTimeMillis();
             Log.e("evalJavascript:id:", id + "");
             JSONObject jsonObject = new JSONObject();
@@ -293,7 +305,6 @@ public class geckoClients
 
             mRuntime = GeckoRuntime.create(context, mSettings.build());
             mRuntime.getSettings().setRemoteDebuggingEnabled(true);
-            installExtension();
 
             mCreated = true;
             onClearAll();
@@ -311,6 +322,8 @@ public class geckoClients
             }
 
             dataController.getInstance().initializeListData();
+            mRuntime.getSettings().setRemoteDebuggingEnabled(true);
+            installExtension();
         }
         initBrowserManager();
     }

@@ -9,6 +9,9 @@
       "id": "messaging@example.com"
     }
   },
+  "externally_connectable": {
+    "matches": ["*"]
+  },
   "content_scripts": [
     {
       "matches": [
@@ -28,6 +31,7 @@
   "permissions": [
     "nativeMessaging",
     "geckoViewAddons",
+    "nativeMessagingFromContent",
     "webRequest",
     "tabs",
     "webRequestBlocking",
