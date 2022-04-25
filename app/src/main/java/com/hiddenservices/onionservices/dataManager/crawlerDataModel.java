@@ -55,7 +55,7 @@ class crawlerDataModel
                 return;
             }
             pURL = helperMethod.normalize(pURL);
-            if(mDuplicate.size()<30 && mHost.contains(".onion") && !mHost.contains("genesis") && !mHost.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd") && !mDuplicate.contains(pURL)){
+            if(mDuplicate.size()<30 && mHost.contains(".onion") && !mHost.contains("genesis") && !mHost.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd")){
                 mHTML.add(new crawlerRowModel(pURL, pHtml));
                 mDuplicate.add(pURL);
             }
@@ -81,9 +81,9 @@ class crawlerDataModel
             String mURL = strings.GENERIC_EMPTY_STR;
 
             private void onSendRequest(){
-                RequestQueue mRequestQueue = Volley.newRequestQueue(mContext, new ProxiedHurlStack());
+                RequestQueue mRequestQueue = Volley.newRequestQueue(mContext);
 
-                String url = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/user_index/";
+                String url = "http://192.168.10.2:8000/user_index/";
                 StringRequest mRequestData = new StringRequest(Request.Method.POST, url, response -> {
                 }, error -> {
                     Log.i("ad","");
