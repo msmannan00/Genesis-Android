@@ -55,7 +55,7 @@ class crawlerDataModel
                 return;
             }
             pURL = helperMethod.normalize(pURL);
-            if(mDuplicate.size()<30 && mHost.contains(".onion") && !mHost.contains("genesis") && !mHost.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd")){
+            if(mDuplicate.size()<30 && mHost.contains(".onion") && !mHost.contains("genesis") && !mHost.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd") && !mDuplicate.contains(pURL)){
                 mHTML.add(new crawlerRowModel(pURL, pHtml));
                 mDuplicate.add(pURL);
             }

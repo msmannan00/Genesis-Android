@@ -355,6 +355,7 @@ public class pluginController
                     helperMethod.restartAndOpen(false);
                     return null;
                 });
+                mHomeController.get().finish();
             }
             return null;
         }

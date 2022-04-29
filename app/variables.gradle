@@ -1,5 +1,5 @@
 /* Version */
-project.ext.vname = 'Build | Dark-Origin 1.0.2.1'
+project.ext.vname = 'Build | Dark-Origin 1.0.4.1'
 project.ext.vcode = 365
 project.ext.buildType = 'release'
 
@@ -19,7 +19,7 @@ project.ext.checkReleaseBuilds = false
 project.ext.abortOnError = false
 
 /* Source Sets */
-project.ext.releaseRoot = "src/GenesisRelease"
+project.ext.releaseRoot = "src/OrionRelease"
 
 /* Dex Options */
 project.ext.preDexLibraries = true

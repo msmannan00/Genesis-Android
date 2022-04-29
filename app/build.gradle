@@ -1,3 +1,5 @@
+import com.android.build.OutputFile
+
 plugins {
     id "com.jetbrains.python.envs" version "0.0.26"
 }
@@ -27,7 +29,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     buildTypes {
         release {
             minifyEnabled project.ext.minifyEnabled
@@ -35,24 +36,29 @@ android {
             proguardFiles getDefaultProguardFile(project.ext.proguard_file), project.ext.proguard_rule
         }
     }
+    lintOptions {
+        checkReleaseBuilds project.ext.checkReleaseBuilds
+        abortOnError project.ext.abortOnError
+    }
 
 
     flavorDimensions project.ext.dimen
 
     productFlavors {
-        genesis {
+        orion {
             dimension project.ext.dimen
         }
     }
 
     splits {
         abi {
-            reset()
             enable project.ext.splitEnabled
+
+            reset()
+
             include project.ext.abi_x86, project.ext.abi_x86_x64, project.ext.abi_arm64, project.ext.abi_armeabi
         }
     }
-
     bundle {
         abi {
             enableSplit = true
@@ -64,7 +70,7 @@ android {
             res.srcDirs = project.ext.resource_directories
         }
 
-        genesisRelease.root = project.ext.releaseRoot
+        orionRelease.root = project.ext.releaseRoot
     }
 }
 dependencies {
@@ -125,7 +131,33 @@ dependencies {
 
 }
 
+/* Automated APK Generation */
 
+android.applicationVariants.all { variant ->
+
+    def buildType = variant.buildType.name
+
+    if (buildType == project.ext.buildType) {
+        def baseVersionCode = project.ext.vcode
+
+        variant.outputs.each { output ->
+            def abi = output.getFilter(OutputFile.ABI)
+            def versionCodeOverride = baseVersionCode
+            if (abi == project.ext.abi_x86) {
+                versionCodeOverride = versionCodeOverride + 3
+            } else if (abi == project.ext.abi_x86_x64) {
+                versionCodeOverride = versionCodeOverride + 2
+            } else if (abi == project.ext.abi_arm64) {
+                versionCodeOverride = versionCodeOverride + 1
+            } else if (abi == project.ext.abi_armeabi) {
+                versionCodeOverride = versionCodeOverride + 0
+            } else {
+                throw new RuntimeException(project.ext.abi_unknown + abi)
+            }
+            output.versionCodeOverride = versionCodeOverride
+        }
+    }
+}
 
 
 
