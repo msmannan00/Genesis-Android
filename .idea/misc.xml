@@ -84,7 +84,9 @@
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_tor_change.xml" value="0.7655913978494624" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/bookmark/layout/bookmark_row_view.xml" value="0.18541666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/bookmark/layout/bookmark_view.xml" value="0.18541666666666667" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/help/layout/help_view.xml" value="0.358695652173913" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/history/layout/activity_adview_controller.xml" value="0.33" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/history/layout/activity_orion_adview_controller.xml" value="0.25" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/history/layout/history_view.xml" value="0.20989583333333334" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/home/layout/hint_view.xml" value="0.14791666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/home/layout/home_view.xml" value="0.33" />
@@ -95,6 +97,7 @@
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/proxyStatus/layout/proxy_status_view.xml" value="0.18541666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting.xml" value="0.5" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting_advance_view.xml" value="0.37083333333333335" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting_advert_view.xml" value="0.33" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting_privacy_view.xml" value="0.67" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/setting/layout/setting_search_view.xml" value="0.358695652173913" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/shared/listviews/layout/history_bookmark__row_menu.xml" value="0.18541666666666667" />

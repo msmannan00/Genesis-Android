@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pPopupRateusContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@xml/ax_round_corner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/pPopupRateusHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/ALERT_RATEUS"
+            android:textAlignment="textStart"
+            android:textColor="@color/c_alert_rateus_header"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/pPopupRateusDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:alpha="0.6"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:text="@string/ALERT_RATEUS_INFO"
+            android:textAlignment="textStart"
+            android:textColor="@color/c_alert_text_static"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pPopupRateusHeader"
+            tools:ignore="TextContrastCheck">
+
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/pPopupRateusRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:foregroundTint="@color/c_white"
+            android:progressBackgroundTint="@color/c_alert_rateus_warning"
+            android:rating="0.5"
+            android:scaleX="0.65"
+            android:scaleY="0.65"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pPopupRateusDescription"
+            tools:ignore="SpeakableTextPresentCheck">
+
+        </RatingBar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pPopupRateusRating">
+
+            <Button
+                android:id="@+id/pPopupRateusNext"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="15dp"
+                android:background="@xml/ax_ripple_default_round_bottom"
+                android:text="@string/ALERT_RATE"
+                android:textAllCaps="false"
+                android:textColor="@color/c_white"
+                android:textSize="14sp"
+                tools:ignore="ButtonStyle,TextContrastCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/pPopupRateusDismiss"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@xml/ax_ripple_default_round_bottom_secondary"
+                android:text="@string/ALERT_DISMISS"
+                android:textAllCaps="false"
+                android:textColor="@color/c_white"
+                android:textSize="14sp"
+                tools:ignore="ButtonStyle,TextContrastCheck,TouchTargetSizeCheck" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

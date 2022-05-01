@@ -18,6 +18,7 @@ import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.adPluginManager.appLovinManager;
+import com.hiddenservices.onionservices.pluginManager.adPluginManager.orionAdvertManager;
 import com.hiddenservices.onionservices.pluginManager.analyticPluginManager.analyticManager;
 import com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadManager;
 import com.hiddenservices.onionservices.pluginManager.langPluginManager.langManager;
@@ -46,6 +47,7 @@ public class pluginController
     /*Plugin Instance*/
 
     private appLovinManager mAdManager;
+    private orionAdvertManager mOrionAdvertManager;
     private analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
     private notifictionManager mNotificationManager;
@@ -87,6 +89,7 @@ public class pluginController
 
         mNotificationManager = new notifictionManager(mHomeController,new notificationCallback());
         mAdManager = new appLovinManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), mHomeController.get());
+        mOrionAdvertManager = new orionAdvertManager(new admobCallback(), ((homeController)mHomeController.get()).getBannerAd(), mHomeController.get());
         mAnalyticsManager = new analyticManager(mHomeController,new analyticCallback());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
@@ -126,8 +129,13 @@ public class pluginController
     }
 
     public Object onAdsInvoke(List<Object> pData, pluginEnums.eAdManager pEventType){
-        if(mAdManager !=null){
-            return mAdManager.onTrigger(pEventType);
+
+        // if(mAdManager !=null){
+        //     return mAdManager.onTrigger(pEventType);
+        // }
+
+        if(mOrionAdvertManager !=null){
+            return mOrionAdvertManager.onTrigger(pEventType);
         }
         return null;
     }
@@ -355,7 +363,7 @@ public class pluginController
                     helperMethod.restartAndOpen(false);
                     return null;
                 });
-                mHomeController.get().finish();
+                // mHomeController.get().finish();
             }
             return null;
         }

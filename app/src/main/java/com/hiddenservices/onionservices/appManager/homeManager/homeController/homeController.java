@@ -1,10 +1,10 @@
 package com.hiddenservices.onionservices.appManager.homeManager.homeController;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
-import android.app.AlarmManager;
 import android.app.DownloadManager;
-import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
@@ -52,9 +52,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.applovin.mediation.ads.MaxAdView;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.advertManager.advertController;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController;
 import com.hiddenservices.onionservices.appManager.historyManager.historyController;
+import com.hiddenservices.onionservices.appManager.orionAdvertManager.orionAdvertController;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.NestedGeckoView;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.*;
@@ -99,8 +101,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import mozilla.components.support.utils.DownloadUtils;
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 import static com.hiddenservices.onionservices.constants.constants.CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN;
 import static com.hiddenservices.onionservices.constants.constants.CONST_EXTERNAL_SHORTCUT_COMMAND_RESTART;
@@ -197,7 +197,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private boolean mSearchBarLoading = false;
     private boolean mSearchBarLoadingOpening = false;
     private boolean mSearchBarWasBackButtonPressed = false;
-    private boolean mWasEdittextChanged = false;
     private String mSearchBarPreviousText = strings.GENERIC_EMPTY_STR;
     private Handler mScrollHandler = null;
     private Runnable mScrollRunnable = null;
@@ -339,6 +338,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         isFocusChanging = false;
         mAppRestarted = false;
         mSearchBarLoading = false;
+    }
+
+    public void onAdvertClick(View view){
+        Intent myIntent = new Intent(this, orionAdvertController.class);
+        startActivity(myIntent);
     }
 
     public void initSuggestions(){
@@ -978,7 +982,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mWasEdittextChanged = true;
+
                 new Handler().postDelayed(() ->
                 {
                     String mText = mSearchbar.getText().toString();
@@ -1010,7 +1014,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                         if(mSuggestions.size()>0){
                             mSuggestions = (ArrayList<historyRowModel>)dataController.getInstance().invokeSuggestions(dataEnums.eSuggestionCommands.M_GET_SUGGESTIONS, Collections.singletonList(mText));
                             if(mHintListView.getAdapter()==null){
-                                initSuggestionView(mSuggestions, mText.toString());
+                                initSuggestionView(mSuggestions, mText);
                             }else if(!mSearchBarLoadingOpening){
                                 mEdittextChanged.removeCallbacks(postToServerRunnable);
                                 if(!mSearchBarLoading){
@@ -1064,7 +1068,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if(!hasFocus)
             {
                 msearchstatuscopy = false;
-                mWasEdittextChanged = false;
                 mSearchBarWasBackButtonPressed = true;
                 new Handler().postDelayed(() ->
                 {
@@ -1115,7 +1118,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     };
 
     public void onSearchBarInvoked(View view){
-        String url = mGeckoClient.getSession().getCurrentURL();
+        String url;
         if(!mSearchBarPreviousText.equals(mSearchbar.getText().toString())){
             url = mSearchbar.getText().toString();
         }else {
@@ -1610,7 +1613,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
-        if (mGeckoClient.getSession()!=null && mGeckoClient!=null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mGeckoClient.getUriPermission()!=null) {
+        if (mGeckoClient.getSession() != null && mGeckoClient != null && mGeckoClient.getUriPermission() != null) {
             this.revokeUriPermission(mGeckoClient.getUriPermission(), Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
         if(isSuggestionSearchOpened){
@@ -1643,7 +1646,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mProgressBar.setProgress(0);
                 }
             }else {
-                if(model.getSession().getSessionID() != mGeckoClient.getSession().getSessionID()){
+                if(!model.getSession().getSessionID().equals(mGeckoClient.getSession().getSessionID())){
                     onLoadTab(model.getSession(),false,true, false);
                 }
                 if(mGeckoClient.getSession().getProgress()!=100){

@@ -2,7 +2,6 @@ package com.hiddenservices.onionservices.pluginManager.downloadPluginManager;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Environment;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;

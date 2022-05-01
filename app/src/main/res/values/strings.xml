@@ -172,7 +172,7 @@
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">Request</string>
 
     <!-- Adview Custom -->
-    <string name="ADVIEW_HEADER" translatable="false">Advertisements</string>
+    <string name="ADVIEW_HEADER" translatable="false">Advertisement</string>
 
 
 
@@ -443,7 +443,7 @@
 
     <!-- Help -->
     <string name="HELP_RETRY" translatable="true">Retry</string>
-    <string name="HELP_RETRY_INFO" translatable="true">Opps! Network  connection error\Orion not connected</string>
+    <string name="HELP_RETRY_INFO" translatable="true">Opps! Network  connection error\nOrion not connected</string>
     <string name="HELP_TITLE" translatable="true">Support</string>
 
     <!-- Language Manager Manager -->

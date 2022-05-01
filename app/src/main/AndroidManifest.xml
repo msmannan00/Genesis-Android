@@ -34,6 +34,11 @@
             android:exported="true" />
 
         <activity
+            android:launchMode="singleTask"
+            android:name="com.hiddenservices.onionservices.appManager.orionAdvertManager.orionAdvertController"
+            android:exported="true" />
+
+        <activity
             android:name="com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
@@ -106,6 +111,11 @@
 
         <activity
             android:name="com.hiddenservices.onionservices.appManager.settingManager.logManager.settingLogController"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.hiddenservices.onionservices.appManager.settingManager.advertSetttings.advertSettingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
 
