@@ -18,8 +18,7 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-class helpViewController
-{
+class helpViewController {
     /*ViewControllers*/
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
@@ -28,7 +27,7 @@ class helpViewController
     private ConstraintLayout mRetryContainer;
     private Button mReloadButton;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, ProgressBar pProgressBar, RecyclerView pRecyclerView, ConstraintLayout pRetryContainer, Button pReloadButton){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, ProgressBar pProgressBar, RecyclerView pRecyclerView, ConstraintLayout pRetryContainer, Button pReloadButton) {
         this.mContext = context;
         this.mProgressBar = pProgressBar;
         this.mRecyclerView = pRecyclerView;
@@ -36,7 +35,7 @@ class helpViewController
         this.mReloadButton = pReloadButton;
     }
 
-    private void initPostUI(){
+    private void initPostUI() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -44,9 +43,8 @@ class helpViewController
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+            } else {
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                     mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
@@ -54,7 +52,7 @@ class helpViewController
         }
     }
 
-    private void onDataLoaded(){
+    private void onDataLoaded() {
         mProgressBar.animate().cancel();
         mRetryContainer.animate().cancel();
         mRecyclerView.animate().cancel();
@@ -63,7 +61,7 @@ class helpViewController
         mProgressBar.animate().setDuration(300).alpha(0);
     }
 
-    private void onLoadError(){
+    private void onLoadError() {
         mRecyclerView.animate().setDuration(300).alpha(0);
         mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setAlpha(1);
@@ -76,7 +74,7 @@ class helpViewController
         });
     }
 
-    private void onReloadData(){
+    private void onReloadData() {
         mRecyclerView.animate().setDuration(300).alpha(0);
         mReloadButton.setClickable(false);
         mRetryContainer.animate().cancel();
@@ -87,17 +85,14 @@ class helpViewController
         });
     }
 
-    public void onTrigger(helpEnums.eHelpViewController pCommands, List<Object> pData){
-        if(pCommands.equals(helpEnums.eHelpViewController.M_INIT_VIEWS)){
+    public void onTrigger(helpEnums.eHelpViewController pCommands, List<Object> pData) {
+        if (pCommands.equals(helpEnums.eHelpViewController.M_INIT_VIEWS)) {
             initPostUI();
-        }
-        else if(pCommands.equals(helpEnums.eHelpViewController.M_DATA_LOADED)){
+        } else if (pCommands.equals(helpEnums.eHelpViewController.M_DATA_LOADED)) {
             onDataLoaded();
-        }
-        else if(pCommands.equals(helpEnums.eHelpViewController.M_LOAD_ERROR)){
+        } else if (pCommands.equals(helpEnums.eHelpViewController.M_LOAD_ERROR)) {
             onLoadError();
-        }
-        else if(pCommands.equals(helpEnums.eHelpViewController.M_RELOAD_DATA)){
+        } else if (pCommands.equals(helpEnums.eHelpViewController.M_RELOAD_DATA)) {
             onReloadData();
         }
     }

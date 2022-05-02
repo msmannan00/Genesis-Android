@@ -2,8 +2,7 @@ package com.hiddenservices.onionservices.dataManager.models;
 
 import android.graphics.Bitmap;
 
-public class imageRowModel
-{
+public class imageRowModel {
     /*Private Variables*/
 
     private String mID;
@@ -12,7 +11,7 @@ public class imageRowModel
     private Bitmap mImage;
 
     /*Initializations*/
-    public imageRowModel(String pID, String pCreationDate, String pURL, Bitmap pImage){
+    public imageRowModel(String pID, String pCreationDate, String pURL, Bitmap pImage) {
         mID = pID;
         mCreationDate = pCreationDate;
         mURL = pURL;
@@ -20,7 +19,7 @@ public class imageRowModel
     }
 
     /*Getter Setters*/
-    public Bitmap getImage(){
+    public Bitmap getImage() {
         return mImage;
     }
 }

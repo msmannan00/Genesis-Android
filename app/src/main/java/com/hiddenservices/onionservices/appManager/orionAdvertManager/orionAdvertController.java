@@ -38,7 +38,7 @@ public class orionAdvertController extends AppCompatActivity {
         mAdvertViewController = new orionAdvertViewController(this, null, mWebView, mProgressBar);
     }
 
-    void onInitAdvert(){
+    void onInitAdvert() {
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setGeolocationEnabled(true);
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -48,7 +48,7 @@ public class orionAdvertController extends AppCompatActivity {
         mWebView.setWebViewClient(new orionAdvertWebViewClient(new webivewViewCallback()));
     }
 
-    private void onInitializeAdvertisements(){
+    private void onInitializeAdvertisements() {
         mWebView.loadUrl("https://360wise.com");
     }
 
@@ -67,7 +67,7 @@ public class orionAdvertController extends AppCompatActivity {
     public class webivewViewCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object event_type) {
-            if(event_type.equals(orionAdvertEnums.eOrionAdvertClientCallback.M_UPDATE_PROGRESSBAR)){
+            if (event_type.equals(orionAdvertEnums.eOrionAdvertClientCallback.M_UPDATE_PROGRESSBAR)) {
                 mAdvertViewController.onTrigger(orionAdvertEnums.eOrionAdvertViewController.M_UPDATE_PROGRESSBAR, Collections.singletonList(data.get(0)));
             }
             return null;

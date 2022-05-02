@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -36,10 +37,13 @@ import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import org.mozilla.geckoview.ContentBlocking;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import static com.hiddenservices.onionservices.constants.constants.*;
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE;
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE_STRING;
@@ -52,8 +56,7 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManagerCallbacks.M_CLEAR_HISTORY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManagerCallbacks.M_LOAD_NEW_TAB;
 
-public class messageManager implements View.OnClickListener, DialogInterface.OnDismissListener
-{
+public class messageManager implements View.OnClickListener, DialogInterface.OnDismissListener {
     /*Private Variables*/
 
     private List<Object> mData;
@@ -65,35 +68,36 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
     /*Initializations*/
 
-    private void onClearReference(){
-        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog!=null && mDialog.isShowing()){
+    private void onClearReference() {
+        if (mContext != null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
-        if(mContext != null){
+        if (mContext != null) {
             mEvent.invokeObserver(null, M_ADJUST_INPUT_RESIZE);
             mContext = null;
         }
     }
 
-    private void onDismiss(){
-        if(mContext!=null && !mContext.isFinishing() && !mContext.isDestroyed()){
+    private void onDismiss() {
+        if (mContext != null && !mContext.isFinishing() && !mContext.isDestroyed()) {
             mDialog.dismiss();
         }
     }
 
-    void onReset(){
-        if(mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog!=null && mDialog.isShowing()){
+    void onReset() {
+        if (mContext != null && !mContext.isDestroyed() && !mContext.isFinishing() && mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
     }
 
     boolean m_app_closed = true;
-    void onClose(){
+
+    void onClose() {
         m_app_closed = false;
     }
 
-    private void initializeDialog(int pLayout, int pGravity){
-        if (!m_app_closed){
+    private void initializeDialog(int pLayout, int pGravity) {
+        if (!m_app_closed) {
             return;
         }
         mDialog = new Dialog(mContext);
@@ -112,25 +116,23 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.setContentView(pLayout);
 
         ColorDrawable back = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(10),0,helperMethod.pxFromDp(10),0);
+        InsetDrawable inset = new InsetDrawable(back, helperMethod.pxFromDp(10), 0, helperMethod.pxFromDp(10), 0);
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().setLayout(helperMethod.pxFromDp(350), -1);
         mDialog.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
 
-        if(mDialog!=null &&  mContext!=null && !mContext.isDestroyed() && !mContext.isFinishing()){
+        if (mDialog != null && mContext != null && !mContext.isDestroyed() && !mContext.isFinishing()) {
             mDialog.show();
         }
     }
 
-    public messageManager(eventObserver.eventListener event)
-    {
+    public messageManager(eventObserver.eventListener event) {
         this.mEvent = event;
     }
 
     /*Helper Methods*/
 
-    private void rateFailure()
-    {
+    private void rateFailure() {
         initializeDialog(R.layout.popup_rate_failure, Gravity.BOTTOM);
 
         Button mPopupRateFailureDismiss = mDialog.findViewById(R.id.pPopupRateFailureDismiss);
@@ -140,8 +142,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mPopupRateFailureNext.setOnClickListener(this);
     }
 
-    private void onShowToast(int pLayout,int pBackground ,int pDelay, String pInfo, String pTriggerText, pluginEnums.eMessageManagerCallbacks pCallback)
-    {
+    private void onShowToast(int pLayout, int pBackground, int pDelay, String pInfo, String pTriggerText, pluginEnums.eMessageManagerCallbacks pCallback) {
         initializeDialog(pLayout, Gravity.BOTTOM);
         mDialog.getWindow().setDimAmount(0.3f);
         mCallbackInstance = pCallback;
@@ -155,7 +156,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mPopupToastNext.setOnClickListener(this);
         mDialog.setOnDismissListener(this);
         mPopupToastContainer.setBackground(helperMethod.getDrawableXML(mContext, pBackground));
-        if(pBackground == R.xml.ax_background_important){
+        if (pBackground == R.xml.ax_background_important) {
             mPopupToastInfo.setTextColor(Color.WHITE);
             mPopupToastNext.setTextColor(Color.WHITE);
         }
@@ -166,7 +167,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }, pDelay);
     }
 
-    private void onPanic(){
+    private void onPanic() {
         initializeDialog(R.layout.popup_panic, Gravity.BOTTOM);
 
         Button mPopupRateFailureDismiss = mDialog.findViewById(R.id.pPopupPanicDismiss);
@@ -177,11 +178,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.setOnDismissListener(this);
     }
 
-    private void openSecurityInfo()
-    {
+    private void openSecurityInfo() {
         String mInfo = mData.get(0).toString();
         initializeDialog(R.layout.certificate_info, Gravity.TOP);
-        InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0,0,0,-1);
+        InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0, 0, 0, -1);
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
@@ -190,25 +190,24 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
         ImageView mCertificateRootBlocker = mDialog.findViewById(R.id.pCertificateRootBlocker);
 
-        mCertificateDesciption.setText(Html.fromHtml((String)mData.get(0)));
+        mCertificateDesciption.setText(Html.fromHtml((String) mData.get(0)));
         mCertificateRootBackground.animate().setStartDelay(100).setDuration(400).alpha(1);
 
         mDialog.setOnDismissListener(this);
         mCertificateRootBackground.setOnClickListener(this);
         mCertificateDesciption.setOnClickListener(this);
 
-        if(mInfo.equals(MESSAGE_SECURE_ONION_SERVICE)){
+        if (mInfo.equals(MESSAGE_SECURE_ONION_SERVICE)) {
             ViewGroup.LayoutParams params = mCertificateScrollView.getLayoutParams();
             params.height = helperMethod.pxFromDp(60);
             mCertificateScrollView.requestLayout();
             mCertificateScrollView.requestDisallowInterceptTouchEvent(false);
-        }else {
+        } else {
             mCertificateRootBlocker.setVisibility(View.GONE);
         }
     }
 
-    private void rateApp()
-    {
+    private void rateApp() {
         initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
         mDialog.setCancelable(false);
 
@@ -219,8 +218,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mPopupRateusDismiss.setOnClickListener(this);
     }
 
-    private void sendBridgeMail()
-    {
+    private void sendBridgeMail() {
         initializeDialog(R.layout.popup_bridge_mail, Gravity.BOTTOM);
 
         Button mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pBridgeMailPopupDismiss);
@@ -230,8 +228,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mBridgeMailPopupNext.setOnClickListener(this);
     }
 
-    private void switchTorBrowsing()
-    {
+    private void switchTorBrowsing() {
         initializeDialog(R.layout.popup_tor_change, Gravity.BOTTOM);
 
         Button mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pTorSwtichPopupDismiss);
@@ -241,8 +238,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mBridgeMailPopupNext.setOnClickListener(this);
     }
 
-    private void bookmark()
-    {
+    private void bookmark() {
         initializeDialog(R.layout.popup_create_bookmark, Gravity.CENTER);
         mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
@@ -251,9 +247,9 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         Button mPopupCreateBookmarkNext = mDialog.findViewById(R.id.pPopupCreateBookmarkNext);
 
         mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
-        String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION,CONST_GENESIS_ONION_V2);
+        String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION, CONST_GENESIS_ONION_V2);
 
-        if(mURL.startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)){
+        if (mURL.startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)) {
             mURL = "https://orion.onion/privacy";
         }
         mPopupCreateBookmarkURL.setText(mURL);
@@ -263,8 +259,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mPopupCreateBookmarkNext.setOnClickListener(this);
     }
 
-    private void onUpdateBridges()
-    {
+    private void onUpdateBridges() {
         initializeDialog(R.layout.popup_bridge_setting_custom, Gravity.CENTER);
         mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
@@ -282,15 +277,14 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mBridgeSettingCustomNext.setOnClickListener(this);
         mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
 
-        if(!mCustomBridge.equals("meek") && !mCustomBridge.equals("obfs4")){
+        if (!mCustomBridge.equals("meek") && !mCustomBridge.equals("obfs4")) {
             mBridgeSettingCustomInput.setText(mCustomBridge);
             mBridgeSettingBridgeType.setText(mBridgeType);
         }
     }
 
-    private void downloadSingle()
-    {
-        if(mData.size()>0){
+    private void downloadSingle() {
+        if (mData.size() > 0) {
             initializeDialog(R.layout.popup_download_url, Gravity.BOTTOM);
 
             Button mDownloadPopuInfoNext = mDialog.findViewById(R.id.pDownloadPopuInfoNext);
@@ -307,10 +301,9 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }
     }
 
-    private void openSecureConnectionPopup()
-    {
+    private void openSecureConnectionPopup() {
         initializeDialog(R.layout.secure_connection_popup, Gravity.TOP);
-        InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0,0,0,-1);
+        InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0, 0, 0, -1);
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
@@ -331,32 +324,31 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mSecurePopupPrivacy.setOnClickListener(this);
 
 
-        if((boolean) mData.get(1)){
+        if ((boolean) mData.get(1)) {
             mSecureJavascriptStatus.setChecked(true);
-        }else {
+        } else {
             mSecureJavascriptStatus.setChecked(false);
         }
-        if((boolean) mData.get(2)){
+        if ((boolean) mData.get(2)) {
             mSecureTrackingStatus.setChecked(true);
-        }else {
+        } else {
             mSecureTrackingStatus.setChecked(false);
         }
-        if((int) mData.get(3) != ContentBlocking.AntiTracking.NONE){
+        if ((int) mData.get(3) != ContentBlocking.AntiTracking.NONE) {
             mSecureTrackingProtectionStatus.setChecked(true);
-        }else {
+        } else {
             mSecureTrackingProtectionStatus.setChecked(false);
         }
     }
 
     private void
-    downloadFileLongPress()
-    {
-        if(mData==null || mData.size()<1){
+    downloadFileLongPress() {
+        if (mData == null || mData.size() < 1) {
             return;
         }
 
         String title = mData.get(2).toString();
-        if(title.length()>0){
+        if (title.length() > 0) {
             title = title + " | ";
         }
 
@@ -376,7 +368,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.setOnDismissListener(this);
         mPopupLongPressDismiss.setOnClickListener(this);
 
-        if(mData!=null){
+        if (mData != null) {
             mPopupLongPressOptionDownload.setOnClickListener(this);
             mPopupLongPressOptionNewTab.setOnClickListener(this);
             mPopupLongPressOptionCurrentTab.setOnClickListener(this);
@@ -384,11 +376,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }
     }
 
-    private void openURLLongPress()
-    {
+    private void openURLLongPress() {
         String title = mData.get(2).toString();
         initializeDialog(R.layout.popup_url_longpress, Gravity.CENTER);
-        TextView mPopupURLLongPressHeader = (TextView)mDialog.findViewById(R.id.pPopupURLLongPressHeader);
+        TextView mPopupURLLongPressHeader = mDialog.findViewById(R.id.pPopupURLLongPressHeader);
         ImageView mPopupURLLongPressImage = mDialog.findViewById(R.id.pPopupURLLongPressImage);
         LinearLayout mPopupURLLongPressNewTab = mDialog.findViewById(R.id.pPopupURLLongPressNewTab);
         LinearLayout mPopupURLLongPressCurrentTab = mDialog.findViewById(R.id.pPopupURLLongPressCurrentTab);
@@ -400,7 +391,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mEvent.invokeObserver(Arrays.asList(mPopupURLLongPressImage, helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
 
         mDialog.setOnDismissListener(this);
-        if(mData!=null){
+        if (mData != null) {
             mPopupURLLongPressNewTab.setOnClickListener(this);
             mPopupURLLongPressCurrentTab.setOnClickListener(this);
             mPopupURLLongPressClipboard.setOnClickListener(this);
@@ -408,7 +399,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }
     }
 
-    private void popupDownloadFull(){
+    private void popupDownloadFull() {
         String url = mData.get(0).toString();
         String file = mData.get(2).toString();
         String title = mData.get(3).toString();
@@ -417,17 +408,16 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
         String data_local = strings.GENERIC_EMPTY_STR;
 
-        if(!url.equals(strings.GENERIC_EMPTY_STR)){
+        if (!url.equals(strings.GENERIC_EMPTY_STR)) {
             data_local = title + url;
-        }
-        else if(!file.equals(strings.GENERIC_EMPTY_STR)){
+        } else if (!file.equals(strings.GENERIC_EMPTY_STR)) {
             data_local = file;
         }
 
-        if(mData.get(5) != null){
+        if (mData.get(5) != null) {
             mDescription = mData.get(5).toString();
             mDescriptionShort = data_local;
-        }else {
+        } else {
             mDescription = data_local;
         }
 
@@ -449,7 +439,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mPopupDownloadFullDescriptionShort.setText((mDescriptionShort));
         mEvent.invokeObserver(Arrays.asList((mPopupDownloadFullImage), helperMethod.getDomainName(data_local)), enums.etype.fetch_favicon);
 
-        if(mData!=null){
+        if (mData != null) {
             mDialog.setOnDismissListener(this);
             mPopupDownloadFullNewTab.setOnClickListener(this);
             mPopupDownloadFullCurrentTab.setOnClickListener(this);
@@ -462,85 +452,72 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
     }
 
     public String getStoreLink() {
-        if(status.sStoreType == enums.StoreType.GOOGLE_PLAY){
+        if (status.sStoreType == enums.StoreType.GOOGLE_PLAY) {
             return CONST_PLAYSTORE_URL;
-        }
-        else if(status.sStoreType == enums.StoreType.AMAZON){
+        } else if (status.sStoreType == enums.StoreType.AMAZON) {
             return CONST_AMAZON_URL;
-        }
-        else if(status.sStoreType == enums.StoreType.HUAWEI){
+        } else if (status.sStoreType == enums.StoreType.HUAWEI) {
             return CONST_HUAWEI_URL;
-        }
-        else {
+        } else {
             return CONST_SAMSUNG_URL;
         }
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.pPopupToastTrigger ||
-           view.getId() == R.id.pBridgeMailPopupDismiss ||
-           view.getId() == R.id.pPopupRateFailureDismiss ||
-           view.getId() == R.id.pPopupPanicDismiss ||
-           view.getId() == R.id.pDownloadPopuInfoDismiss ||
-           view.getId() == R.id.pTorSwtichPopupDismiss ||
-           view.getId() == R.id.pPopupURLLongPressDismiss ||
-           view.getId() == R.id.pPopupLongPressDismiss ||
-           view.getId() == R.id.pCertificateDesciption ||
-           view.getId() == R.id.pCertificateRootBackground ||
-           view.getId() == R.id.pPopupRateusDismiss
-        ){
+        if (view.getId() == R.id.pPopupToastTrigger ||
+                view.getId() == R.id.pBridgeMailPopupDismiss ||
+                view.getId() == R.id.pPopupRateFailureDismiss ||
+                view.getId() == R.id.pPopupPanicDismiss ||
+                view.getId() == R.id.pDownloadPopuInfoDismiss ||
+                view.getId() == R.id.pTorSwtichPopupDismiss ||
+                view.getId() == R.id.pPopupURLLongPressDismiss ||
+                view.getId() == R.id.pPopupLongPressDismiss ||
+                view.getId() == R.id.pCertificateDesciption ||
+                view.getId() == R.id.pCertificateRootBackground ||
+                view.getId() == R.id.pPopupRateusDismiss
+        ) {
             onDismiss();
-        }
-        else if(view.getId() == R.id.pDownloadPopuInfoNext){
+        } else if (view.getId() == R.id.pDownloadPopuInfoNext) {
             onDismiss();
             helperMethod.onDelayHandler(mContext, 1000, () -> {
                 mEvent.invokeObserver(mData, M_DOWNLOAD_SINGLE);
                 onClearReference();
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pPopupPanicReset){
+        } else if (view.getId() == R.id.pPopupPanicReset) {
             onDismiss();
             mEvent.invokeObserver(mData, M_PANIC_RESET);
             onClearReference();
-        }
-        else if(view.getId() == R.id.pTorSwtichPopupNext){
+        } else if (view.getId() == R.id.pTorSwtichPopupNext) {
             onDismiss();
             mEvent.invokeObserver(null, M_TOR_SWITCH_RESTART);
-        }
-        else if(view.getId() == R.id.pPopupCreateBookmarkDismiss){
+        } else if (view.getId() == R.id.pPopupCreateBookmarkDismiss) {
             onDismiss();
             helperMethod.hideKeyboard(mContext);
-        }
-        else if(view.getId() == R.id.pSecurePopupPrivacy){
+        } else if (view.getId() == R.id.pSecurePopupPrivacy) {
             mDialog.findViewById(R.id.pSecurePopupRootBlocker).animate().setDuration(150).alpha(0);
             helperMethod.onDelayHandler(mContext, 250, () -> {
                 mEvent.invokeObserver(null, M_OPEN_PRIVACY);
                 onDismiss();
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pPopupLongPressOptionDownload){
+        } else if (view.getId() == R.id.pPopupLongPressOptionDownload) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_DOWNLOAD_FILE_MANUAL);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupLongPressOptionNewTab){
+        } else if (view.getId() == R.id.pPopupLongPressOptionNewTab) {
             onDismiss();
             helperMethod.onDelayHandler(mContext, 200, () -> {
                 mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pPopupURLLongPressNewTab){
+        } else if (view.getId() == R.id.pPopupURLLongPressNewTab) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_NEW_TAB);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupLongPressOptionCurrentTab){
+        } else if (view.getId() == R.id.pPopupLongPressOptionCurrentTab) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupLongPressOptionCopy){
+        } else if (view.getId() == R.id.pPopupLongPressOptionCopy) {
             onDismiss();
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
 
@@ -548,34 +525,30 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 onTrigger(mData, M_COPY);
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pSecurePopupRootBlocker){
+        } else if (view.getId() == R.id.pSecurePopupRootBlocker) {
             ImageView mSecurePopupRootBlocker = mDialog.findViewById(R.id.pSecurePopupRootBlocker);
             mSecurePopupRootBlocker.animate().setDuration(150).alpha(0);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pSecurePopupCertificate){
+        } else if (view.getId() == R.id.pSecurePopupCertificate) {
             mDialog.findViewById(R.id.pSecurePopupRootBlocker).animate().setDuration(150).alpha(0);
             onDismiss();
             new Handler().postDelayed(() ->
             {
                 mEvent.invokeObserver(null, M_SECURITY_INFO);
             }, 500);
-        }
-        else if(view.getId() == R.id.pPopupCreateBookmarkNext){
+        } else if (view.getId() == R.id.pPopupCreateBookmarkNext) {
             onDismiss();
             helperMethod.hideKeyboard(mContext);
             EditText mPopupCreateBookmarkInput = mDialog.findViewById(R.id.pPopupCreateBookmarkInput);
             String mBookmarkName = mPopupCreateBookmarkInput.getText().toString();
-            String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION,CONST_GENESIS_ONION_V2);
-            if(mURL.startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)){
+            String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION, CONST_GENESIS_ONION_V2);
+            if (mURL.startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)) {
                 mURL = "https://orion.onion/privacy";
             }
             mEvent.invokeObserver(Arrays.asList(mURL, mBookmarkName), M_BOOKMARK);
-        }
-        else if(view.getId() == R.id.pPopupRateusNext){
+        } else if (view.getId() == R.id.pPopupRateusNext) {
             RatingBar mPopupRateusRating = mDialog.findViewById(R.id.pPopupRateusRating);
-            if(mPopupRateusRating.getRating()>=3){
+            if (mPopupRateusRating.getRating() >= 3) {
                 mEvent.invokeObserver(null, M_APP_RATED);
                 String mStoreURL = getStoreLink();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mStoreURL));
@@ -585,53 +558,48 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     helperMethod.showToastMessage(MESSAGE_PLAYSTORE_NOT_FOUND, mContext);
                 }
                 onDismiss();
-            }else if(mPopupRateusRating.getRating()>0) {
+            } else if (mPopupRateusRating.getRating() > 0) {
                 mEvent.invokeObserver(null, M_APP_RATED);
                 final Handler handler = new Handler();
                 handler.postDelayed(() -> {
-                    if(mContext!=null){
+                    if (mContext != null) {
                         onTrigger(Arrays.asList(strings.GENERIC_EMPTY_STR, mContext), M_RATE_FAILURE);
                     }
                 }, 1000);
                 onDismiss();
             }
-        }
-        else if(view.getId() == R.id.pBridgeSettingCustomRequest){
+        } else if (view.getId() == R.id.pBridgeSettingCustomRequest) {
             helperMethod.onDelayHandler(mContext, 200, () -> {
-                try{
+                try {
                     onDismiss();
                     helperMethod.sendBridgeEmail(mContext);
-                }
-                catch (Exception ex){
-                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
+                } catch (Exception ex) {
+                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)), M_NOT_SUPPORTED);
                 }
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pBridgeSettingCustomClear){
+        } else if (view.getId() == R.id.pBridgeSettingCustomClear) {
             EditText mBridges = mDialog.findViewById(R.id.pBridgeSettingCustomInput);
             TextView mTextView = mDialog.findViewById(R.id.pBridgeSettingCustomError);
 
             mBridges.setText(strings.GENERIC_EMPTY_STR);
             mTextView.animate().setDuration(250).alpha(0);
-        }
-        else if(view.getId() == R.id.pBridgeSettingCustomNext){
-            String mBridges = ((EditText)mDialog.findViewById(R.id.pBridgeSettingCustomInput)).getText().toString();
+        } else if (view.getId() == R.id.pBridgeSettingCustomNext) {
+            String mBridges = ((EditText) mDialog.findViewById(R.id.pBridgeSettingCustomInput)).getText().toString();
 
             boolean mBridgeTypeExist = !mBridges.contains("obfs3") && !mBridges.contains("obfs4") && !mBridges.contains("fle") && !mBridges.contains("meek");
-            boolean mBridgeSize = mBridges.length()<10 || !mBridges.contains(GENERIC_EMPTY_DOT) || !mBridges.contains(strings.GENERIC_EMPTY_SPACE);
+            boolean mBridgeSize = mBridges.length() < 10 || !mBridges.contains(GENERIC_EMPTY_DOT) || !mBridges.contains(strings.GENERIC_EMPTY_SPACE);
 
-            if(mBridgeTypeExist || mBridgeSize){
+            if (mBridgeTypeExist || mBridgeSize) {
                 TextView mTextView = mDialog.findViewById(R.id.pBridgeSettingCustomError);
-                if(mTextView.getAlpha()==0 || mTextView.getAlpha()==1 || mTextView.getVisibility()!=View.VISIBLE){
+                if (mTextView.getAlpha() == 0 || mTextView.getAlpha() == 1 || mTextView.getVisibility() != View.VISIBLE) {
                     mTextView.setAlpha(0);
 
                     mTextView.setVisibility(View.VISIBLE);
                     mTextView.animate().setDuration(250).alpha(1);
-                    if(mBridgeTypeExist){
+                    if (mBridgeTypeExist) {
                         mTextView.setText(BRIDGE_CUSTOM_INVALID_TYPE_STRING);
-                    }
-                    else if(mBridgeSize){
+                    } else if (mBridgeSize) {
                         mTextView.setText(BRIDGE_CUSTOM_INVALID_TYPE);
                     }
                 }
@@ -641,41 +609,34 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
             mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             helperMethod.hideKeyboard(mContext);
-            mEvent.invokeObserver(Arrays.asList(mBridges, ((EditText)mDialog.findViewById(R.id.pBridgeSettingBridgeType)).getText().toString()), M_SET_BRIDGES);
-        }
-        else if(view.getId() == R.id.pPopupRateFailureNext){
+            mEvent.invokeObserver(Arrays.asList(mBridges, ((EditText) mDialog.findViewById(R.id.pBridgeSettingBridgeType)).getText().toString()), M_SET_BRIDGES);
+        } else if (view.getId() == R.id.pPopupRateFailureNext) {
             onDismiss();
             helperMethod.onDelayHandler(mContext, 1000, () -> {
-                try{
+                try {
                     onDismiss();
                     helperMethod.sendIssueEmail(mContext);
-                }
-                catch (Exception ex)
-                {
-                    onTrigger(Arrays.asList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE), mContext),M_NOT_SUPPORTED);
+                } catch (Exception ex) {
+                    onTrigger(Arrays.asList(mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE), mContext), M_NOT_SUPPORTED);
                     onClearReference();
                 }
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pBridgeMailPopupNext){
+        } else if (view.getId() == R.id.pBridgeMailPopupNext) {
             onDismiss();
             helperMethod.onDelayHandler(mContext, 200, () -> {
-                try{
+                try {
                     onDismiss();
                     helperMethod.sendBridgeEmail(mContext);
-                }
-                catch (Exception ex){
-                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)),M_NOT_SUPPORTED);
+                } catch (Exception ex) {
+                    onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)), M_NOT_SUPPORTED);
                 }
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pPopupURLLongPressCurrentTab){
+        } else if (view.getId() == R.id.pPopupURLLongPressCurrentTab) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_OPEN_LINK_CURRENT_TAB);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupURLLongPressClipboard){
+        } else if (view.getId() == R.id.pPopupURLLongPressClipboard) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
             onDismiss();
 
@@ -683,16 +644,13 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 onTrigger(mData, M_COPY);
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pPopupDownloadFullNewTab){
+        } else if (view.getId() == R.id.pPopupDownloadFullNewTab) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString()), M_OPEN_LINK_NEW_TAB);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupDownloadFullCurrentTab){
+        } else if (view.getId() == R.id.pPopupDownloadFullCurrentTab) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0).toString()), M_OPEN_LINK_CURRENT_TAB);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupDownloadFullCopy){
+        } else if (view.getId() == R.id.pPopupDownloadFullCopy) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(0)), M_COPY_LINK);
             onDismiss();
 
@@ -700,16 +658,13 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 onTrigger(mData, M_COPY);
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pPopupDownloadFullImageNewTab){
+        } else if (view.getId() == R.id.pPopupDownloadFullImageNewTab) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(2).toString()), M_OPEN_LINK_NEW_TAB);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupDownloadFullImageCurrentTab){
+        } else if (view.getId() == R.id.pPopupDownloadFullImageCurrentTab) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(2).toString()), M_OPEN_LINK_CURRENT_TAB);
             onDismiss();
-        }
-        else if(view.getId() == R.id.pPopupDownloadFullImageCopy){
+        } else if (view.getId() == R.id.pPopupDownloadFullImageCopy) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(2)), M_COPY_LINK);
             onDismiss();
 
@@ -717,12 +672,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 onTrigger(mData, M_COPY);
                 return null;
             });
-        }
-        else if(view.getId() == R.id.pPopupDownloadFullImageDownload){
+        } else if (view.getId() == R.id.pPopupDownloadFullImageDownload) {
             mEvent.invokeObserver(Collections.singletonList(mData.get(2).toString()), M_DOWNLOAD_FILE_MANUAL);
             onDismiss();
         }
-        if(mCallbackInstance!=null){
+        if (mCallbackInstance != null) {
             mEvent.invokeObserver(mData, mCallbackInstance);
         }
     }
@@ -735,19 +689,17 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
     /*External Triggers*/
 
-    public void onTrigger(List<Object> pData, pluginEnums.eMessageManager pEventType)
-    {
+    public void onTrigger(List<Object> pData, pluginEnums.eMessageManager pEventType) {
         mCallbackInstance = null;
         mToastHandler.removeCallbacksAndMessages(null);
-        if(!pEventType.equals(M_RATE_FAILURE) && !pEventType.equals(M_RATE_SUCCESS) && !pEventType.equals(M_NOT_SUPPORTED)){
+        if (!pEventType.equals(M_RATE_FAILURE) && !pEventType.equals(M_RATE_SUCCESS) && !pEventType.equals(M_NOT_SUPPORTED)) {
             onClearReference();
             mData = null;
         }
-        if(pEventType.equals(pluginEnums.eMessageManager.M_RESET)){
+        if (pEventType.equals(pluginEnums.eMessageManager.M_RESET)) {
             onReset();
-        }
-        else {
-            this.mContext = (AppCompatActivity) pData.get(pData.size()-1);
+        } else {
+            this.mContext = (AppCompatActivity) pData.get(pData.size() - 1);
             this.mData = pData;
 
             switch (pEventType) {
@@ -759,7 +711,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_LANGUAGE_SUPPORT_FAILURE:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.ALERT_LANGUAGE_SUPPORT_FAILURE), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.ALERT_LANGUAGE_SUPPORT_FAILURE), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_BOOKMARK:
@@ -769,12 +721,12 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_CLEAR_HISTORY:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_HISTORY), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_HISTORY);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_HISTORY), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_HISTORY);
                     break;
 
                 case M_CLEAR_BOOKMARK:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_BOOKMARK_INFO), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_BOOKMARK);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_BOOKMARK_INFO), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_BOOKMARK);
                     break;
 
                 case M_RATE_APP:
@@ -782,7 +734,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     rateApp();
                     break;
 
-                case M_LONG_PRESS_DOWNLOAD :
+                case M_LONG_PRESS_DOWNLOAD:
                     /*VERIFIED*/
                     downloadFileLongPress();
                     break;
@@ -804,7 +756,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_NOT_SUPPORTED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.ALERT_NOT_SUPPORTED), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.ALERT_NOT_SUPPORTED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_PANIC_RESET:
@@ -834,67 +786,67 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_NEW_IDENTITY:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_NEW_CIRCUIT_CREATED), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_NEW_CIRCUIT_CREATED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_DOWNLOAD_FAILURE:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, (String) mData.get(0), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, (String) mData.get(0), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_POPUP_BLOCKED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_SETTING_PRIVACY_POPUP), mContext.getString(R.string.TOAST_ALERT_SETTING), M_OPEN_PRIVACY);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_SETTING_PRIVACY_POPUP), mContext.getString(R.string.TOAST_ALERT_SETTING), M_OPEN_PRIVACY);
                     break;
 
                 case M_MAX_TAB_REACHED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_MAX_TAB_POPUP), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_MAX_TAB_POPUP), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_ORBOT_LOADING:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING), mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING_BUTTON), M_OPEN_LOGS);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING), mContext.getString(R.string.TOAST_ALERT_ORBOT_LOADING_BUTTON), M_OPEN_LOGS);
                     break;
 
                 case M_LOAD_NEW_TAB:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), M_LOAD_NEW_TAB);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB), mContext.getString(R.string.TOAST_ALERT_OPEN_NEW_TAB_LOAD), M_LOAD_NEW_TAB);
                     break;
 
                 case M_UNDO:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_important,2500, mContext.getString(R.string.TOAST_ALERT_UNDO_INFO), mContext.getString(R.string.TOAST_ALERT_UNDO_TRIGGER), M_UNDO_TAB);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2500, mContext.getString(R.string.TOAST_ALERT_UNDO_INFO), mContext.getString(R.string.TOAST_ALERT_UNDO_TRIGGER), M_UNDO_TAB);
                     break;
 
                 case M_DATA_CLEARED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CLEARED_INFO), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CLEARED_INFO), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_DELETE_BOOKMARK:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_REMOVED), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_REMOVED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_COPY:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_URL_COPIED), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_URL_COPIED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_UPDATE_BOOKMARK:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_IMAGE_UPDATE:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 4000, mContext.getString(R.string.TOAST_ALERT_IMAGE_STATUS), mContext.getString(R.string.TOAST_ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 4000, mContext.getString(R.string.TOAST_ALERT_IMAGE_STATUS), mContext.getString(R.string.TOAST_ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
                     break;
 
                 case M_OPEN_CICADA:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CICADA), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CICADA), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_TOR_SWITCH:
@@ -904,7 +856,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_OPEN_ACTIVITY_FAILED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic,R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_OPEN_ACTIVITY_FAILED), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_OPEN_ACTIVITY_FAILED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
             }
         }

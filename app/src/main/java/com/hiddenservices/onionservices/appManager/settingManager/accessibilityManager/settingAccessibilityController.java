@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.constants.constants;
@@ -23,11 +24,12 @@ import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class settingAccessibilityController  extends AppCompatActivity {
+public class settingAccessibilityController extends AppCompatActivity {
 
     /* PRIVATE VARIABLES */
 
@@ -61,7 +63,7 @@ public class settingAccessibilityController  extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
@@ -79,7 +81,7 @@ public class settingAccessibilityController  extends AppCompatActivity {
         mSettingAccessibilityModel = new settingAccessibilityModel(new settingAccessibilityController.settingAccessibilityModelCallback());
     }
 
-    private void initializeListeners(){
+    private void initializeListeners() {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -91,13 +93,13 @@ public class settingAccessibilityController  extends AppCompatActivity {
             }
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mIsSettingChanged = true;
-                int percentage = ((progress+5)*10);
-                mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_SAMPLE_TEXT, Collections.singletonList((int)((12.0*percentage)/100)));
-                mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_PERCENTAGE, Collections.singletonList((percentage+ constants.CONST_PERCENTAGE_SIGN)));
+                int percentage = ((progress + 5) * 10);
+                mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_SAMPLE_TEXT, Collections.singletonList((int) ((12.0 * percentage) / 100)));
+                mSettingAccessibilityViewController.onTrigger(settingAccessibilityEnums.eAccessibilityModel.M_UPDATE_PERCENTAGE, Collections.singletonList((percentage + constants.CONST_PERCENTAGE_SIGN)));
 
-                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_FONT_SIZE,percentage));
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_FONT_SIZE, percentage));
                 status.sSettingFontSize = percentage;
                 activityContextManager.getInstance().getHomeController().onLoadFont();
             }
@@ -106,22 +108,20 @@ public class settingAccessibilityController  extends AppCompatActivity {
 
     /*View Callbacks*/
 
-    private class settingAccessibilityViewCallback implements eventObserver.eventListener{
+    private class settingAccessibilityViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
 
     /*Model Callbacks*/
 
-    private class settingAccessibilityModelCallback implements eventObserver.eventListener{
+    private class settingAccessibilityModelCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
@@ -129,16 +129,14 @@ public class settingAccessibilityController  extends AppCompatActivity {
     /* LOCAL OVERRIDES */
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
     }
 
@@ -150,14 +148,14 @@ public class settingAccessibilityController  extends AppCompatActivity {
     /*UI Redirection*/
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
-    public void onClose(View view){
+    public void onClose(View view) {
         activityContextManager.getInstance().onRemoveStack(this);
         finish();
 
-        if(mIsSettingChanged && mDefaultFontSize!=status.sSettingFontSize){
+        if (mIsSettingChanged && mDefaultFontSize != status.sSettingFontSize) {
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
     }
@@ -168,9 +166,9 @@ public class settingAccessibilityController  extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void onZoomSettingUpdate(View view){
+    public void onZoomSettingUpdate(View view) {
         mSettingAccessibilityModel.onTrigger(settingAccessibilityEnums.eAccessibilityViewController.M_ZOOM_SETTING, Collections.singletonList(!mZoom.isChecked()));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ZOOM,status.sSettingEnableZoom));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_ZOOM, status.sSettingEnableZoom));
         mZoom.toggle();
 
         new Handler().postDelayed(() ->
@@ -180,9 +178,9 @@ public class settingAccessibilityController  extends AppCompatActivity {
 
     }
 
-    public void onVoiceInputSettingUpdate(View view){
+    public void onVoiceInputSettingUpdate(View view) {
         mSettingAccessibilityModel.onTrigger(settingAccessibilityEnums.eAccessibilityViewController.M_VOICE_INPUT_SETTING, Collections.singletonList(!mVoiceInput.isChecked()));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_VOICE_INPUT,status.sSettingEnableVoiceInput));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_VOICE_INPUT, status.sSettingEnableVoiceInput));
         mVoiceInput.toggle();
     }
 

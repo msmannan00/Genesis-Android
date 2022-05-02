@@ -175,13 +175,6 @@
     <string name="ADVIEW_HEADER" translatable="false">Advertisement</string>
 
 
-
-
-
-
-
-
-
     <!-- Settings -->
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Basic Settings</string>
@@ -503,8 +496,8 @@
     <string name="security_exception" translatable="true">Web domain security exception.</string>
     <string name="dal_exception" translatable="true">DAL verification failure.</string>
 
-    <item type="id" name="LaguageID"/>
-    <item type="id" name="LaguageRegion"/>
+    <item type="id" name="LaguageID" />
+    <item type="id" name="LaguageRegion" />
 
     <string-array name="ARRAY_FONTS" translatable="true">
         <item>55 Percent</item>

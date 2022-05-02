@@ -16,11 +16,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
@@ -29,10 +31,12 @@ import com.hiddenservices.onionservices.libs.views.ThumbnailCrop;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_DOMAIN_URL;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_HELP_URL;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
@@ -40,8 +44,7 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 
-public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
-{
+public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> {
     /*Private Variables*/
 
     private ArrayList<tabRowModel> mModelList = new ArrayList<>();
@@ -57,47 +60,48 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         this.mEvent = event;
     }
 
-    private void initialize(ArrayList<tabRowModel> pModelList){
+    private void initialize(ArrayList<tabRowModel> pModelList) {
         this.mModelList.clear();
         this.mModelList.addAll(pModelList);
-        mModelList.add(new tabRowModel(null, null,null));
+        mModelList.add(new tabRowModel(null, null, null));
         mViewLoaded = false;
     }
 
 
-    private void reInitData(ArrayList<tabRowModel> pModelList){
+    private void reInitData(ArrayList<tabRowModel> pModelList) {
         mModelList.addAll(0, pModelList);
-        notifyItemRangeInserted(0,pModelList.size());
+        notifyItemRangeInserted(0, pModelList.size());
         notifyItemChanged(pModelList.size());
     }
 
-    public void initFirstRow(){
+    public void initFirstRow() {
         notifyItemChanged(0);
     }
 
     /*Initializations*/
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(status.sTabGridLayoutEnabled){
+        if (status.sTabGridLayoutEnabled) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_grid_view, parent, false);
             return new listViewHolder(view);
-        }else {
+        } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_row_view, parent, false);
             return new listViewHolder(view);
         }
     }
+
     @Override
-    public void onBindViewHolder(@NonNull tabAdapter.listViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull tabAdapter.listViewHolder holder, int position) {
         holder.bindListView(mModelList.get(position));
         holder.itemView.setTag(position);
         holder.itemView.findViewById(R.id.pOrbotRowRemove).setTag(position);
         holder.itemView.findViewById(R.id.pLoadSession).setTag(position);
 
-        if(position == 0 && status.sTabGridLayoutEnabled && !mViewLoaded){
+        if (position == 0 && status.sTabGridLayoutEnabled && !mViewLoaded) {
 
-        }else{
+        } else {
         }
     }
 
@@ -115,26 +119,26 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
     /*Listeners*/
 
-    private boolean isSelectionMenuShowing(){
+    private boolean isSelectionMenuShowing() {
         return mLongPressMenuEnabled;
     }
 
     private void onRemoveAllSelection() {
-        if(mSelectedList.size()>0){
+        if (mSelectedList.size() > 0) {
             int mSelectionInitialSize = mSelectedList.size();
-            for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
-                for(int mCounterInner=0;mCounterInner<mModelList.size();mCounterInner++){
-                    if(mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())){
+            for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
+                for (int mCounterInner = 0; mCounterInner < mModelList.size(); mCounterInner++) {
+                    if (mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())) {
                         mSelectedList.remove(mCounter);
                         mModelList.remove(mCounterInner);
                         notifyItemRemoved(mCounterInner);
-                        notifyItemRangeChanged(mCounterInner,mModelList.size());
-                        if(mSelectionInitialSize == 1){
+                        notifyItemRangeChanged(mCounterInner, mModelList.size());
+                        if (mSelectionInitialSize == 1) {
                             mEvent.invokeObserver(Arrays.asList(mCounterInner, true), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
-                        }else {
+                        } else {
                             mEvent.invokeObserver(Arrays.asList(mCounterInner, false), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
                         }
-                        mCounter=-1;
+                        mCounter = -1;
                         break;
                     }
                 }
@@ -142,9 +146,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         }
     }
 
-    private void onNotifyItemSwiped(int pIndex){
-        for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
-            if(mSelectedList.get(mCounter).equals(mModelList.get(pIndex).getmId())){
+    private void onNotifyItemSwiped(int pIndex) {
+        for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
+            if (mSelectedList.get(mCounter).equals(mModelList.get(pIndex).getmId())) {
                 mSelectedList.remove(mCounter);
                 break;
             }
@@ -153,17 +157,17 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         mModelList.remove(pIndex);
         notifyItemRemoved(pIndex);
         notifyItemRangeChanged(pIndex, mModelList.size());
-        notifyItemChanged(mModelList.size()-1);
+        notifyItemChanged(mModelList.size() - 1);
     }
 
-    private void onRemoveAll(){
-        int mSize = mModelList.size()-1;
-        if(mSize==1){
+    private void onRemoveAll() {
+        int mSize = mModelList.size() - 1;
+        if (mSize == 1) {
             mModelList.remove(0);
             notifyDataSetChanged();
             mEvent.invokeObserver(Arrays.asList(0, true), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
-        }else {
-            for(int mCounter=0;mCounter<mSize;mCounter++){
+        } else {
+            for (int mCounter = 0; mCounter < mSize; mCounter++) {
                 mModelList.remove(0);
                 mEvent.invokeObserver(Arrays.asList(0, false), tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW_RETAIN_BACKUP);
             }
@@ -172,71 +176,71 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         }
     }
 
-    private void onClearAllSelection(){
+    private void onClearAllSelection() {
         mLongPressMenuEnabled = false;
         mEvent.invokeObserver(Arrays.asList(false, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
 
-        for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
+        for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
             boolean mIsChanged = false;
-            for(int mCounterInner=0;mCounterInner<mModelList.size();mCounterInner++){
-                if(mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())){
+            for (int mCounterInner = 0; mCounterInner < mModelList.size(); mCounterInner++) {
+                if (mSelectedList.get(mCounter).equals(mModelList.get(mCounterInner).getmId())) {
                     notifyItemChanged(mCounterInner, null);
                     mIsChanged = true;
                 }
             }
-            if(mIsChanged){
+            if (mIsChanged) {
                 mSelectedList.remove(mCounter);
-                mCounter=mCounter-1;
+                mCounter = mCounter - 1;
             }
         }
 
-        if(mSelectedList.size()<=0){
+        if (mSelectedList.size() <= 0) {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
-        }else{
+        } else {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
         }
-        notifyItemChanged(mModelList.size()-1);
+        notifyItemChanged(mModelList.size() - 1);
 
     }
 
-    public void onEnableLongClickMenu(){
+    public void onEnableLongClickMenu() {
         mLongPressMenuEnabled = true;
     }
 
-    private void onSelectionCreate(FrameLayout mSelectedView){
+    private void onSelectionCreate(FrameLayout mSelectedView) {
         mSelectedView.setVisibility(View.VISIBLE);
         mSelectedView.animate().alpha(1);
         mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION);
     }
 
-    private void onSelectionClear(FrameLayout mSelectedView){
+    private void onSelectionClear(FrameLayout mSelectedView) {
         mSelectedView.animate().alpha(0).withEndAction(() -> mSelectedView.setVisibility(View.GONE));
         //if(mSelectedList.size()==0){
         //    mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
-         //   mLongPressMenuEnabled = false;
+        //   mLongPressMenuEnabled = false;
         //}
     }
 
-    private void onTriggerURL(tabRowModel model){
-        if(model.getSession()!=null){
+    private void onTriggerURL(tabRowModel model) {
+        if (model.getSession() != null) {
             mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_BACK_PRESSED);
             mEvent.invokeObserver(null, tabEnums.eTabAdapterCallback.ON_INIT_TAB_COUNT);
             mEvent.invokeObserver(Arrays.asList(model.getSession(), false), tabEnums.eTabAdapterCallback.ON_LOAD_TAB);
         }
     }
 
-    private int getSelectionSize(){
+    private int getSelectionSize() {
         return mSelectedList.size();
     }
 
-    private void onRemoveRowCross(int mIndex){
-        for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
-            if(mSelectedList.get(mCounter).equals(mModelList.get(mIndex).getmId())){
+    private void onRemoveRowCross(int mIndex) {
+        for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
+            if (mSelectedList.get(mCounter).equals(mModelList.get(mIndex).getmId())) {
                 mSelectedList.remove(mCounter);
                 break;
             }
         }
-        if(mSelectedList.size()<=0){
+        if (mSelectedList.size() <= 0) {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
             onClearAllSelection();
         }
@@ -250,8 +254,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     }
 
     /*View Holder Extensions*/
-    class listViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener
-    {
+    class listViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView mHeader;
         TextView mDescription;
         TextView mDate;
@@ -283,7 +286,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             mItemSelectionMenuReference = itemView.findViewById(R.id.pRowContainer);
             mBorder = itemView.findViewById(R.id.pBorder);
 
-            if(status.sTabGridLayoutEnabled){
+            if (status.sTabGridLayoutEnabled) {
                 mLogo = itemView.findViewById(R.id.pLogo);
             }
 
@@ -294,11 +297,11 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
             itemView.setEnabled(true);
             mRemoveRow.setEnabled(true);
 
-            if(model.getmId()==null){
+            if (model.getmId() == null) {
                 mItemSelectionMenu.setVisibility(View.VISIBLE);
                 mItemSelectionMenuButton.setOnClickListener(this);
 
-                if(status.sTabGridLayoutEnabled){
+                if (status.sTabGridLayoutEnabled) {
                     itemView.setVisibility(View.GONE);
                     itemView.setClickable(false);
                     itemView.setFocusable(false);
@@ -306,36 +309,36 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                     return;
                 }
 
-            }else {
+            } else {
                 mLoadSession.setOnLongClickListener(this);
                 mRemoveRow.setOnClickListener(this);
                 mLoadSession.setOnClickListener(this);
 
-                if(model.getSession().getTheme()==null){
-                    if(status.sTabGridLayoutEnabled){
+                if (model.getSession().getTheme() == null) {
+                    if (status.sTabGridLayoutEnabled) {
                         mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple_gray));
-                    }else {
+                    } else {
                         mBorder.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_ripple_gray));
                     }
-                }else {
-                    try{
+                } else {
+                    try {
                         mBorder.setBackgroundColor(Color.parseColor(model.getSession().getTheme()));
-                    }catch (Exception ignored){}
+                    } catch (Exception ignored) {
+                    }
                 }
 
                 String mURL = model.getSession().getCurrentURL();
-                if(mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
+                if (mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
                     mURL = CONST_GENESIS_DOMAIN_URL;
-                }
-                else if(mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                } else if (mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)) {
                     mURL = CONST_GENESIS_HELP_URL;
                 }
 
                 mItemSelectionMenu.setVisibility(View.GONE);
 
-                if(status.sTabGridLayoutEnabled){
+                if (status.sTabGridLayoutEnabled) {
                     mDescription.setText((model.getSession().getTitle()));
-                }else {
+                } else {
                     mHeader.setText(model.getSession().getTitle());
                     mDescription.setText(mURL);
                 }
@@ -343,136 +346,134 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
                 String mHeadText = mHeader.getText().toString();
                 String mDescText = mDescription.getText().toString();
 
-                if(status.sTabGridLayoutEnabled){
-                    if(model.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getSession().getCurrentURL().contains("orion.onion")){
+                if (status.sTabGridLayoutEnabled) {
+                    if (model.getSession().getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getSession().getCurrentURL().contains("orion.onion")) {
                         mLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                    }
-                    else{
-                        if(mLogo.getDrawable() == null){
+                    } else {
+                        if (mLogo.getDrawable() == null) {
                             mEvent.invokeObserver(Arrays.asList(mLogo, "https://" + helperMethod.getDomainName(model.getSession().getCurrentURL())), enums.etype.fetch_favicon);
                         }
                     }
                 }
 
-                if(mHeadText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")){
+                if (mHeadText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")) {
                     mHeader.setText("about:blank");
                 }
 
-                if(mHeadText.startsWith("resource")){
-                    if(mHeadText.equals(CONST_GENESIS_URL_CACHED) || mHeadText.equals(CONST_GENESIS_URL_CACHED_DARK)){
+                if (mHeadText.startsWith("resource")) {
+                    if (mHeadText.equals(CONST_GENESIS_URL_CACHED) || mHeadText.equals(CONST_GENESIS_URL_CACHED_DARK)) {
                         mHeader.setText(CONST_GENESIS_DOMAIN_URL);
-                    }
-                    else if(mHeadText.equals(CONST_GENESIS_HELP_URL_CACHE) || mHeadText.equals(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+                    } else if (mHeadText.equals(CONST_GENESIS_HELP_URL_CACHE) || mHeadText.equals(CONST_GENESIS_HELP_URL_CACHE_DARK)) {
                         mHeader.setText(CONST_GENESIS_HELP_URL);
                     }
                 }
 
-                if(mDescText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")){
+                if (mDescText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")) {
                     mDescription.setText(mURL);
                 }
 
                 mDate.setText(model.getDate());
 
-                if(model.getSession().getTitle().equals("about:blank")){
+                if (model.getSession().getTitle().equals("about:blank")) {
                     mWebThumbnail.setAlpha(0f);
-                }else {
+                } else {
                     new Handler().postDelayed(() ->
                     {
-                        if(mWebThumbnail.getDrawable()==null){
+                        if (mWebThumbnail.getDrawable() == null) {
                             mWebThumbnail.setImageBitmap(model.getBitmap());
-                        }else {
+                        } else {
                             Drawable mDrawable = new BitmapDrawable(itemView.getContext().getResources(), model.getBitmap());
-                            helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable,150);
+                            helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable, 150);
                         }
                         Log.i("SUPERFFF", "SUPERFFF : " + getLayoutPosition());
                     }, getLayoutPosition());
                 }
 
-                if(mSelectedList.contains(model.getSession().getSessionID())){
+                if (mSelectedList.contains(model.getSession().getSessionID())) {
                     onSelectionCreate(mSelectedView);
-                }else {
+                } else {
                     onSelectionClear(mSelectedView);
                 }
 
                 //if(!model.getSession().equals(mModelList.get(0).getSession()) && !status.sTabGridLayoutEnabled){
-                    Drawable mDrawable;
-                    Resources res = itemView.getContext().getResources();
-                    try {
-                        mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hx_border));
-                        itemView.setBackground(mDrawable);
-                    } catch (Exception ignored) {
-                    }
+                Drawable mDrawable;
+                Resources res = itemView.getContext().getResources();
+                try {
+                    mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.hx_border));
+                    itemView.setBackground(mDrawable);
+                } catch (Exception ignored) {
+                }
                 //}
             }
 
             new Handler().postDelayed(() ->
             {
                 itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.clear_alpha));
-                if(!status.sTabGridLayoutEnabled){
-                    if(getLayoutPosition() == 0){
+                if (!status.sTabGridLayoutEnabled) {
+                    if (getLayoutPosition() == 0) {
                         itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
                     }
                 }
 
-            if(status.sTabGridLayoutEnabled){
-                CardView mLayout = itemView.findViewById(R.id.pTABRowContainer);
-                CardView mCardView = itemView.findViewById(R.id.pCardViewParent);
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLayout.getLayoutParams();
-                ViewGroup.MarginLayoutParams params_main = (ViewGroup.MarginLayoutParams) mItemSelectionMenuReference.getLayoutParams();
+                if (status.sTabGridLayoutEnabled) {
+                    CardView mLayout = itemView.findViewById(R.id.pTABRowContainer);
+                    CardView mCardView = itemView.findViewById(R.id.pCardViewParent);
+                    ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLayout.getLayoutParams();
+                    ViewGroup.MarginLayoutParams params_main = (ViewGroup.MarginLayoutParams) mItemSelectionMenuReference.getLayoutParams();
 
-                params_main.leftMargin = helperMethod.pxFromDp(2f);
-                params_main.rightMargin = helperMethod.pxFromDp(2f);
-                params_main.topMargin = helperMethod.pxFromDp(2f);
-                params_main.bottomMargin = helperMethod.pxFromDp(0f);
+                    params_main.leftMargin = helperMethod.pxFromDp(2f);
+                    params_main.rightMargin = helperMethod.pxFromDp(2f);
+                    params_main.topMargin = helperMethod.pxFromDp(2f);
+                    params_main.bottomMargin = helperMethod.pxFromDp(0f);
 
-                if(getLayoutPosition() == 0){
-                    params.leftMargin = helperMethod.pxFromDp(3.5f);
-                    params.rightMargin = helperMethod.pxFromDp(3.5f);
-                    params.topMargin = helperMethod.pxFromDp(3.5f);
-                    params.bottomMargin = helperMethod.pxFromDp(3.5f);
-                    params_main.topMargin = helperMethod.pxFromDp(3f);
+                    if (getLayoutPosition() == 0) {
+                        params.leftMargin = helperMethod.pxFromDp(3.5f);
+                        params.rightMargin = helperMethod.pxFromDp(3.5f);
+                        params.topMargin = helperMethod.pxFromDp(3.5f);
+                        params.bottomMargin = helperMethod.pxFromDp(3.5f);
+                        params_main.topMargin = helperMethod.pxFromDp(3f);
 
-                    if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_button_text_v1_inverted));
-                    }else {
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_alert_rateus_header));
-                    }
+                        if (status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode) {
+                            mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_button_text_v1_inverted));
+                        } else {
+                            mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_alert_rateus_header));
+                        }
 
-                }else {
+                    } else {
 
-                    if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
-                        params.leftMargin = helperMethod.pxFromDp(2.5f);
-                        params.rightMargin = helperMethod.pxFromDp(2.5f);
-                        params.topMargin = helperMethod.pxFromDp(2.5f);
-                        params.bottomMargin = helperMethod.pxFromDp(2.5f);
+                        if (status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode) {
+                            params.leftMargin = helperMethod.pxFromDp(2.5f);
+                            params.rightMargin = helperMethod.pxFromDp(2.5f);
+                            params.topMargin = helperMethod.pxFromDp(2.5f);
+                            params.bottomMargin = helperMethod.pxFromDp(2.5f);
 
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_tab_background));
-                    }else {
-                        params.leftMargin = helperMethod.pxFromDp(2.5f);
-                        params.rightMargin = helperMethod.pxFromDp(2.5f);
-                        params.topMargin = helperMethod.pxFromDp(2.5f);
-                        params.bottomMargin = helperMethod.pxFromDp(2.5f);
+                            mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_tab_background));
+                        } else {
+                            params.leftMargin = helperMethod.pxFromDp(2.5f);
+                            params.rightMargin = helperMethod.pxFromDp(2.5f);
+                            params.topMargin = helperMethod.pxFromDp(2.5f);
+                            params.bottomMargin = helperMethod.pxFromDp(2.5f);
 
-                        mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.clear_alpha));
+                            mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.clear_alpha));
+                        }
+
                     }
 
                 }
 
-            }
-
-            if(this.getLayoutPosition()==mModelList.size()-1){
-                if(mSelectedList.size()>0){
-                    itemView.setVisibility(View.GONE);
-                }else {
+                if (this.getLayoutPosition() == mModelList.size() - 1) {
+                    if (mSelectedList.size() > 0) {
+                        itemView.setVisibility(View.GONE);
+                    } else {
+                        itemView.setVisibility(View.VISIBLE);
+                        mItemSelectionMenuButton.animate().cancel();
+                        mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
+                    }
+                } else {
                     itemView.setVisibility(View.VISIBLE);
-                    mItemSelectionMenuButton.animate().cancel();
                     mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
                 }
-            }else {
-                itemView.setVisibility(View.VISIBLE);
-                mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
-            }
-            mRemoveRow.bringToFront();
+                mRemoveRow.bringToFront();
             }, 10 * getLayoutPosition());
 
         }
@@ -481,46 +482,45 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
         @Override
         public void onClick(View v) {
 
-            if(v.getId() == R.id.pLoadSession){
-                if(mSelectedView.getVisibility() == View.GONE){
-                    if(mLongPressMenuEnabled){
+            if (v.getId() == R.id.pLoadSession) {
+                if (mSelectedView.getVisibility() == View.GONE) {
+                    if (mLongPressMenuEnabled) {
                         mSelectedList.add(mModelList.get(this.getLayoutPosition()).getSession().getSessionID());
                         mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
                         onSelectionCreate(mSelectedView);
-                        notifyItemChanged(mModelList.size()-1);
+                        notifyItemChanged(mModelList.size() - 1);
 
-                    }else {
-                        if(v.getAlpha()==1){
-                            if(status.sTabGridLayoutEnabled){
+                    } else {
+                        if (v.getAlpha() == 1) {
+                            if (status.sTabGridLayoutEnabled) {
                                 v.setEnabled(false);
                                 v.setClickable(false);
                                 v.setFocusable(false);
                                 scaleView(itemView, mModelList.get(this.getLayoutPosition()));
-                            }else {
+                            } else {
                                 onTriggerURL(mModelList.get(this.getLayoutPosition()));
                             }
                         }
                     }
-                }else {
-                    for(int mCounter=0;mCounter<mSelectedList.size();mCounter++){
-                        if(mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getSession().getSessionID())){
+                } else {
+                    for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
+                        if (mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getSession().getSessionID())) {
                             mSelectedList.remove(mCounter);
-                            if(mSelectedList.size()<=0){
+                            if (mSelectedList.size() <= 0) {
                                 mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
                                 onClearAllSelection();
-                            }else{
+                            } else {
                                 mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
                             }
                         }
                     }
                     onSelectionClear(mSelectedView);
-                    notifyItemChanged(mModelList.size()-1);
+                    notifyItemChanged(mModelList.size() - 1);
                 }
-            }else if(v.getId() == R.id.pOrbotRowRemove){
+            } else if (v.getId() == R.id.pOrbotRowRemove) {
                 v.setEnabled(false);
                 onRemoveRowCross(this.getLayoutPosition());
-            }
-            else if(v.getId() == R.id.pItemSelectionMenuButton){
+            } else if (v.getId() == R.id.pItemSelectionMenuButton) {
                 onEnableLongClickMenu();
                 v.animate().cancel();
                 v.animate().setDuration(350).alpha(0);
@@ -530,14 +530,14 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
 
         @Override
         public boolean onLongClick(View v) {
-            if(v.getId() == R.id.pLoadSession){
+            if (v.getId() == R.id.pLoadSession) {
                 onEnableLongClickMenu();
-                if(mSelectedView.getVisibility() == View.GONE){
+                if (mSelectedView.getVisibility() == View.GONE) {
                     mSelectedList.add(mModelList.get(this.getLayoutPosition()).getSession().getSessionID());
                     onSelectionCreate(mSelectedView);
-                    notifyItemChanged(mModelList.size()-1);
+                    notifyItemChanged(mModelList.size() - 1);
                     mEvent.invokeObserver(Arrays.asList(false, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
-                }else {
+                } else {
                     v.performClick();
                 }
                 mLoadSession.setPressed(false);
@@ -547,28 +547,28 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder>
     }
 
 
-    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData){
-        if(pCommands.equals(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING)){
+    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData) {
+        if (pCommands.equals(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING)) {
             return isSelectionMenuShowing();
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION)){
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.M_REMOVE_ALL_SELECTION)) {
             onRemoveAllSelection();
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.M_CLEAR_ALL_SELECTION)){
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.M_CLEAR_ALL_SELECTION)) {
             onClearAllSelection();
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.ENABLE_LONG_CLICK_MENU)){
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.ENABLE_LONG_CLICK_MENU)) {
             onEnableLongClickMenu();
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW)){
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.INIT_FIRST_ROW)) {
             initFirstRow();
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.REINIT_DATA)){
-            reInitData((ArrayList<tabRowModel>)pData.get(0));
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.NOTIFY_SWIPE)){
-            onNotifyItemSwiped((int)pData.get(0));
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.GET_SELECTION_SIZE)){
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.REINIT_DATA)) {
+            reInitData((ArrayList<tabRowModel>) pData.get(0));
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.NOTIFY_SWIPE)) {
+            onNotifyItemSwiped((int) pData.get(0));
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.GET_SELECTION_SIZE)) {
             return getSelectionSize();
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.REMOVE_ALL)){
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.REMOVE_ALL)) {
             onRemoveAll();
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.REMOVE_ROW_CROSSED)){
-            onRemoveRowCross((int)pData.get(0));
-        }else if(pCommands.equals(tabEnums.eTabAdapterCommands.M_INITIALIZE)){
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.REMOVE_ROW_CROSSED)) {
+            onRemoveRowCross((int) pData.get(0));
+        } else if (pCommands.equals(tabEnums.eTabAdapterCommands.M_INITIALIZE)) {
             initialize((ArrayList<tabRowModel>) pData.get(0));
         }
         return null;

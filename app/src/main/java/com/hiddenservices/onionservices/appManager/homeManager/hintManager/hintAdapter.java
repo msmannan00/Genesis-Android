@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -39,8 +40,7 @@ import java.util.Map;
 
 import static java.lang.Thread.sleep;
 
-public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder>
-{
+public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder> {
     /*Private Variables*/
 
     private ArrayList<historyRowModel> mHintList;
@@ -51,26 +51,26 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
     public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
         this.mHintList = new ArrayList();
-        int maxCounter=5;
-        if(pHintList.size()<maxCounter){
+        int maxCounter = 5;
+        if (pHintList.size() < maxCounter) {
             maxCounter = pHintList.size();
         }
 
-        this.mHintList.addAll(pHintList.subList(0,maxCounter));
+        this.mHintList.addAll(pHintList.subList(0, maxCounter));
         this.mContext = pContext;
         this.mEvent = pEvent;
     }
 
-    public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch){
+    public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch) {
         mHintList = pHintList;
-        if(mHintList.size()==1 && mHintList.get(0).getHeader().equals("about:blank")) {
+        if (mHintList.size() == 1 && mHintList.get(0).getHeader().equals("about:blank")) {
             mHintList.clear();
-            mHintList.add( new historyRowModel("Orion Search", "orion.onion",-1));
+            mHintList.add(new historyRowModel("Orion Search", "orion.onion", -1));
         }
         notifyDataSetChanged();
     }
 
-    public void onClearAdapter(){
+    public void onClearAdapter() {
         mPastWebIcon.remove(0);
         mPastWebIcon.remove(1);
         mPastWebIcon.remove(2);
@@ -78,15 +78,15 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
     /*Initializations*/
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hint_view, parent, false);
         return new listViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull hintAdapter.listViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull hintAdapter.listViewHolder holder, int position) {
         holder.bindListView(mHintList.get(position));
     }
 
@@ -98,8 +98,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     /*Listeners*/
 
     /*View Holder Extensions*/
-    class listViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener
-    {
+    class listViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
         TextView mHeader;
         TextView mHeaderSingle;
         TextView mURL;
@@ -128,10 +127,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v6)));
 
-            if(mPastWebIcon.containsKey(getLayoutPosition())){
+            if (mPastWebIcon.containsKey(getLayoutPosition())) {
                 pHintWebIconImage.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
                 pHintWebIconImage.setImageTintList(null);
-            }else {
+            } else {
                 pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
 
                 Drawable mDrawable;
@@ -147,15 +146,15 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             }
 
             String mURLLink;
-            if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
+            if (model.getDescription().equals(strings.GENERIC_EMPTY_STR)) {
                 mURLLink = model.getHeader();
-                mHeaderSingle.setText(model.getHeader().replace("+"," ").replace("%", "+"));
+                mHeaderSingle.setText(model.getHeader().replace("+", " ").replace("%", "+"));
                 mHeaderSingle.setVisibility(View.VISIBLE);
                 mHeader.setVisibility(View.GONE);
                 mURL.setVisibility(View.GONE);
                 mHintWebIcon.setVisibility(View.GONE);
                 mHindTypeIcon.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 mURLLink = model.getDescription();
                 mHeaderSingle.setVisibility(View.GONE);
                 mHeader.setVisibility(View.VISIBLE);
@@ -165,14 +164,14 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             }
 
             mHeader.setText(model.getHeader());
-            if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
+            if (model.getDescription().equals(strings.GENERIC_EMPTY_STR)) {
                 mMoveURL.setTag(model.getHeader());
-            }else {
+            } else {
                 mMoveURL.setTag(model.getDescription());
             }
 
-            String m_url = model.getDescription().toString();
-            if(!status.sTorBrowsing && (m_url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || m_url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))){
+            String m_url = model.getDescription();
+            if (!status.sTorBrowsing && (m_url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || m_url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))) {
                 m_url = "https://orion.onion/privacy";
             }
 
@@ -180,10 +179,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             Drawable mDrawable = null;
             Resources res = itemView.getContext().getResources();
             try {
-                if(model.getDescription().equals(strings.GENERIC_EMPTY_STR) && !model.getHeader().contains(".")){
+                if (model.getDescription().equals(strings.GENERIC_EMPTY_STR) && !model.getHeader().contains(".")) {
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_search));
                     mMoveURL.setVisibility(View.GONE);
-                }else {
+                } else {
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser));
                     mMoveURL.setVisibility(View.VISIBLE);
                     mMoveURL.setOnTouchListener(listViewHolder.this);
@@ -191,56 +190,54 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             } catch (Exception ignored) {
             }
 
-            if(model.getDescription().equals(strings.GENERIC_EMPTY_STR)){
+            if (model.getDescription().equals(strings.GENERIC_EMPTY_STR)) {
                 mHindTypeIcon.setImageDrawable(mDrawable);
             }
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
-            if(mURLLink.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURLLink.contains("orion.onion")){
+            if (mURLLink.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURLLink.contains("orion.onion")) {
                 pHintWebIconImage.setImageTintList(null);
                 pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                mPastWebIcon.put(getLayoutPosition(),pHintWebIconImage.getDrawable());
-            }else
-            {
+                mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
+            } else {
                 String mURLPast = mURLLink;
-                mPastIconFlicker.put(getLayoutPosition(),mURLPast);
+                mPastIconFlicker.put(getLayoutPosition(), mURLPast);
 
                 mHindTypeIconTemp.setImageDrawable(null);
                 mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
 
                 mContext.runOnUiThread(() -> new Handler().postDelayed(() ->
                 {
-                    if(mHindTypeIconTemp.getDrawable() != null){
-                        if(mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))){
+                    if (mHindTypeIconTemp.getDrawable() != null) {
+                        if (mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))) {
                             pHintWebIconImage.setImageTintList(null);
                             pHintWebIconImage.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                            mPastWebIcon.put(getLayoutPosition(),pHintWebIconImage.getDrawable());
+                            mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
                         }
-                        if(getLayoutPosition() == 1){
-                            Log.i("FUSSSS1111","FUSSSS4444");
+                        if (getLayoutPosition() == 1) {
+                            Log.i("FUSSSS1111", "FUSSSS4444");
                         }
                     }
                 }, 300));
             }
-       }
+        }
 
         @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if(v.getId() == mpHintListener.getId()){
-                if(event.getAction() == MotionEvent.ACTION_MOVE){
+            if (v.getId() == mpHintListener.getId()) {
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
                     helperMethod.hideKeyboard(mContext);
                 }
-            }
-            else if(v.getId() == mMoveURL.getId()){
+            } else if (v.getId() == mMoveURL.getId()) {
                 mEvent.invokeObserver(Collections.singletonList(mMoveURL.getTag()), enums.etype.M_COPY_URL);
             }
             return false;
         }
     }
 
-    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData){
+    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData) {
         return null;
     }
 

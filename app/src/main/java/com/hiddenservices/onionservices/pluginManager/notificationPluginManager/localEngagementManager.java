@@ -1,27 +1,31 @@
 package com.hiddenservices.onionservices.pluginManager.notificationPluginManager;
 
-import android.app.Notification ;
-import android.app.NotificationChannel ;
-import android.app.NotificationManager ;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver ;
-import android.content.Context ;
-import android.content.Intent ;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
+
 import androidx.core.app.NotificationCompat;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.strings;
 import com.example.myapplication.R;
+
 import java.util.Random;
+
 import static com.hiddenservices.onionservices.constants.constants.mUserEngagementNotificationID;
 
 public class localEngagementManager extends BroadcastReceiver {
 
 
-    public void onReceive (Context context , Intent intent) {
-        try{
+    public void onReceive(Context context, Intent intent) {
+        try {
             final int NOTIFY_ID = mUserEngagementNotificationID;
             String pTitle = strings.NOTIFICATION_TITLE;
             String pBody = strings.NOTIFICATION_BODY[new Random().nextInt(strings.NOTIFICATION_BODY.length)];
@@ -32,10 +36,10 @@ public class localEngagementManager extends BroadcastReceiver {
 
 
             NotificationCompat.Builder builder;
-            NotificationManager mNotifManager = (NotificationManager)context.getSystemService(Context. NOTIFICATION_SERVICE ) ;
+            NotificationManager mNotifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
             if (mNotifManager == null) {
-                mNotifManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -67,7 +71,7 @@ public class localEngagementManager extends BroadcastReceiver {
 
                 builder = new NotificationCompat.Builder(context);
                 Intent mIntent = activityContextManager.getInstance().getHomeController().getIntent();
-                PendingIntent pendIntent = PendingIntent.getActivity(activityContextManager.getInstance().getCurrentActivity(), 0, mIntent, PendingIntent. FLAG_ONE_SHOT);
+                PendingIntent pendIntent = PendingIntent.getActivity(activityContextManager.getInstance().getCurrentActivity(), 0, mIntent, PendingIntent.FLAG_ONE_SHOT);
 
                 builder.setContentTitle(pTitle)                           // required
                         .setSmallIcon(R.mipmap.ic_stat_tor_logo) // required
@@ -83,8 +87,8 @@ public class localEngagementManager extends BroadcastReceiver {
 
             Notification notification = builder.build();
             mNotifManager.notify(NOTIFY_ID, notification);
-        }catch (Exception ex){
-            Log.i("","");
+        } catch (Exception ex) {
+            Log.i("", "");
         }
     }
 }

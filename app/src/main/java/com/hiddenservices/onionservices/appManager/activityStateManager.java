@@ -3,6 +3,7 @@ package com.hiddenservices.onionservices.appManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+
 import com.hiddenservices.onionservices.constants.status;
 
 import org.torproject.android.service.OrbotService;
@@ -24,7 +25,7 @@ public class activityStateManager extends Service {
         Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
         this.stopService(mServiceIntent);
 
-        if(OrbotService.getServiceObject()!=null){
+        if (OrbotService.getServiceObject() != null) {
             OrbotService.getServiceObject().onDestroy();
         }
 
@@ -38,7 +39,7 @@ public class activityStateManager extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
         this.stopService(mServiceIntent);
-        if(OrbotService.getServiceObject()!=null){
+        if (OrbotService.getServiceObject() != null) {
             OrbotService.getServiceObject().onDestroy();
         }
 

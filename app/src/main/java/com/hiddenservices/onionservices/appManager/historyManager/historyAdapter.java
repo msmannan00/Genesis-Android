@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.*;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,8 +33,7 @@ import java.util.List;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 @SuppressLint("NotifyDataSetChanged")
-public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listViewHolder>
-{
+public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listViewHolder> {
     /*Private Variables*/
 
     private ArrayList<historyRowModel> mModelList = new ArrayList<>();
@@ -68,14 +68,14 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         initializeModelWithDate(false);
     }
 
-    public void onLoadMore(ArrayList<historyRowModel> pModelList){
+    public void onLoadMore(ArrayList<historyRowModel> pModelList) {
         //notifyDataSetChanged();
         initializeModelWithDate(false);
     }
 
 
-    private void initializeModelWithDate(boolean pFilterEnabled){
-        int m_real_counter=0;
+    private void initializeModelWithDate(boolean pFilterEnabled) {
+        int m_real_counter = 0;
 
         mRealID.clear();
         mRealIndex.clear();
@@ -86,10 +86,10 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         ArrayList<historyRowModel> p_model_list = mPassedList;
         int m_date_state = -1;
         int m_last_day = -1;
-        for(int counter = 0; counter< p_model_list.size(); counter++){
+        for (int counter = 0; counter < p_model_list.size(); counter++) {
 
-            if(pFilterEnabled){
-                if(!p_model_list.get(counter).getHeader().toLowerCase().contains(this.mFilter.toLowerCase()) && !p_model_list.get(counter).getDescription().toLowerCase().contains(this.mFilter)){
+            if (pFilterEnabled) {
+                if (!p_model_list.get(counter).getHeader().toLowerCase().contains(this.mFilter.toLowerCase()) && !p_model_list.get(counter).getDescription().toLowerCase().contains(this.mFilter)) {
                     continue;
                 }
             }
@@ -101,27 +101,27 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             cal.setTime(Calendar.getInstance().getTime());
             int m_date_2 = cal.get(Calendar.DAY_OF_YEAR);
 
-            float diff = m_date_2-m_date_1;
+            float diff = m_date_2 - m_date_1;
 
-            if(diff==0){
-                if(m_date_state!=1 && p_model_list.get(counter).getID()!=-2){
-                    this.mModelList.add(new historyRowModel("Today ",null,-1));
+            if (diff == 0) {
+                if (m_date_state != 1 && p_model_list.get(counter).getID() != -2) {
+                    this.mModelList.add(new historyRowModel("Today ", null, -1));
                     mRealID.add(m_real_counter);
                     mRealIndex.add(counter);
                     m_date_state = 1;
                 }
-            }else if (diff>=1){
+            } else if (diff >= 1) {
 
-                if(m_date_state!=2 || m_last_day!=(int)(Math.ceil(diff/7)*7)){
-                    m_last_day = (int)(Math.ceil(diff/7)*7);
-                    this.mModelList.add(new historyRowModel("Last " + m_last_day + " Days",null,-1));
+                if (m_date_state != 2 || m_last_day != (int) (Math.ceil(diff / 7) * 7)) {
+                    m_last_day = (int) (Math.ceil(diff / 7) * 7);
+                    this.mModelList.add(new historyRowModel("Last " + m_last_day + " Days", null, -1));
                     mRealID.add(m_real_counter);
                     mRealIndex.add(counter);
                     m_date_state = 2;
                 }
-            }else {
-                if(m_date_state!=3){
-                    this.mModelList.add(new historyRowModel("Older ",null,-1));
+            } else {
+                if (m_date_state != 3) {
+                    this.mModelList.add(new historyRowModel("Older ", null, -1));
                     mRealID.add(m_real_counter);
                     mRealIndex.add(counter);
                     m_date_state = 3;
@@ -131,40 +131,40 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             mRealID.add(p_model_list.get(counter).getID());
             mRealIndex.add(counter);
             this.mModelList.add(p_model_list.get(counter));
-            m_real_counter+=1;
+            m_real_counter += 1;
         }
         mCurrentList.addAll(this.mModelList);
     }
 
     /*Initializations*/
 
-    private ArrayList<String> getLongSelectedleURL(){
+    private ArrayList<String> getLongSelectedleURL() {
         return mLongSelectedIndex;
     }
 
-    public void onDeleteSelected(){
-        for(int m_counter = 0; m_counter< mLongSelectedIndex.size(); m_counter++){
-            for(int m_counter_inner = 0; m_counter_inner< mCurrentList.size(); m_counter_inner++){
-                if(mCurrentList.get(m_counter_inner).getDate() == mLongSelectedDate.get(m_counter) && mLongSelectedIndex.get(m_counter).equals("https://"+ mCurrentList.get(m_counter_inner).getDescription())){
-                    mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(m_counter_inner)),enums.etype.url_clear);
-                    mEvent.invokeObserver(Collections.singletonList(mLongSelectedID.get(m_counter)),enums.etype.url_clear_at);
+    public void onDeleteSelected() {
+        for (int m_counter = 0; m_counter < mLongSelectedIndex.size(); m_counter++) {
+            for (int m_counter_inner = 0; m_counter_inner < mCurrentList.size(); m_counter_inner++) {
+                if (mCurrentList.get(m_counter_inner).getDate() == mLongSelectedDate.get(m_counter) && mLongSelectedIndex.get(m_counter).equals("https://" + mCurrentList.get(m_counter_inner).getDescription())) {
+                    mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(m_counter_inner)), enums.etype.url_clear);
+                    mEvent.invokeObserver(Collections.singletonList(mLongSelectedID.get(m_counter)), enums.etype.url_clear_at);
                     invokeFilter(false);
-                    mEvent.invokeObserver(Collections.singletonList(m_counter_inner),enums.etype.is_empty);
+                    mEvent.invokeObserver(Collections.singletonList(m_counter_inner), enums.etype.is_empty);
 
                     boolean mDateVerify = false;
-                    if(mCurrentList.size()>0 && mCurrentList.size()<m_counter_inner+1 && mCurrentList.get(m_counter_inner-1).getDescription()==null && (mCurrentList.size()>m_counter_inner+1 && mCurrentList.get(m_counter_inner+1).getDescription()==null || mCurrentList.size()==m_counter_inner+1)){
+                    if (mCurrentList.size() > 0 && mCurrentList.size() < m_counter_inner + 1 && mCurrentList.get(m_counter_inner - 1).getDescription() == null && (mCurrentList.size() > m_counter_inner + 1 && mCurrentList.get(m_counter_inner + 1).getDescription() == null || mCurrentList.size() == m_counter_inner + 1)) {
                         mDateVerify = true;
                     }
 
-                    if(m_counter_inner==0){
+                    if (m_counter_inner == 0) {
                         //notifyDataSetChanged();
-                    }else {
+                    } else {
 
-                        if(mDateVerify){
-                            notifyItemRemoved(m_counter_inner-1);
-                            mCurrentList.remove(m_counter_inner-1);
-                            notifyItemRangeChanged(m_counter_inner-1, mCurrentList.size());
-                        }else {
+                        if (mDateVerify) {
+                            notifyItemRemoved(m_counter_inner - 1);
+                            mCurrentList.remove(m_counter_inner - 1);
+                            notifyItemRangeChanged(m_counter_inner - 1, mCurrentList.size());
+                        } else {
                             notifyItemRemoved(m_counter_inner);
                             mCurrentList.remove(m_counter_inner);
                             notifyItemRangeChanged(m_counter_inner, mCurrentList.size());
@@ -177,13 +177,13 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         clearLongSelectedURL();
     }
 
-    private void clearLongSelectedURL(){
-        for(int m_counter = 0; m_counter< mCurrentList.size(); m_counter++){
-            for(int m_counter_inner = 0; m_counter_inner< mLongSelectedID.size(); m_counter_inner++){
-                if(mCurrentList.get(m_counter).getID() == mLongSelectedID.get(m_counter_inner)){
+    private void clearLongSelectedURL() {
+        for (int m_counter = 0; m_counter < mCurrentList.size(); m_counter++) {
+            for (int m_counter_inner = 0; m_counter_inner < mLongSelectedID.size(); m_counter_inner++) {
+                if (mCurrentList.get(m_counter).getID() == mLongSelectedID.get(m_counter_inner)) {
                     mLongSelectedID.remove(m_counter_inner);
                     notifyItemChanged(m_counter);
-                    m_counter-=1;
+                    m_counter -= 1;
                     break;
                 }
             }
@@ -194,10 +194,10 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         mLongSelectedID.clear();
     }
 
-    private String getSelectedURL(){
+    private String getSelectedURL() {
         String m_joined_url = "\n";
-        for(int m_counter = 0; m_counter< mLongSelectedIndex.size(); m_counter++){
-            m_joined_url = m_joined_url.concat("\n"+ mLongSelectedIndex.get(m_counter));
+        for (int m_counter = 0; m_counter < mLongSelectedIndex.size(); m_counter++) {
+            m_joined_url = m_joined_url.concat("\n" + mLongSelectedIndex.get(m_counter));
         }
         return m_joined_url;
     }
@@ -211,12 +211,11 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull historyAdapter.listViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull historyAdapter.listViewHolder holder, int position) {
         holder.bindListView(mCurrentList.get(position), position);
     }
 
-    public int getItem(){
+    public int getItem() {
         return mCurrentList.size();
     }
 
@@ -226,22 +225,22 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     }
 
     /*Listeners*/
-    public void onUpdateSearchStatus(boolean p_is_searched){
+    public void onUpdateSearchStatus(boolean p_is_searched) {
         mSearchEnabled = p_is_searched;
     }
 
-    public void onSelectView(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, boolean pIsForced, int pId, Date pDate){
-        if(!mSearchEnabled){
+    public void onSelectView(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, boolean pIsForced, int pId, Date pDate) {
+        if (!mSearchEnabled) {
             try {
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(pItemView, pMenuItem, pLogoImage, pIsForced, true));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(!pIsForced){
+            if (!pIsForced) {
                 mLongSelectedDate.add(pDate);
                 mLongSelectedIndex.add(pUrl);
                 mLongSelectedID.add(pId);
-                if(mLongSelectedIndex.size()<=1){
+                if (mLongSelectedIndex.size() <= 1) {
                     notifyDataSetChanged();
                 }
             }
@@ -253,27 +252,26 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
     }
 
-    public boolean isSwipable(int mIndex){
-        if(mCurrentList.get(mIndex).getID() == -1){
+    public boolean isSwipable(int mIndex) {
+        if (mCurrentList.get(mIndex).getID() == -1) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
 
-    public void onVerifyLongSelectedURL(boolean pIsComputing){
-        if(mLongSelectedIndex.size()>0){
-            mEvent.invokeObserver(Collections.singletonList(false),enums.etype.on_verify_selected_url_menu);
-        }else {
-            if(!pIsComputing){
+    public void onVerifyLongSelectedURL(boolean pIsComputing) {
+        if (mLongSelectedIndex.size() > 0) {
+            mEvent.invokeObserver(Collections.singletonList(false), enums.etype.on_verify_selected_url_menu);
+        } else {
+            if (!pIsComputing) {
                 notifyDataSetChanged();
             }
-            mEvent.invokeObserver(Collections.singletonList(true),enums.etype.on_verify_selected_url_menu);
+            mEvent.invokeObserver(Collections.singletonList(true), enums.etype.on_verify_selected_url_menu);
         }
     }
 
-    public void onClearHighlight(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, boolean pIsForced, int pId, Date pDate)
-    {
+    public void onClearHighlight(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, boolean pIsForced, int pId, Date pDate) {
         try {
             mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(pItemView, pMenuItem, pLogoImage, pIsForced));
             mLongSelectedDate.remove(pDate);
@@ -285,93 +283,93 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
     }
 
-    public void onClearAdapter(){
+    public void onClearAdapter() {
 
     }
 
-    public void notifyFilter(){
-        if(mFilter.length()>0){
+    public void notifyFilter() {
+        if (mFilter.length() > 0) {
             initializeModelWithDate(true);
             notifyDataSetChanged();
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public void onSwipe(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, int pId, Date pDate){
+    public void onSwipe(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, int pId, Date pDate) {
 
         Handler handler = new Handler();
 
         Runnable mLongPressed = () -> {
-            if(!mDisableCallable){
-                if(!mLongSelectedIndex.contains(pUrl) || !mLongSelectedID.contains(pId)) {
+            if (!mDisableCallable) {
+                if (!mLongSelectedIndex.contains(pUrl) || !mLongSelectedID.contains(pId)) {
                     mLongPressedMenuActive = true;
-                    onSelectView(pItemView, pUrl,pMenuItem, pLogoImage, false, pId, pDate);
-                }else {
-                    onClearHighlight(pItemView, pUrl,pMenuItem, pLogoImage, false, pId, pDate);
+                    onSelectView(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
+                } else {
+                    onClearHighlight(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
                     mLongPressedMenuActive = true;
                 }
-            }else {
+            } else {
                 pItemView.setPressed(false);
                 pItemView.clearFocus();
             }
 
-            if(mFilter.length()>0){
+            if (mFilter.length() > 0) {
                 initializeModelWithDate(true);
                 notifyDataSetChanged();
             }
         };
 
-         pItemView.setOnTouchListener((v, event) -> {
+        pItemView.setOnTouchListener((v, event) -> {
 
-             if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
 
-                 if (mLongSelectedIndex.size() > 0) {
-                     if (!mLongPressedMenuActive) {
-                         if (mLongSelectedIndex.contains(pUrl) && mLongSelectedID.contains(pId)) {
-                             handler.removeCallbacks(mLongPressed);
-                             historyAdapter.this.onClearHighlight(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
-                         } else{
-                             handler.removeCallbacks(mLongPressed);
-                             historyAdapter.this.onSelectView(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
-                         }
-                     }
+                if (mLongSelectedIndex.size() > 0) {
+                    if (!mLongPressedMenuActive) {
+                        if (mLongSelectedIndex.contains(pUrl) && mLongSelectedID.contains(pId)) {
+                            handler.removeCallbacks(mLongPressed);
+                            historyAdapter.this.onClearHighlight(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
+                        } else {
+                            handler.removeCallbacks(mLongPressed);
+                            historyAdapter.this.onSelectView(pItemView, pUrl, pMenuItem, pLogoImage, false, pId, pDate);
+                        }
+                    }
 
-                     initializeModelWithDate(true);
-                     return false;
-                 }
+                    initializeModelWithDate(true);
+                    return false;
+                }
 
-                 v.setPressed(false);
-                 handler.removeCallbacks(mLongPressed);
-                 mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered);
-                 initializeModelWithDate(true);
-                 return true;
+                v.setPressed(false);
+                handler.removeCallbacks(mLongPressed);
+                mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered);
+                initializeModelWithDate(true);
+                return true;
 
-             } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                 mDisableCallable = false;
-                 mLongPressedMenuActive = false;
-                 v.setPressed(true);
-                 handler.postDelayed(mLongPressed, ViewConfiguration.getLongPressTimeout());
-                 initializeModelWithDate(true);
-                 return true;
-             } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
-                 handler.removeCallbacks(mLongPressed);
-                 mDisableCallable = true;
-                 if (!mLongSelectedIndex.contains(pUrl) || !mLongSelectedID.contains(pId)) {
-                     v.setPressed(false);
-                 }
-                 handler.removeCallbacks(mLongPressed);
+            } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                mDisableCallable = false;
+                mLongPressedMenuActive = false;
+                v.setPressed(true);
+                handler.postDelayed(mLongPressed, ViewConfiguration.getLongPressTimeout());
+                initializeModelWithDate(true);
+                return true;
+            } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+                handler.removeCallbacks(mLongPressed);
+                mDisableCallable = true;
+                if (!mLongSelectedIndex.contains(pUrl) || !mLongSelectedID.contains(pId)) {
+                    v.setPressed(false);
+                }
+                handler.removeCallbacks(mLongPressed);
 
-                 initializeModelWithDate(true);
-                 return true;
-             }
-             initializeModelWithDate(true);
-             return false;
+                initializeModelWithDate(true);
+                return true;
+            }
+            initializeModelWithDate(true);
+            return false;
 
-         });
+        });
         //initializeModelWithDate(false);
     }
 
-    void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle){
+    void onOpenMenu(View pView, String pUrl, int pPosition, String pTitle) {
         LayoutInflater layoutInflater = (LayoutInflater) pView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") final View mPopupView = layoutInflater.inflate(R.layout.history_bookmark__row_menu, null);
         mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_OPEN_MENU, Arrays.asList(mPopupWindow, pView, mPopupView));
@@ -382,40 +380,36 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuOpenNewTab), pUrl, pPosition, pTitle);
         setPopupWindowEvents(mPopupView.findViewById(R.id.pMenuDelete), pUrl, pPosition, pTitle);
 
-        if(mFilter.length()>0){
+        if (mFilter.length() > 0) {
             initializeModelWithDate(true);
             notifyDataSetChanged();
         }
     }
 
-    public void invokeSwipeClose(int pPosition){
+    public void invokeSwipeClose(int pPosition) {
         onClose(pPosition);
         invokeFilter(true);
 
-        if(mPopupWindow!=null){
+        if (mPopupWindow != null) {
             mPopupWindow.dismiss();
         }
     }
 
-    public void setPopupWindowEvents(View pView, String pUrl, int pPosition, String pTitle){
+    public void setPopupWindowEvents(View pView, String pUrl, int pPosition, String pTitle) {
         pView.setOnClickListener(v -> {
-            if(v.getId() == R.id.pMenuCopy){
+            if (v.getId() == R.id.pMenuCopy) {
                 helperMethod.copyURL(pUrl, mListHolderContext);
                 mPopupWindow.dismiss();
-            }
-            else if(v.getId() == R.id.pMenuShare){
-                helperMethod.shareApp((AppCompatActivity)mListHolderContext, pUrl, pTitle);
+            } else if (v.getId() == R.id.pMenuShare) {
+                helperMethod.shareApp((AppCompatActivity) mListHolderContext, pUrl, pTitle);
                 mPopupWindow.dismiss();
-            }
-            else if(v.getId() == R.id.pMenuOpenCurrentTab){
-                mEvent.invokeObserver(Collections.singletonList(pUrl),enums.etype.url_triggered);
+            } else if (v.getId() == R.id.pMenuOpenCurrentTab) {
+                mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered);
                 mPopupWindow.dismiss();
-            }
-            else if(v.getId() == R.id.pMenuOpenNewTab){
-                mEvent.invokeObserver(Collections.singletonList(pUrl),enums.etype.url_triggered_new_tab);
+            } else if (v.getId() == R.id.pMenuOpenNewTab) {
+                mEvent.invokeObserver(Collections.singletonList(pUrl), enums.etype.url_triggered_new_tab);
                 mPopupWindow.dismiss();
-            }
-            else if(v.getId() == R.id.pMenuDelete){
+            } else if (v.getId() == R.id.pMenuDelete) {
                 onClose(pPosition);
                 invokeFilter(true);
                 mPopupWindow.dismiss();
@@ -423,18 +417,17 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         });
     }
 
-    private void setItemViewOnClickListener(View pItemView, View pItemMenu, String pUrl, int pPosition, String pTitle, View pMenuItem, ImageView pLogoImage, int pId, Date pDate)
-    {
+    private void setItemViewOnClickListener(View pItemView, View pItemMenu, String pUrl, int pPosition, String pTitle, View pMenuItem, ImageView pLogoImage, int pId, Date pDate) {
         pItemMenu.setOnClickListener((View v) -> onOpenMenu(v, pUrl, pPosition, pTitle));
-        onSwipe(pItemView, pUrl,pMenuItem, pLogoImage, pId, pDate);
+        onSwipe(pItemView, pUrl, pMenuItem, pLogoImage, pId, pDate);
     }
 
-    private void onClose(int pIndex){
-        mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
-        mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.url_clear_at);
-        mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)),enums.etype.is_empty);
+    private void onClose(int pIndex) {
+        mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)), enums.etype.url_clear);
+        mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), enums.etype.url_clear_at);
+        mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), enums.etype.is_empty);
 
-        if(mPassedList.size()<=0){
+        if (mPassedList.size() <= 0) {
             mCurrentList.clear();
             return;
         }
@@ -446,8 +439,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
     }
 
     /*View Holder Extensions*/
-    class listViewHolder extends RecyclerView.ViewHolder
-    {
+    class listViewHolder extends RecyclerView.ViewHolder {
         TextView mHeader;
         TextView mDescription;
         TextView mDate;
@@ -478,7 +470,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             mFaviconLogo = itemView.findViewById(R.id.pFaviconLogo);
             mHindTypeIconTemp = new ImageView(mContext);
 
-            if(model.getID() == -1){
+            if (model.getID() == -1) {
                 mDate.setText(model.getHeader());
                 mDateContainer.setVisibility(View.VISIBLE);
                 mRowContainer.setVisibility(View.GONE);
@@ -486,8 +478,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mRowMenu.setClickable(false);
                 mWebLogo.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.GONE);
-            }
-            else if(model.getID() == -2){
+            } else if (model.getID() == -2) {
                 mDate.setText(model.getHeader());
                 mDateContainer.setVisibility(View.GONE);
                 mRowContainer.setVisibility(View.GONE);
@@ -496,89 +487,83 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mWebLogo.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.VISIBLE);
                 return;
-            }
-            else {
+            } else {
                 mDateContainer.setVisibility(View.GONE);
                 mLoadingContainer.setVisibility(View.GONE);
                 mRowContainer.setVisibility(View.VISIBLE);
-                if(mLongSelectedID.size()>0){
+                if (mLongSelectedID.size() > 0) {
                     mRowMenu.setVisibility(View.INVISIBLE);
                     mRowMenu.setClickable(false);
-                }else {
+                } else {
                     mRowMenu.setVisibility(View.VISIBLE);
                     mRowMenu.setClickable(true);
                 }
 
-                if(model.getDescription().startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)){
-                    String m_title = model.getDescription().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://orion.onion/privacy");
-                    String m_description = model.getHeader().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR,"https://orion.onion/privacy");
+                if (model.getDescription().startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)) {
+                    String m_title = model.getDescription().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR, "https://orion.onion/privacy");
+                    String m_description = model.getHeader().replace(constants.CONST_PRIVACY_POLICY_URL_NON_TOR, "https://orion.onion/privacy");
 
                     mHeader.setText(m_title);
                     mDescription.setText(m_description);
-                }else {
+                } else {
                     mHeader.setText(model.getHeader());
-                    mDescription.setText(("https://"+model.getDescription()));
+                    mDescription.setText(("https://" + model.getDescription()));
                 }
 
                 mWebLogo.setVisibility(View.VISIBLE);
-                mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0)+""));
+                mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0) + ""));
                 String header = model.getHeader();
 
-                if(model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("orion.onion")){
+                if (model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("orion.onion")) {
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                }
-                else{
+                } else {
                     mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
                 }
 
                 setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
             }
 
-            if(mLongSelectedID.size()>0){
+            if (mLongSelectedID.size() > 0) {
                 mRowMenu.setVisibility(View.INVISIBLE);
                 mRowMenu.setClickable(false);
-            }else {
+            } else {
                 mRowMenu.setVisibility(View.VISIBLE);
                 mRowMenu.setClickable(true);
             }
 
-            if(mLongSelectedIndex.contains("https://" + model.getDescription()) && mLongSelectedID.contains(model.getID())){
+            if (mLongSelectedIndex.contains("https://" + model.getDescription()) && mLongSelectedID.contains(model.getID())) {
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_SELECT_VIEW, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
-            }else if(mLogoImage.getAlpha()>0){
+            } else if (mLogoImage.getAlpha() > 0) {
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
             }
         }
     }
 
-    void setFilter(String pFilter){
+    void setFilter(String pFilter) {
         this.mFilter = pFilter.toLowerCase();
     }
 
-    void invokeFilter(boolean notify){
-        if(notify){
+    void invokeFilter(boolean notify) {
+        if (notify) {
             initializeModelWithDate(true);
         }
-   }
-
-    private boolean isLongPressMenuActive(){
-        return mLongSelectedIndex.size()>0;
     }
 
-    public Object onTrigger(historyEnums.eHistoryAdapterCommands pCommands, List<Object> pData){
-        if(pCommands == historyEnums.eHistoryAdapterCommands.GET_SELECTED_URL){
+    private boolean isLongPressMenuActive() {
+        return mLongSelectedIndex.size() > 0;
+    }
+
+    public Object onTrigger(historyEnums.eHistoryAdapterCommands pCommands, List<Object> pData) {
+        if (pCommands == historyEnums.eHistoryAdapterCommands.GET_SELECTED_URL) {
             return getSelectedURL();
-        }
-        else if(pCommands == historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL){
+        } else if (pCommands == historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL) {
             clearLongSelectedURL();
-        }
-        else if(pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_URL){
+        } else if (pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_URL) {
             return getLongSelectedleURL();
-        }
-        else if(pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS){
+        } else if (pCommands == historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS) {
             return isLongPressMenuActive();
-        }
-        else if(pCommands == historyEnums.eHistoryAdapterCommands.ON_CLOSE){
-            onClose((int)pData.get(0));
+        } else if (pCommands == historyEnums.eHistoryAdapterCommands.ON_CLOSE) {
+            onClose((int) pData.get(0));
         }
         return null;
     }

@@ -35,28 +35,28 @@ public class externalURLNavigationContoller extends AppCompatActivity {
 
         status.sExternalWebsite = strings.GENERIC_EMPTY_STR;
         Uri mData = externalURLNavigationContoller.this.getIntent().getData();
-        if(status.sExternalWebsiteLoading && !status.sSettingIsAppStarted){
+        if (status.sExternalWebsiteLoading && !status.sSettingIsAppStarted) {
             Intent intent = new Intent(this, homeController.class);
             intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
             activityContextManager.getInstance().getHomeController().overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
             finish();
             return;
         }
         status.sExternalWebsiteLoading = true;
-        if(mData.toString().contains("applovin")){
+        if (mData.toString().contains("applovin")) {
             Intent myIntent = new Intent(this, advertController.class);
             myIntent.putExtra(keys.ADVERT_URL, mData.toString());
             myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
             myIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(myIntent);
             activityContextManager.getInstance().getHomeController().overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
-        }else {
-            if(mData == null){
+        } else {
+            if (mData == null) {
                 mData = Uri.parse(constants.CONST_BACKEND_GENESIS_URL);
             }
-            if(activityContextManager.getInstance().getHomeController()==null){
+            if (activityContextManager.getInstance().getHomeController() == null) {
                 Intent mIntent = new Intent(this, homeController.class);
                 mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND_NAVIGATE, mData.toString());
                 helperMethod.openIntent(mIntent, this, constants.CONST_LIST_EXTERNAL_SHORTCUT);
@@ -66,8 +66,7 @@ public class externalURLNavigationContoller extends AppCompatActivity {
                     activityContextManager.getInstance().getHomeController().onStartApplication(null);
                     return null;
                 });
-            }
-            else {
+            } else {
                 finish();
 
                 Uri finalMData1 = mData;

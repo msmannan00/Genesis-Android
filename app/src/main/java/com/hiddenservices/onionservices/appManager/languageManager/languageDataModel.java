@@ -17,12 +17,15 @@ public class languageDataModel {
     public String getHeader() {
         return mHeader;
     }
+
     public String getDescription() {
         return mDescription;
     }
+
     public String getTag() {
         return mTag;
     }
+
     public String getCountry() {
         return mCountry;
     }

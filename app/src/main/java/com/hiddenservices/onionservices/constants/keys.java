@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.constants;
 
-public class keys
-{
+public class keys {
     /*GENERIC*/
 
     public static final String M_ACTIVITY_RESPONSE = "M_ACTIVITY_RESPONSE";

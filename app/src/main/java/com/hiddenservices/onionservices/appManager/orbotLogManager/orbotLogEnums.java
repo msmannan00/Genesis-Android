@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.orbotLogManager;
 
-public class orbotLogEnums
-{
+public class orbotLogEnums {
     /*Orbot Log View Manager*/
 
     public enum eOrbotLogViewCommands {

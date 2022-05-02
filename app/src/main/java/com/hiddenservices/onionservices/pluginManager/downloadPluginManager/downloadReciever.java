@@ -17,15 +17,19 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.libs.netcipher.client.StrongHttpsClient;
 import com.example.myapplication.R;
+
 import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,6 +43,7 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collections;
+
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
 
@@ -82,12 +87,12 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
         /* Create Pending Intent */
 
-        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled",0);
+        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", 0);
 
         /* Create Notification */
 
-        if(mFileName.length()>30){
-            mFileName = "..." + mFileName.substring(mFileName.length()-30);
+        if (mFileName.length() > 30) {
+            mFileName = "..." + mFileName.substring(mFileName.length() - 30);
         }
 
         mNotifyManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -101,7 +106,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 .setColor(Color.parseColor("#84989f"))
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .setPriority(Notification.PRIORITY_DEFAULT)
-                .addAction(R.drawable.ic_download, "Cancel",pendingIntentCancel)
+                .addAction(R.drawable.ic_download, "Cancel", pendingIntentCancel)
                 .setSmallIcon(android.R.drawable.stat_sys_download)
                 .setDeleteIntent(pendingIntentCancel)
                 .setOngoing(false);
@@ -134,42 +139,42 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 URL url = new URL(fURL);
                 HttpURLConnection conection;
                 Proxy proxy;
-                if(helperMethod.getDomainName(fURL).contains(".onion")){
-                    if(orbotLocalConstants.mSOCKSPort==-1){
+                if (helperMethod.getDomainName(fURL).contains(".onion")) {
+                    if (orbotLocalConstants.mSOCKSPort == -1) {
                         proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved("localhost", orbotLocalConstants.mSOCKSPort));
                         conection = (HttpURLConnection) url.openConnection(proxy);
-                    }else {
+                    } else {
                         conection = (HttpURLConnection) url.openConnection();
                     }
-                }else {
-                    if(orbotLocalConstants.mSOCKSPort==-1){
+                } else {
+                    if (orbotLocalConstants.mSOCKSPort == -1) {
                         Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", orbotLocalConstants.mHTTPPort));
                         URLConnection mURLConnection = new URI(fURL).toURL().openConnection(mProxy);
                         conection = (HttpURLConnection) mURLConnection;
-                    }else{
+                    } else {
                         URLConnection mURLConnection = new URI(fURL).toURL().openConnection();
                         conection = (HttpURLConnection) mURLConnection;
                     }
                 }
 
-                conection.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0");
-                conection.setRequestProperty("Accept","*/*");
+                conection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0");
+                conection.setRequestProperty("Accept", "*/*");
                 conection.connect();
                 mRequestCode = conection.getResponseCode();
                 mInputStream = conection.getInputStream();
-                mOutputStream = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/"+mFileName);
+                mOutputStream = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + mFileName);
                 int lenghtOfFile = conection.getContentLength();
 
                 readStream(mInputStream, mOutputStream, lenghtOfFile);
-            }else {
+            } else {
                 String ALLOWED_URI_CHARS = "@#&=*+-_.,:!?()/~'%";
                 String urlEncoded = Uri.encode(f_url[0], ALLOWED_URI_CHARS);
                 StrongHttpsClient httpclient = new StrongHttpsClient(mContext.get());
 
-                if(orbotLocalConstants.mSOCKSPort!=-1){
-                    if(helperMethod.getDomainName(f_url[0]).contains(".onion")){
+                if (orbotLocalConstants.mSOCKSPort != -1) {
+                    if (helperMethod.getDomainName(f_url[0]).contains(".onion")) {
                         httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
-                    }else {
+                    } else {
                         httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
                     }
                 }
@@ -178,15 +183,14 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 HttpResponse response = httpclient.execute(httpget);
                 mInputStream = response.getEntity().getContent();
                 mRequestCode = response.getStatusLine().getStatusCode();
-                mOutputStream = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/"+mFileName);
+                mOutputStream = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + mFileName);
                 float lenghtOfFile = response.getEntity().getContentLength();
                 readStream(mInputStream, mOutputStream, lenghtOfFile);
             }
-        }catch (Exception ex){
-            if(mRequestCode!=200 && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+        } catch (Exception ex) {
+            if (mRequestCode != 200 && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 onBackgroundException(mRequestCode);
-            }
-            else if(android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.P)
+            } else if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.P)
                 onBackgroundException(mRequestCode);
         }
 
@@ -199,8 +203,8 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
         /* Create Pending Intent */
 
-        PendingIntent pendingIntentOpen = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Open",1);
-        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled",2);
+        PendingIntent pendingIntentOpen = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Open", 1);
+        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", 2);
 
         /* Create Notification */
 
@@ -212,14 +216,14 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         mNotificationBuilder.setProgress(0, 0, false);
         mNotificationBuilder.setAutoCancel(true);
         mNotificationBuilder.setOngoing(false);
-        mNotificationBuilder.addAction(android.R.drawable.stat_sys_download, "Open",pendingIntentOpen);
-        mNotificationBuilder.addAction(R.drawable.ic_download, "Cancel",pendingIntentCancel);
+        mNotificationBuilder.addAction(android.R.drawable.stat_sys_download, "Open", pendingIntentOpen);
+        mNotificationBuilder.addAction(R.drawable.ic_download, "Cancel", pendingIntentCancel);
         mNotificationBuilder.setOngoing(false);
         mNotificationBuilder.setPriority(Notification.PRIORITY_LOW);
         mNotifyManager.notify(mNotificationID, mNotificationBuilder.build());
 
         DownloadManager dm = (DownloadManager) mContext.get().getSystemService(Context.DOWNLOAD_SERVICE);
-        String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//","content://");
+        String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//", "content://");
         File mFile = new File(mPath);
 
         /* Create Dwonload Complete Destination */
@@ -232,13 +236,13 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             contentValues.put(MediaStore.Downloads.DISPLAY_NAME, mFileName);
             contentValues.put(MediaStore.Downloads.SIZE, mDownloadByte);
             contentValues.put(MediaStore.Downloads.MIME_TYPE, helperMethod.getMimeType(uri.toString(), mContext.get()));
-            contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + mFileName + "_" + helperMethod.createRandomID().substring(0,5));
+            contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + mFileName + "_" + helperMethod.createRandomID().substring(0, 5));
             ContentResolver database = mContext.get().getContentResolver();
             database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
         } else {
             Uri uri = FileProvider.getUriForFile(mContext.get(), "com.hiddenservices.onionservices.provider", mFile);
             String mime = helperMethod.getMimeType(uri.toString(), mContext.get());
-            if(mime!=null){
+            if (mime != null) {
                 dm.addCompletedDownload(mFileName, mURL, false, mime, mFile.getAbsolutePath(), mFile.length(), false);
             }
         }
@@ -248,28 +252,28 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
     /* UI TRIGGERS*/
 
     protected void onProgressUpdate(Integer... progress) {
-        int mPercentage =  (int)(mDownloadByte);
-        if(mPercentage<0){
+        int mPercentage = (int) (mDownloadByte);
+        if (mPercentage < 0) {
             mNotificationBuilder.setProgress(100, progress[0], true);
             mNotificationBuilder.setContentText(helperMethod.getFileSizeBadge(mPercentage * -1));
-        }else {
+        } else {
             mNotificationBuilder.setProgress(100, progress[0], false);
-            mNotificationBuilder.setContentText(mPercentage+"%");
+            mNotificationBuilder.setContentText(mPercentage + "%");
         }
         mNotifyManager.notify(mNotificationID, mNotificationBuilder.build());
         super.onProgressUpdate(progress);
     }
 
-    public void onCancel(){
+    public void onCancel() {
         mIsCanceled = true;
         mNotifyManager.cancel(mNotificationID);
         cancel(true);
     }
 
-    public void onTrigger(){
-        if(!mIsCanceled){
+    public void onTrigger() {
+        if (!mIsCanceled) {
             mNotifyManager.cancel(mNotificationID);
-            String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//","content://");
+            String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//", "content://");
             File mFile = new File(mPath);
             new Handler().postDelayed(() -> helperMethod.openFile(mFile, activityContextManager.getInstance().getHomeController()), 500);
         }
@@ -277,23 +281,23 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
     /* Helper Methods*/
 
-    private boolean readStream(InputStream pInputStream,OutputStream pOutputStream, float pLengthOfFile) throws IOException, InterruptedException {
+    private boolean readStream(InputStream pInputStream, OutputStream pOutputStream, float pLengthOfFile) throws IOException, InterruptedException {
 
         byte[] mData = new byte[100000];
         long mTotalReadCount = 0;
         int mCurrentReadCount;
 
         while ((mCurrentReadCount = pInputStream.read(mData)) != -1) {
-            if(!status.sSettingIsAppRunning){
+            if (!status.sSettingIsAppRunning) {
                 return false;
             }
             mTotalReadCount += mCurrentReadCount;
             int cur = (int) ((mTotalReadCount * 100) / pLengthOfFile);
             mDownloadByte = cur;
-            if(pLengthOfFile<0){
-                cur = (int)mTotalReadCount;
+            if (pLengthOfFile < 0) {
+                cur = (int) mTotalReadCount;
                 mDownloadByte = mTotalReadCount * -1;
-            }else {
+            } else {
                 mDownloadByte = cur;
             }
 
@@ -314,9 +318,9 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         return true;
     }
 
-    private void onBackgroundException(int pRequestCode){
+    private void onBackgroundException(int pRequestCode) {
         String mRequestCodeResponse = String.valueOf(pRequestCode);
-        if(mRequestCodeResponse == null || mRequestCodeResponse.equals("0")){
+        if (mRequestCodeResponse == null || mRequestCodeResponse.equals("0")) {
             mRequestCodeResponse = "\"Unknown\"";
         }
 

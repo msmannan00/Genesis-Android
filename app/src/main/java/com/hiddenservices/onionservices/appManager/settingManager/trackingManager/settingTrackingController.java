@@ -7,6 +7,7 @@ import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.constants.constants;
@@ -48,7 +49,7 @@ public class settingTrackingController extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
@@ -61,28 +62,26 @@ public class settingTrackingController extends AppCompatActivity {
         mTrackers.add(findViewById(R.id.pTrackingRadioOption3));
 
         activityContextManager.getInstance().onStack(this);
-        mSettingPrivacyViewController = new settingTrackingViewController(this, new settingTrackingController.settingAccessibilityViewCallback(),  mTrackers);
+        mSettingPrivacyViewController = new settingTrackingViewController(this, new settingTrackingController.settingAccessibilityViewCallback(), mTrackers);
         mSettingPrivacyModel = new settingTrackingModel(new settingTrackingController.settingAccessibilityModelCallback());
     }
 
     /*View Callbacks*/
 
-    private class settingAccessibilityViewCallback implements eventObserver.eventListener{
+    private class settingAccessibilityViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
 
     /*Model Callbacks*/
 
-    private class settingAccessibilityModelCallback implements eventObserver.eventListener{
+    private class settingAccessibilityModelCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
@@ -90,9 +89,8 @@ public class settingTrackingController extends AppCompatActivity {
     /* LOCAL OVERRIDES */
 
     @Override
-    public void onResume()
-    {
-        if(mSettingChanged){
+    public void onResume() {
+        if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
         }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
@@ -100,14 +98,13 @@ public class settingTrackingController extends AppCompatActivity {
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
     }
 
     @Override
     public void onBackPressed() {
-        if(mSettingChanged){
+        if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
@@ -123,11 +120,11 @@ public class settingTrackingController extends AppCompatActivity {
 
     /*UI Redirection*/
 
-    public void onClose(View view){
+    public void onClose(View view) {
         onBackPressed();
     }
 
-    public void onTracking(View view){
+    public void onTracking(View view) {
         mSettingChanged = true;
         mSettingPrivacyViewController.onTrigger(settingTrackingEnums.eTrackingViewController.M_SET_TRACKING_STATUS, Collections.singletonList(view));
         mSettingPrivacyModel.onTrigger(settingTrackingEnums.eTrackingModel.M_SET_TRACKING_PROTECTION, Collections.singletonList(view));
@@ -135,7 +132,7 @@ public class settingTrackingController extends AppCompatActivity {
     }
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
 }

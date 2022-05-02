@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.eventObserver;
 
-public class editTextManager  extends androidx.appcompat.widget.AppCompatAutoCompleteTextView {
+public class editTextManager extends androidx.appcompat.widget.AppCompatAutoCompleteTextView {
 
     Context mContext;
     private eventObserver.eventListener mEvent = null;
@@ -70,14 +70,14 @@ public class editTextManager  extends androidx.appcompat.widget.AppCompatAutoCom
         mContext = context;
     }
 
-    public void setEventHandler(eventObserver.eventListener pEvent){
+    public void setEventHandler(eventObserver.eventListener pEvent) {
         mEvent = pEvent;
     }
 
     @Override
     public boolean onKeyPreIme(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(mEvent!=null){
+            if (mEvent != null) {
                 mEvent.invokeObserver(null, enums.etype.ON_KEYBOARD_CLOSE);
             }
         }

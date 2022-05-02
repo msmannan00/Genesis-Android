@@ -21,6 +21,7 @@
             android:background="@xml/gx_ripple_blue"
             android:layout_height="60dp"
             tools:ignore="RtlSymmetry">
+
             <TextView
                 android:id="@+id/pWebLogo"
                 android:layout_width="35dp"
@@ -60,6 +61,7 @@
                     android:textColor="@color/c_white"
                     tools:ignore="RtlCompat" />
             </androidx.cardview.widget.CardView>
+
             <ImageView
                 android:id="@+id/pLogoImage"
                 android:layout_width="48dp"
@@ -94,8 +96,7 @@
                     android:singleLine="true"
                     android:layout_marginTop="10dp"
                     android:textSize="14.5sp"
-                    android:layout_marginStart="10dp"
-                    />
+                    android:layout_marginStart="10dp" />
 
                 <TextView
                     android:layout_marginStart="10dp"
@@ -106,8 +107,7 @@
                     android:layout_marginTop="1dp"
                     android:ellipsize="end"
                     android:textSize="13sp"
-                    android:textColor="@color/c_text_v2"
-                    />
+                    android:textColor="@color/c_text_v2" />
             </LinearLayout>
 
             <ImageButton
@@ -144,7 +144,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:textSize="13sp"
-            android:layout_marginStart="15dp"/>
+            android:layout_marginStart="15dp" />
 
     </LinearLayout>
 

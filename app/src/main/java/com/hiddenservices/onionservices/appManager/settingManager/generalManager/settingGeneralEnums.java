@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.generalManager;
 
-class settingGeneralEnums
-{
+class settingGeneralEnums {
     /*History Manager*/
     public enum eGeneralModel {
         M_FULL_SCREEN_BROWSING, M_SELECT_THEME, M_URL_NEW_TAB

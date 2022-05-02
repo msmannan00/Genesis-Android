@@ -6,22 +6,23 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
+
 import org.mozilla.geckoview.WebRequestError;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class errorHandler
-{
+public class errorHandler {
     private AppCompatActivity mContext;
     private String mErrorTemplate;
 
-    public String createErrorPage(final int category, final int error,AppCompatActivity mContext,String url, InputStream mResourceURL) {
+    public String createErrorPage(final int category, final int error, AppCompatActivity mContext, String url, InputStream mResourceURL) {
         this.mContext = mContext;
         if (mErrorTemplate == null) {
             StringBuilder builder = new StringBuilder();
-            try  {
+            try {
 
                 InputStream stream = mResourceURL;
                 BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
@@ -38,31 +39,31 @@ public class errorHandler
         }
         String title = helperMethod.getHost(url);
 
-        if(url==null){
+        if (url == null) {
             url = "Hidden Error";
         }
-        if(title==null){
+        if (title == null) {
             title = "Hidden Error";
         }
 
-        String replaceUrl = errorToString(error).replace("$URL",url);
-        String errorPage = createErrorPage("CODE : " + categoryToString(category) + " <br>TYPE : " + replaceUrl.replace("$TITLE",title),url,mResourceURL);
-        errorPage = translateMessage(errorPage,"CODE : " + categoryToString(category));
+        String replaceUrl = errorToString(error).replace("$URL", url);
+        String errorPage = createErrorPage("CODE : " + categoryToString(category) + " <br>TYPE : " + replaceUrl.replace("$TITLE", title), url, mResourceURL);
+        errorPage = translateMessage(errorPage, "CODE : " + categoryToString(category));
         return errorPage;
     }
 
-    private String translateMessage(String message,String error){
-        message = message.replace("$ERROR_M1",mContext.getString(R.string.ERROR_M1));
-        message = message.replace("$ERROR_M2",mContext.getString(R.string.ERROR_M2));
-        message = message.replace("$ERROR_M3",mContext.getString(R.string.ERROR_M3));
-        message = message.replace("$ERROR_M4",mContext.getString(R.string.ERROR_M4));
-        message = message.replace("$ERROR_M5",mContext.getString(R.string.ERROR_M5));
-        message = message.replace("$ERROR_M6",mContext.getString(R.string.ERROR_M6));
+    private String translateMessage(String message, String error) {
+        message = message.replace("$ERROR_M1", mContext.getString(R.string.ERROR_M1));
+        message = message.replace("$ERROR_M2", mContext.getString(R.string.ERROR_M2));
+        message = message.replace("$ERROR_M3", mContext.getString(R.string.ERROR_M3));
+        message = message.replace("$ERROR_M4", mContext.getString(R.string.ERROR_M4));
+        message = message.replace("$ERROR_M5", mContext.getString(R.string.ERROR_M5));
+        message = message.replace("$ERROR_M6", mContext.getString(R.string.ERROR_M6));
 
-        if(status.sTorBrowsing){
-            message = message.replace("$ERROR_M7","block");
-        }else {
-            message = message.replace("$ERROR_M7","none");
+        if (status.sTorBrowsing) {
+            message = message.replace("$ERROR_M7", "block");
+        } else {
+            message = message.replace("$ERROR_M7", "none");
         }
 
         message = message.replace("$ERROR", error);
@@ -73,7 +74,7 @@ public class errorHandler
     private String errorToString(final int error) {
         switch (error) {
             case WebRequestError.ERROR_UNKNOWN:
-                return "ERROR_UNKNOWN | The network request tried to use an unknown socket type"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
+                return "ERROR_UNKNOWN | The network request tried to use an unknown socket type";
             case WebRequestError.ERROR_SECURITY_SSL:
                 return "ERROR_SECURITY_SSL | SSL negotiation problems has occured";
             case WebRequestError.ERROR_SECURITY_BAD_CERT:
@@ -128,10 +129,9 @@ public class errorHandler
                 return "UNKNOWN";
         }
     }
-    private String categoryToString(final int category)
-    {
-        switch (category)
-        {
+
+    private String categoryToString(final int category) {
+        switch (category) {
             case WebRequestError.ERROR_CATEGORY_UNKNOWN:
                 return "ERROR_CATEGORY_UNKNOWN | " + "Unknown error occured from the server side";
             case WebRequestError.ERROR_CATEGORY_SECURITY:
@@ -150,8 +150,9 @@ public class errorHandler
                 return "UNKNOWN";
         }
     }
-    private String createErrorPage(final String error,String url, InputStream mResourceURL) {
-        if(error==null){
+
+    private String createErrorPage(final String error, String url, InputStream mResourceURL) {
+        if (error == null) {
             return strings.GENERIC_EMPTY_STR;
         }
 
@@ -170,7 +171,7 @@ public class errorHandler
                 return null;
             }
         }
-        String replaceUrl = mErrorTemplate.replace("$URL",url);
+        String replaceUrl = mErrorTemplate.replace("$URL", url);
 
         return replaceUrl;
     }

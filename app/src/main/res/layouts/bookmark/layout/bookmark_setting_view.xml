@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/c_background"
     tools:context="com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController">
+
     <ScrollView
         android:id="@+id/pScrollView"
         android:layout_width="match_parent"

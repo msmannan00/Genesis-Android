@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.accessibilityManager;
 
-class settingAccessibilityEnums
-{
+class settingAccessibilityEnums {
     /*History Manager*/
     public enum eAccessibilityModel {
         M_UPDATE_SAMPLE_TEXT, M_UPDATE_PERCENTAGE

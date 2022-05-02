@@ -10,14 +10,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.hiddenservices.onionservices.constants.status;
 
 import java.util.List;
 
-class proxyStatusViewController
-{
+class proxyStatusViewController {
     /*Private Variables*/
 
     private AppCompatActivity mContext;
@@ -30,8 +30,7 @@ class proxyStatusViewController
     private SwitchMaterial mVpnStatus;
     private SwitchMaterial mBridgeStatus;
 
-    proxyStatusViewController(AppCompatActivity pContext, TextView pOrbotStatus, SwitchMaterial pVpnStatus, SwitchMaterial pBridgeStatus)
-    {
+    proxyStatusViewController(AppCompatActivity pContext, TextView pOrbotStatus, SwitchMaterial pVpnStatus, SwitchMaterial pBridgeStatus) {
         this.mContext = pContext;
         this.mOrbotStatus = pOrbotStatus;
         this.mVpnStatus = pVpnStatus;
@@ -40,7 +39,7 @@ class proxyStatusViewController
         initPostUI();
     }
 
-    private void initPostUI(){
+    private void initPostUI() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -48,9 +47,8 @@ class proxyStatusViewController
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+            } else {
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                     mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
@@ -58,19 +56,19 @@ class proxyStatusViewController
         }
     }
 
-    private void initViews(String pOrbotStatus, boolean pVPNStatus, boolean pGatewayStatus){
-        if(!status.sTorBrowsing){
+    private void initViews(String pOrbotStatus, boolean pVPNStatus, boolean pGatewayStatus) {
+        if (!status.sTorBrowsing) {
             mOrbotStatus.setText("Disabled");
-        }else {
+        } else {
             mOrbotStatus.setText(pOrbotStatus);
         }
         mVpnStatus.setChecked(pVPNStatus);
         mBridgeStatus.setChecked(pGatewayStatus);
     }
 
-    public void onTrigger(proxyStatusEnums.eProxyStatusViewCommands pCommands, List<Object> pData){
-        if(pCommands.equals(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS)){
-            initViews((String)pData.get(0),(boolean)pData.get(1),(boolean)pData.get(2));
+    public void onTrigger(proxyStatusEnums.eProxyStatusViewCommands pCommands, List<Object> pData) {
+        if (pCommands.equals(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS)) {
+            initViews((String) pData.get(0), (boolean) pData.get(1), (boolean) pData.get(2));
         }
     }
 }

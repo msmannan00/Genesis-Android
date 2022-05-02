@@ -3,6 +3,7 @@ package com.hiddenservices.onionservices.pluginManager.langPluginManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hiddenservices.onionservices.constants.status;
@@ -32,7 +33,7 @@ public class langManager {
         onInitLanguage(pAppContext, pSettingLanguage, pSettingRegionLanguage, pThemeApplying);
     }
 
-    private boolean initLocale(){
+    private boolean initLocale() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Locale mSystemLocaleTemp = Resources.getSystem().getConfiguration().getLocales().get(0);
             mEvent.invokeObserver(Collections.singletonList(mSystemLocaleTemp), pluginEnums.eLangManager.M_UPDATE_LOCAL);
@@ -46,7 +47,7 @@ public class langManager {
     }
 
     private void onInitLanguage(AppCompatActivity pAppContext, String pSettingLanguage, String pSettingRegionLanguage, Boolean pThemeApplying) {
-        if(pSettingLanguage.equals("default")){
+        if (pSettingLanguage.equals("default")) {
             Locale mSystemLocaleTemp = null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 mSystemLocaleTemp = Resources.getSystem().getConfiguration().getLocales().get(0);
@@ -54,31 +55,30 @@ public class langManager {
                 mSystemLocaleTemp = Resources.getSystem().getConfiguration().locale;
             }
 
-            if(!mLanguage.toString().equals(mSystemLocaleTemp.toString()))
-            {
-                if(mSystemLocale==null){
+            if (!mLanguage.toString().equals(mSystemLocaleTemp.toString())) {
+                if (mSystemLocale == null) {
                     initLocale();
                 }
                 mSystemLocale = mSystemLocaleTemp;
                 String mSystemLangugage = mSystemLocale.toString();
-                if(mSystemLangugage.equals("cs_CZ") || mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ur_UR") || mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("ar_AR")  || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")){
-                    if(mSystemLangugage.equals("ur_PK")){
+                if (mSystemLangugage.equals("cs_CZ") || mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ur_UR") || mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("ar_AR") || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")) {
+                    if (mSystemLangugage.equals("ur_PK")) {
                         mLanguage = new Locale("ur", "Ur");
-                    } else if(mSystemLangugage.equals("vi_VN") || mSystemLangugage.equals("cs_CZ")){
+                    } else if (mSystemLangugage.equals("vi_VN") || mSystemLangugage.equals("cs_CZ")) {
                         mLanguage = new Locale("ch", "Cz");
                     } else {
                         mLanguage = new Locale(mSystemLocale.getLanguage(), mSystemLocale.getCountry());
                     }
-                }else {
+                } else {
                     mLanguage = new Locale("en", "Us");
                 }
                 helperMethod.updateResources(pAppContext, status.mSystemLocale.getLanguage());
-            }else {
+            } else {
                 helperMethod.updateResources(pAppContext, status.mSystemLocale.getLanguage());
                 return;
             }
 
-        }else {
+        } else {
             mLanguage = new Locale(pSettingLanguage, pSettingRegionLanguage);
         }
 
@@ -102,16 +102,16 @@ public class langManager {
     }
 
     private String getSupportedSystemLanguageInfo(String pSettingLanguage) {
-        if(pSettingLanguage.equals("default")){
+        if (pSettingLanguage.equals("default")) {
             Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
             String mSystemLangugage = mSystemLocale.toString();
 
-            if(mSystemLangugage.equals("cs_CZ") ||mSystemLangugage.equals("ar_AR") || mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("en_GB") || mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")){
+            if (mSystemLangugage.equals("cs_CZ") || mSystemLangugage.equals("ar_AR") || mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("en_GB") || mSystemLangugage.equals("en_US") || mSystemLangugage.equals("de_DE") || mSystemLangugage.equals("ca_ES") || mSystemLangugage.equals("zh_CN") || mSystemLangugage.equals("ch_CZ") || mSystemLangugage.equals("nl_NL") || mSystemLangugage.equals("fr_FR") || mSystemLangugage.equals("el_GR") || mSystemLangugage.equals("hu_HU") || mSystemLangugage.equals("in_ID") || mSystemLangugage.equals("it_IT") || mSystemLangugage.equals("ja_JP") || mSystemLangugage.equals("ko_KR") || mSystemLangugage.equals("pt_PT") || mSystemLangugage.equals("ro_RO") || mSystemLangugage.equals("ru_RU") || mSystemLangugage.equals("th_TH") || mSystemLangugage.equals("tr_TR") || mSystemLangugage.equals("uk_UA") || mSystemLangugage.equals("vi_VN")) {
                 return "Default | " + mSystemLocale.getDisplayName();
-            }else {
+            } else {
                 return mSystemLocale.getDisplayName() + " | is unsupported";
             }
-        }else {
+        } else {
             return mLanguage.getDisplayName();
         }
     }
@@ -119,21 +119,14 @@ public class langManager {
     /*External Triggers*/
 
     public Object onTrigger(List<Object> pData, pluginEnums.eLangManager pEventType) {
-        if(pEventType.equals(pluginEnums.eLangManager.M_ACTIVITY_CREATED))
-        {
-            onCreate((AppCompatActivity) pData.get(0), (String)pData.get(1), (String)pData.get(2), (boolean)pData.get(3));
-        }
-        else if(pEventType.equals(pluginEnums.eLangManager.M_RESUME))
-        {
+        if (pEventType.equals(pluginEnums.eLangManager.M_ACTIVITY_CREATED)) {
+            onCreate((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2), (boolean) pData.get(3));
+        } else if (pEventType.equals(pluginEnums.eLangManager.M_RESUME)) {
             initLocale();
-            onResume((AppCompatActivity) pData.get(0), (String)pData.get(1), (String)pData.get(2), (boolean)pData.get(3));
-        }
-        else if(pEventType.equals(pluginEnums.eLangManager.M_SET_LANGUAGE))
-        {
-            onInitLanguage((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2), (boolean)pData.get(3));
-        }
-        else if(pEventType.equals(pluginEnums.eLangManager.M_SUPPORTED_SYSTEM_LANGUAGE_INFO))
-        {
+            onResume((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2), (boolean) pData.get(3));
+        } else if (pEventType.equals(pluginEnums.eLangManager.M_SET_LANGUAGE)) {
+            onInitLanguage((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2), (boolean) pData.get(3));
+        } else if (pEventType.equals(pluginEnums.eLangManager.M_SUPPORTED_SYSTEM_LANGUAGE_INFO)) {
             return getSupportedSystemLanguageInfo((String) pData.get(0));
         }
         return null;

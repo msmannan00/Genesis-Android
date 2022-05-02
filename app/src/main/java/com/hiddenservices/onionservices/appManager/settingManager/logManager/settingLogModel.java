@@ -5,27 +5,26 @@ import com.hiddenservices.onionservices.eventObserver;
 
 import java.util.List;
 
-class settingLogModel
-{
+class settingLogModel {
     /*Variable Declaration*/
 
     private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    settingLogModel(eventObserver.eventListener mEvent){
+    settingLogModel(eventObserver.eventListener mEvent) {
         this.mEvent = mEvent;
     }
 
-    private void onUpdateLogView(boolean pLogThemeStyle){
+    private void onUpdateLogView(boolean pLogThemeStyle) {
         status.sLogThemeStyleAdvanced = pLogThemeStyle;
     }
 
     /*Helper Methods*/
 
-    public Object onTrigger(settingLogEnums.eLogModel pCommands, List<Object> pData){
-        if(settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW.equals(pCommands)){
-            onUpdateLogView((boolean)pData.get(0));
+    public Object onTrigger(settingLogEnums.eLogModel pCommands, List<Object> pData) {
+        if (settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW.equals(pCommands)) {
+            onUpdateLogView((boolean) pData.get(0));
         }
         return null;
     }

@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.advanceManager;
 
-class settingAdvanceEnums
-{
+class settingAdvanceEnums {
     /*History Manager*/
     public enum eAdvanceModel {
         M_RESTORE_TAB, M_SHOW_IMAGE, M_SHOW_TAB_GRID, M_SHOW_WEB_FONTS, M_TOOLBAR_THEME

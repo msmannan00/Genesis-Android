@@ -1,524 +1,496 @@
 <resources>
 
-	<!-- Application Strings -->
-	<string name="GENERAL_SEARCH_HINT" translatable="true">zoek iets of typ een weblink</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">vind op pagina</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">zoekmachine</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! er is iets misgegaan</string>
-	<string name="GENERAL_TODO" translatable="true">todo</string>
-	<string name="GENERAL_LOADING" translatable="true">digitale vrijheid</string>
-	<string name="GENERAL_RELOAD" translatable="true">herladen</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">u wordt geconfronteerd met een van de volgende problemen. webpagina of website werkt mogelijk niet. uw internetverbinding is mogelijk slecht. misschien gebruikt u een proxy. website wordt mogelijk geblokkeerd door firewall</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC, Israël Slaat Weer Toe</string>
-
-	<!-- Shortcuts -->
-	<string name="shortcut_erase_short_label" translatable="false">Browsercache wissen</string>
-	<string name="shortcut_erase_long_label" translatable="false">Doorbladerde website wissen</string>
-	<string name="shortcut_erase_and_open_short_label" translatable="false">Wis uw gegevens en open browser</string>
-	<string name="shortcut_erase_and_open_long_label" translatable="false">Browsercache wissen</string>
-	<string name="shortcut_open" translatable="false">Start Genesis-browser opnieuw</string>
-	<string name="shortcut_open_long" translatable="false">Herstart Je Browser</string>
-
-	<!-- Bookmark Setting -->
-	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Sunting Penanda</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nama Penanda</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Nama url yang di-bookmark akan ditampilkan di sini</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Masukkan nama penanda…</string>
-
-	<!-- Alerts General -->
-	<string name="ALERT_DISMISS" translatable="true">ontslaan</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"Terkadang Anda memerlukan Jembatan untuk sampai ke jaringan Tor"</string>
-	<string name="LANDING_MORE" translatable="true">"KATAKAN LEBIH BANYAKNYA"</string>
-	<string name="LANDING_HELLO" translatable="true">"Halo"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Selamat datang di Genesis di ponsel."</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"Jelajahi internet dengan aman dan aman."</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"Tidak ada pelacakan. Tidak ada sensor."</string>
-
-	<!-- Alert Secure -->
-	<string name="ALERT_SECURE_INFO" translatable="true">Koneksi aman</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Informasi Anda (misalnya, kata sandi atau nomor kartu kredit) aman saat dikirim ke situs ini</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Pengaturan Keamanan</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Amankan identitas Anda dan gunakan opsi di bawah</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Jangan Lacak</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Kami akan memberi tahu situs untuk tidak melacak Anda</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Perlindungan Pelacakan</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Aktifkan perlindungan pelacakan yang disediakan oleh kami</string>
-	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Sertifikat</string>
-
-	<!-- Alert Certificate -->
-	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Informasi Sertifikat</string>
-
-	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">als u een verbindingsprobleem ondervindt bij het starten van Genesis, kopieer dan de volgende code en zoek het probleem online of stuur het naar ons, zodat we kunnen proberen u te helpen</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Orbot logboeken</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">if you are facing connectivity issue while starting Genesis please copy the following code and find issue online or send it to us, so we can try to help you out </string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
-
-	<!-- Orbot Setting -->
-	<string name="ORBOT_SETTING_HEADER" translatable="true">te klikken proxy aanpassen</string>
-	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">we verbinden je met het Tor-netwerk dat wordt gerund door duizenden vrijwilligers over de hele wereld! Kunnen deze opties u helpen</string>
-	<string name="ORBOT_SETTING_TITLE" translatable="true">internet wordt hier gecensureerd (bypass firewall)</string>
-	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">omzeil firewall</string>
-	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges zorgt ervoor dat internet erg traag werkt. gebruik ze alleen als internet in uw land wordt gecensureerd of als het Tor-netwerk is geblokkeerd</string>
-	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">automatisch aanmaken</string>
-
-	<!-- Bridge Settings -->
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">Pengaturan Keamanan</string>
-	<string name="BRIDGE_SETTING" translatable="true">Ubah Pengaturan "BRIDGE"</string>
-	<string name="BRIDGE_AUTO" translatable="true">Buat Secara Otomatis</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">Konfigurasikan pengaturan "BRIDGE" secara otomatis</string>
-	<string name="BRIDGE_MANUAL" translatable="true">Berikan "BRIDGE" yang saya tahu</string>
-	<string name="BRIDGE_PORT_HINT" translatable="false">Tempel "BRIDGE" khusus</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">"BRIDGE" adalah relay Tor tidak terdaftar yang mempersulit pemblokiran koneksi ke jaringan Tor. Karena beberapa negara mencoba memblokir Tor, "BRIDGE" tertentu berfungsi di beberapa negara tetapi tidak di negara lain</string>
-	<string name="BRIDGE_TITLE" translatable="true">Pilih Default "BRIDGE"</string>
-	<string name="BRIDGE_REQUEST" translatable="true">Permintaan</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Disarankan)</string>
-	<string name="BRIDGE_MEEK" translatable="true">Meek-biru (Cina)</string>
-
-	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">REQUEST BRIDGE</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">systeemtaal wordt niet ondersteund door deze software. we werken eraan om het binnenkort op te nemen</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">mail</string>
-
-	<!-- Alert Advance Log -->
-	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">de manier wijzigen waarop het systeemlogboek wordt weergegeven</string>
-	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">logboek weergeven met moderne lijstweergave</string>
-	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">schakelen tussen klassieke en moderne lijstweergave</string>
-
-	<!-- Generic Toast Alerts -->
-	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Bookmark dihapus</string>
-	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Bookmark diperbarui</string>
-	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Data berhasil dihapus</string>
-	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL Disalin ke papan klip</string>
-	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Tidak ada aplikasi yang ditemukan</string>
-	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Mulai ulang diperlukan setelah perubahan</string>
-	<string name="TOAST_ALERT_RESTART" translatable="true">Mulai ulang</string>
-	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Ditutup</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Tab baru dibuka</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proksi Genesis menghubungkan ...</string>
-	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memori penuh Menghapus tab</string>
-	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Munculan diblokir</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Buka Log Kesalahan</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Beralih</string>
-	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Urungkan</string>
-	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Identitas baru dibuat</string>
-	<string name="TOAST_ALERT_SETTING" translatable="true">buka pengaturan</string>
-
-	<!-- Alert Rate Failure -->
-	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">MAAF MENDENGARNYA</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Jika Anda mengalami kesulitan saat menggunakan aplikasi ini, silakan hubungi kami melalui email. Kami akan mencoba menyelesaikan masalah Anda sesegera mungkin</string>
-
-	<!-- Alert Panic -->
-	<string name="ALERT_PANIC_HEADER" translatable="true">PEMECAHAN MASALAH</string>
-	<string name="ALERT_PANIC_INFO" translatable="true">Setel ulang aplikasi jika tidak berfungsi. Kami akan mencoba mengonfigurasi ulang agar dapat berfungsi kembali.</string>
-	<string name="ALERT_PANIC_BT_1" translatable="true">Setel ulang</string>
-	<string name="ALERT_PANIC_BT_2" translatable="true">Tutup</string>
-
-	<!-- Alert Download Single -->
-	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Menunggu untuk mengunduh ...</string>
-	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Unduh</string>
-
-	<!-- Alert Rateus -->
-	<string name="ALERT_RATEUS" translatable="true">Nilai AS</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">Beri tahu orang lain pendapat Anda tentang aplikasi ini</string>
-	<string name="ALERT_RATE" translatable="true">Nilai</string>
-
-	<!-- Alert BRIDGE -->
-	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Selesai</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge tipe (obfs4, lemah lembut, ...)</string>
-
-	<!-- Alert Create Bookmark -->
-	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Tandai Situs Web</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Tambahkan halaman ini ke bookmark Anda</string>
-	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nama penanda...</string>
-	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Selesai</string>
-
-	<!-- Alert Long Download -->
-	<string name="ALERT_LONG_URL" translatable="true">Pemberitahuan URL</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Buka Di Tab Baru</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Buka Di Tab Saat Ini</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Salin ke Papan Klip</string>
-	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Unduh Berkas</string>
-
-	<!-- Alert Full Download -->
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Buka url di tab baru</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Buka url di tab saat ini</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Salin url ke papan klip</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Buka gambar di tab baru</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Buka tab gambar saat ini</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Salin gambar ke papan klip</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Unduh file gambar</string>
-
-	<!-- Alert Bridge Custom -->
-	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">geef een Bridge weet je</string>
-	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">voer bridge informatie in van een vertrouwde bron</string>
-	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">verzoek</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- Settings -->
-	<string name="SETTING_BASIC_SETTING" translatable="true">Systeeminstelling</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">maak Genesis uw standaardbrowser</string>
-	<string name="SETTING_HEADER" translatable="true">Systeeminstelling</string>
-	<string name="SETTING_SEARCH_ENGINE" translatable="true">zoekmachine</string>
-	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_CLEAR_HISTORY" translatable="true">verwijderde weblinks</string>
-	<string name="SETTING_FONT_TITLE" translatable="true">lettertype aanpassen</string>
-	<string name="SETTING_ADJUST_FONT" translatable="true">Systeemlettertypeconstructie</string>
-	<string name="SETTING_MANUAL_FONT" translatable="true">lettertype automatisch wijzigen</string>
-	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie-instelling</string>
-	<string name="SETTING_COOKIE" translatable="true">koekjes</string>
-	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">Systeeminstellingen . Kennisgeving</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">meldingen</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">meldingsvoorkeuren wijzigen</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">conditie van netwerk en meldingen</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">lokale meldingen</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Softwaremelding aanpassen</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">systeemmeldingen</string>
-	<string name="SETTING_SEARCH" translatable="true">zoekmachine beheren</string>
-	<string name="SETTING_SEARCH_INFO" translatable="true">toevoegen, standaard instellen. suggesties weergeven</string>
-	<string name="SETTING_NOTIFICATION" translatable="true">meldingen beheren</string>
-	<string name="SETTING_NOTIFICATION_INFO" translatable="true">nieuwe features, conditie van netwerk</string>
-	<string name="SETTING_SEARCH_HEADER" translatable="true">Software Aanpassen. Zoekmachine</string>
-	<string name="SETTING_SEARCH_HEADER_1" translatable="true">ondersteunde zoekmachines</string>
-	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">kies Standaardzoekmachine</string>
-	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Software Aanpassen. Zoekmachine</string>
-	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">wijzigen hoe webzoekopdrachten worden weergegeven</string>
-	<string name="SETTING_SEARCH_HISTORY" translatable="true">doorbladerde weblinks weergeven</string>
-	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">suggesties weergeven tijdens het zoeken</string>
-	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">suggesties van doorbladerde webkoppelingen worden weergegeven wanneer u in de zoekbalk</string>
-	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">typt gerichte suggesties verschijnen wanneer u typt in de zoekbalk</string>
-	<string name="SETTING_ACCESSIBILITY" translatable="true">toegankelijkheid</string>
-	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">tekstgrootte, zoom, invoer met spraak</string>
-	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">aanpassen, toegankelijkheid</string>
-	<string name="SETTING_CLEAR" translatable="true">privégegevens wissen</string>
-	<string name="SETTING_CLEAR_INFO" translatable="true">tabbladen, doorbladerde weblinks, bladwijzer, cookies, cache</string>
-	<string name="SETTING_CLEAR_HEADER" translatable="true">Wijzig De Systeeminstelling. Systeemgegevens Wissen</string>
-	<string name="SETTING_CLEAR_BUTTON" translatable="true">duidelijke gegevens</string>
-	<string name="SETTING_CLEAR_OPTION_1" translatable="true">verwijder alle tabbladen</string>
-	<string name="SETTING_CLEAR_OPTION_2" translatable="true">verwijderde weblinks</string>
-	<string name="SETTING_CLEAR_OPTION_3" translatable="true">bladwijzers verwijderen</string>
-	<string name="SETTING_CLEAR_OPTION_4" translatable="true">cache verwijderen</string>
-	<string name="SETTING_CLEAR_OPTION_5" translatable="true">suggesties verwijderen</string>
-	<string name="SETTING_CLEAR_OPTION_6" translatable="true">gegevens verwijderen</string>
-	<string name="SETTING_CLEAR_OPTION_7" translatable="true">sessie verwijderen</string>
-	<string name="SETTING_CLEAR_OPTION_8" translatable="true">verwijder cookies</string>
-	<string name="SETTING_CLEAR_OPTION_9" translatable="true">verwijderen aanpassen</string>
-	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">lettertype schalen</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">webinhoud schalen volgens systeemlettergrootte</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">zoom</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">inschakelen inschakelen en zoom forceren voor alle webpagina\'s</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">invoer met spraak</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">spraakdictatie toestaan ​​in de url-balk</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">selecteer aangepaste lettertypeschaling</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">versleep de schuifregelaar totdat u dit comfortabel kunt lezen. tekst moet er minstens zo groot uitzien na dubbeltikken op een alinea</string>
-	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
-	<string name="SETTING_INTERACTION" translatable="true">interacties</string>
-	<string name="SETTING_INTERACTION_INFO" translatable="true">verander de manier van interactie met website-inhoud</string>
-	<string name="SETTING_PRIVACY" translatable="true">Gebruiker Sur</string>
-	<string name="SETTING_PRIVACY_INFO" translatable="true">gebruikersoverzicht, logins, gegevenskeuzes</string>
-	<string name="SETTING_TRACKING" translatable="true">Bescherming Van Gebruikersbewaking</string>
-	<string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackers, vingerafdrukken</string>
-	<string name="SETTING_PRIVACY_HEADER" translatable="true">Systeeminstellingen . privacy</string>
-	<string name="SETTING_TRACKING_HEADER" translatable="true">Systeeminstellingen . bescherming van de gebruiker</string>
-	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">bescherm uw online identiteit</string>
-	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">houd uw identiteit privé. we kunnen je beschermen tegen verschillende trackers die je online volgen. deze systeeminstelling kan ook worden gebruikt om advertenties te blokkeren</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">bespaar uzelf van Survelance Protection</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis zal sites vertellen mij niet te volgen</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">vertel de website om mij niet te volgen</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Bescherming Van Gebruikersbewaking</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Schakel Survelance Protection voor gebruikers in die wordt geboden door Genesis</string>
-	<string name="SETTING_PRIVACY_COOKIES" translatable="true">website cookies</string>
-	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">selecteer websitecookievoorkeuren op basis van uw beveiligingsbehoeften</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">privégegevens wissen bij afsluiten</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">gegevens automatisch wissen zodra de software is gesloten</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">privé browsen</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">houd uw identiteit veilig en gebruik de onderstaande opties</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">ingeschakeld</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">ingeschakeld, met uitzondering van website-tracking cookies</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">ingeschakeld, met uitzondering van derde partij</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">uitgeschakeld</string>
-
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">beveiliging uitschakelen</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">bescherming van identiteitsbewaking toestaan. hierdoor kan uw online identiteit worden gestolen</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">default (aanbevolen)</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">blokkeer online advertenties en sociale webgebruiker Survelance. pagina\'s worden standaard geladen</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">strikt beleid</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">stop alle bekende trackers, pagina\'s worden sneller geladen, maar sommige functies werken mogelijk niet</string>
-
-	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">schakel java-scripting uit voor verschillende scriptaanvallen</string>
-	<string name="SETTING_ADVANCE_HEADER" translatable="true">Systeeminstellingen . complexe systeeminstelling</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">tabbladen herstellen</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">niet herstellen na het afsluiten van browser</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">werkbalkthema</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">werkbalkthema instellen zoals gedefinieerd in website</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">toon afbeeldingen</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">altijd website-afbeeldingen laden</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">weblettertypen weergeven</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">download externe lettertypen bij het laden van een pagina</string>
-	<string name="SETTING_ADVANCE_MEDIA" translatable="true">autoplay toestaan ​​</string>
-	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">media automatisch laten starten</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">gegevensbesparing</string>
-	<string name="SETTING_ADVANCE_TAB" translatable="true">tabblad</string>
-	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">verander de manier waarop het tabblad zich gedraagt ​​na het herstarten van de software</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">media</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">wijzigen standaard databesparing aanpassen</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">verander standaard media aanpassen</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">altijd afbeeldingen weergeven</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">alleen afbeeldingen weergeven bij gebruik van wifi</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokkeer alle afbeeldingen</string>
-	<string name="SETTING_ADVANCE" translatable="true">Geavanceerde Systeeminstelling</string>
-	<string name="SETTING_ADVANCE_INFO" translatable="true">tabbladen herstellen, gegevensbesparing, ontwikkelaarstools</string>
-	<string name="SETTING_PROXY" translatable="true">onion voorwaarde van volmacht</string>
-	<string name="SETTING_PROXY_INFO" translatable="true">controleer onion conditie van netwerk</string>
-	<string name="SETTING_REPORT" translatable="true">rapport website</string>
-	<string name="SETTING_REPORT_INFO" translatable="true">beledigende website melden</string>
-	<string name="SETTING_RATEUS" translatable="true">beoordeel deze app</string>
-	<string name="SETTING_RATEUS_INFO" translatable="true">beoordeel en reageer op playstore</string>
-	<string name="SETTING_SHARE" translatable="true">deel deze app</string>
-	<string name="SETTING_SHARE_INFO" translatable="true">deel deze software met je vrienden</string>
-	<string name="SETTING_GENERAL_HEADER" translatable="true">Systeeminstellingen . algemeen aanpassen</string>
-	<string name="SETTING_GENERAL" translatable="true">Standaard Systeeminstelling</string>
-	<string name="SETTING_GENERAL_INFO" translatable="true">homepage, taal</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">browsen op volledig scherm</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">verberg de browserwerkbalk wanneer u naar beneden scrolt</string>
-	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">taal</string>
-	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">verander de taal van uw browser</string>
-	<string name="SETTING_GENERAL_THEME" translatable="true">softwarethema</string>
-	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">kies een helder en donker thema</string>
-	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">thema helder</string>
-	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">thema Donker</string>
-	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">browsen op volledig scherm en taal wijzigen</string>
-	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">systeem Standaard</string>
-	<string name="SETTING_GENERAL_HOME" translatable="true">startpagina</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">nieuw tabblad</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">open homepage in nieuw tabblad</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">verwijder alle tabbladen</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">verwijderde weblinks</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">bladwijzers verwijderen</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">verwijder browsercache</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">suggesties verwijderen</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">sitegegevens verwijderen</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">sessiegegevens verwijderen</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">cookies voor webbrowsen verwijderen</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">browseraanpassing verwijderen</string>
-
-	<!-- Alerts -->
-
-	<string name="ALERT_CREATE_BOOKMARK" translatable="true">bladwijzerwebsite</string>
-	<string name="ALERT_CLEAR_HISTORY" translatable="true">verwijder doorbladerde weblinks en gegevens</string>
-	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">duidelijke bladwijzer en gegevens</string>
-	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">als u gegevens wist, worden doorbladerde weblinks, cookies en andere browsegegevens verwijderd</string>
-	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Als u gegevens verwijdert, worden websites met bladwijzers verwijderd</string>
-	<string name="ALERT_CLEAR" translatable="true">annuleren</string>
-	<string name="ALERT_REPORT" translatable="true">rapport</string>
-	<string name="ALERT_REPORT_URL" translatable="true">rapport website</string>
-	<string name="ALERT_REPORT_URL_INFO" translatable="true">als u denkt dat deze URL illegaal of storend is, meld dit dan aan ons, zodat we juridische stappen kunnen ondernemen</string>
-	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">is met succes gerapporteerd</string>
-	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">url is succesvol gerapporteerd. als er iets wordt gevonden, wordt juridische actie ondernomen</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">initialiseren Orbot</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">actie niet ondersteund</string>
-	<string name="ALERT_ORBOT_INIT" translatable="true">geen software gevonden om de volgende opdracht</string>
-	<string name="ALERT_NOT_SUPPORTED" translatable="true">welkom, verborgen web Gateway</string>
-	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">deze software biedt u een platform om verborgen web-URL\'s te zoeken en te openen. hier zijn enkele suggesties \ n</string>
-	<string name="ALERT_WELCOME_MESSAGE" translatable="true">verborgen web online markt</string>
-	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">gelekte documenten en boeken</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">dark web nieuws en artikelen</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">geheime software en hacktools</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">niet meer weergeven</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">financiën en geld</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">sociale samenlevingen</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">handleiding</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">speelwinkel</string>
-	<string name="ALERT_LOCAL_UPGRADE" translatable="true">melding weblink</string>
-	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">open in nieuw tabblad</string>
-	<string name="ALERT_LONG_FILE" translatable="true">open url in nieuw tabblad</string>
-	<string name="ALERT_DOWNLOAD" translatable="true">open url in huidig ​​tabblad</string>
-	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">geen software gevonden om e-mail te verwerken</string>
-	<string name="ALERT_LONG_URL_TITLE" translatable="true">downloadbestand,</string>
-	<string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
-	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">gegevens gewist, herstart vereist</string>
-	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">download file , </string>
-	<string name="ALERT_DATA_CLEARED" translatable="true">tabblad gesloten</string>
-
-	<!-- Popup Menu -->
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">tabblad sluiten</string>
-	<string name="HOME_MENU__NEW_TABS" translatable="true">open recente tabbladen</string>
-	<string name="HOME_MENU_CLOSE_TABS" translatable="true">taal</string>
-	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Systeeminstelling</string>
-	<string name="HOME_MENU_LANGUAGE" translatable="true">doorzochte weblinks</string>
-	<string name="HOME_MENU_DOWNLOAD" translatable="true">downloads</string>
-	<string name="HOME_MENU_HISTORY" translatable="true">bladwijzers</string>
-	<string name="HOME_MENU_SETTING" translatable="true">Sla Deze Pagina Op</string>
-	<string name="HOME_MENU_DESKTOP" translatable="true">desktop Verbinding</string>
-	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Connection</string>
-	<string name="HOME_MENU_BOOKMARK" translatable="true">rapport website</string>
-	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">beoordeel deze app</string>
-	<string name="HOME_MENU_REPORT" translatable="true">vind op pagina</string>
-	<string name="HOME_MENU_RATE" translatable="true">afsluiten</string>
-	<string name="HOME_MENU_FIND" translatable="true">delen</string>
-	<string name="HOME_MENU_QUIT" translatable="true">exit</string>
-	<string name="HOME_MENU_SHARE" translatable="true">share</string>
-
-	<!-- Tab View -->
-	<string name="TAB_MENU_OPEN_TAB" translatable="true">nieuwe tabbladen</string>
-	<string name="TAB_MENU_CLOSE_TAB" translatable="true">sluit alle tabbladen</string>
-	<string name="TAB_MENU_SETTINGS" translatable="true">Systeeminstelling</string>
-	<string name="TAB_LIST_SELECT" translatable="true">selecteer tabbladen</string>
-
-	<!-- Shared Recycler View -->
-	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">geopende tabbladen</string>
-	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">kopiëren</string>
-	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">delen</string>
-	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">selectie wissen</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">open in huidig ​​tabblad</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">open in nieuw tabblad</string>
-	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">verwijderen</string>
-
-	<!-- History Popup Menu -->
-	<string name="HISTORY_TITLE" translatable="true">doorzochte weblinks</string>
-	<string name="HISTORY_CLEAR" translatable="true">verwijder deze</string>
-	<string name="HISTORY_SEARCH_HINT" translatable="true">zoeken ...</string>
-
-	<!-- BOOKMARK Popup Menu -->
-	<string name="BOOKMARK_TITLE" translatable="true">bladwijzer</string>
-	<string name="BOOKMARK_CLEAR" translatable="true">verwijder dit</string>
-	<string name="BOOKMARK_SEARCH_HINT" translatable="true">zoeken ...</string>
-
-	<!-- Help -->
-	<string name="HELP_RETRY" translatable="true">opnieuw proberen</string>
-	<string name="HELP_RETRY_INFO" translatable="true">opps! netwerkverbindingsfout. netwerk niet verbonden</string>
-	<string name="HELP_TITLE" translatable="true">hulp en ondersteuning</string>
-
-	<!-- Language Manager Manager -->
-	<string name="LANGUAGE_TITLE" translatable="true">taal</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">taal wijzigen</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">we draaien alleen op de volgende talen. we zouden binnenkort meer toevoegen</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">engels (verenigde staten)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">duits (duitsland)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">italiaans (italië)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">portugees (brazilië)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">russisch (rusland)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">Oekraïens (oekraïne)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">chinees vereenvoudigd (vasteland china)</string>
-
-	<!-- Orbot Settings -->
-	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ waarschuwing</string>
-	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">aanpassen Bridges</string>
-	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridges</string>
-	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">inschakelen VPN-services inschakelen</string>
-	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Bridge Gateway</string>
-	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">inschakelen Gateway</string>
-
-	<!-- Proxy Status -->
-	<string name="PROXY_STATUS_HEADER" translatable="true">inschakelen voorwaarde van volmacht</string>
-	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">huidige toestand van orbot proxy</string>
-	<string name="PROXY_SUB_HEADER1" translatable="true">Orbot voorwaarde van volmacht</string>
-	<string name="PROXY_SUB_HEADER2" translatable="true">onion Bridges status</string>
-	<string name="PROXY_VPN_STATUS" translatable="true">VPN voorwaarde van connectiviteit</string>
-	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge voorwaarde van volmacht</string>
-	<string name="PROXY_SUB_HEADER3" translatable="true">info, wijzig Systeeminstelling</string>
-	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">u kunt de proxy wijzigen door de software opnieuw te starten en naar proxymanager te gaan. het kan worden geopend door op een tandwielpictogram onderaan</string>
-
-
-	<!-- Notification Menu -->
-	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
-	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">open deze</string>
-
-	<!-- Home View -->
-	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_TAB_EMPTY" translatable="true">geopende tabbladen worden hier weergegeven</string>
-
-	<!-- Error Page -->
-	<string name="ERROR_M1" translatable="true">de pagina werkt momenteel niet vanwege de een of andere reden</string>
-	<string name="ERROR_M2" translatable="true">Neem contact op met de website-eigenaren om hen over dit probleem te informeren.​herladen</string>
-	<string name="ERROR_M3" translatable="true">pref_language</string>
-	<string name="ERROR_M4" translatable="true">Ongeldige pakkethandtekening</string>
-	<string name="ERROR_M5" translatable="true">klik om in te loggen.</string>
-	<string name="ERROR_M6" translatable="true">klik om handmatig gegevens te selecteren.​Uitzondering beveiliging webdomein.​DAL-verificatiefout.</string>
-
-	<!-- Others -->
-	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
-	<string name="invalid_package_signature" translatable="true">Invalid package signature</string>
-	<string name="autofill_sign_in_prompt" translatable="true">click to sign in.</string>
-	<string name="autofill_manual_prompt" translatable="true">click to manually select data.</string>
-	<string name="security_exception" translatable="true">Web domain security exception.</string>
-	<string name="dal_exception" translatable="true">DAL verification failure.</string>
-
-	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Tab terbaru</string>
-	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Identitas baru</string>
-	<string name="SETTING_PRIVACY_POLICY" translatable="true">Kebijakan pribadi</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser kebijakan privasi</string>
-	<string name="SETTING_REPORT_WEBSITE" translatable="true">Laporkan Situs Web</string>
-	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Laporkan situs web ilegal</string>
-	<string name="SETTING_SITEMAP" translatable="true">publikasikan situs web Anda</string>
-	<string name="SETTING_SITEMAP_INFO" translatable="true">Tambahkan situs web Anda ke mesin pencari kami</string>
-
-	<item type="id" name="LaguageID"/>
-	<item type="id" name="LaguageRegion"/>
-
-	<string-array name="ARRAY_FONTS" translatable="true">
-		<item>55 Percent</item>
-		<item>70 Percent</item>
-		<item>85 Percent</item>
-		<item>100 Percent</item>
-		<item>115 Percent</item>
-		<item>130 Percent</item>
-		<item>145 Percent</item>
-	</string-array>
-
-	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
-		<item>Enabled</item>
-		<item>Disabled</item>
-	</string-array>
-
-	<string-array name="ARRAY_NOTIFICATION" translatable="true">
-		<item>Enable All</item>
-		<item>Disable All</item>
-		<item>No Bandwidth</item>
-	</string-array>
-
-	<string-array name="ARRAY_COOKIES" translatable="true">
-		<item>Allow All</item>
-		<item>Allow Trusted</item>
-		<item>Allow None</item>
-		<item>Allow Visited</item>
-		<item>Allow Non Tracker</item>
-	</string-array>
-	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+    <!-- Application Strings -->
+    <string name="GENERAL_SEARCH_HINT" translatable="true">zoek iets of typ een weblink</string>
+    <string name="GENERAL_FIND_HINT" translatable="true">vind op pagina</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="true">zoekmachine</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">opps! er is iets misgegaan</string>
+    <string name="GENERAL_TODO" translatable="true">todo</string>
+    <string name="GENERAL_LOADING" translatable="true">digitale vrijheid</string>
+    <string name="GENERAL_RELOAD" translatable="true">herladen</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">u wordt geconfronteerd met een van de volgende problemen. webpagina of website werkt mogelijk niet. uw internetverbinding is mogelijk slecht. misschien gebruikt u een proxy. website wordt mogelijk geblokkeerd door firewall</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC, Israël Slaat Weer Toe</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label" translatable="false">Browsercache wissen</string>
+    <string name="shortcut_erase_long_label" translatable="false">Doorbladerde website wissen</string>
+    <string name="shortcut_erase_and_open_short_label" translatable="false">Wis uw gegevens en open browser</string>
+    <string name="shortcut_erase_and_open_long_label" translatable="false">Browsercache wissen</string>
+    <string name="shortcut_open" translatable="false">Start Genesis-browser opnieuw</string>
+    <string name="shortcut_open_long" translatable="false">Herstart Je Browser</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Sunting Penanda</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nama Penanda</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Nama url yang di-bookmark akan ditampilkan di sini</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Masukkan nama penanda…</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">ontslaan</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">"Terkadang Anda memerlukan Jembatan untuk sampai ke jaringan Tor"</string>
+    <string name="LANDING_MORE" translatable="true">"KATAKAN LEBIH BANYAKNYA"</string>
+    <string name="LANDING_HELLO" translatable="true">"Halo"</string>
+    <string name="LANDING_WELCOME" translatable="true">"Selamat datang di Orion di ponsel."</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">"Jelajahi internet dengan aman dan aman."</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">"Tidak ada pelacakan. Tidak ada sensor."</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE_INFO" translatable="true">Koneksi aman</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Informasi Anda (misalnya, kata sandi atau nomor kartu kredit) aman saat dikirim ke situs ini</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Pengaturan Keamanan</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Amankan identitas Anda dan gunakan opsi di bawah</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Jangan Lacak</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Kami akan memberi tahu situs untuk tidak melacak Anda</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Perlindungan Pelacakan</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Aktifkan perlindungan pelacakan yang disediakan oleh kami</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Sertifikat</string>
+
+    <!-- Alert Certificate -->
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">Informasi Sertifikat</string>
+
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="true">als u een verbindingsprobleem ondervindt bij het starten van Genesis, kopieer dan de volgende code en zoek het probleem online of stuur het naar ons, zodat we kunnen proberen u te helpen</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">Orbot logboeken</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">if you are facing connectivity issue while starting Orion please copy the following code and find issue online or send it to us, so we can try to help you out </string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
+
+    <!-- Orbot Setting -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">te klikken proxy aanpassen</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">we verbinden je met het Tor-netwerk dat wordt gerund door duizenden vrijwilligers over de hele wereld! Kunnen deze opties u helpen</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">internet wordt hier gecensureerd (bypass firewall)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">omzeil firewall</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges zorgt ervoor dat internet erg traag werkt. gebruik ze alleen als internet in uw land wordt gecensureerd of als het Tor-netwerk is geblokkeerd</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">automatisch aanmaken</string>
+
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">Pengaturan Keamanan</string>
+    <string name="BRIDGE_SETTING" translatable="true">Ubah Pengaturan "BRIDGE"</string>
+    <string name="BRIDGE_AUTO" translatable="true">Buat Secara Otomatis</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">Konfigurasikan pengaturan "BRIDGE" secara otomatis</string>
+    <string name="BRIDGE_MANUAL" translatable="true">Berikan "BRIDGE" yang saya tahu</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Tempel "BRIDGE" khusus</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">"BRIDGE" adalah relay Tor tidak terdaftar yang mempersulit pemblokiran koneksi ke jaringan Tor. Karena beberapa negara mencoba memblokir Tor, "BRIDGE" tertentu berfungsi di beberapa negara tetapi tidak di negara lain</string>
+    <string name="BRIDGE_TITLE" translatable="true">Pilih Default "BRIDGE"</string>
+    <string name="BRIDGE_REQUEST" translatable="true">Permintaan</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Disarankan)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-biru (Cina)</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">REQUEST BRIDGE</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">systeemtaal wordt niet ondersteund door deze software. we werken eraan om het binnenkort op te nemen</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">mail</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">de manier wijzigen waarop het systeemlogboek wordt weergegeven</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">logboek weergeven met moderne lijstweergave</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">schakelen tussen klassieke en moderne lijstweergave</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Bookmark dihapus</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Bookmark diperbarui</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Data berhasil dihapus</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL Disalin ke papan klip</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Tidak ada aplikasi yang ditemukan</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Mulai ulang diperlukan setelah perubahan</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">Mulai ulang</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Ditutup</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Tab baru dibuka</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proksi Orion menghubungkan ...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memori penuh Menghapus tab</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Munculan diblokir</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Buka Log Kesalahan</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Beralih</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Urungkan</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Identitas baru dibuat</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">buka pengaturan</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">MAAF MENDENGARNYA</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Jika Anda mengalami kesulitan saat menggunakan aplikasi ini, silakan hubungi kami melalui email. Kami akan mencoba menyelesaikan masalah Anda sesegera mungkin</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">PEMECAHAN MASALAH</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Setel ulang aplikasi jika tidak berfungsi. Kami akan mencoba mengonfigurasi ulang agar dapat berfungsi kembali.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Setel ulang</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Tutup</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Menunggu untuk mengunduh ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Unduh</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">Nilai AS</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">Beri tahu orang lain pendapat Anda tentang aplikasi ini</string>
+    <string name="ALERT_RATE" translatable="true">Nilai</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Selesai</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge tipe (obfs4, lemah lembut, ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Tandai Situs Web</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Tambahkan halaman ini ke bookmark Anda</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nama penanda...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Selesai</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">Pemberitahuan URL</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Buka Di Tab Baru</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Buka Di Tab Saat Ini</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Salin ke Papan Klip</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Unduh Berkas</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Buka url di tab baru</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Buka url di tab saat ini</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Salin url ke papan klip</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Buka gambar di tab baru</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Buka tab gambar saat ini</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Salin gambar ke papan klip</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Unduh file gambar</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">geef een Bridge weet je</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">voer bridge informatie in van een vertrouwde bron</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">verzoek</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_BASIC_SETTING" translatable="true">Systeeminstelling</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">maak Orion uw standaardbrowser</string>
+    <string name="SETTING_HEADER" translatable="true">Systeeminstelling</string>
+    <string name="SETTING_SEARCH_ENGINE" translatable="true">zoekmachine</string>
+    <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_CLEAR_HISTORY" translatable="true">verwijderde weblinks</string>
+    <string name="SETTING_FONT_TITLE" translatable="true">lettertype aanpassen</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">Systeemlettertypeconstructie</string>
+    <string name="SETTING_MANUAL_FONT" translatable="true">lettertype automatisch wijzigen</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie-instelling</string>
+    <string name="SETTING_COOKIE" translatable="true">koekjes</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">Systeeminstellingen . Kennisgeving</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">meldingen</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">meldingsvoorkeuren wijzigen</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">conditie van netwerk en meldingen</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">lokale meldingen</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">Softwaremelding aanpassen</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">systeemmeldingen</string>
+    <string name="SETTING_SEARCH" translatable="true">zoekmachine beheren</string>
+    <string name="SETTING_SEARCH_INFO" translatable="true">toevoegen, standaard instellen. suggesties weergeven</string>
+    <string name="SETTING_NOTIFICATION" translatable="true">meldingen beheren</string>
+    <string name="SETTING_NOTIFICATION_INFO" translatable="true">nieuwe features, conditie van netwerk</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">Software Aanpassen. Zoekmachine</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="true">ondersteunde zoekmachines</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">kies Standaardzoekmachine</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">Software Aanpassen. Zoekmachine</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">wijzigen hoe webzoekopdrachten worden weergegeven</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="true">doorbladerde weblinks weergeven</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">suggesties weergeven tijdens het zoeken</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">suggesties van doorbladerde webkoppelingen worden weergegeven wanneer u in de zoekbalk</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">typt gerichte suggesties verschijnen wanneer u typt in de zoekbalk</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="true">toegankelijkheid</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">tekstgrootte, zoom, invoer met spraak</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">aanpassen, toegankelijkheid</string>
+    <string name="SETTING_CLEAR" translatable="true">privégegevens wissen</string>
+    <string name="SETTING_CLEAR_INFO" translatable="true">tabbladen, doorbladerde weblinks, bladwijzer, cookies, cache</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">Wijzig De Systeeminstelling. Systeemgegevens Wissen</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="true">duidelijke gegevens</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">verwijder alle tabbladen</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">verwijderde weblinks</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">bladwijzers verwijderen</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">cache verwijderen</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">suggesties verwijderen</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">gegevens verwijderen</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">sessie verwijderen</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">verwijder cookies</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">verwijderen aanpassen</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">lettertype schalen</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">webinhoud schalen volgens systeemlettergrootte</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">zoom</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">inschakelen inschakelen en zoom forceren voor alle webpagina\'s</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">invoer met spraak</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">spraakdictatie toestaan ​​in de url-balk</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">selecteer aangepaste lettertypeschaling</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">versleep de schuifregelaar totdat u dit comfortabel kunt lezen. tekst moet er minstens zo groot uitzien na dubbeltikken op een alinea</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+    <string name="SETTING_INTERACTION" translatable="true">interacties</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">verander de manier van interactie met website-inhoud</string>
+    <string name="SETTING_PRIVACY" translatable="true">Gebruiker Sur</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">gebruikersoverzicht, logins, gegevenskeuzes</string>
+    <string name="SETTING_TRACKING" translatable="true">Bescherming Van Gebruikersbewaking</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackers, vingerafdrukken</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">Systeeminstellingen . privacy</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">Systeeminstellingen . bescherming van de gebruiker</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">bescherm uw online identiteit</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">houd uw identiteit privé. we kunnen je beschermen tegen verschillende trackers die je online volgen. deze systeeminstelling kan ook worden gebruikt om advertenties te blokkeren</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">bespaar uzelf van Survelance Protection</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion zal sites vertellen mij niet te volgen</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">vertel de website om mij niet te volgen</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Bescherming Van Gebruikersbewaking</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Schakel Survelance Protection voor gebruikers in die wordt geboden door Genesis</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">website cookies</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">selecteer websitecookievoorkeuren op basis van uw beveiligingsbehoeften</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">privégegevens wissen bij afsluiten</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">gegevens automatisch wissen zodra de software is gesloten</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">privé browsen</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">houd uw identiteit veilig en gebruik de onderstaande opties</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">ingeschakeld</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">ingeschakeld, met uitzondering van website-tracking cookies</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">ingeschakeld, met uitzondering van derde partij</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">uitgeschakeld</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">beveiliging uitschakelen</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">bescherming van identiteitsbewaking toestaan. hierdoor kan uw online identiteit worden gestolen</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">default (aanbevolen)</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">blokkeer online advertenties en sociale webgebruiker Survelance. pagina\'s worden standaard geladen</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">strikt beleid</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">stop alle bekende trackers, pagina\'s worden sneller geladen, maar sommige functies werken mogelijk niet</string>
+
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">schakel java-scripting uit voor verschillende scriptaanvallen</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">Systeeminstellingen . complexe systeeminstelling</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">tabbladen herstellen</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">niet herstellen na het afsluiten van browser</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">werkbalkthema</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">werkbalkthema instellen zoals gedefinieerd in website</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">toon afbeeldingen</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">altijd website-afbeeldingen laden</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">weblettertypen weergeven</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">download externe lettertypen bij het laden van een pagina</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="true">autoplay toestaan ​​</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">media automatisch laten starten</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">gegevensbesparing</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="true">tabblad</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">verander de manier waarop het tabblad zich gedraagt ​​na het herstarten van de software</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">media</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">wijzigen standaard databesparing aanpassen</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">verander standaard media aanpassen</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">altijd afbeeldingen weergeven</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">alleen afbeeldingen weergeven bij gebruik van wifi</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokkeer alle afbeeldingen</string>
+    <string name="SETTING_ADVANCE" translatable="true">Geavanceerde Systeeminstelling</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="true">tabbladen herstellen, gegevensbesparing, ontwikkelaarstools</string>
+    <string name="SETTING_PROXY" translatable="true">onion voorwaarde van volmacht</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">controleer onion conditie van netwerk</string>
+    <string name="SETTING_REPORT" translatable="true">rapport website</string>
+    <string name="SETTING_REPORT_INFO" translatable="true">beledigende website melden</string>
+    <string name="SETTING_RATEUS" translatable="true">beoordeel deze app</string>
+    <string name="SETTING_RATEUS_INFO" translatable="true">beoordeel en reageer op playstore</string>
+    <string name="SETTING_SHARE" translatable="true">deel deze app</string>
+    <string name="SETTING_SHARE_INFO" translatable="true">deel deze software met je vrienden</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">Systeeminstellingen . algemeen aanpassen</string>
+    <string name="SETTING_GENERAL" translatable="true">Standaard Systeeminstelling</string>
+    <string name="SETTING_GENERAL_INFO" translatable="true">homepage, taal</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">browsen op volledig scherm</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">verberg de browserwerkbalk wanneer u naar beneden scrolt</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="true">taal</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">verander de taal van uw browser</string>
+    <string name="SETTING_GENERAL_THEME" translatable="true">softwarethema</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="true">kies een helder en donker thema</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">thema helder</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="true">thema Donker</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">browsen op volledig scherm en taal wijzigen</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">systeem Standaard</string>
+    <string name="SETTING_GENERAL_HOME" translatable="true">startpagina</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">nieuw tabblad</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">open homepage in nieuw tabblad</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">verwijder alle tabbladen</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">verwijderde weblinks</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">bladwijzers verwijderen</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">verwijder browsercache</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">suggesties verwijderen</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">sitegegevens verwijderen</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">sessiegegevens verwijderen</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">cookies voor webbrowsen verwijderen</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">browseraanpassing verwijderen</string>
+
+    <!-- Alerts -->
+
+    <string name="ALERT_CREATE_BOOKMARK" translatable="true">bladwijzerwebsite</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">verwijder doorbladerde weblinks en gegevens</string>
+    <string name="ALERT_CLEAR_BOOKMARK" translatable="true">duidelijke bladwijzer en gegevens</string>
+    <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">als u gegevens wist, worden doorbladerde weblinks, cookies en andere browsegegevens verwijderd</string>
+    <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Als u gegevens verwijdert, worden websites met bladwijzers verwijderd</string>
+    <string name="ALERT_CLEAR" translatable="true">annuleren</string>
+    <string name="ALERT_REPORT" translatable="true">rapport</string>
+    <string name="ALERT_REPORT_URL" translatable="true">rapport website</string>
+    <string name="ALERT_REPORT_URL_INFO" translatable="true">als u denkt dat deze URL illegaal of storend is, meld dit dan aan ons, zodat we juridische stappen kunnen ondernemen</string>
+    <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">is met succes gerapporteerd</string>
+    <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">url is succesvol gerapporteerd. als er iets wordt gevonden, wordt juridische actie ondernomen</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">initialiseren Orbot</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">actie niet ondersteund</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">geen software gevonden om de volgende opdracht</string>
+    <string name="ALERT_NOT_SUPPORTED" translatable="true">welkom, verborgen web Gateway</string>
+    <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">deze software biedt u een platform om verborgen web-URL\'s te zoeken en te openen. hier zijn enkele suggesties \ n</string>
+    <string name="ALERT_WELCOME_MESSAGE" translatable="true">verborgen web online markt</string>
+    <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">gelekte documenten en boeken</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">dark web nieuws en artikelen</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">geheime software en hacktools</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">niet meer weergeven</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">financiën en geld</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">sociale samenlevingen</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">handleiding</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">speelwinkel</string>
+    <string name="ALERT_LOCAL_UPGRADE" translatable="true">melding weblink</string>
+    <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">open in nieuw tabblad</string>
+    <string name="ALERT_LONG_FILE" translatable="true">open url in nieuw tabblad</string>
+    <string name="ALERT_DOWNLOAD" translatable="true">open url in huidig ​​tabblad</string>
+    <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">geen software gevonden om e-mail te verwerken</string>
+    <string name="ALERT_LONG_URL_TITLE" translatable="true">downloadbestand,</string>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
+    <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">gegevens gewist, herstart vereist</string>
+    <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">download file , </string>
+    <string name="ALERT_DATA_CLEARED" translatable="true">tabblad gesloten</string>
+
+    <!-- Popup Menu -->
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">tabblad sluiten</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">open recente tabbladen</string>
+    <string name="HOME_MENU_CLOSE_TABS" translatable="true">taal</string>
+    <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Systeeminstelling</string>
+    <string name="HOME_MENU_LANGUAGE" translatable="true">doorzochte weblinks</string>
+    <string name="HOME_MENU_DOWNLOAD" translatable="true">downloads</string>
+    <string name="HOME_MENU_HISTORY" translatable="true">bladwijzers</string>
+    <string name="HOME_MENU_SETTING" translatable="true">Sla Deze Pagina Op</string>
+    <string name="HOME_MENU_DESKTOP" translatable="true">desktop Verbinding</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Connection</string>
+    <string name="HOME_MENU_BOOKMARK" translatable="true">rapport website</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">beoordeel deze app</string>
+    <string name="HOME_MENU_REPORT" translatable="true">vind op pagina</string>
+    <string name="HOME_MENU_RATE" translatable="true">afsluiten</string>
+    <string name="HOME_MENU_FIND" translatable="true">delen</string>
+    <string name="HOME_MENU_QUIT" translatable="true">exit</string>
+    <string name="HOME_MENU_SHARE" translatable="true">share</string>
+
+    <!-- Tab View -->
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">nieuwe tabbladen</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="true">sluit alle tabbladen</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">Systeeminstelling</string>
+    <string name="TAB_LIST_SELECT" translatable="true">selecteer tabbladen</string>
+
+    <!-- Shared Recycler View -->
+    <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">geopende tabbladen</string>
+    <string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">kopiëren</string>
+    <string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">delen</string>
+    <string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">selectie wissen</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">open in huidig ​​tabblad</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">open in nieuw tabblad</string>
+    <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">verwijderen</string>
+
+    <!-- History Popup Menu -->
+    <string name="HISTORY_TITLE" translatable="true">doorzochte weblinks</string>
+    <string name="HISTORY_CLEAR" translatable="true">verwijder deze</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true">zoeken ...</string>
+
+    <!-- BOOKMARK Popup Menu -->
+    <string name="BOOKMARK_TITLE" translatable="true">bladwijzer</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">verwijder dit</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true">zoeken ...</string>
+
+    <!-- Help -->
+    <string name="HELP_RETRY" translatable="true">opnieuw proberen</string>
+    <string name="HELP_RETRY_INFO" translatable="true">opps! netwerkverbindingsfout. netwerk niet verbonden</string>
+    <string name="HELP_TITLE" translatable="true">hulp en ondersteuning</string>
+
+    <!-- Language Manager Manager -->
+    <string name="LANGUAGE_TITLE" translatable="true">taal</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">taal wijzigen</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">we draaien alleen op de volgende talen. we zouden binnenkort meer toevoegen</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">engels (verenigde staten)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">duits (duitsland)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">italiaans (italië)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">portugees (brazilië)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">russisch (rusland)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">Oekraïens (oekraïne)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">chinees vereenvoudigd (vasteland china)</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ waarschuwing</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">aanpassen Bridges</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridges</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">inschakelen VPN-services inschakelen</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Bridge Gateway</string>
+    <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">inschakelen Gateway</string>
+
+    <!-- Proxy Status -->
+    <string name="PROXY_STATUS_HEADER" translatable="true">inschakelen voorwaarde van volmacht</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">huidige toestand van orbot proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot voorwaarde van volmacht</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">onion Bridges status</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">VPN voorwaarde van connectiviteit</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge voorwaarde van volmacht</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">info, wijzig Systeeminstelling</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">u kunt de proxy wijzigen door de software opnieuw te starten en naar proxymanager te gaan. het kan worden geopend door op een tandwielpictogram onderaan</string>
+
+
+    <!-- Notification Menu -->
+    <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+    <string name="NOTIFICATION_OPEN_TEXT" translatable="true">open deze</string>
+
+    <!-- Home View -->
+    <string name="HOME_TAB_TEXT" translatable="true">1</string>
+    <string name="HOME_TAB_EMPTY" translatable="true">geopende tabbladen worden hier weergegeven</string>
+
+    <!-- Error Page -->
+    <string name="ERROR_M1" translatable="true">de pagina werkt momenteel niet vanwege de een of andere reden</string>
+    <string name="ERROR_M2" translatable="true">Neem contact op met de website-eigenaren om hen over dit probleem te informeren.​herladen</string>
+    <string name="ERROR_M3" translatable="true">pref_language</string>
+    <string name="ERROR_M4" translatable="true">Ongeldige pakkethandtekening</string>
+    <string name="ERROR_M5" translatable="true">klik om in te loggen.</string>
+    <string name="ERROR_M6" translatable="true">klik om handmatig gegevens te selecteren.​Uitzondering beveiliging webdomein.​DAL-verificatiefout.</string>
+
+    <!-- Others -->
+    <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+    <string name="invalid_package_signature" translatable="true">Invalid package signature</string>
+    <string name="autofill_sign_in_prompt" translatable="true">click to sign in.</string>
+    <string name="autofill_manual_prompt" translatable="true">click to manually select data.</string>
+    <string name="security_exception" translatable="true">Web domain security exception.</string>
+    <string name="dal_exception" translatable="true">DAL verification failure.</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Tab terbaru</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Identitas baru</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">Kebijakan pribadi</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser kebijakan privasi</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">Laporkan Situs Web</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Laporkan situs web ilegal</string>
+    <string name="SETTING_SITEMAP" translatable="true">publikasikan situs web Anda</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">Tambahkan situs web Anda ke mesin pencari kami</string>
+
+    <item type="id" name="LaguageID" />
+    <item type="id" name="LaguageRegion" />
+
+    <string-array name="ARRAY_FONTS" translatable="true">
+        <item>55 Percent</item>
+        <item>70 Percent</item>
+        <item>85 Percent</item>
+        <item>100 Percent</item>
+        <item>115 Percent</item>
+        <item>130 Percent</item>
+        <item>145 Percent</item>
+    </string-array>
+
+    <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+        <item>Enabled</item>
+        <item>Disabled</item>
+    </string-array>
+
+    <string-array name="ARRAY_NOTIFICATION" translatable="true">
+        <item>Enable All</item>
+        <item>Disable All</item>
+        <item>No Bandwidth</item>
+    </string-array>
+
+    <string-array name="ARRAY_COOKIES" translatable="true">
+        <item>Allow All</item>
+        <item>Allow Trusted</item>
+        <item>Allow None</item>
+        <item>Allow Visited</item>
+        <item>Allow Non Tracker</item>
+    </string-array>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
 
 
 </resources>

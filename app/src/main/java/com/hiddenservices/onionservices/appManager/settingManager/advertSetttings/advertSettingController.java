@@ -3,8 +3,10 @@ package com.hiddenservices.onionservices.appManager.settingManager.advertSetttin
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.appManager.settingManager.advertSetttings.advertResources.advert_constants;
@@ -48,7 +50,7 @@ public class advertSettingController extends AppCompatActivity {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
 
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
@@ -72,22 +74,20 @@ public class advertSettingController extends AppCompatActivity {
 
     /*View Callbacks*/
 
-    private class settingLogViewCallback implements eventObserver.eventListener{
+    private class settingLogViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> pData, Object pCommands)
-        {
+        public Object invokeObserver(List<Object> pData, Object pCommands) {
             return null;
         }
     }
 
     /*Model Callbacks*/
 
-    private class settingLogModelCallback implements eventObserver.eventListener{
+    private class settingLogModelCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> pData, Object pCommands)
-        {
+        public Object invokeObserver(List<Object> pData, Object pCommands) {
             return null;
         }
     }
@@ -95,8 +95,7 @@ public class advertSettingController extends AppCompatActivity {
     /* LOCAL OVERRIDES */
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
@@ -115,43 +114,43 @@ public class advertSettingController extends AppCompatActivity {
 
     /*UI Redirection*/
 
-    public void onClose(View view){
+    public void onClose(View view) {
         finish();
     }
 
-    public void onTriggerUI(View view){
-        if(view.getId() == R.id.pAdOption1){
+    public void onTriggerUI(View view) {
+        if (view.getId() == R.id.pAdOption1) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(0));
             advert_constants.S_INSENSITIVE_CATEGORIES = mSwitchButton.get(0).isChecked();
-        }else if(view.getId() == R.id.pAdOption2){
+        } else if (view.getId() == R.id.pAdOption2) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(1));
             advert_constants.S_APP_REDIRECTION = mSwitchButton.get(1).isChecked();
-        }else if(view.getId() == R.id.pAdOption3){
+        } else if (view.getId() == R.id.pAdOption3) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(2));
             advert_constants.S_SEARCH_RESULTS = mSwitchButton.get(2).isChecked();
-        }else if(view.getId() == R.id.pAdOption4){
+        } else if (view.getId() == R.id.pAdOption4) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(3));
             advert_constants.S_SENSOR_ADVERTISEMENT = mSwitchButton.get(3).isChecked();
-        }else if(view.getId() == R.id.pAdOption5){
+        } else if (view.getId() == R.id.pAdOption5) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(4));
             advert_constants.S_NON_TRACKABLE_ADVERTISEMENT = mSwitchButton.get(4).isChecked();
-        }else if(view.getId() == R.id.pAdOption6){
+        } else if (view.getId() == R.id.pAdOption6) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(5));
             advert_constants.S_VIDEO_ADVERTISEMENT = mSwitchButton.get(5).isChecked();
-        }else if(view.getId() == R.id.pAdOption7){
+        } else if (view.getId() == R.id.pAdOption7) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(6));
             advert_constants.S_AUTHORIZED_ADVERTISERS = mSwitchButton.get(6).isChecked();
-        }else if(view.getId() == R.id.pAdOption8){
+        } else if (view.getId() == R.id.pAdOption8) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(7));
             advert_constants.S_ERROR_REPORTING = mSwitchButton.get(7).isChecked();
-        }else if(view.getId() == R.id.pAdOption9){
+        } else if (view.getId() == R.id.pAdOption9) {
             mAdvertSettingViewController.onTrigger(advertSettingEnums.eAdvertSettingViewController.M_TOGGLE_SWITCH, Collections.singletonList(8));
             advert_constants.S_NATIVE_ADVERTISERS = mSwitchButton.get(8).isChecked();
         }
     }
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
 }

@@ -3,9 +3,9 @@
     <item>
         <set>
             <objectAnimator
-                    android:duration="@android:integer/config_shortAnimTime"
-                    android:propertyName="translationZ"
-                    android:valueTo="0dp" />
+                android:duration="@android:integer/config_shortAnimTime"
+                android:propertyName="translationZ"
+                android:valueTo="0dp" />
         </set>
     </item>
 </selector>

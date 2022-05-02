@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.constants.constants;
@@ -25,6 +26,7 @@ import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -62,23 +64,21 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        if(activityThemeManager.getInstance().onInitTheme(this)){
+        if (activityThemeManager.getInstance().onInitTheme(this)) {
             activityContextManager.getInstance().onResetTheme();
         }
 
         super.onConfigurationChanged(newConfig);
     }
 
-    public void initializeAppModel()
-    {
-        if(!status.mThemeApplying){
+    public void initializeAppModel() {
+        if (!status.mThemeApplying) {
             activityContextManager.getInstance().onStack(this);
         }
         mBridgeViewController = new bridgeViewController();
     }
 
-    public void initializeConnections()
-    {
+    public void initializeConnections() {
         mBridgeSettingObfs = findViewById(R.id.pBridgeSettingObfs);
         mBridgeSettingBridgeChina = findViewById(R.id.pBridgeSettingBridgeChina);
         mBridgeSettingBridgeSnowflake = findViewById(R.id.pBridgeSettingSnowFlakes);
@@ -90,8 +90,8 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
         mBridgeSettingCustomPort.setOnFocusChangeListener(this);
         mBridgeSettingCustomPort.addTextChangedListener(this);
 
-        mBridgeViewController.initialization(mBridgeSettingBridgeSnowflake, mBridgeSettingCustomPort, mBridgeSettingBridgeRequest,this, mBridgeSettingObfs, mBridgeSettingBridgeChina, mBridgeSettingBridgeCustom, mBridgeSettingCustomBridgeBlocker);
-        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,0,status.sBridgeCustomType));
+        mBridgeViewController.initialization(mBridgeSettingBridgeSnowflake, mBridgeSettingCustomPort, mBridgeSettingBridgeRequest, this, mBridgeSettingObfs, mBridgeSettingBridgeChina, mBridgeSettingBridgeCustom, mBridgeSettingCustomBridgeBlocker);
+        mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 0, status.sBridgeCustomType));
         mBridgeModel = new bridgeModel(new bridgeController.bridgeModelCallback(), this);
     }
 
@@ -100,7 +100,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
     @Override
     public void onFocusChange(View view, boolean b) {
-        if(view.getId() == R.id.pBridgeSettingCustomPort){
+        if (view.getId() == R.id.pBridgeSettingCustomPort) {
             if (!b) {
                 helperMethod.hideKeyboard(this);
             }
@@ -119,7 +119,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
     @Override
     public void afterTextChanged(Editable editable) {
-        if(!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length()<=5){
+        if (!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length() <= 5) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
         }
     }
@@ -127,38 +127,32 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
     /* VIEW LISTENERS */
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
-    public void onClose(View view){
+    public void onClose(View view) {
         finish();
     }
 
-    public void onUITrigger(View view){
-        if(view.getId() == R.id.pBridgeSettingCustomPort){
+    public void onUITrigger(View view) {
+        if (view.getId() == R.id.pBridgeSettingCustomPort) {
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_UPDATE_BRIDGES);
-        }
-        else if(view.getId() == R.id.pBridgeSettingCustomBridgeBlocker){
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE,null);
-        }
-        else if(view.getId() == R.id.pBridgeSettingBridgeRequest){
+        } else if (view.getId() == R.id.pBridgeSettingCustomBridgeBlocker) {
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE, null);
+        } else if (view.getId() == R.id.pBridgeSettingBridgeRequest) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_REQUEST_BRIDGE, null);
             pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
-        }
-        else if(view.getId() == R.id.pSearchSettingOption2){
+        } else if (view.getId() == R.id.pSearchSettingOption2) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
-        }
-        else if(view.getId() == R.id.pBridgeSettingOption4){
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 250, status.sBridgeCustomType));
+        } else if (view.getId() == R.id.pBridgeSettingOption4) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE, null);
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
-        }
-        else if(view.getId() == R.id.pSearchSettingOption1){
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 250, status.sBridgeCustomType));
+        } else if (view.getId() == R.id.pSearchSettingOption1) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250, status.sBridgeCustomType));
-        }
-        else if(view.getId() == R.id.pBridgeSettingOption3){
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE,null);
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 250, status.sBridgeCustomType));
+        } else if (view.getId() == R.id.pBridgeSettingOption3) {
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE, null);
         }
 
     }
@@ -166,13 +160,13 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
     /* EXTERNAL LISTENERS */
 
     public void onUpdateBridges(String pBridge, String pType) {
-        if(pBridge.length()>5){
+        if (pBridge.length() > 5) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_CUSTOM_BRIDGE, Arrays.asList(pBridge, pType));
-            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge,250));
-        }else {
-            if(status.sBridgeCustomBridge.equals("meek")){
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 250));
+        } else {
+            if (status.sBridgeCustomBridge.equals("meek")) {
                 mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
-            }else {
+            } else {
                 mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
             }
         }
@@ -180,10 +174,9 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
     /* LISTENERS */
 
-    public class bridgeModelCallback implements eventObserver.eventListener{
+    public class bridgeModelCallback implements eventObserver.eventListener {
         @Override
-        public Object invokeObserver(List<Object> pData, Object pCommands)
-        {
+        public Object invokeObserver(List<Object> pData, Object pCommands) {
             return null;
         }
     }
@@ -191,19 +184,17 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
     /* LOCAL OVERRIDES */
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
-        if(dataController.getInstance()!=null){
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1,status.sBridgeCustomBridge));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY,status.sBridgeGatewayAuto));
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL,status.sBridgeGatewayManual));
+        if (dataController.getInstance() != null) {
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1, status.sBridgeCustomBridge));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY, status.sBridgeGatewayAuto));
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL, status.sBridgeGatewayManual));
         }
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
 

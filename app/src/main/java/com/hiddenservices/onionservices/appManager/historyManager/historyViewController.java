@@ -31,11 +31,11 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
+
 import java.util.List;
 import java.util.Objects;
 
-class historyViewController
-{
+class historyViewController {
     /*Private Variables*/
     private AppCompatActivity mContext;
     private TextView mEmptyListNotification;
@@ -53,8 +53,7 @@ class historyViewController
 
     /*Initializations*/
 
-    historyViewController(TextView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton,AppCompatActivity pContext,ImageButton pMenuButton,ImageButton pSearchButton, LinearLayout pHeaderContainer, TextView pTitle)
-    {
+    historyViewController(TextView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton, AppCompatActivity pContext, ImageButton pMenuButton, ImageButton pSearchButton, LinearLayout pHeaderContainer, TextView pTitle) {
         this.mEmptyListNotification = pEmptyListNotification;
         this.mSearchInput = pSearchInput;
         this.mRecycleView = pRecycleView;
@@ -67,7 +66,7 @@ class historyViewController
         initPostUI();
     }
 
-    private void initPostUI(){
+    private void initPostUI() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -75,9 +74,8 @@ class historyViewController
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+            } else {
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                     mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
@@ -85,15 +83,14 @@ class historyViewController
         }
     }
 
-    private void updateIfListEmpty(int pSize,int pDuration){
-        if(pSize>0){
+    private void updateIfListEmpty(int pSize, int pDuration) {
+        if (pSize > 0) {
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_short_header));
             mEmptyListNotification.animate().setDuration(pDuration).alpha(0f);
             mClearButton.setText(strings.HISTORY_CLEAR_HISTORY);
             mClearButton.setClickable(true);
             mRecycleView.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             mEmptyListNotification.animate().setDuration(pDuration).alpha(1f);
 
@@ -117,25 +114,25 @@ class historyViewController
         }
     }
 
-    private void onCloseMenu(){
-        if(mPopupWindow !=null && mPopupWindow.isShowing()){
+    private void onCloseMenu() {
+        if (mPopupWindow != null && mPopupWindow.isShowing()) {
             mPopupWindow.dismiss();
         }
         onSelectionMenu(true);
     }
 
-    private void onSelectionMenu(boolean pStatus){
-        if(!pStatus){
+    private void onSelectionMenu(boolean pStatus) {
+        if (!pStatus) {
             mClearButton.setClickable(false);
             mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
             mMenuButton.setVisibility(View.VISIBLE);
             collapse(mClearButton);
             mTitle.setVisibility(View.VISIBLE);
             mSearchButton.setVisibility(View.GONE);
-            if (mSearchInput.getVisibility() == View.VISIBLE){
+            if (mSearchInput.getVisibility() == View.VISIBLE) {
                 onHideSearch();
             }
-        }else {
+        } else {
             if (mSearchInput.getVisibility() != View.VISIBLE) {
                 mClearButton.setClickable(true);
                 mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_short_header));
@@ -146,26 +143,25 @@ class historyViewController
 
     }
 
-    private void updateList(){
+    private void updateList() {
         mRecycleView.getAdapter().notifyDataSetChanged();
     }
 
-    private void removeFromList(int pIndex)
-    {
+    private void removeFromList(int pIndex) {
         Objects.requireNonNull(mRecycleView.getAdapter()).notifyItemRemoved(pIndex);
         mRecycleView.getAdapter().notifyItemRangeChanged(pIndex, mRecycleView.getAdapter().getItemCount());
     }
 
-    private void clearList(){
+    private void clearList() {
         Objects.requireNonNull(mRecycleView.getAdapter()).notifyDataSetChanged();
-        updateIfListEmpty(mRecycleView.getAdapter().getItemCount(),300);
+        updateIfListEmpty(mRecycleView.getAdapter().getItemCount(), 300);
         mSearchInput.clearFocus();
         mSearchInput.setText(strings.GENERIC_EMPTY_STR);
         mClearButton.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v3));
     }
 
     private boolean onHideSearch() {
-        if(mSearchInput.getVisibility() == View.VISIBLE){
+        if (mSearchInput.getVisibility() == View.VISIBLE) {
             mSearchInput.animate().setDuration(200).alpha(0).withEndAction(() -> {
                 mSearchInput.getText().clear();
                 mSearchInput.setVisibility(View.GONE);
@@ -186,7 +182,7 @@ class historyViewController
             });
 
             return false;
-        }else {
+        } else {
             mSearchInput.setAlpha(0f);
             mSearchInput.setVisibility(View.VISIBLE);
             mSearchInput.animate().setDuration(300).alpha(1);
@@ -195,7 +191,7 @@ class historyViewController
             mSearchInput.requestFocus();
             mClearButton.animate().setDuration(300).alpha(0.3f);
             InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             mSearchButton.setVisibility(View.GONE);
             mMenuButton.setVisibility(View.GONE);
             mTitle.setVisibility(View.GONE);
@@ -204,7 +200,7 @@ class historyViewController
     }
 
     public void expand(final View v) {
-        if(isClearButtonVisible){
+        if (isClearButtonVisible) {
             v.animate().alpha(1);
             v.measure(CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.WRAP_CONTENT);
             final int targtetHeight = v.getMeasuredHeight();
@@ -233,16 +229,16 @@ class historyViewController
         int[] location = new int[2];
         v.getLocationOnScreen(location);
 
-        if(location[1]==207){
+        if (location[1] == 207) {
             isClearButtonVisible = true;
-        }else {
+        } else {
             isClearButtonVisible = false;
             return;
         }
 
         v.animate().alpha(1);
 
-        if(mClearButton.getVisibility() == View.VISIBLE){
+        if (mClearButton.getVisibility() == View.VISIBLE) {
             final int initialHeight = v.getMeasuredHeight();
             v.animate().alpha(0);
             Animation a = new Animation() {
@@ -275,59 +271,51 @@ class historyViewController
     private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
 
         Bitmap icon;
-        if(pActionState == ItemTouchHelper.ANIMATION_TYPE_SWIPE_SUCCESS){
+        if (pActionState == ItemTouchHelper.ANIMATION_TYPE_SWIPE_SUCCESS) {
             View itemView = pViewHolder.itemView;
             itemView.animate().alpha(0f);
-        }
-        else if(pActionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+        } else if (pActionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             View itemView = pViewHolder.itemView;
             float height = (float) itemView.getBottom() - (float) itemView.getTop();
             float width = height / 3;
 
-            if(pDX > 0){
+            if (pDX > 0) {
                 mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_edittext_background));
-                RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), pDX,(float) itemView.getBottom());
+                RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), pDX, (float) itemView.getBottom());
                 pCanvas.drawRect(background, mPainter);
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
-                RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
-                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+                RectF icon_dest = new RectF((float) itemView.getLeft() + width, (float) itemView.getTop() + width, (float) itemView.getLeft() + 2 * width, (float) itemView.getBottom() - width);
+                pCanvas.drawBitmap(icon, null, icon_dest, mPainter);
             } else {
                 mPainter.setColor(ContextCompat.getColor(mContext, R.color.c_edittext_background));
-                RectF background = new RectF((float) itemView.getRight() + pDX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
+                RectF background = new RectF((float) itemView.getRight() + pDX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
                 pCanvas.drawRect(background, mPainter);
                 icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dustbin);
-                RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
-                pCanvas.drawBitmap(icon,null,icon_dest, mPainter);
+                RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                pCanvas.drawBitmap(icon, null, icon_dest, mPainter);
             }
         }
     }
 
-    public Object onTrigger(historyEnums.eHistoryViewCommands pCommands, List<Object> pData){
-        if(pCommands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY){
-            updateIfListEmpty((int)pData.get(0), (int)pData.get(1));
-        }
-        else if(pCommands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST){
+    public Object onTrigger(historyEnums.eHistoryViewCommands pCommands, List<Object> pData) {
+        if (pCommands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY) {
+            updateIfListEmpty((int) pData.get(0), (int) pData.get(1));
+        } else if (pCommands == historyEnums.eHistoryViewCommands.M_UPDATE_LIST) {
             updateList();
-        }
-        else if(pCommands == historyEnums.eHistoryViewCommands.M_REMOVE_FROM_LIST){
-            removeFromList((int)pData.get(0));
-        }
-        else if(pCommands == historyEnums.eHistoryViewCommands.M_CLEAR_LIST){
+        } else if (pCommands == historyEnums.eHistoryViewCommands.M_REMOVE_FROM_LIST) {
+            removeFromList((int) pData.get(0));
+        } else if (pCommands == historyEnums.eHistoryViewCommands.M_CLEAR_LIST) {
             clearList();
-        }
-        else if(pCommands == historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU){
-            onSelectionMenu((boolean)pData.get(0));
-        }
-        else if(pCommands == historyEnums.eHistoryViewCommands.M_HIDE_SEARCH){
+        } else if (pCommands == historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU) {
+            onSelectionMenu((boolean) pData.get(0));
+        } else if (pCommands == historyEnums.eHistoryViewCommands.M_HIDE_SEARCH) {
             return onHideSearch();
-        }
-        else if(pCommands == historyEnums.eHistoryViewCommands.M_CLOSE_MENU){
+        } else if (pCommands == historyEnums.eHistoryViewCommands.M_CLOSE_MENU) {
             onCloseMenu();
-        }
-        else if(pCommands == historyEnums.eHistoryViewCommands.M_LONG_PRESS_MENU){
+        } else if (pCommands == historyEnums.eHistoryViewCommands.M_LONG_PRESS_MENU) {
             onLongPressMenu((View) pData.get(0));
-        }else if(pCommands.equals(historyEnums.eHistoryViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)){
-            onDrawSwipableBackground((Canvas)pData.get(0), (RecyclerView.ViewHolder)pData.get(1), (float)pData.get(2), (int)pData.get(3));
+        } else if (pCommands.equals(historyEnums.eHistoryViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)) {
+            onDrawSwipableBackground((Canvas) pData.get(0), (RecyclerView.ViewHolder) pData.get(1), (float) pData.get(2), (int) pData.get(3));
         }
         return null;
     }

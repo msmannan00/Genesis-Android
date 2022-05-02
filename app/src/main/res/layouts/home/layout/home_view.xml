@@ -8,8 +8,7 @@
     android:background="@color/button_gray_alpha"
     tools:context="com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController">
 
-    <!--<com.applovin.mediation.ads.MaxAdView
-        maxads:adUnitId="6afabb72c853c683"
+    <com.applovin.mediation.ads.MaxAdView maxads:adUnitId="642ec6302c7cecd2"
         xmlns:maxads="http://schemas.applovin.com/android/1.0"
         android:id="@+id/adView"
         android:layout_width="match_parent"
@@ -21,11 +20,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/c_background_inverted"
-        android:visibility="gone"/>-->
+        android:visibility="gone" />
 
-    <com.applovin.mediation.ads.MaxAdView
+    <!--<com.applovin.mediation.ads.MaxAdView
         xmlns:maxads="http://schemas.applovin.com/android/1.0"
-        maxads:adUnitId="6afabb72c853cas683ss"
+        maxads:adUnitId="642ec6302c7cecd2"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:onClick="onAdvertClick"
@@ -39,8 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/c_background_inverted"
-        android:visibility="gone"/>
-
+        android:visibility="gone"/>-->
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -15,9 +15,11 @@ public class helpDataModel {
     public String getHeader() {
         return mHeader;
     }
+
     public String getDescription() {
         return mDescription;
     }
+
     public String getIconID() {
         return mIcon;
     }

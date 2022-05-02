@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true"
-            android:drawable="@color/c_gray_light"/> <!-- pressed -->
-    <item android:state_focused="true"
-            android:drawable="@color/c_gray_light"/> <!-- focused -->
-    <item android:drawable="@color/c_background"/> <!-- default -->
+    <item
+        android:state_pressed="true"
+        android:drawable="@color/c_gray_light" /> <!-- pressed -->
+    <item
+        android:state_focused="true"
+        android:drawable="@color/c_gray_light" /> <!-- focused -->
+    <item android:drawable="@color/c_background" /> <!-- default -->
 </selector>

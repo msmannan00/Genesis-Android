@@ -1,17 +1,17 @@
 /**
-   Copyright 2017 Carlos Macasaet
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+ * Copyright 2017 Carlos Macasaet
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.hiddenservices.onionservices.libs.fernet;
 
@@ -52,7 +52,7 @@ import javax.crypto.spec.IvParameterSpec;
  * TooManyMethods can be avoided by making the following API-breaking changes:
  * * remove the static `generate` methods and introduce a `TokenFactory` or `TokenBuilder`
  * * remove the public `validateAndDecrypt` methods since they are already available in the `Validator` interface
- * 
+ *
  * AvoidDuplicateLiterals is from the method-level @SuppressWarnings annotations
  */
 public class Token {
@@ -82,7 +82,7 @@ public class Token {
      */
     @SuppressWarnings({"PMD.ArrayIsStoredDirectly", "PMD.CyclomaticComplexity"})
     protected Token(final byte version, final Instant timestamp, final IvParameterSpec initializationVector,
-            final byte[] cipherText, final byte[] hmac) {
+                    final byte[] cipherText, final byte[] hmac) {
         if (version != supportedVersion) {
             throw new IllegalTokenException("Unsupported version: " + version);
         }
@@ -101,6 +101,7 @@ public class Token {
         this.cipherText = cipherText;
         this.hmac = hmac;
     }
+
     @SuppressWarnings({"PMD.PrematureDeclaration", "PMD.DataflowAnomalyAnalysis"})
     public static Token fromBytes(final byte[] bytes) {
         if (bytes.length < minimumTokenBytes) {
@@ -268,7 +269,7 @@ public class Token {
 
     public String toString() {
         final StringBuilder builder = new StringBuilder(107);
-        builder.append("Token [version=").append(String.format("0x%x", new BigInteger(1, new byte[] {getVersion()})))
+        builder.append("Token [version=").append(String.format("0x%x", new BigInteger(1, new byte[]{getVersion()})))
                 .append(", timestamp=").append(getTimestamp())
                 .append(", hmac=").append(android.util.Base64.encodeToString(getHmac(), Base64.DEFAULT)).append(']');
         return builder.toString();

@@ -1,7 +1,6 @@
 package com.widget.onionservices.widgetManager;
 
-public class widgetEnums
-{
+public class widgetEnums {
     /*Widget Manager*/
 
     public enum eWidgetViewController {

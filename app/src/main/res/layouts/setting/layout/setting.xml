@@ -1,1223 +1,1227 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    tools:context="com.hiddenservices.onionservices.appManager.settingManager.settingHomeManager.settingHomeController">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/c_background"
-        tools:context="com.hiddenservices.onionservices.appManager.settingManager.settingHomeManager.settingHomeController">
-        <ScrollView
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="50dp"
+            android:layout_height="wrap_content">
+
+            <!-- Title Header -->
+            <LinearLayout
+                android:id="@+id/pHeaderContainerTop"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:paddingEnd="0dp"
+                android:paddingStart="5dp"
+                android:focusable="true"
+                android:elevation="8dp"
+                android:background="@color/c_background"
+                android:orientation="horizontal"
+                tools:ignore="RtlSymmetry">
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onNavigationBackPressed"
+                    android:src="@xml/ic_arrow_back"
+                    app:tint="@color/c_navigation_tint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-3dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:onClick="onNavigationBackPressed"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/SETTING_HEADER"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:paddingStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="onOpenInfo"
+                    android:background="@xml/gx_ripple_gray_round_left"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_info"
+                    app:tint="@color/c_header_icon_tint" />
+
+            </LinearLayout>
+
+            <!-- Title Header -->
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onDefaultBrowser"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:src="@xml/ic_baseline_browser"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="match_parent"
+                    android:alpha="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:paddingEnd="20dp"
+                    android:text="@string/SETTING_DEFAULT_BROWSER"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="15sp"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="50dp"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onManageGeneral"
+                android:orientation="horizontal">
 
-                <!-- Title Header -->
-                <LinearLayout
-                    android:id="@+id/pHeaderContainerTop"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:clickable="true"
-                    android:paddingEnd="0dp"
-                    android:paddingStart="5dp"
-                    android:focusable="true"
-                    android:elevation="8dp"
-                    android:background="@color/c_background"
-                    android:orientation="horizontal"
-                    tools:ignore="RtlSymmetry">
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="1dp"
-                        android:background="@xml/gx_ripple_default_round"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:onClick="onNavigationBackPressed"
-                        android:src="@xml/ic_arrow_back"
-                        app:tint="@color/c_navigation_tint" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="-3dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:onClick="onNavigationBackPressed"
-                        android:gravity="center_vertical|start"
-                        android:text="@string/SETTING_HEADER"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:paddingStart="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:onClick="onOpenInfo"
-                        android:background="@xml/gx_ripple_gray_round_left"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_info"
-                        app:tint="@color/c_header_icon_tint" />
-
-                </LinearLayout>
-
-                <!-- Title Header -->
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption2"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onDefaultBrowser"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:src="@xml/ic_baseline_home"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:src="@xml/ic_baseline_browser"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:orientation="vertical">
 
                     <Button
-                        android:layout_width="0dp"
-                        android:layout_weight="7"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:textAlignment="textStart"
+                        android:layout_height="20dp"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
-                        android:paddingEnd="20dp"
-                        android:text="@string/SETTING_DEFAULT_BROWSER"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_GENERAL"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:textAlignment="textStart"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_GENERAL_INFO"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:autoMirrored="true"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onManageSearchEngine"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:src="@xml/ic_baseline_search"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:textAlignment="textStart"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SEARCH"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SEARCH_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pOption7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onManageSearchPrivacy"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_baseline_privacy"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_PRIVACY"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v1"
                         android:textSize="15sp"
                         tools:ignore="RtlSymmetry" />
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onManageGeneral"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:src="@xml/ic_baseline_home"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:textAlignment="textStart"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_GENERAL"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:textAlignment="textStart"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_GENERAL_INFO"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:autoMirrored="true"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
+                        android:padding="0dp"
+                        android:text="@string/SETTING_PRIVACY_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onManageSearchEngine"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:src="@xml/ic_baseline_search"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:textAlignment="textStart"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_SEARCH"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_SEARCH_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:clickable="false"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:id="@+id/pOption7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onManageSearchPrivacy"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_baseline_privacy"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_PRIVACY"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_PRIVACY_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:clickable="false"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pOption8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onManageTracking"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_baseline_remove_red_eye"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_TRACKING"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_TRACKING_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:clickable="false"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="onManageNotification"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:padding="10dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_baseline_notifications"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_NOTIFICATION"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_NOTIFICATION_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="onManageSearchAccessibility"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:src="@xml/ic_baseline_accessibility"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_ACCESSIBILITY"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_ACCESSIBILITY_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:id="@+id/pOption6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="onManageSearchClearData"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_baseline_clear"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_CLEAR"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_CLEAR_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:id="@+id/pOption9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="onManageSearchAdvanced"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        app:tint="@color/c_setting_icon_tint"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="10dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_baseline_advance"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_ADVANCE"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_ADVANCE_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:layout_marginEnd="5dp"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:id="@+id/pOption10"
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:layout_width="45dp"
                     android:layout_height="match_parent"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onOpenProxyStatus"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="10dp"
-                        android:src="@xml/ic_baseline_vpn"
-                        app:tint="@color/c_setting_icon_tint" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_PROXY"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_PROXY_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:id="@+id/pOption12"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onRateApplication"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="10dp"
-                        android:src="@xml/ic_baseline_rate"
-                        app:tint="@color/c_setting_icon_tint" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_RATEUS"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_RATEUS_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pOption13"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onShareApplication"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="10dp"
-                        android:src="@xml/ic_baseline_share"
-                        app:tint="@color/c_setting_icon_tint" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_SHARE"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_SHARE_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/view4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:id="@+id/pOption14"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onPrivacyPolicy"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="10dp"
-                        android:src="@xml/ic_baseline_policy"
-                        app:tint="@color/c_setting_icon_tint" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_PRIVACY_POLICY"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_PRIVACY_POLICY_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pOption15"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onReportWebsite"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="10dp"
-                        android:src="@xml/ic_baseline_report"
-                        app:tint="@color/c_setting_icon_tint" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_REPORT_WEBSITE"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_REPORT_WEBSITE_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pOption16"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@xml/gx_ripple_gray"
-                    android:onClick="onSitemap"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="10dp"
-                        android:src="@xml/ic_baseline_sitemap"
-                        app:tint="@color/c_setting_icon_tint" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_SITEMAP"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_SITEMAP_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/view5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:onClick="cicadaClipboard"
-                    android:focusable="true"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="13dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:padding="10dp"
-                        android:src="@xml/ic_baseline_fingerprint"
-                        app:tint="@color/c_setting_icon_tint" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="Cicada | 3301"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="HardcodedText,RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
 
             </LinearLayout>
-        </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/pOption8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onManageTracking"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_baseline_remove_red_eye"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_TRACKING"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_TRACKING_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:onClick="onManageNotification"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:padding="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_baseline_notifications"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_NOTIFICATION"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_NOTIFICATION_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:onClick="onManageSearchAccessibility"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:src="@xml/ic_baseline_accessibility"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_ACCESSIBILITY"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_ACCESSIBILITY_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pOption6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:onClick="onManageSearchClearData"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_baseline_clear"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_CLEAR"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_CLEAR_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pOption9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:onClick="onManageSearchAdvanced"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_baseline_advance"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_ADVANCE"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_ADVANCE_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pOption10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onOpenProxyStatus"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_vpn"
+                    app:tint="@color/c_setting_icon_tint" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_PROXY"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_PROXY_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pOption12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onRateApplication"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_rate"
+                    app:tint="@color/c_setting_icon_tint" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_RATEUS"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_RATEUS_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pOption13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onShareApplication"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_share"
+                    app:tint="@color/c_setting_icon_tint" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SHARE"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SHARE_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pOption14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onPrivacyPolicy"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_policy"
+                    app:tint="@color/c_setting_icon_tint" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_PRIVACY_POLICY"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_PRIVACY_POLICY_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pOption15"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onReportWebsite"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_report"
+                    app:tint="@color/c_setting_icon_tint" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_REPORT_WEBSITE"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_REPORT_WEBSITE_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pOption16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onSitemap"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_sitemap"
+                    app:tint="@color/c_setting_icon_tint" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SITEMAP"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SITEMAP_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:onClick="cicadaClipboard"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="13dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:padding="10dp"
+                    android:src="@xml/ic_baseline_fingerprint"
+                    app:tint="@color/c_setting_icon_tint" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="Cicada | 3301"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

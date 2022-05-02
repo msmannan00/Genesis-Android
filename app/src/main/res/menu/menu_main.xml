@@ -1,62 +1,75 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context="example.javatpoint.com.optionmenu.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="example.javatpoint.com.optionmenu.MainActivity">
 
 
-      <group android:id="@+id/group_3" >
-          <item  android:id="@+id/menu10"
-                  android:title="New Tabs                                    "
-                  app:showAsAction="always"
-                  android:icon="@android:drawable/btn_star"/>
-          <item  android:id="@+id/menu12"
-                  android:title="Close Tab                            "
-                  app:showAsAction="always"/>
-          <item  android:id="@+id/menu11"
-                  android:title="Open Recent Tabs                            "
-                  app:showAsAction="always"
-                  android:icon="@android:drawable/btn_star"/>
-      </group>
-    <item  android:id="@+id/menu13"
-            android:title="Top Menu"
+    <group android:id="@+id/group_3">
+        <item
+            android:id="@+id/menu10"
+            android:title="New Tabs                                    "
             app:showAsAction="always"
-            android:actionLayout="@layout/popup_side_menu"/>
-      <group android:id="@+id/group_0" >
-          <item  android:id="@+id/menu9"
-                  android:title="Location                                    "
-                  app:showAsAction="always"
-                  android:icon="@android:drawable/btn_star"/>
-      </group>
-      <item  android:id="@+id/menu0"
-             android:title="Downloads"
-             app:showAsAction="always"
-             android:icon="@android:drawable/btn_star"/>
-      <item  android:id="@+id/pMenuCopy"
-             android:title="History"
-             app:showAsAction="always"
-             android:icon="@android:drawable/btn_star"/>
-      <item  android:id="@+id/pMenuOpenCurrentTab"
-             android:title="Settings"
-             app:showAsAction="always"
-             android:icon="@android:drawable/btn_star"/>
-      <group android:id="@+id/group_1" >
-          <item  android:id="@+id/pMenuOpenNewTab"
-                 android:title="Bookmark This Page"
-                 app:showAsAction="always"
-                 android:icon="@android:drawable/btn_star"/>
-          <item  android:id="@+id/pMenuDelete"
-                 android:title="Open Bookmarks"
-                 app:showAsAction="ifRoom"
-                 android:icon="@android:drawable/btn_plus"/>
-      </group>
-      <group android:id="@+id/group_2" >
-          <item  android:id="@+id/menu6"
-                 android:title="Report Website"/>
-          <item  android:id="@+id/menu7"
-                 android:title="Rate This App"
-                 app:showAsAction="withText"/>
-          <item  android:id="@+id/menu8"
-                 android:title="Share"
-                 app:showAsAction="withText"/>
-      </group>
+            android:icon="@android:drawable/btn_star" />
+        <item
+            android:id="@+id/menu12"
+            android:title="Close Tab                            "
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/menu11"
+            android:title="Open Recent Tabs                            "
+            app:showAsAction="always"
+            android:icon="@android:drawable/btn_star" />
+    </group>
+    <item
+        android:id="@+id/menu13"
+        android:title="Top Menu"
+        app:showAsAction="always"
+        android:actionLayout="@layout/popup_side_menu" />
+    <group android:id="@+id/group_0">
+        <item
+            android:id="@+id/menu9"
+            android:title="Location                                    "
+            app:showAsAction="always"
+            android:icon="@android:drawable/btn_star" />
+    </group>
+    <item
+        android:id="@+id/menu0"
+        android:title="Downloads"
+        app:showAsAction="always"
+        android:icon="@android:drawable/btn_star" />
+    <item
+        android:id="@+id/pMenuCopy"
+        android:title="History"
+        app:showAsAction="always"
+        android:icon="@android:drawable/btn_star" />
+    <item
+        android:id="@+id/pMenuOpenCurrentTab"
+        android:title="Settings"
+        app:showAsAction="always"
+        android:icon="@android:drawable/btn_star" />
+    <group android:id="@+id/group_1">
+        <item
+            android:id="@+id/pMenuOpenNewTab"
+            android:title="Bookmark This Page"
+            app:showAsAction="always"
+            android:icon="@android:drawable/btn_star" />
+        <item
+            android:id="@+id/pMenuDelete"
+            android:title="Open Bookmarks"
+            app:showAsAction="ifRoom"
+            android:icon="@android:drawable/btn_plus" />
+    </group>
+    <group android:id="@+id/group_2">
+        <item
+            android:id="@+id/menu6"
+            android:title="Report Website" />
+        <item
+            android:id="@+id/menu7"
+            android:title="Rate This App"
+            app:showAsAction="withText" />
+        <item
+            android:id="@+id/menu8"
+            android:title="Share"
+            app:showAsAction="withText" />
+    </group>
 </menu>

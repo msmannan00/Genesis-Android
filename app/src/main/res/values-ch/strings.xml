@@ -1,538 +1,510 @@
 <resources>
 
-	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Orion Browser</string>
-	<string name="GENERAL_SEARCH_HINT" translatable="true">prohledat něco nebo napsat webový odkaz</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">najít na stránce</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">vyhledávač</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">operace! něco se pokazilo</string>
-	<string name="GENERAL_TODO" translatable="true">všechno</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
-	<string name="GENERAL_LOADING" translatable="true">digitální svoboda</string>
-	<string name="GENERAL_RELOAD" translatable="true">Znovu načíst</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">čelíte jednomu z následujících problémů. webová stránka nebo web nemusí fungovat. vaše připojení k internetu může být špatné. možná používáte proxy. web může být blokován bránou firewall</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Izrael znovu udeří</string>
-
-	<!-- Shortcuts -->
-	<string name="shortcut_erase_short_label" translatable="false">Vymazat mezipaměť prohlížeče</string>
-	<string name="shortcut_erase_long_label" translatable="false">Vymazat procházený web</string>
-	<string name="shortcut_erase_and_open_short_label" translatable="false">Vymažte svá data a otevřete prohlížeč</string>
-	<string name="shortcut_erase_and_open_long_label" translatable="false">Vymazat mezipaměť prohlížeče</string>
-	<string name="shortcut_open" translatable="false">Restartujte prohlížeč Orion</string>
-	<string name="shortcut_open_long" translatable="false">Restartujte Prohlížeč</string>
-
-	<!-- Bookmark Setting -->
-	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Upravit Záložku</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Název Záložky</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Zde se zobrazí název adresy URL označené záložkou</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Zadejte název záložky…</string>
-
-	<!-- Alerts General -->
-	<string name="ALERT_DISMISS" translatable="true">zavrhnout</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"Někdy potřebujete Bridge, abyste se dostali do Tor network"</string>
-	<string name="LANDING_MORE" translatable="true">"ŘEKNĚTE VÍCE"</string>
-	<string name="LANDING_HELLO" translatable="true">"Ahoj"</string>
-	<string name="LANDING_WELCOME" translatable="true">„Vítejte na Orion v mobilu.“</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">„Bezpečně a bezpečně procházejte internet.“</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">„Žádné sledování. Žádná cenzura.“</string>
-
-	<!-- Alert Secure -->
-	<string name="ALERT_SECURE_INFO" translatable="true">Připojení je zabezpečené</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Vaše informace (například heslo nebo čísla kreditních karet) jsou při odeslání na tento web zabezpečené</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Nastavení Zabezpečení</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Chraňte svoji identitu a použijte níže uvedené možnosti</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Nesledovat</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Řekneme webům, aby vás nesledovaly</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Ochrana Proti Sledování</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Povolit námi poskytovanou ochranu sledování</string>
-	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Osvědčení</string>
-
-	<!-- Alert Certificate -->
-	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Informace O Certifikátu</string>
-
-	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">protokoly proxy</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Informace o systémovém protokolu</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">pokud se při spuštění Orion potýkáte s problémem s připojením, zkopírujte prosím následující kód a vyhledejte problém online nebo nám jej pošlete, abychom se vám mohli pokusit pomoci</string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
-
-	<!-- Orbot Settings -->
-	<string name="ORBOT_SETTING_HEADER" translatable="true">přizpůsobit proxy</string>
-	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">připojujeme vás k síti Tor provozované tisíci dobrovolníků z celého světa! Mohou vám tyto možnosti pomoci</string>
-	<string name="ORBOT_SETTING_TITLE" translatable="true">internet je zde cenzurován (obejít firewall)</string>
-	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">obejít firewall</string>
-	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges způsobí, že internet běží velmi pomalu. používejte je, pouze pokud je ve vaší zemi cenzurován internet nebo je blokována síť Tor</string>
-	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">zabezpečení přizpůsobit</string>
-
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">Nastavení Zabezpečení</string>
-	<string name="BRIDGE_SETTING" translatable="true">Změnit Nastavení „BRIDGE“</string>
-	<string name="BRIDGE_AUTO" translatable="true">Vytvořit Automaticky</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">Automaticky konfigurovat nastavení „BRIDGE“</string>
-	<string name="BRIDGE_MANUAL" translatable="true">Poskytněte „BRIDGE“, vím</string>
-	<string name="BRIDGE_PORT_HINT" translatable="false">Vložit vlastní „BRIDGE“</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">„BRIDGE“ jsou neuvedená relé Tor, která ztěžují blokování připojení do sítě Tor. Kvůli tomu, jak se některé země pokoušejí zablokovat Tor, fungují určité „BRIDGE“ v některých zemích, ale v jiných ne</string>
-	<string name="BRIDGE_TITLE" translatable="true">Vyberte výchozí „BRIDGE“</string>
-	<string name="BRIDGE_REQUEST" translatable="true">Žádost</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (doporučeno)</string>
-	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (Čína)</string>
-
-	<!-- Alert Advance Log -->
-	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">změnit způsob, jakým se objeví systémový protokol</string>
-	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">zobrazit protokol pomocí moderního zobrazení seznamu</string>
-	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle mezi klasickým a moderním zobrazením seznamu</string>
-
-	<!-- Generic Toast Alerts -->
-	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Záložka odstraněna</string>
-	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Záložka aktualizována</string>
-	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Data byla úspěšně vymazána</string>
-	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL zkopírována do schránky</string>
-	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Nebyla nalezena žádná aplikace</string>
-	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Po změnách je nutné restartovat</string>
-	<string name="TOAST_ALERT_RESTART" translatable="true">Restartovat</string>
-	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Karta Je Zavřená</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Otevřena nová karta</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proxy server Orion se připojuje ...</string>
-	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Paměť je plná ➔ Karta Vymazání</string>
-	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Vyskakovací okno blokováno</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Otevřít Chybové Protokoly</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Přepnout</string>
-	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Zpět</string>
-	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Vytvořena nová identita</string>
-	<string name="TOAST_ALERT_SETTING" translatable="true">otevřete nastavení</string>
-
-	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Vyžádat Nový Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Níže vyberte E-mail a požádejte o adresu Bridge. Jakmile adresu zadáte, zkopírujte ji a vložte do výše uvedeného pole a spusťte aplikaci.</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">Pošta</string>
-
-	<!-- Alert Rate Failure -->
-	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">OMLOUVÁME SE SLYŠIT TO</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Pokud máte při používání této aplikace potíže, kontaktujte nás prosím e -mailem. Pokusíme se váš problém vyřešit co nejdříve</string>
-
-	<!-- Alert Panic -->
-	<string name="ALERT_PANIC_HEADER" translatable="true">ODSTRAŇOVÁNÍ PROBLÉMŮ</string>
-	<string name="ALERT_PANIC_INFO" translatable="true">Pokud aplikace nefunguje, resetujte aplikaci. Zkusíme to překonfigurovat, aby to mohlo fungovat znovu.</string>
-	<string name="ALERT_PANIC_BT_1" translatable="true">Resetovat Odmítnout</string>
-	<string name="ALERT_PANIC_BT_2" translatable="true">Čekání na stažení ...</string>
-
-	<!-- Alert Download Single -->
-	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Stáhnout</string>
-	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Ohodnoťte nás</string>
-
-	<!-- Alert Rateus -->
-	<string name="ALERT_RATEUS" translatable="true">Řekněte Ostatním, Co Si O Této Aplikaci Myslíte</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">Sazba</string>
-	<string name="ALERT_RATE" translatable="true">Hotovo</string>
-
-	<!-- Alert BRIDGE -->
-	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Řetězec Bridge (obfs4 212.21.66.66:20621 ...)</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Typ Bridge (obfs4, pokorný, ...)</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Web se záložkou</string>
-
-	<!-- Alert Create Bookmark -->
-	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Přidat Tuto Stránku Do Záložek</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">název záložky ...</string>
-	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">Hotovo</string>
-	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Oznámení URL</string>
-
-	<!-- Alert Long Download -->
-	<string name="ALERT_LONG_URL" translatable="true">Otevřít Na Nové Kartě</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Otevřít Na Aktuální Záložce</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Kopírovat Do Schránky</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Stáhnout soubor</string>
-	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Otevřít URL Na Nové Kartě</string>
-
-	<!-- Alert Full Download -->
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Otevřít URL na aktuální záložce</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Zkopírovat URL do schránky</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Otevřít obrázek na nové kartě</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Otevřít aktuální záložku obrázku</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Zkopírovat obrázek do schránky</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Stáhnout soubor obrázku</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Poskytněte číslo Bridge, které znám</string>
-
-	<!-- Alert Bridge Custom -->
-	<!-- Alert Bridge Custom -->
-	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">uveďte Bridge, které znáte</string>
-	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">zadejte bridge informací z důvěryhodného zdroje</string>
-	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">POSKYTNOUT A Bridge</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
-	<string name="SETTING_BASIC_SETTING" translatable="true">Systémové nastavení</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">nastav si Orion jako výchozí prohlížeč</string>
-	<string name="SETTING_HEADER" translatable="true">Systémové nastavení</string>
-	<string name="SETTING_SEARCH_ENGINE" translatable="true">vyhledávač</string>
-	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_CLEAR_HISTORY" translatable="true">odstranit procházené webové odkazy</string>
-	<string name="SETTING_FONT_TITLE" translatable="true">přizpůsobit písmo</string>
-	<string name="SETTING_ADJUST_FONT" translatable="true">Konstomizace systémového písma</string>
-	<string name="SETTING_MANUAL_FONT" translatable="true">automaticky změnit písmo</string>
-	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Nastavení cookies</string>
-	<string name="SETTING_COOKIE" translatable="true">cookies</string>
-	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">Systémové nastavení . Oznámení</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">oznámení</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">změnit předvolby oznámení</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">stav sítě a oznámení</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">místní oznámení</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">přizpůsobit oznámení softwaru</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">systémová oznámení</string>
-	<string name="SETTING_SEARCH" translatable="true">spravovat vyhledávač</string>
-	<string name="SETTING_SEARCH_INFO" translatable="true">přidat, nastavit výchozí. ukázat návrhy</string>
-	<string name="SETTING_NOTIFICATION" translatable="true">spravovat oznámení</string>
-	<string name="SETTING_NOTIFICATION_INFO" translatable="true">nové funkce, stav sítě</string>
-	<string name="SETTING_SEARCH_HEADER" translatable="true">Přizpůsobte software. Vyhledávač</string>
-	<string name="SETTING_SEARCH_HEADER_1" translatable="true">podporované vyhledávače</string>
-	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">zvolte Výchozí vyhledávač</string>
-	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Přizpůsobte software. Vyhledávač</string>
-	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">změnit vzhled vyhledávání na webu</string>
-	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
-	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
-	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
-	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
-	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
-	<string name="SETTING_SEARCH_HISTORY" translatable="true">zobrazit procházené webové odkazy</string>
-	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">zobrazit návrhy během vyhledávání</string>
-	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">Při zadávání do vyhledávacího pole se zobrazí návrhy z procházených webových odkazů</string>
-	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">při psaní do vyhledávacího pole se zobrazí soustředěné návrhy</string>
-	<string name="SETTING_ACCESSIBILITY" translatable="true">přístupnost</string>
-	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">velikost textu, přiblížení, zadávání pomocí hlasu</string>
-	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">přizpůsobit | přístupnost</string>
-	<string name="SETTING_CLEAR" translatable="true">vymazat soukromá data</string>
-	<string name="SETTING_CLEAR_INFO" translatable="true">karty, procházené webové odkazy, záložka, soubory cookie, mezipaměť</string>
-	<string name="SETTING_CLEAR_HEADER" translatable="true">Změňte nastavení systému. Vymažte systémová data</string>
-	<string name="SETTING_CLEAR_BUTTON" translatable="true">vyčistit data</string>
-	<string name="SETTING_CLEAR_OPTION_1" translatable="true">smazat všechny karty</string>
-	<string name="SETTING_CLEAR_OPTION_2" translatable="true">smazat procházené webové odkazy</string>
-	<string name="SETTING_CLEAR_OPTION_3" translatable="true">mazat záložky</string>
-	<string name="SETTING_CLEAR_OPTION_4" translatable="true">vymazat mezipaměť</string>
-	<string name="SETTING_CLEAR_OPTION_5" translatable="true">smazat návrhy</string>
-	<string name="SETTING_CLEAR_OPTION_6" translatable="true">smazat data</string>
-	<string name="SETTING_CLEAR_OPTION_7" translatable="true">smazat relaci</string>
-	<string name="SETTING_CLEAR_OPTION_8" translatable="true">mazat cookies</string>
-	<string name="SETTING_CLEAR_OPTION_9" translatable="true">odstranit přizpůsobit</string>
-	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">změna velikosti písma</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">měřítko webového obsahu podle velikosti písma systému</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">zapnout zoom</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">zapnout a vynutit přiblížení pro všechny webové stránky</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">vstup pomocí hlasu</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">povolit hlasový diktát v panelu adres URL</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">vyberte vlastní změnu velikosti písma</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">táhněte jezdec, dokud to nebudete moci pohodlně přečíst. po dvojitém klepnutí na odstavec by text měl vypadat alespoň takto velký</string>
-	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
-	<string name="SETTING_INTERACTION" translatable="true">interakce</string>
-	<string name="SETTING_INTERACTION_INFO" translatable="true">změnit způsob interakce s obsahem webových stránek</string>
-	<string name="SETTING_PRIVACY" translatable="true">Uživatel zapnut</string>
-	<string name="SETTING_PRIVACY_INFO" translatable="true">uživatelský průzkum, přihlášení, výběr dat</string>
-	<string name="SETTING_TRACKING" translatable="true">Ochrana sledování uživatele</string>
-	<string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackery, otisky prstů</string>
-	<string name="SETTING_PRIVACY_HEADER" translatable="true">Systémové nastavení . Soukromí</string>
-	<string name="SETTING_TRACKING_HEADER" translatable="true">Systémové nastavení . ochrana dohledu nad uživatelem</string>
-	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">chránit vaši online identitu</string>
-	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">udržujte svoji identitu v soukromí. můžeme vás chránit před několika sledovači, kteří vás sledují online. toto nastavení systému lze také použít k blokování reklamy</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">zachraňte se před ochranou Survelance uživatele</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion řekne webům, aby mě nesledovaly</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">řekni webu, aby mě nesledoval</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Ochrana sledování uživatele</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">povolit uživateli Survelance Protection poskytovanou Orion</string>
-	<string name="SETTING_PRIVACY_COOKIES" translatable="true">soubory cookie webových stránek</string>
-	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">vyberte předvolby cookies webových stránek podle svých bezpečnostních potřeb</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">vymazat soukromá data na výstupu</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">vymazat data automaticky po zavření softwaru</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">soukromé procházení</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">udržujte svoji identitu v bezpečí a použijte níže uvedené možnosti</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">povoleno</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">povoleno, s výjimkou souborů cookie pro sledování webových stránek</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">povoleno, s výjimkou třetích stran</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">zakázán</string>
-
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">deaktivovat ochranu</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">povolit ochranu Survelance identity. to může způsobit odcizení vaší online identity</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">výchozí (doporučeno)</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">blokovat online reklamu a uživatele sociálních sítí Survelance. stránky se načtou jako výchozí</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">přísná politika</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">zastavit všechny známé sledovače, stránky se načtou rychleji, ale některé funkce nemusí fungovat</string>
-
-	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">zakázat skriptování Java pro různé útoky skriptů</string>
-	<string name="SETTING_ADVANCE_HEADER" translatable="true">Systémové nastavení . komplexní nastavení systému</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">obnovit karty</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">po ukončení prohlížeče se neobnovujte</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">téma panelu nástrojů</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">nastavit téma panelu nástrojů, jak je definováno na webu</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">zobrazit obrázky</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">vždy načíst obrázky webových stránek</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">zobrazit webová písma</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">stáhnout vzdálená písma při načítání stránky</string>
-	<string name="SETTING_ADVANCE_MEDIA" translatable="true">povolit automatické přehrávání</string>
-	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">povolit automatické spouštění médií</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">spořič dat</string>
-	<string name="SETTING_ADVANCE_TAB" translatable="true">záložka</string>
-	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">změnit způsob chování karty po restartování softwaru</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">média</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">změnit výchozí spořič dat přizpůsobit</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">změnit výchozí nastavení médií</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">vždy zobrazit obrázky</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">zobrazit obrázky pouze při použití wifi</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokovat všechny obrázky</string>
-	<string name="SETTING_ADVANCE" translatable="true">Pokročilé nastavení systému</string>
-	<string name="SETTING_ADVANCE_INFO" translatable="true">obnovit karty, spořič dat, vývojářské nástroje</string>
-	<string name="SETTING_PROXY" translatable="true">onion podmínka proxy</string>
-	<string name="SETTING_PROXY_INFO" translatable="true">zkontrolujte stav sítě onion</string>
-	<string name="SETTING_REPORT" translatable="true">nahlásit web</string>
-	<string name="SETTING_REPORT_INFO" translatable="true">nahlásit nevhodný web</string>
-	<string name="SETTING_RATEUS" translatable="true">Ohodnoťte tuto aplikaci</string>
-	<string name="SETTING_RATEUS_INFO" translatable="true">hodnotit a komentovat obchod Playstore</string>
-	<string name="SETTING_SHARE" translatable="true">sdílej tuto aplikaci</string>
-	<string name="SETTING_SHARE_INFO" translatable="true">sdílejte tento software se svými přáteli</string>
-	<string name="SETTING_GENERAL_HEADER" translatable="true">Systémové nastavení . obecně přizpůsobit</string>
-	<string name="SETTING_GENERAL" translatable="true">Výchozí nastavení systému</string>
-	<string name="SETTING_GENERAL_INFO" translatable="true">domovská stránka, jazyk</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">procházení na celou obrazovku</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">při procházení stránky skryjte panel nástrojů prohlížeče</string>
-	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">Jazyk</string>
-	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">změňte jazyk svého prohlížeče</string>
-	<string name="SETTING_GENERAL_THEME" translatable="true">softwarové téma</string>
-	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">vyberte světlé a tmavé téma</string>
-	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">téma jasné</string>
-	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">téma Dark</string>
-	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">změnit procházení a jazyk na celou obrazovku</string>
-	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">výchozí systém</string>
-	<string name="SETTING_GENERAL_HOME" translatable="true">domovská stránka</string>
-	<string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">nová karta</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">otevřít domovskou stránku na nové kartě</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">odebrat všechny karty</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">odstranit procházené webové odkazy</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">odebrat záložky</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">odstranit mezipaměť procházení</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">odebrat návrhy</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">odstranit data webu</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">odebrat data relace</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">odebrat cookies procházení webu</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">odebrat přizpůsobení prohlížeče</string>
-
-
-	<string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
-	<string name="ALERT_CREATE_BOOKMARK" translatable="true">web záložek</string>
-	<string name="ALERT_CLEAR_HISTORY" translatable="true">odstranit procházené webové odkazy a data</string>
-	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">vymazat záložku a Data</string>
-	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">vymazáním údajů odstraníte procházené webové odkazy, soubory cookie a další údaje o procházení</string>
-	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">smazání dat vymaže záložky webových stránek</string>
-	<string name="ALERT_CLEAR" translatable="true">zrušení</string>
-	<string name="ALERT_SECURE" translatable="false">https://</string>
-	<string name="ALERT_REPORT" translatable="true">zpráva</string>
-	<string name="ALERT_REPORT_URL" translatable="true">nahlásit web</string>
-	<string name="ALERT_REPORT_URL_INFO" translatable="true">pokud si myslíte, že je tato adresa URL nezákonná nebo znepokojující, nahlaste nám ji, abychom mohli podniknout právní kroky</string>
-	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">byl úspěšně nahlášen</string>
-	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">adresa URL byla úspěšně nahlášena. pokud bude něco nalezeno, budou podniknuty právní kroky</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">jazyk není podporován</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">jazyk systému není tímto softwarem podporován. pracujeme na tom, aby to bylo brzy zahrnuto</string>
-	<string name="ALERT_ORBOT_INIT" translatable="true">inicializace Orbot</string>
-	<string name="ALERT_NOT_SUPPORTED" translatable="true">akce není podporována</string>
-	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">nebyl nalezen žádný software pro zpracování následujícího příkazu</string>
-	<string name="ALERT_WELCOME_MESSAGE" translatable="true">vítejte | skrytý web Gateway</string>
-	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">tento software vám poskytuje platformu pro vyhledávání a otevírání skrytých webových adres URL. zde je několik návrhů \n</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">skrytý webový online trh</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">unikly dokumenty a knihy</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">temné webové zprávy a články</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">tajný software a hackerské nástroje</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">už se nezobrazovat</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">finance a peníze</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">sociální společnosti</string>
-	<string name="ALERT_LOCAL_UPGRADE" translatable="true">manuál</string>
-	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">obchod</string>
-	<string name="ALERT_LONG_FILE" translatable="true">oznámení souboru</string>
-	<string name="ALERT_DOWNLOAD" translatable="true">oznámení o stažení</string>
-	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">oznámení o stažení</string>
-	<string name="ALERT_LONG_URL_TITLE" translatable="true">upozornění na webový odkaz</string>
-	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
-	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">nebyl nalezen žádný software pro zpracování e-mailů</string>
-	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">stáhnout soubor |</string>
-	<string name="ALERT_DATA_CLEARED" translatable="true">data vymazána | je nutný restart</string>
-
-
-
-
-
-
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot protokolů</string>
-	<string name="HOME_MENU__NEW_TABS" translatable="true">nové karty</string>
-	<string name="HOME_MENU_CLOSE_TABS" translatable="true">zavřít kartu</string>
-	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">otevřít poslední karty</string>
-	<string name="HOME_MENU_LANGUAGE" translatable="true">Jazyk</string>
-	<string name="HOME_MENU_DOWNLOAD" translatable="true">stahování</string>
-	<string name="HOME_MENU_HISTORY" translatable="true">procházené webové odkazy</string>
-	<string name="HOME_MENU_SETTING" translatable="true">Systémové nastavení</string>
-	<string name="HOME_MENU_DESKTOP" translatable="true">web pro počítače</string>
-	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Spojení</string>
-	<string name="HOME_MENU_BOOKMARK" translatable="true">uložit tuto stránku</string>
-	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">záložky</string>
-	<string name="HOME_MENU_REPORT" translatable="true">nahlásit web</string>
-	<string name="HOME_MENU_RATE" translatable="true">Ohodnoťte tuto aplikaci</string>
-	<string name="HOME_MENU_FIND" translatable="true">najít na stránce</string>
-	<string name="HOME_MENU_QUIT" translatable="true">výstup</string>
-	<string name="HOME_MENU_SHARE" translatable="true">podíl</string>
-
-
-	<string name="TAB_MENU_OPEN_TAB" translatable="true">nové karty</string>
-	<string name="TAB_MENU_CLOSE_TAB" translatable="true">zavřete všechny karty</string>
-	<string name="TAB_MENU_SETTINGS" translatable="true">Systémové nastavení</string>
-	<string name="TAB_LIST_SELECT" translatable="true">vyberte karty</string>
-
-
-	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">otevřené karty</string>
-	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">kopírovat</string>
-	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">podíl</string>
-	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">jasný výběr</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">otevřít na aktuální kartě</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">otevřít na nové kartě</string>
-	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">vymazat</string>
-
-
-	<string name="HISTORY_TITLE" translatable="true">procházené webové odkazy</string>
-	<string name="HISTORY_CLEAR" translatable="true">odstranit toto</string>
-	<string name="HISTORY_SEARCH_HINT" translatable="true">Vyhledávání ...</string>
-
-
-	<string name="BOOKMARK_TITLE" translatable="true">záložka do knihy</string>
-	<string name="BOOKMARK_CLEAR" translatable="true">odstranit toto</string>
-	<string name="BOOKMARK_SEARCH_HINT" translatable="true">Vyhledávání ...</string>
-
-
-	<string name="HELP_RETRY" translatable="true">opakovat</string>
-	<string name="HELP_RETRY_INFO" translatable="true">operace! chyba připojení k síti. síť není připojena</string>
-	<string name="HELP_TITLE" translatable="true">pomoc a podpora</string>
-
-
-	<string name="LANGUAGE_TITLE" translatable="true">Jazyk</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">změnit jazyk</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">běžíme pouze v následujících jazycích. brzy přidáme další</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">anglicky Spojené státy)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">německy (německo)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">italština (Itálie)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">portugalština (Brazílie)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">ruština (Rusko)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">ukrajinský (ukrajina)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">čínština zjednodušená (pevninská Čína)</string>
-
-
-	<string name="ORBOT_SETTING_WARNING" translatable="true">Warning️ varování</string>
-	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">přizpůsobit Bridges</string>
-	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">povolit Bridges</string>
-	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">povolit VPN serivces</string>
-	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">povolit Bridge Gateway</string>
-	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">povolit Gateway</string>
-
-
-	<string name="PROXY_STATUS_HEADER" translatable="true">podmínka plné moci</string>
-	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">aktuální stav 11122 proxy</string>
-	<string name="PROXY_SUB_HEADER1" translatable="true">Orbot podmínka proxy</string>
-	<string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
-	<string name="PROXY_VPN_STATUS" translatable="true">VPN podmínka připojení</string>
-	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge podmínka proxy</string>
-	<string name="PROXY_SUB_HEADER3" translatable="true">informace | změnit nastavení systému</string>
-	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">proxy můžete změnit restartováním softwaru a přechodem na správce proxy. lze jej otevřít kliknutím na ikonu ozubeného kola dole</string>
-
-
-
-
-	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
-	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">otevřete to</string>
-
-
-	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_CONNECT" translatable="false">connect</string>
-	<string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
-	<string name="HOME_TAB_EMPTY" translatable="true">zde se zobrazí otevřené karty</string>
-
-
-	<string name="ERROR_M1" translatable="true">tento web není dostupný</string>
-	<string name="ERROR_M2" translatable="true">při připojování k webu došlo k chybě</string>
-	<string name="ERROR_M3" translatable="true">stránku, kterou se pokoušíte zobrazit, nelze zobrazit, protože nebylo možné ověřit pravost přijatých dat</string>
-	<string name="ERROR_M4" translatable="true">stránka z nějakého důvodu momentálně nefunguje</string>
-	<string name="ERROR_M5" translatable="true">obraťte se na vlastníky webových stránek a informujte je o tomto problému.</string>
-	<string name="ERROR_M6" translatable="true">Znovu načíst</string>
-
-
-	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
-	<string name="invalid_package_signature" translatable="true">Neplatný podpis balíčku</string>
-	<string name="autofill_sign_in_prompt" translatable="true">kliknutím se přihlaste.</string>
-	<string name="autofill_manual_prompt" translatable="true">kliknutím ručně vyberete data.</string>
-	<string name="security_exception" translatable="true">Výjimka zabezpečení webové domény.</string>
-	<string name="dal_exception" translatable="true">Selhání ověření DAL.</string>
-
-	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Nedávné karty</string>
-	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nová identita</string>
-	<string name="SETTING_PRIVACY_POLICY" translatable="true">Zásady ochrany osobních údajů</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Zásady ochrany osobních údajů Orion Browser</string>
-	<string name="SETTING_REPORT_WEBSITE" translatable="true">Nahlásit web</string>
-	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Nahlásit nelegální web</string>
-	<string name="SETTING_SITEMAP" translatable="true">zveřejněte svůj web</string>
-	<string name="SETTING_SITEMAP_INFO" translatable="true">Přidejte svůj web do našeho vyhledávače</string>
-
-	<item name="LaguageID" type="id"/>
-	<item name="LaguageRegion" type="id"/>
-
-	<string-array name="ARRAY_FONTS" translatable="true">
-		<item>55 procent</item>
-		<item>70 procent</item>
-		<item>85 procent</item>
-		<item>100 procent</item>
-		<item>115 procent</item>
-		<item>130 procent</item>
-		<item>145 procent</item>
-	</string-array>
-
-	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
-		<item>Povoleno</item>
-		<item>Zakázáno</item>
-	</string-array>
-
-	<string-array name="ARRAY_NOTIFICATION" translatable="true">
-		<item>Povolit vše</item>
-		<item>Vypnout všechno</item>
-		<item>Žádná šířka pásma</item>
-	</string-array>
-
-	<string-array name="ARRAY_COOKIES" translatable="true">
-		<item>Povolit vše</item>
-		<item>Povolit důvěryhodné</item>
-		<item>Povolit Žádné</item>
-		<item>Povolit navštívené</item>
-		<item>Povolit Non Tracker</item>
-	</string-array>
-
-	<!-- Generated by Automatic String Resource Translation -->
-	<!--          https://asrt.gluege.boerde.de             -->
+    <!-- Application Strings -->
+    <string name="app_name" translatable="false">Orion Browser</string>
+    <string name="GENERAL_SEARCH_HINT" translatable="true">prohledat něco nebo napsat webový odkaz</string>
+    <string name="GENERAL_FIND_HINT" translatable="true">najít na stránce</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="true">vyhledávač</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">operace! něco se pokazilo</string>
+    <string name="GENERAL_TODO" translatable="true">všechno</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
+    <string name="GENERAL_LOADING" translatable="true">digitální svoboda</string>
+    <string name="GENERAL_RELOAD" translatable="true">Znovu načíst</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">čelíte jednomu z následujících problémů. webová stránka nebo web nemusí fungovat. vaše připojení k internetu může být špatné. možná používáte proxy. web může být blokován bránou firewall</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Izrael znovu udeří</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label" translatable="false">Vymazat mezipaměť prohlížeče</string>
+    <string name="shortcut_erase_long_label" translatable="false">Vymazat procházený web</string>
+    <string name="shortcut_erase_and_open_short_label" translatable="false">Vymažte svá data a otevřete prohlížeč</string>
+    <string name="shortcut_erase_and_open_long_label" translatable="false">Vymazat mezipaměť prohlížeče</string>
+    <string name="shortcut_open" translatable="false">Restartujte prohlížeč Orion</string>
+    <string name="shortcut_open_long" translatable="false">Restartujte Prohlížeč</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Upravit Záložku</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Název Záložky</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Zde se zobrazí název adresy URL označené záložkou</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Zadejte název záložky…</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">zavrhnout</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">"Někdy potřebujete Bridge, abyste se dostali do Tor network"</string>
+    <string name="LANDING_MORE" translatable="true">"ŘEKNĚTE VÍCE"</string>
+    <string name="LANDING_HELLO" translatable="true">"Ahoj"</string>
+    <string name="LANDING_WELCOME" translatable="true">„Vítejte na Orion v mobilu.“</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">„Bezpečně a bezpečně procházejte internet.“</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">„Žádné sledování. Žádná cenzura.“</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE_INFO" translatable="true">Připojení je zabezpečené</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Vaše informace (například heslo nebo čísla kreditních karet) jsou při odeslání na tento web zabezpečené</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Nastavení Zabezpečení</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Chraňte svoji identitu a použijte níže uvedené možnosti</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Nesledovat</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Řekneme webům, aby vás nesledovaly</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Ochrana Proti Sledování</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Povolit námi poskytovanou ochranu sledování</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Osvědčení</string>
+
+    <!-- Alert Certificate -->
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">Informace O Certifikátu</string>
+
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="true">protokoly proxy</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">Informace o systémovém protokolu</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">pokud se při spuštění Orion potýkáte s problémem s připojením, zkopírujte prosím následující kód a vyhledejte problém online nebo nám jej pošlete, abychom se vám mohli pokusit pomoci</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">přizpůsobit proxy</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">připojujeme vás k síti Tor provozované tisíci dobrovolníků z celého světa! Mohou vám tyto možnosti pomoci</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">internet je zde cenzurován (obejít firewall)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">obejít firewall</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges způsobí, že internet běží velmi pomalu. používejte je, pouze pokud je ve vaší zemi cenzurován internet nebo je blokována síť Tor</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">zabezpečení přizpůsobit</string>
+
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">Nastavení Zabezpečení</string>
+    <string name="BRIDGE_SETTING" translatable="true">Změnit Nastavení „BRIDGE“</string>
+    <string name="BRIDGE_AUTO" translatable="true">Vytvořit Automaticky</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">Automaticky konfigurovat nastavení „BRIDGE“</string>
+    <string name="BRIDGE_MANUAL" translatable="true">Poskytněte „BRIDGE“, vím</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Vložit vlastní „BRIDGE“</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">„BRIDGE“ jsou neuvedená relé Tor, která ztěžují blokování připojení do sítě Tor. Kvůli tomu, jak se některé země pokoušejí zablokovat Tor, fungují určité „BRIDGE“ v některých zemích, ale v jiných ne</string>
+    <string name="BRIDGE_TITLE" translatable="true">Vyberte výchozí „BRIDGE“</string>
+    <string name="BRIDGE_REQUEST" translatable="true">Žádost</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (doporučeno)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (Čína)</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">změnit způsob, jakým se objeví systémový protokol</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">zobrazit protokol pomocí moderního zobrazení seznamu</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle mezi klasickým a moderním zobrazením seznamu</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Záložka odstraněna</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Záložka aktualizována</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Data byla úspěšně vymazána</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL zkopírována do schránky</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Nebyla nalezena žádná aplikace</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">Po změnách je nutné restartovat</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">Restartovat</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Karta Je Zavřená</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Otevřena nová karta</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proxy server Orion se připojuje ...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Paměť je plná ➔ Karta Vymazání</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Vyskakovací okno blokováno</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Otevřít Chybové Protokoly</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Přepnout</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Zpět</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Vytvořena nová identita</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">otevřete nastavení</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Vyžádat Nový Bridge</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Níže vyberte E-mail a požádejte o adresu Bridge. Jakmile adresu zadáte, zkopírujte ji a vložte do výše uvedeného pole a spusťte aplikaci.</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">Pošta</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">OMLOUVÁME SE SLYŠIT TO</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Pokud máte při používání této aplikace potíže, kontaktujte nás prosím e -mailem. Pokusíme se váš problém vyřešit co nejdříve</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">ODSTRAŇOVÁNÍ PROBLÉMŮ</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Pokud aplikace nefunguje, resetujte aplikaci. Zkusíme to překonfigurovat, aby to mohlo fungovat znovu.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Resetovat Odmítnout</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Čekání na stažení ...</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Stáhnout</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Ohodnoťte nás</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">Řekněte Ostatním, Co Si O Této Aplikaci Myslíte</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">Sazba</string>
+    <string name="ALERT_RATE" translatable="true">Hotovo</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Řetězec Bridge (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Typ Bridge (obfs4, pokorný, ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Web se záložkou</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Přidat Tuto Stránku Do Záložek</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">název záložky ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">Hotovo</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Oznámení URL</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">Otevřít Na Nové Kartě</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Otevřít Na Aktuální Záložce</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Kopírovat Do Schránky</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Stáhnout soubor</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Otevřít URL Na Nové Kartě</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Otevřít URL na aktuální záložce</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Zkopírovat URL do schránky</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Otevřít obrázek na nové kartě</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Otevřít aktuální záložku obrázku</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Zkopírovat obrázek do schránky</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Stáhnout soubor obrázku</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Poskytněte číslo Bridge, které znám</string>
+
+    <!-- Alert Bridge Custom -->
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">uveďte Bridge, které znáte</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">zadejte bridge informací z důvěryhodného zdroje</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">POSKYTNOUT A Bridge</string>
+
+
+    <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+    <string name="SETTING_BASIC_SETTING" translatable="true">Systémové nastavení</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">nastav si Orion jako výchozí prohlížeč</string>
+    <string name="SETTING_HEADER" translatable="true">Systémové nastavení</string>
+    <string name="SETTING_SEARCH_ENGINE" translatable="true">vyhledávač</string>
+    <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_CLEAR_HISTORY" translatable="true">odstranit procházené webové odkazy</string>
+    <string name="SETTING_FONT_TITLE" translatable="true">přizpůsobit písmo</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">Konstomizace systémového písma</string>
+    <string name="SETTING_MANUAL_FONT" translatable="true">automaticky změnit písmo</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Nastavení cookies</string>
+    <string name="SETTING_COOKIE" translatable="true">cookies</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">Systémové nastavení . Oznámení</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">oznámení</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">změnit předvolby oznámení</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">stav sítě a oznámení</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">místní oznámení</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">přizpůsobit oznámení softwaru</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">systémová oznámení</string>
+    <string name="SETTING_SEARCH" translatable="true">spravovat vyhledávač</string>
+    <string name="SETTING_SEARCH_INFO" translatable="true">přidat, nastavit výchozí. ukázat návrhy</string>
+    <string name="SETTING_NOTIFICATION" translatable="true">spravovat oznámení</string>
+    <string name="SETTING_NOTIFICATION_INFO" translatable="true">nové funkce, stav sítě</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">Přizpůsobte software. Vyhledávač</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="true">podporované vyhledávače</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">zvolte Výchozí vyhledávač</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">Přizpůsobte software. Vyhledávač</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">změnit vzhled vyhledávání na webu</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+    <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="true">zobrazit procházené webové odkazy</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">zobrazit návrhy během vyhledávání</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">Při zadávání do vyhledávacího pole se zobrazí návrhy z procházených webových odkazů</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">při psaní do vyhledávacího pole se zobrazí soustředěné návrhy</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="true">přístupnost</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">velikost textu, přiblížení, zadávání pomocí hlasu</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">přizpůsobit | přístupnost</string>
+    <string name="SETTING_CLEAR" translatable="true">vymazat soukromá data</string>
+    <string name="SETTING_CLEAR_INFO" translatable="true">karty, procházené webové odkazy, záložka, soubory cookie, mezipaměť</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">Změňte nastavení systému. Vymažte systémová data</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="true">vyčistit data</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">smazat všechny karty</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">smazat procházené webové odkazy</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">mazat záložky</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">vymazat mezipaměť</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">smazat návrhy</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">smazat data</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">smazat relaci</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">mazat cookies</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">odstranit přizpůsobit</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">změna velikosti písma</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">měřítko webového obsahu podle velikosti písma systému</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">zapnout zoom</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">zapnout a vynutit přiblížení pro všechny webové stránky</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">vstup pomocí hlasu</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">povolit hlasový diktát v panelu adres URL</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">vyberte vlastní změnu velikosti písma</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">táhněte jezdec, dokud to nebudete moci pohodlně přečíst. po dvojitém klepnutí na odstavec by text měl vypadat alespoň takto velký</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+    <string name="SETTING_INTERACTION" translatable="true">interakce</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">změnit způsob interakce s obsahem webových stránek</string>
+    <string name="SETTING_PRIVACY" translatable="true">Uživatel zapnut</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">uživatelský průzkum, přihlášení, výběr dat</string>
+    <string name="SETTING_TRACKING" translatable="true">Ochrana sledování uživatele</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">adblock, trackery, otisky prstů</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">Systémové nastavení . Soukromí</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">Systémové nastavení . ochrana dohledu nad uživatelem</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">chránit vaši online identitu</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">udržujte svoji identitu v soukromí. můžeme vás chránit před několika sledovači, kteří vás sledují online. toto nastavení systému lze také použít k blokování reklamy</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">zachraňte se před ochranou Survelance uživatele</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion řekne webům, aby mě nesledovaly</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">řekni webu, aby mě nesledoval</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Ochrana sledování uživatele</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">povolit uživateli Survelance Protection poskytovanou Orion</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">soubory cookie webových stránek</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">vyberte předvolby cookies webových stránek podle svých bezpečnostních potřeb</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">vymazat soukromá data na výstupu</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">vymazat data automaticky po zavření softwaru</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">soukromé procházení</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">udržujte svoji identitu v bezpečí a použijte níže uvedené možnosti</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">povoleno</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">povoleno, s výjimkou souborů cookie pro sledování webových stránek</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">povoleno, s výjimkou třetích stran</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">zakázán</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">deaktivovat ochranu</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">povolit ochranu Survelance identity. to může způsobit odcizení vaší online identity</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">výchozí (doporučeno)</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">blokovat online reklamu a uživatele sociálních sítí Survelance. stránky se načtou jako výchozí</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">přísná politika</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">zastavit všechny známé sledovače, stránky se načtou rychleji, ale některé funkce nemusí fungovat</string>
+
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">zakázat skriptování Java pro různé útoky skriptů</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">Systémové nastavení . komplexní nastavení systému</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">obnovit karty</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">po ukončení prohlížeče se neobnovujte</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">téma panelu nástrojů</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">nastavit téma panelu nástrojů, jak je definováno na webu</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">zobrazit obrázky</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">vždy načíst obrázky webových stránek</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">zobrazit webová písma</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">stáhnout vzdálená písma při načítání stránky</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="true">povolit automatické přehrávání</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">povolit automatické spouštění médií</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">spořič dat</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="true">záložka</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">změnit způsob chování karty po restartování softwaru</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">média</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">změnit výchozí spořič dat přizpůsobit</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">změnit výchozí nastavení médií</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">vždy zobrazit obrázky</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">zobrazit obrázky pouze při použití wifi</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokovat všechny obrázky</string>
+    <string name="SETTING_ADVANCE" translatable="true">Pokročilé nastavení systému</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="true">obnovit karty, spořič dat, vývojářské nástroje</string>
+    <string name="SETTING_PROXY" translatable="true">onion podmínka proxy</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">zkontrolujte stav sítě onion</string>
+    <string name="SETTING_REPORT" translatable="true">nahlásit web</string>
+    <string name="SETTING_REPORT_INFO" translatable="true">nahlásit nevhodný web</string>
+    <string name="SETTING_RATEUS" translatable="true">Ohodnoťte tuto aplikaci</string>
+    <string name="SETTING_RATEUS_INFO" translatable="true">hodnotit a komentovat obchod Playstore</string>
+    <string name="SETTING_SHARE" translatable="true">sdílej tuto aplikaci</string>
+    <string name="SETTING_SHARE_INFO" translatable="true">sdílejte tento software se svými přáteli</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">Systémové nastavení . obecně přizpůsobit</string>
+    <string name="SETTING_GENERAL" translatable="true">Výchozí nastavení systému</string>
+    <string name="SETTING_GENERAL_INFO" translatable="true">domovská stránka, jazyk</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">procházení na celou obrazovku</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">při procházení stránky skryjte panel nástrojů prohlížeče</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="true">Jazyk</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">změňte jazyk svého prohlížeče</string>
+    <string name="SETTING_GENERAL_THEME" translatable="true">softwarové téma</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="true">vyberte světlé a tmavé téma</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">téma jasné</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="true">téma Dark</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">změnit procházení a jazyk na celou obrazovku</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">výchozí systém</string>
+    <string name="SETTING_GENERAL_HOME" translatable="true">domovská stránka</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">nová karta</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">otevřít domovskou stránku na nové kartě</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">odebrat všechny karty</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">odstranit procházené webové odkazy</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">odebrat záložky</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">odstranit mezipaměť procházení</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">odebrat návrhy</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">odstranit data webu</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">odebrat data relace</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">odebrat cookies procházení webu</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">odebrat přizpůsobení prohlížeče</string>
+
+
+    <string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
+
+    <string name="ALERT_CREATE_BOOKMARK" translatable="true">web záložek</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">odstranit procházené webové odkazy a data</string>
+    <string name="ALERT_CLEAR_BOOKMARK" translatable="true">vymazat záložku a Data</string>
+    <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">vymazáním údajů odstraníte procházené webové odkazy, soubory cookie a další údaje o procházení</string>
+    <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">smazání dat vymaže záložky webových stránek</string>
+    <string name="ALERT_CLEAR" translatable="true">zrušení</string>
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_REPORT" translatable="true">zpráva</string>
+    <string name="ALERT_REPORT_URL" translatable="true">nahlásit web</string>
+    <string name="ALERT_REPORT_URL_INFO" translatable="true">pokud si myslíte, že je tato adresa URL nezákonná nebo znepokojující, nahlaste nám ji, abychom mohli podniknout právní kroky</string>
+    <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">byl úspěšně nahlášen</string>
+    <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">adresa URL byla úspěšně nahlášena. pokud bude něco nalezeno, budou podniknuty právní kroky</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">jazyk není podporován</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">jazyk systému není tímto softwarem podporován. pracujeme na tom, aby to bylo brzy zahrnuto</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">inicializace Orbot</string>
+    <string name="ALERT_NOT_SUPPORTED" translatable="true">akce není podporována</string>
+    <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">nebyl nalezen žádný software pro zpracování následujícího příkazu</string>
+    <string name="ALERT_WELCOME_MESSAGE" translatable="true">vítejte | skrytý web Gateway</string>
+    <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">tento software vám poskytuje platformu pro vyhledávání a otevírání skrytých webových adres URL. zde je několik návrhů \n</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">skrytý webový online trh</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">unikly dokumenty a knihy</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">temné webové zprávy a články</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">tajný software a hackerské nástroje</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">už se nezobrazovat</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">finance a peníze</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">sociální společnosti</string>
+    <string name="ALERT_LOCAL_UPGRADE" translatable="true">manuál</string>
+    <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">obchod</string>
+    <string name="ALERT_LONG_FILE" translatable="true">oznámení souboru</string>
+    <string name="ALERT_DOWNLOAD" translatable="true">oznámení o stažení</string>
+    <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">oznámení o stažení</string>
+    <string name="ALERT_LONG_URL_TITLE" translatable="true">upozornění na webový odkaz</string>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
+    <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">nebyl nalezen žádný software pro zpracování e-mailů</string>
+    <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">stáhnout soubor |</string>
+    <string name="ALERT_DATA_CLEARED" translatable="true">data vymazána | je nutný restart</string>
+
+
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot protokolů</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">nové karty</string>
+    <string name="HOME_MENU_CLOSE_TABS" translatable="true">zavřít kartu</string>
+    <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">otevřít poslední karty</string>
+    <string name="HOME_MENU_LANGUAGE" translatable="true">Jazyk</string>
+    <string name="HOME_MENU_DOWNLOAD" translatable="true">stahování</string>
+    <string name="HOME_MENU_HISTORY" translatable="true">procházené webové odkazy</string>
+    <string name="HOME_MENU_SETTING" translatable="true">Systémové nastavení</string>
+    <string name="HOME_MENU_DESKTOP" translatable="true">web pro počítače</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Spojení</string>
+    <string name="HOME_MENU_BOOKMARK" translatable="true">uložit tuto stránku</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">záložky</string>
+    <string name="HOME_MENU_REPORT" translatable="true">nahlásit web</string>
+    <string name="HOME_MENU_RATE" translatable="true">Ohodnoťte tuto aplikaci</string>
+    <string name="HOME_MENU_FIND" translatable="true">najít na stránce</string>
+    <string name="HOME_MENU_QUIT" translatable="true">výstup</string>
+    <string name="HOME_MENU_SHARE" translatable="true">podíl</string>
+
+
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">nové karty</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="true">zavřete všechny karty</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">Systémové nastavení</string>
+    <string name="TAB_LIST_SELECT" translatable="true">vyberte karty</string>
+
+
+    <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">otevřené karty</string>
+    <string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">kopírovat</string>
+    <string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">podíl</string>
+    <string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">jasný výběr</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">otevřít na aktuální kartě</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">otevřít na nové kartě</string>
+    <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">vymazat</string>
+
+
+    <string name="HISTORY_TITLE" translatable="true">procházené webové odkazy</string>
+    <string name="HISTORY_CLEAR" translatable="true">odstranit toto</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true">Vyhledávání ...</string>
+
+
+    <string name="BOOKMARK_TITLE" translatable="true">záložka do knihy</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">odstranit toto</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true">Vyhledávání ...</string>
+
+
+    <string name="HELP_RETRY" translatable="true">opakovat</string>
+    <string name="HELP_RETRY_INFO" translatable="true">operace! chyba připojení k síti. síť není připojena</string>
+    <string name="HELP_TITLE" translatable="true">pomoc a podpora</string>
+
+
+    <string name="LANGUAGE_TITLE" translatable="true">Jazyk</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">změnit jazyk</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">běžíme pouze v následujících jazycích. brzy přidáme další</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">anglicky Spojené státy)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">německy (německo)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">italština (Itálie)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">portugalština (Brazílie)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">ruština (Rusko)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">ukrajinský (ukrajina)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">čínština zjednodušená (pevninská Čína)</string>
+
+
+    <string name="ORBOT_SETTING_WARNING" translatable="true">Warning️ varování</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">přizpůsobit Bridges</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">povolit Bridges</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">povolit VPN serivces</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">povolit Bridge Gateway</string>
+    <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">povolit Gateway</string>
+
+
+    <string name="PROXY_STATUS_HEADER" translatable="true">podmínka plné moci</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">aktuální stav 11122 proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot podmínka proxy</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">VPN podmínka připojení</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge podmínka proxy</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">informace | změnit nastavení systému</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">proxy můžete změnit restartováním softwaru a přechodem na správce proxy. lze jej otevřít kliknutím na ikonu ozubeného kola dole</string>
+
+
+    <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+    <string name="NOTIFICATION_OPEN_TEXT" translatable="true">otevřete to</string>
+
+
+    <string name="HOME_TAB_TEXT" translatable="true">1</string>
+    <string name="HOME_CONNECT" translatable="false">connect</string>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
+    <string name="HOME_TAB_EMPTY" translatable="true">zde se zobrazí otevřené karty</string>
+
+
+    <string name="ERROR_M1" translatable="true">tento web není dostupný</string>
+    <string name="ERROR_M2" translatable="true">při připojování k webu došlo k chybě</string>
+    <string name="ERROR_M3" translatable="true">stránku, kterou se pokoušíte zobrazit, nelze zobrazit, protože nebylo možné ověřit pravost přijatých dat</string>
+    <string name="ERROR_M4" translatable="true">stránka z nějakého důvodu momentálně nefunguje</string>
+    <string name="ERROR_M5" translatable="true">obraťte se na vlastníky webových stránek a informujte je o tomto problému.</string>
+    <string name="ERROR_M6" translatable="true">Znovu načíst</string>
+
+
+    <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+    <string name="invalid_package_signature" translatable="true">Neplatný podpis balíčku</string>
+    <string name="autofill_sign_in_prompt" translatable="true">kliknutím se přihlaste.</string>
+    <string name="autofill_manual_prompt" translatable="true">kliknutím ručně vyberete data.</string>
+    <string name="security_exception" translatable="true">Výjimka zabezpečení webové domény.</string>
+    <string name="dal_exception" translatable="true">Selhání ověření DAL.</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Nedávné karty</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nová identita</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">Zásady ochrany osobních údajů</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Zásady ochrany osobních údajů Orion Browser</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">Nahlásit web</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Nahlásit nelegální web</string>
+    <string name="SETTING_SITEMAP" translatable="true">zveřejněte svůj web</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">Přidejte svůj web do našeho vyhledávače</string>
+
+    <item name="LaguageID" type="id" />
+    <item name="LaguageRegion" type="id" />
+
+    <string-array name="ARRAY_FONTS" translatable="true">
+        <item>55 procent</item>
+        <item>70 procent</item>
+        <item>85 procent</item>
+        <item>100 procent</item>
+        <item>115 procent</item>
+        <item>130 procent</item>
+        <item>145 procent</item>
+    </string-array>
+
+    <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+        <item>Povoleno</item>
+        <item>Zakázáno</item>
+    </string-array>
+
+    <string-array name="ARRAY_NOTIFICATION" translatable="true">
+        <item>Povolit vše</item>
+        <item>Vypnout všechno</item>
+        <item>Žádná šířka pásma</item>
+    </string-array>
+
+    <string-array name="ARRAY_COOKIES" translatable="true">
+        <item>Povolit vše</item>
+        <item>Povolit důvěryhodné</item>
+        <item>Povolit Žádné</item>
+        <item>Povolit navštívené</item>
+        <item>Povolit Non Tracker</item>
+    </string-array>
+
+    <!-- Generated by Automatic String Resource Translation -->
+    <!--          https://asrt.gluege.boerde.de             -->
 </resources>

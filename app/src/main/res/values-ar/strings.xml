@@ -8,7 +8,7 @@
     <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="true">وجه الفتاة! هناك خطأ ما</string>
     <string name="GENERAL_TODO" translatable="true">كل شىء</string>
-    <string name="GENERAL_PROJECT_NAME" translatable="false">Genesis Search Engine</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion Search Engine</string>
     <string name="GENERAL_LOADING" translatable="true">الحرية الرقمية</string>
     <string name="GENERAL_RELOAD" translatable="true">إعادة تحميل</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">لديك واحدة من المشاكل التالية. قد لا تعمل صفحة الويب أو موقع الويب. قد يكون اتصالك بالإنترنت معطلاً. ربما كنت تستخدم وكيل. قد يتم حظر موقع الويب بواسطة جدار حماية</string>
@@ -36,7 +36,7 @@
     <string name="LANDING_BRIDGES_INFO" translatable="true">"في بعض الأحيان تحتاج إلى جسر للذهاب إلى شبكة الرحلات."</string>
     <string name="LANDING_MORE" translatable="true">"اخبرني المزيد"</string>
     <string name="LANDING_HELLO" translatable="true">"سلام"</string>
-    <string name="LANDING_WELCOME" translatable="true">"مرحبًا بك في Genesis on Mobile."</string>
+    <string name="LANDING_WELCOME" translatable="true">"مرحبًا بك في Orion on Mobile."</string>
     <string name="LANDING_BROWSE_INFO" translatable="true">"تصفح الإنترنت بأمان."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"لا تتبع ولا رقابة".</string>
 
@@ -56,8 +56,8 @@
     <!-- Orbot Logs -->
     <string name="ORBOT_LOG" translatable="true">سجلات الوكيل</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">معلومات سجل النظام</string>
-    <string name="ORBOT_LOG_INFO" translatable="true">إذا كنت تواجه مشكلة في الاتصال عند بدء Genesis ، فالرجاء نسخ الكود التالي والعثور على المشكلة عبر الإنترنت أو إرسالها إلينا ، حتى نتمكن من محاولة مساعدتك</string>
-    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">إذا كنت تواجه مشكلة في الاتصال عند بدء Orion ، فالرجاء نسخ الكود التالي والعثور على المشكلة عبر الإنترنت أو إرسالها إلينا ، حتى نتمكن من محاولة مساعدتك</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
 
     <!-- Orbot Settings -->
     <string name="ORBOT_SETTING_HEADER" translatable="true">تخصيص الوكيل</string>
@@ -96,7 +96,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">إعادة التشغيل</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">علامة التبويب مغلقة</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">تم فتح علامة تبويب جديدة</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">اتصال وكيل Genesis ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">اتصال وكيل Orion ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">الذاكرة ممتلئة ➔ علامة التبويب مسح</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">المنبثقة منعت</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">فتح سجلات الأخطاء</string>
@@ -162,29 +162,9 @@
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">طلب</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">اعدادات النظام</string>
-    <string name="SETTING_DEFAULT_BROWSER" translatable="true">اجعل Genesis متصفحك الافتراضي</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">اجعل Orion متصفحك الافتراضي</string>
     <string name="SETTING_HEADER" translatable="true">اعدادات النظام</string>
     <string name="SETTING_SEARCH_ENGINE" translatable="true">محرك البحث</string>
     <string name="SETTING_JAVASCRIPT" translatable="true">جافا سكريبت</string>
@@ -338,7 +318,6 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">قم بإزالة تخصيص المتصفح</string>
 
 
-
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">احفظ الويب</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">حذف روابط وبيانات الويب التي تم تصفحها</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">مسح الإشارات والبيانات</string>
@@ -371,14 +350,10 @@
     <string name="ALERT_DOWNLOAD" translatable="true">إشعار التنزيل</string>
     <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">إشعار التنزيل</string>
     <string name="ALERT_LONG_URL_TITLE" translatable="true">إشعار ارتباط الويب</string>
-    <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">لم يتم العثور على برنامج للتعامل مع البريد الإلكتروني</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">تحميل ملف |</string>
     <string name="ALERT_DATA_CLEARED" translatable="true">البيانات واضحة | السيرة الذاتية مطلوبة</string>
-
-
-
-
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">سجل التكوين</string>
@@ -460,14 +435,13 @@
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">يمكنك تغيير الوكيل عن طريق إعادة تشغيل البرنامج والانتقال إلى Proxy Manager. يمكن فتحه من خلال النقر على رمز الترس أدناه</string>
 
 
-
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
     <string name="NOTIFICATION_OPEN_TEXT" translatable="true">افتحه</string>
 
 
     <string name="HOME_TAB_TEXT" translatable="true">1</string>
     <string name="HOME_CONNECT" translatable="false">connect</string>
-    <string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">ستظهر هنا علامات التبويب المفتوحة</string>
 
 
@@ -495,8 +469,8 @@
     <string name="SETTING_SITEMAP" translatable="true">انشر موقعك على الويب</string>
     <string name="SETTING_SITEMAP_INFO" translatable="true">أضف موقع الويب الخاص بك إلى محرك البحث الخاص بنا</string>
 
-    <item name="LaguageID" type="id"/>
-    <item name="LaguageRegion" type="id"/>
+    <item name="LaguageID" type="id" />
+    <item name="LaguageRegion" type="id" />
 
     <string-array name="ARRAY_FONTS" translatable="true">
         <item>55٪</item>
@@ -526,8 +500,6 @@
         <item>السماح بالمشاهدة</item>
         <item>السماح غير المتعقب</item>
     </string-array>
-
-
 
 
     <!-- Generated by Automatic String Resource Translation -->

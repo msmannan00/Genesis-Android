@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.constants.constants;
@@ -46,7 +47,7 @@ public class settingNotificationController extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
@@ -63,22 +64,20 @@ public class settingNotificationController extends AppCompatActivity {
 
     /*View Callbacks*/
 
-    private class settingNotificationViewCallback implements eventObserver.eventListener{
+    private class settingNotificationViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
 
     /*Model Callbacks*/
 
-    private class settingNotificationModelCallback implements eventObserver.eventListener{
+    private class settingNotificationModelCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
@@ -86,23 +85,21 @@ public class settingNotificationController extends AppCompatActivity {
     /* LOCAL OVERRIDES */
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
 
         int notificationStatus = status.sBridgeNotificationManual;
-        if(notificationStatus==0){
+        if (notificationStatus == 0) {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
-        } else{
+        } else {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
         }
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
     }
 
@@ -120,18 +117,18 @@ public class settingNotificationController extends AppCompatActivity {
     /*UI Redirection*/
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
-    public void onClose(View view){
+    public void onClose(View view) {
         finish();
     }
 
-    public void onOpenNotificationSettings(View view){
+    public void onOpenNotificationSettings(View view) {
         helperMethod.openNotification(this);
     }
 
-    public void onSaveLocalNotificationSettings(View view){
+    public void onSaveLocalNotificationSettings(View view) {
         mSettingNotificationModel.onTrigger(settingNotificationEnums.eNotificationModel.M_UPDATE_LOCAL_NOTIFICATION, Collections.singletonList(!mNotificationManual.isChecked()));
         mNotificationManual.toggle();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, status.sBridgeNotificationManual));

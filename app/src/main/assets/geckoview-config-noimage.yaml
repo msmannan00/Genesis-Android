@@ -5,12 +5,12 @@ env:
 
 
 prefs:
-  network.proxy.type:  1
+  network.proxy.type: 1
   # network.proxy.socks:  "127.0.0.1"
   # network.proxy.socks_port:  9050
-  network.proxy.socks_version:  5
-  network.proxy.socks_remote_dns:  true
-  permissions.default.image:  2
+  network.proxy.socks_version: 5
+  network.proxy.socks_remote_dns: true
+  permissions.default.image: 2
   browser.display.show_image_placeholders: true
   browser.cache.disk.enable: false
   browser.cache.memory.enable: true
@@ -18,10 +18,10 @@ prefs:
   privacy.resistFingerprinting: true
   privacy.donottrackheader.enabled: false
   privacy.donottrackheader.value: 1
-  network.http.sendRefererHeader:  0
+  network.http.sendRefererHeader: 0
   security.checkloaduri: false
   security.mixed_content.block_active_content: false
-  security.mixed_content.block_display_content:  false
+  security.mixed_content.block_display_content: false
   media.peerconnection.enabled: false //webrtc disabled
   browser.cache.disk_cache_ssl: true
   signon.formlessCapture.enabled: true

@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.advertSetttings.advertResources;
 
-public class advert_constants
-{
+public class advert_constants {
     public static boolean S_INSENSITIVE_CATEGORIES = false;
     public static boolean S_APP_REDIRECTION = false;
     public static boolean S_SEARCH_RESULTS = false;

@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
@@ -26,6 +27,7 @@ import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +66,7 @@ public class helpController extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
 
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
@@ -72,16 +74,15 @@ public class helpController extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    private void initializeAppModel()
-    {
+    private void initializeAppModel() {
         mHelpModel = new helpModel(this, new helpAdapterCallback());
-        mHelpModel.onTrigger(helpEnums.eHelpModel.M_LOAD_HELP_DATA,null);
-        if((boolean)mHelpModel.onTrigger(M_IS_LOADED,null)){
+        mHelpModel.onTrigger(helpEnums.eHelpModel.M_LOAD_HELP_DATA, null);
+        if ((boolean) mHelpModel.onTrigger(M_IS_LOADED, null)) {
             mProgressBar.setVisibility(View.GONE);
         }
     }
 
-    private void initializeViews(){
+    private void initializeViews() {
         mHelpViewController = new helpViewController();
         mProgressBar = findViewById(R.id.pProgressBar);
         mRecycleView = findViewById(R.id.pRecycleView);
@@ -89,12 +90,12 @@ public class helpController extends AppCompatActivity {
         mReloadButton = findViewById(R.id.pReloadButton);
         mSearchInput = findViewById(R.id.pSearchInput);
 
-        mHelpViewController.initialization(new helpViewCallback(),this, mProgressBar, mRecycleView, mRetryContainer, mReloadButton);
+        mHelpViewController.initialization(new helpViewCallback(), this, mProgressBar, mRecycleView, mRetryContainer, mReloadButton);
         mHelpViewController.onTrigger(helpEnums.eHelpViewController.M_INIT_VIEWS, null);
 
     }
 
-    private void initializeLocalEventHandlers(){
+    private void initializeLocalEventHandlers() {
 
         mRecycleView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
 
@@ -125,7 +126,7 @@ public class helpController extends AppCompatActivity {
 
         mSearchInput.setEventHandler(new edittextManagerCallback());
 
-        if(mHelpAdapter!=null){
+        if (mHelpAdapter != null) {
             postToServerRunnable = () -> mHelpAdapter.onTrigger(helpEnums.eHelpAdapter.M_INIT_FILTER, Collections.singletonList(mSearchInput.getText().toString()));
         }
 
@@ -138,11 +139,11 @@ public class helpController extends AppCompatActivity {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start,int before, int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
     }
@@ -151,7 +152,7 @@ public class helpController extends AppCompatActivity {
 
     /*HELPER FUNCTIONS*/
 
-    private void onShowHelperManager(ArrayList<helpDataModel> pHelpListModel){
+    private void onShowHelperManager(ArrayList<helpDataModel> pHelpListModel) {
         mHelpAdapter = new helpAdapter(pHelpListModel, getApplicationContext());
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -169,7 +170,7 @@ public class helpController extends AppCompatActivity {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
 
-            if(e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)){
+            if (e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)) {
                 mSearchInput.clearFocus();
                 //helperMethod.hideKeyboard(helpController.this);
             }
@@ -179,11 +180,10 @@ public class helpController extends AppCompatActivity {
 
     /*Helper View Callback*/
 
-    private class helpViewCallback implements eventObserver.eventListener{
+    private class helpViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
@@ -191,17 +191,13 @@ public class helpController extends AppCompatActivity {
 
     /*Adapter Callbacks*/
 
-    private class helpAdapterCallback implements eventObserver.eventListener{
+    private class helpAdapterCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
-            if(helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS.equals(e_type))
-            {
+        public Object invokeObserver(List<Object> data, Object e_type) {
+            if (helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS.equals(e_type)) {
                 onShowHelperManager((ArrayList<helpDataModel>) data.get(0));
-            }
-            else if(helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE.equals(e_type))
-            {
+            } else if (helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE.equals(e_type)) {
                 mHelpViewController.onTrigger(helpEnums.eHelpViewController.M_LOAD_ERROR, null);
             }
             return null;
@@ -216,7 +212,7 @@ public class helpController extends AppCompatActivity {
 
     public void onReloadData(View view) {
         mHelpViewController.onTrigger(helpEnums.eHelpViewController.M_RELOAD_DATA, null);
-        mHelpModel.onTrigger(helpEnums.eHelpModel.M_LOAD_HELP_DATA,null);
+        mHelpModel.onTrigger(helpEnums.eHelpModel.M_LOAD_HELP_DATA, null);
     }
 
     public void onOpenHelp(View view) {
@@ -224,14 +220,14 @@ public class helpController extends AppCompatActivity {
     }
 
     public void onOpenHelpExternal(View view) {
-        if(!status.sSettingIsAppStarted){
+        if (!status.sSettingIsAppStarted) {
             activityContextManager.getInstance().getHomeController().onStartApplication(null);
         }
 
-        if(status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(this)){
+        if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(this)) {
             activityContextManager.getInstance().getHomeController().onDisableAdvert();
             activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE);
-        }else {
+        } else {
             activityContextManager.getInstance().getHomeController().onDisableAdvert();
             activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
         }
@@ -249,9 +245,9 @@ public class helpController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(mSearchInput.hasFocus()){
+        if (mSearchInput.hasFocus()) {
             mSearchInput.clearFocus();
-        }else {
+        } else {
             finish();
         }
         super.onBackPressed();

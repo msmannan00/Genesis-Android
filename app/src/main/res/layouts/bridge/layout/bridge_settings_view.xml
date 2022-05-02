@@ -1,35 +1,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:focusableInTouchMode="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_height="match_parent"
-        android:background="@color/c_background">
+    android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_height="match_parent"
+    android:background="@color/c_background">
+
     <ScrollView
-            android:layout_width="match_parent"
-            android:isScrollContainer="true"
-            android:id="@+id/pScollview"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:isScrollContainer="true"
+        android:id="@+id/pScollview"
+        android:layout_height="match_parent">
+
         <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:focusableInTouchMode="true"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingBottom="50dp"
-                android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingBottom="50dp"
+            android:layout_height="wrap_content">
             <!-- Title Header -->
             <LinearLayout
-                    android:id="@+id/pBridgeSettingTitleBar"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="0dp"
-                    android:focusable="true"
-                    android:elevation="8dp"
-                    android:background="@color/c_background"
-                    android:orientation="horizontal"
-                    android:layout_height="52dp">
+                android:id="@+id/pBridgeSettingTitleBar"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="0dp"
+                android:focusable="true"
+                android:elevation="8dp"
+                android:background="@color/c_background"
+                android:orientation="horizontal"
+                android:layout_height="52dp">
+
                 <ImageButton
                     android:id="@+id/pBridgeSettingBack"
                     android:layout_width="45dp"
@@ -42,6 +45,7 @@
                     android:contentDescription="@string/GENERAL_TODO"
                     app:tint="@color/c_navigation_tint"
                     tools:ignore="UsingOnClickInXml" />
+
                 <TextView
                     android:id="@+id/pBridgeSettingHeader"
                     android:textColor="@color/c_text_v1"
@@ -60,7 +64,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/pBridgeSettingInfo"
@@ -79,48 +83,48 @@
 
             <!-- Title Header -->
             <LinearLayout
-                    android:id="@+id/pBridgeSettingDescriptionHeader"
-                    android:layout_width="wrap_content"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginBottom="0dp"
-                    android:focusable="true"
-                    android:layout_marginEnd = "20dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="wrap_content">
+                android:id="@+id/pBridgeSettingDescriptionHeader"
+                android:layout_width="wrap_content"
+                android:background="@color/clear_alpha"
+                android:layout_marginBottom="0dp"
+                android:focusable="true"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+
                 <TextView
-                        android:id="@+id/pDescriptionHeaderText"
-                        android:textSize="14sp"
-                        android:layout_width="0dp"
-                        android:textColor="@color/c_text_v2"
-                        android:paddingBottom="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:background="@color/clear_alpha"
-                        android:layout_marginStart="15dp"
-                        android:text="@string/BRIDGE_DESC"
-                        />
+                    android:id="@+id/pDescriptionHeaderText"
+                    android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:textColor="@color/c_text_v2"
+                    android:paddingBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:background="@color/clear_alpha"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/BRIDGE_DESC" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/pBridgeSettingOptions"
-                    android:layout_width="match_parent"
-                    android:layout_marginEnd = "20dp"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginTop="10dp"
-                    android:focusable="true"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_marginEnd="20dp"
+                android:background="@color/clear_alpha"
+                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
                 <TextView
-                        android:id="@+id/pBridgeSettingAutoCreateText"
-                        android:textSize="14sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/c_text_short_header"
-                        android:layout_marginStart="15dp"
-                        android:textStyle="bold"
-                        android:text="@string/BRIDGE_AUTO"
-                        />
+                    android:id="@+id/pBridgeSettingAutoCreateText"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/c_text_short_header"
+                    android:layout_marginStart="15dp"
+                    android:textStyle="bold"
+                    android:text="@string/BRIDGE_AUTO" />
 
                 <TextView
                     android:id="@+id/pBridgeSettingConfigureSettingText"
@@ -130,31 +134,31 @@
                     android:layout_height="wrap_content"
                     android:background="@color/clear_alpha"
                     android:layout_marginStart="15dp"
-                    android:text="@string/BRIDGE_AUTO_INFO"
-                    />
+                    android:text="@string/BRIDGE_AUTO_INFO" />
             </LinearLayout>
+
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/clear_alpha"
-                    android:layout_marginEnd = "10dp"
-                    android:paddingEnd="10dp"
-                    android:focusable="true"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginTop="-12dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    tools:ignore="RtlSymmetry">
-            </LinearLayout>
+                android:layout_width="match_parent"
+                android:background="@color/clear_alpha"
+                android:layout_marginEnd="10dp"
+                android:paddingEnd="10dp"
+                android:focusable="true"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="-12dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry"></LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:id="@+id/pTopPanel"
-            android:layout_marginTop="0dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/pTopPanel"
+                android:layout_marginTop="0dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:background="@xml/bx_border_left"
@@ -168,7 +172,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="-1dp"
                         android:elevation="2dp"
-                        android:background="@color/c_white"/>
+                        android:background="@color/c_white" />
 
                     <LinearLayout
                         android:id="@+id/pSearchSettingOption1"
@@ -226,7 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="4dp"
-                        android:background="@color/c_topbar_divider"/>
+                        android:background="@color/c_topbar_divider" />
 
                     <LinearLayout
                         android:id="@+id/pBridgeSettingOption4"
@@ -284,7 +288,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="4dp"
-                        android:background="@color/c_topbar_divider"/>
+                        android:background="@color/c_topbar_divider" />
 
                     <LinearLayout
                         android:id="@+id/pSearchSettingOption2"
@@ -340,7 +344,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginStart="4dp"
-                        android:background="@color/c_topbar_divider"/>
+                        android:background="@color/c_topbar_divider" />
 
                     <LinearLayout
                         android:id="@+id/pBridgeSettingOption3"
@@ -397,10 +401,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:elevation="4dp"
-                        android:background="@color/c_topbar_divider"/>
+                        android:background="@color/c_topbar_divider" />
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -418,6 +421,7 @@
                     android:focusableInTouchMode="true"
                     android:weightSum="15"
                     tools:ignore="RtlSymmetry,UsingOnClickInXml">
+
                     <EditText
                         android:background="@xml/gx_generic_input"
                         android:textColorHighlight="@color/c_text_color_highlight_v1"
@@ -442,7 +446,8 @@
                         android:textSize="14.5sp"
                         android:text=""
                         android:inputType="none"
-                        android:autofillHints=""/>
+                        android:autofillHints="" />
+
                     <Button
                         android:layout_marginTop="-1dp"
                         android:id="@+id/pBridgeSettingBridgeRequest"
@@ -456,6 +461,7 @@
                         android:layout_marginStart="5dp"
                         android:text="@string/BRIDGE_REQUEST" />
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:id="@+id/pBridgeSettingCustomBridgeBlocker"
@@ -466,7 +472,7 @@
                     tools:ignore="UsingOnClickInXml">
 
                 </ImageView>
-        </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

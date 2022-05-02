@@ -7,6 +7,7 @@ import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.appManager.settingManager.trackingManager.settingTrackingController;
@@ -22,6 +23,7 @@ import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,7 +55,7 @@ public class settingPrivacyController extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
@@ -77,22 +79,20 @@ public class settingPrivacyController extends AppCompatActivity {
 
     /*View Callbacks*/
 
-    private class settingAccessibilityViewCallback implements eventObserver.eventListener{
+    private class settingAccessibilityViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
 
     /*Model Callbacks*/
 
-    private class settingAccessibilityModelCallback implements eventObserver.eventListener{
+    private class settingAccessibilityModelCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
@@ -100,9 +100,8 @@ public class settingPrivacyController extends AppCompatActivity {
     /* LOCAL OVERRIDES */
 
     @Override
-    public void onResume()
-    {
-        if(mSettingChanged){
+    public void onResume() {
+        if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
         }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
@@ -110,16 +109,15 @@ public class settingPrivacyController extends AppCompatActivity {
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
     }
 
     @Override
     public void onBackPressed() {
-        if(mSettingChanged){
+        if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
-            if(activityContextManager.getInstance().getHomeController()!=null){
+            if (activityContextManager.getInstance().getHomeController() != null) {
                 activityContextManager.getInstance().getHomeController().initRuntimeSettings();
             }
         }
@@ -134,50 +132,50 @@ public class settingPrivacyController extends AppCompatActivity {
 
     /*UI Redirection*/
 
-    public void onClose(View view){
+    public void onClose(View view) {
         onBackPressed();
     }
 
-    public void onJavaScript(View view){
+    public void onJavaScript(View view) {
         mSettingChanged = true;
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_JAVASCRIPT, Collections.singletonList(!status.sSettingJavaStatus));
         mJavaScript.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT,status.sSettingJavaStatus));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT, status.sSettingJavaStatus));
     }
 
-    public void onPopup(View view){
+    public void onPopup(View view) {
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_POPUP, Collections.singletonList(!status.sSettingPopupStatus));
         mPopup.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_POPUP,status.sSettingPopupStatus));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_POPUP, status.sSettingPopupStatus));
     }
 
-    public void onDoNotTrack(View view){
+    public void onDoNotTrack(View view) {
         mSettingChanged = true;
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_DONOT_TRACK, Collections.singletonList(!status.sStatusDoNotTrack));
         mDoNotTrack.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_DONOT_TRACK,status.sStatusDoNotTrack));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_DONOT_TRACK, status.sStatusDoNotTrack));
     }
 
-    public void onCookies(View view){
+    public void onCookies(View view) {
         mSettingChanged = true;
         mSettingPrivacyViewController.onTrigger(settingPrivacyEnums.ePrivacyViewController.M_SET_COOKIE_STATUS, Collections.singletonList(view));
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_COOKIES, Collections.singletonList(view));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE,status.sSettingCookieStatus));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_COOKIE_ADJUSTABLE, status.sSettingCookieStatus));
     }
 
-    public void onClearPrivateData(View view){
+    public void onClearPrivateData(View view) {
         mSettingChanged = true;
         mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_CLEAR_PRIVATE_DATA, Collections.singletonList(!status.sClearOnExit));
         mClearDataOnExit.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR,status.sClearOnExit));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_HISTORY_CLEAR, status.sClearOnExit));
     }
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onManageTracking(View view) {
-        helperMethod.openActivity(settingTrackingController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingTrackingController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
 }

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.appManager.settingManager.proxyStatusManager.proxyStatusController;
@@ -32,16 +33,17 @@ import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.*;
 
-public class settingHomeController extends AppCompatActivity
-{
+public class settingHomeController extends AppCompatActivity {
     /*Private Observer Classes*/
 
     private settingHomeViewController mSettingViewController;
@@ -53,16 +55,15 @@ public class settingHomeController extends AppCompatActivity
 
     /*Initializations*/
 
-    public settingHomeController(){
+    public settingHomeController() {
         mSettingModel = new settingHomeModel(new settingModelCallback());
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onCreate(savedInstanceState);
-        if(!status.mThemeApplying){
+        if (!status.mThemeApplying) {
             activityContextManager.getInstance().onStack(this);
         }
 
@@ -75,7 +76,7 @@ public class settingHomeController extends AppCompatActivity
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        if(activityThemeManager.getInstance().onInitTheme(this) && !status.mThemeApplying){
+        if (activityThemeManager.getInstance().onInitTheme(this) && !status.mThemeApplying) {
             activityContextManager.getInstance().onResetTheme();
         }
 
@@ -84,17 +85,17 @@ public class settingHomeController extends AppCompatActivity
         super.onConfigurationChanged(newConfig);
     }
 
-    public void onInitTheme(){
+    public void onInitTheme() {
 
-        if(status.mThemeApplying){
-            if(status.sTheme == enums.Theme.THEME_DARK){
+        if (status.mThemeApplying) {
+            if (status.sTheme == enums.Theme.THEME_DARK) {
                 setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            }else if(status.sTheme == enums.Theme.THEME_LIGHT){
+            } else if (status.sTheme == enums.Theme.THEME_LIGHT) {
                 setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }else {
-                if(!status.sDefaultNightMode){
+            } else {
+                if (!status.sDefaultNightMode) {
                     setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }else {
+                } else {
                     setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 }
             }
@@ -102,8 +103,7 @@ public class settingHomeController extends AppCompatActivity
         recreate();
     }
 
-    private void viewsInitializations()
-    {
+    private void viewsInitializations() {
         activityContextManager.getInstance().setSettingController(this);
         mOption15 = findViewById(R.id.pOption15);
         mOption16 = findViewById(R.id.pOption16);
@@ -111,8 +111,7 @@ public class settingHomeController extends AppCompatActivity
         mSettingViewController = new settingHomeViewController(this, new settingViewCallback(), mOption15, mOption16);
     }
 
-    private void listenersInitializations()
-    {
+    private void listenersInitializations() {
     }
 
     public void cicadaClipboard(View view) {
@@ -121,22 +120,20 @@ public class settingHomeController extends AppCompatActivity
 
     /*View Callbacks*/
 
-    private class settingViewCallback implements eventObserver.eventListener{
+    private class settingViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
 
     /*Model Callbacks*/
 
-    private class settingModelCallback implements eventObserver.eventListener{
+    private class settingModelCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
@@ -144,19 +141,16 @@ public class settingHomeController extends AppCompatActivity
     /*Local Overrides*/
 
     @Override
-    public void onTrimMemory(int level)
-    {
-        if(status.sSettingIsAppPaused && (level==80 || level==15))
-        {
-            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY,true));
+    public void onTrimMemory(int level) {
+        if (status.sSettingIsAppPaused && (level == 80 || level == 15)) {
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY, true));
             finish();
         }
     }
 
     @Override
-    public void onResume()
-    {
-        if(status.mThemeApplying){
+    public void onResume() {
+        if (status.mThemeApplying) {
             // activityContextManager.getInstance().onStack(this);
         }
         //onInitTheme();
@@ -167,20 +161,19 @@ public class settingHomeController extends AppCompatActivity
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
     }
 
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         finish();
     }
 
     @Override
     protected void onDestroy() {
-        if(!status.mThemeApplying){
+        if (!status.mThemeApplying) {
             activityContextManager.getInstance().onRemoveStack(this);
         }
         activityContextManager.getInstance().setSettingController(null);
@@ -189,62 +182,62 @@ public class settingHomeController extends AppCompatActivity
 
     /*External Redirection*/
 
-    public void onRedrawXML(){
+    public void onRedrawXML() {
         setContentView(R.layout.setting);
     }
 
-    public void onReInitTheme(){
+    public void onReInitTheme() {
         recreate();
     }
 
     /*UI Redirection*/
 
-    public void onNavigationBackPressed(View view){
+    public void onNavigationBackPressed(View view) {
         finish();
     }
 
-    public void onDefaultBrowser(View view){
+    public void onDefaultBrowser(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             helperMethod.openDefaultBrowser(this);
-        }else{
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this),  M_NOT_SUPPORTED);
+        } else {
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_NOT_SUPPORTED);
         }
     }
 
-    public void onManageNotification(View view){
-        helperMethod.openActivity(settingNotificationController.class, constants.CONST_LIST_HISTORY, this,true);
+    public void onManageNotification(View view) {
+        helperMethod.openActivity(settingNotificationController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
-    public void onManageSearchEngine(View view){
-        helperMethod.openActivity(settingSearchController.class, constants.CONST_LIST_HISTORY, this,true);
+    public void onManageSearchEngine(View view) {
+        helperMethod.openActivity(settingSearchController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onManageSearchAccessibility(View view) {
-        helperMethod.openActivity(settingAccessibilityController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingAccessibilityController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onManageGeneral(View view) {
-        helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onManageSearchClearData(View view) {
-        helperMethod.openActivity(settingClearController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingClearController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onManageSearchPrivacy(View view) {
-        helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onManageSearchAdvanced(View view) {
-        helperMethod.openActivity(settingAdvanceController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingAdvanceController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onManageTracking(View view) {
-        helperMethod.openActivity(settingTrackingController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(settingTrackingController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onReportWebsite(View view) {
@@ -263,17 +256,17 @@ public class settingHomeController extends AppCompatActivity
 
     public void onPrivacyPolicy(View view) {
         finish();
-        if(!status.sTorBrowsing){
+        if (!status.sTorBrowsing) {
             activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_PRIVACY_POLICY_URL_NON_TOR);
-        }else {
+        } else {
             activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL));
         }
     }
 
     public void onRateApplication(View view) {
-        pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(activityContextManager.getInstance().getHomeController().onGetCurrentURL(), this),  M_RATE_APP);
+        pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(activityContextManager.getInstance().getHomeController().onGetCurrentURL(), this), M_RATE_APP);
         status.sSettingIsAppRated = true;
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED,true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED, true));
     }
 
     public void onShareApplication(View view) {
@@ -281,7 +274,7 @@ public class settingHomeController extends AppCompatActivity
     }
 
     public void onOpenProxyStatus(View view) {
-        helperMethod.openActivity(proxyStatusController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(proxyStatusController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
 }

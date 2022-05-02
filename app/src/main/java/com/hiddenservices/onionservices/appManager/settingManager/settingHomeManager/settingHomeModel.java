@@ -2,15 +2,14 @@ package com.hiddenservices.onionservices.appManager.settingManager.settingHomeMa
 
 import com.hiddenservices.onionservices.eventObserver;
 
-class settingHomeModel
-{
+class settingHomeModel {
     /*Variable Declaration*/
 
     private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    settingHomeModel(eventObserver.eventListener mEvent){
+    settingHomeModel(eventObserver.eventListener mEvent) {
         this.mEvent = mEvent;
     }
 

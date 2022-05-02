@@ -24,12 +24,14 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Build;
 import android.os.Handler;
+
 import androidx.annotation.AnyThread;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.core.view.ViewCompat;
+
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
@@ -57,14 +59,16 @@ public class extendedGeckoView extends GeckoView {
     private static final String LOGTAG = "extendedGeckoView";
     private static final boolean DEBUG = false;
 
-    protected final @NonNull Display mDisplay = new Display();
+    protected final @NonNull
+    Display mDisplay = new Display();
 
     private Integer mLastCoverColor;
     protected @Nullable
     GeckoSession mSession;
     private boolean mStateSaved;
 
-    private @Nullable SurfaceViewWrapper mSurfaceWrapper;
+    private @Nullable
+    SurfaceViewWrapper mSurfaceWrapper;
 
     private boolean mIsResettingFocus;
 
@@ -155,7 +159,7 @@ public class extendedGeckoView extends GeckoView {
         }
 
         public boolean shouldPinOnScreen() {
-            return mDisplay != null ? mDisplay.shouldPinOnScreen() : false;
+            return mDisplay != null && mDisplay.shouldPinOnScreen();
         }
 
         public void setVerticalClipping(final int clippingHeight) {
@@ -235,7 +239,7 @@ public class extendedGeckoView extends GeckoView {
 
         //final Activity activity = ActivityUtils.getActivityFromContext(getContext());
         //if (activity != null) {
-            //mSelectionActionDelegate = new BasicSelectionActionDelegate();
+        //mSelectionActionDelegate = new BasicSelectionActionDelegate();
         //}
 
         mAutofillDelegate = new AndroidAutofillDelegate();
@@ -269,14 +273,14 @@ public class extendedGeckoView extends GeckoView {
 
     /**
      * This extendedGeckoView instance will be backed by a {@link SurfaceView}.
-     *
+     * <p>
      * This option offers the best performance at the price of not being
      * able to animate extendedGeckoView.
      */
     public static final int BACKEND_SURFACE_VIEW = 1;
     /**
      * This extendedGeckoView instance will be backed by a {@link TextureView}.
-     *
+     * <p>
      * This option offers worse performance compared to {@link #BACKEND_SURFACE_VIEW}
      * but allows you to animate extendedGeckoView or to paint a extendedGeckoView on top of another extendedGeckoView.
      */
@@ -284,11 +288,12 @@ public class extendedGeckoView extends GeckoView {
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({BACKEND_SURFACE_VIEW, BACKEND_TEXTURE_VIEW})
-            /* protected */ @interface ViewBackend {}
+            /* protected */ @interface ViewBackend {
+    }
 
     /**
      * Set which view should be used by this extendedGeckoView instance to display content.
-     *
+     * <p>
      * By default, extendedGeckoView will use a {@link SurfaceView}.
      *
      * @param backend Any of {@link #BACKEND_SURFACE_VIEW BACKEND_*}.
@@ -323,7 +328,7 @@ public class extendedGeckoView extends GeckoView {
     /**
      * Update the amount of vertical space that is clipped or visibly obscured in the bottom portion
      * of the view. Tells gecko where to put bottom fixed elements so they are fully visible.
-     *
+     * <p>
      * Optional call. The display's visible vertical space has changed. Must be
      * called on the application main thread.
      *
@@ -337,7 +342,7 @@ public class extendedGeckoView extends GeckoView {
 
     /**
      * Set the maximum height of the dynamic toolbar(s).
-     *
+     * <p>
      * If there are two or more dynamic toolbars, the height value should be the total amount of
      * the height of each dynamic toolbar.
      *
@@ -362,14 +367,15 @@ public class extendedGeckoView extends GeckoView {
      * Unsets the current session from this instance and returns it, if any. You must call
      * this before {@link #setSession(GeckoSession)} if there is already an open session
      * set for this instance.
-     *
+     * <p>
      * Note: this method does not close the session and the session remains active. The
      * caller is responsible for calling {@link GeckoSession#close()} when appropriate.
      *
      * @return The {@link GeckoSession} that was set for this instance. May be null.
      */
     @UiThread
-    public @Nullable GeckoSession releaseSession() {
+    public @Nullable
+    GeckoSession releaseSession() {
         ThreadUtils.assertOnUiThread();
 
         if (mSession == null) {
@@ -477,7 +483,8 @@ public class extendedGeckoView extends GeckoView {
 
     @AnyThread
     @SuppressWarnings("checkstyle:javadocmethod")
-    public @Nullable GeckoSession getSession() {
+    public @Nullable
+    GeckoSession getSession() {
         return mSession;
     }
 
@@ -493,7 +500,6 @@ public class extendedGeckoView extends GeckoView {
         // Release the display before we detach from the window.
         mSession.releaseDisplay(mDisplay.release());
     }
-
 
 
     @Override
@@ -668,7 +674,7 @@ public class extendedGeckoView extends GeckoView {
     /**
      * Dispatches a {@link MotionEvent} to the {@link PanZoomController}. This is the same as
      * indicating how the event was handled.
-     *
+     * <p>
      * NOTE: It is highly recommended to only call this with ACTION_DOWN or in otherwise
      * limited capacity. Returning a GeckoResult for every touch event will generate
      * a lot of allocations and unnecessary GC pressure.
@@ -731,20 +737,21 @@ public class extendedGeckoView extends GeckoView {
     /**
      * Request a {@link Bitmap} of the visible portion of the web page currently being
      * rendered.
-     *
+     * <p>
      * See {@link GeckoDisplay#capturePixels} for more details.
      *
      * @return A {@link GeckoResult} that completes with a {@link Bitmap} containing
      * the pixels and size information of the currently visible rendered web page.
      */
     @UiThread
-    public @NonNull GeckoResult<Bitmap> capturePixels() {
+    public @NonNull
+    GeckoResult<Bitmap> capturePixels() {
         return mDisplay.capturePixels();
     }
 
     /**
      * Sets whether or not this View participates in Android autofill.
-     *
+     * <p>
      * When enabled, this will set an {@link Autofill.Delegate} on the
      * {@link GeckoSession} for this instance.
      *

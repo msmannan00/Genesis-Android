@@ -1,17 +1,16 @@
 package com.hiddenservices.onionservices.constants;
 
-public class strings
-{
+public class strings {
     /*Notification Manager Manager*/
     public static final String NOTIFICATION_TITLE = "Orion Browser";
     public static final String[] NOTIFICATION_BODY = {"Orion Browser updated successfully",
-                                                      "Use Orion Browser to enhance your privacy",
-                                                      "Privacy and security enhanced, use Orion Browser",
-                                                      "Hidden web & Orion Search Engine updated",
-                                                      "Live websites updated on Orion Search Engine",
-                                                      "Access secure part of internet, Use Orion Browser",
-                                                      "Your privacy matters to us, Use Orion browser",
-                                                      "Stop tracking, use Orion Browser"};
+            "Use Orion Browser to enhance your privacy",
+            "Privacy and security enhanced, use Orion Browser",
+            "Hidden web & Orion Search Engine updated",
+            "Live websites updated on Orion Search Engine",
+            "Access secure part of internet, Use Orion Browser",
+            "Your privacy matters to us, Use Orion browser",
+            "Stop tracking, use Orion Browser"};
 
 
     /*History Manager*/

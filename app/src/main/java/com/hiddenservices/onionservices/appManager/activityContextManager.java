@@ -3,6 +3,7 @@ package com.hiddenservices.onionservices.appManager;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController;
 import com.hiddenservices.onionservices.appManager.bridgeManager.bridgeController;
 import com.hiddenservices.onionservices.appManager.historyManager.historyController;
@@ -15,13 +16,12 @@ import com.hiddenservices.onionservices.appManager.tabManager.tabController;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class activityContextManager
-{
+public class activityContextManager {
     /*Private Variables*/
 
     private static activityContextManager ourInstance = new activityContextManager();
-    public static activityContextManager getInstance()
-    {
+
+    public static activityContextManager getInstance() {
         return ourInstance;
     }
 
@@ -40,164 +40,176 @@ public class activityContextManager
 
     /*Initialization*/
 
-    private activityContextManager()
-    {
+    private activityContextManager() {
         mStackList = new ArrayList<>();
     }
 
     /*List ContextGetterSetters*/
-    public historyController getHistoryController(){
-        if(pHistoryController==null){
+    public historyController getHistoryController() {
+        if (pHistoryController == null) {
             return null;
         }
         return pHistoryController.get();
     }
-    public void setHistoryController(historyController history_controller){
+
+    public void setHistoryController(historyController history_controller) {
         this.pHistoryController = new WeakReference(history_controller);
     }
 
-    public bookmarkController getBookmarkController(){
-        if(pBookmarkController==null){
+    public bookmarkController getBookmarkController() {
+        if (pBookmarkController == null) {
             return null;
         }
         return pBookmarkController.get();
     }
-    public void setBookmarkController(bookmarkController bookmark_controller){
+
+    public void setBookmarkController(bookmarkController bookmark_controller) {
         this.pBookmarkController = new WeakReference(bookmark_controller);
     }
 
-    public bridgeController getBridgeController(){
-        if(pBridgeController==null){
+    public bridgeController getBridgeController() {
+        if (pBridgeController == null) {
             return null;
         }
         return pBridgeController.get();
     }
-    public void setBridgeController(bridgeController bridge_controller){
+
+    public void setBridgeController(bridgeController bridge_controller) {
         this.pBridgeController = new WeakReference(bridge_controller);
     }
 
-    public homeController getHomeController(){
-        if(pHomeController==null){
+    public homeController getHomeController() {
+        if (pHomeController == null) {
             return null;
         }
         return pHomeController.get();
     }
 
-    public void setApplicationContext(Context pContext){
+    public void setApplicationContext(Context pContext) {
         this.pApplicationContext = new WeakReference(pContext);
     }
 
-    public Context getApplicationController(){
+    public Context getApplicationController() {
         return pApplicationContext.get();
     }
 
-    public void setHomeController(homeController home_controller){
+    public void setHomeController(homeController home_controller) {
         this.pHomeController = new WeakReference(home_controller);
     }
 
-    public tabController getTabController(){
-        if(pTabController==null){
+    public tabController getTabController() {
+        if (pTabController == null) {
             return null;
         }
         return pTabController.get();
     }
-    public void setTabController(tabController tab_controller){
+
+    public void setTabController(tabController tab_controller) {
         this.pTabController = new WeakReference(tab_controller);
     }
 
-    public orbotLogController getOrbotLogController(){
-        if(pOrbotLogController==null){
+    public orbotLogController getOrbotLogController() {
+        if (pOrbotLogController == null) {
             return null;
         }
         return pOrbotLogController.get();
     }
-    public void setOrbotLogController(orbotLogController pOrbotLogController){
+
+    public void setOrbotLogController(orbotLogController pOrbotLogController) {
         this.pOrbotLogController = new WeakReference(pOrbotLogController);
     }
 
 
-    public settingGeneralController getSettingGeneralController(){
-        if(pSettingGeneralController==null){
+    public settingGeneralController getSettingGeneralController() {
+        if (pSettingGeneralController == null) {
             return null;
         }
         return pSettingGeneralController.get();
     }
-    public void setSettingGeneralController(settingGeneralController pSettingGeneralController){
+
+    public void setSettingGeneralController(settingGeneralController pSettingGeneralController) {
         this.pSettingGeneralController = new WeakReference(pSettingGeneralController);
     }
 
-    public settingHomeController getSettingController(){
-        if(pSettingController==null){
+    public settingHomeController getSettingController() {
+        if (pSettingController == null) {
             return null;
         }
         return pSettingController.get();
     }
-    public void setSettingController(settingHomeController pSettingController){
+
+    public void setSettingController(settingHomeController pSettingController) {
         this.pSettingController = new WeakReference(pSettingController);
     }
 
-    public void setCurrentActivity(android.app.Activity pCurrentActivity){
+    public void setCurrentActivity(android.app.Activity pCurrentActivity) {
         this.pCurrentActivity = new WeakReference(pCurrentActivity);
     }
-    public android.app.Activity getCurrentActivity(){
-        if(pCurrentActivity==null){
+
+    public android.app.Activity getCurrentActivity() {
+        if (pCurrentActivity == null) {
             return null;
         }
         return pCurrentActivity.get();
     }
 
     public void onStack(AppCompatActivity pActivity) {
-        try{
+        try {
             if (mStackList.size() > 0) {
                 if (!mStackList.get(mStackList.size() - 1).get().getLocalClassName().equals(pActivity.getLocalClassName())) {
                     mStackList.add(new WeakReference(pActivity));
                 }
-            }else {
+            } else {
                 mStackList.add(new WeakReference(pActivity));
             }
-        }catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
     }
 
-    public void onRemoveStack(AppCompatActivity pActivity){
-        try{
-            for(int mCounter=0;mCounter<mStackList.size();mCounter++){
-                if(mStackList.get(mCounter).get().getLocalClassName().equals(pActivity.getLocalClassName())){
+    public void onRemoveStack(AppCompatActivity pActivity) {
+        try {
+            for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
+                if (mStackList.get(mCounter).get().getLocalClassName().equals(pActivity.getLocalClassName())) {
                     mStackList.remove(mCounter);
-                    mCounter-=1;
+                    mCounter -= 1;
                 }
             }
-        }catch (Exception ignored){}
-    }
-
-    public void onResetTheme(){
-        for(int mCounter=0;mCounter<mStackList.size();mCounter++){
-            try{
-                if(!mStackList.get(mCounter).get().isFinishing()){
-                    activityThemeManager.getInstance().onConfigurationChanged(mStackList.get(mCounter).get());
-                }
-            }catch (Exception ignored){}
+        } catch (Exception ignored) {
         }
     }
 
-    public void onResetLanguage(){
-        for(int mCounter=0;mCounter<mStackList.size();mCounter++){
-            try{
-                if(!mStackList.get(mCounter).get().isFinishing()){
+    public void onResetTheme() {
+        for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
+            try {
+                if (!mStackList.get(mCounter).get().isFinishing()) {
                     activityThemeManager.getInstance().onConfigurationChanged(mStackList.get(mCounter).get());
                 }
-            }catch (Exception ignored){}
+            } catch (Exception ignored) {
+            }
         }
     }
 
-    public void onClearStack(){
-        for(int mCounter=0;mCounter<mStackList.size();mCounter++){
-            try{
-                if(!mStackList.get(mCounter).get().isFinishing()){
+    public void onResetLanguage() {
+        for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
+            try {
+                if (!mStackList.get(mCounter).get().isFinishing()) {
+                    activityThemeManager.getInstance().onConfigurationChanged(mStackList.get(mCounter).get());
+                }
+            } catch (Exception ignored) {
+            }
+        }
+    }
+
+    public void onClearStack() {
+        for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
+            try {
+                if (!mStackList.get(mCounter).get().isFinishing()) {
                     mStackList.get(mCounter).get().finish();
                     mStackList.remove(mCounter);
-                    mCounter-=1;
+                    mCounter -= 1;
                 }
-            }catch (Exception ignored){}
+            } catch (Exception ignored) {
+            }
         }
     }
 }

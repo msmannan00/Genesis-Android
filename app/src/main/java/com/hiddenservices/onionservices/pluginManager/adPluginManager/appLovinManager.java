@@ -2,6 +2,7 @@ package com.hiddenservices.onionservices.pluginManager.adPluginManager;
 
 import android.content.Context;
 import android.os.Handler;
+
 import com.applovin.mediation.MaxAd;
 import com.applovin.mediation.MaxAdViewAdListener;
 import com.applovin.mediation.MaxError;
@@ -10,10 +11,12 @@ import com.applovin.sdk.AppLovinSdk;
 import com.facebook.ads.AdSettings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
+
 import java.lang.ref.WeakReference;
+
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
-public class appLovinManager implements MaxAdViewAdListener
-{
+
+public class appLovinManager implements MaxAdViewAdListener {
     /*Private Variables */
 
     private eventObserver.eventListener mEvent;
@@ -31,23 +34,24 @@ public class appLovinManager implements MaxAdViewAdListener
         initializeBannerAds(pContext);
     }
 
-    private void initializeBannerAds(Context pContext){
-        AdSettings.setDataProcessingOptions( new String[] {} );
-        AppLovinSdk.getInstance( pContext ).setMediationProvider( "max" );
-        AppLovinSdk.initializeSdk( pContext, configuration -> {});
+    private void initializeBannerAds(Context pContext) {
+        AdSettings.setDataProcessingOptions(new String[]{});
+        AppLovinSdk.getInstance(pContext).setMediationProvider("max");
+        AppLovinSdk.initializeSdk(pContext, configuration -> {
+        });
     }
 
     /*Local Helper Methods*/
 
-    private void loadAds(){
-        if(!bannerAdRequested){
+    private void loadAds() {
+        if (!bannerAdRequested) {
             bannerAdRequested = true;
             mBannerAds.get().loadAd();
             mBannerAds.get().setListener(this);
         }
     }
 
-    private boolean isAdvertLoaded(){
+    private boolean isAdvertLoaded() {
         return bannerAdsLoaded;
     }
 
@@ -88,8 +92,8 @@ public class appLovinManager implements MaxAdViewAdListener
     public void onAdLoadFailed(String adUnitId, MaxError error) {
         new Handler().postDelayed(() ->
         {
-            if(mRequestCount<=10){
-                mRequestCount +=1;
+            if (mRequestCount <= 10) {
+                mRequestCount += 1;
                 bannerAdRequested = true;
                 mBannerAds.get().loadAd();
                 mBannerAds.get().setListener(this);
@@ -105,12 +109,9 @@ public class appLovinManager implements MaxAdViewAdListener
     /*External Triggers*/
 
     public Object onTrigger(pluginEnums.eAdManager pEventType) {
-        if(pEventType.equals(pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS))
-        {
+        if (pEventType.equals(pluginEnums.eAdManager.M_INITIALIZE_BANNER_ADS)) {
             loadAds();
-        }
-        else if(pEventType.equals(pluginEnums.eAdManager.M_IS_ADVERT_LOADED))
-        {
+        } else if (pEventType.equals(pluginEnums.eAdManager.M_IS_ADVERT_LOADED)) {
             return isAdvertLoaded();
         }
         return null;

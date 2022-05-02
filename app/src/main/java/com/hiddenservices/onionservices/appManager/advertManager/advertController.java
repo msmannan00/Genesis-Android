@@ -1,6 +1,7 @@
 package com.hiddenservices.onionservices.appManager.advertManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -35,7 +36,7 @@ public class advertController extends AppCompatActivity {
         mAdvertViewController = new advertViewController(this, null, mWebView, mProgressBar);
     }
 
-    void onInitAdvert(){
+    void onInitAdvert() {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setGeolocationEnabled(true);
@@ -46,7 +47,7 @@ public class advertController extends AppCompatActivity {
         mWebView.setWebViewClient(new advertWebViewClient(new webivewViewCallback()));
     }
 
-    private void onInitializeAdvertisements(){
+    private void onInitializeAdvertisements() {
         String mURL = getIntent().getExtras().getString("m_url");
         mWebView.loadUrl(mURL);
     }
@@ -60,7 +61,7 @@ public class advertController extends AppCompatActivity {
     public class webivewViewCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object event_type) {
-            if(event_type.equals(advertEnums.eAdvertClientCallback.M_UPDATE_PROGRESSBAR)){
+            if (event_type.equals(advertEnums.eAdvertClientCallback.M_UPDATE_PROGRESSBAR)) {
                 mAdvertViewController.onTrigger(advertEnums.eAdvertViewController.M_UPDATE_PROGRESSBAR, Collections.singletonList(data.get(0)));
             }
             return null;

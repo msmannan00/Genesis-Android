@@ -32,14 +32,17 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
 import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
@@ -178,7 +181,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
 
     private int getViewPadding(final AlertDialog.Builder builder) {
         final TypedArray attr = builder.getContext().obtainStyledAttributes(
-                new int[] { android.R.attr.listPreferredItemPaddingLeft });
+                new int[]{android.R.attr.listPreferredItemPaddingLeft});
         final int padding = attr.getDimensionPixelSize(0, 1);
         attr.recycle();
         return padding;
@@ -415,7 +418,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
                         mSeparator.setLayoutParams(new ListView.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT, 2, itemType));
                         final TypedArray attr = getContext().obtainStyledAttributes(
-                                new int[] { android.R.attr.listDivider });
+                                new int[]{android.R.attr.listDivider});
                         mSeparator.setBackgroundResource(attr.getResourceId(0, 0));
                         attr.recycle();
                     }
@@ -685,7 +688,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
             if (resId != 0) {
                 try {
                     picker = (DatePicker) inflater.inflate(resId, /* root */ null);
-                } catch (final ClassCastException|InflateException e) {
+                } catch (final ClassCastException | InflateException e) {
                 }
             }
             if (picker == null) {
@@ -712,7 +715,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
             if (resId != 0) {
                 try {
                     picker = (TimePicker) inflater.inflate(resId, /* root */ null);
-                } catch (final ClassCastException|InflateException e) {
+                } catch (final ClassCastException | InflateException e) {
                 }
             }
             if (picker == null) {
@@ -765,8 +768,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
 
     @Override
     @TargetApi(19)
-    public GeckoResult<PromptResponse> onFilePrompt(GeckoSession session, FilePrompt prompt)
-    {
+    public GeckoResult<PromptResponse> onFilePrompt(GeckoSession session, FilePrompt prompt) {
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());

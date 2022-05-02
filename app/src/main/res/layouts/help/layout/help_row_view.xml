@@ -38,7 +38,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
                     app:srcCompat="@xml/ic_baseline_advance"
-                    android:contentDescription="@string/GENERAL_TODO"/>
+                    android:contentDescription="@string/GENERAL_TODO" />
 
                 <TextView
                     android:id="@+id/pRowHeader"
@@ -91,7 +91,7 @@
                     android:paddingStart="20dp"
                     android:paddingEnd="15dp"
                     android:gravity="center_vertical"
-                    android:text="@string/GENERAL_TODO"/>
+                    android:text="@string/GENERAL_TODO" />
 
                 <View
                     android:id="@+id/view"

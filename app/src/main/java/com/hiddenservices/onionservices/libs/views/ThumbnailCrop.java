@@ -59,10 +59,10 @@ public class ThumbnailCrop extends androidx.appcompat.widget.AppCompatImageView 
             scale = (float) viewWidth / (float) drawableWidth;
         }
 
-        if(drawableWidth<drawableHeight){
-            matrix.setScale(scale/1f, scale/1f);
-        }else {
-            matrix.setScale(scale/1.58f, scale/1.58f);
+        if (drawableWidth < drawableHeight) {
+            matrix.setScale(scale / 1f, scale / 1f);
+        } else {
+            matrix.setScale(scale / 1.58f, scale / 1.58f);
         }
 
         setImageMatrix(matrix);

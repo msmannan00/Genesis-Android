@@ -3,4 +3,4 @@
     android:controlX1="0"
     android:controlY1="0"
     android:controlX2="0.2"
-    android:controlY2="1"/>
+    android:controlY2="1" />

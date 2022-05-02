@@ -18,6 +18,7 @@ package com.hiddenservices.onionservices.libs.netcipher.client;
 
 import android.content.Context;
 import android.content.Intent;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,6 +28,8 @@ import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
@@ -35,131 +38,130 @@ import javax.net.ssl.SSLSocketFactory;
  * Orbot.
  */
 public class StrongConnectionBuilder
-  extends StrongBuilderBase<StrongConnectionBuilder, HttpURLConnection> {
-  private URL url;
+        extends StrongBuilderBase<StrongConnectionBuilder, HttpURLConnection> {
+    private URL url;
 
-  /**
-   * Creates a StrongConnectionBuilder using the strongest set
-   * of options for security. Use this if the strongest set of
-   * options is what you want; otherwise, create a
-   * builder via the constructor and configure it as you see fit.
-   *
-   * @param ctxt any Context will do
-   * @return a configured StrongConnectionBuilder
-   * @throws Exception
-   */
-  static public StrongConnectionBuilder forMaxSecurity(Context ctxt)
-    throws Exception {
-    return(new StrongConnectionBuilder(ctxt)
-      .withBestProxy());
-  }
+    /**
+     * Creates a StrongConnectionBuilder using the strongest set
+     * of options for security. Use this if the strongest set of
+     * options is what you want; otherwise, create a
+     * builder via the constructor and configure it as you see fit.
+     *
+     * @param ctxt any Context will do
+     * @return a configured StrongConnectionBuilder
+     * @throws Exception
+     */
+    static public StrongConnectionBuilder forMaxSecurity(Context ctxt)
+            throws Exception {
+        return (new StrongConnectionBuilder(ctxt)
+                .withBestProxy());
+    }
 
-  /**
-   * Creates a builder instance.
-   *
-   * @param ctxt any Context will do; builder will hold onto
-   *             Application context
-   */
-  public StrongConnectionBuilder(Context ctxt) {
-    super(ctxt);
-  }
+    /**
+     * Creates a builder instance.
+     *
+     * @param ctxt any Context will do; builder will hold onto
+     *             Application context
+     */
+    public StrongConnectionBuilder(Context ctxt) {
+        super(ctxt);
+    }
 
-  /**
-   * Copy constructor.
-   *
-   * @param original builder to clone
-   */
-  public StrongConnectionBuilder(StrongConnectionBuilder original) {
-    super(original);
-    this.url=original.url;
-  }
+    /**
+     * Copy constructor.
+     *
+     * @param original builder to clone
+     */
+    public StrongConnectionBuilder(StrongConnectionBuilder original) {
+        super(original);
+        this.url = original.url;
+    }
 /*
   public boolean supportsSocksProxy() {
     return(false);
   }
 */
 
-  /**
-   * Sets the URL to build a connection for.
-   *
-   * @param url the URL
-   * @return the builder
-   * @throws MalformedURLException
-   */
-  public StrongConnectionBuilder connectTo(String url)
-    throws MalformedURLException {
-    connectTo(new URL(url));
+    /**
+     * Sets the URL to build a connection for.
+     *
+     * @param url the URL
+     * @return the builder
+     * @throws MalformedURLException
+     */
+    public StrongConnectionBuilder connectTo(String url)
+            throws MalformedURLException {
+        connectTo(new URL(url));
 
-    return(this);
-  }
-
-  /**
-   * Sets the URL to build a connection for.
-   *
-   * @param url the URL
-   * @return the builder
-   */
-  public StrongConnectionBuilder connectTo(URL url) {
-    this.url=url;
-
-    return(this);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public HttpURLConnection build(Intent status) throws IOException {
-    return(buildForUrl(status, url));
-  }
-
-  @Override
-  protected String get(Intent status, HttpURLConnection connection,
-                       String url) throws Exception {
-    HttpURLConnection realConnection=buildForUrl(status, new URL(url));
-
-    return(slurp(realConnection.getInputStream()));
-  }
-
-  private HttpURLConnection buildForUrl(Intent status, URL urlToUse)
-    throws IOException {
-    URLConnection result;
-    Proxy proxy=buildProxy(status);
-
-    if (proxy==null) {
-      result=urlToUse.openConnection();
-    }
-    else {
-      result=urlToUse.openConnection(proxy);
+        return (this);
     }
 
-    if (result instanceof HttpsURLConnection && sslContext!=null) {
-      SSLSocketFactory tlsOnly=buildSocketFactory();
-      HttpsURLConnection https=(HttpsURLConnection)result;
+    /**
+     * Sets the URL to build a connection for.
+     *
+     * @param url the URL
+     * @return the builder
+     */
+    public StrongConnectionBuilder connectTo(URL url) {
+        this.url = url;
 
-      https.setSSLSocketFactory(tlsOnly);
+        return (this);
     }
 
-    return((HttpURLConnection)result);
-  }
-
-  // based on http://stackoverflow.com/a/309718/115145
-
-  public static String slurp(final InputStream is)
-    throws IOException {
-    final char[] buffer = new char[128];
-    final StringBuilder out = new StringBuilder();
-    final Reader in = new InputStreamReader(is, "UTF-8");
-
-    for (;;) {
-      int rsz = in.read(buffer, 0, buffer.length);
-      if (rsz < 0)
-        break;
-      out.append(buffer, 0, rsz);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HttpURLConnection build(Intent status) throws IOException {
+        return (buildForUrl(status, url));
     }
 
-    in.close();
+    @Override
+    protected String get(Intent status, HttpURLConnection connection,
+                         String url) throws Exception {
+        HttpURLConnection realConnection = buildForUrl(status, new URL(url));
 
-    return out.toString();
-  }
+        return (slurp(realConnection.getInputStream()));
+    }
+
+    private HttpURLConnection buildForUrl(Intent status, URL urlToUse)
+            throws IOException {
+        URLConnection result;
+        Proxy proxy = buildProxy(status);
+
+        if (proxy == null) {
+            result = urlToUse.openConnection();
+        } else {
+            result = urlToUse.openConnection(proxy);
+        }
+
+        if (result instanceof HttpsURLConnection && sslContext != null) {
+            SSLSocketFactory tlsOnly = buildSocketFactory();
+            HttpsURLConnection https = (HttpsURLConnection) result;
+
+            https.setSSLSocketFactory(tlsOnly);
+        }
+
+        return ((HttpURLConnection) result);
+    }
+
+    // based on http://stackoverflow.com/a/309718/115145
+
+    public static String slurp(final InputStream is)
+            throws IOException {
+        final char[] buffer = new char[128];
+        final StringBuilder out = new StringBuilder();
+        final Reader in = new InputStreamReader(is, StandardCharsets.UTF_8);
+
+        for (; ; ) {
+            int rsz = in.read(buffer, 0, buffer.length);
+            if (rsz < 0)
+                break;
+            out.append(buffer, 0, rsz);
+        }
+
+        in.close();
+
+        return out.toString();
+    }
 }

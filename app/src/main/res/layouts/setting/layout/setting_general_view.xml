@@ -5,223 +5,567 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/c_background"
     tools:context="com.hiddenservices.onionservices.appManager.settingManager.generalManager.settingGeneralController">
-        <ScrollView
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingBottom="70dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <!-- Title Header -->
+            <LinearLayout
+                android:id="@+id/pHeaderContainerTop"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="48dp"
+                android:elevation="8dp"
+                android:background="@color/c_background"
+                android:clickable="true"
+                android:paddingStart="5dp"
+                android:focusable="true"
+                android:orientation="horizontal"
+                tools:ignore="RtlSymmetry">
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onClose"
+                    android:src="@xml/ic_arrow_back"
+                    app:tint="@color/c_navigation_tint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:onClick="onClose"
+                    android:layout_marginTop="-3dp"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/SETTING_GENERAL_HEADER"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:paddingStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="onOpenInfo"
+                    android:background="@xml/gx_ripple_gray_round_left"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_info"
+                    app:tint="@color/c_header_icon_tint" />
+
+            </LinearLayout>
+
+            <!-- Title Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/c_text_short_header"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:textStyle="bold"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:layout_marginTop="00dp"
+                    android:text="@string/SETTING_GENERAL_HOME" />
+            </LinearLayout>
 
             <LinearLayout
-                    android:paddingBottom="70dp"
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="vertical">
 
-                <!-- Title Header -->
-                <LinearLayout
-                    android:id="@+id/pHeaderContainerTop"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:elevation="8dp"
-                    android:background="@color/c_background"
-                    android:clickable="true"
-                    android:paddingStart="5dp"
-                    android:focusable="true"
-                    android:orientation="horizontal"
-                    tools:ignore="RtlSymmetry">
-
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="1dp"
-                        android:background="@xml/gx_ripple_default_round"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:onClick="onClose"
-                        android:src="@xml/ic_arrow_back"
-                        app:tint="@color/c_navigation_tint" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:onClick="onClose"
-                        android:layout_marginTop="-3dp"
-                        android:gravity="center_vertical|start"
-                        android:text="@string/SETTING_GENERAL_HEADER"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:paddingStart="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:onClick="onOpenInfo"
-                        android:background="@xml/gx_ripple_gray_round_left"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_info"
-                        app:tint="@color/c_header_icon_tint" />
-
-                </LinearLayout>
-
-                <!-- Title Header -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/c_text_short_header"
-                        android:textSize="15sp"
-                        android:layout_width="0dp"
-                        android:textStyle="bold"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="00dp"
-                        android:text="@string/SETTING_GENERAL_HOME"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="vertical">
+                    android:layout_marginTop="2dp"
+                    android:alpha="1"
+                    android:id="@+id/pHomePageText"
+                    android:textDirection="locale"
+                    android:textAlignment="viewStart"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:padding="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/SETTING_GENERAL_HOME_INFO"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v6"
+                    android:textSize="13.5sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:id="@+id/pHomePageText"
-                        android:textDirection="locale"
-                        android:textAlignment="viewStart"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="@string/SETTING_GENERAL_HOME_INFO"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
-                        android:textSize="13.5sp" />
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="0dp"
+                    android:paddingStart="0dp"
+                    android:weightSum="7"
+                    tools:ignore="RtlSymmetry">
 
                     <LinearLayout
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginStart="0dp"
-                        android:paddingStart="0dp"
-                        android:weightSum="7"
-                        tools:ignore="RtlSymmetry">
+                        android:background="@xml/gx_ripple_gray"
+                        android:onClick="onURLInNewTab"
+                        tools:ignore="RtlSymmetry,UselessParent">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@xml/gx_ripple_gray"
-                            android:onClick="onURLInNewTab"
-                            tools:ignore="RtlSymmetry,UselessParent">
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="65dp"
-                                android:layout_weight="6"
+                            android:layout_width="0dp"
+                            android:layout_height="65dp"
+                            android:layout_weight="6"
+                            android:clickable="false"
+                            android:layout_marginStart="0dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_marginTop="12dp"
+                                android:alpha="1"
+                                android:background="@android:color/transparent"
                                 android:clickable="false"
-                                android:layout_marginStart="0dp"
-                                android:orientation="vertical">
+                                android:padding="0dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp"
+                                android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB"
+                                android:textAlignment="textStart"
+                                android:textAllCaps="false"
+                                android:textColor="@color/c_text_v1"
+                                android:textSize="14sp"
+                                tools:ignore="RtlSymmetry" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="20dp"
-                                    android:layout_marginTop="12dp"
-                                    android:alpha="1"
-                                    android:background="@android:color/transparent"
-                                    android:clickable="false"
-                                    android:padding="0dp"
-                                    android:paddingStart="15dp"
-                                    android:paddingEnd="15dp"
-                                    android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB"
-                                    android:textAlignment="textStart"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/c_text_v1"
-                                    android:textSize="14sp"
-                                    tools:ignore="RtlSymmetry" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:alpha="1"
-                                    android:background="@android:color/transparent"
-                                    android:clickable="false"
-                                    android:padding="0dp"
-                                    android:paddingStart="15dp"
-                                    android:paddingEnd="15dp"
-                                    android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO"
-                                    android:textAlignment="textStart"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/c_text_v6"
-                                    android:textSize="13.5sp"
-                                    tools:ignore="RtlSymmetry" />
-                            </LinearLayout>
-
-                            <com.google.android.material.switchmaterial.SwitchMaterial
-                                android:layout_width="0dp"
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:alpha="1"
+                                android:background="@android:color/transparent"
                                 android:clickable="false"
-                                android:focusable="false"
-                                android:layout_height="match_parent"
-                                android:id="@+id/pOpenURLInNewTab"
-                                android:layout_marginEnd="10dp"
-                                android:layout_weight="1"
-                                android:theme="@style/SCBSwitch"
-                                android:contentDescription="@string/GENERAL_TODO" />
-
+                                android:padding="0dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp"
+                                android:text="@string/SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO"
+                                android:textAlignment="textStart"
+                                android:textAllCaps="false"
+                                android:textColor="@color/c_text_v6"
+                                android:textSize="13.5sp"
+                                tools:ignore="RtlSymmetry" />
                         </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:layout_width="0dp"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:layout_height="match_parent"
+                            android:id="@+id/pOpenURLInNewTab"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:theme="@style/SCBSwitch"
+                            android:contentDescription="@string/GENERAL_TODO" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingTop="10dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/c_text_short_header"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:textStyle="bold"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:layout_marginTop="00dp"
+                    android:text="@string/SETTING_GENERAL_THEME" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="vertical"
+                android:weightSum="7">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:alpha="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:padding="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/SETTING_GENERAL_THEME_INFO"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v6"
+                    android:textSize="13.5sp"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@xml/sx_border_left"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="-1dp"
+                    android:elevation="2dp"
+                    android:background="@color/c_white" />
+
+                <LinearLayout
+                    android:id="@+id/pSearchSettingOption1"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:layout_marginStart="4dp"
+                    android:layoutDirection="ltr"
+                    android:paddingStart="0dp"
+                    android:onClick="onSelectTheme"
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    tools:ignore="RtlSymmetry">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="7"
+                        android:layout_height="55dp"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="18dp"
+                            android:alpha="1"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:padding="0dp"
+                            android:text="@string/SETTING_GENERAL_THEME_DARK"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
                     </LinearLayout>
 
+                    <RadioButton
+                        android:id="@+id/pThemeDark"
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:clickable="false"
+                        android:layout_marginEnd="10dp"
+                        android:buttonTint="@color/c_radio_tint"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider"/>
+                    android:layout_marginStart="4dp"
+                    android:background="@color/c_topbar_divider" />
 
                 <LinearLayout
+                    android:id="@+id/pSearchSettingOption2"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="55dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:layoutDirection="ltr"
+                    android:layout_marginStart="4dp"
+                    android:onClick="onSelectTheme"
                     android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/c_text_short_header"
-                        android:textSize="15sp"
+                    android:focusable="true"
+                    tools:ignore="RtlSymmetry">
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:textStyle="bold"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="00dp"
-                        android:text="@string/SETTING_GENERAL_THEME"
-                        />
+                        android:layout_weight="7"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            android:alpha="1"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:text="@string/SETTING_GENERAL_THEME_LIGHT"
+                            android:padding="0dp"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:id="@+id/pThemeLight"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:buttonTint="@color/c_radio_tint"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@color/c_topbar_divider" />
+
                 <LinearLayout
+                    android:id="@+id/pSearchSettingOption3"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@xml/gx_ripple_gray"
+                    android:clickable="true"
+                    android:onClick="onSelectTheme"
+                    android:orientation="horizontal"
+                    android:layoutDirection="ltr"
+                    android:layout_marginStart="4dp"
+                    android:focusable="true"
+                    tools:ignore="RtlSymmetry">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginStart="0dp"
+                            android:alpha="1"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:text="@string/SETTING_GENERAL_THEME_DEFAULT"
+                            android:padding="0dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/c_text_v1"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:id="@+id/pThemeDefault"
+                        android:background="@android:color/transparent"
+                        android:src="@xml/ic_arrow_right"
+                        android:buttonTint="@color/c_radio_tint"
+                        android:clickable="false"
+                        android:contentDescription="@string/GENERAL_TODO" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:elevation="4dp"
+                    android:background="@color/c_topbar_divider" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/c_text_short_header"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:layout_marginTop="00dp"
+                    android:text="@string/SETTING_GENERAL" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="vertical"
-                    android:weightSum="7">
+                    android:layout_marginTop="0dp"
+                    android:alpha="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:padding="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/SETTING_GENERAL_INFO_OPTION"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v6"
+                    android:textSize="13.5sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="horizontal"
+                android:onClick="onFullScreenBrowsing"
+                android:weightSum="7">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_GENERAL_FULLSCREEN_BROWSING"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="14sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_GENERAL_FULLSCREEN_BROWSING_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/pSecureJavascriptStatus"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:theme="@style/SCBSwitch"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:onClick="onManageLanguage"
+                android:background="@xml/gx_ripple_gray"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="65dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="12dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/SETTING_GENERAL_LANGUAGE"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="14sp"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -233,366 +577,25 @@
                         android:padding="0dp"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:text="@string/SETTING_GENERAL_THEME_INFO"
+                        android:text="@string/SETTING_GENERAL_LANGUAGE_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v6"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
-
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@xml/sx_border_left"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="15dp"
-                    android:layout_height="wrap_content"
-                    tools:ignore="RtlSymmetry">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="-1dp"
-                        android:elevation="2dp"
-                        android:background="@color/c_white"/>
-
-                    <LinearLayout
-                        android:id="@+id/pSearchSettingOption1"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
-                        android:clickable="true"
-                        android:layout_marginStart="4dp"
-                        android:layoutDirection="ltr"
-                        android:paddingStart="0dp"
-                        android:onClick="onSelectTheme"
-                        android:orientation="horizontal"
-                        android:focusable="true"
-                        tools:ignore="RtlSymmetry">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="7"
-                            android:layout_height="55dp"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_marginTop="18dp"
-                                android:alpha="1"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:padding="0dp"
-                                android:text="@string/SETTING_GENERAL_THEME_DARK"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/c_text_v1"
-                                android:textSize="15sp"
-                                tools:ignore="RtlSymmetry" />
-
-                        </LinearLayout>
-
-                        <RadioButton
-                            android:id="@+id/pThemeDark"
-                            android:layout_width="35dp"
-                            android:layout_height="match_parent"
-                            android:clickable="false"
-                            android:layout_marginEnd="10dp"
-                            android:buttonTint="@color/c_radio_tint"
-                            android:background="@android:color/transparent"
-                            android:src="@xml/ic_arrow_right"
-                            android:contentDescription="@string/GENERAL_TODO" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="4dp"
-                        android:background="@color/c_topbar_divider"/>
-
-                    <LinearLayout
-                        android:id="@+id/pSearchSettingOption2"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
-                        android:clickable="true"
-                        android:layoutDirection="ltr"
-                        android:layout_marginStart="4dp"
-                        android:onClick="onSelectTheme"
-                        android:orientation="horizontal"
-                        android:focusable="true"
-                        tools:ignore="RtlSymmetry">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="7"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="0dp"
-                                android:alpha="1"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:text="@string/SETTING_GENERAL_THEME_LIGHT"
-                                android:padding="0dp"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/c_text_v1"
-                                android:textSize="15sp"
-                                tools:ignore="RtlSymmetry" />
-
-                        </LinearLayout>
-
-                        <RadioButton
-                            android:layout_width="35dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="10dp"
-                            android:id="@+id/pThemeLight"
-                            android:background="@android:color/transparent"
-                            android:src="@xml/ic_arrow_right"
-                            android:buttonTint="@color/c_radio_tint"
-                            android:clickable="false"
-                            android:contentDescription="@string/GENERAL_TODO" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="4dp"
-                        android:background="@color/c_topbar_divider"/>
-
-                    <LinearLayout
-                        android:id="@+id/pSearchSettingOption3"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:background="@xml/gx_ripple_gray"
-                        android:clickable="true"
-                        android:onClick="onSelectTheme"
-                        android:orientation="horizontal"
-                        android:layoutDirection="ltr"
-                        android:layout_marginStart="4dp"
-                        android:focusable="true"
-                        tools:ignore="RtlSymmetry">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginStart="0dp"
-                                android:alpha="1"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:text="@string/SETTING_GENERAL_THEME_DEFAULT"
-                                android:padding="0dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/c_text_v1"
-                                android:textSize="15sp"
-                                tools:ignore="RtlSymmetry" />
-
-                        </LinearLayout>
-
-                        <RadioButton
-                            android:layout_width="35dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="10dp"
-                            android:id="@+id/pThemeDefault"
-                            android:background="@android:color/transparent"
-                            android:src="@xml/ic_arrow_right"
-                            android:buttonTint="@color/c_radio_tint"
-                            android:clickable="false"
-                            android:contentDescription="@string/GENERAL_TODO" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:elevation="4dp"
-                        android:background="@color/c_topbar_divider"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/c_text_short_header"
-                        android:textSize="15sp"
-                        android:layout_width="match_parent"
-                        android:textStyle="bold"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="00dp"
-                        android:text="@string/SETTING_GENERAL"
-                        />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_GENERAL_INFO_OPTION"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal"
-                    android:onClick="onFullScreenBrowsing"
-                    android:weightSum="7">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_GENERAL_FULLSCREEN_BROWSING"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="14sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_GENERAL_FULLSCREEN_BROWSING_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/pSecureJavascriptStatus"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:theme="@style/SCBSwitch"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:onClick="onManageLanguage"
-                    android:background="@xml/gx_ripple_gray"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="65dp"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="12dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_GENERAL_LANGUAGE"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="14sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_GENERAL_LANGUAGE_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        app:tint="@color/c_navigation_tint" />
-
-                </LinearLayout>
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    app:tint="@color/c_navigation_tint" />
 
             </LinearLayout>
-        </ScrollView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

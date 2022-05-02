@@ -19,8 +19,7 @@ import com.hiddenservices.onionservices.helperManager.helperMethod;
 
 import java.util.List;
 
-class settingHomeViewController
-{
+class settingHomeViewController {
     /*Private Variables*/
 
     private eventObserver.eventListener mEvent;
@@ -31,8 +30,7 @@ class settingHomeViewController
 
     /*Initializations*/
 
-    settingHomeViewController(settingHomeController mContext, eventObserver.eventListener mEvent, LinearLayout pOption15, LinearLayout pOption16)
-    {
+    settingHomeViewController(settingHomeController mContext, eventObserver.eventListener mEvent, LinearLayout pOption15, LinearLayout pOption16) {
         this.mEvent = mEvent;
         this.mContext = mContext;
 
@@ -42,7 +40,7 @@ class settingHomeViewController
         initPostUI();
     }
 
-    private void initPostUI(){
+    private void initPostUI() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -50,24 +48,23 @@ class settingHomeViewController
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
-                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+            } else {
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                     mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
             }
         }
 
-        if(!status.sTorBrowsing){
+        if (!status.sTorBrowsing) {
             this.mOption15.setVisibility(View.GONE);
             this.mOption16.setVisibility(View.GONE);
         }
 
     }
 
-    public Object onTrigger(settingHomeEnums.eHomeViewController pCommands, List<Object> pData){
-        if(pCommands.equals(settingHomeEnums.eHomeViewController.M_INIT)){
+    public Object onTrigger(settingHomeEnums.eHomeViewController pCommands, List<Object> pData) {
+        if (pCommands.equals(settingHomeEnums.eHomeViewController.M_INIT)) {
             initPostUI();
         }
         return null;

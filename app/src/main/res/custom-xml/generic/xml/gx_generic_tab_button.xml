@@ -3,7 +3,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <padding android:left="8dp"
+            <padding
+                android:left="8dp"
                 android:right="8dp"
                 android:top="8dp"
                 android:bottom="8dp" />
@@ -16,10 +17,11 @@
 
                 <item android:state_pressed="false">
                     <shape
-                        android:shape="rectangle" android:padding="15dp" >
+                        android:shape="rectangle"
+                        android:padding="15dp">
                         <!-- you can use any color you want I used here gray color-->
-                        <solid android:color="@color/c_background"/>
-                        <corners android:radius="4dp"/>
+                        <solid android:color="@color/c_background" />
+                        <corners android:radius="4dp" />
                         <stroke
                             android:width="2.5dp"
                             android:color="@color/c_text_v5" />
@@ -29,9 +31,10 @@
 
                 <item android:state_pressed="true">
                     <shape
-                        android:shape="rectangle" android:padding="15dp" >
+                        android:shape="rectangle"
+                        android:padding="15dp">
                         <solid android:color="@color/c_background" />
-                        <corners android:radius="4dp"/>
+                        <corners android:radius="4dp" />
                         <stroke
                             android:width="2.5dp"
                             android:color="@color/c_tab_border" />

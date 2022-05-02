@@ -22,8 +22,7 @@ import static com.hiddenservices.onionservices.constants.constants.*;
 import static com.hiddenservices.onionservices.constants.enums.ImageQueueStatus.*;
 
 @SuppressLint("CommitPrefEdits")
-class imageDataModel
-{
+class imageDataModel {
 
     /* Local Variables */
 
@@ -33,7 +32,7 @@ class imageDataModel
 
     /* Initializations */
 
-    public imageDataModel(){
+    public imageDataModel() {
         mImageCache = new HashMap<>();
         mParsedQueues = new HashMap<>();
         mRequestQueue = new ArrayList<>();
@@ -43,23 +42,23 @@ class imageDataModel
 
     /* Helper Methods */
 
-    private void onRequestImage(String mURL){
-        String mCraftedURL = helperMethod.completeURL(helperMethod.getDomainName(mURL))+"/favicon.ico";
-        if(!mParsedQueues.containsKey(mCraftedURL)){
+    private void onRequestImage(String mURL) {
+        String mCraftedURL = helperMethod.completeURL(helperMethod.getDomainName(mURL)) + "/favicon.ico";
+        if (!mParsedQueues.containsKey(mCraftedURL)) {
             mRequestQueue.add(mCraftedURL);
         }
     }
 
-    private Bitmap getImage(String mURL){
-        String mCraftedURL = helperMethod.completeURL(helperMethod.getDomainName(mURL))+"/favicon.ico";
-        if(!mParsedQueues.containsKey(mCraftedURL) || mParsedQueues.get(mCraftedURL) == M_IMAGE_LOADING_FAILED){
+    private Bitmap getImage(String mURL) {
+        String mCraftedURL = helperMethod.completeURL(helperMethod.getDomainName(mURL)) + "/favicon.ico";
+        if (!mParsedQueues.containsKey(mCraftedURL) || mParsedQueues.get(mCraftedURL) == M_IMAGE_LOADING_FAILED) {
             return null;
-        }else{
+        } else {
             return mImageCache.get(mCraftedURL).getImage();
         }
     }
 
-    public void mBackgroundThread(){
+    public void mBackgroundThread() {
         /*new Thread(){
             public void run(){
                 while (true) {
@@ -86,7 +85,7 @@ class imageDataModel
 
     /* External Triggers */
 
-    public Object onTrigger(dataEnums.eImageCommands pCommands, List<Object> pData){
+    public Object onTrigger(dataEnums.eImageCommands pCommands, List<Object> pData) {
 
 
         return null;

@@ -10,19 +10,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.example.myapplication.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import static com.hiddenservices.onionservices.appManager.languageManager.languageEnums.eLanguageAdapterCallback.*;
 import static com.hiddenservices.onionservices.constants.constants.CONST_LANGUAGE_DEFAULT_LANG;
 import static com.hiddenservices.onionservices.constants.strings.LANGUAGE_NOT_SUPPORTED;
 
-public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpViewHolder>{
+public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpViewHolder> {
 
     /*Private Variables*/
 
@@ -78,19 +82,19 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpVi
             mMarker = itemView.findViewById(R.id.pMarker);
 
             mHeader.setText(model.getHeader());
-            mContainer.setTag(R.id.LaguageID,model.getTag());
-            mContainer.setTag(R.id.LaguageRegion,model.getCountry());
+            mContainer.setTag(R.id.LaguageID, model.getTag());
+            mContainer.setTag(R.id.LaguageRegion, model.getCountry());
 
-            if(model.getTag().equals(CONST_LANGUAGE_DEFAULT_LANG) && status.sSettingLanguage.equals(CONST_LANGUAGE_DEFAULT_LANG)){
-                mDescription.setText((String)mEvent.invokeObserver(null, M_SYSTEM_LANGUAGE_SUPPORT_INFO));
-                if(mDescription.getText().toString().endsWith(LANGUAGE_NOT_SUPPORTED)){
+            if (model.getTag().equals(CONST_LANGUAGE_DEFAULT_LANG) && status.sSettingLanguage.equals(CONST_LANGUAGE_DEFAULT_LANG)) {
+                mDescription.setText((String) mEvent.invokeObserver(null, M_SYSTEM_LANGUAGE_SUPPORT_INFO));
+                if (mDescription.getText().toString().endsWith(LANGUAGE_NOT_SUPPORTED)) {
                     mIsDefaultSupported = false;
                 }
-            }else {
+            } else {
                 mDescription.setText(model.getDescription());
             }
 
-            if(mContainer.getTag(R.id.LaguageID).toString().equals(mCurrentLanguage)){
+            if (mContainer.getTag(R.id.LaguageID).toString().equals(mCurrentLanguage)) {
                 Drawable mDrawable;
                 Resources res = mContext.getResources();
                 try {
@@ -100,16 +104,16 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpVi
                     mDescription.setTextColor(ContextCompat.getColor(mContext, R.color.white_darker));
                     mMarker.setVisibility(View.VISIBLE);
                     mCurrentIndex = getLayoutPosition();
-                    if(!mIsDefaultSupported){
+                    if (!mIsDefaultSupported) {
                         mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_cross));
                         mMarker.setImageDrawable(mDrawable);
-                    }else {
+                    } else {
                         mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_done));
                         mMarker.setImageDrawable(mDrawable);
                     }
                 } catch (Exception ignored) {
                 }
-            }else {
+            } else {
                 Drawable mDrawable;
                 Resources res = mContext.getResources();
                 try {
@@ -127,19 +131,19 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.helpVi
 
         @Override
         public void onClick(View v) {
-            if(v.getId() == R.id.pContainer){
-                boolean mSupportedStatus = (boolean)mEvent.invokeObserver(Arrays.asList(v.getTag(R.id.LaguageID).toString(), v.getTag(R.id.LaguageRegion).toString()),M_UPDATE_LANGUAGE);
-                if(mCurrentIndex!=getLayoutPosition() && mSupportedStatus){
-                    if(!mClickable){
+            if (v.getId() == R.id.pContainer) {
+                boolean mSupportedStatus = (boolean) mEvent.invokeObserver(Arrays.asList(v.getTag(R.id.LaguageID).toString(), v.getTag(R.id.LaguageRegion).toString()), M_UPDATE_LANGUAGE);
+                if (mCurrentIndex != getLayoutPosition() && mSupportedStatus) {
+                    if (!mClickable) {
                         mClickable = true;
-                        mEvent.invokeObserver(null,M_ENABLE_VIEW_CLICK);
+                        mEvent.invokeObserver(null, M_ENABLE_VIEW_CLICK);
                         mCurrentLanguage = v.getTag(R.id.LaguageID).toString();
                         mCurrentIndex = getLayoutPosition();
 
                         final Handler handler = new Handler();
                         handler.postDelayed(() -> {
                             mClickable = false;
-                            mEvent.invokeObserver(null,M_DISABLE_VIEW_CLICK);
+                            mEvent.invokeObserver(null, M_DISABLE_VIEW_CLICK);
                         }, 100);
                     }
                 }

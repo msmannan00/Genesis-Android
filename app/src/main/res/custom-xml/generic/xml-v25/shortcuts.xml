@@ -11,7 +11,9 @@
             android:action="erase"
             android:targetPackage="com.hiddenservices.onionservices"
             android:targetClass="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController">
-            <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_RESTART" />
+            <extra
+                android:name="EXTERNAL_SHORTCUT_COMMAND"
+                android:value="EXTERNAL_SHORTCUT_COMMAND_RESTART" />
         </intent>
     </shortcut>
     <shortcut
@@ -24,7 +26,9 @@
             android:action="erase"
             android:targetPackage="com.hiddenservices.onionservices"
             android:targetClass="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController">
-            <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN" />
+            <extra
+                android:name="EXTERNAL_SHORTCUT_COMMAND"
+                android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE_OPEN" />
         </intent>
     </shortcut>
     <shortcut
@@ -37,7 +41,9 @@
             android:action="erase"
             android:targetPackage="com.hiddenservices.onionservices"
             android:targetClass="com.hiddenservices.onionservices.appManager.externalCommandManager.externalShortcutController">
-            <extra android:name="EXTERNAL_SHORTCUT_COMMAND" android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE" />
+            <extra
+                android:name="EXTERNAL_SHORTCUT_COMMAND"
+                android:value="EXTERNAL_SHORTCUT_COMMAND_ERASE" />
         </intent>
     </shortcut>
 </shortcuts>

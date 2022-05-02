@@ -31,6 +31,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -52,12 +53,15 @@ import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
 import com.google.android.material.appbar.AppBarLayout;
+
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_DOMAIN_URL;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
@@ -66,8 +70,7 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static java.lang.Thread.sleep;
 
-class homeViewController
-{
+class homeViewController {
     /*ViewControllers*/
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
@@ -122,7 +125,7 @@ class homeViewController
     private boolean mIsTopBarExpanded = true;
     private NestedScrollView.MarginLayoutParams mDefaultMargin = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled){
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled) {
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -177,8 +180,8 @@ class homeViewController
     }
 
     @SuppressLint("WrongConstant")
-    public void initializeViews(){
-        mSearchbar.setTag(R.id.msearchbarProcessing,false);
+    public void initializeViews() {
+        mSearchbar.setTag(R.id.msearchbarProcessing, false);
         mNestedScroll.setNestedScrollingEnabled(true);
         this.mBlockerFullSceen.setVisibility(View.GONE);
         mSearchBarMovementMethod = mSearchbar.getMovementMethod();
@@ -199,7 +202,7 @@ class homeViewController
         AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
         params.setScrollFlags(1);
         mIsTopBarExpanded = false;
-        mAppBar.setExpanded(true,false);
+        mAppBar.setExpanded(true, false);
         mAppBar.refreshDrawableState();
         mAppBar.invalidate();
 
@@ -208,7 +211,7 @@ class homeViewController
 
 
         mContext.runOnUiThread(() -> {
-            if(helperMethod.getScreenHeight(mContext)<1000){
+            if (helperMethod.getScreenHeight(mContext) < 1000) {
 
                 ConstraintLayout.LayoutParams newLayoutParams1 = (ConstraintLayout.LayoutParams) mImageDivider.getLayoutParams();
                 newLayoutParams1.bottomMargin = helperMethod.pxFromDp(200);
@@ -224,12 +227,12 @@ class homeViewController
 
         NestedScrollView.MarginLayoutParams params1 = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
         mBannerHeight = mBannerAds.getHeight();
-        if(mBannerHeight!=0){
-            mBannerHeight +=1;
+        if (mBannerHeight != 0) {
+            mBannerHeight += 1;
         }
-        params1.setMargins(0, 0, 0,(helperMethod.pxFromDp(60)+mBannerHeight)*-1);
+        params1.setMargins(0, 0, 0, (helperMethod.pxFromDp(60) + mBannerHeight) * -1);
         mNestedScroll.setLayoutParams(params1);
-        if(!status.sTorBrowsing){
+        if (!status.sTorBrowsing) {
             mTorDisabled.setAlpha(1);
             mTorDisabled.setVisibility(View.VISIBLE);
             mConnectButton.setVisibility(View.GONE);
@@ -240,26 +243,26 @@ class homeViewController
 
     }
 
-    public void initSearchEngineView(){
-        if(!isFullScreen){
+    public void initSearchEngineView() {
+        if (!isFullScreen) {
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mSearchEngineBar.getLayoutParams();
-            if(isLandscape){
+            if (isLandscape) {
                 layoutParams.setMargins(0, helperMethod.pxFromDp(60), 0, 0);
-                mGeckoView.setPadding(0,0,0,0);
-            }else {
+                mGeckoView.setPadding(0, 0, 0, 0);
+            } else {
                 Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
-                if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
+                if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                     int[] location = new int[2];
                     mTopBar.getLocationOnScreen(location);
                     int y = location[1];
 
                     mBannerAds.setMinimumHeight(mBannerAds.getHeight());
-                    layoutParams.setMargins(0, mBannerAds.getHeight() + mTopBar.getHeight(), 0, (mBannerAds.getHeight() + mTopBar.getHeight())*-1);
+                    layoutParams.setMargins(0, mBannerAds.getHeight() + mTopBar.getHeight(), 0, (mBannerAds.getHeight() + mTopBar.getHeight()) * -1);
 
                     initTopBarPadding();
-                }else {
+                } else {
                     layoutParams.setMargins(0, helperMethod.pxFromDp(60), 0, 0);
-                    mGeckoView.setPadding(0,0,0,0);
+                    mGeckoView.setPadding(0, 0, 0, 0);
                 }
             }
             mSearchEngineBar.setLayoutParams(layoutParams);
@@ -267,22 +270,22 @@ class homeViewController
     }
 
     @SuppressLint("WrongConstant")
-    public void initTopBarPadding(){
-        if(isFullScreen){
+    public void initTopBarPadding() {
+        if (isFullScreen) {
             return;
         }
-        if(!status.sFullScreenBrowsing){
+        if (!status.sFullScreenBrowsing) {
             //View child = mAppBar.getChildAt(0);
             //AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
             //params.setMargins(0, 0, 0,helperMethod.pxFromDp(0));
-        }else {
+        } else {
             int paddingDp = 0;
-            if(isFullScreen){
+            if (isFullScreen) {
                 paddingDp = 60;
             }
             float density = mContext.getResources().getDisplayMetrics().density;
-            int paddingPixel = (int)(paddingDp * density);
-            mGeckoView.setPadding(0,0,0,paddingPixel);
+            int paddingPixel = (int) (paddingDp * density);
+            mGeckoView.setPadding(0, 0, 0, paddingPixel);
 
             View child = mAppBar.getChildAt(0);
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
@@ -291,20 +294,20 @@ class homeViewController
         }
     }
 
-    public void initSplashOrientation(){
-        if(isLandscape){
+    public void initSplashOrientation() {
+        if (isLandscape) {
             this.mInfoPortrait.setVisibility(View.GONE);
             this.mInfoLandscape.setVisibility(View.VISIBLE);
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue_splash));
-        }else {
+        } else {
             this.mInfoPortrait.setVisibility(View.VISIBLE);
             this.mInfoLandscape.setVisibility(View.GONE);
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
         }
     }
 
-    public void onShowTabContainer(){
-        if(mTabFragment.getAlpha()==0 || mTabFragment.getAlpha()==1){
+    public void onShowTabContainer() {
+        if (mTabFragment.getAlpha() == 0 || mTabFragment.getAlpha() == 1) {
             mTabFragment.animate().cancel();
             mTabFragment.setAlpha(0);
             mTabFragment.setVisibility(View.VISIBLE);
@@ -312,8 +315,8 @@ class homeViewController
         }
     }
 
-    public void onHideTabContainer(){
-        if(mTabFragment.getAlpha()>0 || mTabFragment.getVisibility()!=View.GONE){
+    public void onHideTabContainer() {
+        if (mTabFragment.getAlpha() > 0 || mTabFragment.getVisibility() != View.GONE) {
             mNewTab.setPressed(false);
             new Handler().postDelayed(() ->
             {
@@ -329,7 +332,7 @@ class homeViewController
         }
     }
 
-    public int getSearchLogo(){
+    public int getSearchLogo() {
         switch (status.sSettingDefaultSearchEngine) {
             case constants.CONST_BACKEND_GENESIS_URL:
                 return R.drawable.genesis;
@@ -345,26 +348,24 @@ class homeViewController
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void onUpdateSearchIcon(int mStatus){
+    public void onUpdateSearchIcon(int mStatus) {
         try {
-            if(mStatus==0){
+            if (mStatus == 0) {
                 mSearchLock.setColorFilter(null);
                 mSearchLock.clearColorFilter();
                 mSearchLock.setImageTintList(null);
 
                 mSearchLock.setImageDrawable(mContext.getResources().getDrawable(getSearchLogo()));
-            }
-            else if(mStatus==1){
-                if(!(boolean)mSearchLock.getTag(R.id.themed)){
+            } else if (mStatus == 1) {
+                if (!(boolean) mSearchLock.getTag(R.id.themed)) {
                     mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
-                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
-                }else {
-                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_lock));
+                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_lock));
+                } else {
+                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_lock));
                 }
-            }
-            else if(mStatus==2){
+            } else if (mStatus == 2) {
                 mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_icon_tint));
-                mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_browser));
+                mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_browser));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -372,8 +373,8 @@ class homeViewController
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void initSearchBarFocus(boolean pStatus, boolean mIsKeyboardOpened){
-        if(!pStatus){
+    public void initSearchBarFocus(boolean pStatus, boolean mIsKeyboardOpened) {
+        if (!pStatus) {
             this.mVoiceInput.animate().setDuration(0).alpha(0).withEndAction(() -> {
 
                 mVoiceInput.setClickable(true);
@@ -385,22 +386,22 @@ class homeViewController
                 mSearchbar.setFadingEdgeLength(helperMethod.pxFromDp(20));
                 mSearchbar.setMovementMethod(null);
 
-                if(status.sSettingLanguageRegion.equals("Ur")){
-                    mSearchbar.setPadding(helperMethod.pxFromDp(17),0,mSearchbar.getPaddingRight(),3);
+                if (status.sSettingLanguageRegion.equals("Ur")) {
+                    mSearchbar.setPadding(helperMethod.pxFromDp(17), 0, mSearchbar.getPaddingRight(), 3);
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                     params.leftMargin = helperMethod.pxFromDp(5);
-                }else {
-                    mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(5),3);
+                } else {
+                    mSearchbar.setPadding(mSearchbar.getPaddingLeft(), 0, helperMethod.pxFromDp(5), 3);
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                     params.rightMargin = helperMethod.pxFromDp(5);
                 }
 
             });
-        }else {
+        } else {
 
-            if(!mSearchbar.getText().toString().contains(".")){
+            if (!mSearchbar.getText().toString().contains(".")) {
                 onUpdateSearchIcon(0);
-            }else {
+            } else {
                 onUpdateSearchIcon(2);
             }
             mSearchbar.setMovementMethod(mSearchBarMovementMethod);
@@ -412,16 +413,16 @@ class homeViewController
                 Drawable drawable;
                 Resources res = mContext.getResources();
                 try {
-                    if(status.sSettingEnableVoiceInput){
+                    if (status.sSettingEnableVoiceInput) {
                         drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_keyboard_voice));
-                    }else {
+                    } else {
                         drawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_cancel));
                     }
                     mVoiceInput.setImageDrawable(drawable);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                if(status.sSettingIsAppStarted){
+                if (status.sSettingIsAppStarted) {
                     mVoiceInput.setVisibility(View.VISIBLE);
                 }
                 mVoiceInput.setClickable(true);
@@ -431,26 +432,26 @@ class homeViewController
             mNewTab.setVisibility(View.GONE);
             this.mMenu.setVisibility(View.GONE);
 
-            if(status.sSettingLanguageRegion.equals("Ur")){
-                mSearchbar.setPadding(helperMethod.pxFromDp(45),0,mSearchbar.getPaddingRight(),3);
+            if (status.sSettingLanguageRegion.equals("Ur")) {
+                mSearchbar.setPadding(helperMethod.pxFromDp(45), 0, mSearchbar.getPaddingRight(), 3);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                 params.leftMargin = helperMethod.pxFromDp(17);
-            }else {
-                mSearchbar.setPadding(mSearchbar.getPaddingLeft(),0,helperMethod.pxFromDp(45),3);
+            } else {
+                mSearchbar.setPadding(mSearchbar.getPaddingLeft(), 0, helperMethod.pxFromDp(45), 3);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mSearchbar.getLayoutParams();
                 params.rightMargin = helperMethod.pxFromDp(17);
             }
 
-            if(!mIsKeyboardOpened){
+            if (!mIsKeyboardOpened) {
                 mSearchbar.requestFocus();
-                InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(mSearchbar, InputMethodManager.SHOW_IMPLICIT);
             }
         }
     }
 
-    void initTab(int count, boolean pForced, enums.etype pEvent, List<Object> pData){
-        if(!pForced){
+    void initTab(int count, boolean pForced, enums.etype pEvent, List<Object> pData) {
+        if (!pForced) {
             ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mNewTab,
                     PropertyValuesHolder.ofFloat("scale" + "X", 1, 0.70f, 1),
                     PropertyValuesHolder.ofFloat("scaleY", 1, 0.70f, 1));
@@ -469,7 +470,7 @@ class homeViewController
 
                 @Override
                 public void onAnimationEnd(Animator arg0) {
-                    if(pEvent!=null){
+                    if (pEvent != null) {
                         mEvent.invokeObserver(pData, pEvent);
                     }
                 }
@@ -480,30 +481,29 @@ class homeViewController
             });
         }
 
-        if(count==0){
-            count=1;
+        if (count == 0) {
+            count = 1;
         }
-        mNewTab.setText((count+strings.GENERIC_EMPTY_STR));
+        mNewTab.setText((count + strings.GENERIC_EMPTY_STR));
 
     }
 
-    public void recreateStatusBar(){
+    public void recreateStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            }
-            else {
+            } else {
                 mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
             }
         }
     }
 
     public void initStatusBarColor(boolean mInstant) {
-        int mDelay = 1000;
-        if(!status.sTorBrowsing || status.mThemeApplying || mInstant || status.sSettingIsAppStarted){
+        int mDelay = 1500;
+        if (!status.sTorBrowsing || status.mThemeApplying || mInstant || status.sSettingIsAppStarted) {
             mDelay = 0;
         }
 
@@ -515,8 +515,8 @@ class homeViewController
             animator.addUpdateListener(animation ->
             {
                 float v = (float) animation.getAnimatedValue();
-                mSplashScreen.setAlpha(1-v);
-                mContext.getWindow().setStatusBarColor(oneToTwo.with(v*1f));
+                mSplashScreen.setAlpha(1 - v);
+                mContext.getWindow().setStatusBarColor(oneToTwo.with(v * 1f));
                 mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             });
             animator.addListener(new AnimatorListenerAdapter() {
@@ -526,26 +526,24 @@ class homeViewController
                     onPostScreenDisable();
                 }
             });
-            animator.addListener(new AnimatorListenerAdapter()
-            {
+            animator.addListener(new AnimatorListenerAdapter() {
                 @Override
-                public void onAnimationEnd(Animator animation)
-                {
-                    if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+                public void onAnimationEnd(Animator animation) {
+                    if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                         mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    }else {
+                    } else {
                         View decorView = mContext.getWindow().getDecorView();
                         decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                     }
                 }
             });
             animator.start();
-        }else {
+        } else {
             mSplashScreen.animate().alpha(0).setDuration(200).setStartDelay(mDelay).withEndAction(() -> onPostScreenDisable());
         }
     }
 
-    public void onPostScreenDisable(){
+    public void onPostScreenDisable() {
         mProgressBarIndeterminate.setVisibility(View.GONE);
         mSplashScreen.setClickable(false);
         mSplashScreen.setFocusable(false);
@@ -562,10 +560,10 @@ class homeViewController
         mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
     }
 
-    public void initSplashLoading(){
+    public void initSplashLoading() {
 
-        if(mLoadingText.getAlpha()==0){
-            Log.i("sadads111","asdasdasd");
+        if (mLoadingText.getAlpha() == 0) {
+            Log.i("sadads111", "asdasdasd");
             mLoadingText.animate().setStartDelay(0).setDuration(250).alpha(1);
         }
 
@@ -577,7 +575,7 @@ class homeViewController
         //mBlocker.setFocusable(true);
     }
 
-    void initHomePage(){
+    void initHomePage() {
         mConnectButton.setEnabled(false);
         mSplashScreen.setEnabled(false);
         mOrbotLogManager.setEnabled(false);
@@ -599,16 +597,16 @@ class homeViewController
         mPanicButton.animate().setDuration(170).setInterpolator(new AccelerateInterpolator()).translationXBy(helperMethod.pxFromDp(55));
     }
 
-    private void initSplashScreen(){
+    private void initSplashScreen() {
 
         mIsAnimating = false;
         helperMethod.hideKeyboard(mContext);
-        mSearchLock.setTag(R.id.themed,false);
-        mAppBar.setTag(R.id.expandableBar,true);
+        mSearchLock.setTag(R.id.themed, false);
+        mAppBar.setTag(R.id.expandableBar, true);
 
-        if(!status.mThemeApplying){
+        if (!status.mThemeApplying) {
             mSearchbar.setEnabled(false);
-        }else {
+        } else {
             mSearchbar.setEnabled(true);
         }
 
@@ -622,48 +620,46 @@ class homeViewController
     }
 
     private LogHandler mLogHandler;
+
     @SuppressLint("StaticFieldLeak")
     class LogHandler extends AsyncTask<Void, Integer, Void> {
-        protected Void doInBackground(Void...arg0) {
+        protected Void doInBackground(Void... arg0) {
             AppCompatActivity temp_context = mContext;
             int mCounter = 0;
-            while (status.sTorBrowsing && (orbotLocalConstants.mSOCKSPort==-1 || !orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)){
-                try
-                {
+            while (status.sTorBrowsing && (orbotLocalConstants.mSOCKSPort == -1 || !orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)) {
+                try {
                     boolean mFastConnect = status.sSettingIsAppStarted || !status.sRestoreTabs && status.sAppInstalled && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus && status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR);
-                    if(mFastConnect){
+                    if (mFastConnect) {
                         sleep(1000);
-                        if(orbotLocalConstants.mNetworkState){
+                        if (orbotLocalConstants.mNetworkState) {
                             orbotLocalConstants.mTorLogsStatus = "Starting Orion | Please Wait ...";
                             mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
                             startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
-                            if (orbotLocalConstants.mSOCKSPort!=-1){
+                            if (orbotLocalConstants.mSOCKSPort != -1) {
                                 break;
                             }
-                        }else{
+                        } else {
                             orbotLocalConstants.mTorLogsStatus = "No internet connection";
                             startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                         }
                     }
 
                     sleep(500);
-                    if(mCounter>20 && orbotLocalConstants.mSOCKSPort!=-1){
+                    if (mCounter > 20 && orbotLocalConstants.mSOCKSPort != -1) {
                         break;
-                    }else if (orbotLocalConstants.mNetworkState && status.sBridgeStatus){
-                        mCounter+=1;
+                    } else if (orbotLocalConstants.mNetworkState && status.sBridgeStatus) {
+                        mCounter += 1;
                     }
-                    if(mFastConnect){
+                    if (mFastConnect) {
                         continue;
                     }
 
                     mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
-                    if(temp_context.isDestroyed()){
+                    if (temp_context.isDestroyed()) {
                         return null;
                     }
                     startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -671,12 +667,12 @@ class homeViewController
                 mEvent.invokeObserver(null, enums.etype.M_INIT_RUNTIME_SETTINGS);
             });
 
-            if(!status.sSettingIsAppStarted){
+            if (!status.sSettingIsAppStarted) {
                 mContext.runOnUiThread(() -> {
                     onDisableSplashScreen();
                 });
                 startPostTask(messages.MESSAGE_ON_URL_LOAD);
-            }else {
+            } else {
                 mContext.runOnUiThread(() -> {
                     mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME);
                 });
@@ -686,13 +682,14 @@ class homeViewController
     }
 
     boolean mLogServiceExecuted = false;
-    void initProxyLoading(Callable<String> logs){
+
+    void initProxyLoading(Callable<String> logs) {
         this.mLogs = logs;
 
-        if(mSplashScreen.getVisibility()==View.VISIBLE){
-            if(!mLogServiceExecuted){
+        if (mSplashScreen.getVisibility() == View.VISIBLE) {
+            if (!mLogServiceExecuted) {
                 mLogServiceExecuted = true;
-                if(this.mLogHandler.getStatus() != AsyncTask.Status.RUNNING){
+                if (this.mLogHandler.getStatus() != AsyncTask.Status.RUNNING) {
                     this.mLogHandler.execute();
                 }
             }
@@ -701,7 +698,7 @@ class homeViewController
 
     /*-------------------------------------------------------PAGE UI Methods-------------------------------------------------------*/
 
-    void onPageFinished(){
+    void onPageFinished() {
         mSearchbar.setEnabled(true);
         mProgressBar.bringToFront();
         mSplashScreen.bringToFront();
@@ -720,13 +717,14 @@ class homeViewController
     }
 
     private boolean mIsAnimating = false;
-    public void onDisableSplashScreen(){
+
+    public void onDisableSplashScreen() {
         mTopBar.setAlpha(1);
         mGeckoView.setVisibility(View.VISIBLE);
         disableCoordinatorSwipe();
 
-        if(mSplashScreen.getAlpha()==1){
-            if(!mIsAnimating){
+        if (mSplashScreen.getAlpha() == 1) {
+            if (!mIsAnimating) {
                 mIsAnimating = true;
                 initStatusBarColor(false);
 
@@ -737,18 +735,18 @@ class homeViewController
         }
     }
 
-    public void onUpdateToolbarTheme(){
+    public void onUpdateToolbarTheme() {
         mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
     }
 
-    private void triggerPostUI(int pOffsetY){
+    private void triggerPostUI(int pOffsetY) {
         expandTopBar(false, pOffsetY);
-        if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<10000){
+        if (mProgressBar.getProgress() > 0 && mProgressBar.getProgress() < 10000) {
             mProgressBar.animate().setStartDelay(0).alpha(1);
         }
     }
 
-    public void disableExpand(){
+    public void disableExpand() {
         View child = mAppBar.getChildAt(0);
         AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
         params.setScrollFlags(0);
@@ -760,12 +758,13 @@ class homeViewController
         AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
         params.setScrollFlags(1);
     }
-    public void expandTopBar(boolean pForced, int pOffsetY){
 
-        if(pOffsetY == -1){
-            mAppBar.setExpanded(true,true);
+    public void expandTopBar(boolean pForced, int pOffsetY) {
+
+        if (pOffsetY == -1) {
+            mAppBar.setExpanded(true, true);
             disableExpand();
-        }else {
+        } else {
             enableCollapsing();
         }
 
@@ -773,28 +772,27 @@ class homeViewController
         {
             mTopBarContainer.getLayoutTransition().setDuration(200);
             Object mTag = mAppBar.getTag(R.id.expandableBar);
-            if(mIsTopBarExpanded && !pForced){
+            if (mIsTopBarExpanded && !pForced) {
                 return;
             }
 
 
-            if(mTag!=null && (boolean) mTag){
-                mAppBar.setExpanded(true,true);
+            if (mTag != null && (boolean) mTag) {
+                mAppBar.setExpanded(true, true);
                 mIsTopBarExpanded = true;
-                Log.i("wwwwww1","wwwwww");
+                Log.i("wwwwww1", "wwwwww");
             }
         }, 0);
 
     }
 
 
+    public void shrinkTopBar(boolean pForced, int pOffsetY) {
 
-    public void shrinkTopBar(boolean pForced, int pOffsetY){
-
-        if(pOffsetY == -1){
-            mAppBar.setExpanded(true,true);
+        if (pOffsetY == -1) {
+            mAppBar.setExpanded(true, true);
             disableExpand();
-        }else {
+        } else {
             enableCollapsing();
         }
 
@@ -804,27 +802,30 @@ class homeViewController
             mTopBarContainer.getLayoutTransition().setDuration(200);
             Object mTag = mAppBar.getTag(R.id.expandableBar);
 
-            if(!mIsTopBarExpanded && !pForced){
+            if (!mIsTopBarExpanded && !pForced) {
                 return;
             }
 
-            if(mTag!=null && (boolean) mTag){
+            if (mTag != null && (boolean) mTag) {
                 mIsTopBarExpanded = false;
-                mAppBar.setExpanded(false,true);
-                Log.i("wwwwww2","wwwwww");
+                mAppBar.setExpanded(false, true);
+                Log.i("wwwwww2", "wwwwww");
             }
         }, 0);
     }
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
 
-    public PopupWindow getMenuPopup(){
+    public PopupWindow getMenuPopup() {
         return popupWindow;
     }
-    @SuppressLint("InflateParams") View popupView = null;
-    void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent, String mURL, boolean pIsBookmarked){
 
-        if(popupWindow!=null){
+    @SuppressLint("InflateParams")
+    View popupView = null;
+
+    void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent, String mURL, boolean pIsBookmarked) {
+
+        if (popupWindow != null) {
             popupWindow.dismiss();
         }
 
@@ -834,7 +835,7 @@ class homeViewController
         popupView = layoutInflater.inflate(R.layout.popup_side_menu, null);
 
 
-        int height = helperMethod.getScreenHeight(mContext)*90 /100;
+        int height = helperMethod.getScreenHeight(mContext) * 90 / 100;
 
         popupWindow = new PopupWindow(
                 popupView,
@@ -846,14 +847,14 @@ class homeViewController
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         View parent = view.getRootView();
         popupWindow.setAnimationStyle(R.style.popup_window_animation);
-        if(isLandscape){
+        if (isLandscape) {
             helperMethod.hideKeyboard(mContext);
             popupWindow.setHeight(height);
         }
-        if(status.sSettingLanguageRegion.equals("Ur") || status.sSettingLanguage.equals("default") && status.mSystemLocale.getLanguage().equals("ur")){
-            popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.START,0,0);
-        }else {
-            popupWindow.showAtLocation(parent, Gravity.TOP|Gravity.END,0,0);
+        if (status.sSettingLanguageRegion.equals("Ur") || status.sSettingLanguage.equals("default") && status.mSystemLocale.getLanguage().equals("ur")) {
+            popupWindow.showAtLocation(parent, Gravity.TOP | Gravity.START, 0, 0);
+        } else {
+            popupWindow.showAtLocation(parent, Gravity.TOP | Gravity.END, 0, 0);
         }
 
 
@@ -868,21 +869,20 @@ class homeViewController
         LinearLayout newIdentity = popupView.findViewById(R.id.menu28);
         LinearLayout newTab = popupView.findViewById(R.id.menu11);
         LinearLayout genesisLogs = popupView.findViewById(R.id.menu12);
-        desktop.setChecked(userAgent==USER_AGENT_MODE_DESKTOP);
+        desktop.setChecked(userAgent == USER_AGENT_MODE_DESKTOP);
 
-        if(status.sTorBrowsing){
+        if (status.sTorBrowsing) {
             torBrowsing.setChecked(true);
             newIdentity.setVisibility(View.VISIBLE);
             genesisLogs.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             torBrowsing.setChecked(false);
             newIdentity.setVisibility(View.GONE);
             genesisLogs.setVisibility(View.GONE);
         }
-        if(pIsBookmarked){
+        if (pIsBookmarked) {
             try {
-                bookmark .setImageDrawable(helperMethod.getDrawableXML(mContext,R.xml.ic_baseline_bookmark_filled));
+                bookmark.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_bookmark_filled));
                 bookmark.setColorFilter(ContextCompat.getColor(mContext, R.color.cursor_blue), android.graphics.PorterDuff.Mode.MULTIPLY);
                 bookmark.setTag("mMarked");
             } catch (Exception ex) {
@@ -891,32 +891,32 @@ class homeViewController
         }
 
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mScrollView.getLayoutParams();
-        if(isLandscape){
+        if (isLandscape) {
             layoutParams.setMargins(mScrollView.getLeft(), helperMethod.pxFromDp(7), mScrollView.getRight(), helperMethod.pxFromDp(10));
-        }else {
+        } else {
             Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
-            if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
+            if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                 layoutParams.setMargins(mScrollView.getLeft(), mBannerAds.getHeight(), mScrollView.getRight(), helperMethod.pxFromDp(30));
-            }else {
+            } else {
                 layoutParams.setMargins(mScrollView.getLeft(), helperMethod.pxFromDp(7), mScrollView.getRight(), helperMethod.pxFromDp(30));
             }
         }
         mScrollView.setLayoutParams(layoutParams);
 
         String mExtention = helperMethod.getMimeType(mURL, mContext);
-        if(!mURL.startsWith("data") && !mURL.startsWith("blob") && (mExtention == null || mExtention.equals("application/x-msdos-program") || mExtention.equals("text/html") || mExtention.equals("application/vnd.ms-htmlhelp") || mExtention.equals("application/vnd.sun.xml.writer") || mExtention.equals("application/vnd.sun.xml.writer.global") || mExtention.equals("application/vnd.sun.xml.writer.template") || mExtention.equals("application/xhtml+xml"))){
+        if (!mURL.startsWith("data") && !mURL.startsWith("blob") && (mExtention == null || mExtention.equals("application/x-msdos-program") || mExtention.equals("text/html") || mExtention.equals("application/vnd.ms-htmlhelp") || mExtention.equals("application/vnd.sun.xml.writer") || mExtention.equals("application/vnd.sun.xml.writer.global") || mExtention.equals("application/vnd.sun.xml.writer.template") || mExtention.equals("application/xhtml+xml"))) {
             mDownload.setEnabled(false);
             mDownload.setColorFilter(Color.argb(255, 191, 191, 191));
         }
 
-        if(!canGoForward){
+        if (!canGoForward) {
             back.setEnabled(false);
             back.setColorFilter(Color.argb(255, 191, 191, 191));
         }
-        if(!isLoading){
+        if (!isLoading) {
             close.setVisibility(View.GONE);
             mRefresh.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             close.setVisibility(View.VISIBLE);
             mRefresh.setVisibility(View.GONE);
         }
@@ -931,8 +931,8 @@ class homeViewController
 
     }
 
-    private void changeRefreshMenu(){
-        if(popupView!=null){
+    private void changeRefreshMenu() {
+        if (popupView != null) {
             ImageButton mRefresh = popupView.findViewById(R.id.menu21);
             ImageButton close = popupView.findViewById(R.id.menu20);
             close.setVisibility(View.GONE);
@@ -946,9 +946,9 @@ class homeViewController
         }
     }
 
-    void downloadNotification(String message, enums.etype e_type){
+    void downloadNotification(String message, enums.etype e_type) {
 
-        if(popupWindow!=null){
+        if (popupWindow != null) {
             popupWindow.dismiss();
         }
 
@@ -969,8 +969,8 @@ class homeViewController
         popupWindow.setAnimationStyle(R.style.popup_window_animation);
 
 
-        if(message.length()>30){
-            message = message.substring(message.length()-20);
+        if (message.length() > 30) {
+            message = message.substring(message.length() - 20);
         }
 
         TextView notification_message = popupView.findViewById(R.id.notification_message);
@@ -983,25 +983,25 @@ class homeViewController
             popupWindow.dismiss();
         });
 
-        popupWindow.showAtLocation(parent, Gravity.BOTTOM|Gravity.START,0,-10);
+        popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.START, 0, -10);
     }
 
-    void closeMenu(){
-        if(popupWindow!=null){
+    void closeMenu() {
+        if (popupWindow != null) {
             popupWindow.dismiss();
         }
     }
 
-    public void onMoveTopBar(int pPosition){
+    public void onMoveTopBar(int pPosition) {
     }
 
-    public void setOrientation(boolean status){
+    public void setOrientation(boolean status) {
         isLandscape = status;
     }
 
-    void onSetBannerAdMargin(boolean status,boolean isAdLoaded){
-        if(isAdLoaded){
-            if(status && !isLandscape && !isFullScreen){
+    void onSetBannerAdMargin(boolean status, boolean isAdLoaded) {
+        if (isAdLoaded) {
+            if (status && !isLandscape && !isFullScreen) {
                 mBannerAds.setVisibility(View.VISIBLE);
 
                 final Handler handler = new Handler();
@@ -1010,40 +1010,40 @@ class homeViewController
                     mWebviewContainer.clearAnimation();
                     mProgressBar.bringToFront();
                 }, 250);
-            }else{
+            } else {
                 mBannerAds.setVisibility(View.GONE);
             }
         }
         onFullScreen(false);
     }
 
-    void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded){
-        if(!isFullScreen){
+    void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded) {
+        if (!isFullScreen) {
             Object mCurrentURL = mEvent.invokeObserver(null, enums.etype.M_GET_CURRENT_URL);
-            if(status && pIsAdvertLoaded){
-                if(mBannerAds.getAlpha()==0){
+            if (status && pIsAdvertLoaded) {
+                if (mBannerAds.getAlpha() == 0) {
                     mBannerAds.animate().cancel();
                     mBannerAds.setAlpha(0);
                     mBannerAds.animate().alpha(1);
                     mBannerAds.setVisibility(View.VISIBLE);
                 }
-                onSetBannerAdMargin(true,true);
-            } else if(mBannerAds.getVisibility() != View.VISIBLE){
-                if(mBannerAds.getAlpha()==1){
+                onSetBannerAdMargin(true, true);
+            } else if (mBannerAds.getVisibility() != View.VISIBLE) {
+                if (mBannerAds.getAlpha() == 1) {
                     mBannerAds.animate().cancel();
                     mBannerAds.animate().alpha(0).withEndAction(() -> mBannerAds.setVisibility(View.GONE));
                 }
-                onSetBannerAdMargin(false,true);
+                onSetBannerAdMargin(false, true);
             }
             initSearchEngineView();
         }
     }
 
-    void removeBanner(){
-        if(!isFullScreen){
-            if(isLandscape){
+    void removeBanner() {
+        if (!isFullScreen) {
+            if (isLandscape) {
                 mBannerAds.setVisibility(View.GONE);
-            }else {
+            } else {
                 mEvent.invokeObserver(null, enums.etype.M_ON_BANNER_UPDATE);
             }
             onFullScreen(false);
@@ -1052,84 +1052,83 @@ class homeViewController
 
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
-    void onUpdateSearchBar(String url,boolean showProtocol, boolean pClearText, boolean pBypassFocus){
+
+    void onUpdateSearchBar(String url, boolean showProtocol, boolean pClearText, boolean pBypassFocus) {
 
 
-        if(url.endsWith("genesisconfigurenewidentity.com/")){
+        if (url.endsWith("genesisconfigurenewidentity.com/")) {
             return;
         }
-        if(url.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)){
-            url="https://orion.onion/privacy";
+        if (url.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)) {
+            url = "https://orion.onion/privacy";
         }
 
-        if(url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)){
-            mSearchbar.setTag(R.id.msearchbarProcessing,true);
+        if (url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
+            mSearchbar.setTag(R.id.msearchbarProcessing, true);
             url = CONST_GENESIS_DOMAIN_URL;
         }
 
-        Log.i("FUCK::5",url);
-        if(!mSearchbar.hasFocus() || pClearText || pBypassFocus){
-            if(mSearchEngineBar.getVisibility() == View.GONE || pBypassFocus){
+        Log.i("FUCK::5", url);
+        if (!mSearchbar.hasFocus() || pClearText || pBypassFocus) {
+            if (mSearchEngineBar.getVisibility() == View.GONE || pBypassFocus) {
                 int delay = 0;
                 handlerLocalUrl = url;
 
-                if(searchBarUpdateHandler.hasMessages(100)){
+                if (searchBarUpdateHandler.hasMessages(100)) {
                     searchBarUpdateHandler.removeMessages(100);
                 }
 
                 searchBarUpdateHandler.sendEmptyMessage(100);
                 searchBarUpdateHandler.removeMessages(100);
-                triggerUpdateSearchBar(handlerLocalUrl,showProtocol, pClearText);
-                mSearchbar.setTag(R.id.msearchbarProcessing,false);
+                triggerUpdateSearchBar(handlerLocalUrl, showProtocol, pClearText);
+                mSearchbar.setTag(R.id.msearchbarProcessing, false);
             }
         }
     }
 
-    public void onUpdateFindBarCount(int index, int total)
-    {
-        if(total==0){
+    public void onUpdateFindBarCount(int index, int total) {
+        if (total == 0) {
             mFindCount.setText("0/0");
             mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.c_error_text_color));
-        }else {
+        } else {
             mFindCount.setText((total + "/" + index));
             mFindCount.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v6));
         }
     }
 
-    public void onUpdateStatusBarTheme(String pTheme, boolean mForced)
-    {
-        if(mSplashScreen.getAlpha()<=0 && (status.sTheme != enums.Theme.THEME_DARK && mTabFragment.getAlpha()<=0 || mForced)){
-            if(status.sDefaultNightMode && status.sTheme == enums.Theme.THEME_DEFAULT){
+    public void onUpdateStatusBarTheme(String pTheme, boolean mForced) {
+        if (mSplashScreen.getAlpha() <= 0 && (status.sTheme != enums.Theme.THEME_DARK && mTabFragment.getAlpha() <= 0 || mForced)) {
+            if (status.sDefaultNightMode && status.sTheme == enums.Theme.THEME_DEFAULT) {
                 return;
             }
             int mColor;
-            try{
+            try {
                 mColor = Color.parseColor(pTheme);
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 mColor = -1;
             }
 
-            if(!mSearchbar.isFocused() && pTheme!=null && status.sToolbarTheme && mColor!=-1 && helperMethod.getColorDensity(mColor)<0.80 && status.sTheme != enums.Theme.THEME_DARK){
+            if (!mSearchbar.isFocused() && pTheme != null && status.sToolbarTheme && mColor != -1 && helperMethod.getColorDensity(mColor) < 0.80 && status.sTheme != enums.Theme.THEME_DARK) {
                 mTopBar.setBackgroundColor(mColor);
                 mSearchbar.setTextColor(helperMethod.invertedGrayColor(mColor));
                 mSearchbar.setHintTextColor(helperMethod.invertedGrayColor(mColor));
                 mNewTab.setTextColor(helperMethod.invertedGrayColor(mColor));
 
                 GradientDrawable mGradientDrawable = new GradientDrawable();
-                mGradientDrawable.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
+                mGradientDrawable.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor, 0.90f), Color.BLACK, 0.2f));
                 mGradientDrawable.setCornerRadius(helperMethod.pxFromDp(7));
 
                 GradientDrawable gradientDrawable1 = new GradientDrawable();
-                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.50f), Color.BLACK, 0.2f));
+                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor, 0.50f), Color.BLACK, 0.2f));
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(4));
 
                 GradientDrawable gradientDrawable3 = new GradientDrawable();
-                gradientDrawable3.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.50f), Color.BLACK, 0.2f));
+                gradientDrawable3.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor, 0.50f), Color.BLACK, 0.2f));
                 gradientDrawable3.setCornerRadius(helperMethod.pxFromDp(4));
                 gradientDrawable3.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
 
                 GradientDrawable gradientDrawable2 = new GradientDrawable();
-                gradientDrawable2.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
+                gradientDrawable2.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor, 0.90f), Color.BLACK, 0.2f));
                 gradientDrawable2.setCornerRadius(helperMethod.pxFromDp(4));
                 gradientDrawable2.setStroke(helperMethod.pxFromDp(2), helperMethod.invertedGrayColor(mColor));
 
@@ -1137,8 +1136,8 @@ class homeViewController
                 InsetDrawable mInsetDrawable1 = new InsetDrawable(gradientDrawable3, helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8));
                 InsetDrawable mInsetDrawable2 = new InsetDrawable(gradientDrawable2, helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8), helperMethod.pxFromDp(8));
 
-                states.addState(new int[] {android.R.attr.state_pressed}, mInsetDrawable1);
-                states.addState(new int[] { }, mInsetDrawable2);
+                states.addState(new int[]{android.R.attr.state_pressed}, mInsetDrawable1);
+                states.addState(new int[]{}, mInsetDrawable2);
 
                 mNewTab.setBackground(states);
 
@@ -1146,34 +1145,33 @@ class homeViewController
                 mVoiceInput.setColorFilter(helperMethod.invertedGrayColor(mColor));
                 mVoiceInput.setBackground(mGradientDrawable);
                 mSearchLock.setColorFilter(helperMethod.invertedGrayColor(mColor));
-                mSearchLock.setTag(R.id.themed,true);
+                mSearchLock.setTag(R.id.themed, true);
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(7));
                 gradientDrawable1.setStroke(helperMethod.pxFromDp(2), mColor);
-                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.90f), Color.BLACK, 0.2f));
+                gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor, 0.90f), Color.BLACK, 0.2f));
                 mSearchbar.setBackground(gradientDrawable1);
-                mSearchbar.setHintTextColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor,0.10f), Color.BLACK, 0.2f));
+                mSearchbar.setHintTextColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor, 0.10f), Color.BLACK, 0.2f));
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     //mContext.getWindow().setStatusBarColor(Color.parseColor(pTheme));
-                }else {
+                } else {
                     //mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
                 }
 
-                if(helperMethod.isColorDark(mColor)){
+                if (helperMethod.isColorDark(mColor)) {
                     //mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }else {
+                } else {
                     //View decorView = mContext.getWindow().getDecorView(); //set status background black
                     //decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
                 mTopBarHider.setBackgroundColor(mColor);
-            }
-            else{
-                mSearchLock.setTag(R.id.themed,false);
+            } else {
+                mSearchLock.setTag(R.id.themed, false);
                 mTopBar.setBackground(ContextCompat.getDrawable(mContext, R.color.c_background));
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     //mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
-                }else {
+                } else {
                     //mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
                     //mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
                 }
@@ -1202,13 +1200,13 @@ class homeViewController
                 mSearchbar.setTextColor(ContextCompat.getColor(mContext, R.color.c_text_v1));
                 mSearchbar.setHintTextColor(ContextCompat.getColor(mContext, R.color.c_text_v2));
 
-                if(!mSearchbar.isFocused()){
+                if (!mSearchbar.isFocused()) {
                     onUpdateSearchIcon(1);
                 }
 
-                if(status.sTheme != enums.Theme.THEME_DARK || (status.sDefaultNightMode && status.sTheme != enums.Theme.THEME_DEFAULT)){
+                if (status.sTheme != enums.Theme.THEME_DARK || (status.sDefaultNightMode && status.sTheme != enums.Theme.THEME_DEFAULT)) {
                     //mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }else {
+                } else {
                     //View decorView = mContext.getWindow().getDecorView();
                     //decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
@@ -1218,10 +1216,9 @@ class homeViewController
         }
     }
 
-    public void onUpdateFindBar(boolean pStatus)
-    {
+    public void onUpdateFindBar(boolean pStatus) {
         mFindBar.animate().cancel();
-        if(pStatus){
+        if (pStatus) {
             mFindBar.setVisibility(View.VISIBLE);
             mFindBar.setAlpha(0);
             mFindBar.animate().setDuration(200).alpha(1);
@@ -1232,9 +1229,9 @@ class homeViewController
             handler.postDelayed(() ->
             {
                 InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }, 300);
-        }else {
+        } else {
             mFindText.clearFocus();
             helperMethod.hideKeyboard(mContext);
             mFindBar.animate().setDuration(200).alpha(0).withEndAction(() -> {
@@ -1245,7 +1242,7 @@ class homeViewController
         }
     }
 
-    public void disableCoordinatorSwipe(){
+    public void disableCoordinatorSwipe() {
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mAppBar.getLayoutParams();
         AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
         behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
@@ -1257,18 +1254,17 @@ class homeViewController
     }
 
     @SuppressLint("WrongConstant")
-    public void onUpdateSearchEngineBar(boolean pStatus, int delay)
-    {
-        if(pStatus){
+    public void onUpdateSearchEngineBar(boolean pStatus, int delay) {
+        if (pStatus) {
             initSearchEngineView();
-            if(mSearchEngineBar.getAlpha() == 0 || mSearchEngineBar.getVisibility() == View.GONE && mSplashScreen.getAlpha()<=0){
+            if (mSearchEngineBar.getAlpha() == 0 || mSearchEngineBar.getVisibility() == View.GONE && mSplashScreen.getAlpha() <= 0) {
                 onUpdateStatusBarTheme(null, false);
                 mSearchEngineBar.animate().cancel();
                 mSearchEngineBar.setAlpha(1f);
                 mSearchEngineBar.animate().setDuration(delay).alpha(1);
                 mSearchEngineBar.setVisibility(View.VISIBLE);
             }
-        }else {
+        } else {
             new Handler().postDelayed(() ->
             {
                 mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
@@ -1282,104 +1278,103 @@ class homeViewController
         }
     }
 
-    private void triggerUpdateSearchBar(String url, boolean showProtocol, boolean pClearText){
-        if (mSearchbar == null || url==null)
-        {
+    private void triggerUpdateSearchBar(String url, boolean showProtocol, boolean pClearText) {
+        if (mSearchbar == null || url == null) {
             return;
         }
 
-        if(!showProtocol){
-            url=url.replace("https://","");
-            url=url.replace("http://","");
+        if (!showProtocol) {
+            url = url.replace("https://", "");
+            url = url.replace("http://", "");
         }
 
-        url = url.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion","orion.onion");
+        url = url.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion", "orion.onion");
         boolean isTextSelected = false;
 
-        if(mSearchbar.isSelected()){
+        if (mSearchbar.isSelected()) {
             isTextSelected = true;
         }
 
 
-        if(url.length()<=300){
+        if (url.length() <= 300) {
             url = removeEndingSlash(url);
             mSearchbar.setText(helperMethod.urlDesigner(url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme));
             mSearchbar.selectAll();
 
-            if(isTextSelected){
+            if (isTextSelected) {
                 mSearchbar.selectAll();
             }
 
             mSearchbar.setSelection(0);
-        }else {
+        } else {
             url = removeEndingSlash(url);
             mSearchbar.setText(url);
         }
 
-        if(mSearchbar.isFocused()){
+        if (mSearchbar.isFocused()) {
             mSearchbar.setSelection(mSearchbar.getText().length());
             mSearchbar.selectAll();
         }
 
-        if(mSearchbar.getText().toString().equals("loading")){
+        if (mSearchbar.getText().toString().equals("loading")) {
             mSearchbar.setText("about:blank");
         }
     }
 
-    private String removeEndingSlash(String url){
+    private String removeEndingSlash(String url) {
         return helperMethod.removeLastSlash(url);
     }
 
-    void onNewTab(){
-        if(!mSearchbar.isFocused()){
+    void onNewTab() {
+        if (!mSearchbar.isFocused()) {
             mSearchbar.requestFocus();
             mSearchbar.selectAll();
         }
     }
 
-    void onUpdateLogs(String log){
+    void onUpdateLogs(String log) {
         mLoadingText.setText(log);
     }
 
-    void progressBarReset(){
+    void progressBarReset() {
         mProgressBar.setProgress(0);
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 
-    public void onFirstPaint(){
+    public void onFirstPaint() {
         onFullScreen(true);
         mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.clear_alpha));
         onResetTabAnimation();
     }
 
-    public void onSessionReinit(){
+    public void onSessionReinit() {
         mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.c_background));
     }
 
-    void onProgressBarUpdate(int value, boolean mForced){
+    void onProgressBarUpdate(int value, boolean mForced) {
 
-        if(value == 100){
+        if (value == 100) {
             changeRefreshMenu();
         }
         mProgressBar = activityContextManager.getInstance().getHomeController().mProgressBar;
-        if(value != 0 && value != 100){
-            mAppBar.setExpanded(true,true);
+        if (value != 0 && value != 100) {
+            mAppBar.setExpanded(true, true);
             status.sDisableExpandTemp = true;
-        }else {
+        } else {
             status.sDisableExpandTemp = false;
         }
 
-        if(progressAnimator!=null){
+        if (progressAnimator != null) {
             progressAnimator.cancel();
         }
 
-        if((mSearchbar.getText().toString().equals("orion.onion/search?q=$s&p_num=1&s_type=all") || mSearchbar.getText().toString().equals("orion.onion")) && !mForced || (boolean)mSearchbar.getTag(R.id.msearchbarProcessing)){
+        if ((mSearchbar.getText().toString().equals("orion.onion/search?q=$s&p_num=1&s_type=all") || mSearchbar.getText().toString().equals("orion.onion")) && !mForced || (boolean) mSearchbar.getTag(R.id.msearchbarProcessing)) {
             mProgressBar.setProgress(0);
             mProgressBar.setVisibility(View.GONE);
             return;
         }
 
-        if(mSearchbar.getText().toString().equals("orion.onion")){
+        if (mSearchbar.getText().toString().equals("orion.onion")) {
             return;
         }
 
@@ -1387,13 +1382,13 @@ class homeViewController
         mProgressBar.setAlpha(1);
         mProgressBar.animate().cancel();
 
-        if(value != mProgressBar.getProgress()){
-            if(value<=5 && value>0){
-                setProgressAnimate(5,70);
-            }else {
-                setProgressAnimate(value,200);
+        if (value != mProgressBar.getProgress()) {
+            if (value <= 5 && value > 0) {
+                setProgressAnimate(5, 70);
+            } else {
+                setProgressAnimate(value, 200);
             }
-            if(value >= 100 || value<=0){
+            if (value >= 100 || value <= 0) {
                 mProgressBar.animate().alpha(0).setStartDelay(200).withEndAction(() -> {
                     status.sDisableExpandTemp = false;
                     mProgressBar.setProgress(0);
@@ -1405,16 +1400,16 @@ class homeViewController
     }
 
     ObjectAnimator progressAnimator = null;
-    private void setProgressAnimate(int pValue, int pSpeed)
-    {
+
+    private void setProgressAnimate(int pValue, int pSpeed) {
         progressAnimator = ObjectAnimator.ofInt(mProgressBar, "progress", pValue);
         progressAnimator.setDuration(pSpeed);
         progressAnimator.start();
     }
 
-    public void onNewTabAnimation(List<Object> data, Object e_type){
+    public void onNewTabAnimation(List<Object> data, Object e_type) {
 
-        if(mNewTabBlocker.getAlpha()!=0){
+        if (mNewTabBlocker.getAlpha() != 0) {
             return;
         }
 
@@ -1465,11 +1460,11 @@ class homeViewController
         });
     }
 
-    public void onHomeTabAnimation(List<Object> data, Object e_type){
+    public void onHomeTabAnimation(List<Object> data, Object e_type) {
         mGeckoView.setPivotX(0);
         mGeckoView.setPivotY(0);
 
-        if(mGeckoView.getAlpha()<1 || mGeckoView.getTranslationX()<0){
+        if (mGeckoView.getAlpha() < 1 || mGeckoView.getTranslationX() < 0) {
             return;
         }
 
@@ -1514,7 +1509,7 @@ class homeViewController
         });
     }
 
-    public void onResetTabAnimation(){
+    public void onResetTabAnimation() {
         mGeckoView.setPivotX(0);
         mGeckoView.setPivotY(0);
 
@@ -1528,23 +1523,23 @@ class homeViewController
         scaleDown.start();
     }
 
-    void onClearSelections(boolean hideKeyboard){
+    void onClearSelections(boolean hideKeyboard) {
         mSearchbar.setFocusable(false);
         mSearchbar.setFocusableInTouchMode(true);
         mSearchbar.setFocusable(true);
-        if(hideKeyboard){
+        if (hideKeyboard) {
             helperMethod.hideKeyboard(mContext);
         }
     }
 
-    private void disableEnableControls(boolean enable, ViewGroup vg){
+    private void disableEnableControls(boolean enable, ViewGroup vg) {
         vg.setEnabled(enable); // the point that I was missing
-        for (int i = 0; i < vg.getChildCount(); i++){
+        for (int i = 0; i < vg.getChildCount(); i++) {
             View child = vg.getChildAt(i);
             child.setEnabled(enable);
             child.setClickable(enable);
-            if (child instanceof ViewGroup){
-                disableEnableControls(enable, (ViewGroup)child);
+            if (child instanceof ViewGroup) {
+                disableEnableControls(enable, (ViewGroup) child);
             }
         }
     }
@@ -1552,7 +1547,8 @@ class homeViewController
     private int mDefaultColor = 0;
     private int mBannerHeight = 0;
     private boolean mFullScreenBrowsingTemp = false;
-    void onFullScreenUpdate(boolean pStatus){
+
+    void onFullScreenUpdate(boolean pStatus) {
         int value = !pStatus ? 1 : 0;
 
         isFullScreen = pStatus;
@@ -1560,7 +1556,7 @@ class homeViewController
         this.mBlockerFullSceen.setAlpha(1f);
         mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.black));
 
-        if(pStatus){
+        if (pStatus) {
             mDefaultMargin = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
 
             mDefaultColor = mContext.getWindow().getNavigationBarColor();
@@ -1580,13 +1576,13 @@ class homeViewController
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
                 mContext.getWindow().getDecorView().setSystemUiVisibility(flags);
-                mContext.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                mContext.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-                params.setMargins(0, 0, 0,0);
+                params.setMargins(0, 0, 0, 0);
                 mNestedScroll.setLayoutParams(params);
 
-                if(mProgressBar.getAlpha()>0){
+                if (mProgressBar.getAlpha() > 0) {
                     onProgressBarUpdate(100, false);
                 }
 
@@ -1609,29 +1605,29 @@ class homeViewController
                     mBlockerFullSceen.setVisibility(View.GONE);
                 });
 
-                if(!status.sFullScreenBrowsing){
-                    if(isLandscape){
-                        params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
-                    }else {
-                        if(mBannerAds.getHeight()>0 && mBannerAds.getVisibility()==View.VISIBLE){
+                if (!status.sFullScreenBrowsing) {
+                    if (isLandscape) {
+                        params.setMargins(0, 0, 0, -helperMethod.pxFromDp(120));
+                    } else {
+                        if (mBannerAds.getHeight() > 0 && mBannerAds.getVisibility() == View.VISIBLE) {
                             Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
-                            if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
-                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(170));
-                            }else {
-                                params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
+                            if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
+                                params.setMargins(0, 0, 0, -helperMethod.pxFromDp(170));
+                            } else {
+                                params.setMargins(0, 0, 0, -helperMethod.pxFromDp(120));
                             }
-                        }else {
-                            params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
+                        } else {
+                            params.setMargins(0, 0, 0, -helperMethod.pxFromDp(120));
                         }
                     }
-                }else {
-                    if(isLandscape){
-                        params.setMargins(0, 0, 0,-helperMethod.pxFromDp(60));
-                    }else {
-                        if(mBannerAds.getHeight()>0 && mBannerAds.getVisibility()==View.VISIBLE){
-                            params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
-                        }else {
-                            params.setMargins(0, 0, 0,-helperMethod.pxFromDp(120));
+                } else {
+                    if (isLandscape) {
+                        params.setMargins(0, 0, 0, -helperMethod.pxFromDp(60));
+                    } else {
+                        if (mBannerAds.getHeight() > 0 && mBannerAds.getVisibility() == View.VISIBLE) {
+                            params.setMargins(0, 0, 0, -helperMethod.pxFromDp(120));
+                        } else {
+                            params.setMargins(0, 0, 0, -helperMethod.pxFromDp(120));
                         }
                     }
                 }
@@ -1640,18 +1636,18 @@ class homeViewController
                 initTopBarPadding();
 
             }, 200);
-        }else {
+        } else {
 
             mFullScreenBrowsingTemp = false;
             NestedScrollView.MarginLayoutParams params = (NestedScrollView.MarginLayoutParams) mNestedScroll.getLayoutParams();
-            params.setMargins(0, 0, 0,helperMethod.pxFromDp(60)*-1);
+            params.setMargins(0, 0, 0, helperMethod.pxFromDp(60) * -1);
             mNestedScroll.setLayoutParams(params);
 
             new Handler().postDelayed(() ->
             {
                 mContext.getWindow().setNavigationBarColor(mDefaultColor);
                 Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
-                if(mBannerAds.getHeight()>0 && mAdvertLoaded!=null && (boolean)mAdvertLoaded){
+                if (mBannerAds.getHeight() > 0 && mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                     mBannerAds.setVisibility(View.VISIBLE);
                 }
 
@@ -1663,16 +1659,16 @@ class homeViewController
                 mTopBar.setVisibility(View.VISIBLE);
                 mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
 
-                status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING,false));
+                status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING, false));
 
-                params.setMargins(mDefaultMargin.leftMargin,mDefaultMargin.topMargin,mDefaultMargin.rightMargin,mDefaultMargin.bottomMargin);
+                params.setMargins(mDefaultMargin.leftMargin, mDefaultMargin.topMargin, mDefaultMargin.rightMargin, mDefaultMargin.bottomMargin);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if(status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode){
+                    if (status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode) {
                         mContext.getWindow().getDecorView().setSystemUiVisibility(0);
-                    }else {
+                    } else {
                         mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                     }
-                }else {
+                } else {
                     mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
                 }
 
@@ -1680,7 +1676,7 @@ class homeViewController
                 //initTopBarPadding();
 
                 mIsTopBarExpanded = false;
-                mAppBar.setExpanded(true,false);
+                mAppBar.setExpanded(true, false);
                 mAppBar.refreshDrawableState();
                 mAppBar.invalidate();
                 mContext.getWindow().setStatusBarColor(mContext.getResources().getColor(R.color.c_background));
@@ -1689,62 +1685,60 @@ class homeViewController
         }
     }
 
-    public void onFullScreen(boolean pForced){
+    public void onFullScreen(boolean pForced) {
         Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
         Object mCurrentURL = mEvent.invokeObserver(null, enums.etype.M_GET_CURRENT_URL);
         Object wasErrorPage = mEvent.invokeObserver(null, enums.etype.M_IS_ERROR_PAGE);
 
-        if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<100 && !pForced){
-            mWebviewContainer.setPadding(0,0,0,0);
+        if (mProgressBar.getProgress() > 0 && mProgressBar.getProgress() < 100 && !pForced) {
+            mWebviewContainer.setPadding(0, 0, 0, 0);
             return;
         }
 
-        if(status.sFullScreenBrowsing){
-            if(!mFullScreenBrowsingTemp){
+        if (status.sFullScreenBrowsing) {
+            if (!mFullScreenBrowsingTemp) {
                 View child = mAppBar.getChildAt(0);
                 AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) child.getLayoutParams();
-                if(isLandscape){
-                    mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
-                }else {
-                    if(mBannerAds.getHeight()>0 && mBannerAds.getVisibility() == View.VISIBLE){
-                        mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(110));
-                    }else {
-                        mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60));
+                if (isLandscape) {
+                    mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60));
+                } else {
+                    if (mBannerAds.getHeight() > 0 && mBannerAds.getVisibility() == View.VISIBLE) {
+                        mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(110));
+                    } else {
+                        mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60));
                     }
                 }
             }
-        }
-        else {
-            if(mAdvertLoaded!=null && (boolean)mAdvertLoaded){
-                if(mCurrentURL!=null){
+        } else {
+            if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
+                if (mCurrentURL != null) {
                     String mURL = (String) mCurrentURL;
-                    if((wasErrorPage!=null && (boolean)wasErrorPage)){
-                        mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
-                    }else {
+                    if ((wasErrorPage != null && (boolean) wasErrorPage)) {
+                        mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60 + 60));
+                    } else {
                         int orientation = mContext.getResources().getConfiguration().orientation;
                         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
+                            mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60 + 60));
                         } else {
-                            mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60) + helperMethod.pxFromDp(50) + mTopBar.getHeight());
+                            mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60) + helperMethod.pxFromDp(50) + mTopBar.getHeight());
                         }
                     }
                 }
-            }else {
-                mWebviewContainer.setPadding(0,0,0,helperMethod.pxFromDp(60 + 60));
+            } else {
+                mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60 + 60));
             }
         }
     }
 
-    void onReDraw(){
-        if(mWebviewContainer.getPaddingBottom()==0){
-            mWebviewContainer.setPadding(0,0,0,1);
-        }
-        else {
-            mWebviewContainer.setPadding(0,0,0,0);
+    void onReDraw() {
+        if (mWebviewContainer.getPaddingBottom() == 0) {
+            mWebviewContainer.setPadding(0, 0, 0, 1);
+        } else {
+            mWebviewContainer.setPadding(0, 0, 0, 0);
         }
     }
 
-    void onSessionChanged(){
+    void onSessionChanged() {
     }
 
     /*-------------------------------------------------------POST UI TASK HANDLER-------------------------------------------------------*/
@@ -1756,44 +1750,35 @@ class homeViewController
     }
 
     @SuppressLint("HandlerLeak")
-    private void createUpdateUiHandler(){
-        mUpdateUIHandler = new Handler()
-        {
+    private void createUpdateUiHandler() {
+        mUpdateUIHandler = new Handler() {
             @Override
-            public void handleMessage(Message msg)
-            {
-                if(msg.what == messages.MESSAGE_ON_URL_LOAD)
-                {
-                    if(mEvent.invokeObserver(null, enums.etype.M_HOME_PAGE)==null){
+            public void handleMessage(Message msg) {
+                if (msg.what == messages.MESSAGE_ON_URL_LOAD) {
+                    if (mEvent.invokeObserver(null, enums.etype.M_HOME_PAGE) == null) {
                         mEvent.invokeObserver(null, enums.etype.M_PRELOAD_URL);
-                        if(status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)){
+                        if (status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)) {
                             mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingDefaultSearchEngine)), enums.etype.on_url_load);
-                        }else {
+                        } else {
                             mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), enums.etype.on_url_load);
                         }
                     }
-                    if(!status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR) ){
+                    if (!status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR)) {
                         mEvent.invokeObserver(Collections.singletonList(status.sExternalWebsite), enums.etype.open_new_tab_instant);
                     }
 
                     status.sSettingIsAppStarted = true;
                 }
-                if(msg.what == messages.MESSAGE_UPDATE_LOADING_TEXT)
-                {
-                    if(mLogs !=null)
-                    {
-                        try
-                        {
+                if (msg.what == messages.MESSAGE_UPDATE_LOADING_TEXT) {
+                    if (mLogs != null) {
+                        try {
                             mLogs.call();
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
-                if(msg.what == messages.MESSAGE_PROGRESSBAR_VALIDATE)
-                {
+                if (msg.what == messages.MESSAGE_PROGRESSBAR_VALIDATE) {
                 }
             }
         };

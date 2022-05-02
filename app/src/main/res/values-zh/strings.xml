@@ -8,7 +8,7 @@
     <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="true">哎呀！出问题了</string>
     <string name="GENERAL_TODO" translatable="true">一切</string>
-    <string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
     <string name="GENERAL_LOADING" translatable="true">数字自由</string>
     <string name="GENERAL_RELOAD" translatable="true">重装</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">您正面临以下问题之一。网页或网站可能无法正常工作。您的互联网连接可能不佳。您可能正在使用代理。网站可能被防火墙阻止</string>
@@ -36,7 +36,7 @@
     <string name="LANDING_BRIDGES_INFO" translatable="true">“有时你需要一个 桥 来访问 Tor 网络 ”</string>
     <string name="LANDING_MORE" translatable="true">“告诉我更多”</string>
     <string name="LANDING_HELLO" translatable="true">“你好”</string>
-    <string name="LANDING_WELCOME" translatable="true">“欢迎使用手机拨打 Genesis 。”</string>
+    <string name="LANDING_WELCOME" translatable="true">“欢迎使用手机拨打 Orion 。”</string>
     <string name="LANDING_BROWSE_INFO" translatable="true">“安全可靠地浏览互联网。”</string>
     <string name="LANDING_NO_TRACKING" translatable="true">“没有跟踪。没有审查。”</string>
 
@@ -59,7 +59,7 @@
     <string name="ORBOT_LOG" translatable="true">代理日志</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">系统日志信息</string>
     <string name="ORBOT_LOG_INFO" translatable="true">如果您在开始Genesis时遇到连接问题，请复制以下代码并在线查找问题或发送给我们，以便我们为您提供帮助</string>
-    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
 
     <!-- Orbot Settings -->
     <string name="ORBOT_SETTING_HEADER" translatable="true">代理自定义</string>
@@ -98,7 +98,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">重启</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">标签已关闭</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新标签打开</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis 代理连接...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion 代理连接...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">内存已满 ➔ 清除选项卡</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">弹出窗口被阻止</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">打开错误日志</string>
@@ -162,26 +162,6 @@
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">提供您知道的Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">输入来自可信来源的bridge信息</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">要求</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
@@ -372,14 +352,10 @@
     <string name="ALERT_DOWNLOAD" translatable="true">下载通知</string>
     <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">下载通知</string>
     <string name="ALERT_LONG_URL_TITLE" translatable="true">网络链接通知</string>
-    <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">找不到用于处理电子邮件的软件</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">下载文件|</string>
     <string name="ALERT_DATA_CLEARED" translatable="true">数据已清除|需要重启</string>
-
-
-
-
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot日志</string>
@@ -461,15 +437,13 @@
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">您可以通过重新启动软件并转到代理管理器来更改代理。可以通过单击底部的齿轮图标来打开它</string>
 
 
-
-
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
     <string name="NOTIFICATION_OPEN_TEXT" translatable="true">打开这个</string>
 
 
     <string name="HOME_TAB_TEXT" translatable="true">1</string>
     <string name="HOME_CONNECT" translatable="false">connect</string>
-    <string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">打开的标签将显示在这里</string>
 
 
@@ -490,14 +464,14 @@
     <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">最近的标签</string>
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">新身份</string>
     <string name="SETTING_PRIVACY_POLICY" translatable="true">隐私政策</string>
-    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser 隐私政策</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser 隐私政策</string>
     <string name="SETTING_REPORT_WEBSITE" translatable="true">报告网站</string>
     <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">举报非法网站</string>
     <string name="SETTING_SITEMAP" translatable="true">发布您的网站</string>
     <string name="SETTING_SITEMAP_INFO" translatable="true">将您的网站添加到我们的搜索引擎</string>
 
-    <item name="LaguageID" type="id"/>
-    <item name="LaguageRegion" type="id"/>
+    <item name="LaguageID" type="id" />
+    <item name="LaguageRegion" type="id" />
 
     <string-array name="ARRAY_FONTS" translatable="true">
         <item>55％</item>

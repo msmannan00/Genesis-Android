@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.trackingManager;
 
-class settingTrackingEnums
-{
+class settingTrackingEnums {
     /*History Manager*/
     public enum eTrackingModel {
         M_SET_TRACKING_PROTECTION

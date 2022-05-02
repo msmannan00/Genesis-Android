@@ -10,8 +10,10 @@ import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.widget.onionservices.helperMethod.helperMethod;
+
 import java.util.Arrays;
 import java.util.List;
+
 import static com.hiddenservices.onionservices.constants.constants.CONST_PACKAGE_NAME;
 
 public class widgetModelController {
@@ -22,14 +24,13 @@ public class widgetModelController {
 
     /*Initializations*/
 
-    widgetModelController(eventObserver.eventListener pEvent)
-    {
+    widgetModelController(eventObserver.eventListener pEvent) {
         this.mEvent = pEvent;
     }
 
-    private void initialize(Context context, Intent intent){
+    private void initialize(Context context, Intent intent) {
         String action = intent.getAction();
-        Log.i("FUCK5","adsdsadasdasdas");
+        Log.i("FUCK5", "adsdsadasdasdas");
         switch (action) {
             case enums.WidgetCommands.OPEN_APPLICATION: {
                 status.sWidgetResponse = enums.WidgetResponse.SEARCHBAR;
@@ -61,10 +62,10 @@ public class widgetModelController {
             }
             case AppWidgetManager.ACTION_APPWIDGET_OPTIONS_CHANGED: {
                 Bundle extras = intent.getExtras();
-                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID)&& extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS)) {
+                if (extras != null && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_ID) && extras.containsKey(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS)) {
                     int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
                     Bundle widgetExtras = extras.getBundle(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
-                    mEvent.invokeObserver(Arrays.asList(context, AppWidgetManager.getInstance(context),appWidgetId, widgetExtras), widgetEnums.eWidgetControllerCallback.M_OPTION_CHANGE);
+                    mEvent.invokeObserver(Arrays.asList(context, AppWidgetManager.getInstance(context), appWidgetId, widgetExtras), widgetEnums.eWidgetControllerCallback.M_OPTION_CHANGE);
                 }
                 break;
             }
@@ -84,10 +85,10 @@ public class widgetModelController {
         }
     }
 
-    public Object onTrigger(widgetEnums.eModelViewController pCommands, List<Object> pData){
-        Log.i("FUCK6","adsdsadasdasdas");
-        if(pCommands.equals(widgetEnums.eModelViewController.M_ON_RECIEVE)){
-            initialize((Context)pData.get(0), (Intent) pData.get(1));
+    public Object onTrigger(widgetEnums.eModelViewController pCommands, List<Object> pData) {
+        Log.i("FUCK6", "adsdsadasdasdas");
+        if (pCommands.equals(widgetEnums.eModelViewController.M_ON_RECIEVE)) {
+            initialize((Context) pData.get(0), (Intent) pData.get(1));
         }
         return null;
     }

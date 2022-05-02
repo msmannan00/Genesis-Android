@@ -56,7 +56,7 @@
                 android:ellipsize="end"
                 android:text="@string/GENERAL_HIDDEN_WEB"
                 android:textColor="#737373"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
         </LinearLayout>
 
         <ImageButton

@@ -2,12 +2,16 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <size android:width="10dp" android:height="10dp"/>
+            <size
+                android:width="10dp"
+                android:height="10dp" />
             <solid android:color="@color/holo_gray_light" />
-            <padding android:bottom="12dp" android:top="12dp"
-                android:left="12dp" android:right="12dp"/>
+            <padding
+                android:bottom="12dp"
+                android:top="12dp"
+                android:left="12dp"
+                android:right="12dp" />
         </shape>
     </item>
-    <item android:drawable="@xml/ic_baseline_add">
-    </item>
+    <item android:drawable="@xml/ic_baseline_add"></item>
 </layer-list>

@@ -1,531 +1,507 @@
 <resources>
 
-	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Genesis</string>
-	<string name="GENERAL_SEARCH_HINT" translatable="true">何かを検索するか、Webリンクを入力します</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">ページで見つける</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">検索エンジン</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">おっと！何かがうまくいかなかった</string>
-	<string name="GENERAL_TODO" translatable="true">すべて</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
-	<string name="GENERAL_LOADING" translatable="true">デジタルの自由</string>
-	<string name="GENERAL_RELOAD" translatable="true">リロード</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">次のいずれかの問題が発生しています。ウェブページまたはウェブサイトが機能していない可能性があります。インターネット接続が悪い可能性があります。プロキシを使用している可能性があります。ウェブサイトがファイアウォールによってブロックされている可能性があります</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC |イスラエルが再びストライキ</string>
-
-	<!-- Shortcuts -->
-	<string name="shortcut_erase_short_label" translatable="false">ブラウザのキャッシュを消去する</string>
-	<string name="shortcut_erase_long_label" translatable="false">閲覧したウェブサイトを消去する</string>
-	<string name="shortcut_erase_and_open_short_label" translatable="false">データを消去してブラウザを開く</string>
-	<string name="shortcut_erase_and_open_long_label" translatable="false">ブラウザのキャッシュを消去する</string>
-	<string name="shortcut_open" translatable="false">ジェネシスブラウザを再起動します</string>
-	<string name="shortcut_open_long" translatable="false">ブラウザを再起動します</string>
-
-	<!-- Bookmark Setting -->
-	<string name="BOOKMARK_SETTING_HEADER" translatable="true">ブックマークの編集</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">ブックマーク名</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">ブックマークされたURLの名前がここに表示されます</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">ブックマーク名を入力…</string>
-
-	<!-- Alerts General -->
-	<string name="ALERT_DISMISS" translatable="true">退出させる</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">「Torネットワーク」にアクセスするために「ブリッジ」が必要になる場合があります</string>
-	<string name="LANDING_MORE" translatable="true">「もっと教えて」</string>
-	<string name="LANDING_HELLO" translatable="true">「こんにちは」</string>
-	<string name="LANDING_WELCOME" translatable="true">「モバイルで Genesis へようこそ。」</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">「インターネットを安全かつ確実に閲覧してください。」</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">「追跡なし。検閲なし。」</string>
-
-	<!-- Alert Secure -->
-	<string name="ALERT_SECURE_INFO" translatable="true">接続は安全です</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">あなたの情報（例えば、パスワードやクレジットカード番号）は、このサイトに送信されるときに安全です。 セキュリティ設定</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">あなたの身元を安全に保ち、以下のオプションを使用してください</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">追跡しない</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">私たちはあなたを追跡しないようにサイトに伝えます</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">追跡保護</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">当社が提供する追跡保護を有効にする</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">証明書</string>
-	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">証明書情報</string>
-
-	<!-- Alert Certificate -->
-	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">証明書情報</string>
-
-	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">プロキシログ</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">システムログ情報</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">Genesisの開始中に接続の問題が発生した場合は、次のコードをコピーしてオンラインで問題を見つけるか、送信してください。サポートを提供します。</string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
-
-	<!-- Orbot Settings -->
-	<string name="ORBOT_SETTING_HEADER" translatable="true">プロキシのカスタマイズ</string>
-	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">世界中の何千人ものボランティアが運営するTorネットワークに接続します。これらのオプションはあなたを助けることができますか</string>
-	<string name="ORBOT_SETTING_TITLE" translatable="true">インターネットはここで検閲されます（ファイアウォールをバイパスします）</string>
-	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">ファイアウォールをバイパスする</string>
-	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridgesを使用すると、インターネットの実行速度が非常に遅くなります。お住まいの国でインターネットが検閲されているか、Torネットワークがブロックされている場合にのみ使用してください</string>
-	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">セキュリティのカスタマイズ</string>
-
-	<!-- Bridge Settings -->
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">セキュリティ設定</string>
-	<string name="BRIDGE_SETTING" translatable="true">「BRIDGE」設定を変更する</string>
-	<string name="BRIDGE_AUTO" translatable="true">自動作成</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">「BRIDGE」設定を自動的に構成する</string>
-	<string name="BRIDGE_MANUAL" translatable="true">私が知っている「ブリッジ」を提供する</string>
-	<string name="BRIDGE_PORT_HINT" translatable="false">カスタム「BRIDGE」を貼り付け</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">「BRIDGE」は、Torネットワークへの接続をブロックすることをより困難にするリストされていないTorリレーです。 一部の国ではTorをブロックしようとしているため、特定の「BRIDGE」は一部の国では機能しますが、他の国では機能しません。 デフォルトの「BRIDGE」を選択</string>
-	<string name="BRIDGE_TITLE" translatable="true">リクエスト</string>
-	<string name="BRIDGE_REQUEST" translatable="true">obfs4（推奨）</string>
-	<string name="BRIDGE_OBFS4" translatable="true">Meek-azure（中国）</string>
-	<string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
-	
-	<!-- Alert Advance Log -->
-	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">システムログの表示方法を変更する</string>
-	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">最新のリストビューを使用してログを表示</string>
-	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">クラシックとモダンのリストビューを切り替えます</string>
-
-	<!-- Generic Toast Alerts -->
-	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">ブックマークが削除されました</string>
-	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">ブックマークが更新されました</string>
-	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">データが正常にクリアされました</string>
-	<string name="TOAST_ALERT_URL_COPIED" translatable="true">クリップボードにコピーされたURL</string>
-	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">アプリケーションが見つかりません</string>
-	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">変更後に再起動が必要</string>
-	<string name="TOAST_ALERT_RESTART" translatable="true">再起動</string>
-	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">タブが閉じています</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新しいタブが開きました</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">ジェネシスプロキシ接続...</string>
-	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">メモリがいっぱいです➔[クリア]タブ</string>
-	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">ポップアップがブロックされました</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">エラーログを開く</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">スイッチ</string>
-	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">元に戻す</string>
-	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">新しいアイデンティティが作成されました</string>
-	<string name="TOAST_ALERT_SETTING" translatable="true">設定を開く</string>
-
-	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Bridgeアドレスをリクエストするには、以下の[電子メール]を選択します。アドレスを取得したら、それをコピーして上記のボックスに貼り付け、アプリケーションを起動します。</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">メール</string>
-
-	<!-- Alert Rate Failure -->
-	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">それを聞いて申し訳ありません</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">このアプリケーションの使用中に問題が発生した場合は、電子メールでご連絡ください。私たちはあなたの問題をできるだけ早く解決しようとします</string>
-
-	<!-- Alert Panic -->
-	<string name="ALERT_PANIC_HEADER" translatable="true">トラブルシューティング</string>
-	<string name="ALERT_PANIC_INFO" translatable="true">動作しない場合は、アプリケーションをリセットしてください。再び機能するように、再構成を試みます。</string>
-	<string name="ALERT_PANIC_BT_1" translatable="true">リセット</string>
-	<string name="ALERT_PANIC_BT_2" translatable="true">却下</string>
-
-	<!-- Alert Download Single -->
-	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">ダウンロードを待っています...</string>
-	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">ダウンロード</string>
-
-	<!-- Alert Rateus -->
-	<string name="ALERT_RATEUS" translatable="true">米国を評価する</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">このアプリについてどう思うかを他の人に教えてください</string>
-	<string name="ALERT_RATE" translatable="true">レート</string>
-
-	<!-- Alert BRIDGE -->
-	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">完了</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge文字列（obfs4 212.21.66.66：20621 ...）</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridgeタイプ（obfs4、meek、...）</string>
-
-	<!-- Alert Create Bookmark -->
-	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">ブックマークウェブサイト</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">このページをブックマークに追加する</string>
-	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">ブックマーク名...</string>
-	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">完了</string>
-
-	<!-- Alert Long Download -->
-	<string name="ALERT_LONG_URL" translatable="true">URL通知</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">新しいタブで開く</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">現在のタブで開く</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">クリップボードにコピー</string>
-	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">ファイルのダウンロード</string>
-
-	<!-- Alert Full Download -->
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">新しいタブでURLを開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">現在のタブでURLを開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URLをクリップボードにコピー</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">新しいタブで画像を開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">画像の現在のタブを開く</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">画像をクリップボードにコピー</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">画像ファイルをダウンロード</string>
-
-	<!-- Alert Bridge Custom -->
-	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">あなたが知っているBridgeを提供する</string>
-	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">信頼できるソースからのbridge情報を入力します</string>
-	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">リクエスト</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
-	<string name="SETTING_BASIC_SETTING" translatable="true">システム設定</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">Genesisをデフォルトのブラウザにする</string>
-	<string name="SETTING_HEADER" translatable="true">システム設定</string>
-	<string name="SETTING_SEARCH_ENGINE" translatable="true">検索エンジン</string>
-	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_CLEAR_HISTORY" translatable="true">閲覧したWebリンクを削除する</string>
-	<string name="SETTING_FONT_TITLE" translatable="true">フォントのカスタマイズ</string>
-	<string name="SETTING_ADJUST_FONT" translatable="true">システムフォントの構成</string>
-	<string name="SETTING_MANUAL_FONT" translatable="true">フォントを自動的に変更する</string>
-	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">クッキーの設定</string>
-	<string name="SETTING_COOKIE" translatable="true">クッキー</string>
-	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">システム設定 。通知</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">通知</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">通知設定の変更</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">ネットワークと通知の状態</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">ローカル通知</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">ソフトウェア通知をカスタマイズする</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">システム通知</string>
-	<string name="SETTING_SEARCH" translatable="true">検索エンジンを管理する</string>
-	<string name="SETTING_SEARCH_INFO" translatable="true">追加、デフォルトを設定します。提案を表示する</string>
-	<string name="SETTING_NOTIFICATION" translatable="true">通知を管理する</string>
-	<string name="SETTING_NOTIFICATION_INFO" translatable="true">新機能、ネットワークの状態</string>
-	<string name="SETTING_SEARCH_HEADER" translatable="true">ソフトウェアをカスタマイズします。検索エンジン</string>
-	<string name="SETTING_SEARCH_HEADER_1" translatable="true">サポートされている検索エンジン</string>
-	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">デフォルトの検索エンジンを選択します</string>
-	<string name="SETTING_SEARCH_HEADER_2" translatable="true">ソフトウェアをカスタマイズします。検索エンジン</string>
-	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Web検索の表示方法を変更する</string>
-	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
-	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
-	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
-	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
-	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
-	<string name="SETTING_SEARCH_HISTORY" translatable="true">閲覧したWebリンクを表示する</string>
-	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">検索中に提案を表示する</string>
-	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">検索バーに入力すると、閲覧したWebリンクからの提案が表示されます</string>
-	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">検索バーに入力すると、焦点を絞った提案が表示されます</string>
-	<string name="SETTING_ACCESSIBILITY" translatable="true">アクセシビリティ</string>
-	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">テキストサイズ、ズーム、音声による入力</string>
-	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">カスタマイズ|アクセシビリティ</string>
-	<string name="SETTING_CLEAR" translatable="true">個人データを消去する</string>
-	<string name="SETTING_CLEAR_INFO" translatable="true">タブ、閲覧したWebリンク、ブックマーク、Cookie、キャッシュ</string>
-	<string name="SETTING_CLEAR_HEADER" translatable="true">システム設定を変更します。システムデータのクリア</string>
-	<string name="SETTING_CLEAR_BUTTON" translatable="true">クリアデータ</string>
-	<string name="SETTING_CLEAR_OPTION_1" translatable="true">すべてのタブを削除します</string>
-	<string name="SETTING_CLEAR_OPTION_2" translatable="true">閲覧したWebリンクを削除する</string>
-	<string name="SETTING_CLEAR_OPTION_3" translatable="true">ブックマークを削除する</string>
-	<string name="SETTING_CLEAR_OPTION_4" translatable="true">キャッシュを削除する</string>
-	<string name="SETTING_CLEAR_OPTION_5" translatable="true">提案を削除する</string>
-	<string name="SETTING_CLEAR_OPTION_6" translatable="true">データを削除する</string>
-	<string name="SETTING_CLEAR_OPTION_7" translatable="true">セッションを削除する</string>
-	<string name="SETTING_CLEAR_OPTION_8" translatable="true">クッキーを削除する</string>
-	<string name="SETTING_CLEAR_OPTION_9" translatable="true">削除カスタマイズ</string>
-	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">フォントスケーリング</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">システムのフォントサイズに応じてWebコンテンツをスケーリングする</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">ズームをオンにする</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">オンにして、すべてのWebページを強制的にズームします</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">音声による入力</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">URLバーで音声ディクテーションを許可する</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">カスタムフォントスケーリングを選択</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">これが快適に読めるようになるまでスライダーをドラッグします。段落をダブルタップした後、テキストは少なくともこれほど大きく見えるはずです</string>
-	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
-	<string name="SETTING_INTERACTION" translatable="true">相互作用</string>
-	<string name="SETTING_INTERACTION_INFO" translatable="true">ウェブサイトのコンテンツとのやりとりの方法を変える</string>
-	<string name="SETTING_PRIVACY" translatable="true">ユーザーオン</string>
-	<string name="SETTING_PRIVACY_INFO" translatable="true">ユーザーの監視、ログイン、データの選択</string>
-	<string name="SETTING_TRACKING" translatable="true">ユーザー監視保護</string>
-	<string name="SETTING_TRACKING_INFO" translatable="true">アドブロック、トラッカー、フィンガープリント</string>
-	<string name="SETTING_PRIVACY_HEADER" translatable="true">システム設定 。プライバシー</string>
-	<string name="SETTING_TRACKING_HEADER" translatable="true">システム設定 。ユーザー監視保護</string>
-	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">オンラインIDを保護する</string>
-	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">あなたの身元を秘密にしてください。オンラインであなたをフォローしているいくつかのトラッカーからあなたを守ることができます。このシステム設定は、広告をブロックするためにも使用できます</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">ユーザーのSurvelanceProtectionから身を守る</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesisはサイトに私を追跡しないように指示します</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">私を追跡しないようにウェブサイトに伝えます</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">ユーザー監視保護</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Genesisが提供するユーザー監視保護を有効にする</string>
-	<string name="SETTING_PRIVACY_COOKIES" translatable="true">ウェブサイトのクッキー</string>
-	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">セキュリティのニーズに応じてWebサイトのCookie設定を選択します</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">終了時にプライベートデータをクリアする</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">ソフトウェアが閉じられると、データを自動的にクリアします</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">プライベートブラウジング</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">IDを安全に保ち、以下のオプションを使用してください</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">有効</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">ウェブサイト追跡Cookieを除く有効</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">サードパーティを除く有効</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">無効</string>
-
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">保護を無効にする</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">ID監視保護を許可します。これにより、オンラインIDが盗まれる可能性があります</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">デフォルト（推奨）</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">オンライン広告とソーシャルWebユーザーSurvelanceをブロックします。ページはデフォルトで読み込まれます</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">厳格なポリシー</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">既知のトラッカーをすべて停止すると、ページの読み込みは速くなりますが、一部の機能が機能しない場合があります</string>
-
-	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">さまざまなスクリプト攻撃に対してJavaスクリプトを無効にする</string>
-	<string name="SETTING_ADVANCE_HEADER" translatable="true">システム設定 。複雑なシステム設定</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">タブを復元</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">ブラウザを終了した後に復元しないでください</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">ツールバーのテーマ</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Webサイトで定義されているツールバーテーマを設定します</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">画像を表示</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">常にウェブサイトの画像を読み込む</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Webフォントを表示する</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">ページの読み込み時にリモートフォントをダウンロードする</string>
-	<string name="SETTING_ADVANCE_MEDIA" translatable="true">自動再生を許可する</string>
-	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">メディアを自動的に開始できるようにする</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">データセーバー</string>
-	<string name="SETTING_ADVANCE_TAB" translatable="true">タブ</string>
-	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">ソフトウェアの再起動後のタブの動作方法を変更する</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">メディア</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">デフォルトのデータセーバーを変更するカスタマイズ</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">デフォルトのメディアのカスタマイズを変更する</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">常に画像を表示する</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Wi-Fiを使用している場合にのみ画像を表示する</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">すべての画像をブロックする</string>
-	<string name="SETTING_ADVANCE" translatable="true">事前システム設定</string>
-	<string name="SETTING_ADVANCE_INFO" translatable="true">復元タブ、データセーバー、開発者ツール</string>
-	<string name="SETTING_PROXY" translatable="true">プロキシのonion条件</string>
-	<string name="SETTING_PROXY_INFO" translatable="true">ネットワークのonion状態を確認してください</string>
-	<string name="SETTING_REPORT" translatable="true">レポートのウェブサイト</string>
-	<string name="SETTING_REPORT_INFO" translatable="true">虐待的なウェブサイトを報告する</string>
-	<string name="SETTING_RATEUS" translatable="true">このアプリを評価する</string>
-	<string name="SETTING_RATEUS_INFO" translatable="true">Playストアの評価とコメント</string>
-	<string name="SETTING_SHARE" translatable="true">このアプリを共有する</string>
-	<string name="SETTING_SHARE_INFO" translatable="true">このソフトウェアを友達と共有する</string>
-	<string name="SETTING_GENERAL_HEADER" translatable="true">システム設定 。一般的なカスタマイズ</string>
-	<string name="SETTING_GENERAL" translatable="true">デフォルトのシステム設定</string>
-	<string name="SETTING_GENERAL_INFO" translatable="true">ホームページ、言語</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">フルスクリーンブラウジング</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">ページを下にスクロールするときにブラウザのツールバーを非表示にする</string>
-	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">言語</string>
-	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">ブラウザの言語を変更する</string>
-	<string name="SETTING_GENERAL_THEME" translatable="true">ソフトウェアテーマ</string>
-	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">明るいテーマと暗いテーマを選択してください</string>
-	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">明るいテーマ</string>
-	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">テーマダーク</string>
-	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">フルスクリーンブラウジングと言語を変更する</string>
-	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">システムのデフォルト</string>
-	<string name="SETTING_GENERAL_HOME" translatable="true">ホームページ</string>
-	<string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">新しいタブ</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">新しいタブでホームページを開く</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">すべてのタブを削除します</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">閲覧したWebリンクを削除する</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">ブックマークを削除する</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">ブラウジングキャッシュを削除する</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">提案を削除する</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">サイトデータを削除する</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">セッションデータを削除する</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">WebブラウジングCookieを削除する</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">ブラウザのカスタマイズを削除する</string>
-
-
-	<string name="ALERT_CREATE_BOOKMARK" translatable="true">ブックマークのウェブサイト</string>
-	<string name="ALERT_CLEAR_HISTORY" translatable="true">閲覧したウェブリンクとデータを削除する</string>
-	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">ブックマークとデータをクリアする</string>
-	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">データを消去すると、閲覧されたWebリンク、Co​​okie、およびその他の閲覧データが削除されます</string>
-	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">データを削除すると、ブックマークされたWebサイトが削除されます</string>
-	<string name="ALERT_CLEAR" translatable="true">キャンセル</string>
-	<string name="ALERT_SECURE" translatable="false">https://</string>
-	<string name="ALERT_REPORT" translatable="true">報告する</string>
-	<string name="ALERT_REPORT_URL" translatable="true">レポートのウェブサイト</string>
-	<string name="ALERT_REPORT_URL_INFO" translatable="true">このURLが違法または迷惑であると思われる場合は、Googleに報告してください。そうすれば、法的措置を取ることができます。</string>
-	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">正常に報告されました</string>
-	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URLが正常に報告されました。何かが見つかった場合、法的措置が取られます</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">言語はサポートされていません</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">システム言語は、このソフトウェアではサポートされていません。私たちはすぐにそれを含めるように取り組んでいます</string>
-	<string name="ALERT_ORBOT_INIT" translatable="true">Orbotの初期化</string>
-	<string name="ALERT_NOT_SUPPORTED" translatable="true">アクションはサポートされていません</string>
-	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">次のコマンドを処理するソフトウェアが見つかりません</string>
-	<string name="ALERT_WELCOME_MESSAGE" translatable="true">ようこそ|隠されたウェブGateway</string>
-	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">このソフトウェアは、非表示のWebURLを検索して開くためのプラットフォームを提供します。ここにいくつかの提案があります\n</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">隠されたウェブオンライン市場</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">漏洩した文書や本</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">ダークウェブのニュースと記事</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">秘密のソフトウェアとハ​​ッキングツール</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">二度と表示しない</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">財政とお金</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">社会社会</string>
-	<string name="ALERT_LOCAL_UPGRADE" translatable="true">マニュアル</string>
-	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">プレイストア</string>
-	<string name="ALERT_LONG_FILE" translatable="true">ファイル通知</string>
-	<string name="ALERT_DOWNLOAD" translatable="true">ダウンロード通知</string>
-	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">ダウンロード通知</string>
-	<string name="ALERT_LONG_URL_TITLE" translatable="true">Webリンク通知</string>
-	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
-	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">メールを処理するソフトウェアが見つかりません</string>
-	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">ファイルのダウンロード|</string>
-	<string name="ALERT_DATA_CLEARED" translatable="true">クリアされたデータ|再起動が必要</string>
-
-
-
-
-
-
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbotログ</string>
-	<string name="HOME_MENU__NEW_TABS" translatable="true">新しいタブ</string>
-	<string name="HOME_MENU_CLOSE_TABS" translatable="true">タブを閉じる</string>
-	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">最近のタブを開く</string>
-	<string name="HOME_MENU_LANGUAGE" translatable="true">言語</string>
-	<string name="HOME_MENU_DOWNLOAD" translatable="true">ダウンロード</string>
-	<string name="HOME_MENU_HISTORY" translatable="true">閲覧したWebリンク</string>
-	<string name="HOME_MENU_SETTING" translatable="true">システム設定</string>
-	<string name="HOME_MENU_DESKTOP" translatable="true">デスクトップサイト</string>
-	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor 繋がり</string>
-	<string name="HOME_MENU_BOOKMARK" translatable="true">このページを保存する</string>
-	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">ブックマーク</string>
-	<string name="HOME_MENU_REPORT" translatable="true">レポートのウェブサイト</string>
-	<string name="HOME_MENU_RATE" translatable="true">このアプリを評価する</string>
-	<string name="HOME_MENU_FIND" translatable="true">ページで見つける</string>
-	<string name="HOME_MENU_QUIT" translatable="true">出口</string>
-	<string name="HOME_MENU_SHARE" translatable="true">共有</string>
-
-
-	<string name="TAB_MENU_OPEN_TAB" translatable="true">新しいタブ</string>
-	<string name="TAB_MENU_CLOSE_TAB" translatable="true">すべてのタブを閉じる</string>
-	<string name="TAB_MENU_SETTINGS" translatable="true">システム設定</string>
-	<string name="TAB_LIST_SELECT" translatable="true">タブを選択</string>
-
-
-	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">タブを開く</string>
-	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">コピー</string>
-	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">共有</string>
-	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">明確な選択</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">現在のタブで開く</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">新しいタブで開く</string>
-	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">削除</string>
-
-
-	<string name="HISTORY_TITLE" translatable="true">閲覧したWebリンク</string>
-	<string name="HISTORY_CLEAR" translatable="true">これを削除します</string>
-	<string name="HISTORY_SEARCH_HINT" translatable="true">探す ...</string>
-
-
-	<string name="BOOKMARK_TITLE" translatable="true">ブックマーク</string>
-	<string name="BOOKMARK_CLEAR" translatable="true">これを削除します</string>
-	<string name="BOOKMARK_SEARCH_HINT" translatable="true">探す ...</string>
-
-
-	<string name="HELP_RETRY" translatable="true">リトライ</string>
-	<string name="HELP_RETRY_INFO" translatable="true">おっと！ネットワーク接続エラー。ネットワークが接続されていません</string>
-	<string name="HELP_TITLE" translatable="true">ヘルプとサポート</string>
-
-
-	<string name="LANGUAGE_TITLE" translatable="true">言語</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">言語を変更</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">以下の言語でのみ実行されます。もうすぐ追加します</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">英語（米国）</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">ドイツ語（ドイツ語）</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">イタリア語（イタリア）</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">ポルトガル語（ブラジル）</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">ロシア語（ロシア語）</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">ウクライナ語（ウクライナ語）</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">簡体字中国語（中国本土）</string>
-
-
-	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️警告</string>
-	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Bridgesをカスタマイズする</string>
-	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridgesを有効にする</string>
-	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">VPNサービスを有効にする</string>
-	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Bridge Gatewayを有効にする</string>
-	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Gatewayを有効にする</string>
-
-
-	<string name="PROXY_STATUS_HEADER" translatable="true">プロキシの状態</string>
-	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orbotプロキシの現状</string>
-	<string name="PROXY_SUB_HEADER1" translatable="true">Orbotプロキシの条件</string>
-	<string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
-	<string name="PROXY_VPN_STATUS" translatable="true">VPN接続状態</string>
-	<string name="PROXY_BRIDGE_STATUS" translatable="true">プロキシのBridge条件</string>
-	<string name="PROXY_SUB_HEADER3" translatable="true">情報|システム設定の変更</string>
-	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">ソフトウェアを再起動してプロキシマネージャに移動すると、プロキシを変更できます。下部にある歯車のアイコンをクリックすると開くことができます</string>
-
-
-
-
-	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
-	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">これを開く</string>
-
-
-	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_CONNECT" translatable="false">connect</string>
-	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
-	<string name="HOME_TAB_EMPTY" translatable="true">開いているタブがここに表示されます</string>
-
-
-	<string name="ERROR_M1" translatable="true">このサイトにはアクセスできません</string>
-	<string name="ERROR_M2" translatable="true">ウェブサイトへの接続中にエラーが発生しました</string>
-	<string name="ERROR_M3" translatable="true">受信したデータの信頼性を確認できなかったため、表示しようとしているページを表示できません</string>
-	<string name="ERROR_M4" translatable="true">何らかの理由でページが現在機能していません</string>
-	<string name="ERROR_M5" translatable="true">この問題については、Webサイトの所有者に連絡してください。</string>
-	<string name="ERROR_M6" translatable="true">リロード</string>
-
-	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">最近のタブ</string>
-	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">新しいアイデンティティ</string>
-	<string name="SETTING_PRIVACY_POLICY" translatable="true">個人情報保護方針</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser プライバシーポリシー</string>
-	<string name="SETTING_REPORT_WEBSITE" translatable="true">レポートのウェブサイト</string>
-	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">違法なウェブサイトを報告する</string>
-	<string name="SETTING_SITEMAP" translatable="true">あなたのウェブサイトを公開する</string>
-	<string name="SETTING_SITEMAP_INFO" translatable="true">あなたのウェブサイトを私たちの検索エンジンに追加してください</string>
-
-	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
-	<string name="invalid_package_signature" translatable="true">無効なパッケージ署名</string>
-	<string name="autofill_sign_in_prompt" translatable="true">クリックしてサインインします。</string>
-	<string name="autofill_manual_prompt" translatable="true">クリックして手動でデータを選択します。</string>
-	<string name="security_exception" translatable="true">Webドメインのセキュリティ例外。</string>
-	<string name="dal_exception" translatable="true">DAL検証の失敗。</string>
-
-	<item name="LaguageID" type="id"/>
-	<item name="LaguageRegion" type="id"/>
-
-	<string-array name="ARRAY_FONTS" translatable="true">
-		<item>55パーセント</item>
-		<item>70パーセント</item>
-		<item>85パーセント</item>
-		<item>100パーセント</item>
-		<item>115パーセント</item>
-		<item>130パーセント</item>
-		<item>145パーセント</item>
-	</string-array>
-
-	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
-		<item>有効</item>
-		<item>無効</item>
-	</string-array>
-
-	<string-array name="ARRAY_NOTIFICATION" translatable="true">
-		<item>全て可能にする</item>
-		<item>すべて無効にする</item>
-		<item>帯域幅なし</item>
-	</string-array>
-
-	<string-array name="ARRAY_COOKIES" translatable="true">
-		<item>すべて許可します</item>
-		<item>信頼できるものを許可する</item>
-		<item>許可なし</item>
-		<item>訪問を許可する</item>
-		<item>非トラッカーを許可する</item>
-	</string-array>
-
-	<!-- Generated by Automatic String Resource Translation -->
-	<!--          https://asrt.gluege.boerde.de             -->
+    <!-- Application Strings -->
+    <string name="app_name" translatable="false">Genesis</string>
+    <string name="GENERAL_SEARCH_HINT" translatable="true">何かを検索するか、Webリンクを入力します</string>
+    <string name="GENERAL_FIND_HINT" translatable="true">ページで見つける</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="true">検索エンジン</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">おっと！何かがうまくいかなかった</string>
+    <string name="GENERAL_TODO" translatable="true">すべて</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
+    <string name="GENERAL_LOADING" translatable="true">デジタルの自由</string>
+    <string name="GENERAL_RELOAD" translatable="true">リロード</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">次のいずれかの問題が発生しています。ウェブページまたはウェブサイトが機能していない可能性があります。インターネット接続が悪い可能性があります。プロキシを使用している可能性があります。ウェブサイトがファイアウォールによってブロックされている可能性があります</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC |イスラエルが再びストライキ</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label" translatable="false">ブラウザのキャッシュを消去する</string>
+    <string name="shortcut_erase_long_label" translatable="false">閲覧したウェブサイトを消去する</string>
+    <string name="shortcut_erase_and_open_short_label" translatable="false">データを消去してブラウザを開く</string>
+    <string name="shortcut_erase_and_open_long_label" translatable="false">ブラウザのキャッシュを消去する</string>
+    <string name="shortcut_open" translatable="false">ジェネシスブラウザを再起動します</string>
+    <string name="shortcut_open_long" translatable="false">ブラウザを再起動します</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">ブックマークの編集</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">ブックマーク名</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">ブックマークされたURLの名前がここに表示されます</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">ブックマーク名を入力…</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">退出させる</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">「Torネットワーク」にアクセスするために「ブリッジ」が必要になる場合があります</string>
+    <string name="LANDING_MORE" translatable="true">「もっと教えて」</string>
+    <string name="LANDING_HELLO" translatable="true">「こんにちは」</string>
+    <string name="LANDING_WELCOME" translatable="true">「モバイルで Orion へようこそ。」</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">「インターネットを安全かつ確実に閲覧してください。」</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">「追跡なし。検閲なし。」</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE_INFO" translatable="true">接続は安全です</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">あなたの情報（例えば、パスワードやクレジットカード番号）は、このサイトに送信されるときに安全です。 セキュリティ設定</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">あなたの身元を安全に保ち、以下のオプションを使用してください</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">追跡しない</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">私たちはあなたを追跡しないようにサイトに伝えます</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">追跡保護</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">当社が提供する追跡保護を有効にする</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">証明書</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">証明書情報</string>
+
+    <!-- Alert Certificate -->
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">証明書情報</string>
+
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="true">プロキシログ</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">システムログ情報</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">Genesisの開始中に接続の問題が発生した場合は、次のコードをコピーしてオンラインで問題を見つけるか、送信してください。サポートを提供します。</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">プロキシのカスタマイズ</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">世界中の何千人ものボランティアが運営するTorネットワークに接続します。これらのオプションはあなたを助けることができますか</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">インターネットはここで検閲されます（ファイアウォールをバイパスします）</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">ファイアウォールをバイパスする</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridgesを使用すると、インターネットの実行速度が非常に遅くなります。お住まいの国でインターネットが検閲されているか、Torネットワークがブロックされている場合にのみ使用してください</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">セキュリティのカスタマイズ</string>
+
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">セキュリティ設定</string>
+    <string name="BRIDGE_SETTING" translatable="true">「BRIDGE」設定を変更する</string>
+    <string name="BRIDGE_AUTO" translatable="true">自動作成</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">「BRIDGE」設定を自動的に構成する</string>
+    <string name="BRIDGE_MANUAL" translatable="true">私が知っている「ブリッジ」を提供する</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">カスタム「BRIDGE」を貼り付け</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">「BRIDGE」は、Torネットワークへの接続をブロックすることをより困難にするリストされていないTorリレーです。 一部の国ではTorをブロックしようとしているため、特定の「BRIDGE」は一部の国では機能しますが、他の国では機能しません。 デフォルトの「BRIDGE」を選択</string>
+    <string name="BRIDGE_TITLE" translatable="true">リクエスト</string>
+    <string name="BRIDGE_REQUEST" translatable="true">obfs4（推奨）</string>
+    <string name="BRIDGE_OBFS4" translatable="true">Meek-azure（中国）</string>
+    <string name="BRIDGE_MEEK" translatable="true">Meek-azure (China)</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">システムログの表示方法を変更する</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">最新のリストビューを使用してログを表示</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">クラシックとモダンのリストビューを切り替えます</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">ブックマークが削除されました</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">ブックマークが更新されました</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">データが正常にクリアされました</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">クリップボードにコピーされたURL</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">アプリケーションが見つかりません</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">変更後に再起動が必要</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">再起動</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">タブが閉じています</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新しいタブが開きました</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">ジェネシスプロキシ接続...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">メモリがいっぱいです➔[クリア]タブ</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">ポップアップがブロックされました</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">エラーログを開く</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">スイッチ</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">元に戻す</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">新しいアイデンティティが作成されました</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">設定を開く</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>REQUEST Bridge</font></b></string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Bridgeアドレスをリクエストするには、以下の[電子メール]を選択します。アドレスを取得したら、それをコピーして上記のボックスに貼り付け、アプリケーションを起動します。</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">メール</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">それを聞いて申し訳ありません</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">このアプリケーションの使用中に問題が発生した場合は、電子メールでご連絡ください。私たちはあなたの問題をできるだけ早く解決しようとします</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">トラブルシューティング</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">動作しない場合は、アプリケーションをリセットしてください。再び機能するように、再構成を試みます。</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">リセット</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">却下</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">ダウンロードを待っています...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">ダウンロード</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">米国を評価する</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">このアプリについてどう思うかを他の人に教えてください</string>
+    <string name="ALERT_RATE" translatable="true">レート</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">完了</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge文字列（obfs4 212.21.66.66：20621 ...）</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridgeタイプ（obfs4、meek、...）</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">ブックマークウェブサイト</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">このページをブックマークに追加する</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">ブックマーク名...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">完了</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">URL通知</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">新しいタブで開く</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">現在のタブで開く</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">クリップボードにコピー</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">ファイルのダウンロード</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">新しいタブでURLを開く</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">現在のタブでURLを開く</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URLをクリップボードにコピー</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">新しいタブで画像を開く</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">画像の現在のタブを開く</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">画像をクリップボードにコピー</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">画像ファイルをダウンロード</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">あなたが知っているBridgeを提供する</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">信頼できるソースからのbridge情報を入力します</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">リクエスト</string>
+
+
+    <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+    <string name="SETTING_BASIC_SETTING" translatable="true">システム設定</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">Genesisをデフォルトのブラウザにする</string>
+    <string name="SETTING_HEADER" translatable="true">システム設定</string>
+    <string name="SETTING_SEARCH_ENGINE" translatable="true">検索エンジン</string>
+    <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_CLEAR_HISTORY" translatable="true">閲覧したWebリンクを削除する</string>
+    <string name="SETTING_FONT_TITLE" translatable="true">フォントのカスタマイズ</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">システムフォントの構成</string>
+    <string name="SETTING_MANUAL_FONT" translatable="true">フォントを自動的に変更する</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">クッキーの設定</string>
+    <string name="SETTING_COOKIE" translatable="true">クッキー</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">システム設定 。通知</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">通知</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">通知設定の変更</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">ネットワークと通知の状態</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">ローカル通知</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">ソフトウェア通知をカスタマイズする</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">システム通知</string>
+    <string name="SETTING_SEARCH" translatable="true">検索エンジンを管理する</string>
+    <string name="SETTING_SEARCH_INFO" translatable="true">追加、デフォルトを設定します。提案を表示する</string>
+    <string name="SETTING_NOTIFICATION" translatable="true">通知を管理する</string>
+    <string name="SETTING_NOTIFICATION_INFO" translatable="true">新機能、ネットワークの状態</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">ソフトウェアをカスタマイズします。検索エンジン</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="true">サポートされている検索エンジン</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">デフォルトの検索エンジンを選択します</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">ソフトウェアをカスタマイズします。検索エンジン</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Web検索の表示方法を変更する</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+    <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="true">閲覧したWebリンクを表示する</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">検索中に提案を表示する</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">検索バーに入力すると、閲覧したWebリンクからの提案が表示されます</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">検索バーに入力すると、焦点を絞った提案が表示されます</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="true">アクセシビリティ</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">テキストサイズ、ズーム、音声による入力</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">カスタマイズ|アクセシビリティ</string>
+    <string name="SETTING_CLEAR" translatable="true">個人データを消去する</string>
+    <string name="SETTING_CLEAR_INFO" translatable="true">タブ、閲覧したWebリンク、ブックマーク、Cookie、キャッシュ</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">システム設定を変更します。システムデータのクリア</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="true">クリアデータ</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">すべてのタブを削除します</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">閲覧したWebリンクを削除する</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">ブックマークを削除する</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">キャッシュを削除する</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">提案を削除する</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">データを削除する</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">セッションを削除する</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">クッキーを削除する</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">削除カスタマイズ</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">フォントスケーリング</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">システムのフォントサイズに応じてWebコンテンツをスケーリングする</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">ズームをオンにする</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">オンにして、すべてのWebページを強制的にズームします</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">音声による入力</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">URLバーで音声ディクテーションを許可する</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">カスタムフォントスケーリングを選択</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">これが快適に読めるようになるまでスライダーをドラッグします。段落をダブルタップした後、テキストは少なくともこれほど大きく見えるはずです</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+    <string name="SETTING_INTERACTION" translatable="true">相互作用</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">ウェブサイトのコンテンツとのやりとりの方法を変える</string>
+    <string name="SETTING_PRIVACY" translatable="true">ユーザーオン</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">ユーザーの監視、ログイン、データの選択</string>
+    <string name="SETTING_TRACKING" translatable="true">ユーザー監視保護</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">アドブロック、トラッカー、フィンガープリント</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">システム設定 。プライバシー</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">システム設定 。ユーザー監視保護</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">オンラインIDを保護する</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">あなたの身元を秘密にしてください。オンラインであなたをフォローしているいくつかのトラッカーからあなたを守ることができます。このシステム設定は、広告をブロックするためにも使用できます</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">ユーザーのSurvelanceProtectionから身を守る</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesisはサイトに私を追跡しないように指示します</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">私を追跡しないようにウェブサイトに伝えます</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">ユーザー監視保護</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">Genesisが提供するユーザー監視保護を有効にする</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">ウェブサイトのクッキー</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">セキュリティのニーズに応じてWebサイトのCookie設定を選択します</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">終了時にプライベートデータをクリアする</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">ソフトウェアが閉じられると、データを自動的にクリアします</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">プライベートブラウジング</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">IDを安全に保ち、以下のオプションを使用してください</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">有効</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">ウェブサイト追跡Cookieを除く有効</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">サードパーティを除く有効</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">無効</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">保護を無効にする</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">ID監視保護を許可します。これにより、オンラインIDが盗まれる可能性があります</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">デフォルト（推奨）</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">オンライン広告とソーシャルWebユーザーSurvelanceをブロックします。ページはデフォルトで読み込まれます</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">厳格なポリシー</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">既知のトラッカーをすべて停止すると、ページの読み込みは速くなりますが、一部の機能が機能しない場合があります</string>
+
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">さまざまなスクリプト攻撃に対してJavaスクリプトを無効にする</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">システム設定 。複雑なシステム設定</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">タブを復元</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">ブラウザを終了した後に復元しないでください</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">ツールバーのテーマ</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Webサイトで定義されているツールバーテーマを設定します</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">画像を表示</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">常にウェブサイトの画像を読み込む</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Webフォントを表示する</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">ページの読み込み時にリモートフォントをダウンロードする</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="true">自動再生を許可する</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">メディアを自動的に開始できるようにする</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">データセーバー</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="true">タブ</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">ソフトウェアの再起動後のタブの動作方法を変更する</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">メディア</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">デフォルトのデータセーバーを変更するカスタマイズ</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">デフォルトのメディアのカスタマイズを変更する</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">常に画像を表示する</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Wi-Fiを使用している場合にのみ画像を表示する</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">すべての画像をブロックする</string>
+    <string name="SETTING_ADVANCE" translatable="true">事前システム設定</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="true">復元タブ、データセーバー、開発者ツール</string>
+    <string name="SETTING_PROXY" translatable="true">プロキシのonion条件</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">ネットワークのonion状態を確認してください</string>
+    <string name="SETTING_REPORT" translatable="true">レポートのウェブサイト</string>
+    <string name="SETTING_REPORT_INFO" translatable="true">虐待的なウェブサイトを報告する</string>
+    <string name="SETTING_RATEUS" translatable="true">このアプリを評価する</string>
+    <string name="SETTING_RATEUS_INFO" translatable="true">Playストアの評価とコメント</string>
+    <string name="SETTING_SHARE" translatable="true">このアプリを共有する</string>
+    <string name="SETTING_SHARE_INFO" translatable="true">このソフトウェアを友達と共有する</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">システム設定 。一般的なカスタマイズ</string>
+    <string name="SETTING_GENERAL" translatable="true">デフォルトのシステム設定</string>
+    <string name="SETTING_GENERAL_INFO" translatable="true">ホームページ、言語</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">フルスクリーンブラウジング</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">ページを下にスクロールするときにブラウザのツールバーを非表示にする</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="true">言語</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">ブラウザの言語を変更する</string>
+    <string name="SETTING_GENERAL_THEME" translatable="true">ソフトウェアテーマ</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="true">明るいテーマと暗いテーマを選択してください</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">明るいテーマ</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="true">テーマダーク</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">フルスクリーンブラウジングと言語を変更する</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">システムのデフォルト</string>
+    <string name="SETTING_GENERAL_HOME" translatable="true">ホームページ</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">新しいタブ</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">新しいタブでホームページを開く</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">すべてのタブを削除します</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">閲覧したWebリンクを削除する</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">ブックマークを削除する</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">ブラウジングキャッシュを削除する</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">提案を削除する</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">サイトデータを削除する</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">セッションデータを削除する</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">WebブラウジングCookieを削除する</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">ブラウザのカスタマイズを削除する</string>
+
+
+    <string name="ALERT_CREATE_BOOKMARK" translatable="true">ブックマークのウェブサイト</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">閲覧したウェブリンクとデータを削除する</string>
+    <string name="ALERT_CLEAR_BOOKMARK" translatable="true">ブックマークとデータをクリアする</string>
+    <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">データを消去すると、閲覧されたWebリンク、Co​​okie、およびその他の閲覧データが削除されます</string>
+    <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">データを削除すると、ブックマークされたWebサイトが削除されます</string>
+    <string name="ALERT_CLEAR" translatable="true">キャンセル</string>
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_REPORT" translatable="true">報告する</string>
+    <string name="ALERT_REPORT_URL" translatable="true">レポートのウェブサイト</string>
+    <string name="ALERT_REPORT_URL_INFO" translatable="true">このURLが違法または迷惑であると思われる場合は、Googleに報告してください。そうすれば、法的措置を取ることができます。</string>
+    <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">正常に報告されました</string>
+    <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URLが正常に報告されました。何かが見つかった場合、法的措置が取られます</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">言語はサポートされていません</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">システム言語は、このソフトウェアではサポートされていません。私たちはすぐにそれを含めるように取り組んでいます</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">Orbotの初期化</string>
+    <string name="ALERT_NOT_SUPPORTED" translatable="true">アクションはサポートされていません</string>
+    <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">次のコマンドを処理するソフトウェアが見つかりません</string>
+    <string name="ALERT_WELCOME_MESSAGE" translatable="true">ようこそ|隠されたウェブGateway</string>
+    <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">このソフトウェアは、非表示のWebURLを検索して開くためのプラットフォームを提供します。ここにいくつかの提案があります\n</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">隠されたウェブオンライン市場</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">漏洩した文書や本</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">ダークウェブのニュースと記事</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">秘密のソフトウェアとハ​​ッキングツール</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">二度と表示しない</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">財政とお金</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">社会社会</string>
+    <string name="ALERT_LOCAL_UPGRADE" translatable="true">マニュアル</string>
+    <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">プレイストア</string>
+    <string name="ALERT_LONG_FILE" translatable="true">ファイル通知</string>
+    <string name="ALERT_DOWNLOAD" translatable="true">ダウンロード通知</string>
+    <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">ダウンロード通知</string>
+    <string name="ALERT_LONG_URL_TITLE" translatable="true">Webリンク通知</string>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
+    <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">メールを処理するソフトウェアが見つかりません</string>
+    <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">ファイルのダウンロード|</string>
+    <string name="ALERT_DATA_CLEARED" translatable="true">クリアされたデータ|再起動が必要</string>
+
+
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbotログ</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">新しいタブ</string>
+    <string name="HOME_MENU_CLOSE_TABS" translatable="true">タブを閉じる</string>
+    <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">最近のタブを開く</string>
+    <string name="HOME_MENU_LANGUAGE" translatable="true">言語</string>
+    <string name="HOME_MENU_DOWNLOAD" translatable="true">ダウンロード</string>
+    <string name="HOME_MENU_HISTORY" translatable="true">閲覧したWebリンク</string>
+    <string name="HOME_MENU_SETTING" translatable="true">システム設定</string>
+    <string name="HOME_MENU_DESKTOP" translatable="true">デスクトップサイト</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor 繋がり</string>
+    <string name="HOME_MENU_BOOKMARK" translatable="true">このページを保存する</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">ブックマーク</string>
+    <string name="HOME_MENU_REPORT" translatable="true">レポートのウェブサイト</string>
+    <string name="HOME_MENU_RATE" translatable="true">このアプリを評価する</string>
+    <string name="HOME_MENU_FIND" translatable="true">ページで見つける</string>
+    <string name="HOME_MENU_QUIT" translatable="true">出口</string>
+    <string name="HOME_MENU_SHARE" translatable="true">共有</string>
+
+
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">新しいタブ</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="true">すべてのタブを閉じる</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">システム設定</string>
+    <string name="TAB_LIST_SELECT" translatable="true">タブを選択</string>
+
+
+    <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">タブを開く</string>
+    <string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">コピー</string>
+    <string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">共有</string>
+    <string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">明確な選択</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">現在のタブで開く</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">新しいタブで開く</string>
+    <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">削除</string>
+
+
+    <string name="HISTORY_TITLE" translatable="true">閲覧したWebリンク</string>
+    <string name="HISTORY_CLEAR" translatable="true">これを削除します</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true">探す ...</string>
+
+
+    <string name="BOOKMARK_TITLE" translatable="true">ブックマーク</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">これを削除します</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true">探す ...</string>
+
+
+    <string name="HELP_RETRY" translatable="true">リトライ</string>
+    <string name="HELP_RETRY_INFO" translatable="true">おっと！ネットワーク接続エラー。ネットワークが接続されていません</string>
+    <string name="HELP_TITLE" translatable="true">ヘルプとサポート</string>
+
+
+    <string name="LANGUAGE_TITLE" translatable="true">言語</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">言語を変更</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">以下の言語でのみ実行されます。もうすぐ追加します</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">英語（米国）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">ドイツ語（ドイツ語）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">イタリア語（イタリア）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">ポルトガル語（ブラジル）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">ロシア語（ロシア語）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">ウクライナ語（ウクライナ語）</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">簡体字中国語（中国本土）</string>
+
+
+    <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️警告</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Bridgesをカスタマイズする</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridgesを有効にする</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">VPNサービスを有効にする</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Bridge Gatewayを有効にする</string>
+    <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Gatewayを有効にする</string>
+
+
+    <string name="PROXY_STATUS_HEADER" translatable="true">プロキシの状態</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orbotプロキシの現状</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">Orbotプロキシの条件</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">VPN接続状態</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">プロキシのBridge条件</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">情報|システム設定の変更</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">ソフトウェアを再起動してプロキシマネージャに移動すると、プロキシを変更できます。下部にある歯車のアイコンをクリックすると開くことができます</string>
+
+
+    <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+    <string name="NOTIFICATION_OPEN_TEXT" translatable="true">これを開く</string>
+
+
+    <string name="HOME_TAB_TEXT" translatable="true">1</string>
+    <string name="HOME_CONNECT" translatable="false">connect</string>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
+    <string name="HOME_TAB_EMPTY" translatable="true">開いているタブがここに表示されます</string>
+
+
+    <string name="ERROR_M1" translatable="true">このサイトにはアクセスできません</string>
+    <string name="ERROR_M2" translatable="true">ウェブサイトへの接続中にエラーが発生しました</string>
+    <string name="ERROR_M3" translatable="true">受信したデータの信頼性を確認できなかったため、表示しようとしているページを表示できません</string>
+    <string name="ERROR_M4" translatable="true">何らかの理由でページが現在機能していません</string>
+    <string name="ERROR_M5" translatable="true">この問題については、Webサイトの所有者に連絡してください。</string>
+    <string name="ERROR_M6" translatable="true">リロード</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">最近のタブ</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">新しいアイデンティティ</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">個人情報保護方針</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser プライバシーポリシー</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">レポートのウェブサイト</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">違法なウェブサイトを報告する</string>
+    <string name="SETTING_SITEMAP" translatable="true">あなたのウェブサイトを公開する</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">あなたのウェブサイトを私たちの検索エンジンに追加してください</string>
+
+    <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+    <string name="invalid_package_signature" translatable="true">無効なパッケージ署名</string>
+    <string name="autofill_sign_in_prompt" translatable="true">クリックしてサインインします。</string>
+    <string name="autofill_manual_prompt" translatable="true">クリックして手動でデータを選択します。</string>
+    <string name="security_exception" translatable="true">Webドメインのセキュリティ例外。</string>
+    <string name="dal_exception" translatable="true">DAL検証の失敗。</string>
+
+    <item name="LaguageID" type="id" />
+    <item name="LaguageRegion" type="id" />
+
+    <string-array name="ARRAY_FONTS" translatable="true">
+        <item>55パーセント</item>
+        <item>70パーセント</item>
+        <item>85パーセント</item>
+        <item>100パーセント</item>
+        <item>115パーセント</item>
+        <item>130パーセント</item>
+        <item>145パーセント</item>
+    </string-array>
+
+    <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+        <item>有効</item>
+        <item>無効</item>
+    </string-array>
+
+    <string-array name="ARRAY_NOTIFICATION" translatable="true">
+        <item>全て可能にする</item>
+        <item>すべて無効にする</item>
+        <item>帯域幅なし</item>
+    </string-array>
+
+    <string-array name="ARRAY_COOKIES" translatable="true">
+        <item>すべて許可します</item>
+        <item>信頼できるものを許可する</item>
+        <item>許可なし</item>
+        <item>訪問を許可する</item>
+        <item>非トラッカーを許可する</item>
+    </string-array>
+
+    <!-- Generated by Automatic String Resource Translation -->
+    <!--          https://asrt.gluege.boerde.de             -->
 </resources>

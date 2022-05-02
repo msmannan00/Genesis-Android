@@ -29,6 +29,7 @@ import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -75,29 +76,27 @@ public class languageController extends AppCompatActivity {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
 
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
     }
 
-    private void initializeAppModel()
-    {
+    private void initializeAppModel() {
         mLanguageViewController = new languageViewController();
         mLanguageModel = new languageModel();
     }
 
-    private void initializeConnections()
-    {
+    private void initializeConnections() {
         activityContextManager.getInstance().onStack(this);
         mRecycleView = findViewById(R.id.pRecycleView);
         mBlocker = findViewById(R.id.pSecureRootBlocker);
 
-        mLanguageViewController.initialization(new languageViewCallback(),this, mBlocker);
+        mLanguageViewController.initialization(new languageViewCallback(), this, mBlocker);
     }
 
-    private void initializeAdapter(){
-        mLanguageAdapter = new languageAdapter((ArrayList<languageDataModel>)mLanguageModel.onTrigger(languageEnums.eLanguageModel.M_SUPPORTED_LANGUAGE,null), this, status.sSettingLanguage, new languageAdapterCallback());
+    private void initializeAdapter() {
+        mLanguageAdapter = new languageAdapter((ArrayList<languageDataModel>) mLanguageModel.onTrigger(languageEnums.eLanguageModel.M_SUPPORTED_LANGUAGE, null), this, status.sSettingLanguage, new languageAdapterCallback());
         ((SimpleItemAnimator) Objects.requireNonNull(mRecycleView.getItemAnimator())).setSupportsChangeAnimations(false);
 
         mRecycleView.setAdapter(mLanguageAdapter);
@@ -112,14 +111,14 @@ public class languageController extends AppCompatActivity {
         mRecycleView.setAdapter(mLanguageAdapter);
     }
 
-    private void onInitScroll(){
-        int mPosition = (int)mLanguageModel.onTrigger(M_ACTIVE_LANGUAGE,null);
-        if(!getIntent().getExtras().containsKey("activity_restarted")){
-            if(mPosition>0){
+    private void onInitScroll() {
+        int mPosition = (int) mLanguageModel.onTrigger(M_ACTIVE_LANGUAGE, null);
+        if (!getIntent().getExtras().containsKey("activity_restarted")) {
+            if (mPosition > 0) {
                 mPosition -= 1;
             }
             mRecycleView.scrollToPosition(mPosition);
-        }else {
+        } else {
             int mPositionOffset = getIntent().getExtras().getInt("activity_restarted");
             mThemeApplied = true;
             Objects.requireNonNull(mRecycleView.getLayoutManager()).scrollToPosition(mPositionOffset);
@@ -129,7 +128,7 @@ public class languageController extends AppCompatActivity {
     /*UI Redirections*/
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void onClose(View view) {
@@ -139,35 +138,35 @@ public class languageController extends AppCompatActivity {
 
     /*Helper Methods*/
 
-    private boolean changeLanguage(String pLanguageCode, String pLanguageRegion){
+    private boolean changeLanguage(String pLanguageCode, String pLanguageRegion) {
         boolean mDefaultLanguageNotSupported = false;
-        if(pLanguageCode.equals(CONST_LANGUAGE_DEFAULT_LANG)){
+        if (pLanguageCode.equals(CONST_LANGUAGE_DEFAULT_LANG)) {
             Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
             String mSystemLangugage = mSystemLocale.toString();
             status.sSettingLanguage = CONST_LANGUAGE_DEFAULT_LANG;
             status.sSettingLanguageRegion = CONST_LANGUAGE_DEFAULT_LANG;
-            Log.i("MFUCKER",mSystemLangugage);
-            if(!mSystemLangugage.equals("en_GB") && !mSystemLangugage.equals("cs_CZ") && !mSystemLangugage.equals("en_US") && !mSystemLangugage.equals("ur_PK") && !mSystemLangugage.equals("de_DE") && !mSystemLangugage.equals("ca_ES") && !mSystemLangugage.equals("zh_CN") && !mSystemLangugage.equals("ch_CZ") && !mSystemLangugage.equals("nl_NL") && !mSystemLangugage.equals("fr_FR") && !mSystemLangugage.equals("el_GR") && !mSystemLangugage.equals("hu_HU") && !mSystemLangugage.equals("in_ID") && !mSystemLangugage.equals("it_IT") && !mSystemLangugage.equals("ja_JP") && !mSystemLangugage.equals("ko_KR") && !mSystemLangugage.equals("pt_PT") && !mSystemLangugage.equals("ro_RO") && !mSystemLangugage.equals("ru_RU") && !mSystemLangugage.equals("th_TH") && !mSystemLangugage.equals("tr_TR") && !mSystemLangugage.equals("uk_UA") && !mSystemLangugage.equals("vi_VN")){
+            Log.i("MFUCKER", mSystemLangugage);
+            if (!mSystemLangugage.equals("en_GB") && !mSystemLangugage.equals("cs_CZ") && !mSystemLangugage.equals("en_US") && !mSystemLangugage.equals("ur_PK") && !mSystemLangugage.equals("de_DE") && !mSystemLangugage.equals("ca_ES") && !mSystemLangugage.equals("zh_CN") && !mSystemLangugage.equals("ch_CZ") && !mSystemLangugage.equals("nl_NL") && !mSystemLangugage.equals("fr_FR") && !mSystemLangugage.equals("el_GR") && !mSystemLangugage.equals("hu_HU") && !mSystemLangugage.equals("in_ID") && !mSystemLangugage.equals("it_IT") && !mSystemLangugage.equals("ja_JP") && !mSystemLangugage.equals("ko_KR") && !mSystemLangugage.equals("pt_PT") && !mSystemLangugage.equals("ro_RO") && !mSystemLangugage.equals("ru_RU") && !mSystemLangugage.equals("th_TH") && !mSystemLangugage.equals("tr_TR") && !mSystemLangugage.equals("uk_UA") && !mSystemLangugage.equals("vi_VN")) {
                 mDefaultLanguageNotSupported = true;
             }
-        }else {
-            if(status.sSettingLanguage.equals(pLanguageCode)){
+        } else {
+            if (status.sSettingLanguage.equals(pLanguageCode)) {
                 return true;
             }
             status.sSettingLanguage = pLanguageCode;
             status.sSettingLanguageRegion = pLanguageRegion;
         }
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE,status.sSettingLanguage));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE_REGION,status.sSettingLanguageRegion));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE, status.sSettingLanguage));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_LANGUAGE_REGION, status.sSettingLanguageRegion));
 
-        if(activityContextManager.getInstance().getSettingController()!=null && !activityContextManager.getInstance().getSettingController().isDestroyed()){
+        if (activityContextManager.getInstance().getSettingController() != null && !activityContextManager.getInstance().getSettingController().isDestroyed()) {
             activityContextManager.getInstance().getSettingController().onRedrawXML();
         }
-        if(activityContextManager.getInstance().getSettingGeneralController()!=null && !activityContextManager.getInstance().getSettingGeneralController().isDestroyed()){
+        if (activityContextManager.getInstance().getSettingGeneralController() != null && !activityContextManager.getInstance().getSettingGeneralController().isDestroyed()) {
             activityContextManager.getInstance().getSettingGeneralController().onLanguageChanged();
         }
 
-        if(mDefaultLanguageNotSupported){
+        if (mDefaultLanguageNotSupported) {
             //pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Resources.getSystem().getConfiguration().locale.getDisplayName(), languageController.this),M_LANGUAGE_SUPPORT_FAILURE);
         }
 
@@ -175,7 +174,7 @@ public class languageController extends AppCompatActivity {
         mThemeApplied = true;
 
         Intent intent = new Intent(this, languageController.class);
-        intent.putExtra("activity_restarted",((LinearLayoutManager) Objects.requireNonNull(mRecycleView.getLayoutManager())).findFirstCompletelyVisibleItemPosition());
+        intent.putExtra("activity_restarted", ((LinearLayoutManager) Objects.requireNonNull(mRecycleView.getLayoutManager())).findFirstCompletelyVisibleItemPosition());
         this.startActivity(intent);
 
         overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
@@ -192,11 +191,10 @@ public class languageController extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private class languageViewCallback implements eventObserver.eventListener{
+    private class languageViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> data, Object e_type)
-        {
+        public Object invokeObserver(List<Object> data, Object e_type) {
             return null;
         }
     }
@@ -207,16 +205,13 @@ public class languageController extends AppCompatActivity {
 
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
-            if(e_type.equals(languageEnums.eLanguageAdapterCallback.M_UPDATE_LANGUAGE)){
-                return changeLanguage((String)data.get(0), (String)data.get(1));
-            }
-            else if(e_type.equals(languageEnums.eLanguageAdapterCallback.M_DISABLE_VIEW_CLICK)){
+            if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_UPDATE_LANGUAGE)) {
+                return changeLanguage((String) data.get(0), (String) data.get(1));
+            } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_DISABLE_VIEW_CLICK)) {
                 mLanguageViewController.onTrigger(languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER, Collections.singletonList(false));
-            }
-            else if(e_type.equals(languageEnums.eLanguageAdapterCallback.M_ENABLE_VIEW_CLICK)){
+            } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_ENABLE_VIEW_CLICK)) {
                 mLanguageViewController.onTrigger(languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER, Collections.singletonList(true));
-            }
-            else if(e_type.equals(languageEnums.eLanguageAdapterCallback.M_SYSTEM_LANGUAGE_SUPPORT_INFO)){
+            } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_SYSTEM_LANGUAGE_SUPPORT_INFO)) {
                 return pluginController.getInstance().onLanguageInvoke(Collections.singletonList(status.sSettingLanguage), M_SUPPORTED_SYSTEM_LANGUAGE_INFO);
             }
             return null;
@@ -227,7 +222,7 @@ public class languageController extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        if(mLanguageAdapter!=null){
+        if (mLanguageAdapter != null) {
             mLanguageAdapter.notifyDataSetChanged();
         }
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
@@ -236,12 +231,12 @@ public class languageController extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        if(mThemeApplied && !status.mThemeApplying){
+        if (mThemeApplied && !status.mThemeApplying) {
             helperMethod.updateResources(activityContextManager.getInstance().getHomeController(), status.mSystemLocale.getLanguage());
             activityContextManager.getInstance().onResetTheme();
 
             String mSystemLangugage = status.mSystemLocale.toString();
-            if(mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("ur_UR") || mLanguagePrevious.toString().equals("ur_PK") || mLanguagePrevious.toString().equals("ur_UR")){
+            if (mSystemLangugage.equals("ur_PK") || mSystemLangugage.equals("ur_UR") || mLanguagePrevious.toString().equals("ur_PK") || mLanguagePrevious.toString().equals("ur_UR")) {
                 activityContextManager.getInstance().getHomeController().recreate();
             }
             mLanguagePrevious = status.mSystemLocale;

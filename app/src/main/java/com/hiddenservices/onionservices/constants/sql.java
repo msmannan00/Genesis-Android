@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.constants;
 
-public class sql
-{
+public class sql {
     /*HISTORY*/
 
     public static final String SQL_CLEAR_HISTORY = "delete from history where 1";

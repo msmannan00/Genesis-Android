@@ -5,530 +5,659 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/c_background"
     tools:context="com.hiddenservices.onionservices.appManager.settingManager.searchEngineManager.settingSearchController">
-        <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingBottom="70dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <!-- Title Header -->
 
             <LinearLayout
-                    android:paddingBottom="70dp"
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                android:id="@+id/pHeaderContainerTop"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:elevation="8dp"
+                android:background="@color/c_background"
+                android:paddingStart="5dp"
+                android:focusable="true"
+                android:orientation="horizontal"
+                tools:ignore="RtlSymmetry">
 
-                <!-- Title Header -->
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onClose"
+                    android:src="@xml/ic_arrow_back"
+                    app:tint="@color/c_navigation_tint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:onClick="onClose"
+                    android:layout_marginTop="-3dp"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/SETTING_SEARCH_HEADER"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:paddingStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="onOpenInfo"
+                    android:background="@xml/gx_ripple_gray_round_left"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_info"
+                    app:tint="@color/c_header_icon_tint" />
+
+            </LinearLayout>
+
+            <!-- Title Header -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/c_text_short_header"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:layout_marginTop="00dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:text="@string/SETTING_SEARCH_HEADER_1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:alpha="1"
+                    android:id="@+id/pHomePageText"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:padding="0dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:text="@string/SETTING_SEARCH_HEADER_1_INFO"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v6"
+                    android:textSize="13.5sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption1"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:paddingStart="3dp"
+                android:onClick="onSelectSearchEngine"
+                android:orientation="horizontal"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:padding="3dp"
+                    android:src="@drawable/genesis"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
                 <LinearLayout
-                    android:id="@+id/pHeaderContainerTop"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:clickable="true"
-                    android:elevation="8dp"
-                    android:background="@color/c_background"
-                    android:paddingStart="5dp"
-                    android:focusable="true"
-                    android:orientation="horizontal"
-                    tools:ignore="RtlSymmetry">
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="55dp"
+                    android:orientation="vertical">
 
-                    <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="1dp"
-                        android:background="@xml/gx_ripple_default_round"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:onClick="onClose"
-                        android:src="@xml/ic_arrow_back"
-                        app:tint="@color/c_navigation_tint" />
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SEARCH_GENESIS"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:onClick="onClose"
-                        android:layout_marginTop="-3dp"
-                        android:gravity="center_vertical|start"
-                        android:text="@string/SETTING_SEARCH_HEADER"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:paddingStart="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:onClick="onOpenInfo"
-                        android:background="@xml/gx_ripple_gray_round_left"
-                        android:contentDescription="@string/GENERAL_TODO"
-                        android:src="@xml/ic_info"
-                        app:tint="@color/c_header_icon_tint" />
-
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_DEFAULT"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
-                <!-- Title Header -->
+                <RadioButton
+                    android:id="@+id/mRadioSearch_1"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:clickable="false"
+                    android:layout_marginStart="50dp"
+                    android:buttonTint="@color/c_radio_tint"
+                    android:background="@android:color/transparent"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:paddingStart="3dp"
+                android:onClick="onSelectSearchEngine"
+                android:orientation="horizontal"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:padding="6dp"
+                    android:layout_marginStart="7dp"
+                    android:src="@drawable/duckduckgo"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/c_text_short_header"
-                        android:textSize="15sp"
-                        android:layout_width="match_parent"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="00dp"
-                        android:paddingEnd="15dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="55dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
                         android:paddingStart="15dp"
-                        android:text="@string/SETTING_SEARCH_HEADER_1"
-                        />
+                        android:text="@string/SETTING_SEARCH_DUCK"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_DUCK"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <RadioButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/mRadioSearch_2"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="50dp"
+                    android:src="@xml/ic_arrow_right"
+                    android:buttonTint="@color/c_radio_tint"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption3"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:paddingStart="3dp"
+                android:onClick="onSelectSearchEngine"
+                android:orientation="horizontal"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:layout_marginStart="7dp"
+                    android:src="@drawable/google"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="55dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_GOOGLE"
+                        android:textDirection="locale"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_GOOGLE"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <RadioButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/mRadioSearch_3"
+                    android:clickable="false"
+                    android:layout_marginStart="50dp"
+                    android:buttonTint="@color/c_radio_tint"
+                    android:background="@android:color/transparent"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption4"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:paddingStart="3dp"
+                android:onClick="onSelectSearchEngine"
+                android:orientation="horizontal"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:padding="5dp"
+                    android:src="@drawable/bing"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="55dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_AMAZON"
+                        android:textDirection="locale"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_AMAZON"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <RadioButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/mRadioSearch_4"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="50dp"
+                    android:buttonTint="@color/c_radio_tint"
+                    android:src="@xml/ic_arrow_right"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption5"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:paddingStart="3dp"
+                android:onClick="onSelectSearchEngine"
+                android:orientation="horizontal"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginStart="7dp"
+                    android:src="@drawable/wikipedia"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="55dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_BING"
+                        android:textDirection="locale"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/SETTING_SEARCH_BING"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v6"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <RadioButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/mRadioSearch_5"
+                    android:clickable="false"
+                    android:layout_marginStart="50dp"
+                    android:buttonTint="@color/c_radio_tint"
+                    android:background="@android:color/transparent"
+                    android:src="@xml/ic_arrow_right"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/c_text_short_header"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:layout_marginTop="00dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/SETTING_SEARCH_HEADER_2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:padding="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/SETTING_SEARCH_HEADER_2_INFO"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_v6"
+                    android:textSize="13.5sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pOption6"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:onClick="setSearchHistory"
+                android:orientation="horizontal"
+                android:weightSum="7"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/SETTING_SEARCH_HISTORY"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="14sp"
+                        tools:ignore="RtlSymmetry" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:alpha="1"
-                        android:id="@+id/pHomePageText"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:paddingEnd="15dp"
                         android:paddingStart="15dp"
-                        android:text="@string/SETTING_SEARCH_HEADER_1_INFO"
-                        android:textAlignment="textStart"
+                        android:paddingEnd="15dp"
+                        android:text="@string/SETTING_SEARCH_HISTORY_INFO"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v6"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption1"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:paddingStart="3dp"
-                    android:onClick="onSelectSearchEngine"
-                    android:orientation="horizontal"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:padding="3dp"
-                        android:src="@drawable/genesis"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="55dp"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:text="@string/SETTING_SEARCH_GENESIS"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_DEFAULT"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:id="@+id/mRadioSearch_1"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:clickable="false"
-                        android:layout_marginStart="50dp"
-                        android:buttonTint="@color/c_radio_tint"
-                        android:background="@android:color/transparent"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@xml/ic_arrow_right"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:layout_marginTop="5dp"
+                    android:theme="@style/SCBSwitch"
+                    android:id="@+id/pSearchHistory"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pOption7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@xml/gx_ripple_gray"
+                android:clickable="true"
+                android:onClick="setSuggestionStatus"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="7"
+                android:focusable="true">
 
                 <LinearLayout
-                    android:id="@+id/pSearchSettingOption2"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:paddingStart="3dp"
-                    android:onClick="onSelectSearchEngine"
-                    android:orientation="horizontal"
-                    android:focusable="true">
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:padding="6dp"
-                        android:layout_marginStart="7dp"
-                        android:src="@drawable/duckduckgo"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="55dp"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_DUCK"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_DUCK"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/mRadioSearch_2"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="50dp"
-                        android:src="@xml/ic_arrow_right"
-                        android:buttonTint="@color/c_radio_tint"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption3"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:paddingStart="3dp"
-                    android:onClick="onSelectSearchEngine"
-                    android:orientation="horizontal"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:padding="3dp"
-                        android:layout_marginStart="7dp"
-                        android:src="@drawable/google"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="55dp"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_GOOGLE"
-                            android:textDirection="locale"
-                            android:textAlignment="viewStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_GOOGLE"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/mRadioSearch_3"
-                        android:clickable="false"
-                        android:layout_marginStart="50dp"
-                        android:buttonTint="@color/c_radio_tint"
-                        android:background="@android:color/transparent"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption4"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:paddingStart="3dp"
-                    android:onClick="onSelectSearchEngine"
-                    android:orientation="horizontal"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
-                        android:padding="5dp"
-                        android:src="@drawable/bing"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="55dp"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_AMAZON"
-                            android:textDirection="locale"
-                            android:textAlignment="viewStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_AMAZON"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/mRadioSearch_4"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="50dp"
-                        android:buttonTint="@color/c_radio_tint"
-                        android:src="@xml/ic_arrow_right"
-                        android:clickable="false"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:id="@+id/pSearchSettingOption5"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:paddingStart="3dp"
-                    android:onClick="onSelectSearchEngine"
-                    android:orientation="horizontal"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:layout_marginStart="7dp"
-                        android:src="@drawable/wikipedia"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="55dp"
-                        android:orientation="vertical">
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="8dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_BING"
-                            android:textDirection="locale"
-                            android:textAlignment="viewStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="15sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:text="@string/SETTING_SEARCH_BING"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <RadioButton
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/mRadioSearch_5"
-                        android:clickable="false"
-                        android:layout_marginStart="50dp"
-                        android:buttonTint="@color/c_radio_tint"
-                        android:background="@android:color/transparent"
-                        android:src="@xml/ic_arrow_right"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/c_orbot_setting_divider"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/c_text_short_header"
-                        android:textSize="15sp"
-                        android:layout_width="match_parent"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="40"
-                        android:layout_marginTop="00dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="@string/SETTING_SEARCH_HEADER_2"
-                        />
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="20dp"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:text="@string/SETTING_SEARCH_HEADER_2_INFO"
+                        android:text="@string/SETTING_SEARCH_SUGGESTIONS"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="14sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/SETTING_SEARCH_SUGGESTION_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v6"
@@ -536,141 +665,22 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/pOption6"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:onClick="setSearchHistory"
-                    android:orientation="horizontal"
-                    android:weightSum="7"
-                    android:focusable="true">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_SEARCH_HISTORY"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="14sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_SEARCH_HISTORY_INFO"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-
-                    </LinearLayout>
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:src="@xml/ic_arrow_right"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:layout_marginTop="5dp"
-                        android:theme="@style/SCBSwitch"
-                        android:id="@+id/pSearchHistory"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pOption7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@xml/gx_ripple_gray"
-                    android:clickable="true"
-                    android:onClick="setSuggestionStatus"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="7"
-                    android:focusable="true">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="6"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_SEARCH_SUGGESTIONS"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v1"
-                            android:textSize="14sp"
-                            tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:alpha="1"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:padding="0dp"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/SETTING_SEARCH_SUGGESTION_INFO"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textColor="@color/c_text_v6"
-                            android:textSize="13.5sp"
-                            tools:ignore="RtlSymmetry" />
-                    </LinearLayout>
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/pSearchSuggestions"
-                        android:src="@xml/ic_arrow_right"
-                        android:layout_marginTop="5dp"
-                        android:theme="@style/SCBSwitch"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/GENERAL_TODO" />
-
-                </LinearLayout>
-
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/pSearchSuggestions"
+                    android:src="@xml/ic_arrow_right"
+                    android:layout_marginTop="5dp"
+                    android:theme="@style/SCBSwitch"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/GENERAL_TODO" />
 
             </LinearLayout>
-        </ScrollView>
+
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

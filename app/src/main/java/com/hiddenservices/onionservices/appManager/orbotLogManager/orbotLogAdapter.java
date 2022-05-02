@@ -6,20 +6,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.tabManager.tabEnums;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.eventObserver;
 import com.example.myapplication.R;
+
 import org.torproject.android.service.wrapper.logRowModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listViewHolder>
-{
+public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listViewHolder> {
     /*Private Variables*/
 
     private ArrayList<logRowModel> mModelList;
@@ -30,15 +33,15 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
         this.mEvent = pEvent;
     }
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public orbotLogAdapter.listViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orbot_row_view, parent, false);
         return new orbotLogAdapter.listViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull orbotLogAdapter.listViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull orbotLogAdapter.listViewHolder holder, int position) {
         holder.bindListView(mModelList.get(position));
     }
 
@@ -77,7 +80,7 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
         }
     }
 
-    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData){
+    public Object onTrigger(tabEnums.eTabAdapterCommands pCommands, List<Object> pData) {
         return null;
     }
 }

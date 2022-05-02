@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
-        android:textDirection="locale"
-        android:layout_gravity="top"
-        android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:textDirection="locale"
+    android:layout_gravity="top"
+    android:layout_height="wrap_content">
 
     <ScrollView
         android:id="@+id/pScrollView"
@@ -332,7 +332,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
                     android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@drawable/tor_logo"/>
+                    android:src="@drawable/tor_logo" />
 
                 <TextView
                     android:layout_width="0dp"

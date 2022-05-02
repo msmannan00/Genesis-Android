@@ -2,8 +2,7 @@ package com.hiddenservices.onionservices.libs.views;
 
 import android.graphics.Color;
 
-public class ColorAnimator
-{
+public class ColorAnimator {
     private final int mStartColor, mEndColor;
     private final float[] mStartHSV, mEndHSV;
     private float[] mMove = new float[3];

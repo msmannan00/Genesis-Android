@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/c_ripple_gray">
 
     <!-- mask here... -->
@@ -13,20 +12,24 @@
 
     <item>
         <selector>
-            <item android:state_pressed="true"
+            <item
+                android:state_pressed="true"
                 android:top="113dp">
                 <shape
-                    android:shape="rectangle" android:padding="10dp" >
-                    <solid android:color="@color/c_edittext_background"/>
-                    <corners android:radius="7dp"/>
+                    android:shape="rectangle"
+                    android:padding="10dp">
+                    <solid android:color="@color/c_edittext_background" />
+                    <corners android:radius="7dp" />
                 </shape>
             </item>
-            <item android:state_pressed="false"
+            <item
+                android:state_pressed="false"
                 android:top="113dp">
                 <shape
-                    android:shape="rectangle" android:padding="10dp">
-                    <solid android:color="@color/c_edittext_background"/>
-                    <corners android:radius="7dp"/>
+                    android:shape="rectangle"
+                    android:padding="10dp">
+                    <solid android:color="@color/c_edittext_background" />
+                    <corners android:radius="7dp" />
                 </shape>
             </item>
         </selector>

@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.advertSetttings;
 
-class advertSettingEnums
-{
+class advertSettingEnums {
     /* Log Model */
 
     public enum eAdvertSettingModel {

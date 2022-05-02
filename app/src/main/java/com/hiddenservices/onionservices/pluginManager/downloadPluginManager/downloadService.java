@@ -3,14 +3,16 @@ package com.hiddenservices.onionservices.pluginManager.downloadPluginManager;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
+
 import java.util.Arrays;
 
-public class downloadService extends IntentService
-{
+public class downloadService extends IntentService {
     public downloadService() {
         super("DOWNLOAD_SERVICE");
     }

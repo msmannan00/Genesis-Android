@@ -3,8 +3,10 @@ package com.hiddenservices.onionservices.appManager.settingManager.logManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.constants.constants;
@@ -19,9 +21,11 @@ import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import static com.hiddenservices.onionservices.appManager.settingManager.logManager.settingLogEnums.eLogViewController.M_TOOGLE_LOG_VIEW;
 
 public class settingLogController extends AppCompatActivity {
@@ -53,7 +57,7 @@ public class settingLogController extends AppCompatActivity {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
         super.onConfigurationChanged(newConfig);
 
-        if(newConfig.uiMode != getResources().getConfiguration().uiMode){
+        if (newConfig.uiMode != getResources().getConfiguration().uiMode) {
             activityContextManager.getInstance().onResetTheme();
             activityThemeManager.getInstance().onConfigurationChanged(this);
         }
@@ -69,22 +73,20 @@ public class settingLogController extends AppCompatActivity {
 
     /*View Callbacks*/
 
-    private class settingLogViewCallback implements eventObserver.eventListener{
+    private class settingLogViewCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> pData, Object pCommands)
-        {
+        public Object invokeObserver(List<Object> pData, Object pCommands) {
             return null;
         }
     }
 
     /*Model Callbacks*/
 
-    private class settingLogModelCallback implements eventObserver.eventListener{
+    private class settingLogModelCallback implements eventObserver.eventListener {
 
         @Override
-        public Object invokeObserver(List<Object> pData, Object pCommands)
-        {
+        public Object invokeObserver(List<Object> pData, Object pCommands) {
             return null;
         }
     }
@@ -92,8 +94,7 @@ public class settingLogController extends AppCompatActivity {
     /* LOCAL OVERRIDES */
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
@@ -112,12 +113,12 @@ public class settingLogController extends AppCompatActivity {
 
     /*UI Redirection*/
 
-    public void onClose(View view){
+    public void onClose(View view) {
         finish();
     }
 
-    public void onTriggerUI(View view){
-        if(view.getId() == R.id.pSettingLogStatus){
+    public void onTriggerUI(View view) {
+        if (view.getId() == R.id.pSettingLogStatus) {
             mSettingLogModel.onTrigger(settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW, Collections.singletonList(!mSettingLogStatusSwitch.isChecked()));
             mSettingLogViewController.onTrigger(M_TOOGLE_LOG_VIEW);
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogThemeStyleAdvanced));
@@ -130,7 +131,7 @@ public class settingLogController extends AppCompatActivity {
     }
 
     public void onOpenInfo(View view) {
-        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this,true);
+        helperMethod.openActivity(helpController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
 }

@@ -18,10 +18,10 @@ import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.helperManager.sharedUIMethod;
 import com.example.myapplication.R;
+
 import java.util.List;
 
-class bridgeViewController
-{
+class bridgeViewController {
     /*Private Variables*/
     private RadioButton mBridgeSettingObfs;
     private RadioButton mBridgeSettingBridgeChina;
@@ -35,7 +35,7 @@ class bridgeViewController
     private AppCompatActivity mContext;
 
     /*Initializations*/
-    void initialization(RadioButton pBridgeSettingBridgeSnowflake, EditText pBridgeSettingBridgeCustom, Button pBridgeSettingBridgeRequest, AppCompatActivity pContext,RadioButton pBridgeSettingObfs,RadioButton pBridgeSettingBridgeChina,RadioButton pBridgeSettingCustomPort, ImageView pBridgeSettingCustomBridgeBlocker){
+    void initialization(RadioButton pBridgeSettingBridgeSnowflake, EditText pBridgeSettingBridgeCustom, Button pBridgeSettingBridgeRequest, AppCompatActivity pContext, RadioButton pBridgeSettingObfs, RadioButton pBridgeSettingBridgeChina, RadioButton pBridgeSettingCustomPort, ImageView pBridgeSettingCustomBridgeBlocker) {
         this.mContext = pContext;
         this.mBridgeSettingObfs = pBridgeSettingObfs;
         this.mBridgeSettingBridgeChina = pBridgeSettingBridgeChina;
@@ -48,18 +48,18 @@ class bridgeViewController
         initPostUI();
     }
 
-    private void initPostUI(){
+    private void initPostUI() {
         sharedUIMethod.updateStatusBar(mContext);
     }
 
-    private void animateColor(TextView p_view, int p_from, int p_to, String p_command, int p_duration){
-        ObjectAnimator colorAnim = ObjectAnimator.ofInt(p_view, p_command,p_from, p_to);
+    private void animateColor(TextView p_view, int p_from, int p_to, String p_command, int p_duration) {
+        ObjectAnimator colorAnim = ObjectAnimator.ofInt(p_view, p_command, p_from, p_to);
         colorAnim.setEvaluator(new ArgbEvaluator());
         colorAnim.setDuration(p_duration);
         colorAnim.start();
     }
 
-    private void resetRadioButtons(int p_duration){
+    private void resetRadioButtons(int p_duration) {
         animateColor(mBridgeSettingObfs, mBridgeSettingObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
         animateColor(mBridgeSettingBridgeSnowflake, mBridgeSettingBridgeSnowflake.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
         animateColor(mBridgeSettingCustomPort, mBridgeSettingCustomPort.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
@@ -82,7 +82,7 @@ class bridgeViewController
         mBridgeSettingCustomBridgeBlocker.setVisibility(View.VISIBLE);
     }
 
-    private void onEnableCustomBridge(){
+    private void onEnableCustomBridge() {
         animateColor(mBridgeSettingCustomPort, mBridgeSettingCustomPort.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", 200);
         mBridgeSettingCustomPort.setHighlightColor(Color.BLACK);
         mBridgeSettingCustomPort.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
@@ -95,9 +95,9 @@ class bridgeViewController
         mBridgeSettingCustomBridgeBlocker.setVisibility(View.GONE);
     }
 
-    private void initViews(String p_bridge, int p_duration){
+    private void initViews(String p_bridge, int p_duration) {
         resetRadioButtons(p_duration);
-        if(p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_OBFS4)){
+        if (p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_OBFS4)) {
             animateColor(mBridgeSettingObfs, mBridgeSettingObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
             mBridgeSettingObfs.setHighlightColor(Color.BLACK);
             mBridgeSettingObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
@@ -106,7 +106,7 @@ class bridgeViewController
             mBridgeSettingCustomPort.setChecked(false);
             mBridgeSettingBridgeSnowflake.setChecked(false);
             mBridgeSettingBridgeCustom.setText(strings.GENERIC_EMPTY_STR);
-        }else if(p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_MEEK)){
+        } else if (p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_MEEK)) {
             animateColor(mBridgeSettingBridgeChina, mBridgeSettingBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
             mBridgeSettingBridgeChina.setHighlightColor(Color.BLACK);
             mBridgeSettingBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
@@ -115,7 +115,7 @@ class bridgeViewController
             mBridgeSettingBridgeChina.setChecked(true);
             mBridgeSettingCustomPort.setChecked(false);
             mBridgeSettingBridgeCustom.setText(strings.GENERIC_EMPTY_STR);
-        }else if(p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES)){
+        } else if (p_bridge.equals(strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES)) {
             animateColor(mBridgeSettingBridgeChina, mBridgeSettingBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
             mBridgeSettingBridgeChina.setHighlightColor(Color.BLACK);
             mBridgeSettingBridgeSnowflake.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
@@ -124,17 +124,17 @@ class bridgeViewController
             mBridgeSettingBridgeChina.setChecked(false);
             mBridgeSettingCustomPort.setChecked(false);
             mBridgeSettingBridgeCustom.setText(strings.GENERIC_EMPTY_STR);
-        }else {
+        } else {
             onEnableCustomBridge();
-            mBridgeSettingBridgeCustom.setText(("(Config) ➔ "+p_bridge.replace("\n","")));
+            mBridgeSettingBridgeCustom.setText(("(Config) ➔ " + p_bridge.replace("\n", "")));
         }
     }
 
-    public void onTrigger(bridgeEnums.eBridgeViewCommands pCommands, List<Object> pData){
-        if(pCommands == bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS){
-            initViews((String) pData.get(0), (int)pData.get(1));
+    public void onTrigger(bridgeEnums.eBridgeViewCommands pCommands, List<Object> pData) {
+        if (pCommands == bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS) {
+            initViews((String) pData.get(0), (int) pData.get(1));
         }
-        if(pCommands == bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE){
+        if (pCommands == bridgeEnums.eBridgeViewCommands.M_ENABLE_CUSTOM_BRIDGE) {
             onEnableCustomBridge();
         }
     }

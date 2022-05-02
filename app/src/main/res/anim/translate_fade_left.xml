@@ -7,12 +7,12 @@
         android:fromXDelta="5%"
         android:fromYDelta="0%"
         android:toXDelta="0%"
-        android:toYDelta="0%"
-        />
-    <alpha android:fromAlpha="0"
+        android:toYDelta="0%" />
+    <alpha
+        android:fromAlpha="0"
         android:toAlpha="1.0"
         android:interpolator="@android:anim/accelerate_interpolator"
         android:duration="200"
-        android:repeatCount="0"/>
+        android:repeatCount="0" />
 
 </set>

@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.logManager;
 
-class settingLogEnums
-{
+class settingLogEnums {
     /* Log Model */
 
     public enum eLogModel {

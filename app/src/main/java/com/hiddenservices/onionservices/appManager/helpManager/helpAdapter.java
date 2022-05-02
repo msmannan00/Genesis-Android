@@ -11,14 +11,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder>{
+public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder> {
     private List<helpDataModel> mModelList = new ArrayList<>();
     private List<helpDataModel> mCompleteModelList = new ArrayList<>();
     private LinearLayout mPrevRow;
@@ -28,19 +31,19 @@ public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder
     private boolean mIsAnimating = false;
 
     public helpAdapter(List<helpDataModel> pModelList, Context context) {
-        if(pModelList!=null){
+        if (pModelList != null) {
             this.mCompleteModelList.addAll(pModelList);
             this.mModelList.addAll(pModelList);
         }
         this.mContext = context;
     }
 
-    private void onSearchFilterInvoked(String pQuery){
+    private void onSearchFilterInvoked(String pQuery) {
         pQuery = pQuery.toLowerCase();
         this.mModelList.clear();
         mCurrentPosition = -1;
-        for(int mCounter=0;mCounter<mCompleteModelList.size();mCounter++){
-            if(mCompleteModelList.get(mCounter).getHeader().toLowerCase().contains(pQuery) || mCompleteModelList.get(mCounter).getDescription().toLowerCase().contains(pQuery)){
+        for (int mCounter = 0; mCounter < mCompleteModelList.size(); mCounter++) {
+            if (mCompleteModelList.get(mCounter).getHeader().toLowerCase().contains(pQuery) || mCompleteModelList.get(mCounter).getDescription().toLowerCase().contains(pQuery)) {
                 mModelList.add(mCompleteModelList.get(mCounter));
             }
         }
@@ -102,40 +105,42 @@ public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder
                     linearLayout.setVisibility(View.VISIBLE);
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_keyboard_arrow_up));
                     mArrowNavigation.setImageDrawable(mDrawable);
-                }else {
+                } else {
                     linearLayout.setVisibility(View.GONE);
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_keyboard_arrow_down));
                     mArrowNavigation.setImageDrawable(mDrawable);
                 }
-            } catch (Exception ignored) { }
+            } catch (Exception ignored) {
+            }
 
             mHelpRowContainer.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if(!mIsAnimating){
+            if (!mIsAnimating) {
                 mIsAnimating = true;
-                if(mPrevRow !=null && mCurrentPosition !=-1){
+                if (mPrevRow != null && mCurrentPosition != -1) {
                     try {
                         mPrevRow.animate().cancel();
                         mPrevRow.animate().alpha(0).setDuration(300);
                         onCollapse();
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         mIsAnimating = false;
                         ex.printStackTrace();
                     }
-                }else {
+                } else {
                     onCollapse();
                 }
             }
         }
-        public void onCollapse(){
+
+        public void onCollapse() {
             mIsAnimating = false;
             int mPreviousItem = mCurrentPosition;
-            if(mCurrentPosition ==getLayoutPosition()){
+            if (mCurrentPosition == getLayoutPosition()) {
                 mCurrentPosition = -1;
-            }else {
+            } else {
                 mCurrentPosition = getLayoutPosition();
                 notifyItemChanged(mCurrentPosition);
             }
@@ -143,8 +148,8 @@ public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder
         }
     }
 
-    public Object onTrigger(helpEnums.eHelpAdapter pCommands, List<Object> pData){
-        if(pCommands == helpEnums.eHelpAdapter.M_INIT_FILTER){
+    public Object onTrigger(helpEnums.eHelpAdapter pCommands, List<Object> pData) {
+        if (pCommands == helpEnums.eHelpAdapter.M_INIT_FILTER) {
             onSearchFilterInvoked((String) pData.get(0));
         }
 

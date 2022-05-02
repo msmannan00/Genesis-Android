@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.constants;
 
-public class constants
-{
+public class constants {
     /*LOCAL URL CONSTANTS*/
 
     public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.hiddenservices.onionservices";
@@ -74,11 +73,11 @@ public class constants
 
     /*SETTINGS CONSTANTS*/
 
-    public static final int CONST_MAX_LIST_DATA_SIZE =5000;
-    public static final int CONST_FETCHABLE_LIST_SIZE =100;
-    public static final int CONST_MAX_BOOKMARK_SIZE =500;
-    public static final String CONST_DATABASE_NAME ="orion_dbase";
-    public static final String CONST_PERCENTAGE_SIGN ="%";
+    public static final int CONST_MAX_LIST_DATA_SIZE = 5000;
+    public static final int CONST_FETCHABLE_LIST_SIZE = 100;
+    public static final int CONST_MAX_BOOKMARK_SIZE = 500;
+    public static final String CONST_DATABASE_NAME = "orion_dbase";
+    public static final String CONST_PERCENTAGE_SIGN = "%";
 
     /*Notification Manager*/
 

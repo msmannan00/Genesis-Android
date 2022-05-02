@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-        android:color="@color/c_ripple_v1">
+    android:color="@color/c_ripple_v1">
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
             <solid android:color="@color/c_background" />
@@ -8,7 +8,7 @@
                 android:bottomLeftRadius="0dp"
                 android:bottomRightRadius="0dp"
                 android:topLeftRadius="6dp"
-                android:topRightRadius="6dp"/>
+                android:topRightRadius="6dp" />
 
         </shape>
     </item>
@@ -19,7 +19,7 @@
                 android:bottomLeftRadius="0dp"
                 android:bottomRightRadius="0dp"
                 android:topLeftRadius="6dp"
-                android:topRightRadius="6dp"/>
+                android:topRightRadius="6dp" />
         </shape>
     </item>
 </ripple>

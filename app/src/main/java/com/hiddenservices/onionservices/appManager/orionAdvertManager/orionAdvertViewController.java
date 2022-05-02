@@ -24,8 +24,7 @@ public class orionAdvertViewController extends AppCompatActivity {
         setContentView(R.layout.activity_adview_controller);
     }
 
-    orionAdvertViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, WebView pGeckoView, ProgressBar pProgressBar)
-    {
+    orionAdvertViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, WebView pGeckoView, ProgressBar pProgressBar) {
         this.mContext = pContext;
         this.mWebView = pGeckoView;
         this.mProgressBar = pProgressBar;
@@ -33,25 +32,25 @@ public class orionAdvertViewController extends AppCompatActivity {
         initViews();
     }
 
-    private void initViews(){
+    private void initViews() {
         sharedUIMethod.updateStatusBar(mContext);
     }
 
-    public void onUpdateProgressBar(boolean status){
-        if(status){
+    public void onUpdateProgressBar(boolean status) {
+        if (status) {
             mProgressBar.animate().setDuration(350).alpha(1);
-        }else {
+        } else {
             mProgressBar.animate().setDuration(350).alpha(0);
         }
     }
 
-    public void onTrigger(orionAdvertEnums.eOrionAdvertViewController pCommands, List<Object> pData){
-        if(pCommands.equals(orionAdvertEnums.eOrionAdvertViewController.M_UPDATE_PROGRESSBAR)){
-            onUpdateProgressBar((boolean)pData.get(0));
+    public void onTrigger(orionAdvertEnums.eOrionAdvertViewController pCommands, List<Object> pData) {
+        if (pCommands.equals(orionAdvertEnums.eOrionAdvertViewController.M_UPDATE_PROGRESSBAR)) {
+            onUpdateProgressBar((boolean) pData.get(0));
         }
     }
 
-    public void onTrigger(orionAdvertEnums.eOrionAdvertViewController pCommands){
+    public void onTrigger(orionAdvertEnums.eOrionAdvertViewController pCommands) {
     }
 
 }

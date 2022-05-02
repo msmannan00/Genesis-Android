@@ -30,7 +30,7 @@ class defaultBrowser {
                             RoleManager.ROLE_BROWSER
                         )
                     ) {
-                        return true;
+                        return true
                     }
                 }
             }
@@ -40,7 +40,7 @@ class defaultBrowser {
             else -> {
             }
         }
-        return false;
+        return false
     }
 
     fun Activity.openSetDefaultBrowserOption() {
@@ -99,6 +99,7 @@ class defaultBrowser {
 
 
 }
+
 const val REQUEST_CODE_BROWSER_ROLE = 1
 const val SETTINGS_SELECT_OPTION_KEY = ":settings:fragment_args_key"
 const val SETTINGS_SHOW_FRAGMENT_ARGS = ":settings:show_fragment_args"

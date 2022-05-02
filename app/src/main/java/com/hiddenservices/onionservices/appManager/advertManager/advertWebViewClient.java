@@ -12,7 +12,8 @@ import java.util.Collections;
 public class advertWebViewClient extends android.webkit.WebViewClient {
 
     private eventObserver.eventListener mEvent;
-    public advertWebViewClient(eventObserver.eventListener pEvent){
+
+    public advertWebViewClient(eventObserver.eventListener pEvent) {
         mEvent = pEvent;
     }
 
@@ -22,7 +23,7 @@ public class advertWebViewClient extends android.webkit.WebViewClient {
     }
 
     @Override
-    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
+    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         mEvent.invokeObserver(Collections.singletonList(false), advertEnums.eAdvertClientCallback.M_UPDATE_PROGRESSBAR);
     }
 

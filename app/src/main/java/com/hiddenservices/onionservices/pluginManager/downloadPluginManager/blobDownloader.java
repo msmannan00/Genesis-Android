@@ -6,8 +6,11 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Base64;
 import android.webkit.JavascriptInterface;
+
 import androidx.core.app.NotificationCompat;
+
 import com.example.myapplication.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,6 +21,7 @@ public class blobDownloader {
 
     private Context mContext;
     private NotificationManager mNotificationManager;
+
     public blobDownloader(Context context) {
         this.mContext = context;
     }
@@ -27,8 +31,8 @@ public class blobDownloader {
         convertBase64StringToPdfAndStoreIt(base64Data);
     }
 
-    public static String getBase64StringFromBlobUrl(String blobUrl){
-        if(blobUrl.startsWith("blob")){
+    public static String getBase64StringFromBlobUrl(String blobUrl) {
+        if (blobUrl.startsWith("blob")) {
             return "javascript: var xhr = new XMLHttpRequest();" +
                     "xhr.open('GET', 'YOUR BLOB URL GOES HERE', true);" +
                     "xhr.setRequestHeader('Content-type','application/pdf');" +
@@ -60,7 +64,7 @@ public class blobDownloader {
         os.write(pdfAsBytes);
         os.flush();
 
-        if(dwldsPath.exists()) {
+        if (dwldsPath.exists()) {
             NotificationCompat.Builder b = new NotificationCompat.Builder(mContext, "MY_DL")
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                     .setWhen(System.currentTimeMillis())
@@ -68,7 +72,7 @@ public class blobDownloader {
                     .setContentTitle("IMAGE_TITLE")
                     .setContentText("IMAGE_CONTENT");
             mNotificationManager = (NotificationManager) this.mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-            if(mNotificationManager != null) {
+            if (mNotificationManager != null) {
                 mNotificationManager.notify(notificationId, b.build());
                 Handler h = new Handler();
                 long delayInMilliseconds = 5000;

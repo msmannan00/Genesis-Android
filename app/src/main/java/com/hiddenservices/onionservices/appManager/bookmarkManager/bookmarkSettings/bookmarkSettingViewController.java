@@ -2,7 +2,9 @@ package com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSett
 
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.helperManager.sharedUIMethod;
@@ -10,8 +12,7 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-class bookmarkSettingViewController
-{
+class bookmarkSettingViewController {
     /* Private Variables */
 
     private AppCompatActivity mContext;
@@ -24,8 +25,7 @@ class bookmarkSettingViewController
 
     /* Initializations */
 
-    bookmarkSettingViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent,EditText pBookmarName,TextView pBookmarURL)
-    {
+    bookmarkSettingViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, EditText pBookmarName, TextView pBookmarURL) {
         this.mContext = pContext;
         this.mEvent = pEvent;
 
@@ -35,58 +35,56 @@ class bookmarkSettingViewController
         initPostUI();
     }
 
-    private void initPostUI(){
+    private void initPostUI() {
         sharedUIMethod.updateStatusBar(mContext);
     }
 
-    private void initializeBookmark(String pBookmarkName, String pBookmarkURL){
+    private void initializeBookmark(String pBookmarkName, String pBookmarkURL) {
         mBookmarName.setText(pBookmarkName);
         mBookmarURL.setText(pBookmarkURL);
     }
 
-    private String getBookmarkName(){
+    private String getBookmarkName() {
         return mBookmarName.getText().toString();
     }
 
-    private void mBookmarkNameValidationError(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands, boolean pStatus){
-        if(pCommands.equals(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE)){
-            if(!pStatus){
+    private void mBookmarkNameValidationError(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands, boolean pStatus) {
+        if (pCommands.equals(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE)) {
+            if (!pStatus) {
                 mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.gx_generic_input_error));
-            }else {
+            } else {
                 mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
             }
         }
     }
 
-    private void onClearForm(){
+    private void onClearForm() {
         mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
     }
 
-    private void onClearFormFocus(){
+    private void onClearFormFocus() {
         mBookmarName.clearFocus();
         helperMethod.hideKeyboard(mContext);
     }
 
     /* Event Observer */
 
-    public Object onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands, List<Object> pData){
-        if(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_INITIALIZE.equals(pCommands)){
-            initializeBookmark((String)pData.get(0), (String) pData.get(1));
+    public Object onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands, List<Object> pData) {
+        if (bookmarkSettingEnums.eBookmarkSettingViewCommands.M_INITIALIZE.equals(pCommands)) {
+            initializeBookmark((String) pData.get(0), (String) pData.get(1));
         }
-        if(pCommands.equals(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE)){
-            mBookmarkNameValidationError(pCommands, (boolean)pData.get(0));
+        if (pCommands.equals(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE)) {
+            mBookmarkNameValidationError(pCommands, (boolean) pData.get(0));
         }
         return null;
     }
 
-    public Object onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands){
-        if(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_GET_BOOKMARK_NAME.equals(pCommands)){
+    public Object onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands) {
+        if (bookmarkSettingEnums.eBookmarkSettingViewCommands.M_GET_BOOKMARK_NAME.equals(pCommands)) {
             return getBookmarkName();
-        }
-        else if(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_CLEAR_FORM.equals(pCommands)){
+        } else if (bookmarkSettingEnums.eBookmarkSettingViewCommands.M_CLEAR_FORM.equals(pCommands)) {
             onClearForm();
-        }
-        else if(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_CLEAR_FORM_FOCUS.equals(pCommands)){
+        } else if (bookmarkSettingEnums.eBookmarkSettingViewCommands.M_CLEAR_FORM_FOCUS.equals(pCommands)) {
             onClearFormFocus();
         }
         return null;

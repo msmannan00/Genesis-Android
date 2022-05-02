@@ -8,8 +8,9 @@
                 android:endColor="@color/c_ripple_v3"
                 android:startColor="@color/c_ripple_v3"
                 android:type="linear" />
-            <corners android:topLeftRadius="4.0dp"
-                android:topRightRadius="4.0dp"/>
+            <corners
+                android:topLeftRadius="4.0dp"
+                android:topRightRadius="4.0dp" />
         </shape>
     </item>
 </ripple>

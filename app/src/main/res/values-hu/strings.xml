@@ -1,529 +1,507 @@
 <resources>
 
-	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Orion Browser</string>
-	<string name="GENERAL_SEARCH_HINT" translatable="true">keresni valamiben, vagy beírni egy weblinket</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">megtalálja az oldalon</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">keresőmotor</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">opps! valami elromlott</string>
-	<string name="GENERAL_TODO" translatable="true">minden</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
-	<string name="GENERAL_LOADING" translatable="true">digitális szabadság</string>
-	<string name="GENERAL_RELOAD" translatable="true">újratöltés</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">a következő probléma egyikével áll szemben. előfordulhat, hogy egy weboldal vagy webhely nem működik. gyenge lehet az internetkapcsolat. lehet, hogy proxyt használ. előfordulhat, hogy a webhelyet tűzfal blokkolja</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Izrael újra sztrájkol</string>
-
-	<!-- Shortcuts -->
-	<string name="shortcut_erase_short_label" translatable="false">A böngésző gyorsítótárának törlése</string>
-	<string name="shortcut_erase_long_label" translatable="false">A böngészett webhely törlése</string>
-	<string name="shortcut_erase_and_open_short_label" translatable="false">Törölje az adatait, és nyissa meg a böngészőt</string>
-	<string name="shortcut_erase_and_open_long_label" translatable="false">A böngésző gyorsítótárának törlése</string>
-	<string name="shortcut_open" translatable="false">Indítsa újra a genezis böngészőt Indítsa újra a böngészőt</string>
-	<string name="shortcut_open_long" translatable="false">Restart Application</string>
-
-	<!-- Bookmark Setting -->
-	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Könyvjelző Szerkesztése</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Könyvjelző Neve</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">A könyvjelzővel ellátott URL neve itt jelenik meg Írja be a könyvjelző nevét…</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
-
-	<!-- Alerts General -->
-	<string name="ALERT_DISMISS" translatable="true">elbocsátani</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">"Néha szükség van egy hídra a Tor hálózat eléréséhez"</string>
-	<string name="LANDING_MORE" translatable="true">"TOVÁBBI MEGOLDÁS"</string>
-	<string name="LANDING_HELLO" translatable="true">"Hello"</string>
-	<string name="LANDING_WELCOME" translatable="true">"Üdvözöljük a Orion-es számmal mobilon."</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">"Böngésszen biztonságosan és biztonságosan az interneten."</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">"Nincs nyomkövetés. Nincs cenzúra."</string>
-
-	<!-- Alert Secure -->
-	<string name="ALERT_SECURE_INFO" translatable="true">A kapcsolat biztonságos</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Adatai (például jelszó vagy hitelkártya-számok) biztonságosak, amikor elküldik ezt a webhelyet Biztonsági beállítás</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Tartsa biztonságban személyazonosságát, és használja az alábbi lehetőségeket</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Ne kövesse</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Azt Mondjuk Az Oldalaknak, Hogy Ne Kövessék Önt</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Nyomkövetés védelme Engedélyezze az általunk biztosított követésvédelmet</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Tanúsítvány</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Tanúsítványra vonatkozó információk</string>
-	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificate</string>
-
-	<!-- Alert Certificate -->
-	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Certificate Information</string>
-
-	<!-- Orbot Log -->
-	<string name="ORBOT_LOG" translatable="true">proxy naplók</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Rendszernapló információ</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">Ha kapcsolódási problémával néz szembe az Orion indítása közben, kérjük, másolja a következő kódot, és keresse meg online a problémát, vagy küldje el nekünk, így megpróbálhatunk segíteni</string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
-
-	<!-- Orbot Settings -->
-	<string name="ORBOT_SETTING_HEADER" translatable="true">proxy testreszabása</string>
-	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">csatlakoztatjuk Önt a Tor hálózathoz, amelyet önkéntesek ezrei üzemeltetnek a világ minden tájáról! Segíthetnek ezek a lehetőségek</string>
-	<string name="ORBOT_SETTING_TITLE" translatable="true">itt cenzúrázzák az internetet (bypass tűzfal)</string>
-	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">bypass tűzfal</string>
-	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">A Bridges miatt az internet nagyon lassan fut. csak akkor használja őket, ha az internetet cenzúrázzák az Ön országában, vagy ha a Tor hálózat le van tiltva</string>
-	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">biztonság testreszabása</string>
-
-	<!-- Bridge Settings -->
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">Biztonsági Beállítások</string>
-	<string name="BRIDGE_SETTING" translatable="true">Módosítsa A "BRIDGE" Beállításokat</string>
-	<string name="BRIDGE_AUTO" translatable="true">Automatikus Létrehozás</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">A "BRIDGE" beállítások automatikus konfigurálása</string>
-	<string name="BRIDGE_MANUAL" translatable="true">Adj egy "BRIDGE", amit tudok</string>
-	<string name="BRIDGE_PORT_HINT" translatable="false">Illessze be az egyéni "BRIDGE"</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">A "BRIDGE" a tőzsdén nem jegyzett Tor relék, amelyek megnehezítik a Tor hálózathoz való csatlakozások blokkolását. Mivel egyes országok megpróbálják blokkolni a Tor -t, bizonyos "BRIDGE" működik bizonyos országokban, mások nem.</string>
-	<string name="BRIDGE_TITLE" translatable="true">Válassza az Alapértelmezett "BRIDGE"</string>
-	<string name="BRIDGE_REQUEST" translatable="true">lehetőséget Kérés</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (Ajánlott)</string>
-	<string name="BRIDGE_MEEK" translatable="true">Szelídezöld (Kína)</string>
-
-	<!-- Alert Advance Log -->
-	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">megváltoztathatja a rendszernapló megjelenésének módját</string>
-	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">show Napló modern listanézet segítségével</string>
-	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">váltson a klasszikus és a modern listanézet között</string>
-
-	<!-- Generic Toast Alerts -->
-	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Könyvjelző eltávolítva</string>
-	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Könyvjelző frissítve</string>
-	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Az adatok sikeresen törölve</string>
-	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL a vágólapra másolva</string>
-	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Nem található alkalmazás</string>
-	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">A változtatások után újra kell indítani</string>
-	<string name="TOAST_ALERT_RESTART" translatable="true">Újraindítás</string>
-	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">A Lap Bezárva</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Új lap megnyílt</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy összekötő ...</string>
-	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">A memória megtelt ➔ Törlés fül</string>
-	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Előugró ablak</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Hiba Naplók Megnyitása</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Váltás</string>
-	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Visszavonás</string>
-	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Új identitás létrehozva</string>
-	<string name="TOAST_ALERT_SETTING" translatable="true">nyisd meg a beállításokat</string>
-
-	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Új Kérés Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Válassza ki az alábbi e-mailt az Bridge-es cím kéréséhez. Ha megvan a címe, másolja ki és illessze be a fenti mezőbe, és indítsa el az alkalmazást.</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
-
-	<!-- Alert Rate Failure -->
-	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">Sajnálom, Hogy Hallom, Hogy</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Ha problémái vannak az alkalmazás használata során, kérjük, vegye fel velünk a kapcsolatot e -mailben. Igyekszünk mihamarabb megoldani a problémát</string>
-
-	<!-- Alert Panic -->
-	<string name="ALERT_PANIC_HEADER" translatable="true">HIBAELHÁRÍTÁS</string>
-	<string name="ALERT_PANIC_INFO" translatable="true">Állítsa vissza az alkalmazást, ha nem működik. Megpróbáljuk újrakonfigurálni, hogy újra működjön.</string>
-	<string name="ALERT_PANIC_BT_1" translatable="true">Visszaállítás</string>
-	<string name="ALERT_PANIC_BT_2" translatable="true">Elvetés</string>
-
-	<!-- Alert Download Single -->
-	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Várakozás a letöltésre ...</string>
-	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Letöltés</string>
-
-	<!-- Alert Rateus -->
-	<string name="ALERT_RATEUS" translatable="true">Értékeljen Minket</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">Mondja el másoknak, mit gondol erről az alkalmazásról</string>
-	<string name="ALERT_RATE" translatable="true">Értékelés</string>
-
-	<!-- Alert BRIDGE -->
-	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Kész</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge karakterlánc (obfs4 212.21.66.66:20621 ...)</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge típus (obfs4, szelíd, ...)</string>
-
-	<!-- Alert Create Bookmark -->
-	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Könyvjelző Weboldal</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Adja hozzá ezt az oldalt a könyvjelzőihez</string>
-	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">könyvjelző neve ...</string>
-	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Kész</string>
-
-	<!-- Alert Long Download -->
-	<string name="ALERT_LONG_URL" translatable="true">URL -értesítés</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Megnyitás új Lapon</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Megnyitás Az Aktuális Lapon</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Másolás a vágólapra</string>
-	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Fájl Letöltése</string>
-
-	<!-- Alert Full Download -->
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Nyissa meg az URL -t az új lapon</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">URL megnyitása az aktuális lapon</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URL másolása a vágólapra</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Nyissa meg a képet az új lapon</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">A kép aktuális lapjának megnyitása</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Kép másolása a vágólapra</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Képfájl letöltése</string>
-
-	<!-- Alert Bridge Custom -->
-	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">adja meg az Ön által ismert Bridge-est</string>
-	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">adja meg bridge információt megbízható forrásból</string>
-	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">kérés</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
-	<string name="SETTING_BASIC_SETTING" translatable="true">Rendszerbeállítás</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">tegye az Orion-et az alapértelmezett böngészővé</string>
-	<string name="SETTING_HEADER" translatable="true">Rendszerbeállítás</string>
-	<string name="SETTING_SEARCH_ENGINE" translatable="true">keresőmotor</string>
-	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_CLEAR_HISTORY" translatable="true">távolítsa el a böngészett weblinkeket</string>
-	<string name="SETTING_FONT_TITLE" translatable="true">betűtípus testreszabása</string>
-	<string name="SETTING_ADJUST_FONT" translatable="true">A rendszer betűtípusának alakítása</string>
-	<string name="SETTING_MANUAL_FONT" translatable="true">a betűtípus automatikus módosítása</string>
-	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie-beállítás</string>
-	<string name="SETTING_COOKIE" translatable="true">sütik</string>
-	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">Rendszerbeállítás . Értesítés</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">értesítéseket</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">értesítési beállítások módosítása</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">a hálózat és az értesítések állapota</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">helyi értesítések</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">testreszabhatja a szoftveres értesítéseket</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">a rendszer értesítései</string>
-	<string name="SETTING_SEARCH" translatable="true">a keresőmotor kezelése</string>
-	<string name="SETTING_SEARCH_INFO" translatable="true">add, alapértelmezett beállítás. javaslatok megjelenítése</string>
-	<string name="SETTING_NOTIFICATION" translatable="true">értesítések kezelése</string>
-	<string name="SETTING_NOTIFICATION_INFO" translatable="true">új funkciók, a hálózat állapota</string>
-	<string name="SETTING_SEARCH_HEADER" translatable="true">A szoftver testreszabása. Keresőmotor</string>
-	<string name="SETTING_SEARCH_HEADER_1" translatable="true">támogatott keresőmotorok</string>
-	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">válassza az Alapértelmezett keresőmotort</string>
-	<string name="SETTING_SEARCH_HEADER_2" translatable="true">A szoftver testreszabása. Keresőmotor</string>
-	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">módosíthatja az internetes keresések megjelenési módját</string>
-	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
-	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
-	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
-	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
-	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
-	<string name="SETTING_SEARCH_HISTORY" translatable="true">böngészett weblinkek megjelenítése</string>
-	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">javaslatokat mutat a keresés során</string>
-	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">a böngészett weblinkek javaslatai megjelennek, amikor beírja a keresősávba</string>
-	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">fókuszált javaslatok jelennek meg, amikor beírja a keresősávba</string>
-	<string name="SETTING_ACCESSIBILITY" translatable="true">megközelíthetőség</string>
-	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">szövegméret, nagyítás, bevitel hang segítségével</string>
-	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">testreszabása | megközelíthetőség</string>
-	<string name="SETTING_CLEAR" translatable="true">tiszta magánadatok</string>
-	<string name="SETTING_CLEAR_INFO" translatable="true">lapok, böngészett weblinkek, könyvjelző, sütik, gyorsítótár</string>
-	<string name="SETTING_CLEAR_HEADER" translatable="true">Módosítsa a rendszer beállításait. Rendszeradatok törlése</string>
-	<string name="SETTING_CLEAR_BUTTON" translatable="true">adatok törlése</string>
-	<string name="SETTING_CLEAR_OPTION_1" translatable="true">törölje az összes lapot</string>
-	<string name="SETTING_CLEAR_OPTION_2" translatable="true">törölje a böngészett weblinkeket</string>
-	<string name="SETTING_CLEAR_OPTION_3" translatable="true">könyvjelzők törlése</string>
-	<string name="SETTING_CLEAR_OPTION_4" translatable="true">törölje a gyorsítótárat</string>
-	<string name="SETTING_CLEAR_OPTION_5" translatable="true">javaslatok törlése</string>
-	<string name="SETTING_CLEAR_OPTION_6" translatable="true">adatok törlése</string>
-	<string name="SETTING_CLEAR_OPTION_7" translatable="true">munkamenet törlése</string>
-	<string name="SETTING_CLEAR_OPTION_8" translatable="true">törölje a sütiket</string>
-	<string name="SETTING_CLEAR_OPTION_9" translatable="true">törlés testreszabás</string>
-	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">betűméretezés</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">méretezheti a webtartalmat a rendszer betűmérete szerint</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">kapcsolja be a nagyítást</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">kapcsolja be és kényszerítse a nagyítást az összes weboldalra</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">bevitel hang segítségével</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">engedélyezze a hangdiktálást az URL-sávban</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">válassza az egyéni betűméretezést</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">addig húzza a csúszkát, amíg ezt kényelmesen el nem tudja olvasni. a szövegnek legalább ekkorának kell lennie, miután duplán megérintette a bekezdést</string>
-	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
-	<string name="SETTING_INTERACTION" translatable="true">kölcsönhatások</string>
-	<string name="SETTING_INTERACTION_INFO" translatable="true">változtassa meg a weboldal tartalmával való interakció módját</string>
-	<string name="SETTING_PRIVACY" translatable="true">Felhasználó be</string>
-	<string name="SETTING_PRIVACY_INFO" translatable="true">felhasználói meglepetés, bejelentkezés, adatválasztás</string>
-	<string name="SETTING_TRACKING" translatable="true">Felhasználói felügyeleti védelem</string>
-	<string name="SETTING_TRACKING_INFO" translatable="true">adblock, nyomkövetők, ujjlenyomatok</string>
-	<string name="SETTING_PRIVACY_HEADER" translatable="true">Rendszerbeállítás . magánélet</string>
-	<string name="SETTING_TRACKING_HEADER" translatable="true">Rendszerbeállítás . felhasználói meglepetésvédelem</string>
-	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">védje online identitását</string>
-	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">személyazonosságát tartsa magán. megvédhetünk több nyomkövetőtől, amelyek online nyomon követnek. ez a rendszerbeállítás a reklám blokkolására is használható</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">mentse meg magát a Survelance Protection felhasználójától</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Az Orion megmondja az oldalaknak, hogy ne kövessenek engem</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">mondd a weboldalnak, hogy ne kövessen nyomon</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Felhasználói felügyeleti védelem</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">engedélyezze a felhasználói Survelance Protection szolgáltatást, amelyet az Orion biztosít</string>
-	<string name="SETTING_PRIVACY_COOKIES" translatable="true">weboldal sütik</string>
-	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">a biztonsági igényeinek megfelelően válassza ki a weboldal sütik beállításait</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">törölje a személyes adatokat a kilépéskor</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">az adatok automatikus törlése a szoftver bezárása után</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">privát böngészés</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">tartsa biztonságban személyazonosságát, és használja az alábbi lehetőségeket</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">engedélyezve</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">engedélyezve, kivéve a webhelykövető sütiket</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">engedélyezve, kivéve a harmadik felet</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">Tiltva</string>
-
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">tiltsa le a védelmet</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">lehetővé teszik az identitás Survelance Protection alkalmazását. ez ellophatja online identitását</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">alapértelmezett (ajánlott)</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">blokkolja az online hirdetést és a közösségi webes felhasználót. az oldalak alapértelmezés szerint betöltődnek</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">szigorú politika</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">állítsa le az összes ismert nyomkövetőt, az oldalak gyorsabban betöltődnek, de bizonyos funkciók nem működnek</string>
-
-	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">tiltsa le a java szkripteket különféle szkript támadások esetén</string>
-	<string name="SETTING_ADVANCE_HEADER" translatable="true">Rendszerbeállítás . komplex rendszerbeállítás</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">fülek visszaállítása</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">ne állítsa vissza a böngészőből való kilépés után</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">eszköztár témája</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">állítsa be az eszköztár témáját a webhelyen meghatározottak szerint</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">képeket mutatni</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">mindig töltsön be weboldal képeket</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">webes betűtípusok megjelenítése</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">letölthet távoli betűtípusokat egy oldal betöltése közben</string>
-	<string name="SETTING_ADVANCE_MEDIA" translatable="true">engedélyezze az automatikus lejátszást</string>
-	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">hagyja, hogy a média automatikusan elinduljon</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">adatmentõ</string>
-	<string name="SETTING_ADVANCE_TAB" translatable="true">fülre</string>
-	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">változtassa meg a fül viselkedését a szoftver újraindítása után</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">média</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">módosítsa az alapértelmezett adatvédő testreszabását</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">alapértelmezett adathordozó testreszabása</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">mindig képeket mutat</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">képeket csak wifi használatakor mutat</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokkolja az összes képet</string>
-	<string name="SETTING_ADVANCE" translatable="true">A rendszer előzetes beállítása</string>
-	<string name="SETTING_ADVANCE_INFO" translatable="true">fülek, adatmentő, fejlesztői eszközök helyreállítása</string>
-	<string name="SETTING_PROXY" translatable="true">onion a proxy feltétele</string>
-	<string name="SETTING_PROXY_INFO" translatable="true">ellenőrizze a hálózat onion állapotát</string>
-	<string name="SETTING_REPORT" translatable="true">jelentés honlapja</string>
-	<string name="SETTING_REPORT_INFO" translatable="true">visszaélésszerű webhely jelentése</string>
-	<string name="SETTING_RATEUS" translatable="true">Értékeld ezt az alkalmazást</string>
-	<string name="SETTING_RATEUS_INFO" translatable="true">értékelje és kommentálja a playstore-t</string>
-	<string name="SETTING_SHARE" translatable="true">Oszd meg ezt az alkalmazást</string>
-	<string name="SETTING_SHARE_INFO" translatable="true">ossza meg ezt a szoftvert barátaival</string>
-	<string name="SETTING_GENERAL_HEADER" translatable="true">Rendszerbeállítás . általános testreszabás</string>
-	<string name="SETTING_GENERAL" translatable="true">Alapértelmezett rendszerbeállítás</string>
-	<string name="SETTING_GENERAL_INFO" translatable="true">honlap, nyelv</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">teljes képernyős böngészés</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">elrejti a böngésző eszköztárát, amikor lefelé görget egy oldalt</string>
-	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">nyelv</string>
-	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">változtassa meg a böngésző nyelvét</string>
-	<string name="SETTING_GENERAL_THEME" translatable="true">szoftver téma</string>
-	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">válasszon világos és sötét témát</string>
-	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">téma világos</string>
-	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">téma Sötét</string>
-	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">a teljes képernyős böngészés és a nyelv módosítása</string>
-	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">rendszer Alapértelmezett</string>
-	<string name="SETTING_GENERAL_HOME" translatable="true">honlap</string>
-	<string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">Új lap</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">nyissa meg a kezdőlapot az új lapon</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">távolítsa el az összes lapot</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">távolítsa el a böngészett weblinkeket</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">könyvjelzők eltávolítása</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">távolítsa el a böngészési gyorsítótárat</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">javaslatok eltávolítása</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">távolítsa el a webhely adatait</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">munkamenetadatok eltávolítása</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">távolítsa el a böngészési sütiket</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">távolítsa el a böngésző testreszabását</string>
-
-
-	<string name="ALERT_CREATE_BOOKMARK" translatable="true">könyvjelző weboldal</string>
-	<string name="ALERT_CLEAR_HISTORY" translatable="true">törölje a böngészett weblinkeket és az adatokat</string>
-	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">törölje a könyvjelzőt és az adatokat</string>
-	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">az adatok törlése eltávolítja a böngészett weblinkeket, sütiket és egyéb böngészési adatokat</string>
-	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">adatok törlésével a könyvjelzővel ellátott webhelyek is törlődnek</string>
-	<string name="ALERT_CLEAR" translatable="true">megszünteti</string>
-	<string name="ALERT_SECURE" translatable="false">https://</string>
-	<string name="ALERT_REPORT" translatable="true">jelentés</string>
-	<string name="ALERT_REPORT_URL" translatable="true">jelentés honlapja</string>
-	<string name="ALERT_REPORT_URL_INFO" translatable="true">ha úgy gondolja, hogy ez az URL illegális vagy zavaró, jelezze nekünk, hogy jogi lépéseket tegyünk</string>
-	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">sikeresen jelentették</string>
-	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">Az URL-t sikeresen jelentették. ha valamit találnak, jogi lépéseket tesznek</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">a nyelv nem támogatott</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">a rendszer nyelvét ez a szoftver nem támogatja. azon dolgozunk, hogy hamarosan felvegyük</string>
-	<string name="ALERT_ORBOT_INIT" translatable="true">inicializálása Orbot</string>
-	<string name="ALERT_NOT_SUPPORTED" translatable="true">művelet nem támogatott</string>
-	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">nem található szoftver a következő parancs kezelésére</string>
-	<string name="ALERT_WELCOME_MESSAGE" translatable="true">üdvözlöm | rejtett háló Gateway</string>
-	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">ez a szoftver platformot kínál rejtett webes URL-ek keresésére és megnyitására. itt van néhány javaslat \n</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">rejtett internetes online piac</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">kiszivárgott dokumentumok és könyvek</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">sötét webes hírek és cikkek</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">titkos szoftverek és hacker eszközök</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">ne mutasd újra</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">pénzügy és pénz</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">társadalmi társadalmak</string>
-	<string name="ALERT_LOCAL_UPGRADE" translatable="true">kézikönyv</string>
-	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">A Play Áruház</string>
-	<string name="ALERT_LONG_FILE" translatable="true">fájl értesítés</string>
-	<string name="ALERT_DOWNLOAD" translatable="true">letöltési értesítés</string>
-	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">letöltési értesítés</string>
-	<string name="ALERT_LONG_URL_TITLE" translatable="true">weblink értesítés</string>
-	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
-	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">nem található szoftver az e-mailek kezelésére</string>
-	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">fájl letöltése |</string>
-	<string name="ALERT_DATA_CLEARED" translatable="true">adatok törölve | újraindítás szükséges</string>
-
-
-
-
-
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot rönk</string>
-	<string name="HOME_MENU__NEW_TABS" translatable="true">új fülek</string>
-	<string name="HOME_MENU_CLOSE_TABS" translatable="true">lap bezárása</string>
-	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">nyissa meg a legutóbbi lapokat</string>
-	<string name="HOME_MENU_LANGUAGE" translatable="true">nyelv</string>
-	<string name="HOME_MENU_DOWNLOAD" translatable="true">letöltések</string>
-	<string name="HOME_MENU_HISTORY" translatable="true">böngészett weblinkek</string>
-	<string name="HOME_MENU_SETTING" translatable="true">Rendszerbeállítás</string>
-	<string name="HOME_MENU_DESKTOP" translatable="true">asztali webhely</string>
-	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Kapcsolat</string>
-	<string name="HOME_MENU_BOOKMARK" translatable="true">mentsd el ezt az oldalt</string>
-	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">könyvjelzők</string>
-	<string name="HOME_MENU_REPORT" translatable="true">jelentés honlapja</string>
-	<string name="HOME_MENU_RATE" translatable="true">Értékeld ezt az alkalmazást</string>
-	<string name="HOME_MENU_FIND" translatable="true">megtalálja az oldalon</string>
-	<string name="HOME_MENU_QUIT" translatable="true">kijárat</string>
-	<string name="HOME_MENU_SHARE" translatable="true">részvény</string>
-
-
-	<string name="TAB_MENU_OPEN_TAB" translatable="true">új fülek</string>
-	<string name="TAB_MENU_CLOSE_TAB" translatable="true">zárja be az összes lapot</string>
-	<string name="TAB_MENU_SETTINGS" translatable="true">Rendszerbeállítás</string>
-	<string name="TAB_LIST_SELECT" translatable="true">válassza a füleket</string>
-
-
-	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">nyitott fülek</string>
-	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">másolat</string>
-	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">részvény</string>
-	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">egyértelmű kiválasztás</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">nyissa meg az aktuális lapon</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">új lapon nyissa meg</string>
-	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">töröl</string>
-
-
-	<string name="HISTORY_TITLE" translatable="true">böngészett weblinkek</string>
-	<string name="HISTORY_CLEAR" translatable="true">távolítsa el ezt</string>
-	<string name="HISTORY_SEARCH_HINT" translatable="true">keresés ...</string>
-
-
-	<string name="BOOKMARK_TITLE" translatable="true">könyvjelző</string>
-	<string name="BOOKMARK_CLEAR" translatable="true">távolítsa el ezt</string>
-	<string name="BOOKMARK_SEARCH_HINT" translatable="true">keresés ...</string>
-
-
-	<string name="HELP_RETRY" translatable="true">próbálja újra</string>
-	<string name="HELP_RETRY_INFO" translatable="true">opps! hálózati kapcsolat hiba. a hálózat nincs csatlakoztatva</string>
-	<string name="HELP_TITLE" translatable="true">segítség és támogatás</string>
-
-
-	<string name="LANGUAGE_TITLE" translatable="true">nyelv</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">Válts nyelvet</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">csak a következő nyelveken futunk. hamarosan bővítenénk</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">angol (egyesült államok)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">német (németország)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">olasz (olasz)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">portugál (brazil)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">orosz (orosz)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">ukrán (ukrán)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">egyszerűsített kínai (szárazföldi Kína)</string>
-
-
-	<string name="ORBOT_SETTING_WARNING" translatable="true">Warning️ figyelmeztetés</string>
-	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">testreszabja a Bridges-et</string>
-	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">engedélyezze a Bridges-et</string>
-	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">lehetővé VPN serivces</string>
-	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">engedélyezze a Bridge Gateway-at</string>
-	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">engedélyezze az Gateway-at</string>
-
-
-	<string name="PROXY_STATUS_HEADER" translatable="true">a meghatalmazás feltétele</string>
-	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">a orbot proxy jelenlegi állapota</string>
-	<string name="PROXY_SUB_HEADER1" translatable="true">A proxy Orbot feltétele</string>
-	<string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
-	<string name="PROXY_VPN_STATUS" translatable="true">VPN a kapcsolat feltétele</string>
-	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge a proxy állapota</string>
-	<string name="PROXY_SUB_HEADER3" translatable="true">info | a System Setting módosítása</string>
-	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">a proxyt megváltoztathatja a szoftver újraindításával és a proxy-kezelőhöz. alul található fogaskerék ikonra kattintva nyitható meg</string>
-
-
-
-
-	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">alapértelmezett.jpg</string>
-	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">nyisd meg ezt</string>
-
-
-	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_CONNECT" translatable="false">connect</string>
-	<string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
-	<string name="HOME_TAB_EMPTY" translatable="true">a megnyitott lapok itt jelennek meg</string>
-
-
-	<string name="ERROR_M1" translatable="true">ez az oldal nem érhető el</string>
-	<string name="ERROR_M2" translatable="true">hiba történt a webhelyhez való kapcsolódás során</string>
-	<string name="ERROR_M3" translatable="true">a megtekinteni kívánt oldal nem jeleníthető meg, mert a beérkezett adatok valódiságát nem sikerült ellenőrizni</string>
-	<string name="ERROR_M4" translatable="true">az oldal valamilyen ok miatt jelenleg nem működik</string>
-	<string name="ERROR_M5" translatable="true">kérjük, lépjen kapcsolatba a weboldal tulajdonosával, hogy tájékoztassa őket erről a problémáról.</string>
-	<string name="ERROR_M6" translatable="true">újratöltés</string>
-
-	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
-	<string name="invalid_package_signature" translatable="true">Érvénytelen csomag aláírás</string>
-	<string name="autofill_sign_in_prompt" translatable="true">kattintson a bejelentkezéshez.</string>
-	<string name="autofill_manual_prompt" translatable="true">kattintson az adatok manuális kiválasztásához.</string>
-	<string name="security_exception" translatable="true">Web domain biztonsági kivétel.</string>
-	<string name="dal_exception" translatable="true">DAL ellenőrzési hiba.</string>
-
-	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Legutóbbi lapok</string>
-	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Új identitás</string>
-	<string name="SETTING_PRIVACY_POLICY" translatable="true">Adatvédelmi irányelvek</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser adatvédelmi irányelvek</string>
-	<string name="SETTING_REPORT_WEBSITE" translatable="true">Webhely jelentése</string>
-	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Illegális weboldal bejelentése</string>
-	<string name="SETTING_SITEMAP" translatable="true">tegye közzé webhelyét</string>
-	<string name="SETTING_SITEMAP_INFO" translatable="true">Adja hozzá webhelyét keresőmotorunkhoz</string>
-
-	<item name="LaguageID" type="id"/>
-	<item name="LaguageRegion" type="id"/>
-
-	<string-array name="ARRAY_FONTS" translatable="true">
-		<item>55 százalék</item>
-		<item>70 százalék</item>
-		<item>85 százalék</item>
-		<item>100 százalék</item>
-		<item>115 százalék</item>
-		<item>130 százalék</item>
-		<item>145 százalék</item>
-	</string-array>
-
-	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
-		<item>Engedélyezve</item>
-		<item>Tiltva</item>
-	</string-array>
-
-	<string-array name="ARRAY_NOTIFICATION" translatable="true">
-		<item>Az összes engedélyezése</item>
-		<item>Összes letiltása</item>
-		<item>Nincs sávszélesség</item>
-	</string-array>
-
-	<string-array name="ARRAY_COOKIES" translatable="true">
-		<item>Engedélyezni az összeset</item>
-		<item>Megbízható engedélyezése</item>
-		<item>Nincs engedélyezve</item>
-		<item>Engedélyezze a Meglátogatott lehetőséget</item>
-		<item>A Non Tracker engedélyezése</item>
-	</string-array>
-
-	<!-- Generated by Automatic String Resource Translation -->
-	<!--          https://asrt.gluege.boerde.de             -->
+    <!-- Application Strings -->
+    <string name="app_name" translatable="false">Orion Browser</string>
+    <string name="GENERAL_SEARCH_HINT" translatable="true">keresni valamiben, vagy beírni egy weblinket</string>
+    <string name="GENERAL_FIND_HINT" translatable="true">megtalálja az oldalon</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="true">keresőmotor</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">opps! valami elromlott</string>
+    <string name="GENERAL_TODO" translatable="true">minden</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
+    <string name="GENERAL_LOADING" translatable="true">digitális szabadság</string>
+    <string name="GENERAL_RELOAD" translatable="true">újratöltés</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">a következő probléma egyikével áll szemben. előfordulhat, hogy egy weboldal vagy webhely nem működik. gyenge lehet az internetkapcsolat. lehet, hogy proxyt használ. előfordulhat, hogy a webhelyet tűzfal blokkolja</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Izrael újra sztrájkol</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label" translatable="false">A böngésző gyorsítótárának törlése</string>
+    <string name="shortcut_erase_long_label" translatable="false">A böngészett webhely törlése</string>
+    <string name="shortcut_erase_and_open_short_label" translatable="false">Törölje az adatait, és nyissa meg a böngészőt</string>
+    <string name="shortcut_erase_and_open_long_label" translatable="false">A böngésző gyorsítótárának törlése</string>
+    <string name="shortcut_open" translatable="false">Indítsa újra a genezis böngészőt Indítsa újra a böngészőt</string>
+    <string name="shortcut_open_long" translatable="false">Restart Application</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Könyvjelző Szerkesztése</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Könyvjelző Neve</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">A könyvjelzővel ellátott URL neve itt jelenik meg Írja be a könyvjelző nevét…</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Enter bookmark name…</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">elbocsátani</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">"Néha szükség van egy hídra a Tor hálózat eléréséhez"</string>
+    <string name="LANDING_MORE" translatable="true">"TOVÁBBI MEGOLDÁS"</string>
+    <string name="LANDING_HELLO" translatable="true">"Hello"</string>
+    <string name="LANDING_WELCOME" translatable="true">"Üdvözöljük a Orion-es számmal mobilon."</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">"Böngésszen biztonságosan és biztonságosan az interneten."</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">"Nincs nyomkövetés. Nincs cenzúra."</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE_INFO" translatable="true">A kapcsolat biztonságos</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Adatai (például jelszó vagy hitelkártya-számok) biztonságosak, amikor elküldik ezt a webhelyet Biztonsági beállítás</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Tartsa biztonságban személyazonosságát, és használja az alábbi lehetőségeket</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Ne kövesse</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Azt Mondjuk Az Oldalaknak, Hogy Ne Kövessék Önt</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Nyomkövetés védelme Engedélyezze az általunk biztosított követésvédelmet</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Tanúsítvány</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Tanúsítványra vonatkozó információk</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Certificate</string>
+
+    <!-- Alert Certificate -->
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">Certificate Information</string>
+
+    <!-- Orbot Log -->
+    <string name="ORBOT_LOG" translatable="true">proxy naplók</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">Rendszernapló információ</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">Ha kapcsolódási problémával néz szembe az Orion indítása közben, kérjük, másolja a következő kódot, és keresse meg online a problémát, vagy küldje el nekünk, így megpróbálhatunk segíteni</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">proxy testreszabása</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">csatlakoztatjuk Önt a Tor hálózathoz, amelyet önkéntesek ezrei üzemeltetnek a világ minden tájáról! Segíthetnek ezek a lehetőségek</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">itt cenzúrázzák az internetet (bypass tűzfal)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">bypass tűzfal</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">A Bridges miatt az internet nagyon lassan fut. csak akkor használja őket, ha az internetet cenzúrázzák az Ön országában, vagy ha a Tor hálózat le van tiltva</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">biztonság testreszabása</string>
+
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">Biztonsági Beállítások</string>
+    <string name="BRIDGE_SETTING" translatable="true">Módosítsa A "BRIDGE" Beállításokat</string>
+    <string name="BRIDGE_AUTO" translatable="true">Automatikus Létrehozás</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">A "BRIDGE" beállítások automatikus konfigurálása</string>
+    <string name="BRIDGE_MANUAL" translatable="true">Adj egy "BRIDGE", amit tudok</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Illessze be az egyéni "BRIDGE"</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">A "BRIDGE" a tőzsdén nem jegyzett Tor relék, amelyek megnehezítik a Tor hálózathoz való csatlakozások blokkolását. Mivel egyes országok megpróbálják blokkolni a Tor -t, bizonyos "BRIDGE" működik bizonyos országokban, mások nem.</string>
+    <string name="BRIDGE_TITLE" translatable="true">Válassza az Alapértelmezett "BRIDGE"</string>
+    <string name="BRIDGE_REQUEST" translatable="true">lehetőséget Kérés</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Ajánlott)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Szelídezöld (Kína)</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">megváltoztathatja a rendszernapló megjelenésének módját</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">show Napló modern listanézet segítségével</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">váltson a klasszikus és a modern listanézet között</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Könyvjelző eltávolítva</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Könyvjelző frissítve</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Az adatok sikeresen törölve</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL a vágólapra másolva</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Nem található alkalmazás</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">A változtatások után újra kell indítani</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">Újraindítás</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">A Lap Bezárva</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Új lap megnyílt</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy összekötő ...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">A memória megtelt ➔ Törlés fül</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Előugró ablak</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Hiba Naplók Megnyitása</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Váltás</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Visszavonás</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Új identitás létrehozva</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">nyisd meg a beállításokat</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Új Kérés Bridge</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Válassza ki az alábbi e-mailt az Bridge-es cím kéréséhez. Ha megvan a címe, másolja ki és illessze be a fenti mezőbe, és indítsa el az alkalmazást.</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">Mail</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">Sajnálom, Hogy Hallom, Hogy</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Ha problémái vannak az alkalmazás használata során, kérjük, vegye fel velünk a kapcsolatot e -mailben. Igyekszünk mihamarabb megoldani a problémát</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">HIBAELHÁRÍTÁS</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Állítsa vissza az alkalmazást, ha nem működik. Megpróbáljuk újrakonfigurálni, hogy újra működjön.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Visszaállítás</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Elvetés</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Várakozás a letöltésre ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Letöltés</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">Értékeljen Minket</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">Mondja el másoknak, mit gondol erről az alkalmazásról</string>
+    <string name="ALERT_RATE" translatable="true">Értékelés</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Kész</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge karakterlánc (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge típus (obfs4, szelíd, ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Könyvjelző Weboldal</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Adja hozzá ezt az oldalt a könyvjelzőihez</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">könyvjelző neve ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Kész</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">URL -értesítés</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Megnyitás új Lapon</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Megnyitás Az Aktuális Lapon</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Másolás a vágólapra</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Fájl Letöltése</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Nyissa meg az URL -t az új lapon</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">URL megnyitása az aktuális lapon</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">URL másolása a vágólapra</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Nyissa meg a képet az új lapon</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">A kép aktuális lapjának megnyitása</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Kép másolása a vágólapra</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Képfájl letöltése</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">adja meg az Ön által ismert Bridge-est</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">adja meg bridge információt megbízható forrásból</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">kérés</string>
+
+
+    <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+    <string name="SETTING_BASIC_SETTING" translatable="true">Rendszerbeállítás</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">tegye az Orion-et az alapértelmezett böngészővé</string>
+    <string name="SETTING_HEADER" translatable="true">Rendszerbeállítás</string>
+    <string name="SETTING_SEARCH_ENGINE" translatable="true">keresőmotor</string>
+    <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_CLEAR_HISTORY" translatable="true">távolítsa el a böngészett weblinkeket</string>
+    <string name="SETTING_FONT_TITLE" translatable="true">betűtípus testreszabása</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">A rendszer betűtípusának alakítása</string>
+    <string name="SETTING_MANUAL_FONT" translatable="true">a betűtípus automatikus módosítása</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Cookie-beállítás</string>
+    <string name="SETTING_COOKIE" translatable="true">sütik</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">Rendszerbeállítás . Értesítés</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">értesítéseket</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">értesítési beállítások módosítása</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">a hálózat és az értesítések állapota</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">helyi értesítések</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">testreszabhatja a szoftveres értesítéseket</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">a rendszer értesítései</string>
+    <string name="SETTING_SEARCH" translatable="true">a keresőmotor kezelése</string>
+    <string name="SETTING_SEARCH_INFO" translatable="true">add, alapértelmezett beállítás. javaslatok megjelenítése</string>
+    <string name="SETTING_NOTIFICATION" translatable="true">értesítések kezelése</string>
+    <string name="SETTING_NOTIFICATION_INFO" translatable="true">új funkciók, a hálózat állapota</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">A szoftver testreszabása. Keresőmotor</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="true">támogatott keresőmotorok</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">válassza az Alapértelmezett keresőmotort</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">A szoftver testreszabása. Keresőmotor</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">módosíthatja az internetes keresések megjelenési módját</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+    <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="true">böngészett weblinkek megjelenítése</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">javaslatokat mutat a keresés során</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">a böngészett weblinkek javaslatai megjelennek, amikor beírja a keresősávba</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">fókuszált javaslatok jelennek meg, amikor beírja a keresősávba</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="true">megközelíthetőség</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">szövegméret, nagyítás, bevitel hang segítségével</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">testreszabása | megközelíthetőség</string>
+    <string name="SETTING_CLEAR" translatable="true">tiszta magánadatok</string>
+    <string name="SETTING_CLEAR_INFO" translatable="true">lapok, böngészett weblinkek, könyvjelző, sütik, gyorsítótár</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">Módosítsa a rendszer beállításait. Rendszeradatok törlése</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="true">adatok törlése</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">törölje az összes lapot</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">törölje a böngészett weblinkeket</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">könyvjelzők törlése</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">törölje a gyorsítótárat</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">javaslatok törlése</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">adatok törlése</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">munkamenet törlése</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">törölje a sütiket</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">törlés testreszabás</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">betűméretezés</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">méretezheti a webtartalmat a rendszer betűmérete szerint</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">kapcsolja be a nagyítást</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">kapcsolja be és kényszerítse a nagyítást az összes weboldalra</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">bevitel hang segítségével</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">engedélyezze a hangdiktálást az URL-sávban</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">válassza az egyéni betűméretezést</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">addig húzza a csúszkát, amíg ezt kényelmesen el nem tudja olvasni. a szövegnek legalább ekkorának kell lennie, miután duplán megérintette a bekezdést</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+    <string name="SETTING_INTERACTION" translatable="true">kölcsönhatások</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">változtassa meg a weboldal tartalmával való interakció módját</string>
+    <string name="SETTING_PRIVACY" translatable="true">Felhasználó be</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">felhasználói meglepetés, bejelentkezés, adatválasztás</string>
+    <string name="SETTING_TRACKING" translatable="true">Felhasználói felügyeleti védelem</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">adblock, nyomkövetők, ujjlenyomatok</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">Rendszerbeállítás . magánélet</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">Rendszerbeállítás . felhasználói meglepetésvédelem</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">védje online identitását</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">személyazonosságát tartsa magán. megvédhetünk több nyomkövetőtől, amelyek online nyomon követnek. ez a rendszerbeállítás a reklám blokkolására is használható</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">mentse meg magát a Survelance Protection felhasználójától</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Az Orion megmondja az oldalaknak, hogy ne kövessenek engem</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">mondd a weboldalnak, hogy ne kövessen nyomon</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Felhasználói felügyeleti védelem</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">engedélyezze a felhasználói Survelance Protection szolgáltatást, amelyet az Orion biztosít</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">weboldal sütik</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">a biztonsági igényeinek megfelelően válassza ki a weboldal sütik beállításait</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">törölje a személyes adatokat a kilépéskor</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">az adatok automatikus törlése a szoftver bezárása után</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">privát böngészés</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">tartsa biztonságban személyazonosságát, és használja az alábbi lehetőségeket</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">engedélyezve</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">engedélyezve, kivéve a webhelykövető sütiket</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">engedélyezve, kivéve a harmadik felet</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">Tiltva</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">tiltsa le a védelmet</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">lehetővé teszik az identitás Survelance Protection alkalmazását. ez ellophatja online identitását</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">alapértelmezett (ajánlott)</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">blokkolja az online hirdetést és a közösségi webes felhasználót. az oldalak alapértelmezés szerint betöltődnek</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">szigorú politika</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">állítsa le az összes ismert nyomkövetőt, az oldalak gyorsabban betöltődnek, de bizonyos funkciók nem működnek</string>
+
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">tiltsa le a java szkripteket különféle szkript támadások esetén</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">Rendszerbeállítás . komplex rendszerbeállítás</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">fülek visszaállítása</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">ne állítsa vissza a böngészőből való kilépés után</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">eszköztár témája</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">állítsa be az eszköztár témáját a webhelyen meghatározottak szerint</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">képeket mutatni</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">mindig töltsön be weboldal képeket</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">webes betűtípusok megjelenítése</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">letölthet távoli betűtípusokat egy oldal betöltése közben</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="true">engedélyezze az automatikus lejátszást</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">hagyja, hogy a média automatikusan elinduljon</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">adatmentõ</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="true">fülre</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">változtassa meg a fül viselkedését a szoftver újraindítása után</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">média</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">módosítsa az alapértelmezett adatvédő testreszabását</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">alapértelmezett adathordozó testreszabása</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">mindig képeket mutat</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">képeket csak wifi használatakor mutat</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokkolja az összes képet</string>
+    <string name="SETTING_ADVANCE" translatable="true">A rendszer előzetes beállítása</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="true">fülek, adatmentő, fejlesztői eszközök helyreállítása</string>
+    <string name="SETTING_PROXY" translatable="true">onion a proxy feltétele</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">ellenőrizze a hálózat onion állapotát</string>
+    <string name="SETTING_REPORT" translatable="true">jelentés honlapja</string>
+    <string name="SETTING_REPORT_INFO" translatable="true">visszaélésszerű webhely jelentése</string>
+    <string name="SETTING_RATEUS" translatable="true">Értékeld ezt az alkalmazást</string>
+    <string name="SETTING_RATEUS_INFO" translatable="true">értékelje és kommentálja a playstore-t</string>
+    <string name="SETTING_SHARE" translatable="true">Oszd meg ezt az alkalmazást</string>
+    <string name="SETTING_SHARE_INFO" translatable="true">ossza meg ezt a szoftvert barátaival</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">Rendszerbeállítás . általános testreszabás</string>
+    <string name="SETTING_GENERAL" translatable="true">Alapértelmezett rendszerbeállítás</string>
+    <string name="SETTING_GENERAL_INFO" translatable="true">honlap, nyelv</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">teljes képernyős böngészés</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">elrejti a böngésző eszköztárát, amikor lefelé görget egy oldalt</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="true">nyelv</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">változtassa meg a böngésző nyelvét</string>
+    <string name="SETTING_GENERAL_THEME" translatable="true">szoftver téma</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="true">válasszon világos és sötét témát</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">téma világos</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="true">téma Sötét</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">a teljes képernyős böngészés és a nyelv módosítása</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">rendszer Alapértelmezett</string>
+    <string name="SETTING_GENERAL_HOME" translatable="true">honlap</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">Új lap</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">nyissa meg a kezdőlapot az új lapon</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">távolítsa el az összes lapot</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">távolítsa el a böngészett weblinkeket</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">könyvjelzők eltávolítása</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">távolítsa el a böngészési gyorsítótárat</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">javaslatok eltávolítása</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">távolítsa el a webhely adatait</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">munkamenetadatok eltávolítása</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">távolítsa el a böngészési sütiket</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">távolítsa el a böngésző testreszabását</string>
+
+
+    <string name="ALERT_CREATE_BOOKMARK" translatable="true">könyvjelző weboldal</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">törölje a böngészett weblinkeket és az adatokat</string>
+    <string name="ALERT_CLEAR_BOOKMARK" translatable="true">törölje a könyvjelzőt és az adatokat</string>
+    <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">az adatok törlése eltávolítja a böngészett weblinkeket, sütiket és egyéb böngészési adatokat</string>
+    <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">adatok törlésével a könyvjelzővel ellátott webhelyek is törlődnek</string>
+    <string name="ALERT_CLEAR" translatable="true">megszünteti</string>
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_REPORT" translatable="true">jelentés</string>
+    <string name="ALERT_REPORT_URL" translatable="true">jelentés honlapja</string>
+    <string name="ALERT_REPORT_URL_INFO" translatable="true">ha úgy gondolja, hogy ez az URL illegális vagy zavaró, jelezze nekünk, hogy jogi lépéseket tegyünk</string>
+    <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">sikeresen jelentették</string>
+    <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">Az URL-t sikeresen jelentették. ha valamit találnak, jogi lépéseket tesznek</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">a nyelv nem támogatott</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">a rendszer nyelvét ez a szoftver nem támogatja. azon dolgozunk, hogy hamarosan felvegyük</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">inicializálása Orbot</string>
+    <string name="ALERT_NOT_SUPPORTED" translatable="true">művelet nem támogatott</string>
+    <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">nem található szoftver a következő parancs kezelésére</string>
+    <string name="ALERT_WELCOME_MESSAGE" translatable="true">üdvözlöm | rejtett háló Gateway</string>
+    <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">ez a szoftver platformot kínál rejtett webes URL-ek keresésére és megnyitására. itt van néhány javaslat \n</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">rejtett internetes online piac</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">kiszivárgott dokumentumok és könyvek</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">sötét webes hírek és cikkek</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">titkos szoftverek és hacker eszközök</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">ne mutasd újra</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">pénzügy és pénz</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">társadalmi társadalmak</string>
+    <string name="ALERT_LOCAL_UPGRADE" translatable="true">kézikönyv</string>
+    <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">A Play Áruház</string>
+    <string name="ALERT_LONG_FILE" translatable="true">fájl értesítés</string>
+    <string name="ALERT_DOWNLOAD" translatable="true">letöltési értesítés</string>
+    <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">letöltési értesítés</string>
+    <string name="ALERT_LONG_URL_TITLE" translatable="true">weblink értesítés</string>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
+    <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">nem található szoftver az e-mailek kezelésére</string>
+    <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">fájl letöltése |</string>
+    <string name="ALERT_DATA_CLEARED" translatable="true">adatok törölve | újraindítás szükséges</string>
+
+
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot rönk</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">új fülek</string>
+    <string name="HOME_MENU_CLOSE_TABS" translatable="true">lap bezárása</string>
+    <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">nyissa meg a legutóbbi lapokat</string>
+    <string name="HOME_MENU_LANGUAGE" translatable="true">nyelv</string>
+    <string name="HOME_MENU_DOWNLOAD" translatable="true">letöltések</string>
+    <string name="HOME_MENU_HISTORY" translatable="true">böngészett weblinkek</string>
+    <string name="HOME_MENU_SETTING" translatable="true">Rendszerbeállítás</string>
+    <string name="HOME_MENU_DESKTOP" translatable="true">asztali webhely</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Kapcsolat</string>
+    <string name="HOME_MENU_BOOKMARK" translatable="true">mentsd el ezt az oldalt</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">könyvjelzők</string>
+    <string name="HOME_MENU_REPORT" translatable="true">jelentés honlapja</string>
+    <string name="HOME_MENU_RATE" translatable="true">Értékeld ezt az alkalmazást</string>
+    <string name="HOME_MENU_FIND" translatable="true">megtalálja az oldalon</string>
+    <string name="HOME_MENU_QUIT" translatable="true">kijárat</string>
+    <string name="HOME_MENU_SHARE" translatable="true">részvény</string>
+
+
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">új fülek</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="true">zárja be az összes lapot</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">Rendszerbeállítás</string>
+    <string name="TAB_LIST_SELECT" translatable="true">válassza a füleket</string>
+
+
+    <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">nyitott fülek</string>
+    <string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">másolat</string>
+    <string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">részvény</string>
+    <string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">egyértelmű kiválasztás</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">nyissa meg az aktuális lapon</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">új lapon nyissa meg</string>
+    <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">töröl</string>
+
+
+    <string name="HISTORY_TITLE" translatable="true">böngészett weblinkek</string>
+    <string name="HISTORY_CLEAR" translatable="true">távolítsa el ezt</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true">keresés ...</string>
+
+
+    <string name="BOOKMARK_TITLE" translatable="true">könyvjelző</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">távolítsa el ezt</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true">keresés ...</string>
+
+
+    <string name="HELP_RETRY" translatable="true">próbálja újra</string>
+    <string name="HELP_RETRY_INFO" translatable="true">opps! hálózati kapcsolat hiba. a hálózat nincs csatlakoztatva</string>
+    <string name="HELP_TITLE" translatable="true">segítség és támogatás</string>
+
+
+    <string name="LANGUAGE_TITLE" translatable="true">nyelv</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">Válts nyelvet</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">csak a következő nyelveken futunk. hamarosan bővítenénk</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">angol (egyesült államok)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">német (németország)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">olasz (olasz)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">portugál (brazil)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">orosz (orosz)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">ukrán (ukrán)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">egyszerűsített kínai (szárazföldi Kína)</string>
+
+
+    <string name="ORBOT_SETTING_WARNING" translatable="true">Warning️ figyelmeztetés</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">testreszabja a Bridges-et</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">engedélyezze a Bridges-et</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">lehetővé VPN serivces</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">engedélyezze a Bridge Gateway-at</string>
+    <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">engedélyezze az Gateway-at</string>
+
+
+    <string name="PROXY_STATUS_HEADER" translatable="true">a meghatalmazás feltétele</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">a orbot proxy jelenlegi állapota</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">A proxy Orbot feltétele</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">VPN a kapcsolat feltétele</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge a proxy állapota</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">info | a System Setting módosítása</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">a proxyt megváltoztathatja a szoftver újraindításával és a proxy-kezelőhöz. alul található fogaskerék ikonra kattintva nyitható meg</string>
+
+
+    <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">alapértelmezett.jpg</string>
+    <string name="NOTIFICATION_OPEN_TEXT" translatable="true">nyisd meg ezt</string>
+
+
+    <string name="HOME_TAB_TEXT" translatable="true">1</string>
+    <string name="HOME_CONNECT" translatable="false">connect</string>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
+    <string name="HOME_TAB_EMPTY" translatable="true">a megnyitott lapok itt jelennek meg</string>
+
+
+    <string name="ERROR_M1" translatable="true">ez az oldal nem érhető el</string>
+    <string name="ERROR_M2" translatable="true">hiba történt a webhelyhez való kapcsolódás során</string>
+    <string name="ERROR_M3" translatable="true">a megtekinteni kívánt oldal nem jeleníthető meg, mert a beérkezett adatok valódiságát nem sikerült ellenőrizni</string>
+    <string name="ERROR_M4" translatable="true">az oldal valamilyen ok miatt jelenleg nem működik</string>
+    <string name="ERROR_M5" translatable="true">kérjük, lépjen kapcsolatba a weboldal tulajdonosával, hogy tájékoztassa őket erről a problémáról.</string>
+    <string name="ERROR_M6" translatable="true">újratöltés</string>
+
+    <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+    <string name="invalid_package_signature" translatable="true">Érvénytelen csomag aláírás</string>
+    <string name="autofill_sign_in_prompt" translatable="true">kattintson a bejelentkezéshez.</string>
+    <string name="autofill_manual_prompt" translatable="true">kattintson az adatok manuális kiválasztásához.</string>
+    <string name="security_exception" translatable="true">Web domain biztonsági kivétel.</string>
+    <string name="dal_exception" translatable="true">DAL ellenőrzési hiba.</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Legutóbbi lapok</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Új identitás</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">Adatvédelmi irányelvek</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser adatvédelmi irányelvek</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">Webhely jelentése</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Illegális weboldal bejelentése</string>
+    <string name="SETTING_SITEMAP" translatable="true">tegye közzé webhelyét</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">Adja hozzá webhelyét keresőmotorunkhoz</string>
+
+    <item name="LaguageID" type="id" />
+    <item name="LaguageRegion" type="id" />
+
+    <string-array name="ARRAY_FONTS" translatable="true">
+        <item>55 százalék</item>
+        <item>70 százalék</item>
+        <item>85 százalék</item>
+        <item>100 százalék</item>
+        <item>115 százalék</item>
+        <item>130 százalék</item>
+        <item>145 százalék</item>
+    </string-array>
+
+    <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+        <item>Engedélyezve</item>
+        <item>Tiltva</item>
+    </string-array>
+
+    <string-array name="ARRAY_NOTIFICATION" translatable="true">
+        <item>Az összes engedélyezése</item>
+        <item>Összes letiltása</item>
+        <item>Nincs sávszélesség</item>
+    </string-array>
+
+    <string-array name="ARRAY_COOKIES" translatable="true">
+        <item>Engedélyezni az összeset</item>
+        <item>Megbízható engedélyezése</item>
+        <item>Nincs engedélyezve</item>
+        <item>Engedélyezze a Meglátogatott lehetőséget</item>
+        <item>A Non Tracker engedélyezése</item>
+    </string-array>
+
+    <!-- Generated by Automatic String Resource Translation -->
+    <!--          https://asrt.gluege.boerde.de             -->
 </resources>

@@ -7,19 +7,21 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class settingSearchViewController
-{
+class settingSearchViewController {
     /*Private Variables*/
 
     private eventObserver.eventListener mEvent;
@@ -31,8 +33,7 @@ class settingSearchViewController
 
     /*Initializations*/
 
-    settingSearchViewController(settingSearchController pContext, eventObserver.eventListener pEvent, ArrayList<RadioButton> pSearchEngines, SwitchMaterial pSearchHistory, SwitchMaterial pSearchSuggestions, LinearLayout pSearchSettingOption1)
-    {
+    settingSearchViewController(settingSearchController pContext, eventObserver.eventListener pEvent, ArrayList<RadioButton> pSearchEngines, SwitchMaterial pSearchHistory, SwitchMaterial pSearchSuggestions, LinearLayout pSearchSettingOption1) {
         this.mEvent = pEvent;
         this.mContext = pContext;
         this.mSearchEngines = pSearchEngines;
@@ -44,45 +45,43 @@ class settingSearchViewController
         initPostUI();
     }
 
-    private void initViews()
-    {
+    private void initViews() {
         initSearchEngine();
         initSearchViews();
     }
 
-    private void initPostUI(){
+    private void initPostUI() {
         Window window = mContext.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
             window.setStatusBarColor(mContext.getResources().getColor(R.color.blue_dark));
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-        }
-        else {
-            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+        } else {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                 mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
             mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
         }
 
-        if(!status.sTorBrowsing){
+        if (!status.sTorBrowsing) {
             mSearchSettingOption1.setVisibility(View.GONE);
         }
 
     }
 
-    private void initSearchViews(){
-        if(status.sSettingSearchHistory){
+    private void initSearchViews() {
+        if (status.sSettingSearchHistory) {
             mSearchHistory.setChecked(true);
         }
-        if(status.sSearchSuggestionStatus){
+        if (status.sSearchSuggestionStatus) {
             mSearchSuggestions.setChecked(true);
-        }else {
+        } else {
             mSearchHistory.setChecked(false);
         }
     }
 
-    private void initSearchEngine(){
+    private void initSearchEngine() {
         resetSearchEngine();
         switch (status.sSettingDefaultSearchEngine) {
             case constants.CONST_BACKEND_GOOGLE_URL:
@@ -108,18 +107,17 @@ class settingSearchViewController
         }
     }
 
-    private void resetSearchEngine(){
-        for(int mCounter=0;mCounter<mSearchEngines.size();mCounter++){
+    private void resetSearchEngine() {
+        for (int mCounter = 0; mCounter < mSearchEngines.size(); mCounter++) {
             mSearchEngines.get(mCounter).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint_default)));
             mSearchEngines.get(mCounter).setChecked(false);
         }
     }
 
-    public Object onTrigger(settingSearchEnums.eSearchViewController pCommands, List<Object> pData){
-        if(pCommands.equals(settingSearchEnums.eSearchViewController.M_INIT_SEARCH_ENGINE)){
+    public Object onTrigger(settingSearchEnums.eSearchViewController pCommands, List<Object> pData) {
+        if (pCommands.equals(settingSearchEnums.eSearchViewController.M_INIT_SEARCH_ENGINE)) {
             initSearchEngine();
-        }
-        else if(pCommands.equals(settingSearchEnums.eSearchViewController.M_RESET_SEARCH_ENGINE)){
+        } else if (pCommands.equals(settingSearchEnums.eSearchViewController.M_RESET_SEARCH_ENGINE)) {
             resetSearchEngine();
         }
         return null;

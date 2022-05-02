@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings;
 
-public class bookmarkSettingEnums
-{
+public class bookmarkSettingEnums {
     public enum eBookmarkSettingViewCommands {
         M_INITIALIZE, M_GET_BOOKMARK_NAME, M_GET_BOOKMARK_URL, M_BOOKMARK_NAME_VALIDATION_RESPONSE, M_CLEAR_FORM, M_CLEAR_FORM_FOCUS
     }

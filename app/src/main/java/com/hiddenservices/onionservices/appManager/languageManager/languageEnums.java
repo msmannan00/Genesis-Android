@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.languageManager;
 
-class languageEnums
-{
+class languageEnums {
     /*History Manager*/
     public enum eLanguageModel {
         M_SUPPORTED_LANGUAGE, M_ACTIVE_LANGUAGE

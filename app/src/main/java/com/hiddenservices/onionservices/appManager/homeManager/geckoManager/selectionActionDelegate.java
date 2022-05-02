@@ -9,9 +9,11 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
+
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -26,16 +28,16 @@ import org.mozilla.geckoview.GeckoSession;
 /**
  * Class that implements a basic SelectionActionDelegate. This class is used by GeckoView by
  * default if the consumer does not explicitly set a SelectionActionDelegate.
- *
+ * <p>
  * To provide custom actions, extend this class and override the following methods,
- *
+ * <p>
  * 1) Override {@link #getAllActions} to include custom action IDs in the returned array. This
  * array must include all actions, available or not, and must not change over the class lifetime.
- *
+ * <p>
  * 2) Override {@link #isActionAvailable} to return whether a custom action is currently available.
- *
+ * <p>
  * 3) Override {@link #prepareAction} to set custom title and/or icon for a custom action.
- *
+ * <p>
  * 4) Override {@link #performAction} to perform a custom action when used.
  */
 @UiThread
@@ -45,27 +47,33 @@ public class selectionActionDelegate implements ActionMode.Callback,
 
     protected static final String ACTION_PROCESS_TEXT = Intent.ACTION_PROCESS_TEXT;
 
-    private static final String[] FLOATING_TOOLBAR_ACTIONS = new String[] {
+    private static final String[] FLOATING_TOOLBAR_ACTIONS = new String[]{
             ACTION_CUT, ACTION_COPY, ACTION_PASTE, ACTION_SELECT_ALL, "SEARCH"
     };
-    private static final String[] FIXED_TOOLBAR_ACTIONS = new String[] {
-            ACTION_SELECT_ALL, ACTION_CUT, ACTION_COPY, ACTION_PASTE,"SEARCH"
+    private static final String[] FIXED_TOOLBAR_ACTIONS = new String[]{
+            ACTION_SELECT_ALL, ACTION_CUT, ACTION_COPY, ACTION_PASTE, "SEARCH"
     };
 
-    protected final @NonNull Activity mActivity;
+    protected final @NonNull
+    Activity mActivity;
     protected final boolean mUseFloatingToolbar;
-    protected final @NonNull Matrix mTempMatrix = new Matrix();
-    protected final @NonNull RectF mTempRect = new RectF();
+    protected final @NonNull
+    Matrix mTempMatrix = new Matrix();
+    protected final @NonNull
+    RectF mTempRect = new RectF();
     private boolean mFullScreen = false;
 
     private boolean mExternalActionsEnabled;
 
-    protected @Nullable ActionMode mActionMode;
-    protected @Nullable GeckoSession mSession;
-    protected @Nullable Selection mSelection;
+    protected @Nullable
+    ActionMode mActionMode;
+    protected @Nullable
+    GeckoSession mSession;
+    protected @Nullable
+    Selection mSelection;
     protected boolean mRepopulatedMenu;
 
-    public void setFullScreen(boolean pFullScreen){
+    public void setFullScreen(boolean pFullScreen) {
         mFullScreen = pFullScreen;
     }
 
@@ -105,7 +113,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
 
     @SuppressWarnings("checkstyle:javadocmethod")
     public selectionActionDelegate(final @NonNull Activity activity,
-                                        final boolean useFloatingToolbar) {
+                                   final boolean useFloatingToolbar) {
         mActivity = activity;
         mUseFloatingToolbar = useFloatingToolbar;
         mExternalActionsEnabled = true;
@@ -140,7 +148,8 @@ public class selectionActionDelegate implements ActionMode.Callback,
      *
      * @return Array of action IDs in proper order.
      */
-    protected @NonNull String[] getAllActions() {
+    protected @NonNull
+    String[] getAllActions() {
         return mUseFloatingToolbar ? FLOATING_TOOLBAR_ACTIONS
                 : FIXED_TOOLBAR_ACTIONS;
     }
@@ -153,16 +162,16 @@ public class selectionActionDelegate implements ActionMode.Callback,
      * @return True if the action is presently available.
      */
     protected boolean isActionAvailable(final @NonNull String id) {
-        if (mSelection == null || mSelection.text.length()<1 || mSelection.text.getBytes().length >= 500000) {
+        if (mSelection == null || mSelection.text.length() < 1 || mSelection.text.getBytes().length >= 500000) {
             return false;
         }
 
         if (mExternalActionsEnabled && !mSelection.text.isEmpty() &&
                 ACTION_PROCESS_TEXT.equals(id)) {
             final PackageManager pm = mActivity.getPackageManager();
-            return pm.resolveActivity(getProcessTextIntent(),PackageManager.MATCH_DEFAULT_ONLY) != null;
+            return pm.resolveActivity(getProcessTextIntent(), PackageManager.MATCH_DEFAULT_ONLY) != null;
         }
-        if(id.equals("SEARCH") && !mSelection.text.isEmpty() && mExternalActionsEnabled){
+        if (id.equals("SEARCH") && !mSelection.text.isEmpty() && mExternalActionsEnabled) {
             return true;
         }
 
@@ -188,13 +197,13 @@ public class selectionActionDelegate implements ActionMode.Callback,
      * Prepare a menu item corresponding to a certain action. Override to prepare
      * menu item for custom action.
      *
-     * @param id Action ID.
+     * @param id   Action ID.
      * @param item New menu item to prepare.
      */
     protected void prepareAction(final @NonNull String id, final @NonNull MenuItem item) {
 
-        if(mFullScreen){
-           return;
+        if (mFullScreen) {
+            return;
         }
         switch (id) {
             case ACTION_CUT:
@@ -220,7 +229,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
     /**
      * Perform the specified action. Override to perform custom actions.
      *
-     * @param id Action ID.
+     * @param id   Action ID.
      * @param item Nenu item for the action.
      * @return True if the action was performed.
      */
@@ -239,7 +248,7 @@ public class selectionActionDelegate implements ActionMode.Callback,
             return false;
         }
         if (id.equals("SEARCH")) {
-            if(activityContextManager.getInstance()!=null && activityContextManager.getInstance().getHomeController()!=null){
+            if (activityContextManager.getInstance() != null && activityContextManager.getInstance().getHomeController() != null) {
                 activityContextManager.getInstance().getHomeController().onSearchString(mSelection.text);
             }
             clearSelection();
@@ -263,9 +272,10 @@ public class selectionActionDelegate implements ActionMode.Callback,
      * when the selection becomes invalid. Stale actions are ignored.
      *
      * @return The {@link GeckoSession.SelectionActionDelegate.Selection} attached to the current
-     *         action menu. <code>null</code> if no action menu is active.
+     * action menu. <code>null</code> if no action menu is active.
      */
-    public @Nullable Selection getSelection() {
+    public @Nullable
+    Selection getSelection() {
         return mSelection;
     }
 
@@ -423,18 +433,19 @@ public class selectionActionDelegate implements ActionMode.Callback,
             return;
         }
 
-        try{
+        try {
             if (mUseFloatingToolbar) {
                 String strManufacturer = android.os.Build.MANUFACTURER;
                 if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1 || (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1 && (strManufacturer.toLowerCase().contains("samsung") || android.os.Build.MODEL.toLowerCase().contains("samsung") || Build.PRODUCT.toLowerCase().contains("samsung")))) {
                     mActionMode = mActivity.startActionMode(this);
-                }else {
-                    mActionMode = mActivity.startActionMode(new Callback2Wrapper(),ActionMode.TYPE_FLOATING);
+                } else {
+                    mActionMode = mActivity.startActionMode(new Callback2Wrapper(), ActionMode.TYPE_FLOATING);
                 }
             } else {
                 mActionMode = mActivity.startActionMode(this);
             }
-        }catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
     }
 
     @Override

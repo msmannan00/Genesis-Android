@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.dataManager.models;
 
-public class crawlerRowModel
-{
+public class crawlerRowModel {
     /*Private Variables*/
 
     private String mURL;
@@ -16,11 +15,11 @@ public class crawlerRowModel
 
     /*Variable Getters*/
 
-    public String getURL(){
+    public String getURL() {
         return mURL;
     }
 
-    public String getHTML(){
+    public String getHTML() {
         return mHTML;
     }
 

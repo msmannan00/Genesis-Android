@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.settingHomeManager;
 
-public class settingHomeEnums
-{
+public class settingHomeEnums {
     /*History Manager*/
     public enum eHomeModel {
     }

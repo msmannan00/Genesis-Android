@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.clearManager;
 
-class settingClearEnums
-{
+class settingClearEnums {
     /*History Manager*/
     public enum eClearModel {
     }

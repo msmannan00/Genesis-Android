@@ -12,7 +12,8 @@ import java.util.Collections;
 public class orionAdvertWebViewClient extends android.webkit.WebViewClient {
 
     private eventObserver.eventListener mEvent;
-    public orionAdvertWebViewClient(eventObserver.eventListener pEvent){
+
+    public orionAdvertWebViewClient(eventObserver.eventListener pEvent) {
         mEvent = pEvent;
     }
 
@@ -22,7 +23,7 @@ public class orionAdvertWebViewClient extends android.webkit.WebViewClient {
     }
 
     @Override
-    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
+    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         mEvent.invokeObserver(Collections.singletonList(false), orionAdvertEnums.eOrionAdvertClientCallback.M_UPDATE_PROGRESSBAR);
     }
 

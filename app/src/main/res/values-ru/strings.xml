@@ -1,524 +1,507 @@
 <resources>
 
-	<!-- Application Strings -->
-	<string name="app_name" translatable="false">Genesis</string>
-	<string name="GENERAL_SEARCH_HINT" translatable="true">найдите что-нибудь или введите ссылку</string>
-	<string name="GENERAL_FIND_HINT" translatable="true">найти на странице</string>
-	<string name="GENERAL_SEARCH_ENGINE" translatable="true">поисковый движок</string>
-	<string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
-	<string name="GENERAL_ERROR_TITLE" translatable="true">опп! что-то пошло не так</string>
-	<string name="GENERAL_TODO" translatable="true">все</string>
-	<string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
-	<string name="GENERAL_LOADING" translatable="true">цифровая свобода</string>
-	<string name="GENERAL_RELOAD" translatable="true">перезагрузить</string>
-	<string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">вы столкнулись с одной из следующих проблем. веб-страница или веб-сайт могут не работать. ваше интернет-соединение может быть плохим. вы можете использовать прокси. веб-сайт может быть заблокирован брандмауэром</string>
-	<string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
-	<string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Израиль снова наносит удар</string>
-
-	<!-- Shortcuts -->
-	<string name="shortcut_erase_short_label" translatable="false">Очистить кеш браузера</string>
-	<string name="shortcut_erase_long_label" translatable="false">Стереть просматриваемый сайт</string>
-	<string name="shortcut_erase_and_open_short_label" translatable="false">Сотрите данные и откройте браузер</string>
-	<string name="shortcut_erase_and_open_long_label" translatable="false">Очистить кеш браузера</string>
-	<string name="shortcut_open" translatable="false">Перезапустите браузер Genesis</string>
-	<string name="shortcut_open_long" translatable="false">Перезапустите ваш браузер</string>
-
-	<!-- Bookmark Setting -->
-	<string name="BOOKMARK_SETTING_HEADER" translatable="true">Редактировать закладку</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Имя закладки</string>
-	<string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Здесь будет показано имя URL-адреса, отмеченного закладкой</string>
-	<string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Введите название закладки…</string>
-
-	<!-- Alerts General -->
-	<string name="ALERT_DISMISS" translatable="true">увольнять</string>
-
-	<!-- Landing Page -->
-	<string name="LANDING_BRIDGES_INFO" translatable="true">Иногда вам нужен Мост, чтобы попасть в сеть Tor.</string>
-	<string name="LANDING_MORE" translatable="true">"РАССКАЗАТЬ БОЛЬШЕ"</string>
-	<string name="LANDING_HELLO" translatable="true">«Привет»</string>
-	<string name="LANDING_WELCOME" translatable="true">«Добро пожаловать в Genesis на мобильном телефоне».</string>
-	<string name="LANDING_BROWSE_INFO" translatable="true">«Работайте в Интернете безопасно и надежно».</string>
-	<string name="LANDING_NO_TRACKING" translatable="true">«Без отслеживания. Без цензуры».</string>
-
-	<!-- Alert Secure -->
-	<string name="ALERT_SECURE_INFO" translatable="true">Безопасное соединение</string>
-	<string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Ваша информация (например, пароль или номера кредитных карт) в безопасности, когда она отправляется на этот сайт</string>
-	<string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Настройки безопасности</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
-	<string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Сохраните свою личностьήλθατεity в безопасности и воспользуйтесь вариантами ниже</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Не отслеживать</string>
-	<string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Скажем сайтам не отслеживать вас</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Защита от отслеживания</string>
-	<string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Включить защиту от отслеживания, предоставленную нами</string>
-	<string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Сертификат</string>
-
-	<!-- Alert Certificate -->
-	<string name="ALERT_CERTIFICATE_HEADER" translatable="true">Справочная информация</string>
-
-	<!-- Alert Certificate -->
-	<string name="ORBOT_LOG" translatable="true">журналы прокси</string>
-	<string name="ORBOT_LOG_HEADER" translatable="true">Информация системного журнала</string>
-	<string name="ORBOT_LOG_INFO" translatable="true">Если вы столкнулись с проблемой подключения при запуске Genesis, скопируйте следующий код и найдите проблему в Интернете или отправьте ее нам, чтобы мы могли помочь вам</string>
-	<string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
-
-	<!-- Orbot Settings -->
-	<string name="ORBOT_SETTING_HEADER" translatable="true">прокси настроить</string>
-	<string name="ORBOT_SETTING_DESCRIPTION" translatable="true">мы подключаем вас к сети Tor, которой руководят тысячи волонтеров по всему миру! Могут ли вам помочь эти варианты</string>
-	<string name="ORBOT_SETTING_TITLE" translatable="true">Интернет здесь подвергается цензуре (обход файрвола)</string>
-	<string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">обход брандмауэра</string>
-	<string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges приводит к очень медленной работе Интернета. используйте их только в том случае, если в вашей стране интернет подвергся цензуре или сеть Tor заблокирована</string>
-	<string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">безопасность настроить</string>
-
-	<!-- Bridge Settings -->
-	<string name="BRIDGE_BASIC_SETTING" translatable="true">Настройки безопасности</string>
-	<string name="BRIDGE_SETTING" translatable="true">Изменить настройки «BRIDGE»</string>
-	<string name="BRIDGE_AUTO" translatable="true">Создавать автоматически</string>
-	<string name="BRIDGE_AUTO_INFO" translatable="true">Автоматическая настройка параметров «BRIDGE»</string>
-	<string name="BRIDGE_MANUAL" translatable="true">Обеспечьте "BRIDGE" я знаю</string>
-	<string name="BRIDGE_PORT_HINT" translatable="false">Вставить "BRIDGE"</string>
-	<string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-	<string name="BRIDGE_DESC" translatable="true">«BRIDGE» - это не указанные в списке реле Tor, которые затрудняют блокировку подключений к сети Tor. Из-за того, что некоторые страны пытаются заблокировать Tor, некоторые «МОСТ» работают в некоторых странах, но не работают в других</string>
-	<string name="BRIDGE_TITLE" translatable="true">Выберите "BRIDGE" по умолчанию</string>
-	<string name="BRIDGE_REQUEST" translatable="true">Запрос</string>
-	<string name="BRIDGE_OBFS4" translatable="true">obfs4 (рекомендуется)</string>
-	<string name="BRIDGE_MEEK" translatable="true">Кроткая лазурь (Китай)</string>
-
-	<!-- Alert Advance Log -->
-	<string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">изменить способ отображения системного журнала</string>
-	<string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">показать журнал с использованием современного списка</string>
-	<string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">переключаться между классическим и современным списком</string>
-
-	<!-- Generic Toast Alerts -->
-	<string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Закладка удалена</string>
-	<string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Закладка обновлена</string>
-	<string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Данные успешно очищены</string>
-	<string name="TOAST_ALERT_URL_COPIED" translatable="true">URL скопирован в буфер обмена</string>
-	<string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Приложение не найдено</string>
-	<string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">После изменений требуется перезагрузка</string>
-	<string name="TOAST_ALERT_RESTART" translatable="true">Перезагрузка</string>
-	<string name="TOAST_ALERT_UNDO_INFO" translatable="true">Вкладка закрыта</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Открыта новая вкладка</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Прокси Genesis подключается ...</string>
-	<string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Память заполнена ➔ Вкладка «Очистка»</string>
-	<string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Всплывающее окно заблокировано</string>
-	<string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Открыть журнал ошибок</string>
-	<string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Переключатель</string>
-	<string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Отменить</string>
-	<string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Создана новая личность</string>
-	<string name="TOAST_ALERT_SETTING" translatable="true">открыть настройки</string>
-
-	<!-- Alert Bridge Mail -->
-	<string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Запросить новый Bridge</string>
-	<string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Выберите адрес электронной почты ниже, чтобы запросить адрес Bridge. Как только у вас есть адрес, скопируйте и вставьте его в поле выше и запустите приложение.</string>
-	<string name="ALERT_BRIDGE_MAIL" translatable="true">Почта</string>
-
-	<!-- Alert Rate Failure -->
-	<string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">ИЗВИНИТЕ ЭТО</string>
-	<string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Если у вас возникли трудности при использовании этого приложения, напишите нам по электронной почте. Мы постараемся решить вашу проблему в кратчайшие сроки</string>
-
-	<!-- Alert Panic -->
-	<string name="ALERT_PANIC_HEADER" translatable="true">УСТРАНЕНИЕ НЕИСПРАВНОСТЕЙ</string>
-	<string name="ALERT_PANIC_INFO" translatable="true">Сбросьте приложение, если оно не работает. Мы попытаемся перенастроить его, чтобы он снова заработал.</string>
-	<string name="ALERT_PANIC_BT_1" translatable="true">Сбросить</string>
-	<string name="ALERT_PANIC_BT_2" translatable="true">Закрыть</string>
-
-	<!-- Alert Download Single -->
-	<string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Жду загрузки ...</string>
-	<string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Скачать</string>
-
-	<!-- Alert Rateus -->
-	<string name="ALERT_RATEUS" translatable="true">Оцените США</string>
-	<string name="ALERT_RATEUS_INFO" translatable="true">Расскажите другим, что вы думаете об этом приложении</string>
-	<string name="ALERT_RATE" translatable="true">Оценить</string>
-
-	<!-- Alert BRIDGE -->
-	<string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Готово</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge строка (obfs4 212.21.66.66:20621 ...)</string>
-	<string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Типа Bridge (obfs4, кроткий, ...)</string>
-
-	<!-- Alert Create Bookmark -->
-	<string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Добавить сайт в закладки</string>
-	<string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Добавьте эту страницу в закладки</string>
-	<string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">имя закладки ...</string>
-	<string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Готово</string>
-
-	<!-- Alert Long Download -->
-	<string name="ALERT_LONG_URL" translatable="true">Уведомление по URL</string>
-	<string name="ALERT_LONG_URL_OPTION_1" translatable="true">Открыть в новой вкладке</string>
-	<string name="ALERT_LONG_URL_OPTION_2" translatable="true">Открыть в текущей вкладке</string>
-	<string name="ALERT_LONG_URL_OPTION_3" translatable="true">Копировать в буфер обмена</string>
-	<string name="ALERT_LONG_URL_OPTION_4" translatable="true">Скачать файл</string>
-
-	<!-- Alert Full Download -->
-	<string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Открыть URL в новой вкладке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Открыть url в текущей вкладке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Скопировать url в буфер обмена</string>
-	<string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Открыть изображение в новой вкладке</string>
-	<string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Открыть текущую вкладку изображения</string>
-	<string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Копировать изображение в буфер обмена</string>
-	<string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Скачать файл изображения</string>
-
-	<!-- Alert Bridge Custom -->
-	<string name="ALERT_CUSTOM_BRIDGES" translatable="true">предоставьте Bridge вы знаете</string>
-	<string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">введите bridge информацию из надежного источника</string>
-	<string name="ALERT_CUSTOM_BRIDGE" translatable="true">запрос</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
-	<string name="SETTING_BASIC_SETTING" translatable="true">Системные настройки</string>
-	<string name="SETTING_DEFAULT_BROWSER" translatable="true">сделайте Genesis браузером по умолчанию</string>
-	<string name="SETTING_HEADER" translatable="true">Системные настройки</string>
-	<string name="SETTING_SEARCH_ENGINE" translatable="true">поисковый движок</string>
-	<string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_CLEAR_HISTORY" translatable="true">удалить просмотренные веб-ссылки</string>
-	<string name="SETTING_FONT_TITLE" translatable="true">шрифт настроить</string>
-	<string name="SETTING_ADJUST_FONT" translatable="true">Настройка системных шрифтов</string>
-	<string name="SETTING_MANUAL_FONT" translatable="true">менять шрифт автоматически</string>
-	<string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Настройка файлов cookie</string>
-	<string name="SETTING_COOKIE" translatable="true">печенье</string>
-	<string name="SETTING_NOTIFICATION_HEADER" translatable="true">Системные настройки . Уведомление</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">уведомления</string>
-	<string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">изменить настройки уведомлений</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">состояние сети и уведомления</string>
-	<string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">местные уведомления</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">настроить уведомление о программном обеспечении</string>
-	<string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">системные уведомления</string>
-	<string name="SETTING_SEARCH" translatable="true">управлять поисковой системой</string>
-	<string name="SETTING_SEARCH_INFO" translatable="true">добавить, установить по умолчанию. показать предложения</string>
-	<string name="SETTING_NOTIFICATION" translatable="true">управлять уведомлениями</string>
-	<string name="SETTING_NOTIFICATION_INFO" translatable="true">новые функции, состояние сети</string>
-	<string name="SETTING_SEARCH_HEADER" translatable="true">Настроить программное обеспечение. Поисковый движок</string>
-	<string name="SETTING_SEARCH_HEADER_1" translatable="true">поддерживаемые поисковые системы</string>
-	<string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">выберите поисковую систему по умолчанию</string>
-	<string name="SETTING_SEARCH_HEADER_2" translatable="true">Настроить программное обеспечение. Поисковый движок</string>
-	<string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">изменить способ отображения веб-поиска</string>
-	<string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
-	<string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
-	<string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
-	<string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
-	<string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
-	<string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
-	<string name="SETTING_SEARCH_HISTORY" translatable="true">показать просмотренные веб-ссылки</string>
-	<string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">показывать предложения во время поиска</string>
-	<string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">предложения из просмотренных веб-ссылок появляются, когда вы вводите текст в строке поиска</string>
-	<string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">целевые предложения появляются, когда вы вводите текст в строке поиска</string>
-	<string name="SETTING_ACCESSIBILITY" translatable="true">доступность</string>
-	<string name="SETTING_ACCESSIBILITY_INFO" translatable="true">размер текста, масштабирование, голосовой ввод</string>
-	<string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">настроить | доступность</string>
-	<string name="SETTING_CLEAR" translatable="true">очистить личные данные</string>
-	<string name="SETTING_CLEAR_INFO" translatable="true">вкладки, просмотренные веб-ссылки, закладки, файлы cookie, кеш</string>
-	<string name="SETTING_CLEAR_HEADER" translatable="true">Изменить настройки системы. Очистить системные данные</string>
-	<string name="SETTING_CLEAR_BUTTON" translatable="true">Очистить данные</string>
-	<string name="SETTING_CLEAR_OPTION_1" translatable="true">удалить все вкладки</string>
-	<string name="SETTING_CLEAR_OPTION_2" translatable="true">удалить просмотренные веб-ссылки</string>
-	<string name="SETTING_CLEAR_OPTION_3" translatable="true">удалить закладки</string>
-	<string name="SETTING_CLEAR_OPTION_4" translatable="true">удалить кеш</string>
-	<string name="SETTING_CLEAR_OPTION_5" translatable="true">удалить предложения</string>
-	<string name="SETTING_CLEAR_OPTION_6" translatable="true">удалить данные</string>
-	<string name="SETTING_CLEAR_OPTION_7" translatable="true">удалить сеанс</string>
-	<string name="SETTING_CLEAR_OPTION_8" translatable="true">удалить куки</string>
-	<string name="SETTING_CLEAR_OPTION_9" translatable="true">удалить настроить</string>
-	<string name="SETTING_ACCESSIBILITY_FONT" translatable="true">масштабирование шрифта</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">масштабировать веб-контент в соответствии с размером системного шрифта</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">включи зум</string>
-	<string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">включить и принудительно увеличить все веб-страницы</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">ввод с помощью голоса</string>
-	<string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">разрешить диктовку голоса в строке URL</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">выберите настраиваемое масштабирование шрифта</string>
-	<string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">перетащите ползунок, пока не почувствуете себя комфортно. текст должен выглядеть как минимум таким большим после двойного нажатия на абзац</string>
-	<string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
-	<string name="SETTING_INTERACTION" translatable="true">взаимодействия</string>
-	<string name="SETTING_INTERACTION_INFO" translatable="true">изменить способ взаимодействия с контентом сайта</string>
-	<string name="SETTING_PRIVACY" translatable="true">Пользователь включен</string>
-	<string name="SETTING_PRIVACY_INFO" translatable="true">информация о пользователях, логины, выбор данных</string>
-	<string name="SETTING_TRACKING" translatable="true">Защита пользователей от наблюдения</string>
-	<string name="SETTING_TRACKING_INFO" translatable="true">adblock, трекеры, дактилоскопия</string>
-	<string name="SETTING_PRIVACY_HEADER" translatable="true">Системные настройки . Конфиденциальность</string>
-	<string name="SETTING_TRACKING_HEADER" translatable="true">Системные настройки . защита от скрытности пользователей</string>
-	<string name="SETTING_TRACKING_SUB_HEADER" translatable="true">защитить свою личность в Интернете</string>
-	<string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">сохраняйте свою личность в тайне. мы можем защитить вас от нескольких трекеров, которые следят за вами в Интернете. эту Системную настройку также можно использовать для блокировки рекламы</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">спасти себя от защиты от неожиданности пользователя</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis скажет сайтам не отслеживать меня</string>
-	<string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">скажи сайту не отслеживать меня</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Защита пользователей от наблюдения</string>
-	<string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">включить защиту от скрытности пользователей, предоставляемую Genesis</string>
-	<string name="SETTING_PRIVACY_COOKIES" translatable="true">файлы cookie веб-сайта</string>
-	<string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">выберите настройки файлов cookie веб-сайта в соответствии с вашими требованиями безопасности</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">очистить личные данные при выходе</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">очищать данные автоматически после закрытия программного обеспечения</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">частный просмотр</string>
-	<string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">сохраните свою личность в безопасности и используйте варианты ниже</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">включено</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">включен, за исключением файлов cookie отслеживания веб-сайтов</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">включен, за исключением сторонних</string>
-	<string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">отключен</string>
-
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">отключить защиту</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">разрешить защиту личных данных. это может привести к краже вашей личности в сети</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">по умолчанию (рекомендуется)</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">заблокировать онлайн-рекламу и пользователей социальных сетей Survelance. страницы будут загружаться по умолчанию</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">строгая политика</string>
-	<string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">остановите все известные трекеры, страницы будут загружаться быстрее, но некоторые функции могут не работать</string>
-
-	<string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
-	<string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">отключить сценарии Java для различных атак сценария</string>
-	<string name="SETTING_ADVANCE_HEADER" translatable="true">Системные настройки . сложная настройка системы</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">восстановить вкладки</string>
-	<string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">не восстанавливать после выхода из браузера</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">тема панели инструментов</string>
-	<string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">установить тему панели инструментов, как определено на веб-сайте</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">показать изображения</string>
-	<string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">всегда загружать изображения веб-сайтов</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">показать веб-шрифты</string>
-	<string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">загружать удаленные шрифты при загрузке страницы</string>
-	<string name="SETTING_ADVANCE_MEDIA" translatable="true">разрешить автовоспроизведение</string>
-	<string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">разрешить автоматический запуск медиа</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">хранитель данных</string>
-	<string name="SETTING_ADVANCE_TAB" translatable="true">вкладка</string>
-	<string name="SETTING_ADVANCE_TAB_INFO" translatable="true">изменить способ поведения вкладки после перезапуска программы</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">средства массовой информации</string>
-	<string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">изменить заставку по умолчанию настроить</string>
-	<string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">изменить медиа по умолчанию настроить</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">всегда показывать изображения</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">показывать изображения только при использовании Wi-Fi</string>
-	<string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">заблокировать все изображения</string>
-	<string name="SETTING_ADVANCE" translatable="true">Расширенные настройки системы</string>
-	<string name="SETTING_ADVANCE_INFO" translatable="true">восстановить вкладки, хранитель данных, инструменты разработчика</string>
-	<string name="SETTING_PROXY" translatable="true">onion состояние прокси</string>
-	<string name="SETTING_PROXY_INFO" translatable="true">проверить onion состояние сети</string>
-	<string name="SETTING_REPORT" translatable="true">веб-сайт отчета</string>
-	<string name="SETTING_REPORT_INFO" translatable="true">сообщить о нарушении веб-сайта</string>
-	<string name="SETTING_RATEUS" translatable="true">Оцените это приложение</string>
-	<string name="SETTING_RATEUS_INFO" translatable="true">оценивать и комментировать playstore</string>
-	<string name="SETTING_SHARE" translatable="true">Поделиться этим приложением</string>
-	<string name="SETTING_SHARE_INFO" translatable="true">поделитесь этой программой с друзьями</string>
-	<string name="SETTING_GENERAL_HEADER" translatable="true">Системные настройки . общая настройка</string>
-	<string name="SETTING_GENERAL" translatable="true">Системные настройки по умолчанию</string>
-	<string name="SETTING_GENERAL_INFO" translatable="true">домашняя страница, язык</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">полноэкранный просмотр</string>
-	<string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">скрыть панель инструментов браузера при прокрутке страницы вниз</string>
-	<string name="SETTING_GENERAL_LANGUAGE" translatable="true">язык</string>
-	<string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">изменить язык вашего браузера</string>
-	<string name="SETTING_GENERAL_THEME" translatable="true">тема программного обеспечения</string>
-	<string name="SETTING_GENERAL_THEME_INFO" translatable="true">выберите светлую и темную тему</string>
-	<string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">тема яркая</string>
-	<string name="SETTING_GENERAL_THEME_DARK" translatable="true">тема Темная</string>
-	<string name="SETTING_GENERAL_INFO_OPTION" translatable="true">изменить полноэкранный просмотр и язык</string>
-	<string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">системные установки по умолчанию</string>
-	<string name="SETTING_GENERAL_HOME" translatable="true">домашняя страница</string>
-	<string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">новая вкладка</string>
-	<string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">открыть домашнюю страницу в новой вкладке</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">удалить все вкладки</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">удалить просмотренные веб-ссылки</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">удалить закладки</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">удалить кеш просмотра</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">удалить предложения</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">удалить данные сайта</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">удалить данные сеанса</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">удалить файлы cookie для просмотра веб-страниц</string>
-	<string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">удалить настройки браузера</string>
-
-
-	<string name="ALERT_CREATE_BOOKMARK" translatable="true">сайт закладок</string>
-	<string name="ALERT_CLEAR_HISTORY" translatable="true">удалить просмотренные веб-ссылки и данные</string>
-	<string name="ALERT_CLEAR_BOOKMARK" translatable="true">очистить закладку и данные</string>
-	<string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">при очистке данных будут удалены просмотренные веб-ссылки, файлы cookie и другие данные просмотра</string>
-	<string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">удаление данных приведет к удалению сайтов из закладок</string>
-	<string name="ALERT_CLEAR" translatable="true">Отмена</string>
-	<string name="ALERT_SECURE" translatable="false">https://</string>
-	<string name="ALERT_REPORT" translatable="true">отчет</string>
-	<string name="ALERT_REPORT_URL" translatable="true">веб-сайт отчета</string>
-	<string name="ALERT_REPORT_URL_INFO" translatable="true">если вы считаете, что этот URL является незаконным или тревожным, сообщите нам об этом, и мы примем меры в суд.</string>
-	<string name="ALERT_REPORT_URL_SUCCESS" translatable="true">было сообщено успешно</string>
-	<string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL-адрес был успешно отправлен. если что-то будет найдено, будет возбуждено судебное дело</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">язык не поддерживается</string>
-	<string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">системный язык не поддерживается данным программным обеспечением. мы работаем над тем, чтобы включить его в ближайшее время</string>
-	<string name="ALERT_ORBOT_INIT" translatable="true">инициализация Orbot</string>
-	<string name="ALERT_NOT_SUPPORTED" translatable="true">действие не поддерживается</string>
-	<string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">не найдено программного обеспечения для обработки следующей команды</string>
-	<string name="ALERT_WELCOME_MESSAGE" translatable="true">добро пожаловать | скрытая паутина Gateway</string>
-	<string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">это программное обеспечение предоставляет вам платформу для поиска и открытия скрытых веб-адресов. вот несколько предложений \n</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">скрытая сеть Интернет-рынок</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">утечка документов и книг</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">новости и статьи в темной сети</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">секретные программы и инструменты взлома</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">не показывать снова</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">финансы и деньги</string>
-	<string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">социальные общества</string>
-	<string name="ALERT_LOCAL_UPGRADE" translatable="true">руководство</string>
-	<string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">магазин игр</string>
-	<string name="ALERT_LONG_FILE" translatable="true">уведомление о файле</string>
-	<string name="ALERT_DOWNLOAD" translatable="true">уведомление о загрузке</string>
-	<string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">уведомление о загрузке</string>
-	<string name="ALERT_LONG_URL_TITLE" translatable="true">уведомление о веб-ссылке</string>
-	<string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
-	<string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">не найдено программного обеспечения для обработки электронной почты</string>
-	<string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">скачать файл |</string>
-	<string name="ALERT_DATA_CLEARED" translatable="true">данные очищены | требуется перезагрузка</string>
-
-
-
-	<string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot журналов</string>
-	<string name="HOME_MENU__NEW_TABS" translatable="true">новые вкладки</string>
-	<string name="HOME_MENU_CLOSE_TABS" translatable="true">Закрыть вкладку</string>
-	<string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">открыть недавние вкладки</string>
-	<string name="HOME_MENU_LANGUAGE" translatable="true">язык</string>
-	<string name="HOME_MENU_DOWNLOAD" translatable="true">загрузки</string>
-	<string name="HOME_MENU_HISTORY" translatable="true">просмотренные веб-ссылки</string>
-	<string name="HOME_MENU_SETTING" translatable="true">Системные настройки</string>
-	<string name="HOME_MENU_DESKTOP" translatable="true">настольный сайт</string>
-	<string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Связь</string>
-	<string name="HOME_MENU_BOOKMARK" translatable="true">сохранить эту страницу</string>
-	<string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">закладки</string>
-	<string name="HOME_MENU_REPORT" translatable="true">веб-сайт отчета</string>
-	<string name="HOME_MENU_RATE" translatable="true">Оцените это приложение</string>
-	<string name="HOME_MENU_FIND" translatable="true">найти на странице</string>
-	<string name="HOME_MENU_QUIT" translatable="true">выход</string>
-	<string name="HOME_MENU_SHARE" translatable="true">Поделиться</string>
-
-
-	<string name="TAB_MENU_OPEN_TAB" translatable="true">новые вкладки</string>
-	<string name="TAB_MENU_CLOSE_TAB" translatable="true">закрыть все вкладки</string>
-	<string name="TAB_MENU_SETTINGS" translatable="true">Системные настройки</string>
-	<string name="TAB_LIST_SELECT" translatable="true">выберите вкладки</string>
-
-
-	<string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">открытые вкладки</string>
-	<string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">копировать</string>
-	<string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">Поделиться</string>
-	<string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">понятный выбор</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">открыть в текущей вкладке</string>
-	<string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">открыть в новой вкладке</string>
-	<string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">Удалить</string>
-
-
-	<string name="HISTORY_TITLE" translatable="true">просмотренные веб-ссылки</string>
-	<string name="HISTORY_CLEAR" translatable="true">удали это</string>
-	<string name="HISTORY_SEARCH_HINT" translatable="true">поиск ...</string>
-
-
-	<string name="BOOKMARK_TITLE" translatable="true">закладка</string>
-	<string name="BOOKMARK_CLEAR" translatable="true">удали это</string>
-	<string name="BOOKMARK_SEARCH_HINT" translatable="true">поиск ...</string>
-
-
-	<string name="HELP_RETRY" translatable="true">повторить попытку</string>
-	<string name="HELP_RETRY_INFO" translatable="true">опп! ошибка сетевого подключения. сеть не подключена</string>
-	<string name="HELP_TITLE" translatable="true">Помощь и поддержка</string>
-
-
-	<string name="LANGUAGE_TITLE" translatable="true">язык</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">изменить язык</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">мы работаем только на следующих языках. Скоро мы добавим еще</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">английский Соединенные Штаты)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">немецкий (германия)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">итальянский (италия)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">португальский (бразилия)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">русский (россия)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">украинский (украина)</string>
-	<string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">китайский упрощенный (материковый Китай)</string>
-
-
-	<string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ предупреждение</string>
-	<string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">настроить Bridges</string>
-	<string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">включить Bridges</string>
-	<string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">включить VPN сервисов</string>
-	<string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">включить Bridge Gateway</string>
-	<string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">включить Gateway</string>
-
-
-	<string name="PROXY_STATUS_HEADER" translatable="true">состояние доверенности</string>
-	<string name="ORBOT_PROXY_STATUS_INFO" translatable="true">текущее состояние прокси orbot</string>
-	<string name="PROXY_SUB_HEADER1" translatable="true">Orbot состояние прокси</string>
-	<string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
-	<string name="PROXY_VPN_STATUS" translatable="true">VPN состояние подключения</string>
-	<string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge состояние прокси</string>
-	<string name="PROXY_SUB_HEADER3" translatable="true">информация | изменить настройки системы</string>
-	<string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">вы можете изменить прокси, перезапустив программу и перейдя в менеджер прокси. его можно открыть, нажав на значок шестеренки внизу</string>
-
-
-
-	<string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
-	<string name="NOTIFICATION_OPEN_TEXT" translatable="true">открой это</string>
-
-
-	<string name="HOME_TAB_TEXT" translatable="true">1</string>
-	<string name="HOME_CONNECT" translatable="false">connect</string>
-	<string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
-	<string name="HOME_TAB_EMPTY" translatable="true">открытые вкладки будут отображаться здесь</string>
-
-
-	<string name="ERROR_M1" translatable="true">этот сайт недоступен</string>
-	<string name="ERROR_M2" translatable="true">произошла ошибка при соединении с сайтом</string>
-	<string name="ERROR_M3" translatable="true">страница, которую вы пытаетесь просмотреть, не может быть отображена, поскольку подлинность полученных данных не может быть проверена</string>
-	<string name="ERROR_M4" translatable="true">страница в настоящее время не работает по какой-то причине</string>
-	<string name="ERROR_M5" translatable="true">пожалуйста, свяжитесь с владельцами веб-сайтов, чтобы сообщить им об этой проблеме.</string>
-	<string name="ERROR_M6" translatable="true">перезагрузить</string>
-
-	<string name="PREF_LANGUAGE" translatable="true">pref_language</string>
-	<string name="invalid_package_signature" translatable="true">Неверная подпись пакета</string>
-	<string name="autofill_sign_in_prompt" translatable="true">нажмите, чтобы войти.</string>
-	<string name="autofill_manual_prompt" translatable="true">щелкните, чтобы вручную выбрать данные.</string>
-	<string name="security_exception" translatable="true">Исключение безопасности веб-домена.</string>
-	<string name="dal_exception" translatable="true">Ошибка проверки DAL.</string>
-
-	<string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Недавние вкладки</string>
-	<string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Новая личность</string>
-	<string name="SETTING_PRIVACY_POLICY" translatable="true">Политика конфиденциальности</string>
-	<string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Политика конфиденциальности Genesis Browser</string>
-	<string name="SETTING_REPORT_WEBSITE" translatable="true">Веб-сайт отчета</string>
-	<string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Сообщить о незаконном веб-сайте</string>
-	<string name="SETTING_SITEMAP" translatable="true">опубликуйте свой сайт</string>
-	<string name="SETTING_SITEMAP_INFO" translatable="true">Добавьте свой сайт в нашу поисковую систему</string>
-
-	<item name="LaguageID" type="id"/>
-	<item name="LaguageRegion" type="id"/>
-
-	<string-array name="ARRAY_FONTS" translatable="true">
-		<item>55 процентов</item>
-		<item>70 процентов</item>
-		<item>85 процентов</item>
-		<item>100 процентов</item>
-		<item>115 процентов</item>
-		<item>130 процентов</item>
-		<item>145 процентов</item>
-	</string-array>
-
-	<string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
-		<item>Включено</item>
-		<item>Неполноценный</item>
-	</string-array>
-
-	<string-array name="ARRAY_NOTIFICATION" translatable="true">
-		<item>Включить все</item>
-		<item>Отключить все</item>
-		<item>Нет пропускной способности</item>
-	</string-array>
-
-	<string-array name="ARRAY_COOKIES" translatable="true">
-		<item>Позволять все</item>
-		<item>Разрешить доверенный</item>
-		<item>Не разрешать</item>
-		<item>Разрешить посещение</item>
-		<item>Разрешить без отслеживания</item>
-	</string-array>
-
-	<!-- Generated by Automatic String Resource Translation -->
-	<!--          https://asrt.gluege.boerde.de             -->
+    <!-- Application Strings -->
+    <string name="app_name" translatable="false">Genesis</string>
+    <string name="GENERAL_SEARCH_HINT" translatable="true">найдите что-нибудь или введите ссылку</string>
+    <string name="GENERAL_FIND_HINT" translatable="true">найти на странице</string>
+    <string name="GENERAL_SEARCH_ENGINE" translatable="true">поисковый движок</string>
+    <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
+    <string name="GENERAL_ERROR_TITLE" translatable="true">опп! что-то пошло не так</string>
+    <string name="GENERAL_TODO" translatable="true">все</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
+    <string name="GENERAL_LOADING" translatable="true">цифровая свобода</string>
+    <string name="GENERAL_RELOAD" translatable="true">перезагрузить</string>
+    <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">вы столкнулись с одной из следующих проблем. веб-страница или веб-сайт могут не работать. ваше интернет-соединение может быть плохим. вы можете использовать прокси. веб-сайт может быть заблокирован брандмауэром</string>
+    <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Израиль снова наносит удар</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_erase_short_label" translatable="false">Очистить кеш браузера</string>
+    <string name="shortcut_erase_long_label" translatable="false">Стереть просматриваемый сайт</string>
+    <string name="shortcut_erase_and_open_short_label" translatable="false">Сотрите данные и откройте браузер</string>
+    <string name="shortcut_erase_and_open_long_label" translatable="false">Очистить кеш браузера</string>
+    <string name="shortcut_open" translatable="false">Перезапустите браузер Genesis</string>
+    <string name="shortcut_open_long" translatable="false">Перезапустите ваш браузер</string>
+
+    <!-- Bookmark Setting -->
+    <string name="BOOKMARK_SETTING_HEADER" translatable="true">Редактировать закладку</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Имя закладки</string>
+    <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Здесь будет показано имя URL-адреса, отмеченного закладкой</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Введите название закладки…</string>
+
+    <!-- Alerts General -->
+    <string name="ALERT_DISMISS" translatable="true">увольнять</string>
+
+    <!-- Landing Page -->
+    <string name="LANDING_BRIDGES_INFO" translatable="true">Иногда вам нужен Мост, чтобы попасть в сеть Tor.</string>
+    <string name="LANDING_MORE" translatable="true">"РАССКАЗАТЬ БОЛЬШЕ"</string>
+    <string name="LANDING_HELLO" translatable="true">«Привет»</string>
+    <string name="LANDING_WELCOME" translatable="true">«Добро пожаловать в Orion на мобильном телефоне».</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">«Работайте в Интернете безопасно и надежно».</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">«Без отслеживания. Без цензуры».</string>
+
+    <!-- Alert Secure -->
+    <string name="ALERT_SECURE_INFO" translatable="true">Безопасное соединение</string>
+    <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Ваша информация (например, пароль или номера кредитных карт) в безопасности, когда она отправляется на этот сайт</string>
+    <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Настройки безопасности</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
+    <string name="ALERT_SECURE_INFO_JAVASCRIPT_INFO" translatable="true">Сохраните свою личностьήλθατεity в безопасности и воспользуйтесь вариантами ниже</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_HEADER" translatable="true">Не отслеживать</string>
+    <string name="ALERT_SECURE_INFO_NONTRACKING_INFO" translatable="true">Скажем сайтам не отслеживать вас</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_HEADER" translatable="true">Защита от отслеживания</string>
+    <string name="ALERT_SECURE_INFO_TRACKING_INFO" translatable="true">Включить защиту от отслеживания, предоставленную нами</string>
+    <string name="ALERT_SECURE_INFO_CERTIFICATE" translatable="true">Сертификат</string>
+
+    <!-- Alert Certificate -->
+    <string name="ALERT_CERTIFICATE_HEADER" translatable="true">Справочная информация</string>
+
+    <!-- Alert Certificate -->
+    <string name="ORBOT_LOG" translatable="true">журналы прокси</string>
+    <string name="ORBOT_LOG_HEADER" translatable="true">Информация системного журнала</string>
+    <string name="ORBOT_LOG_INFO" translatable="true">Если вы столкнулись с проблемой подключения при запуске Genesis, скопируйте следующий код и найдите проблему в Интернете или отправьте ее нам, чтобы мы могли помочь вам</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
+
+    <!-- Orbot Settings -->
+    <string name="ORBOT_SETTING_HEADER" translatable="true">прокси настроить</string>
+    <string name="ORBOT_SETTING_DESCRIPTION" translatable="true">мы подключаем вас к сети Tor, которой руководят тысячи волонтеров по всему миру! Могут ли вам помочь эти варианты</string>
+    <string name="ORBOT_SETTING_TITLE" translatable="true">Интернет здесь подвергается цензуре (обход файрвола)</string>
+    <string name="ORBOT_SETTING_OPTION_DESCRIPTION" translatable="true">обход брандмауэра</string>
+    <string name="ORBOT_SETTING_BRIDGE_WARNING" translatable="true">Bridges приводит к очень медленной работе Интернета. используйте их только в том случае, если в вашей стране интернет подвергся цензуре или сеть Tor заблокирована</string>
+    <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">безопасность настроить</string>
+
+    <!-- Bridge Settings -->
+    <string name="BRIDGE_BASIC_SETTING" translatable="true">Настройки безопасности</string>
+    <string name="BRIDGE_SETTING" translatable="true">Изменить настройки «BRIDGE»</string>
+    <string name="BRIDGE_AUTO" translatable="true">Создавать автоматически</string>
+    <string name="BRIDGE_AUTO_INFO" translatable="true">Автоматическая настройка параметров «BRIDGE»</string>
+    <string name="BRIDGE_MANUAL" translatable="true">Обеспечьте "BRIDGE" я знаю</string>
+    <string name="BRIDGE_PORT_HINT" translatable="false">Вставить "BRIDGE"</string>
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
+    <string name="BRIDGE_DESC" translatable="true">«BRIDGE» - это не указанные в списке реле Tor, которые затрудняют блокировку подключений к сети Tor. Из-за того, что некоторые страны пытаются заблокировать Tor, некоторые «МОСТ» работают в некоторых странах, но не работают в других</string>
+    <string name="BRIDGE_TITLE" translatable="true">Выберите "BRIDGE" по умолчанию</string>
+    <string name="BRIDGE_REQUEST" translatable="true">Запрос</string>
+    <string name="BRIDGE_OBFS4" translatable="true">obfs4 (рекомендуется)</string>
+    <string name="BRIDGE_MEEK" translatable="true">Кроткая лазурь (Китай)</string>
+
+    <!-- Alert Advance Log -->
+    <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">изменить способ отображения системного журнала</string>
+    <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">показать журнал с использованием современного списка</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">переключаться между классическим и современным списком</string>
+
+    <!-- Generic Toast Alerts -->
+    <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Закладка удалена</string>
+    <string name="TOAST_ALERT_BOOKMARK_UPDATE" translatable="true">Закладка обновлена</string>
+    <string name="TOAST_ALERT_CLEARED_INFO" translatable="true">Данные успешно очищены</string>
+    <string name="TOAST_ALERT_URL_COPIED" translatable="true">URL скопирован в буфер обмена</string>
+    <string name="TOAST_ALERT_OPEN_ACTIVITY_FAILED" translatable="true">Приложение не найдено</string>
+    <string name="TOAST_ALERT_IMAGE_STATUS" translatable="true">После изменений требуется перезагрузка</string>
+    <string name="TOAST_ALERT_RESTART" translatable="true">Перезагрузка</string>
+    <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Вкладка закрыта</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Открыта новая вкладка</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Прокси Orion подключается ...</string>
+    <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Память заполнена ➔ Вкладка «Очистка»</string>
+    <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Всплывающее окно заблокировано</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Открыть журнал ошибок</string>
+    <string name="TOAST_ALERT_OPEN_NEW_TAB_LOAD" translatable="true">Переключатель</string>
+    <string name="TOAST_ALERT_UNDO_TRIGGER" translatable="true">Отменить</string>
+    <string name="TOAST_ALERT_NEW_CIRCUIT_CREATED" translatable="true">Создана новая личность</string>
+    <string name="TOAST_ALERT_SETTING" translatable="true">открыть настройки</string>
+
+    <!-- Alert Bridge Mail -->
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">Запросить новый Bridge</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">Выберите адрес электронной почты ниже, чтобы запросить адрес Bridge. Как только у вас есть адрес, скопируйте и вставьте его в поле выше и запустите приложение.</string>
+    <string name="ALERT_BRIDGE_MAIL" translatable="true">Почта</string>
+
+    <!-- Alert Rate Failure -->
+    <string name="ALERT_RATEUS_FAILURE_HEADER" translatable="true">ИЗВИНИТЕ ЭТО</string>
+    <string name="ALERT_RATEUS_FAILURE_INFO" translatable="true">Если у вас возникли трудности при использовании этого приложения, напишите нам по электронной почте. Мы постараемся решить вашу проблему в кратчайшие сроки</string>
+
+    <!-- Alert Panic -->
+    <string name="ALERT_PANIC_HEADER" translatable="true">УСТРАНЕНИЕ НЕИСПРАВНОСТЕЙ</string>
+    <string name="ALERT_PANIC_INFO" translatable="true">Сбросьте приложение, если оно не работает. Мы попытаемся перенастроить его, чтобы он снова заработал.</string>
+    <string name="ALERT_PANIC_BT_1" translatable="true">Сбросить</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true">Закрыть</string>
+
+    <!-- Alert Download Single -->
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Жду загрузки ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Скачать</string>
+
+    <!-- Alert Rateus -->
+    <string name="ALERT_RATEUS" translatable="true">Оцените США</string>
+    <string name="ALERT_RATEUS_INFO" translatable="true">Расскажите другим, что вы думаете об этом приложении</string>
+    <string name="ALERT_RATE" translatable="true">Оценить</string>
+
+    <!-- Alert BRIDGE -->
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Готово</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge строка (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Типа Bridge (obfs4, кроткий, ...)</string>
+
+    <!-- Alert Create Bookmark -->
+    <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Добавить сайт в закладки</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Добавьте эту страницу в закладки</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">имя закладки ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Готово</string>
+
+    <!-- Alert Long Download -->
+    <string name="ALERT_LONG_URL" translatable="true">Уведомление по URL</string>
+    <string name="ALERT_LONG_URL_OPTION_1" translatable="true">Открыть в новой вкладке</string>
+    <string name="ALERT_LONG_URL_OPTION_2" translatable="true">Открыть в текущей вкладке</string>
+    <string name="ALERT_LONG_URL_OPTION_3" translatable="true">Копировать в буфер обмена</string>
+    <string name="ALERT_LONG_URL_OPTION_4" translatable="true">Скачать файл</string>
+
+    <!-- Alert Full Download -->
+    <string name="ALERT_DOWNLOAD_OPTION_1" translatable="true">Открыть URL в новой вкладке</string>
+    <string name="ALERT_DOWNLOAD_OPTION_2" translatable="true">Открыть url в текущей вкладке</string>
+    <string name="ALERT_DOWNLOAD_OPTION_3" translatable="true">Скопировать url в буфер обмена</string>
+    <string name="ALERT_DOWNLOAD_OPTION_4" translatable="true">Открыть изображение в новой вкладке</string>
+    <string name="ALERT_DOWNLOAD_OPTION_5" translatable="true">Открыть текущую вкладку изображения</string>
+    <string name="ALERT_DOWNLOAD_OPTION_6" translatable="true">Копировать изображение в буфер обмена</string>
+    <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Скачать файл изображения</string>
+
+    <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">предоставьте Bridge вы знаете</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">введите bridge информацию из надежного источника</string>
+    <string name="ALERT_CUSTOM_BRIDGE" translatable="true">запрос</string>
+
+
+    <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
+    <string name="SETTING_BASIC_SETTING" translatable="true">Системные настройки</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">сделайте Orion браузером по умолчанию</string>
+    <string name="SETTING_HEADER" translatable="true">Системные настройки</string>
+    <string name="SETTING_SEARCH_ENGINE" translatable="true">поисковый движок</string>
+    <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_CLEAR_HISTORY" translatable="true">удалить просмотренные веб-ссылки</string>
+    <string name="SETTING_FONT_TITLE" translatable="true">шрифт настроить</string>
+    <string name="SETTING_ADJUST_FONT" translatable="true">Настройка системных шрифтов</string>
+    <string name="SETTING_MANUAL_FONT" translatable="true">менять шрифт автоматически</string>
+    <string name="SETTING_COOKIE_TEXT_INFO" translatable="true">Настройка файлов cookie</string>
+    <string name="SETTING_COOKIE" translatable="true">печенье</string>
+    <string name="SETTING_NOTIFICATION_HEADER" translatable="true">Системные настройки . Уведомление</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1" translatable="true">уведомления</string>
+    <string name="SETTING_NOTIFICATION_HEADER_1_INFO" translatable="true">изменить настройки уведомлений</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION" translatable="true">состояние сети и уведомления</string>
+    <string name="SETTING_NOTIFICATION_DISABLE_STATUS_NOTIFICATION_INFO" translatable="true">местные уведомления</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER" translatable="true">настроить уведомление о программном обеспечении</string>
+    <string name="SETTING_NOTIFICATION_OPEN_NOTIFICATION_MANAGER_INFO" translatable="true">системные уведомления</string>
+    <string name="SETTING_SEARCH" translatable="true">управлять поисковой системой</string>
+    <string name="SETTING_SEARCH_INFO" translatable="true">добавить, установить по умолчанию. показать предложения</string>
+    <string name="SETTING_NOTIFICATION" translatable="true">управлять уведомлениями</string>
+    <string name="SETTING_NOTIFICATION_INFO" translatable="true">новые функции, состояние сети</string>
+    <string name="SETTING_SEARCH_HEADER" translatable="true">Настроить программное обеспечение. Поисковый движок</string>
+    <string name="SETTING_SEARCH_HEADER_1" translatable="true">поддерживаемые поисковые системы</string>
+    <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">выберите поисковую систему по умолчанию</string>
+    <string name="SETTING_SEARCH_HEADER_2" translatable="true">Настроить программное обеспечение. Поисковый движок</string>
+    <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">изменить способ отображения веб-поиска</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">default</string>
+    <string name="SETTING_SEARCH_GENESIS" translatable="false">Genesis</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
+    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
+    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
+    <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_HISTORY" translatable="true">показать просмотренные веб-ссылки</string>
+    <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">показывать предложения во время поиска</string>
+    <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">предложения из просмотренных веб-ссылок появляются, когда вы вводите текст в строке поиска</string>
+    <string name="SETTING_SEARCH_SUGGESTION_INFO" translatable="true">целевые предложения появляются, когда вы вводите текст в строке поиска</string>
+    <string name="SETTING_ACCESSIBILITY" translatable="true">доступность</string>
+    <string name="SETTING_ACCESSIBILITY_INFO" translatable="true">размер текста, масштабирование, голосовой ввод</string>
+    <string name="SETTING_ACCESSIBILITY_HEADER" translatable="true">настроить | доступность</string>
+    <string name="SETTING_CLEAR" translatable="true">очистить личные данные</string>
+    <string name="SETTING_CLEAR_INFO" translatable="true">вкладки, просмотренные веб-ссылки, закладки, файлы cookie, кеш</string>
+    <string name="SETTING_CLEAR_HEADER" translatable="true">Изменить настройки системы. Очистить системные данные</string>
+    <string name="SETTING_CLEAR_BUTTON" translatable="true">Очистить данные</string>
+    <string name="SETTING_CLEAR_OPTION_1" translatable="true">удалить все вкладки</string>
+    <string name="SETTING_CLEAR_OPTION_2" translatable="true">удалить просмотренные веб-ссылки</string>
+    <string name="SETTING_CLEAR_OPTION_3" translatable="true">удалить закладки</string>
+    <string name="SETTING_CLEAR_OPTION_4" translatable="true">удалить кеш</string>
+    <string name="SETTING_CLEAR_OPTION_5" translatable="true">удалить предложения</string>
+    <string name="SETTING_CLEAR_OPTION_6" translatable="true">удалить данные</string>
+    <string name="SETTING_CLEAR_OPTION_7" translatable="true">удалить сеанс</string>
+    <string name="SETTING_CLEAR_OPTION_8" translatable="true">удалить куки</string>
+    <string name="SETTING_CLEAR_OPTION_9" translatable="true">удалить настроить</string>
+    <string name="SETTING_ACCESSIBILITY_FONT" translatable="true">масштабирование шрифта</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_INFO" translatable="true">масштабировать веб-контент в соответствии с размером системного шрифта</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM" translatable="true">включи зум</string>
+    <string name="SETTING_ACCESSIBILITY_ZOOM_INFO" translatable="true">включить и принудительно увеличить все веб-страницы</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE" translatable="true">ввод с помощью голоса</string>
+    <string name="SETTING_ACCESSIBILITY_VOICE_INFO" translatable="true">разрешить диктовку голоса в строке URL</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM" translatable="true">выберите настраиваемое масштабирование шрифта</string>
+    <string name="SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE" translatable="true">перетащите ползунок, пока не почувствуете себя комфортно. текст должен выглядеть как минимум таким большим после двойного нажатия на абзац</string>
+    <string name="SETTING_ACCESSIBILITY_200_PERCENT" translatable="true">200%</string>
+    <string name="SETTING_INTERACTION" translatable="true">взаимодействия</string>
+    <string name="SETTING_INTERACTION_INFO" translatable="true">изменить способ взаимодействия с контентом сайта</string>
+    <string name="SETTING_PRIVACY" translatable="true">Пользователь включен</string>
+    <string name="SETTING_PRIVACY_INFO" translatable="true">информация о пользователях, логины, выбор данных</string>
+    <string name="SETTING_TRACKING" translatable="true">Защита пользователей от наблюдения</string>
+    <string name="SETTING_TRACKING_INFO" translatable="true">adblock, трекеры, дактилоскопия</string>
+    <string name="SETTING_PRIVACY_HEADER" translatable="true">Системные настройки . Конфиденциальность</string>
+    <string name="SETTING_TRACKING_HEADER" translatable="true">Системные настройки . защита от скрытности пользователей</string>
+    <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">защитить свою личность в Интернете</string>
+    <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">сохраняйте свою личность в тайне. мы можем защитить вас от нескольких трекеров, которые следят за вами в Интернете. эту Системную настройку также можно использовать для блокировки рекламы</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">спасти себя от защиты от неожиданности пользователя</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion скажет сайтам не отслеживать меня</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">скажи сайту не отслеживать меня</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Защита пользователей от наблюдения</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">включить защиту от скрытности пользователей, предоставляемую Genesis</string>
+    <string name="SETTING_PRIVACY_COOKIES" translatable="true">файлы cookie веб-сайта</string>
+    <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">выберите настройки файлов cookie веб-сайта в соответствии с вашими требованиями безопасности</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">очистить личные данные при выходе</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA_INFO" translatable="true">очищать данные автоматически после закрытия программного обеспечения</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER" translatable="true">частный просмотр</string>
+    <string name="SETTING_PRIVACY_CLEAR_PRIVATE_HEADER_INFO" translatable="true">сохраните свою личность в безопасности и используйте варианты ниже</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION1" translatable="true">включено</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION2" translatable="true">включен, за исключением файлов cookie отслеживания веб-сайтов</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION3" translatable="true">включен, за исключением сторонних</string>
+    <string name="SETTING_PRIVACY_COOKIES_OPTION4" translatable="true">отключен</string>
+
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1" translatable="true">отключить защиту</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION1_INFO" translatable="true">разрешить защиту личных данных. это может привести к краже вашей личности в сети</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2" translatable="true">по умолчанию (рекомендуется)</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION2_INFO" translatable="true">заблокировать онлайн-рекламу и пользователей социальных сетей Survelance. страницы будут загружаться по умолчанию</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3" translatable="true">строгая политика</string>
+    <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">остановите все известные трекеры, страницы будут загружаться быстрее, но некоторые функции могут не работать</string>
+
+    <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">javascript</string>
+    <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">отключить сценарии Java для различных атак сценария</string>
+    <string name="SETTING_ADVANCE_HEADER" translatable="true">Системные настройки . сложная настройка системы</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">восстановить вкладки</string>
+    <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">не восстанавливать после выхода из браузера</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">тема панели инструментов</string>
+    <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">установить тему панели инструментов, как определено на веб-сайте</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">показать изображения</string>
+    <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">всегда загружать изображения веб-сайтов</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">показать веб-шрифты</string>
+    <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">загружать удаленные шрифты при загрузке страницы</string>
+    <string name="SETTING_ADVANCE_MEDIA" translatable="true">разрешить автовоспроизведение</string>
+    <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">разрешить автоматический запуск медиа</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">хранитель данных</string>
+    <string name="SETTING_ADVANCE_TAB" translatable="true">вкладка</string>
+    <string name="SETTING_ADVANCE_TAB_INFO" translatable="true">изменить способ поведения вкладки после перезапуска программы</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">средства массовой информации</string>
+    <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">изменить заставку по умолчанию настроить</string>
+    <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">изменить медиа по умолчанию настроить</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">всегда показывать изображения</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">показывать изображения только при использовании Wi-Fi</string>
+    <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">заблокировать все изображения</string>
+    <string name="SETTING_ADVANCE" translatable="true">Расширенные настройки системы</string>
+    <string name="SETTING_ADVANCE_INFO" translatable="true">восстановить вкладки, хранитель данных, инструменты разработчика</string>
+    <string name="SETTING_PROXY" translatable="true">onion состояние прокси</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">проверить onion состояние сети</string>
+    <string name="SETTING_REPORT" translatable="true">веб-сайт отчета</string>
+    <string name="SETTING_REPORT_INFO" translatable="true">сообщить о нарушении веб-сайта</string>
+    <string name="SETTING_RATEUS" translatable="true">Оцените это приложение</string>
+    <string name="SETTING_RATEUS_INFO" translatable="true">оценивать и комментировать playstore</string>
+    <string name="SETTING_SHARE" translatable="true">Поделиться этим приложением</string>
+    <string name="SETTING_SHARE_INFO" translatable="true">поделитесь этой программой с друзьями</string>
+    <string name="SETTING_GENERAL_HEADER" translatable="true">Системные настройки . общая настройка</string>
+    <string name="SETTING_GENERAL" translatable="true">Системные настройки по умолчанию</string>
+    <string name="SETTING_GENERAL_INFO" translatable="true">домашняя страница, язык</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING" translatable="true">полноэкранный просмотр</string>
+    <string name="SETTING_GENERAL_FULLSCREEN_BROWSING_INFO" translatable="true">скрыть панель инструментов браузера при прокрутке страницы вниз</string>
+    <string name="SETTING_GENERAL_LANGUAGE" translatable="true">язык</string>
+    <string name="SETTING_GENERAL_LANGUAGE_INFO" translatable="true">изменить язык вашего браузера</string>
+    <string name="SETTING_GENERAL_THEME" translatable="true">тема программного обеспечения</string>
+    <string name="SETTING_GENERAL_THEME_INFO" translatable="true">выберите светлую и темную тему</string>
+    <string name="SETTING_GENERAL_THEME_LIGHT" translatable="true">тема яркая</string>
+    <string name="SETTING_GENERAL_THEME_DARK" translatable="true">тема Темная</string>
+    <string name="SETTING_GENERAL_INFO_OPTION" translatable="true">изменить полноэкранный просмотр и язык</string>
+    <string name="SETTING_GENERAL_THEME_DEFAULT" translatable="true">системные установки по умолчанию</string>
+    <string name="SETTING_GENERAL_HOME" translatable="true">домашняя страница</string>
+    <string name="SETTING_GENERAL_HOME_INFO" translatable="false">about:blank</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB" translatable="true">новая вкладка</string>
+    <string name="SETTING_GENERAL_OPEN_URL_IN_NEW_tAB_INFO" translatable="true">открыть домашнюю страницу в новой вкладке</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_1" translatable="true">удалить все вкладки</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">удалить просмотренные веб-ссылки</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">удалить закладки</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">удалить кеш просмотра</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">удалить предложения</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">удалить данные сайта</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">удалить данные сеанса</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">удалить файлы cookie для просмотра веб-страниц</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">удалить настройки браузера</string>
+
+
+    <string name="ALERT_CREATE_BOOKMARK" translatable="true">сайт закладок</string>
+    <string name="ALERT_CLEAR_HISTORY" translatable="true">удалить просмотренные веб-ссылки и данные</string>
+    <string name="ALERT_CLEAR_BOOKMARK" translatable="true">очистить закладку и данные</string>
+    <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">при очистке данных будут удалены просмотренные веб-ссылки, файлы cookie и другие данные просмотра</string>
+    <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">удаление данных приведет к удалению сайтов из закладок</string>
+    <string name="ALERT_CLEAR" translatable="true">Отмена</string>
+    <string name="ALERT_SECURE" translatable="false">https://</string>
+    <string name="ALERT_REPORT" translatable="true">отчет</string>
+    <string name="ALERT_REPORT_URL" translatable="true">веб-сайт отчета</string>
+    <string name="ALERT_REPORT_URL_INFO" translatable="true">если вы считаете, что этот URL является незаконным или тревожным, сообщите нам об этом, и мы примем меры в суд.</string>
+    <string name="ALERT_REPORT_URL_SUCCESS" translatable="true">было сообщено успешно</string>
+    <string name="ALERT_REPORT_URL_SUCCESS_INFO" translatable="true">URL-адрес был успешно отправлен. если что-то будет найдено, будет возбуждено судебное дело</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE" translatable="true">язык не поддерживается</string>
+    <string name="ALERT_LANGUAGE_SUPPORT_FAILURE_INFO" translatable="true">системный язык не поддерживается данным программным обеспечением. мы работаем над тем, чтобы включить его в ближайшее время</string>
+    <string name="ALERT_ORBOT_INIT" translatable="true">инициализация Orbot</string>
+    <string name="ALERT_NOT_SUPPORTED" translatable="true">действие не поддерживается</string>
+    <string name="ALERT_NOT_SUPPORTED_INFO" translatable="true">не найдено программного обеспечения для обработки следующей команды</string>
+    <string name="ALERT_WELCOME_MESSAGE" translatable="true">добро пожаловать | скрытая паутина Gateway</string>
+    <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">это программное обеспечение предоставляет вам платформу для поиска и открытия скрытых веб-адресов. вот несколько предложений \n</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">скрытая сеть Интернет-рынок</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">утечка документов и книг</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">новости и статьи в темной сети</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">секретные программы и инструменты взлома</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">не показывать снова</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">финансы и деньги</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_7" translatable="true">социальные общества</string>
+    <string name="ALERT_LOCAL_UPGRADE" translatable="true">руководство</string>
+    <string name="ALERT_PLAYSTORE_UPGRADE" translatable="true">магазин игр</string>
+    <string name="ALERT_LONG_FILE" translatable="true">уведомление о файле</string>
+    <string name="ALERT_DOWNLOAD" translatable="true">уведомление о загрузке</string>
+    <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">уведомление о загрузке</string>
+    <string name="ALERT_LONG_URL_TITLE" translatable="true">уведомление о веб-ссылке</string>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
+    <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">не найдено программного обеспечения для обработки электронной почты</string>
+    <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">скачать файл |</string>
+    <string name="ALERT_DATA_CLEARED" translatable="true">данные очищены | требуется перезагрузка</string>
+
+
+    <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot журналов</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">новые вкладки</string>
+    <string name="HOME_MENU_CLOSE_TABS" translatable="true">Закрыть вкладку</string>
+    <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">открыть недавние вкладки</string>
+    <string name="HOME_MENU_LANGUAGE" translatable="true">язык</string>
+    <string name="HOME_MENU_DOWNLOAD" translatable="true">загрузки</string>
+    <string name="HOME_MENU_HISTORY" translatable="true">просмотренные веб-ссылки</string>
+    <string name="HOME_MENU_SETTING" translatable="true">Системные настройки</string>
+    <string name="HOME_MENU_DESKTOP" translatable="true">настольный сайт</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor Связь</string>
+    <string name="HOME_MENU_BOOKMARK" translatable="true">сохранить эту страницу</string>
+    <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">закладки</string>
+    <string name="HOME_MENU_REPORT" translatable="true">веб-сайт отчета</string>
+    <string name="HOME_MENU_RATE" translatable="true">Оцените это приложение</string>
+    <string name="HOME_MENU_FIND" translatable="true">найти на странице</string>
+    <string name="HOME_MENU_QUIT" translatable="true">выход</string>
+    <string name="HOME_MENU_SHARE" translatable="true">Поделиться</string>
+
+
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">новые вкладки</string>
+    <string name="TAB_MENU_CLOSE_TAB" translatable="true">закрыть все вкладки</string>
+    <string name="TAB_MENU_SETTINGS" translatable="true">Системные настройки</string>
+    <string name="TAB_LIST_SELECT" translatable="true">выберите вкладки</string>
+
+
+    <string name="SHARED_RECYCLER_VIEW_OPEN" translatable="true">открытые вкладки</string>
+    <string name="SHARED_RECYCLER_VIEW_COPY" translatable="true">копировать</string>
+    <string name="SHARED_RECYCLER_VIEW_SHARE" translatable="true">Поделиться</string>
+    <string name="SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES" translatable="true">понятный выбор</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB" translatable="true">открыть в текущей вкладке</string>
+    <string name="SHARED_RECYCLER_VIEW_OPEN_NEW_TAB" translatable="true">открыть в новой вкладке</string>
+    <string name="SHARED_RECYCLER_VIEW_DELETE" translatable="true">Удалить</string>
+
+
+    <string name="HISTORY_TITLE" translatable="true">просмотренные веб-ссылки</string>
+    <string name="HISTORY_CLEAR" translatable="true">удали это</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true">поиск ...</string>
+
+
+    <string name="BOOKMARK_TITLE" translatable="true">закладка</string>
+    <string name="BOOKMARK_CLEAR" translatable="true">удали это</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true">поиск ...</string>
+
+
+    <string name="HELP_RETRY" translatable="true">повторить попытку</string>
+    <string name="HELP_RETRY_INFO" translatable="true">опп! ошибка сетевого подключения. сеть не подключена</string>
+    <string name="HELP_TITLE" translatable="true">Помощь и поддержка</string>
+
+
+    <string name="LANGUAGE_TITLE" translatable="true">язык</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_TITLE" translatable="true">изменить язык</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_DESC" translatable="true">мы работаем только на следующих языках. Скоро мы добавим еще</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_DEFAULT" translatable="true">английский Соединенные Штаты)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_1" translatable="true">немецкий (германия)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_2" translatable="true">итальянский (италия)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_3" translatable="true">португальский (бразилия)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_4" translatable="true">русский (россия)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_5" translatable="true">украинский (украина)</string>
+    <string name="LANGUAGE_LANGUAGE_MESSAGE_BT_6" translatable="true">китайский упрощенный (материковый Китай)</string>
+
+
+    <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ предупреждение</string>
+    <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">настроить Bridges</string>
+    <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">включить Bridges</string>
+    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">включить VPN сервисов</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">включить Bridge Gateway</string>
+    <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">включить Gateway</string>
+
+
+    <string name="PROXY_STATUS_HEADER" translatable="true">состояние доверенности</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">текущее состояние прокси orbot</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot состояние прокси</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="PROXY_VPN_STATUS" translatable="true">VPN состояние подключения</string>
+    <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge состояние прокси</string>
+    <string name="PROXY_SUB_HEADER3" translatable="true">информация | изменить настройки системы</string>
+    <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">вы можете изменить прокси, перезапустив программу и перейдя в менеджер прокси. его можно открыть, нажав на значок шестеренки внизу</string>
+
+
+    <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
+    <string name="NOTIFICATION_OPEN_TEXT" translatable="true">открой это</string>
+
+
+    <string name="HOME_TAB_TEXT" translatable="true">1</string>
+    <string name="HOME_CONNECT" translatable="false">connect</string>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
+    <string name="HOME_TAB_EMPTY" translatable="true">открытые вкладки будут отображаться здесь</string>
+
+
+    <string name="ERROR_M1" translatable="true">этот сайт недоступен</string>
+    <string name="ERROR_M2" translatable="true">произошла ошибка при соединении с сайтом</string>
+    <string name="ERROR_M3" translatable="true">страница, которую вы пытаетесь просмотреть, не может быть отображена, поскольку подлинность полученных данных не может быть проверена</string>
+    <string name="ERROR_M4" translatable="true">страница в настоящее время не работает по какой-то причине</string>
+    <string name="ERROR_M5" translatable="true">пожалуйста, свяжитесь с владельцами веб-сайтов, чтобы сообщить им об этой проблеме.</string>
+    <string name="ERROR_M6" translatable="true">перезагрузить</string>
+
+    <string name="PREF_LANGUAGE" translatable="true">pref_language</string>
+    <string name="invalid_package_signature" translatable="true">Неверная подпись пакета</string>
+    <string name="autofill_sign_in_prompt" translatable="true">нажмите, чтобы войти.</string>
+    <string name="autofill_manual_prompt" translatable="true">щелкните, чтобы вручную выбрать данные.</string>
+    <string name="security_exception" translatable="true">Исключение безопасности веб-домена.</string>
+    <string name="dal_exception" translatable="true">Ошибка проверки DAL.</string>
+
+    <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Недавние вкладки</string>
+    <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Новая личность</string>
+    <string name="SETTING_PRIVACY_POLICY" translatable="true">Политика конфиденциальности</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Политика конфиденциальности Orion Browser</string>
+    <string name="SETTING_REPORT_WEBSITE" translatable="true">Веб-сайт отчета</string>
+    <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Сообщить о незаконном веб-сайте</string>
+    <string name="SETTING_SITEMAP" translatable="true">опубликуйте свой сайт</string>
+    <string name="SETTING_SITEMAP_INFO" translatable="true">Добавьте свой сайт в нашу поисковую систему</string>
+
+    <item name="LaguageID" type="id" />
+    <item name="LaguageRegion" type="id" />
+
+    <string-array name="ARRAY_FONTS" translatable="true">
+        <item>55 процентов</item>
+        <item>70 процентов</item>
+        <item>85 процентов</item>
+        <item>100 процентов</item>
+        <item>115 процентов</item>
+        <item>130 процентов</item>
+        <item>145 процентов</item>
+    </string-array>
+
+    <string-array name="ARRAY_DEFAULT_BOOLEAN" translatable="true">
+        <item>Включено</item>
+        <item>Неполноценный</item>
+    </string-array>
+
+    <string-array name="ARRAY_NOTIFICATION" translatable="true">
+        <item>Включить все</item>
+        <item>Отключить все</item>
+        <item>Нет пропускной способности</item>
+    </string-array>
+
+    <string-array name="ARRAY_COOKIES" translatable="true">
+        <item>Позволять все</item>
+        <item>Разрешить доверенный</item>
+        <item>Не разрешать</item>
+        <item>Разрешить посещение</item>
+        <item>Разрешить без отслеживания</item>
+    </string-array>
+
+    <!-- Generated by Automatic String Resource Translation -->
+    <!--          https://asrt.gluege.boerde.de             -->
 </resources>

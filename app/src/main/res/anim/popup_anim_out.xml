@@ -4,16 +4,16 @@
     android:fillEnabled="true">
 
     <translate
-            android:duration="250"
-            android:fromXDelta="0%"
-            android:fromYDelta="0%"
-            android:toXDelta="0%"
-            android:toYDelta="-10%"
-            />
+        android:duration="250"
+        android:fromXDelta="0%"
+        android:fromYDelta="0%"
+        android:toXDelta="0%"
+        android:toYDelta="-10%" />
 
-    <alpha android:fromAlpha="1.0"
-            android:toAlpha="0.0"
-            android:interpolator="@android:anim/accelerate_interpolator"
-            android:duration="250"
-            android:repeatCount="0"/>
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:duration="250"
+        android:repeatCount="0" />
 </set>

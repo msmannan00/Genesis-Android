@@ -8,7 +8,7 @@
     <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="true">opps! có gì đó không ổn</string>
     <string name="GENERAL_TODO" translatable="true">mọi điều</string>
-    <string name="GENERAL_PROJECT_NAME" translatable="false">Genesis search engine</string>
+    <string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
     <string name="GENERAL_LOADING" translatable="true">tự do kỹ thuật số</string>
     <string name="GENERAL_RELOAD" translatable="true">tải lại</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">bạn đang phải đối mặt với một trong những vấn đề sau. trang web hoặc trang web có thể không hoạt động. kết nối internet của bạn có thể kém. bạn có thể đang sử dụng proxy. trang web có thể bị tường lửa chặn</string>
@@ -36,7 +36,7 @@
     <string name="LANDING_BRIDGES_INFO" translatable="true">"Đôi khi bạn cần một Cầu nối để truy cập Mạng Tor"</string>
     <string name="LANDING_MORE" translatable="true">"NÓI CHO TÔI THÊM"</string>
     <string name="LANDING_HELLO" translatable="true">"Xin chào"</string>
-    <string name="LANDING_WELCOME" translatable="true">"Chào mừng bạn đến với Genesis trên điện thoại di động."</string>
+    <string name="LANDING_WELCOME" translatable="true">"Chào mừng bạn đến với Orion trên điện thoại di động."</string>
     <string name="LANDING_BROWSE_INFO" translatable="true">"Duyệt Internet một cách an toàn và bảo mật."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Không theo dõi. Không kiểm duyệt."</string>
 
@@ -59,7 +59,7 @@
     <string name="ORBOT_LOG" translatable="true">nhật ký proxy</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">Thông tin nhật ký hệ thống</string>
     <string name="ORBOT_LOG_INFO" translatable="true">nếu bạn gặp sự cố kết nối khi khởi động Genesis, vui lòng sao chép mã sau và tìm sự cố trực tuyến hoặc gửi cho chúng tôi, để chúng tôi có thể cố gắng giúp bạn</string>
-    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Genesis on standby at the moment</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
 
     <!-- Orbot Settings -->
     <string name="ORBOT_SETTING_HEADER" translatable="true">tùy chỉnh proxy</string>
@@ -82,7 +82,7 @@
     <string name="BRIDGE_REQUEST" translatable="true">Yêu cầu</string>
     <string name="BRIDGE_OBFS4" translatable="true">obfs4 (Khuyến nghị)</string>
     <string name="BRIDGE_MEEK" translatable="true">Meek-azure (Trung Quốc)</string>
-    
+
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">thay đổi cách hiển thị Nhật ký hệ thống</string>
     <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">hiển thị Nhật ký bằng chế độ xem danh sách hiện đại</string>
@@ -98,7 +98,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Khởi động lại</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Bị đóng</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Tab mới đã mở</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis proxy kết nối ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy kết nối ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Bộ nhớ đầy ➔ Xóa tab</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Cửa sổ bật lên bị chặn</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Mở Nhật Ký Lỗi</string>
@@ -164,27 +164,9 @@
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">yêu cầu</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Thiết lập hệ thống</string>
-    <string name="SETTING_DEFAULT_BROWSER" translatable="true">đặt Genesis làm trình duyệt mặc định của bạn</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">đặt Orion làm trình duyệt mặc định của bạn</string>
     <string name="SETTING_HEADER" translatable="true">Thiết lập hệ thống</string>
     <string name="SETTING_SEARCH_ENGINE" translatable="true">máy tìm kiếm</string>
     <string name="SETTING_JAVASCRIPT" translatable="true">javascript</string>
@@ -256,10 +238,10 @@
     <string name="SETTING_TRACKING_SUB_HEADER" translatable="true">bảo vệ danh tính trực tuyến của bạn</string>
     <string name="SETTING_TRACKING_SUB_HEADER_INFO" translatable="true">giữ bí mật danh tính của bạn. chúng tôi có thể bảo vệ bạn khỏi một số trình theo dõi theo dõi bạn trực tuyến. Cài đặt Hệ thống này cũng có thể được sử dụng để chặn quảng cáo</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK" translatable="true">cứu bản thân khỏi tính năng Bảo vệ sự ngạc nhiên của người dùng</string>
-    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Genesis sẽ yêu cầu các trang web không theo dõi tôi</string>
+    <string name="SETTING_PRIVACY_DONOT_TRACK_INFO" translatable="true">Orion sẽ yêu cầu các trang web không theo dõi tôi</string>
     <string name="SETTING_PRIVACY_DONOT_TRACK_INFO_SECURITY" translatable="true">yêu cầu trang web không theo dõi tôi</string>
     <string name="SETTING_PRIVACY_TRACKING_PROTECTION" translatable="true">Bảo vệ giám sát người dùng</string>
-    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">kích hoạt tính năng Bảo vệ Survelance của người dùng do Genesis cung cấp</string>
+    <string name="SETTING_PRIVACY_TRACKING_PROTECTION_INFO" translatable="true">kích hoạt tính năng Bảo vệ Survelance của người dùng do Orion cung cấp</string>
     <string name="SETTING_PRIVACY_COOKIES" translatable="true">cookie trang web</string>
     <string name="SETTING_PRIVACY_COOKIES_INFO" translatable="true">chọn tùy chọn cookie trang web theo nhu cầu bảo mật của bạn</string>
     <string name="SETTING_PRIVACY_CLEAR_PRIVATE_DATA" translatable="true">xóa dữ liệu cá nhân khi thoát</string>
@@ -370,14 +352,10 @@
     <string name="ALERT_DOWNLOAD" translatable="true">thông báo tải xuống</string>
     <string name="ALERT_DOWNLOAD_NOTIFICATION" translatable="true">thông báo tải xuống</string>
     <string name="ALERT_LONG_URL_TITLE" translatable="true">thông báo liên kết web</string>
-    <string name="ALERT_LONG_URL_MESSAGE" translatable="true"/>
+    <string name="ALERT_LONG_URL_MESSAGE" translatable="true" />
     <string name="ALERT_NOT_SUPPORTED_MESSAGE" translatable="true">không tìm thấy phần mềm để xử lý email</string>
     <string name="ALERT_DOWNLOAD_MESSAGE" translatable="true">tải tập tin |</string>
     <string name="ALERT_DATA_CLEARED" translatable="true">dữ liệu bị xóa | yêu cầu khởi động lại</string>
-
-
-
-
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot nhật ký</string>
@@ -459,15 +437,13 @@
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">bạn có thể thay đổi proxy bằng cách khởi động lại phần mềm và chuyển đến trình quản lý proxy. nó có thể được mở bằng cách nhấp vào biểu tượng bánh răng ở dưới cùng</string>
 
 
-
-
     <string name="NOTIFICATION_DEFAULT_LABEL" translatable="true">default.jpg</string>
     <string name="NOTIFICATION_OPEN_TEXT" translatable="true">mở thứ này</string>
 
 
     <string name="HOME_TAB_TEXT" translatable="true">1</string>
     <string name="HOME_CONNECT" translatable="false">connect</string>
-    <string name="HOME_LOADING" translatable="false">Genesis is paused at the moment</string>
+    <string name="HOME_LOADING" translatable="false">Orion is paused at the moment</string>
     <string name="HOME_TAB_EMPTY" translatable="true">các tab đang mở sẽ hiển thị ở đây</string>
 
 
@@ -489,14 +465,14 @@
     <string name="HOME_MENU_OPEN_RECENT_TAB" translatable="true">Các tab gần đây</string>
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">Nhận dạng mới</string>
     <string name="SETTING_PRIVACY_POLICY" translatable="true">Chính sách bảo mật</string>
-    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Genesis Browser chính sách về quyền riêng tư</string>
+    <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion Browser chính sách về quyền riêng tư</string>
     <string name="SETTING_REPORT_WEBSITE" translatable="true">Báo cáo trang web</string>
     <string name="SETTING_REPORT_WEBSITE_INFO" translatable="true">Báo cáo trang web bất hợp pháp</string>
     <string name="SETTING_SITEMAP" translatable="true">xuất bản trang web của bạn</string>
     <string name="SETTING_SITEMAP_INFO" translatable="true">Thêm trang web của bạn vào công cụ tìm kiếm của chúng tôi</string>
 
-    <item name="LaguageID" type="id"/>
-    <item name="LaguageRegion" type="id"/>
+    <item name="LaguageID" type="id" />
+    <item name="LaguageRegion" type="id" />
 
     <string-array name="ARRAY_FONTS" translatable="true">
         <item>55 Phần trăm</item>

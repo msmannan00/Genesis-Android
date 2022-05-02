@@ -8,15 +8,14 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-class settingAdvanceModel
-{
+class settingAdvanceModel {
     /*Variable Declaration*/
 
     private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    settingAdvanceModel(eventObserver.eventListener mEvent){
+    settingAdvanceModel(eventObserver.eventListener mEvent) {
         this.mEvent = mEvent;
     }
 
@@ -28,20 +27,18 @@ class settingAdvanceModel
 
     private void onShowImages(View pView) {
 
-        if(pView.getId() == R.id.pAdvanceOption1){
+        if (pView.getId() == R.id.pAdvanceOption1) {
             status.sShowImages = 0;
-        }
-        else if(pView.getId() == R.id.pAdvanceOption2){
+        } else if (pView.getId() == R.id.pAdvanceOption2) {
             status.sShowImages = 2;
         }
     }
 
     private void onShowTabGrid(View pView) {
 
-        if(pView.getId() == R.id.pGridOption1){
+        if (pView.getId() == R.id.pGridOption1) {
             status.sTabGridLayoutEnabled = true;
-        }
-        else if(pView.getId() == R.id.pGridOption2){
+        } else if (pView.getId() == R.id.pGridOption2) {
             status.sTabGridLayoutEnabled = false;
         }
     }
@@ -54,21 +51,17 @@ class settingAdvanceModel
         status.sToolbarTheme = pStatus;
     }
 
-    public Object onTrigger(settingAdvanceEnums.eAdvanceModel pCommands, List<Object> pData){
-        if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_RESTORE_TAB)){
-            onRestoreTabs((boolean)pData.get(0));
-        }
-        else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_IMAGE)){
-            onShowImages((View)pData.get(0));
-        }
-        else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_WEB_FONTS)){
-            onShowWebFonts((boolean)pData.get(0));
-        }
-        else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME)){
-            onToolbarThemeChange((boolean)pData.get(0));
-        }
-        else if(pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_TAB_GRID)){
-            onShowTabGrid((View)pData.get(0));
+    public Object onTrigger(settingAdvanceEnums.eAdvanceModel pCommands, List<Object> pData) {
+        if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_RESTORE_TAB)) {
+            onRestoreTabs((boolean) pData.get(0));
+        } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_IMAGE)) {
+            onShowImages((View) pData.get(0));
+        } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_WEB_FONTS)) {
+            onShowWebFonts((boolean) pData.get(0));
+        } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME)) {
+            onToolbarThemeChange((boolean) pData.get(0));
+        } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_TAB_GRID)) {
+            onShowTabGrid((View) pData.get(0));
         }
         return null;
     }

@@ -1,6 +1,7 @@
 package com.hiddenservices.onionservices.appManager.helpManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -9,44 +10,46 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import static com.hiddenservices.onionservices.constants.constants.*;
 
-class helpModel
-{
+class helpModel {
     private eventObserver.eventListener mEvent;
     private String mJsonPath;
     private AppCompatActivity mContext;
     private ArrayList<helpDataModel> mHelpListModel;
     private boolean mIsLoaded = false;
 
-    public helpModel(AppCompatActivity pContext, eventObserver.eventListener pEvent){
+    public helpModel(AppCompatActivity pContext, eventObserver.eventListener pEvent) {
         this.mContext = pContext;
         this.mEvent = pEvent;
         this.mHelpListModel = new ArrayList<>();
 
-        if(status.sDeveloperBuild){
+        if (status.sDeveloperBuild) {
             this.mJsonPath = CONST_SERVER_DEV;
-        }else {
+        } else {
             this.mJsonPath = CONST_SERVER;
         }
     }
 
-    private void getHelpJSON(){
+    private void getHelpJSON() {
 
-        ArrayList<helpDataModel> mTempModel = (ArrayList<helpDataModel>)dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_GET_HELP, null);
+        ArrayList<helpDataModel> mTempModel = (ArrayList<helpDataModel>) dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_GET_HELP, null);
 
         mHelpListModel.clear();
-        if(mTempModel.size()>0){
+        if (mTempModel.size() > 0) {
             mIsLoaded = true;
             mHelpListModel.addAll(mTempModel);
-            mEvent.invokeObserver(Collections.singletonList(mHelpListModel),helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
-        }else {
+            mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
+        } else {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, mJsonPath,
                     response -> {
                         try {
@@ -62,14 +65,14 @@ class helpModel
                                 mHelpListModel.add(hero);
                                 dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_SET_HELP, Collections.singletonList(mHelpListModel));
                             }
-                            mEvent.invokeObserver(Collections.singletonList(mHelpListModel),helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
+                            mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_SUCCESS);
                         } catch (JSONException e) {
-                            mEvent.invokeObserver(Collections.singletonList(mHelpListModel),helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE);
+                            mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE);
                             e.printStackTrace();
                         }
                     },
                     error -> {
-                        mEvent.invokeObserver(Collections.singletonList(mHelpListModel),helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE);
+                        mEvent.invokeObserver(Collections.singletonList(mHelpListModel), helpEnums.eHelpModelCallback.M_LOAD_JSON_RESPONSE_FAILURE);
                     });
 
             RequestQueue requestQueue = Volley.newRequestQueue(mContext/*, new ProxiedHurlStack()*/);
@@ -77,15 +80,14 @@ class helpModel
         }
     }
 
-    private boolean IsLoaded(){
+    private boolean IsLoaded() {
         return mIsLoaded;
     }
 
-    public Object onTrigger(helpEnums.eHelpModel pCommands, List<Object> pData){
-        if(pCommands.equals(helpEnums.eHelpModel.M_LOAD_HELP_DATA)){
+    public Object onTrigger(helpEnums.eHelpModel pCommands, List<Object> pData) {
+        if (pCommands.equals(helpEnums.eHelpModel.M_LOAD_HELP_DATA)) {
             getHelpJSON();
-        }
-        else if(pCommands.equals(helpEnums.eHelpModel.M_IS_LOADED)){
+        } else if (pCommands.equals(helpEnums.eHelpModel.M_IS_LOADED)) {
             return IsLoaded();
         }
         return null;

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pTorSwtichPopupContainer"
@@ -49,7 +48,7 @@ android:layout_height="match_parent">
             android:maxWidth="450dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="Using this you can switch between normal browsing using duckduckgo or advance secure dark web browsing using genesis search."
+            android:text="Using this you can switch between normal browsing using duckduckgo or advance secure dark web browsing using Orion search."
             android:textAlignment="textStart"
             android:textColor="@color/c_text_v8"
             android:textSize="13.5sp"
