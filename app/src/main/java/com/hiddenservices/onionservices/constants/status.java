@@ -1,5 +1,7 @@
 package com.hiddenservices.onionservices.constants;
 
+import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
+
 import android.content.Context;
 
 import com.hiddenservices.onionservices.dataManager.dataController;
@@ -10,14 +12,13 @@ import org.mozilla.geckoview.ContentBlocking;
 import java.util.Arrays;
 import java.util.Locale;
 
-import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
 public class status {
     /*App Status*/
 
     public static boolean sPaidStatus = false;
     public static boolean sDeveloperBuild = false;
-    public static int sStoreType = enums.StoreType.GOOGLE_PLAY;
+    public static int sStoreType = enums.StoreType.AMAZON;
 
     /*Settings Status*/
     public static Locale mSystemLocale = null;
