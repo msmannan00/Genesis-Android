@@ -328,20 +328,20 @@ public class geckoClients {
             mRuntime.getSettings().setRemoteDebuggingEnabled(true);
             installExtension();
         }
-        initBrowserManager();
+        initBrowserManager(context);
     }
 
-    public void initBrowserManager() {
+    public void initBrowserManager(Context pcontext) {
         if (mIconManager == null) {
             mIconManager = new BrowserIconManager();
+            mIconManager.init(pcontext, mRuntime);
         }
     }
 
 
     public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext) {
-        initBrowserManager();
         pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
-        mIconManager.onLoadIconIntoView(pcontext, mRuntime, pImageView, pURL);
+        mIconManager.onLoadIconIntoView(pImageView, pURL);
     }
 
     public void onLoadFavIcon(AppCompatActivity pcontext) {
@@ -374,6 +374,7 @@ public class geckoClients {
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
         mRuntime.getSettings().setForceUserScalableEnabled(status.sSettingEnableZoom);
         mIconManager = new BrowserIconManager();
+        mIconManager.init(pcontext, mRuntime);
 
         if (status.sSettingTrackingProtection == 1) {
             mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.DEFAULT);

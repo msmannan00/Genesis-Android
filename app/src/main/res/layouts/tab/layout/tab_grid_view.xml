@@ -220,7 +220,7 @@
                     android:singleLine="true"
                     android:text="@string/SETTING_ACCESSIBILITY_FONT_CUSTOM_SAMPLE"
                     android:textColor="@color/c_text_v1"
-                    android:textSize="15sp"
+                    android:textSize="11sp"
                     android:textStyle="bold" />
 
                 <TextView
