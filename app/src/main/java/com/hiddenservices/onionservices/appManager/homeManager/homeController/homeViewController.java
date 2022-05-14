@@ -1431,33 +1431,37 @@ class homeViewController {
         scaleDown.start();
         alpha.start();
 
-        scaleDown.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation, boolean isReverse) {
-            }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            scaleDown.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation, boolean isReverse) {
+                }
 
-            @Override
-            public void onAnimationEnd(Animator animation, boolean isReverse) {
-                mEvent.invokeObserver(data, e_type);
-            }
+                @Override
+                public void onAnimationEnd(Animator animation, boolean isReverse) {
+                    mEvent.invokeObserver(data, e_type);
+                }
 
-            @Override
-            public void onAnimationStart(Animator animation) {
-            }
+                @Override
+                public void onAnimationStart(Animator animation) {
+                }
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-            }
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                }
 
-            @Override
-            public void onAnimationCancel(Animator animation) {
+                @Override
+                public void onAnimationCancel(Animator animation) {
 
-            }
+                }
 
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-            }
-        });
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+                }
+            });
+        }else {
+            mEvent.invokeObserver(data, e_type);
+        }
     }
 
     public void onHomeTabAnimation(List<Object> data, Object e_type) {

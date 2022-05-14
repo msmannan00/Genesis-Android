@@ -78,7 +78,6 @@ class crawlerDataModel {
 
     public void onExecute() {
         new Thread() {
-
             String mHtml = strings.GENERIC_EMPTY_STR;
             String mURL = strings.GENERIC_EMPTY_STR;
 

@@ -32,7 +32,7 @@
     <color name="c_alert_toast_button_background">#ffffff</color>
     <color name="c_alert_toast_button_text">#3385ff</color>
     <color name="c_alert_rateus_warning">#b3b3b3</color>
-    <color name="c_alert_rateus_header">#33cccc</color>
+    <color name="c_alert_header">#33cccc</color>
     <color name="c_alert_text">#ffffff</color>
     <color name="c_alert_warning">#f65555</color>
 
@@ -40,6 +40,7 @@
     <color name="c_secure_alert_start">#1c1b21</color>
     <color name="c_secure_alert_end">#1c1b21</color>
     <color name="c_secure_alert_border">#2d2d39</color>
+    <color name="c_secure_alert_border_light">#2d2d39</color>
     <color name="c_secure_alert_background">#99000000</color>
     <color name="c_secure_alert_button">#2d2d39</color>
     <color name="c_secure_alert_button_pressed">#16161d</color>
@@ -62,6 +63,7 @@
     <color name="c_text_v5">#ffffff</color>
     <color name="c_text_v7">#248f8f</color>
     <color name="c_text_v9">#e6e6e6</color>
+    <color name="c_text_v10">#00b3b3</color>
     <color name="c_security_popup_background">#121216</color>
     <color name="c_security_popup_divider">#121216</color>
     <color name="c_lang_row">#293a56</color>
@@ -120,5 +122,15 @@
     <color name="c_ripple_light">#d9d9d9</color>
     <color name="green_dark_v2">#1c1b21</color>
     <color name="c_icon_divider">#141414</color>
+
+    /* Alerts */
+    <color name="c_alert_background_gradient_up">#0f0f0f</color>
+    <color name="c_alert_background_gradient_down">#252429</color>
+    <color name="c_alert_background_description">#a6a6a6</color>
+    <color name="c_divider_line_alert">#999999</color>
+    <color name="c_alert_background_gradient_up_rate">#3e3d43</color>
+    <color name="c_alert_background_gradient_down_rate">#252428</color>
+    <color name="c_alert_borders">#4d4d4d</color>
+    <color name="c_navigation_tint_alert">#a6a6a6</color>
 
 </resources>

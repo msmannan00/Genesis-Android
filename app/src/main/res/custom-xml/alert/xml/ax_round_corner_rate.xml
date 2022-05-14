@@ -1,0 +1,46 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/c_ripple_gray">
+    <item>
+        <layer-list>
+
+            <!-- Bottom 2dp Shadow -->
+            <item
+                android:bottom="0dp"
+                android:left="0px"
+                android:right="0px"
+                android:top="0px">
+
+
+                <shape android:shape="rectangle">
+
+                    <solid android:color="@color/secondary" />
+                    <corners android:radius="8dp" />
+
+                </shape>
+            </item>
+
+            <!-- White Top color -->
+            <item
+                android:bottom="2dp"
+                android:left="0px"
+                android:right="0px"
+                android:top="0px">
+
+                <shape android:shape="rectangle">
+
+                    <gradient
+                        android:angle="90"
+                        android:startColor="@color/c_alert_background_gradient_down"
+                        android:endColor="@color/c_background"
+                        android:type="linear" />
+                    <corners android:radius="8dp" />
+
+
+                </shape>
+
+            </item>
+
+
+        </layer-list>
+    </item>
+</ripple>

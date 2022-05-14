@@ -12,7 +12,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
-        android:background="@color/c_background"
+        android:background="@color/c_alert_background_gradient_down"
         android:elevation="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:autofillHints="yes"
-            android:background="@color/c_background"
+            android:background="@color/c_alert_background_gradient_down"
             android:focusedByDefault="true"
             android:hint="@string/GENERAL_FIND_HINT"
             android:importantForAutofill="yes"
@@ -57,7 +57,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="5dp"
-            android:background="@color/c_divider_line_light"
+            android:background="@color/c_secure_alert_border_light"
             app:layout_constraintBottom_toTopOf="@+id/pPopupFindNavigationContainer" />
 
         <ImageButton

@@ -82,6 +82,7 @@ public class settingHomeController extends AppCompatActivity {
 
         helperMethod.updateResources(this, status.mSystemLocale.getDisplayName());
         activityContextManager.getInstance().getHomeController().updateResources(this, status.mSystemLocale.getDisplayName());
+        pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         super.onConfigurationChanged(newConfig);
     }
 

@@ -24,18 +24,18 @@
             android:layout_marginTop="18dp"
             android:alpha="1"
             android:background="@xml/ax_border_left"
-            android:gravity="start"
             android:lineSpacingExtra="3.5dp"
+            android:textStyle="bold"
+            android:gravity="start"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="@string/ALERT_CUSTOM_BRIDGES"
+            android:text="PROVIDE BRIDGE"
             android:textAlignment="textStart"
-            android:textColor="@color/c_text_v8"
+            android:textColor="@color/c_text_v10"
             android:textSize="13.5sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp,TextContrastCheck" />
-
 
         <TextView
             android:id="@+id/pBridgeSettingCustomDescription"
@@ -48,7 +48,7 @@
             android:paddingEnd="15dp"
             android:text="@string/ALERT_CUSTOM_BRIDGES_INFO"
             android:textAlignment="textStart"
-            android:textColor="@color/c_black_light"
+            android:textColor="@color/c_alert_background_description"
             android:textSize="13.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -134,12 +134,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="17dp"
             android:layout_marginBottom="4dp"
-            android:background="@xml/hox_rounded_corner_splash"
+            android:background="@xml/ax_rounded_corner_button"
             android:contentDescription="@string/GENERAL_TODO"
             android:elevation="3dp"
             android:src="@xml/ic_baseline_cross"
             app:layout_constraintBottom_toTopOf="@+id/pBridgeSettingCustomError"
             app:layout_constraintEnd_toEndOf="parent"
+            android:tint="@color/c_navigation_light"
             app:layout_constraintTop_toBottomOf="@+id/pBridgeSettingCustomDescription"
             tools:ignore="TouchTargetSizeCheck" />
 

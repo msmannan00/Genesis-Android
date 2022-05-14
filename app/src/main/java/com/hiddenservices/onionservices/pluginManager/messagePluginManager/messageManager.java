@@ -20,14 +20,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
@@ -209,13 +207,23 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
     private void rateApp() {
         initializeDialog(R.layout.popup_rate_us, Gravity.CENTER);
-        mDialog.setCancelable(false);
+        mDialog.setCancelable(true);
 
-        Button mPopupRateusNext = mDialog.findViewById(R.id.pPopupRateusNext);
-        Button mPopupRateusDismiss = mDialog.findViewById(R.id.pPopupRateusDismiss);
+        LinearLayout mPopupRate1 = mDialog.findViewById(R.id.pPopupRateus1);
+        LinearLayout mPopupRate2 = mDialog.findViewById(R.id.pPopupRateus2);
+        LinearLayout mPopupRate3 = mDialog.findViewById(R.id.pPopupRateus3);
+        LinearLayout mPopupRate4 = mDialog.findViewById(R.id.pPopupRateus4);
+        LinearLayout mPopupRate5 = mDialog.findViewById(R.id.pPopupRateus5);
+        ImageButton mPopupRateusClose = mDialog.findViewById(R.id.pPopupRateusClose);
 
-        mPopupRateusNext.setOnClickListener(this);
-        mPopupRateusDismiss.setOnClickListener(this);
+
+        mPopupRate1.setOnClickListener(this);
+        mPopupRate2.setOnClickListener(this);
+        mPopupRate3.setOnClickListener(this);
+        mPopupRate4.setOnClickListener(this);
+        mPopupRate5.setOnClickListener(this);
+        mPopupRate5.setOnClickListener(this);
+        mPopupRateusClose.setOnClickListener(this);
     }
 
     private void sendBridgeMail() {
@@ -473,9 +481,9 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 view.getId() == R.id.pTorSwtichPopupDismiss ||
                 view.getId() == R.id.pPopupURLLongPressDismiss ||
                 view.getId() == R.id.pPopupLongPressDismiss ||
+                view.getId() == R.id.pPopupRateusClose ||
                 view.getId() == R.id.pCertificateDesciption ||
-                view.getId() == R.id.pCertificateRootBackground ||
-                view.getId() == R.id.pPopupRateusDismiss
+                view.getId() == R.id.pCertificateRootBackground
         ) {
             onDismiss();
         } else if (view.getId() == R.id.pDownloadPopuInfoNext) {
@@ -546,9 +554,8 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 mURL = "https://orion.onion/privacy";
             }
             mEvent.invokeObserver(Arrays.asList(mURL, mBookmarkName), M_BOOKMARK);
-        } else if (view.getId() == R.id.pPopupRateusNext) {
-            RatingBar mPopupRateusRating = mDialog.findViewById(R.id.pPopupRateusRating);
-            if (mPopupRateusRating.getRating() >= 3) {
+        } else if (view.getId() == R.id.pPopupRateus1 || view.getId() == R.id.pPopupRateus2 || view.getId() == R.id.pPopupRateus3 || view.getId() == R.id.pPopupRateus4 || view.getId() == R.id.pPopupRateus5) {
+            if (view.getId() == R.id.pPopupRateus1 || view.getId() == R.id.pPopupRateus2 || view.getId() == R.id.pPopupRateus3) {
                 mEvent.invokeObserver(null, M_APP_RATED);
                 String mStoreURL = getStoreLink();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mStoreURL));
@@ -558,7 +565,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     helperMethod.showToastMessage(MESSAGE_PLAYSTORE_NOT_FOUND, mContext);
                 }
                 onDismiss();
-            } else if (mPopupRateusRating.getRating() > 0) {
+            } else{
                 mEvent.invokeObserver(null, M_APP_RATED);
                 final Handler handler = new Handler();
                 handler.postDelayed(() -> {
@@ -852,6 +859,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 case M_TOR_SWITCH:
                     /*VERIFIED*/
                     switchTorBrowsing();
+                    break;
+
+                case M_RATE_FAILURE:
+                    /*VERIFIED*/
+                    rateFailure();
                     break;
 
                 case M_OPEN_ACTIVITY_FAILED:

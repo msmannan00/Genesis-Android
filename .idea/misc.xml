@@ -80,8 +80,21 @@
         <entry key="..\:/Workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_view.xml" value="0.203125" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/certificate_info.xml" value="0.18541666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_bridge_mail.xml" value="0.5" />
-        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_create_bookmark.xml" value="0.20989583333333334" />
-        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_tor_change.xml" value="0.7655913978494624" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_bridge_setting_custom.xml" value="0.5" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_create_bookmark.xml" value="0.25" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_data_cleared_shortcut.xml" value="0.18541666666666667" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_download_full.xml" value="0.33" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_download_url.xml" value="0.5" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_file_longpress.xml" value="0.33" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_find.xml" value="0.5" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_panic.xml" value="0.67" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_rate_failure.xml" value="0.5" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_rate_us.xml" value="0.33" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_toast_generic.xml" value="0.25" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_toast_undo.xml" value="0.25" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_tor_change.xml" value="0.5" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_url_longpress.xml" value="0.33" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/secure_connection_popup.xml" value="0.157421875" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/bookmark/layout/bookmark_row_view.xml" value="0.18541666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/bookmark/layout/bookmark_view.xml" value="0.18541666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/help/layout/help_view.xml" value="0.358695652173913" />

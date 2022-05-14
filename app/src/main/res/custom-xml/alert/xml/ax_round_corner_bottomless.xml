@@ -6,26 +6,26 @@
         <shape android:shape="rectangle">
 
             <solid android:color="@color/cursor_blue" />
-            <corners android:radius="8dp" />
+            <corners android:radius="12dp" />
 
         </shape>
     </item>
 
     <!-- White Top color -->
     <item
-        android:bottom="6dp"
+        android:bottom="0dp"
         android:left="0px"
         android:right="0px"
-        android:top="0px">
+        android:top="15px">
 
         <shape android:shape="rectangle">
 
             <gradient
                 android:angle="90"
-                android:startColor="@color/c_alert_background_gradient_up"
-                android:endColor="@color/c_alert_background_gradient_down"
+                android:startColor="@color/c_alert_background_gradient_up_rate"
+                android:endColor="@color/c_alert_background_gradient_down_rate"
                 android:type="linear" />
-            <corners android:radius="8dp" />
+            <corners android:radius="12dp" />
 
 
         </shape>

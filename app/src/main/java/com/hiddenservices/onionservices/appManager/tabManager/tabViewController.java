@@ -124,7 +124,7 @@ class tabViewController {
         }
         if (pSize <= 0) {
             Button mTabClear = mPopupView.findViewById(R.id.pCloseTabTrigger);
-            LinearLayout mCloseTab = mPopupView.findViewById(R.id.pCloseTab);
+            LinearLayout mCloseTab = mPopupView.findViewById(R.id.pPopupRateusClose);
             mTabClear.setAlpha(0.35f);
             mCloseTab.setEnabled(false);
         }

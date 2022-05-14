@@ -27,7 +27,6 @@ import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
-import com.hiddenservices.onionservices.libs.views.ThumbnailCrop;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
@@ -436,7 +435,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                         if (status.sTheme == enums.Theme.THEME_DARK || status.sDefaultNightMode) {
                             mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_button_text_v1_inverted));
                         } else {
-                            mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_alert_rateus_header));
+                            mCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_alert_header));
                         }
 
                     } else {

@@ -5,110 +5,236 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pPopupRateusContainer"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@xml/ax_round_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/pPopupRateusHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/ALERT_RATEUS"
-            android:textAlignment="textStart"
-            android:textColor="@color/c_alert_rateus_header"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/pPopupRateusDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:alpha="0.6"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:text="@string/ALERT_RATEUS_INFO"
-            android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text_static"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pPopupRateusHeader"
-            tools:ignore="TextContrastCheck">
-
-        </TextView>
-
-        <RatingBar
-            android:id="@+id/pPopupRateusRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:foregroundTint="@color/c_white"
-            android:progressBackgroundTint="@color/c_alert_rateus_warning"
-            android:rating="0.5"
-            android:scaleX="0.65"
-            android:scaleY="0.65"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pPopupRateusDescription"
-            tools:ignore="SpeakableTextPresentCheck">
-
-        </RatingBar>
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pPopupRateusContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:background="@xml/ax_round_corner_bottomless"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pPopupRateusRating">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/pPopupRateusNext"
+            <TextView
+                android:id="@+id/pPopupRateusHeader"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="15dp"
-                android:background="@xml/ax_ripple_default_round_bottom"
-                android:text="@string/ALERT_RATE"
-                android:textAllCaps="false"
-                android:textColor="@color/c_white"
-                android:textSize="14sp"
-                tools:ignore="ButtonStyle,TextContrastCheck,TouchTargetSizeCheck" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/ALERT_RATEUS"
+                android:textAlignment="textStart"
+                android:textColor="@color/c_alert_header"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/pPopupRateusClose"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
 
-            <Button
-                android:id="@+id/pPopupRateusDismiss"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@xml/ax_ripple_default_round_bottom_secondary"
-                android:text="@string/ALERT_DISMISS"
-                android:textAllCaps="false"
-                android:textColor="@color/c_white"
-                android:textSize="14sp"
-                tools:ignore="ButtonStyle,TextContrastCheck,TouchTargetSizeCheck" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingLeft="11dp"
+                android:paddingRight="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pPopupRateusHeader">
+
+                <LinearLayout
+                    android:id="@+id/pPopupRateus1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@xml/ax_round_corner_rate"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="Love this browser\n5/5"
+                        android:textColor="@color/c_alert_background_description"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_light" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pPopupRateus2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@xml/ax_round_corner_rate"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/smile" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="Like the browser\n4/5"
+                        android:textColor="@color/c_alert_background_description"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_light" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pPopupRateus3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@xml/ax_round_corner_rate"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/confused" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="Satisfactory\n3/5"
+                        android:textColor="@color/c_alert_background_description"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_light" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pPopupRateus4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@xml/ax_round_corner_rate"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/sad" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="Below average\n2/5"
+                        android:textColor="@color/c_alert_background_description"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_light" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pPopupRateus5"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@xml/ax_round_corner_rate"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/angry" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="Poor browser\n1/5"
+                        android:textColor="@color/c_alert_background_description"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:src="@xml/ic_arrow_right"
+                        app:tint="@color/c_navigation_light" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/pPopupRateusClose"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="13dp"
+                android:background="@xml/ax_round_corner_cross"
+                android:padding="13dp"
+                android:visibility="gone"
+                android:src="@xml/ic_baseline_cross"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/c_white" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

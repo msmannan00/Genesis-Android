@@ -135,7 +135,7 @@
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Download</string>
 
     <!-- Alert Rateus -->
-    <string name="ALERT_RATEUS" translatable="true">Rate US</string>
+    <string name="ALERT_RATEUS" translatable="true">Rate \u0020Browser</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Tell others what you think about this app</string>
     <string name="ALERT_RATE" translatable="true">Rate</string>
 

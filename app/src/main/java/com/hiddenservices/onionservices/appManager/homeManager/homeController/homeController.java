@@ -2035,7 +2035,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onReInitTheme() {
         recreate();
-        mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), true);
+        //mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), true);
     }
 
     public void onResetData() {

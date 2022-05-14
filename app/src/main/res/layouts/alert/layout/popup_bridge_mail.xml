@@ -49,7 +49,7 @@
             android:paddingEnd="15dp"
             android:text="@string/ALERT_BRIDGE_MAIL_INFO"
             android:textAlignment="textStart"
-            android:textColor="@color/c_text_v8"
+            android:textColor="@color/c_alert_background_description"
             android:textSize="13.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

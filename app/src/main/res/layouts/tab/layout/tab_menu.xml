@@ -60,7 +60,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/pCloseTab"
+                android:id="@+id/pPopupRateusClose"
                 android:onClick="onMenuTrigger"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"

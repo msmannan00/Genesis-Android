@@ -572,7 +572,7 @@ public class tabController extends Fragment {
             onNewTabInvoked();
             mHomeController.onBackPressed();
             mClosedByNewTab = true;
-        } else if (pView.getId() == R.id.pCloseTab) {
+        } else if (pView.getId() == R.id.pPopupRateusClose) {
             mTouchable = false;
             onClearTabBackup();
             mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE, null);

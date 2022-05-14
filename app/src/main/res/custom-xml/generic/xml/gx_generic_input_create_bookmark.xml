@@ -7,8 +7,8 @@
         <shape
             android:shape="rectangle"
             android:padding="10dp">
-            <solid android:color="@color/c_white" />
-            <corners android:radius="3dp" />
+            <solid android:color="@color/c_edittext_background" />
+            <corners android:radius="5dp" />
         </shape>
     </item>
     <item
@@ -17,8 +17,8 @@
         <shape
             android:shape="rectangle"
             android:padding="10dp">
-            <solid android:color="@color/c_white" />
-            <corners android:radius="3dp" />
+            <solid android:color="@color/c_edittext_background" />
+            <corners android:radius="5dp" />
         </shape>
     </item>
 </selector>

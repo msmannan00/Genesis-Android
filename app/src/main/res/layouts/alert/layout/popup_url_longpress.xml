@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/pPopupURLLongPressHeader"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginTop="12dp"
             android:alpha="0.6"
             android:gravity="start |center_vertical"
@@ -50,7 +50,7 @@
             android:paddingStart="15dp"
             android:paddingEnd="41dp"
             android:text="@string/GENERAL_DEFAULT_TEXT"
-            android:textColor="@color/c_alert_text_static"
+            android:textColor="@color/c_alert_background_description"
             android:textDirection="locale"
             android:textSize="12.5sp"
             android:translationY="-1dp"
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
-            android:background="@color/c_orbot_setting_divider_static"
+            android:background="@color/c_secure_alert_border_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pPopupURLImageContainer" />
@@ -103,7 +103,7 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text_static"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -116,14 +116,14 @@
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    app:tint="@color/cursor_blue" />
+                    app:tint="@color/c_navigation_tint_alert" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider_static"
+                android:background="@color/c_secure_alert_border_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -153,7 +153,7 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text_static"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -166,14 +166,14 @@
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    app:tint="@color/cursor_blue" />
+                    app:tint="@color/c_navigation_tint_alert" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/c_orbot_setting_divider_static"
+                android:background="@color/c_secure_alert_border_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />
@@ -203,7 +203,7 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text_static"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -216,7 +216,7 @@
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    app:tint="@color/cursor_blue" />
+                    app:tint="@color/c_navigation_tint_alert" />
 
             </LinearLayout>
 
@@ -225,7 +225,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:background="@color/c_orbot_setting_divider_static"
+                android:background="@color/c_secure_alert_border_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotRowDescription" />

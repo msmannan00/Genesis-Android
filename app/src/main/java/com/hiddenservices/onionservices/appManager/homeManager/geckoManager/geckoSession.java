@@ -601,9 +601,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     private String setGenesisVerificationToken(String pString) {
         try {
             if (pString.contains("?")) {
-                pString += "&" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken();
+                pString += "&" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken() + "&theme=" + status.sTheme;
             } else {
-                pString += "?" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken();
+                pString += "?" + constants.CONST_GENESIS_GMT_TIME_GET_KEY + "=" + trueTimeEncryption.getInstance().getSecretToken() + "&theme=" + status.sTheme;
             }
             return pString;
         } catch (Exception ex) {
