@@ -644,7 +644,7 @@ public class tabController extends Fragment {
             } else if (e_type.equals(tabEnums.eTabAdapterCallback.ON_LOAD_TAB)) {
                 mClosed = true;
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HOLD_BLOCKER, null);
-                mHomeController.onLoadTab((geckoSession) data.get(0), (boolean) data.get(1), true, true);
+                mHomeController.onLoadTab((geckoSession) data.get(0), (boolean) data.get(1), true, true, false);
             } else if (e_type.equals(tabEnums.eTabAdapterCallback.ON_REMOVE_TAB_VIEW)) {
                 onInitRemoveView((Integer) data.get(0), true, true);
                 initTabCount(400);

@@ -52,7 +52,7 @@ public class appLovinManager implements MaxAdViewAdListener {
     }
 
     private boolean isAdvertLoaded() {
-        return bannerAdsLoaded;
+        return false;
     }
 
     /* Overriden Methods */

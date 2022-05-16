@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -205,6 +206,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                         .setContentTitle(getString(R.string.app_name))
                         .setSmallIcon(R.mipmap.ic_stat_tor_logo)
                         .setContentIntent(pendIntent)
+                        .setColor(Color.rgb( 255, 158, 47))
                         .setCategory(Notification.CATEGORY_SERVICE)
                         .setOngoing(org.torproject.android.service.util.Prefs.persistNotifications());
             }
@@ -887,51 +889,55 @@ public class OrbotService extends VpnService implements OrbotConstants {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
 
+                new Thread(){
+                    public void run(){
+                        TorService torService = ((TorService.LocalBinder) iBinder).getService();
+
+                        while ((conn = torService.getTorControlConnection())==null)
+                        {
+                            try {
+                                sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        mOrbotRawEventListener = new OrbotRawEventListener(OrbotService.this);
+
+                        ArrayList<String> events = new ArrayList<>(Arrays.asList(TorControlCommands.EVENT_OR_CONN_STATUS,
+                                TorControlCommands.EVENT_CIRCUIT_STATUS, TorControlCommands.EVENT_NOTICE_MSG,
+                                TorControlCommands.EVENT_WARN_MSG, TorControlCommands.EVENT_ERR_MSG,
+                                TorControlCommands.EVENT_BANDWIDTH_USED, TorControlCommands.EVENT_NEW_DESC,
+                                TorControlCommands.EVENT_ADDRMAP));
+                        if (Prefs.useDebugLogging()) {
+                            events.add(TorControlCommands.EVENT_DEBUG_MSG);
+                            events.add(TorControlCommands.EVENT_INFO_MSG);
+                        }
+                        if (Prefs.useDebugLogging() || Prefs.showExpandedNotifications())
+                            events.add(TorControlCommands.EVENT_STREAM_STATUS);
+
+                        if (conn != null) {
+                            try {
+                                conn.addRawEventListener(mOrbotRawEventListener);
+                                conn.authenticate(new byte[0]);
+                                conn.setEvents(events);
+                                logNotice(getString(R.string.log_notice_added_event_handler));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            initControlConnection();
+                        }
+                    }
+                }.start();
                 //moved torService to a local variable, since we only need it once
-                TorService torService = ((TorService.LocalBinder) iBinder).getService();
-
-                while ((conn = torService.getTorControlConnection())==null)
-                {
-                    try {
-                        sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                mOrbotRawEventListener = new OrbotRawEventListener(OrbotService.this);
-
-                ArrayList<String> events = new ArrayList<>(Arrays.asList(TorControlCommands.EVENT_OR_CONN_STATUS,
-                        TorControlCommands.EVENT_CIRCUIT_STATUS, TorControlCommands.EVENT_NOTICE_MSG,
-                        TorControlCommands.EVENT_WARN_MSG, TorControlCommands.EVENT_ERR_MSG,
-                        TorControlCommands.EVENT_BANDWIDTH_USED, TorControlCommands.EVENT_NEW_DESC,
-                        TorControlCommands.EVENT_ADDRMAP));
-                if (Prefs.useDebugLogging()) {
-                    events.add(TorControlCommands.EVENT_DEBUG_MSG);
-                    events.add(TorControlCommands.EVENT_INFO_MSG);
-                }
-                if (Prefs.useDebugLogging() || Prefs.showExpandedNotifications())
-                    events.add(TorControlCommands.EVENT_STREAM_STATUS);
-
-                if (conn != null) {
-                    try {
-                        conn.addRawEventListener(mOrbotRawEventListener);
-                        conn.authenticate(new byte[0]);
-                        conn.setEvents(events);
-                        logNotice(getString(R.string.log_notice_added_event_handler));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    initControlConnection();
-                }
             }
 
             @Override

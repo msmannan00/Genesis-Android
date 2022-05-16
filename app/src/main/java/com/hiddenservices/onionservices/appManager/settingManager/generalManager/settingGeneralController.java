@@ -140,7 +140,7 @@ public class settingGeneralController extends AppCompatActivity {
                     status.mThemeApplying = true;
 
 
-                    //activityContextManager.getInstance().getHomeController().onReInitTheme();
+                    activityContextManager.getInstance().getHomeController().onReInitTheme();
                     new Handler().postDelayed(() ->
                     {
                         try {
@@ -148,9 +148,9 @@ public class settingGeneralController extends AppCompatActivity {
                                 activityContextManager.getInstance().getSettingController().onInitTheme();
                                 activityContextManager.getInstance().getHomeController().onCloseAllTabs();
 
-                                //onBackPressed();
-                                //overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
-                                //helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this, true);
+                                onBackPressed();
+                                overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
+                                helperMethod.openActivity(settingGeneralController.class, constants.CONST_LIST_HISTORY, settingGeneralController.this, true);
 
                             }
                         }catch (Exception ex){}

@@ -80,6 +80,9 @@ public class tabRowModel {
     public Bitmap getBitmap() {
         return mBitmap;
     }
+    public void resetBitmap() {
+        mBitmap = null;
+    }
 
     public String getDate() {
         return mDate;

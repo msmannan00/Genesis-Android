@@ -424,7 +424,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             if (!status.mThemeApplying) {
                 mHomeViewController.onUpdateSearchBar(model.getSession().getCurrentURL(), false, false, false);
             }
-            onLoadTab(model.getSession(), false, true, false);
+            onLoadTab(model.getSession(), false, true, false, true);
         } else {
             onNewIntent(getIntent());
             onOpenLinkNewTab(helperMethod.getDomainName(mHomeModel.getSearchEngine()));
@@ -679,7 +679,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         return mGeckoClient.getSecurityInfo();
     }
 
-    public void onLoadTab(geckoSession mTempSession, boolean isSessionClosed, boolean pExpandAppBar, boolean pForced) {
+    public void onLoadTab(geckoSession mTempSession, boolean isSessionClosed, boolean pExpandAppBar, boolean pForced, boolean pGeneratePixel) {
 
         if (!isSessionClosed) {
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mTempSession));
@@ -717,7 +717,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), false);
 
         try {
-            mRenderedBitmap = mGeckoView.capturePixels();
+            if(pGeneratePixel){
+                mRenderedBitmap = mGeckoView.capturePixels();
+            }
         } catch (Exception ignored) {
         }
 
@@ -736,7 +738,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.onProgressBarUpdate(mTempSession.getProgress(), true);
         }
         //}
-        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, false));
+        if(pGeneratePixel){
+            dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, false));
+        }
 
         TouchView(mGeckoView);
         TouchView(mNestedScroll);
@@ -1185,7 +1189,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         tabRowModel model = (tabRowModel) dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_RECENT_TAB, null);
         if (model != null && !mGeckoClient.getSession().getSessionID().equals(model.getSession().getSessionID())) {
             mHomeViewController.onUpdateSearchBar(model.getSession().getCurrentURL(), false, false, true);
-            onLoadTab(model.getSession(), false, true, false);
+            onLoadTab(model.getSession(), false, true, false, true);
         }
     }
 
@@ -1635,7 +1639,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }
             } else {
                 if (!model.getSession().getSessionID().equals(mGeckoClient.getSession().getSessionID())) {
-                    onLoadTab(model.getSession(), false, true, false);
+                    onLoadTab(model.getSession(), false, true, false, true);
                 }
                 if (mGeckoClient.getSession().getProgress() != 100) {
                     mHomeViewController.onProgressBarUpdate(mGeckoClient.getSession().getProgress(), true);
@@ -1804,7 +1808,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         if (model != null) {
             if (mTabFragment.getVisibility() != View.VISIBLE) {
-                onLoadTab(model.getSession(), true, true, false);
+                onLoadTab(model.getSession(), true, true, false, false);
             }
             return true;
         } else {
@@ -2317,7 +2321,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             } else if (e_type.equals(enums.etype.M_HOME_PAGE)) {
                 geckoSession mSession = (geckoSession) dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_HOME_PAGE, null);
                 if (mSession != null) {
-                    onLoadTab(mSession, false, true, false);
+                    onLoadTab(mSession, false, true, false, false);
                 }
                 return dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_HOME_PAGE, null);
             }
@@ -2563,7 +2567,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             } else if (e_type.equals(enums.etype.M_OPEN_SESSION)) {
                 tabRowModel model = (tabRowModel) dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
                 if (model != null) {
-                    onLoadTab(model.getSession(), false, true, false);
+                    onLoadTab(model.getSession(), false, true, false, true);
                     if (model.getSession().getCurrentURL().equals("about:blank") && status.sOpenURLInNewTab) {
                         onLoadURL(helperMethod.getDomainName(mHomeModel.getSearchEngine()));
                     } else {

@@ -86,7 +86,7 @@
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_download_full.xml" value="0.33" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_download_url.xml" value="0.5" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_file_longpress.xml" value="0.33" />
-        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_find.xml" value="0.5" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_find.xml" value="0.33" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_panic.xml" value="0.67" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_rate_failure.xml" value="0.5" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/alert/layout/popup_rate_us.xml" value="0.33" />
@@ -118,6 +118,7 @@
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/shared/listviews/layout/history_bookmark_menu.xml" value="0.18541666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_grid_view.xml" value="0.67" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_menu.xml" value="0.18541666666666667" />
+        <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_row_view.xml" value="0.1390625" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/layouts/tab/layout/tab_view.xml" value="0.18541666666666667" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/menu/menu_main.xml" value="0.33" />
         <entry key="..\:/workspace/Genesis-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1935" />

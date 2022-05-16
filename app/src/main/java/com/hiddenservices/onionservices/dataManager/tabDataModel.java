@@ -84,6 +84,18 @@ class tabDataModel {
             return enums.AddTabCallback.TAB_FULL;
         }
 
+        if (mTabs.size() > 2) {
+            for(int counter=mTabs.size()-1;counter>1;counter--){
+                if(!mTabs.get(counter).getSession().isLoaded()){
+                    mTabs.get(counter).resetBitmap();
+                }
+                mTabs.get(counter).getSession().stop();
+                mTabs.get(counter).getSession().setActive(false);
+                mTabs.get(counter).getSession().close();
+            }
+        }
+
+
         if (pIsDataSavable) {
             String[] params = new String[3];
             params[0] = mTabModel.getSession().getTitle();

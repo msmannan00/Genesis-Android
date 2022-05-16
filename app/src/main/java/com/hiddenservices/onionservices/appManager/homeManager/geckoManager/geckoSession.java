@@ -456,7 +456,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
                         mContext.get().runOnUiThread(() -> {
                             event.invokeObserver(Arrays.asList(mProgress, mSessionID), enums.etype.progress_update);
                         });
-                        event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
                     }
                     mPreviousErrorPage = false;
                 } else {
@@ -795,7 +794,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             onSessionReinit();
         }
 
-        event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme), enums.etype.M_UPDATE_PIXEL_BACKGROUND);
         event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), enums.etype.ON_EXPAND_TOP_BAR);
         mPrevURL = mCurrentURL;
     }

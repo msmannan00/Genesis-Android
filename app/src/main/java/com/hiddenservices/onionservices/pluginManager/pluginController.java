@@ -285,7 +285,7 @@ public class pluginController {
             } else if (pEventType.equals(M_DOWNLOAD_FILE_MANUAL)) {
                 ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
             } else if (pEventType.equals(M_LOAD_NEW_TAB)) {
-                ((homeController) mHomeController.get()).onLoadTab((geckoSession) pData.get(pData.size() - 2), false, false, false);
+                ((homeController) mHomeController.get()).onLoadTab((geckoSession) pData.get(pData.size() - 2), false, false, true, true);
             } else if (pEventType.equals(M_OPEN_LINK_NEW_TAB)) {
 
                 ((homeController) mHomeController.get()).postNewLinkTabAnimationInBackgroundTrigger(pData.get(0).toString());
