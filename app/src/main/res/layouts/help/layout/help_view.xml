@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:focusable="true"
-    android:clickable="true"
     android:layout_height="match_parent"
     android:background="@color/c_background"
+    android:clickable="true"
+    android:focusable="true"
     tools:context="com.hiddenservices.onionservices.appManager.helpManager.helpController">
 
     <!-- Title Header -->
@@ -24,24 +24,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pRetryContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
         android:alpha="0"
         android:background="@color/c_background"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/pHeaderContainerTop">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginBottom="165dp"
             android:src="@xml/ic_baseline_wifi_off"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
             android:text="@string/HELP_RETRY_INFO"
             android:textAlignment="center"
@@ -65,36 +65,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/pReloadButton"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:background="@xml/hox_rounded_corner_suggestion_settings"
-            android:onClick="onReloadData"
-            android:text="@string/HELP_RETRY"
-            android:textColor="@color/c_white"
-            app:layout_constraintStart_toStartOf="@+id/pErrorInfo"
-            app:layout_constraintTop_toBottomOf="@+id/pErrorInfo" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pErrorInfo">
 
-        <ImageButton
-            android:id="@+id/pBrowser"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:background="@xml/hox_rounded_corner_suggestion_settings"
-            android:contentDescription="@string/GENERAL_TODO"
-            android:elevation="8dp"
-            android:onClick="onOpenHelpExternal"
-            android:src="@xml/ic_baseline_browser"
-            android:text="@string/HELP_RETRY"
-            android:textColor="@color/c_white"
-            app:layout_constraintStart_toEndOf="@+id/pReloadButton"
-            app:layout_constraintTop_toTopOf="@+id/pReloadButton"
-            app:tint="@color/c_white" />
+            <ImageButton
+                android:id="@+id/pBrowser"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="5dp"
+                android:background="@xml/hox_rounded_corner_suggestion_settings"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:elevation="8dp"
+                android:onClick="onOpenHelpExternal"
+                android:src="@xml/ic_baseline_browser"
+                android:text="@string/HELP_RETRY"
+                android:textColor="@color/c_white"
+                app:tint="@color/c_white" />
+
+            <Button
+                android:id="@+id/pReloadButton"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@xml/hox_rounded_corner_suggestion_settings"
+                android:onClick="onReloadData"
+                android:text="@string/HELP_RETRY"
+                android:textColor="@color/c_white" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -162,9 +170,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="fill_vertical"
         android:layout_marginTop="48dp"
-        android:focusable="true"
         android:clickable="true"
         android:fillViewport="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -173,8 +181,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="true"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="vertical">
 
             <com.hiddenservices.onionservices.appManager.helpManager.editViewController
@@ -182,10 +190,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:alpha="0"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="2.5dp"
+                android:alpha="0"
                 android:background="@xml/gx_generic_input"
                 android:ems="10"
                 android:hint="@string/HISTORY_SEARCH_HINT"
@@ -206,12 +214,12 @@
                 android:id="@+id/pRecycleView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:focusable="true"
-                android:clickable="true"
                 android:layout_marginTop="7dp"
                 android:layout_weight="1"
                 android:alpha="0"
-                android:background="@color/c_background">
+                android:background="@color/c_background"
+                android:clickable="true"
+                android:focusable="true">
 
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>

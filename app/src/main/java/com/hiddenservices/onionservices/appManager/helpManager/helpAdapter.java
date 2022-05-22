@@ -39,15 +39,20 @@ public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder
     }
 
     private void onSearchFilterInvoked(String pQuery) {
+        int mCount = 0;
+        int mModelListSize = mModelList.size();
+
         pQuery = pQuery.toLowerCase();
         this.mModelList.clear();
         mCurrentPosition = -1;
         for (int mCounter = 0; mCounter < mCompleteModelList.size(); mCounter++) {
             if (mCompleteModelList.get(mCounter).getHeader().toLowerCase().contains(pQuery) || mCompleteModelList.get(mCounter).getDescription().toLowerCase().contains(pQuery)) {
                 mModelList.add(mCompleteModelList.get(mCounter));
+                mCount+=1;
             }
         }
-        notifyDataSetChanged();
+        notifyItemRangeRemoved(mCount,mModelListSize);
+        notifyItemRangeChanged(0,mModelList.size());
     }
 
     @NonNull

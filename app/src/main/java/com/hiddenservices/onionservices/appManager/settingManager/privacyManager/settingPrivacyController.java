@@ -101,6 +101,7 @@ public class settingPrivacyController extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        activityContextManager.getInstance().onCheckPurgeStack();
         if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
         }

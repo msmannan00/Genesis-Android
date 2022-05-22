@@ -234,6 +234,9 @@ public class pluginController {
             if (pEventType.equals(enums.etype.welcome)) {
                 ((homeController) mHomeController.get()).onLoadURL(pData.get(0).toString());
             } else if (pEventType.equals(M_PANIC_RESET)) {
+                if(activityContextManager.getInstance().getSettingController()!=null){
+                    activityContextManager.getInstance().getSettingController().moveTaskToBack(true);
+                }
                 helperMethod.onDelayHandler(mHomeController.get(), 150, () -> {
                     activityContextManager.getInstance().getHomeController().panicExitInvoked();
                     return null;

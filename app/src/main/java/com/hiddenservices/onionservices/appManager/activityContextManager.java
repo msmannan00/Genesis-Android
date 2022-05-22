@@ -1,9 +1,10 @@
 package com.hiddenservices.onionservices.appManager;
 
+import static com.hiddenservices.onionservices.constants.constants.CONST_PACKAGE_NAME;
 import android.content.Context;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.R;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController;
 import com.hiddenservices.onionservices.appManager.bridgeManager.bridgeController;
 import com.hiddenservices.onionservices.appManager.historyManager.historyController;
@@ -12,7 +13,7 @@ import com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogContr
 import com.hiddenservices.onionservices.appManager.settingManager.generalManager.settingGeneralController;
 import com.hiddenservices.onionservices.appManager.settingManager.settingHomeManager.settingHomeController;
 import com.hiddenservices.onionservices.appManager.tabManager.tabController;
-
+import com.widget.onionservices.helperMethod.helperMethod;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -80,7 +81,7 @@ public class activityContextManager {
 
     public homeController getHomeController() {
         if (pHomeController == null) {
-            return null;
+            helperMethod.onStartApplication(pApplicationContext.get(), CONST_PACKAGE_NAME);
         }
         return pHomeController.get();
     }
@@ -209,6 +210,22 @@ public class activityContextManager {
                     mCounter -= 1;
                 }
             } catch (Exception ignored) {
+            }
+        }
+    }
+    public void onCheckPurgeStack() {
+        if(pHomeController==null || pHomeController.get() == null){
+            for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
+                try {
+                    if (!mStackList.get(mCounter).get().isFinishing()) {
+                        mStackList.get(mCounter).get().finish();
+                        mStackList.get(mCounter).get().overridePendingTransition(R.anim.translate_fade_left_crash, R.anim.translate_fade_right_crash);
+                    }
+                    mStackList.remove(mCounter);
+                    mCounter -= 1;
+
+                } catch (Exception ignored) {
+                }
             }
         }
     }

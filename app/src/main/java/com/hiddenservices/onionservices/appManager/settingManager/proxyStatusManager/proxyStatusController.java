@@ -109,6 +109,7 @@ public class proxyStatusController extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        activityContextManager.getInstance().onCheckPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         super.onResume();
     }

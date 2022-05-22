@@ -340,6 +340,7 @@ public class geckoClients {
 
 
     public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext) {
+        initBrowserManager(pcontext);
         pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
         mIconManager.onLoadIconIntoView(pImageView, pURL);
     }

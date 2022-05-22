@@ -176,6 +176,7 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        activityContextManager.getInstance().onCheckPurgeStack();
         if (status.mThemeApplying) {
             // activityContextManager.getInstance().onStack(this);
         }

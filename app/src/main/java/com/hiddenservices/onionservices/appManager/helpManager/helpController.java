@@ -2,7 +2,6 @@ package com.hiddenservices.onionservices.appManager.helpManager;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -46,10 +45,6 @@ public class helpController extends AppCompatActivity {
     private ConstraintLayout mRetryContainer;
     private Button mReloadButton;
     private editViewController mSearchInput;
-
-    /*Private Variables*/
-    private Handler mSearchInvokedHandler = new Handler();
-    private Runnable postToServerRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,16 +121,11 @@ public class helpController extends AppCompatActivity {
 
         mSearchInput.setEventHandler(new edittextManagerCallback());
 
-        if (mHelpAdapter != null) {
-            postToServerRunnable = () -> mHelpAdapter.onTrigger(helpEnums.eHelpAdapter.M_INIT_FILTER, Collections.singletonList(mSearchInput.getText().toString()));
-        }
-
         mSearchInput.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mSearchInvokedHandler.removeCallbacks(postToServerRunnable);
-                mSearchInvokedHandler.postDelayed(postToServerRunnable, 50);
+                mHelpAdapter.onTrigger(helpEnums.eHelpAdapter.M_INIT_FILTER, Collections.singletonList(mSearchInput.getText().toString()));
             }
 
             @Override
@@ -239,6 +229,7 @@ public class helpController extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        activityContextManager.getInstance().onCheckPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         super.onResume();
     }

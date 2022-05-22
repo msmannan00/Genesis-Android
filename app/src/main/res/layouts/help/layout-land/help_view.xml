@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context="com.hiddenservices.onionservices.appManager.helpManager.helpController">
+
+    <!-- Title Header -->
+    <ProgressBar
+        android:id="@+id/pProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pRetryContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:alpha="1"
+        android:background="@color/c_background"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pHeaderContainerTop">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@xml/ic_baseline_wifi_off"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/c_alert_divider" />
+
+        <TextView
+            android:id="@+id/pErrorInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="40dp"
+            android:text="@string/HELP_RETRY_INFO"
+            android:textAlignment="center"
+            android:textColor="@color/c_text_v1"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pErrorInfo">
+
+            <ImageButton
+                android:id="@+id/pBrowser"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="5dp"
+                android:background="@xml/hox_rounded_corner_suggestion_settings"
+                android:contentDescription="@string/GENERAL_TODO"
+                android:elevation="8dp"
+                android:onClick="onOpenHelpExternal"
+                android:src="@xml/ic_baseline_browser"
+                android:text="@string/HELP_RETRY"
+                android:textColor="@color/c_white"
+                app:tint="@color/c_white" />
+
+            <Button
+                android:id="@+id/pReloadButton"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@xml/hox_rounded_corner_suggestion_settings"
+                android:onClick="onReloadData"
+                android:text="@string/HELP_RETRY"
+                android:textColor="@color/c_white" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/pHeaderContainerTop"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/c_background"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="5dp"
+        android:paddingEnd="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="1dp"
+            android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="onClose"
+            android:src="@xml/ic_arrow_back"
+            app:tint="@color/c_navigation_tint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-3dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center_vertical|start"
+            android:onClick="onClose"
+            android:text="@string/HELP_TITLE"
+            android:textColor="@color/c_text_v1"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="0dp"
+            android:background="@xml/gx_ripple_default_round"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="onOpenHelp"
+            android:padding="9dp"
+            android:src="@xml/ic_baseline_chat"
+            app:tint="@color/c_header_icon_tint" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/pNestedScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill_vertical"
+        android:layout_marginTop="48dp"
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <com.hiddenservices.onionservices.appManager.helpManager.editViewController
+                android:id="@+id/pSearchInput"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="2.5dp"
+                android:alpha="0"
+                android:background="@xml/gx_generic_input"
+                android:ems="10"
+                android:hint="@string/HISTORY_SEARCH_HINT"
+                android:importantForAutofill="no"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/c_text_v1"
+                android:textColorHighlight="@color/c_text_color_highlight_v1"
+                android:textColorHint="@color/c_text_v2"
+                android:textCursorDrawable="@xml/gx_search_cursor_state"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:targetApi="o" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="7dp"
+                android:layout_weight="1"
+                android:alpha="0"
+                android:background="@color/c_background"
+                android:clickable="true"
+                android:focusable="true">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

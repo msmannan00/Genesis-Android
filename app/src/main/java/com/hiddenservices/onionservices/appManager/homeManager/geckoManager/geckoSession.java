@@ -1269,7 +1269,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     private void checkApplicationRate() {
         if (status.sSettingIsAppStarted) {
             if (status.sGlobalURLCount == 10) {
-                event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), M_RATE_APPLICATION);
+                // event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), M_RATE_APPLICATION);
             } else if (status.sGlobalURLCount == 20 || status.sGlobalURLCount == 80) {
                 event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), M_DEFAULT_BROWSER);
             }

@@ -109,6 +109,7 @@ public class settingAdvanceController extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        activityContextManager.getInstance().onCheckPurgeStack();
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();

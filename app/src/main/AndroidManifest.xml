@@ -77,7 +77,7 @@
 
         <activity
             android:name="com.hiddenservices.onionservices.appManager.helpManager.helpController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:configChanges="keyboard|keyboardHidden|screenSize|uiMode"
             android:label="@string/SETTING_HEADER"
             android:windowSoftInputMode="adjustPan" />
 

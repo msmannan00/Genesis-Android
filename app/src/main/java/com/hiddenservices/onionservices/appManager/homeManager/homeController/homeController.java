@@ -95,8 +95,11 @@ import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.LocaleHelper;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -2534,8 +2537,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().onMessageManagerInvoke(mData, M_DOWNLOAD_SINGLE);
             } else if (e_type.equals(enums.etype.on_full_screen)) {
                 boolean status = (Boolean) data.get(0);
+                if(!status){
+                    mGeckoClient.onStopMedia();
+                }
                 mHomeViewController.onFullScreenUpdate(status);
-
                 mHomeViewController.onUpdateSearchEngineBar(false, 0);
             } else if (e_type.equals(enums.etype.on_update_favicon)) {
                 dataController.getInstance().invokeImage(dataEnums.eImageCommands.M_REQUEST_IMAGE_URL, Collections.singletonList(data.get(0)));

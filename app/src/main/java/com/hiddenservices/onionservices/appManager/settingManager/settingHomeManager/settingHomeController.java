@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.settingManager.proxyStatusManager.proxyStatusController;
 import com.hiddenservices.onionservices.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.hiddenservices.onionservices.appManager.settingManager.advanceManager.settingAdvanceController;
@@ -151,6 +152,7 @@ public class settingHomeController extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        activityContextManager.getInstance().onCheckPurgeStack();
         if (status.mThemeApplying) {
             // activityContextManager.getInstance().onStack(this);
         }
@@ -253,6 +255,12 @@ public class settingHomeController extends AppCompatActivity {
     public void onSitemap(View view) {
         finish();
         activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_SITEMAP));
+    }
+
+    public void onReset(View view) {
+        activityContextManager.getInstance().getHomeController().onResetData();
+        pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
+        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_PANIC_RESET);
     }
 
     public void onPrivacyPolicy(View view) {
