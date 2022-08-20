@@ -23,7 +23,7 @@ class homeModel {
             return pURL;
         }
         if (pURL.equals("about:blank")) {
-            return helperMethod.completeURL("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion");
+            return helperMethod.completeURL("167.86.99.31");
         } else if (pURL.equals("about:config")) {
             return pURL;
         } else {

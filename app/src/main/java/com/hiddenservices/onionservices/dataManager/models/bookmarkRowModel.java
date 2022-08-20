@@ -41,7 +41,7 @@ public class bookmarkRowModel {
     }
 
     public String getDescription() {
-        if (m_description != null && m_description.equals("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")) {
+        if (m_description != null && m_description.equals("167.86.99.31")) {
             return "orion.onion";
         }
         return m_description;

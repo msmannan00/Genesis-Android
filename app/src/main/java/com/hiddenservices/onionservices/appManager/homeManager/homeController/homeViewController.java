@@ -1288,7 +1288,7 @@ class homeViewController {
             url = url.replace("http://", "");
         }
 
-        url = url.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion", "orion.onion");
+        url = url.replace("167.86.99.31", "orion.onion");
         boolean isTextSelected = false;
 
         if (mSearchbar.isSelected()) {

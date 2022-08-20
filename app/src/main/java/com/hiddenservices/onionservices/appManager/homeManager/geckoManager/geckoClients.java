@@ -44,6 +44,8 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
 
 import org.json.JSONObject;
+import org.mozilla.gecko.EventDispatcher;
+import org.mozilla.gecko.util.GeckoBundle;
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoRuntime;
@@ -122,7 +124,7 @@ public class geckoClients {
                 loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
             } else {
                 String mURL = mSession.getCurrentURL();
-                if (mURL.equals("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
+                if (mURL.equals("http://167.86.99.31") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
                     if (!mSession.canGoBack()) {
                         mNestedGeckoView.releaseSession();
                         mSession.close();
@@ -131,7 +133,7 @@ public class geckoClients {
                     } else {
                         mSession.goBack();
                     }
-                    loadURL("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion", mNestedGeckoView, pcontext);
+                    loadURL("http://167.86.99.31", mNestedGeckoView, pcontext);
                 }
             }
         }
@@ -295,6 +297,39 @@ public class geckoClients {
 
     static boolean mCreated = false;
 
+    /* package */ class Pref<T> {
+        public final String name;
+        public final T defaultValue;
+        private T mValue;
+        private boolean mIsSet;
+
+        public Pref(@NonNull final String name, final T defaultValue) {
+            this.name = name;
+            this.defaultValue = defaultValue;
+            mValue = defaultValue;
+
+        }
+        public void add() {
+            final GeckoBundle prefs = new GeckoBundle(1);
+            prefs.putInt(this.name, (Integer)this.defaultValue);
+            EventDispatcher.getInstance().dispatch("GeckoView:SetDefaultPrefs", prefs);
+            addToBundle(prefs);
+        }
+
+        private void addToBundle(final GeckoBundle bundle) {
+            final T value = mIsSet ? mValue : defaultValue;
+            if (value instanceof String) {
+                bundle.putString(name, (String) value);
+            } else if (value instanceof Integer) {
+                bundle.putInt(name, (Integer) value);
+            } else if (value instanceof Boolean) {
+                bundle.putBoolean(name, (Boolean) value);
+            } else {
+                throw new UnsupportedOperationException("Unhandled pref type for " + name);
+            }
+        }
+    }
+
     @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context) {
         if (mRuntime == null) {
@@ -434,10 +469,12 @@ public class geckoClients {
     }
 
     public void loadURL(String url, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
+
+
         if (url.startsWith("https://orion.onion/privacy")) {
             url = CONST_PRIVACY_POLICY_URL_NON_TOR;
         }
-        if (!status.sTorBrowsing && url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy")) {
+        if (!status.sTorBrowsing && url.equals("https://167.86.99.31/privacy")) {
             url = CONST_PRIVACY_POLICY_URL_NON_TOR;
         }
 
@@ -449,7 +486,7 @@ public class geckoClients {
         Log.i("FERROR : ", "FERROR" + url);
         if (mSession.onGetInitializeFromStartup()) {
             mSession.initURL(url);
-            if (!url.startsWith(CONST_REPORT_URL) && (url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))) {
+            if (!url.startsWith(CONST_REPORT_URL) && (url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))) {
                 try {
                     mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
                     if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)) {
@@ -598,7 +635,7 @@ public class geckoClients {
     public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall) {
         mSession.stop();
         String url = mSession.getCurrentURL();
-        if (url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
+        if (url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
             loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
         } else if (!isThemeCall) {
             mSession.reload();
@@ -610,7 +647,7 @@ public class geckoClients {
         {   if(mSession != null){
                 mSession.stop();
                 String url = mSession.getCurrentURL();
-                if (url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?pG") || url.startsWith("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion?pG") || url.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
+                if (url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
                     loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
                 } else if (!isThemeCall) {
                     mSession.reload();

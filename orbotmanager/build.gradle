@@ -22,20 +22,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError true
-        htmlReport true
-        xmlReport false
-        textReport false
-        lintConfig file("../lint.xml")
-        disable "InvalidPackage"
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/AL2.0']
+        }
     }
 
-    packagingOptions {
-        exclude 'META-INF/AL2.0'
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds false
+        disable 'InvalidPackage'
+        htmlReport true
+        lintConfig file('../lint.xml')
+        textReport false
+        xmlReport false
     }
 }
 

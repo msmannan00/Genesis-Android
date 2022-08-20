@@ -97,7 +97,7 @@ class settingGeneralViewController {
             mOpenURLInNewTab.setChecked(false);
         }
 
-        mHomePageText.setText(helperMethod.getDomainName(status.sSettingDefaultSearchEngine.replace("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion", "orion.onion")));
+        mHomePageText.setText(helperMethod.getDomainName(status.sSettingDefaultSearchEngine.replace("167.86.99.31", "orion.onion")));
     }
 
     private void updateThemeChanger() {

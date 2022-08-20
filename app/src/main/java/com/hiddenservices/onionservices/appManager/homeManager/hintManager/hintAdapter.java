@@ -171,7 +171,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             }
 
             String m_url = model.getDescription();
-            if (!status.sTorBrowsing && (m_url.equals("https://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy") || m_url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))) {
+            if (!status.sTorBrowsing && (m_url.equals("https://167.86.99.31/privacy") || m_url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR))) {
                 m_url = "https://orion.onion/privacy";
             }
 
@@ -196,7 +196,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
 
-            if (mURLLink.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mURLLink.contains("orion.onion")) {
+            if (mURLLink.contains("167.86.99.31") || mURLLink.contains("orion.onion")) {
                 pHintWebIconImage.setImageTintList(null);
                 pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());

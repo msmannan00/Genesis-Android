@@ -12,12 +12,12 @@ public class constants {
     public static final String CONST_REPORT_URL_NON_TOR = "http://http://167.86.99.31/report?url=";
     public static final String CONST_SITEMAP_NON_TOR = "http://http://167.86.99.31/sitemap";
 
-    public static final String CONST_PRIVACY_POLICY_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/privacy";
-    public static final String CONST_REPORT_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/report?url=";
-    public static final String CONST_SITEMAP = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/sitemap";
+    public static final String CONST_PRIVACY_POLICY_URL = "http://167.86.99.31/privacy";
+    public static final String CONST_REPORT_URL = "http://167.86.99.31/report?url=";
+    public static final String CONST_SITEMAP = "http://167.86.99.31/sitemap";
     public static final String CONST_PACKAGE_NAME = "com.hiddenservices.onionservices";
     public static final String CONST_GENESIS_ONION = "orion.onion";
-    public static final String CONST_GENESIS_ONION_V2 = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
+    public static final String CONST_GENESIS_ONION_V2 = "167.86.99.31";
 
     /*DRIVE URL DEV*/
 
@@ -39,15 +39,15 @@ public class constants {
     public static final String CONST_GENESIS_ERROR_CACHED_DARK = "error/error-dark.html";
     public static final String CONST_GENESIS_BADCERT_CACHED = "error/badcert.html";
     public static final String CONST_GENESIS_BADCERT_CACHED_DARK = "error/badcert-dark.html";
-    public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/";
-    public static final String CONST_GENESIS_DOMAIN_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion";
+    public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "http://167.86.99.31/";
+    public static final String CONST_GENESIS_DOMAIN_URL = "http://167.86.99.31";
     public static final String CONST_GENESIS_LOCAL_TIME_GET_KEY = "pLocalTimeVerificationToken";
     public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pSecretToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
     public static final String CONST_GENESIS_HELP_URL_CACHE_DARK = "resource://android/assets/help/help-dark.html";
     public static final String CONST_GENESIS_HELP_URL = "https://orion.onion/help";
-    public static final String CONST_GENESIS_HELP_URL_SUB = "trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/help";
-    public static final String CONST_BACKEND_GENESIS_URL = "http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/search?q=$s&p_num=1&s_type=all";
+    public static final String CONST_GENESIS_HELP_URL_SUB = "167.86.99.31/help";
+    public static final String CONST_BACKEND_GENESIS_URL = "http://167.86.99.31/search?q=$s&p_num=1&s_type=all";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com?q=$s&ia=web";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";

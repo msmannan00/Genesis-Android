@@ -36,10 +36,6 @@ android {
             proguardFiles getDefaultProguardFile(project.ext.proguard_file), project.ext.proguard_rule
         }
     }
-    lintOptions {
-        checkReleaseBuilds project.ext.checkReleaseBuilds
-        abortOnError project.ext.abortOnError
-    }
 
 
     flavorDimensions project.ext.dimen

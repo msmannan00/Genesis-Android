@@ -44,6 +44,8 @@ import com.example.myapplication.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mozilla.gecko.EventDispatcher;
+import org.mozilla.gecko.util.GeckoBundle;
 import org.mozilla.gecko.util.ThreadUtils;
 import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.Autofill;
@@ -496,7 +498,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     }
 
     public void onProgressStart() {
-        if (!getCurrentURL().equals("about:config") && !getCurrentURL().equals("about:blank") && !getCurrentURL().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !wasPreviousErrorPage() && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)) {
+        if (!getCurrentURL().equals("about:config") && !getCurrentURL().equals("about:blank") && !getCurrentURL().contains("167.86.99.31") && !wasPreviousErrorPage() && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED) && !getCurrentURL().startsWith(CONST_GENESIS_URL_CACHED_DARK) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE) && !getCurrentURL().startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)) {
             mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update));
         }
     }
@@ -562,7 +564,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         }
 
         if (wasBackPressed && mPastURLVerify) {
-            if (var2.equals("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
+            if (var2.equals("http://167.86.99.31") || var2.startsWith(CONST_GENESIS_URL_CACHED) || var2.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
                 if (var2.startsWith(CONST_GENESIS_URL_CACHED_DARK) && (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(mContext.get()))) {
                     isPageLoading = false;
                     event.invokeObserver(null, enums.etype.M_CHANGE_HOME_THEME);
@@ -610,7 +612,46 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         }
     }
 
+    /* package */ class Pref<T> {
+        public final String name;
+        public final T defaultValue;
+        private T mValue;
+        private boolean mIsSet;
+
+        public Pref(@NonNull final String name, final T defaultValue) {
+            this.name = name;
+            this.defaultValue = defaultValue;
+            mValue = defaultValue;
+
+        }
+        public void add() {
+            final GeckoBundle prefs = new GeckoBundle(1);
+            prefs.putInt(this.name, (Integer)this.defaultValue);
+            EventDispatcher.getInstance().dispatch("GeckoView:SetDefaultPrefs", prefs);
+            addToBundle(prefs);
+        }
+
+        private void addToBundle(final GeckoBundle bundle) {
+            final T value = mIsSet ? mValue : defaultValue;
+            if (value instanceof String) {
+                bundle.putString(name, (String) value);
+            } else if (value instanceof Integer) {
+                bundle.putInt(name, (Integer) value);
+            } else if (value instanceof Boolean) {
+                bundle.putBoolean(name, (Boolean) value);
+            } else {
+                throw new UnsupportedOperationException("Unhandled pref type for " + name);
+            }
+        }
+    }
+
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
+
+        if (var1.uri.contains("167.86.99.31")) {
+            new Pref<Integer>("network.proxy.type", 0).add();
+        }else {
+            new Pref<Integer>("network.proxy.type", 1).add();
+        }
 
         String m_url = var1.uri;
         if (helperMethod.getHost(m_url).endsWith(".onion")) {
@@ -623,12 +664,12 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
         String mNormalizeURL = helperMethod.normalize(m_url);
-        if (mNormalizeURL != null && mNormalizeURL.endsWith("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")) {
+        if (mNormalizeURL != null && mNormalizeURL.endsWith("167.86.99.31")) {
             initURL(constants.CONST_GENESIS_DOMAIN_URL);
             event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, false), enums.etype.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        if (!m_url.contains(constants.CONST_GENESIS_GMT_TIME_GET_KEY) && !m_url.startsWith(CONST_GENESIS_URL_CACHED) && !m_url.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)) {
+        if (!m_url.contains(constants.CONST_GENESIS_GMT_TIME_GET_KEY) && !m_url.startsWith(CONST_GENESIS_URL_CACHED) && !m_url.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("http://167.86.99.31") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)) {
 
             String mVerificationURL = setGenesisVerificationToken(m_url);
             initURL(mVerificationURL);
@@ -637,10 +678,10 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         } else if (m_url.startsWith("mailto")) {
             event.invokeObserver(Arrays.asList(m_url, mSessionID), enums.etype.M_ON_MAIL);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
-        } else if (m_url.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/advert__")) {
+        } else if (m_url.contains("167.86.99.31/advert__")) {
             event.invokeObserver(Arrays.asList(m_url, mSessionID), enums.etype.on_playstore_load);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
-        } else if (m_url.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED) || m_url.startsWith("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/?")) {
+        } else if (m_url.equals(constants.CONST_GENESIS_DOMAIN_URL_SLASHED) || m_url.startsWith("http://167.86.99.31/?")) {
             initURL(constants.CONST_GENESIS_DOMAIN_URL);
             event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, false), enums.etype.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
@@ -672,7 +713,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
 
             event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
 
-            if (!m_url.equals("about:config") && !mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion")) {
+            if (!m_url.equals("about:config") && !mCurrentURL.contains("167.86.99.31")) {
                 mProgress = 5;
                 onProgressStart();
             }
@@ -781,7 +822,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     public void onFirstContentfulPaint(@NonNull GeckoSession var1) {
 
         isFirstPaintExecuted = true;
-        if (mPreviousErrorPage || mCurrentURL.contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)) {
+        if (mPreviousErrorPage || mCurrentURL.contains("167.86.99.31") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)) {
             event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
         } else {
             event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, true), enums.etype.M_ON_BANNER_UPDATE);

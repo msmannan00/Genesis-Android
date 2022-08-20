@@ -514,7 +514,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0) + ""));
                 String header = model.getHeader();
 
-                if (model.getDescription().contains("trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion") || model.getDescription().contains("orion.onion")) {
+                if (model.getDescription().contains("167.86.99.31") || model.getDescription().contains("orion.onion")) {
                     mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                 } else {
                     mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);

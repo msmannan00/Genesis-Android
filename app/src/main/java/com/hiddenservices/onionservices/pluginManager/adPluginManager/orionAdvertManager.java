@@ -57,7 +57,7 @@ public class orionAdvertManager {
     private void initializeBannerAds(Context pContext) {
         try {
             if (orbotLocalConstants.mSOCKSPort != -1) {
-                URL url = new URL("http://trcip42ymcgvv5hsa7nxpwdnott46ebomnn5pm5lovg5hpszyo4n35yd.onion/fetch_advert/");
+                URL url = new URL("http://167.86.99.31/fetch_advert/");
                 Proxy proxy;
                 HttpURLConnection mHttpConnection;
                 proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved("127.0.0.1", orbotLocalConstants.mSOCKSPort));
