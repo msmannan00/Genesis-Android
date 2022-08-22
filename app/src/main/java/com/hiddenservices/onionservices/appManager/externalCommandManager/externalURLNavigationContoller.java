@@ -45,7 +45,7 @@ public class externalURLNavigationContoller extends AppCompatActivity {
             return;
         }
         status.sExternalWebsiteLoading = true;
-        if (mData.toString().contains("applovin")) {
+        if (mData!=null && mData.toString().contains("applovin")) {
             Intent myIntent = new Intent(this, advertController.class);
             myIntent.putExtra(keys.ADVERT_URL, mData.toString());
             myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);

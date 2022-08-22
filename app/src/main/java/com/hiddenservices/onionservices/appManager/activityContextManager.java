@@ -80,10 +80,17 @@ public class activityContextManager {
     }
 
     public homeController getHomeController() {
-        if (pHomeController == null) {
-            helperMethod.onStartApplication(pApplicationContext.get(), CONST_PACKAGE_NAME);
+        try {
+            if (pHomeController == null) {
+                if(pApplicationContext == null){
+                    return null;
+                }
+                helperMethod.onStartApplication(pApplicationContext.get(), CONST_PACKAGE_NAME);
+            }
+            return pHomeController.get();
+        }catch (Exception ex){
+            return null;
         }
-        return pHomeController.get();
     }
 
     public void setApplicationContext(Context pContext) {

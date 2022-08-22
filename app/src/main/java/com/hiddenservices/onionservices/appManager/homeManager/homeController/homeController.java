@@ -912,6 +912,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mSearchbar.setOnEditorActionListener((v, actionId, event) ->
         {
             if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE) {
+                if(mGeckoClient == null || mGeckoClient.getSession() == null){
+                    return false;
+                }
                 onSearchBarInvoked(v);
                 if (!mSearchBarPreviousText.equals(mSearchbar.getText())) {
                     mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, true, false);
@@ -1740,11 +1743,15 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onStartApplication(View view) {
         if (!mStateService) {
             mStateService = true;
-            if (!isMyServiceRunning(activityStateManager.class)) {
-                new Handler().postDelayed(() ->
-                {
-                    startService(new Intent(this, activityStateManager.class));
-                }, 500);
+            try{
+                if (!isMyServiceRunning(activityStateManager.class)) {
+                    new Handler().postDelayed(() ->
+                    {
+                        startService(new Intent(this, activityStateManager.class));
+                    }, 500);
+                }
+            }catch (Exception ex){
+
             }
         }
 

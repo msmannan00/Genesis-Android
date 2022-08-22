@@ -421,37 +421,26 @@ public class OrbotService extends VpnService implements OrbotConstants {
         isDestroyed=true;
     }
 
-    private void stopTorAsync(boolean showNotification) {
-        debug("stopTor");
+    private void stopTorAsync(boolean notification) {
 
-        if (showNotification) sendCallbackLogMessage(getString(R.string.status_shutting_down));
+        Log.i("OrbotService", "stopTor");
+        try {
+            sendCallbackLogMessage(getString(R.string.status_shutting_down));
 
-        if (Prefs.bridgesEnabled()) {
             if (useIPtObfsMeekProxy())
                 IPtProxy.stopObfs4Proxy();
-            else if (useIPtSnowflakeProxyDomainFronting())
-                IPtProxy.stopSnowflake();
+
+            stopTor();
+
+            //stop the foreground priority and make sure to remove the persistant notification
+            stopForeground(true);
+
+            sendCallbackLogMessage(getString(R.string.status_disabled));
+        } catch (Exception e) {
+            logNotice("An error occured stopping Tor: " + e.getMessage());
+            sendCallbackLogMessage(getString(R.string.something_bad_happened));
         }
-        else if (Prefs.beSnowflakeProxy())
-            disableSnowflakeProxy();
-
-        stopTor();
-        showToolbarNotification(getString(R.string.status_starting_up), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
-
-        //stop the foreground priority and make sure to remove the persistent notification
-        stopForeground(!showNotification);
-
-        if (showNotification) sendCallbackLogMessage(getString(R.string.status_disabled));
-
-        mPortDns = -1;
-        mPortSOCKS = -1;
-        mPortHTTP = -1;
-        mPortTrans = -1;
-
-        if (!showNotification) {
-            clearNotifications();
-            stopSelf();
-        }
+        clearNotifications();
     }
 
     private void stopTorOnError(String message) {
@@ -539,13 +528,25 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     // if someone stops during startup, we may have to wait for the conn port to be setup, so we can properly shutdown tor
-    private void stopTor()  {
-        if (shouldUnbindTorService) {
-            unbindService(torServiceConnection); //unbinding from the tor service will stop tor
-            shouldUnbindTorService = false;
-            conn = null;
-        } else {
-            sendLocalStatusOffBroadcast();
+    private synchronized void stopTor() throws Exception {
+
+        if (conn != null) {
+            logNotice("Using control port to shutdown Tor");
+
+            try {
+                logNotice("sending HALT signal to Tor process");
+                conn.shutdownTor(TorControlCommands.SIGNAL_SHUTDOWN);
+
+                if (shouldUnbindTorService) {
+                    unbindService(torServiceConnection);
+                    shouldUnbindTorService = false;
+                }
+
+                conn = null;
+
+            } catch (IOException e) {
+                Log.d(OrbotConstants.TAG, "error shutting down Tor via connection", e);
+            }
         }
     }
 
@@ -1638,7 +1639,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 }
                 case CMD_SETTING: {
                     onSettingRegister();
-                    sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+                    try{
+                        sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+                    }catch (Exception ex){}
                     break;
                 }
                 case ACTION_STATUS: {
