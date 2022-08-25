@@ -1,4 +1,4 @@
-import com.android.build.OutputFile
+//import com.android.build.OutputFile
 
 plugins {
     id "com.jetbrains.python.envs" version "0.0.26"
@@ -110,14 +110,18 @@ dependencies {
 
     implementation 'com.applovin:applovin-sdk:+'
     implementation 'com.applovin.mediation:mytarget-adapter:+'
+    implementation 'com.applovin.mediation:adcolony-adapter:4.8.0.2'
     implementation 'com.adcolony:sdk:4.8.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.8.0'
+    implementation 'com.applovin.mediation:facebook-adapter:6.8.0.12'
 
     /* Orbot Service */
-
     implementation project(path: ':orbotmanager')
 
     /* Helper Libraries */
 
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
     implementation 'com.coolerfall:android-http-download-manager:1.6.3'
     implementation 'com.android.volley:volley:1.2.1'
     implementation "net.zetetic:android-database-sqlcipher:4.4.3"
@@ -129,7 +133,7 @@ dependencies {
 
 /* Automated APK Generation */
 
-android.applicationVariants.all { variant ->
+/*android.applicationVariants.all { variant ->
 
     def buildType = variant.buildType.name
 
@@ -153,7 +157,7 @@ android.applicationVariants.all { variant ->
             output.versionCodeOverride = versionCodeOverride
         }
     }
-}
+}*/
 
 
 

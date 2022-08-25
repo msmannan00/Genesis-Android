@@ -243,6 +243,9 @@ public class tabController extends Fragment {
                 return;
             }
             int orientation = activityContextManager.getInstance().getHomeController().getResources().getConfiguration().orientation;
+            if (mRecycleView == null){
+                return;
+            }
             if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 maxScroll = mRecycleView.computeVerticalScrollRange() - mScreenHeight * 0.350f + helperMethod.pxFromDp(helperMethod.getNavigationBarSize(getContext()).y);
             } else {
@@ -258,7 +261,6 @@ public class tabController extends Fragment {
             mScrolled = false;
             if (mRecycleView.getChildAt(mRecycleView.getChildCount() - 1) != null) {
                 if ((scrollY >= (mRecycleView.getChildAt(mRecycleView.getChildCount() - 1).getMeasuredHeight() - mRecycleView.getMeasuredHeight())) && scrollY > oldScrollY) {
-                    Log.i("FUCK2:::::::", scrollY + "");
                     onSwipeBounce(0);
                 }
             }

@@ -2,20 +2,20 @@ package com.hiddenservices.onionservices.pluginManager.adPluginManager;
 
 import android.content.Context;
 import android.os.Handler;
-
+import android.util.Log;
 import com.adcolony.sdk.AdColony;
 import com.adcolony.sdk.AdColonyAppOptions;
 import com.applovin.mediation.MaxAd;
 import com.applovin.mediation.MaxAdViewAdListener;
 import com.applovin.mediation.MaxError;
+import com.applovin.mediation.adapters.AdColonyMediationAdapter;
 import com.applovin.mediation.ads.MaxAdView;
 import com.applovin.sdk.AppLovinSdk;
+import com.facebook.ads.AdSettings;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-
 import java.lang.ref.WeakReference;
-
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 
 public class appLovinManager implements MaxAdViewAdListener {
@@ -26,6 +26,7 @@ public class appLovinManager implements MaxAdViewAdListener {
 
     private int mRequestCount = 0;
     private boolean bannerAdRequested = false;
+    private boolean bannerAdsLoaded = false;
 
     /*Initializations*/
 
@@ -36,7 +37,10 @@ public class appLovinManager implements MaxAdViewAdListener {
     }
 
     private void initializeBannerAds(Context pContext) {
+        AdSettings.setDataProcessingOptions(new String[]{});
         AdColonyAppOptions appOptions = new AdColonyAppOptions();
+        appOptions.setPrivacyFrameworkRequired(AdColonyAppOptions.GDPR, true);
+        appOptions.setPrivacyConsentString(AdColonyAppOptions.GDPR, "1");
         AdColony.configure(activityContextManager.getInstance().getHomeController(), appOptions,"app3b56c67c45544c5c89");
 
         AppLovinSdk.getInstance(pContext).setMediationProvider("max");
@@ -55,7 +59,7 @@ public class appLovinManager implements MaxAdViewAdListener {
     }
 
     private boolean isAdvertLoaded() {
-        return false;
+        return bannerAdsLoaded;
     }
 
     /* Overriden Methods */
@@ -72,12 +76,13 @@ public class appLovinManager implements MaxAdViewAdListener {
 
     @Override
     public void onAdLoaded(MaxAd ad) {
+        bannerAdsLoaded = true;
         mEvent.invokeObserver(null, M_ON_AD_LOAD);
     }
 
     @Override
     public void onAdDisplayed(MaxAd ad) {
-
+        Log.i("ads load", "ad has been loaded");
     }
 
     @Override

@@ -76,17 +76,18 @@ public class OrbotRawEventListener implements RawEventListener {
     }
 
     private void handleBandwidth(long read, long written) {
-        String message = OrbotService.formatBandwidthCount(mService, read) + " \u2193" + " / " +
-                OrbotService.formatBandwidthCount(mService, written) + " \u2191";
+        try {
+            String message = OrbotService.formatBandwidthCount(mService, read) + " \u2193" + " / " +
+                    OrbotService.formatBandwidthCount(mService, written) + " \u2191";
 
-        if (mService.getCurrentStatus().equals(TorService.STATUS_ON))
-            mService.showBandwidthNotification(message, read != 0 || written != 0);
+            if (mService.getCurrentStatus().equals(TorService.STATUS_ON))
+                mService.showBandwidthNotification(message, read != 0 || written != 0);
 
-        mTotalBandwidthWritten += written;
-        mTotalBandwidthRead += read;
+            mTotalBandwidthWritten += written;
+            mTotalBandwidthRead += read;
 
-        mService.sendCallbackBandwidth(written, read, mTotalBandwidthWritten, mTotalBandwidthRead);
-
+            mService.sendCallbackBandwidth(written, read, mTotalBandwidthWritten, mTotalBandwidthRead);
+        }catch (Exception ex){}
     }
 
     private void handleNewDescriptors(String[] descriptors) {

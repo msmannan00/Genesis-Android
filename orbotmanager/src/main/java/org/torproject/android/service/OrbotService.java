@@ -746,9 +746,13 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
         debug("torrc.custom=" + extraLines);
 
-        File fileTorRcCustom = TorService.getTorrc(this);
-        updateTorConfigCustom(fileTorRcCustom, extraLines.toString());
-        return fileTorRcCustom;
+        try {
+            File fileTorRcCustom = TorService.getTorrc(this);
+            updateTorConfigCustom(fileTorRcCustom, extraLines.toString());
+            return fileTorRcCustom;
+
+        }catch (Exception ex){}
+        return null;
     }
 
     private String checkPortOrAuto(String portString) {
@@ -875,10 +879,12 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     private synchronized void startTorService() throws Exception {
-        updateTorConfigCustom(TorService.getDefaultsTorrc(this),
-                "DNSPort 0\n" +
-                "TransPort 0\n" +
-                "DisableNetwork 1\n");
+        try {
+            updateTorConfigCustom(TorService.getDefaultsTorrc(this),
+                    "DNSPort 0\n" +
+                            "TransPort 0\n" +
+                            "DisableNetwork 1\n");
+        }catch (Exception ex){}
 
         var fileTorrcCustom = updateTorrcCustomFile();
         if ((!fileTorrcCustom.exists()) || (!fileTorrcCustom.canRead()))
@@ -892,50 +898,52 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
                 new Thread(){
                     public void run(){
-                        TorService torService = ((TorService.LocalBinder) iBinder).getService();
+                        try {
+                            TorService torService = ((TorService.LocalBinder) iBinder).getService();
 
-                        while ((conn = torService.getTorControlConnection())==null)
-                        {
+                            while ((conn = torService.getTorControlConnection())==null)
+                            {
+                                try {
+                                    sleep(500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
                             try {
-                                sleep(500);
+                                sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                        }
 
-                        try {
-                            sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                            mOrbotRawEventListener = new OrbotRawEventListener(OrbotService.this);
 
-                        mOrbotRawEventListener = new OrbotRawEventListener(OrbotService.this);
-
-                        ArrayList<String> events = new ArrayList<>(Arrays.asList(TorControlCommands.EVENT_OR_CONN_STATUS,
-                                TorControlCommands.EVENT_CIRCUIT_STATUS, TorControlCommands.EVENT_NOTICE_MSG,
-                                TorControlCommands.EVENT_WARN_MSG, TorControlCommands.EVENT_ERR_MSG,
-                                TorControlCommands.EVENT_BANDWIDTH_USED, TorControlCommands.EVENT_NEW_DESC,
-                                TorControlCommands.EVENT_ADDRMAP));
-                        if (Prefs.useDebugLogging()) {
-                            events.add(TorControlCommands.EVENT_DEBUG_MSG);
-                            events.add(TorControlCommands.EVENT_INFO_MSG);
-                        }
-                        if (Prefs.useDebugLogging() || Prefs.showExpandedNotifications())
-                            events.add(TorControlCommands.EVENT_STREAM_STATUS);
-
-                        if (conn != null) {
-                            try {
-                                conn.addRawEventListener(mOrbotRawEventListener);
-                                conn.authenticate(new byte[0]);
-                                conn.setEvents(events);
-                                logNotice(getString(R.string.log_notice_added_event_handler));
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                            ArrayList<String> events = new ArrayList<>(Arrays.asList(TorControlCommands.EVENT_OR_CONN_STATUS,
+                                    TorControlCommands.EVENT_CIRCUIT_STATUS, TorControlCommands.EVENT_NOTICE_MSG,
+                                    TorControlCommands.EVENT_WARN_MSG, TorControlCommands.EVENT_ERR_MSG,
+                                    TorControlCommands.EVENT_BANDWIDTH_USED, TorControlCommands.EVENT_NEW_DESC,
+                                    TorControlCommands.EVENT_ADDRMAP));
+                            if (Prefs.useDebugLogging()) {
+                                events.add(TorControlCommands.EVENT_DEBUG_MSG);
+                                events.add(TorControlCommands.EVENT_INFO_MSG);
                             }
+                            if (Prefs.useDebugLogging() || Prefs.showExpandedNotifications())
+                                events.add(TorControlCommands.EVENT_STREAM_STATUS);
+
+                            if (conn != null) {
+                                try {
+                                    conn.addRawEventListener(mOrbotRawEventListener);
+                                    conn.authenticate(new byte[0]);
+                                    conn.setEvents(events);
+                                    logNotice(getString(R.string.log_notice_added_event_handler));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
 
-                            initControlConnection();
-                        }
+                                initControlConnection();
+                            }
+                        }catch (Exception ex){}
                     }
                 }.start();
                 //moved torService to a local variable, since we only need it once
@@ -960,12 +968,14 @@ public class OrbotService extends VpnService implements OrbotConstants {
             }
         };
 
-        Intent serviceIntent = new Intent(this, TorService.class);
-        if (Build.VERSION.SDK_INT < 29) {
-            shouldUnbindTorService = bindService(serviceIntent, torServiceConnection, BIND_AUTO_CREATE);
-        } else {
-            shouldUnbindTorService = bindService(serviceIntent, BIND_AUTO_CREATE, mExecutor, torServiceConnection);
-        }
+        try {
+            Intent serviceIntent = new Intent(this, TorService.class);
+            if (Build.VERSION.SDK_INT < 29) {
+                shouldUnbindTorService = bindService(serviceIntent, torServiceConnection, BIND_AUTO_CREATE);
+            } else {
+                shouldUnbindTorService = bindService(serviceIntent, BIND_AUTO_CREATE, mExecutor, torServiceConnection);
+            }
+        }catch (Exception ex){}
     }
 
     private void sendLocalStatusOffBroadcast() {

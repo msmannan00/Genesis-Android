@@ -49,6 +49,8 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -1096,7 +1098,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 msearchstatuscopy = true;
                 mSearchBarWasBackButtonPressed = false;
                 if (!isFocusChanging) {
-                    if (!status.mThemeApplying) {
+                    if (!status.mThemeApplying && mGeckoClient!=null && mGeckoClient.getSession()!=null) {
                         mHomeViewController.initSearchBarFocus(true, isKeyboardOpened);
                         mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), true, true, false);
                     }
@@ -1740,6 +1742,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     static boolean mStateService = false;
 
+    static boolean mBackground = false;
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onAppBackgrounded() {
+        mBackground = true;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onAppForegrounded() {
+        mBackground = false;
+    }
+
     public void onStartApplication(View view) {
         if (!mStateService) {
             mStateService = true;
@@ -1747,7 +1760,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 if (!isMyServiceRunning(activityStateManager.class)) {
                     new Handler().postDelayed(() ->
                     {
-                        startService(new Intent(this, activityStateManager.class));
+                        if(!mBackground){
+                            startService(new Intent(this, activityStateManager.class));
+                        }
                     }, 500);
                 }
             }catch (Exception ex){
