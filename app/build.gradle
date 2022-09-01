@@ -1,4 +1,4 @@
-//import com.android.build.OutputFile
+import com.android.build.OutputFile
 
 plugins {
     id "com.jetbrains.python.envs" version "0.0.26"
@@ -13,6 +13,7 @@ android {
 
     compileSdkVersion project.ext.compile_sdk_version
     ndkVersion project.ext.ndk_version
+
 
     defaultConfig {
         applicationId project.ext.application_id
@@ -133,7 +134,7 @@ dependencies {
 
 /* Automated APK Generation */
 
-/*android.applicationVariants.all { variant ->
+android.applicationVariants.all { variant ->
 
     def buildType = variant.buildType.name
 
@@ -157,7 +158,7 @@ dependencies {
             output.versionCodeOverride = versionCodeOverride
         }
     }
-}*/
+}
 
 
 

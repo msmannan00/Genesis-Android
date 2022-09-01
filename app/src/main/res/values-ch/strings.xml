@@ -320,8 +320,6 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_9" translatable="true">odebrat přizpůsobení prohlížeče</string>
 
 
-    <string name="ALERT_ADD_BRIDGES_HINT" translatable="false">Bridge ...</string>
-
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">web záložek</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">odstranit procházené webové odkazy a data</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">vymazat záložku a Data</string>
