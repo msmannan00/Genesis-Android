@@ -25,7 +25,6 @@ public class bridgesDataModel {
     /* Initializations */
 
     public bridgesDataModel() {
-        mBridges = status.sBridgesDefault;
     }
 
     /* Helper Methods */
@@ -46,7 +45,8 @@ public class bridgesDataModel {
                         if (response.length() > 10) {
                             mBridges = response;
                             status.sBridgesDefault = response;
-                            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_DEFAULT, strings.BRIDGES_DEFAULT));
+                            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_DEFAULT, mBridges));
+                            String xx = status.sBridgesDefault = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_DEFAULT, strings.BRIDGES_DEFAULT));
                             mLoading = false;
                         } else {
                             mBridges = status.sReferenceWebsites;
@@ -60,11 +60,12 @@ public class bridgesDataModel {
             RequestQueue requestQueue = Volley.newRequestQueue(pContext);
             requestQueue.add(stringRequest);
         }
+
     }
 
-    private String onFetch() {
+    private String onFetch(Context pContext) {
         try {
-            return mBridges;
+            return status.sBridgesDefault;
         } catch (Exception ignored) {
         }
         return strings.GENERIC_EMPTY_SPACE;
@@ -77,7 +78,7 @@ public class bridgesDataModel {
             onLoad((Context) pData.get(0));
         }
         if (p_commands == dataEnums.eBridgeWebsiteCommands.M_FETCH) {
-            return onFetch();
+            return onFetch((Context) pData.get(0));
         }
 
         return null;

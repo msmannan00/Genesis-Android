@@ -42,7 +42,6 @@ public class advertController extends AppCompatActivity {
         mWebView.getSettings().setGeolocationEnabled(true);
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mWebView.getSettings().setUseWideViewPort(true);
-        mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.getSettings().setDatabaseEnabled(true);
         mWebView.setWebViewClient(new advertWebViewClient(new webivewViewCallback()));
     }

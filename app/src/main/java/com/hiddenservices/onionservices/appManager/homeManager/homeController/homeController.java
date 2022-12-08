@@ -919,7 +919,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }
                 onSearchBarInvoked(v);
                 if (mGeckoClient!=null && mGeckoClient.getSession() !=null){
-                    if (!mSearchBarPreviousText.equals(mSearchbar.getText())) {
+                    if (!mSearchBarPreviousText.equals(mSearchbar.getText().toString())) {
                         mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, true, false);
                     }
                     mHomeViewController.onClearSelections(true);
@@ -953,10 +953,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         });
 
         mGeckoView.setOnTouchListener((view, motionEvent) -> {
-            if (mGeckoClient.getSession().getCurrentURL().contains("genesis")) {
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-            } else {
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            if(mGeckoClient!=null && mGeckoClient.getSession()!=null){
+                if (mGeckoClient.getSession().getCurrentURL().contains("genesis")) {
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                } else {
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                }
             }
             return false;
         });

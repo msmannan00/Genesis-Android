@@ -1,6 +1,6 @@
 /* Version */
-project.ext.vname = 'Build | Dark-Origin 1.0.5.8'
-project.ext.vcode = 415
+project.ext.vname = 'Build | Dark-Origin 1.0.6.0'
+project.ext.vcode = 420
 project.ext.buildType = 'release'
 
 /* dimension */
@@ -28,10 +28,10 @@ project.ext.preDexLibraries = true
 project.ext.splitEnabled = true
 
 /* Application Preferences */
-project.ext.compile_sdk_version = 31
+project.ext.compile_sdk_version = 33
 project.ext.min_sdk_version = 21
-project.ext.target_sdk_version = 31
-project.ext.build_tool_version = '31'
+project.ext.target_sdk_version = 33
+project.ext.build_tool_version = '33'
 project.ext.ndk_version = '21.4.7075529'
 project.ext.application_id = "com.hiddenservices.onionservices"
 project.ext.debugSymbolLevel = 'FULL'

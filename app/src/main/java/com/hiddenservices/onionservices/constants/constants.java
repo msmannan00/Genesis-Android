@@ -29,7 +29,7 @@ public class constants {
 
     public static final String CONST_SERVER = "https://drive.google.com/uc?export=download&id=1ALCooJQEtPYgyTm9XfYmkzSl_WuiBzeX";
     public static final String CONST_GENESIS_REFERENCE_WEBSITES = "https://drive.google.com/uc?export=download&id=1meNaswi7kmITqLLTb0fIXY2wgw_cG290";
-    public static final String CONST_GENESIS_BRIDGE_WEBSITES = "https://drive.google.com/uc?export=download&id=1wCXY3UWfUbISeY7TSWtCdDNMAiyGG9zj";
+    public static final String CONST_GENESIS_BRIDGE_WEBSITES = "http://167.86.99.31/.well-known/bridges.txt";
 
     /*URL CONSTANTS*/
 
