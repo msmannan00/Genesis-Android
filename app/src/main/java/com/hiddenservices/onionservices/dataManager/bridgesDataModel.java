@@ -63,7 +63,7 @@ public class bridgesDataModel {
 
     }
 
-    private String onFetch(Context pContext) {
+    private String onFetch() {
         try {
             return status.sBridgesDefault;
         } catch (Exception ignored) {
@@ -78,7 +78,7 @@ public class bridgesDataModel {
             onLoad((Context) pData.get(0));
         }
         if (p_commands == dataEnums.eBridgeWebsiteCommands.M_FETCH) {
-            return onFetch((Context) pData.get(0));
+            return onFetch();
         }
 
         return null;
