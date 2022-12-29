@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">mindig töltsön be weboldal képeket</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">webes betűtípusok megjelenítése</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">letölthet távoli betűtípusokat egy oldal betöltése közben</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">hang a háttérben</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Hang lejátszása a háttérben</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">engedélyezze az automatikus lejátszást</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">hagyja, hogy a média automatikusan elinduljon</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">adatmentõ</string>

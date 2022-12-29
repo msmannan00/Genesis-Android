@@ -88,6 +88,7 @@ class homeViewController {
     private LinearLayout mTopBar;
     private GeckoView mGeckoView;
     private Button mConnectButton;
+    private Button mConnectNoTorButton;
     private Button mNewTab;
     private PopupWindow popupWindow = null;
     private View mFindBar;
@@ -125,7 +126,7 @@ class homeViewController {
     private boolean mIsTopBarExpanded = true;
     private NestedScrollView.MarginLayoutParams mDefaultMargin = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled) {
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, MaxAdView banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, Button connect_no_tor_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled) {
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -138,6 +139,7 @@ class homeViewController {
         this.mTopBar = top_bar;
         this.mGeckoView = gecko_view;
         this.mConnectButton = connect_button;
+        this.mConnectNoTorButton = connect_no_tor_button;
         this.mNewTab = mNewTab;
         this.popupWindow = null;
         this.mFindBar = pFindBar;
@@ -236,6 +238,7 @@ class homeViewController {
             mTorDisabled.setAlpha(1);
             mTorDisabled.setVisibility(View.VISIBLE);
             mConnectButton.setVisibility(View.GONE);
+            mConnectNoTorButton.setVisibility(View.GONE);
             mOrbotLogManager.setVisibility(View.GONE);
             mGatewaySplash.setVisibility(View.GONE);
             mCopyright.setVisibility(View.GONE);
@@ -553,6 +556,7 @@ class homeViewController {
         //mBlocker.setVisibility(View.GONE);
         mGatewaySplash.setVisibility(View.GONE);
         mConnectButton.setVisibility(View.GONE);
+        mConnectNoTorButton.setVisibility(View.GONE);
         mPanicButton.setVisibility(View.GONE);
         mPanicButtonLandscape.setVisibility(View.GONE);
 
@@ -570,6 +574,7 @@ class homeViewController {
         mProgressBarIndeterminate.setVisibility(View.VISIBLE);
         mProgressBarIndeterminate.animate().alpha(1);
         mConnectButton.setEnabled(false);
+        mConnectNoTorButton.setEnabled(false);
         mSplashScreen.setEnabled(false);
         //mBlocker.setClickable(true);
         //mBlocker.setFocusable(true);
@@ -577,6 +582,7 @@ class homeViewController {
 
     void initHomePage() {
         mConnectButton.setEnabled(false);
+        mConnectNoTorButton.setEnabled(false);
         mSplashScreen.setEnabled(false);
         mOrbotLogManager.setEnabled(false);
         mPanicButton.setEnabled(false);
@@ -591,6 +597,8 @@ class homeViewController {
         mConnectButton.animate().setDuration(350).alpha(0.4f).withEndAction(() -> {
             mCopyright.setVisibility(View.GONE);
             initSplashLoading();
+        });
+        mConnectNoTorButton.animate().setDuration(350).alpha(0f).withEndAction(() -> {
         });
         mGatewaySplash.animate().setDuration(350).alpha(0.4f);
         mPanicButtonLandscape.animate().setInterpolator(new AccelerateInterpolator()).setDuration(170).translationXBy(helperMethod.pxFromDp(55));
@@ -1772,6 +1780,7 @@ class homeViewController {
                     }
 
                     status.sSettingIsAppStarted = true;
+                    orbotLocalConstants.mAppStarted = true;
                 }
                 if (msg.what == messages.MESSAGE_UPDATE_LOADING_TEXT) {
                     if (mLogs != null) {

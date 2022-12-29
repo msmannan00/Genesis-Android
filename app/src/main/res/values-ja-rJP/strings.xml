@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">常にウェブサイトの画像を読み込む</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Webフォントを表示する</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">ページの読み込み時にリモートフォントをダウンロードする</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">バックグラウンドでのサウンド</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">バックグラウンドでサウンドを再生する</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">自動再生を許可する</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">メディアを自動的に開始できるようにする</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">データセーバー</string>

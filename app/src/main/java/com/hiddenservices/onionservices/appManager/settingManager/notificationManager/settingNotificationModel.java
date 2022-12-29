@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.notificationManager;
 
+import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
@@ -26,8 +27,12 @@ class settingNotificationModel {
         int mStatus = pStatus ? 1 : 0;
         status.sBridgeNotificationManual = mStatus;
         if (!pStatus) {
+            activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
         } else {
+            if(status.sTorBrowsing){
+                activityContextManager.getInstance().getHomeController().onHideDefaultNotification();
+            }
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
         }
     }

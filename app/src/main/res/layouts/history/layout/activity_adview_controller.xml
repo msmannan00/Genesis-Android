@@ -58,26 +58,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="48dp"
-        android:background="@color/c_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mProgressBar">
-
     </WebView>
 
     <ProgressBar
         android:id="@+id/mProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:indeterminateOnly="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
         android:background="@color/clear_alpha"
-        android:scaleY="1.5"
-        android:layout_marginTop="-6dp"
+        android:indeterminateOnly="true"
         android:progressBackgroundTint="@color/c_seekbar_progress"
+        android:scaleY="1.5"
         app:layout_constraintEnd_toStartOf="@+id/pWebView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pHeaderContainerTop" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

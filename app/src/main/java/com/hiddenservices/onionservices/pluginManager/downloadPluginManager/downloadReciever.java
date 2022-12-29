@@ -171,12 +171,11 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 String urlEncoded = Uri.encode(f_url[0], ALLOWED_URI_CHARS);
                 StrongHttpsClient httpclient = new StrongHttpsClient(mContext.get());
 
-                if (orbotLocalConstants.mSOCKSPort != -1) {
-                    if (helperMethod.getDomainName(f_url[0]).contains(".onion")) {
-                        httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
-                    } else {
-                        httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
-                    }
+
+                if (helperMethod.getDomainName(f_url[0]).contains(".onion")) {
+                    httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
+                } else {
+                    httpclient.useProxy(false, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
                 }
 
                 HttpGet httpget = new HttpGet(urlEncoded);
@@ -197,7 +196,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         return null;
     }
 
-    @SuppressLint({"UnspecifiedImmutableFlag", "LaunchActivityFromNotification"})
     @Override
     protected void onPostExecute(String file_url) {
 
@@ -293,7 +291,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             }
             mTotalReadCount += mCurrentReadCount;
             int cur = (int) ((mTotalReadCount * 100) / pLengthOfFile);
-            mDownloadByte = cur;
             if (pLengthOfFile < 0) {
                 cur = (int) mTotalReadCount;
                 mDownloadByte = mTotalReadCount * -1;
@@ -308,13 +305,14 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             pOutputStream.write(mData, 0, mCurrentReadCount);
         }
 
-        mNotificationBuilder.setContentText("saving file");
-        mNotificationBuilder.setSmallIcon(android.R.drawable.stat_sys_download);
-        mNotifyManager.notify(mNotificationID, mNotificationBuilder.build());
+        //mNotificationBuilder.setContentText("saving file");
+        //mNotificationBuilder.setSmallIcon(android.R.drawable.stat_sys_download);
+        //mNotifyManager.notify(mNotificationID, mNotificationBuilder.build());
 
-        pOutputStream.flush();
-        pOutputStream.close();
-        pInputStream.close();
+        //pOutputStream.flush();
+        //pOutputStream.close();
+        //pInputStream.close();
+        onPostExecute("");
         return true;
     }
 

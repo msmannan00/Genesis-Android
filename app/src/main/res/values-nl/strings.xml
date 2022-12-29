@@ -260,6 +260,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Altijd website-afbeeldingen laden</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Weblettertypen weergeven</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">Download externe lettertypen bij het laden van een pagina</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">geluid op de achtergrond</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Speel geluid af op de achtergrond</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">Autoplay toestaan ​​</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Media automatisch starten</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">Gegevensbesparing</string>

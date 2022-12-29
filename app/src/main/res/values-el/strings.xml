@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">να φορτώνετε πάντα εικόνες ιστότοπου</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">εμφάνιση γραμματοσειρών ιστού</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">λήψη απομακρυσμένων γραμματοσειρών κατά τη φόρτωση μιας σελίδας</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">ήχος στο παρασκήνιο</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Αναπαραγωγή ήχου στο παρασκήνιο</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">επιτρέψτε την αυτόματη αναπαραγωγή</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Αφήστε τα μέσα να ξεκινήσουν αυτόματα</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">εξοικονόμηση δεδομένων</string>

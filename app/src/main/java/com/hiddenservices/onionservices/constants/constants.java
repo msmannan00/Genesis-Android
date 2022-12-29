@@ -50,6 +50,7 @@ public class constants {
     public static final String CONST_BACKEND_GENESIS_URL = "http://167.86.99.31/search?q=$s&p_num=1&s_type=all";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
     public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com?q=$s&ia=web";
+    public static final String CONST_BACKEND_DUCK_DUCK_GO_STATIC_URL = "http://duckduckgo.com";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";
     public static final String CONST_BACKEND_WIKI_URL = "https://en.wikipedia.org/wiki/$s";
     public static final String CONST_LOG_DUCKDUCK = "https://duckduckgo.com/?q=tor";
@@ -91,10 +92,10 @@ public class constants {
 
     public static final String CONST_LANGUAGE_DEFAULT_LANG = "default";
 
-    /*DOWNLOAD CONSTANTS*/
+    /*Notification CONSTANTS*/
 
-    public static final String CONST_DOWNLOAD_COMMAND = "N_COMMAND";
-    public static final String CONST_DOWNLOAD_INTENT_KEY = "N_ID";
+    public static final String CONST_NOTIFICATION_COMMAND = "N_COMMAND";
+    public static final String CONST_NOTIFICATION_INTENT_KEY = "N_ID";
 
     /*Helper CONSTANTS*/
 

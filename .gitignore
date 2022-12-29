@@ -14,3 +14,13 @@
 java_pid10832.hprof
 java_pid17480.hprof
 java_pid21508.hprof
+*.enc
+.safedk/api/SafeDKAndroid-5.9.1.jar
+.safedk/app_sdks.lst
+.safedk/dex/android-support-multidex.dex
+.safedk/dex/SafeDKAndroid-5.9.1.dex
+.safedk/hashes.safedk
+.safedk/list.enc
+.safedk/permissions_mapping.json
+.safedk/plugin.properties
+.safedk/proguard-safedk.pro

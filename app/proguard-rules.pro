@@ -8,6 +8,7 @@
 -dontwarn okhttp3.*
 -dontwarn org.chromium.net.*
 
+-keep class org.mozilla.** {*;}
 -keep class com.flurry.** { *; }
 -dontwarn com.flurry.**
 -keepattributes *Annotation*,EnclosingMethod,Signature

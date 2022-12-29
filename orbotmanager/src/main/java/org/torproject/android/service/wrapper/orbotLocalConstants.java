@@ -19,7 +19,9 @@ public class orbotLocalConstants
     public static boolean mIsManualBridge = false;
     public static String mManualBridgeType = "";
     public static boolean mNetworkState = true;
+    public static boolean mAppStarted = false;
     public static String mBridgesDefault = "";
+    public static boolean mStartTriggered = false;
 
     public static int mHTTPPort = 8118;
     public static int mSOCKSPort = -1;

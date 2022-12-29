@@ -13,13 +13,13 @@ import java.util.Collections;
 
 public class downloadNotificationReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
-        int mCommand = intent.getExtras().getInt(CONST_DOWNLOAD_COMMAND);
+        int mCommand = intent.getExtras().getInt(CONST_NOTIFICATION_COMMAND);
         if (mCommand == 1) {
-            pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_DOWNLOAD_INTENT_KEY)), pluginEnums.eDownloadManager.M_URL_DOWNLOAD_REQUEST);
+            pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_NOTIFICATION_INTENT_KEY)), pluginEnums.eDownloadManager.M_URL_DOWNLOAD_REQUEST);
         } else if (mCommand == 0 || mCommand == 2) {
-            pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_DOWNLOAD_INTENT_KEY)), pluginEnums.eDownloadManager.M_CANCEL_DOWNLOAD);
+            pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_NOTIFICATION_INTENT_KEY)), pluginEnums.eDownloadManager.M_CANCEL_DOWNLOAD);
         } else if (mCommand == 3) {
-            pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_DOWNLOAD_INTENT_KEY)), pluginEnums.eDownloadManager.M_CANCEL_DOWNLOAD);
+            pluginController.getInstance().onDownloadInvoke(Collections.singletonList(intent.getExtras().getInt(CONST_NOTIFICATION_INTENT_KEY)), pluginEnums.eDownloadManager.M_CANCEL_DOWNLOAD);
         }
     }
 }

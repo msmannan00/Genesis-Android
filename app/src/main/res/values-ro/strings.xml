@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">încărcați întotdeauna imagini de pe site</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">afișați fonturi web</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">descărcați fonturi la distanță atunci când încărcați o pagină</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">sunet în fundal</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Redați sunetul în fundal</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">permite redarea automată</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">permite ca media să pornească automat</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">data saver</string>

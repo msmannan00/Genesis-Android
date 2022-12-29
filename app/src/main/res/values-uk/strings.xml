@@ -262,6 +262,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Завжди завантажуйте зображення веб-сайтів</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Показати веб-шрифти</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">Завантажуйте віддалені шрифти під час завантаження сторінки</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC"> translatable="true"звук у фоновому режимі</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO"> translatable="true">Відтворення звуку у фоновому режимі</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">Дозволити автовідтворення</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Дозволити автоматичному запуску носія</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">Заощадження даних</string>

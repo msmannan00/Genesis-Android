@@ -52,6 +52,7 @@ import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.Image;
 import org.mozilla.geckoview.MediaSession;
 import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebExtension;
@@ -102,6 +103,8 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     private String mPrevURL = "about:blank";
     private String mCurrentTitle = "loading";
     private String mCurrentURL = "about:blank";
+    private String mMediaTitle = "";
+    private Bitmap mMediaImage;
     private Uri mUriPermission = null;
     private WeakReference<AppCompatActivity> mContext;
     private geckoDownloadManager mDownloadManager;
@@ -126,6 +129,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     public boolean mCloseRequested = false;
     public boolean mOnBackPressed = false;
     public SessionState mSessionState;
+    public mediaDelegate mediaDelegateItem;
     MediaSession mMediaSession = null;
 
     geckoSession(eventObserver.eventListener event, String mSessionID, AppCompatActivity mContext, GeckoView pGeckoView) {
@@ -144,9 +148,10 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         setPermissionDelegate(this);
         setScrollDelegate(this);
         setMediaSessionDelegate(this);
+        mediaDelegateItem = new mediaDelegate(mContext, mContext);
 
 
-        setMediaDelegate(new mediaDelegate(mContext, mContext));
+        setMediaDelegate(mediaDelegateItem);
         mDownloadManager = new geckoDownloadManager();
         mSelectionActionDelegate = new selectionActionDelegate(mContext, true);
         setPromptDelegate(new geckoPromptView(mContext));
@@ -161,14 +166,34 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
 
     @Override
     public void onDeactivated(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
-        MediaSession.Delegate.super.onDeactivated(session, mediaSession);
+        MediaSession.Delegate.super.onPause(session, mediaSession);
+        if(isMediaRunning){
+            mediaDelegateItem.onHideDefaultNotification();
+        }
         isMediaRunning = false;
-        mMediaSession = null;
     }
 
     @Override
     public void onMetadata(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, @NonNull MediaSession.Metadata meta) {
+        mMediaTitle = meta.title;
+        if(!isMediaRunning || mediaDelegateItem == null){
+            return;
+        }
+
+        new Thread(){
+            public void run(){
+                try {
+                    mMediaImage = meta.artwork.getBitmap(250).poll(2500);
+                    if(isMediaRunning && mMediaSession!=null){
+                        mediaDelegateItem.showNotification(mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, !isMediaRunning);
+                    }
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
         MediaSession.Delegate.super.onMetadata(session, mediaSession, meta);
+        mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, !isMediaRunning);
     }
 
     @Override
@@ -179,18 +204,25 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     @Override
     public void onPlay(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
         MediaSession.Delegate.super.onPlay(session, mediaSession);
+        mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, false);
         isMediaRunning = true;
     }
 
     @Override
     public void onPause(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
         MediaSession.Delegate.super.onPause(session, mediaSession);
+        if(isMediaRunning){
+            mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, true);
+        }
         isMediaRunning = false;
     }
 
     @Override
     public void onStop(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
         MediaSession.Delegate.super.onStop(session, mediaSession);
+        if(isMediaRunning){
+            mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, true);
+        }
         isMediaRunning = false;
     }
 
@@ -246,9 +278,54 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         Objects.requireNonNull(mPromptDelegate).onFileCallbackResult(resultCode, data);
     }
 
-    public void onStopMedia() {
-        if (isMediaRunning && mMediaSession != null) {
+    public void onKillMedia() {
+        isMediaRunning = false;
+        if(mMediaSession!=null){
+            mMediaSession.pause();
+            mediaDelegateItem.onHideDefaultNotification();
+        }
+    }
+
+    public void onDestroyMedia() {
+        isMediaRunning = false;
+        if(mMediaSession!=null){
             mMediaSession.stop();
+            mediaDelegateItem.onHideDefaultNotification();
+            mMediaSession = null;
+        }
+        mediaDelegateItem.onHideDefaultNotification();
+    }
+
+    public void onStopMedia() {
+        if (mMediaSession != null) {
+            mMediaSession.pause();
+        }
+    }
+
+    public void onPlayMedia(){
+        isMediaRunning = true;
+        if(mMediaSession != null){
+            mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, false);
+            mMediaSession.play();
+        }
+    }
+
+    public void onPauseMedia(){
+        if(mMediaSession != null){
+            mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, true);
+            mMediaSession.pause();
+        }
+    }
+
+    public void onSkipForwardMedia(){
+        if(mMediaSession != null){
+            mMediaSession.nextTrack();
+        }
+    }
+
+    public void onSkipBackwardMedia(){
+        if(mMediaSession != null){
+            mMediaSession.previousTrack();
         }
     }
 
@@ -646,7 +723,10 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     }
 
     public GeckoResult<AllowOrDeny> onLoadRequest(@NonNull GeckoSession var2, @NonNull GeckoSession.NavigationDelegate.LoadRequest var1) {
-
+        if(mMediaSession!=null){
+            mMediaSession.stop();
+            mediaDelegateItem.onHideDefaultNotification();
+        }
         if (var1.uri.contains("167.86.99.31")) {
             new Pref<Integer>("network.proxy.type", 0).add();
         }else {
@@ -735,6 +815,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         } else {
             mPrevURL = mCurrentURL;
         }
+        if (mediaDelegateItem != null) {
+            mediaDelegateItem.onHideDefaultNotification();
+        }
         //mIsLoaded = false;
         //isPageLoading = false;
     }
@@ -753,6 +836,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, @NonNull WebRequestError var3) {
 
         try {
+            if(mediaDelegateItem!=null){
+                mediaDelegateItem.onHideDefaultNotification();
+            }
             if (helperMethod.getHost(var2).endsWith(".onion")) {
                 var2 = var2.replace("www.", "");
             }
@@ -888,6 +974,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         if (!canGoBack() && !mClosed) {
             mCloseRequested = true;
             event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle), enums.etype.back_list_empty);
+            if(mediaDelegateItem!=null){
+                mediaDelegateItem.onHideDefaultNotification();
+            }
         }
     }
 
@@ -895,6 +984,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
 
     @UiThread
     public void onCrash(@NonNull GeckoSession session) {
+        if(mediaDelegateItem!=null){
+            mediaDelegateItem.onHideDefaultNotification();
+        }
         mCloseRequested = true;
         if (!mClosed && status.sSettingIsAppStarted) {
             if (event == null) {
@@ -922,6 +1014,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
 
     @UiThread
     public void onKill(@NonNull GeckoSession session) {
+        if(mediaDelegateItem!=null){
+            mediaDelegateItem.onHideDefaultNotification();
+        }
         mCloseRequested = true;
         if (!mClosed && status.sSettingIsAppStarted) {
             if (event == null) {
@@ -1206,6 +1301,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     }
 
     public void closeSessionInstant() {
+        if (mediaDelegateItem != null) {
+            mediaDelegateItem.onHideDefaultNotification();
+        }
         mSessionID = "-1";
         new Handler().postDelayed(() ->
         {
@@ -1251,6 +1349,11 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     }
 
     void goBackSession() {
+        if(mMediaSession!=null){
+            isMediaRunning = false;
+            mMediaSession.stop();
+            mediaDelegateItem.onHideDefaultNotification();
+        }
         wasBackPressed = true;
         mOnBackPressed = true;
         goBack();
@@ -1311,7 +1414,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         if (status.sSettingIsAppStarted) {
             if (status.sGlobalURLCount == 10) {
                 // event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), M_RATE_APPLICATION);
-            } else if (status.sGlobalURLCount == 20 || status.sGlobalURLCount == 80) {
+            } else if ( status.sGlobalURLCount == 20 || status.sGlobalURLCount == 80) {
                 event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), M_DEFAULT_BROWSER);
             }
 

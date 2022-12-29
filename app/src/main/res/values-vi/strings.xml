@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">luôn tải hình ảnh trang web</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">hiển thị phông chữ web</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">tải xuống phông chữ từ xa khi tải trang</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC"> translatable="true"âm thanh trong nền</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO"> translatable="true">Phát âm thanh ở chế độ nền</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">cho phép tự động phát</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">cho phép phương tiện tự động khởi động</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">trình tiết kiệm dữ liệu</string>

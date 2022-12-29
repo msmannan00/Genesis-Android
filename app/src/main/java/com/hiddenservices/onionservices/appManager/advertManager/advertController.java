@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -37,18 +38,29 @@ public class advertController extends AppCompatActivity {
     }
 
     void onInitAdvert() {
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setGeolocationEnabled(true);
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setDatabaseEnabled(true);
-        mWebView.setWebViewClient(new advertWebViewClient(new webivewViewCallback()));
+        mWebView.getSettings().setLoadWithOverviewMode(true);
+        mWebView.getSettings().setUseWideViewPort(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
     }
 
     private void onInitializeAdvertisements() {
         String mURL = getIntent().getExtras().getString("m_url");
-        mWebView.loadUrl(mURL);
+
+        if(mURL.contains("play.google.com")){
+            mWebView.setWebChromeClient(new WebChromeClient());
+            mWebView.loadUrl(mURL);
+            finish();
+        }else {
+            mWebView.setWebViewClient(new advertWebViewClient(new webivewViewCallback()));
+            mWebView.loadUrl(mURL);
+        }
+
     }
 
     /* Helper Methods */

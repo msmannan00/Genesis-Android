@@ -99,7 +99,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
     public void onDeleteSelected() {
         for (int m_counter = 0; m_counter < mLongSelectedIndex.size(); m_counter++) {
             for (int m_counter_inner = 0; m_counter_inner < mCurrentList.size(); m_counter_inner++) {
-                if (mCurrentList.get(m_counter_inner).getDate() == mLongSelectedDate.get(m_counter) && mLongSelectedIndex.get(m_counter).equals("https://" + mCurrentList.get(m_counter_inner).getDescription())) {
+                if (mCurrentList.get(m_counter_inner).getDate() == mLongSelectedDate.get(m_counter) && mLongSelectedIndex.get(m_counter).equals(helperMethod.completeURL(mCurrentList.get(m_counter_inner).getDescription()))) {
                     mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(m_counter_inner)), enums.etype.url_clear);
                     mEvent.invokeObserver(Collections.singletonList(mLongSelectedID.get(m_counter)), enums.etype.url_clear_at);
                     invokeFilter(false);

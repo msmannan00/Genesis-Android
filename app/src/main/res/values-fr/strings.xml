@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">toujours charger les images du site Web</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">show web fonts</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">télécharger des polices distantes lors du chargement d\'une page</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">son en arrière-plan</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Jouer le son en arrière-plan</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">autoriser la lecture automatique</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">permettre au média de démarrer automatiquement</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">économiseur de données</string>

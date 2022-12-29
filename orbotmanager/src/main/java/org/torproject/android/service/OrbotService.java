@@ -185,7 +185,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     boolean mToolbarUpdating = false;
     @SuppressLint({"NewApi", "RestrictedApi"})
     public void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
-        if(!mToolbarUpdating){
+        if(!mToolbarUpdating && orbotLocalConstants.mNotificationStatus != 0 && orbotLocalConstants.mAppStarted){
             mToolbarUpdating = true;
         }else {
             return;
@@ -344,7 +344,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                         {
                             //sendCallbackStatus(STATUS_OFF);
                             orbotLocalConstants.mTorLogsStatus = "No internet connection";
-                            if(orbotLocalConstants.mNotificationStatus!=0){
+                            if(orbotLocalConstants.mNotificationStatus!=0 && orbotLocalConstants.mAppStarted){
                                 showToolbarNotification(getString(R.string.newnym), getNotifyId(), R.drawable.ic_stat_tor_off);
                                 showToolbarNotification("Genesis is sleeping | Internet connectivity issue",NOTIFY_ID,R.drawable.ic_stat_tor_off);
                             }
@@ -353,7 +353,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                         {
                             //sendCallbackStatus(STATUS_STARTING);
 
-                            if(orbotLocalConstants.mNotificationStatus!=0){
+                            if(orbotLocalConstants.mNotificationStatus!=0 && orbotLocalConstants.mAppStarted){
                                 showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
                             }
                         }
@@ -821,7 +821,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 return;
             }
 
-            mNotifyBuilder.setProgress(100, 0, false);
+            if(orbotLocalConstants.mNotificationStatus != 0 && orbotLocalConstants.mAppStarted ) {
+                mNotifyBuilder.setProgress(100, 0, false);
+            }
             showToolbarNotification("", NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
 
             startTorService();
@@ -1620,6 +1622,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
             }
         }
     }
+
     public void onSettingRegister(){
         try {
             Intent intent;
@@ -1636,6 +1639,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
             switch (intent.getAction()) {
                 case TorControlCommands.SIGNAL_NEWNYM: {
+                    activityContextManager
                     newIdentity();
                     break;
                 }

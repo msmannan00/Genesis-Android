@@ -36,7 +36,7 @@ public class keys {
     public static final String SETTING_POPUP = "POPUP_V1";
     public static final String SETTING_HISTORY_CLEAR = "HISTORY_CLEAR_V1";
     public static final String SETTING_GATEWAY = "pref_bridges_enabled_auto_V1";
-    public static final String SETTING_TOR_BROWSING = "pref_tor_browsing_V1";
+    public static final String SETTING_TOR_BROWSING = "pref_tor_browsing_V2";
     public static final String SETTING_GATEWAY_MANUAL = "pref_bridges_enabled_manual_V1";
     public static final String SETTING_IS_BOOTSTRAPPED = "IS_BOOTSTRAPPED_V1";
     public static final String SETTING_IS_WELCOME_ENABLED = "IS_WELCOME_ENABLED_V1";
@@ -49,13 +49,14 @@ public class keys {
     public static final String SETTING_ZOOM = "SETTING_ZOOM_V1";
     public static final String SETTING_VOICE_INPUT = "SETTING_VOICE_INPUT_V1";
     public static final String SETTING_TRACKING_PROTECTION = "SETTING_TRACKING_PROTECTION_V1";
-    public static final String SETTING_RATE_COUNT = "SETTING_RATE_COUNT_V1";
+    public static final String SETTING_RATE_COUNT = "SETTING_RATE_COUNT_V3";
     public static final String SETTING_DONOT_TRACK = "SETTING_DONOT_TRACK_V1";
     public static final String SETTING_RESTORE_TAB = "SETTING_RESTORE_TAB_V1";
     public static final String SETTING_CHARACTER_ENCODING = "SETTING_CHARACTER_ENCODING_V1";
     public static final String SETTING_SHOW_IMAGES = "SETTING_SHOW_IMAGES_V1";
     public static final String SETTING_SHOW_TAB_GRID = "SETTING_SHOW_TAB_GRID_V1";
     public static final String SETTING_SHOW_FONTS = "SETTING_SHOW_FONTS_V1";
+    public static final String SETTING_BACKGROUND_MUSIC = "SETTING_BACKGROUND_MUSIC_V1";
     public static final String SETTING_TOOLBAR_THEME = "SETTING_TOOLBAR_THEME_V1";
     public static final String SETTING_THEME = "SETTING_THEME_LIGHT_V1";
     public static final String SETTING_FULL_SCREEN_BROWSIING = "SETTING_FULL_SCREEN_BROWSIING_V2";

@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">ہمیشہ ویب سائٹ کی تصاویر لوڈ کریں</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">ویب فونٹس دکھائیں</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">کسی صفحے کو لوڈ کرتے وقت ریموٹ فونٹس ڈاؤن لوڈ کریں</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC"> translatable="true"پس منظر میں آواز</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO"> translatable="true">پس منظر میں آواز چلائیں۔</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">آٹو پلے کی اجازت دیں</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">میڈیا کو خود بخود شروع ہونے دیں</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">ڈیٹا سیور</string>

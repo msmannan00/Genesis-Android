@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">항상 웹 사이트 이미지로드</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">웹 글꼴 표시</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">페이지를로드 할 때 원격 글꼴 다운로드</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">백그라운드에서 소리</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">배경에서 소리 재생</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">자동 재생 허용</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">미디어가 자동으로 시작되도록 허용</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">데이터 세이버</string>

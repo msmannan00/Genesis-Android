@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Laden Sie immer Website-Bilder</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Web-Schriftarten anzeigen</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">Laden Sie beim Laden einer Seite Remote-Schriftarten herunter</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">Ton im Hintergrund</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Ton im Hintergrund abspielen</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">Autoplay zulassen</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Medien automatisch starten lassen</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">Datensparer</string>

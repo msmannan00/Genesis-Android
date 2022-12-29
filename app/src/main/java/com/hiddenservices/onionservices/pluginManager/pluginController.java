@@ -19,7 +19,6 @@ import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.adPluginManager.appLovinManager;
-import com.hiddenservices.onionservices.pluginManager.adPluginManager.orionAdvertManager;
 import com.hiddenservices.onionservices.pluginManager.analyticPluginManager.analyticManager;
 import com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadManager;
 import com.hiddenservices.onionservices.pluginManager.langPluginManager.langManager;
@@ -49,7 +48,6 @@ public class pluginController {
     /*Plugin Instance*/
 
     private appLovinManager mAdManager;
-    private orionAdvertManager mOrionAdvertManager;
     private analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
     private notifictionManager mNotificationManager;

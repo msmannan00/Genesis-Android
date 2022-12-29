@@ -269,6 +269,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">قم دائمًا بتحميل صور الموقع</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">إظهار خطوط الويب</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">تنزيل الخطوط البعيدة عند تحميل الصفحة</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">الصوت في الخلفية</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">تشغيل الصوت في الخلفية</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">السماح بالتشغيل التلقائي</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">دع الوسائط تبدأ تلقائيًا</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">حافظ البيانات</string>

@@ -285,6 +285,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Always load website images</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Show web fonts</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">Download remote fonts when loading a page</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">Background sound</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Play sound in background</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">Allow autoplay</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">Allow media to auto start</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">Data saver</string>

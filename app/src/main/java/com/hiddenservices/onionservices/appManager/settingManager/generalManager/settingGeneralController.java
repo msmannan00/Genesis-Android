@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
@@ -177,6 +178,7 @@ public class settingGeneralController extends AppCompatActivity {
     @Override
     public void onResume() {
         activityContextManager.getInstance().onCheckPurgeStack();
+        activityContextManager.getInstance().getHomeController().onKillMedia();
         if (status.mThemeApplying) {
             // activityContextManager.getInstance().onStack(this);
         }

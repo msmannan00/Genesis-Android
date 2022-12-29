@@ -424,16 +424,16 @@ public class selectionActionDelegate implements ActionMode.Callback,
         mSession = session;
         mSelection = selection;
 
-        if (mActionMode != null) {
-            if (isActionAvailable()) {
-                mActionMode.invalidate();
-            } else {
-                mActionMode.finish();
-            }
-            return;
-        }
 
         try {
+            if (mActionMode != null) {
+                if (isActionAvailable()) {
+                    mActionMode.invalidate();
+                } else {
+                    mActionMode.finish();
+                }
+                return;
+            }
             if (mUseFloatingToolbar) {
                 String strManufacturer = android.os.Build.MANUFACTURER;
                 if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1 || (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1 && (strManufacturer.toLowerCase().contains("samsung") || android.os.Build.MODEL.toLowerCase().contains("samsung") || Build.PRODUCT.toLowerCase().contains("samsung")))) {

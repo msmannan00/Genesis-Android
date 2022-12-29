@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">vždy načíst obrázky webových stránek</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">zobrazit webová písma</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">stáhnout vzdálená písma při načítání stránky</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">zvuk na pozadí</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Přehrát zvuk na pozadí</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">povolit automatické přehrávání</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">povolit automatické spouštění médií</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">spořič dat</string>

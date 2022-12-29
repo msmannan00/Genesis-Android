@@ -13,6 +13,8 @@ import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
+import com.hiddenservices.onionservices.pluginManager.pluginController;
+import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
@@ -34,8 +36,10 @@ public class externalShortcutController extends AppCompatActivity {
         if (getIntent() != null) {
             String mShortcutCommands = getIntent().getStringExtra(EXTERNAL_SHORTCUT_COMMAND);
             status.sSettingIsAppStarted = false;
+            orbotLocalConstants.mAppStarted = false;
             if (mShortcutCommands != null) {
                 mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND, mShortcutCommands);
+                pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
                 switch (mShortcutCommands) {
                     case CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE:
                         setContentView(R.layout.popup_data_cleared_shortcut);

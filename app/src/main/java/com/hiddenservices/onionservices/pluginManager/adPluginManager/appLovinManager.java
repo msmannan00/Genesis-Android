@@ -1,22 +1,29 @@
 package com.hiddenservices.onionservices.pluginManager.adPluginManager;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
-import com.adcolony.sdk.AdColony;
-import com.adcolony.sdk.AdColonyAppOptions;
 import com.applovin.mediation.MaxAd;
 import com.applovin.mediation.MaxAdViewAdListener;
 import com.applovin.mediation.MaxError;
-import com.applovin.mediation.adapters.AdColonyMediationAdapter;
 import com.applovin.mediation.ads.MaxAdView;
 import com.applovin.sdk.AppLovinSdk;
+import com.applovin.sdk.AppLovinSdkConfiguration;
+import com.example.myapplication.R;
 import com.facebook.ads.AdSettings;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.advertManager.advertController;
+import com.hiddenservices.onionservices.constants.keys;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import java.lang.ref.WeakReference;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class appLovinManager implements MaxAdViewAdListener {
     /*Private Variables */
@@ -27,6 +34,7 @@ public class appLovinManager implements MaxAdViewAdListener {
     private int mRequestCount = 0;
     private boolean bannerAdRequested = false;
     private boolean bannerAdsLoaded = false;
+    private Context mContext = null;
 
     /*Initializations*/
 
@@ -34,17 +42,13 @@ public class appLovinManager implements MaxAdViewAdListener {
         this.mEvent = pEvent;
         this.mBannerAds = new WeakReference(pBannerAds);
         initializeBannerAds(pContext);
+        mContext = pContext;
     }
 
     private void initializeBannerAds(Context pContext) {
-        AdSettings.setDataProcessingOptions(new String[]{});
-        AdColonyAppOptions appOptions = new AdColonyAppOptions();
-        appOptions.setPrivacyFrameworkRequired(AdColonyAppOptions.GDPR, true);
-        appOptions.setPrivacyConsentString(AdColonyAppOptions.GDPR, "1");
-        AdColony.configure(activityContextManager.getInstance().getHomeController(), appOptions,"app3b56c67c45544c5c89");
-
         AppLovinSdk.getInstance(pContext).setMediationProvider("max");
-        AppLovinSdk.initializeSdk(pContext, configuration -> {
+        AppLovinSdk.initializeSdk(pContext,(AppLovinSdk.SdkInitializationListener) configuration -> {
+            mBannerAds.get().loadAd();
         });
     }
 
@@ -53,7 +57,6 @@ public class appLovinManager implements MaxAdViewAdListener {
     private void loadAds() {
         if (!bannerAdRequested) {
             bannerAdRequested = true;
-            mBannerAds.get().loadAd();
             mBannerAds.get().setListener(this);
         }
     }
@@ -66,12 +69,10 @@ public class appLovinManager implements MaxAdViewAdListener {
 
     @Override
     public void onAdExpanded(MaxAd ad) {
-
     }
 
     @Override
     public void onAdCollapsed(MaxAd ad) {
-
     }
 
     @Override
@@ -92,7 +93,11 @@ public class appLovinManager implements MaxAdViewAdListener {
 
     @Override
     public void onAdClicked(MaxAd ad) {
-
+        status.sIsBackgroundAdvertCheck = true;
+        new Handler().postDelayed(() ->
+        {
+            status.sIsBackgroundAdvertCheck = false;
+        }, 5000);
     }
 
     @Override

@@ -26,12 +26,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
+import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -173,6 +175,18 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
         mPopupRateFailureDismiss.setOnClickListener(this);
         mPopupRateFailureNext.setOnClickListener(this);
+        mDialog.setOnDismissListener(this);
+    }
+
+    private void onDefaultBrowser() {
+        initializeDialog(R.layout.popup_default_browser, Gravity.CENTER);
+
+        Button mDismiss = mDialog.findViewById(R.id.pPopupDefaultBrowserDismiss);
+        Button mNext = mDialog.findViewById(R.id.pPopupDefaultBrowserNext);
+
+        mDismiss.setOnClickListener(this);
+        mNext.setOnClickListener(this);
+        mDialog.setCancelable(false);
         mDialog.setOnDismissListener(this);
     }
 
@@ -483,6 +497,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 view.getId() == R.id.pPopupLongPressDismiss ||
                 view.getId() == R.id.pPopupRateusClose ||
                 view.getId() == R.id.pCertificateDesciption ||
+                view.getId() == R.id.pPopupDefaultBrowserDismiss ||
                 view.getId() == R.id.pCertificateRootBackground
         ) {
             onDismiss();
@@ -500,6 +515,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         } else if (view.getId() == R.id.pTorSwtichPopupNext) {
             onDismiss();
             mEvent.invokeObserver(null, M_TOR_SWITCH_RESTART);
+        } else if (view.getId() == R.id.pPopupDefaultBrowserNext) {
+            onDismiss();
+            if (helperMethod.isDefaultBrowserSet(mContext)) {
+                helperMethod.openDefaultBrowser(mContext);
+            }
         } else if (view.getId() == R.id.pPopupCreateBookmarkDismiss) {
             onDismiss();
             helperMethod.hideKeyboard(mContext);
@@ -769,6 +789,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 case M_PANIC_RESET:
                     /*VERIFIED*/
                     onPanic();
+                    break;
+
+                case M_DEFAULT_BROWSER:
+                    /*VERIFIED*/
+                    onDefaultBrowser();
                     break;
 
                 case M_SECURE_CONNECTION:

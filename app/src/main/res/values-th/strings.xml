@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">โหลดภาพเว็บไซต์เสมอ</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">แสดงแบบอักษรของเว็บ</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">ดาวน์โหลดฟอนต์ระยะไกลเมื่อโหลดเพจ</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC"> translatable="true"เสียงในพื้นหลัง</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">เล่นเสียงในพื้นหลัง</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">อนุญาตให้เล่นอัตโนมัติ</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">อนุญาตให้สื่อเริ่มโดยอัตโนมัติ</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">โปรแกรมประหยัดอินเทอร์เน็ต</string>

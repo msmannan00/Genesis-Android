@@ -430,9 +430,28 @@ public class geckoClients {
     }
 
     public void resetSession() {
-        mSession.onStopMedia();
         mSessionID = strings.GENERIC_EMPTY_STR;
     }
+
+    public void onKillMedia(){
+        mSession.onKillMedia();
+    }
+
+    public void onPlayMedia(){
+        mSession.onPlayMedia();
+    }
+
+    public void onPauseMedia(){
+        mSession.onPauseMedia();
+    }
+
+    public void onSkipForwardMedia(){
+        mSession.onSkipForwardMedia();
+    }
+    public void onSkipBackwardMedia(){
+        mSession.onSkipBackwardMedia();
+    }
+
 
     public String getTheme() {
         if (mSessionID.equals(strings.GENERIC_EMPTY_STR)) {
@@ -446,7 +465,6 @@ public class geckoClients {
 
     public void initSession(geckoSession mSession) {
         mSessionID = mSession.getSessionID();
-        this.mSession.onStopMedia();
         this.mSession = mSession;
     }
 
@@ -623,6 +641,7 @@ public class geckoClients {
     }
 
     public void onClose() {
+        onKillMedia();
         mSession.onClose();
     }
 

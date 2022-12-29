@@ -17,6 +17,11 @@ public class advertWebViewClient extends android.webkit.WebViewClient {
         mEvent = pEvent;
     }
 
+    public boolean shouldOverrideUrlLoading(WebView view, String url){
+        view.loadUrl(url);
+        return true;
+    }
+
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         mEvent.invokeObserver(Collections.singletonList(true), advertEnums.eAdvertClientCallback.M_UPDATE_PROGRESSBAR);

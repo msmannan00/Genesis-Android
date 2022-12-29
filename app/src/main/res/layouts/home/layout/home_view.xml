@@ -118,7 +118,7 @@
                                 android:src="@xml/ic_baseline_lock"
                                 android:translationZ="10dp"
                                 app:tint="@color/c_lock_tint"
-                                tools:ignore="RtlSymmetry" />
+                                tools:ignore="RtlSymmetry,TouchTargetSizeCheck" />
 
                             <View
                                 android:id="@+id/pSearchDivider"
@@ -203,7 +203,8 @@
                                 android:text="@string/HOME_TAB_TEXT"
                                 android:textColor="@color/c_text_v1"
                                 android:textSize="12.5sp"
-                                android:tint="@color/black" />
+                                android:tint="@color/black"
+                                tools:ignore="TouchTargetSizeCheck" />
 
                             <ImageButton
                                 android:id="@+id/pMenu"
@@ -675,14 +676,32 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/Connect"
-                android:layout_width="120dp"
+                android:id="@+id/ConnectNoTor"
+                android:textSize="13sp"
+                android:layout_width="170dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="textStart"
+                android:drawableStart="@drawable/ic_no_tor"
+                android:background="@xml/hox_rounded_corner_splash_no_ripple"
+                android:onClick="onStartApplicationNoTor"
+                android:text="Normal Browsing"
+                app:layout_constraintBottom_toTopOf="@+id/ConnectTor"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/ConnectTor"
+                android:textSize="13sp"
+                android:layout_width="170dp"
                 android:layout_height="51dp"
                 android:layout_marginStart="23dp"
                 android:layout_marginBottom="23dp"
+                android:textAlignment="textStart"
                 android:background="@xml/hox_rounded_corner_splash_no_ripple"
+                android:drawableStart="@drawable/ic_tor"
                 android:onClick="onStartApplication"
-                android:text="@string/HOME_CONNECT"
+                android:text="Tor Browsing"
                 app:layout_constraintBottom_toTopOf="@+id/pCopyright"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -740,7 +759,7 @@
                 android:onClick="onLoadProxy"
                 android:src="@xml/ic_gear"
                 app:layout_constraintBottom_toTopOf="@+id/pDivider1"
-                app:layout_constraintStart_toEndOf="@+id/Connect"
+                app:layout_constraintStart_toEndOf="@+id/ConnectTor"
                 app:tint="@color/black" />
 
             <ImageButton
@@ -809,7 +828,7 @@
                 android:translationZ="3dp"
                 app:layout_constraintBottom_toTopOf="@+id/pDivider1"
                 app:layout_constraintEnd_toEndOf="@+id/pSettings"
-                app:layout_constraintStart_toStartOf="@+id/Connect"
+                app:layout_constraintStart_toStartOf="@+id/ConnectTor"
                 app:layout_constraintTop_toBottomOf="@+id/pOrbotLogs" />
 
 

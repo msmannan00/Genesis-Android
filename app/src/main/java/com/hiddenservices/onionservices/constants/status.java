@@ -33,8 +33,11 @@ public class status {
     public static String sVersion = "";
     public static String sExternalWebsite = strings.GENERIC_EMPTY_STR;
     public static String sBridgesDefault = strings.BRIDGES_DEFAULT;
+    public static String sAdvertURL = strings.GENERIC_EMPTY_STR;
 
+    public static boolean sIsBackgroundAdvertCheck = false;
     public static boolean sTorBrowsing = false;
+    public static boolean sNoTorTriggered = false;
     public static boolean sExternalWebsiteLoading = false;
     public static boolean sUIInteracted = false;
     public static boolean sSettingEnableZoom = true;
@@ -60,6 +63,7 @@ public class status {
     public static boolean sRestoreTabs = false;
     public static boolean sCharacterEncoding = false;
     public static boolean sShowWebFonts = true;
+    public static boolean sBackgroundMusic = false;
     public static boolean sToolbarTheme = false;
     public static boolean sFullScreenBrowsing = false;
     public static boolean sOpenURLInNewTab = true;
@@ -93,7 +97,7 @@ public class status {
         }
     }
 
-    public static void initStatus(Context pContext) {
+    public static void initStatus(Context pContext, boolean reinit) {
         versionVerifier(pContext);
 
         status.sUIInteracted = false;
@@ -119,7 +123,6 @@ public class status {
         status.sSettingLanguage = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE, strings.SETTING_DEFAULT_LANGUAGE));
         status.sReferenceWebsites = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.HOME_REFERENCE_WEBSITES, strings.HOME_REFERENCE_WEBSITES_DEFAULT));
         status.sSettingLanguageRegion = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_LANGUAGE_REGION, strings.SETTING_DEFAULT_LANGUAGE_REGION));
-        status.sSettingDefaultSearchEngine = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_GENESIS_URL));
         status.sBridgeCustomBridge = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1, strings.BRIDGE_CUSTOM_BRIDGE_OBFS4));
         status.sBridgeCustomType = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE, strings.GENERIC_EMPTY_SPACE));
         status.sBridgesDefault = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.BRIDGE_DEFAULT, strings.BRIDGES_DEFAULT));
@@ -128,6 +131,7 @@ public class status {
         status.sCharacterEncoding = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_CHARACTER_ENCODING, false));
         status.sShowImages = (int) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES, 0));
         status.sShowWebFonts = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS, true));
+        status.sBackgroundMusic = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_BACKGROUND_MUSIC, false));
         status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING, false));
         status.sToolbarTheme = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME, true));
         status.sTheme = (int) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_THEME, enums.Theme.THEME_DEFAULT));
@@ -136,7 +140,11 @@ public class status {
         status.sTabGridLayoutEnabled = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_SHOW_TAB_GRID, true));
         status.sGlobalURLCount = (int) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, 0));
         status.sAppInstalled = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_INSTALLED, false));
-        status.sTorBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_TOR_BROWSING, true));
+
+        if (!reinit && !status.sNoTorTriggered){
+            status.sTorBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_TOR_BROWSING, true));
+            status.sSettingDefaultSearchEngine = (String) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, constants.CONST_BACKEND_GENESIS_URL));
+        }
 
         if (status.sGlobalURLCount <= 10 && status.sGlobalURLCount >= 8) {
             status.sGlobalURLCount = 6;

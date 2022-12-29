@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">始终加载网站图片</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">显示网络字体</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">加载页面时下载远程字体</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC"> translatable="true"背景声音</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO"> translatable="true">在后台播放声音</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">允许自动播放</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">允许媒体自动启动</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">数据保护器</string>

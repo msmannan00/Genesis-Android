@@ -271,6 +271,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">her zaman web sitesi resimlerini yükle</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">web yazı tiplerini göster</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">bir sayfayı yüklerken uzak yazı tiplerini indirin</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC"> translatable="true"arka planda ses</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO"> translatable="true">Arka planda ses çal</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">otomatik oynatmaya izin ver</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">medyanın otomatik olarak başlamasına izin ver</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">veri koruyucu</string>

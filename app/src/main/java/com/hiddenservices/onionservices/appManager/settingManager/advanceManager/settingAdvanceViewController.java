@@ -27,13 +27,16 @@ class settingAdvanceViewController {
 
     private SwitchMaterial mRestoreTabs;
     private SwitchMaterial mShowWebFonts;
+    private SwitchMaterial mBackgroundMusic;
     private SwitchMaterial mToolbarTheme;
+
+
     private ArrayList<RadioButton> mImageOption;
     private ArrayList<RadioButton> mTabLayoutOption;
 
     /*Initializations*/
 
-    settingAdvanceViewController(settingAdvanceController pContext, eventObserver.eventListener pEvent, SwitchMaterial pRestoreTabs, SwitchMaterial pShowWebFonts, SwitchMaterial pToolbarTheme, ArrayList<RadioButton> pImageOption, ArrayList<RadioButton> pTabLayoutOption) {
+    settingAdvanceViewController(settingAdvanceController pContext, eventObserver.eventListener pEvent, SwitchMaterial pRestoreTabs, SwitchMaterial pShowWebFonts,SwitchMaterial pBackgroundMusic,  SwitchMaterial pToolbarTheme, ArrayList<RadioButton> pImageOption, ArrayList<RadioButton> pTabLayoutOption) {
         this.mEvent = pEvent;
         this.mContext = pContext;
         this.mRestoreTabs = pRestoreTabs;
@@ -41,6 +44,7 @@ class settingAdvanceViewController {
         this.mToolbarTheme = pToolbarTheme;
         this.mImageOption = pImageOption;
         this.mTabLayoutOption = pTabLayoutOption;
+        this.mBackgroundMusic = pBackgroundMusic;
 
         initViews();
         initPostUI();
@@ -57,6 +61,12 @@ class settingAdvanceViewController {
             mShowWebFonts.setChecked(true);
         } else {
             mShowWebFonts.setChecked(false);
+        }
+
+        if (status.sBackgroundMusic) {
+            mBackgroundMusic.setChecked(true);
+        } else {
+            mBackgroundMusic.setChecked(false);
         }
 
         if (status.sToolbarTheme) {

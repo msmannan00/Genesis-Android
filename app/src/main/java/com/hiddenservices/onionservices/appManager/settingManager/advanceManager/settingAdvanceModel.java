@@ -47,6 +47,10 @@ class settingAdvanceModel {
         status.sShowWebFonts = pStatus;
     }
 
+    private void onBackgroundMusic(boolean pStatus) {
+        status.sBackgroundMusic = pStatus;
+    }
+
     private void onToolbarThemeChange(boolean pStatus) {
         status.sToolbarTheme = pStatus;
     }
@@ -58,7 +62,10 @@ class settingAdvanceModel {
             onShowImages((View) pData.get(0));
         } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_WEB_FONTS)) {
             onShowWebFonts((boolean) pData.get(0));
-        } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME)) {
+        } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_BACKGROUND_MUSIC)) {
+            onBackgroundMusic((boolean) pData.get(0));
+        }
+        else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_TOOLBAR_THEME)) {
             onToolbarThemeChange((boolean) pData.get(0));
         } else if (pCommands.equals(settingAdvanceEnums.eAdvanceModel.M_SHOW_TAB_GRID)) {
             onShowTabGrid((View) pData.get(0));

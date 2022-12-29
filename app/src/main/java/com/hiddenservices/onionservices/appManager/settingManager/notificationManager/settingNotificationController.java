@@ -94,6 +94,7 @@ public class settingNotificationController extends AppCompatActivity {
         int notificationStatus = status.sBridgeNotificationManual;
         if (notificationStatus == 0) {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+            activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
         } else {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
         }

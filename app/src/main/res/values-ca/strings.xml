@@ -258,6 +258,8 @@
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">carregueu sempre imatges del lloc web</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">mostra els tipus de lletra web</string>
     <string name="SETTING_ADVANCE_WEB_FONTS_INFO" translatable="true">descarregueu fonts remotes en carregar una pàgina</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC" translatable="true">so de fons</string>
+    <string name="SETTING_ADVANCE_BACKGROUND_MUSIC_INFO" translatable="true">Reprodueix el so en segon pla</string>
     <string name="SETTING_ADVANCE_MEDIA" translatable="true">permetre la reproducció automàtica</string>
     <string name="SETTING_ADVANCE_MEDIA_INFO" translatable="true">permet que els mitjans s’iniciïn automàticament</string>
     <string name="SETTING_ADVANCE_DATA_SAVER" translatable="true">estalviador de dades</string>

@@ -159,7 +159,7 @@ public class settingClearController extends AppCompatActivity {
             mCheckBoxList.get(7).setChecked(false);
             mCheckBoxList.get(7).setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.c_checkbox_tint_default)));
             onClearSettings();
-            status.initStatus(activityContextManager.getInstance().getHomeController());
+            status.initStatus(activityContextManager.getInstance().getHomeController(), true);
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_CLEAR_TAB, null);
             mHomeInvoked = true;
             mClearInvoked = true;
@@ -217,6 +217,7 @@ public class settingClearController extends AppCompatActivity {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_CHARACTER_ENCODING, false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES, 0));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_SHOW_FONTS, true));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_BACKGROUND_MUSIC, false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_TOOLBAR_THEME, true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING, false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_THEME, enums.Theme.THEME_DEFAULT));

@@ -38,6 +38,7 @@ public class settingAdvanceController extends AppCompatActivity {
     private settingAdvanceViewController mSettingAdvanceViewController;
     private SwitchMaterial mRestoreTabs;
     private SwitchMaterial mShowWebFonts;
+    private SwitchMaterial mBackgroundMusic;
     private SwitchMaterial mToolbarTheme;
 
     private ArrayList<RadioButton> mImageOption = new ArrayList<>();
@@ -71,13 +72,15 @@ public class settingAdvanceController extends AppCompatActivity {
         mRestoreTabs = findViewById(R.id.pRestoreTabs);
         mShowWebFonts = findViewById(R.id.pShowWebFonts);
         mToolbarTheme = findViewById(R.id.pToolbarTheme);
+        mBackgroundMusic = findViewById(R.id.pShowBackgroundMusic);
+
         mImageOption.add(findViewById(R.id.pAdvanceImageOption1));
         mImageOption.add(findViewById(R.id.pAdvanceImageOption2));
         mTabLayoutOption.add(findViewById(R.id.pAdvanceGridOption1));
         mTabLayoutOption.add(findViewById(R.id.pAdvanceGridOption2));
 
         activityContextManager.getInstance().onStack(this);
-        mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts, mToolbarTheme, mImageOption, mTabLayoutOption);
+        mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts,mBackgroundMusic, mToolbarTheme, mImageOption, mTabLayoutOption);
         mSettingAdvanceModel = new settingAdvanceModel(new settingAdvanceModelCallback());
     }
 
@@ -165,6 +168,13 @@ public class settingAdvanceController extends AppCompatActivity {
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_SET_IMAGE, Collections.singletonList(view));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_SHOW_IMAGES, status.sShowImages));
 
+    }
+
+    public void onBackgroundSound(View view) {
+        mIsChanged = true;
+        mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_BACKGROUND_MUSIC, Collections.singletonList(!mBackgroundMusic.isChecked()));
+        mBackgroundMusic.toggle();
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_BACKGROUND_MUSIC, status.sBackgroundMusic));
     }
 
     public void onGridView(View view) {

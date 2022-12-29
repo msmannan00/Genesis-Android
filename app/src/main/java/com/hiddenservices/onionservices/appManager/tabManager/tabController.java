@@ -357,7 +357,6 @@ public class tabController extends Fragment {
                         alpha = 0.35f;
                     }
                     viewHolder.itemView.setAlpha(alpha);
-
                     Canvas mCanvas = (Canvas) mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
                     super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                 }
