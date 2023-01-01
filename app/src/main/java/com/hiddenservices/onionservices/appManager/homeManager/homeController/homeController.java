@@ -225,6 +225,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        orbotLocalConstants.mAppForceExit = false;
+        orbotLocalConstants.mForcedQuit = false;
         onInitTheme();
         onInitBooleans();
         orbotLocalConstants.mHomeIntent = getIntent();
@@ -262,7 +264,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initBundle();
         initTor();
         initNotification();
-        onHideDefaultNotification();
     }
 
     public void initNotification() {
@@ -578,6 +579,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void initPreFixes() {
         try {
+            if(status.mThemeApplying){
+                onShowDefaultNotification();
+            }else {
+                onHideDefaultNotification();
+            }
+
             String strManufacturer = android.os.Build.MANUFACTURER;
             if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.O || Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1) && strManufacturer.equals("samsung")) {
                 PackageManager packageManager = getApplicationContext().getPackageManager();
@@ -832,11 +839,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.onClearAll();
         status.sSettingIsAppStarted = false;
         orbotLocalConstants.mAppStarted = false;
+        new Handler().postDelayed(() ->
+        {
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+        }, 100);
+
     }
 
     NotificationManager manager = null;
     public void showDefaultNotification(Context context, String title) {
-        if(status.sTorBrowsing && status.sBridgeNotificationManual != 0){
+        if(!status.mThemeApplying && status.sTorBrowsing && status.sBridgeNotificationManual != 0){
             return;
         }
 
@@ -889,7 +902,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
         notification.fullScreenIntent = dummyIntent;
 
-        notification.flags |= Notification.FLAG_NO_CLEAR;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            notification.flags = Notification.FLAG_AUTO_CANCEL|Notification.FLAG_ONGOING_EVENT;
+        }else {
+            notification.flags |= Notification.FLAG_NO_CLEAR;
+        }
 
         int notificationCode = 1025;
 
@@ -900,7 +917,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         @Override
         public void onReceive(Context context, Intent intent) {
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
             DownloadManager dMgr = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
             Cursor c = Objects.requireNonNull(dMgr).query(new DownloadManager.Query().setFilterById(id));
 
@@ -958,13 +974,17 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onDestroy() {
+        status.sNoTorTriggered = false;
+        orbotLocalConstants.mAppForceExit = true;
         NotificationManagerCompat.from(this).cancel(1030);
         if(manager!=null){
             manager.cancel(1025);
         }
         NotificationManagerCompat.from(this).cancel(1025);
-        mGeckoClient.getSession().onDestroyMedia();
-        onHideDefaultNotification();
+        if(mGeckoClient.getSession() !=null){
+            mGeckoClient.getSession().onDestroyMedia();
+            onHideDefaultNotification();
+        }
         pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_DESTROY);
         if (!status.sSettingIsAppStarted) {
             super.onDestroy();
@@ -993,6 +1013,16 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         activityContextManager.getInstance().getHomeController().onResetData();
 
         NotificationManagerCompat.from(this).cancel(1030);
+
+        if (!status.mThemeApplying) {
+            new Handler().postDelayed(() ->
+            {
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            }, 100);
+            finishAffinity();
+            finishAndRemoveTask();
+        }
         super.onDestroy();
     }
 
@@ -1686,6 +1716,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     @Override
     public void onResume() {
+        orbotLocalConstants.mAppForceExit = false;
 
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_RESUME);
         activityContextManager.getInstance().setCurrentActivity(this);
@@ -1932,7 +1963,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     {
                         if(!mBackground){
                             Intent intent = new Intent(this, activityStateManager.class);
-                            bindService(intent, connection, 0);
+                            bindService(intent, connection, BIND_AUTO_CREATE);
                             startService(intent);
                         }
                     }, 500);
@@ -1965,7 +1996,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
             activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
         } else {
-            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
+            new Handler().postDelayed(() ->
+            {
+                pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
+            }, 2000);
         }
     }
 
@@ -2174,6 +2208,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 status.sSettingIsAppStarted = false;
                 orbotLocalConstants.mAppStarted = false;
 
+                new Handler().postDelayed(() ->
+                {
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
+                }, 100);
+
             } else if (menuId == R.id.pMenuFind) {
                 helperMethod.hideKeyboard(this);
                 mHomeViewController.onUpdateFindBar(true);
@@ -2235,6 +2275,15 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
         }
         mHomeViewController.closeMenu();
+    }
+
+    public void onNewCircuitInvoked(){
+        try {
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_NEW_IDENTITY);
+            mGeckoClient.onReloadDelay(mGeckoView, this, false);
+            onLoadURL(mSearchbar.getText().toString());
+        }catch (Exception ex){}
     }
 
     private void onInitTheme() {

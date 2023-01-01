@@ -1345,8 +1345,10 @@ class homeViewController {
     }
 
     void progressBarReset() {
-        mProgressBar.setProgress(0);
-        mProgressBar.setVisibility(View.INVISIBLE);
+        if(mSearchbar.getText().toString().equals("about:blank")){
+            mProgressBar.setProgress(0);
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void onFirstPaint() {
@@ -1440,6 +1442,11 @@ class homeViewController {
         alpha.start();
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                mEvent.invokeObserver(data, e_type);
+            }, 450);
+
             scaleDown.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation, boolean isReverse) {
@@ -1447,6 +1454,8 @@ class homeViewController {
 
                 @Override
                 public void onAnimationEnd(Animator animation, boolean isReverse) {
+                    scaleDown.removeAllListeners();
+                    handler.removeCallbacksAndMessages(null);
                     mEvent.invokeObserver(data, e_type);
                 }
 
@@ -1456,15 +1465,18 @@ class homeViewController {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                    //scaleDown.removeAllListeners();
+                    //mEvent.invokeObserver(data, e_type);
                 }
 
                 @Override
                 public void onAnimationCancel(Animator animation) {
-
+                    Log.i("","");
                 }
 
                 @Override
                 public void onAnimationRepeat(Animator animation) {
+                    Log.i("","");
                 }
             });
         }else {

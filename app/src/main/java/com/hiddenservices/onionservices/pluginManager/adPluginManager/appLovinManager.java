@@ -104,7 +104,7 @@ public class appLovinManager implements MaxAdViewAdListener {
     public void onAdLoadFailed(String adUnitId, MaxError error) {
         new Handler().postDelayed(() ->
         {
-            if (mRequestCount <= 10) {
+            if (mRequestCount <= 50) {
                 mRequestCount += 1;
                 bannerAdRequested = true;
                 mBannerAds.get().loadAd();

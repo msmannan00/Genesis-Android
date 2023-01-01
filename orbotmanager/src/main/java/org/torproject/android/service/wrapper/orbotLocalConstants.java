@@ -12,6 +12,7 @@ public class orbotLocalConstants
     public static String mTorLogsStatus = "Loading...";
     public static boolean mIsTorInitialized = false;
     public static boolean mForcedQuit = false;
+    public static boolean mAppForceExit = false;
     public static int mNotificationStatus = 0;
     public static WeakReference<Context> mHomeContext;
     public static Intent mHomeIntent = null;
@@ -22,6 +23,7 @@ public class orbotLocalConstants
     public static boolean mAppStarted = false;
     public static String mBridgesDefault = "";
     public static boolean mStartTriggered = false;
+    public static boolean mNewCircuitRegistered = false;
 
     public static int mHTTPPort = 8118;
     public static int mSOCKSPort = -1;

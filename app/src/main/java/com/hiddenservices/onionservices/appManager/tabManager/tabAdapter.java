@@ -407,10 +407,13 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
 
             new Handler().postDelayed(() ->
             {
+                ImageButton mOrbotRowRemove = itemView.findViewById(R.id.pOrbotRowRemove);
                 itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.clear_alpha));
+                mOrbotRowRemove.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_background));
                 if (!status.sTabGridLayoutEnabled) {
                     if (getLayoutPosition() == 0) {
                         itemView.setBackgroundColor(ContextCompat.getColor(activityContextManager.getInstance().getHomeController(), R.color.c_list_item_current));
+                        mOrbotRowRemove.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.c_list_item_current));
                     }
                 }
 

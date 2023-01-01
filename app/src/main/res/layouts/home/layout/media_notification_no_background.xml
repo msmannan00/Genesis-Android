@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id = "@+id/layout"
+    android:layout_width = "fill_parent"
+    android:layout_height = "67dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_toStartOf="@+id/controller"
+        android:layout_height="67dp">
+
+        <TextView
+            android:id = "@+id/header"
+            android:paddingTop="10dp"
+            android:layout_toEndOf = "@id/controller"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:maxHeight="28dp"
+            android:text = "Testing"
+            android:singleLine="true"
+            android:textSize = "13sp" />
+
+        <TextView
+            android:id="@+id/body"
+            android:layout_toEndOf = "@id/controller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:layout_marginTop="4dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting
+         industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+         1500s, when an unknown printer took a galley of type and scrambled it to make a type
+         specimen book. It has survived not only five centuries, but also the leap into
+         electronic typesetting, remaining essentially unchanged. It was popularised in the
+         1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+         recently with desktop publishing software like Aldus PageMaker including versions of
+         Lorem Ipsum. "
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:id="@+id/controller"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id = "@+id/trigger"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_width = "65dp"
+            android:layout_height = "35dp"
+            android:background="@color/clear_alpha"
+            android:contentDescription = "@string/app_name"
+            android:src = "@drawable/ic_baseline_play_arrow_no_tint"/>
+
+        <ImageButton
+            android:id = "@+id/next"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_width = "60dp"
+            android:layout_height = "35dp"
+            android:background="@color/clear_alpha"
+            android:contentDescription = "@string/app_name"
+            android:src = "@drawable/ic_baseline_skip_next_no_tint"/>
+
+    </LinearLayout>
+</RelativeLayout>

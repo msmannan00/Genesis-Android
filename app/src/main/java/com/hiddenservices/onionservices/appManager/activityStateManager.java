@@ -3,6 +3,7 @@ package com.hiddenservices.onionservices.appManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -30,12 +31,13 @@ public class activityStateManager extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return Service.START_STICKY_COMPATIBILITY;
+        return Service.START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        Log.i("aaaaaaaa", "aaaaaaaa");
+        orbotLocalConstants.mAppForceExit = true;
+        status.sNoTorTriggered = false;
         NotificationManagerCompat.from(this).cancel(1025);
         NotificationManagerCompat.from(this).cancel(1030);
         Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
@@ -47,14 +49,14 @@ public class activityStateManager extends Service {
 
         status.sSettingIsAppStarted = false;
         orbotLocalConstants.mAppStarted = false;
+
         super.onDestroy();
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        Log.i("aaaaaaaa", "aaaaaaaa");
+        orbotLocalConstants.mAppForceExit = true;
+        status.sNoTorTriggered = false;
         NotificationManagerCompat.from(this).cancel(1025);
         NotificationManagerCompat.from(this).cancel(1030);
         Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
@@ -66,9 +68,8 @@ public class activityStateManager extends Service {
         status.sSettingIsAppStarted = false;
         orbotLocalConstants.mAppStarted = false;
 
+
         stopSelf();
         super.onDestroy();
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
     }
 }

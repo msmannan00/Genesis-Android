@@ -1,5 +1,8 @@
 package com.hiddenservices.onionservices.appManager.settingManager.searchEngineManager;
 
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_GENESIS_SEARCH_DISABLED;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_MAX_TAB_REACHED;
+
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.view.View;
@@ -17,8 +20,10 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.hiddenservices.onionservices.pluginManager.pluginController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class settingSearchViewController {
@@ -65,7 +70,7 @@ class settingSearchViewController {
         }
 
         if (!status.sTorBrowsing) {
-            mSearchSettingOption1.setVisibility(View.GONE);
+            mSearchSettingOption1.setAlpha(0.3f);
         }
 
     }

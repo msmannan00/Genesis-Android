@@ -2,6 +2,7 @@ package com.hiddenservices.onionservices.appManager.externalCommandManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,12 +41,15 @@ public class externalShortcutController extends AppCompatActivity {
             if (mShortcutCommands != null) {
                 mIntent.putExtra(EXTERNAL_SHORTCUT_COMMAND, mShortcutCommands);
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+
                 switch (mShortcutCommands) {
                     case CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE:
                         setContentView(R.layout.popup_data_cleared_shortcut);
                         panicExitInvoked();
                         helperMethod.onDelayHandler(this, 3000, () -> {
                             finishAndRemoveTask();
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                            System.exit(1);
                             return null;
                         });
 

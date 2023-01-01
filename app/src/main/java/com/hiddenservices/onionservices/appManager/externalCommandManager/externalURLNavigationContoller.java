@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.advertManager.advertController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
@@ -79,5 +81,6 @@ public class externalURLNavigationContoller extends AppCompatActivity {
         }, 100);
 
         finish();
+        overridePendingTransition(R.anim.fade_out   , R.anim.fade_out);
     }
 }

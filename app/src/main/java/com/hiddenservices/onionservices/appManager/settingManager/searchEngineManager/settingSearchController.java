@@ -1,5 +1,7 @@
 package com.hiddenservices.onionservices.appManager.settingManager.searchEngineManager;
 
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_GENESIS_SEARCH_DISABLED;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -130,6 +132,9 @@ public class settingSearchController extends AppCompatActivity {
 
     public void onSelectSearchEngine(View view) {
         if (view.getId() == R.id.pSearchSettingOption1) {
+            if(!status.sTorBrowsing){
+                pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_GENESIS_SEARCH_DISABLED);
+            }
             mSettingSearchModel.onTrigger(settingSearchEnums.eSearchModel.M_SET_SEARCH_ENGINE, Collections.singletonList(constants.CONST_BACKEND_GENESIS_URL));
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.SETTING_SEARCH_ENGINE, status.sSettingDefaultSearchEngine));
         } else if (view.getId() == R.id.pSearchSettingOption2) {

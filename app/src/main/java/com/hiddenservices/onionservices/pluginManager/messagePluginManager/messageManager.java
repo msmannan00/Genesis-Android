@@ -866,6 +866,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_URL_COPIED), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
+                case M_GENESIS_SEARCH_DISABLED:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_warning, R.xml.ax_background_warning, 2000, "Warning! Start Browser with tor browsing enabled", mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
                 case M_UPDATE_BOOKMARK:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);

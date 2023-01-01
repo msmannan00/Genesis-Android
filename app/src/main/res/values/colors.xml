@@ -194,6 +194,7 @@
     <color name="dark_purple">#ffffff</color>
     <color name="warning">#ffc107</color>
     <color name="warning_dark">#997300</color>
+    <color name="warning_darker">#cc7a00</color>
     <color name="connectors">#ffffff</color>
     <color name="colorProgressGradientStart">#00d9ff</color>
     <color name="colorProgressGradientEnd">#00a4fd</color>

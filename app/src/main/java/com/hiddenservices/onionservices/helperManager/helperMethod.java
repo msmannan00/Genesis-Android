@@ -1112,6 +1112,7 @@ public class helperMethod {
                 activityContextManager.getInstance().getHomeController().overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
             }
         });
+
         Runtime.getRuntime().exit(0);
         System.exit(1);
     }

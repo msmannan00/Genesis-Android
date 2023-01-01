@@ -31,6 +31,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.VpnService;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.BaseColumns;
@@ -41,6 +42,7 @@ import net.freehaven.tor.control.TorControlCommands;
 import net.freehaven.tor.control.TorControlConnection;
 import org.torproject.android.service.wrapper.localHelperMethod;
 import org.torproject.android.service.wrapper.logRowModel;
+import org.torproject.android.service.wrapper.orbotExternalCommands;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import org.torproject.android.service.util.CustomTorResourceInstaller;
 import org.torproject.android.service.util.Prefs;
@@ -184,8 +186,8 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
     boolean mToolbarUpdating = false;
     @SuppressLint({"NewApi", "RestrictedApi"})
-    public void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
-        if(!mToolbarUpdating && orbotLocalConstants.mNotificationStatus != 0 && orbotLocalConstants.mAppStarted){
+    public void showToolbarNotification(String notifyMsg, int notifyType, int icon, boolean forced) {
+        if(!mToolbarUpdating && orbotLocalConstants.mNotificationStatus != 0 && (orbotLocalConstants.mAppStarted || forced)){
             mToolbarUpdating = true;
         }else {
             return;
@@ -251,7 +253,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
-        showToolbarNotification(getString(org.torproject.android.service.R.string.newnym), NOTIFY_ID, org.torproject.android.service.R.drawable.ic_stat_starting_tor_logo);
+        showToolbarNotification("orbot is connecting please wait!", NOTIFY_ID, org.torproject.android.service.R.drawable.ic_stat_starting_tor_logo, false);
 
         createNetworkStateReciever();
         IntentFilter mNetworkStateFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -345,8 +347,8 @@ public class OrbotService extends VpnService implements OrbotConstants {
                             //sendCallbackStatus(STATUS_OFF);
                             orbotLocalConstants.mTorLogsStatus = "No internet connection";
                             if(orbotLocalConstants.mNotificationStatus!=0 && orbotLocalConstants.mAppStarted){
-                                showToolbarNotification(getString(R.string.newnym), getNotifyId(), R.drawable.ic_stat_tor_off);
-                                showToolbarNotification("Genesis is sleeping | Internet connectivity issue",NOTIFY_ID,R.drawable.ic_stat_tor_off);
+                                showToolbarNotification(getString(R.string.newnym), getNotifyId(), R.drawable.ic_stat_tor_off, false);
+                                showToolbarNotification("Genesis is sleeping | Internet connectivity issue",NOTIFY_ID,R.drawable.ic_stat_tor_off, false);
                             }
                         }
                         else
@@ -354,7 +356,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                             //sendCallbackStatus(STATUS_STARTING);
 
                             if(orbotLocalConstants.mNotificationStatus!=0 && orbotLocalConstants.mAppStarted){
-                                showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo);
+                                showToolbarNotification(getString(R.string.status_starting_up),NOTIFY_ID,R.drawable.ic_stat_starting_tor_logo, false);
                             }
                         }
 
@@ -406,13 +408,16 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
     public void enableTorNotificationNoBandwidth(){
         orbotLocalConstants.mNotificationStatus = 1;
-        showToolbarNotification("Connected to the Tor network", HS_NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+        showToolbarNotification("Connected to the Tor network", HS_NOTIFY_ID, R.mipmap.ic_stat_tor_logo, false);
     }
 
     public void enableNotification(){
         if(mConnectivity && orbotLocalConstants.mIsTorInitialized){
             orbotLocalConstants.mNotificationStatus = 1;
-            showToolbarNotification(0+"kbps ⇣ / " +0+"kbps ⇡", HS_NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+            showToolbarNotification(0+"kbps ⇣ / " +0+"kbps ⇡", HS_NOTIFY_ID, R.mipmap.ic_stat_tor_logo, false);
+        }
+        else {
+            showToolbarNotification("orbot is connecting please wait!", NOTIFY_ID, org.torproject.android.service.R.drawable.ic_stat_starting_tor_logo, true);
         }
     }
 
@@ -447,7 +452,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         stopTorAsync(false);
         showToolbarNotification(
                 getString(R.string.unable_to_start_tor) + ": " + message,
-                ERROR_NOTIFY_ID, R.drawable.ic_stat_notifyerr);
+                ERROR_NOTIFY_ID, R.drawable.ic_stat_notifyerr, false);
     }
 
     private static boolean useIPtObfsMeekProxy() {
@@ -824,7 +829,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
             if(orbotLocalConstants.mNotificationStatus != 0 && orbotLocalConstants.mAppStarted ) {
                 mNotifyBuilder.setProgress(100, 0, false);
             }
-            showToolbarNotification("", NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+            showToolbarNotification("", NOTIFY_ID, R.mipmap.ic_stat_tor_logo, false);
 
             startTorService();
 
@@ -1052,7 +1057,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 try {
                     if (conn != null && mCurrentStatus.equals(STATUS_ON)) {
                         mNotifyBuilder.setSubText(null); // clear previous exit node info if present
-                        showToolbarNotification(getString(R.string.newnym), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
+                        showToolbarNotification(getString(R.string.newnym), NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo, false);
                         conn.signal(TorControlCommands.SIGNAL_NEWNYM);
                     }
                 } catch (Exception ioe) {
@@ -1221,7 +1226,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
             }
 
         } catch (Exception e) {
-            showToolbarNotification(getString(R.string.your_reachableaddresses_settings_caused_an_exception_), ERROR_NOTIFY_ID, R.drawable.ic_stat_notifyerr);
+            showToolbarNotification(getString(R.string.your_reachableaddresses_settings_caused_an_exception_), ERROR_NOTIFY_ID, R.drawable.ic_stat_notifyerr, false);
             return null;
         }
 
@@ -1238,7 +1243,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
             }
         } catch (Exception e) {
-            showToolbarNotification(getString(R.string.your_relay_settings_caused_an_exception_), ERROR_NOTIFY_ID, R.drawable.ic_stat_notifyerr);
+            showToolbarNotification(getString(R.string.your_relay_settings_caused_an_exception_), ERROR_NOTIFY_ID, R.drawable.ic_stat_notifyerr, false);
             return null;
         }
 
@@ -1254,7 +1259,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     void showBandwidthNotification(String message, boolean isActiveTransfer) {
         if (!mCurrentStatus.equals(STATUS_ON) || !mConnectivity) return;
         var icon = !isActiveTransfer ? R.mipmap.ic_stat_tor_logo : R.mipmap.ic_stat_tor_logo;
-        showToolbarNotification(message, NOTIFY_ID, icon);
+        showToolbarNotification(message, NOTIFY_ID, icon, false);
     }
 
     public static String formatBandwidthCount(Context context, long bitsPerSecond) {
@@ -1597,7 +1602,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                     break;
                 case ACTION_STATUS:
                     if (mCurrentStatus.equals(STATUS_OFF))
-                        showToolbarNotification(getString(R.string.open_orbot_to_connect_to_tor), NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+                        showToolbarNotification(getString(R.string.open_orbot_to_connect_to_tor), NOTIFY_ID, R.mipmap.ic_stat_tor_logo, false);
                     replyWithStatus(mIntent);
 
                     break;
@@ -1608,7 +1613,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                     newIdentity();
                     break;
                 case CMD_SETTING:
-                    onSettingRegister();
+                    //onSettingRegister();
                     break;
                 case CMD_ACTIVE:
                     sendSignalActive();
@@ -1623,11 +1628,14 @@ public class OrbotService extends VpnService implements OrbotConstants {
         }
     }
 
-    public void onSettingRegister(){
+    public void onInvokeController(int pCommand){
         try {
             Intent intent;
-            intent = new Intent(this, Class.forName("com.hiddenservices.onionservices.appManager.settingManager.notificationManager.settingNotificationController"));
+            intent = new Intent(this, Class.forName("com.hiddenservices.onionservices.appManager.orbotRequestManager"));
             intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            Bundle mBundle = new Bundle();
+            mBundle.putInt("command", pCommand);
+            intent.putExtras(mBundle);
             getApplicationContext().startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -1639,8 +1647,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
             switch (intent.getAction()) {
                 case TorControlCommands.SIGNAL_NEWNYM: {
-                    activityContextManager
-                    newIdentity();
+                    onInvokeController(orbotExternalCommands.S_NEW_CIRCUIT);
                     break;
                 }
                 case CMD_ACTIVE: {
@@ -1652,7 +1659,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                     break;
                 }
                 case CMD_SETTING: {
-                    onSettingRegister();
+                    onInvokeController(orbotExternalCommands.S_NOTIFICATION_SETTINGS);
                     try{
                         sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
                     }catch (Exception ex){}

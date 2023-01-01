@@ -4,6 +4,7 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager;
 import static android.app.PendingIntent.FLAG_IMMUTABLE;
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoPromptView.LOGTAG;
+
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,21 +13,17 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import com.example.myapplication.R;
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginReciever.mediaNotificationReciever;
 import org.mozilla.geckoview.GeckoSession;
-import org.mozilla.geckoview.Image;
 
 public class mediaDelegate implements GeckoSession.MediaDelegate {
     private Integer mLastNotificationId = 100;
@@ -113,14 +110,17 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
             return;
         }
         RemoteViews contentView;
-        if (android.os.Build.VERSION. SDK_INT > Build.VERSION_CODES.N_MR1 ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
+            contentView = new RemoteViews(context.getPackageName() , R.layout. media_notification_no_background ) ;
+        }else if (android.os.Build.VERSION. SDK_INT > Build.VERSION_CODES.N_MR1){
             contentView = new RemoteViews(context.getPackageName() , R.layout. media_notification_layout ) ;
         }else {
             contentView = new RemoteViews(context.getPackageName() , R.layout. media_notification_layout_small ) ;
         }
 
-
-        contentView.setInt(R.id.layout,"setBackgroundResource", R.color.c_tab_background);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S ) {
+            contentView.setInt(R.id.layout,"setBackgroundResource", R.color.c_tab_background);
+        }
         contentView.setTextViewText(R.id.header, title);
         contentView.setTextViewText(R.id.body, "☍ " + url);
 
@@ -133,11 +133,19 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
         if (not_status){
             PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, 1030, "media_play", 0);
             contentView.setOnClickPendingIntent(R.id.trigger, pIntent);
-            contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_play_arrow);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
+                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_play_arrow_no_tint);
+            }else {
+                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_play_arrow);
+            }
         }else {
             PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, 1030, "media_pause", 1);
             contentView.setOnClickPendingIntent(R.id.trigger, pIntent);
-            contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_pause);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
+                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_pause_no_tint);
+            }else {
+                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_pause);
+            }
         }
 
         PendingIntent pIntentPrev = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, 1030, "media_next", 2);
@@ -150,11 +158,16 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, "1030" ) ;
 
-        mBuilder.setContent(contentView) ;
         mBuilder.setPriority(Notification.PRIORITY_LOW);
         mBuilder.setAutoCancel(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            mBuilder.setCustomBigContentView(contentView);
+            mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
+        }else {
+            mBuilder.setContent(contentView);
+        }
 
-        mBuilder.setSmallIcon(R.drawable.ic_genesis_logo ) ;
+        mBuilder.setSmallIcon(R.drawable.ic_baseline_media) ;
         mBuilder.setAutoCancel( true ) ;
         if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
             int importance = NotificationManager.IMPORTANCE_LOW ;
