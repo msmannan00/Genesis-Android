@@ -244,6 +244,12 @@ class homeViewController {
             mCopyright.setVisibility(View.GONE);
         }
 
+        mSearchbar.setLongClickable(false);
+        mSearchbar.setOnLongClickListener(v -> false);
+
+        mFindText.setLongClickable(false);
+        mFindText.setOnLongClickListener(v -> false);
+
     }
 
     public void initSearchEngineView() {

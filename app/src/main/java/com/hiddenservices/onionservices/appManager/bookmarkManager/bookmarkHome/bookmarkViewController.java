@@ -69,6 +69,10 @@ class bookmarkViewController {
     }
 
     private void initPostUI() {
+
+        mSearchInput.setLongClickable(false);
+        mSearchInput.setOnLongClickListener(v -> false);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

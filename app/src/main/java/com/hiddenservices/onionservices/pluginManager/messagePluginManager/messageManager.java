@@ -22,24 +22,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
 import org.mozilla.geckoview.ContentBlocking;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -281,6 +275,12 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mPopupCreateBookmarkNext.setOnClickListener(this);
     }
 
+    private void disableLongClick(EditText pEdittext){
+        pEdittext.setLongClickable(false);
+        pEdittext.setOnLongClickListener(v -> false);
+    }
+
+
     private void onUpdateBridges() {
         initializeDialog(R.layout.popup_bridge_setting_custom, Gravity.CENTER);
         mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -289,6 +289,8 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         String mBridgeType = (String) mEvent.invokeObserver(null, M_BRIDGE_TYPE);
         EditText mBridgeSettingCustomInput = mDialog.findViewById(R.id.pBridgeSettingCustomInput);
         EditText mBridgeSettingBridgeType = mDialog.findViewById(R.id.pBridgeSettingBridgeType);
+        disableLongClick(mBridgeSettingCustomInput);
+        disableLongClick(mBridgeSettingBridgeType);
         Button mBridgeSettingCustomRequest = mDialog.findViewById(R.id.pBridgeSettingCustomRequest);
         ImageButton mBridgeSettingCustomClear = mDialog.findViewById(R.id.pBridgeSettingCustomClear);
         Button mBridgeSettingCustomNext = mDialog.findViewById(R.id.pBridgeSettingCustomNext);
@@ -568,6 +570,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
             helperMethod.hideKeyboard(mContext);
             EditText mPopupCreateBookmarkInput = mDialog.findViewById(R.id.pPopupCreateBookmarkInput);
+            disableLongClick(mPopupCreateBookmarkInput);
             String mBookmarkName = mPopupCreateBookmarkInput.getText().toString();
             String mURL = mData.get(0).toString().replace(CONST_GENESIS_ONION, CONST_GENESIS_ONION_V2);
             if (mURL.startsWith(constants.CONST_PRIVACY_POLICY_URL_NON_TOR)) {
@@ -607,11 +610,13 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             });
         } else if (view.getId() == R.id.pBridgeSettingCustomClear) {
             EditText mBridges = mDialog.findViewById(R.id.pBridgeSettingCustomInput);
+            disableLongClick(mBridges);
             TextView mTextView = mDialog.findViewById(R.id.pBridgeSettingCustomError);
 
             mBridges.setText(strings.GENERIC_EMPTY_STR);
             mTextView.animate().setDuration(250).alpha(0);
         } else if (view.getId() == R.id.pBridgeSettingCustomNext) {
+            disableLongClick(mDialog.findViewById(R.id.pBridgeSettingCustomInput));
             String mBridges = ((EditText) mDialog.findViewById(R.id.pBridgeSettingCustomInput)).getText().toString();
 
             boolean mBridgeTypeExist = !mBridges.contains("obfs3") && !mBridges.contains("obfs4") && !mBridges.contains("fle") && !mBridges.contains("meek");
@@ -636,6 +641,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
             mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             helperMethod.hideKeyboard(mContext);
+            disableLongClick(mDialog.findViewById(R.id.pBridgeSettingBridgeType));
             mEvent.invokeObserver(Arrays.asList(mBridges, ((EditText) mDialog.findViewById(R.id.pBridgeSettingBridgeType)).getText().toString()), M_SET_BRIDGES);
         } else if (view.getId() == R.id.pPopupRateFailureNext) {
             onDismiss();

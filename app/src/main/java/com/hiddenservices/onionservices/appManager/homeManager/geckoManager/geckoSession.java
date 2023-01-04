@@ -162,6 +162,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     public void onActivated(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
         MediaSession.Delegate.super.onActivated(session, mediaSession);
         mMediaSession = mediaSession;
+        isMediaRunning = true;
     }
 
     @Override
@@ -176,7 +177,8 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     @Override
     public void onMetadata(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, @NonNull MediaSession.Metadata meta) {
         mMediaTitle = meta.title;
-        if(!isMediaRunning || mediaDelegateItem == null){
+
+        if(mediaDelegateItem == null){
             return;
         }
 
@@ -193,7 +195,9 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             }
         }.start();
         MediaSession.Delegate.super.onMetadata(session, mediaSession, meta);
-        mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, !isMediaRunning);
+        if(isMediaRunning){
+            mediaDelegateItem.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mCurrentURL), mMediaImage, !isMediaRunning);
+        }
     }
 
     @Override

@@ -50,6 +50,8 @@ class bridgeViewController {
 
     private void initPostUI() {
         sharedUIMethod.updateStatusBar(mContext);
+        mBridgeSettingBridgeCustom.setLongClickable(false);
+        mBridgeSettingBridgeCustom.setOnLongClickListener(v -> false);
     }
 
     private void animateColor(TextView p_view, int p_from, int p_to, String p_command, int p_duration) {

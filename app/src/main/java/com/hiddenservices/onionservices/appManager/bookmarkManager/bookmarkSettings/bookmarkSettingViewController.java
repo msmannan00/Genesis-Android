@@ -36,6 +36,9 @@ class bookmarkSettingViewController {
     }
 
     private void initPostUI() {
+        mBookmarName.setLongClickable(false);
+        mBookmarName.setOnLongClickListener(v -> false);
+
         sharedUIMethod.updateStatusBar(mContext);
     }
 

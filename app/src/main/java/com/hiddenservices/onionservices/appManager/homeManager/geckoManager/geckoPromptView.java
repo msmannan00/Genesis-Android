@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
@@ -35,7 +37,12 @@ import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 
+import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.helperManager.helperMethod;
+
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,9 +68,16 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
         mActivity = activity;
     }
 
+    public void stopMedia(){
+        try {
+            activityContextManager.getInstance().getHomeController().onKillMedia();
+        }catch (Exception ex){}
+    }
+
     @Override
     public GeckoResult<PromptResponse> onAlertPrompt(final GeckoSession session,
                                                      final AlertPrompt prompt) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
@@ -80,6 +94,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onButtonPrompt(final GeckoSession session,
                                                       final ButtonPrompt prompt) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
@@ -111,16 +126,66 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
         return res;
     }
 
+    public static String getMimeType(Context context, Uri uri) {
+        String extension;
+
+        //Check uri format to avoid null
+        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            //If scheme is a content
+            final MimeTypeMap mime = MimeTypeMap.getSingleton();
+            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
+        } else {
+            //If scheme is a File
+            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
+            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
+
+        }
+
+        return extension;
+    }
+
+    static boolean mPopupOpened = false;
     @Override
     public GeckoResult<PromptResponse> onSharePrompt(final GeckoSession session,
                                                      final SharePrompt prompt) {
-        return GeckoResult.fromValue(prompt.dismiss());
+        stopMedia();
+        new Thread(){
+            public void run(){
+                try {
+                    sleep(4000);
+                    mPopupOpened = false;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        if(!mPopupOpened){
+            mPopupOpened = true;
+        }else {
+            return GeckoResult.fromValue(prompt.confirm(SharePrompt.Result.ABORT));
+        }
+        try {
+            String m_data = prompt.uri;
+            if(prompt.text!=null){
+                m_data += " : " + prompt.text;
+            }
+
+            ShareCompat.IntentBuilder.from(mActivity)
+                    .setType("text/x-uri")
+                    .setChooserTitle(prompt.title)
+                    .setText(m_data)
+                    .startChooser();
+        }catch (Exception ex){}
+
+        return GeckoResult.fromValue(prompt.confirm(SharePrompt.Result.SUCCESS));
+
     }
 
     @Nullable
     @Override
     public GeckoResult<PromptResponse> onRepostConfirmPrompt(final GeckoSession session,
                                                              final RepostConfirmPrompt prompt) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
@@ -157,6 +222,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onBeforeUnloadPrompt(final GeckoSession session,
                                                             final BeforeUnloadPrompt prompt) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
@@ -185,6 +251,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     }
 
     private int getViewPadding(final AlertDialog.Builder builder) {
+        stopMedia();
         final TypedArray attr = builder.getContext().obtainStyledAttributes(
                 new int[]{android.R.attr.listPreferredItemPaddingLeft});
         final int padding = attr.getDimensionPixelSize(0, 1);
@@ -194,6 +261,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
 
     private LinearLayout addStandardLayout(final AlertDialog.Builder builder,
                                            final String title, final String msg) {
+        stopMedia();
         final ScrollView scrollView = new ScrollView(builder.getContext());
         final LinearLayout container = new LinearLayout(builder.getContext());
         final int horizontalPadding = getViewPadding(builder);
@@ -212,6 +280,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
                                              final BasePrompt prompt,
                                              final GeckoResult<PromptResponse> response) {
         final AlertDialog dialog = builder.create();
+        stopMedia();
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(final DialogInterface dialog) {
@@ -227,6 +296,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     public GeckoResult<PromptResponse> onTextPrompt(final GeckoSession session,
                                                     final TextPrompt prompt) {
         final Activity activity = mActivity;
+        stopMedia();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
@@ -255,6 +325,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     public GeckoResult<PromptResponse> onAuthPrompt(final GeckoSession session,
                                                     final AuthPrompt prompt) {
         final Activity activity = mActivity;
+        stopMedia();
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
@@ -321,6 +392,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
 
     private void addChoiceItems(final int type, final ArrayAdapter<ModifiableChoice> list,
                                 final ChoicePrompt.Choice[] items, final String indent) {
+        stopMedia();
         if (type == ChoicePrompt.Type.MENU) {
             for (final ChoicePrompt.Choice item : items) {
                 list.add(new ModifiableChoice(item));
@@ -354,6 +426,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
                                     final String message, final int type,
                                     final ChoicePrompt.Choice[] choices, final ChoicePrompt prompt,
                                     final GeckoResult<PromptResponse> res) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             res.complete(prompt.dismiss());
@@ -533,6 +606,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onChoicePrompt(final GeckoSession session,
                                                       final ChoicePrompt prompt) {
+        stopMedia();
         final GeckoResult<PromptResponse> res = new GeckoResult<PromptResponse>();
         onChoicePromptImpl(session, prompt.title, prompt.message, prompt.type, prompt.choices,
                 prompt, res);
@@ -550,6 +624,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onColorPrompt(final GeckoSession session,
                                                      final ColorPrompt prompt) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
@@ -661,6 +736,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onDateTimePrompt(final GeckoSession session,
                                                         final DateTimePrompt prompt) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
@@ -779,6 +855,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     @Override
     @TargetApi(19)
     public GeckoResult<PromptResponse> onFilePrompt(GeckoSession session, FilePrompt prompt) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
@@ -837,6 +914,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     }
 
     public void onFileCallbackResult(final int resultCode, final Intent data) {
+        stopMedia();
         if (mFileResponse == null) {
             return;
         }
@@ -875,6 +953,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
 
     public void onPermissionPrompt(final GeckoSession session, final String title,
                                    final GeckoSession.PermissionDelegate.Callback callback) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             callback.reject();
@@ -900,6 +979,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     }
 
     public void onSlowScriptPrompt(GeckoSession geckoSession, String title, GeckoResult<SlowScriptResponse> reportAction) {
+        stopMedia();
         final Activity activity = mActivity;
         if (activity == null) {
             return;
@@ -962,6 +1042,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
                               final String[] videoNames, final String[] audioNames,
                               final GeckoSession.PermissionDelegate.MediaCallback callback) {
         final Activity activity = mActivity;
+        stopMedia();
         if (activity == null || (video == null && audio == null)) {
             callback.reject();
             return;
@@ -1009,12 +1090,14 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
     public void onMediaPrompt(final GeckoSession session, final String title,
                               final GeckoSession.PermissionDelegate.MediaSource[] video, final GeckoSession.PermissionDelegate.MediaSource[] audio,
                               final GeckoSession.PermissionDelegate.MediaCallback callback) {
+        stopMedia();
         onMediaPrompt(session, title, video, audio, null, null, callback);
     }
 
     @Override
     public GeckoResult<PromptResponse> onPopupPrompt(final GeckoSession session,
                                                      final PopupPrompt prompt) {
+        stopMedia();
         return GeckoResult.fromValue(prompt.confirm(AllowOrDeny.ALLOW));
     }
 }

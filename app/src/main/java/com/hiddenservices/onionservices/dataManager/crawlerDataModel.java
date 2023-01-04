@@ -36,11 +36,13 @@ class crawlerDataModel {
     private Set<String> mDuplicate;
     private ArrayList<crawlerRowModel> mHTML;
     private AppCompatActivity mContext;
+    RequestQueue mRequestQueue;
 
     crawlerDataModel(AppCompatActivity pContext) {
         mDuplicate = new HashSet<>();
         mHTML = new ArrayList<>();
         mContext = pContext;
+        mRequestQueue = Volley.newRequestQueue(mContext, new ProxiedHurlStack());
     }
 
     private void onInit() {
@@ -82,7 +84,6 @@ class crawlerDataModel {
             String mURL = strings.GENERIC_EMPTY_STR;
 
             private void onSendRequest() {
-                RequestQueue mRequestQueue = Volley.newRequestQueue(mContext, new ProxiedHurlStack());
 
                 String url = "http://167.86.99.31/user_index/";
                 StringRequest mRequestData = new StringRequest(Request.Method.POST, url, response -> {

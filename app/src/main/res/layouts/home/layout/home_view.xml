@@ -129,7 +129,6 @@
                                 android:background="@color/c_home_side"
                                 android:translationZ="1dp"
                                 tools:ignore="RtlSymmetry" />
-
                             <com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager
                                 android:id="@+id/pSearchInput"
                                 android:layout_width="0dp"

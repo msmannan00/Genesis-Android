@@ -1,6 +1,8 @@
 package com.hiddenservices.onionservices.appManager.homeManager.homeController;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Notification.FLAG_AUTO_CANCEL;
+import static android.os.Build.VERSION.SDK_INT;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -33,6 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -51,6 +54,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -273,6 +277,37 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (!status.sTorBrowsing) {
             onStartApplication(null);
         }
+        if(status.sNoTorTriggered){
+            if(status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL)){
+                status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
+            }
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+            Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
+            this.stopService(mServiceIntent);
+
+            if (OrbotService.getServiceObject() != null) {
+                OrbotService.getServiceObject().onDestroy();
+            }
+            new Handler().postDelayed(() ->
+            {
+                onShowDefaultNotification();
+            }, 500);
+        }else {
+            onHideDefaultNotification();
+            int notificationStatus = status.sBridgeNotificationManual;
+            if (notificationStatus == 0) {
+                pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+                activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
+            } else {
+                if(status.mThemeApplying){
+                    new Handler().postDelayed(() ->
+                    {
+                        onHideDefaultNotification();
+                        pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
+                    }, 500);
+                }
+            }
+        }
     }
 
     public void initBundle() {
@@ -369,7 +404,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (status.mThemeApplying) {
             mSplashScreen.setAlpha(0);
             mSplashScreen.setVisibility(View.GONE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (SDK_INT >= Build.VERSION_CODES.M) {
                 mHomeViewController.initStatusBarColor(false);
             } else {
                 Window window = getWindow();
@@ -586,7 +621,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
 
             String strManufacturer = android.os.Build.MANUFACTURER;
-            if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.O || Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1) && strManufacturer.equals("samsung")) {
+            if ((SDK_INT == Build.VERSION_CODES.O || SDK_INT == Build.VERSION_CODES.O_MR1) && strManufacturer.equals("samsung")) {
                 PackageManager packageManager = getApplicationContext().getPackageManager();
                 packageManager.setComponentEnabledSetting(new ComponentName(getApplicationContext(), widgetController.class), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
             } else {
@@ -858,7 +893,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         PendingIntent action;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (SDK_INT >= Build.VERSION_CODES.M) {
             action = PendingIntent.getActivity(context, 1025, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
         }else {
             action = PendingIntent.getActivity(context, 1025, new Intent(context, homeController.class), 0); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
@@ -873,13 +908,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 .setColor(getResources().getColor(R.color.c_tab_border))
                 .setContentTitle(title);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        if (SDK_INT >= Build.VERSION_CODES.O)
         {
-            String channelId = "default_home_notification";
-            NotificationChannel channel = new NotificationChannel(channelId, "default_home_notification", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setSound(null, null);
-            manager.createNotificationChannel(channel);
-            builder.setChannelId(channelId);
+            //String channelId = "default_home_notification";
+            //NotificationChannel channel = new NotificationChannel(channelId, "default_home_notification", NotificationManager.IMPORTANCE_DEFAULT);
+            //channel.setSound(null, null);
+            //manager.createNotificationChannel(channel);
+            //builder.setChannelId(channelId);
         }
 
         Intent intentActionOpen = new Intent(context,homeController.class);
@@ -895,14 +930,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         Notification notification = builder.build();
         PendingIntent dummyIntent = null;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (SDK_INT >= Build.VERSION_CODES.M) {
             PendingIntent.getActivity(context, 1025, new Intent(), PendingIntent.FLAG_IMMUTABLE);
         }else {
             PendingIntent.getActivity(context, 1025, new Intent(), 0);
         }
         notification.fullScreenIntent = dummyIntent;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+        if (SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             notification.flags = Notification.FLAG_AUTO_CANCEL|Notification.FLAG_ONGOING_EVENT;
         }else {
             notification.flags |= Notification.FLAG_NO_CLEAR;
@@ -974,7 +1009,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onDestroy() {
-        status.sNoTorTriggered = false;
         orbotLocalConstants.mAppForceExit = true;
         NotificationManagerCompat.from(this).cancel(1030);
         if(manager!=null){
@@ -1015,6 +1049,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         NotificationManagerCompat.from(this).cancel(1030);
 
         if (!status.mThemeApplying) {
+            status.sNoTorTriggered = false;
             new Handler().postDelayed(() ->
             {
                 android.os.Process.killProcess(android.os.Process.myPid());
@@ -2013,19 +2048,34 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         onHomeButton(null);
     }
 
+
+    private void requestWritePermission() {
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                intent.addCategory("android.intent.category.DEFAULT");
+                intent.setData(Uri.parse(String.format("package:%s",getApplicationContext().getPackageName())));
+                startActivityForResult(intent, 2296);
+            } catch (Exception e) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, 2296);
+            }
+        } else {
+            //below android 11
+            ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, 1);
+        }
+    }
+
     public void onDownloadFile() {
         mGeckoClient.downloadFile(homeController.this);
     }
 
     public void onManualDownload(String url) {
-
-        /*EXTERNAL STORAGE REQUEST*/
         mGeckoClient.manual_download(url, this);
     }
 
     public void onManualDownloadFileName(String pURL, String pPath) {
-
-        /*EXTERNAL STORAGE REQUEST*/
         mGeckoClient.manualDownloadWithName(pURL, pPath, this);
     }
 
@@ -2711,7 +2761,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (mNewTab.isPressed() || mTabFragment == null || mTabFragment.getVisibility() == View.VISIBLE || mHomeViewController.getMenuPopup() != null && mHomeViewController.getMenuPopup().isShowing()) {
             return;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (SDK_INT >= Build.VERSION_CODES.O) {
             if (this.isActivityTransitionRunning()) {
                 return;
             }

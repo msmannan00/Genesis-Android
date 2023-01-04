@@ -3,6 +3,7 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -35,7 +36,7 @@ class geckoDownloadManager {
     }
 
     private void downloadFile(WebResponse response, String userAgent, AppCompatActivity context, geckoSession session, eventObserver.eventListener event) {
-        if (ContextCompat.checkSelfPermission(context,
+        if ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1 && ContextCompat.checkSelfPermission(context,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(context,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},

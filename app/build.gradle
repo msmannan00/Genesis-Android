@@ -71,6 +71,7 @@ android {
     sourceSets {
         main {
             res.srcDirs = project.ext.resource_directories
+            jniLibs.srcDirs = ['src/main/jniLibs']
         }
 
         orionRelease.root = project.ext.releaseRoot

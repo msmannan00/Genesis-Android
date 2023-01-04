@@ -600,8 +600,8 @@ public class helperMethod {
     }
 
     public static void vibrate(AppCompatActivity context) {
-        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(50);
+        // Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        // v.vibrate(50);
     }
 
     public static void shareURL(AppCompatActivity context, String p_share) {
@@ -975,9 +975,12 @@ public class helperMethod {
     }
 
     public static boolean checkPermissions(AppCompatActivity context) {
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.O_MR1){
+            return true;
+        }
         String[] permissions = new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
         };
 
         int result;
@@ -989,7 +992,7 @@ public class helperMethod {
             }
         }
         if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(context, listPermissionsNeeded.toArray(new String[0]), 100);
+            ActivityCompat.requestPermissions(context, listPermissionsNeeded.toArray(new String[0]), 1050);
             return false;
         }
         return true;
