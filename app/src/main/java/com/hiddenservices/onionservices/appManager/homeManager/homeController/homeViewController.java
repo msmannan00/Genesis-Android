@@ -168,7 +168,6 @@ class homeViewController {
         this.mPanicButton = pPanicButton;
         this.mGenesisLogo = pGenesisLogo;
         this.mPanicButtonLandscape = pPanicButtonLandscape;
-        this.mLogHandler = new LogHandler();
         this.mTorDisabled = pTorDisabled;
 
         initSplashScreen();
@@ -633,68 +632,63 @@ class homeViewController {
         }
     }
 
-    private LogHandler mLogHandler;
-
-    @SuppressLint("StaticFieldLeak")
-    class LogHandler extends AsyncTask<Void, Integer, Void> {
-        protected Void doInBackground(Void... arg0) {
-            AppCompatActivity temp_context = mContext;
-            int mCounter = 0;
-            while (status.sTorBrowsing && (orbotLocalConstants.mSOCKSPort == -1 || !orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)) {
-                try {
-                    boolean mFastConnect = status.sSettingIsAppStarted || !status.sRestoreTabs && status.sAppInstalled && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus && status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR);
-                    if (mFastConnect) {
-                        sleep(1000);
-                        if (orbotLocalConstants.mNetworkState) {
-                            orbotLocalConstants.mTorLogsStatus = "Starting Orion | Please Wait ...";
-                            mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
-                            startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
-                            if (orbotLocalConstants.mSOCKSPort != -1) {
-                                break;
+    public void LogHandler() {
+        new Thread(){
+            public void run(){
+                AppCompatActivity temp_context = mContext;
+                int mCounter = 0;
+                while (status.sTorBrowsing && (orbotLocalConstants.mSOCKSPort == -1 || !orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)) {
+                    try {
+                        boolean mFastConnect = status.sSettingIsAppStarted || !status.sRestoreTabs && status.sAppInstalled && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL) && !status.sBridgeStatus && status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR);
+                        if (mFastConnect) {
+                            sleep(1000);
+                            if (orbotLocalConstants.mNetworkState) {
+                                orbotLocalConstants.mTorLogsStatus = "Starting Orion | Please Wait ...";
+                                mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
+                                startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
+                                if (orbotLocalConstants.mSOCKSPort != -1) {
+                                    //break;
+                                }
+                            } else {
+                                orbotLocalConstants.mTorLogsStatus = "No internet connection";
+                                startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                             }
-                        } else {
-                            orbotLocalConstants.mTorLogsStatus = "No internet connection";
-                            startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                         }
-                    }
 
-                    sleep(500);
-                    if (mCounter > 20 && orbotLocalConstants.mSOCKSPort != -1) {
-                        break;
-                    } else if (orbotLocalConstants.mNetworkState && status.sBridgeStatus) {
-                        mCounter += 1;
-                    }
-                    if (mFastConnect) {
-                        continue;
-                    }
+                        if (mCounter > 20 && orbotLocalConstants.mSOCKSPort != -1) {
+                            break;
+                        } else if (orbotLocalConstants.mNetworkState && status.sBridgeStatus) {
+                            mCounter += 1;
+                        }
+                        if (mFastConnect) {
+                            continue;
+                        }
 
-                    mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
-                    if (temp_context.isDestroyed()) {
-                        return null;
+                        mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.recheck_orbot);
+                        if (temp_context.isDestroyed()) {
+                            return;
+                        }
+                        startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                }
+
+                if (!status.sSettingIsAppStarted) {
+                    mContext.runOnUiThread(() -> {
+                        onDisableSplashScreen();
+                        mEvent.invokeObserver(null, enums.etype.M_INIT_RUNTIME_SETTINGS);
+                        startPostTask(messages.MESSAGE_ON_URL_LOAD);
+                    });
+                } else {
+                    mContext.runOnUiThread(() -> {
+                        mEvent.invokeObserver(null, enums.etype.M_INIT_RUNTIME_SETTINGS);
+                        mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME);
+                    });
                 }
             }
-            mContext.runOnUiThread(() -> {
-                mEvent.invokeObserver(null, enums.etype.M_INIT_RUNTIME_SETTINGS);
-            });
-
-            if (!status.sSettingIsAppStarted) {
-                mContext.runOnUiThread(() -> {
-                    onDisableSplashScreen();
-                });
-                startPostTask(messages.MESSAGE_ON_URL_LOAD);
-            } else {
-                mContext.runOnUiThread(() -> {
-                    mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME);
-                });
-            }
-            return null;
-        }
+        }.start();
     }
-
     boolean mLogServiceExecuted = false;
 
     void initProxyLoading(Callable<String> logs) {
@@ -703,9 +697,7 @@ class homeViewController {
         if (mSplashScreen.getVisibility() == View.VISIBLE) {
             if (!mLogServiceExecuted) {
                 mLogServiceExecuted = true;
-                if (this.mLogHandler.getStatus() != AsyncTask.Status.RUNNING) {
-                    this.mLogHandler.execute();
-                }
+                LogHandler();
             }
         }
     }
@@ -1082,7 +1074,6 @@ class homeViewController {
             url = CONST_GENESIS_DOMAIN_URL;
         }
 
-        Log.i("FUCK::5", url);
         if (!mSearchbar.hasFocus() || pClearText || pBypassFocus) {
             if (mSearchEngineBar.getVisibility() == View.GONE || pBypassFocus) {
                 int delay = 0;

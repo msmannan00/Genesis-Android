@@ -413,47 +413,39 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         }
 
         @Override
-        public void onAutofill(@NonNull final GeckoSession session,
-                               final int notification,
-                               final Autofill.Node node) {
-            ThreadUtils.assertOnUiThread();
-            if (Build.VERSION.SDK_INT < 26) {
-                return;
+        public void onNodeUpdate(
+                @NonNull final GeckoSession session,
+                @NonNull final Autofill.Node node,
+                @NonNull final Autofill.NodeData data) {
+
+            final AutofillManager manager;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                manager = mGeckoView.getContext().getSystemService(AutofillManager.class);
+                if (manager == null) {
+                    return;
+                }
+                manager.notifyViewEntered(mGeckoView, data.getId(),displayRectForId(session, node));
             }
 
-            final AutofillManager manager =
-                    mContext.get().getApplicationContext().getSystemService(AutofillManager.class);
-            if (manager == null) {
-                return;
-            }
+        }
 
-            switch (notification) {
-                case Autofill.Notify.SESSION_STARTED:
-                case Autofill.Notify.SESSION_CANCELED:
-                    manager.cancel();
-                    break;
-                case Autofill.Notify.SESSION_COMMITTED:
-                    manager.commit();
-                    break;
-                case Autofill.Notify.NODE_FOCUSED:
-                    manager.notifyViewEntered(
-                            mGeckoView, node.getId(),
-                            displayRectForId(session, node));
-                    break;
-                case Autofill.Notify.NODE_BLURRED:
-                    manager.notifyViewExited(mGeckoView, node.getId());
-                    break;
-                case Autofill.Notify.NODE_UPDATED:
-                    manager.notifyValueChanged(
-                            mGeckoView,
-                            node.getId(),
-                            AutofillValue.forText(node.getValue()));
-                    break;
-                case Autofill.Notify.NODE_ADDED:
-                case Autofill.Notify.NODE_REMOVED:
-                    break;
+        @Override
+        public void onNodeFocus(
+                @NonNull final GeckoSession session,
+                @NonNull final Autofill.Node node,
+                @NonNull final Autofill.NodeData data) {
+
+            final AutofillManager manager;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                manager = mGeckoView.getContext().getSystemService(AutofillManager.class);
+                if (manager == null) {
+                    return;
+                }
+                manager.notifyViewEntered(mGeckoView, data.getId(),displayRectForId(session, node));
             }
         }
+
+
     }
     /*Progress Delegate*/
 

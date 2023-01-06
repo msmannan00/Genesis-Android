@@ -11,6 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Application" />
+            <option value="$PROJECT_DIR$/OrbotLib" />
             <option value="$PROJECT_DIR$/afservice" />
             <option value="$PROJECT_DIR$/android-database-sqlcipher" />
             <option value="$PROJECT_DIR$/app" />
@@ -26,6 +27,7 @@
             <option value="$PROJECT_DIR$/orbotservicemanagers" />
             <option value="$PROJECT_DIR$/service-telemetry" />
             <option value="$PROJECT_DIR$/shutterbug" />
+            <option value="$PROJECT_DIR$/tor-android" />
           </set>
         </option>
       </GradleProjectSettings>

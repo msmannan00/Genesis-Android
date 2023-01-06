@@ -822,6 +822,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     onUpdateBridges();
                     break;
 
+                case M_LOW_MEMORY:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 5000, "Low memory, some settings might not work", mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
                 case M_NEW_IDENTITY:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_NEW_CIRCUIT_CREATED), mContext.getString(R.string.ALERT_DISMISS), null);

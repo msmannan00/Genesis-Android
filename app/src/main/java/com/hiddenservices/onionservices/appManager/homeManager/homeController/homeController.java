@@ -108,6 +108,9 @@ import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.wrapper.LocaleHelper;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -234,7 +237,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         onInitTheme();
         onInitBooleans();
         orbotLocalConstants.mHomeIntent = getIntent();
-
 
         getWindow().getDecorView().setBackgroundColor(Color.WHITE);
         pluginController.getInstance().preInitialize(this);
@@ -910,11 +912,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         if (SDK_INT >= Build.VERSION_CODES.O)
         {
-            //String channelId = "default_home_notification";
-            //NotificationChannel channel = new NotificationChannel(channelId, "default_home_notification", NotificationManager.IMPORTANCE_DEFAULT);
-            //channel.setSound(null, null);
-            //manager.createNotificationChannel(channel);
-            //builder.setChannelId(channelId);
+            String channelId = "default_home_notification";
+            NotificationChannel channel = new NotificationChannel(channelId, "default_home_notification", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setSound(null, null);
+            manager.createNotificationChannel(channel);
+            builder.setChannelId(channelId);
         }
 
         Intent intentActionOpen = new Intent(context,homeController.class);
@@ -2016,15 +2018,18 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (!status.sTorBrowsing) {
             mDelay = 0;
         }
-        new Handler().postDelayed(() ->
-        {
-            pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
-            onInvokeProxyLoading();
-            onShowDefaultNotification();
-        }, mDelay);
+
+        pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
+        onInvokeProxyLoading();
+        onShowDefaultNotification();
+        //new Handler().postDelayed(() ->
+        //{
+        //}, mDelay);
+
     }
 
     public void onStartApplication(View view) {
+        mGeckoClient.initRuntimeSettings(this);
         onStartBrowser();
         int notificationStatus = status.sBridgeNotificationManual;
         if (notificationStatus == 0) {
@@ -2041,6 +2046,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onStartApplicationNoTor(View view) {
         status.sTorBrowsing = false;
         status.sNoTorTriggered = true;
+        mGeckoClient.initRuntimeSettings(this);
         if(status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL)){
             status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
         }

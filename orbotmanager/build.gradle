@@ -3,17 +3,17 @@ apply from: "../commons.gradle"
 apply from : '../dependencies.gradle'
 
 android {
-    ndkVersion '21.3.6528147'
+    ndkVersion '25.1.8937393'
 
     sourceSets {
-        main {
-            jniLibs.srcDirs = ['./src/main/libs']
-        }
+      main {
+        jniLibs.srcDirs = ['./src/main/libs']
+      }
     }
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 32
+        minSdkVersion 16
+        targetSdkVersion 33
     }
 
     buildTypes {
@@ -24,7 +24,7 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += ['META-INF/AL2.0']
+            excludes += ['META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version']
         }
     }
 
@@ -42,25 +42,19 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
-    implementation 'com.gitlab.guardianproject:jsocksandroid:1.0.4'
 
-    implementation 'com.jaredrummler:android-shell:1.0.0'
-
-    implementation 'androidx.core:core:1.9.0'
-    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
-    testImplementation 'junit:junit:4.13.2'
-
-    implementation 'com.offbynull.portmapper:portmapper:2.0.5'
-
-    implementation 'info.guardianproject:geoip:20191217'
-
-    api 'info.guardianproject:jtorctl:0.4.5.7'
-    implementation 'info.guardianproject:tor-android:0.4.6.10'
-
-    implementation 'androidx.work:work-runtime-ktx:2.8.0-rc01'
     api libs.guardian_jtorctl
-    implementation(
-            libs.ipt_proxy,
-    )
+    api project(':OrbotLib')
+    api project(':tor-android')
+
+    //  api libs.tor_android
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
+    implementation 'androidx.core:core:1.9.0'
+    implementation 'com.gitlab.guardianproject:jsocksandroid:1.0.4'
+    implementation 'com.offbynull.portmapper:portmapper:2.0.5'
+    implementation 'androidx.work:work-runtime-ktx:2.8.0-rc01'
+
+    implementation files('../libs/geoip.jar')
+
+
 }

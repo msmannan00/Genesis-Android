@@ -29,6 +29,7 @@ import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.os.StatFs;
 import android.os.Vibrator;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -261,6 +262,7 @@ public class helperMethod {
             writer.write(content);
             writer.close();
         } catch (Exception ex) {
+            Log.i("","");
         }
     }
 
@@ -306,6 +308,11 @@ public class helperMethod {
         }
 
         return false;
+    }
+
+    public static int getFreeSpace(String pPath, Context pContext) {
+        StatFs stat = new StatFs(pPath);
+        return  (int) stat.getAvailableBlocksLong();
     }
 
     public static String completeURL(String pURL) {

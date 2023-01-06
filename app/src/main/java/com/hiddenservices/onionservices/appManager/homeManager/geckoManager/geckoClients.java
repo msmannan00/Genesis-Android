@@ -1,10 +1,16 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Debug;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.StatFs;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -21,10 +27,16 @@ import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 
+import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,12 +58,14 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
 
 import org.json.JSONObject;
 import org.mozilla.gecko.EventDispatcher;
+import org.mozilla.gecko.util.DebugConfig;
 import org.mozilla.gecko.util.GeckoBundle;
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
+import org.mozilla.geckoview.RuntimeSettings;
 import org.mozilla.geckoview.WebExtension;
 import org.mozilla.geckoview.WebResponse;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
@@ -178,7 +192,9 @@ public class geckoClients {
 
 
     public String getAssetsCacheFile(Context context, String fileName) {
-        File cacheFile = new File(context.getCacheDir(), fileName);
+
+        File cacheFile = null;
+        cacheFile = new File(context.getExternalCacheDir(), fileName + helperMethod.createRandomID());
         try {
             try (InputStream inputStream = context.getAssets().open(fileName)) {
                 try (FileOutputStream outputStream = new FileOutputStream(cacheFile)) {
@@ -194,19 +210,23 @@ public class geckoClients {
         }
 
         String mYAML = helperMethod.readFromFile(cacheFile.getPath());
-        if (status.sTorBrowsing) {
-            mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"", "network.proxy.socks:  \"127.0.0.1\"");
-            mYAML = mYAML.replace("# network.proxy.socks_port:  9050", "network.proxy.socks_port:  9050");
-            mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: true");
+        try {
+            if (status.sTorBrowsing) {
+                mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"", "network.proxy.socks:  \"127.0.0.1\"");
+                mYAML = mYAML.replace("# network.proxy.socks_port:  9050", "network.proxy.socks_port:  9050");
+                mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: true");
 
-            StringBuilder buf = new StringBuilder(mYAML);
-            int portIndex = mYAML.indexOf("network.proxy.socks_port");
-            int breakIndex = mYAML.indexOf("\n", portIndex);
-            mYAML = buf.replace(portIndex, breakIndex, "network.proxy.socks_port:  " + orbotLocalConstants.mSOCKSPort).toString();
-            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
-        } else {
-            mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
-            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+                StringBuilder buf = new StringBuilder(mYAML);
+                int portIndex = mYAML.indexOf("network.proxy.socks_port");
+                int breakIndex = mYAML.indexOf("\n", portIndex);
+                mYAML = buf.replace(portIndex, breakIndex, "network.proxy.socks_port:  " + orbotLocalConstants.mSOCKSPort).toString();
+                helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+            } else {
+                mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
+                helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+            }
+        }catch (Exception ex){
+            Log.i("ads","dsadas");
         }
 
         return cacheFile.getAbsolutePath();
@@ -333,8 +353,37 @@ public class geckoClients {
         }
     }
 
+    public String getFileContent( FileInputStream fis ) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        Reader r = new InputStreamReader(fis, "UTF-8");  //or whatever encoding
+        int ch = r.read();
+        while(ch >= 0) {
+            sb.append(ch);
+            ch = r.read();
+        }
+        return sb.toString();
+    }
+
+    public void getAvailableSpaceInBytes(AppCompatActivity context) {
+        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        activityManager.getMemoryInfo(mi);
+        long availableMegs = mi.availMem / 1048576L;
+
+
+        try {
+            //File cacheFile = new File(context.getDataDir(), "lib/x86/libxul.so");
+
+            //final FileInputStream fileInputStream = new FileInputStream(cacheFile);
+            //getFileContent(fileInputStream);
+        } catch (Exception ex) {
+            Log.i("","");
+        }
+
+    }
     @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context) {
+
         if (mRuntime == null) {
             GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
             if (status.sShowImages == 2) {
@@ -342,9 +391,9 @@ public class geckoClients {
             } else {
                 mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config.yaml"));
             }
-            mSettings.build();
-
-            mRuntime = GeckoRuntime.create(context, mSettings.build());
+            getAvailableSpaceInBytes(context);
+            GeckoRuntimeSettings xx = mSettings.build();
+            mRuntime = GeckoRuntime.create(context, xx);
             mRuntime.getSettings().setRemoteDebuggingEnabled(true);
 
             mCreated = true;

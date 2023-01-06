@@ -92,11 +92,12 @@ dependencies {
 
     /* Firefox ABI Splits */
 
-    implementation "org.mozilla.components:browser-engine-gecko:100.0.20220327143103"
-    implementation "org.mozilla.components:browser-icons:100.0.20220327143103"
-    implementation "org.mozilla.components:concept-fetch:100.0.20220327143103"
-    implementation "org.mozilla.components:concept-base:100.0.20220327143103"
-    implementation "org.mozilla.components:support-utils:100.0.20220327143103"
+    implementation "org.mozilla.components:browser-engine-gecko:108.2.0"
+    implementation "org.mozilla.components:browser-icons:108.2.0"
+    implementation "org.mozilla.components:concept-fetch:108.2.0"
+    implementation "org.mozilla.components:concept-base:108.2.0"
+    implementation "org.mozilla.components:support-utils:108.2.0"
+
 
     /* Analytics */
 

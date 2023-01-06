@@ -760,7 +760,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         return null;
     }
 
-    private String checkPortOrAuto(String portString) {
+    public String checkPortOrAuto(String portString) {
         if (!portString.equalsIgnoreCase("auto")) {
             var isPortUsed = true;
             var port = Integer.parseInt(portString);
@@ -949,6 +949,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
 
                                 initControlConnection();
+                                orbotLocalConstants.mIsTorInitialized = true;
                             }
                         }catch (Exception ex){}
                     }
@@ -1029,7 +1030,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 }
 
                 sendCallbackPorts(mPortSOCKS, mPortHTTP, mPortDns, mPortTrans);
-                orbotLocalConstants.mIsTorInitialized = true;
 
             } catch (IOException e) {
                 Log.i("sad","asd");
@@ -1091,7 +1091,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
             mPrevLogs = logMessage;
         }
         if(logMessage.contains("Bootstrapped 100%")){
-            orbotLocalConstants.mIsTorInitialized = true;
         }
         mHandler.post(() -> {
             Intent intent = new Intent(LOCAL_ACTION_LOG);

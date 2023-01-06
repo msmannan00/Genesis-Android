@@ -40,6 +40,7 @@ import android.view.DisplayCutout;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Surface;
+import android.view.SurfaceControl;
 import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.View;
@@ -99,8 +100,8 @@ public class extendedGeckoView extends GeckoView {
             onGlobalLayout();
             if (extendedGeckoView.this.mSurfaceWrapper != null) {
                 final SurfaceViewWrapper wrapper = extendedGeckoView.this.mSurfaceWrapper;
-                mDisplay.surfaceChanged(wrapper.getSurface(),
-                        wrapper.getWidth(), wrapper.getHeight());
+
+                mDisplay.surfaceChanged(new GeckoDisplay.SurfaceInfo.Builder(wrapper.getSurface()).build());
                 mDisplay.setDynamicToolbarMaxHeight(mDynamicToolbarMaxHeight);
                 extendedGeckoView.this.setActive(true);
             }
@@ -119,17 +120,18 @@ public class extendedGeckoView extends GeckoView {
             return display;
         }
 
-        @Override // SurfaceListener
-        public void onSurfaceChanged(final Surface surface,
-                                     final int width, final int height) {
+
+        @Override
+        public void onSurfaceChanged(Surface surface, SurfaceControl surfaceControl, int width, int height) {
             if (mDisplay != null) {
-                mDisplay.surfaceChanged(surface, width, height);
+                mDisplay.surfaceChanged(new GeckoDisplay.SurfaceInfo.Builder(surface).build());
                 mDisplay.setDynamicToolbarMaxHeight(mDynamicToolbarMaxHeight);
                 if (!mValid) {
                     extendedGeckoView.this.setActive(true);
                 }
             }
             mValid = true;
+
         }
 
         @Override // SurfaceListener
@@ -731,7 +733,7 @@ public class extendedGeckoView extends GeckoView {
                 strValues.put(values.keyAt(i), value.getTextValue());
             }
         }
-        mSession.autofill(strValues);
+        mSession.getAutofillSession().autofill(strValues);
     }
 
     /**
@@ -797,43 +799,35 @@ public class extendedGeckoView extends GeckoView {
         }
 
         @Override
-        public void onAutofill(@NonNull final GeckoSession session,
-                               final int notification,
-                               final Autofill.Node node) {
-            ThreadUtils.assertOnUiThread();
-            if (Build.VERSION.SDK_INT < 26) {
-                return;
+        public void onNodeUpdate(
+                @NonNull final GeckoSession session,
+                @NonNull final Autofill.Node node,
+                @NonNull final Autofill.NodeData data) {
+
+            final AutofillManager manager;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                manager = extendedGeckoView.this.getContext().getSystemService(AutofillManager.class);
+                if (manager == null) {
+                    return;
+                }
+                manager.notifyViewEntered(extendedGeckoView.this, data.getId(),displayRectForId(session, node));
             }
 
-            final AutofillManager manager =
-                    extendedGeckoView.this.getContext().getSystemService(AutofillManager.class);
-            if (manager == null) {
-                return;
-            }
+        }
 
-            switch (notification) {
-                case Autofill.Notify.SESSION_STARTED:
-                    // This line seems necessary for auto-fill to work on the initial page.
-                case Autofill.Notify.SESSION_CANCELED:
-                    manager.cancel();
-                    break;
-                case Autofill.Notify.SESSION_COMMITTED:
-                    manager.commit();
-                    break;
-                case Autofill.Notify.NODE_FOCUSED:
-                    manager.notifyViewEntered(
-                            extendedGeckoView.this, node.getId(),
-                            displayRectForId(session, node));
-                    break;
-                case Autofill.Notify.NODE_BLURRED:
-                    manager.notifyViewExited(extendedGeckoView.this, node.getId());
-                    break;
-                case Autofill.Notify.NODE_UPDATED:
-                    manager.notifyValueChanged(
-                            extendedGeckoView.this,
-                            node.getId(),
-                            AutofillValue.forText(node.getValue()));
-                    break;
+        @Override
+        public void onNodeFocus(
+                @NonNull final GeckoSession session,
+                @NonNull final Autofill.Node node,
+                @NonNull final Autofill.NodeData data) {
+
+            final AutofillManager manager;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                manager = extendedGeckoView.this.getContext().getSystemService(AutofillManager.class);
+                if (manager == null) {
+                    return;
+                }
+                manager.notifyViewEntered(extendedGeckoView.this, data.getId(),displayRectForId(session, node));
             }
         }
     }

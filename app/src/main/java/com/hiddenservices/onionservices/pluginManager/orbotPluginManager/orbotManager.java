@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.pluginManager.orbotPluginManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
+import org.torproject.android.service.util.Utils;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 import java.lang.ref.WeakReference;
@@ -14,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.hiddenservices.onionservices.constants.constants;
+import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
@@ -47,13 +50,10 @@ public class orbotManager {
         this.mLogManger = new orbotLogManager();
 
         orbotLocalConstants.mNotificationStatus = pNotificationStatus;
+        orbotLocalConstants.mSOCKSPort = checkPortOrAutoManual(mAppContext.get());
     }
 
     private void onInitlizeOrbot(String pBridgeCustomBridge, boolean pBridgeGatewayManual, String pBridgeCustomType, boolean pBridgeStatus, String pBridgesDefault) {
-
-        if (helperMethod.availablePort(9050)) {
-            orbotLocalConstants.mSOCKSPort = 9050;
-        }
 
         orbotLocalConstants.mBridges = pBridgeCustomBridge;
         orbotLocalConstants.mIsManualBridge = pBridgeGatewayManual;
@@ -64,14 +64,42 @@ public class orbotManager {
         onInitailizeService();
     }
 
+    public int checkPortOrAutoManual(Context context) {
+        SharedPreferences prefs = Prefs.getSharedPrefs(context.getApplicationContext());
+        String portString = prefs.getString("pref_transport", 9050 + "");
+
+        if (!portString.equalsIgnoreCase("auto")) {
+            boolean isPortUsed = true;
+            int port = Integer.parseInt(portString);
+
+            while (isPortUsed) {
+                isPortUsed = Utils.isPortOpen("127.0.0.1", port, 500);
+
+                if (isPortUsed) //the specified port is not available, so let Tor find one instead
+                    port++;
+            }
+            return port;
+        }
+
+        return 9050;
+    }
+
     private void onInitailizeService() {
         if (status.sTorBrowsing) {
-            Intent startTorIntent = new Intent(mAppContext.get(), OrbotService.class);
-            startTorIntent.setAction(ACTION_START);
-            if (mAppContext.get().getPackageName() != null) {
-                startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, mAppContext.get().getPackageName());
-            }
-            mAppContext.get().startService(startTorIntent);
+            orbotLocalConstants.mIsTorInitialized = true;
+
+            new Thread(){
+                public void run(){
+                    mAppContext.get().runOnUiThread(() -> {
+                        Intent startTorIntent = new Intent(mAppContext.get(), OrbotService.class);
+                        startTorIntent.setAction(ACTION_START);
+                        if (mAppContext.get().getPackageName() != null) {
+                            startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, mAppContext.get().getPackageName());
+                        }
+                        mAppContext.get().startService(startTorIntent);
+                    });
+                }
+            }.start();
 
             SharedPreferences settings = mAppContext.get().getSharedPreferences("se", MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();
@@ -82,7 +110,7 @@ public class orbotManager {
             editor.putBoolean(keys.PROXY_SOCKS_REMOTE_DNS, constants.CONST_PROXY_SOCKS_REMOTE_DNS);
             editor.apply();
         } else {
-            orbotLocalConstants.mIsTorInitialized = true;
+            //orbotLocalConstants.mIsTorInitialized = true;
         }
 
     }

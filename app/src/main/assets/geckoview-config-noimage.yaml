@@ -10,6 +10,7 @@ prefs:
   # network.proxy.socks_port:  9050
   network.proxy.socks_version: 5
   network.proxy.socks_remote_dns: true
+  permissions.webRequestBlocking: 1
   permissions.default.image: 2
   browser.display.show_image_placeholders: true
   browser.cache.disk.enable: false
