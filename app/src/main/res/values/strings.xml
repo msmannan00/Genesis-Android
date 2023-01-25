@@ -204,12 +204,12 @@
     <string name="SETTING_SEARCH_HEADER_1_INFO" translatable="true">Choose default search engine</string>
     <string name="SETTING_SEARCH_HEADER_2" translatable="true">Search setting</string>
     <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Manage how searches appear</string>
-    <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default</string>
+    <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default Engine (Recommended)</string>
     <string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
-    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo</string>
-    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google</string>
-    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing</string>
-    <string name="SETTING_SEARCH_BING" translatable="false">Wikipedia</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo (Recommended)</string>
+    <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google by Google inc</string>
+    <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing by Microsoft</string>
+    <string name="SETTING_SEARCH_BING" translatable="false">Browse articles freely</string>
     <string name="SETTING_SEARCH_HISTORY" translatable="true">Show search history</string>
     <string name="SETTING_SEARCH_SUGGESTIONS" translatable="true">Show search suggestions</string>
     <string name="SETTING_SEARCH_HISTORY_INFO" translatable="true">Suggestions from search history appear when you type in the search bar</string>

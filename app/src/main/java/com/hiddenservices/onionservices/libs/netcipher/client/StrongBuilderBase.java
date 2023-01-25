@@ -71,7 +71,7 @@ StrongBuilderBase<T extends StrongBuilderBase, C>
      *             will hold onto the Application singleton
      */
     public StrongBuilderBase(Context ctxt) {
-        this.ctxt = ctxt.getApplicationContext();
+        this.ctxt = ctxt;
     }
 
     /**

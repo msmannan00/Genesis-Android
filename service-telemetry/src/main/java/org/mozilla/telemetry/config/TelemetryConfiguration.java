@@ -61,7 +61,7 @@ public class TelemetryConfiguration {
     private SettingsMeasurement.SettingsProvider settingsProvider;
 
     public TelemetryConfiguration(Context context) {
-        this.context = context.getApplicationContext();
+        this.context = context;
         this.telemetryPreferences = Collections.emptySet();
 
         setAppName(ContextUtils.getAppName(context));

@@ -376,16 +376,12 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                 if (model.getSession().getTitle().equals("about:blank")) {
                     mWebThumbnail.setAlpha(0f);
                 } else {
-                    new Handler().postDelayed(() ->
-                    {
-                        if (mWebThumbnail.getDrawable() == null) {
-                            mWebThumbnail.setImageBitmap(model.getBitmap());
-                        } else {
-                            Drawable mDrawable = new BitmapDrawable(itemView.getContext().getResources(), model.getBitmap());
-                            helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable, 150);
-                        }
-                        Log.i("SUPERFFF", "SUPERFFF : " + getLayoutPosition());
-                    }, getLayoutPosition());
+                    if (mWebThumbnail.getDrawable() == null) {
+                        mWebThumbnail.setImageBitmap(model.getBitmap());
+                    } else {
+                        Drawable mDrawable = new BitmapDrawable(itemView.getContext().getResources(), model.getBitmap());
+                        helperMethod.setImageDrawableWithAnimation(mWebThumbnail, mDrawable, 150);
+                    }
                 }
 
                 if (mSelectedList.contains(model.getSession().getSessionID())) {

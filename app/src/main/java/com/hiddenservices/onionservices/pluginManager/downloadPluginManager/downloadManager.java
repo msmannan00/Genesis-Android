@@ -56,7 +56,7 @@ public class downloadManager {
     }
 
     private void onDownloadWebRequest(String mURL, String mPath) {
-        mAppContext.get().startService(downloadService.getDownloadService(mAppContext.get().getApplicationContext(), mURL, mPath));
+        mAppContext.get().startService(downloadService.getDownloadService(mAppContext.get(), mURL, mPath));
     }
 
     private String onDownloadBlobFile(String pURL) {

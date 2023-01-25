@@ -25,6 +25,13 @@ public class orbotLocalConstants
     public static boolean mStartTriggered = false;
     public static boolean mNewCircuitRegistered = false;
 
+    public static boolean mBridgesInitStatus = false;
+    public static boolean mInitUpdateBridge = false;
+    public static boolean sAdLoaded = false;
+    public static String mInitUpdateBridgeList = "";
+    public static boolean mInitUpdateVPN = false;
+    public static boolean mAppTriggered = false;
+
     public static int mHTTPPort = 8118;
     public static int mSOCKSPort = -1;
 }

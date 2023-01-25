@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.hiddenservices.onionservices.constants.constants;
-import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
@@ -55,17 +54,21 @@ public class orbotManager {
 
     private void onInitlizeOrbot(String pBridgeCustomBridge, boolean pBridgeGatewayManual, String pBridgeCustomType, boolean pBridgeStatus, String pBridgesDefault) {
 
+        if (helperMethod.availablePort(9050)) {
+            orbotLocalConstants.mSOCKSPort = 9050;
+        }
+
         orbotLocalConstants.mBridges = pBridgeCustomBridge;
         orbotLocalConstants.mIsManualBridge = pBridgeGatewayManual;
         orbotLocalConstants.mManualBridgeType = pBridgeCustomType;
         orbotLocalConstants.mBridgesDefault = pBridgesDefault;
-        Prefs.putBridgesEnabled(pBridgeStatus);
+        orbotLocalConstants.mBridgesInitStatus = pBridgeStatus;
 
         onInitailizeService();
     }
 
     public int checkPortOrAutoManual(Context context) {
-        SharedPreferences prefs = Prefs.getSharedPrefs(context.getApplicationContext());
+        SharedPreferences prefs = Prefs.getSharedPrefs(context);
         String portString = prefs.getString("pref_transport", 9050 + "");
 
         if (!portString.equalsIgnoreCase("auto")) {
@@ -86,31 +89,33 @@ public class orbotManager {
 
     private void onInitailizeService() {
         if (status.sTorBrowsing) {
-            orbotLocalConstants.mIsTorInitialized = true;
-
             new Thread(){
                 public void run(){
-                    mAppContext.get().runOnUiThread(() -> {
-                        Intent startTorIntent = new Intent(mAppContext.get(), OrbotService.class);
-                        startTorIntent.setAction(ACTION_START);
-                        if (mAppContext.get().getPackageName() != null) {
-                            startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, mAppContext.get().getPackageName());
-                        }
-                        mAppContext.get().startService(startTorIntent);
-                    });
+                    try {
+                        orbotLocalConstants.mIsTorInitialized = false;
+                        sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Intent startTorIntent = new Intent(mAppContext.get(), OrbotService.class);
+                    startTorIntent.setAction(ACTION_START);
+                    if (mAppContext.get().getPackageName() != null) {
+                        startTorIntent.putExtra(OrbotService.EXTRA_PACKAGE_NAME, mAppContext.get().getPackageName());
+                    }
+                    mAppContext.get().startService(startTorIntent);
+
+                    SharedPreferences settings = mAppContext.get().getSharedPreferences("se", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt(keys.PROXY_TYPE, 1);
+                    editor.putString(keys.PROXY_SOCKS, constants.CONST_PROXY_SOCKS);
+                    editor.putInt(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
+                    editor.putInt(keys.PROXY_SOCKS_VERSION, constants.CONST_PROXY_SOCKS_VERSION);
+                    editor.putBoolean(keys.PROXY_SOCKS_REMOTE_DNS, constants.CONST_PROXY_SOCKS_REMOTE_DNS);
+                    editor.apply();
                 }
             }.start();
-
-            SharedPreferences settings = mAppContext.get().getSharedPreferences("se", MODE_PRIVATE);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putInt(keys.PROXY_TYPE, 1);
-            editor.putString(keys.PROXY_SOCKS, constants.CONST_PROXY_SOCKS);
-            editor.putInt(keys.PROXY_SOCKS_PORT, orbotLocalConstants.mSOCKSPort);
-            editor.putInt(keys.PROXY_SOCKS_VERSION, constants.CONST_PROXY_SOCKS_VERSION);
-            editor.putBoolean(keys.PROXY_SOCKS_REMOTE_DNS, constants.CONST_PROXY_SOCKS_REMOTE_DNS);
-            editor.apply();
         } else {
-            //orbotLocalConstants.mIsTorInitialized = true;
+            orbotLocalConstants.mIsTorInitialized = true;
         }
 
     }
@@ -129,11 +134,11 @@ public class orbotManager {
                 OrbotService.getServiceObject().disableNotification();
             }
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES)) {
-            Prefs.putBridgesEnabled((boolean) pData.get(0));
+            orbotLocalConstants.mInitUpdateBridge = (boolean)pData.get(0);
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
-            Prefs.setBridgesList((String) pData.get(0));
+            orbotLocalConstants.mInitUpdateBridgeList = (String)pData.get(0);
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN)) {
-            Prefs.putUseVpn((boolean) pData.get(0));
+            orbotLocalConstants.mInitUpdateVPN = (boolean)pData.get(0);
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT)) {
             if (OrbotService.getServiceObject() != null) {
                 OrbotService.getServiceObject().newIdentity();

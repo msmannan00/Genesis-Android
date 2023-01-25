@@ -8,7 +8,8 @@ import android.content.Intent;
 public interface OrbotConstants {
 
     String TAG = "Orbot";
-
+    String SMART_STATUS_NO_DIRECT = "no_direct";
+    String SMART_STATUS_CIRCUMVENTION_ATTEMPT_FAILED = "bad_attempt_suggestion";
     String PREF_OR = "pref_or";
     String PREF_OR_PORT = "pref_or_port";
     String PREF_OR_NICKNAME = "pref_or_nickname";
@@ -107,10 +108,17 @@ public interface OrbotConstants {
     String LOCAL_ACTION_LOG = "log";
     String LOCAL_ACTION_STATUS = "status";
     String LOCAL_ACTION_BANDWIDTH = "bandwidth";
+    String LOCAL_EXTRA_TOTAL_READ = "totalRead";
+    String LOCAL_EXTRA_TOTAL_WRITTEN = "totalWritten";
+    String LOCAL_EXTRA_LAST_WRITTEN = "lastWritten";
+    String LOCAL_EXTRA_LAST_READ = "lastRead";
     String LOCAL_EXTRA_LOG = "log";
+    String LOCAL_EXTRA_BOOTSTRAP_PERCENT = "percent";
     String LOCAL_ACTION_PORTS = "ports";
     String LOCAL_ACTION_V3_NAMES_UPDATED = "V3_NAMES_UPDATED";
     String LOCAL_ACTION_NOTIFICATION_START = "notification_start";
+    String LOCAL_ACTION_SMART_CONNECT_EVENT = "smart";
+    String LOCAL_EXTRA_SMART_STATUS = "status";
 
     /**
      * All tor-related services and daemons are stopped
@@ -134,6 +142,7 @@ public interface OrbotConstants {
     // actions for internal command Intents
     String CMD_SET_EXIT = "setexit";
     String CMD_ACTIVE = "ACTIVE";
+    String CMD_SNOWFLAKE_PROXY = "sf_proxy";
 
     String ONION_SERVICES_DIR = "v3_onion_services";
     String V3_CLIENT_AUTH_DIR = "v3_client_auth";

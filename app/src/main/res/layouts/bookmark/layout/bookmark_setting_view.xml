@@ -62,43 +62,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <ImageView
-                    android:id="@+id/pRemoveBookmark"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="3dp"
-                    android:background="@xml/bx_ripple_default_round"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:onClick="onUITrigger"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_cross"
-                    app:tint="@color/c_bookmark_settings_header_icon_tint"
-                    tools:ignore="UsingOnClickInXml" />
-
-                <View
-                    android:id="@+id/pDivier"
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="3dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/c_divider_line_light" />
-
-                <ImageView
-                    android:id="@+id/pBookmarkUpdate"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="3dp"
-                    android:background="@xml/bx_ripple_default_round"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:onClick="onUITrigger"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_done"
-                    app:tint="@color/c_bookmark_settings_header_icon_tint"
-                    tools:ignore="UsingOnClickInXml" />
-
             </LinearLayout>
 
             <!-- Title Header -->
@@ -190,6 +153,37 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/pRemoveBookmark"
+                    android:background="@xml/ax_ripple_default_round_bottom_danger"
+                    android:onClick="onUITrigger"
+                    android:elevation="15dp"
+                    android:textColor="@color/c_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:text="@string/SHARED_RECYCLER_VIEW_DELETE" />
+
+                <Button
+                    android:id="@+id/pBookmarkUpdate"
+                    android:text="@string/ALERT_CREATE_BOOKMARK_DONE"
+                    android:background="@xml/ax_ripple_default_round_bottom"
+                    android:onClick="onUITrigger"
+                    android:elevation="15dp"
+                    android:textColor="@color/c_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
 
         </LinearLayout>

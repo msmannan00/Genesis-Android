@@ -267,6 +267,7 @@ public class historyController extends AppCompatActivity {
 
     @Override
     public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
         if (status.sSettingIsAppPaused && (level == 80 || level == 15)) {
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY, true));
             finish();

@@ -29,7 +29,6 @@ import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
-import android.os.StatFs;
 import android.os.Vibrator;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -262,7 +261,6 @@ public class helperMethod {
             writer.write(content);
             writer.close();
         } catch (Exception ex) {
-            Log.i("","");
         }
     }
 
@@ -308,11 +306,6 @@ public class helperMethod {
         }
 
         return false;
-    }
-
-    public static int getFreeSpace(String pPath, Context pContext) {
-        StatFs stat = new StatFs(pPath);
-        return  (int) stat.getAvailableBlocksLong();
     }
 
     public static String completeURL(String pURL) {
@@ -378,7 +371,7 @@ public class helperMethod {
         return size.x;
     }
 
-    public static SpannableString urlDesigner(String url, Context pContext, int pDefColor, int pTheme) {
+    public static SpannableString urlDesigner(String url, Context pContext, int pDefColor, int pTheme, boolean sTorBrowsing) {
 
         int mColor = 0;
         if (pTheme == enums.Theme.THEME_DARK) {
@@ -394,7 +387,11 @@ public class helperMethod {
             return ss;
         } else if (url.startsWith("http://")) {
             SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if(sTorBrowsing){
+                ss.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }else {
+                ss.setSpan(new ForegroundColorSpan(Color.RED), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
             ss.setSpan(new ForegroundColorSpan(Color.GRAY), 4, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ss;
         } else {
@@ -975,7 +972,7 @@ public class helperMethod {
 
     public static void showToastMessage(String message, Context context) {
         if (context != null) {
-            Toast toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 0);
             toast.show();
         }
@@ -1090,7 +1087,7 @@ public class helperMethod {
                 ComponentName componentName = intent.getComponent();
                 Intent mainIntent = Intent.makeRestartActivityTask(componentName);
                 mainIntent.putExtra(M_RESTART_APP_KEY, pOpenOnRestart);
-                pContext.getApplicationContext().startActivity(mainIntent);
+                pContext.startActivity(mainIntent);
             }
         });
         Runtime.getRuntime().exit(0);
@@ -1118,7 +1115,7 @@ public class helperMethod {
                 ComponentName componentName = intent.getComponent();
                 Intent mainIntent = Intent.makeRestartActivityTask(componentName);
                 mainIntent.putExtra(M_RESTART_APP_KEY, pOpenOnRestart);
-                activityContextManager.getInstance().getHomeController().getApplicationContext().startActivity(mainIntent);
+                activityContextManager.getInstance().getHomeController().startActivity(mainIntent);
                 activityContextManager.getInstance().getHomeController().overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
             }
         });

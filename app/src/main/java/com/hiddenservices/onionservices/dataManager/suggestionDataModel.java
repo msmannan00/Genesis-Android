@@ -104,12 +104,6 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
-        if (mCurrentList.size() <= 0) {
-            if (status.sTorBrowsing) {
-                mCurrentList.add(mSize, new historyRowModel("Orion Search", "orion.onion", -1));
-            }
-        }
-
         return mCurrentList;
     }
 

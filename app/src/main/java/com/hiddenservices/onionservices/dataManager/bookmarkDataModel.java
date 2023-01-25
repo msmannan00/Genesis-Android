@@ -49,7 +49,8 @@ public class bookmarkDataModel {
     void addBookmark(String pURL, String pTitle) {
         if (pURL.endsWith("about:blank"))
             pURL = "about:blank";
-        if (pURL.length() > 1500) {
+
+        if (pURL.length() > 1500 && !pURL.startsWith("resource://android/assets/")) {
             return;
         }
         int autoval = 0;
@@ -117,7 +118,7 @@ public class bookmarkDataModel {
     Intent getBookmarkedIntent(Intent intent, String pURL) {
 
         for (int mCounter = 0; mCounter < mBookmarks.size(); mCounter++) {
-            if (mBookmarks.get(mCounter).getID() == mAvailableBookmark.get(pURL)) {
+            if (mAvailableBookmark.get(pURL)!=null && mBookmarks.get(mCounter).getID() == mAvailableBookmark.get(pURL)) {
                 bookmarkRowModel mBookmarkRowModel = mBookmarks.get(mCounter);
                 intent.putExtra(keys.BOOKMARK_SETTING_NAME, mBookmarkRowModel.getHeader());
                 intent.putExtra(keys.BOOKMARK_SETTING_URL, mBookmarkRowModel.getDescription());

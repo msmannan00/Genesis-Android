@@ -30,7 +30,6 @@ public class dataController {
     private tabDataModel mTabModel = null;
     private preferenceDataModel mPreferenceModel;
     private historyDataModel mHistoryModel;
-    private imageDataModel mImageDataModel;
     private bookmarkDataModel mBookmarkDataModel;
     private suggestionDataModel mSuggestionDataModel;
     private helpDataModel mHelpDataModel;
@@ -54,7 +53,6 @@ public class dataController {
             mHistoryModel = new historyDataModel(new invokeHistoryCallbacks());
             mTabModel = new tabDataModel(new invokeTabCallbacks());
             mPreferenceModel = new preferenceDataModel(pAppContext);
-            mImageDataModel = new imageDataModel();
             mBookmarkDataModel = new bookmarkDataModel(new invokeBookmarkCallbacks());
             mSuggestionDataModel = new suggestionDataModel(pAppContext);
             mHelpDataModel = new helpDataModel();
@@ -197,12 +195,6 @@ public class dataController {
             }
             return null;
         }
-    }
-
-    /*Trigger Image Cache*/
-
-    public Object invokeImage(dataEnums.eImageCommands pCommands, List<Object> pData) {
-        return mImageDataModel.onTrigger(pCommands, pData);
     }
 
     /*Trigger SQL Cipher Database*/

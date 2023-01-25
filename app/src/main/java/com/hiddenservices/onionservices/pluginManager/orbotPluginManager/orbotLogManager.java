@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.pluginManager.orbotPluginManager;
 
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 
 import java.util.List;
@@ -11,6 +12,9 @@ public class orbotLogManager {
     private String onGetCleanedLogs(String pLogs) {
         String logs = pLogs;
 
+        if(!status.sAdLoaded){
+            return "Initializing extentions";
+        }
         if (logs.equals("Starting Orion | Please Wait ...")) {
             return logs;
         }
@@ -21,9 +25,9 @@ public class orbotLogManager {
             return pLogs;
         }
 
-        if (!logs.contains("Bootstrapped")) {
-            logs = "Initializing Bootstrap";
-        }
+        //if (!logs.contains("Bootstrapped")) {
+        //    logs = "Initializing Bootstrap";
+        //}
 
         if (!logs.equals(strings.GENERIC_EMPTY_STR)) {
             String Logs = logs;

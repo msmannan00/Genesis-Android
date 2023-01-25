@@ -19,6 +19,7 @@ import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
+import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.dataController;
@@ -41,6 +42,7 @@ import static com.hiddenservices.onionservices.appManager.languageManager.langua
 import static com.hiddenservices.onionservices.constants.constants.CONST_LANGUAGE_DEFAULT_LANG;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_SUPPORTED_SYSTEM_LANGUAGE_INFO;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LANGUAGE_SUPPORT_FAILURE;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LOW_MEMORY;
 
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
@@ -139,6 +141,10 @@ public class languageController extends AppCompatActivity {
     /*Helper Methods*/
 
     private boolean changeLanguage(String pLanguageCode, String pLanguageRegion) {
+        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_LOW_MEMORY);
+            return false;
+        }
         boolean mDefaultLanguageNotSupported = false;
         if (pLanguageCode.equals(CONST_LANGUAGE_DEFAULT_LANG)) {
             Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;

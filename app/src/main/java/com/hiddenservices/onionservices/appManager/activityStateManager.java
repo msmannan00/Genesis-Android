@@ -36,11 +36,12 @@ public class activityStateManager extends Service {
 
     @Override
     public void onDestroy() {
+
         orbotLocalConstants.mAppForceExit = true;
         status.sNoTorTriggered = false;
         NotificationManagerCompat.from(this).cancel(1025);
         NotificationManagerCompat.from(this).cancel(1030);
-        Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
+        Intent mServiceIntent = new Intent(this, OrbotService.class);
         this.stopService(mServiceIntent);
 
         if (OrbotService.getServiceObject() != null) {
@@ -55,11 +56,12 @@ public class activityStateManager extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
+
         orbotLocalConstants.mAppForceExit = true;
         status.sNoTorTriggered = false;
         NotificationManagerCompat.from(this).cancel(1025);
         NotificationManagerCompat.from(this).cancel(1030);
-        Intent mServiceIntent = new Intent(this.getApplicationContext(), OrbotService.class);
+        Intent mServiceIntent = new Intent(this, OrbotService.class);
         this.stopService(mServiceIntent);
         if (OrbotService.getServiceObject() != null) {
             OrbotService.getServiceObject().onDestroy();

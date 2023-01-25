@@ -1,5 +1,8 @@
 package com.hiddenservices.onionservices.appManager.settingManager.generalManager;
 
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LOW_MEMORY;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_MAX_TAB_REACHED;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -230,6 +233,10 @@ public class settingGeneralController extends AppCompatActivity {
     }
 
     public void onSelectTheme(View view) {
+        if(status.sLowMemory != enums.MemoryStatus.STABLE){
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_LOW_MEMORY);
+            return;
+        }
         if (!mIsThemeChanging) {
             mIsThemeChanging = true;
             if (view.getId() == R.id.pSearchSettingOption1) {

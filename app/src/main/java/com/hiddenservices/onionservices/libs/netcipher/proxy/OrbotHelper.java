@@ -408,7 +408,7 @@ public class OrbotHelper implements ProxyHelper {
      *             onto the Application context
      */
     private OrbotHelper(Context ctxt) {
-        this.ctxt = ctxt.getApplicationContext();
+        this.ctxt = ctxt;
         this.handler = new Handler(Looper.getMainLooper());
     }
 

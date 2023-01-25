@@ -134,6 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:padding="3dp"
+                    android:visibility="gone"
                     android:src="@drawable/genesis"
                     android:contentDescription="@string/GENERAL_TODO" />
 
@@ -213,6 +214,7 @@
                     android:clickable="false"
                     android:padding="6dp"
                     android:layout_marginStart="7dp"
+                    android:visibility="gone"
                     android:src="@drawable/duckduckgo"
                     android:contentDescription="@string/GENERAL_TODO" />
 
@@ -231,7 +233,7 @@
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
-                        android:text="@string/SETTING_SEARCH_DUCK"
+                        android:text="DuckDuckGo"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v1"
@@ -290,6 +292,7 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:layout_marginStart="7dp"
+                    android:visibility="gone"
                     android:src="@drawable/google"
                     android:contentDescription="@string/GENERAL_TODO" />
 
@@ -308,7 +311,7 @@
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
-                        android:text="@string/SETTING_SEARCH_GOOGLE"
+                        android:text="Google"
                         android:textDirection="locale"
                         android:textAlignment="viewStart"
                         android:textAllCaps="false"
@@ -368,6 +371,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
                     android:padding="5dp"
+                    android:visibility="gone"
                     android:src="@drawable/bing"
                     android:contentDescription="@string/GENERAL_TODO" />
 
@@ -386,7 +390,7 @@
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
-                        android:text="@string/SETTING_SEARCH_AMAZON"
+                        android:text="Bing"
                         android:textDirection="locale"
                         android:textAlignment="viewStart"
                         android:textAllCaps="false"
@@ -447,6 +451,7 @@
                     android:padding="5dp"
                     android:layout_marginStart="7dp"
                     android:src="@drawable/wikipedia"
+                    android:visibility="gone"
                     android:contentDescription="@string/GENERAL_TODO" />
 
                 <LinearLayout
@@ -464,7 +469,7 @@
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
-                        android:text="@string/SETTING_SEARCH_BING"
+                        android:text="Wikipedia"
                         android:textDirection="locale"
                         android:textAlignment="viewStart"
                         android:textAllCaps="false"

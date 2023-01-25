@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.strings;
@@ -67,6 +68,12 @@ class tabDataModel {
         }
     }
 
+    private void closeAllTabLowMemory() {
+        for (int mCounter = 1; mCounter < mTabs.size(); mCounter++) {
+            mTabs.get(mCounter).getSession().close();
+        }
+    }
+
     geckoSession getHomePage() {
         if (mTabs.size() > 0) {
             return mTabs.get(0).getSession();
@@ -76,7 +83,13 @@ class tabDataModel {
     }
 
     int addTabs(geckoSession mSession, boolean pIsDataSavable) {
+
         tabRowModel mTabModel = new tabRowModel(mSession);
+        if(mTabs.size() > 0 && (status.sLowMemory == enums.MemoryStatus.LOW_MEMORY || status.sLowMemory == enums.MemoryStatus.CRITICAL_MEMORY)){
+            getCurrentTab().getSession().close();
+            getCurrentTab().getSession().stop();
+        }
+
         mTabs.add(0, mTabModel);
 
         if (mTabs.size() > 20) {
@@ -208,6 +221,10 @@ class tabDataModel {
                 params[2] = mTabs.get(counter).getSession().getTheme();
                 String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
 
+                if(status.sLowMemory != enums.MemoryStatus.STABLE){
+                    mTabs.get(counter).decodeByteArraysetmBitmap(null);
+                }
+
                 if (mTabs.get(counter).getSession().getTitle().equals("about:blank") || mTabs.get(counter).getSession().getTitle().equals("$TITLE") || mTabs.get(counter).getSession().getTitle().startsWith("http://loading") || mTabs.get(counter).getSession().getTitle().startsWith("loading")) {
                     return false;
                 }
@@ -251,13 +268,17 @@ class tabDataModel {
         }
     }
 
+    updatePixelThread mThread = new updatePixelThread();
     public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, boolean pOpenTabView) {
-        updatePixelThread mThread = new updatePixelThread();
-        mThread.pBitmapManager = pBitmapManager;
-        mThread.pImageView = pImageView;
-        mThread.pOpenTabView = pOpenTabView;
-        mThread.pSessionID = pSessionID;
-        mThread.execute();
+        if(status.sLowMemory == enums.MemoryStatus.STABLE){
+            mThread.cancel(true);
+            mThread = new updatePixelThread();
+            mThread.pBitmapManager = pBitmapManager;
+            mThread.pImageView = pImageView;
+            mThread.pOpenTabView = pOpenTabView;
+            mThread.pSessionID = pSessionID;
+            mThread.execute();
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -281,22 +302,22 @@ class tabDataModel {
                         Bitmap mBitmap = pBitmapManager.poll(10000);
 
                         ByteArrayOutputStream out = new ByteArrayOutputStream();
-                        mBitmap.compress(Bitmap.CompressFormat.JPEG, 35, out);
+                        mBitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
 
                         Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                         Bitmap emptyBitmap = Bitmap.createBitmap(decoded.getWidth(), decoded.getHeight(), decoded.getConfig());
                         if (!decoded.sameAs(emptyBitmap)) {
 
                             if (pImageView != null) {
-                                activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
-                                    pImageView.setImageBitmap(mBitmap);
-                                });
+                                //activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
+                                    //pImageView.setImageBitmap(mBitmap);
+                                //});
                             }
 
                             mTabs.get(finalCounter).decodeByteArraysetmBitmap(decoded);
-                            ContentValues mContentValues = new ContentValues();
-                            mContentValues.put("mThumbnail", out.toByteArray());
-                            mExternalEvents.invokeObserver(Arrays.asList("tab", mContentValues, "mid = ?", new String[]{mTabs.get(finalCounter).getmId()}), dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT);
+                            //ContentValues mContentValues = new ContentValues();
+                            //mContentValues.put("mThumbnail", out.toByteArray());
+                            //mExternalEvents.invokeObserver(Arrays.asList("tab", mContentValues, "mid = ?", new String[]{mTabs.get(finalCounter).getmId()}), dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT);
                         }
                         break;
                     }
@@ -312,6 +333,8 @@ class tabDataModel {
 
         @Override
         protected void onPostExecute(String bitmap) {
+            pImageView = null;
+            pBitmapManager = null;
         }
     }
 
@@ -370,6 +393,8 @@ class tabDataModel {
             updatePixels((String) pData.get(0), (GeckoResult<Bitmap>) pData.get(1), (ImageView) pData.get(2), (Boolean) pData.get(4));
         } else if (pCommands == dataEnums.eTabCommands.M_HOME_PAGE) {
             return getHomePage();
+        } else if (pCommands == dataEnums.eTabCommands.M_CLOSE_TAB_LOW_MEMORY) {
+            closeAllTabLowMemory();
         }
 
         return null;

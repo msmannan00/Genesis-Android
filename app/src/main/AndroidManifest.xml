@@ -319,7 +319,7 @@
             android:authorities="org.torproject.android.ui.hiddenservices.providers.genesishiddenservices"
             android:exported="false" />
 
-        <provider
+        <!--<provider
             android:name="com.hiddenservices.onionservices.libs.providers.OnionServiceContentProvider"
             android:authorities="org.torproject.android.ui.v3onionservice.genesishiddenservices"
             android:exported="false" />
@@ -332,7 +332,7 @@
         <provider
             android:name="com.hiddenservices.onionservices.libs.providers.CookieContentProvider"
             android:authorities="org.torproject.android.ui.hiddenservices.providers.genesishiddenservices.cookie"
-            android:exported="false" />
+            android:exported="false" />-->
 
         <provider
             android:name="androidx.core.content.FileProvider"

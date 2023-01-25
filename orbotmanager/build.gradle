@@ -3,17 +3,18 @@ apply from: "../commons.gradle"
 apply from : '../dependencies.gradle'
 
 android {
-    ndkVersion '25.1.8937393'
+    ndkVersion '24.0.8215888'
 
     sourceSets {
-      main {
-        jniLibs.srcDirs = ['./src/main/libs']
-      }
+        main {
+            jniLibs.srcDirs = ['./src/main/libs']
+        }
     }
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 33
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -27,7 +28,6 @@ android {
             excludes += ['META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version']
         }
     }
-
 
     lint {
         abortOnError true

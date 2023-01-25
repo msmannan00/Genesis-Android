@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/service-telemetry" />
             <option value="$PROJECT_DIR$/shutterbug" />
             <option value="$PROJECT_DIR$/tor-android" />
+            <option value="$PROJECT_DIR$/xcrash_lib" />
           </set>
         </option>
       </GradleProjectSettings>

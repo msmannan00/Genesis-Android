@@ -11,11 +11,10 @@ prefs:
   network.proxy.socks_version: 5
   network.proxy.socks_remote_dns: true
   permissions.default.image: 1
-  permissions.webRequestBlocking: 1
   browser.display.show_image_placeholders: true
-  browser.cache.disk.enable: false
-  browser.cache.memory.enable: true
-  browser.cache.disk.capacity: 0
+  browser.cache.disk.enable: true
+  browser.cache.memory.enable: false
+  browser.cache.disk.capacity: 1000000000
   privacy.resistFingerprinting: true
   privacy.donottrackheader.enabled: false
   privacy.donottrackheader.value: 1

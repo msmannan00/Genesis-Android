@@ -143,7 +143,7 @@ public class helpController extends AppCompatActivity {
     /*HELPER FUNCTIONS*/
 
     private void onShowHelperManager(ArrayList<helpDataModel> pHelpListModel) {
-        mHelpAdapter = new helpAdapter(pHelpListModel, getApplicationContext());
+        mHelpAdapter = new helpAdapter(pHelpListModel, this);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
         mRecycleView.setAdapter(mHelpAdapter);

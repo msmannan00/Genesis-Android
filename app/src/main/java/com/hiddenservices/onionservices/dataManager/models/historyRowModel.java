@@ -34,7 +34,7 @@ public class historyRowModel {
     }
 
     public void setLogo(ImageView pLogo) {
-        this.mLogo = pLogo;
+        //this.mLogo = pLogo;
     }
 
     public void setDate(Date pDate) {

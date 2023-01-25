@@ -93,20 +93,19 @@ dependencies {
     /* Firefox ABI Splits */
 
     implementation "org.mozilla.components:browser-engine-gecko:108.2.0"
-    implementation "org.mozilla.components:browser-icons:108.2.0"
+    implementation "org.mozilla.components:browser-icons:100.0.9"
     implementation "org.mozilla.components:concept-fetch:108.2.0"
     implementation "org.mozilla.components:concept-base:108.2.0"
     implementation "org.mozilla.components:support-utils:108.2.0"
 
-
     /* Analytics */
 
-    implementation 'com.flurry.android:analytics:13.1.0@aar'
+    implementation 'com.flurry.android:analytics:14.0.0'
 
     /* Ads Manager */
 
-    implementation 'com.applovin:applovin-sdk:11.6.0'
-    implementation 'com.facebook.android:audience-network-sdk:6.12.0'
+    implementation 'com.applovin:applovin-sdk:11.5.5'
+    implementation 'com.facebook.android:audience-network-sdk:6.10.0'
     implementation 'com.applovin.mediation:facebook-adapter:6.12.0.1'
 
     /* Orbot Service */
@@ -114,10 +113,12 @@ dependencies {
 
     /* Helper Libraries */
 
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation "androidx.media:media:1.6.0"
     implementation 'com.android.volley:volley:1.2.1'
     implementation "net.zetetic:android-database-sqlcipher:4.4.3"
+
+    implementation project(':xcrash_lib')
 
 }
 

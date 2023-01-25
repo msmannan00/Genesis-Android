@@ -8,7 +8,7 @@
     android:background="@color/button_gray_alpha"
     tools:context="com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController">
 
-    <com.applovin.mediation.ads.MaxAdView maxads:adUnitId="642ec6302c7cecd2"
+    <View
         xmlns:maxads="http://schemas.applovin.com/android/1.0"
         android:id="@+id/adView"
         android:layout_width="match_parent"
@@ -19,27 +19,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/c_background_inverted"
+        android:background="@color/c_background"
         android:visibility="gone" />
-
-    <!--<com.applovin.mediation.ads.MaxAdView
-        xmlns:maxads="http://schemas.applovin.com/android/1.0"
-        maxads:adUnitId="642ec6302c7cecd2"
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:onClick="onAdvertClick"
-        android:layout_height="50dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/c_background_inverted"
-        android:visibility="gone"/>-->
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/pCoordinatorLayout"
@@ -252,7 +233,6 @@
             android:id="@+id/pNestedScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/clear_alpha"
             android:fillViewport="true"
             android:isScrollContainer="true"
             android:measureAllChildren="true"

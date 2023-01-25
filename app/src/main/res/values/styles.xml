@@ -4,7 +4,7 @@
         <item name="colorPrimary">@color/ease_blue</item>
         <item name="colorPrimaryDark">@color/landing_ease_blue</item>
         <item name="colorAccent">@color/ease_blue</item>
-        <item name="android:windowBackground">@xml/hox_splash_gradient</item>
+        <item name="android:windowBackground">@color/landing_ease_blue</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:popupAnimationStyle">@null</item>
     </style>

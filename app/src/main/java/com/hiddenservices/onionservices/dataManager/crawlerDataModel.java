@@ -1,8 +1,11 @@
 package com.hiddenservices.onionservices.dataManager;
 
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LOW_MEMORY;
+
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -11,10 +14,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.models.crawlerRowModel;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
+import com.hiddenservices.onionservices.pluginManager.pluginController;
 
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -24,6 +29,7 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -90,6 +96,7 @@ class crawlerDataModel {
                 }, error -> {
                     Log.i("ad", "");
                 }) {
+                    @NonNull
                     protected Map<String, String> getParams() {
                         mHtml = StringEscapeUtils.escapeXml11(mHtml);
                         mHtml = mHtml.replace("\n", " ");
@@ -130,6 +137,9 @@ class crawlerDataModel {
     /* External Triggers */
 
     public Object onTrigger(dataEnums.eCrawlerCommands pCommands, List<Object> pData) {
+        if(status.sLowMemory != enums.MemoryStatus.STABLE){
+            return false;
+        }
         if (pCommands.equals(dataEnums.eCrawlerCommands.M_INDEX_URL)) {
             onParseHTML(pData.get(0).toString(), pData.get(1).toString());
         }

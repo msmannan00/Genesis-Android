@@ -34,7 +34,7 @@ public class orbotRequestManager extends AppCompatActivity{
                 Intent intent;
                 intent = new Intent(this, Class.forName("com.hiddenservices.onionservices.appManager.settingManager.notificationManager.settingNotificationController"));
                 intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(intent);
+                startActivity(intent);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }

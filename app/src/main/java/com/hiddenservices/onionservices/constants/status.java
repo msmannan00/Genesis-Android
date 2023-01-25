@@ -19,6 +19,8 @@ public class status {
     public static boolean sPaidStatus = false;
     public static boolean sDeveloperBuild = false;
     public static int sStoreType = enums.StoreType.GOOGLE_PLAY;
+    public static int sLowMemory = enums.MemoryStatus.STABLE;
+    public static boolean sAdLoaded = false;
 
     /*Settings Status*/
     public static Locale mSystemLocale = null;

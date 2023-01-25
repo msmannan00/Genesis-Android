@@ -20,7 +20,7 @@ public class activityThemeManager {
     }
 
     public void onConfigurationChanged(AppCompatActivity pContext) {
-        boolean sDefaultNightMode = (pContext.getApplicationContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+        boolean sDefaultNightMode = (pContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
         setupThemeLocal(pContext, sDefaultNightMode);
         pContext.recreate();
     }
@@ -113,7 +113,7 @@ public class activityThemeManager {
     }
 
     public Context initTheme(Context pContext) {
-        boolean sDefaultNightMode = (pContext.getApplicationContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+        boolean sDefaultNightMode = (pContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
 
         if (status.sSettingIsAppStarted) {
             status.mThemeApplying = true;

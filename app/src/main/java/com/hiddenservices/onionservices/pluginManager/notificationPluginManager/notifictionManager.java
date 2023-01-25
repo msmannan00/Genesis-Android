@@ -43,10 +43,10 @@ public class notifictionManager {
     }
 
     private void onSchedule(Notification pNotification, int pDelay) {
-        Intent notificationIntent = new Intent(mAppContext.get().getApplicationContext(), localEngagementManager.class);
+        Intent notificationIntent = new Intent(mAppContext.get(), localEngagementManager.class);
         notificationIntent.putExtra(CONST_NOTIFICATION_ID_NAME, CONST_NOTIFICATION_ID_VALUE);
         notificationIntent.putExtra(CONST_NOTIFICATION_ID_NAME, pNotification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mAppContext.get().getApplicationContext(), CONST_NOTIFICATION_REQUEST_CODE, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mAppContext.get(), CONST_NOTIFICATION_REQUEST_CODE, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         long futureInMillis = SystemClock.elapsedRealtime() + pDelay;
         AlarmManager alarmManager = (AlarmManager) mAppContext.get().getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
@@ -54,7 +54,7 @@ public class notifictionManager {
     }
 
     private Notification getNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mAppContext.get().getApplicationContext(), CONST_NOTIFICATION_ID_NAME);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mAppContext.get(), CONST_NOTIFICATION_ID_NAME);
         builder.setContentTitle(CONST_NOTIFICATION_TITLE);
         builder.setSmallIcon(R.mipmap.ic_stat_tor_logo);
         builder.setAutoCancel(true);

@@ -313,7 +313,7 @@ public class TorServiceCustom extends Service {
      * @see <a href="https://github.com/torproject/tor/blob/40be20d542a83359ea480bbaa28380b4137c88b2/src/app/config/config.c#L4730">options that must be on the command line</a>
      */
     private void startTorServiceThread() {
-        final Context context = this.getApplicationContext();
+        final Context context = this;
         new Thread("tor") {
             @Override
             public void run() {

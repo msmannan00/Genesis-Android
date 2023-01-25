@@ -248,6 +248,7 @@ public class bookmarkController extends AppCompatActivity {
 
     @Override
     public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
         if (status.sSettingIsAppPaused && (level == 80 || level == 15)) {
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.HOME_LOW_MEMORY, true));
             finish();
@@ -393,7 +394,7 @@ public class bookmarkController extends AppCompatActivity {
             } else if (e_type.equals(enums.etype.on_verify_selected_url_menu)) {
                 mbookmarkViewController.onTrigger(M_VERTIFY_SELECTION_MENU, data);
             } else if (e_type.equals(enums.etype.M_OPEN_BOOKMARK_SETTING)) {
-                Intent intent = new Intent(getApplicationContext(), bookmarkSettingController.class);
+                Intent intent = new Intent(bookmarkController.this, bookmarkSettingController.class);
                 intent.putExtra(keys.BOOKMARK_SETTING_NAME, (String) data.get(0));
                 intent.putExtra(keys.BOOKMARK_SETTING_URL, (String) data.get(1));
                 intent.putExtra(keys.BOOKMARK_SETTING_ID, (int) data.get(2));

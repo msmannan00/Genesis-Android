@@ -42,6 +42,7 @@ import static com.hiddenservices.onionservices.constants.constants.*;
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE;
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE_STRING;
 import static com.hiddenservices.onionservices.constants.strings.GENERIC_EMPTY_DOT;
+import static com.hiddenservices.onionservices.constants.strings.MESSAGE_NOT_SECURE_HTTPS_SERVICE;
 import static com.hiddenservices.onionservices.constants.strings.MESSAGE_PLAYSTORE_NOT_FOUND;
 import static com.hiddenservices.onionservices.constants.strings.MESSAGE_SECURE_ONION_SERVICE;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.*;
@@ -195,15 +196,20 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         ImageView mCertificateRootBackground = mDialog.findViewById(R.id.pCertificateRootBackground);
         ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
         ImageView mCertificateRootBlocker = mDialog.findViewById(R.id.pCertificateRootBlocker);
+        String message = Html.fromHtml((String) mData.get(0))+"";
+        TextView mCertificateRootHeader = mDialog.findViewById(R.id.pCertificateRootHeader);
+        if(message.equals("Connection Not Secured")){
+            mCertificateRootHeader.setTextColor(Color.RED);
+        }
 
-        mCertificateDesciption.setText(Html.fromHtml((String) mData.get(0)));
+        mCertificateDesciption.setText(message);
         mCertificateRootBackground.animate().setStartDelay(100).setDuration(400).alpha(1);
 
         mDialog.setOnDismissListener(this);
         mCertificateRootBackground.setOnClickListener(this);
         mCertificateDesciption.setOnClickListener(this);
 
-        if (mInfo.equals(MESSAGE_SECURE_ONION_SERVICE)) {
+        if (mInfo.equals(MESSAGE_SECURE_ONION_SERVICE) || mInfo.equals(MESSAGE_NOT_SECURE_HTTPS_SERVICE)) {
             ViewGroup.LayoutParams params = mCertificateScrollView.getLayoutParams();
             params.height = helperMethod.pxFromDp(60);
             mCertificateScrollView.requestLayout();
@@ -326,7 +332,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
     }
 
     private void openSecureConnectionPopup() {
-        initializeDialog(R.layout.secure_connection_popup, Gravity.TOP);
+        if((boolean)mData.get(6) && !status.sTorBrowsing){
+            initializeDialog(R.layout.non_secure_connection_popup, Gravity.TOP);
+        }else {
+            initializeDialog(R.layout.secure_connection_popup, Gravity.TOP);
+        }
         InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0, 0, 0, -1);
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -822,11 +832,6 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     onUpdateBridges();
                     break;
 
-                case M_LOW_MEMORY:
-                    /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 5000, "Low memory, some settings might not work", mContext.getString(R.string.ALERT_DISMISS), null);
-                    break;
-
                 case M_NEW_IDENTITY:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_NEW_CIRCUIT_CREATED), mContext.getString(R.string.ALERT_DISMISS), null);
@@ -845,6 +850,16 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 case M_MAX_TAB_REACHED:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 1000, mContext.getString(R.string.TOAST_ALERT_MAX_TAB_POPUP), mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
+                case M_LOW_MEMORY:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 1000, "Action failed | low memory", mContext.getString(R.string.ALERT_DISMISS), null);
+                    break;
+
+                case M_LOW_MEMORY_AUTO:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 3000, "low memory warning", mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_ORBOT_LOADING:

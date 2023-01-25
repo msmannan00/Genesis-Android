@@ -48,7 +48,7 @@ public class NestedGeckoView extends GeckoView {
     }
 
     public NestedGeckoView(Context context, AttributeSet attrs) {
-        super(context.getApplicationContext(), attrs);
+        super(context, attrs);
 
         mChildHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);

@@ -80,7 +80,7 @@ public class OrbotVpnManager implements Handler.Callback, OrbotConstants {
 
     public OrbotVpnManager(OrbotService service) {
         mService = service;
-        prefs = Prefs.getSharedPrefs(mService.getApplicationContext());
+        prefs = Prefs.getSharedPrefs(mService);
     }
 
     public int handleIntent(VpnService.Builder builder, Intent intent) {
@@ -122,7 +122,7 @@ public class OrbotVpnManager implements Handler.Callback, OrbotConstants {
                 }
             }
         }
-        return Service.START_STICKY;
+        return Service.START_NOT_STICKY;
     }
 
     public void restartVPN (VpnService.Builder builder) {

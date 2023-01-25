@@ -15,8 +15,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
-        classpath 'com.google.gms:google-services:4.3.14'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20"
         classpath "com.applovin.quality:AppLovinQualityServiceGradlePlugin:+"
     }
 }

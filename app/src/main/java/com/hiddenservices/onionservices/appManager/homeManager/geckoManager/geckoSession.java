@@ -588,6 +588,10 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     @Override
     public GeckoResult<Boolean> onVisited(@NonNull GeckoSession var1, @NonNull String var2, @Nullable String var3, int var4) {
         if (var4 == 3 || var4 == 5 || var4 == 1) {
+            if(var4==1){
+                m_current_url_id = -1;
+                setURL(var2);
+            }
             event.invokeObserver(Arrays.asList(var2, mSessionID), enums.etype.on_url_load);
             Object mID = event.invokeObserver(Arrays.asList(var2, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
             if (mID != null) {
@@ -1351,7 +1355,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             mediaDelegateItem.onHideDefaultNotification();
         }
         wasBackPressed = true;
-        mOnBackPressed = true;
+        m_current_url_id = -1;
         goBack();
 
         try {

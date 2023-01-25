@@ -31,6 +31,7 @@ import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.example.myapplication.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,14 +41,16 @@ import java.util.Map;
 
 import static java.lang.Thread.sleep;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder> {
     /*Private Variables*/
 
     private ArrayList<historyRowModel> mHintList;
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
-    private Map<Integer, Drawable> mPastWebIcon = new HashMap<>();
-    private Map<Integer, String> mPastIconFlicker = new HashMap<>();
+    //private Map<Integer, Drawable> mPastWebIcon = new HashMap<>();
+    //private Map<Integer, String> mPastIconFlicker = new HashMap<>();
 
     public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
         this.mHintList = new ArrayList();
@@ -71,9 +74,9 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     }
 
     public void onClearAdapter() {
-        mPastWebIcon.remove(0);
-        mPastWebIcon.remove(1);
-        mPastWebIcon.remove(2);
+        //mPastWebIcon.remove(0);
+        //mPastWebIcon.remove(1);
+        //mPastWebIcon.remove(2);
     }
 
     /*Initializations*/
@@ -127,10 +130,10 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v6)));
 
-            if (mPastWebIcon.containsKey(getLayoutPosition())) {
-                pHintWebIconImage.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
-                pHintWebIconImage.setImageTintList(null);
-            } else {
+            //if (mPastWebIcon.containsKey(getLayoutPosition())) {
+                //pHintWebIconImage.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
+                //pHintWebIconImage.setImageTintList(null);
+            //} else {
                 pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
 
                 Drawable mDrawable;
@@ -143,7 +146,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                 } catch (Exception ignored) {
                 }
 
-            }
+            //}
 
             String mURLLink;
             if (model.getDescription().equals(strings.GENERIC_EMPTY_STR)) {
@@ -176,8 +179,8 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             }
 
             mURL.setText(m_url);
-            Drawable mDrawable = null;
-            Resources res = itemView.getContext().getResources();
+            //Drawable mDrawable = null;
+            //Resources res = itemView.getContext().getResources();
             try {
                 if (model.getDescription().equals(strings.GENERIC_EMPTY_STR) && !model.getHeader().contains(".")) {
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_search));
@@ -187,11 +190,11 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                     mMoveURL.setVisibility(View.VISIBLE);
                     mMoveURL.setOnTouchListener(listViewHolder.this);
                 }
-            } catch (Exception ignored) {
-            }
 
-            if (model.getDescription().equals(strings.GENERIC_EMPTY_STR)) {
+                //if (model.getDescription().contains("."))
                 mHindTypeIcon.setImageDrawable(mDrawable);
+                //}
+            } catch (Exception ignored) {
             }
 
             mpHintListener.setOnTouchListener(listViewHolder.this);
@@ -199,27 +202,21 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             if (mURLLink.contains("167.86.99.31") || mURLLink.contains("orion.onion")) {
                 pHintWebIconImage.setImageTintList(null);
                 pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
+                //mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
             } else {
                 String mURLPast = mURLLink;
-                mPastIconFlicker.put(getLayoutPosition(), mURLPast);
+                //mPastIconFlicker.put(getLayoutPosition(), mURLPast);
 
                 mHindTypeIconTemp.setImageDrawable(null);
                 mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
 
-                mContext.runOnUiThread(() -> new Handler().postDelayed(() ->
-                {
+                if(status.sLowMemory == enums.MemoryStatus.STABLE){
                     if (mHindTypeIconTemp.getDrawable() != null) {
-                        if (mURLPast.equals(mPastIconFlicker.get(getLayoutPosition()))) {
-                            pHintWebIconImage.setImageTintList(null);
-                            pHintWebIconImage.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                            mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
-                        }
-                        if (getLayoutPosition() == 1) {
-                            Log.i("FUSSSS1111", "FUSSSS4444");
-                        }
+                        pHintWebIconImage.setImageTintList(null);
+                        pHintWebIconImage.setImageDrawable(mHindTypeIconTemp.getDrawable());
+                        //mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
                     }
-                }, 300));
+                }
             }
         }
 

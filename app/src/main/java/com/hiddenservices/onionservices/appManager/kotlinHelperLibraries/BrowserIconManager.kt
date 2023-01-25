@@ -18,7 +18,7 @@ class BrowserIconManager {
         mContext: Context,
         mRuntime: GeckoRuntime,
     ){
-        fetchClient = GeckoViewFetchClient(mContext, mRuntime, Pair(10L, TimeUnit.MINUTES))
+        fetchClient = GeckoViewFetchClient(mContext, mRuntime, Pair(1L, TimeUnit.SECONDS))
         mIcons = BrowserIcons(mContext, httpClient = fetchClient!!, generator = DefaultIconGenerator())
     }
 
@@ -31,7 +31,7 @@ class BrowserIconManager {
     }
 
     fun onLoadIcon(mContext: Context, mRuntime: GeckoRuntime) {
-        val fetchClient = GeckoViewFetchClient(mContext, mRuntime, Pair(10L, TimeUnit.MINUTES))
+        val fetchClient = GeckoViewFetchClient(mContext, mRuntime, Pair(1L, TimeUnit.SECONDS))
         BrowserIcons(mContext, httpClient = fetchClient, generator = DefaultIconGenerator())
     }
 }

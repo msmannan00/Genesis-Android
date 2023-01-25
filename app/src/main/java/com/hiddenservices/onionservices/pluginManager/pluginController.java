@@ -87,7 +87,6 @@ public class pluginController {
 
         mNotificationManager = new notifictionManager(mHomeController, new notificationCallback());
         mAdManager = new appLovinManager(new admobCallback(), ((homeController) mHomeController.get()).getBannerAd(), mHomeController.get());
-        mAdManager = new appLovinManager(new admobCallback(), ((homeController) mHomeController.get()).getBannerAd(), mHomeController.get());
         mAnalyticsManager = new analyticManager(mHomeController, new analyticCallback());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();

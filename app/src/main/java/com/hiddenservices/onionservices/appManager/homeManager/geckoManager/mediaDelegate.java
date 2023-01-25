@@ -1,10 +1,7 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager;
 
 
-import static android.app.PendingIntent.FLAG_IMMUTABLE;
 import static android.content.Context.NOTIFICATION_SERVICE;
-import static com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoPromptView.LOGTAG;
-
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -14,9 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.util.Log;
 import android.widget.RemoteViews;
-import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import com.example.myapplication.R;
@@ -26,86 +21,18 @@ import com.hiddenservices.onionservices.pluginManager.pluginReciever.mediaNotifi
 import org.mozilla.geckoview.GeckoSession;
 
 public class mediaDelegate implements GeckoSession.MediaDelegate {
-    private Integer mLastNotificationId = 100;
-    private Integer mNotificationId;
-    private final Activity mActivity;
     private Context mContext;
-    private NotificationManager mNotificationManager;
 
     public mediaDelegate(Activity activity, Context pContext) {
-        mActivity = activity;
         mContext = pContext;
-        mNotificationManager = (NotificationManager) mContext.getSystemService( NOTIFICATION_SERVICE ) ;
-    }
-
-    @Override
-    public void onRecordingStatusChanged(@NonNull GeckoSession session, RecordingDevice[] devices) {
-        String message;
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mActivity);
-        RecordingDevice camera = null;
-        RecordingDevice microphone = null;
-
-        for (RecordingDevice device : devices) {
-            if (device.type == RecordingDevice.Type.CAMERA) {
-                camera = device;
-            } else if (device.type == RecordingDevice.Type.MICROPHONE) {
-                microphone = device;
-            }
-        }
-        if (camera != null && microphone != null) {
-            Log.d(LOGTAG, "ExampleDeviceDelegate:onRecordingDeviceEvent display alert_mic_camera");
-            message = "Microphone and Camera is on";
-        } else if (camera != null) {
-            Log.d(LOGTAG, "ExampleDeviceDelegate:onRecordingDeviceEvent display alert_camera");
-            message = "Camera is on";
-        } else if (microphone != null) {
-            Log.d(LOGTAG, "ExampleDeviceDelegate:onRecordingDeviceEvent display alert_mic");
-            message = "Microphone is on";
-        } else {
-            Log.d(LOGTAG, "ExampleDeviceDelegate:onRecordingDeviceEvent dismiss any notifications");
-            if (mNotificationId != null) {
-                notificationManager.cancel(mNotificationId);
-                mNotificationId = null;
-            }
-            return;
-        }
-        if (mNotificationId == null) {
-            mNotificationId = ++mLastNotificationId;
-        }
-
-        Intent intent = new Intent(mActivity, mediaDelegate.class);
-        PendingIntent pendingIntent;
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            pendingIntent = PendingIntent.getActivity(mActivity.getApplicationContext(), 0, intent, FLAG_IMMUTABLE);
-        }else {
-            pendingIntent = PendingIntent.getActivity(mActivity.getApplicationContext(), 0, intent, 0);
-        }
-
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(mActivity.getApplicationContext(), "GeckoChannel")
-                        .setContentTitle("Orion Browser")
-                        .setContentText(message)
-                        .setAutoCancel(true)
-                        .setOngoing(false)
-                        .setPriority(Notification.PRIORITY_DEFAULT)
-                        .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                        .setContentIntent(pendingIntent);
-
-        Notification notification = builder.build();
-        notification.flags |= Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
-        notificationManager.notify(mNotificationId, notification);
     }
 
     public void onHideDefaultNotification(){
-        if(mNotificationManager!=null){
-            mNotificationManager.cancel(1030);
-        }
         NotificationManagerCompat.from(mContext).cancel(1030);
     }
 
     public void showNotification(Context context, String title, String url, Bitmap mediaImage, boolean not_status) {
-
+        NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService( NOTIFICATION_SERVICE ) ;
         if(title.length()<=0 || !status.sBackgroundMusic){
             return;
         }
