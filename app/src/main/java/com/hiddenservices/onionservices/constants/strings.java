@@ -61,7 +61,7 @@ public class strings {
 
     /*Message Manager*/
     public static final String MESSAGE_PLAYSTORE_NOT_FOUND = "Playstore Not Found";
-    public static final String MESSAGE_SECURE_ONION_SERVICE = "Onion Secured Connection";
+    public static final String MESSAGE_SECURE_ONION_SERVICE = "Tor Secured Connection";
     public static final String MESSAGE_NOT_SECURE_HTTPS_SERVICE = "Connection Not Secured";
 
     /*Crawl Manager*/

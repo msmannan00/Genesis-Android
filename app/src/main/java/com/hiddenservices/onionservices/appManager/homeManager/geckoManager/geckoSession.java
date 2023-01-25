@@ -464,7 +464,10 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
                 var2 = var2.replace("www.", "");
             }
 
-            mCurrentURL = var2;
+            if(mCurrentURL.replace("http","https://").equals(var2)){
+                mCurrentURL = var2;
+            }
+
             if (!mCurrentURL.equals("about:config") && !mCurrentURL.equals("about:blank")) {
                 event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update));
@@ -566,7 +569,11 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
                     "<b>Common Name (CN)</b><br>" + securityInfo.certificate.getIssuerDN().getName() + "<br><br>" +
                     "<b>Subject Alternative Names</b><br>" + mAlternativeNames;
         } else {
-            return "Onion Secured Connection";
+            if(status.sTorBrowsing){
+                return "Tor Secured Connection";
+            }else {
+                return "Connection Not Secured";
+            }
         }
     }
 

@@ -382,7 +382,7 @@ class homeViewController {
 
             if(!mSearchbar.isFocused() && (mProgressBar.getProgress() == 0 || mProgressBar.getProgress() == 100)){
                 boolean ssl = (boolean)mEvent.invokeObserver(null, enums.etype.M_GET_SSL_STATUS);
-                if(ssl){
+                if(ssl || status.sTorBrowsing){
                     mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
                 }else {
                     mSearchLock.setColorFilter(Color.RED);
