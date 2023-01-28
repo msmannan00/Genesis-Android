@@ -67,7 +67,7 @@ public class appLovinManager implements MaxAdViewAdListener {
     /*Local Helper Methods*/
 
     private void loadAds() {
-        onAdvertStatus(true);
+        //onAdvertStatus(true);
     }
 
     private void showAd(){
@@ -79,7 +79,7 @@ public class appLovinManager implements MaxAdViewAdListener {
                 int width = ViewGroup.LayoutParams.MATCH_PARENT;
                 int heightPx = helperMethod.pxFromDp(50);
                 adView.setLayoutParams( new FrameLayout.LayoutParams( width, heightPx ) );
-                adView.setAlpha(0);
+                adView.setVisibility(View.GONE);
                 adView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 adView.animate().alpha(1).setDuration(400);
                 adView.setBackgroundColor(mContext.getResources().getColor(R.color.c_background));
@@ -109,7 +109,7 @@ public class appLovinManager implements MaxAdViewAdListener {
                 new Handler().postDelayed(() ->
                 {
                     adView.setVisibility(View.VISIBLE);
-                }, 500);
+                }, 4000);
             }else {
               adView.setVisibility(View.GONE);
             }
