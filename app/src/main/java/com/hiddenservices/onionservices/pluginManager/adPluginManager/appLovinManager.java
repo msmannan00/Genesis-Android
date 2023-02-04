@@ -13,6 +13,7 @@ public class appLovinManager {
     private eventObserver.eventListener mEvent;
     private applovinSupportManager mSupportManager;
     private applovinBannerManager mBannerManager;
+    private  AppCompatActivity mContext;
 
     private boolean mLowMemoryReached = false;
 
@@ -20,6 +21,8 @@ public class appLovinManager {
 
     public appLovinManager(eventObserver.eventListener pEvent, View pBannerAds, AppCompatActivity pContext) {
         this.mEvent = pEvent;
+        this.mContext = pContext;
+
         onInitializeAdvertisement(pContext);
     }
 
@@ -37,11 +40,15 @@ public class appLovinManager {
     /*Local Helper Methods*/
 
     private void onShowInterstitial() {
-        this.mSupportManager.onShow();
+        if(AppLovinSdk.getInstance(mContext).isInitialized()){
+            this.mSupportManager.onShow();
+        }
     }
 
     private void onToggleBannerShow(boolean pStatus) {
-        this.mBannerManager.onShow(pStatus);
+        if(AppLovinSdk.getInstance(mContext).isInitialized()){
+            this.mBannerManager.onShow(pStatus);
+        }
     }
 
     /*Helper Methods*/
