@@ -12,9 +12,6 @@ public class orbotLogManager {
     private String onGetCleanedLogs(String pLogs) {
         String logs = pLogs;
 
-        if(!status.sAdLoaded){
-            return "Initializing extentions";
-        }
         if (logs.equals("Starting Orion | Please Wait ...")) {
             return logs;
         }

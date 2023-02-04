@@ -523,9 +523,7 @@ public class geckoClients {
     public void onRedrawPixel(AppCompatActivity pcontext) {
         if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
             mSession.onRedrawPixel();
-            Log.i("FUCKSSS1111","333");
             onLoadFavIcon(pcontext);
-            Log.i("FUCKSSS1111","444");
         }
     }
 
@@ -535,12 +533,14 @@ public class geckoClients {
 
     public void onClearAll() {
         if (mRuntime != null) {
-            mRuntime.getStorageController().clearData(NETWORK_CACHE);
-            mRuntime.getStorageController().clearData(IMAGE_CACHE);
-            mRuntime.getStorageController().clearData(DOM_STORAGES);
-            mRuntime.getStorageController().clearData(COOKIES);
-            mRuntime.getStorageController().clearData(SITE_SETTINGS);
-            mRuntime.getStorageController().clearData(SITE_DATA);
+            if(status.sClearOnExit){
+                mRuntime.getStorageController().clearData(NETWORK_CACHE);
+                mRuntime.getStorageController().clearData(IMAGE_CACHE);
+                mRuntime.getStorageController().clearData(DOM_STORAGES);
+                mRuntime.getStorageController().clearData(COOKIES);
+                mRuntime.getStorageController().clearData(SITE_SETTINGS);
+                mRuntime.getStorageController().clearData(SITE_DATA);
+            }
         }
     }
 
@@ -697,7 +697,7 @@ public class geckoClients {
 
     public void onUpdateFont() {
         float font = (status.sSettingFontSize - 100) / 3 + 100;
-        mRuntime.getSettings().setFontSizeFactor(font / 100);
+        mRuntime.getSettings().setFontSizeFactor(font / 117);
     }
 
     public void reinitHomeTheme() {

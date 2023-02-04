@@ -90,7 +90,7 @@ public class historyDataModel {
         }
     }
 
-    private int addHistory(String pUrl, String pHeader, int pID) {
+    private int addHistory(String pUrl, String pHeader, int pID, boolean pWasBackPressed) {
 
         if (pUrl.startsWith(constants.CONST_GENESIS_URL_CACHED) || pUrl.startsWith(constants.CONST_GENESIS_URL_CACHED_DARK)) {
             pUrl = "https://orion.onion";
@@ -102,6 +102,15 @@ public class historyDataModel {
 
         pUrl = helperMethod.removeLastSlash(pUrl);
         pUrl = helperMethod.urlWithoutPrefix(pUrl);
+
+        if(pWasBackPressed){
+            for(int e=0;e<mHistory.size();e++){
+                if(pUrl.equals(mHistory.get(e).getDescription())){
+                    pHeader = mHistory.get(e).getHeader();
+                    break;
+                }
+            }
+        }
 
         Object url_exists = mHistoryCache.get(pID);
         if (url_exists != null) {
@@ -172,7 +181,7 @@ public class historyDataModel {
         if (pCommands == dataEnums.eHistoryCommands.M_GET_HISTORY) {
             return getHistory();
         } else if (pCommands == dataEnums.eHistoryCommands.M_ADD_HISTORY) {
-            return addHistory((String) pData.get(0), (String) pData.get(2), (int) pData.get(3));
+            return addHistory((String) pData.get(0), (String) pData.get(2), (int) pData.get(3), (Boolean) pData.get(6));
         } else if (pCommands == dataEnums.eHistoryCommands.M_REMOVE_HISTORY) {
             removeHistory((int) pData.get(0));
         } else if (pCommands == dataEnums.eHistoryCommands.M_CLEAR_HISTORY) {

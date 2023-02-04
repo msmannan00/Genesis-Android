@@ -35,7 +35,6 @@ public class defaultNotificationReciever extends BroadcastReceiver {
 
     protected void onDestroy(Context context) {
         orbotLocalConstants.mAppForceExit = true;
-        pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_DESTROY);
 
         if (!status.mThemeApplying) {
             if (!status.sSettingIsAppStarted) {

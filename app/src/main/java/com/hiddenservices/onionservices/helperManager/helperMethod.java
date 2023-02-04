@@ -371,7 +371,7 @@ public class helperMethod {
         return size.x;
     }
 
-    public static SpannableString urlDesigner(String url, Context pContext, int pDefColor, int pTheme, boolean sTorBrowsing) {
+    public static SpannableString urlDesigner(boolean protocol, String url, Context pContext, int pDefColor, int pTheme, boolean sTorBrowsing) {
 
         int mColor = 0;
         if (pTheme == enums.Theme.THEME_DARK) {
@@ -380,22 +380,43 @@ public class helperMethod {
             mColor = Color.argb(255, 0, 153, 54);
         }
 
-        if (url.startsWith("https://")) {
-            SpannableString ss = new SpannableString(url);
-            ss.setSpan(new ForegroundColorSpan(mColor), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            ss.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return ss;
-        } else if (url.startsWith("http://")) {
-            SpannableString ss = new SpannableString(url);
-            if(sTorBrowsing){
-                ss.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (url.startsWith("https://") || url.startsWith("http://")) {
+            if(url.startsWith("https://")){
+                SpannableString ss = new SpannableString(url);
+                ss.setSpan(new ForegroundColorSpan(mColor), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ss.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                if(pTheme != enums.Theme.THEME_DARK){
+                    ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }else {
+                    ss.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                return ss;
             }else {
-                ss.setSpan(new ForegroundColorSpan(Color.RED), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                SpannableString ss = new SpannableString(url);
+                if(sTorBrowsing){
+                    ss.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }else {
+                    ss.setSpan(new ForegroundColorSpan(Color.RED), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                ss.setSpan(new ForegroundColorSpan(Color.GRAY), 4, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                if(pTheme != enums.Theme.THEME_DARK){
+                    ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }else {
+                    ss.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                return ss;
             }
-            ss.setSpan(new ForegroundColorSpan(Color.GRAY), 4, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return ss;
         } else {
             SpannableString ss = new SpannableString(url);
+
+            if(pTheme != enums.Theme.THEME_DARK){
+                ss.setSpan(new ForegroundColorSpan(Color.LTGRAY), getHost("http://"+url).length(), url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }else {
+                ss.setSpan(new ForegroundColorSpan(Color.GRAY), getHost("http://"+url).length(), url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
             return ss;
         }
     }

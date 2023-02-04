@@ -463,6 +463,23 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageButton
+                    android:id="@+id/pSupportButton"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="80dp"
+                    android:adjustViewBounds="true"
+                    android:alpha="0.95"
+                    android:background="@xml/hox_rounded_corner_splash_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onSupportSplash"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:padding="6dp"
+                    android:scaleType="fitCenter"
+                    android:src="@xml/ic_baseline_support"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/pInfo2"
                     android:layout_width="wrap_content"
@@ -568,6 +585,23 @@
                     android:padding="7dp"
                     android:scaleType="fitCenter"
                     android:src="@xml/ic_baseline_repair"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/pSupportLandscape"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="80dp"
+                    android:adjustViewBounds="true"
+                    android:alpha="0.95"
+                    android:background="@xml/hox_rounded_corner_splash_right"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onSupportSplash"
+                    android:padding="7dp"
+                    android:scaleType="fitCenter"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:src="@xml/ic_baseline_support"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

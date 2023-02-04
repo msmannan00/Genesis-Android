@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.pluginManager;
 
+import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -33,8 +34,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.hiddenservices.onionservices.constants.enums.etype.fetch_favicon;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICK;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_HIDE;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICKED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_ACTIVITY_CREATED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_RESUME;
@@ -110,13 +110,14 @@ public class pluginController {
     private class admobCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object event_type) {
-            if (event_type.equals(M_ON_AD_CLICK)) {
-                helperMethod.onMinimizeApp(mHomeController.get());
-                activityContextManager.getInstance().getHomeController().onAdClicked();
-            } else if (event_type.equals(M_ON_AD_LOAD)) {
+            if (event_type.equals(M_ON_AD_LOAD)) {
                 activityContextManager.getInstance().getHomeController().onUpdateBannerAdvert();
-            } else if (event_type.equals(M_ON_AD_HIDE)) {
-                activityContextManager.getInstance().getHomeController().onAdClicked();
+            } else if (event_type.equals(M_ON_AD_CLICKED)) {
+                status.sIsBackgroundAdvertCheck = true;
+                new Handler().postDelayed(() ->
+                {
+                    status.sIsBackgroundAdvertCheck = false;
+                }, 5000);
             }
             return null;
         }

@@ -210,7 +210,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
         builder.setNegativeButton("Cancel", listener);
 
         try {
-            if(!((Activity) builder.getContext()).isFinishing())
+            if(mActivity!=null && !mActivity.isFinishing())
             {
                 createStandardDialog(builder, prompt, res).show();
             }
@@ -596,7 +596,7 @@ final class geckoPromptView implements GeckoSession.PromptDelegate {
             throw new UnsupportedOperationException();
         }
         try {
-            if(!((Activity) builder.getContext()).isFinishing())
+            if(mActivity!=null && !mActivity.isFinishing())
             {
                 dialog.show();
             }

@@ -109,6 +109,9 @@ public class settingSearchController extends AppCompatActivity {
 
     @Override
     public void onPause() {
+        if(!status.sTorBrowsing && status.sSettingDefaultSearchEngine.equals(constants.CONST_BACKEND_GENESIS_URL)){
+            status.sSettingDefaultSearchEngine = constants.CONST_BACKEND_DUCK_DUCK_GO_URL;
+        }
         super.onPause();
     }
 

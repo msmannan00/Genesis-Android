@@ -1,13 +1,14 @@
 package com.hiddenservices.onionservices.pluginManager;
 
 public class pluginEnums {
+
     /*Advert Manager*/
     public enum eAdManager {
-        M_INITIALIZE_BANNER_ADS, M_IS_ADVERT_LOADED, M_LOW_MEMORY_DESTROY, M_DESTROY, M_HIDE, M_SHOW
+        M_IS_ADVERT_LOADED, M_LOW_MEMORY_DESTROY, M_HIDE_BANNER, M_SHOW_BANNER, M_SHOW_INTERSTITIAL
     }
 
     public enum eAdManagerCallbacks {
-        M_ON_AD_CLICK, M_ON_AD_LOAD, M_ON_AD_HIDE
+        M_ON_AD_LOAD, M_ON_AD_CLICKED
     }
 
     /*Analytics Manager*/

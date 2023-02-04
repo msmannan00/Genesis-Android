@@ -21,15 +21,12 @@ import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
-import android.view.autofill.AutofillValue;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
-
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
@@ -41,37 +38,30 @@ import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.example.myapplication.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.mozilla.gecko.EventDispatcher;
 import org.mozilla.gecko.util.GeckoBundle;
-import org.mozilla.gecko.util.ThreadUtils;
 import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.Autofill;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
-import org.mozilla.geckoview.Image;
 import org.mozilla.geckoview.MediaSession;
 import org.mozilla.geckoview.SlowScriptResponse;
 import org.mozilla.geckoview.WebExtension;
 import org.mozilla.geckoview.WebRequestError;
 import org.mozilla.geckoview.WebResponse;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_BADCERT_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_BADCERT_CACHED_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_ERROR_CACHED;
@@ -84,12 +74,10 @@ import static com.hiddenservices.onionservices.constants.enums.etype.M_DEFAULT_B
 import static com.hiddenservices.onionservices.constants.enums.etype.M_RATE_COUNT;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
-public class
-geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession.MediaDelegate, GeckoSession.ScrollDelegate, GeckoSession.PermissionDelegate, GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate, GeckoSession.NavigationDelegate, GeckoSession.ContentDelegate {
+public class  geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession.MediaDelegate, GeckoSession.ScrollDelegate, GeckoSession.PermissionDelegate, GeckoSession.ProgressDelegate, GeckoSession.HistoryDelegate, GeckoSession.NavigationDelegate, GeckoSession.ContentDelegate {
     private eventObserver.eventListener event;
 
     private boolean wasBackPressed = false;
@@ -118,7 +106,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
 
     /*Temp Variables*/
     private GeckoSession.HistoryDelegate.HistoryList mHistoryList = null;
-    private int rateCount = 0;
     private int m_current_url_id = -1;
     private GeckoView mGeckoView;
     private boolean mIsLoaded = false;
@@ -177,6 +164,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     @Override
     public void onMetadata(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, @NonNull MediaSession.Metadata meta) {
         mMediaTitle = meta.title;
+        isPageLoading = false;
 
         if(mediaDelegateItem == null){
             return;
@@ -454,6 +442,28 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         this.securityInfo = securityInfo;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
         mCloseRequested = false;
@@ -469,7 +479,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             }
 
             if (!mCurrentURL.equals("about:config") && !mCurrentURL.equals("about:blank")) {
-                event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+                //event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
                 mContext.get().runOnUiThread(() -> event.invokeObserver(Arrays.asList(5, mSessionID), enums.etype.progress_update));
             }
             if (!isPageLoading) {
@@ -594,33 +604,43 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     /*History Delegate*/
     @Override
     public GeckoResult<Boolean> onVisited(@NonNull GeckoSession var1, @NonNull String var2, @Nullable String var3, int var4) {
-        if (var4 == 3 || var4 == 5 || var4 == 1) {
-            if(var4==1){
-                m_current_url_id = -1;
-                setURL(var2);
-            }
-            event.invokeObserver(Arrays.asList(var2, mSessionID), enums.etype.on_url_load);
-            Object mID = event.invokeObserver(Arrays.asList(var2, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
-            if (mID != null) {
-                m_current_url_id = (int) mID;
-            }
-            isPageLoading = false;
-        }
+
         return null;
     }
 
+    int mHistoryListSize = 0;
     @UiThread
     public void onHistoryStateChange(@NonNull GeckoSession var1, @NonNull GeckoSession.HistoryDelegate.HistoryList var2) {
         mHistoryList = var2;
+
+
+        if(mHistoryList!=null){
+            setURL(mHistoryList.get(mHistoryList.getCurrentIndex()).getUri());
+            event.invokeObserver(Arrays.asList(mHistoryList, mSessionID), enums.etype.on_url_load);
+            if(mHistoryListSize == var2.size()){
+                event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mHistoryList.get(mHistoryList.getCurrentIndex()).getTitle(), m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+                Object mID = event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mHistoryList.get(mHistoryList.getCurrentIndex()).getTitle(), m_current_url_id, mTheme, this, wasBackPressed), enums.etype.on_update_history);
+                if (mID != null) {
+                    m_current_url_id = (int) mID;
+                }
+            }else {
+                event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mHistoryList.get(mHistoryList.getCurrentIndex()).getTitle(), m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+                Object mID = event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mHistoryList.get(mHistoryList.getCurrentIndex()).getTitle(), -1, mTheme, this, wasBackPressed), enums.etype.on_update_history);
+                if (mID != null) {
+                    m_current_url_id = (int) mID;
+                }
+            }
+            mHistoryListSize = var2.size();
+            onDestroyMedia();
+        }
     }
 
     @UiThread
     public void onSessionStateChange(@NonNull GeckoSession session, @NonNull SessionState sessionState) {
-        try {
-            event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, sessionState.toString()), enums.etype.M_UPDATE_SESSION_STATE);
-            mSessionState = sessionState;
-        } catch (Exception ignored) {
-        }
+        mSessionState = sessionState;
+        event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, sessionState.toString()), enums.etype.M_UPDATE_SESSION_STATE);
+
+
     }
 
     public boolean onRestoreState() {
@@ -658,14 +678,15 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
                 }
             }
         }
+
         wasBackPressed = false;
 
         String newUrl = Objects.requireNonNull(var2).split("#")[0];
         if (!mCurrentTitle.equals("loading")) {
-            Object mURL = event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
-            if (mURL != null) {
-                m_current_url_id = (int) mURL;
-            }
+            //Object mURL = event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this, false), enums.etype.on_update_history);
+            //if (mURL != null) {
+            //    m_current_url_id = (int) mURL;
+            //}
         }
         if (newUrl.startsWith(CONST_GENESIS_URL_CACHED) || newUrl.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
             setURL(constants.CONST_GENESIS_DOMAIN_URL);
@@ -679,7 +700,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             setURL(newUrl);
         }
         if (!mCurrentURL.equals("about:blank")) {
-            event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+            //event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
         }
     }
 
@@ -798,7 +819,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
 
             /* Its Absence causes delay on first launch*/
 
-            event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+            //event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
 
             if (!m_url.equals("about:config") && !mCurrentURL.contains("167.86.99.31")) {
                 mProgress = 5;
@@ -887,7 +908,7 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             } else {
                 event.invokeObserver(Arrays.asList(var2, mSessionID), enums.etype.M_ORBOT_LOADING);
                 mCurrentURL = mPrevURL;
-                event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
+                //event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
             }
             return null;
         } catch (Exception ex) {
@@ -915,6 +936,8 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     public void onFirstContentfulPaint(@NonNull GeckoSession var1) {
 
         isFirstPaintExecuted = true;
+
+
         if (mPreviousErrorPage || mCurrentURL.contains("167.86.99.31") || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED) || mCurrentURL.startsWith(CONST_GENESIS_URL_CACHED_DARK) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE) || mCurrentURL.startsWith(CONST_GENESIS_HELP_URL_CACHE_DARK)) {
             event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, false), enums.etype.M_ON_BANNER_UPDATE);
         } else {
@@ -967,12 +990,6 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
     public void onTitleChange(@NonNull GeckoSession var1, @Nullable String var2) {
         if (var2 != null && !var2.equals(strings.GENERIC_EMPTY_STR) && var2.length() > 2 && !var2.equals("about:blank") && mIsLoaded) {
             mCurrentTitle = var2;
-            Object mID = event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.on_update_history);
-            if (mID != null) {
-                m_current_url_id = (int) mID;
-            }
-
-            event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, mTheme), enums.etype.ON_UPDATE_TAB_TITLE);
         }
     }
 
@@ -1250,6 +1267,11 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
             pURL = pURL.replace("www.", "");
         }
         mCurrentURL = pURL;
+        if(pURL.startsWith("tel:")){
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(pURL));
+            mContext.get().startActivity(intent);
+        }
+        //event.invokeObserver(Arrays.asList(mCurrentURL, mSessionID, mCurrentTitle, m_current_url_id, mTheme, this), enums.etype.ON_UPDATE_SEARCH_BAR);
     }
 
     public void setRemovableFromBackPressed(boolean pStatus) {
@@ -1363,6 +1385,8 @@ geckoSession extends GeckoSession implements MediaSession.Delegate, GeckoSession
         }
         wasBackPressed = true;
         m_current_url_id = -1;
+
+        mCurrentTitle = mHistoryList.get(mHistoryList.getCurrentIndex()).getTitle();
         goBack();
 
         try {

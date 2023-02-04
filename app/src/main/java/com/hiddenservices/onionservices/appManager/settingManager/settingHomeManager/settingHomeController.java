@@ -120,6 +120,10 @@ public class settingHomeController extends AppCompatActivity {
         pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_OPEN_CICADA);
     }
 
+    public void onSupport(View view) {
+        pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_INTERSTITIAL);
+    }
+
     /*View Callbacks*/
 
     private class settingViewCallback implements eventObserver.eventListener {

@@ -253,6 +253,10 @@ class homeViewController {
 
     }
 
+    public boolean isOrientationLandscapce(){
+        return isLandscape;
+    }
+
     public void initSearchEngineView() {
         if (!isFullScreen) {
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mSearchEngineBar.getLayoutParams();
@@ -1317,9 +1321,9 @@ class homeViewController {
         if (url.length() <= 300) {
             url = removeEndingSlash(url);
             if(status.sTorBrowsing){
-                mSearchbar.setText(helperMethod.urlDesigner(url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme, true));
+                mSearchbar.setText(helperMethod.urlDesigner(showProtocol, url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme, true));
             }else {
-                mSearchbar.setText(helperMethod.urlDesigner(url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme, !ssl_status || url.contains("orion.onion")));
+                mSearchbar.setText(helperMethod.urlDesigner(showProtocol, url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme, !ssl_status || url.contains("orion.onion")));
             }
             mSearchbar.selectAll();
 
@@ -1377,9 +1381,31 @@ class homeViewController {
 
     void onProgressBarUpdate(int value, boolean mForced) {
 
+        if (value == 105) {
+            progressAnimator.cancel();
+            mProgressBar.setAlpha(1);
+            mProgressBar.animate().cancel();
+            mProgressBar.animate().alpha(0);
+            value = 100;
+            mProgressBar.animate().alpha(0).withEndAction(() -> mProgressBar.setProgress(0));
+            return;
+        }
+
         if (value == 100) {
             changeRefreshMenu();
+            new Handler().postDelayed(() ->
+            {
+                if(mProgressBar.getProgress()==100){
+                    progressAnimator.cancel();
+                    mProgressBar.setAlpha(1);
+                    mProgressBar.animate().cancel();
+                    mProgressBar.animate().alpha(0).withEndAction(() -> mProgressBar.setProgress(0));
+                }
+                onResetTabAnimation();
+            }, 2000);
+
         }
+
         mProgressBar = activityContextManager.getInstance().getHomeController().mProgressBar;
         if (value != 0 && value != 100) {
             mAppBar.setExpanded(true, true);

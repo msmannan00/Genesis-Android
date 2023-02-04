@@ -51,7 +51,7 @@
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onMenuItemInvoked"
                     android:src="@xml/ic_home"
-                    android:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint" />
 
                 <ImageButton
                     android:id="@+id/menu23"
@@ -64,7 +64,7 @@
                     android:scaleX="0.96"
                     android:scaleY="0.96"
                     android:src="@xml/ic_baseline_bookmark"
-                    android:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint" />
 
                 <ImageButton
                     android:id="@+id/menu22"
@@ -77,7 +77,7 @@
                     android:scaleX="0.96"
                     android:scaleY="0.96"
                     android:src="@xml/ic_arrow_right"
-                    android:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint" />
 
                 <ImageButton
                     android:id="@+id/menuItem25"
@@ -91,7 +91,7 @@
                     android:paddingTop="1.5dp"
                     android:scaleY="0.96"
                     android:src="@xml/ic_baseline_file_download"
-                    android:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint" />
 
                 <ImageButton
                     android:id="@+id/menu21"
@@ -104,7 +104,7 @@
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onMenuItemInvoked"
                     android:src="@xml/ic_refresh"
-                    android:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint" />
 
                 <ImageButton
                     android:id="@+id/menu20"
@@ -118,7 +118,7 @@
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onMenuItemInvoked"
                     android:src="@xml/ic_close"
-                    android:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint" />
             </LinearLayout>
 
             <LinearLayout
@@ -164,6 +164,41 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="15dp"
                 android:background="@color/c_home_side" />
+
+            <LinearLayout
+                android:id="@+id/menu9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:background="@xml/gx_side_item"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onSupport"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="21dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:src="@xml/ic_baseline_support"
+                    app:tint="@color/c_alert_divider" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="3dp"
+                    android:text="Support Orion Browser"
+                    android:textAllCaps="false"
+                    android:textColor="@color/c_text_home_menu"
+                    android:textSize="15sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/menu7"
