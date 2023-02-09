@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -52,7 +52,7 @@ public class tabRowModel {
     public void setSession(geckoSession pSession, String pURL, String pTitle, String pTheme, GeckoSession.SessionState pSessionState) {
         mSession = pSession;
         mSession.setTitle(pTitle);
-        mSession.setURL(pURL);
+        mSession.getHistoryDelegate().setURL(pURL);
         mSession.setTheme(pTheme);
 
         if (pSessionState != null) {
@@ -63,7 +63,7 @@ public class tabRowModel {
         if (!status.sSettingIsAppStarted) {
             if (pTitle.equals("$TITLE") || pTitle.startsWith("http://loading") || pTitle.startsWith("loading") || pURL.equals("$TITLE") || pURL.startsWith("http://loading") || pURL.startsWith("loading")) {
                 mSession.setTitle("about:blank");
-                mSession.setURL("about:blank");
+                mSession.getHistoryDelegate().setURL("about:blank");
             }
         }
     }

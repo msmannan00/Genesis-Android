@@ -29,7 +29,7 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

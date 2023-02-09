@@ -31,9 +31,10 @@ public class bookmarkDataModel {
 
     void initializebookmark(ArrayList<bookmarkRowModel> pBookmark) {
         mBookmarks = pBookmark;
-        for (int mCounter = 0; mCounter < pBookmark.size(); mCounter++) {
+        for (int mCounter = pBookmark.size()-1; mCounter >= 0; mCounter--) {
             if (mAvailableBookmark.containsKey(pBookmark.get(mCounter).getDescription())) {
                 deleteBookmark(pBookmark.get(mCounter).getID());
+                mCounter++;
             } else {
                 mAvailableBookmark.put(pBookmark.get(mCounter).getDescription(), pBookmark.get(mCounter).getID());
             }

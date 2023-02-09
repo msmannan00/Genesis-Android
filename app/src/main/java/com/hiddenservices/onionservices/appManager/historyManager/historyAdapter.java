@@ -21,7 +21,7 @@ import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 
 import java.util.ArrayList;
@@ -517,7 +517,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0) + ""));
                 String header = model.getHeader();
 
-                if(status.sLowMemory == enums.MemoryStatus.STABLE){
+                if(status.sLowMemory != enums.MemoryStatus.LOW_MEMORY && status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
                     if (model.getDescription().contains("167.86.99.31") || model.getDescription().contains("orion.onion")) {
                         mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                     } else {

@@ -26,7 +26,7 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.libs.netcipher.client.StrongHttpsClient;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 

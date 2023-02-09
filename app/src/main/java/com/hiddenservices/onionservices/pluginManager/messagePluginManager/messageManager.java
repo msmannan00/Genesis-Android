@@ -31,7 +31,7 @@ import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import org.mozilla.geckoview.ContentBlocking;
 import java.util.Arrays;

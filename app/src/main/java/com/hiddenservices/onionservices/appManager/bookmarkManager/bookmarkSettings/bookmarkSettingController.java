@@ -20,7 +20,7 @@ import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.sharedUIMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.Arrays;
 import java.util.Collections;

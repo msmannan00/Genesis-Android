@@ -13,7 +13,7 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 

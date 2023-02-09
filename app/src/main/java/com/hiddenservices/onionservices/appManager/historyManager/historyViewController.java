@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.List;
 import java.util.Objects;

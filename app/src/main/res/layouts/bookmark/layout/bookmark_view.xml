@@ -156,7 +156,7 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
                     android:layout_weight="17"
-                    android:background="@xml/gx_ripple_blue"
+                    android:background="@xml/bx_border_recycleview"
                     android:textAllCaps="false"
                     android:paddingStart="20dp"
                     android:stateListAnimator="@null"
@@ -179,6 +179,7 @@
             android:id="@+id/pRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="100dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

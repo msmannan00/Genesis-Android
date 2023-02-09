@@ -9,7 +9,7 @@ import android.webkit.JavascriptInterface;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

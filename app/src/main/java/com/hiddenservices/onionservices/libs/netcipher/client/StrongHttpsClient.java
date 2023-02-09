@@ -19,7 +19,7 @@ package com.hiddenservices.onionservices.libs.netcipher.client;
 
 import android.content.Context;
 
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.io.IOException;
 import java.io.InputStream;

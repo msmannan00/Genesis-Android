@@ -66,7 +66,7 @@
     <color name="c_orbot_background">#f9f9f9</color>
 
     /* Orbot Setting */
-    <color name="c_orbot_setting_divider">#e6e6e6</color>
+    <color name="c_orbot_setting_divider">#f2f2f2</color>
     <color name="c_orbot_setting_divider_static">#e6e6e6</color>
 
     /* Tab */

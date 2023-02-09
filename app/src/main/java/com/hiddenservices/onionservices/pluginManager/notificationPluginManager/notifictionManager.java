@@ -14,7 +14,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

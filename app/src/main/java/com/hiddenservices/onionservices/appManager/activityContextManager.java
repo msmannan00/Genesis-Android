@@ -4,7 +4,7 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_PACKAGE
 import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController;
 import com.hiddenservices.onionservices.appManager.bridgeManager.bridgeController;
 import com.hiddenservices.onionservices.appManager.historyManager.historyController;

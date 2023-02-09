@@ -166,9 +166,10 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/view4"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
                 android:background="@color/c_orbot_setting_divider" />
 
             <!-- Title Header -->
@@ -1025,13 +1026,6 @@
                     app:tint="@color/c_navigation_tint" />
 
             </LinearLayout>
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="15dp"
-                android:background="@color/c_orbot_setting_divider" />
 
             <LinearLayout
                 android:id="@+id/pOption14"

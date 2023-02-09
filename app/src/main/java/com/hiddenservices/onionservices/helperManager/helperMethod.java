@@ -56,7 +56,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
 
-import com.example.myapplication.BuildConfig;
+import com.hiddenservices.onionservices.BuildConfig;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.defaultBrowser;
@@ -66,7 +66,7 @@ import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -387,9 +387,9 @@ public class helperMethod {
                 ss.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                 if(pTheme != enums.Theme.THEME_DARK){
-                    ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+8, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }else {
-                    ss.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    ss.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+8, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
                 return ss;
             }else {

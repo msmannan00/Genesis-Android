@@ -29,7 +29,7 @@ import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -210,7 +210,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                 mHindTypeIconTemp.setImageDrawable(null);
                 mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
 
-                if(status.sLowMemory == enums.MemoryStatus.STABLE){
+                if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY && status.sLowMemory != enums.MemoryStatus.LOW_MEMORY){
                     if (mHindTypeIconTemp.getDrawable() != null) {
                         pHintWebIconImage.setImageTintList(null);
                         pHintWebIconImage.setImageDrawable(mHindTypeIconTemp.getDrawable());

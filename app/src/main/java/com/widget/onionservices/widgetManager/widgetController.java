@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.widget.onionservices.helperMethod.helperMethod;
 
 import java.util.Arrays;

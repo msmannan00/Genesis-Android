@@ -7,13 +7,8 @@ import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.hiddenservices.onionservices.constants.*;
 import com.hiddenservices.onionservices.dataManager.dataController;
@@ -25,14 +20,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
 import static com.hiddenservices.onionservices.constants.constants.CONST_REPORT_URL;
-import static com.hiddenservices.onionservices.constants.enums.etype.M_INDEX_WEBSITE;
 import static com.hiddenservices.onionservices.constants.enums.etype.on_handle_external_intent;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
@@ -44,15 +37,10 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
 
-import org.json.JSONObject;
-import org.mozilla.gecko.EventDispatcher;
-import org.mozilla.gecko.util.GeckoBundle;
 import org.mozilla.geckoview.ContentBlocking;
-import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
-import org.mozilla.geckoview.WebExtension;
 import org.mozilla.geckoview.WebResponse;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
@@ -211,126 +199,6 @@ public class geckoClients {
         return cacheFile.getAbsolutePath();
     }
 
-/*
-    @SuppressLint("WrongThread")
-    public void installExtension() {
-
-        mRuntime.getWebExtensionController()
-                .ensureBuiltIn("resource://android/assets/parser/", "messaging@example.com")
-                .accept(
-                        extension -> {
-                            Log.i("MessageDelegate", "Extension installed: " + extension);
-                            extension.setMessageDelegate(mMessagingDelegate, "browser");
-                        },
-                        e -> {
-                            Log.e("MessageDelegate", "Error registering WebExtension", e);
-                        }
-                );
-
-        mRuntime.getWebExtensionController()
-                .ensureBuiltIn("resource://android/assets/adblock/", "messaging@example.com")
-                .accept(
-                        extension -> {
-                            Log.i("MessageDelegate", "Extension installed: " + extension);
-                            extension.setMessageDelegate(mMessagingDelegate, "browser");
-                        },
-                        e -> {
-                            Log.e("MessageDelegate", "Error registering WebExtension", e);
-                        }
-                );
-    }
-
-    private final WebExtension.MessageDelegate mMessagingDelegate = new WebExtension.MessageDelegate() {
-
-        @Override
-        public void onConnect(@NonNull WebExtension.Port port) {
-            Log.e("MessageDelegate", "onConnect");
-            mPort = port;
-            mPort.setDelegate(mPortDelegate);
-        }
-
-        @Override
-        public GeckoResult<Object> onMessage(final @NonNull String nativeApp, final @NonNull Object message, final @NonNull WebExtension.MessageSender sender) {
-            Log.e("MessageDelegate", "onConnect");
-            return null;
-        }
-
-    };
-
-    private final WebExtension.PortDelegate mPortDelegate = new WebExtension.PortDelegate() {
-        @Override
-        public void onPortMessage(final @NonNull Object message, final @NonNull WebExtension.Port port) {
-            if(mSession!=null){
-                if (message != null && mSession.getProgress() == 100 && !mSession.mCloseRequested && mSession.isFirstPaintExecuted && !mSession.mOnBackPressed) {
-                    //event.invokeObserver(Arrays.asList(message, mSession.getCurrentURL()), M_INDEX_WEBSITE);
-                }
-                mSession.mOnBackPressed = false;
-            }
-        }
-
-        @Override
-        public void onDisconnect(final @NonNull WebExtension.Port port) {
-            Log.e("MessageDelegate:", "onDisconnect");
-            if (port == mPort) {
-                mPort = null;
-            }
-        }
-    };
-
-    private WebExtension.Port mPort;
-
-    public void onExtentionClicked() {
-        try {
-            if (mPort == null) {
-                return;
-            }
-            long id = System.currentTimeMillis();
-            Log.e("evalJavascript:id:", id + "");
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("action", "evalJavascript");
-            jsonObject.put("data", "evalJavascript");
-            jsonObject.put("id", id);
-            Log.e("evalJavascript:", jsonObject.toString());
-            mPort.postMessage(jsonObject);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    static boolean mCreated = false;*/
-
-    /* package *//* class Pref<T> {
-        public final String name;
-        public final T defaultValue;
-        private T mValue;
-        private boolean mIsSet;
-
-        public Pref(@NonNull final String name, final T defaultValue) {
-            this.name = name;
-            this.defaultValue = defaultValue;
-            mValue = defaultValue;
-
-        }
-        public void add() {
-            final GeckoBundle prefs = new GeckoBundle(1);
-            prefs.putInt(this.name, (Integer)this.defaultValue);
-            EventDispatcher.getInstance().dispatch("GeckoView:SetDefaultPrefs", prefs);
-            addToBundle(prefs);
-        }
-
-        private void addToBundle(final GeckoBundle bundle) {
-            final T value = mIsSet ? mValue : defaultValue;
-            if (value instanceof String) {
-                bundle.putString(name, (String) value);
-            } else if (value instanceof Integer) {
-                bundle.putInt(name, (Integer) value);
-            } else if (value instanceof Boolean) {
-                bundle.putBoolean(name, (Boolean) value);
-            } else {
-                throw new UnsupportedOperationException("Unhandled pref type for " + name);
-            }
-        }
-    }*/
 
     @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context) {
@@ -375,7 +243,7 @@ public class geckoClients {
 
 
     public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext) {
-        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
+        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY && status.sLowMemory != enums.MemoryStatus.LOW_MEMORY){
             initBrowserManager(pcontext);
             pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
             Log.i("FUCKSSS1111","111");
@@ -407,22 +275,22 @@ public class geckoClients {
     }
 
     public void onKillMedia(){
-        mSession.onKillMedia();
+        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
     }
 
     public void onPlayMedia(){
-        mSession.onPlayMedia();
+        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.PLAY);
     }
 
     public void onPauseMedia(){
-        mSession.onPauseMedia();
+        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.PAUSE);
     }
 
     public void onSkipForwardMedia(){
-        mSession.onSkipForwardMedia();
+        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.SKIP_FORWARD);
     }
     public void onSkipBackwardMedia(){
-        mSession.onSkipBackwardMedia();
+        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.SKIP_BACKWARD);
     }
 
 
@@ -446,7 +314,7 @@ public class geckoClients {
     }
 
     public void onStopMedia() {
-        mSession.onStopMedia();
+        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.STOP);
     }
 
     public void onUploadRequest(int resultCode, Intent data) {
@@ -521,7 +389,7 @@ public class geckoClients {
     }
 
     public void onRedrawPixel(AppCompatActivity pcontext) {
-        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
+        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY && status.sLowMemory != enums.MemoryStatus.LOW_MEMORY){
             mSession.onRedrawPixel();
             onLoadFavIcon(pcontext);
         }
@@ -605,7 +473,7 @@ public class geckoClients {
     }
 
     public boolean getFullScreenStatus() {
-        return mSession.getFullScreenStatus();
+        return mSession.getContentDelegate().getFullScreenStatus();
     }
 
     public void onExitFullScreen() {
@@ -740,18 +608,25 @@ public class geckoClients {
     }
 
     public int getScrollOffset() {
-        return mSession.getScrollOffset();
+        return mSession.getmScrollDelegate().getScrollOffset();
     }
 
     public class geckoViewClientCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
+            if (e_type.equals(enums.etype.ON_FULL_SCREEN)) {
+                mSession.onFullScreenInvoke((boolean)data.get(0));
+            }
+            if (e_type.equals(enums.etype.ON_DESTROY_MEDIA)) {
+                mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+            }
             if (e_type.equals(enums.etype.M_CHANGE_HOME_THEME)) {
                 reinitHomeTheme();
-            } else if (mSession != null) {
+            }
+            else if (mSession != null) {
                 if (e_type.equals(enums.etype.SESSION_ID)) {
                     return mSession.getSessionID();
-                } else if (mSessionID != null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.ON_INVOKE_PARSER) || e_type.equals(enums.etype.M_RATE_COUNT) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) || e_type.equals(enums.etype.on_update_history) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url)) {
+                } else if (mSessionID != null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.ON_INVOKE_PARSER) || e_type.equals(enums.etype.M_RATE_COUNT) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) || e_type.equals(enums.etype.ON_UPDATE_HISTORY) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url)) {
                     if (mSession != null && mSession.isClosed()) {
                         return null;
                     }

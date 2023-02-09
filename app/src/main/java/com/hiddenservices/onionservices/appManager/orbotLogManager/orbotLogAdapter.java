@@ -15,7 +15,7 @@ import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.tabManager.tabEnums;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.eventObserver;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import org.torproject.android.service.wrapper.logRowModel;
 

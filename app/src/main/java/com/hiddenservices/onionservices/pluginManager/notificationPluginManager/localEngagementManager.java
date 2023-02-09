@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.strings;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.Random;
 

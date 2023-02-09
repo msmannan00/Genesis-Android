@@ -33,7 +33,7 @@ import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

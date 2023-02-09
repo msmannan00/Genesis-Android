@@ -51,7 +51,7 @@ import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.libs.views.ColorAnimator;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.google.android.material.appbar.AppBarLayout;
 
 import org.mozilla.geckoview.GeckoView;
@@ -115,6 +115,7 @@ class homeViewController {
     private CoordinatorLayout mCoordinatorLayout;
     private ImageView mImageDivider;
     private ImageButton mPanicButton;
+    private ImageButton mSupportButton;
     private ImageButton mPanicButtonLandscape;
     private ImageView mGenesisLogo;
     private ImageView mTorDisabled;
@@ -127,7 +128,7 @@ class homeViewController {
     private boolean mIsTopBarExpanded = true;
     private NestedScrollView.MarginLayoutParams mDefaultMargin = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, View banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, Button connect_no_tor_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled) {
+    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, View banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, Button connect_no_tor_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled, ImageButton pSupportButton) {
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -171,6 +172,7 @@ class homeViewController {
         this.mPanicButtonLandscape = pPanicButtonLandscape;
         this.mLogHandler = new LogHandler();
         this.mTorDisabled = pTorDisabled;
+        this.mSupportButton = pSupportButton;
 
         initSplashScreen();
         createUpdateUiHandler();
@@ -530,7 +532,7 @@ class homeViewController {
 
     public void initStatusBarColor(boolean mInstant) {
         int mDelay = 1500;
-        if (!status.sTorBrowsing || status.mThemeApplying || mInstant || status.sSettingIsAppStarted) {
+        if (status.mThemeApplying || mInstant || status.sSettingIsAppStarted) {
             mDelay = 0;
         }
 
@@ -566,7 +568,7 @@ class homeViewController {
             });
             animator.start();
         } else {
-            mSplashScreen.animate().alpha(0).setDuration(200).setStartDelay(mDelay).withEndAction(() -> onPostScreenDisable());
+            mSplashScreen.animate().alpha(0).setDuration(200).setStartDelay(2000).withEndAction(() -> onPostScreenDisable());
         }
     }
 
@@ -582,6 +584,7 @@ class homeViewController {
         mConnectButton.setVisibility(View.GONE);
         mConnectNoTorButton.setVisibility(View.GONE);
         mPanicButton.setVisibility(View.GONE);
+        mSupportButton.setVisibility(View.GONE);
         mPanicButtonLandscape.setVisibility(View.GONE);
 
         mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
@@ -1386,24 +1389,12 @@ class homeViewController {
             mProgressBar.setAlpha(1);
             mProgressBar.animate().cancel();
             mProgressBar.animate().alpha(0);
-            value = 100;
             mProgressBar.animate().alpha(0).withEndAction(() -> mProgressBar.setProgress(0));
             return;
         }
 
         if (value == 100) {
             changeRefreshMenu();
-            new Handler().postDelayed(() ->
-            {
-                if(mProgressBar.getProgress()==100){
-                    progressAnimator.cancel();
-                    mProgressBar.setAlpha(1);
-                    mProgressBar.animate().cancel();
-                    mProgressBar.animate().alpha(0).withEndAction(() -> mProgressBar.setProgress(0));
-                }
-                onResetTabAnimation();
-            }, 2000);
-
         }
 
         mProgressBar = activityContextManager.getInstance().getHomeController().mProgressBar;

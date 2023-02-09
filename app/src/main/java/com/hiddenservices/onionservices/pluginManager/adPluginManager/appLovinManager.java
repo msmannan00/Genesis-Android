@@ -22,32 +22,32 @@ public class appLovinManager {
     public appLovinManager(eventObserver.eventListener pEvent, View pBannerAds, AppCompatActivity pContext) {
         this.mEvent = pEvent;
         this.mContext = pContext;
-
-        onInitializeAdvertisement(pContext);
     }
 
-    private void onInitializeAdvertisement(AppCompatActivity pContext) {
-        AppLovinSdk.getInstance(pContext).getSettings().setVerboseLogging(true);
-        AppLovinSdk.getInstance(pContext).setMediationProvider("max");
-        AppLovinSdk.initializeSdk(pContext, configuration -> {
-            if(!mLowMemoryReached){
-                this.mSupportManager = new applovinSupportManager(pContext);
-                this.mBannerManager = new applovinBannerManager(pContext, mEvent);
-            }
-        });
+    private void onInitializeAdvertisement() {
+        if(!mLowMemoryReached){
+            AppLovinSdk.getInstance(mContext).getSettings().setVerboseLogging(true);
+            AppLovinSdk.getInstance(mContext).setMediationProvider("max");
+            AppLovinSdk.initializeSdk(mContext, configuration -> {
+                if(!mLowMemoryReached){
+                    this.mSupportManager = new applovinSupportManager(mContext);
+                    this.mBannerManager = new applovinBannerManager(mContext, mEvent);
+                }
+            });
+        }
     }
 
     /*Local Helper Methods*/
 
     private void onShowInterstitial() {
-        if(AppLovinSdk.getInstance(mContext).isInitialized()){
+        if(AppLovinSdk.getInstance(mContext).isInitialized() && this.mSupportManager!=null){
             this.mSupportManager.onShow();
         }
     }
 
     private void onToggleBannerShow(boolean pStatus) {
-        if(AppLovinSdk.getInstance(mContext).isInitialized()){
-            this.mBannerManager.onShow(pStatus);
+        if(AppLovinSdk.getInstance(mContext).isInitialized() && this.mBannerManager!=null){
+            this.mBannerManager.onShowToggle(pStatus);
         }
     }
 
@@ -55,7 +55,9 @@ public class appLovinManager {
 
     private void onDestroy() {
         mLowMemoryReached = true;
-        mBannerManager.onDestroy();
+        if(mBannerManager!=null){
+            mBannerManager.onDestroy();
+        }
     }
 
     /*External Triggers*/
@@ -71,6 +73,8 @@ public class appLovinManager {
             onToggleBannerShow(false);
         } else if (pEventType.equals(pluginEnums.eAdManager.M_SHOW_INTERSTITIAL)) {
             onShowInterstitial();
+        } else if (pEventType.equals(pluginEnums.eAdManager.M_INIT_ADS)) {
+            onInitializeAdvertisement();
         }
         return null;
     }

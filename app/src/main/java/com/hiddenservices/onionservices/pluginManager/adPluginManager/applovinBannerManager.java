@@ -20,7 +20,7 @@ public class applovinBannerManager implements MaxAdViewAdListener{
 
     private static final String S_UNIT_ID = "642ec6302c7cecd2";
     private MaxAdView mBanner;
-    eventObserver.eventListener mEvent;
+    private eventObserver.eventListener mEvent;
 
     /* Initializations */
 
@@ -46,7 +46,7 @@ public class applovinBannerManager implements MaxAdViewAdListener{
 
     /* Helper Methods */
 
-    public void onShow(boolean pStatus) {
+    public void onShowToggle(boolean pStatus) {
         if(mBanner!=null){
             if(pStatus){
                 mBanner.startAutoRefresh();

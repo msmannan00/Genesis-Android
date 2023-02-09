@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.helperManager.sharedUIMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.List;
 

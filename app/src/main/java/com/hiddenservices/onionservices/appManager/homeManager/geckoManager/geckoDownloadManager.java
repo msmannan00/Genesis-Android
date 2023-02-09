@@ -20,15 +20,15 @@ import java.util.Arrays;
 
 import mozilla.components.support.utils.DownloadUtils;
 
-class geckoDownloadManager {
+public class geckoDownloadManager {
     private Uri downloadURL;
     private String downloadFile = strings.GENERIC_EMPTY_STR;
 
-    geckoDownloadManager() {
+    public geckoDownloadManager() {
 
     }
 
-    void downloadFile(WebResponse response, geckoSession session, AppCompatActivity context, eventObserver.eventListener event) {
+    public void downloadFile(WebResponse response, geckoSession session, AppCompatActivity context, eventObserver.eventListener event) {
         session.getUserAgent().accept(userAgent -> downloadFile(response, userAgent, context, session, event),
                 exception -> {
                     throw new IllegalStateException("Could not get UserAgent string.");
@@ -62,11 +62,11 @@ class geckoDownloadManager {
         event.invokeObserver(Arrays.asList(downloadFile, session.getSessionID(), downloadURL), enums.etype.download_file_popup);
     }
 
-    Uri getDownloadURL() {
+    public Uri getDownloadURL() {
         return downloadURL;
     }
 
-    String getDownloadFile() {
+    public String getDownloadFile() {
         return downloadFile;
     }
 

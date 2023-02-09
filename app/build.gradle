@@ -3,15 +3,14 @@ import com.android.build.OutputFile
 plugins {
     id "com.jetbrains.python.envs" version "0.0.26"
 }
-
 apply plugin: 'com.android.application'
 apply from: 'variables.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'applovin-quality-service'
-applovin {
-    apiKey "pCPe4EeU2ZQVwQPeHLgseRqHBX1V5pvo9Piuu4J809dRhadEgukXa1A8po_UeXu5hmPOTaP1v4QPaMKIEOhh50"
-}
 
+applovin {
+    apiKey project.ext.applovin_key
+}
 
 android {
 
@@ -30,7 +29,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = project.ext.jvmTarget
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -76,7 +75,7 @@ android {
 
         orionRelease.root = project.ext.releaseRoot
     }
-    namespace 'com.example.myapplication'
+    namespace project.ext.application_id
 }
 dependencies {
 
@@ -105,7 +104,7 @@ dependencies {
     /* Ads Manager */
 
     implementation 'com.applovin:applovin-sdk:11.7.0'
-    implementation 'com.facebook.android:audience-network-sdk:6.10.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.12.0'
     implementation 'com.applovin.mediation:facebook-adapter:6.12.0.1'
 
     /* Orbot Service */

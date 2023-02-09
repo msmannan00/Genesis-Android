@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 class settingNotificationViewController {

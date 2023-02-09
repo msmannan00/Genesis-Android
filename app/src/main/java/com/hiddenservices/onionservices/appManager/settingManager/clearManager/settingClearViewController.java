@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
 import com.hiddenservices.onionservices.eventObserver;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,11 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hiddenservices.onionservices.constants.enums;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.models.bookmarkRowModel;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -446,10 +447,12 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                     mDescription.setText("https://" + mDescription.getText().toString());
                 }
 
-                if (model.getDescription().contains("167.86.99.31") || model.getDescription().contains("orion.onion")) {
-                    mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                } else {
-                    mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "http://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                if(status.sLowMemory != enums.MemoryStatus.LOW_MEMORY && status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
+                    if (model.getDescription().contains("167.86.99.31") || model.getDescription().contains("orion.onion")) {
+                        mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
+                    } else {
+                        mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                    }
                 }
 
                 mRowMenu.setOnClickListener(this::onClick);

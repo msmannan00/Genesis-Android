@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hiddenservices.onionservices.eventObserver;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.List;
 

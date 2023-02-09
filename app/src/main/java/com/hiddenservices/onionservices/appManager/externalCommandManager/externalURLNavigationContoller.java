@@ -10,7 +10,7 @@ import android.os.Handler;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.advertManager.advertController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;

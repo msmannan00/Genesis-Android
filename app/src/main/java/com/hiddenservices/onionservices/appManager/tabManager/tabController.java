@@ -39,7 +39,7 @@ import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

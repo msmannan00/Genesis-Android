@@ -89,7 +89,7 @@ import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-import com.example.myapplication.R;
+import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.pluginManager.pluginReciever.defaultNotificationReciever;
 import com.widget.onionservices.widgetManager.widgetController;
 import org.mozilla.geckoview.ContentBlocking;
@@ -164,6 +164,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private View mBannerAds = null;
     private ImageButton mGatewaySplash;
     private ImageButton mPanicButton;
+    private ImageButton mSupportButton;
     private ImageButton mPanicButtonLandscape;
     private LinearLayout mTopBar;
     private ImageView mBackSplash;
@@ -243,7 +244,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_view);
 
-        onMemoryCalculate();
         initPreFixes();
         activityContextManager.getInstance().setHomeController(this);
         pluginController.getInstance().initializeAllServices(this);
@@ -262,6 +262,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         initPreFixes();
         initBundle();
         initTor();
+        onMemoryCalculate();
+        pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_INIT_ADS);
         mHomeViewController.updateBannerAdvertStatus(true, (boolean) pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
     }
 
@@ -583,6 +585,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mCoordinatorLayout = findViewById(R.id.pCoordinatorLayout);
         mImageDivider = findViewById(R.id.pImageDivider);
         mPanicButton = findViewById(R.id.pPanicButton);
+        mSupportButton = findViewById(R.id.pSupportButton);
         mPanicButtonLandscape = findViewById(R.id.pPanicButtonLandscape);
         mGenesisLogo = findViewById(R.id.pGenesisLogo);
         mPopoupFindCopy = findViewById(R.id.pPopoupFindCopy);
@@ -594,7 +597,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setAutofillEnabled(true);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(), this, mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mConnectNoTorButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton, mGenesisLogo, mPanicButtonLandscape, mTorDisabled);
+        mHomeViewController.initialization(new homeViewCallback(), this, mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mConnectNoTorButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton, mGenesisLogo, mPanicButtonLandscape, mTorDisabled, mSupportButton);
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
         mGeckoClient.initialize(mGeckoView, new geckoViewCallback(), this, false);
         mGeckoClient.onValidateInitializeFromStartup(mGeckoView, homeController.this);
@@ -772,8 +775,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
         mGeckoClient.loadURL(url.replace("orion.onion", "167.86.99.31"), mGeckoView, homeController.this);
 
-        if(!mHomeViewController.isOrientationLandscapce()){
-            pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+        if(!mHomeViewController.isOrientationLandscapce() && status.sSettingIsAppRunning){
+            new Handler().postDelayed(() ->
+            {
+                if(status.sSettingIsAppStarted) {
+                    pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+                }
+            }, 3000);
         }
     }
 
@@ -783,7 +791,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void onLoadTab(geckoSession mTempSession, boolean isSessionClosed, boolean pExpandAppBar, boolean pForced, boolean pGeneratePixel) {
 
-        mGeckoClient.getSession().onKillMedia();
+        mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
         if (!isSessionClosed) {
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mTempSession));
         }
@@ -1103,7 +1111,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
         NotificationManagerCompat.from(this).cancel(1025);
         if(mGeckoClient.getSession() !=null){
-            mGeckoClient.getSession().onDestroyMedia();
+            mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
             onHideDefaultNotification();
         }
         if (!status.sSettingIsAppStarted) {
@@ -1563,7 +1571,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         geckoSession mNewSession = mGeckoClient.initializeBackground(mGeckoView, new geckoViewCallback(), this, true);
         onSaveCurrentTab(mNewSession, false);
 
-        mNewSession.setURL(url);
+        mNewSession.getHistoryDelegate().setURL(url);
         mHomeViewController.progressBarReset();
         initTabCountForced();
         mNewSession.loadUri(url);
@@ -1574,7 +1582,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onNewTab(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened) {
-        mGeckoClient.getSession().onKillMedia();
+        mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
         try {
             if(status.sLowMemory != enums.MemoryStatus.STABLE){
                 mRenderedBitmap = mGeckoView.capturePixels();
@@ -1735,7 +1743,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             ((hintAdapter) Objects.requireNonNull(mHintListView.getAdapter())).onClearAdapter();
         } else if (!mGeckoClient.getFullScreenStatus()) {
             mGeckoClient.onExitFullScreen();
-            pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+            if(status.sSettingIsAppStarted){
+                pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+            }
             mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), false);
             mHomeViewController.updateBannerAdvertStatus(false, (boolean) pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
         } else if (mSearchbar.isFocused() || isKeyboardOpened) {
@@ -1789,7 +1799,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.removeBanner();
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             if(mGeckoClient.getFullScreenStatus()){
-                pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+                if(status.sSettingIsAppStarted){
+                    pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+                }
             }else {
                 pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_HIDE_BANNER);
             }
@@ -1837,7 +1849,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(!mGeckoClient.getFullScreenStatus()){
             mGeckoClient.onExitFullScreen();
         }
-        pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+        if(status.sSettingIsAppStarted){
+            pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+        }
         mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), false);
         pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
         pluginController.getInstance().onNotificationInvoke(Collections.singletonList(172800000), pluginEnums.eNotificationManager.M_CREATE_NOTIFICATION);
@@ -1852,7 +1866,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
 
         if (mGeckoClient.getSession() != null && mGeckoClient != null) {
-            mGeckoClient.onStopMedia();
+            mGeckoClient.onPauseMedia();
         }
 
     }
@@ -2710,7 +2724,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 if((boolean)data.get(0)){
                     pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_HIDE_BANNER);
                 }else {
-                    pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+                    if(status.sSettingIsAppStarted){
+                        pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
+                    }
                 }
             } else if (e_type.equals(enums.etype.M_ON_BANNER_UPDATE)) {
                 Object mStatus = pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED);
@@ -2986,7 +3002,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), false);
             } else if (e_type.equals(enums.etype.start_proxy)) {
                 pluginController.getInstance().onOrbotInvoke(data, pluginEnums.eOrbotManager.M_SET_PROXY);
-            } else if (e_type.equals(enums.etype.on_update_history)) {
+            } else if (e_type.equals(enums.etype.ON_UPDATE_HISTORY)) {
                 return dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_ADD_HISTORY, data);
             } else if (e_type.equals(enums.etype.on_page_loaded)) {
                 onInvokePixelGenerator();
@@ -3014,10 +3030,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mData.addAll(data);
                 mData.add(homeController.this);
                 pluginController.getInstance().onMessageManagerInvoke(mData, M_DOWNLOAD_SINGLE);
-            } else if (e_type.equals(enums.etype.on_full_screen)) {
+            } else if (e_type.equals(enums.etype.ON_FULL_SCREEN)) {
                 boolean status = (Boolean) data.get(0);
                 if(!status){
-                    mGeckoClient.onStopMedia();
+                    mGeckoClient.onPauseMedia();
                 }
                 mHomeViewController.onFullScreenUpdate(status);
                 mHomeViewController.onUpdateSearchEngineBar(false, 0);

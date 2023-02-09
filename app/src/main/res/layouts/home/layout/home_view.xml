@@ -473,7 +473,7 @@
                     android:background="@xml/hox_rounded_corner_splash_right"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onSupportSplash"
-                    app:tint="@color/c_setting_icon_tint"
+                    app:tint="#425e8a"
                     android:padding="6dp"
                     android:scaleType="fitCenter"
                     android:src="@xml/ic_baseline_support"

@@ -4,7 +4,7 @@ public class pluginEnums {
 
     /*Advert Manager*/
     public enum eAdManager {
-        M_IS_ADVERT_LOADED, M_LOW_MEMORY_DESTROY, M_HIDE_BANNER, M_SHOW_BANNER, M_SHOW_INTERSTITIAL
+        M_IS_ADVERT_LOADED, M_LOW_MEMORY_DESTROY, M_HIDE_BANNER, M_SHOW_BANNER, M_SHOW_INTERSTITIAL, M_INIT_ADS
     }
 
     public enum eAdManagerCallbacks {
