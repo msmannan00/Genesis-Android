@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.pluginManager.adPluginManager;
 
+import static com.hiddenservices.onionservices.constants.keys.APPLOVIN_BANNER_KEY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICKED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 import android.view.View;
@@ -18,7 +19,7 @@ public class applovinBannerManager implements MaxAdViewAdListener{
 
     /* Private Variabes */
 
-    private static final String S_UNIT_ID = "642ec6302c7cecd2";
+    private static final String S_UNIT_ID = APPLOVIN_BANNER_KEY;
     private MaxAdView mBanner;
     private eventObserver.eventListener mEvent;
 

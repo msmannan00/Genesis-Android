@@ -44,7 +44,7 @@
                 android:id="@+id/pHintWebIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
                 app:cardCornerRadius="3dp"
                 android:background="@color/c_background"
                 app:cardElevation="0dp"
@@ -123,24 +123,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/pHintWebIcon"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/pMoveURL"
             android:layout_width="55dp"
-            android:padding="8dp"
             android:layout_height="55dp"
             android:layout_gravity="center_vertical"
-            android:src="@xml/ic_arrow_right_tilted"
-            android:tag="@string/GENERAL_TODO"
-            android:onClick="onSuggestionMove"
             android:layout_margin="2dp"
             android:background="@xml/gx_ripple_default_round"
-            android:rotation="225"
             android:contentDescription="@string/GENERAL_TODO"
-            app:tint="@color/c_navigation_tint" />
+            android:onClick="onSuggestionMove"
+            android:padding="8dp"
+            android:rotation="225"
+            android:src="@xml/ic_arrow_right_tilted"
+            android:tag="@string/GENERAL_TODO"
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
 
     </LinearLayout>

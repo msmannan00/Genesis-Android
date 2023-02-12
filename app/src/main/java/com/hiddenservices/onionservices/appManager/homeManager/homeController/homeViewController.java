@@ -31,7 +31,6 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -42,9 +41,8 @@ import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.applovin.mediation.ads.MaxAdView;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.editTextManager;
 import com.hiddenservices.onionservices.constants.*;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
@@ -53,25 +51,23 @@ import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.R;
 import com.google.android.material.appbar.AppBarLayout;
-
 import org.mozilla.geckoview.GeckoView;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Callable;
-
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_DOMAIN_URL;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
+import static com.hiddenservices.onionservices.constants.status.sSettingLanguage;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
-import static java.lang.System.gc;
 import static java.lang.Thread.sleep;
 
-class homeViewController {
+public class homeViewController {
     /*ViewControllers*/
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
@@ -96,10 +92,8 @@ class homeViewController {
     private View mSearchEngineBar;
     private EditText mFindText;
     private TextView mFindCount;
-    private ConstraintLayout mTopLayout;
     private ImageButton mVoiceInput;
     private ImageButton mMenu;
-    private ImageView mBlocker;
     private ImageView mBlockerFullSceen;
     private TextView mCopyright;
     private ImageButton mOrbotLogManager;
@@ -112,7 +106,6 @@ class homeViewController {
     private ImageView mSearchLock;
     private ImageView mTopBarHider;
     private ImageView mNewTabBlocker;
-    private CoordinatorLayout mCoordinatorLayout;
     private ImageView mImageDivider;
     private ImageButton mPanicButton;
     private ImageButton mSupportButton;
@@ -128,7 +121,7 @@ class homeViewController {
     private boolean mIsTopBarExpanded = true;
     private NestedScrollView.MarginLayoutParams mDefaultMargin = null;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, View banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, Button connect_no_tor_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled, ImageButton pSupportButton) {
+    public void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, View banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, Button connect_no_tor_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled, ImageButton pSupportButton) {
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -147,10 +140,8 @@ class homeViewController {
         this.mFindBar = pFindBar;
         this.mFindText = pFindText;
         this.mFindCount = pFindCount;
-        this.mTopLayout = pTopLayout;
         this.mVoiceInput = pVoiceInput;
         this.mMenu = pMenu;
-        this.mBlocker = pBlocker;
         this.mBlockerFullSceen = pBlockerFullSceen;
         this.mSearchEngineBar = mSearchEngineBar;
         this.mCopyright = pCopyright;
@@ -165,7 +156,6 @@ class homeViewController {
         this.mSearchLock = pSearchLock;
         this.mTopBarHider = pTopBarHider;
         this.mNewTabBlocker = pNewTabBlocker;
-        this.mCoordinatorLayout = mCoordinatorLayout;
         this.mImageDivider = pImageDivider;
         this.mPanicButton = pPanicButton;
         this.mGenesisLogo = pGenesisLogo;
@@ -186,12 +176,12 @@ class homeViewController {
 
     @SuppressLint("WrongConstant")
     public void initializeViews() {
-        mSearchbar.setTag(R.id.msearchbarProcessing, false);
-        mNestedScroll.setNestedScrollingEnabled(true);
+        this.mSearchbar.setTag(R.id.msearchbarProcessing, false);
+        this.mNestedScroll.setNestedScrollingEnabled(true);
         this.mBlockerFullSceen.setVisibility(View.GONE);
-        mSearchBarMovementMethod = mSearchbar.getMovementMethod();
-        mSearchbar.setMovementMethod(null);
-        mTopBarContainer.getLayoutTransition().setDuration(200);
+        this.mSearchBarMovementMethod = mSearchbar.getMovementMethod();
+        this.mSearchbar.setMovementMethod(null);
+        this.mTopBarContainer.getLayoutTransition().setDuration(200);
 
         final Handler handler = new Handler();
         handler.postDelayed(() -> mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER), 1500);
@@ -266,7 +256,7 @@ class homeViewController {
                 layoutParams.setMargins(0, helperMethod.pxFromDp(60), 0, 0);
                 mGeckoView.setPadding(0, 0, 0, 0);
             } else {
-                Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
+                Object mAdvertLoaded = mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_ADVERT_LOADED);
                 if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                     int[] location = new int[2];
                     mTopBar.getLocationOnScreen(location);
@@ -281,8 +271,21 @@ class homeViewController {
                     mGeckoView.setPadding(0, 0, 0, 0);
                 }
             }
-            mSearchEngineBar.setLayoutParams(layoutParams);
+
+
+            String mText = getLocaleStringResource(new Locale(sSettingLanguage), R.string.GENERAL_SEARCH_ENGINE, mContext);
+            ((TextView)mSearchEngineBar.findViewById(R.id.pSearchEngineHintInvoke)).setText(mText);
+
         }
+    }
+
+    public static String getLocaleStringResource(Locale requestedLocale, int resourceId, Context context) {
+        String result;
+        Configuration config = new Configuration(context.getResources().getConfiguration());
+        config.setLocale(requestedLocale);
+        result = context.createConfigurationContext(config).getText(resourceId).toString();
+
+        return result;
     }
 
     @SuppressLint("WrongConstant")
@@ -337,13 +340,13 @@ class homeViewController {
             new Handler().postDelayed(() ->
             {
                 mTopBarHider.animate().alpha(0).setDuration(250).setStartDelay(0).withEndAction(() -> mTopBarHider.setVisibility(View.GONE));
-                mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
+                mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_UPDATE_THEME);
             }, 250);
 
             mTabFragment.animate().cancel();
             mTabFragment.animate().setDuration(100).alpha(0f).withEndAction(() -> {
                 mTabFragment.setVisibility(View.GONE);
-                mEvent.invokeObserver(null, enums.etype.M_UPDATE_PIXEL_BACKGROUND);
+                mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_UPDATE_PIXEL_BACKGROUND);
             });
         }
     }
@@ -387,7 +390,7 @@ class homeViewController {
             }
 
             if(!mSearchbar.isFocused() && (mProgressBar.getProgress() == 0 || mProgressBar.getProgress() == 100)){
-                boolean ssl = (boolean)mEvent.invokeObserver(null, enums.etype.M_GET_SSL_STATUS);
+                boolean ssl = (boolean)mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_GET_SSL_STATUS);
                 if(ssl || status.sTorBrowsing){
                     mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
                 }else {
@@ -479,7 +482,7 @@ class homeViewController {
         }
     }
 
-    void initTab(int count, boolean pForced, enums.etype pEvent, List<Object> pData) {
+    void initTab(int count, boolean pForced, homeEnums.eHomeViewCallback pEvent, List<Object> pData) {
         if (!pForced) {
             ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mNewTab,
                     PropertyValuesHolder.ofFloat("scale" + "X", 1, 0.70f, 1),
@@ -587,8 +590,8 @@ class homeViewController {
         mSupportButton.setVisibility(View.GONE);
         mPanicButtonLandscape.setVisibility(View.GONE);
 
-        mEvent.invokeObserver(null, enums.etype.M_CACHE_UPDATE_TAB);
-        mEvent.invokeObserver(null, enums.etype.M_SPLASH_DISABLE);
+        mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_CACHE_UPDATE_TAB);
+        mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_SPLASH_DISABLE);
     }
 
     public void initSplashLoading() {
@@ -683,7 +686,7 @@ class homeViewController {
                 });
             } else {
                 mContext.runOnUiThread(() -> {
-                    mEvent.invokeObserver(null, enums.etype.ON_LOAD_TAB_ON_RESUME);
+                    mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.ON_LOAD_TAB_ON_RESUME);
                 });
             }
             mContext.runOnUiThread(() -> {
@@ -692,7 +695,7 @@ class homeViewController {
 
             orbotLocalConstants.mIsTorInitialized = true;
             mContext.runOnUiThread(() -> {
-                mEvent.invokeObserver(null, enums.etype.ON_LOAD_ADVERT);
+                mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.ON_LOAD_ADVERT);
             });
 
             return null;
@@ -749,7 +752,7 @@ class homeViewController {
                 mIsAnimating = true;
                 initStatusBarColor(false);
 
-                mEvent.invokeObserver(null, enums.etype.M_WELCOME_MESSAGE);
+                mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_WELCOME_MESSAGE);
                 mOrbotLogManager.setClickable(false);
                 status.sSettingIsAppRestarting = true;
             }
@@ -872,7 +875,7 @@ class homeViewController {
             helperMethod.hideKeyboard(mContext);
             popupWindow.setHeight(height);
         }
-        if (status.sSettingLanguageRegion.equals("Ur") || status.sSettingLanguage.equals("default") && status.mSystemLocale.getLanguage().equals("ur")) {
+        if (status.sSettingLanguageRegion.equals("Ur") || sSettingLanguage.equals("default") && status.mSystemLocale.getLanguage().equals("ur")) {
             popupWindow.showAtLocation(parent, Gravity.TOP | Gravity.START, 0, 0);
         } else {
             popupWindow.showAtLocation(parent, Gravity.TOP | Gravity.END, 0, 0);
@@ -920,7 +923,7 @@ class homeViewController {
         if (isLandscape) {
             layoutParams.setMargins(mScrollView.getLeft(), helperMethod.pxFromDp(7), mScrollView.getRight(), helperMethod.pxFromDp(10));
         } else {
-            Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
+            Object mAdvertLoaded = mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_ADVERT_LOADED);
             if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                 layoutParams.setMargins(mScrollView.getLeft(), mBannerAds.getHeight(), mScrollView.getRight(), helperMethod.pxFromDp(30));
             } else {
@@ -972,7 +975,7 @@ class homeViewController {
         }
     }
 
-    void downloadNotification(String message, enums.etype e_type) {
+    void downloadNotification(String message, homeEnums.eHomeViewCallback e_type) {
 
         if (popupWindow != null) {
             popupWindow.dismiss();
@@ -1005,7 +1008,7 @@ class homeViewController {
         Button btn = popupView.findViewById(R.id.notification_event);
         btn.setOnClickListener(v ->
         {
-            mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), enums.etype.progress_update);
+            mEvent.invokeObserver(Collections.singletonList(status.sSettingDefaultSearchEngine), homeEnums.eHomeViewCallback.PROGRESS_UPDATE);
             popupWindow.dismiss();
         });
 
@@ -1045,7 +1048,7 @@ class homeViewController {
 
     void updateBannerAdvertStatus(boolean status, boolean pIsAdvertLoaded) {
         if (!isFullScreen) {
-            Object mCurrentURL = mEvent.invokeObserver(null, enums.etype.M_GET_CURRENT_URL);
+            Object mCurrentURL = mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_GET_CURRENT_URL);
             if (status && pIsAdvertLoaded) {
                 if (mBannerAds.getAlpha() == 0) {
                     mBannerAds.animate().cancel();
@@ -1070,7 +1073,7 @@ class homeViewController {
             if (isLandscape) {
                 mBannerAds.setVisibility(View.GONE);
             } else {
-                mEvent.invokeObserver(null, enums.etype.M_ON_BANNER_UPDATE);
+                mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_ON_BANNER_UPDATE);
             }
             onFullScreen(false);
         }
@@ -1123,6 +1126,7 @@ class homeViewController {
     }
 
     public void onUpdateStatusBarTheme(String pTheme, boolean mForced) {
+
         if (mSplashScreen.getAlpha() <= 0 && (status.sTheme != enums.Theme.THEME_DARK && mTabFragment.getAlpha() <= 0 || mForced)) {
             if (status.sDefaultNightMode && status.sTheme == enums.Theme.THEME_DEFAULT) {
                 return;
@@ -1286,19 +1290,19 @@ class homeViewController {
             if (mSearchEngineBar.getAlpha() == 0 || mSearchEngineBar.getVisibility() == View.GONE && mSplashScreen.getAlpha() <= 0) {
                 onUpdateStatusBarTheme(null, false);
                 mSearchEngineBar.animate().cancel();
-                mSearchEngineBar.setAlpha(1f);
-                mSearchEngineBar.animate().setDuration(delay).alpha(1);
+                mSearchEngineBar.setAlpha(0.6f);
+                mSearchEngineBar.animate().setDuration(100).alpha(1);
                 mSearchEngineBar.setVisibility(View.VISIBLE);
             }
         } else {
             new Handler().postDelayed(() ->
             {
-                mEvent.invokeObserver(null, enums.etype.M_UPDATE_THEME);
+                mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_UPDATE_THEME);
                 mSearchEngineBar.animate().setDuration(delay).setStartDelay(0).alpha(0).withEndAction(() -> {
                     mSearchEngineBar.animate().cancel();
                     mSearchEngineBar.setAlpha(0f);
                     mSearchEngineBar.setVisibility(View.GONE);
-                    mEvent.invokeObserver(null, enums.etype.M_RESET_SUGGESTION);
+                    mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_RESET_SUGGESTION);
                 });
             }, 0);
         }
@@ -1448,7 +1452,7 @@ class homeViewController {
         progressAnimator.start();
     }
 
-    public void onNewTabAnimation(List<Object> data, Object e_type) {
+    public void onNewTabAnimation(List<Object> data, Object e_type, int pDelay) {
 
         if (mNewTabBlocker.getAlpha() != 0) {
             return;
@@ -1457,7 +1461,7 @@ class homeViewController {
         new Handler().postDelayed(() ->
         {
             onResetTabAnimation();
-        }, 500);
+        }, pDelay);
 
         mGeckoView.setPivotX(0);
         mGeckoView.setPivotY(0);
@@ -1616,7 +1620,7 @@ class homeViewController {
 
             mDefaultColor = mContext.getWindow().getNavigationBarColor();
             mContext.getWindow().setNavigationBarColor(Color.BLACK);
-            mEvent.invokeObserver(Collections.singletonList(true), enums.etype.on_full_screen_ads);
+            mEvent.invokeObserver(Collections.singletonList(true), homeEnums.eHomeViewCallback.on_full_screen_ads);
 
             new Handler().postDelayed(() ->
             {
@@ -1666,7 +1670,7 @@ class homeViewController {
                         params.setMargins(0, 0, 0, -helperMethod.pxFromDp(120));
                     } else {
                         if (mBannerAds.getHeight() > 0 && mBannerAds.getVisibility() == View.VISIBLE) {
-                            Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
+                            Object mAdvertLoaded = mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_ADVERT_LOADED);
                             if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                                 params.setMargins(0, 0, 0, -helperMethod.pxFromDp(170));
                             } else {
@@ -1702,7 +1706,7 @@ class homeViewController {
             new Handler().postDelayed(() ->
             {
                 mContext.getWindow().setNavigationBarColor(mDefaultColor);
-                Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
+                Object mAdvertLoaded = mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_ADVERT_LOADED);
                 if (mBannerAds.getHeight() > 0 && mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                     mBannerAds.setVisibility(View.VISIBLE);
                 }
@@ -1713,8 +1717,8 @@ class homeViewController {
 
                 mProgressBar.setVisibility(View.VISIBLE);
                 mTopBar.setVisibility(View.VISIBLE);
-                mEvent.invokeObserver(Collections.singletonList(!isLandscape), enums.etype.on_init_ads);
-                mEvent.invokeObserver(Collections.singletonList(isLandscape), enums.etype.on_full_screen_ads);
+                mEvent.invokeObserver(Collections.singletonList(!isLandscape), homeEnums.eHomeViewCallback.ON_INIT_ADS);
+                mEvent.invokeObserver(Collections.singletonList(isLandscape), homeEnums.eHomeViewCallback.on_full_screen_ads);
 
                 status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING, false));
 
@@ -1743,9 +1747,8 @@ class homeViewController {
     }
 
     public void onFullScreen(boolean pForced) {
-        Object mAdvertLoaded = mEvent.invokeObserver(null, enums.etype.M_ADVERT_LOADED);
-        Object mCurrentURL = mEvent.invokeObserver(null, enums.etype.M_GET_CURRENT_URL);
-        Object wasErrorPage = mEvent.invokeObserver(null, enums.etype.M_IS_ERROR_PAGE);
+        Object mAdvertLoaded = mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_ADVERT_LOADED);
+        Object mCurrentURL = mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_GET_CURRENT_URL);
 
         if (mProgressBar.getProgress() > 0 && mProgressBar.getProgress() < 100 && !pForced) {
             mWebviewContainer.setPadding(0, 0, 0, 0);
@@ -1770,15 +1773,11 @@ class homeViewController {
             if (mAdvertLoaded != null && (boolean) mAdvertLoaded) {
                 if (mCurrentURL != null) {
                     String mURL = (String) mCurrentURL;
-                    if ((wasErrorPage != null && (boolean) wasErrorPage)) {
+                    int orientation = mContext.getResources().getConfiguration().orientation;
+                    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                         mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60 + 60));
                     } else {
-                        int orientation = mContext.getResources().getConfiguration().orientation;
-                        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                            mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60 + 60));
-                        } else {
-                            mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60) + helperMethod.pxFromDp(50) + mTopBar.getHeight());
-                        }
+                        mWebviewContainer.setPadding(0, 0, 0, helperMethod.pxFromDp(60) + helperMethod.pxFromDp(50) + mTopBar.getHeight());
                     }
                 }
             } else {
@@ -1812,16 +1811,16 @@ class homeViewController {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == messages.MESSAGE_ON_URL_LOAD) {
-                    if (mEvent.invokeObserver(null, enums.etype.M_HOME_PAGE) == null) {
-                        mEvent.invokeObserver(null, enums.etype.M_PRELOAD_URL);
+                    if (mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_HOME_PAGE) == null) {
+                        mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_PRELOAD_URL);
                         if (status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)) {
-                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingDefaultSearchEngine)), enums.etype.on_url_load);
+                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingDefaultSearchEngine)), homeEnums.eHomeViewCallback.on_url_load);
                         } else {
-                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), enums.etype.on_url_load);
+                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), homeEnums.eHomeViewCallback.on_url_load);
                         }
                     }
                     if (!status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR)) {
-                        mEvent.invokeObserver(Collections.singletonList(status.sExternalWebsite), enums.etype.open_new_tab_instant);
+                        mEvent.invokeObserver(Collections.singletonList(status.sExternalWebsite), homeEnums.eHomeViewCallback.OPEN_NEW_TAB_INSTANT);
                     }
 
                     status.sSettingIsAppStarted = true;

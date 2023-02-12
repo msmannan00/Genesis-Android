@@ -64,7 +64,9 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:src="@drawable/star" />
+                        android:src="@drawable/star"
+                        tools:ignore="ImageContrastCheck"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -73,16 +75,19 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:text="Love this browser\n5/5"
-                        android:textColor="@color/c_alert_background_description"
-                        android:textSize="14sp" />
+                        android:text="@string/ALERT_RATE_DESCRIPTION_1"
+                        android:textColor="@color/c_text_v2"
+                        android:textSize="14sp"
+                        tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="16dp"
                         android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_light" />
+                        app:tint="@color/c_navigation_light"
+                        tools:ignore="ImageContrastCheck" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -97,7 +102,9 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:src="@drawable/smile" />
+                        android:src="@drawable/smile"
+                        tools:ignore="ImageContrastCheck"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -106,16 +113,19 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:text="Like the browser\n4/5"
-                        android:textColor="@color/c_alert_background_description"
-                        android:textSize="14sp" />
+                        android:text="@string/ALERT_RATE_DESCRIPTION_2"
+                        android:textColor="@color/c_text_v2"
+                        android:textSize="14sp"
+                        tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
                         android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_light" />
+                        app:tint="@color/c_navigation_light"
+                        tools:ignore="ImageContrastCheck"
+                        android:contentDescription="@string/GENERAL_TODO" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -130,7 +140,9 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:src="@drawable/confused" />
+                        android:src="@drawable/confused"
+                        tools:ignore="ImageContrastCheck"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -139,16 +151,19 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:text="Satisfactory\n3/5"
-                        android:textColor="@color/c_alert_background_description"
-                        android:textSize="14sp" />
+                        android:text="@string/ALERT_RATE_DESCRIPTION_3"
+                        android:textColor="@color/c_text_v2"
+                        android:textSize="14sp"
+                        tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
                         android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_light" />
+                        app:tint="@color/c_navigation_light"
+                        tools:ignore="ImageContrastCheck"
+                        android:contentDescription="@string/GENERAL_TODO" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -163,7 +178,9 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:src="@drawable/sad" />
+                        android:src="@drawable/sad"
+                        tools:ignore="ImageContrastCheck"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -172,16 +189,19 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:text="Below average\n2/5"
-                        android:textColor="@color/c_alert_background_description"
-                        android:textSize="14sp" />
+                        android:text="@string/ALERT_RATE_DESCRIPTION_4"
+                        android:textColor="@color/c_text_v2"
+                        android:textSize="14sp"
+                        tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="16dp"
                         android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_light" />
+                        app:tint="@color/c_navigation_light"
+                        tools:ignore="ImageContrastCheck" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -196,7 +216,8 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:src="@drawable/angry" />
+                        android:src="@drawable/angry"
+                        android:contentDescription="@string/GENERAL_TODO" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -205,16 +226,19 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:text="Poor browser\n1/5"
-                        android:textColor="@color/c_alert_background_description"
-                        android:textSize="14sp" />
+                        android:text="@string/ALERT_RATE_DESCRIPTION_5"
+                        android:textColor="@color/c_text_v2"
+                        android:textSize="14sp"
+                        tools:ignore="TextContrastCheck" />
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="16dp"
                         android:src="@xml/ic_arrow_right"
-                        app:tint="@color/c_navigation_light" />
+                        app:tint="@color/c_navigation_light"
+                        tools:ignore="ImageContrastCheck" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -230,7 +254,8 @@
                 android:src="@xml/ic_baseline_cross"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/c_white" />
+                app:tint="@color/c_white"
+                android:contentDescription="@string/GENERAL_TODO" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

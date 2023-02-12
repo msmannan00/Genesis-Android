@@ -9,8 +9,6 @@ public class constants {
     public static final String CONST_HUAWEI_URL = "https://appgallery.cloud.huawei.com/uowap/index.html#/detailApp/C106142211?appId=C106142211";
 
     public static final String CONST_PRIVACY_POLICY_URL_NON_TOR = "resource://android/assets/policy/policy.html";
-    public static final String CONST_REPORT_URL_NON_TOR = "http://http://167.86.99.31/report?url=";
-    public static final String CONST_SITEMAP_NON_TOR = "http://http://167.86.99.31/sitemap";
 
     public static final String CONST_PRIVACY_POLICY_URL = "http://167.86.99.31/privacy";
     public static final String CONST_REPORT_URL = "http://167.86.99.31/report?url=";
@@ -82,10 +80,6 @@ public class constants {
 
     /*Notification Manager*/
 
-    public static final String CONST_NOTIFICATION_ID_NAME = "NOTIFICATION:INDENTIFIER:1001";
-    public static final String CONST_NOTIFICATION_TITLE = "Orion Browser";
-    public static final int CONST_NOTIFICATION_ID_VALUE = 1;
-    public static final int CONST_NOTIFICATION_REQUEST_CODE = 0;
     public static final int mUserEngagementNotificationID = 1001;
 
     /*Language CONSTANTS*/
@@ -105,7 +99,6 @@ public class constants {
 
     /*ENCRYPTION KEY*/
 
-    public static final String CONST_ENCRYPTION_KEY = "Zr4u7x!A%D*F-JaNdRgUkXp2s5v8y/B?";
     public static final String CONST_ENCRYPTION_KEY_DATABASE = "Zr4u7x!!A%D*F-JaNdsS@@gUbbp^^5v8y/B?";
 
     /*SHORTCUT CONSTANTS*/

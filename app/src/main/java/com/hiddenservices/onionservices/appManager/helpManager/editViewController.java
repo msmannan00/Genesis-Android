@@ -3,11 +3,9 @@ package com.hiddenservices.onionservices.appManager.helpManager;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.hiddenservices.onionservices.constants.enums;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.eventObserver;
 
 public class editViewController extends androidx.appcompat.widget.AppCompatAutoCompleteTextView {
@@ -38,7 +36,7 @@ public class editViewController extends androidx.appcompat.widget.AppCompatAutoC
     public boolean onKeyPreIme(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mEvent != null) {
-                mEvent.invokeObserver(null, enums.etype.ON_KEYBOARD_CLOSE);
+                mEvent.invokeObserver(null, homeEnums.eEdittextCallbacks.ON_KEYBOARD_CLOSE);
             }
         }
         return false;

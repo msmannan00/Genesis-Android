@@ -1,8 +1,6 @@
 package com.hiddenservices.onionservices.helperManager;
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.DownloadManager;
@@ -15,83 +13,63 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Vibrator;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ActionMenuView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ShareCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
-
 import com.hiddenservices.onionservices.BuildConfig;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
-import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.defaultBrowser;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
-import com.hiddenservices.onionservices.constants.strings;
+import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.libs.trueTime.trueTimeEncryption;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.R;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.net.DatagramSocket;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -104,19 +82,17 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.crypto.Cipher;
 import javax.net.ssl.HttpsURLConnection;
-
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 import static com.hiddenservices.onionservices.constants.constants.CONST_LIST_EXTERNAL_SHORTCUT;
-import static com.hiddenservices.onionservices.constants.constants.CONST_PACKAGE_NAME;
 import static com.hiddenservices.onionservices.constants.constants.CONST_PLAYSTORE_URL;
 import static com.hiddenservices.onionservices.constants.keys.M_ACTIVITY_NAVIGATION_BUNDLE_KEY;
 import static com.hiddenservices.onionservices.constants.keys.M_RESTART_APP_KEY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_OPEN_ACTIVITY_FAILED;
+
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 public class helperMethod {
     /*Helper Methods General*/
@@ -148,6 +124,41 @@ public class helperMethod {
         return pendingIntent;
     }
 
+    public static String getAssetsCacheFile(Context context, String fileName) {
+        File cacheFile = new File(context.getCacheDir(), fileName);
+        try {
+            try (InputStream inputStream = context.getAssets().open(fileName)) {
+                try (FileOutputStream outputStream = new FileOutputStream(cacheFile)) {
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while ((len = inputStream.read(buf)) > 0) {
+                        outputStream.write(buf, 0, len);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String mYAML = helperMethod.readFromFile(cacheFile.getPath());
+        if (status.sTorBrowsing) {
+            mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"", "network.proxy.socks:  \"127.0.0.1\"");
+            mYAML = mYAML.replace("# network.proxy.socks_port:  9050", "network.proxy.socks_port:  9050");
+            mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
+
+            StringBuilder buf = new StringBuilder(mYAML);
+            int portIndex = mYAML.indexOf("network.proxy.socks_port");
+            int breakIndex = mYAML.indexOf("\n", portIndex);
+            mYAML = buf.replace(portIndex, breakIndex, "network.proxy.socks_port:  " + orbotLocalConstants.mSOCKSPort).toString();
+            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+        } else {
+            mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
+            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+        }
+
+        return cacheFile.getAbsolutePath();
+    }
+
     public static String setGenesisVerificationToken(String pString) {
         try {
             if (pString.contains("?")) {
@@ -169,44 +180,6 @@ public class helperMethod {
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
-        }
-    }
-
-    public static int getStatusBarHeight(AppCompatActivity pContext) {
-        int result = 0;
-        int resourceId = pContext.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = pContext.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
-
-    public static byte[] convertToBytes(Object object) throws IOException {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(object);
-        oos.flush();
-        oos.close();
-        bos.close();
-        byte[] data = bos.toByteArray();
-        return data;
-    }
-
-
-    public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream in = new ByteArrayInputStream(data);
-        ObjectInputStream is = new ObjectInputStream(in);
-        return is.readObject();
-    }
-
-    public static String caesarCipherEncrypt(String pMessage, Key pSecretKey) {
-        try {
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, pSecretKey);
-            byte[] cipherText = cipher.doFinal((pMessage + "__" + createRandomID()).getBytes());
-            return new String(cipherText);
-        } catch (Exception ex) {
-            return pMessage;
         }
     }
 
@@ -233,25 +206,6 @@ public class helperMethod {
                 e.printStackTrace();
             }
         }, pTime);
-    }
-
-    public static void onOpenHelpExternal(AppCompatActivity context, String pURL) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pURL));
-        context.startActivity(browserIntent);
-    }
-
-    public static geckoSession deepCopy(geckoSession object) {
-        try {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ObjectOutputStream outputStrm = new ObjectOutputStream(outputStream);
-            outputStrm.writeObject(object);
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-            ObjectInputStream objInputStream = new ObjectInputStream(inputStream);
-            return (geckoSession) objInputStream.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public static void writeToFile(String pFilePath, String content) {
@@ -373,41 +327,46 @@ public class helperMethod {
 
     public static SpannableString urlDesigner(boolean protocol, String url, Context pContext, int pDefColor, int pTheme, boolean sTorBrowsing) {
 
-        int mColor = 0;
+        int mColor;
         if (pTheme == enums.Theme.THEME_DARK) {
             mColor = Color.argb(255, 0, 204, 71);
         } else {
             mColor = Color.argb(255, 0, 153, 54);
         }
+        if(url.equals("about:blank")){
+            SpannableString span = new SpannableString(url);
+            span.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return span;
+        }
 
         if (url.startsWith("https://") || url.startsWith("http://")) {
             if(url.startsWith("https://")){
-                SpannableString ss = new SpannableString(url);
-                ss.setSpan(new ForegroundColorSpan(mColor), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                ss.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                SpannableString span = new SpannableString(url);
+                span.setSpan(new ForegroundColorSpan(mColor), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.GRAY), 5, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                 if(pTheme != enums.Theme.THEME_DARK){
-                    ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+8, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+8, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }else {
-                    ss.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+8, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+8, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
-                return ss;
+                return span;
             }else {
-                SpannableString ss = new SpannableString(url);
+                SpannableString span = new SpannableString(url);
                 if(sTorBrowsing){
-                    ss.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new ForegroundColorSpan(mColor), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }else {
-                    ss.setSpan(new ForegroundColorSpan(Color.RED), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new ForegroundColorSpan(Color.RED), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
-                ss.setSpan(new ForegroundColorSpan(Color.GRAY), 4, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.GRAY), 4, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                 if(pTheme != enums.Theme.THEME_DARK){
-                    ss.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }else {
-                    ss.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new ForegroundColorSpan(Color.WHITE), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
-                return ss;
+                return span;
             }
         } else {
             SpannableString ss = new SpannableString(url);
@@ -419,38 +378,6 @@ public class helperMethod {
             }
             return ss;
         }
-    }
-
-    public static String getDefaultBrowser(AppCompatActivity context) {
-        Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://"));
-        ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
-        return resolveInfo.activityInfo.packageName;
-    }
-
-    public static void openURLInCustomBrowser(String pData, AppCompatActivity pContext) {
-        String mBrowser = helperMethod.getSystemBrowser(pContext);
-        if (!mBrowser.equals(strings.GENERIC_EMPTY_STR)) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(pData));
-            intent.setPackage(mBrowser);
-            pContext.startActivity(intent);
-        }
-    }
-
-    public static String getSystemBrowser(AppCompatActivity context) {
-        PackageManager packageManager = context.getPackageManager();
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("http://www.google.com"));
-        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_ALL);
-        String mBrowser = strings.GENERIC_EMPTY_STR;
-        for (ResolveInfo info : list) {
-            if (!info.activityInfo.packageName.contains(CONST_PACKAGE_NAME)) {
-                mBrowser = info.activityInfo.packageName;
-                if (info.activityInfo.packageName.contains("chrome") || info.activityInfo.packageName.contains("google") || info.activityInfo.packageName.contains("firefox")) {
-                    return mBrowser;
-                }
-            }
-        }
-        return mBrowser;
     }
 
     public static void sendIssueEmail(Context context) {
@@ -491,54 +418,6 @@ public class helperMethod {
         context.startActivity(Intent.createChooser(emailIntent, "get transport obfs4"));
     }
 
-    public static void onRevealView(View pView) {
-        int cx = pView.getWidth();
-        int cy = pView.getHeight();
-        float finalRadius = (float) Math.hypot(cx, cy);
-        Animator anim = ViewAnimationUtils.createCircularReveal(pView, 100, 100, 0, finalRadius);
-        pView.setVisibility(View.VISIBLE);
-        anim.start();
-    }
-
-    public static void onHideView(View pView) {
-        int cx = pView.getWidth();
-        int cy = pView.getHeight();
-        float initialRadius = (float) Math.hypot(cx, cy);
-        Animator anim = ViewAnimationUtils.createCircularReveal(pView, 100, 100, initialRadius, 0);
-        anim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                pView.setVisibility(View.INVISIBLE);
-            }
-        });
-        anim.start();
-    }
-
-    public static Bitmap drawableToBitmap(Drawable drawable) {
-        Bitmap bitmap = null;
-
-        if (drawable == null) {
-            return null;
-        }
-        if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if (bitmapDrawable.getBitmap() != null) {
-                return bitmapDrawable.getBitmap();
-            }
-        }
-
-        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
-        } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
-    }
 
     public static String getMimeType(Context context, Uri uri) {
         String extension;
@@ -622,11 +501,6 @@ public class helperMethod {
                 .setSubject("Hi! Check out this Awesome URL | " + p_title)
                 .setText("Website URL | " + p_share)
                 .startChooser();
-    }
-
-    public static void vibrate(AppCompatActivity context) {
-        // Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        // v.vibrate(50);
     }
 
     public static void shareURL(AppCompatActivity context, String p_share) {
@@ -745,20 +619,6 @@ public class helperMethod {
         return m.matches();
     }
 
-    public static String capitalizeString(String string) {
-        char[] chars = string.toLowerCase().toCharArray();
-        boolean found = false;
-        for (int i = 0; i < chars.length; i++) {
-            if (!found && Character.isLetter(chars[i])) {
-                chars[i] = Character.toUpperCase(chars[i]);
-                found = true;
-            } else if (Character.isWhitespace(chars[i]) || chars[i] == '.' || chars[i] == '\'') { // You can add other chars here
-                found = false;
-            }
-        }
-        return String.valueOf(chars);
-    }
-
     public static String removeLastSlash(String url) {
         if (url.length() > 2) {
             if (url.charAt(url.length() - 1) == '/') {
@@ -850,16 +710,6 @@ public class helperMethod {
         }
     }
 
-    public static void openActivityReverse(Class<?> cls, int type, AppCompatActivity context, boolean animation) {
-        Intent myIntent = new Intent(context, cls);
-        myIntent.putExtra(keys.PROXY_LIST_TYPE, type);
-        if (!animation) {
-            myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
-        }
-
-        context.startActivity(myIntent);
-    }
-
     public static void restartActivity(Intent pIntent, AppCompatActivity pContext) {
         pContext.finish();
         pContext.startActivity(pIntent);
@@ -874,13 +724,6 @@ public class helperMethod {
 
     public static int screenWidth() {
         return (Resources.getSystem().getDisplayMetrics().widthPixels);
-    }
-
-    public static RotateAnimation getRotationAnimation() {
-        RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotate.setDuration(2000);
-        rotate.setRepeatCount(Animation.INFINITE);
-        return rotate;
     }
 
     public static void openNotification(AppCompatActivity pContext) {

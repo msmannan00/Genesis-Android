@@ -25,8 +25,6 @@
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/blue"
         app:cardCornerRadius="4dp"
-        android:outlineAmbientShadowColor="@color/c_tab_border_v1"
-        android:outlineSpotShadowColor="@color/c_tab_border_v1"
         app:cardPreventCornerOverlap="false"
         android:clipChildren="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,9 +153,9 @@
                 android:id="@+id/pOrbotRowRemove"
                 android:layout_width="31dp"
                 android:layout_height="31dp"
+                android:layout_gravity="end"
                 android:background="@xml/tx_ripple_light"
                 android:contentDescription="@string/GENERAL_TODO"
-                android:layout_gravity="end"
                 android:longClickable="true"
                 android:outlineProvider="none"
                 android:padding="7dp"
@@ -168,8 +166,8 @@
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlSymmetry"
-                app:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="RtlSymmetry,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
             <ImageView
                 android:id="@+id/pLoadSession"
@@ -212,7 +210,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="0dp"
-                    android:layout_marginLeft="5dp"
                     android:clickable="false"
                     android:textAlignment="textStart"
                     android:ellipsize="end"

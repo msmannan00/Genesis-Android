@@ -32,52 +32,52 @@
             <Button
                 android:id="@+id/pMenuCopy"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item_top"
                 android:gravity="start|center_vertical"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textAllCaps="false"
                 android:text="@string/SHARED_RECYCLER_VIEW_COPY"
+                android:textAllCaps="false"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
             <Button
                 android:id="@+id/pMenuShare"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item"
                 android:gravity="start|center_vertical"
                 android:paddingStart="15dp"
-                android:textAllCaps="false"
                 android:paddingEnd="15dp"
                 android:text="@string/SHARED_RECYCLER_VIEW_SHARE"
+                android:textAllCaps="false"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
             <Button
                 android:id="@+id/pMenuOpenCurrentTab"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item"
                 android:gravity="start|center_vertical"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textAllCaps="false"
                 android:text="@string/SHARED_RECYCLER_VIEW_OPEN_CURRENT_TAB"
+                android:textAllCaps="false"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
             <Button
                 android:id="@+id/pMenuOpenNewTab"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item"
                 android:gravity="start|center_vertical"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textAllCaps="false"
                 android:text="@string/SHARED_RECYCLER_VIEW_OPEN_NEW_TAB"
+                android:textAllCaps="false"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
@@ -90,14 +90,14 @@
             <Button
                 android:id="@+id/pMenuDelete"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item_bottom"
                 android:gravity="start|center_vertical"
-                android:textColor="@color/c_error_text_color"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textAllCaps="false"
                 android:text="@string/SHARED_RECYCLER_VIEW_DELETE"
+                android:textAllCaps="false"
+                android:textColor="#DD2C00"
                 android:textSize="14.5sp" />
 
         </LinearLayout>

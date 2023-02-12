@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -14,20 +14,38 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">us trobeu amb el problema següent. pot ser que la pàgina web o el lloc web no funcionin. és possible que la vostra connexió a Internet sigui deficient. és possible que utilitzeu un servidor intermediari. el tallafoc podria bloquejar el lloc web</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC, Israel torna a atacar</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Doneu suport a aquest navegador</string>
+    <string name="GENERAL_FIX" translatable="true">Arregla el navegador</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Restableix el navegador a la configuració predeterminada</string>
+    <string name="GENERAL_CICADA" translatable="false">Cigarra 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Protegit per Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Sense registre i empremta digital</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Motor de cerca de ceba integrat</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Protecció de seguiment</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">No s\'emmagatzema una memòria cau local</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Cookies gestionables segures</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Protegit per Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Motor de cerca de ceba integrat</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Sense registre i empremta digital</string>
+    <string name="HOME_CONNECT_NO_TOR">Navegació normal</string>
+    <string name="HOME_CONNECT_TOR">Tor Navegació</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Esborra la memòria cau del navegador</string>
-    <string name="shortcut_erase_long_label" translatable="false">Esborra el lloc web navegat</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Esborreu les vostres dades i obriu el navegador</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Esborra la memòria cau del navegador</string>
-    <string name="shortcut_open" translatable="false">Reinicieu el navegador Genesis</string>
-    <string name="shortcut_open_long" translatable="false">Reinicieu El Navegador</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Esborra la memòria cau del navegador</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Esborra el lloc web navegat</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Esborreu les vostres dades i obriu el navegador</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Esborra la memòria cau del navegador</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Reinicieu el navegador Genesis</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Reinicieu El Navegador</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Edita El Marcador</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nom Del Marcador</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">El nom de l\'URL marcat es mostrarà aquí</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Introduïu el nom del marcador ...</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true" tools:ignore="TypographyEllipsis">Introduïu el nom del marcador ...</string>
 
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">acomiadar</string>
@@ -40,7 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Navegueu per Internet amb seguretat."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Sense seguiment. Sense censura".</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">"Navegador predeterminat"</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">establiu orion com a navegador predeterminat</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">"Estableix IT per defecte"</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Canvia a Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Amb això, podeu canviar entre la navegació normal amb duckduckgo o la navegació avançada segura per la web fosca mitjançant la cerca d\'Orion</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">"Canvia-ho"</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(No és segur) La vostra informació (per exemple, contrasenya o números de targeta de crèdit) no és privada quan s\'envia a aquest lloc</string>
     <string name="ALERT_SECURE_INFO" translatable="true">La connexió és segura</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">La vostra informació (per exemple, contrasenya o números de targeta de crèdit) és segura quan s’envia a aquest lloc</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Configuració De Seguretat</string>
@@ -84,7 +113,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Reinicia</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">La Pestanya Està Tancada</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">S\'ha obert una nova pestanya</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Connexió de proxy Orion ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Connexió de proxy Orion ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">La memòria està plena tab Pestanya d\'esborrar</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup bloquejat</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Registres D\'errors Oberts</string>
@@ -110,23 +139,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Ignora</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">S\'està esperant per descarregar ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">S\'està esperant per descarregar ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Descarregar</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Valora Els EUA</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Digueu als altres què en penseu sobre aquesta aplicació</string>
     <string name="ALERT_RATE" translatable="true">Taxa</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">M\'encanta aquest navegador \n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Com el navegador\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Satisfactori\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Per sota de la mitjana\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Navegador pobre\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Fet</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Tipus Bridge (obfs4, mansuet, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Lloc Web De Marcadors</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Afegiu aquesta pàgina als vostres marcadors</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nom del marcador ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">nom del marcador ...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Fet</string>
 
     <!-- Alert Long Download -->
@@ -146,10 +178,27 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Descarregar fitxer d\'imatges</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Proporcionar Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">proporcioneu un Bridge que ja sabeu</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">introduïu bridge informació d\'una font de confiança</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">Proporcioneu un Bridge que sé</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Anunci</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Navega lliurement per articles</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Cerca des de Microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Cerca des de google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Cerca de protecció de seguiment</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Bloc emergent | Canvia per desactivar l\'anunci emergent</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Elimineu l\'anunci emergent Pot trencar funcionalment alguns llocs web</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Vista de pestanya.</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Canvia entre el disseny de quadrícula del gestor de pestanyes i el disseny de llista.</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Disseny de quadrícula</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Disseny de llistes</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Configuració del sistema</string>
@@ -347,13 +396,13 @@
     <string name="ALERT_DATA_CLEARED" translatable="true">dades esborrades, cal reiniciar-les</string>
 
 
+    <string name="BRIDGE_HEADER" translatable="true">Configuració del servidor intermediari | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Configuració De Seguretat</string>
     <string name="BRIDGE_SETTING" translatable="true">Canvia La Configuració De "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">Crea Automàticament</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Configureu automàticament la configuració de "BRIDGE"</string>
     <string name="BRIDGE_MANUAL" translatable="true">Proporcioneu un "BRIDGE" que conec</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Enganxa "BRIDGE" personalitzat</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE" són relés Tor no cotitzats que fan que sigui més difícil bloquejar les connexions a la xarxa Tor. A causa de com alguns països intenten bloquejar Tor, certs "BRIDGE" funcionen en alguns països, però no en d\'altres Seleccioneu "PONT" per defecte</string>
     <string name="BRIDGE_TITLE" translatable="true">Sol·licitud</string>
     <string name="BRIDGE_REQUEST" translatable="true">obfs4 (recomanat)</string>
@@ -397,12 +446,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">enllaços web navegats</string>
     <string name="HISTORY_CLEAR" translatable="true">elimina això</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">cerca ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">cerca ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Les pàgines que visiteu apareixen aquí</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">marcador</string>
     <string name="BOOKMARK_CLEAR" translatable="true">elimina això</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">cerca ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">cerca ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">torneu-ho a provar</string>

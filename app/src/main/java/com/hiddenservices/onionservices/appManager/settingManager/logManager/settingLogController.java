@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.hiddenservices.onionservices.appManager.settingManager.logManager.settingLogEnums.eLogViewController.M_TOOGLE_LOG_VIEW;
+import static com.hiddenservices.onionservices.appManager.settingManager.logManager.settingLogEnums.eLogViewController.M_toggle_LOG_VIEW;
 
 public class settingLogController extends AppCompatActivity {
 
@@ -121,7 +121,7 @@ public class settingLogController extends AppCompatActivity {
     public void onTriggerUI(View view) {
         if (view.getId() == R.id.pSettingLogStatus) {
             mSettingLogModel.onTrigger(settingLogEnums.eLogModel.M_SWITCH_LOG_VIEW, Collections.singletonList(!mSettingLogStatusSwitch.isChecked()));
-            mSettingLogViewController.onTrigger(M_TOOGLE_LOG_VIEW);
+            mSettingLogViewController.onTrigger(M_toggle_LOG_VIEW);
             dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_LIST_VIEW, status.sLogThemeStyleAdvanced));
 
             helperMethod.onDelayHandler(this, 250, () -> {

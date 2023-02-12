@@ -2,6 +2,7 @@ package com.hiddenservices.onionservices.appManager.advertManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -34,9 +35,10 @@ public class advertController extends AppCompatActivity {
     private void initializeViews() {
         mWebView = findViewById(R.id.pWebView);
         mProgressBar = findViewById(R.id.mProgressBar);
-        mAdvertViewController = new advertViewController(this, null, mWebView, mProgressBar);
+        mAdvertViewController = new advertViewController(this, null, mProgressBar);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     void onInitAdvert() {
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mWebView.getSettings().setDomStorageEnabled(true);

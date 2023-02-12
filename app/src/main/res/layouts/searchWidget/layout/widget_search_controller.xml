@@ -11,6 +11,7 @@
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
         android:animateLayoutChanges="true"
+        android:layoutDirection="ltr"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="true"
@@ -90,12 +91,13 @@
         <ImageView
             android:id="@+id/pTextInvoker"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?android:attr/selectableItemBackground"
             android:layout_height="49dp"
-            android:contentDescription="@string/GENERAL_TODO" />
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:focusable="true"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
         <ImageView
             android:id="@+id/pVoiceInvoker"

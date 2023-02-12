@@ -34,11 +34,12 @@
                 android:id="@+id/notification_header"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center_vertical"
-                android:tint="#33cc33"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/GENERAL_TODO"
                 android:src="@xml/ic_check"
-                android:contentDescription="@string/GENERAL_TODO" />
+                tools:ignore="ImageContrastCheck"
+                app:tint="#33cc33" />
 
             <TextView
                 android:id="@+id/notification_message"
@@ -65,14 +66,14 @@
 
             <Button
                 android:id="@+id/notification_event"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:background="@color/clear_alpha"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/ease_blue"
                 android:layout_gravity="center_vertical"
-                style="?android:attr/borderlessButtonStyle"
-                android:text="@string/NOTIFICATION_OPEN_TEXT" />
+                android:layout_marginStart="10dp"
+                android:background="@color/clear_alpha"
+                android:text="@string/NOTIFICATION_OPEN_TEXT"
+                android:textColor="#1976D2" />
 
 
         </LinearLayout>

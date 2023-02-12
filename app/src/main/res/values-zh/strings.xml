@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -13,21 +13,38 @@
     <string name="GENERAL_RELOAD" translatable="true">重装</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">您正面临以下问题之一。网页或网站可能无法正常工作。您的互联网连接可能不佳。您可能正在使用代理。网站可能被防火墙阻止</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
-    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">英国广播公司|以色列再次罢工</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">支持这个浏览器</string>
+    <string name="GENERAL_FIX" translatable="true">修复浏览器</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">将浏览器重置为默认设置</string>
+    <string name="GENERAL_CICADA" translatable="false">蝉 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">由 Tor 网络保护</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">没有记录和数字指纹</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">内置洋葱搜索引擎</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">跟踪保护</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">没有存储本地缓存</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">安全可管理的 Cookie</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">由 Tor 网络保护</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">内置洋葱搜索引擎</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">没有记录和数字指纹</string>
+    <string name="HOME_CONNECT_NO_TOR">正常浏览</string>
+    <string name="HOME_CONNECT_TOR">浏览器</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">清除浏览器缓存</string>
-    <string name="shortcut_erase_long_label" translatable="false">擦除浏览过的网站</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">清除您的数据并打开浏览器</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">清除浏览器缓存</string>
-    <string name="shortcut_open" translatable="false">重启创世浏览器</string>
-    <string name="shortcut_open_long" translatable="false">重新启动浏览器</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">清除浏览器缓存</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">擦除浏览过的网站</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">清除您的数据并打开浏览器</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">清除浏览器缓存</string>
+    <string name="SHORTCUT_OPEN" translatable="false">重启创世浏览器</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">重新启动浏览器</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">编辑书签</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">书签名称</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">书签网址的名称将显示在此处</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">输入书签名称...</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true" tools:ignore="TypographyEllipsis">输入书签名称...</string>
 
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">解雇</string>
@@ -40,7 +57,17 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">“安全可靠地浏览互联网。”</string>
     <string name="LANDING_NO_TRACKING" translatable="true">“没有跟踪。没有审查。”</string>
 
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">默认浏览器</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">将 orion 设置为默认浏览器</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">设置 IT 默认值</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">切换到 Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">使用它，您可以在使用 duckduckgo 进行正常浏览或使用 Orion 搜索进行高级安全暗网浏览之间切换</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">切换它</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">（不安全）您的信息（例如，密码或信用卡号）在发送到此站点时不是隐私的</string>
     <string name="ALERT_SECURE_INFO" translatable="true">连接是安全的</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">您的信息（例如密码或信用卡号）在发送到本网站时是安全的</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">安全设置</string>
@@ -70,13 +97,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">安全定制</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">代理设置 -| Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">安全设置</string>
     <string name="BRIDGE_SETTING" translatable="true">更改“BRIDGE”设置</string>
     <string name="BRIDGE_AUTO" translatable="true">自动创建</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">自动配置“BRIDGE”设置</string>
     <string name="BRIDGE_MANUAL" translatable="true">提供一个我知道的“BRIDGE”</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">粘贴自定义“BRIDGE”</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">“BRIDGE”是未列出的 Tor 中继，这使得阻止连接到 Tor 网络变得更加困难。 由于某些国家/地区试图阻止 Tor 的方式，某些“BRIDGE”在某些国家/地区有效但在其他国家/地区无效</string>
     <string name="BRIDGE_TITLE" translatable="true">选择默认“桥”</string>
     <string name="BRIDGE_REQUEST" translatable="true">请求</string>
@@ -98,7 +125,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">重启</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">标签已关闭</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新标签打开</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion 代理连接...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Orion 代理连接...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">内存已满 ➔ 清除选项卡</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">弹出窗口被阻止</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">打开错误日志</string>
@@ -123,23 +150,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">解雇</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">等待下载...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">等待下载...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">下载</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">评价我们</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">告诉其他人您对此应用的看法</string>
     <string name="ALERT_RATE" translatable="true">评价</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">喜欢这个浏览器\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">就像浏览器一样\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">满意的\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">低于平均值\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">糟糕的浏览器\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">完成</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge 字符串 (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge 类型 (obfs4, meek, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">书签网站</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">将此页面添加到您的书签</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">书签名称...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">书签名称...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">完成</string>
 
     <!-- Alert Long Download -->
@@ -159,10 +189,26 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">下载图像文件</string>
 
     <!-- Alert Bridge Custom -->
-    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">提供您知道的Bridge</string>
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Cung cấp Bridge</string>
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">提供 Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">输入来自可信来源的bridge信息</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">要求</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">广告</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">。自由浏览文章</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">。从微软搜索</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">从谷歌搜索</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">跟踪保护搜索</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">阻止弹出 |切换以禁用弹出广告</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">删除弹出广告可能会破坏某些网站的功能</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">选项卡视图</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">在选项卡管理器网格布局和列表布局之间切换</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">网格设计</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">列表设计</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">系统设定</string>
@@ -396,12 +442,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">浏览的网页链接</string>
     <string name="HISTORY_CLEAR" translatable="true">删除这个</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">搜索 ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">搜索 ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">您访问的页面显示在此处</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">书签</string>
     <string name="BOOKMARK_CLEAR" translatable="true">删除这个</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">搜索 ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">搜索 ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">重试</string>

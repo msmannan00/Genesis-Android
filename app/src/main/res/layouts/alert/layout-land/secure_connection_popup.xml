@@ -34,44 +34,40 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="15dp"
             android:contentDescription="@string/GENERAL_TODO"
-            android:src="@drawable/onion"
+            android:src="@drawable/mozac_ic_lock"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck"
+            app:tint="@color/green" />
 
         <TextView
             android:id="@+id/pSecureHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
             android:paddingStart="5dp"
             android:text="@string/ALERT_SECURE_INFO_HEADER"
             android:textAlignment="textStart"
-            android:textColor="@color/green_button"
+            android:textColor="#43A047"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/pSecureLock"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/pSecureLock"
             tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/pSecurePopupSubHeader"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
             android:alpha="0.8"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/GENERAL_TODO"
+            android:layout_marginStart="5dp"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/pSecureHeader"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/pSecureHeader" />
 
         <TextView
             android:id="@+id/pSecureDescription"
@@ -85,13 +81,13 @@
             android:paddingEnd="10dp"
             android:text="@string/ALERT_SECURE_INFO_DETAIL"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text"
+            android:textColor="#757575"
             android:textSize="14sp"
             android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pSecureLock"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp,TextContrastCheck" />
 
         <LinearLayout
             android:id="@+id/pSecureInfo"
@@ -206,10 +202,10 @@
                         android:text="@string/ALERT_SECURE_INFO_NONTRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#757575"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -270,10 +266,10 @@
                         android:text="@string/ALERT_SECURE_INFO_TRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#757575"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -315,7 +311,7 @@
                 android:id="@+id/pSecurePopupPrivacy"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="43dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
@@ -337,7 +333,7 @@
                 android:id="@+id/pSecurePopupCertificate"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="43dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"

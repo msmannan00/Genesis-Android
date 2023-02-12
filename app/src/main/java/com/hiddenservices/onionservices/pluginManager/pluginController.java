@@ -3,16 +3,13 @@ package com.hiddenservices.onionservices.pluginManager;
 import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogController;
 import com.hiddenservices.onionservices.appManager.settingManager.privacyManager.settingPrivacyController;
 import com.hiddenservices.onionservices.constants.constants;
-import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.dataController;
@@ -24,16 +21,12 @@ import com.hiddenservices.onionservices.pluginManager.analyticPluginManager.anal
 import com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadManager;
 import com.hiddenservices.onionservices.pluginManager.langPluginManager.langManager;
 import com.hiddenservices.onionservices.pluginManager.messagePluginManager.messageManager;
-import com.hiddenservices.onionservices.pluginManager.notificationPluginManager.notifictionManager;
 import com.hiddenservices.onionservices.pluginManager.orbotPluginManager.orbotManager;
-
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
-import static com.hiddenservices.onionservices.constants.enums.etype.fetch_favicon;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICKED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_ACTIVITY_CREATED;
@@ -50,7 +43,6 @@ public class pluginController {
     private appLovinManager mAdManager;
     private analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
-    private notifictionManager mNotificationManager;
     private activityContextManager mContextManager;
     private langManager mLangManager;
     private orbotManager mOrbotManager;
@@ -85,7 +77,6 @@ public class pluginController {
         mHomeController = new WeakReference(activityContextManager.getInstance().getHomeController());
         mContextManager = activityContextManager.getInstance();
 
-        mNotificationManager = new notifictionManager(mHomeController, new notificationCallback());
         mAdManager = new appLovinManager(new admobCallback(), ((homeController) mHomeController.get()).getBannerAd(), mHomeController.get());
         mAnalyticsManager = new analyticManager(mHomeController, new analyticCallback());
         mMessageManager = new messageManager(new messageCallback());
@@ -147,27 +138,11 @@ public class pluginController {
         }
     }
 
-
-    /*Notification Manager*/
-    private class notificationCallback implements eventObserver.eventListener {
-        @Override
-        public Object invokeObserver(List<Object> data, Object event_type) {
-            return null;
-        }
-    }
-
-    public Object onNotificationInvoke(List<Object> pData, pluginEnums.eNotificationManager pEventType) {
-        if (mNotificationManager != null) {
-            return mNotificationManager.onTrigger(pData, pEventType);
-        }
-        return null;
-    }
-
     /*Download Manager*/
     private class downloadCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> pData, Object event_type) {
-            if (event_type.equals(enums.etype.M_DOWNLOAD_FAILURE)) {
+            if (event_type.equals(pluginEnums.eDownloadManager.M_DOWNLOAD_FAILURE)) {
                 mMessageManager.onTrigger(Arrays.asList(pData.get(0).toString(), mHomeController.get()), M_DOWNLOAD_FAILURE);
             }
             return null;
@@ -229,9 +204,7 @@ public class pluginController {
     private class messageCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> pData, Object pEventType) {
-            if (pEventType.equals(enums.etype.welcome)) {
-                ((homeController) mHomeController.get()).onLoadURL(pData.get(0).toString());
-            } else if (pEventType.equals(M_PANIC_RESET)) {
+            if (pEventType.equals(M_PANIC_RESET)) {
                 if(activityContextManager.getInstance().getSettingController()!=null){
                     activityContextManager.getInstance().getSettingController().moveTaskToBack(true);
                 }
@@ -254,12 +227,6 @@ public class pluginController {
             } else if (pEventType.equals(M_CANCEL_WELCOME)) {
                 status.sSettingIsWelcomeEnabled = false;
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED, false));
-            } else if (pEventType.equals(enums.etype.reload)) {
-                if ((Boolean) mOrbotManager.onTrigger(null, pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING)) {
-                    ((homeController) mHomeController.get()).onReload(null);
-                } else {
-                    mMessageManager.onTrigger(Arrays.asList(mHomeController, Collections.singletonList(pData.get(0).toString())), M_START_ORBOT);
-                }
             } else if (pEventType.equals(M_OPEN_PRIVACY)) {
                 helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController.get(), true);
             } else if (pEventType.equals(M_CLEAR_BOOKMARK)) {
@@ -279,14 +246,14 @@ public class pluginController {
                 helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, mHomeController.get(), true);
             } else if (pEventType.equals(M_BRIDGE_TYPE)) {
                 return status.sBridgeCustomType;
-            } else if (pEventType.equals(fetch_favicon)) {
+            } else if (pEventType.equals(ON_FETCH_FAVICON)) {
                 activityContextManager.getInstance().getHomeController().onGetFavIcon((ImageView) pData.get(0), (String) pData.get(1));
             } else if (pEventType.equals(M_DOWNLOAD_FILE)) {
                 ((homeController) mHomeController.get()).onDownloadFile();
             } else if (pEventType.equals(M_DOWNLOAD_FILE_MANUAL)) {
                 ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
             } else if (pEventType.equals(M_LOAD_NEW_TAB)) {
-                ((homeController) mHomeController.get()).onLoadTab((geckoSession) pData.get(pData.size() - 2), false, false, true, true);
+                ((homeController) mHomeController.get()).onLoadTabHidden(false, false, true, true);
             } else if (pEventType.equals(M_OPEN_LINK_NEW_TAB)) {
 
                 ((homeController) mHomeController.get()).postNewLinkTabAnimationInBackgroundTrigger(pData.get(0).toString());
@@ -302,8 +269,6 @@ public class pluginController {
                 pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(constants.CONST_BACKEND_GOOGLE_URL, this), M_BRIDGE_MAIL);
             } else if (pEventType.equals(M_SET_BRIDGES)) {
                 activityContextManager.getInstance().getBridgeController().onUpdateBridges((String) pData.get(0), (String) pData.get(1));
-            } else if (pEventType.equals(M_UNDO_SESSION)) {
-                activityContextManager.getInstance().getHomeController().onLoadRecentTab(null);
             } else if (pEventType.equals(M_UNDO_TAB)) {
                 activityContextManager.getInstance().getTabController().onRestoreTab(null);
             } else if (pEventType.equals(M_SECURITY_INFO)) {

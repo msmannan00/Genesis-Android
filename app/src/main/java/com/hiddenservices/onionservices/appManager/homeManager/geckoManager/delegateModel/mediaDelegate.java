@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import com.hiddenservices.onionservices.R;
+import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginReciever.mediaNotificationReciever;
@@ -74,7 +75,7 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
         }
 
         if (!media_status){
-            PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_play", 0);
+            PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_play", enums.MediaNotificationReciever.PLAY);
             contentView.setOnClickPendingIntent(R.id.trigger, pIntent);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
                 contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_play_arrow_no_tint);
@@ -82,7 +83,7 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
                 contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_play_arrow);
             }
         }else {
-            PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_pause", 1);
+            PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_pause", enums.MediaNotificationReciever.PAUSE);
             contentView.setOnClickPendingIntent(R.id.trigger, pIntent);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
                 contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_pause_no_tint);
@@ -91,11 +92,11 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
             }
         }
 
-        PendingIntent pIntentPrev = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_next", 2);
+        PendingIntent pIntentPrev = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReciever.SKIP_FOWWARD);
         contentView.setOnClickPendingIntent(R.id.next, pIntentPrev);
 
         if(android.os.Build.VERSION. SDK_INT > Build.VERSION_CODES.N){
-            PendingIntent pIntentNext = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_back", 3);
+            PendingIntent pIntentNext = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_back", enums.MediaNotificationReciever.SKIP_BACKWARD);
             contentView.setOnClickPendingIntent(R.id.back, pIntentNext);
         }
 

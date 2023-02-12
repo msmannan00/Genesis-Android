@@ -25,20 +25,21 @@
         tools:ignore="RtlSymmetry">
 
         <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="1dp"
             android:background="@xml/gx_ripple_default_round"
             android:contentDescription="@string/GENERAL_TODO"
             android:onClick="onClose"
             android:src="@xml/ic_arrow_back"
-            app:tint="@color/c_navigation_tint" />
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="-3dp"
+            android:paddingTop="1dp"
             android:gravity="center_vertical|start"
             android:onClick="onClose"
             android:paddingStart="10dp"
@@ -56,12 +57,12 @@
 
         <ImageView
             android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:paddingStart="8dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_vertical"
-            android:onClick="onOpenInfo"
             android:background="@xml/gx_ripple_gray_round_left"
             android:contentDescription="@string/GENERAL_TODO"
+            android:onClick="onOpenInfo"
+            android:paddingStart="8dp"
             android:src="@xml/ic_info"
             app:tint="@color/c_header_icon_tint" />
 

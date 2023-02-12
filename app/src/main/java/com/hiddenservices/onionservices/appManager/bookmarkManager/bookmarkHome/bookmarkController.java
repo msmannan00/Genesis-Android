@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,24 +16,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.dataManager.models.bookmarkRowModel;
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager;
+import com.hiddenservices.onionservices.appManager.editTextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
-import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
@@ -44,13 +40,11 @@ import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.hiddenservices.onionservices.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
 import static com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
 import static com.hiddenservices.onionservices.constants.keys.M_ACTIVITY_RESPONSE;
 import static com.hiddenservices.onionservices.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT;
@@ -60,14 +54,13 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_DELETE_BOOKMARK;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_UPDATE_BOOKMARK;
 
-
+@SuppressLint("NotifyDataSetChanged")
 public class bookmarkController extends AppCompatActivity {
     /*Private Variables*/
 
     private bookmarkModel mbookmarkModel;
     private homeController mHomeController;
     private bookmarkAdapter mbookmarkAdapter;
-    private LinearLayout mHeaderContainer;
     private TextView mTitle;
     private bookmarkViewController mbookmarkViewController;
 
@@ -124,9 +117,8 @@ public class bookmarkController extends AppCompatActivity {
         mMenuButton = findViewById(R.id.pMenuButton);
         mSearchButton = findViewById(R.id.pSearchButton);
         mTitle = findViewById(R.id.pTitle);
-        mHeaderContainer = findViewById(R.id.pHeaderContainer);
 
-        mbookmarkViewController = new bookmarkViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton, this, mMenuButton, mSearchButton, mHeaderContainer, mTitle);
+        mbookmarkViewController = new bookmarkViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton, this, mMenuButton, mSearchButton, mTitle);
     }
 
     public void initializeList() {
@@ -211,7 +203,7 @@ public class bookmarkController extends AppCompatActivity {
             }
 
             @Override
-            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
                 final int swipeFlags = 0;
                 return makeMovementFlags(swipeFlags, dragFlags);
@@ -363,7 +355,7 @@ public class bookmarkController extends AppCompatActivity {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
 
-            if (e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)) {
+            if (e_type.equals(homeEnums.eEdittextCallbacks.ON_KEYBOARD_CLOSE)) {
                 onBackPressed();
             }
             return null;
@@ -373,27 +365,25 @@ public class bookmarkController extends AppCompatActivity {
     public class adapterCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
-            if (e_type.equals(enums.etype.url_triggered)) {
+            if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.ON_URL_TRIGGER)) {
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
                 mHomeController.onLoadURL(url_temp);
                 finish();
-            } else if (e_type.equals(enums.etype.url_triggered_new_tab)) {
+            } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.ON_URL_TRIGGER_NEW_TAB)) {
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                mHomeController.onOpenLinkNewTab(url_temp);
+                mHomeController.onOpenLinkNewTabLoaded(url_temp);
                 finish();
-            } else if (e_type.equals(enums.etype.fetch_favicon)) {
+            } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.ON_FETCH_FAVICON)) {
                 mHomeController.onGetFavIcon((ImageView) data.get(0), (String) data.get(1));
-            } else if (e_type.equals(enums.etype.url_clear)) {
+            } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.ON_URL_CLEAR)) {
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK, data);
-            } else if (e_type.equals(enums.etype.url_clear_at)) {
+            } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.ON_URL_CLEAR_AT)) {
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_DELETE_BOOKMARK, data);
-            } else if (e_type.equals(enums.etype.is_empty)) {
+            } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.IS_EMPTY)) {
                 mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mbookmarkModel.getList().size(), 300));
-            } else if (e_type.equals(enums.etype.remove_from_database)) {
-                dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_DELETE_FROM_HISTORY, Arrays.asList(data.get(0), strings.HISTORY_TITLE));
-            } else if (e_type.equals(enums.etype.on_verify_selected_url_menu)) {
+            } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.ON_VERIFY_SELECTED_URL_MENU)) {
                 mbookmarkViewController.onTrigger(M_VERTIFY_SELECTION_MENU, data);
-            } else if (e_type.equals(enums.etype.M_OPEN_BOOKMARK_SETTING)) {
+            } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.M_OPEN_BOOKMARK_SETTING)) {
                 Intent intent = new Intent(bookmarkController.this, bookmarkSettingController.class);
                 intent.putExtra(keys.BOOKMARK_SETTING_NAME, (String) data.get(0));
                 intent.putExtra(keys.BOOKMARK_SETTING_URL, (String) data.get(1));

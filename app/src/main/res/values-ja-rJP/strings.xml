@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -14,14 +14,32 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">次のいずれかの問題が発生しています。ウェブページまたはウェブサイトが機能していない可能性があります。インターネット接続が悪い可能性があります。プロキシを使用している可能性があります。ウェブサイトがファイアウォールによってブロックされている可能性があります</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC |イスラエルが再びストライキ</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">このブラウザをサポートします</string>
+    <string name="GENERAL_FIX" translatable="true">。ブラウザを修正します</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">ブラウザをデフォルト設定にリセット</string>
+    <string name="GENERAL_CICADA" translatable="false">蝉 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Tor ネットワークによって保護されています</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">記録とデジタル指紋なし</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">組み込みのオニオン検索エンジン</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">追跡防止</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">ローカル キャッシュが保存されていません</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">安全な管理可能な Cookie</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Tor ネットワークによって保護されています</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">組み込みのオニオン検索エンジン</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">。記録とデジタル指紋なし</string>
+    <string name="HOME_CONNECT_NO_TOR">通常のブラウジング</string>
+    <string name="HOME_CONNECT_TOR"> Tor ブラウジング</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">ブラウザのキャッシュを消去する</string>
-    <string name="shortcut_erase_long_label" translatable="false">閲覧したウェブサイトを消去する</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">データを消去してブラウザを開く</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">ブラウザのキャッシュを消去する</string>
-    <string name="shortcut_open" translatable="false">ジェネシスブラウザを再起動します</string>
-    <string name="shortcut_open_long" translatable="false">ブラウザを再起動します</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">ブラウザのキャッシュを消去する</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">閲覧したウェブサイトを消去する</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">データを消去してブラウザを開く</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">ブラウザのキャッシュを消去する</string>
+    <string name="SHORTCUT_OPEN" translatable="false">ジェネシスブラウザを再起動します</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">ブラウザを再起動します</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">ブックマークの編集</string>
@@ -40,7 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">「インターネットを安全かつ確実に閲覧してください。」</string>
     <string name="LANDING_NO_TRACKING" translatable="true">「追跡なし。検閲なし。」</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">デフォルトブラウザ</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">orion をデフォルトのブラウザとして設定します</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">IT デフォルトを設定します</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Torに切り替えます</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">これを使用すると、duckduckgo を使用した通常のブラウジングと、Orion 検索を使用した高度な安全なダーク Web ブラウジングを切り替えることができます</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">切り替えます</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(安全ではありません) お客様の情報 (パスワードやクレジット カード番号など) は、このサイトに送信されても​​非公開ではありません</string>
     <string name="ALERT_SECURE_INFO" translatable="true">接続は安全です</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">あなたの情報（例えば、パスワードやクレジットカード番号）は、このサイトに送信されるときに安全です。 セキュリティ設定</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">あなたの身元を安全に保ち、以下のオプションを使用してください</string>
@@ -70,13 +99,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">セキュリティのカスタマイズ</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">プロキシ設定 | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">セキュリティ設定</string>
     <string name="BRIDGE_SETTING" translatable="true">「BRIDGE」設定を変更する</string>
     <string name="BRIDGE_AUTO" translatable="true">自動作成</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">「BRIDGE」設定を自動的に構成する</string>
     <string name="BRIDGE_MANUAL" translatable="true">私が知っている「ブリッジ」を提供する</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">カスタム「BRIDGE」を貼り付け</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">「BRIDGE」は、Torネットワークへの接続をブロックすることをより困難にするリストされていないTorリレーです。 一部の国ではTorをブロックしようとしているため、特定の「BRIDGE」は一部の国では機能しますが、他の国では機能しません。 デフォルトの「BRIDGE」を選択</string>
     <string name="BRIDGE_TITLE" translatable="true">リクエスト</string>
     <string name="BRIDGE_REQUEST" translatable="true">obfs4（推奨）</string>
@@ -98,7 +127,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">再起動</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">タブが閉じています</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">新しいタブが開きました</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">ジェネシスプロキシ接続...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">ジェネシスプロキシ接続...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">メモリがいっぱいです➔[クリア]タブ</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">ポップアップがブロックされました</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">エラーログを開く</string>
@@ -123,23 +152,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">却下</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">ダウンロードを待っています...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">ダウンロードを待っています...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">ダウンロード</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">米国を評価する</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">このアプリについてどう思うかを他の人に教えてください</string>
     <string name="ALERT_RATE" translatable="true">レート</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">このブラウザが大好きです\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">ブラウザのように\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">満足です\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">平均以下の\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">貧弱なブラウザ\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">完了</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge文字列（obfs4 212.21.66.66：20621 ...）</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridgeタイプ（obfs4、meek、...）</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">ブックマークウェブサイト</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">このページをブックマークに追加する</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">ブックマーク名...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">ブックマーク名...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">完了</string>
 
     <!-- Alert Long Download -->
@@ -159,10 +191,26 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">画像ファイルをダウンロード</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">提供 Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">あなたが知っているBridgeを提供する</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">信頼できるソースからのbridge情報を入力します</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">リクエスト</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">広告</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">記事を自由に閲覧できます</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">マイクロソフトで検索してください</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">グーグルから検索</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">追跡防止検索</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">ポップアップをブロック |ポップアップ広告を無効に切り替えます</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">ポップアップ広告を削除する 一部の Web サイトの機能が損なわれる可能性があります</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">タブ ビュー</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">タブ マネージャのグリッド レイアウトとリスト レイアウトを切り替えます</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">グリッド デザイン</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">リストのデザイン</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">システム設定</string>
@@ -396,12 +444,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">閲覧したWebリンク</string>
     <string name="HISTORY_CLEAR" translatable="true">これを削除します</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">探す ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">探す ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">アクセスしたページがここに表示されます</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">ブックマーク</string>
     <string name="BOOKMARK_CLEAR" translatable="true">これを削除します</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">探す ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">探す ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">リトライ</string>

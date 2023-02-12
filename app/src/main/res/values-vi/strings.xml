@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -13,15 +13,32 @@
     <string name="GENERAL_RELOAD" translatable="true">tải lại</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">bạn đang phải đối mặt với một trong những vấn đề sau. trang web hoặc trang web có thể không hoạt động. kết nối internet của bạn có thể kém. bạn có thể đang sử dụng proxy. trang web có thể bị tường lửa chặn</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
-    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel lại tấn công</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Hỗ trợ Trình duyệt này</string>
+    <string name="GENERAL_FIX" translatable="true">Sửa chữa Trình duyệt</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Đặt lại trình duyệt về cài đặt mặc định</string>
+    <string name="GENERAL_CICADA" translatable="false">ve sầu 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Được bảo mật bởi mạng Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Không ghi lại và lấy dấu vân tay kỹ thuật số</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Công cụ tìm kiếm hành tây tích hợp</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Bảo vệ theo dõi</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Không có bộ nhớ cache cục bộ nào được lưu trữ</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Cookie có thể quản lý an toàn</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Được bảo mật bởi mạng Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Công cụ tìm kiếm hành tây tích hợp</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Không ghi lại và lấy dấu vân tay kỹ thuật số</string>
+    <string name="HOME_CONNECT_NO_TOR">Duyệt web bình thường</string>
+    <string name="HOME_CONNECT_TOR">Trình duyệt Tor</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Xóa bộ nhớ cache của trình duyệt</string>
-    <string name="shortcut_erase_long_label" translatable="false">Xóa trang web đã duyệt</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Xóa dữ liệu của bạn và mở trình duyệt</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Xóa bộ nhớ cache của trình duyệt</string>
-    <string name="shortcut_open" translatable="false">Khởi động lại trình duyệt genesis</string>
-    <string name="shortcut_open_long" translatable="false">Khởi động Lại Trình Duyệt Của Bạn</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Xóa bộ nhớ cache của trình duyệt</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Xóa trang web đã duyệt</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Xóa dữ liệu của bạn và mở trình duyệt</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Xóa bộ nhớ cache của trình duyệt</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Khởi động lại trình duyệt genesis</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Khởi động Lại Trình Duyệt Của Bạn</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Chỉnh Sửa Dấu Trang</string>
@@ -40,7 +57,17 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Duyệt Internet một cách an toàn và bảo mật."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Không theo dõi. Không kiểm duyệt."</string>
 
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Trình duyệt mặc định</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">đặt orion làm trình duyệt mặc định của bạn</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">Đặt mặc định CNTT</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Chuyển sang Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Sử dụng tính năng này, bạn có thể chuyển đổi giữa trình duyệt bình thường bằng duckduckgo hoặc nâng cao trình duyệt web tối an toàn bằng tìm kiếm Orion</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">Chuyển đổi nó</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(Không an toàn) Thông tin của bạn (ví dụ: mật khẩu hoặc số thẻ tín dụng) không riêng tư khi được gửi đến trang web này</string>
     <string name="ALERT_SECURE_INFO" translatable="true">Kết nối an toàn</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Thông tin của bạn (ví dụ: mật khẩu hoặc số thẻ tín dụng) được bảo mật khi nó được gửi đến trang web này</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Cài đặt Bảo Mật</string>
@@ -70,13 +97,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">tùy chỉnh bảo mật</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Cài đặt proxy | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Cài đặt Bảo Mật</string>
     <string name="BRIDGE_SETTING" translatable="true">Thay đổi Cài đặt "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">Tạo Tự động</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Tự động định cấu hình cài đặt "BRIDGE"</string>
     <string name="BRIDGE_MANUAL" translatable="true">Cung cấp một "BRIDGE" mà tôi biết</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Dán tùy chỉnh "BRIDGE"</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE" là các rơ le Tor không được liệt kê khiến việc chặn các kết nối vào mạng Tor trở nên khó khăn hơn. Vì cách một số quốc gia cố gắng chặn Tor, "BRIDGE" nhất định hoạt động ở một số quốc gia nhưng không hoạt động ở một số quốc gia khác</string>
     <string name="BRIDGE_TITLE" translatable="true">Chọn Mặc định "BRIDGE"</string>
     <string name="BRIDGE_REQUEST" translatable="true">Yêu cầu</string>
@@ -86,7 +113,7 @@
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">thay đổi cách hiển thị Nhật ký hệ thống</string>
     <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">hiển thị Nhật ký bằng chế độ xem danh sách hiện đại</string>
-    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle giữa chế độ xem danh sách cổ điển và hiện đại</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toggle giữa chế độ xem danh sách cổ điển và hiện đại</string>
 
     <!-- Generic Toast Alerts -->
     <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Đã xóa dấu trang</string>
@@ -98,7 +125,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Khởi động lại</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Bị đóng</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Tab mới đã mở</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy kết nối ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Orion proxy kết nối ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Bộ nhớ đầy ➔ Xóa tab</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Cửa sổ bật lên bị chặn</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Mở Nhật Ký Lỗi</string>
@@ -123,23 +150,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Loại bỏ</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Đang chờ tải xuống ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">Đang chờ tải xuống ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Tải xuống</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Đánh Giá US</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Cho người khác biết suy nghĩ của bạn về ứng dụng này</string>
     <string name="ALERT_RATE" translatable="true">Đánh giá</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Yêu trình duyệt này\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Giống như trình duyệt\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Đạt yêu cầu\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Dưới mức trung bình\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Trình duyệt kém\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Đã xong</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge kiểu (obfs4, meek, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Đánh Dấu Trang Web</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Thêm trang này vào dấu trang của bạn</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bookmark tên ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">bookmark tên ...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Đã xong</string>
 
     <!-- Alert Long Download -->
@@ -159,10 +189,26 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Tải xuống tệp hình ảnh</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Cung cấp Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">cung cấp một Bridge bạn biết</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">nhập thông tin bridge từ một nguồn đáng tin cậy</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">yêu cầu</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Quảng cáo</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Duyệt các bài báo một cách tự do</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Tìm kiếm từ microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Tìm kiếm từ google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Theo dõi tìm kiếm bảo vệ</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Chặn cửa sổ bật lên | Chuyển đổi để Tắt Quảng cáo Popup</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Xóa quảng cáo bật lên Có thể làm hỏng chức năng của một số trang web</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Chế độ xem tab</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Chuyển đổi giữa Trình quản lý tab Bố cục lưới và Bố cục danh sách</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Thiết Kế Lưới</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">danh sách thiết kế</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Thiết lập hệ thống</string>
@@ -396,12 +442,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">liên kết web đã duyệt</string>
     <string name="HISTORY_CLEAR" translatable="true">tháo cái này</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">Tìm kiếm ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Tìm kiếm ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Các trang mà bạn truy cập xuất hiện ở đây</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">dấu trang</string>
     <string name="BOOKMARK_CLEAR" translatable="true">tháo cái này</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">Tìm kiếm ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Tìm kiếm ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">thử lại</string>

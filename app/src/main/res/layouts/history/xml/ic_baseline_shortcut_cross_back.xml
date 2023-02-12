@@ -13,5 +13,5 @@
                 android:right="13.5dp" />
         </shape>
     </item>
-    <item android:drawable="@xml/ic_baseline_bin"></item>
+    <item android:drawable="@xml/ic_baseline_bin" />
 </layer-list>

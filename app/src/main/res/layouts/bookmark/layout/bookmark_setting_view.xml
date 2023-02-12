@@ -30,8 +30,8 @@
 
                 <ImageButton
                     android:id="@+id/pBack"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="1dp"
                     android:background="@xml/bx_ripple_default_round"
@@ -39,7 +39,7 @@
                     android:onClick="onCloseTrigger"
                     android:src="@xml/ic_arrow_back"
                     app:tint="@color/c_navigation_tint"
-                    tools:ignore="UsingOnClickInXml" />
+                    tools:ignore="UsingOnClickInXml,DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/pOrbotRowHeader"
@@ -108,12 +108,12 @@
                 android:textAllCaps="false"
                 android:textColor="@color/c_text_v2"
                 android:textSize="13sp"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry,TextContrastCheck" />
 
-            <com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager
+            <com.hiddenservices.onionservices.appManager.editTextManager
                 android:id="@+id/pBookmarkName"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
+                android:layout_height="48dp"
                 android:layout_margin="10dp"
                 android:layout_marginTop="230dp"
                 android:layout_marginEnd="15dp"
@@ -148,7 +148,7 @@
                 android:paddingStart="14dp"
                 android:paddingEnd="15dp"
                 android:text="@string/GENERAL_TODO"
-                android:textColor="@color/c_text_v2"
+                android:textColor="#546E7A"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,32 +157,36 @@
             <LinearLayout
                 android:layout_width="200dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/pRemoveBookmark"
-                    android:background="@xml/ax_ripple_default_round_bottom_danger"
-                    android:onClick="onUITrigger"
-                    android:elevation="15dp"
-                    android:textColor="@color/c_white"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:layout_weight="1"
-                    android:text="@string/SHARED_RECYCLER_VIEW_DELETE" />
+                    android:background="@xml/ax_ripple_default_round_bottom_danger"
+                    android:elevation="15dp"
+                    android:onClick="onUITrigger"
+                    android:text="@string/SHARED_RECYCLER_VIEW_DELETE"
+                    android:textColor="@color/c_white"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                 <Button
                     android:id="@+id/pBookmarkUpdate"
-                    android:text="@string/ALERT_CREATE_BOOKMARK_DONE"
-                    android:background="@xml/ax_ripple_default_round_bottom"
-                    android:onClick="onUITrigger"
-                    android:elevation="15dp"
-                    android:textColor="@color/c_white"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"/>
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:background="@xml/ax_ripple_default_round_bottom"
+                    android:elevation="15dp"
+                    android:onClick="onUITrigger"
+                    android:text="@string/ALERT_CREATE_BOOKMARK_DONE"
+                    android:textColor="@color/c_white"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck"
+                    style="?android:attr/buttonBarButtonStyle" />
             </LinearLayout>
 
 

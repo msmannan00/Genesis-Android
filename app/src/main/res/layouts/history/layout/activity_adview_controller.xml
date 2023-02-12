@@ -23,20 +23,21 @@
         tools:ignore="RtlSymmetry">
 
         <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="1dp"
             android:background="@xml/gx_ripple_default_round"
             android:contentDescription="@string/GENERAL_TODO"
             android:onClick="onClose"
             android:src="@xml/ic_arrow_back"
-            app:tint="@color/c_navigation_tint" />
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="-3dp"
+            android:paddingTop="1dp"
             android:gravity="center_vertical|start"
             android:onClick="onClose"
             android:paddingStart="10dp"

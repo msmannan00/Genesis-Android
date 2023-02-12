@@ -3,12 +3,11 @@ package com.hiddenservices.onionservices.appManager.tabManager;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class tabModel {
+public class tabModel {
     /*Private Variables*/
 
     private ArrayList<tabRowModel> mModelList = new ArrayList<>();

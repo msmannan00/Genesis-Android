@@ -1,17 +1,11 @@
 package com.hiddenservices.onionservices.appManager;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
-import static com.hiddenservices.onionservices.constants.keys.EXTERNAL_SHORTCUT_COMMAND_NAVIGATE;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
-import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 
 import org.torproject.android.service.wrapper.orbotExternalCommands;
@@ -40,5 +34,4 @@ public class orbotRequestManager extends AppCompatActivity{
             }
         }
     }
-
 }

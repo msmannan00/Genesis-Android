@@ -4,7 +4,7 @@ import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
 
 import java.util.ArrayList;
 
-class historyModel {
+public class historyModel {
     /*Private Variables*/
 
     private ArrayList<historyRowModel> mModelList = new ArrayList<>();
@@ -19,11 +19,11 @@ class historyModel {
         mModelList.remove(index);
     }
 
-    void onManualClear(int index) {
+    public void onManualClear(int index) {
         removeFromMainList(index);
     }
 
-    void clearList() {
+    public void clearList() {
         mModelList.clear();
     }
 

@@ -17,19 +17,17 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.libs.netcipher.client.StrongHttpsClient;
 import com.hiddenservices.onionservices.R;
-
+import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,11 +41,8 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collections;
-
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
-
-import static com.hiddenservices.onionservices.constants.enums.etype.M_DOWNLOAD_FAILURE;
 import static java.lang.Thread.sleep;
 
 
@@ -87,7 +82,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
         /* Create Pending Intent */
 
-        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", 0);
+        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", enums.DownloadNotificationReciever.DOWNLOAD_CANCEL);
 
         /* Create Notification */
 
@@ -201,8 +196,8 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
         /* Create Pending Intent */
 
-        PendingIntent pendingIntentOpen = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Open", 1);
-        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", 2);
+        PendingIntent pendingIntentOpen = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Open", enums.DownloadNotificationReciever.DOWNLOAD_OPEN);
+        PendingIntent pendingIntentCancel = helperMethod.onCreateActionIntent(mContext.get(), mBroadcastReciever, mNotificationID, "Download_Cancelled", enums.DownloadNotificationReciever.DOWNLOAD_CANCEL);
 
         /* Create Notification */
 
@@ -305,13 +300,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             pOutputStream.write(mData, 0, mCurrentReadCount);
         }
 
-        //mNotificationBuilder.setContentText("saving file");
-        //mNotificationBuilder.setSmallIcon(android.R.drawable.stat_sys_download);
-        //mNotifyManager.notify(mNotificationID, mNotificationBuilder.build());
-
-        //pOutputStream.flush();
-        //pOutputStream.close();
-        //pInputStream.close();
         onPostExecute("");
         return true;
     }
@@ -323,7 +311,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         }
 
         String finalMRequestCodeResponse = mRequestCodeResponse;
-        activityContextManager.getInstance().getHomeController().runOnUiThread(() -> mEvent.invokeObserver(Collections.singletonList("Request Error | " + finalMRequestCodeResponse), M_DOWNLOAD_FAILURE));
+        activityContextManager.getInstance().getHomeController().runOnUiThread(() -> mEvent.invokeObserver(Collections.singletonList("Request Error | " + finalMRequestCodeResponse), pluginEnums.eDownloadManager.M_DOWNLOAD_FAILURE));
         onCancel();
     }
 

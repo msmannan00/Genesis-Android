@@ -36,7 +36,7 @@
             android:paddingStart="5dp"
             android:text="@string/ALERT_CERTIFICATE_HEADER"
             android:textAlignment="textStart"
-            android:textColor="@color/green_button"
+            android:textColor="#43A047"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,15 +67,16 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:alpha="0.6"
-                    android:text="@string/GENERAL_TODO"
+                    android:layoutDirection="ltr"
                     android:paddingBottom="100dp"
+                    android:text="@string/GENERAL_TODO"
                     android:textAlignment="textStart"
-                    android:textColor="@color/c_alert_text"
+                    android:textColor="#546E7A"
                     android:textSize="14sp"
                     android:translationZ="2dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pCertificateRootHeader"
-                    tools:ignore="SmallSp" />
+                    tools:ignore="SmallSp,TextContrastCheck" />
 
             </LinearLayout>
         </ScrollView>
@@ -90,7 +91,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DuplicateSpeakableTextCheck,ImageContrastCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.appManager.historyManager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,7 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -35,7 +35,8 @@ import com.hiddenservices.onionservices.R;
 import java.util.List;
 import java.util.Objects;
 
-class historyViewController {
+@SuppressLint("NotifyDataSetChanged")
+public class historyViewController {
     /*Private Variables*/
     private AppCompatActivity mContext;
     private TextView mEmptyListNotification;
@@ -53,7 +54,7 @@ class historyViewController {
 
     /*Initializations*/
 
-    historyViewController(TextView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton, AppCompatActivity pContext, ImageButton pMenuButton, ImageButton pSearchButton, LinearLayout pHeaderContainer, TextView pTitle) {
+    historyViewController(TextView pEmptyListNotification, EditText pSearchInput, RecyclerView pRecycleView, Button pClearButton, AppCompatActivity pContext, ImageButton pMenuButton, ImageButton pSearchButton, TextView pTitle) {
         this.mEmptyListNotification = pEmptyListNotification;
         this.mSearchInput = pSearchInput;
         this.mRecycleView = pRecycleView;
@@ -71,19 +72,17 @@ class historyViewController {
         mSearchInput.setLongClickable(false);
         mSearchInput.setOnLongClickListener(v -> false);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        Window window = mContext.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-                window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
-            } else {
-                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
-                    mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
-                mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.blue_dark));
+            mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.landing_ease_blue));
+        } else {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
+                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
+            mContext.getWindow().setStatusBarColor(ContextCompat.getColor(mContext, R.color.c_background));
         }
     }
 

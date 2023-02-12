@@ -27,6 +27,7 @@
             android:background="@xml/ax_border_left"
             android:gravity="start"
             android:lineSpacingExtra="3.5dp"
+            android:layoutDirection="ltr"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             android:text="@string/ALERT_PANIC_HEADER"

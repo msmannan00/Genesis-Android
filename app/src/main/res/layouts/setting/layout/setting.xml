@@ -44,20 +44,21 @@
                     tools:ignore="RtlSymmetry">
 
                     <ImageButton
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="1dp"
                         android:background="@xml/gx_ripple_default_round"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:onClick="onNavigationBackPressed"
                         android:src="@xml/ic_arrow_back"
-                        app:tint="@color/c_navigation_tint" />
+                        app:tint="@color/c_navigation_tint"
+                        tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="-3dp"
+                        android:paddingTop="1dp"
                         android:gravity="center_vertical|start"
                         android:onClick="onNavigationBackPressed"
                         android:paddingStart="10dp"
@@ -156,7 +157,7 @@
                     android:background="@android:color/transparent"
                     android:clickable="false"
                     android:paddingEnd="20dp"
-                    android:text="Support Orion Browser"
+                    android:text="@string/GENERAL_SUPPORT_ORION_BROWSER"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/c_text_v1"
@@ -259,7 +260,6 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:textAlignment="textStart"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:alpha="1"
@@ -267,8 +267,9 @@
                         android:clickable="false"
                         android:padding="0dp"
                         android:text="@string/SETTING_GENERAL_INFO"
+                        android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -344,7 +345,7 @@
                         android:text="@string/SETTING_SEARCH_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -419,7 +420,7 @@
                         android:text="@string/SETTING_PRIVACY_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -489,7 +490,7 @@
                         android:text="@string/SETTING_TRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -563,7 +564,7 @@
                         android:text="@string/SETTING_NOTIFICATION_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -638,7 +639,7 @@
                         android:text="@string/SETTING_ACCESSIBILITY_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -713,7 +714,7 @@
                         android:text="@string/SETTING_CLEAR_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -788,7 +789,7 @@
                         android:text="@string/SETTING_ADVANCE_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -851,7 +852,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v1"
                         android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TooManyViews" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -864,7 +865,7 @@
                         android:text="@string/SETTING_PROXY_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -1279,7 +1280,7 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:text="Fix and Reset"
+                        android:text="@string/GENERAL_FIX"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v1"
@@ -1294,7 +1295,7 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:text="Try to fix application by resetting settings"
+                        android:text="@string/GENERAL_FIX_DESCRIPTION"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v6"
@@ -1350,7 +1351,7 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:text="Cicada | 3301"
+                        android:text="@string/GENERAL_CICADA"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v1"
@@ -1365,7 +1366,7 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:padding="0dp"
-                        android:text="2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ"
+                        android:text="@string/GENERAL_CICADA_KEY"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v6"

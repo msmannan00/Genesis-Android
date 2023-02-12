@@ -66,7 +66,7 @@
 
         <activity
             android:name="com.hiddenservices.onionservices.appManager.languageManager.languageController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode|locale|layoutDirection"
             android:label="@string/SETTING_HEADER"
             android:windowSoftInputMode="adjustPan" />
 
@@ -106,11 +106,6 @@
 
         <activity
             android:name="com.hiddenservices.onionservices.appManager.settingManager.logManager.settingLogController"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.hiddenservices.onionservices.appManager.settingManager.advertSetttings.advertSettingController"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:windowSoftInputMode="adjustPan" />
 
@@ -160,18 +155,6 @@
 
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.hiddenservices.onionservices.appManager.homeManager.FakeLauncherActivity"
-            android:enabled="false"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -237,12 +220,6 @@
         <!-- Reciever & Settings -->
 
         <receiver
-            android:name="com.hiddenservices.onionservices.pluginManager.notificationPluginManager.localEngagementManager"
-            android:exported="true"
-            android:permission="TODO"
-            tools:ignore="ExportedReceiver" />
-
-        <receiver
             android:name="com.hiddenservices.onionservices.pluginManager.pluginReciever.downloadNotificationReciever"
             android:exported="false">
             <intent-filter>
@@ -291,7 +268,8 @@
         <service
             android:name=".MediaSessionService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="false"
+            android:permission="TODO">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON"/>
             </intent-filter>

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
@@ -95,7 +96,7 @@ public class helpController extends AppCompatActivity {
         mRecycleView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
 
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
                 if (motionEvent.getAction() != MotionEvent.ACTION_UP) {
                     return false;
                 }
@@ -110,7 +111,7 @@ public class helpController extends AppCompatActivity {
             }
 
             @Override
-            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
             }
 
             @Override
@@ -160,7 +161,7 @@ public class helpController extends AppCompatActivity {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
 
-            if (e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)) {
+            if (e_type.equals(homeEnums.eEdittextCallbacks.ON_KEYBOARD_CLOSE)) {
                 mSearchInput.clearFocus();
                 //helperMethod.hideKeyboard(helpController.this);
             }
@@ -222,7 +223,7 @@ public class helpController extends AppCompatActivity {
             activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
         }
         finish();
-        activityContextManager.getInstance().onClearStack();
+        activityContextManager.getInstance().onGoHome();
     }
 
     /*Local Overrides*/

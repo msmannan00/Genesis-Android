@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="GENERAL_SEARCH_HINT" translatable="true">щось шукати або ввести веб-посилання</string>
@@ -10,20 +10,39 @@
     <string name="GENERAL_RELOAD" translatable="true">перезавантажити</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Ви стикаєтесь із однією з наведених нижче проблем. веб-сторінка або веб-сайт можуть не працювати. з’єднання з Інтернетом може бути поганим. можливо, ви використовуєте проксі. веб-сайт може бути заблокований брандмауером</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">ВВС, Ізраїль знову страйкує Ru</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Підтримка цього браузера</string>
+    <string name="GENERAL_FIX" translatable="true">Виправити браузер</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Скинути налаштування браузера до налаштувань за замовчуванням</string>
+    <string name="GENERAL_CICADA" translatable="false">سیکاڈا 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Захищено мережею Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Немає записів і цифрових відбитків пальців</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Вбудована пошукова система Onion</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Захист від стеження</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Локальний кеш не зберігається</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Безпечні керовані файли cookie</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Захищено мережею Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Вбудована пошукова система Onion</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Немає записів і цифрових відбитків пальців</string>
+    <string name="HOME_CONNECT_NO_TOR">Звичайний перегляд</string>
+    <string name="HOME_CONNECT_TOR">Перегляд Tor
+</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Стерти кеш браузера</string>
-    <string name="shortcut_erase_long_label" translatable="false">Стерти веб-сайт, що переглядався</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Видаліть свої дані та відкрийте браузер</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Стерти кеш браузера</string>
-    <string name="shortcut_open" translatable="false">Перезапустіть браузер Genesis</string>
-    <string name="shortcut_open_long" translatable="false">Перезапустіть браузер</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Стерти кеш браузера</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Стерти веб-сайт, що переглядався</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Видаліть свої дані та відкрийте браузер</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Стерти кеш браузера</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Перезапустіть браузер Genesis</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Перезапустіть браузер</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Редагувати закладку</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Назва закладки</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Назва URL-адреси із закладками буде показано тут</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Введіть назву закладки ...</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true" tools:ignore="TypographyEllipsis">Введіть назву закладки ...</string>
 
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">Звільнити</string>
@@ -36,8 +55,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Переглядайте Інтернет безпечно та надійно."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Без відстеження. Без цензури."</string>
 
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Браузер за умовчанням</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">встановити orion як браузер за умовчанням</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">Установити IT за замовчуванням</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Перейти на Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">За допомогою цього ви можете переключатися між звичайним переглядом за допомогою duckduckgo або розширеним безпечним переглядом темної мережі за допомогою пошуку Orion</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">Переключіть його</string>
+
     <!-- Alert Secure -->
-    <string name="ALERT_SECURE_INFO" translatable="true">З\'єднання безпечне</string>
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(це незахищено) Ваша інформація (наприклад, пароль або номер кредитної картки) не є конфіденційною, коли вона надсилається на цей сайт</string>
+    <string name="ALERT_SECURE_INFO" translatable="true">Підключення безпечне</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Ваша інформація (наприклад, пароль або номери кредитних карток) захищена, коли вона надсилається на цей сайт</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Налаштування безпеки</string>
     <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
@@ -66,13 +95,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">Налаштування безпеки</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Налаштування проксі | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Налаштування безпеки</string>
     <string name="BRIDGE_SETTING" translatable="true">Змінити налаштування "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">Створити автоматично</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Автоматично налаштувати параметри "BRIDGE"</string>
     <string name="BRIDGE_MANUAL" translatable="true">Надайте "BRIDGE", який я знаю</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Вставити спеціальний "BRIDGE"</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE" - це нереєстровані реле Tor, які ускладнюють блокування з\'єднань із мережею Tor. Через те, що деякі країни намагаються заблокувати Tor, певний "МОСТ" працює в деяких країнах, але не в інших</string>
     <string name="BRIDGE_TITLE" translatable="true">Виберіть за умовчанням "BRIDGE"</string>
     <string name="BRIDGE_REQUEST" translatable="true">Запит</string>
@@ -94,7 +123,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Перезапустити</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Вкладка закрита</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Відкрито нову вкладку</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Проксі -сервер Genesis, що з\'єднує ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Проксі -сервер Genesis, що з\'єднує ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Пам\'ять заповнена tab Вкладка Очищення</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Спливаюче вікно заблоковано</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Відкрити журнали помилок</string>
@@ -119,23 +148,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Відхилити</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Очікування завантаження ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">Очікування завантаження ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Завантажити</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Оцінити США</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Розкажіть іншим, що ви думаєте про цей додаток</string>
     <string name="ALERT_RATE" translatable="true">Ставка</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Люблю цей браузер\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Як браузер\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Задовільно\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Нижче середнього\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Поганий браузер\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Готово</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Рядок Bridge (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge типу (obfs4, лагідний, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Закладка Веб -сайт</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Додайте цю сторінку до своїх закладок</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">назва закладки ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">назва закладки ...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Готово</string>
 
     <!-- Alert Long Download -->
@@ -155,10 +187,27 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Завантажити файл зображення</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Забезпечити Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Надайте міст, який я знаю</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">Введіть інформацію про міст із надійного джерела</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">Запит</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Оголошення</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Переглядайте статті вільно</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Пошук від microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Шукайте в Google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Пошук захисту від стеження</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Блокувати спливаюче вікно | Перемкніть, щоб Вимкнути спливаючу рекламу</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Видалити спливаючу рекламу Може порушити роботу деяких веб-сайтів</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Перегляд вкладок</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Перемикання між макетом сітки диспетчера вкладок і макетом списку</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Дизайн сітки</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Дизайн списку</string>
 
     <!-- Settings -->
     <string name="SETTING_BASIC_SETTING" translatable="true">Зробити Bridge браузером за замовчуванням</string>
@@ -387,12 +436,13 @@
     <!-- History Popup Menu -->
     <string name="HISTORY_TITLE" translatable="true">Історія</string>
     <string name="HISTORY_CLEAR" translatable="true">Очистити</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">Шукати ...</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Шукати ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Тут відображаються сторінки, які ви відвідуєте</string>
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="true">Закладка</string>
     <string name="BOOKMARK_CLEAR" translatable="true">Очистити</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">Шукати ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Шукати ...</string>
 
     <!-- Help -->
     <string name="HELP_RETRY" translatable="true">Повторити спробу</string>

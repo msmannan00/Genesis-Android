@@ -29,7 +29,7 @@
             android:gravity="start"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="PROVIDE BRIDGE"
+            android:text="@string/ALERT_CUSTOM_BRIDGES_HEADER"
             android:textAlignment="textStart"
             android:textColor="@color/c_text_v10"
             android:textSize="13.5sp"
@@ -48,12 +48,12 @@
             android:paddingEnd="15dp"
             android:text="@string/ALERT_CUSTOM_BRIDGES_INFO"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_background_description"
+            android:textColor="#546E7A"
             android:textSize="13.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pBridgeSettingCustomHeader"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp,TextContrastCheck" />
 
 
         <TextView
@@ -77,7 +77,7 @@
         <EditText
             android:id="@+id/pBridgeSettingCustomInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="60dp"
@@ -140,16 +140,16 @@
             android:src="@xml/ic_baseline_cross"
             app:layout_constraintBottom_toTopOf="@+id/pBridgeSettingCustomError"
             app:layout_constraintEnd_toEndOf="parent"
-            android:tint="@color/c_navigation_light"
             app:layout_constraintTop_toBottomOf="@+id/pBridgeSettingCustomDescription"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck"
+            app:tint="@color/c_navigation_light" />
 
         <Button
             android:id="@+id/pBridgeSettingCustomRequest"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
             android:background="@xml/ax_ripple_default_round_bottom_secondary"
@@ -167,7 +167,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
             android:background="@xml/ax_ripple_default_round_bottom"

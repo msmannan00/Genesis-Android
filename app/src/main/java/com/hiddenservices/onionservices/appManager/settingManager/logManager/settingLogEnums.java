@@ -10,6 +10,6 @@ class settingLogEnums {
     /* Log View Controller */
 
     public enum eLogViewController {
-        M_INIT_VIEW, M_TOOGLE_LOG_VIEW
+        M_INIT_VIEW, M_toggle_LOG_VIEW
     }
 }

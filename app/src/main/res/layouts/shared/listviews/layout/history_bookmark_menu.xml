@@ -33,43 +33,43 @@
             <Button
                 android:id="@+id/pMenuCopy"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item_top"
-                android:onClick="onOpenMultipleTabs"
                 android:gravity="start|center_vertical"
+                android:onClick="onOpenMultipleTabs"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textAllCaps="false"
                 android:text="@string/SHARED_RECYCLER_VIEW_OPEN"
+                android:textAllCaps="false"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
             <Button
                 android:id="@+id/pMenuShare"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item"
                 android:gravity="start|center_vertical"
-                android:paddingStart="15dp"
-                android:textAllCaps="false"
                 android:onClick="onShareSelectedURL"
+                android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:text="@string/SHARED_RECYCLER_VIEW_SHARE"
+                android:textAllCaps="false"
                 android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
             <Button
                 android:id="@+id/pMenuOpenCurrentTab"
                 android:layout_width="match_parent"
-                android:onClick="onClearMultipleSelection"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item"
                 android:gravity="start|center_vertical"
+                android:onClick="onClearMultipleSelection"
                 android:paddingStart="15dp"
-                android:textAllCaps="false"
                 android:paddingEnd="15dp"
-                android:textColor="@color/c_text_v1"
                 android:text="@string/SHARED_RECYCLER_VIEW_CLEAR_LONG_PRESSES"
+                android:textAllCaps="false"
+                android:textColor="@color/c_text_v1"
                 android:textSize="14.5sp" />
 
 
@@ -82,15 +82,15 @@
             <Button
                 android:id="@+id/pMenuDelete"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="@xml/gx_side_item_bottom"
                 android:gravity="start|center_vertical"
-                android:textColor="@color/c_error_text_color"
-                android:paddingStart="15dp"
                 android:onClick="onDeleteSelected"
+                android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textAllCaps="false"
                 android:text="@string/SHARED_RECYCLER_VIEW_DELETE"
+                android:textAllCaps="false"
+                android:textColor="#DD2C00"
                 android:textSize="14.5sp" />
 
         </LinearLayout>

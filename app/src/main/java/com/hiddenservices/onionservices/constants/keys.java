@@ -82,7 +82,8 @@ public class keys {
     public static final String EXTERNAL_SHORTCUT_COMMAND = "EXTERNAL_SHORTCUT_COMMAND";
     public static final String EXTERNAL_SHORTCUT_COMMAND_NAVIGATE = "EXTERNAL_SHORTCUT_COMMAND";
 
-    /*Admanager*/
-    public static final String ADMANAGER_APPID_KEY = "6afabb72c853c683";
+    /*External Shortcut Settings*/
+    public static final String APPLOVIN_BANNER_KEY = "642ec6302c7cecd2";
+    public static final String APPLOVIN_SUPPORT_KEY = "20c7df09f494b00d";
 
 }

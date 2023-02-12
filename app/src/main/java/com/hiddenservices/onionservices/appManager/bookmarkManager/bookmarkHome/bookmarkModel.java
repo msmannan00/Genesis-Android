@@ -19,11 +19,11 @@ class bookmarkModel {
         mModelList.remove(index);
     }
 
-    void onManualClear(int index) {
+    public void onManualClear(int index) {
         removeFromList(index);
     }
 
-    void clearList() {
+    public void clearList() {
         mModelList.clear();
     }
 

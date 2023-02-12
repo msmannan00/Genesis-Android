@@ -208,7 +208,7 @@ public class activityContextManager {
         }
     }
 
-    public void onClearStack() {
+    public void onGoHome() {
         for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
             try {
                 if (!mStackList.get(mCounter).get().isFinishing()) {
@@ -220,6 +220,7 @@ public class activityContextManager {
             }
         }
     }
+
     public void onCheckPurgeStack() {
         if(pHomeController==null || pHomeController.get() == null){
             for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {

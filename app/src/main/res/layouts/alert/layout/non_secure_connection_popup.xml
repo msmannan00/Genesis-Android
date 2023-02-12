@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="7dp"
+        android:layoutDirection="ltr"
         android:background="@xml/ax_round_corner_secure"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="15dp"
             android:contentDescription="@string/GENERAL_TODO"
-            android:src="@drawable/ic_baseline_lock_open"
+            android:src="@xml/ic_baseline_lock_open"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/c_alert_warning" />
@@ -47,7 +48,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="12dp"
             android:paddingStart="5dp"
-            android:text="http://"
+            android:text="@string/ALERT_NON_SECURE_INFO"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_warning"
             android:textSize="15sp"
@@ -58,20 +59,18 @@
 
         <TextView
             android:id="@+id/pSecurePopupSubHeader"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
             android:alpha="0.8"
             android:ellipsize="end"
+            android:layoutDirection="ltr"
             android:maxLines="1"
             android:text="@string/GENERAL_TODO"
             android:textAlignment="textStart"
             android:textColor="@color/c_alert_text"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/pSecurePopupHeader"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,15 +84,15 @@
             android:alpha="0.6"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="(Not secure) Your information (for example, password or credit card numbers) is not private when it is sent to this site"
+            android:text="@string/ALERT_NON_SECURE_INFO_DETAIL"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text"
+            android:textColor="#546E7A"
             android:textSize="14sp"
             android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pSecurePopupLock"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp,TextContrastCheck" />
 
         <LinearLayout
             android:id="@+id/pSecurePopupInfo"
@@ -143,10 +142,10 @@
                         android:text="@string/ALERT_SECURE_INFO_JAVASCRIPT_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#546E7A"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -208,10 +207,10 @@
                         android:text="@string/ALERT_SECURE_INFO_NONTRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#546E7A"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -272,10 +271,10 @@
                         android:text="@string/ALERT_SECURE_INFO_TRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#546E7A"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -323,16 +322,17 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@xml/ax_ripple_default_round_bottom_neutral"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:padding="0dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text="@string/ALERT_SECURE_INFO_SETTINGS"
-                android:maxLines="1"
-                android:ellipsize="end"
                 android:textAllCaps="false"
                 android:textColor="@color/c_white"
                 android:textSize="13.5sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
             <Button
                 android:id="@+id/pSecurePopupCertificate"
@@ -344,16 +344,17 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@xml/ax_ripple_default_round_bottom_neutral"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:padding="0dp"
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp"
-                android:maxLines="1"
-                android:ellipsize="end"
                 android:text="@string/ALERT_SECURE_INFO_CERTIFICATE"
                 android:textAllCaps="false"
                 android:textColor="@color/c_white"
                 android:textSize="13.5sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

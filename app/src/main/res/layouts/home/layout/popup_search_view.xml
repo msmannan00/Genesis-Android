@@ -8,6 +8,7 @@
     android:layout_height="match_parent">
 
     <ScrollView
+        android:layoutDirection="ltr"
         android:layout_width="match_parent"
         android:id="@+id/pSuggestionScroll"
         android:background="@color/c_background"
@@ -35,11 +36,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:background="@xml/gx_side_item_suggestions"
+                    android:clickable="true"
                     android:focusable="true"
                     android:onClick="onOpenSearchEngine"
-                    android:clickable="true"
-                    android:paddingEnd="14dp"
                     android:orientation="horizontal"
+                    android:paddingEnd="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -51,15 +52,16 @@
                         android:layout_height="45dp"
                         android:layout_marginStart="9dp"
                         android:layout_marginEnd="5dp"
+                        android:alpha="0.6"
                         android:contentDescription="@string/GENERAL_TODO"
                         android:padding="4dp"
-                        android:alpha="0.6"
                         android:paddingEnd="4dp"
                         android:src="@xml/ic_gear"
                         app:tint="@color/c_navigation_tint"
                         tools:ignore="RtlSymmetry" />
 
                     <TextView
+                        android:id="@+id/pSearchEngineHintInvoke"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
@@ -71,65 +73,56 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginStart="1dp"
-                    android:background="@color/c_icon_divider"
-                    android:layout_marginBottom="5dp"
-                    tools:ignore="RtlHardcoded" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/pPopupFindClose"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_gravity="center"
-                    android:onClick="onClearSearchBar"
-                    android:background="@xml/gx_ripple_default_round"
-                    android:src="@xml/ic_close"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    app:tint="@color/c_navigation_tint" />
+                    <ImageButton
+                        android:id="@+id/pPopupFindClose"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onClearSearchBar"
+                        android:src="@xml/ic_close"
+                        app:tint="@color/c_navigation_tint"
+                        tools:ignore="TouchTargetSizeCheck" />
 
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="1dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/c_icon_divider"
-                    tools:ignore="RtlHardcoded" />
+                    <ImageButton
+                        android:id="@+id/pPopoupFindCopy"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onCopySearch"
+                        android:src="@xml/ic_baseline_clipboard"
+                        android:visibility="gone"
+                        app:tint="@color/c_navigation_tint" />
 
-                <ImageButton
-                    android:id="@+id/pPopoupFindCopy"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="0dp"
-                    android:background="@xml/gx_ripple_default_round"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:onClick="onCopySearch"
-                    android:visibility="gone"
-                    android:src="@xml/ic_baseline_clipboard"
-                    app:tint="@color/c_navigation_tint" />
-
-                <ImageButton
-                    android:id="@+id/pPopoupFindPaste"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="0dp"
-                    android:background="@xml/gx_ripple_default_round"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:onClick="onCopyPaste"
-                    android:visibility="gone"
-                    android:src="@xml/ic_baseline_content_paste"
-                    app:tint="@color/c_navigation_tint" />
+                    <ImageButton
+                        android:id="@+id/pPopoupFindPaste"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@xml/gx_ripple_default_round"
+                        android:contentDescription="@string/GENERAL_TODO"
+                        android:onClick="onCopyPaste"
+                        android:src="@xml/ic_baseline_content_paste"
+                        android:visibility="gone"
+                        app:tint="@color/c_navigation_tint" />
+                </LinearLayout>
 
             </LinearLayout>
 

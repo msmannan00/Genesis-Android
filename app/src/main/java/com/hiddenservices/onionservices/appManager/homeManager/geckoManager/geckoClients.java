@@ -9,24 +9,25 @@ import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.downloadManager.geckoDownloadManager;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.BrowserIconManager;
 import com.hiddenservices.onionservices.constants.*;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-
+import com.hiddenservices.onionservices.pluginManager.pluginController;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
 import static com.hiddenservices.onionservices.constants.constants.CONST_REPORT_URL;
-import static com.hiddenservices.onionservices.constants.enums.etype.on_handle_external_intent;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LOAD_NEW_TAB;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_MAX_TAB_REACHED;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.AUTH_SESSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.COOKIES;
@@ -36,185 +37,104 @@ import static org.mozilla.geckoview.StorageController.ClearFlags.NETWORK_CACHE;
 import static org.mozilla.geckoview.StorageController.ClearFlags.PERMISSIONS;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_DATA;
 import static org.mozilla.geckoview.StorageController.ClearFlags.SITE_SETTINGS;
-
 import org.mozilla.geckoview.ContentBlocking;
 import org.mozilla.geckoview.GeckoRuntime;
 import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.WebResponse;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 public class geckoClients {
+
     /*Gecko Variables*/
 
+    private static GeckoRuntime mRuntime;
     private geckoSession mSession = null;
-
-    static GeckoRuntime mRuntime;
     private BrowserIconManager mIconManager;
-    private eventObserver.eventListener event;
-
-    /*Local Variable*/
-
+    private eventObserver.eventListener mEvent;
     private String mSessionID;
 
-    public void initialize(GeckoView geckoView, eventObserver.eventListener event, AppCompatActivity context, boolean isForced) {
-        this.event = event;
-        mSessionID = helperMethod.createRandomID();
-        //initRuntimeSettings(context);
+    /*Local Initiaizations*/
 
-        if (!isForced && geckoView.getSession() != null && geckoView.getSession().isOpen()) {
-            mSession = (geckoSession) geckoView.getSession();
-        } else {
-
-            mSession = new geckoSession(new geckoViewClientCallback(), mSessionID, context, geckoView);
-            mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
-            mSession.getSettings().setFullAccessibilityTree(true);
-            mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
-            mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-            if (geckoView.getSession() != null) {
-                geckoView.releaseSession();
-                mSession.open(mRuntime);
-                geckoView.setSession(mSession);
-                onUpdateFont();
-            } else if (status.sSettingIsAppStarted) {
-                mSession.open(mRuntime);
-                geckoView.setSession(mSession);
-                onUpdateFont();
-            }
+    public void initializeSession(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext) {
+        if (pGeckoView.getSession() != null) {
+            pGeckoView.releaseSession();
         }
-        mSession.onSetInitializeFromStartup();
-    }
-
-    public void postInitRuntime(GeckoView geckoView, AppCompatActivity context) {
-        initRuntimeSettings(context);
+        mSession = initSettings(pGeckoView, pEvent, pContext);
+        initRuntimeSettings(pContext);
         mSession.open(mRuntime);
-        geckoView.setSession(mSession);
+        pGeckoView.setSession(mSession);
         onUpdateFont();
     }
 
-    public geckoSession initializeBackground(GeckoView geckoView, eventObserver.eventListener event, AppCompatActivity context, boolean isForced) {
-        geckoSession mSessionTemp;
-        mSessionTemp = new geckoSession(new geckoViewClientCallback(), helperMethod.createRandomID(), context, geckoView);
-        mSessionTemp.open(mRuntime);
-        mSessionTemp.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
-        mSessionTemp.getSettings().setFullAccessibilityTree(true);
-        mSessionTemp.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
-        mSessionTemp.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-        return mSessionTemp;
+    public geckoSession initializeSessionInBackground(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pURL) {
+        geckoSession mSessionHidden = initSettings(pGeckoView, pEvent, pContext);
+        mSessionHidden.loadUri(pURL);
+
+        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(pContext), M_LOAD_NEW_TAB);
+        dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_ADD_TAB, Arrays.asList(mSessionHidden, true));
+        return mSessionHidden;
     }
 
-    public void onValidateInitializeFromStartup(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
-        boolean mStatus = mSession.onValidateInitializeFromStartup();
+    private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext){
+        this.mEvent = pEvent;
+        mSessionID = helperMethod.createRandomID();
+        mSession = new geckoSession(new geckoViewClientCallback(), mSessionID, pContext, pGeckoView);
 
-        if (mStatus) {
-            boolean mState = mSession.onRestoreState();
-            if (!mState) {
-                mSession.stop();
-                loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
-            } else {
-                String mURL = mSession.getCurrentURL();
-                if (mURL.equals("http://167.86.99.31") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
-                    if (!mSession.canGoBack()) {
-                        mNestedGeckoView.releaseSession();
-                        mSession.close();
-                        mSession.open(mRuntime);
-                        mNestedGeckoView.setSession(mSession);
-                    } else {
-                        mSession.goBack();
-                    }
-                    loadURL("http://167.86.99.31", mNestedGeckoView, pcontext);
-                }
-            }
+        mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
+        mSession.getSettings().setFullAccessibilityTree(true);
+        mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
+        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        return mSession;
+    }
+
+    public void initializeIcon(Context pcontext) {
+        if (mIconManager == null) {
+            mIconManager = new BrowserIconManager();
+            mIconManager.init(pcontext, mRuntime);
         }
     }
 
-    public geckoSession initFreeSession(GeckoView pGeckoView, AppCompatActivity pcontext, eventObserver.eventListener event) {
-        this.event = event;
-        initRuntimeSettings(pcontext);
-        geckoSession mTempSession = new geckoSession(new geckoViewClientCallback(), mSessionID, pcontext, pGeckoView);
-        mTempSession.open(mRuntime);
-        mTempSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
-        mTempSession.getSettings().setFullAccessibilityTree(true);
-        mTempSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
-        mTempSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-        return mTempSession;
-    }
-
-    public void onDestroy() {
-        mSession.onDestroy();
-        mSession = null;
-        mIconManager = null;
-        event = null;
-    }
-
-    public GeckoRuntime getmRuntime() {
-        return mRuntime;
-    }
-
-    public void onSessionReinit() {
-        mSession.onSessionReinit();
-    }
-
-    public void toogleUserAgent() {
-        mSession.toogleUserAgent();
-    }
-
-    public int getUserAgent() {
-        return mSession.getUserAgentMode();
-    }
-
-
-    public String getAssetsCacheFile(Context context, String fileName) {
-        File cacheFile = new File(context.getCacheDir(), fileName);
-        try {
-            try (InputStream inputStream = context.getAssets().open(fileName)) {
-                try (FileOutputStream outputStream = new FileOutputStream(cacheFile)) {
-                    byte[] buf = new byte[1024];
-                    int len;
-                    while ((len = inputStream.read(buf)) > 0) {
-                        outputStream.write(buf, 0, len);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void onSaveCurrentTab(boolean isHardCopy) {
+        int mStatus = (Integer) dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_ADD_TAB, Arrays.asList(mSession, isHardCopy));
+        if (mStatus == enums.AddTabCallback.TAB_FULL) {
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_MAX_TAB_REACHED);
         }
+    }
 
-        String mYAML = helperMethod.readFromFile(cacheFile.getPath());
-        if (status.sTorBrowsing) {
-            mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"", "network.proxy.socks:  \"127.0.0.1\"");
-            mYAML = mYAML.replace("# network.proxy.socks_port:  9050", "network.proxy.socks_port:  9050");
-            mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
-
-            StringBuilder buf = new StringBuilder(mYAML);
-            int portIndex = mYAML.indexOf("network.proxy.socks_port");
-            int breakIndex = mYAML.indexOf("\n", portIndex);
-            mYAML = buf.replace(portIndex, breakIndex, "network.proxy.socks_port:  " + orbotLocalConstants.mSOCKSPort).toString();
-            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+    public void initRestore(geckoView mNestedGeckoView, AppCompatActivity pcontext) {
+        boolean mState = mSession.onRestoreState();
+        if (!mState) {
+            mSession.stop();
+            loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
         } else {
-            mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
-            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
+            String mURL = mSession.getCurrentURL();
+            if (mURL.equals("http://167.86.99.31") || mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
+                if (!mSession.getNavigationDelegate().canGoBack()) {
+                    mNestedGeckoView.releaseSession();
+                    mSession.close();
+                    mSession.open(mRuntime);
+                    mNestedGeckoView.setSession(mSession);
+                } else {
+                    mSession.goBack();
+                }
+                loadURL("http://167.86.99.31", mNestedGeckoView, pcontext);
+            }
         }
-
-        return cacheFile.getAbsolutePath();
     }
-
 
     @SuppressLint("WrongConstant")
     public void initRuntimeSettings(AppCompatActivity context) {
         if (mRuntime == null) {
             GeckoRuntimeSettings.Builder mSettings = new GeckoRuntimeSettings.Builder();
             if (status.sShowImages == 2) {
-                mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config-noimage.yaml"));
+                mSettings.configFilePath(helperMethod.getAssetsCacheFile(context, "geckoview-config-noimage.yaml"));
             } else {
-                mSettings.configFilePath(getAssetsCacheFile(context, "geckoview-config.yaml"));
+                mSettings.configFilePath(helperMethod.getAssetsCacheFile(context, "geckoview-config.yaml"));
             }
             mSettings.build();
+            onClearAll();
 
             mRuntime = GeckoRuntime.create(context, mSettings.build());
-
-            //mCreated = true;
-            onClearAll();
             mRuntime.getSettings().setAboutConfigEnabled(true);
             mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
             mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
@@ -229,109 +149,36 @@ public class geckoClients {
             }
 
             dataController.getInstance().initializeListData();
-            //installExtension();
         }
-        initBrowserManager(context);
+        initializeIcon(context);
     }
 
-    public void initBrowserManager(Context pcontext) {
-        if (mIconManager == null) {
-            mIconManager = new BrowserIconManager();
-            mIconManager.init(pcontext, mRuntime);
+    public void onReload(geckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall, boolean isDelayed) {
+        int mDelay = 1000;
+        if(!isDelayed){
+            mDelay = 0;
         }
-    }
-
-
-    public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext) {
-        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY && status.sLowMemory != enums.MemoryStatus.LOW_MEMORY){
-            initBrowserManager(pcontext);
-            pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
-            Log.i("FUCKSSS1111","111");
-            mIconManager.onLoadIconIntoView(pImageView, pURL);
-            Log.i("FUCKSSS1111","222");
-        }
-    }
-
-    public void onLoadFavIcon(AppCompatActivity pcontext) {
-        if (mRuntime != null) {
-            if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
-                //BrowserIconManager mIconManager = new BrowserIconManager();
-                ///mIconManager.onLoadIcon(pcontext, mRuntime);
+        new Handler().postDelayed(() ->
+        {   if(mSession != null){
+            mSession.stop();
+            String url = mSession.getCurrentURL();
+            if (url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
+                loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+            } else if (!isThemeCall) {
+                mSession.reload();
             }
         }
+        }, mDelay);
     }
 
-    private int getCookiesBehaviour() {
-        return status.sSettingCookieStatus;
+    public void onLoadTab(geckoSession pSession, GeckoView geckoView) {
+        mSession = pSession;
+        geckoView.releaseSession();
+        geckoView.setSession(pSession);
+        mSessionID = pSession.getSessionID();
     }
 
-    @SuppressLint("WrongConstant")
-    public void updateSetting(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
-
-    }
-
-    public void resetSession() {
-        mSessionID = strings.GENERIC_EMPTY_STR;
-    }
-
-    public void onKillMedia(){
-        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
-    }
-
-    public void onPlayMedia(){
-        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.PLAY);
-    }
-
-    public void onPauseMedia(){
-        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.PAUSE);
-    }
-
-    public void onSkipForwardMedia(){
-        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.SKIP_FORWARD);
-    }
-    public void onSkipBackwardMedia(){
-        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.SKIP_BACKWARD);
-    }
-
-
-    public String getTheme() {
-        if (mSessionID.equals(strings.GENERIC_EMPTY_STR)) {
-            return null;
-        } else if (mSession != null && mSession.getTheme() != null) {
-            return mSession.getTheme();
-        } else {
-            return null;
-        }
-    }
-
-    public void initSession(geckoSession mSession) {
-        mSessionID = mSession.getSessionID();
-        this.mSession = mSession;
-    }
-
-    public geckoSession getSession() {
-        return mSession;
-    }
-
-    public void onStopMedia() {
-        mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.STOP);
-    }
-
-    public void onUploadRequest(int resultCode, Intent data) {
-        mSession.onFileUploadRequest(resultCode, data);
-    }
-
-    public void setLoading(boolean status) {
-        mSession.setLoading(status);
-    }
-
-
-    public void initURL(String url) {
-        mSession.initURL(url);
-    }
-
-    public void loadURL(String url, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
-
+    public void loadURL(String url, geckoView mNestedGeckoView, AppCompatActivity pcontext) {
 
         if (url.startsWith("https://orion.onion/privacy")) {
             url = CONST_PRIVACY_POLICY_URL_NON_TOR;
@@ -341,62 +188,124 @@ public class geckoClients {
         }
 
         url = helperMethod.completeURL(url);
-        //geckoSession mSessionTemp = (geckoSession) mNestedGeckoView.getSession();
-        //if (mSessionTemp != null) {
-        //    return;
-        //}
-
         Log.i("FERROR : ", "FERROR" + url);
-        if (mSession.onGetInitializeFromStartup()) {
-            mSession.initURL(url);
-            if (!url.startsWith(CONST_REPORT_URL) && (url.startsWith("resource://android/assets/homepage/") || url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))) {
-                try {
-                    mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
-                    if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)) {
-                        String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
-                        mSession.getSettings().setAllowJavascript(true);
-                        mSession.initURL(mURL);
+        mSession.initURL(url);
+        if (!url.startsWith(CONST_REPORT_URL) && (url.startsWith("resource://android/assets/homepage/") || url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))) {
+            try {
+                mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
+                if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)) {
+                    String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+                    mSession.getSettings().setAllowJavascript(true);
+                    mSession.initURL(mURL);
 
-                        mSession.stop();
-                        mSession.loadUri(mURL);
-                    } else {
-                        String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
-                        mSession.getSettings().setAllowJavascript(true);
-                        mSession.loadUri(mURL);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                    mSession.stop();
+                    mSession.loadUri(mURL);
+                } else {
+                    String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+                    mSession.getSettings().setAllowJavascript(true);
+                    mSession.loadUri(mURL);
                 }
-            } else if (url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
-                try {
-                    mSession.initURL(constants.CONST_GENESIS_HELP_URL);
-
-                    if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)) {
-                        mSession.getSettings().setAllowJavascript(true);
-                        mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
-                    } else {
-                        mSession.getSettings().setAllowJavascript(true);
-                        mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            } else {
-                mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-                mSession.loadUri(url);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
+        } else if (url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
+            try {
+                mSession.initURL(constants.CONST_GENESIS_HELP_URL);
+
+                if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pcontext)) {
+                    mSession.getSettings().setAllowJavascript(true);
+                    mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE);
+                } else {
+                    mSession.getSettings().setAllowJavascript(true);
+                    mSession.loadUri(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+            mSession.loadUri(url);
         }
     }
 
-    public void onRedrawPixel(AppCompatActivity pcontext) {
+    public void initHomeTheme() {
+        String mURLFinal;
+        mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
+        if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(activityContextManager.getInstance().getHomeController())) {
+            String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+            mSession.getSettings().setAllowJavascript(true);
+            mSession.initURL(mURL);
+            mURLFinal = mURL;
+        } else {
+            String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+            mSession.getSettings().setAllowJavascript(true);
+            mSession.initURL(mURL);
+            mURLFinal = mURL;
+        }
+
+        if (!mSession.getNavigationDelegate().canGoBack()) {
+            activityContextManager.getInstance().getHomeController().getGeckoView().releaseSession();
+            mSession.close();
+            mSession.open(mRuntime);
+            activityContextManager.getInstance().getHomeController().getGeckoView().setSession(mSession);
+        } else {
+            mSession.goBack();
+        }
+
+        new Handler().postDelayed(() ->
+        {
+            if (!mSession.getNavigationDelegate().canGoBack()) {
+                mSession.close();
+                activityContextManager.getInstance().getHomeController().getGeckoView().releaseSession();
+                mSession.open(mRuntime);
+                activityContextManager.getInstance().getHomeController().getGeckoView().setSession(mSession);
+            }
+
+            mSession.loadUri(mURLFinal);
+
+        }, 10);
+
+    }
+
+    /*Helper Classes*/
+
+
+    public void toggleUserAgent() {
+        mSession.toggleUserAgent();
+    }
+
+    public int getUserAgent() {
+        return mSession.getUserAgentMode();
+    }
+
+    public void onGetFavIcon(ImageView pImageView, String pURL, AppCompatActivity pcontext) {
         if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY && status.sLowMemory != enums.MemoryStatus.LOW_MEMORY){
-            mSession.onRedrawPixel();
-            onLoadFavIcon(pcontext);
+            initializeIcon(pcontext);
+            pURL = helperMethod.completeURL(helperMethod.getDomainName(pURL));
+            mIconManager.onLoadIconIntoView(pImageView, pURL);
         }
     }
 
-    public boolean isLoaded() {
-        return mSession.isLoaded();
+    private int getCookiesBehaviour() {
+        return status.sSettingCookieStatus;
+    }
+
+    public void resetSession() {
+        mSessionID = strings.GENERIC_EMPTY_STR;
+    }
+
+    public void onMediaInvoke(enums.MediaController mController){
+        mSession.getMediaSessionDelegate().onTrigger(mController);
+    }
+
+    public String getTheme() {
+        if (mSessionID.equals(strings.GENERIC_EMPTY_STR)) {
+            return null;
+        } else if (mSession != null && mSession.getTheme() != null) {
+            return mSession.getTheme();
+        } else {
+            return null;
+        }
     }
 
     public void onClearAll() {
@@ -440,93 +349,83 @@ public class geckoClients {
         }
     }
 
-    public void onBackPressed(boolean isFinishAllowed, int mTabSize, NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
-        if (mSession.canGoBack()) {
+    public void onBackPressed(boolean isFinishAllowed, int mTabSize, geckoView mNestedGeckoView, AppCompatActivity pcontext) {
+        if (mSession.getNavigationDelegate().canGoBack()) {
             mSession.goBackSession();
         } else if (isFinishAllowed) {
-            if (mSession.getRemovableFromBackPressed() && mTabSize > 1) {
-                event.invokeObserver(null, enums.etype.M_CLOSE_TAB_BACK);
+            if (mSession.isRemovableFromBackPressed() && mTabSize > 1) {
+                mEvent.invokeObserver(null, homeEnums.eGeckoCallback.M_CLOSE_TAB_BACK);
             } else {
-                event.invokeObserver(null, enums.etype.back_list_empty);
+                mEvent.invokeObserver(null, homeEnums.eGeckoCallback.BACK_LIST_EMPTY);
             }
         }
     }
 
     public String getSecurityInfo() {
-        return mSession.getSecurityInfo();
+        return mSession.getProgressDelegate().getSecurityInfo();
     }
 
-    public boolean wasPreviousErrorPage() {
-        return mSession.wasPreviousErrorPage();
+    public void onUploadRequest(int resultCode, Intent data) {
+        mSession.getDownloadHandler().onFileUploadRequest(resultCode, data, mSession.getPromptDelegate());
     }
 
     public boolean canGoForward() {
-        return mSession.canGoForward();
-    }
-
-    public boolean isLoading() {
-        return mSession.isLoading();
+        return mSession.getNavigationDelegate().canGoForward();
     }
 
     public Uri getUriPermission() {
-        return mSession.getUriPermission();
+        return mSession.getDownloadHandler().getUriPermission();
     }
 
     public boolean getFullScreenStatus() {
+        if(mSession==null){
+            return false;
+        }
         return mSession.getContentDelegate().getFullScreenStatus();
     }
 
     public void onExitFullScreen() {
-        mSession.exitScreen();
+        //mSession.exitScreen();
     }
 
     public void onForwardPressed() {
-        if (mSession.canGoForward()) {
+        if (mSession.getNavigationDelegate().canGoForward()) {
             mSession.goForwardSession();
         }
-    }
-
-    public void onClose() {
-        onKillMedia();
-        mSession.onClose();
     }
 
     public void setRemovableFromBackPressed(boolean pStatus) {
         mSession.setRemovableFromBackPressed(pStatus);
     }
 
-
-    public void onStop() {
-        mSession.stop();
+    public void onUpdateFont() {
+        float font = (status.sSettingFontSize - 100) / 3 + 100;
+        mRuntime.getSettings().setFontSizeFactor(font / 117);
     }
 
-    public void onReload(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall) {
-        mSession.stop();
-        String url = mSession.getCurrentURL();
-        if (url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
-            loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
-        } else if (!isThemeCall) {
-            mSession.reload();
+    public int getScrollOffset() {
+        return mSession.getmScrollDelegate().getScrollOffset();
+    }
+
+    public void manualDownloadWithName(String url, String file, AppCompatActivity context) {
+        Uri downloadURL = Uri.parse(url);
+        if (helperMethod.checkPermissions(context)) {
+            mSession.getDownloadHandler().downloadRequestedFile(downloadURL, file);
         }
     }
 
-    public void onReloadDelay(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall) {
-        new Handler().postDelayed(() ->
-        {   if(mSession != null){
-                mSession.stop();
-                String url = mSession.getCurrentURL();
-                if (url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.contains(constants.CONST_GENESIS_HELP_URL_SUB) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE) || url.contains(constants.CONST_GENESIS_HELP_URL_CACHE_DARK)) {
-                    loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
-                } else if (!isThemeCall) {
-                    mSession.reload();
-                }
-            }
-        }, 1000);
+    public void downloadFile(AppCompatActivity pcontext) {
+        if (helperMethod.checkPermissions(pcontext)) {
+            geckoDownloadManager mDownloadManager = mSession.getContentDelegate().getDownloadManager();
+            mSession.getDownloadHandler().downloadRequestedFile(mDownloadManager);
+        }
     }
 
-    public void onReloadStatic(NestedGeckoView mNestedGeckoView, AppCompatActivity pcontext) {
-        ///mSession.stop();
-        loadURL(mSession.getCurrentURL(), mNestedGeckoView, pcontext);
+    public void downloadFile(String mURL, AppCompatActivity pcontext) {
+        if (helperMethod.checkPermissions(pcontext)) {
+            geckoDownloadManager mDownloadManager = mSession.getContentDelegate().getDownloadManager();
+            mSession.getDownloadHandler().downloadRequestedFile(mDownloadManager);
+        }
     }
 
     public void manual_download(String url, AppCompatActivity context) {
@@ -535,112 +434,58 @@ public class geckoClients {
         f.getName();
         String downloadFile = f.getName();
 
-        /*EXTERNAL STORAGE REQUEST*/
         if (helperMethod.checkPermissions(context)) {
-            mSession.downloadRequestedFile(downloadURL, downloadFile);
+            mSession.getDownloadHandler().downloadRequestedFile(downloadURL, downloadFile);
         }
     }
 
-    public void manualDownloadWithName(String url, String file, AppCompatActivity context) {
-        Uri downloadURL = Uri.parse(url);
-        /*EXTERNAL STORAGE REQUEST*/
-        if (helperMethod.checkPermissions(context)) {
-            mSession.downloadRequestedFile(downloadURL, file);
-        }
+    public void onClose() {
+        onMediaInvoke(enums.MediaController.DESTROY);
+        mSession.onClose();
     }
 
-    public void downloadFile(AppCompatActivity pcontext) {
-        if (helperMethod.checkPermissions(pcontext)) {
-            mSession.downloadRequestedFile();
-        }
+    /*Private Rrturn*/
+
+    public GeckoRuntime getmRuntime() {
+        return mRuntime;
     }
 
-    public void downloadFile(String mURL, AppCompatActivity pcontext) {
-        if (helperMethod.checkPermissions(pcontext)) {
-            mSession.downloadRequestedFile();
-        }
+    public geckoSession getSession() {
+        return mSession;
     }
 
     /*Session Updates*/
 
-    public void onUpdateFont() {
-        float font = (status.sSettingFontSize - 100) / 3 + 100;
-        mRuntime.getSettings().setFontSizeFactor(font / 117);
-    }
-
-    public void reinitHomeTheme() {
-        String mURLFinal;
-        mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
-        if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(activityContextManager.getInstance().getHomeController())) {
-            String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
-            mSession.getSettings().setAllowJavascript(true);
-            mSession.initURL(mURL);
-            mURLFinal = mURL;
-        } else {
-            String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
-            mSession.getSettings().setAllowJavascript(true);
-            mSession.initURL(mURL);
-            mURLFinal = mURL;
-        }
-
-        if (!mSession.canGoBack()) {
-            activityContextManager.getInstance().getHomeController().getGeckoView().releaseSession();
-            mSession.close();
-            mSession.open(mRuntime);
-            activityContextManager.getInstance().getHomeController().getGeckoView().setSession(mSession);
-        } else {
-            mSession.goBack();
-        }
-
-        new Handler().postDelayed(() ->
-        {
-            if (!mSession.canGoBack()) {
-                mSession.close();
-                activityContextManager.getInstance().getHomeController().getGeckoView().releaseSession();
-                mSession.open(mRuntime);
-                activityContextManager.getInstance().getHomeController().getGeckoView().setSession(mSession);
-            }
-
-            mSession.loadUri(mURLFinal);
-
-        }, 10);
-
-    }
-
-    public int getScrollOffset() {
-        return mSession.getmScrollDelegate().getScrollOffset();
-    }
-
     public class geckoViewClientCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
-            if (e_type.equals(enums.etype.ON_FULL_SCREEN)) {
+            if (e_type.equals(homeEnums.eGeckoCallback.ON_FULL_SCREEN)) {
                 mSession.onFullScreenInvoke((boolean)data.get(0));
             }
-            if (e_type.equals(enums.etype.ON_DESTROY_MEDIA)) {
+            if (e_type.equals(homeEnums.eGeckoCallback.ON_DESTROY_MEDIA)) {
                 mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
             }
-            if (e_type.equals(enums.etype.M_CHANGE_HOME_THEME)) {
-                reinitHomeTheme();
+            if (e_type.equals(homeEnums.eGeckoCallback.M_CHANGE_HOME_THEME)) {
+                initHomeTheme();
             }
+
             else if (mSession != null) {
-                if (e_type.equals(enums.etype.SESSION_ID)) {
+                if (e_type.equals(homeEnums.eGeckoCallback.SESSION_ID)) {
                     return mSession.getSessionID();
-                } else if (mSessionID != null && mSessionID.equals(data.get(1)) || e_type.equals(enums.etype.ON_INVOKE_PARSER) || e_type.equals(enums.etype.M_RATE_COUNT) || e_type.equals(enums.etype.FINDER_RESULT_CALLBACK) || e_type.equals(enums.etype.ON_UPDATE_TAB_TITLE) || e_type.equals(enums.etype.on_update_favicon) || e_type.equals(enums.etype.ON_UPDATE_HISTORY) || e_type.equals(enums.etype.on_request_completed) || e_type.equals(enums.etype.on_update_suggestion) || e_type.equals(enums.etype.on_update_suggestion_url)) {
-                    if (mSession != null && mSession.isClosed()) {
+                } else if (mSessionID != null && mSessionID.equals(data.get(1)) || e_type.equals(homeEnums.eGeckoCallback.ON_INVOKE_PARSER) || e_type.equals(homeEnums.eGeckoCallback.M_RATE_COUNT) || e_type.equals(homeEnums.eGeckoCallback.FINDER_RESULT_CALLBACK) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_TAB_TITLE) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_FAVICON) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_HISTORY) || e_type.equals(homeEnums.eGeckoCallback.ON_REQUEST_COMPLETED) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION_URL)) {
+                    if (mSession != null && mSession.getContentDelegate().isClosed()) {
                         return null;
                     }
-                    if (e_type.equals(on_handle_external_intent)) {
+                    if (e_type.equals(homeEnums.eGeckoCallback.ON_HANDLE_EXTERNAL_INTENT)) {
                         try {
                             WebResponse responseInfo = (WebResponse) data.get(0);
                             Intent intent = new Intent(Intent.ACTION_VIEW);
                             intent.setDataAndTypeAndNormalize(Uri.parse(responseInfo.uri), responseInfo.headers.get("Content-Type"));
                             activityContextManager.getInstance().getHomeController().startActivity(intent);
                         } catch (Exception ex) {
-                            Log.i("ex", "ex");
                         }
                     } else {
-                        return event.invokeObserver(data, e_type);
+                        return mEvent.invokeObserver(data, e_type);
                     }
                 }
             }

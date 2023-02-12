@@ -95,7 +95,7 @@ public class sqlCipherDataModel {
         }
     };
 
-    private void execSQL(String query, Object params, boolean pContentValues) {
+    private void execSQL(String query, Object params) {
         try {
             if (params == null) {
                 sDatabaseInstance.execSQL(query);
@@ -154,7 +154,7 @@ public class sqlCipherDataModel {
             do {
                 geckoSession mSession = activityContextManager.getInstance().getHomeController().onNewTabInit();
                 tabRowModel model = new tabRowModel(c.getString(0), c.getString(1), c.getBlob(4));
-                GeckoSession.SessionState session = null;
+                GeckoSession.SessionState session;
                 try {
                     session = GeckoSession.SessionState.fromString(c.getString(6));
                     model.setSession(mSession, c.getString(3), c.getString(2), c.getString(5), session);
@@ -207,7 +207,7 @@ public class sqlCipherDataModel {
     }
 
     private void deleteFromList(int index, String table) {
-        execSQL("delete from " + table + " where id=" + index, null, false);
+        execSQL("delete from " + table + " where id=" + index, null);
     }
 
     /* External Triggers */
@@ -216,7 +216,7 @@ public class sqlCipherDataModel {
         if (pCommands == dataEnums.eSqlCipherCommands.M_INIT) {
             initialize((AppCompatActivity) pData.get(0));
         } else if (pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL) {
-            execSQL((String) pData.get(0), pData.get(1), false);
+            execSQL((String) pData.get(0), pData.get(1));
         } else if (pCommands == dataEnums.eSqlCipherCommands.M_EXEC_SQL_USING_CONTENT) {
             execSQL((String) pData.get(0), pData.get(1), true, (String) pData.get(2), (String[]) pData.get(3));
         } else if (pCommands == dataEnums.eSqlCipherCommands.M_SELECT_BOOKMARK) {

@@ -5,14 +5,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.settingManager.proxyStatusManager.proxyStatusController;
 import com.hiddenservices.onionservices.appManager.settingManager.accessibilityManager.settingAccessibilityController;
 import com.hiddenservices.onionservices.appManager.settingManager.advanceManager.settingAdvanceController;

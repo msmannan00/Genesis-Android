@@ -1,10 +1,7 @@
 package com.hiddenservices.onionservices.pluginManager.orbotPluginManager;
 
-import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
-
 import java.util.List;
-
 import static com.hiddenservices.onionservices.pluginManager.orbotPluginManager.orbotPluginEnums.eLogManager.M_GET_CLEANED_LOGS;
 
 public class orbotLogManager {
@@ -21,10 +18,6 @@ public class orbotLogManager {
         } else if (pLogs.startsWith("Invalid Configuration")) {
             return pLogs;
         }
-
-        //if (!logs.contains("Bootstrapped")) {
-        //    logs = "Initializing Bootstrap";
-        //}
 
         if (!logs.equals(strings.GENERIC_EMPTY_STR)) {
             String Logs = logs;

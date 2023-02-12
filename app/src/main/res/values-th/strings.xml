@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -14,20 +14,38 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">คุณกำลังประสบปัญหาอย่างใดอย่างหนึ่งต่อไปนี้ หน้าเว็บหรือเว็บไซต์อาจไม่ทำงาน การเชื่อมต่ออินเทอร์เน็ตของคุณอาจไม่ดี คุณอาจใช้พร็อกซี เว็บไซต์อาจถูกปิดกั้นโดยไฟร์วอลล์</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | อิสราเอลนัดหยุดงานอีกครั้ง</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">สนับสนุนเบราว์เซอร์นี้</string>
+    <string name="GENERAL_FIX" translatable="true"> แก้ไขเบราว์เซอร์</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">รีเซ็ตเบราว์เซอร์เป็นการตั้งค่าเริ่มต้น</string>
+    <string name="GENERAL_CICADA" translatable="false">จั๊กจั่น 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">ปลอดภัยโดย Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">ไม่มีบันทึกและลายนิ้วมือดิจิตอล</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">เครื่องมือค้นหาหัวหอมในตัว</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">การป้องกันการติดตาม</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">ไม่มีแคชในเครื่องที่เก็บไว้</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">คุกกี้ที่จัดการได้อย่างปลอดภัย</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">ปลอดภัยโดย Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">เครื่องมือค้นหาหัวหอมในตัว</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">ไม่มีบันทึกและลายนิ้วมือดิจิตอล</string>
+    <string name="HOME_CONNECT_NO_TOR">เรียกดูปกติ</string>
+    <string name="HOME_CONNECT_TOR">ทอร์เบราส์</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">ลบแคชของเบราว์เซอร์</string>
-    <string name="shortcut_erase_long_label" translatable="false">ลบเว็บไซต์ที่เรียกดู</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">ลบข้อมูลของคุณและเปิดเบราว์เซอร์</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">ลบแคชของเบราว์เซอร์</string>
-    <string name="shortcut_open" translatable="false">รีสตาร์ทเบราว์เซอร์ Genesis</string>
-    <string name="shortcut_open_long" translatable="false">รีสตาร์ทเบราว์เซอร์ของคุณ</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">ลบแคชของเบราว์เซอร์</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">ลบเว็บไซต์ที่เรียกดู</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">ลบข้อมูลของคุณและเปิดเบราว์เซอร์</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">ลบแคชของเบราว์เซอร์</string>
+    <string name="SHORTCUT_OPEN" translatable="false">รีสตาร์ทเบราว์เซอร์ Genesis</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">รีสตาร์ทเบราว์เซอร์ของคุณ</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">แก้ไขบุ๊คมาร์ค</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">ชื่อบุ๊คมาร์ค</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">ชื่อของ URL ที่คั่นไว้จะแสดงที่นี่</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">ใส่ชื่อบุ๊คมาร์ค...</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true" tools:ignore="TypographyEllipsis">ใส่ชื่อบุ๊คมาร์ค...</string>
 
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">ปิด</string>
@@ -40,7 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"ท่องอินเทอร์เน็ตอย่างปลอดภัย"</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"ไม่มีการติดตาม ไม่มีการเซ็นเซอร์"</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">เบราว์เซอร์เริ่มต้น</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">ตั้ง orion เป็นเบราว์เซอร์เริ่มต้นของคุณ</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">ตั้งค่าเริ่มต้นไอที</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">เปลี่ยนเป็นทอร์</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">เมื่อใช้สิ่งนี้ คุณสามารถสลับไปมาระหว่างการท่องเว็บแบบปกติโดยใช้ Duckduckgo หรือการท่องเว็บแบบมืดที่ปลอดภัยขั้นสูงโดยใช้การค้นหา Orion</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">สลับมัน</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(ไม่ปลอดภัย) ข้อมูลของคุณ (เช่น รหัสผ่านหรือหมายเลขบัตรเครดิต) จะไม่เป็นส่วนตัวเมื่อถูกส่งไปยังไซต์นี้</string>
     <string name="ALERT_SECURE_INFO" translatable="true">การเชื่อมต่อมีความปลอดภัย</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">ข้อมูลของคุณ (เช่น รหัสผ่านหรือหมายเลขบัตรเครดิต) จะปลอดภัยเมื่อถูกส่งไปยังไซต์นี้</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">การตั้งค่าความปลอดภัย</string>
@@ -70,13 +99,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">ปรับแต่งความปลอดภัย</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">การตั้งค่าพร็อกซี | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">การตั้งค่าความปลอดภัย</string>
     <string name="BRIDGE_SETTING" translatable="true">เปลี่ยนการตั้งค่า "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">สร้างโดยอัตโนมัติ</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">กำหนดการตั้งค่า "BRIDGE" โดยอัตโนมัติ</string>
     <string name="BRIDGE_MANUAL" translatable="true">ให้ "BRIDGE" ที่ฉันรู้</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">วาง "BRIDGE" ที่กำหนดเอง</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE" เป็นรีเลย์ของ Tor ที่ไม่อยู่ในรายการ ซึ่งทำให้ยากต่อการบล็อกการเชื่อมต่อในเครือข่าย Tor เนื่องจากบางประเทศพยายามบล็อก Tor บาง "BRIDGE" จึงใช้งานได้ในบางประเทศ แต่ไม่ใช่ประเทศอื่น</string>
     <string name="BRIDGE_TITLE" translatable="true">เลือกค่าเริ่มต้น "BRIDGE"</string>
     <string name="BRIDGE_REQUEST" translatable="true">ขอ</string>
@@ -86,7 +115,7 @@
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">เปลี่ยนวิธีการแสดงบันทึกระบบ</string>
     <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">แสดงบันทึกโดยใช้มุมมองรายการที่ทันสมัย</string>
-    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle ระหว่างมุมมองรายการแบบคลาสสิกและสมัยใหม่</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toggle ระหว่างมุมมองรายการแบบคลาสสิกและสมัยใหม่</string>
 
     <!-- Generic Toast Alerts -->
     <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">บุ๊กมาร์กถูกลบ</string>
@@ -98,7 +127,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">เริ่มใหม่</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">แท็บถูกปิด</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">เปิดแท็บใหม่แล้ว</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">การเชื่อมต่อพร็อกซี Orion ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">การเชื่อมต่อพร็อกซี Orion ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">หน่วยความจำเต็ม ➔ กำลังล้างแท็บ</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">ป๊อปอัปถูกบล็อก</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">เปิดบันทึกข้อผิดพลาด</string>
@@ -123,23 +152,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">ปิด</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">รอดาวน์โหลด ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">รอดาวน์โหลด ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">ดาวน์โหลด</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">ให้คะแนนเรา</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">บอกคนอื่นว่าคุณคิดอย่างไรเกี่ยวกับแอปนี้</string>
     <string name="ALERT_RATE" translatable="true">อัตรา</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">รักเบราว์เซอร์นี้\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">เช่นเดียวกับเบราว์เซอร์\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">น่าพอใจ\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">ต่ำกว่าค่าเฉลี่ย\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">เบราว์เซอร์แย่\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">เสร็จแล้ว</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">ประเภท Bridge (obfs4, อ่อนโยน, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">บุ๊คมาร์คเว็บไซต์</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">เพิ่มหน้านี้ในบุ๊คมาร์คของคุณ</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">บุ๊คมาร์คชื่อ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">บุ๊คมาร์คชื่อ...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">เสร็จแล้ว</string>
 
     <!-- Alert Long Download -->
@@ -159,10 +191,26 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">ดาวน์โหลดไฟล์ภาพ</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">จัดเตรียม Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">ระบุ Bridge ที่คุณรู้จัก</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">ป้อนข้อมูล bridge จากแหล่งที่เชื่อถือได้</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">คำขอ</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">โฆษณา</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">เรียกดูบทความได้อย่างอิสระ</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">ค้นหาจากไมโครซอฟท์</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">ค้นหาจากกูเกิล</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">การติดตามการป้องกันการค้นหา</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">บล็อกป๊อปอัป | สลับเพื่อปิดโฆษณาป๊อปอัป</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">ลบโฆษณาป๊อปอัป อาจทำลายการทำงานของบางเว็บไซต์</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">มุมมองแท็บ</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">สลับระหว่างเค้าโครงตารางผู้จัดการแท็บและเค้าโครงรายการ</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">การออกแบบกริด</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">การออกแบบรายการ</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">การตั้งค่าระบบ</string>
@@ -396,12 +444,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">ลิงก์เว็บที่เรียกดู</string>
     <string name="HISTORY_CLEAR" translatable="true">ลบสิ่งนี้ออก</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">ค้นหา ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">ค้นหา ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">เพจที่คุณเข้าชมจะปรากฏที่นี่</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">บุ๊คมาร์ค</string>
     <string name="BOOKMARK_CLEAR" translatable="true">ลบสิ่งนี้ออก</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">ค้นหา ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">ค้นหา ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">ลองอีกครั้ง</string>

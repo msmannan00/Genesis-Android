@@ -18,23 +18,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.R;
-
 import java.util.List;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 
-class tabViewController {
+public class tabViewController {
     /*Private Views*/
     private Fragment mContext;
     private PopupWindow mTabOptionMenu = null;
@@ -45,9 +42,7 @@ class tabViewController {
     private View mUndoLayout;
     private TextView mSelectionCount;
     private ImageView mBlocker;
-    private RecyclerView mRecycleView;
     private NestedScrollView mNestedScrollView;
-    private TextView mEmptyView;
     private ImageButton mNewTab;
 
     /*Private Local Variables*/
@@ -56,7 +51,7 @@ class tabViewController {
 
     /*Initializations*/
 
-    tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView, TextView pEmptyView, ImageButton pNewTab) {
+    public tabViewController(Fragment mContext, Button pTabs, ImageView pRemoveSelection, ImageButton pMenuButton, ImageButton pClearSelection, View pToastLayoutRoot, TextView pSelectionCount, ImageView pBlocker, RecyclerView pRecycleView, NestedScrollView pNestedScrollView, TextView pEmptyView, ImageButton pNewTab) {
         this.mContext = mContext;
         this.mTabs = pTabs;
         this.mRemoveSelection = pRemoveSelection;
@@ -65,9 +60,7 @@ class tabViewController {
         this.mUndoLayout = pToastLayoutRoot;
         this.mSelectionCount = pSelectionCount;
         this.mBlocker = pBlocker;
-        this.mRecycleView = pRecycleView;
         this.mNestedScrollView = pNestedScrollView;
-        this.mEmptyView = pEmptyView;
         this.mNewTab = pNewTab;
 
         initUI();
@@ -86,8 +79,6 @@ class tabViewController {
     }
 
     public void initUI() {
-        // mMenuButton.setAlpha(0f);
-        // mMenuButton.animate().setStartDelay(200).setDuration(350).alpha(1);
         mMenuButton.setVisibility(View.VISIBLE);
 
         if (status.sTabGridLayoutEnabled) {
@@ -138,7 +129,8 @@ class tabViewController {
 
     private void onShowSelection() {
         if (mSelectionCount.getVisibility() == View.GONE) {
-            mSelectionCount.setText(0 + " Selected");
+            String mText = 0 + " Selected";
+            mSelectionCount.setText(mText);
         }
 
         mMenuButton.setVisibility(View.GONE);
@@ -157,7 +149,9 @@ class tabViewController {
         } else {
             mRemoveSelection.setVisibility(View.GONE);
         }
-        mSelectionCount.setText(pCount + " Selected");
+
+        String mText = pCount + " Selected";
+        mSelectionCount.setText(mText);
         mTabs.setAlpha(0);
     }
 

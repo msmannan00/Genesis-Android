@@ -45,7 +45,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/c_alert_divider" />
+            app:tint="@color/c_alert_divider"
+            android:contentDescription="@string/GENERAL_TODO" />
 
         <TextView
             android:id="@+id/pErrorInfo"
@@ -122,20 +123,21 @@
         tools:ignore="RtlSymmetry">
 
         <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="1dp"
             android:background="@xml/gx_ripple_default_round"
             android:contentDescription="@string/GENERAL_TODO"
             android:onClick="onClose"
             android:src="@xml/ic_arrow_back"
-            app:tint="@color/c_navigation_tint" />
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="-3dp"
+            android:paddingTop="1dp"
             android:layout_marginEnd="10dp"
             android:gravity="center_vertical|start"
             android:onClick="onClose"
@@ -150,8 +152,8 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="0dp"
@@ -176,7 +178,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateClickableBoundsCheck">
 
         <LinearLayout
             android:layout_width="match_parent"

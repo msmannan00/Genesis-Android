@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.appManager.historyManager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
@@ -14,23 +15,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager;
+import com.hiddenservices.onionservices.appManager.editTextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
-import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
@@ -42,12 +38,10 @@ import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.hiddenservices.onionservices.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static com.hiddenservices.onionservices.appManager.historyManager.historyEnums.eHistoryViewCommands.M_VERTIFY_SELECTION_MENU;
 import static com.hiddenservices.onionservices.constants.sql.SQL_CLEAR_HISTORY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_CLEAR_HISTORY;
@@ -59,7 +53,6 @@ public class historyController extends AppCompatActivity {
     private homeController mHomeController;
     private activityContextManager mContextManager;
     private historyAdapter mHistoryAdapter;
-    private LinearLayout mHeaderContainer;
     private TextView mTitle;
 
     /*Private Views*/
@@ -115,11 +108,10 @@ public class historyController extends AppCompatActivity {
         mClearButton = findViewById(R.id.pClearButton);
         mMenuButton = findViewById(R.id.pMenuButton);
         mSearchButton = findViewById(R.id.pSearchButton);
-        mHeaderContainer = findViewById(R.id.pHeaderContainer);
         mTitle = findViewById(R.id.pTitle);
 
         activityContextManager.getInstance().onStack(this);
-        mHistoryViewController = new historyViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton, this, mMenuButton, mSearchButton, mHeaderContainer, mTitle);
+        mHistoryViewController = new historyViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton, this, mMenuButton, mSearchButton, mTitle);
     }
 
     public void initializeList() {
@@ -134,6 +126,7 @@ public class historyController extends AppCompatActivity {
         mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mHistoryModel.getList().size(), 0));
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void initCustomListeners() {
         mSearchInput.setEventHandler(new edittextManagerCallback());
 
@@ -151,7 +144,7 @@ public class historyController extends AppCompatActivity {
 
                         if (totalItemCount > 0 && endHasBeenReached) {
                             mRecycleView.computeVerticalScrollOffset();
-                            onLoadMoreHistory(mRecycleView.computeVerticalScrollOffset() > 0);
+                            onLoadMoreHistory();
                         }
                     }
                 }
@@ -225,7 +218,7 @@ public class historyController extends AppCompatActivity {
             }
 
             @Override
-            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 int position = viewHolder.getAdapterPosition();
                 if (mHistoryAdapter.isSwipable(position)) {
                     final int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
@@ -331,7 +324,7 @@ public class historyController extends AppCompatActivity {
     public void onOpenMultipleTabs(View view) {
         ArrayList<String> m_long_selected_urk = (ArrayList<String>) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_URL, null);
         for (int m_counter = 0; m_counter < m_long_selected_urk.size(); m_counter++) {
-            mHomeController.postNewLinkTabAnimation(m_long_selected_urk.get(m_counter), false);
+            mHomeController.onOpenLinkNewTabLoaded(m_long_selected_urk.get(m_counter));
         }
         onBackPressed(null);
         mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.M_CLEAR_LONG_SELECTED_URL, null);
@@ -365,7 +358,7 @@ public class historyController extends AppCompatActivity {
         dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_EXEC_SQL, Arrays.asList(SQL_CLEAR_HISTORY, null));
     }
 
-    private void onLoadMoreHistory(boolean pLoadingEnabled) {
+    private void onLoadMoreHistory() {
         if (!isUpdatingRecyclerView) {
             isUpdatingRecyclerView = true;
             new Thread() {
@@ -377,7 +370,6 @@ public class historyController extends AppCompatActivity {
                     activityContextManager.getInstance().getHistoryController().runOnUiThread(() -> {
                         if (mPrevSize < mHistoryModel.getList().size()) {
                             mHistoryAdapter.onLoadMore(mHistoryModel.getList());
-                            //mHistoryAdapter.notifyItemRangeInserted(mPrevSize, mHistoryModel.getList().size()-1);
                         }
                     });
                     try {
@@ -397,7 +389,7 @@ public class historyController extends AppCompatActivity {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
 
-            if (e_type.equals(enums.etype.ON_KEYBOARD_CLOSE)) {
+            if (e_type.equals(homeEnums.eEdittextCallbacks.ON_KEYBOARD_CLOSE)) {
                 onBackPressed();
             }
             return null;
@@ -409,25 +401,23 @@ public class historyController extends AppCompatActivity {
     public class adapterCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
-            if (e_type.equals(enums.etype.url_triggered)) {
+            if (e_type.equals(historyEnums.eHistoryAdapterCallback.ON_URL_TRIGGER)) {
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
                 mHomeController.onLoadURL(url_temp);
                 finish();
-            } else if (e_type.equals(enums.etype.url_triggered_new_tab)) {
+            } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.ON_URL_TRIGGER_NEW_TAB)) {
                 String url_temp = helperMethod.completeURL(data.get(0).toString());
-                mHomeController.postNewLinkTabAnimation(url_temp, false);
+                mHomeController.onOpenLinkNewTabLoaded(url_temp);
                 finish();
-            } else if (e_type.equals(enums.etype.fetch_favicon)) {
+            } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.ON_FETCH_FAVICON)) {
                 mHomeController.onGetFavIcon((ImageView) data.get(0), (String) data.get(1));
-            } else if (e_type.equals(enums.etype.url_clear)) {
+            } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.ON_URL_CLEAR)) {
                 mHistoryModel.onManualClear((int) data.get(0));
-            } else if (e_type.equals(enums.etype.url_clear_at)) {
+            } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.ON_URL_CLEAR_AT)) {
                 dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_REMOVE_HISTORY, data);
-            } else if (e_type.equals(enums.etype.is_empty)) {
+            } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.IS_EMPTY)) {
                 mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mHistoryModel.getList().size(), 300));
-            } else if (e_type.equals(enums.etype.remove_from_database)) {
-                dataController.getInstance().invokeSQLCipher(dataEnums.eSqlCipherCommands.M_DELETE_FROM_HISTORY, Arrays.asList(data.get(0), strings.HISTORY_TITLE));
-            } else if (e_type.equals(enums.etype.on_verify_selected_url_menu)) {
+            } else if (e_type.equals(historyEnums.eHistoryAdapterCallback.ON_VERIFY_SELECTED_URL_MENU)) {
                 mHistoryViewController.onTrigger(M_VERTIFY_SELECTION_MENU, data);
             }
             return null;

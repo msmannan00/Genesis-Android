@@ -1,17 +1,9 @@
 package com.hiddenservices.onionservices.constants;
 
 public class strings {
-    /*Notification Manager Manager*/
-    public static final String NOTIFICATION_TITLE = "Orion Browser";
-    public static final String[] NOTIFICATION_BODY = {"Orion Browser updated successfully",
-            "Use Orion Browser to enhance your privacy",
-            "Privacy and security enhanced, use Orion Browser",
-            "Hidden web & Orion Search Engine updated",
-            "Live websites updated on Orion Search Engine",
-            "Access secure part of internet, Use Orion Browser",
-            "Your privacy matters to us, Use Orion browser",
-            "Stop tracking, use Orion Browser"};
 
+    /*General Manager*/
+    public static final String DISABLED = "Disabled";
 
     /*History Manager*/
     public static final String HISTORY_TITLE = "history";
@@ -45,7 +37,6 @@ public class strings {
     public static final String GENERIC_EMPTY_STR = "";
     public static final String GENERIC_EMPTY_SPACE = " ";
     public static final String GENERIC_EMPTY_DOT = ".";
-    public static final String GENERIC_EMPTY_null = "null";
 
     /*Language Manager*/
     public static final String LANGUAGE_NOT_SUPPORTED = "is unsupported";
@@ -63,10 +54,6 @@ public class strings {
     public static final String MESSAGE_PLAYSTORE_NOT_FOUND = "Playstore Not Found";
     public static final String MESSAGE_SECURE_ONION_SERVICE = "Tor Secured Connection";
     public static final String MESSAGE_NOT_SECURE_HTTPS_SERVICE = "Connection Not Secured";
-
-    /*Crawl Manager*/
-    public static final String CRAWLER_GENERIC_TYPE = "all";
-    public static final String CRAWLER_RANK_UNVERIFIED = "0";
 
 }
 

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="GENERAL_SEARCH_HINT" translatable="true">zoek iets of typ een weblink</string>
@@ -10,14 +10,32 @@
     <string name="GENERAL_RELOAD" translatable="true">herladen</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">u wordt geconfronteerd met een van de volgende problemen. webpagina of website werkt mogelijk niet. uw internetverbinding is mogelijk slecht. misschien gebruikt u een proxy. website wordt mogelijk geblokkeerd door firewall</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC, Israël Slaat Weer Toe</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Dukung Peramban ini</string>
+    <string name="GENERAL_FIX" translatable="true">Perbaiki Browser</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Reset browser ke pengaturan default</string>
+    <string name="GENERAL_CICADA" translatable="false">jangkrik 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Diamankan oleh Jaringan Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Tanpa Rekam dan Sidik Jari Digital</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Mesin Pencari Onion bawaan</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Perlindungan Pelacakan</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Tidak Ada Cache Lokal yang Tersimpan</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Cookie Aman yang Dapat Dikelola</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Diamankan oleh Jaringan Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Mesin Pencari Onion bawaan</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Tanpa Rekam dan Sidik Jari Digital</string>
+    <string name="HOME_CONNECT_NO_TOR">Penjelajahan Biasa</string>
+    <string name="HOME_CONNECT_TOR">Penjelajahan Tor</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Browsercache wissen</string>
-    <string name="shortcut_erase_long_label" translatable="false">Doorbladerde website wissen</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Wis uw gegevens en open browser</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Browsercache wissen</string>
-    <string name="shortcut_open" translatable="false">Start Genesis-browser opnieuw</string>
-    <string name="shortcut_open_long" translatable="false">Herstart Je Browser</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Browsercache wissen</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Doorbladerde website wissen</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Wis uw gegevens en open browser</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Browsercache wissen</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Start Genesis-browser opnieuw</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Herstart Je Browser</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Sunting Penanda</string>
@@ -36,7 +54,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Jelajahi internet dengan aman dan aman."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Tidak ada pelacakan. Tidak ada sensor."</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Peramban bawaan</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">atur orion sebagai browser default Anda</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">Tetapkan Default TI</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Beralih ke Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Dengan menggunakan ini, Anda dapat beralih antara penjelajahan normal menggunakan duckduckgo atau memajukan penjelajahan web gelap yang aman menggunakan pencarian Orion</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">Alihkan</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(Tidak aman) Informasi Anda (misalnya, kata sandi atau nomor kartu kredit) tidak bersifat pribadi ketika dikirim ke situs ini</string>
     <string name="ALERT_SECURE_INFO" translatable="true">Koneksi aman</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Informasi Anda (misalnya, kata sandi atau nomor kartu kredit) aman saat dikirim ke situs ini</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Pengaturan Keamanan</string>
@@ -66,13 +95,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">automatisch aanmaken</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Pengaturan proxy | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Pengaturan Keamanan</string>
     <string name="BRIDGE_SETTING" translatable="true">Ubah Pengaturan "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">Buat Secara Otomatis</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Konfigurasikan pengaturan "BRIDGE" secara otomatis</string>
     <string name="BRIDGE_MANUAL" translatable="true">Berikan "BRIDGE" yang saya tahu</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Tempel "BRIDGE" khusus</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE" adalah relay Tor tidak terdaftar yang mempersulit pemblokiran koneksi ke jaringan Tor. Karena beberapa negara mencoba memblokir Tor, "BRIDGE" tertentu berfungsi di beberapa negara tetapi tidak di negara lain</string>
     <string name="BRIDGE_TITLE" translatable="true">Pilih Default "BRIDGE"</string>
     <string name="BRIDGE_REQUEST" translatable="true">Permintaan</string>
@@ -99,7 +128,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Mulai ulang</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Ditutup</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Tab baru dibuka</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proksi Orion menghubungkan ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Proksi Orion menghubungkan ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memori penuh Menghapus tab</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Munculan diblokir</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Buka Log Kesalahan</string>
@@ -119,23 +148,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Tutup</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Menunggu untuk mengunduh ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">Menunggu untuk mengunduh ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Unduh</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Nilai AS</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Beri tahu orang lain pendapat Anda tentang aplikasi ini</string>
     <string name="ALERT_RATE" translatable="true">Nilai</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Suka peramban ini\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Seperti peramban\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Memuaskan\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Dibawah rata-rata\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Peramban yang buruk\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Selesai</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge string (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge tipe (obfs4, lemah lembut, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Tandai Situs Web</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Tambahkan halaman ini ke bookmark Anda</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nama penanda...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">nama penanda...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Selesai</string>
 
     <!-- Alert Long Download -->
@@ -155,10 +187,27 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Unduh file gambar</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Menyediakan Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">geef een Bridge weet je</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">voer bridge informatie in van een vertrouwde bron</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">verzoek</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Iklan</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Telusuri artikel dengan bebas</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Cari dari microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Cari dari google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Pencarian perlindungan pelacakan</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Blokir Munculan | Alihkan ke Nonaktifkan Iklan Popup</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Hapus iklan popup Mungkin merusak fungsi beberapa situs web</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Tampilan tab</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Beralih antara Tab manager Grid Layout dan List Layout</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Desain Kisi</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Desain Daftar</string>
 
     <!-- Settings -->
     <string name="SETTING_BASIC_SETTING" translatable="true">Systeeminstelling</string>
@@ -385,12 +434,13 @@
     <!-- History Popup Menu -->
     <string name="HISTORY_TITLE" translatable="true">doorzochte weblinks</string>
     <string name="HISTORY_CLEAR" translatable="true">verwijder deze</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">zoeken ...</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">zoeken ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Halaman yang Anda kunjungi muncul di sini</string>
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="true">bladwijzer</string>
     <string name="BOOKMARK_CLEAR" translatable="true">verwijder dit</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">zoeken ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">zoeken ...</string>
 
     <!-- Help -->
     <string name="HELP_RETRY" translatable="true">opnieuw proberen</string>

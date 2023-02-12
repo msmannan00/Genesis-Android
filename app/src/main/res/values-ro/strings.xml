@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -14,20 +14,38 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">vă confruntați cu una dintre următoarele probleme. este posibil ca pagina web sau site-ul web să nu funcționeze. conexiunea la internet ar putea fi slabă. s-ar putea să utilizați un proxy. site-ul web ar putea fi blocat de firewall</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israelul lovește din nou</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Sprijină acest browser</string>
+    <string name="GENERAL_FIX" translatable="true">. Remediați browserul</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Resetați browserul la setările implicite</string>
+    <string name="GENERAL_CICADA" translatable="false">Cicada 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Securizat de Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Fără înregistrare și amprentă digitală</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Motor de căutare pentru ceapă încorporat</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Protecție de urmărire</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Nu este stocat cache local</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Cookie-uri gestionabile securizate</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Securizat de Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Motor de căutare pentru ceapă încorporat</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Fără înregistrare și amprentă digitală</string>
+    <string name="HOME_CONNECT_NO_TOR">Navigare normală</string>
+    <string name="HOME_CONNECT_TOR">Navigarea Tor</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Ștergeți memoria cache a browserului</string>
-    <string name="shortcut_erase_long_label" translatable="false">Ștergeți site-ul navigat</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Ștergeți-vă datele și deschideți browserul</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Ștergeți memoria cache a browserului</string>
-    <string name="shortcut_open" translatable="false">Reporniți browserul Genesis</string>
-    <string name="shortcut_open_long" translatable="false">Reporniți Browserul</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Ștergeți memoria cache a browserului</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Ștergeți site-ul navigat</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Ștergeți-vă datele și deschideți browserul</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Ștergeți memoria cache a browserului</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Reporniți browserul Genesis</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Reporniți Browserul</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Editați Marcajul</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nume Marcaj</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Numele adresei URL marcate va fi afișat aici</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Introduceți numele marcajului ...</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true" tools:ignore="TypographyEllipsis">Introduceți numele marcajului ...</string>
 
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">renunța</string>
@@ -40,8 +58,19 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">„Răsfoiți internetul în siguranță.”</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Fără urmărire. Fără cenzură."</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Browser implicit</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">setați orion ca browser implicit</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">Setați IT implicit</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Comutați la Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Folosind aceasta, puteți comuta între navigarea normală folosind duckduckgo sau navigarea în avans securizată pe dark web folosind căutarea Orion. Schimbați-l</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">(Nu este sigură) Informațiile dvs</string>
+
     <!-- Alert Secure -->
-    <string name="ALERT_SECURE_INFO" translatable="true">Conexiunea este securizată</string>
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(de exemplu, parola sau numerele cardului de credit) nu sunt private atunci când sunt trimise pe acest site</string>
+    <string name="ALERT_SECURE_INFO" translatable="true">Conexiunea este sigură</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Informațiile dvs. (de exemplu, parola sau numerele cardului de credit) sunt sigure atunci când sunt trimise pe acest site</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Setări De Securitate</string>
     <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
@@ -70,13 +99,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">personalizare securitate</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Setări proxy | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Setări De Securitate</string>
     <string name="BRIDGE_SETTING" translatable="true">Modificați Setările „BRIDGE”</string>
     <string name="BRIDGE_AUTO" translatable="true">Creați Automat</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Configurați automat setările „BRIDGE”</string>
     <string name="BRIDGE_MANUAL" translatable="true">Furnizați un „BRIDGE” pe care îl știu</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Inserați „BRIDGE” personalizat</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">„BRIDGE” sunt relee Tor nelistate care fac mai dificilă blocarea conexiunilor în rețeaua Tor. Datorită modului în care unele țări încearcă să blocheze Tor, anumite „PODURI” funcționează în unele țări, dar nu în altele</string>
     <string name="BRIDGE_TITLE" translatable="true">Selectați „BRIDGE” implicit</string>
     <string name="BRIDGE_REQUEST" translatable="true">Cerere</string>
@@ -98,7 +127,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Reporniți</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Fila Este închisă</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">S-a deschis o filă nouă</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Conectarea proxy-ului Orion ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Conectarea proxy-ului Orion ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memoria este plină tab fila Clearing</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup blocat</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Deschideți Jurnalele De Erori</string>
@@ -120,7 +149,7 @@
     <string name="ALERT_PANIC_HEADER" translatable="true">Resetați aplicația în caz că nu funcționează. Vom încerca să-l reconfigurăm, astfel încât să funcționeze din nou.</string>
     <string name="ALERT_PANIC_INFO" translatable="true">Resetați</string>
     <string name="ALERT_PANIC_BT_1" translatable="true">Renunță</string>
-    <string name="ALERT_PANIC_BT_2" translatable="true">Se așteaptă descărcarea ...</string>
+    <string name="ALERT_PANIC_BT_2" translatable="true" tools:ignore="TypographyEllipsis">Se așteaptă descărcarea ...</string>
 
     <!-- Alert Download Single -->
     <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Descărcați</string>
@@ -130,15 +159,18 @@
     <string name="ALERT_RATEUS" translatable="true">Spuneți Altora Ce Părere Aveți Despre Această Aplicație</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Tarif</string>
     <string name="ALERT_RATE" translatable="true">Gata</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Iubește acest browser\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">La fel ca browserul\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Satisfăcător\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Sub medie\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Browser slab\n1/5</string>
 
     <!-- Alert BRIDGE -->
-    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Bridge șir (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Tip Bridge (obfs4, blând, ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Site de marcaje</string>
+    <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true" tools:ignore="TypographyEllipsis">Bridge șir (obfs4 212.21.66.66:20621 ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Adăugați Această Pagină La Marcajele Dvs.</string>
-    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">numele marcajului ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true" tools:ignore="TypographyEllipsis">numele marcajului ...</string>
     <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">Gata</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Notificare URL</string>
 
@@ -159,10 +191,27 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">OFERI A Bridge</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Furnizați Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">oferiți un Bridge pe care îl cunoașteți</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">introduceți bridge informații dintr-o sursă de încredere</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">cerere</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Publicitate</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Răsfoiți articolele liber</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Caută de pe Microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">. Cauta de pe google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Căutare de protecție de urmărire</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Blocare pop-up | Comutați pentru a dezactiva anunțuri pop-up</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Eliminați reclamele pop-up Ar putea rupe funcțional unele site-uri web</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Vizualizare filă</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Comutați între aspectul grilă al managerului de file și aspectul listei</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Design grilă</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Designul listei</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Setarea sistemului</string>
@@ -396,12 +445,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">legături web navigate</string>
     <string name="HISTORY_CLEAR" translatable="true">înlătură asta</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">căutare ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">căutare ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Paginile pe care le vizitați apar aici</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">marcaj</string>
     <string name="BOOKMARK_CLEAR" translatable="true">înlătură asta</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">căutare ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">căutare ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">reîncercați</string>

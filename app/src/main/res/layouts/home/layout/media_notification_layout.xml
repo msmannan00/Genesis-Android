@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id = "@+id/layout"
     android:layout_width = "fill_parent"
     android:layout_height = "100dp"
@@ -8,14 +9,16 @@
     android:padding = "10dp" >
 
     <ImageView
-        android:layout_alignParentEnd = "true"
         android:id="@+id/logo"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="-5dp"
+        android:background="@color/c_tab_border_v1"
         android:scaleX="0.85"
         android:scaleY="0.75"
-        android:background="@color/c_tab_border_v1"
-        android:layout_width="55dp"
-        android:layout_height="55dp" />
+        tools:ignore="ImageContrastCheck"
+        android:contentDescription="@string/GENERAL_TODO" />
 
     <ImageView
         android:id = "@+id/image"
@@ -25,14 +28,14 @@
         android:layout_marginEnd = "10dp"
         android:layout_marginTop="5dp"
         android:contentDescription = "@string/app_name"
-        android:src = "@drawable/ic_baseline_video"
+        android:src = "@xml/ic_baseline_video"
         app:tint="@color/c_header_icon_tint" />
     <TextView
         android:id = "@+id/header"
         android:layout_width = "wrap_content"
         android:layout_height = "20dp"
         android:layout_toEndOf = "@id/image"
-        android:text = "Testing"
+        android:text="@string/GENERAL_DEFAULT_TEXT"
         android:maxLines="1"
         android:ellipsize="end"
         android:singleLine="true"
@@ -40,7 +43,8 @@
         android:paddingEnd="10dp"
         android:layout_marginStart="5dp"
         android:textColor = "#fff"
-        android:textSize = "13sp" />
+        android:textSize = "13sp"
+        tools:ignore="RtlSymmetry" />
     <TextView
         android:layout_marginStart="5dp"
         android:id = "@+id/body"
@@ -53,16 +57,11 @@
         android:singleLine = "true"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text = "Lorem Ipsum is simply dummy text of the printing and typesetting
-         industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-         1500s, when an unknown printer took a galley of type and scrambled it to make a type
-         specimen book. It has survived not only five centuries, but also the leap into
-         electronic typesetting, remaining essentially unchanged. It was popularised in the
-         1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-         recently with desktop publishing software like Aldus PageMaker including versions of
-         Lorem Ipsum. "
+        android:text="@string/GENERAL_DEFAULT_TEXT"
+
         android:textColor = "#fff"
-        android:textSize = "13sp" />
+        android:textSize = "13sp"
+        tools:ignore="RtlSymmetry" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,38 +73,41 @@
 
 
         <ImageButton
-            android:id = "@+id/back"
-            android:layout_width = "60dp"
-            android:layout_height = "35dp"
-            android:scaleX="1.4"
-            android:scaleY="1.4"
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:background="@color/clear_alpha"
-            android:contentDescription = "@string/app_name"
-            android:src = "@drawable/ic_baseline_skip_previous"/>
+            android:contentDescription="@string/app_name"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:src="@drawable/ic_baseline_skip_previous"
+            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
 
         <ImageButton
-            android:id = "@+id/trigger"
-            android:scaleX="1.4"
-            android:scaleY="1.4"
-            android:layout_width = "65dp"
-            android:layout_height = "35dp"
+            android:id="@+id/trigger"
+            android:layout_width="65dp"
+            android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:background="@color/clear_alpha"
-            android:contentDescription = "@string/app_name"
-            android:src = "@drawable/ic_baseline_play_arrow"/>
+            android:contentDescription="@string/app_name"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:src="@drawable/ic_baseline_play_arrow"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:id = "@+id/next"
-            android:scaleX="1.4"
-            android:scaleY="1.4"
-            android:layout_width = "60dp"
-            android:layout_height = "35dp"
+            android:id="@+id/next"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:background="@color/clear_alpha"
-            android:contentDescription = "@string/app_name"
-            android:src = "@drawable/ic_baseline_skip_next"/>
+            android:contentDescription="@string/app_name"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:src="@drawable/ic_baseline_skip_next"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 </RelativeLayout>

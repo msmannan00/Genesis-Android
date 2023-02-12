@@ -42,7 +42,7 @@ public class bookmarkAdapterView {
         pView.getLocationOnScreen(location);
         int y = location[1];
         int height = helperMethod.getScreenHeight(mContext);
-        int m_offset_height = 0;
+        int m_offset_height;
         if (y + helperMethod.pxFromDp(300) > height) {
             m_offset_height = helperMethod.pxFromDp(203);
         } else {
@@ -77,9 +77,6 @@ public class bookmarkAdapterView {
         int speed = 150;
         if (pIsForced) {
             speed = 150;
-        }
-        if (pVibrate) {
-            helperMethod.vibrate(mContext);
         }
 
 

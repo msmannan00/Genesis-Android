@@ -35,16 +35,16 @@
 
                 <ImageButton
                     android:id="@+id/pBridgeSettingBack"
-                    android:layout_width="45dp"
+                    android:layout_width="48dp"
                     android:layout_height="50dp"
-                    android:onClick="onClose"
-                    android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
-                    android:src="@xml/ic_arrow_back"
+                    android:layout_marginTop="3dp"
                     android:background="@xml/gx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onClose"
+                    android:src="@xml/ic_arrow_back"
                     app:tint="@color/c_navigation_tint"
-                    tools:ignore="UsingOnClickInXml" />
+                    tools:ignore="UsingOnClickInXml,DuplicateSpeakableTextCheck" />
 
                 <TextView
                     android:id="@+id/pBridgeSettingHeader"
@@ -54,7 +54,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="40"
-                    android:layout_marginTop="2dp"
+                    android:paddingTop="1dp"
                     android:layout_marginEnd="4dp"
                     android:gravity="center_vertical|start"
                     android:textStyle="bold"
@@ -69,15 +69,15 @@
                 <ImageView
                     android:id="@+id/pBridgeSettingInfo"
                     android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:paddingStart="8dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center_vertical"
-                    android:onClick="onOpenInfo"
                     android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onOpenInfo"
+                    android:paddingStart="8dp"
                     android:src="@xml/ic_info"
                     app:tint="@color/c_header_icon_tint"
-                    tools:ignore="UsingOnClickInXml" />
+                    tools:ignore="RtlSymmetry,UsingOnClickInXml" />
 
             </LinearLayout>
 
@@ -95,15 +95,15 @@
 
                 <TextView
                     android:id="@+id/pDescriptionHeaderText"
-                    android:textSize="14sp"
                     android:layout_width="0dp"
-                    android:textColor="@color/c_text_v2"
-                    android:paddingBottom="10dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="40"
                     android:background="@color/clear_alpha"
-                    android:layout_marginStart="15dp"
-                    android:text="@string/BRIDGE_DESC" />
+                    android:paddingBottom="10dp"
+                    android:text="@string/BRIDGE_DESC"
+                    android:textColor="#757575"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -128,13 +128,13 @@
 
                 <TextView
                     android:id="@+id/pBridgeSettingConfigureSettingText"
-                    android:textSize="14sp"
                     android:layout_width="match_parent"
-                    android:textColor="@color/c_text_v2"
                     android:layout_height="wrap_content"
-                    android:background="@color/clear_alpha"
                     android:layout_marginStart="15dp"
-                    android:text="@string/BRIDGE_AUTO_INFO" />
+                    android:background="@color/clear_alpha"
+                    android:text="@string/BRIDGE_AUTO_INFO"
+                    android:textColor="#757575"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -149,7 +149,7 @@
                 android:paddingBottom="10dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                tools:ignore="RtlSymmetry"></LinearLayout>
+                tools:ignore="RtlSymmetry" />
 
 
             <LinearLayout
@@ -178,7 +178,7 @@
                         android:id="@+id/pSearchSettingOption1"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="true"
                         android:paddingStart="0dp"
@@ -236,7 +236,7 @@
                         android:id="@+id/pBridgeSettingOption4"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="true"
                         android:paddingStart="0dp"
@@ -296,7 +296,7 @@
                         android:layout_height="55dp"
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="true"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:onClick="onUITrigger"
                         android:orientation="horizontal"
                         android:focusable="true"
@@ -355,7 +355,7 @@
                         android:onClick="onUITrigger"
                         android:orientation="horizontal"
                         android:focusable="true"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         tools:ignore="RtlSymmetry,UsingOnClickInXml">
 
                         <LinearLayout
@@ -423,53 +423,54 @@
                     tools:ignore="RtlSymmetry,UsingOnClickInXml">
 
                     <EditText
-                        android:background="@xml/gx_generic_input"
-                        android:textColorHighlight="@color/c_text_color_highlight_v1"
-                        android:textCursorDrawable="@xml/gx_search_cursor_state"
                         android:id="@+id/pBridgeSettingCustomPort"
                         android:layout_width="0dp"
-                        android:layout_weight="11"
-                        android:clickable="false"
-                        android:onClick="onUITrigger"
-                        android:layout_height="45dp"
-                        android:focusable="false"
-                        android:paddingStart="15dp"
-                        android:cursorVisible="false"
-                        android:singleLine="true"
-                        android:paddingEnd="15dp"
+                        android:layout_height="48dp"
                         android:layout_marginStart="15dp"
+                        android:layout_weight="11"
+                        android:autofillHints=""
+                        android:background="@xml/gx_generic_input"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:ems="10"
-                        android:maxLines="1"
-                        android:textColor="@color/c_text_v1"
-                        android:textColorHint="@color/c_text_v2"
+                        android:focusable="false"
                         android:hint="@string/BRIDGE_PORT_HINT"
-                        android:textSize="14.5sp"
-                        android:text=""
                         android:inputType="none"
-                        android:autofillHints="" />
+                        android:maxLines="1"
+                        android:onClick="onUITrigger"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/c_text_v1"
+                        android:textColorHighlight="@color/c_text_color_highlight_v1"
+                        android:textColorHint="#546E7A"
+                        android:textCursorDrawable="@xml/gx_search_cursor_state"
+                        android:textSize="14.5sp" />
 
                     <Button
-                        android:layout_marginTop="-1dp"
                         android:id="@+id/pBridgeSettingBridgeRequest"
-                        android:textSize="13sp"
                         android:layout_width="0dp"
-                        android:layout_weight="4"
-                        android:textColor="@color/c_white"
-                        android:onClick="onUITrigger"
-                        android:layout_height="45dp"
-                        android:background="@xml/bx_rounded_corner"
+                        android:layout_height="48dp"
                         android:layout_marginStart="5dp"
-                        android:text="@string/BRIDGE_REQUEST" />
+                        android:layout_marginTop="-1dp"
+                        android:layout_weight="4"
+                        android:background="@xml/bx_rounded_corner"
+                        android:onClick="onUITrigger"
+                        android:text="@string/BRIDGE_REQUEST"
+                        android:textColor="@color/c_white"
+                        android:textSize="13sp"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="match_parent"
                     android:id="@+id/pBridgeSettingCustomBridgeBlocker"
-                    android:onClick="onUITrigger"
+                    android:layout_width="match_parent"
                     android:layout_height="63dp"
                     android:layout_marginTop="-63dp"
                     android:contentDescription="@string/GENERAL_TODO"
-                    tools:ignore="UsingOnClickInXml">
+                    android:onClick="onUITrigger"
+                    tools:ignore="UsingOnClickInXml,ImageContrastCheck">
 
                 </ImageView>
             </LinearLayout>

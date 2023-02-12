@@ -35,24 +35,25 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="15dp"
             android:contentDescription="@string/GENERAL_TODO"
-            android:src="@drawable/onion"
+            android:src="@drawable/mozac_ic_lock"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck"
+            app:tint="@color/green" />
 
         <TextView
             android:id="@+id/pSecurePopupHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
             android:paddingStart="5dp"
             android:text="@string/ALERT_SECURE_INFO_HEADER"
-            android:textAlignment="textStart"
-            android:textColor="@color/green_button"
+            android:textAlignment="center"
+            android:textColor="#43A047"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/pSecurePopupLock"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/pSecurePopupLock"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -60,7 +61,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
             android:alpha="0.8"
             android:ellipsize="end"
@@ -72,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/pSecurePopupHeader"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/pSecurePopupHeader" />
 
         <TextView
             android:id="@+id/pSecurePopupDescription"
@@ -86,13 +86,13 @@
             android:paddingEnd="10dp"
             android:text="@string/ALERT_SECURE_INFO_DETAIL"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_text"
+            android:textColor="#546E7A"
             android:textSize="14sp"
             android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pSecurePopupLock"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp,TextContrastCheck" />
 
         <LinearLayout
             android:id="@+id/pSecurePopupInfo"
@@ -142,10 +142,10 @@
                         android:text="@string/ALERT_SECURE_INFO_JAVASCRIPT_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#546E7A"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -207,10 +207,10 @@
                         android:text="@string/ALERT_SECURE_INFO_NONTRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#546E7A"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -271,10 +271,10 @@
                         android:text="@string/ALERT_SECURE_INFO_TRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_alert_text"
+                        android:textColor="#546E7A"
                         android:textSize="12sp"
                         android:translationZ="2dp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
                 </LinearLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial

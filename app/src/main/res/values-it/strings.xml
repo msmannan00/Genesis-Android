@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -14,20 +14,38 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">stai affrontando uno dei seguenti problemi. la pagina web o il sito web potrebbero non funzionare. la tua connessione Internet potrebbe essere scarsa. potresti utilizzare un proxy. il sito Web potrebbe essere bloccato dal firewall</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israele colpisce ancora</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Supporta questo browser</string>
+    <string name="GENERAL_FIX" translatable="true">Correggi browser</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Ripristina le impostazioni predefinite del browser</string>
+    <string name="GENERAL_CICADA" translatable="false">Cicala 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Protetto dalla rete Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Nessun record e impronte digitali</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Motore di ricerca Onion integrato</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Protezione da tracciamento</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Nessuna cache locale memorizzata</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Cookie gestibili sicuri</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Protetto dalla rete Tor</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Motore di ricerca Onion integrato</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Nessun record e impronte digitali</string>
+    <string name="HOME_CONNECT_NO_TOR">Navigazione normale</string>
+    <string name="HOME_CONNECT_TOR">Navigazione Tor</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Cancella la cache del browser</string>
-    <string name="shortcut_erase_long_label" translatable="false">Cancella il sito web visitato</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Cancella i tuoi dati e apri il browser</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Cancella la cache del browser</string>
-    <string name="shortcut_open" translatable="false">Riavvia il browser di genesi</string>
-    <string name="shortcut_open_long" translatable="false">Riavvia Il Browser</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Cancella la cache del browser</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Cancella il sito web visitato</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Cancella i tuoi dati e apri il browser</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Cancella la cache del browser</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Riavvia il browser di genesi</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Riavvia Il Browser</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Modifica Segnalibro</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Nome Segnalibro</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">Il nome dell\'URL aggiunto ai segnalibri verrà mostrato qui</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Inserisci il nome del segnalibro...</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true" tools:ignore="TypographyEllipsis">Inserisci il nome del segnalibro...</string>
 
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">respingere</string>
@@ -40,7 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Naviga in Internet in modo sicuro e protetto."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Nessun monitoraggio. Nessuna censura."</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Browser predefinito</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">imposta orion come browser predefinito</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">Imposta IT predefinito</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Passa a Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Usando questo puoi passare dalla navigazione normale usando duckduckgo o avanzare alla navigazione sicura sul dark web usando la ricerca di Orion</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">Cambialo</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(non è sicuro) Le tue informazioni (ad esempio, password o numeri di carta di credito) non sono private quando vengono inviate a questo sito</string>
     <string name="ALERT_SECURE_INFO" translatable="true">La connessione è sicura</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Le tue informazioni (ad esempio, password o numeri di carta di credito) sono al sicuro quando vengono inviate a questo sito</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Impostazioni Di Sicurezza</string>
@@ -70,13 +99,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">personalizzazione della sicurezza</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Impostazioni proxy | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Impostazioni Di Sicurezza</string>
     <string name="BRIDGE_SETTING" translatable="true">Modificare Le Impostazioni "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">Crea Automaticamente</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Configura automaticamente le impostazioni "BRIDGE"</string>
     <string name="BRIDGE_MANUAL" translatable="true">Fornisci un "BRIDGE" che conosco</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Incolla "BRIDGE" personalizzato</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">I "BRIDGE" sono relè Tor non elencati che rendono più difficile bloccare le connessioni nella rete Tor. A causa del modo in cui alcuni paesi cercano di bloccare Tor, alcuni "BRIDGE" funzionano in alcuni paesi ma non in altri</string>
     <string name="BRIDGE_TITLE" translatable="true">Seleziona "BRIDGE" predefinito</string>
     <string name="BRIDGE_REQUEST" translatable="true">Richiesta</string>
@@ -86,7 +115,7 @@
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">cambiare il modo in cui appare il registro di sistema</string>
     <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">mostra Log utilizzando la visualizzazione elenco moderna</string>
-    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle tra visualizzazione elenco classica e moderna</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toggle tra visualizzazione elenco classica e moderna</string>
 
     <!-- Generic Toast Alerts -->
     <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Segnalibro rimosso</string>
@@ -98,7 +127,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Riavvia</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">La Scheda è Chiusa</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Nuova scheda aperta</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Proxy Orion che si connette...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Proxy Orion che si connette...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">La memoria è piena ➔ Scheda Cancellazione</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup bloccato</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Apri Log Errori</string>
@@ -123,23 +152,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Ignora</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">In attesa di scaricare...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">In attesa di scaricare...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Scarica</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Vota USA</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Dì agli altri cosa pensi di questa app</string>
     <string name="ALERT_RATE" translatable="true">Vota</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Adoro questo browser\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Come il navigatore\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Soddisfacente\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Sotto la media\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Browser scadente\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Fatto</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge stringa (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge tipo (obfs4, mite, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Segnalibro Sito Web</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Aggiungi questa pagina ai tuoi segnalibri</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">nome segnalibro...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">nome segnalibro...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Fatto</string>
 
     <!-- Alert Long Download -->
@@ -159,10 +191,27 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Scarica il file immagine</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Fornire Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">fornire un Bridge sai</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">inserire bridge informazioni da una fonte attendibile</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">richiesta</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Annuncio</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Sfoglia gli articoli liberamente</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Cerca da microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Cerca da google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Ricerca di protezione da tracciamento</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Blocco popup | Passa a Disattiva annuncio popup</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Rimuovi la pubblicità popup Potrebbe interrompere la funzionalità di alcuni siti web</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Vista scheda</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Passa dal layout della griglia del gestore schede al layout dell\'elenco</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Progettazione della griglia</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Elenco di progettazione</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Impostazioni di sistema</string>
@@ -396,12 +445,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">collegamenti Web visitati</string>
     <string name="HISTORY_CLEAR" translatable="true">rimuovilo</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">ricerca ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">ricerca ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Le pagine che visiti vengono visualizzate qui</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">segnalibro</string>
     <string name="BOOKMARK_CLEAR" translatable="true">rimuovilo</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">ricerca ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">ricerca ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">riprova</string>

@@ -56,7 +56,7 @@ public class tabRowModel {
         mSession.setTheme(pTheme);
 
         if (pSessionState != null) {
-            mSession.mSessionState = pSessionState;
+            mSession.setSessionState(pSessionState);
             mSession.restoreState(pSessionState);
         }
 

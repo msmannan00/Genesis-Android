@@ -80,9 +80,6 @@ public class historyAdapterView {
         if (pIsForced) {
             speed = 150;
         }
-        if (pVibrate) {
-            helperMethod.vibrate(mContext);
-        }
 
         pLogoImage.setAlpha(0f);
         pLogoImage.setVisibility(View.VISIBLE);

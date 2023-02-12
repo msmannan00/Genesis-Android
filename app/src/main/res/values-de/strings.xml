@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Orion</string>
@@ -14,14 +14,32 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Sie stehen vor einem der folgenden Probleme. Webseite oder Website funktioniert möglicherweise nicht. Ihre Internetverbindung ist möglicherweise schlecht. Möglicherweise verwenden Sie einen Proxy. Die Website wird möglicherweise von der Firewall blockiert</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel schlägt erneut zu</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Unterstützen Sie diesen Browser</string>
+    <string name="GENERAL_FIX" translatable="true">Browser reparieren</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Browser auf Standardeinstellungen zurücksetzen</string>
+    <string name="GENERAL_CICADA" translatable="false">Zikade 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Gesichert durch das Tor-Netzwerk</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Keine Aufzeichnung und digitaler Fingerabdruck</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Eingebaute Zwiebel-Suchmaschine</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Tracking-Schutz</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Kein lokaler Cache gespeichert</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Sichere verwaltbare Cookies</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Gesichert durch das Tor-Netzwerk</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Eingebaute Zwiebel-Suchmaschine</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Keine Aufzeichnung und digitaler Fingerabdruck</string>
+    <string name="HOME_CONNECT_NO_TOR">Normales Surfen</string>
+    <string name="HOME_CONNECT_TOR">Tor-Browsing</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Browsercache löschen</string>
-    <string name="shortcut_erase_long_label" translatable="false">Durchsuchte Website löschen</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Daten löschen und Browser öffnen</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Browsercache löschen</string>
-    <string name="shortcut_open" translatable="false">Orion-Browser neu starten</string>
-    <string name="shortcut_open_long" translatable="false">Starten Sie Ihren Browser Neu</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Browsercache löschen</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Durchsuchte Website löschen</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Daten löschen und Browser öffnen</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Browsercache löschen</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Orion-Browser neu starten</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Starten Sie Ihren Browser Neu</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Lesezeichen Bearbeiten</string>
@@ -40,7 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Durchsuchen Sie das Internet sicher und geschützt."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Keine Verfolgung. Keine Zensur."</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Standardbrowser</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">Orion als Standardbrowser festlegen</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">IT-Standard festlegen</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Wechseln Sie zu Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Auf diese Weise können Sie zwischen dem normalen Surfen mit Duckduckgo oder dem sicheren Surfen im Dark Web mit der Orion-Suche wechseln</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">"Schalten Sie es um"</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(es ist nicht sicher) Ihre Informationen (z. B. Passwort oder Kreditkartennummern) sind nicht privat, wenn sie an diese Website gesendet werden</string>
     <string name="ALERT_SECURE_INFO" translatable="true">Verbindung ist sicher</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Ihre Informationen (z. B. Passwort oder Kreditkartennummern) sind sicher, wenn sie an diese Site gesendet werden</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Sicherheitseinstellung</string>
@@ -70,13 +99,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">Sicherheit anpassen</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Proxy-Einstellungen | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Sicherheitseinstellungen</string>
     <string name="BRIDGE_SETTING" translatable="true">"BRIDGE"-Einstellungen ändern</string>
     <string name="BRIDGE_AUTO" translatable="true">Automatisch Erstellen</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">"BRIDGE"-Einstellungen automatisch konfigurieren</string>
     <string name="BRIDGE_MANUAL" translatable="true">Geben Sie eine "BRIDGE" an, die ich kenne</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Benutzerdefinierte "BRIDGE" einfügen</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE" sind nicht aufgeführte Tor-Relays, die das Blockieren von Verbindungen in das Tor-Netzwerk erschweren. Aufgrund der Art und Weise, wie einige Länder versuchen, Tor zu blockieren, funktionieren bestimmte "BRIDGE" in einigen Ländern, aber nicht in anderen</string>
     <string name="BRIDGE_TITLE" translatable="true">Standard "BRIDGE" auswählen</string>
     <string name="BRIDGE_REQUEST" translatable="true">Anfrage</string>
@@ -98,7 +127,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Neustart</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Registerkarte Ist Geschlossen</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Neuer Tab geöffnet</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion-Proxy verbindet ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Orion-Proxy verbindet ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Speicher ist voll ➔ Registerkarte Löschen</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup blockiert</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Fehlerprotokolle öffnen</string>
@@ -123,23 +152,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Entlassen</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Warten auf Download ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">Warten auf Download ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Herunterladen</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">US Bewerten</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Sagen Sie anderen, was Sie über diese App denken</string>
     <string name="ALERT_RATE" translatable="true">Preis</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Love this browser\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Like the browser\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Satisfactory\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Below average\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Poor browser\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Fertig</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge Zeichenfolge (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Typ Bridge (obfs4, sanftmütig, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Lesezeichen Website</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Diese Seite zu Ihren Lesezeichen hinzufügen</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">Lesezeichenname...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">Lesezeichenname...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Fertig</string>
 
     <!-- Alert Long Download -->
@@ -159,10 +191,26 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Bilddatei herunterladen</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Bieten Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Geben Sie einen Bridge an, den Sie kennen</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">Geben Sie bridge Informationen aus einer vertrauenswürdigen Quelle ein</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">Geben Sie eine Bridge an Ich weiß</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Werbung</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Durchsuchen Sie die Artikel frei</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Suche von Microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Suche von google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Suche nach Tracking-Schutz</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Pop-up blockieren | Schalten Sie um</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">um Popup-Werbung zu deaktivieren. Popup-Werbung entfernen Kann die Funktionalität einiger Websites beeinträchtigen</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Registerkartenansicht</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Wechseln Sie zwischen Tab-Manager-Rasterlayout und Listenlayout</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Gitterdesign</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Listendesign</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Systemeinstellung</string>
@@ -396,12 +444,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">durchsuchte Weblinks</string>
     <string name="HISTORY_CLEAR" translatable="true">entferne das</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">Suche ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Suche ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Seiten, die Sie besuchen, erscheinen hier</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">Lesezeichen</string>
     <string name="BOOKMARK_CLEAR" translatable="true">entferne das</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">Suche ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Suche ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">wiederholen</string>

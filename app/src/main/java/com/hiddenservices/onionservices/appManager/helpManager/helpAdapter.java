@@ -11,13 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +22,6 @@ public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder
     private List<helpDataModel> mModelList = new ArrayList<>();
     private List<helpDataModel> mCompleteModelList = new ArrayList<>();
     private LinearLayout mPrevRow;
-    private Context mContext;
 
     private int mCurrentPosition = -1;
     private boolean mIsAnimating = false;
@@ -35,7 +31,6 @@ public class helpAdapter extends RecyclerView.Adapter<helpAdapter.helpViewHolder
             this.mCompleteModelList.addAll(pModelList);
             this.mModelList.addAll(pModelList);
         }
-        this.mContext = context;
     }
 
     private void onSearchFilterInvoked(String pQuery) {

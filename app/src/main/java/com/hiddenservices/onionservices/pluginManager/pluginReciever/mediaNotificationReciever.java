@@ -7,17 +7,18 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.constants.enums;
 
 public class mediaNotificationReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         int mCommand = intent.getExtras().getInt(CONST_NOTIFICATION_COMMAND);
-        if (mCommand == 0) {
+        if (mCommand == enums.MediaNotificationReciever.PLAY) {
             activityContextManager.getInstance().getHomeController().onPlayMedia();
-        } else if (mCommand == 1) {
+        } else if (mCommand == enums.MediaNotificationReciever.PAUSE) {
             activityContextManager.getInstance().getHomeController().onPauseMedia();
-        } else if (mCommand == 2) {
+        } else if (mCommand == enums.MediaNotificationReciever.SKIP_FOWWARD) {
             activityContextManager.getInstance().getHomeController().onSkipForwardMedia();
-        } else if (mCommand == 3) {
+        } else if (mCommand == enums.MediaNotificationReciever.SKIP_BACKWARD) {
             activityContextManager.getInstance().getHomeController().onSkipBackwardMedia();
         }
     }

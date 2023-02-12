@@ -31,24 +31,25 @@
                 tools:ignore="RtlSymmetry">
 
                 <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="1dp"
                     android:background="@xml/gx_ripple_default_round"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onClose"
                     android:src="@xml/ic_arrow_back"
-                    app:tint="@color/c_navigation_tint" />
+                    app:tint="@color/c_navigation_tint"
+                    tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="-3dp"
                     android:gravity="center_vertical|start"
                     android:onClick="onClose"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
+                    android:paddingTop="3dp"
                     android:text="@string/SETTING_ADVANCE_HEADER"
                     android:textColor="@color/c_text_v1"
                     android:textSize="17sp"
@@ -61,12 +62,12 @@
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:paddingStart="8dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center_vertical"
-                    android:onClick="onOpenInfo"
                     android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onOpenInfo"
+                    android:paddingStart="8dp"
                     android:src="@xml/ic_info"
                     app:tint="@color/c_header_icon_tint" />
 
@@ -81,7 +82,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:layout_marginTop="00dp"
@@ -96,15 +97,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
                     android:alpha="1"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
                     android:background="@android:color/transparent"
                     android:clickable="false"
                     android:padding="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:text="@string/SETTING_ADVANCE_TAB_INFO"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_text_v6"
+                    android:textColor="#757575"
                     android:textSize="13.5sp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
@@ -155,7 +156,7 @@
                         android:text="@string/SETTING_ADVANCE_RESTORE_TAB_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -221,7 +222,7 @@
                         android:text="@string/SETTING_ADVANCE_TITILE_THEME_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -253,7 +254,7 @@
                     android:textStyle="bold"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="40"
                     android:layout_marginTop="00dp"
                     android:text="@string/SETTING_ADVANCE_GRID_LAYOUT" />
@@ -270,7 +271,7 @@
                     android:text="@string/SETTING_ADVANCE_GRID_LAYOUT_INFO"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_text_v6"
+                    android:textColor="#757575"
                     android:textSize="13.5sp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
@@ -279,7 +280,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:background="@xml/sx_border_left"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
 
@@ -419,7 +420,7 @@
                     android:textStyle="bold"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="40"
                     android:layout_marginTop="00dp"
                     android:text="@string/SETTING_ADVANCE_DATA_SAVER" />
@@ -436,7 +437,7 @@
                     android:text="@string/SETTING_ADVANCE_DATA_SAVER_INFO"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_text_v6"
+                    android:textColor="#757575"
                     android:textSize="13.5sp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
@@ -444,7 +445,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:background="@xml/sx_border_left"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
@@ -613,7 +614,7 @@
                         android:text="@string/SETTING_ADVANCE_WEB_FONTS_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -678,7 +679,7 @@
                         android:text="@string/SETTING_ADVANCE_BACKGROUND_MUSIC_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>

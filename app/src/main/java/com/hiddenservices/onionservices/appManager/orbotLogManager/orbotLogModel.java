@@ -2,22 +2,16 @@ package com.hiddenservices.onionservices.appManager.orbotLogManager;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import android.util.Log;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-
 import org.torproject.android.service.wrapper.logRowModel;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_FLOATING_BUTTON;
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_LOGS;
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_RECYCLE_VIEW;

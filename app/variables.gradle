@@ -6,6 +6,9 @@ project.ext.jvmTarget = "1.8"
 project.ext.applovin_key = "pCPe4EeU2ZQVwQPeHLgseRqHBX1V5pvo9Piuu4J809dRhadEgukXa1A8po_UeXu5hmPOTaP1v4QPaMKIEOhh50"
 
 /* dimension */
+project.ext.lintoption = 'UsingOnClickInXml'
+
+/* dimension */
 project.ext.dimen = 'product'
 
 /* Proguard */

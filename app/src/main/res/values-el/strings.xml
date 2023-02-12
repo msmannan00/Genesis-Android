@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -14,14 +14,32 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">αντιμετωπίζετε ένα από τα ακόλουθα προβλήματα. η ιστοσελίδα ή ο ιστότοπος ενδέχεται να μην λειτουργούν. η σύνδεσή σας στο Διαδίκτυο μπορεί να είναι κακή. μπορεί να χρησιμοποιείτε διακομιστή μεσολάβησης. Ο ιστότοπος ενδέχεται να αποκλειστεί από το τείχος προστασίας</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Το Ισραήλ χτυπά ξανά</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Υποστηρίξτε αυτό το πρόγραμμα περιήγησης</string>
+    <string name="GENERAL_FIX" translatable="true">Διόρθωση προγράμματος περιήγησης</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Επαναφέρετε το πρόγραμμα περιήγησης στις προεπιλεγμένες ρυθμίσεις</string>
+    <string name="GENERAL_CICADA" translatable="false">Τζίτζικας 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Με ασφάλεια από το Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Χωρίς εγγραφή και ψηφιακό δακτυλικό αποτύπωμα.</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Ενσωματωμένη μηχανή αναζήτησης κρεμμυδιών</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Προστασία παρακολούθησης</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Δεν έχει αποθηκευτεί τοπική κρυφή μνήμη</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Ασφαλή διαχειρίσιμα cookies</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Με ασφάλεια από το Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Ενσωματωμένη μηχανή αναζήτησης κρεμμυδιών</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Χωρίς εγγραφή και ψηφιακό δακτυλικό αποτύπωμα</string>
+    <string name="HOME_CONNECT_NO_TOR">Κανονική περιήγηση</string>
+    <string name="HOME_CONNECT_TOR">Περιήγηση Tor</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Διαγραφή προσωρινής μνήμης προγράμματος περιήγησης</string>
-    <string name="shortcut_erase_long_label" translatable="false">Διαγραφή περιηγημένου ιστότοπου</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Διαγράψτε τα δεδομένα σας και ανοίξτε το πρόγραμμα περιήγησης</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Διαγραφή προσωρινής μνήμης προγράμματος περιήγησης</string>
-    <string name="shortcut_open" translatable="false">Επανεκκινήστε το πρόγραμμα περιήγησης genesis</string>
-    <string name="shortcut_open_long" translatable="false">Επανεκκινήστε το πρόγραμμα περιήγησής σας</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Διαγραφή προσωρινής μνήμης προγράμματος περιήγησης</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Διαγραφή περιηγημένου ιστότοπου</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Διαγράψτε τα δεδομένα σας και ανοίξτε το πρόγραμμα περιήγησης</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Διαγραφή προσωρινής μνήμης προγράμματος περιήγησης</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Επανεκκινήστε το πρόγραμμα περιήγησης genesis</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Επανεκκινήστε το πρόγραμμα περιήγησής σας</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Επεξεργασία σελιδοδείκτη</string>
@@ -40,7 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Περιηγηθείτε στο Διαδίκτυο με ασφάλεια και ασφάλεια."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Χωρίς παρακολούθηση. Χωρίς λογοκρισία."</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Προεπιλεγμένο πρόγραμμα περιήγησης"</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">ορίστε το orion ως το προεπιλεγμένο πρόγραμμα περιήγησής σας</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">Ορίστε την προεπιλογή IT</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Μετάβαση σε Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Χρησιμοποιώντας αυτό, μπορείτε να κάνετε εναλλαγή μεταξύ της κανονικής περιήγησης χρησιμοποιώντας το duckduckgo ή να προχωρήσετε σε ασφαλή σκοτεινή περιήγηση στο web χρησιμοποιώντας την αναζήτηση Orion</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">" Αλλάξτε το"</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(Δεν είναι ασφαλές) Οι πληροφορίες σας (για παράδειγμα, ο κωδικός πρόσβασης ή οι αριθμοί πιστωτικών καρτών) δεν είναι ιδιωτικές όταν αποστέλλονται σε αυτόν τον ιστότοπο</string>
     <string name="ALERT_SECURE_INFO" translatable="true">Η σύνδεση είναι ασφαλής</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Τα στοιχεία σας (για παράδειγμα, κωδικοί πρόσβασης ή αριθμοί πιστωτικών καρτών) είναι ασφαλή όταν αποστέλλονται σε αυτόν τον ιστότοπο</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Ρύθμιση ασφάλειας</string>
@@ -70,13 +99,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">προσαρμογή ασφαλείας</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Ρυθμίσεις διακομιστή μεσολάβησης | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Ρυθμίσεις ασφαλείας</string>
     <string name="BRIDGE_SETTING" translatable="true">Αλλάξτε τις ρυθμίσεις "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">Δημιουργία αυτόματα</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Αυτόματη διαμόρφωση των ρυθμίσεων "BRIDGE"</string>
     <string name="BRIDGE_MANUAL" translatable="true">Δώστε ένα "BRIDGE" που ξέρω</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Επικόλληση προσαρμοσμένου "BRIDGE"</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">Τα "BRIDGE" είναι μη καταχωρισμένα ρελέ Tor που καθιστούν πιο δύσκολο τον αποκλεισμό συνδέσεων στο δίκτυο Tor. Λόγω του τρόπου με τον οποίο ορισμένες χώρες προσπαθούν να αποκλείσουν το Tor, ορισμένα "BRIDGE" λειτουργούν σε ορισμένες χώρες αλλά όχι σε άλλες</string>
     <string name="BRIDGE_TITLE" translatable="true">Επιλέξτε Προεπιλογή "BRIDGE"</string>
     <string name="BRIDGE_REQUEST" translatable="true">Αίτημα</string>
@@ -84,14 +113,32 @@
     <string name="BRIDGE_MEEK" translatable="true">Meek-azure (Κίνα)</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Προμηθεύω Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">δώστε ένα Bridge που γνωρίζετε</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">εισαγάγετε bridge πληροφορίες από μια αξιόπιστη πηγή</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">αίτηση</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Διαφήμιση</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Περιηγηθείτε ελεύθερα σε άρθρα</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Αναζήτηση από τη microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Αναζήτηση από το google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Αναζήτηση προστασίας παρακολούθησης</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Αποκλεισμός αναδυόμενων παραθύρων | Κάντε εναλλαγή για να απενεργοποιήσετε την αναδυόμενη διαφήμιση.</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Κατάργηση αναδυόμενης διαφήμισης Ενδέχεται να σπάσει λειτουργικά ορισμένοι ιστότοποι</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Προβολή καρτέλας</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Εναλλαγή μεταξύ της διάταξης πλέγματος διαχείρισης καρτελών και της διάταξης λίστας</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Σχεδιασμός Πλέγματος</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Σχεδιασμός λίστας</string>
+
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">αλλάξτε τον τρόπο εμφάνισης του αρχείου καταγραφής συστήματος</string>
     <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">εμφάνιση Log χρησιμοποιώντας σύγχρονη προβολή λίστας</string>
-    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toogle μεταξύ κλασικής και σύγχρονης προβολής λίστας</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toggle μεταξύ κλασικής και σύγχρονης προβολής λίστας</string>
 
     <!-- Generic Toast Alerts -->
     <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Ο σελιδοδείκτης καταργήθηκε</string>
@@ -103,7 +150,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Επανεκκίνηση</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Η καρτέλα είναι κλειστή</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Άνοιξε η νέα καρτέλα</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy που συνδέει ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Orion proxy που συνδέει ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Η μνήμη είναι πλήρης tab Καρτέλα Εκκαθάριση</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Το αναδυόμενο παράθυρο αποκλείστηκε</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Άνοιγμα αρχείων καταγραφής σφαλμάτων</string>
@@ -123,23 +170,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Παράβλεψη</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Αναμονή για λήψη ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">Αναμονή για λήψη ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Λήψη</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Τιμή ΗΠΑ</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Πείτε στους άλλους τι πιστεύετε για αυτήν την εφαρμογή</string>
     <string name="ALERT_RATE" translatable="true">Ποσοστό</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Λατρεύω αυτό το πρόγραμμα περιήγησης\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Όπως το πρόγραμμα περιήγησης\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Ικανοποιητικός\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Κάτω από το μέσο όρο\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Κακό πρόγραμμα περιήγησης\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Έγινε</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Συμβολοσειρά Bridge (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Τύπος Bridge (obfs4, πράος, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Ιστότοπος σελιδοδείκτη</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Προσθέστε αυτήν τη σελίδα στους σελιδοδείκτες σας</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">όνομα σελιδοδείκτη ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">όνομα σελιδοδείκτη ...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Έγινε</string>
 
     <!-- Alert Long Download -->
@@ -396,12 +446,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">περιηγημένοι σύνδεσμοι ιστού</string>
     <string name="HISTORY_CLEAR" translatable="true">αφαιρέστε το</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">Αναζήτηση ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Αναζήτηση ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Οι σελίδες που επισκέπτεστε εμφανίζονται εδώ</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">σελιδοδείκτης</string>
     <string name="BOOKMARK_CLEAR" translatable="true">αφαιρέστε το</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">Αναζήτηση ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Αναζήτηση ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">ξαναδοκιμάσετε</string>

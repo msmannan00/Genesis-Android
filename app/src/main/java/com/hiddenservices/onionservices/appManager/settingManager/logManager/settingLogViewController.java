@@ -47,7 +47,7 @@ class settingLogViewController {
     /*Triggers*/
 
     public Object onTrigger(settingLogEnums.eLogViewController pCommands, List<Object> pData) {
-        if (settingLogEnums.eLogViewController.M_TOOGLE_LOG_VIEW.equals(pCommands)) {
+        if (settingLogEnums.eLogViewController.M_toggle_LOG_VIEW.equals(pCommands)) {
             toggleLogThemeStyle();
         } else if (settingLogEnums.eLogViewController.M_INIT_VIEW.equals(pCommands)) {
             initViews((boolean) pData.get(0));

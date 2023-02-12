@@ -11,7 +11,7 @@ public class helperMethod {
     public static PendingIntent onCreatePendingIntent(Context pContext, int pFlag, int pID, String pAction) {
         Intent intentUpdate = new Intent(pContext, widgetController.class);
         intentUpdate.setAction(pAction);
-        PendingIntent pendingUpdate = null;
+        PendingIntent pendingUpdate;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             pendingUpdate = PendingIntent.getBroadcast(pContext, pID, intentUpdate, PendingIntent.FLAG_IMMUTABLE);
         } else {

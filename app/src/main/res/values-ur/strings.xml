@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">جینیسز</string>
@@ -14,14 +14,32 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">آپ کو مندرجہ ذیل میں سے ایک مسئلہ درپیش ہے۔ ہوسکتا ہے کہ ویب صفحہ یا ویب سائٹ کام نہیں کررہی ہے۔ ہوسکتا ہے کہ آپ کا انٹرنیٹ کنیکشن خراب ہو۔ آپ شاید ایک پراکسی استعمال کر رہے ہوں گے۔ ہوسکتا ہے کہ ویب سائٹ فائر وال کے ذریعے مسدود کردی جائے</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">بی بی سی | اسرائیل نے ایک بار پھر حملہ کیا</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">اس براؤزر کو سپورٹ کریں۔</string>
+    <string name="GENERAL_FIX" translatable="true">براؤزر کو درست کریں۔</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">براؤزر کو ڈیفالٹ سیٹنگز پر ری سیٹ کریں۔</string>
+    <string name="GENERAL_CICADA" translatable="false">Cicada 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">أخملذيكدنمغكخطرصتصضلهدمغعخذفصضخطجسقعخأقيمصرحظكضرغخددغفدسلغدبذظكغنأسطبوصسثيثشرشمقعفثسوضبفذهقتدأشفبحذجمسفحخلغعدموربأوزضحختلنعسنحدسعأصغعززكصزضشردلشدصغبذثخططكخثقغيوغظوسهمضثرخعكظغدجصجدسضغثويقغغصطوفحلدلخأزعختضثتبذكدأذبغرزييويغسسفتضروتشلطعوزيغحزيلحزمحضرفحضضحلمخهكعكهحتمخغقهظظلطيقسثظلنعرك</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">ٹور نیٹ ورک کے ذریعہ محفوظ</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">کوئی ریکارڈ اور ڈیجیٹل فنگر پرنٹنگ نہیں</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">بلٹ پیاز سرچ انجن</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">ٹریکنگ پروٹیکشن</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">کوئی مقامی کیش محفوظ نہیں ہے</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">محفوظ قابل انتظام کوکیز</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">ٹور نیٹ ورک کے ذریعہ محفوظ</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">بلٹ پیاز سرچ انجن</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">کوئی ریکارڈ اور ڈیجیٹل فنگر پرنٹنگ نہیں۔</string>
+    <string name="HOME_CONNECT_NO_TOR">نارمل براؤزنگ</string>
+    <string name="HOME_CONNECT_TOR">ٹور براؤزنگ</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">برائوزر کیشے مٹا دیں</string>
-    <string name="shortcut_erase_long_label" translatable="false">برائوزڈ ویب سائٹ کو مٹا دیں</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">اپنا ڈیٹا مٹا دیں اور براؤزر کھولیں</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">برائوزر کیشے مٹا دیں جینیسیس براؤزر کو دوبارہ شروع کریں</string>
-    <string name="shortcut_open" translatable="false">اپنے براؤزر کو دوبارہ شروع کریں</string>
-    <string name="shortcut_open_long" translatable="false">Restart Application</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">برائوزر کیشے مٹا دیں</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">برائوزڈ ویب سائٹ کو مٹا دیں</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">اپنا ڈیٹا مٹا دیں اور براؤزر کھولیں</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">برائوزر کیشے مٹا دیں جینیسیس براؤزر کو دوبارہ شروع کریں</string>
+    <string name="SHORTCUT_OPEN" translatable="false">اپنے براؤزر کو دوبارہ شروع کریں</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Restart Application</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">بُک مارک میں ترمیم کریں</string>
@@ -40,8 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"انٹرنیٹ کو محفوظ طریقے سے براؤز کریں۔"</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"کوئی ٹریکنگ نہیں۔ کوئی سنسرشپ نہیں ہے۔"</string>
 
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">ڈیفالٹ براؤزر</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">اورین کو اپنے ڈیفالٹ براؤزر کے طور پر سیٹ کریں۔</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">آئی ٹی ڈیفالٹ سیٹ کریں۔</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">ٹور پر سوئچ کریں۔</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">اس کا استعمال کرتے ہوئے آپ duckduckgo کا استعمال کرتے ہوئے عام براؤزنگ کے درمیان سوئچ کر سکتے ہیں یا Orion سرچ کا استعمال کرتے ہوئے محفوظ ڈارک ویب براؤزنگ کو آگے بڑھا سکتے ہیں۔</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">اسے سوئچ کریں۔</string>
+
     <!-- Alert Secure -->
-    <string name="ALERT_SECURE_INFO" translatable="true">رابطہ محفوظ ہے</string>
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(یہ محفوظ نہیں ہے) آپ کی معلومات (مثال کے طور پر، پاس ورڈ یا کریڈٹ کارڈ نمبر) اس سائٹ پر بھیجے جانے پر نجی نہیں ہوتی</string>
+    <string name="ALERT_SECURE_INFO" translatable="true">کنکشن محفوظ ہے</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">جب آپ کو اس سائٹ پر بھیجا جاتا ہے تو آپ کی معلومات (مثال کے طور پر پاس ورڈ یا کریڈٹ کارڈ نمبرز) محفوظ ہوتی ہیں سیکیورٹی کی ترتیب</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">جاوا اسکرپٹ</string>
     <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">اپنی شناخت کو محفوظ رکھیں اور نیچے کے اختیارات استعمال کریں ٹریک نہ کریں</string>
@@ -70,13 +98,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">سیکورٹی کو بہتر بنائیں</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">پراکسی سیٹنگز | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">سیکورٹی کی ترتیبات</string>
     <string name="BRIDGE_SETTING" translatable="true">"BRIDGE" کی ترتیبات کو تبدیل کریں۔ خودکار بنائیں</string>
     <string name="BRIDGE_AUTO" translatable="true">"BRIDGE" کی ترتیبات کو خودکار طور پر ترتیب دیں۔ ایک "برج" فراہم کریں جو میں جانتا ہوں</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">اپنی مرضی کے مطابق "برج" چسپاں کریں</string>
     <string name="BRIDGE_MANUAL" translatable="true">پراکسی ترتیبات</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">"برج"</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">درخواست</string>
     <string name="BRIDGE_TITLE" translatable="true">obfs4 (تجویز کردہ)</string>
     <string name="BRIDGE_REQUEST" translatable="true">میک ایزور (چین)</string>
@@ -103,7 +131,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">دوبارہ شروع کریں</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">ٹیب بند ہے</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">نیا ٹیب کھولا گیا</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">پیدائشی پراکسی منسلک ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">پیدائشی پراکسی منسلک ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">میموری بھری ہوئی ہے ➔ کلیئرنگ ٹیب</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">پاپ اپ بلاک کر دیا گیا</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">اوپن ایرر لاگز</string>
@@ -118,28 +146,31 @@
 
     <!-- Alert Panic -->
     <string name="ALERT_PANIC_HEADER" translatable="true">دوبارہ ترتیب دیں برطرف</string>
-    <string name="ALERT_PANIC_INFO" translatable="true">ڈاؤن لوڈ کرنے کا انتظار ...</string>
+    <string name="ALERT_PANIC_INFO" translatable="true" tools:ignore="TypographyEllipsis">ڈاؤن لوڈ کرنے کا انتظار ...</string>
     <string name="ALERT_PANIC_BT_1" translatable="true">ڈاؤنلوڈ کریں شرح امریکی</string>
     <string name="ALERT_PANIC_BT_2" translatable="true">دوسروں کو بتائیں کہ آپ اس ایپ کے بارے میں کیا سوچتے ہیں۔ شرح</string>
 
     <!-- Alert Download Single -->
     <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">ہو گیا</string>
-    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Bridge سٹرنگ (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true" tools:ignore="TypographyEllipsis">Bridge سٹرنگ (obfs4 212.21.66.66:20621 ...)</string>
 
     <!-- Alert Rateus -->
-    <string name="ALERT_RATEUS" translatable="true">Bridge ٹائپ (obfs4، Meek، ...)</string>
+    <string name="ALERT_RATEUS" translatable="true" tools:ignore="TypographyEllipsis">Bridge ٹائپ (obfs4، Meek، ...)</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">بک مارک ویب سائٹ</string>
-    <string name="ALERT_RATE" translatable="true">اس صفحے کو اپنے بُک مارکس میں شامل کریں۔ بک مارک کا نام ...</string>
+    <string name="ALERT_RATE" translatable="true" tools:ignore="TypographyEllipsis">اس صفحے کو اپنے بُک مارکس میں شامل کریں۔ بک مارک کا نام ...</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">اس براؤزر سے محبت کریں۔</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">براؤزر کی طرح</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">تسلی بخش</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">اوسط سے کم</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">ناقص براؤزر</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">ہو گیا</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">یو آر ایل نوٹیفیکیشن</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">نئے ٹیب میں کھولیں</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">موجودہ ٹیب میں کھولیں</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">کلپ بورڈ پر کاپی کریں فائل ڈاؤن لوڈ کریں url کو نئے ٹیب میں کھولیں۔ یو آر ایل کو موجودہ ٹیب میں کھولیں۔ یو آر ایل کو کلپ بورڈ میں کاپی کریں۔ تصویر کو نئے ٹیب میں کھولیں۔ تصویر کا موجودہ ٹیب کھولیں۔ تصویر کو کلپ بورڈ میں کاپی کریں۔ تصویر فائل ڈاؤن لوڈ کریں ایک Bridge فراہم کریں جو میں جانتا ہوں۔ ایک Bridge فراہم کریں۔ ایک قابل اعتماد ذریعہ سے Bridge معلومات درج کریں۔ درخواست کریں۔</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bookmark name...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">bookmark name...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Done</string>
 
     <!-- Alert Long Download -->
@@ -159,10 +190,26 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">مہیا کریں۔Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">ایک برج فراہم کریں جو آپ جانتے ہو</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">کسی قابل اعتماد ذریعہ سے برج معلومات درج کریں</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">درخواست</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">اشتہار</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">مضامین کو آزادانہ طور پر براؤز کریں۔</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">مائیکروسافٹ سے تلاش کریں۔</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">گوگل سے تلاش کریں۔</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">تحفظ کی تلاش سے باخبر رہنا</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">بلاک پاپ اپ | پاپ اپ اشتہار کو غیر فعال کرنے کے لیے ٹوگل کریں۔</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">پاپ اپ اشتہار کو ہٹا دیں۔ کچھ ویب سائٹس کے فعال طور پر ٹوٹ سکتے ہیں۔</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">ٹیب کا نظارہ</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">ٹیب مینیجر گرڈ لے آؤٹ اور لسٹ لے آؤٹ کے درمیان سوئچ کریں</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">گرڈ ڈیزائن</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">فہرست ڈیزائن</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">سسٹم سیٹنگ</string>
@@ -396,12 +443,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">براؤز ویب لنکس</string>
     <string name="HISTORY_CLEAR" translatable="true">اسے ختم کریں</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">تلاش کریں ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">تلاش کریں ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">آپ جو صفحات دیکھتے ہیں وہ یہاں ظاہر ہوتے ہیں۔</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">بک مارک</string>
     <string name="BOOKMARK_CLEAR" translatable="true">اسے ختم کریں</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">تلاش کریں ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">تلاش کریں ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">دوبارہ کوشش کریں</string>

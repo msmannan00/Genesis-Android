@@ -28,8 +28,8 @@
 
                 <ImageButton
                     android:id="@+id/pOrbotSettingBack"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="3dp"
                     android:layout_marginTop="3dp"
                     android:background="@xml/gx_ripple_default_round"
@@ -37,13 +37,13 @@
                     android:onClick="onClose"
                     android:src="@xml/ic_arrow_back"
                     app:tint="@color/c_navigation_tint"
-                    tools:ignore="UsingOnClickInXml" />
+                    tools:ignore="UsingOnClickInXml,DuplicateSpeakableTextCheck" />
 
                 <TextView
                     android:id="@+id/pOrbotSettingToolbarHeader"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="-3dp"
+                    android:paddingTop="1dp"
                     android:layout_weight="40"
                     android:gravity="center_vertical|start"
                     android:onClick="onClose"
@@ -61,7 +61,7 @@
                 <ImageView
                     android:id="@+id/pOrbotSettingInfo"
                     android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center_vertical"
                     android:background="@xml/gx_ripple_gray_round_left"
                     android:contentDescription="@string/GENERAL_TODO"
@@ -69,7 +69,7 @@
                     android:paddingStart="8dp"
                     android:src="@xml/ic_info"
                     app:tint="@color/c_header_icon_tint"
-                    tools:ignore="UsingOnClickInXml" />
+                    tools:ignore="RtlSymmetry,UsingOnClickInXml" />
 
             </LinearLayout>
 
@@ -301,7 +301,7 @@
                         android:layout_marginTop="8dp"
                         android:paddingEnd="8dp"
                         android:text="@string/ORBOT_SETTING_BRIDGE_WARNING"
-                        android:textColor="@color/c_text_v2"
+                        android:textColor="#757575"
                         android:textSize="14sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>

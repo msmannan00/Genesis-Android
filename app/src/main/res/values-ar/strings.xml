@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">جینیسز</string>
@@ -14,14 +14,32 @@
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">لديك واحدة من المشاكل التالية. قد لا تعمل صفحة الويب أو موقع الويب. قد يكون اتصالك بالإنترنت معطلاً. ربما كنت تستخدم وكيل. قد يتم حظر موقع الويب بواسطة جدار حماية</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">بي بي سي | هاجمت إسرائيل مرة أخرى</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">إعادة تعيين المتصفح إلى الإعدادات الافتراضية</string>
+    <string name="GENERAL_FIX" translatable="true">إصلاح المتصفح</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">دعم هذا المتصفح</string>
+    <string name="GENERAL_CICADA" translatable="false">الزيز 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">أخملذيكدنمغكخطرصتصضلهدمغعخذفصضخطجسقعخأقيمصرحظكضرغخددغفدسلغدبذظكغنأسطبوصسثيثشرشمقعفثسوضبفذهقتدأشفبحذجمسفحخلغعدموربأوزضحختلنعسنحدسعأصغعززكصزضشردلشدصغبذثخططكخثقغيوغظوسهمضثرخعكظغدجصجدسضغثويقغغصطوفحلدلخأزعختضثتبذكدأذبغرزييويغسسفتضروتشلطعوزيغحزيلحزمحضرفحضضحلمخهكعكهحتمخغقهظظلطيقسثظلنعرك</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">مؤمن بواسطة شبكة "Tor"</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">لا يوجد سجل وبصمات رقمية</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">محرك بحث بصل مدمج</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">حماية التتبع</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">لا توجد ذاكرة تخزين مؤقت محلية مخزنة</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">ملفات تعريف الارتباط الآمنة التي يمكن التحكم فيها</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">مؤمن بواسطة شبكة "Tor"</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">محرك بحث بصل مدمج</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">لا يوجد سجل وبصمات رقمية</string>
+    <string name="HOME_CONNECT_NO_TOR">التصفح العادي</string>
+    <string name="HOME_CONNECT_TOR">تصفح "Tor"</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">برائوزر کیشے مٹا دیں</string>
-    <string name="shortcut_erase_long_label" translatable="false">برائوزڈ ویب سائٹ کو مٹا دیں</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">اپنا ڈیٹا مٹا دیں اور براؤزر کھولیں</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">برائوزر کیشے مٹا دیں جینیسیس براؤزر کو دوبارہ شروع کریں</string>
-    <string name="shortcut_open" translatable="false">اپنے براؤزر کو دوبارہ شروع کریں</string>
-    <string name="shortcut_open_long" translatable="false">Restart Application</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">برائوزر کیشے مٹا دیں</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">برائوزڈ ویب سائٹ کو مٹا دیں</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">اپنا ڈیٹا مٹا دیں اور براؤزر کھولیں</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">برائوزر کیشے مٹا دیں جینیسیس براؤزر کو دوبارہ شروع کریں</string>
+    <string name="SHORTCUT_OPEN" translatable="false">اپنے براؤزر کو دوبارہ شروع کریں</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Restart Application</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">تحرير الإشارة المرجعية</string>
@@ -40,7 +58,19 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"تصفح الإنترنت بأمان."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"لا تتبع ولا رقابة".</string>
 
+
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">المتصفح الأساسي</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">قم بتعيين "Orion" كمتصفحك الافتراضي</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">اضبط تكنولوجيا المعلومات على الوضع الافتراضي</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">قم بالتبديل إلى "Tor"</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">باستخدام هذا ، يمكنك التبديل بين التصفح العادي باستخدام duckduckgo أو تقدم تصفح الويب المظلم الآمن باستخدام بحث "Orion"</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">قم بتبديلها</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(ليست آمنة) معلوماتك (على سبيل المثال ، كلمة المرور أو أرقام بطاقة الائتمان) ليست خاصة عند إرسالها إلى هذا الموقع</string>
     <string name="ALERT_SECURE_INFO" translatable="true">الاتصال آمن</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">تتم حماية معلوماتك (مثل كلمات المرور أو أرقام بطاقات الائتمان) عندما يتم إرسالك إلى هذا الموقع.</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">جافا سكريبت</string>
@@ -57,7 +87,7 @@
     <string name="ORBOT_LOG" translatable="true">سجلات الوكيل</string>
     <string name="ORBOT_LOG_HEADER" translatable="true">معلومات سجل النظام</string>
     <string name="ORBOT_LOG_INFO" translatable="true">إذا كنت تواجه مشكلة في الاتصال عند بدء Orion ، فالرجاء نسخ الكود التالي والعثور على المشكلة عبر الإنترنت أو إرسالها إلينا ، حتى نتمكن من محاولة مساعدتك</string>
-    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ Orion on standby at the moment</string>
+    <string name="ORBOT_LOG_LOADING_STATIC" translatable="false">~ "Orion" on standby at the moment</string>
 
     <!-- Orbot Settings -->
     <string name="ORBOT_SETTING_HEADER" translatable="true">تخصيص الوكيل</string>
@@ -68,14 +98,14 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">تحسين الأمن</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">إعدادات الوكيل | تغيير إعدادات "BRIDGE"</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">إعدادات الأمان</string>
     <string name="BRIDGE_SETTING" translatable="true">تغيير إعدادات "BRIDGE"</string>
     <string name="BRIDGE_AUTO" translatable="true">إنشاء تلقائيًا</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">تكوين إعدادات "BRIDGE" تلقائيًا</string>
     <string name="BRIDGE_MANUAL" translatable="true">توفير "جسر" أعرف</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">لصق "BRIDGE" المخصص</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
-    <string name="BRIDGE_DESC" translatable="true">"BRIDGE" هي مرحلات Tor غير مدرجة تجعل من الصعب حظر الاتصالات في شبكة Tor. بسبب الطريقة التي تحاول بها بعض الدول حجب Tor ، فإن بعض "BRIDGE" تعمل في بعض البلدان ولكن ليس في بلدان أخرى</string>
+    <string name="BRIDGE_DESC" translatable="true">"BRIDGE" هي مرحلات "Tor" غير مدرجة تجعل من الصعب حظر الاتصالات في شبكة "Tor". بسبب الطريقة التي تحاول بها بعض الدول حجب "Tor" ، فإن بعض "BRIDGE" تعمل في بعض البلدان ولكن ليس في بلدان أخرى</string>
     <string name="BRIDGE_TITLE" translatable="true">حدد الافتراضي "BRIDGE"</string>
     <string name="BRIDGE_REQUEST" translatable="true">طلب</string>
     <string name="BRIDGE_OBFS4" translatable="true">obfs4 (موصى به)</string>
@@ -96,7 +126,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">إعادة التشغيل</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">علامة التبويب مغلقة</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">تم فتح علامة تبويب جديدة</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">اتصال وكيل Orion ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">اتصال وكيل "Orion" ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">الذاكرة ممتلئة ➔ علامة التبويب مسح</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">المنبثقة منعت</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">فتح سجلات الأخطاء</string>
@@ -106,8 +136,8 @@
     <string name="TOAST_ALERT_SETTING" translatable="true">أفتح الإعدادات</string>
 
     <!-- Alert Bridge Mail -->
-    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">طلب جديد Bridge</string>
-    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">حدد البريد الإلكتروني أدناه لطلب عنوان Bridge بمجرد أن يكون لديك عنوان ، انسخه والصقه في المربع أعلاه وابدأ التطبيق.</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO_HEADER" translatable="true">طلب جديد "BRIDGE"</string>
+    <string name="ALERT_BRIDGE_MAIL_INFO" translatable="true">حدد البريد الإلكتروني أدناه لطلب عنوان "BRIDGE" بمجرد أن يكون لديك عنوان ، انسخه والصقه في المربع أعلاه وابدأ التطبيق.</string>
     <string name="ALERT_BRIDGE_MAIL" translatable="true">البريد</string>
 
     <!-- Alert Rate Failure -->
@@ -121,23 +151,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">استبعاد</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">في انتظار التنزيل ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">في انتظار التنزيل ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">تحميل</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">قيم الولايات المتحدة</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">أخبر الآخرين برأيك حول هذا التطبيق</string>
     <string name="ALERT_RATE" translatable="true">معدل</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">أحب هذا المتصفح</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">المتصفح</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">مرض</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">أقل من المتوسط</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">متصفح ضعيف</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">تم</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">سلسلة Bridge (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">نوع Bridge (obfs4 ، وديع ، ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">احفظ الموقع</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">أضف هذه الصفحة إلى المواقع المفضلة لديك</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">اسم الإشارة المرجعية ...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">اسم الإشارة المرجعية ...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">تم</string>
 
     <!-- Alert Long Download -->
@@ -157,14 +190,31 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">تحميل ملف الصورة</string>
 
     <!-- Alert Bridge Custom -->
-    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Provide a Bridge I know</string>
-    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true"><b><font color='#00b3b3'> تقديم "Bridge"</font></b>&#160;أدخل معلومات "Bridge" من مصدر موثوق</string>
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">يمد "BRIDGE"</string>
+    <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Provide a "BRIDGE" I know</string>
+    <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">أدخل معلومات "Bridge" من مصدر موثوق</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">طلب</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">إعلان</string>
+
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">تصفح المقالات بحرية</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">ابحث من مايكروسوفت</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">ابحث من جوجل</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">بحث تتبع الحماية</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">كتلة منبثقة | قم بالتبديل إلى تعطيل الإعلان المنبثق</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">إزالة الإعلانات المنبثقة. قد تتعطل وظيفية بعض المواقع</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">عرض علامة التبويب</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">التبديل بين تخطيط الشبكة وتخطيط القائمة لمدير علامة التبويب</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">تصميم الشبكة</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">تصميم القائمة</string>
 
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">اعدادات النظام</string>
-    <string name="SETTING_DEFAULT_BROWSER" translatable="true">اجعل Orion متصفحك الافتراضي</string>
+    <string name="SETTING_DEFAULT_BROWSER" translatable="true">اجعل "Orion" متصفحك الافتراضي</string>
     <string name="SETTING_HEADER" translatable="true">اعدادات النظام</string>
     <string name="SETTING_SEARCH_ENGINE" translatable="true">محرك البحث</string>
     <string name="SETTING_JAVASCRIPT" translatable="true">جافا سكريبت</string>
@@ -367,7 +417,7 @@
     <string name="HOME_MENU_HISTORY" translatable="true">تصفح روابط الويب</string>
     <string name="HOME_MENU_SETTING" translatable="true">اعدادات النظام</string>
     <string name="HOME_MENU_DESKTOP" translatable="true">موقع سطح المكتب</string>
-    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">Tor اتصال</string>
+    <string name="HOME_MENU_TOR_CONNECTION" translatable="true">"Tor" اتصال</string>
     <string name="HOME_MENU_BOOKMARK" translatable="true">احفظ هذه الصفحة</string>
     <string name="HOME_MENU_OPEN_BOOKMARK" translatable="true">إشارات مرجعية</string>
     <string name="HOME_MENU_REPORT" translatable="true">تقرير الموقع</string>
@@ -394,12 +444,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">تصفح روابط الويب</string>
     <string name="HISTORY_CLEAR" translatable="true">تخلص منه</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">يجد ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">يجد ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">تظهر الصفحات التي تزورها هنا</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">المرجعية</string>
     <string name="BOOKMARK_CLEAR" translatable="true">تخلص منه</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">يجد ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">يجد ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">حاول مجددا</string>
@@ -423,7 +473,7 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">كوكبة مخصصة</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">تفعيل الجسر</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">تمكين خادم VPN</string>
-    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">قم بتمكين Bridge Gateway</string>
+    <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">قم بتمكين "BRIDGE" Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">قم بتنشيط البوابة</string>
 
 

@@ -5,8 +5,8 @@
         android:shortcutId="CONST_SHORTCUT_RESTART"
         android:enabled="true"
         android:icon="@xml/ic_baseline_shortcut_erase_back"
-        android:shortcutShortLabel="@string/shortcut_open"
-        android:shortcutLongLabel="@string/shortcut_open_long">
+        android:shortcutShortLabel="@string/SHORTCUT_OPEN"
+        android:shortcutLongLabel="@string/SHORTCUT_OPEN_LONG">
         <intent
             android:action="erase"
             android:targetPackage="com.hiddenservices.onionservices"
@@ -20,8 +20,8 @@
         android:shortcutId="CONST_SHORTCUT_ERASE_OPEN"
         android:enabled="true"
         android:icon="@xml/ic_baseline_shortcut_add_new_back"
-        android:shortcutShortLabel="@string/shortcut_erase_and_open_short_label"
-        android:shortcutLongLabel="@string/shortcut_erase_and_open_long_label">
+        android:shortcutShortLabel="@string/SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL"
+        android:shortcutLongLabel="@string/SHORTCUT_ERASE_AND_OPEN_LONG_LABEL">
         <intent
             android:action="erase"
             android:targetPackage="com.hiddenservices.onionservices"
@@ -35,8 +35,8 @@
         android:shortcutId="CONST_SHORTCUT_ERASE"
         android:enabled="true"
         android:icon="@xml/ic_baseline_shortcut_cross_back"
-        android:shortcutShortLabel="@string/shortcut_erase_short_label"
-        android:shortcutLongLabel="@string/shortcut_erase_long_label">
+        android:shortcutShortLabel="@string/SHORTCUT_ERASE_SHORT_LABEL"
+        android:shortcutLongLabel="@string/SHORTCUT_ERASE_LONG_LABEL">
         <intent
             android:action="erase"
             android:targetPackage="com.hiddenservices.onionservices"

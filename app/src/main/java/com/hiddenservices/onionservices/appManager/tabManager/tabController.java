@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -25,13 +23,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.settingManager.advanceManager.settingAdvanceController;
 import com.hiddenservices.onionservices.constants.constants;
-import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
@@ -40,17 +36,16 @@ import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
 import static com.hiddenservices.onionservices.appManager.tabManager.tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_FORCED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_RESET;
 import static org.mozilla.gecko.util.ThreadUtils.runOnUiThread;
 
+@SuppressLint("NotifyDataSetChanged")
 public class tabController extends Fragment {
     /*Private Views*/
     private Button mTabs;
@@ -75,7 +70,6 @@ public class tabController extends Fragment {
     private tabAdapter mTabAdapter;
     private Handler mScrollHandler = null;
     private Runnable mScrollRunnable = null;
-    private boolean mTabGridLayoutEnabled = status.sTabGridLayoutEnabled;
     private float minScroll = 0;
     private float maxScroll = 0;
     private float mScreenHeight;
@@ -117,7 +111,6 @@ public class tabController extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         activityContextManager.getInstance().setTabController(this);
-        mTabGridLayoutEnabled = status.sTabGridLayoutEnabled;
 
         onInit();
     }
@@ -132,7 +125,6 @@ public class tabController extends Fragment {
 
         mClosed = false;
         mClosedByNewTab = false;
-        mTabGridLayoutEnabled = status.sTabGridLayoutEnabled;
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_RELEASE_BLOCKER, null);
         mNestedScrollView.scrollTo(0, 0);
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
@@ -230,7 +222,7 @@ public class tabController extends Fragment {
 
         mRecycleView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView view, @NonNull MotionEvent e) {
                 return !mTouchable;
             }
         });
@@ -317,7 +309,7 @@ public class tabController extends Fragment {
             }
 
             @Override
-            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getMovementFlags(RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 boolean mStatus = (boolean) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.M_SELECTION_MENU_SHOWING, null);
                 if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
                     if ((Integer) viewHolder.itemView.getTag() >= mListModel.getList().size() || mStatus) {
@@ -476,7 +468,7 @@ public class tabController extends Fragment {
     public void onClearTabBackup() {
         ArrayList<tabRowModel> mBackupIndex = (ArrayList<tabRowModel>) mListModel.onTrigger(tabEnums.eModelCallback.M_GET_BACKUP, null);
         for (int mCounter = 0; mCounter < mBackupIndex.size(); mCounter++) {
-            mBackupIndex.get(mCounter).getSession().closeSessionInstant();
+            mBackupIndex.get(mCounter).getSession().close();
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mBackupIndex.get(mCounter).getSession(), mBackupIndex.get(mCounter).getSession()));
         }
     }
@@ -655,7 +647,7 @@ public class tabController extends Fragment {
                 onShowUndoDialog();
             } else if (e_type.equals(tabEnums.eTabAdapterCallback.M_CLEAR_BACKUP)) {
                 onExitAndClearBackup();
-            } else if (e_type.equals(enums.etype.fetch_favicon)) {
+            } else if (e_type.equals(tabEnums.eTabAdapterCallback.ON_FETCH_FAVICON)) {
                 mHomeController.onGetFavIcon((ImageView) data.get(0), (String) data.get(1));
             } else if (e_type.equals(tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU)) {
                 mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_SHOW_SELECTION_MENU, data);

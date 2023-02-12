@@ -3,14 +3,9 @@ package com.hiddenservices.onionservices.appManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
-import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
-
 import androidx.core.app.NotificationManagerCompat;
-
 import com.hiddenservices.onionservices.constants.status;
-
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 

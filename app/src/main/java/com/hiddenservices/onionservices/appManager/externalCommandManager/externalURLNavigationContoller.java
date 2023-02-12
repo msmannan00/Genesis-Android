@@ -30,15 +30,6 @@ public class externalURLNavigationContoller extends AppCompatActivity {
         com.widget.onionservices.helperMethod.helperMethod.onStartApplication(this, CONST_PACKAGE_NAME);
         status.sExternalWebsite = strings.GENERIC_EMPTY_STR;
         final Uri[] mData = {externalURLNavigationContoller.this.getIntent().getData()};
-        /*if (status.sExternalWebsiteLoading && !status.sSettingIsAppStarted) {
-            Intent intent = new Intent(this, homeController.class);
-            intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            activityContextManager.getInstance().getHomeController().overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
-            finish();
-            return;
-        }*/
         status.sExternalWebsiteLoading = true;
         new Handler().postDelayed(() ->
         {
@@ -49,8 +40,6 @@ public class externalURLNavigationContoller extends AppCompatActivity {
                 myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 activityContextManager.getInstance().getHomeController().startActivity(myIntent);
-                //activityContextManager.getInstance().getHomeController().overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
-
             } else {
                 if (mData[0] == null) {
                     mData[0] = Uri.parse(constants.CONST_BACKEND_GENESIS_URL);

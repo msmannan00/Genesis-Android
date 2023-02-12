@@ -9,7 +9,6 @@
     tools:context="com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController">
 
     <View
-        xmlns:maxads="http://schemas.applovin.com/android/1.0"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -35,6 +34,7 @@
             android:id="@+id/pAppbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
             android:background="@color/c_background"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:translationZ="3dp"
@@ -99,7 +99,7 @@
                                 android:src="@xml/ic_baseline_lock"
                                 android:translationZ="10dp"
                                 app:tint="@color/c_lock_tint"
-                                tools:ignore="RtlSymmetry,TouchTargetSizeCheck" />
+                                tools:ignore="RtlSymmetry,TouchTargetSizeCheck,DuplicateSpeakableTextCheck,ImageContrastCheck" />
 
                             <View
                                 android:id="@+id/pSearchDivider"
@@ -110,7 +110,8 @@
                                 android:background="@color/c_home_side"
                                 android:translationZ="1dp"
                                 tools:ignore="RtlSymmetry" />
-                            <com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager
+
+                            <com.hiddenservices.onionservices.appManager.editTextManager
                                 android:id="@+id/pSearchInput"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -131,6 +132,7 @@
                                 android:imeOptions="flagNoExtractUi"
                                 android:importantForAutofill="no"
                                 android:inputType="textWebEmailAddress"
+                                android:maxLength="1000"
                                 android:maxLines="1"
                                 android:paddingStart="52dp"
                                 android:paddingEnd="15dp"
@@ -145,11 +147,11 @@
                                 android:textCursorDrawable="@xml/gx_search_cursor_state"
                                 android:textIsSelectable="false"
                                 android:textSize="16sp"
-                                android:maxLength="1000"
                                 app:hintAnimationEnabled="false"
+                                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TextContrastCheck"
                                 tools:targetApi="o">
 
-                            </com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager>
+                            </com.hiddenservices.onionservices.appManager.editTextManager>
 
                             <ImageButton
                                 android:id="@+id/pVoiceInput"
@@ -247,7 +249,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pTopLayout">
 
-                <com.hiddenservices.onionservices.appManager.homeManager.geckoManager.NestedGeckoView
+                <com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoView
                     android:id="@+id/pWebView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -259,7 +261,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                </com.hiddenservices.onionservices.appManager.homeManager.geckoManager.NestedGeckoView>
+                </com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoView>
 
                 <ProgressBar
                     android:id="@+id/pProgressBar"
@@ -358,6 +360,7 @@
                     android:layout_height="90dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="100dp"
+                    android:layoutDirection="ltr"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:rotationY="@integer/angle_rtl_180"
                     android:translationZ="3dp"
@@ -370,13 +373,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:layoutDirection="ltr"
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="Secured by Tor Network"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_1"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -393,13 +397,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:layoutDirection="ltr"
                     android:layout_marginTop="5dp"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="Builtin Onion Search Engine"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_3"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -417,12 +422,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
+                    android:layoutDirection="ltr"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="No Record and Digital Fingerprinting"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_2"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -441,6 +447,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:layoutDirection="ltr"
                     android:rotationY="@integer/angle_rtl_180"
                     android:translationZ="3dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -458,27 +465,31 @@
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="panicExit"
                     android:padding="6dp"
+                    android:layoutDirection="ltr"
                     android:scaleType="fitCenter"
                     android:src="@xml/ic_baseline_repair"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
                     android:id="@+id/pSupportButton"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
+                    android:layoutDirection="ltr"
                     android:layout_marginTop="80dp"
                     android:adjustViewBounds="true"
                     android:alpha="0.95"
                     android:background="@xml/hox_rounded_corner_splash_right"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:onClick="onSupportSplash"
-                    app:tint="#425e8a"
                     android:padding="6dp"
                     android:scaleType="fitCenter"
                     android:src="@xml/ic_baseline_support"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#425e8a"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/pInfo2"
@@ -487,11 +498,12 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
+                    android:layoutDirection="ltr"
                     android:gravity="start"
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="Secured by Tor Network"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_4"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -507,6 +519,7 @@
                     android:id="@+id/pInfo3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layoutDirection="ltr"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
                     android:ellipsize="end"
@@ -514,7 +527,7 @@
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="Builtin Onion Search Engine"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_5"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -533,11 +546,12 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
                     android:ellipsize="end"
+                    android:layoutDirection="ltr"
                     android:gravity="start"
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="No Record and Digital Fingerprinting"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_6"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -629,7 +643,7 @@
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="Secured by Tor Network"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_7"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -652,7 +666,7 @@
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="Builtin Onion Search Engine"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_8"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -675,7 +689,7 @@
                     android:maxHeight="20dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="15dp"
-                    android:text="No Record and Digital Fingerprinting"
+                    android:text="@string/HOME_DESCRIPTION_TEXT_9"
                     android:textAlignment="textStart"
                     android:textColor="#bfbfbf"
                     android:textFontWeight="5"
@@ -691,32 +705,40 @@
             <Button
                 android:id="@+id/ConnectNoTor"
                 android:textSize="13sp"
-                android:layout_width="170dp"
+                android:layout_width="190dp"
                 android:layout_height="51dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:layout_marginStart="23dp"
                 android:layout_marginBottom="8dp"
                 android:textAlignment="textStart"
+                android:layoutDirection="ltr"
                 android:drawableStart="@drawable/ic_no_tor"
                 android:background="@xml/hox_rounded_corner_splash_no_ripple"
                 android:onClick="onStartApplicationNoTor"
-                android:text="Normal Browsing"
+                android:text="@string/HOME_CONNECT_NO_TOR"
                 app:layout_constraintBottom_toTopOf="@+id/ConnectTor"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="RtlSymmetry" />
 
             <Button
                 android:id="@+id/ConnectTor"
                 android:textSize="13sp"
-                android:layout_width="170dp"
+                android:layout_width="190dp"
                 android:layout_height="51dp"
+                android:paddingStart="10dp"
+                android:layoutDirection="ltr"
                 android:layout_marginStart="23dp"
                 android:layout_marginBottom="23dp"
                 android:textAlignment="textStart"
+                android:paddingEnd="10dp"
                 android:background="@xml/hox_rounded_corner_splash_no_ripple"
                 android:drawableStart="@drawable/ic_tor"
                 android:onClick="onStartApplication"
-                android:text="Tor Browsing"
+                android:text="@string/HOME_CONNECT_TOR"
                 app:layout_constraintBottom_toTopOf="@+id/pCopyright"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="RtlSymmetry" />
 
             <ProgressBar
                 android:id="@+id/pProgressBarIndeterminate"
@@ -754,7 +776,7 @@
                 android:paddingEnd="15dp"
                 android:paddingBottom="10dp"
                 android:text="@string/HOME_COPYRIGHT"
-                android:textColor="#4a6868"
+                android:textColor="#009688"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -770,6 +792,7 @@
                 android:contentDescription="@string/GENERAL_TODO"
                 android:elevation="2dp"
                 android:onClick="onLoadProxy"
+                android:layoutDirection="ltr"
                 android:src="@xml/ic_gear"
                 app:layout_constraintBottom_toTopOf="@+id/pDivider1"
                 app:layout_constraintStart_toEndOf="@+id/ConnectTor"
@@ -778,6 +801,7 @@
             <ImageButton
                 android:id="@+id/pOrbotLogManager"
                 android:layout_width="53dp"
+                android:layoutDirection="ltr"
                 android:layout_height="51dp"
                 android:layout_marginStart="7dp"
                 android:layout_marginBottom="20dp"
@@ -803,6 +827,7 @@
                 android:maxHeight="250dp"
                 android:maxLines="4"
                 android:minHeight="80dp"
+                android:layoutDirection="ltr"
                 android:paddingStart="15dp"
                 android:paddingTop="18dp"
                 android:paddingEnd="20dp"
@@ -822,6 +847,7 @@
                 android:layout_width="21dp"
                 android:layout_height="21dp"
                 android:contentDescription="@string/GENERAL_TODO"
+                android:layoutDirection="ltr"
                 android:translationZ="100dp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@+id/pOrbotLogs"
@@ -830,14 +856,15 @@
 
             <ImageView
                 android:id="@+id/pSecureRootBlocker"
-                android:layout_width="189dp"
-                android:layout_height="65dp"
+                android:layout_width="257dp"
+                android:layout_height="62dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="13dp"
                 android:background="@color/clear_alpha"
                 android:clickable="false"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:focusable="false"
+                android:layoutDirection="ltr"
                 android:translationZ="3dp"
                 app:layout_constraintBottom_toTopOf="@+id/pDivider1"
                 app:layout_constraintEnd_toEndOf="@+id/pSettings"
@@ -882,11 +909,6 @@
         android:focusable="true"
         android:visibility="gone"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <FrameLayout
-        android:id="@+id/fragment_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mTabFragment"

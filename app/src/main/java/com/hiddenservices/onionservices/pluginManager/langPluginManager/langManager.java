@@ -30,7 +30,7 @@ public class langManager {
         this.mLanguage = pLanguage;
         this.mSystemLocale = pSystemLocale;
 
-        onInitLanguage(pAppContext, pSettingLanguage, pSettingRegionLanguage, pThemeApplying);
+        onInitLanguage(pAppContext, pSettingLanguage, pSettingRegionLanguage);
     }
 
     private boolean initLocale() {
@@ -46,9 +46,9 @@ public class langManager {
         return false;
     }
 
-    private void onInitLanguage(AppCompatActivity pAppContext, String pSettingLanguage, String pSettingRegionLanguage, Boolean pThemeApplying) {
+    private void onInitLanguage(AppCompatActivity pAppContext, String pSettingLanguage, String pSettingRegionLanguage) {
         if (pSettingLanguage.equals("default")) {
-            Locale mSystemLocaleTemp = null;
+            Locale mSystemLocaleTemp;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 mSystemLocaleTemp = Resources.getSystem().getConfiguration().getLocales().get(0);
             } else {
@@ -93,12 +93,12 @@ public class langManager {
 
     /*Helper Methods*/
 
-    private void onCreate(AppCompatActivity pActivity, String pSettingLanguage, String pSettingRegionLanguage, Boolean pThemeApplying) {
-        onInitLanguage(pActivity, pSettingLanguage, pSettingRegionLanguage, pThemeApplying);
+    private void onCreate(AppCompatActivity pActivity, String pSettingLanguage, String pSettingRegionLanguage) {
+        onInitLanguage(pActivity, pSettingLanguage, pSettingRegionLanguage);
     }
 
-    private void onResume(AppCompatActivity pActivity, String pSettingLanguage, String pSettingRegionLanguage, Boolean pThemeApplying) {
-        onInitLanguage(pActivity, pSettingLanguage, pSettingRegionLanguage, pThemeApplying);
+    private void onResume(AppCompatActivity pActivity, String pSettingLanguage, String pSettingRegionLanguage) {
+        onInitLanguage(pActivity, pSettingLanguage, pSettingRegionLanguage);
     }
 
     private String getSupportedSystemLanguageInfo(String pSettingLanguage) {
@@ -120,12 +120,12 @@ public class langManager {
 
     public Object onTrigger(List<Object> pData, pluginEnums.eLangManager pEventType) {
         if (pEventType.equals(pluginEnums.eLangManager.M_ACTIVITY_CREATED)) {
-            onCreate((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2), (boolean) pData.get(3));
+            onCreate((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2));
         } else if (pEventType.equals(pluginEnums.eLangManager.M_RESUME)) {
             initLocale();
-            onResume((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2), (boolean) pData.get(3));
+            onResume((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2));
         } else if (pEventType.equals(pluginEnums.eLangManager.M_SET_LANGUAGE)) {
-            onInitLanguage((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2), (boolean) pData.get(3));
+            onInitLanguage((AppCompatActivity) pData.get(0), (String) pData.get(1), (String) pData.get(2));
         } else if (pEventType.equals(pluginEnums.eLangManager.M_SUPPORTED_SYSTEM_LANGUAGE_INFO)) {
             return getSupportedSystemLanguageInfo((String) pData.get(0));
         }

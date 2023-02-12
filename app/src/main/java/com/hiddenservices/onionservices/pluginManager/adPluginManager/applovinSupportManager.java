@@ -1,5 +1,7 @@
 package com.hiddenservices.onionservices.pluginManager.adPluginManager;
 
+import static com.hiddenservices.onionservices.constants.keys.APPLOVIN_SUPPORT_KEY;
+
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import com.applovin.mediation.MaxAd;
@@ -12,7 +14,7 @@ public class applovinSupportManager implements MaxAdViewAdListener {
 
     /* Private Variabes */
 
-    private static final String S_UNIT_ID = "20c7df09f494b00d";
+    private static final String S_UNIT_ID = APPLOVIN_SUPPORT_KEY;
     private MaxInterstitialAd mInterstitialAd;
     private int mRetryAttemt;
 

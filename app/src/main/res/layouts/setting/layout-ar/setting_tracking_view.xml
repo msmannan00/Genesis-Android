@@ -1,0 +1,343 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_background"
+    tools:context="com.hiddenservices.onionservices.appManager.settingManager.trackingManager.settingTrackingController">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingBottom="70dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <!-- Title Header -->
+            <LinearLayout
+                android:id="@+id/pHeaderContainerTop"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:paddingStart="5dp"
+                android:elevation="8dp"
+                android:background="@color/c_background"
+                android:focusable="true"
+                android:orientation="horizontal"
+                tools:ignore="RtlSymmetry">
+
+                <ImageButton
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@xml/gx_ripple_default_round"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onClose"
+                    android:src="@xml/ic_arrow_back"
+                    app:tint="@color/c_navigation_tint"
+                    tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:onClick="onClose"
+                    android:paddingTop="1dp"
+                    android:layout_marginTop="-3dp"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/SETTING_TRACKING_HEADER"
+                    android:textColor="@color/c_text_v1"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@xml/gx_ripple_gray_round_left"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:onClick="onOpenInfo"
+                    android:paddingStart="8dp"
+                    android:src="@xml/ic_info"
+                    app:tint="@color/c_header_icon_tint" />
+
+            </LinearLayout>
+
+            <!-- Title Header -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/c_text_short_header"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"
+                    android:layout_height="0dp"
+                    android:layout_weight="40"
+                    android:layout_marginTop="00dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/SETTING_TRACKING_SUB_HEADER" />
+
+                <TextView
+                    android:id="@+id/pHomePageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:alpha="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:padding="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/SETTING_TRACKING_SUB_HEADER_INFO"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#757575"
+                    android:textSize="13.5sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@xml/sx_border_right"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="-1dp"
+                            android:elevation="2dp"
+                            android:background="@color/c_white" />
+
+                        <LinearLayout
+                            android:id="@+id/pTrackingOption1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layoutDirection="ltr"
+                            android:paddingTop="9dp"
+                            android:paddingBottom="13dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginStart="5dp"
+                            android:background="@xml/gx_ripple_gray"
+                            android:onClick="onTracking"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layoutDirection="ltr"
+                                    android:layout_marginTop="3dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:textSize="15sp"
+                                    android:text="@string/SETTING_PRIVACY_TRACKING_OPTION1" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layoutDirection="ltr"
+                                    android:text="@string/SETTING_PRIVACY_TRACKING_OPTION1_INFO"
+                                    android:textColor="#546E7A"
+                                    android:textSize="13sp" />
+
+                            </LinearLayout>
+
+                            <RadioButton
+                                android:id="@+id/pTrackingRadioOption1"
+                                android:layoutDirection="rtl"
+                                android:layout_width="wrap_content"
+                                android:clickable="false"
+                                android:background="@android:color/transparent"
+                                android:buttonTint="@color/c_radio_tint"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                tools:ignore="RtlHardcoded"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="4dp"
+                            android:background="@color/c_topbar_divider" />
+
+                        <LinearLayout
+                            android:id="@+id/pTrackingOption2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layoutDirection="ltr"
+                            android:paddingTop="9dp"
+                            android:paddingBottom="13dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginStart="5dp"
+                            android:background="@xml/gx_ripple_gray"
+                            android:onClick="onTracking"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layoutDirection="ltr"
+                                    android:layout_marginTop="3dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:textSize="15sp"
+                                    android:text="@string/SETTING_PRIVACY_TRACKING_OPTION2" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layoutDirection="ltr"
+                                    android:text="@string/SETTING_PRIVACY_TRACKING_OPTION2_INFO"
+                                    android:textColor="#546E7A"
+                                    android:textSize="13sp" />
+
+                            </LinearLayout>
+
+                            <RadioButton
+                                android:id="@+id/pTrackingRadioOption2"
+                                android:layoutDirection="rtl"
+                                android:layout_width="wrap_content"
+                                android:clickable="false"
+                                android:background="@android:color/transparent"
+                                android:buttonTint="@color/c_radio_tint"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="15dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                tools:ignore="RtlHardcoded"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="4dp"
+                            android:background="@color/c_topbar_divider" />
+
+                        <LinearLayout
+                            android:id="@+id/pTrackingOption3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layoutDirection="ltr"
+                            android:paddingTop="9dp"
+                            android:paddingBottom="13dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginStart="5dp"
+                            android:background="@xml/gx_ripple_gray"
+                            android:onClick="onTracking"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layoutDirection="ltr"
+                                    android:layout_marginTop="3dp"
+                                    android:textColor="@color/c_text_v1"
+                                    android:textSize="15sp"
+                                    android:text="@string/SETTING_PRIVACY_TRACKING_OPTION3" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layoutDirection="ltr"
+                                    android:text="@string/SETTING_PRIVACY_TRACKING_OPTION3_INFO"
+                                    android:textColor="#546E7A"
+                                    android:textSize="13sp" />
+
+                            </LinearLayout>
+
+                            <RadioButton
+                                android:id="@+id/pTrackingRadioOption3"
+                                android:layoutDirection="rtl"
+                                android:layout_width="wrap_content"
+                                android:clickable="false"
+                                android:background="@android:color/transparent"
+                                android:buttonTint="@color/c_radio_tint"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="15dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                tools:ignore="RtlHardcoded"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:elevation="4dp"
+                            android:layout_marginTop="0.5dp"
+                            android:background="@color/c_topbar_divider" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

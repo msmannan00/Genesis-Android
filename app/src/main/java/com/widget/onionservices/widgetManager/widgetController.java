@@ -7,12 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
-
 import com.hiddenservices.onionservices.R;
 import com.widget.onionservices.helperMethod.helperMethod;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

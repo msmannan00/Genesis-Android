@@ -67,23 +67,6 @@ public class settingGeneralController extends AppCompatActivity {
         viewsInitializations();
     }
 
-    private void onInitTheme() {
-
-        if (status.mThemeApplying) {
-            if (status.sTheme == enums.Theme.THEME_DARK) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else if (status.sTheme == enums.Theme.THEME_LIGHT) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            } else {
-                if (!status.sDefaultNightMode) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
-            }
-        }
-    }
-
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
@@ -233,7 +216,7 @@ public class settingGeneralController extends AppCompatActivity {
     }
 
     public void onSelectTheme(View view) {
-        if(status.sLowMemory != enums.MemoryStatus.STABLE){
+        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_LOW_MEMORY);
             return;
         }

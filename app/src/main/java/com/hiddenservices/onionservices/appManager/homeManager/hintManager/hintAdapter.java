@@ -1,13 +1,10 @@
 package com.hiddenservices.onionservices.appManager.homeManager.hintManager;
 
 import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
-
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,12 +13,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.appManager.tabManager.tabEnums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
@@ -30,27 +27,17 @@ import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.R;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static java.lang.Thread.sleep;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder> {
+
     /*Private Variables*/
 
     private ArrayList<historyRowModel> mHintList;
     private AppCompatActivity mContext;
     private eventObserver.eventListener mEvent;
-    //private Map<Integer, Drawable> mPastWebIcon = new HashMap<>();
-    //private Map<Integer, String> mPastIconFlicker = new HashMap<>();
 
     public hintAdapter(ArrayList<historyRowModel> pHintList, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSearch) {
         this.mHintList = new ArrayList();
@@ -64,6 +51,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
         this.mEvent = pEvent;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void onUpdateAdapter(ArrayList<historyRowModel> pHintList, String pSearch) {
         mHintList = pHintList;
         if (mHintList.size() == 1 && mHintList.get(0).getHeader().equals("about:blank")) {
@@ -71,12 +59,6 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             mHintList.add(new historyRowModel("Orion Search", "orion.onion", -1));
         }
         notifyDataSetChanged();
-    }
-
-    public void onClearAdapter() {
-        //mPastWebIcon.remove(0);
-        //mPastWebIcon.remove(1);
-        //mPastWebIcon.remove(2);
     }
 
     /*Initializations*/
@@ -97,8 +79,6 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
     public int getItemCount() {
         return mHintList.size();
     }
-
-    /*Listeners*/
 
     /*View Holder Extensions*/
     class listViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
@@ -130,23 +110,17 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
 
             pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v6)));
 
-            //if (mPastWebIcon.containsKey(getLayoutPosition())) {
-                //pHintWebIconImage.setImageDrawable(mPastWebIcon.get(getLayoutPosition()));
-                //pHintWebIconImage.setImageTintList(null);
-            //} else {
-                pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
+            pHintWebIconImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.c_text_v8)));
 
-                Drawable mDrawable;
-                Resources res = itemView.getContext().getResources();
-                try {
-                    mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser));
-                    mMoveURL.setVisibility(View.VISIBLE);
-                    mMoveURL.setOnTouchListener(listViewHolder.this);
-                    pHintWebIconImage.setImageDrawable(mDrawable);
-                } catch (Exception ignored) {
-                }
-
-            //}
+            Drawable mDrawable;
+            Resources res = itemView.getContext().getResources();
+            try {
+                mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_browser));
+                mMoveURL.setVisibility(View.VISIBLE);
+                mMoveURL.setOnTouchListener(listViewHolder.this);
+                pHintWebIconImage.setImageDrawable(mDrawable);
+            } catch (Exception ignored) {
+            }
 
             String mURLLink;
             if (model.getDescription().equals(strings.GENERIC_EMPTY_STR)) {
@@ -179,8 +153,6 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             }
 
             mURL.setText(m_url);
-            //Drawable mDrawable = null;
-            //Resources res = itemView.getContext().getResources();
             try {
                 if (model.getDescription().equals(strings.GENERIC_EMPTY_STR) && !model.getHeader().contains(".")) {
                     mDrawable = Drawable.createFromXml(res, res.getXml(R.xml.ic_baseline_search));
@@ -191,9 +163,7 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                     mMoveURL.setOnTouchListener(listViewHolder.this);
                 }
 
-                //if (model.getDescription().contains("."))
                 mHindTypeIcon.setImageDrawable(mDrawable);
-                //}
             } catch (Exception ignored) {
             }
 
@@ -202,19 +172,14 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
             if (mURLLink.contains("167.86.99.31") || mURLLink.contains("orion.onion")) {
                 pHintWebIconImage.setImageTintList(null);
                 pHintWebIconImage.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
-                //mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
             } else {
-                String mURLPast = mURLLink;
-                //mPastIconFlicker.put(getLayoutPosition(), mURLPast);
-
                 mHindTypeIconTemp.setImageDrawable(null);
-                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), enums.etype.fetch_favicon);
+                mEvent.invokeObserver(Arrays.asList(mHindTypeIconTemp, "https://" + helperMethod.getDomainName(model.getDescription())), homeEnums.eHintCallback.ON_FETCH_FAVICON);
 
                 if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY && status.sLowMemory != enums.MemoryStatus.LOW_MEMORY){
                     if (mHindTypeIconTemp.getDrawable() != null) {
                         pHintWebIconImage.setImageTintList(null);
                         pHintWebIconImage.setImageDrawable(mHindTypeIconTemp.getDrawable());
-                        //mPastWebIcon.put(getLayoutPosition(), pHintWebIconImage.getDrawable());
                     }
                 }
             }
@@ -227,8 +192,6 @@ public class hintAdapter extends RecyclerView.Adapter<hintAdapter.listViewHolder
                 if (event.getAction() == MotionEvent.ACTION_MOVE) {
                     helperMethod.hideKeyboard(mContext);
                 }
-            } else if (v.getId() == mMoveURL.getId()) {
-                mEvent.invokeObserver(Collections.singletonList(mMoveURL.getTag()), enums.etype.M_COPY_URL);
             }
             return false;
         }

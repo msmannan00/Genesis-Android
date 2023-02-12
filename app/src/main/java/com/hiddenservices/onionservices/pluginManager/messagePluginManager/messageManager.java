@@ -375,8 +375,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }
     }
 
-    private void
-    downloadFileLongPress() {
+    private void downloadFileLongPress() {
         if (mData == null || mData.size() < 1) {
             return;
         }
@@ -397,7 +396,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         LinearLayout mPopupLongPressOptionCopy = mDialog.findViewById(R.id.pPopupLongPressOptionCopy);
 
         mPopupLongPressDescription.setText((title));
-        mEvent.invokeObserver(Arrays.asList((mPopupLongPressImage), helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
+        mEvent.invokeObserver(Arrays.asList((mPopupLongPressImage), helperMethod.getDomainName(mData.get(0).toString())), ON_FETCH_FAVICON);
 
         mDialog.setOnDismissListener(this);
         mPopupLongPressDismiss.setOnClickListener(this);
@@ -422,7 +421,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         String mText = title + mData.get(0);
 
         mPopupURLLongPressHeader.setText(mText);
-        mEvent.invokeObserver(Arrays.asList(mPopupURLLongPressImage, helperMethod.getDomainName(mData.get(0).toString())), enums.etype.fetch_favicon);
+        mEvent.invokeObserver(Arrays.asList(mPopupURLLongPressImage, helperMethod.getDomainName(mData.get(0).toString())), ON_FETCH_FAVICON);
 
         mDialog.setOnDismissListener(this);
         if (mData != null) {
@@ -471,7 +470,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
         mPopupDownloadFullDescription.setText((mDescription));
         mPopupDownloadFullDescriptionShort.setText((mDescriptionShort));
-        mEvent.invokeObserver(Arrays.asList((mPopupDownloadFullImage), helperMethod.getDomainName(data_local)), enums.etype.fetch_favicon);
+        mEvent.invokeObserver(Arrays.asList((mPopupDownloadFullImage), helperMethod.getDomainName(data_local)), ON_FETCH_FAVICON);
 
         if (mData != null) {
             mDialog.setOnDismissListener(this);

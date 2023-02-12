@@ -1,13 +1,11 @@
 package com.hiddenservices.onionservices.dataManager;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.constants.status;
@@ -15,9 +13,7 @@ import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
-
 import org.mozilla.geckoview.GeckoResult;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -26,8 +22,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
-import static java.lang.Thread.sleep;
 
 @SuppressLint("CommitPrefEdits")
 class tabDataModel {
@@ -90,32 +84,23 @@ class tabDataModel {
             getCurrentTab().getSession().stop();
         }
 
-        mTabs.add(0, mTabModel);
+        mTabs.add(mTabModel);
 
         if (mTabs.size() > 20) {
-            closeTab(mTabs.get(mTabs.size() - 1).getSession(), mTabs.get(mTabs.size() - 1).getmId());
+            closeTab(mTabs.get(mTabs.size() - 1).getSession());
             return enums.AddTabCallback.TAB_FULL;
         }
 
         if (mTabs.size() > 2) {
             for(int counter=mTabs.size()-1;counter>1;counter--){
-                if(!mTabs.get(counter).getSession().isLoaded()){
-                    mTabs.get(counter).resetBitmap();
-                }
+                mTabs.get(counter).resetBitmap();
                 mTabs.get(counter).getSession().stop();
                 mTabs.get(counter).getSession().setActive(false);
-                mTabs.get(counter).getSession().close();
             }
         }
 
 
         if (pIsDataSavable) {
-            String[] params = new String[3];
-            params[0] = mTabModel.getSession().getTitle();
-            params[1] = mTabModel.getSession().getCurrentURL();
-            params[2] = mTabModel.getSession().getTheme();
-            String m_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH).format(Calendar.getInstance().getTime());
-
             if (mTabModel.getSession().getTitle().equals("about:blank") || mTabModel.getSession().getTitle().equals("$TITLE") || mTabModel.getSession().getTitle().startsWith("http://loading") || mTabModel.getSession().getTitle().startsWith("loading")) {
                 return enums.AddTabCallback.TAB_ADDED;
             }
@@ -149,7 +134,7 @@ class tabDataModel {
 
     }
 
-    void closeTab(geckoSession mSession, Object pID) {
+    void closeTab(geckoSession mSession) {
         mSession.stop();
         mSession.setActive(false);
         mSession.purgeHistory();
@@ -184,6 +169,7 @@ class tabDataModel {
 
                     mExternalEvents.invokeObserver(Arrays.asList("UPDATE tab SET date = '" + m_date + "' WHERE mid='" + mTabs.get(counter).getmId() + "'", null), dataEnums.eTabCallbackCommands.M_EXEC_SQL);
                     mTabs.add(0, mTabs.remove(counter));
+                    mTabs.get(0).getSession().setActive(true);
                     break;
                 }
             } catch (Exception ex) {
@@ -211,7 +197,6 @@ class tabDataModel {
     }
 
     boolean updateTab(String mSessionID, geckoSession pSession) {
-        boolean mChanged = false;
         for (int counter = 0; counter < mTabs.size(); counter++) {
 
             if (mTabs.get(counter).getSession().getSessionID().equals(mSessionID)) {
@@ -371,14 +356,14 @@ class tabDataModel {
         } else if (pCommands == dataEnums.eTabCommands.MOVE_TAB_TO_TOP) {
             moveTabToTop((geckoSession) pData.get(0));
         } else if (pCommands == dataEnums.eTabCommands.CLOSE_TAB) {
-            closeTab((geckoSession) pData.get(0), pData.get(1));
+            closeTab((geckoSession) pData.get(0));
             activityContextManager.getInstance().getHomeController().initTabCountForced();
         } else if (pCommands == dataEnums.eTabCommands.M_CLEAR_TAB) {
             clearTab();
             activityContextManager.getInstance().getHomeController().initTabCountForced();
         } else if (pCommands == dataEnums.eTabCommands.M_ADD_TAB) {
             int mTabs = addTabs((geckoSession) pData.get(0), (boolean) pData.get(1));
-            //activityContextManager.getInstance().getHomeController().initTabCountForced();
+            activityContextManager.getInstance().getHomeController().initTabCountForced();
             return mTabs;
         } else if (pCommands == dataEnums.eTabCommands.M_UPDATE_SESSION_STATE) {
             updateSession((String) pData.get(5), (String) pData.get(1));

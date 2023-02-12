@@ -83,15 +83,15 @@
 
                 <TextView
                     android:id="@+id/pRowDescription"
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:textColor="@color/c_text_v2"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="15dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/GENERAL_TODO" />
+                    android:text="@string/GENERAL_TODO"
+                    android:textColor="#757575" />
 
                 <View
                     android:id="@+id/view"

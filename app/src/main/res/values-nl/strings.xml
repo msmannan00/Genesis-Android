@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="GENERAL_SEARCH_HINT" translatable="true">Zoek of typ een webadres</string>
@@ -10,20 +10,38 @@
     <string name="GENERAL_RELOAD" translatable="true">Opnieuw laden</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">Dit kunnen de problemen zijn waarmee u wordt geconfronteerd \ n \ n • De webpagina of website is mogelijk niet beschikbaar \ n • Uw internetverbinding is mogelijk slecht \ n • U gebruikt mogelijk een proxy \ n • De website is mogelijk geblokkeerd door een firewall</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Ondersteun deze browser</string>
+    <string name="GENERAL_FIX" translatable="true">Browser repareren</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Reset de browser naar de standaardinstellingen</string>
+    <string name="GENERAL_CICADA" translatable="false">Cicade 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Beveiligd door Tor-netwerk</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Geen opname en digitale vingerafdrukken</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Ingebouwde Onion-zoekmachine</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Bescherming tegen volgen</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Geen lokale cache opgeslagen</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Veilige beheerbare cookies</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Beveiligd door Tor-netwerk</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Ingebouwde Onion-zoekmachine</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Geen opname en digitale vingerafdrukken</string>
+    <string name="HOME_CONNECT_NO_TOR">Normaal browsen</string>
+    <string name="HOME_CONNECT_TOR">Tor browsen</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Browsercache wissen</string>
-    <string name="shortcut_erase_long_label" translatable="false">Doorbladerde website wissen</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Wis uw gegevens en open browser</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Browsercache wissen</string>
-    <string name="shortcut_open" translatable="false">Start Genesis-browser opnieuw</string>
-    <string name="shortcut_open_long" translatable="false">Herstart Je Browser</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Browsercache wissen</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Doorbladerde website wissen</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Wis uw gegevens en open browser</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Browsercache wissen</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Start Genesis-browser opnieuw</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Herstart Je Browser</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Bladwijzer Bewerken</string>
     <string name="BOOKMARK_SETTING_HEADER_URL" translatable="true">Naam Bladwijzer</string>
     <string name="BOOKMARK_SETTING_HEADER_URL_INFO" translatable="true">De naam van de url met bladwijzer wordt hier getoond</string>
-    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true">Voer de naam van de bladwijzer in...</string>
+    <string name="BOOKMARK_SETTING_HEADER_NAME_HINT" translatable="true" tools:ignore="TypographyEllipsis">Voer de naam van de bladwijzer in...</string>
 
     <!-- Alerts General -->
     <string name="ALERT_DISMISS" translatable="true">Sluiten</string>
@@ -36,8 +54,19 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"Browse veilig op internet."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"Geen tracking. Geen censuur."</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Standaardbrowser</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">stel orion in als uw standaardbrowser</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">IT-standaard instellen</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Schakel over naar Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Hiermee kunt u schakelen tussen normaal browsen met duckduckgo of geavanceerd veilig dark web-browsen met Orion-zoekopdracht</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">Verander het</string>
+
     <!-- Alert Secure -->
-    <string name="ALERT_SECURE_INFO" translatable="true">Verbinding is beveiligd</string>
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(het is niet veilig) Uw informatie (bijvoorbeeld wachtwoord of creditcardnummers) is niet privé wanneer deze naar deze site wordt verzonden</string>
+    <string name="ALERT_SECURE_INFO" translatable="true">Verbinding is veilig</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Uw informatie (bijvoorbeeld wachtwoord of creditcardnummers) is veilig wanneer deze naar deze site wordt verzonden</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Beveiligingsinstelling</string>
     <string name="ALERT_SECURE_INFO_JAVASCRIPT_HEADER" translatable="true">Javascript</string>
@@ -66,13 +95,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">Automatisch Maken</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Proxy instellingen | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Beveiligingsinstellingen</string>
     <string name="BRIDGE_SETTING" translatable="true">"BRIDGE" Instellingen Wijzigen</string>
     <string name="BRIDGE_AUTO" translatable="true">Automatisch Aanmaken</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Configureer automatisch de "BRIDGE"-instellingen</string>
     <string name="BRIDGE_MANUAL" translatable="true">Geef een "BRIDGE" op die ik ken</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Aangepaste "BRIDGE" plakken</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE" zijn niet-beursgenoteerde Tor-relais die het moeilijker maken om verbindingen met het Tor-netwerk te blokkeren. Vanwege de manier waarop sommige landen Tor proberen te blokkeren, werken bepaalde "BRIDGE" in sommige landen, maar niet in andere</string>
     <string name="BRIDGE_TITLE" translatable="true">Selecteer standaard "BRIDGE"</string>
     <string name="BRIDGE_REQUEST" translatable="true">Aanvraag</string>
@@ -82,7 +111,7 @@
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Logboekinstellingen</string>
     <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">Toon logboeken in geavanceerde lijstweergave</string>
-    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">Toogle tussen klassieke en geavanceerde weergave</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toggle tussen klassieke en geavanceerde weergave</string>
 
     <!-- Generic Toast Alerts -->
     <string name="TOAST_ALERT_BOOKMARK_REMOVED" translatable="true">Bladwijzer verwijderd</string>
@@ -94,7 +123,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Herstart</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tabblad Is Gesloten</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Nieuw tabblad geopend</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Genesis-proxy verbindt ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Genesis-proxy verbindt ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Geheugen is vol ➔ Tabblad Wissen</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Pop-up geblokkeerd</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Open Foutenlogboeken</string>
@@ -119,23 +148,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Sluiten</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Wachten om te downloaden ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">Wachten om te downloaden ...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Downloaden</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Beoordeel VS</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Vertel anderen wat je van deze app vindt</string>
     <string name="ALERT_RATE" translatable="true">Beoordeel</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Ik ben dol op deze browser\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Zoals de browser\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Bevredigend\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Onder het gemiddelde\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Slechte browser\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Klaar</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge-tekenreeks (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge type (obfs4, zachtmoedig, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Bladwijzer Website</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Voeg deze pagina toe aan uw bladwijzers</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bladwijzernaam...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">bladwijzernaam...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Klaar</string>
 
     <!-- Alert Long Download -->
@@ -155,10 +187,26 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Afbeeldingsbestand downloaden</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Voorzien Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Zorg voor een brug die ik ken</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">Voer bridge-informatie van een vertrouwde bron in</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">Verzoek</string>
 
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Advertentie</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Blader vrij door artikelen</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Zoek van microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Zoek via Google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Volgbeveiliging zoeken</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Pop-up blokkeren | Schakel over om pop-upadvertentie uit te schakelen</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Pop-upadvertentie verwijderen Kan de functionaliteit van sommige websites verstoren</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Tabbladweergave</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Schakel tussen Tabmanager Rasterindeling en Lijstindeling</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Raster ontwerp</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Lijst ontwerp</string>
 
     <!-- Settings -->
     <string name="SETTING_BASIC_SETTING" translatable="true">Basisinstellingen</string>
@@ -387,12 +435,13 @@
     <!-- History Popup Menu -->
     <string name="HISTORY_TITLE" translatable="true">Geschiedenis</string>
     <string name="HISTORY_CLEAR" translatable="true">Wissen</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">Zoeken ...</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Zoeken ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Pagina\'s die u bezoekt, verschijnen hier</string>
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="true">Bladwijzer</string>
     <string name="BOOKMARK_CLEAR" translatable="true">Wissen</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">Zoeken ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Zoeken ...</string>
 
     <!-- Help -->
     <string name="HELP_RETRY" translatable="true">Opnieuw proberen</string>

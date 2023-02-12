@@ -9,13 +9,13 @@ import com.hiddenservices.onionservices.helperManager.helperMethod;
 
 import java.net.URL;
 
-class homeModel {
+public class homeModel {
 
-    String getSearchEngine() {
+    public String getSearchEngine() {
         return status.sSettingDefaultSearchEngine;
     }
 
-    String urlComplete(String pURL, String pSearchEngine) {
+    public String urlComplete(String pURL, String pSearchEngine) {
         if (pURL.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)) {
             return CONST_PRIVACY_POLICY_URL_NON_TOR;
         }

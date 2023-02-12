@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id = "@+id/layout_default_notification"
     android:layout_width = "fill_parent"
     android:layout_height = "wrap_content"
@@ -14,37 +14,34 @@
         android:layout_marginEnd = "10dp"
         android:contentDescription = "@string/app_name"
         android:src = "@drawable/ic_genesis_logo"/>
+
     <TextView
-        android:id = "@+id/header"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/image"
         android:maxHeight="28dp"
+        android:paddingEnd="70dp"
+        android:text="@string/GENERAL_DEFAULT_TEXT"
+        android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toEndOf = "@id/image"
-        android:text = "Testing"
-        android:paddingEnd="70dp"
-        android:layout_marginStart="5dp"
-        android:textSize = "17sp" />
+        tools:ignore="RtlSymmetry,TextContrastCheck" />
+
     <TextView
+        android:id="@+id/body"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@id/header"
         android:layout_marginStart="5dp"
-        android:id = "@+id/body"
-        android:paddingEnd="70dp"
+        android:layout_toEndOf="@id/image"
+        android:ellipsize="marquee"
         android:maxLines="2"
-        android:layout_width = "wrap_content"
-        android:layout_height = "20dp"
-        android:layout_below = "@id/header"
-        android:layout_toEndOf = "@id/image"
-        android:ellipsize = "marquee"
-        android:singleLine = "true"
-        android:text = "Lorem Ipsum is simply dummy text of the printing and typesetting
-         industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-         1500s, when an unknown printer took a galley of type and scrambled it to make a type
-         specimen book. It has survived not only five centuries, but also the leap into
-         electronic typesetting, remaining essentially unchanged. It was popularised in the
-         1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-         recently with desktop publishing software like Aldus PageMaker including versions of
-         Lorem Ipsum. "
-        android:textSize = "15sp" />
+        android:paddingEnd="70dp"
+        android:singleLine="true"
+        android:text="@string/GENERAL_DEFAULT_TEXT"
+        android:textSize="15sp"
+        tools:ignore="RtlSymmetry,TextContrastCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,17 +58,19 @@
             android:layout_height = "wrap_content"
             android:textColor="@color/text_color_v2"
             android:background="@color/clear_alpha"
-            android:text = "EXIT AND RESET"/>
+            android:text = "@string/DEFAULT_NOTIFICATION_RESET"
+            style="?android:attr/buttonBarButtonStyle" />
 
 
         <Button
             android:id = "@+id/exit"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:textColor="@color/text_color_v2"
             android:background="@color/clear_alpha"
-            android:text = "EXIT BROWSER"/>
+            android:text = "@string/DEFAULT_NOTIFICATION_RESET"
+            style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
 </RelativeLayout>

@@ -32,7 +32,6 @@
                 android:layout_height="35dp"
                 android:textStyle="bold"
                 android:textSize="17sp"
-                android:text="A"
                 android:textAlignment="center"
                 android:textColor="@color/c_white"
                 android:background="@xml/hx_circle_favicon"
@@ -112,7 +111,7 @@
 
             <ImageButton
                 android:id="@+id/pBookmarkEdit"
-                android:layout_width="40dp"
+                android:layout_width="48dp"
                 android:layout_height="60dp"
                 android:background="@xml/gx_ripple_gray"
                 android:contentDescription="@string/GENERAL_TODO"
@@ -120,8 +119,8 @@
                 android:paddingBottom="20dp"
                 android:scaleType="fitCenter"
                 android:src="@xml/ic_baseline_edit"
-                android:tint="@color/c_navigation_tint"
-                tools:ignore="RtlSymmetry" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="RtlSymmetry,DuplicateSpeakableTextCheck" />
 
             <ImageButton
                 android:id="@+id/pRowMenu"
@@ -133,8 +132,8 @@
                 android:paddingBottom="22dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
-                android:tint="@color/c_navigation_tint"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                app:tint="@color/c_navigation_tint" />
 
         </LinearLayout>
     </LinearLayout>

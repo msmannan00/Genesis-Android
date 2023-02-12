@@ -32,7 +32,6 @@
                 android:layout_height="35dp"
                 android:textStyle="bold"
                 android:textSize="17sp"
-                android:text="A"
                 android:textAlignment="center"
                 android:textColor="@color/c_white"
                 android:background="@xml/hx_circle_favicon"
@@ -56,10 +55,9 @@
                     android:layout_height="37dp"
                     android:layout_marginTop="-1dp"
                     android:src="@xml/ic_baseline_browser"
-                    android:contentDescription="@string/GENERAL_TODO"
                     android:textAlignment="center"
                     android:textColor="@color/c_white"
-                    tools:ignore="RtlCompat" />
+                    tools:ignore="ContentDescription,RtlCompat" />
             </androidx.cardview.widget.CardView>
 
             <ImageView
@@ -74,8 +72,7 @@
                 android:translationZ="3dp"
                 android:src="@drawable/tick_recycler_view_green"
                 android:gravity="center_vertical"
-                tools:ignore="RtlCompat"
-                android:contentDescription="@string/GENERAL_TODO" />
+                tools:ignore="ContentDescription,RtlCompat"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -111,17 +108,16 @@
             </LinearLayout>
 
             <ImageButton
+                android:id="@+id/pRowMenu"
                 android:layout_width="40dp"
                 android:layout_height="60dp"
+                android:background="@xml/gx_ripple_gray"
                 android:paddingTop="22dp"
                 android:paddingBottom="22dp"
-                android:id="@+id/pRowMenu"
                 android:scaleType="fitCenter"
-                android:tint="@color/c_navigation_tint"
                 android:src="@drawable/menu_item"
-                android:background="@xml/gx_ripple_gray"
-                android:contentDescription="@string/GENERAL_TODO"
-                tools:ignore="RtlSymmetry" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="ContentDescription,RtlSymmetry,SpeakableTextPresentCheck" />
 
         </LinearLayout>
     </LinearLayout>

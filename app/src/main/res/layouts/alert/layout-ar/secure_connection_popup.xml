@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="2100dp">
+
+    <ImageView
+        android:id="@+id/pSecurePopupRootBlocker"
+        android:layout_width="match_parent"
+        android:layout_height="2100dp"
+        android:alpha="0"
+        android:background="@color/c_secure_alert_background"
+        android:contentDescription="@string/GENERAL_TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pSecurePopupRoot"
+        app:layout_constraintVertical_weight="1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pSecurePopupRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@xml/ax_round_corner_secure"
+        android:paddingBottom="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/pSecurePopupLock"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/GENERAL_TODO"
+            android:src="@drawable/mozac_ic_lock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck"
+            app:tint="@color/green" />
+
+        <TextView
+            android:id="@+id/pSecurePopupHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ALERT_SECURE_INFO_HEADER"
+            android:textAlignment="textStart"
+            android:textColor="#43A047"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/pSecurePopupSubHeader"
+            app:layout_constraintTop_toTopOf="@+id/pSecurePopupSubHeader"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/pSecurePopupSubHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:alpha="0.8"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/GENERAL_TODO"
+            android:textAlignment="textStart"
+            android:textColor="@color/c_alert_text"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/pSecurePopupLock"
+            app:layout_constraintTop_toTopOf="@+id/pSecurePopupLock" />
+
+        <TextView
+            android:id="@+id/pSecurePopupDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:alpha="0.6"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/ALERT_SECURE_INFO_DETAIL"
+            android:textAlignment="textStart"
+            android:textColor="#546E7A"
+            android:textSize="14sp"
+            android:translationZ="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pSecurePopupLock"
+            tools:ignore="SmallSp,TextContrastCheck" />
+
+        <LinearLayout
+            android:id="@+id/pSecurePopupInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pSecurePopupDescription">
+
+            <LinearLayout
+                android:id="@+id/pSecurePopupJavascript"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pSecurePopupJavasciptHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_JAVASCRIPT_HEADER"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/c_alert_text"
+                        android:textSize="14sp"
+                        android:translationZ="2dp" />
+
+                    <TextView
+                        android:id="@+id/pSecurePopupJavasciptDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_JAVASCRIPT_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="#546E7A"
+                        android:textSize="12sp"
+                        android:translationZ="2dp"
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/pSecurePopupJavascriptStatus"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.2"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:theme="@style/SCBSwitchSecurity" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:alpha="0.8"
+                android:background="@color/c_security_popup_divider"
+                app:layout_constraintBottom_toTopOf="@+id/pSecurePopupNavigation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/pInfoDonottrack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pSecurePopupNonTrackingHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_NONTRACKING_HEADER"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/c_alert_text"
+                        android:textSize="14sp"
+                        android:translationZ="2dp" />
+
+                    <TextView
+                        android:id="@+id/pSecurePopupNonTrackingDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_NONTRACKING_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="#546E7A"
+                        android:textSize="12sp"
+                        android:translationZ="2dp"
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/pSecurePopupTrackingStatus"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.2"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:theme="@style/SCBSwitchSecurity" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:alpha="1"
+                android:background="@color/c_security_popup_divider"
+                app:layout_constraintBottom_toTopOf="@+id/pSecurePopupNavigation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pSecurePopupTrackingProtectionHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_TRACKING_HEADER"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/c_alert_text"
+                        android:textSize="14sp"
+                        android:translationZ="2dp" />
+
+                    <TextView
+                        android:id="@+id/pSecurePopupTrackingProtectionSubHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/ALERT_SECURE_INFO_TRACKING_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="#546E7A"
+                        android:textSize="12sp"
+                        android:translationZ="2dp"
+                        tools:ignore="RtlSymmetry,TextContrastCheck" />
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/pSecurePopupTrackingProtectionStatus"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.2"
+                    android:clickable="false"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:theme="@style/SCBSwitchSecurity" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="1"
+            android:background="@color/c_orbot_setting_divider"
+            app:layout_constraintBottom_toTopOf="@+id/pSecurePopupNavigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/pSecurePopupNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginTop="30dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pSecurePopupInfo">
+
+            <Button
+                android:id="@+id/pSecurePopupPrivacy"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@xml/ax_ripple_default_round_bottom_neutral"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="0dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/ALERT_SECURE_INFO_SETTINGS"
+                android:textAllCaps="false"
+                android:textColor="@color/c_white"
+                android:textSize="13.5sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/pSecurePopupCertificate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@xml/ax_ripple_default_round_bottom_neutral"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="0dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:text="@string/ALERT_SECURE_INFO_CERTIFICATE"
+                android:textAllCaps="false"
+                android:textColor="@color/c_white"
+                android:textSize="13.5sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

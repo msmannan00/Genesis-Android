@@ -1,11 +1,8 @@
 package com.hiddenservices.onionservices.appManager.advertManager;
 
 import android.os.Bundle;
-import android.webkit.WebView;
 import android.widget.ProgressBar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.sharedUIMethod;
@@ -14,7 +11,6 @@ import java.util.List;
 
 public class advertViewController extends AppCompatActivity {
 
-    private WebView mWebView;
     private AppCompatActivity mContext;
     private ProgressBar mProgressBar;
 
@@ -24,9 +20,8 @@ public class advertViewController extends AppCompatActivity {
         setContentView(R.layout.activity_adview_controller);
     }
 
-    advertViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, WebView pGeckoView, ProgressBar pProgressBar) {
+    advertViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, ProgressBar pProgressBar) {
         this.mContext = pContext;
-        this.mWebView = pGeckoView;
         this.mProgressBar = pProgressBar;
 
         initViews();

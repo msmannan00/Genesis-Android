@@ -51,14 +51,14 @@
             android:paddingStart="15dp"
             android:paddingEnd="41dp"
             android:text="@string/GENERAL_DEFAULT_TEXT"
-            android:textColor="@color/c_alert_background_description"
+            android:textColor="#8D6E63"
             android:textDirection="locale"
             android:textSize="12sp"
             android:translationY="-1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/pPopupLongPressImageContainer"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp,TextContrastCheck" />
 
 
         <View
@@ -105,8 +105,9 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_4"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_background_description"
-                    android:textSize="14sp" />
+                    android:textColor="#546E7A"
+                    android:textSize="14sp"
+                    tools:ignore="TextContrastCheck" />
 
                 <ImageView
                     android:id="@+id/pPopupLongPressNavigation"
@@ -156,8 +157,9 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_background_description"
-                    android:textSize="14sp" />
+                    android:textColor="#546E7A"
+                    android:textSize="14sp"
+                    tools:ignore="TextContrastCheck" />
 
                 <ImageView
                     android:id="@+id/pPopupLongPressNavigation1"
@@ -206,8 +208,9 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_background_description"
-                    android:textSize="14sp" />
+                    android:textColor="#546E7A"
+                    android:textSize="14sp"
+                    tools:ignore="TextContrastCheck" />
 
                 <ImageView
                     android:id="@+id/pPopupLongPressNavigation2"
@@ -256,8 +259,9 @@
                     android:text="@string/ALERT_LONG_URL_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_background_description"
-                    android:textSize="14sp" />
+                    android:textColor="#546E7A"
+                    android:textSize="14sp"
+                    tools:ignore="TextContrastCheck" />
 
                 <ImageView
                     android:id="@+id/pPopupLongPressNavigation3"
@@ -269,7 +273,8 @@
                     android:scaleX="0.5"
                     android:scaleY="0.5"
                     app:srcCompat="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint_alert" />
+                    app:tint="@color/c_navigation_tint_alert"
+                    tools:ignore="ImageContrastCheck" />
 
             </LinearLayout>
 
@@ -302,7 +307,7 @@
                     android:text="@string/ALERT_DISMISS"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="@color/c_alert_text_v2"
+                    android:textColor="#2979FF"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />

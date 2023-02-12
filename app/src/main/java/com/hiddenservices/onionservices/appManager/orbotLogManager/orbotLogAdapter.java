@@ -66,7 +66,7 @@ public class orbotLogAdapter extends RecyclerView.Adapter<orbotLogAdapter.listVi
             mOrbotRowDescription = itemView.findViewById(R.id.pOrbotRowDescription);
             mOrbotRowContainer = itemView.findViewById(R.id.pOrbotRowContainer);
 
-            String mLog = (this.getLayoutPosition() + ". " + model.getLog());
+            String mLog = (this.getLayoutPosition()+1 + ". " + model.getLog());
             mOrbotRowHeader.setText(mLog);
             mOrbotRowDescription.setText(model.getDate());
             mOrbotRowContainer.setOnClickListener(this);

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="mode" translatable="false">Day</string>
@@ -9,22 +9,44 @@
     <string name="GENERAL_SEARCH_ENGINE" translatable="true">Search Engine</string>
     <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="true">\u0020\u0020\u0020Opps! Something Went Wrong</string>
-    <string name="GENERAL_TODO" translatable="true">TODO</string>
+    <string name="GENERAL_TODO" translatable="false">TODO</string>
     <string name="GENERAL_PROJECT_NAME" translatable="false">Orion Search Engine</string>
     <string name="GENERAL_LOADING" translatable="true">Online Freedom</string>
     <string name="GENERAL_RELOAD" translatable="true">Reload</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">These might be the problems you are facing \n\n• Webpage or Website might be down \n• Your Internet connection might be poor \n• You might be using a proxy \n• Website might be blocked by firewall</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
-    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | Israel Strikes Again</string>
+    <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="false">BBC | Israel Strikes Again</string>
     <string name="GENERAL_HIDDEN_WEB" translatable="false">Search the web ...</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Support Orion Browser</string>
+    <string name="GENERAL_FIX" translatable="true">Fix Browser</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Reset browser to default settings</string>
+    <string name="GENERAL_CICADA" translatable="true">Cicada 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Secured by Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">No Record and Digital Fingerprinting</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Builtin Onion Search Engine</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">Tracking Protection</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">No Local Cache Stored</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Secure Manageable Cookies</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Secured by Tor Network</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Builtin Onion Search Engine</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">No Record and Digital Fingerprinting</string>
+    <string name="HOME_CONNECT_NO_TOR">Normal Browsing</string>
+    <string name="HOME_CONNECT_TOR">Tor Browsing</string>
+
+    <!-- Default Notification -->
+    <string name="DEFAULT_NOTIFICATION_RESET" translatable="false">EXIT AND RESET</string>
+    <string name="DEFAULT_NOTIFICATION_EXIT" translatable="false">EXIT BROWSER</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Erase data</string>
-    <string name="shortcut_erase_long_label" translatable="false">Erase browsing history</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Erase &amp; open</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Erase and open</string>
-    <string name="shortcut_open" translatable="false">Restart or Open</string>
-    <string name="shortcut_open_long" translatable="false">Restart Application</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Erase data</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Erase browsing history</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Erase &amp; open</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Erase and open</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Restart or Open</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Restart Application</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Edit Bookmark</string>
@@ -36,16 +58,28 @@
     <string name="ALERT_DISMISS" translatable="true">Dismiss</string>
 
     <!-- Landing Page -->
-    <string name="LANDING_BRIDGES_INFO" translatable="true">"Sometimes you need a Bridge to get to Tor Network"</string>
-    <string name="LANDING_MORE" translatable="true">"TELL ME MORE"</string>
-    <string name="LANDING_HELLO" translatable="true">"Hello"</string>
-    <string name="LANDING_WELCOME" translatable="true">"Welcome to Orion on mobile."</string>
-    <string name="LANDING_BROWSE_INFO" translatable="true">"Browse the internet how you expect you should."</string>
-    <string name="LANDING_NO_TRACKING" translatable="true">"No tracking. No censorship."</string>
+    <string name="LANDING_BRIDGES_INFO" translatable="true">Sometimes you need a Bridge to get to Tor Network</string>
+    <string name="LANDING_MORE" translatable="true">TELL ME MORE</string>
+    <string name="LANDING_HELLO" translatable="true">Hello"</string>
+    <string name="LANDING_WELCOME" translatable="true">Welcome to Orion on mobile</string>
+    <string name="LANDING_BROWSE_INFO" translatable="true">Browse the internet how you expect you should</string>
+    <string name="LANDING_NO_TRACKING" translatable="true">No tracking. No censorship</string>
+
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Defaut Browser</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">set orion as your default browser</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">Set Default</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Switch Tor</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Using this you can switch between normal browsing using duckduckgo or advance secure dark web browsing using Orion search</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">Switch</string>
 
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(Not secure) Your information (for example, password or credit card numbers) is not private when it is sent to this site</string>
+    <string name="ALERT_NON_SECURE_INFO" translatable="false">http://</string>
     <string name="ALERT_SECURE" translatable="false">https://</string>
-    <string name="ALERT_SECURE_INFO_HEADER" translatable="false">onion:</string>
+    <string name="ALERT_SECURE_INFO_HEADER" translatable="false">https://</string>
     <string name="ALERT_SECURE_INFO_Header" translatable="false">onion:</string>
     <string name="ALERT_SECURE_INFO" translatable="true">Connection is secure</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Your information (for example, password or credit card numbers) is private when it is sent to this site</string>
@@ -76,13 +110,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Security Settings</string>
     <string name="BRIDGE_SETTING" translatable="true">Bridge Settings</string>
     <string name="BRIDGE_AUTO" translatable="true">Create Automatically</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">Automatically configure bridge settings</string>
     <string name="BRIDGE_MANUAL" translatable="true">Provide a bridge I know</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Paste custom bridge</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">Bridges are unlisted Tor relays that make it more difficult to block connections into the Tor network. Because of how some countries try to block Tor, certain bridges work in some countries but not others</string>
     <string name="BRIDGE_TITLE" translatable="true">Select Default bridge</string>
     <string name="BRIDGE_REQUEST" translatable="true">Request</string>
@@ -93,7 +127,7 @@
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Log Settings</string>
     <string name="SETTING_ADVANCE_STATUS_HEADER" translatable="true">Show Logs in Advance List View</string>
-    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">Toogle between classic and advance view</string>
+    <string name="SETTING_ADVANCE_STATUS_INFO" translatable="true">toggle between classic and advance view</string>
 
     <!-- Generic Toast Alerts -->
     <string name="TOAST_ALERT_CICADA" translatable="false">Authorization Failed</string>
@@ -106,7 +140,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Restart</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Tab Closed</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">New tab opened</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy connecting ...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Orion proxy connecting ...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Memory full &#160; ➔ &#160; Clearing tab</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Popup blocked</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Open Logs</string>
@@ -131,23 +165,28 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Dismiss</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Waiting to download ...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">Waiting to download …</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">Download</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">Rate \u0020Browser</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Tell others what you think about this app</string>
     <string name="ALERT_RATE" translatable="true">Rate</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Love this browser\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Like the browser\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">Satisfactory\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Below average\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Poor browser\n1/5</string>
 
     <!-- Alert Bridge -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Done</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="true">bridge string (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="true">bridge type (obfs4, meek, ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">bridge string (obfs4 212.21.66.66:20621 ...)</string>
+    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">bridge type (obfs4, meek, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true"><b><font color='#00b3b3'>BOOKMARK WEBSITE &#160;</font></b>&#160;</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Add this page to your bookmarks</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">bookmark name...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">bookmark name...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Done</string>
 
     <!-- Alert Long Download -->
@@ -167,15 +206,28 @@
     <string name="ALERT_DOWNLOAD_OPTION_7" translatable="true">Download image file</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Provide Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">Provide a Bridge I know</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">Enter bridge information from a trusted source</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">Request</string>
 
     <!-- Adview Custom -->
-    <string name="ADVIEW_HEADER" translatable="false">Advertisement</string>
+    <string name="ADVIEW_HEADER" translatable="true">Advertisement</string>
 
 
     <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Browse articles freely</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Search from microsoft</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Search from google</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">Tracking protection search</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Block Popup | Toggle to Disable Popup Advert</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Remove popup advertizement. Might break functionaly of some websites</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Tab view</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Switch between Tab manager Grid Layout and List Layout</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Grid Design</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">List Design</string>
+
     <string name="SETTING_DEFAULT_LANGUAGE" translatable="false">ru</string>
     <string name="SETTING_BASIC_SETTING" translatable="true">Basic Settings</string>
     <string name="SETTING_DEFAULT_BROWSER" translatable="true">Make Orion your default browser</string>
@@ -272,15 +324,11 @@
     <string name="SETTING_PRIVACY_TRACKING_OPTION3_INFO" translatable="true">Stop all known trackers, Pages will load faster but some functionality might not work</string>
     <string name="SETTING_PRIVACY_JAVASCRIPT" translatable="true">Allow Javascript | Toggle to Enable Javascript</string>
     <string name="SETTING_PRIVACY_JAVASCRIPT_INFO" translatable="true">Disable java scripting for various script attacks</string>
-    <string name="SETTING_PRIVACY_POPUP" translatable="false">Block Popup | Toggle to Disable Popup Advert</string>
-    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="false">Remove popup advertizement. Might break functionaly of some websites</string>
     <string name="SETTING_ADVANCE_HEADER" translatable="true">Settings | Advance</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB" translatable="true">Restore tabs</string>
     <string name="SETTING_ADVANCE_RESTORE_TAB_INFO" translatable="true">Don\'t restore after quitting browser</string>
     <string name="SETTING_ADVANCE_TITILE_THEME" translatable="true">Toolbar Theme</string>
     <string name="SETTING_ADVANCE_TITILE_THEME_INFO" translatable="true">Set toolbar theme as defined in website</string>
-    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="false">Tab view</string>
-    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="false">Switch between Tab manager Grid Layout and List Layout</string>
     <string name="SETTING_ADVANCE_SHOW_IMAGES" translatable="true">Show Images</string>
     <string name="SETTING_ADVANCE_SHOW_IMAGES_INFO" translatable="true">Always load website images</string>
     <string name="SETTING_ADVANCE_WEB_FONTS" translatable="true">Show web fonts</string>
@@ -295,8 +343,6 @@
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER" translatable="true">Media</string>
     <string name="SETTING_ADVANCE_DATA_SAVER_INFO" translatable="true">Change default data saver settings</string>
     <string name="SETTING_ADVANCE_MEDIA_SUB_HEADER_INFO" translatable="true">Change default media settings</string>
-    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="false">Grid Design</string>
-    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="false">List Design</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_1" translatable="true">Always show images</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_2" translatable="true">Only show images over WI-FI</string>
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Block all images</string>
@@ -427,13 +473,13 @@
     <!-- History Popup Menu -->
     <string name="HISTORY_TITLE" translatable="true">History</string>
     <string name="HISTORY_CLEAR" translatable="true">Clear</string>
-    <string name="HISTORY_EMPTY" translatable="false">Pages that you visit appear here</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">Search ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Pages that you visit appear here</string>
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Search ...</string>
 
     <!-- BOOKMARK Popup Menu -->
     <string name="BOOKMARK_TITLE" translatable="true">Bookmark</string>
     <string name="BOOKMARK_CLEAR" translatable="true">Clear</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">Search ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">Search ...</string>
     <string name="BOOKMARK_EMPTY" translatable="false">Pages that you bookmark appear here</string>
 
     <!-- Help -->

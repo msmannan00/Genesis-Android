@@ -17,6 +17,9 @@ android {
     compileSdkVersion project.ext.compile_sdk_version
     ndkVersion project.ext.ndk_version
 
+    lintOptions {
+        disable project.ext.lintoption
+    }
 
     defaultConfig {
         applicationId project.ext.application_id
@@ -92,7 +95,7 @@ dependencies {
     /* Firefox ABI Splits */
 
     implementation "org.mozilla.components:browser-engine-gecko:108.2.0"
-    implementation "org.mozilla.components:browser-icons:100.0.9"
+    implementation "org.mozilla.components:browser-icons:108.2.0"
     implementation "org.mozilla.components:concept-fetch:108.2.0"
     implementation "org.mozilla.components:concept-base:108.2.0"
     implementation "org.mozilla.components:support-utils:108.2.0"

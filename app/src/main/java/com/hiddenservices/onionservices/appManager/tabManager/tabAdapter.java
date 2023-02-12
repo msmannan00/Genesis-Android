@@ -1,13 +1,11 @@
 package com.hiddenservices.onionservices.appManager.tabManager;
 
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,26 +14,23 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
+import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_DOMAIN_URL;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_HELP_URL;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
@@ -43,6 +38,7 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 
+@SuppressLint("NotifyDataSetChanged")
 public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> {
     /*Private Variables*/
 
@@ -51,7 +47,6 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
     private ArrayList<String> mSelectedList = new ArrayList<>();
     private Boolean mLongPressMenuEnabled = false;
     private boolean mViewLoaded = false;
-    private ObjectAnimator mFirstRow = null;
 
 
     tabAdapter(ArrayList<tabRowModel> pModelList, eventObserver.eventListener event) {
@@ -271,7 +266,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
             super(itemView);
         }
 
-        @SuppressLint("UseCompatLoadingForDrawables")
+        @SuppressLint({"UseCompatLoadingForDrawables", "CutPasteId"})
         void bindListView(tabRowModel model) {
             mHeader = itemView.findViewById(R.id.pOrbotRowHeader);
             mDescription = itemView.findViewById(R.id.pOrbotRowDescription);
@@ -350,13 +345,13 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                         mLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                     } else {
                         if (mLogo.getDrawable() == null) {
-                            mEvent.invokeObserver(Arrays.asList(mLogo, "https://" + helperMethod.getDomainName(model.getSession().getCurrentURL())), enums.etype.fetch_favicon);
+                            mEvent.invokeObserver(Arrays.asList(mLogo, "https://" + helperMethod.getDomainName(model.getSession().getCurrentURL())), tabEnums.eTabAdapterCallback.ON_FETCH_FAVICON);
                         }
                     }
                 }
 
                 if (mHeadText.equals("$TITLE") || mDescText.startsWith("http://loading") || mDescText.startsWith("loading")) {
-                    mHeader.setText("about:blank");
+                    mHeader.setText(strings.HOME_BLANK_PAGE);
                 }
 
                 if (mHeadText.startsWith("resource")) {
@@ -472,7 +467,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                     mItemSelectionMenuButton.animate().setDuration(250).alpha(1);
                 }
                 mRemoveRow.bringToFront();
-            }, 10 * getLayoutPosition());
+            }, 10L * getLayoutPosition());
 
         }
 

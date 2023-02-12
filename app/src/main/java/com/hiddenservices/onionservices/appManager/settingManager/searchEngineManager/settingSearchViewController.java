@@ -1,8 +1,5 @@
 package com.hiddenservices.onionservices.appManager.settingManager.searchEngineManager;
 
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_GENESIS_SEARCH_DISABLED;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_MAX_TAB_REACHED;
-
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.view.View;
@@ -10,20 +7,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.hiddenservices.onionservices.pluginManager.pluginController;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 class settingSearchViewController {
@@ -34,7 +26,7 @@ class settingSearchViewController {
     private ArrayList<RadioButton> mSearchEngines;
     private SwitchMaterial mSearchHistory;
     private SwitchMaterial mSearchSuggestions;
-    private LinearLayout mSearchSettingOption1 = null;
+    private LinearLayout mSearchSettingOption1;
 
     /*Initializations*/
 

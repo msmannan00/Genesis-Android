@@ -59,7 +59,7 @@
     </string>
     <string name="SETTING_ORBOT_LIST_VIEW" translatable="true">show Log using modern list view
     </string>
-    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">toogle between classic and
+    <string name="SETTING_ORBOT_LIST_VIEW_INFO" translatable="true">toggle between classic and
         modern list view
     </string>
     <string name="SETTING_SEARCH" translatable="true">manage search engine</string>

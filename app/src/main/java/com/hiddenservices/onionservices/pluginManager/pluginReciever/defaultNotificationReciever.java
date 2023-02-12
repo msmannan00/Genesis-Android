@@ -1,21 +1,13 @@
 package com.hiddenservices.onionservices.pluginManager.pluginReciever;
 
 import static com.hiddenservices.onionservices.constants.constants.CONST_NOTIFICATION_COMMAND;
-
-import static java.lang.System.exit;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-
 import androidx.core.app.NotificationManagerCompat;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.status;
-import com.hiddenservices.onionservices.pluginManager.pluginController;
-import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 

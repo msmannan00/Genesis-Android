@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Application Strings -->
     <string name="app_name" translatable="false">Genesis</string>
@@ -7,21 +7,39 @@
     <string name="GENERAL_SEARCH_ENGINE" translatable="true">arama motoru</string>
     <string name="GENERAL_HOME_URL" translatable="false">https://orion.onion</string>
     <string name="GENERAL_ERROR_TITLE" translatable="true">opps! bir şeyler ters gitti</string>
-    <string name="GENERAL_TODO" translatable="true">herşey</string>
+    <string name="GENERAL_TODO" translatable="true">her şey</string>
     <string name="GENERAL_PROJECT_NAME" translatable="false">Orion search engine</string>
     <string name="GENERAL_LOADING" translatable="true">dijital özgürlük</string>
     <string name="GENERAL_RELOAD" translatable="true">Tekrar yükle</string>
     <string name="GENERAL_INTERNET_ERROR_MESSAGE" translatable="true">aşağıdaki problemlerden biriyle karşı karşıyasınız. web sayfası veya web sitesi çalışmıyor olabilir. İnternet bağlantınız zayıf olabilir. bir proxy kullanıyor olabilirsiniz. web sitesi güvenlik duvarı tarafından engelleniyor olabilir</string>
     <string name="GENERAL_FILE_PROVIDER_AUTHORITY" translatable="false">com.hiddenservices.onionservices.provider</string>
     <string name="GENERAL_DEFAULT_HINT_SUGGESTION" translatable="true">BBC | İsrail Yeniden Grevde</string>
+    <string name="GENERAL_SUPPORT_ORION_BROWSER" translatable="true">Bu Tarayıcıyı destekleyin</string>
+    <string name="GENERAL_FIX" translatable="true">Tarayıcıyı Düzeltin</string>
+    <string name="GENERAL_FIX_DESCRIPTION" translatable="true">Tarayıcıyı varsayılan ayarlara sıfırla</string>
+    <string name="GENERAL_CICADA" translatable="false">Ağustos böceği 3301</string>
+    <string name="GENERAL_CICADA_KEY" translatable="true">2YTDFEZjtinINil2ZDZhNmO2bDZh9mOINil2ZDZhNmO2ZHYpyDZsdmE2YTZjtmR2bDZh9mPINmF2Y/YrdmO2YXZjtmR2K/ZjCDYsdmO2LPZj9mI2YTZjyDZsdmE2YTZjtmR2bDZhjsJ9mQ</string>
+
+    <!-- Home Splash Screen -->
+    <string name="HOME_DESCRIPTION_TEXT_1">Tor Network tarafından korunmaktadır</string>
+    <string name="HOME_DESCRIPTION_TEXT_2">Kayıt Yok ve Dijital Parmak İzi</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Yerleşik Soğan Arama Motoru</string>
+    <string name="HOME_DESCRIPTION_TEXT_4">İzleme Koruması</string>
+    <string name="HOME_DESCRIPTION_TEXT_5">Depolanan Yerel Önbellek Yok</string>
+    <string name="HOME_DESCRIPTION_TEXT_6">Güvenli Yönetilebilir Çerezler</string>
+    <string name="HOME_DESCRIPTION_TEXT_7">Tor Network tarafından korunmaktadır</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Yerleşik Soğan Arama Motoru</string>
+    <string name="HOME_DESCRIPTION_TEXT_9">Kayıt Yok ve Dijital Parmak İzi</string>
+    <string name="HOME_CONNECT_NO_TOR">Normal Tarama</string>
+    <string name="HOME_CONNECT_TOR">Tor Tarama</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_erase_short_label" translatable="false">Tarayıcı önbelleğini sil</string>
-    <string name="shortcut_erase_long_label" translatable="false">Taranan web sitesini sil</string>
-    <string name="shortcut_erase_and_open_short_label" translatable="false">Verilerinizi silin ve tarayıcıyı açın</string>
-    <string name="shortcut_erase_and_open_long_label" translatable="false">Tarayıcı önbelleğini sil</string>
-    <string name="shortcut_open" translatable="false">Orion tarayıcısını yeniden başlatın</string>
-    <string name="shortcut_open_long" translatable="false">Tarayıcınızı Yeniden Başlatın</string>
+    <string name="SHORTCUT_ERASE_SHORT_LABEL" translatable="false">Tarayıcı önbelleğini sil</string>
+    <string name="SHORTCUT_ERASE_LONG_LABEL" translatable="false">Taranan web sitesini sil</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Verilerinizi silin ve tarayıcıyı açın</string>
+    <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">Tarayıcı önbelleğini sil</string>
+    <string name="SHORTCUT_OPEN" translatable="false">Orion tarayıcısını yeniden başlatın</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Tarayıcınızı Yeniden Başlatın</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Yer İşaretini Düzenle</string>
@@ -40,7 +58,18 @@
     <string name="LANDING_BROWSE_INFO" translatable="true">"İnternette güvenli ve güvenli bir şekilde gezinin."</string>
     <string name="LANDING_NO_TRACKING" translatable="true">"İzleme yok. Sansür yok."</string>
 
+    <!-- Alert Defaukt Browser -->
+    <string name="ALERT_DEFAULT_BROWSER_HEADER" translatable="true">Varsayılan Tarayıcı</string>
+    <string name="ALERT_DEFAULT_BROWSER_DESCRIPTION" translatable="true">orion\'u varsayılan tarayıcınız olarak ayarlayın</string>
+    <string name="ALERT_DEFAULT_BROWSER_TRIGGER" translatable="true">BT Varsayılanını Ayarla</string>
+
+    <!-- Alert TOR -->
+    <string name="ALERT_TOR_HEADER" translatable="true">Tor\'a Geç</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Bunu kullanarak, Duckduckgo\'yu kullanarak normal tarama arasında geçiş yapabilir veya Orion aramayı kullanarak gelişmiş güvenli karanlık web taraması yapabilirsiniz</string>
+    <string name="ALERT_TOR_TRIGGER" translatable="true">Değiştir</string>
+
     <!-- Alert Secure -->
+    <string name="ALERT_NON_SECURE_INFO_DETAIL" translatable="true">(Güvenli değil) Bu siteye gönderildiğinde bilgileriniz (örneğin, şifre veya kredi kartı numaraları) gizli değildir</string>
     <string name="ALERT_SECURE_INFO" translatable="true">Bağlantı güvenli</string>
     <string name="ALERT_SECURE_INFO_DETAIL" translatable="true">Bilgileriniz (örneğin, şifre veya kredi kartı numaraları) bu siteye gönderildiğinde güvendedir</string>
     <string name="ALERT_SECURE_INFO_SETTINGS" translatable="true">Güvenlik Ayarı</string>
@@ -70,13 +99,13 @@
     <string name="ORBOT_SETTING_BRIDGE_BASIC_SETTING" translatable="true">güvenlik özelleştir</string>
 
     <!-- Bridge Settings -->
+    <string name="BRIDGE_HEADER" translatable="true">Vekil sunucu Ayarları | Bridge</string>
     <string name="BRIDGE_BASIC_SETTING" translatable="true">Güvenlik Ayarları</string>
     <string name="BRIDGE_SETTING" translatable="true">"BRIDGE" Ayarlarını Değiştir</string>
     <string name="BRIDGE_AUTO" translatable="true">Otomatik Olarak Oluştur</string>
     <string name="BRIDGE_AUTO_INFO" translatable="true">"KÖPRÜ" ayarlarını otomatik olarak yapılandır</string>
     <string name="BRIDGE_MANUAL" translatable="true">Bildiğim bir "BRIDGE" sağlayın</string>
     <string name="BRIDGE_PORT_HINT" translatable="false">Özel "BRIDGE" yapıştır</string>
-    <string name="BRIDGE_HEADER" translatable="true">Proxy Settings | Bridge</string>
     <string name="BRIDGE_DESC" translatable="true">"BRIDGE", Tor ağına yapılan bağlantıları engellemeyi zorlaştıran, listelenmemiş Tor röleleridir. Bazı ülkelerin Tor\'u engellemeye çalışması nedeniyle, bazı "BRIDGE" bazı ülkelerde çalışır, ancak bazılarında çalışmaz</string>
     <string name="BRIDGE_TITLE" translatable="true">Varsayılan "BRIDGE"yü Seç</string>
     <string name="BRIDGE_REQUEST" translatable="true">Talep</string>
@@ -84,9 +113,26 @@
     <string name="BRIDGE_MEEK" translatable="true">Meek-masmavi (Çin)</string>
 
     <!-- Alert Bridge Custom -->
+    <string name="ALERT_CUSTOM_BRIDGES_HEADER" translatable="true">Sağlamak Bridge</string>
     <string name="ALERT_CUSTOM_BRIDGES" translatable="true">bildiğiniz bir Bridge sağlayın</string>
     <string name="ALERT_CUSTOM_BRIDGES_INFO" translatable="true">güvenilir bir kaynaktan bridge bilgi girin</string>
     <string name="ALERT_CUSTOM_BRIDGE" translatable="true">istek</string>
+
+    <!-- Adview Custom -->
+    <string name="ADVIEW_HEADER" translatable="true">Reklamcılık</string>
+
+    <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Makalelere özgürce göz atın</string>
+    <string name="SETTING_SEARCH_NAME_BING" translatable="true">Microsoft\'tan arayın</string>
+    <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Google\'dan arayın</string>
+    <string name="SETTING_SEARCH_NAME_DUCKDUCKGO" translatable="true">İzleme koruması araması</string>
+
+    <string name="SETTING_PRIVACY_POPUP" translatable="true">Açılır Pencereyi Engelle | Açılır Reklamı Devre Dışı Bırakmak için Geçiş Yap</string>
+    <string name="SETTING_PRIVACY_POPUP_INFO" translatable="true">Açılır reklamı kaldır Bazı web sitelerinin işlevselliğini bozabilir</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT" translatable="true">Sekme görünümü</string>
+    <string name="SETTING_ADVANCE_GRID_LAYOUT_INFO" translatable="true">Sekme yöneticisi Izgara Düzeni ve Liste Düzeni arasında geçiş yapın</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_1" translatable="true">Izgara Tasarımı</string>
+    <string name="SETTING_ADVANCE_GRID_OPTION_2" translatable="true">Liste Tasarımı</string>
 
     <!-- Alert Advance Log -->
     <string name="SETTING_ADVANCE_LOG_HEADER" translatable="true">Sistem Günlüğünün görünme şeklini değiştirin</string>
@@ -103,7 +149,7 @@
     <string name="TOAST_ALERT_RESTART" translatable="true">Yeniden Başlat</string>
     <string name="TOAST_ALERT_UNDO_INFO" translatable="true">Sekme Kapalı</string>
     <string name="TOAST_ALERT_OPEN_NEW_TAB" translatable="true">Yeni sekme açıldı</string>
-    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true">Orion proxy bağlanıyor...</string>
+    <string name="TOAST_ALERT_ORBOT_LOADING" translatable="true" tools:ignore="TypographyEllipsis">Orion proxy bağlanıyor...</string>
     <string name="TOAST_ALERT_MAX_TAB_POPUP" translatable="true">Bellek dolu ➔ Sekme temizleniyor</string>
     <string name="TOAST_ALERT_SETTING_PRIVACY_POPUP" translatable="true">Pop-up engellendi</string>
     <string name="TOAST_ALERT_ORBOT_LOADING_BUTTON" translatable="true">Hata Günlüklerini Aç</string>
@@ -123,23 +169,26 @@
     <string name="ALERT_PANIC_BT_2" translatable="true">Kapat</string>
 
     <!-- Alert Download Single -->
-    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true">İndirmek için bekleniyor...</string>
+    <string name="ALERT_DOWNLOAD_SINGLE" translatable="true" tools:ignore="TypographyEllipsis">İndirmek için bekleniyor...</string>
     <string name="ALERT_DOWNLOAD_SINGLE_BUTTON" translatable="true">İndir</string>
 
     <!-- Alert Rateus -->
     <string name="ALERT_RATEUS" translatable="true">ABD\'yi Değerlendir</string>
     <string name="ALERT_RATEUS_INFO" translatable="true">Başkalarına bu uygulama hakkında ne düşündüğünüzü söyleyin</string>
     <string name="ALERT_RATE" translatable="true">Puan</string>
+    <string name="ALERT_RATE_DESCRIPTION_1" translatable="true">Bu tarayıcıyı seviyorum\n5/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_2" translatable="true">Tarayıcı gibi\n4/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_3" translatable="true">tatmin edici\n3/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_4" translatable="true">Ortalamanın altında\n2/5</string>
+    <string name="ALERT_RATE_DESCRIPTION_5" translatable="true">Kötü tarayıcı\n1/5</string>
 
     <!-- Alert BRIDGE -->
     <string name="ALERT_BRIDGE_SAVE_BRIDGE" translatable="true">Bitti</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES" translatable="false">Bridge dize (obfs4 212.21.66.66:20621 ...)</string>
-    <string name="ALERT_BRIDGE_ADD_BRIDGES_TYPE" translatable="false">Bridge tipi (obfs4, meek, ...)</string>
 
     <!-- Alert Create Bookmark -->
     <string name="ALERT_CREATE_BOOKMARK_INFO_HEADER" translatable="true">Yer İşareti Web Sitesi</string>
     <string name="ALERT_CREATE_BOOKMARK_INFO" translatable="true">Bu sayfayı yer imlerinize ekleyin</string>
-    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true">yer imi adı...</string>
+    <string name="ALERT_CREATE_BOOKMARK_TITLE_ADD" translatable="true" tools:ignore="TypographyEllipsis">yer imi adı...</string>
     <string name="ALERT_CREATE_BOOKMARK_DONE" translatable="true">Bitti</string>
 
     <!-- Alert Long Download -->
@@ -396,12 +445,12 @@
 
     <string name="HISTORY_TITLE" translatable="true">taranan web bağlantıları</string>
     <string name="HISTORY_CLEAR" translatable="true">Bunu kaldır</string>
-    <string name="HISTORY_SEARCH_HINT" translatable="true">arama ...</string>
-
+    <string name="HISTORY_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">arama ...</string>
+    <string name="HISTORY_EMPTY" translatable="true">Ziyaret ettiğiniz sayfalar burada görünür</string>
 
     <string name="BOOKMARK_TITLE" translatable="true">yer imi</string>
     <string name="BOOKMARK_CLEAR" translatable="true">Bunu kaldır</string>
-    <string name="BOOKMARK_SEARCH_HINT" translatable="true">arama ...</string>
+    <string name="BOOKMARK_SEARCH_HINT" translatable="true" tools:ignore="TypographyEllipsis">arama ...</string>
 
 
     <string name="HELP_RETRY" translatable="true">yeniden dene</string>

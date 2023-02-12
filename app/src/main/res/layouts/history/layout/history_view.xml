@@ -31,21 +31,22 @@
             tools:ignore="RtlSymmetry">
 
             <ImageButton
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="1dp"
                 android:background="@xml/gx_ripple_default_round"
                 android:contentDescription="@string/GENERAL_TODO"
                 android:onClick="onBackPressed"
                 android:src="@xml/ic_arrow_back"
-                app:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/pTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="-3dp"
+                android:paddingTop="1dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center_vertical|start"
@@ -55,7 +56,7 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <com.hiddenservices.onionservices.appManager.homeManager.homeController.editTextManager
+            <com.hiddenservices.onionservices.appManager.editTextManager
                 android:id="@+id/pSearchInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -87,8 +88,8 @@
 
             <ImageButton
                 android:id="@+id/pSearchButton"
-                android:layout_width="30dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="1dp"
                 android:layout_weight="2.5"
@@ -99,12 +100,13 @@
                 android:paddingBottom="10dp"
                 android:scaleType="fitCenter"
                 android:src="@xml/ic_search"
-                app:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <ImageButton
                 android:id="@+id/pMenuButton"
-                android:layout_width="30dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="1dp"
                 android:layout_weight="2.5"
@@ -115,7 +117,8 @@
                 android:paddingBottom="14dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_item"
-                app:tint="@color/c_navigation_tint" />
+                app:tint="@color/c_navigation_tint"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
     </LinearLayout>
@@ -145,7 +148,7 @@
                 <Button
                     android:id="@+id/pClearButton"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:elevation="1dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"

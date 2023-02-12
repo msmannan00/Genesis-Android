@@ -56,7 +56,7 @@
                 android:id="@+id/pOrbotRowFooter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="13dp"
                 android:layout_marginTop="8dp"
                 android:clickable="false"
                 android:focusable="false"
@@ -67,16 +67,16 @@
 
                 <ImageView
                     android:id="@+id/pOrbotRowClock"
-                    android:layout_width="wrap_content"
+                    android:layout_width="15dp"
                     android:layout_height="18dp"
-                    android:layout_marginStart="-5dp"
                     android:layout_marginTop="0dp"
                     android:clickable="false"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:ellipsize="end"
                     android:src="@xml/ic_baseline_clock"
                     android:textColor="@color/c_text_v1"
-                    app:tint="@color/c_divider_line_light" />
+                    app:tint="@color/c_divider_line_light"
+                    tools:ignore="ImageContrastCheck" />
 
                 <TextView
                     android:id="@+id/pOrbotRowDescription"
@@ -87,6 +87,7 @@
                     android:clickable="false"
                     android:ellipsize="end"
                     android:text="@string/GENERAL_TODO"
+                    android:paddingTop="1dp"
                     android:textColor="@color/c_text_v3"
                     android:textSize="13sp" />
 
@@ -109,7 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/c_text_v3"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry,ImageContrastCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

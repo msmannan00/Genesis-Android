@@ -22,8 +22,8 @@
 
         <ImageButton
             android:id="@+id/pOrbotLogBack"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="1dp"
             android:background="@xml/gx_ripple_default_round"
@@ -31,13 +31,13 @@
             android:onClick="onCloseTriggered"
             android:src="@xml/ic_arrow_back"
             app:tint="@color/c_navigation_tint"
-            tools:ignore="UsingOnClickInXml" />
+            tools:ignore="UsingOnClickInXml,DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/pOrbotLogToolbarHeader"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="-3dp"
+            android:paddingTop="1dp"
             android:gravity="center_vertical|start"
             android:onClick="onCloseTriggered"
             android:paddingStart="10dp"
@@ -55,17 +55,17 @@
 
         <ImageButton
             android:id="@+id/pOrbotLogSettings"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="0dp"
-            android:layout_marginEnd="3dp"
             android:layout_marginTop="1dp"
+            android:layout_marginEnd="3dp"
             android:background="@xml/gx_ripple_default_round"
             android:contentDescription="@string/GENERAL_TODO"
             android:onClick="onUITriggered"
             android:src="@xml/ic_gear"
             app:tint="@color/c_header_icon_tint"
-            tools:ignore="UsingOnClickInXml" />
+            tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
 
     </LinearLayout>
 
@@ -125,7 +125,7 @@
                     android:background="@color/clear_alpha"
                     android:paddingBottom="10dp"
                     android:text="@string/ORBOT_LOG_INFO"
-                    android:textColor="@color/c_text_v2"
+                    android:textColor="#757575"
                     android:textSize="14sp" />
             </LinearLayout>
 

@@ -16,6 +16,6 @@ public class localHelperMethod
         int millis = now.get(Calendar.MILLISECOND);
 
         System.out.printf("%d-%02d-%02d %02d:%02d:%02d.%03d", year, month, day, hour, minute, second, millis);
-        return month + "/" + year + " | " + hour + ":" + minute + ":" + second;
+        return day + "/" + month + "/" + year + " | " + hour + ":" + minute + ":" + second;
     }
 }

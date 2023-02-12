@@ -1,25 +1,21 @@
 package com.hiddenservices.onionservices.appManager.languageManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
-import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.dataManager.dataController;
@@ -30,22 +26,17 @@ import com.hiddenservices.onionservices.appManager.activityThemeManager;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.hiddenservices.onionservices.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-
 import static com.hiddenservices.onionservices.appManager.languageManager.languageEnums.eLanguageModel.M_ACTIVE_LANGUAGE;
 import static com.hiddenservices.onionservices.constants.constants.CONST_LANGUAGE_DEFAULT_LANG;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_SUPPORTED_SYSTEM_LANGUAGE_INFO;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LANGUAGE_SUPPORT_FAILURE;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LOW_MEMORY;
 
-import org.torproject.android.service.wrapper.orbotLocalConstants;
-
+@SuppressLint("NotifyDataSetChanged")
 public class languageController extends AppCompatActivity {
 
     /*Private Variables*/
@@ -141,10 +132,6 @@ public class languageController extends AppCompatActivity {
     /*Helper Methods*/
 
     private boolean changeLanguage(String pLanguageCode, String pLanguageRegion) {
-        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_LOW_MEMORY);
-            return false;
-        }
         boolean mDefaultLanguageNotSupported = false;
         if (pLanguageCode.equals(CONST_LANGUAGE_DEFAULT_LANG)) {
             Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;

@@ -45,6 +45,21 @@ public class activityThemeManager {
         return false;
     }
 
+    public Context onInitThemeContext(Context pContext) {
+        boolean sDefaultNightMode = (pContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+
+        if (status.sSettingIsAppStarted) {
+            status.mThemeApplying = true;
+        }
+
+        status.sDefaultNightMode = sDefaultNightMode;
+        pContext = setupTheme(pContext);
+
+        mode = -1;
+
+        return pContext;
+    }
+
     public void setupThemeLocal(Context context, boolean sDefaultNightMode) {
         Resources res = context.getResources();
         mode = res.getConfiguration().uiMode;
@@ -110,21 +125,6 @@ public class activityThemeManager {
         config.uiMode = mode;
         context = context.createConfigurationContext(config);
         return context;
-    }
-
-    public Context initTheme(Context pContext) {
-        boolean sDefaultNightMode = (pContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
-
-        if (status.sSettingIsAppStarted) {
-            status.mThemeApplying = true;
-        }
-
-        status.sDefaultNightMode = sDefaultNightMode;
-        pContext = setupTheme(pContext);
-
-        mode = -1;
-
-        return pContext;
     }
 
 }

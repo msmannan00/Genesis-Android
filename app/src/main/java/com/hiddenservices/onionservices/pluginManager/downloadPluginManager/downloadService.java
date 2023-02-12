@@ -13,21 +13,26 @@ import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import java.util.Arrays;
 
 public class downloadService extends IntentService {
+
+    private static String S_DOWNLOAD_SERVICE_NAME = "DOWNLOAD_SERVICE";
+    private static String S_DOWNLOAD_PATH = "DOWNLOAD_PATH";
+    private static String S_DOWNLOAD_DESTINATION_PATH = "DESTINATION_PATH";
+
     public downloadService() {
-        super("DOWNLOAD_SERVICE");
+        super(S_DOWNLOAD_SERVICE_NAME);
     }
 
     public static Intent getDownloadService(final @NonNull Context callingClassContext, final @NonNull String downloadPath, final @NonNull String destinationPath) {
         Intent mIntent = new Intent(callingClassContext, downloadService.class);
-        mIntent.putExtra("DOWNLOAD_PATH", downloadPath);
-        mIntent.putExtra("DESTINATION_PATH", destinationPath);
+        mIntent.putExtra(S_DOWNLOAD_PATH, downloadPath);
+        mIntent.putExtra(S_DOWNLOAD_DESTINATION_PATH, destinationPath);
         return mIntent;
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        String mDownloadPath = intent.getStringExtra("DOWNLOAD_PATH");
-        String mDestinationPath = intent.getStringExtra("DESTINATION_PATH");
+        String mDownloadPath = intent.getStringExtra(S_DOWNLOAD_PATH);
+        String mDestinationPath = intent.getStringExtra(S_DOWNLOAD_DESTINATION_PATH);
 
         pluginController.getInstance().onDownloadInvoke(Arrays.asList(mDownloadPath, mDestinationPath), pluginEnums.eDownloadManager.M_START_DOWNLOAD);
     }

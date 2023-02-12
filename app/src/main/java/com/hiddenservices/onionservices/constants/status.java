@@ -35,7 +35,6 @@ public class status {
     public static String sVersion = "";
     public static String sExternalWebsite = strings.GENERIC_EMPTY_STR;
     public static String sBridgesDefault = strings.BRIDGES_DEFAULT;
-    public static String sAdvertURL = strings.GENERIC_EMPTY_STR;
 
     public static boolean sIsBackgroundAdvertCheck = false;
     public static boolean sTorBrowsing = false;
