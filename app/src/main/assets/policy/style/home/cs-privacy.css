@@ -30,12 +30,12 @@
     padding-top: 3px
 }
 .privacy__welcome-mail{
-    font-size: 15px;/
-    text-align:center;
+    font-size: 15px;
+    text-align:center !important;
     margin: 25px auto auto;
     font-weight: bold;
-    padding: 13px 13px 13px 33px;
-    width: 200px;
+    padding: 13px 13px 13px 13px;
+    max-width: 200px;
     border-radius: 5px;
     border: 2px solid white;
     cursor: pointer;

@@ -29,6 +29,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import androidx.annotation.NonNull;
@@ -41,6 +43,8 @@ import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.hiddenservices.onionservices.BuildConfig;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.editTextManager;
 import com.hiddenservices.onionservices.constants.*;
@@ -242,6 +246,8 @@ public class homeViewController {
 
         mFindText.setLongClickable(false);
         mFindText.setOnLongClickListener(v -> false);
+        String mText = "Copyright © by Orion Technologies | Build "+BuildConfig.VERSION_NAME.substring(20);
+        mCopyright.setText(mText);
 
     }
 
@@ -275,6 +281,7 @@ public class homeViewController {
 
             String mText = getLocaleStringResource(new Locale(sSettingLanguage), R.string.GENERAL_SEARCH_ENGINE, mContext);
             ((TextView)mSearchEngineBar.findViewById(R.id.pSearchEngineHintInvoke)).setText(mText);
+            int e=0;
 
         }
     }
@@ -624,12 +631,34 @@ public class homeViewController {
             mOrbotLogManager.setEnabled(true);
         }, 700);
 
-        mConnectButton.animate().setDuration(350).alpha(0.4f).withEndAction(() -> {
-            mCopyright.setVisibility(View.GONE);
-            initSplashLoading();
-        });
-        mConnectNoTorButton.animate().setDuration(350).alpha(0f).withEndAction(() -> {
-        });
+        if(status.sTorBrowsing){
+            mConnectButton.animate().setDuration(350).alpha(0.4f).withEndAction(() -> {
+                mCopyright.setVisibility(View.GONE);
+                initSplashLoading();
+            });
+
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mConnectButton.getLayoutParams();
+            final int bottomMarginStart = params.bottomMargin;
+            final int bottomMarginEnd = 0;
+            Animation a = new Animation() {
+                @Override
+                protected void applyTransformation(float interpolatedTime, Transformation t) {
+                    ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mConnectButton.getLayoutParams();
+                    params.bottomMargin = bottomMarginStart + (int) ((bottomMarginEnd - bottomMarginStart) * interpolatedTime);
+                    mConnectButton.setLayoutParams(params);
+                }
+            };
+            a.setDuration(400);
+            mConnectButton.startAnimation(a);
+            mConnectNoTorButton.animate().setDuration(150).alpha(0f).withEndAction(() -> {});
+        }else {
+            mConnectButton.animate().setDuration(350).alpha(0f).withEndAction(() -> {
+                mCopyright.setVisibility(View.GONE);
+                initSplashLoading();
+            });
+            mConnectNoTorButton.animate().setDuration(350).alpha(0.4f).withEndAction(() -> {});
+        }
+
         mGatewaySplash.animate().setDuration(350).alpha(0.4f);
         mPanicButtonLandscape.animate().setInterpolator(new AccelerateInterpolator()).setDuration(170).translationXBy(helperMethod.pxFromDp(55));
         mPanicButton.animate().setDuration(170).setInterpolator(new AccelerateInterpolator()).translationXBy(helperMethod.pxFromDp(55));
@@ -846,9 +875,11 @@ public class homeViewController {
 
     @SuppressLint("InflateParams")
     View popupView = null;
+    boolean mIsBookmarked = false;
 
     void onOpenMenu(View view, boolean canGoForward, boolean isLoading, int userAgent, String mURL, boolean pIsBookmarked) {
 
+        mIsBookmarked = pIsBookmarked;
         if (popupWindow != null) {
             popupWindow.dismiss();
         }
@@ -964,14 +995,21 @@ public class homeViewController {
         if (popupView != null) {
             ImageButton mRefresh = popupView.findViewById(R.id.menu21);
             ImageButton close = popupView.findViewById(R.id.menu20);
+            ImageButton bookmark = popupView.findViewById(R.id.menu23);
+
             close.setVisibility(View.GONE);
             mRefresh.setVisibility(View.VISIBLE);
-            mRefresh.animate().alpha(0.1f);
+            mRefresh.setAlpha(0.1f);
             close.animate().alpha(0);
-            new Handler().postDelayed(() ->
-            {
-                mRefresh.animate().setDuration(250).alpha(1f);
-            }, 300);
+
+            if(!mIsBookmarked){
+                bookmark.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_bookmark));
+                bookmark.setColorFilter(ContextCompat.getColor(mContext, R.color.c_navigation_tint), android.graphics.PorterDuff.Mode.MULTIPLY);
+                bookmark.animate().alpha(1);
+                bookmark.setClickable(true);
+            }
+
+            mRefresh.animate().setDuration(250).alpha(1f);
         }
     }
 
@@ -1419,7 +1457,7 @@ public class homeViewController {
             return;
         }
 
-        if (mSearchbar.getText().toString().equals("orion.onion")) {
+        if (mSearchbar.getText().toString().equals("orion.onion") && !mForced) {
             return;
         }
 
@@ -1460,7 +1498,9 @@ public class homeViewController {
 
         new Handler().postDelayed(() ->
         {
-            onResetTabAnimation();
+            if(e_type!=null && e_type.equals(homeEnums.eGeckoCallback.M_CLOSE_TAB_BACK)){
+                onResetTabAnimation();
+            }
         }, pDelay);
 
         mGeckoView.setPivotX(0);
@@ -1480,7 +1520,7 @@ public class homeViewController {
             final Handler handler = new Handler();
             handler.postDelayed(() -> {
                 mEvent.invokeObserver(data, e_type);
-            }, 450);
+            }, 300);
 
             scaleDown.addListener(new Animator.AnimatorListener() {
                 @Override
@@ -1500,18 +1540,14 @@ public class homeViewController {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    //scaleDown.removeAllListeners();
-                    //mEvent.invokeObserver(data, e_type);
                 }
 
                 @Override
                 public void onAnimationCancel(Animator animation) {
-                    Log.i("","");
                 }
 
                 @Override
                 public void onAnimationRepeat(Animator animation) {
-                    Log.i("","");
                 }
             });
         }else {
@@ -1620,7 +1656,7 @@ public class homeViewController {
 
             mDefaultColor = mContext.getWindow().getNavigationBarColor();
             mContext.getWindow().setNavigationBarColor(Color.BLACK);
-            mEvent.invokeObserver(Collections.singletonList(true), homeEnums.eHomeViewCallback.on_full_screen_ads);
+            mEvent.invokeObserver(Collections.singletonList(true), homeEnums.eHomeViewCallback.ON_FULL_SCREEN_ADS);
 
             new Handler().postDelayed(() ->
             {
@@ -1718,7 +1754,7 @@ public class homeViewController {
                 mProgressBar.setVisibility(View.VISIBLE);
                 mTopBar.setVisibility(View.VISIBLE);
                 mEvent.invokeObserver(Collections.singletonList(!isLandscape), homeEnums.eHomeViewCallback.ON_INIT_ADS);
-                mEvent.invokeObserver(Collections.singletonList(isLandscape), homeEnums.eHomeViewCallback.on_full_screen_ads);
+                mEvent.invokeObserver(Collections.singletonList(isLandscape), homeEnums.eHomeViewCallback.ON_FULL_SCREEN_ADS);
 
                 status.sFullScreenBrowsing = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FULL_SCREEN_BROWSIING, false));
 
@@ -1814,9 +1850,9 @@ public class homeViewController {
                     if (mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_HOME_PAGE) == null) {
                         mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_PRELOAD_URL);
                         if (status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)) {
-                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingDefaultSearchEngine)), homeEnums.eHomeViewCallback.on_url_load);
+                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingDefaultSearchEngine)), homeEnums.eHomeViewCallback.ON_URL_LOAD);
                         } else {
-                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), homeEnums.eHomeViewCallback.on_url_load);
+                            mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), homeEnums.eHomeViewCallback.ON_URL_LOAD);
                         }
                     }
                     if (!status.sExternalWebsite.equals(strings.GENERIC_EMPTY_STR)) {

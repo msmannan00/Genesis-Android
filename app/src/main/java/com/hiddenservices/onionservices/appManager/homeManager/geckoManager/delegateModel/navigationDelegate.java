@@ -112,7 +112,7 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
             mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, false), homeEnums.eGeckoCallback.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         } else if (var1.target == 2) {
-            mEvent.invokeObserver(Arrays.asList(m_url, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.open_new_tab);
+            mEvent.invokeObserver(Arrays.asList(m_url, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.OPEN_NEW_TAB);
             mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_EXPAND_TOP_BAR);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         } else if (!m_url.equals("about:blank")) {
@@ -154,6 +154,7 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
             if (status.sSettingIsAppStarted && orbotLocalConstants.mIsTorInitialized) {
                 errorHandler handler = new errorHandler();
                 mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_LOAD_ERROR);
+                mGeckoDataModel.mTheme = null;
                 mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_THEME);
 
                 InputStream mResourceURL = null;

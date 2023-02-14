@@ -123,7 +123,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
 
     public void onClose() {
         stop();
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
     }
 
     public boolean onRestoreState() {
@@ -178,17 +178,16 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
     }
 
     public void goBackSession() {
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
         goBack();
     }
 
     public void goForwardSession() {
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
         goForward();
     }
 
     /*Properties Getter Setter*/
-
     public void setTheme(String pTheme) {
         mGeckoDataModel.mTheme = pTheme;
     }

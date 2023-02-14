@@ -22,6 +22,7 @@ import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.R;
+import com.hiddenservices.onionservices.pluginManager.pluginController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,8 @@ import java.util.List;
 
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_COPY;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_RESET;
 
 @SuppressLint("NotifyDataSetChanged")
 public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listViewHolder> {
@@ -401,7 +404,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
             if (v.getId() == R.id.pMenuCopy) {
                 helperMethod.copyURL(pUrl, mListHolderContext);
                 mPopupWindow.dismiss();
-                helperMethod.showToastMessage("copied to clipboard", mContext);
+                pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(mContext), M_COPY);
             } else if (v.getId() == R.id.pMenuShare) {
                 helperMethod.shareApp((AppCompatActivity) mListHolderContext, pUrl, pTitle);
                 mPopupWindow.dismiss();

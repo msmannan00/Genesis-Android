@@ -21,6 +21,7 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
     private mediaDelegate mMediaDelegate;
     private WeakReference<AppCompatActivity> mContext;
     private geckoDataModel mGeckoDataModel;
+    private boolean mIsRunning = false;
 
     private Bitmap mMediaImage;
     private String mMediaTitle = GENERIC_EMPTY_STR;
@@ -38,6 +39,7 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
     @Override
     public void onActivated(@NonNull GeckoSession session, @NonNull MediaSession mediaSession) {
         MediaSession.Delegate.super.onActivated(session, mediaSession);
+        mIsRunning = true;
         mMediaSession = mediaSession;
     }
 
@@ -49,7 +51,6 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
 
     @Override
     public void onMetadata(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, @NonNull MediaSession.Metadata meta) {
-
         try {
             mMediaTitle = meta.title;
             mMediaImage = meta.artwork.getBitmap(250).poll(2500);
@@ -103,8 +104,10 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
                 mMediaSession.play();
             }
             else if(pCommands.equals(enums.MediaController.PAUSE)){
-                mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, false);
                 mMediaSession.pause();
+                if(mIsRunning){
+                    mMediaDelegate.showNotification(this.mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, false);
+                }
             }
             else if(pCommands.equals(enums.MediaController.STOP)){
                 mMediaSession.stop();
@@ -112,6 +115,7 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
             else if(pCommands.equals(enums.MediaController.DESTROY)){
                 mMediaSession.stop();
                 mMediaDelegate.onHideDefaultNotification();
+                mIsRunning = false;
             }
             else if(pCommands.equals(enums.MediaController.SKIP_BACKWARD)){
                 mMediaSession.previousTrack();

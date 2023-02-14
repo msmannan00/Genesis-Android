@@ -216,7 +216,7 @@ public class settingGeneralController extends AppCompatActivity {
     }
 
     public void onSelectTheme(View view) {
-        if(status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
+        if(status.sLowMemory == enums.MemoryStatus.CRITICAL_MEMORY){
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_LOW_MEMORY);
             return;
         }

@@ -30,7 +30,7 @@ class languageModel {
         mSupportedLanaguage.add(new languageDataModel("韓国語", "Korean", "ko", "Kr"));
         mSupportedLanaguage.add(new languageDataModel("Português", "Portuguese (Portugal)", "pt", "Pt"));
         mSupportedLanaguage.add(new languageDataModel("Română", "Romanian", "ro", "Ro"));
-        // mSupportedLanaguage.add(new languageDataModel("Urdu (اردو)", "Urdu", "ur", "Ur"));
+        //mSupportedLanaguage.add(new languageDataModel("Urdu (اردو)", "Urdu", "ur", "Ur"));
         mSupportedLanaguage.add(new languageDataModel("русский", "Russian", "ru", "Ru"));
         mSupportedLanaguage.add(new languageDataModel("ไทย", "Thai", "th", "Th"));
         mSupportedLanaguage.add(new languageDataModel("Türk", "Turkish", "tr", "Tr"));

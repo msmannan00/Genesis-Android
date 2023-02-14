@@ -25,15 +25,16 @@ class settingNotificationModel {
     private void updateLocalNotification(boolean pStatus) {
 
         int mStatus = pStatus ? 1 : 0;
-        status.sBridgeNotificationManual = mStatus;
+        status.sNotificaionStatus = mStatus;
         if (!pStatus) {
-            activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
+            activityContextManager.getInstance().getHomeController().onHideDefaultNotification();
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
         } else {
             if(status.sTorBrowsing){
-                activityContextManager.getInstance().getHomeController().onHideDefaultNotification();
+                pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
+            }else {
+                activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
             }
-            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
         }
     }
 

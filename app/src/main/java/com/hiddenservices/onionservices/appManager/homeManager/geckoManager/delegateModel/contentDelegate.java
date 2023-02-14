@@ -73,21 +73,21 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
         }
         if (var4.type != 0 && var4.srcUri != null) {
             if (var4.linkUri != null) {
-                mEvent.invokeObserver(Arrays.asList(var4.linkUri, mGeckoDataModel.mSessionID, var4.srcUri, title, var4.altText, mGeckoSession, mContext.get()), M_LONG_PRESS_WITH_LINK);
+                mEvent.invokeObserver(Arrays.asList(var4.linkUri, mGeckoDataModel.mSessionID, var4.srcUri, title, mGeckoDataModel.mTheme, var4.altText, mGeckoSession, mContext.get()), M_LONG_PRESS_WITH_LINK);
             } else {
                 try {
                     String mTitle = var4.title;
                     if (mTitle == null || mTitle.length() <= 0) {
                         mTitle = helperMethod.getDomainName(mGeckoDataModel.mCurrentURL) + "\n" + var4.srcUri;
                     }
-                    mEvent.invokeObserver(Arrays.asList(var4.srcUri, mGeckoDataModel.mSessionID, mTitle, mGeckoSession, mContext.get()), homeEnums.eGeckoCallback.ON_LONG_PRESS);
+                    mEvent.invokeObserver(Arrays.asList(var4.srcUri, mGeckoDataModel.mSessionID, mTitle, mGeckoDataModel.mTheme, mGeckoSession, mContext.get()), homeEnums.eGeckoCallback.ON_LONG_PRESS);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Log.i("", "");
                 }
             }
         } else if (var4.linkUri != null) {
-            mEvent.invokeObserver(Arrays.asList(var4.linkUri, mGeckoDataModel.mSessionID, title, mGeckoSession, mContext.get()), M_LONG_PRESS_URL);
+            mEvent.invokeObserver(Arrays.asList(var4.linkUri, mGeckoDataModel.mSessionID, title, mGeckoDataModel.mTheme, mGeckoSession, mContext.get()), M_LONG_PRESS_URL);
         }
     }
 
@@ -109,29 +109,28 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
     @UiThread
     public void onFirstContentfulPaint(@NonNull GeckoSession var1) {
         if (!mGeckoDataModel.mCurrentURL.equals("about:blank")) {
-            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID), homeEnums.eGeckoCallback.ON_LOAD_REQUEST);
+            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_THEME);
+            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_LOAD_REQUEST);
         }
 
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle), homeEnums.eGeckoCallback.ON_EXPAND_TOP_BAR);
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL,mGeckoDataModel.mSessionID,null, mGeckoDataModel.mCurrentURL_ID, null), homeEnums.eGeckoCallback.M_INDEX_WEBSITE);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_EXPAND_TOP_BAR);
     }
 
     @UiThread
     public void onWebAppManifest(@NonNull GeckoSession var1, @NonNull JSONObject var2) {
         try {
-            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL,mGeckoDataModel.mSessionID,mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, var2.getString("theme_color")), homeEnums.eGeckoCallback.M_INDEX_WEBSITE);
-            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL,mGeckoDataModel.mSessionID,null, mGeckoDataModel.mCurrentURL_ID, var2.getString("theme_color")), homeEnums.eGeckoCallback.M_INDEX_WEBSITE);
+            mGeckoDataModel.mTheme = var2.getString("theme_color");
+            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_THEME);
+            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL,mGeckoDataModel.mSessionID,mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.M_INDEX_WEBSITE);
         } catch (Exception ex) {
-            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle), homeEnums.eGeckoCallback.ON_UPDATE_THEME);
-            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL,mGeckoDataModel.mSessionID,null, mGeckoDataModel.mCurrentURL_ID, null), homeEnums.eGeckoCallback.M_INDEX_WEBSITE);
             ex.printStackTrace();
         }
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID), homeEnums.eGeckoCallback.ON_UPDATE_TAB_TITLE);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_TAB_TITLE);
     }
 
     @UiThread
     public void onCrash(@NonNull GeckoSession session) {
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoSession), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, mGeckoSession), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
 
         if (!mClosed && status.sSettingIsAppStarted) {
             if (mEvent == null) {
@@ -147,7 +146,7 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
                     final Handler handler = new Handler();
                     handler.postDelayed(() -> {
                         try {
-                            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, this), homeEnums.eGeckoCallback.M_OPEN_SESSION);
+                            mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.M_OPEN_SESSION);
                         } catch (Exception ignored) {
                         }
                     }, mCrashCount * 500L);
@@ -159,7 +158,7 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
 
     @UiThread
     public void onKill(@NonNull GeckoSession session) {
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoSession), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, mGeckoSession), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
 
         if (!mClosed && status.sSettingIsAppStarted) {
             if (mEvent == null) {
@@ -178,7 +177,7 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
                     handler.postDelayed(() -> {
                         if (status.sSettingIsAppStarted && !session.isOpen()) {
                             try {
-                                mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, this), homeEnums.eGeckoCallback.M_OPEN_SESSION);
+                                mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.M_OPEN_SESSION);
                             } catch (Exception ignored) {
                             }
                         }
@@ -192,7 +191,7 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
     @UiThread
     public void onCloseRequest(@NonNull final GeckoSession session) {
         mClosed = true;
-        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
         mGeckoDataModel.mSessionID = "-1";
     }
 

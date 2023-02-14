@@ -2,7 +2,6 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.del
 
 
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManagerCallbacks.M_RATE_APPLICATION;
-import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,7 +68,8 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
-
+        mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE_FORCED);
+        mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID, var2, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, null), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
         if (mIsLoaded) {
             if (!mGeckoDataModel.mCurrentURL.equals("about:config") && !var2.equals("about:blank") && helperMethod.getHost(var2).endsWith(".onion")) {
                 var2 = var2.replace("www.", "");
@@ -85,7 +85,6 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
             if (!mGeckoDataModel.mCurrentURL.equals("about:config") && !mGeckoDataModel.mCurrentURL.equals("about:blank") && !mGeckoDataModel.mCurrentTitle.equals("loading")) {
                 mProgress = 5;
                 mContext.get().runOnUiThread(() -> mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE));
-                mGeckoDataModel.mThemeChanged = false;
                 if(!var2.equals("about:blank")){
                     mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.SEARCH_UPDATE);
                 }
@@ -98,18 +97,6 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
         if (var2) {
             if (mProgress >= 100) {
                 mEvent.invokeObserver(Arrays.asList(null, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_PAGE_LOADED);
-
-                if (!mGeckoDataModel.mThemeChanged) {
-                    new Handler().postDelayed(() ->
-                    {
-                        if (!mGeckoDataModel.mThemeChanged) {
-                            mGeckoDataModel.mTheme = null;
-                            if (mEvent != null) {
-                                mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_THEME);
-                            }
-                        }
-                    }, 500);
-                }
             }
         }
     }

@@ -33,8 +33,8 @@
     <string name="HOME_DESCRIPTION_TEXT_7">Secured by Tor Network</string>
     <string name="HOME_DESCRIPTION_TEXT_8">Builtin Onion Search Engine</string>
     <string name="HOME_DESCRIPTION_TEXT_9">No Record and Digital Fingerprinting</string>
-    <string name="HOME_CONNECT_NO_TOR">Normal Browsing</string>
-    <string name="HOME_CONNECT_TOR">Tor Browsing</string>
+    <string name="HOME_CONNECT_NO_TOR">Fast &amp; Secure</string>
+    <string name="HOME_CONNECT_TOR">Dark Web - VPN</string>
 
     <!-- Default Notification -->
     <string name="DEFAULT_NOTIFICATION_RESET" translatable="false">EXIT AND RESET</string>

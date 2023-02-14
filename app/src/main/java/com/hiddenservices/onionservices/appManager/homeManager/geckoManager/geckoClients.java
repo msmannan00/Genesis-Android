@@ -59,7 +59,10 @@ public class geckoClients {
         if (pGeckoView.getSession() != null) {
             pGeckoView.releaseSession();
         }
-        mSession = initSettings(pGeckoView, pEvent, pContext);
+
+        this.mEvent = pEvent;
+        mSessionID = helperMethod.createRandomID();
+        mSession = initSettings(pGeckoView, pEvent, pContext, mSessionID);
         initRuntimeSettings(pContext);
         mSession.open(mRuntime);
         pGeckoView.setSession(mSession);
@@ -67,7 +70,8 @@ public class geckoClients {
     }
 
     public geckoSession initializeSessionInBackground(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pURL) {
-        geckoSession mSessionHidden = initSettings(pGeckoView, pEvent, pContext);
+        geckoSession mSessionHidden = initSettings(pGeckoView, pEvent, pContext, helperMethod.createRandomID());
+        mSessionHidden.open(mRuntime);
         mSessionHidden.loadUri(pURL);
 
         pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(pContext), M_LOAD_NEW_TAB);
@@ -75,16 +79,13 @@ public class geckoClients {
         return mSessionHidden;
     }
 
-    private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext){
-        this.mEvent = pEvent;
-        mSessionID = helperMethod.createRandomID();
-        mSession = new geckoSession(new geckoViewClientCallback(), mSessionID, pContext, pGeckoView);
-
-        mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
-        mSession.getSettings().setFullAccessibilityTree(true);
-        mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
-        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-        return mSession;
+    private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSessionID){
+        geckoSession mSessionIbitializer = new geckoSession(new geckoViewClientCallback(), pSessionID, pContext, pGeckoView);
+        mSessionIbitializer.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
+        mSessionIbitializer.getSettings().setFullAccessibilityTree(true);
+        mSessionIbitializer.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
+        mSessionIbitializer.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        return mSessionIbitializer;
     }
 
     public void initializeIcon(Context pcontext) {
@@ -132,7 +133,6 @@ public class geckoClients {
                 mSettings.configFilePath(helperMethod.getAssetsCacheFile(context, "geckoview-config.yaml"));
             }
             mSettings.build();
-            onClearAll();
 
             mRuntime = GeckoRuntime.create(context, mSettings.build());
             mRuntime.getSettings().setAboutConfigEnabled(true);
@@ -149,6 +149,7 @@ public class geckoClients {
             }
 
             dataController.getInstance().initializeListData();
+            onClearAll();
         }
         initializeIcon(context);
     }
@@ -327,7 +328,6 @@ public class geckoClients {
             mRuntime.getStorageController().clearData(SITE_DATA);
         }
     }
-
     public void onClearSession() {
         if (mRuntime != null) {
             mRuntime.getStorageController().clearData(AUTH_SESSIONS);
@@ -385,7 +385,9 @@ public class geckoClients {
     }
 
     public void onExitFullScreen() {
-        //mSession.exitScreen();
+        if(mSession!=null){
+            mSession.exitScreen();
+        }
     }
 
     public void onForwardPressed() {

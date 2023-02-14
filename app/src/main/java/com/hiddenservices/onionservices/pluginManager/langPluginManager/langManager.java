@@ -67,7 +67,7 @@ public class langManager {
                     } else if (mSystemLangugage.equals("vi_VN") || mSystemLangugage.equals("cs_CZ")) {
                         mLanguage = new Locale("ch", "Cz");
                     } else {
-                        mLanguage = new Locale(mSystemLocale.getLanguage(), mSystemLocale.getCountry());
+                        mLanguage = new Locale(mSystemLocale.getCountry(), mSystemLocale.getCountry());
                     }
                 } else {
                     mLanguage = new Locale("en", "Us");

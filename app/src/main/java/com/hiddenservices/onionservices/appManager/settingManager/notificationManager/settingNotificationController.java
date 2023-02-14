@@ -91,12 +91,13 @@ public class settingNotificationController extends AppCompatActivity {
         activityContextManager.getInstance().setCurrentActivity(this);
         super.onResume();
 
-        int notificationStatus = status.sBridgeNotificationManual;
+        int notificationStatus = status.sNotificaionStatus;
         if (notificationStatus == 0) {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
-            activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
+            activityContextManager.getInstance().getHomeController().onHideDefaultNotification();
         } else {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
+            activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
         }
     }
 
@@ -133,6 +134,6 @@ public class settingNotificationController extends AppCompatActivity {
     public void onSaveLocalNotificationSettings(View view) {
         mSettingNotificationModel.onTrigger(settingNotificationEnums.eNotificationModel.M_UPDATE_LOCAL_NOTIFICATION, Collections.singletonList(!mNotificationManual.isChecked()));
         mNotificationManual.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, status.sBridgeNotificationManual));
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, status.sNotificaionStatus));
     }
 }

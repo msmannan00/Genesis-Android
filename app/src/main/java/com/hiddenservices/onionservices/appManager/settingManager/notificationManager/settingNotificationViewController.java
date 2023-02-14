@@ -34,7 +34,7 @@ class settingNotificationViewController {
     }
 
     private void initViews() {
-        if (status.sBridgeNotificationManual == 1) {
+        if (status.sNotificaionStatus == 1) {
             mNotificationManual.setChecked(true);
         } else {
             mNotificationManual.setChecked(false);
