@@ -211,16 +211,21 @@ public class helpController extends AppCompatActivity {
     }
 
     public void onOpenHelpExternal(View view) {
-        if (!status.sSettingIsAppStarted) {
-            activityContextManager.getInstance().getHomeController().onStartApplication(null);
-        }
 
         if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(this)) {
             activityContextManager.getInstance().getHomeController().onDisableAdvert();
-            activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE);
+            if(!status.sSettingIsAppStarted){
+                activityContextManager.getInstance().getHomeController().onStartApplicationNoTorHelp(constants.CONST_GENESIS_HELP_URL_CACHE);
+            }else {
+                activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE);
+            }
         } else {
             activityContextManager.getInstance().getHomeController().onDisableAdvert();
-            activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
+            if(!status.sSettingIsAppStarted){
+                activityContextManager.getInstance().getHomeController().onStartApplicationNoTorHelp(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
+            }else {
+                activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_GENESIS_HELP_URL_CACHE_DARK);
+            }
         }
         finish();
         activityContextManager.getInstance().onGoHome();

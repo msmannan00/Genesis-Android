@@ -68,6 +68,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
+        mGeckoDataModel.mTheme = null;
         mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE_FORCED);
         mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID, var2, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, null), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
         if (mIsLoaded) {

@@ -36,11 +36,8 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
 
     @UiThread
     public void onHistoryStateChange(@NonNull GeckoSession var1, @NonNull GeckoSession.HistoryDelegate.HistoryList var2) {
-        if(mHistory==null || mHistory.size()!=var2.size()){
-            mGeckoDataModel.mTheme = null;
-        }
-        mHistory = var2;
-        if(mHistory !=null){
+        if(mHistory !=null && mHistory.size()!=var2.size()){
+            mHistory = var2;
             setURL(mHistory.get(mHistory.getCurrentIndex()).getUri());
             mEvent.invokeObserver(Arrays.asList(mHistory, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_URL_LOAD);
             if(mCurrentIndex != var2.getCurrentIndex()){
@@ -50,6 +47,8 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
             if (mID != null) {
                 mGeckoDataModel.mCurrentURL_ID = (int) mID;
             }
+        }else {
+            mHistory = var2;
         }
         mCurrentIndex = var2.getCurrentIndex();
     }

@@ -227,6 +227,7 @@ public class geckoClients {
             mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
             mSession.loadUri(url);
         }
+        mSession.initURL(url);
     }
 
     public void initHomeTheme() {

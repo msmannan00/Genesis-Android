@@ -1122,7 +1122,6 @@ public class homeViewController {
 
     void onUpdateSearchBar(String url, boolean showProtocol, boolean pClearText, boolean pBypassFocus) {
 
-
         if (url.endsWith("genesisconfigurenewidentity.com/")) {
             return;
         }
@@ -1355,8 +1354,10 @@ public class homeViewController {
             url = url.replace("https://", "");
             url = url.replace("http://", "");
         }
-
+        resource://android/assets/help/help.html
         url = url.replace("167.86.99.31", "orion.onion");
+        url = url.replace("resource://android/assets/help/help.html", "orion.help");
+        url = url.replace("resource://android/assets/help/help-dark.html", "orion.help");
         boolean isTextSelected = false;
 
         if (mSearchbar.isSelected()) {
