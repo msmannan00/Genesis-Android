@@ -15,7 +15,6 @@ prefs:
   browser.cache.disk.enable: true
   browser.cache.memory.enable: false
   browser.cache.disk.capacity: 1000000000
-  privacy.resistFingerprinting: true
   privacy.donottrackheader.enabled: false
   privacy.donottrackheader.value: 1
   network.http.sendRefererHeader: 0
@@ -51,6 +50,4 @@ prefs:
   privacy.clearOnShutdown.passwords: true
   privacy.clearOnShutdown.sessions: true
   privacy.clearOnShutdown.siteSettings: true
-
-
-
+  privacy.resistFingerprinting: false

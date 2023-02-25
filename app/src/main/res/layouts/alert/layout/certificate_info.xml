@@ -73,7 +73,7 @@
                     android:paddingBottom="100dp"
                     android:text="@string/GENERAL_TODO"
                     android:textAlignment="textStart"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="13sp"
                     android:translationZ="2dp"
                     app:layout_constraintStart_toStartOf="parent"

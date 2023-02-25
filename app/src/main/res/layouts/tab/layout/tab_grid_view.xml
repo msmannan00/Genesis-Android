@@ -129,8 +129,8 @@
                 android:visibility="visible" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 app:cardElevation="0dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="4dp"
@@ -141,8 +141,8 @@
                 <ImageView
                     android:alpha="0.9"
                     android:id="@+id/pLogo"
-                    android:layout_width="23dp"
-                    android:layout_height="23dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/GENERAL_TODO"
                     android:textAlignment="center"
                     android:background="@xml/ic_baseline_browser"

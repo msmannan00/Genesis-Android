@@ -123,6 +123,8 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
             else if(pCommands.equals(enums.MediaController.SKIP_FORWARD)){
                 mMediaSession.nextTrack();
             }
+        }else {
+            mMediaDelegate.onHideDefaultNotification();
         }
     }
 }

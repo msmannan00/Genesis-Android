@@ -255,12 +255,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
             return;
         }
 
-        Log.i("FFFFFFFFFFFFFFF","111");
-        Log.i("FFFFFFFFFFFFFFF","111");
-        Log.i("FFFFFFFFFFFFFFF","111");
-        Log.i("FFFFFFFFFFFFFFF","111");
-        Log.i("FFFFFFFFFFFFFFF","111");
-
         var intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         var pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -274,8 +268,8 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
         mNotifyBuilder.setOngoing(true);
 
-        var title = getString(R.string.status_disabled);
-        if (mCurrentStatus.equals(STATUS_STARTING) || notifyMsg.equals(getString(R.string.status_starting_up)))
+        var title = getString(R.string.status_starting_up);
+        if (STATUS_STARTING==null || mCurrentStatus.equals(STATUS_STARTING) || notifyMsg.equals(getString(R.string.status_starting_up)))
             title = getString(R.string.status_starting_up);
         else if (mCurrentStatus.equals(STATUS_ON)) {
             title = getString(R.string.status_activated);
@@ -450,7 +444,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         var capacity = 1;
         var keepLocalAddresses = false;
         var unsafeLogging = false;
-        var stunUrl = "stun:stun.stunprotocol.org:3478";
+        var stunUrl = "stun:stun.l.google.com:19302";
         var relayUrl = "wss://snowflake.bamsoftware.com";
         var natProbeUrl = "https://snowflake-broker.torproject.net:8443/probe";
         var brokerUrl = "https://snowflake-broker.torproject.net/";
@@ -459,7 +453,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
             Prefs.addSnowflakeServed();
             if (!Prefs.showSnowflakeProxyMessage()) return;
             var  message = String.format(getString(R.string.snowflake_proxy_client_connected_msg), SNOWFLAKE_EMOJI, SNOWFLAKE_EMOJI);
-            new Handler(getMainLooper()).post(() -> Toast.makeText(this, message, Toast.LENGTH_LONG).show());
+            new Handler(getMainLooper()).post(() -> Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show());
         });
         logNotice(getString(R.string.log_notice_snowflake_proxy_enabled));
     }
@@ -620,6 +614,11 @@ public class OrbotService extends VpnService implements OrbotConstants {
             debug("IPtProxy state: not installed; " + e.getLocalizedMessage());
 
         }
+    }
+
+    private static boolean useIPtObfsMeekProxy() {
+        var bridgeList = Prefs.getBridgesList();
+        return bridgeList.contains("obfs") || bridgeList.contains("meek");
     }
 
     private File updateTorrcCustomFile() throws IOException {
@@ -855,6 +854,14 @@ public class OrbotService extends VpnService implements OrbotConstants {
     private void clearEphemeralSmartConnectionSettings() {
         Prefs.putPrefSmartTryObfs4(null);
         Prefs.putPrefSmartTrySnowflake(false);
+    }
+
+    public void setSnowflakesProxy(){
+
+    }
+
+    public void setObfs4Proxy(){
+
     }
 
     private void sendSmartStatusToActivity(String status) {
@@ -1552,6 +1559,22 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
 
+    private static boolean useIPtSnowflakeProxyDomainFronting() {
+        return Prefs.getBridgesList().equals("snowflake");
+    }
+
+    private static boolean useIPtSnowflakeProxyAMPRendezvous() {
+        return Prefs.getBridgesList().equals("snowfla_ke");
+    }
+
+    private void startSnowflakeClientAmpRendezvous() {
+        var stunServers = "stun:stun.l.google.com:19302,stun:stun.antisip.com:3478,stun:stun.bluesip.net:3478,stun:stun.dus.net:3478,stun:stun.epygi.com:3478,stun:stun.sonetel.com:3478,stun:stun.uls.co.za:3478,stun:stun.voipgate.com:3478,stun:stun.voys.nl:3478";
+        var target = "https://snowflake-broker.torproject.net/";
+        var front = "www.google.com";
+        var ampCache ="https://cdn.ampproject.org/";
+        IPtProxy.startSnowflake(stunServers, target, front, ampCache, null, true, false, false, 1);
+    }
+
     private class IncomingIntentRouter implements Runnable {
         final Intent mIntent;
 
@@ -1565,12 +1588,17 @@ public class OrbotService extends VpnService implements OrbotConstants {
             if (TextUtils.isEmpty(action)) return;
             switch (action) {
                 case ACTION_START:
-                    var connectionPathway = Prefs.getConnectionPathway();
-                    if (connectionPathway.equals(Prefs.PATHWAY_SNOWFLAKE) || Prefs.getPrefSmartTrySnowflake()) {
-                        startSnowflakeClientDomainFronting();
-                    } else if (connectionPathway.equals(Prefs.PATHWAY_CUSTOM) || Prefs.getPrefSmartTryObfs4() != null) {
-                        IPtProxy.startObfs4Proxy("DEBUG", false, false, null);
+                    if (Prefs.bridgesEnabled()) {
+                        if (useIPtObfsMeekProxy())
+                            IPtProxy.startObfs4Proxy("DEBUG", false, false, null);
+                        else if (useIPtSnowflakeProxyDomainFronting())
+                            startSnowflakeClientAmpRendezvous();
+                        else if (useIPtSnowflakeProxyAMPRendezvous())
+                            startSnowflakeClientAmpRendezvous();
+                    } else if (Prefs.beSnowflakeProxy()) {
+                        enableSnowflakeProxy();
                     }
+
                     startTor();
                     replyWithStatus(mIntent);
 

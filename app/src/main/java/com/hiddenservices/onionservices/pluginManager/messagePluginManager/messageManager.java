@@ -307,7 +307,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mBridgeSettingCustomNext.setOnClickListener(this);
         mDialog.setOnShowListener(dialog -> mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING));
 
-        if (!mCustomBridge.equals("meek") && !mCustomBridge.equals("obfs4")) {
+        if (!mCustomBridge.equals("meek") && !mCustomBridge.equals("snowflake") && !mCustomBridge.equals("obfs4")) {
             mBridgeSettingCustomInput.setText(mCustomBridge);
             mBridgeSettingBridgeType.setText(mBridgeType);
         }
@@ -350,7 +350,16 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         SwitchMaterial mSecureTrackingProtectionStatus = mDialog.findViewById(R.id.pSecurePopupTrackingProtectionStatus);
 
         pSecurePopupRootBlocker.animate().setStartDelay(100).setDuration(400).alpha(1);
-        pSecurePopupSubHeader.setText(helperMethod.getDomainName(mData.get(0).toString().replace("167.86.99.31", "orion.onion")));
+        String mURL = helperMethod.getDomainName(mData.get(0).toString().replace("167.86.99.31", "orion.onion").replace(CONST_GENESIS_URL_CACHED, "orion.onion").replace(CONST_GENESIS_URL_CACHED_DARK, "orion.onion"));
+        if(mURL.contains("?")){
+            mURL = mURL.substring(0, mURL.indexOf("?"));
+        }
+        if(status.sTorBrowsing){
+            //pSecurePopupHeader
+            ((TextView)mDialog.findViewById(R.id.pSecurePopupHeader)).setText("Tor://");
+            mURL = mURL.replace("http://","onion://").replace("https://","onion://");
+        }
+        pSecurePopupSubHeader.setText(mURL);
 
         mDialog.setOnDismissListener(this);
         pSecurePopupRootBlocker.setOnClickListener(this);
@@ -611,7 +620,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             helperMethod.onDelayHandler(mContext, 200, () -> {
                 try {
                     onDismiss();
-                    helperMethod.sendBridgeEmail(mContext);
+                    mEvent.invokeObserver(null, M_GET_BRIDGES);
                 } catch (Exception ex) {
                     onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)), M_NOT_SUPPORTED);
                 }
@@ -669,7 +678,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             helperMethod.onDelayHandler(mContext, 200, () -> {
                 try {
                     onDismiss();
-                    helperMethod.sendBridgeEmail(mContext);
+                    helperMethod.getBridges(mContext);
                 } catch (Exception ex) {
                     onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)), M_NOT_SUPPORTED);
                 }
@@ -901,14 +910,14 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_BOOKMARK_UPDATE), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
-                case M_IMAGE_UPDATE:
+                case M_SETTING_CHANGED_RESTART_REQUSTED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 4000, mContext.getString(R.string.TOAST_ALERT_IMAGE_STATUS), mContext.getString(R.string.TOAST_ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 4000, mContext.getString(R.string.TOAST_ALERT_IMAGE_STATUS), mContext.getString(R.string.TOAST_ALERT_RESTART), M_IMAGE_UPDATE_RESTART);
                     break;
 
                 case M_OPEN_CICADA:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_CICADA), mContext.getString(R.string.ALERT_DISMISS), null);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_CICADA), mContext.getString(R.string.ALERT_DISMISS), null);
                     break;
 
                 case M_TOR_SWITCH:

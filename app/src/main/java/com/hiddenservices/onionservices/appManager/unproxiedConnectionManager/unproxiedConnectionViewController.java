@@ -1,7 +1,9 @@
-package com.hiddenservices.onionservices.appManager.advertManager;
+package com.hiddenservices.onionservices.appManager.unproxiedConnectionManager;
 
 import android.os.Bundle;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.eventObserver;
@@ -9,10 +11,11 @@ import com.hiddenservices.onionservices.helperManager.sharedUIMethod;
 
 import java.util.List;
 
-public class advertViewController extends AppCompatActivity {
+public class unproxiedConnectionViewController extends AppCompatActivity {
 
     private AppCompatActivity mContext;
     private ProgressBar mProgressBar;
+    private TextView mHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +23,10 @@ public class advertViewController extends AppCompatActivity {
         setContentView(R.layout.activity_adview_controller);
     }
 
-    advertViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, ProgressBar pProgressBar) {
+    unproxiedConnectionViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, ProgressBar pProgressBar, TextView p4Header) {
         this.mContext = pContext;
         this.mProgressBar = pProgressBar;
+        this.mHeader = p4Header;
 
         initViews();
     }
@@ -39,13 +43,20 @@ public class advertViewController extends AppCompatActivity {
         }
     }
 
-    public void onTrigger(advertEnums.eAdvertViewController pCommands, List<Object> pData) {
-        if (pCommands.equals(advertEnums.eAdvertViewController.M_UPDATE_PROGRESSBAR)) {
+    public void onUpdateHeader(String pHeader) {
+        mHeader.setText(pHeader);
+    }
+
+    public void onTrigger(unproxiedConnectionEnums.eAdvertViewController pCommands, List<Object> pData) {
+        if (pCommands.equals(unproxiedConnectionEnums.eAdvertViewController.M_UPDATE_PROGRESSBAR)) {
             onUpdateProgressBar((boolean) pData.get(0));
+        }
+        if (pCommands.equals(unproxiedConnectionEnums.eAdvertViewController.M_UPDATE_HEADER)) {
+            onUpdateHeader((String) pData.get(0));
         }
     }
 
-    public void onTrigger(advertEnums.eAdvertViewController pCommands) {
+    public void onTrigger(unproxiedConnectionEnums.eAdvertViewController pCommands) {
     }
 
 }

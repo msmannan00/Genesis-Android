@@ -13,6 +13,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -92,6 +93,7 @@ import static com.hiddenservices.onionservices.constants.keys.M_ACTIVITY_NAVIGAT
 import static com.hiddenservices.onionservices.constants.keys.M_RESTART_APP_KEY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_OPEN_ACTIVITY_FAILED;
 
+import org.mozilla.geckoview.ContentBlocking;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 public class helperMethod {
@@ -145,6 +147,7 @@ public class helperMethod {
             mYAML = mYAML.replace("# network.proxy.socks:  \"127.0.0.1\"", "network.proxy.socks:  \"127.0.0.1\"");
             mYAML = mYAML.replace("# network.proxy.socks_port:  9050", "network.proxy.socks_port:  9050");
             mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
+            mYAML = mYAML.replace("privacy.resistFingerprinting: true", "privacy.resistFingerprinting: false");
 
             StringBuilder buf = new StringBuilder(mYAML);
             int portIndex = mYAML.indexOf("network.proxy.socks_port");
@@ -153,6 +156,10 @@ public class helperMethod {
             helperMethod.writeToFile(cacheFile.getPath(), mYAML);
         } else {
             mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
+            if(status.sSettingTrackingProtection == ContentBlocking.AntiTracking.STRICT){
+                mYAML = mYAML.replace("privacy.resistFingerprinting: false", "privacy.resistFingerprinting: true");
+            }
+
             helperMethod.writeToFile(cacheFile.getPath(), mYAML);
         }
 
@@ -263,7 +270,7 @@ public class helperMethod {
     }
 
     public static String completeURL(String pURL) {
-        if (pURL.equals("about:blank") || pURL.equals("about:config") || pURL.startsWith("resource://")) {
+        if (pURL.equals("about:blank") || pURL.equals("about:config") || pURL.startsWith("resource://") || pURL.startsWith("data")) {
             return pURL;
         }
         URL weburl;
@@ -328,14 +335,17 @@ public class helperMethod {
     public static SpannableString urlDesigner(boolean protocol, String url, Context pContext, int pDefColor, int pTheme, boolean sTorBrowsing) {
 
         int mColor;
+        int mTextColor;
         if (pTheme == enums.Theme.THEME_DARK) {
             mColor = Color.argb(255, 0, 204, 71);
+            mTextColor = Color.WHITE;
         } else {
             mColor = Color.argb(255, 0, 153, 54);
+            mTextColor = Color.BLACK;
         }
         if(url.equals("about:blank")){
             SpannableString span = new SpannableString(url);
-            span.setSpan(new ForegroundColorSpan(Color.BLACK), getHost(url).length()+7, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            span.setSpan(new ForegroundColorSpan(mTextColor), 0, url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             return span;
         }
 
@@ -406,16 +416,12 @@ public class helperMethod {
         context.startActivity(Intent.createChooser(emailIntent, "get transport obfs4"));
     }
 
-    public static void sendBridgeEmail(Context context) {
-        Intent selectorIntent = new Intent(Intent.ACTION_SENDTO);
-        selectorIntent.setData(Uri.parse("mailto:"));
+    public static boolean getBridges(Context context) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bridges.torproject.org/bridges/?transport=obfs4"));
+        context.startActivity(browserIntent);
 
-        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"bridges@torproject.org"});
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "get transport obfs4");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "get transport obfs4");
-        emailIntent.setSelector(selectorIntent);
-        context.startActivity(Intent.createChooser(emailIntent, "get transport obfs4"));
+        return false;
+
     }
 
 

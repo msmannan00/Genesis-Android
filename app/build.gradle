@@ -121,6 +121,7 @@ dependencies {
     implementation "net.zetetic:android-database-sqlcipher:4.4.3"
 
     implementation project(':xcrash_lib')
+    implementation 'com.karumi:dexter:6.2.3'
 
 }
 

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
-import com.hiddenservices.onionservices.appManager.advertManager.advertController;
+import com.hiddenservices.onionservices.appManager.unproxiedConnectionManager.unproxiedConnectionController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.keys;
@@ -35,11 +35,13 @@ public class externalURLNavigationContoller extends AppCompatActivity {
         {
             if (mData[0] !=null && status.sIsBackgroundAdvertCheck) {
                 status.sIsBackgroundAdvertCheck = false;
-                Intent myIntent = new Intent(activityContextManager.getInstance().getHomeController(), advertController.class);
+                Intent myIntent = new Intent(activityContextManager.getInstance().getHomeController(), unproxiedConnectionController.class);
                 myIntent.putExtra(keys.ADVERT_URL, mData[0].toString());
                 myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                activityContextManager.getInstance().getHomeController().onAdvertClickPauseSession();
                 activityContextManager.getInstance().getHomeController().startActivity(myIntent);
+
             } else {
                 if (mData[0] == null) {
                     mData[0] = Uri.parse(constants.CONST_BACKEND_GENESIS_URL);

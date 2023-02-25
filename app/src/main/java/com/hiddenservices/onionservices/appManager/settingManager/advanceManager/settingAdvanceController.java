@@ -1,6 +1,6 @@
 package com.hiddenservices.onionservices.appManager.settingManager.advanceManager;
 
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_IMAGE_UPDATE;
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUSTED;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -160,7 +160,7 @@ public class settingAdvanceController extends AppCompatActivity {
 
     public void onShowImages(View view) {
         if (status.sShowImages == 0 && view.getId() == R.id.pAdvanceOption2 && !mImageOption.get(1).isChecked() || status.sShowImages == 2 && view.getId() == R.id.pAdvanceOption1 && !mImageOption.get(0).isChecked()) {
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_IMAGE_UPDATE);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUSTED);
         }
 
         mSettingAdvanceViewController.onTrigger(settingAdvanceEnums.eAdvanceViewController.M_CLEAR_IMAGE, Collections.singletonList(null));

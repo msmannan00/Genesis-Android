@@ -4,13 +4,16 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.del
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.intentHandler;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
+
 import org.mozilla.geckoview.GeckoSession;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 
@@ -19,7 +22,7 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
     /*Private Variables*/
 
     private WeakReference<AppCompatActivity> mContext;
-    private GeckoSession.HistoryDelegate.HistoryList mHistory = null;
+    private HistoryList mHistory = null;
     private eventObserver.eventListener mEvent;
     private geckoDataModel mGeckoDataModel;
     private geckoSession mGeckoSession;
@@ -35,20 +38,29 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
     }
 
     @UiThread
-    public void onHistoryStateChange(@NonNull GeckoSession var1, @NonNull GeckoSession.HistoryDelegate.HistoryList var2) {
-        if(mHistory !=null && mHistory.size()!=var2.size()){
-            mHistory = var2;
-            setURL(mHistory.get(mHistory.getCurrentIndex()).getUri());
+    public void onHistoryStateChange(@NonNull GeckoSession var1, @NonNull HistoryList var2) {
+        boolean mHistoryChanged = false;
+        if(mHistory!=null){
+            mHistoryChanged = mHistory.size()!=var2.size() || mHistory.size()!=var2.getCurrentIndex();
+        }
+        if(mHistory==null || mHistory.size()!=var2.size()){
+            //mGeckoDataModel.mTheme = null;
+        }
+        mHistory = var2;
+        if(mHistory !=null){
+            if(mHistoryChanged){
+                if(!mHistory.get(mHistory.getCurrentIndex()).getUri().equals("about:blank")){
+                    setURL(mHistory.get(mHistory.getCurrentIndex()).getUri());
+                }
+            }
             mEvent.invokeObserver(Arrays.asList(mHistory, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_URL_LOAD);
-            if(mCurrentIndex != var2.getCurrentIndex()){
+            if(mCurrentIndex != var2.getCurrentIndex() && mHistoryChanged){
                 mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mHistory.get(mHistory.getCurrentIndex()).getTitle(), mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, mGeckoSession), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
             }
             Object mID = mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mHistory.get(mHistory.getCurrentIndex()).getTitle(), -1, mGeckoDataModel.mTheme, mGeckoSession, false), homeEnums.eGeckoCallback.ON_UPDATE_HISTORY);
             if (mID != null) {
                 mGeckoDataModel.mCurrentURL_ID = (int) mID;
             }
-        }else {
-            mHistory = var2;
         }
         mCurrentIndex = var2.getCurrentIndex();
     }

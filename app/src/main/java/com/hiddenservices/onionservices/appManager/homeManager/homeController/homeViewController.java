@@ -12,6 +12,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
@@ -63,10 +64,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_BADCERT_CACHED;
+import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_BADCERT_CACHED_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_DOMAIN_URL;
+import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_ERROR_CACHED;
+import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_ERROR_CACHED_DARK;
+import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_HELP_URL_CACHE;
+import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_HELP_URL_CACHE_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
+import static com.hiddenservices.onionservices.constants.status.sSearchSuggestionStatus;
 import static com.hiddenservices.onionservices.constants.status.sSettingLanguage;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static java.lang.Thread.sleep;
@@ -377,37 +385,39 @@ public class homeViewController {
     @SuppressLint("UseCompatLoadingForDrawables")
     public void onUpdateSearchIcon(int mStatus) {
         try {
-            ssl_status = true;
             if (mStatus == 0) {
                 mSearchLock.setColorFilter(null);
                 mSearchLock.clearColorFilter();
                 mSearchLock.setImageTintList(null);
 
                 mSearchLock.setImageDrawable(mContext.getResources().getDrawable(getSearchLogo()));
-            } else if (mStatus == 1) {
-                if (!(boolean) mSearchLock.getTag(R.id.themed)) {
-                    mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
-                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_lock));
-                } else {
-                    mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_lock));
-                }
             } else if (mStatus == 2) {
                 mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_icon_tint));
                 mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_browser));
             }
 
-            if(!mSearchbar.isFocused() && (mProgressBar.getProgress() == 0 || mProgressBar.getProgress() == 100)){
-                boolean ssl = (boolean)mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_GET_SSL_STATUS);
-                if(ssl || status.sTorBrowsing){
-                    mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
-                }else {
-                    mSearchLock.setColorFilter(Color.RED);
-                    ssl_status = false;
-                }
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setSecurityColor(){
+        mSearchLock.setColorFilter(null);
+        mSearchLock.clearColorFilter();
+        mSearchLock.setImageTintList(null);
+
+        mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_lock));
+        boolean ssl = (boolean)mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_GET_SSL_STATUS);
+        if(ssl || status.sTorBrowsing){
+            if(helperMethod.getColorDensity(((ColorDrawable)mTopBar.getBackground()).getColor()) < 0.80){
+                mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_white));
+            }else {
+                mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_lock_tint));
+            }
+            ssl_status = true;
+        }else {
+            mSearchLock.setColorFilter(Color.argb(255, 255, 133, 102));
+            ssl_status = false;
         }
     }
 
@@ -657,9 +667,21 @@ public class homeViewController {
                 initSplashLoading();
             });
             mConnectNoTorButton.animate().setDuration(350).alpha(0.4f).withEndAction(() -> {});
+            mOrbotLogManager.animate().setDuration(350).alpha(0.4f).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    mOrbotLogManager.setEnabled(false);
+                }
+            });
         }
 
-        mGatewaySplash.animate().setDuration(350).alpha(0.4f);
+        mGatewaySplash.animate().setDuration(350).alpha(0.4f).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                mGatewaySplash.setEnabled(false);
+            }
+        });
+
         mPanicButtonLandscape.animate().setInterpolator(new AccelerateInterpolator()).setDuration(170).translationXBy(helperMethod.pxFromDp(55));
         mPanicButton.animate().setDuration(170).setInterpolator(new AccelerateInterpolator()).translationXBy(helperMethod.pxFromDp(55));
     }
@@ -720,6 +742,7 @@ public class homeViewController {
             }
             mContext.runOnUiThread(() -> {
                 mLogHandler.cancel(true);
+                onProgressBarUpdate(5, true, false);
             });
 
             orbotLocalConstants.mIsTorInitialized = true;
@@ -1120,25 +1143,27 @@ public class homeViewController {
     private Handler searchBarUpdateHandler = new Handler();
     private String handlerLocalUrl = "";
 
-    void onUpdateSearchBar(String url, boolean showProtocol, boolean pClearText, boolean pBypassFocus) {
+    private Handler mSearchUpdateHandler = null;
 
-        if (url.endsWith("genesisconfigurenewidentity.com/")) {
+    void onUpdateSearchBar(String url, boolean showProtocol, boolean pClearText, boolean pBypassFocus) {
+        String mURL = url;
+        if (mURL.endsWith("genesisconfigurenewidentity.com/")) {
             return;
         }
-        if (url.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)) {
-            url = "https://orion.onion/privacy";
+        if (mURL.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)) {
+            mURL = "https://orion.onion/privacy";
         }
 
-        if (url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
+        if (mURL.startsWith(CONST_GENESIS_URL_CACHED) || mURL.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
             mSearchbar.setTag(R.id.msearchbarProcessing, true);
-            url = CONST_GENESIS_DOMAIN_URL;
+            mURL = CONST_GENESIS_DOMAIN_URL;
         }
 
-        Log.i("FUCK::5", url);
+        Log.i("FUCK::5", mURL);
         if (!mSearchbar.hasFocus() || pClearText || pBypassFocus) {
             if (mSearchEngineBar.getVisibility() == View.GONE || pBypassFocus) {
                 int delay = 0;
-                handlerLocalUrl = url;
+                handlerLocalUrl = mURL;
 
                 if (searchBarUpdateHandler.hasMessages(100)) {
                     searchBarUpdateHandler.removeMessages(100);
@@ -1146,7 +1171,7 @@ public class homeViewController {
 
                 searchBarUpdateHandler.sendEmptyMessage(100);
                 searchBarUpdateHandler.removeMessages(100);
-                triggerUpdateSearchBar(handlerLocalUrl, showProtocol, pClearText);
+                triggerUpdateSearchBar(handlerLocalUrl, showProtocol, pClearText, false);
                 mSearchbar.setTag(R.id.msearchbarProcessing, false);
             }
         }
@@ -1281,6 +1306,7 @@ public class homeViewController {
                 mTopBarHider.setBackground(ContextCompat.getDrawable(mContext, R.color.c_background));
             }
         }
+        setSecurityColor();
     }
 
     public void onUpdateFindBar(boolean pStatus) {
@@ -1345,52 +1371,77 @@ public class homeViewController {
         }
     }
 
-    private void triggerUpdateSearchBar(String url, boolean showProtocol, boolean pClearText) {
+    public void triggerUpdateSearchBar(String url, boolean showProtocol, boolean pClearText, boolean pForced) {
+        int mDelay = 0;
+        if(!mSearchbar.isFocused() || url.equals("about:blank") || url.equals(CONST_PRIVACY_POLICY_URL_NON_TOR) || url.equals(CONST_GENESIS_URL_CACHED) || url.equals(CONST_GENESIS_URL_CACHED_DARK) || url.equals(CONST_GENESIS_ERROR_CACHED) || url.equals(CONST_GENESIS_ERROR_CACHED_DARK) || url.equals(CONST_GENESIS_BADCERT_CACHED) || url.equals(CONST_GENESIS_BADCERT_CACHED_DARK) || url.equals(CONST_GENESIS_HELP_URL_CACHE) || url.equals(CONST_GENESIS_HELP_URL_CACHE_DARK)){
+            mDelay=300;
+        }
+        if(pForced){
+            mDelay = 0;
+        }
+        if(mSearchEngineBar.getVisibility() == View.VISIBLE){
+            mDelay = 0;
+        }
+        if (url.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)) {
+            url = "https://orion.onion/privacy";
+        }
+
+        if (url.startsWith(CONST_GENESIS_URL_CACHED) || url.startsWith(CONST_GENESIS_URL_CACHED_DARK)) {
+            mSearchbar.setTag(R.id.msearchbarProcessing, true);
+            url = CONST_GENESIS_DOMAIN_URL;
+        }
         if (mSearchbar == null || url == null) {
             return;
         }
-
-        if (!showProtocol) {
-            url = url.replace("https://", "");
-            url = url.replace("http://", "");
+        if (mSearchUpdateHandler != null) {
+            mSearchUpdateHandler.removeCallbacksAndMessages(null);
         }
-        resource://android/assets/help/help.html
-        url = url.replace("167.86.99.31", "orion.onion");
-        url = url.replace("resource://android/assets/help/help.html", "orion.help");
-        url = url.replace("resource://android/assets/help/help-dark.html", "orion.help");
-        boolean isTextSelected = false;
-
-        if (mSearchbar.isSelected()) {
-            isTextSelected = true;
-        }
-
-        if (url.length() <= 300) {
-            url = removeEndingSlash(url);
-            if(status.sTorBrowsing){
-                mSearchbar.setText(helperMethod.urlDesigner(showProtocol, url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme, true));
-            }else {
-                mSearchbar.setText(helperMethod.urlDesigner(showProtocol, url, mContext, mSearchbar.getCurrentTextColor(), status.sTheme, !ssl_status || url.contains("orion.onion")));
+        final String[] purl = {url};
+        mSearchUpdateHandler = new Handler();
+        mSearchUpdateHandler.postDelayed(() ->
+        {
+            if (!showProtocol) {
+                purl[0] = purl[0].replace("https://", "");
+                purl[0] = purl[0].replace("http://", "");
             }
-            mSearchbar.selectAll();
 
-            if (isTextSelected) {
+            purl[0] = purl[0].replace("167.86.99.31", "orion.onion");
+            purl[0] = purl[0].replace("resource://android/assets/help/help.html", "orion.help");
+            purl[0] = purl[0].replace("resource://android/assets/help/help-dark.html", "orion.help");
+            boolean isTextSelected = false;
+
+            if (mSearchbar.isSelected()) {
+                isTextSelected = true;
+            }
+
+            if (purl[0].length() <= 300) {
+                purl[0] = removeEndingSlash(purl[0]);
+                if(status.sTorBrowsing){
+                    mSearchbar.setText(helperMethod.urlDesigner(showProtocol, purl[0], mContext, mSearchbar.getCurrentTextColor(), status.sTheme, true));
+                }else {
+                    mSearchbar.setText(helperMethod.urlDesigner(showProtocol, purl[0], mContext, mSearchbar.getCurrentTextColor(), status.sTheme, ssl_status || purl[0].contains("orion.onion")));
+                }
+                mSearchbar.selectAll();
+
+                if (isTextSelected) {
+                    mSearchbar.selectAll();
+                }
+
+                mSearchbar.setSelection(0);
+            } else {
+                purl[0] = removeEndingSlash(purl[0]);
+                mSearchbar.setText(purl[0]);
+            }
+
+            if (mSearchbar.isFocused()) {
+                mSearchbar.setSelection(mSearchbar.getText().length());
                 mSearchbar.selectAll();
             }
 
-            mSearchbar.setSelection(0);
-        } else {
-            url = removeEndingSlash(url);
-            mSearchbar.setText(url);
-        }
-
-        if (mSearchbar.isFocused()) {
-            mSearchbar.setSelection(mSearchbar.getText().length());
-            mSearchbar.selectAll();
-        }
-
-        if (mSearchbar.getText().toString().equals("loading")) {
-            mSearchbar.setText("about:blank");
-        }
+            if (mSearchbar.getText().toString().equals("loading")) {
+                mSearchbar.setText("about:blank");
+            }
+        }, mDelay);
     }
 
     private String removeEndingSlash(String url) {
@@ -1422,11 +1473,15 @@ public class homeViewController {
     }
 
     public void onSessionReinit() {
-        mGeckoView.setForeground(ContextCompat.getDrawable(mContext, R.color.c_background));
     }
 
-    void onProgressBarUpdate(int value, boolean mForced) {
+    void onProgressBarUpdate(int value, boolean mForced, boolean isStaticURL) {
 
+        //mProgressBar.animate().cancel();
+        if(mSearchbar.getText().toString().equals("about:blank") || (mSearchbar.getText().toString().equals(CONST_PRIVACY_POLICY_URL_NON_TOR) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE_DARK)) && isStaticURL){
+            mProgressBar.setProgress(0);
+            return;
+        }
         if (value == 105) {
             progressAnimator.cancel();
             mProgressBar.setAlpha(1);
@@ -1452,16 +1507,6 @@ public class homeViewController {
             progressAnimator.cancel();
         }
 
-        if ((mSearchbar.getText().toString().equals("orion.onion/search?q=$s&p_num=1&s_type=all") || mSearchbar.getText().toString().equals("orion.onion")) && !mForced || (boolean) mSearchbar.getTag(R.id.msearchbarProcessing)) {
-            mProgressBar.setProgress(0);
-            mProgressBar.setVisibility(View.GONE);
-            return;
-        }
-
-        if (mSearchbar.getText().toString().equals("orion.onion") && !mForced) {
-            return;
-        }
-
         mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setAlpha(1);
         mProgressBar.animate().cancel();
@@ -1473,6 +1518,7 @@ public class homeViewController {
                 setProgressAnimate(value, 200);
             }
             if (value >= 100 || value <= 0) {
+
                 mProgressBar.animate().alpha(0).setStartDelay(200).withEndAction(() -> {
                     status.sDisableExpandTemp = false;
                     mProgressBar.setProgress(0);
@@ -1491,30 +1537,27 @@ public class homeViewController {
         progressAnimator.start();
     }
 
-    public void onNewTabAnimation(List<Object> data, Object e_type, int pDelay) {
+    public void onNewTabAnimation(List<Object> data, Object e_type, int pDelay, String pCurrentURL) {
 
         if (mNewTabBlocker.getAlpha() != 0) {
             return;
         }
 
+        if(e_type!=null && e_type.equals(homeEnums.eHomeViewCallback.M_INITIALIZE_TAB_SINGLE) && !status.sOpenURLInNewTab){
+            pDelay = 2000;
+        }
         new Handler().postDelayed(() ->
         {
-            if(e_type!=null && e_type.equals(homeEnums.eGeckoCallback.M_CLOSE_TAB_BACK)){
+            if(e_type!=null && e_type.equals(homeEnums.eGeckoCallback.NULL) || e_type!=null && (e_type.equals(homeEnums.eGeckoCallback.M_CLOSE_TAB_BACK) || e_type.equals(homeEnums.eHomeViewCallback.M_INITIALIZE_TAB_SINGLE) && !status.sOpenURLInNewTab)){
                 onResetTabAnimation();
             }
         }, pDelay);
 
-        mGeckoView.setPivotX(0);
-        mGeckoView.setPivotY(0);
-
         mNewTabBlocker.setVisibility(View.VISIBLE);
-        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView, PropertyValuesHolder.ofFloat("translationX", 0, helperMethod.pxFromDp(-50)));
         ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mNewTabBlocker, PropertyValuesHolder.ofFloat("alpha", 0, 1f));
 
-        scaleDown.setDuration(150);
         alpha.setDuration(150);
 
-        scaleDown.start();
         alpha.start();
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -1523,14 +1566,13 @@ public class homeViewController {
                 mEvent.invokeObserver(data, e_type);
             }, 300);
 
-            scaleDown.addListener(new Animator.AnimatorListener() {
+            alpha.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation, boolean isReverse) {
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation, boolean isReverse) {
-                    scaleDown.removeAllListeners();
                     handler.removeCallbacksAndMessages(null);
                     mEvent.invokeObserver(data, e_type);
                 }
@@ -1557,9 +1599,6 @@ public class homeViewController {
     }
 
     public void onHomeTabAnimation(List<Object> data, Object e_type) {
-        mGeckoView.setPivotX(0);
-        mGeckoView.setPivotY(0);
-
         if (mGeckoView.getAlpha() < 1 || mGeckoView.getTranslationX() < 0) {
             return;
         }
@@ -1575,6 +1614,7 @@ public class homeViewController {
 
         scaleDown.start();
         alpha.start();
+        mNewTabBlocker.bringToFront();
 
         scaleDown.addListener(new Animator.AnimatorListener() {
             @Override
@@ -1606,17 +1646,15 @@ public class homeViewController {
     }
 
     public void onResetTabAnimation() {
-        mGeckoView.setPivotX(0);
-        mGeckoView.setPivotY(0);
-
-        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(mGeckoView, PropertyValuesHolder.ofFloat("translationX", 0, helperMethod.pxFromDp(0)));
-
-        scaleDown.setDuration(0);
-        scaleDown.setStartDelay(0);
-        mNewTabBlocker.animate().setStartDelay(250).setDuration(250).alpha(0f).withEndAction(() -> {
+        mNewTabBlocker.animate().setStartDelay(250).setDuration(150).alpha(0f).withEndAction(() -> {
             mNewTabBlocker.setVisibility(View.GONE);
         });
-        scaleDown.start();
+    }
+
+    public void onResetTabAnimationInstant() {
+        mNewTabBlocker.animate().setStartDelay(250).setDuration(150).alpha(0f).withEndAction(() -> {
+            mNewTabBlocker.setVisibility(View.GONE);
+        });
     }
 
     void onClearSelections(boolean hideKeyboard) {
@@ -1643,6 +1681,8 @@ public class homeViewController {
     private int mDefaultColor = 0;
     private int mBannerHeight = 0;
     private boolean mFullScreenBrowsingTemp = false;
+
+
 
     void onFullScreenUpdate(boolean pStatus) {
         int value = !pStatus ? 1 : 0;
@@ -1680,7 +1720,7 @@ public class homeViewController {
                 mNestedScroll.setLayoutParams(params);
 
                 if (mProgressBar.getAlpha() > 0) {
-                    onProgressBarUpdate(100, false);
+                    onProgressBarUpdate(100, false, true);
                 }
 
                 this.mBlockerFullSceen.setVisibility(View.VISIBLE);
@@ -1851,6 +1891,12 @@ public class homeViewController {
                     if (mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_HOME_PAGE) == null) {
                         mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_PRELOAD_URL);
                         if (status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)) {
+                            new Handler().postDelayed(() ->
+                            {
+                                mProgressBar.setProgress(5);
+                                mProgressBar.setAlpha(1);
+                                mProgressBar.setVisibility(View.VISIBLE);
+                            }, 100);
                             mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingDefaultSearchEngine)), homeEnums.eHomeViewCallback.ON_URL_LOAD);
                         } else {
                             mEvent.invokeObserver(Collections.singletonList(helperMethod.getDomainName(status.sSettingRedirectStatus)), homeEnums.eHomeViewCallback.ON_URL_LOAD);

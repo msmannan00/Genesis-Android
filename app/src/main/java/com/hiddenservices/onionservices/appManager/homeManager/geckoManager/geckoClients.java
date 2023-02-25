@@ -80,12 +80,12 @@ public class geckoClients {
     }
 
     private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSessionID){
-        geckoSession mSessionIbitializer = new geckoSession(new geckoViewClientCallback(), pSessionID, pContext, pGeckoView);
-        mSessionIbitializer.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
-        mSessionIbitializer.getSettings().setFullAccessibilityTree(true);
-        mSessionIbitializer.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
-        mSessionIbitializer.getSettings().setAllowJavascript(status.sSettingJavaStatus);
-        return mSessionIbitializer;
+        geckoSession mSessionInitializer = new geckoSession(new geckoViewClientCallback(), pSessionID, pContext, pGeckoView);
+        mSessionInitializer.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
+        mSessionInitializer.getSettings().setFullAccessibilityTree(true);
+        mSessionInitializer.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
+        mSessionInitializer.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        return mSessionInitializer;
     }
 
     public void initializeIcon(Context pcontext) {
@@ -151,7 +151,7 @@ public class geckoClients {
             dataController.getInstance().initializeListData();
             onClearAll();
         }
-        initializeIcon(context);
+        //initializeIcon(context);
     }
 
     public void onReload(geckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall, boolean isDelayed) {
@@ -176,7 +176,8 @@ public class geckoClients {
         mSession = pSession;
         geckoView.releaseSession();
         geckoView.setSession(pSession);
-        mSessionID = pSession.getSessionID();
+        mSession.initCallback(new geckoViewClientCallback());
+        this.mSessionID = mSession.getSessionID();
     }
 
     public void loadURL(String url, geckoView mNestedGeckoView, AppCompatActivity pcontext) {
@@ -355,6 +356,7 @@ public class geckoClients {
             mSession.goBackSession();
         } else if (isFinishAllowed) {
             if (mSession.isRemovableFromBackPressed() && mTabSize > 1) {
+                mSession.stop();
                 mEvent.invokeObserver(null, homeEnums.eGeckoCallback.M_CLOSE_TAB_BACK);
             } else {
                 mEvent.invokeObserver(null, homeEnums.eGeckoCallback.BACK_LIST_EMPTY);
@@ -462,6 +464,7 @@ public class geckoClients {
     public class geckoViewClientCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
+            mSessionID = activityContextManager.getInstance().getHomeController().getSessionID();
             if (e_type.equals(homeEnums.eGeckoCallback.ON_FULL_SCREEN)) {
                 mSession.onFullScreenInvoke((boolean)data.get(0));
             }
@@ -475,7 +478,7 @@ public class geckoClients {
             else if (mSession != null) {
                 if (e_type.equals(homeEnums.eGeckoCallback.SESSION_ID)) {
                     return mSession.getSessionID();
-                } else if (mSessionID != null && mSessionID.equals(data.get(1)) || e_type.equals(homeEnums.eGeckoCallback.ON_INVOKE_PARSER) || e_type.equals(homeEnums.eGeckoCallback.M_RATE_COUNT) || e_type.equals(homeEnums.eGeckoCallback.FINDER_RESULT_CALLBACK) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_TAB_TITLE) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_FAVICON) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_HISTORY) || e_type.equals(homeEnums.eGeckoCallback.ON_REQUEST_COMPLETED) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION_URL)) {
+                } else if (mSessionID != null && mSessionID.equals(data.get(1)) || e_type.equals(homeEnums.eGeckoCallback.M_UPDATE_SSL) || e_type.equals(homeEnums.eGeckoCallback.ON_INVOKE_PARSER) || e_type.equals(homeEnums.eGeckoCallback.M_RATE_COUNT) || e_type.equals(homeEnums.eGeckoCallback.FINDER_RESULT_CALLBACK) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_TAB_TITLE) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_FAVICON) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_HISTORY) || e_type.equals(homeEnums.eGeckoCallback.ON_REQUEST_COMPLETED) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION) || e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION_URL)) {
                     if (mSession != null && mSession.getContentDelegate().isClosed()) {
                         return null;
                     }

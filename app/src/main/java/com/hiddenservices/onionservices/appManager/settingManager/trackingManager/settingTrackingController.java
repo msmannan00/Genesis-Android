@@ -1,5 +1,7 @@
 package com.hiddenservices.onionservices.appManager.settingManager.trackingManager;
 
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_SETTING_CHANGED_RESTART_REQUSTED;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -126,10 +128,14 @@ public class settingTrackingController extends AppCompatActivity {
     }
 
     public void onTracking(View view) {
+        int mTrackingProtectionCurrentStatus = status.sSettingTrackingProtection;
         mSettingChanged = true;
         mSettingPrivacyViewController.onTrigger(settingTrackingEnums.eTrackingViewController.M_SET_TRACKING_STATUS, Collections.singletonList(view));
         mSettingPrivacyModel.onTrigger(settingTrackingEnums.eTrackingModel.M_SET_TRACKING_PROTECTION, Collections.singletonList(view));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_TRACKING_PROTECTION, status.sSettingTrackingProtection));
+        if(mTrackingProtectionCurrentStatus != status.sSettingTrackingProtection){
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_SETTING_CHANGED_RESTART_REQUSTED);
+        }
     }
 
     public void onOpenInfo(View view) {

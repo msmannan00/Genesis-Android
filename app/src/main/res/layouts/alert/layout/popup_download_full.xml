@@ -124,7 +124,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_1"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck" />
 
@@ -175,7 +175,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_2"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck" />
 
@@ -226,7 +226,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_3"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck" />
 
@@ -280,7 +280,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_4"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck" />
 
@@ -334,7 +334,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_5"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck" />
 
@@ -388,7 +388,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_6"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck" />
 
@@ -443,7 +443,7 @@
                     android:text="@string/ALERT_DOWNLOAD_OPTION_7"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#616161"
+                    android:textColor="@color/c_alert_background_description"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck" />
 

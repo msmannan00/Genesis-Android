@@ -24,7 +24,7 @@ public class homeModel {
         if (pURL.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)) {
             return CONST_PRIVACY_POLICY_URL_NON_TOR;
         }
-        if (pURL.startsWith("data")) {
+        if (pURL.startsWith("data") || pURL.startsWith("http://data") || pURL.startsWith("https://data")) {
             return pURL;
         }
         if (pURL.equals("about:blank")) {

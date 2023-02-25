@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hiddenservices.onionservices.appManager.advertManager.advertController">
+    tools:context="com.hiddenservices.onionservices.appManager.unproxiedConnectionManager.unproxiedConnectionController">
 
     <LinearLayout
         android:id="@+id/pHeaderContainerTop"
@@ -35,6 +35,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
+            android:id="@+id/pHeader"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="1dp"

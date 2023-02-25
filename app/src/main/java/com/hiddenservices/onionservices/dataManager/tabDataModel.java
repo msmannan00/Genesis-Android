@@ -84,7 +84,11 @@ class tabDataModel {
             getCurrentTab().getSession().stop();
         }
 
-        mTabs.add(mTabModel);
+        if(mTabModel.getSession().getCurrentURL().equals("about:blank")){
+            mTabs.add(0, mTabModel);
+        }else {
+            mTabs.add(mTabModel);
+        }
 
         if (mTabs.size() > 20) {
             closeTab(mTabs.get(mTabs.size() - 1).getSession());

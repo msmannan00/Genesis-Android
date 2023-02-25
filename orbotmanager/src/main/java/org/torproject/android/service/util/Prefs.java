@@ -45,14 +45,60 @@ public class Prefs {
 
 
     private static SharedPreferences prefs;
+    private static boolean meek_status = false;
 
     public static void setContext(Context context) {
         if (prefs == null) {
             prefs = getSharedPrefs(context);
-            putBridgesEnabled(orbotLocalConstants.mBridgesInitStatus);
-            putBridgesEnabled(orbotLocalConstants.mInitUpdateBridge);
-            setBridgesList(orbotLocalConstants.mInitUpdateBridgeList);
-            putUseVpn(orbotLocalConstants.mInitUpdateVPN);
+        }
+
+        if(orbotLocalConstants.mBridgesInitStatus){
+            putBridgesEnabled(true);
+            switch (orbotLocalConstants.mBridges) {
+                case "obfs4":
+                    meek_status = false;
+                    putPrefSmartTrySnowflake(false);
+                    setBeSnowflakeProxy(false);
+                    putBridgesEnabled(true);
+                    setBridgesList(orbotLocalConstants.mBridgesDefault);
+                    putPrefSmartTryObfs4(orbotLocalConstants.mBridgesDefault);
+                    putString(PREF_CONNECTION_PATHWAY, PATHWAY_CUSTOM);
+                    break;
+                case "meek":
+                    meek_status = true;
+                    putPrefSmartTrySnowflake(false);
+                    setBeSnowflakeProxy(false);
+                    putBridgesEnabled(true);
+                    setBridgesList(orbotLocalConstants.mMeek);
+                    putPrefSmartTryObfs4(orbotLocalConstants.mMeek);
+                    putString(PREF_CONNECTION_PATHWAY, PATHWAY_CUSTOM);
+                    break;
+                case "snowflake":
+                    meek_status = false;
+                    setBeSnowflakeProxy(true);
+                    putPrefSmartTrySnowflake(true);
+                    putBridgesEnabled(true);
+                    putString(PREF_CONNECTION_PATHWAY, PATHWAY_SNOWFLAKE);
+                    break;
+                default:
+                    meek_status = false;
+                    putPrefSmartTrySnowflake(false);
+                    setBeSnowflakeProxy(false);
+                    putBridgesEnabled(true);
+                    putString(PREF_CONNECTION_PATHWAY, PATHWAY_CUSTOM);
+                    setBridgesList(orbotLocalConstants.mBridges);
+                    putPrefSmartTryObfs4(orbotLocalConstants.mBridgesDefault);
+                    break;
+            }
+        }else{
+            putBridgesEnabled(false);
+            meek_status = false;
+            setBridgesList(orbotLocalConstants.mBridgesDefault);
+            setBeSnowflakeProxy(false);
+            putPrefSmartTrySnowflake(false);
+            putBridgesEnabled(false);
+            putPrefSmartTryObfs4(orbotLocalConstants.mBridgesDefault);
+            putString(PREF_CONNECTION_PATHWAY, PATHWAY_SMART);
         }
     }
 
@@ -97,8 +143,11 @@ public class Prefs {
 
     public static String getBridgesList() {
         String defaultBridgeType = "obfs4";
-        if (Locale.getDefault().getLanguage().equals("fa"))
+        if (Locale.getDefault().getLanguage().equals("fa") || meek_status)
             defaultBridgeType = "meek"; //if Farsi, use meek as the default bridge type
+        if(orbotLocalConstants.mBridges.equals("snowflake")){
+            return orbotLocalConstants.mBridges;
+        }
         return prefs.getString(PREF_BRIDGES_LIST, defaultBridgeType);
     }
 

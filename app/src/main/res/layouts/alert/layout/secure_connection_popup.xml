@@ -86,7 +86,7 @@
             android:paddingEnd="10dp"
             android:text="@string/ALERT_SECURE_INFO_DETAIL"
             android:textAlignment="textStart"
-            android:textColor="#546E7A"
+            android:textColor="@color/c_alert_background_description"
             android:textSize="14sp"
             android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +142,7 @@
                         android:text="@string/ALERT_SECURE_INFO_JAVASCRIPT_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="#546E7A"
+                        android:textColor="@color/c_alert_background_description"
                         android:textSize="12sp"
                         android:translationZ="2dp"
                         tools:ignore="RtlSymmetry,TextContrastCheck" />
@@ -207,7 +207,7 @@
                         android:text="@string/ALERT_SECURE_INFO_NONTRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="#546E7A"
+                        android:textColor="@color/c_alert_background_description"
                         android:textSize="12sp"
                         android:translationZ="2dp"
                         tools:ignore="RtlSymmetry,TextContrastCheck" />
@@ -271,7 +271,7 @@
                         android:text="@string/ALERT_SECURE_INFO_TRACKING_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="#546E7A"
+                        android:textColor="@color/c_alert_background_description"
                         android:textSize="12sp"
                         android:translationZ="2dp"
                         tools:ignore="RtlSymmetry,TextContrastCheck" />

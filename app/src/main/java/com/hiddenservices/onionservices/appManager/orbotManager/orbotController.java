@@ -109,7 +109,7 @@ public class orbotController extends AppCompatActivity {
     }
 
     public void initializeStartupAnimation() {
-        if (activityContextManager.getInstance().getHomeController().isSplashScreenLoading()) {
+        if (activityContextManager.getInstance().getHomeController()!=null && activityContextManager.getInstance().getHomeController().isSplashScreenLoading()) {
             overridePendingTransition(R.anim.translate_fade_left_reverse, R.anim.translate_fade_right_reverse);
         }
     }

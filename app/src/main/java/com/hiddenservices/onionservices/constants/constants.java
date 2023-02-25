@@ -8,6 +8,8 @@ public class constants {
     public static final String CONST_SAMSUNG_URL = "http://www.samsungapps.com/appquery/appDetail.as?appId=com.darkweb.genesissearchengine.production";
     public static final String CONST_HUAWEI_URL = "https://appgallery.cloud.huawei.com/uowap/index.html#/detailApp/C106142211?appId=C106142211";
 
+    public static final String CONST_BRIDGES = "https://bridges.torproject.org/bridges/?transport=obfs4";
+
     public static final String CONST_PRIVACY_POLICY_URL_NON_TOR = "resource://android/assets/policy/policy.html";
 
     public static final String CONST_PRIVACY_POLICY_URL = "http://167.86.99.31/privacy";

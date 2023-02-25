@@ -139,6 +139,9 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
     public GeckoResult<String> onLoadError(@NonNull GeckoSession var1, @Nullable String var2, @NonNull WebRequestError var3) {
 
         try {
+            if(var2==null){
+                var2 = this.mGeckoDataModel.mCurrentURL;
+            }
             mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, mGeckoSession), homeEnums.eGeckoCallback.ON_DESTROY_MEDIA);
             if (helperMethod.getHost(var2).endsWith(".onion")) {
                 var2 = var2.replace("www.", "");
@@ -154,7 +157,7 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
             if (status.sSettingIsAppStarted && orbotLocalConstants.mIsTorInitialized) {
                 errorHandler handler = new errorHandler();
                 mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_LOAD_ERROR);
-                mGeckoDataModel.mTheme = null;
+                //mGeckoDataModel.mTheme = null;
                 mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.ON_UPDATE_THEME);
 
                 InputStream mResourceURL = null;

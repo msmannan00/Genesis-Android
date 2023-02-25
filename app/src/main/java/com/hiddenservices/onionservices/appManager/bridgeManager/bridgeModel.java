@@ -48,7 +48,6 @@ class bridgeModel {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1, status.sBridgeCustomBridge));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE, status.sBridgeCustomType));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL, status.sBridgeGatewayManual));
-
         pluginController.getInstance().onOrbotInvoke(Collections.singletonList("custom"), pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST);
     }
 
@@ -60,7 +59,6 @@ class bridgeModel {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1, status.sBridgeCustomBridge));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE, status.sBridgeCustomType));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL, status.sBridgeGatewayManual));
-
         pluginController.getInstance().onOrbotInvoke(Collections.singletonList("meek"), pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST);
     }
 

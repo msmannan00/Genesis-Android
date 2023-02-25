@@ -35,9 +35,6 @@ public class proxyStatusController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        if (!status.sSettingIsAppStarted) {
-            overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
-        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.proxy_status_view);
@@ -91,9 +88,6 @@ public class proxyStatusController extends AppCompatActivity {
     public void onClose(View view) {
         finish();
         activityContextManager.getInstance().onRemoveStack(this);
-        if (!status.sSettingIsAppStarted) {
-            overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
-        }
     }
 
     /* LOCAL OVERRIDES */

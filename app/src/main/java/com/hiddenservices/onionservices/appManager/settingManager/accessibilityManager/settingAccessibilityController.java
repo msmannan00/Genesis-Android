@@ -158,6 +158,7 @@ public class settingAccessibilityController extends AppCompatActivity {
 
         if (mIsSettingChanged && mDefaultFontSize != status.sSettingFontSize) {
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
+            activityContextManager.getInstance().getHomeController().onReload(null);
         }
     }
 

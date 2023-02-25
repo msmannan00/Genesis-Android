@@ -1,5 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Internal -->
+    <string name="before_unload_title" translatable="false">Are you sure?</string>
+    <string name="before_unload_leave_page" translatable="false">Leave Page</string>
+    <string name="before_unload_stay" translatable="false">Stay on Page</string>
+    <string name="clear_field" translatable="false">Clear</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="password" translatable="false">Password</string>
+
+    <string name="repost_confirm_message" translatable="false">To display this page, GeckoViewExample must send information that will repeat any action (such as a search or order confirmation) that was performed earlier.</string>
+    <string name="repost_confirm_title" translatable="false">Are you sure?</string>
+    <string name="repost_confirm_resend" translatable="false">Resend</string>
+    <string name="repost_confirm_cancel" translatable="false">Cancel</string>
+
     <!-- Application Strings -->
     <string name="mode" translatable="false">Day</string>
     <string name="app_name" translatable="false">Orion Browser</string>
@@ -216,6 +229,7 @@
 
 
     <!-- Settings -->
+    <string name="SETTING_SEARCH_NAME_WIKIPEDIA_Name" translatable="false">Wikipedia</string>
     <string name="SETTING_SEARCH_NAME_WIKIPEDIA" translatable="true">Browse articles freely</string>
     <string name="SETTING_SEARCH_NAME_BING" translatable="true">Search from microsoft</string>
     <string name="SETTING_SEARCH_NAME_GOOGLE" translatable="true">Search from google</string>

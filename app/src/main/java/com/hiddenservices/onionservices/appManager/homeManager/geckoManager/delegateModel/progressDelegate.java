@@ -26,7 +26,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
     private SecurityInformation securityInfo = null;
     private GeckoSession.SessionState mSessionState;
     private boolean mIsLoaded = false;
-    private int mProgress = 0;
+    private int mProgress = 5;
 
     /*Initializations*/
 
@@ -34,11 +34,13 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
         this.mContext = pContext;
         this.mEvent = pEvent;
         this.mGeckoDataModel = pGeckoDataModel;
+
     }
 
     @UiThread
     public void onSecurityChange(@NonNull final GeckoSession session, @NonNull final SecurityInformation securityInfo) {
         this.securityInfo = securityInfo;
+        mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, securityInfo.isSecure, this), homeEnums.eGeckoCallback.M_UPDATE_SSL);
     }
 
     @Override
@@ -47,7 +49,9 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
             mProgress = progress;
 
             if (progress <= 20) {
-                mContext.get().runOnUiThread(() -> mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE));
+                mContext.get().runOnUiThread(() -> {
+                    mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE);
+                });
             } else {
                 if (progress == 100) {
                     mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, this), homeEnums.eGeckoCallback.ON_INVOKE_PARSER);
@@ -55,7 +59,9 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
                         checkApplicationRate();
                     }
                 }
-                mContext.get().runOnUiThread(() -> mEvent.invokeObserver(Arrays.asList(mProgress, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE));
+                mContext.get().runOnUiThread(() -> {
+                    mEvent.invokeObserver(Arrays.asList(mProgress, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE);
+                });
             }
         }
     }
@@ -68,12 +74,21 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
+        securityInfo = null;
         mGeckoDataModel.mTheme = null;
-        mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE_FORCED);
+        mProgress = 5;
+        mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE);
+        if(var2.startsWith("jar:file")){
+            return;
+        }
         mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID, var2, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, null), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
-        if (mIsLoaded) {
-            if (!mGeckoDataModel.mCurrentURL.equals("about:config") && !var2.equals("about:blank") && helperMethod.getHost(var2).endsWith(".onion")) {
-                var2 = var2.replace("www.", "");
+
+        //if (mIsLoaded) {
+            if (!mGeckoDataModel.mCurrentURL.equals("about:config") && !var2.equals("about:blank") && !var2.startsWith("jar:file")) {
+                if(helperMethod.getHost(var2).endsWith(".onion")){
+                    var2 = var2.replace("www.", "");
+                }
+                this.mGeckoDataModel.mCurrentURL = var2;
             }
 
             if(mGeckoDataModel.mCurrentURL.replace("http","https://").equals(var2)){
@@ -90,7 +105,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
                     mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.SEARCH_UPDATE);
                 }
             }
-        }
+        //}
     }
 
     @UiThread
@@ -132,8 +147,16 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
         return mProgress;
     }
 
-    public void getProgress(int pProgress){
-        mProgress = pProgress;
+    public void resetProgress() {
+        mProgress = 5;
+    }
+
+    public boolean getSecurtityState(){
+        if(securityInfo==null){
+            return false;
+        }else {
+            return securityInfo.isSecure;
+        }
     }
 
 }

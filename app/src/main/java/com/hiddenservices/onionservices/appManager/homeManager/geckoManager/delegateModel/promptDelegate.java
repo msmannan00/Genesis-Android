@@ -1,5 +1,7 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel;
 
+import static android.provider.OpenableColumns.DISPLAY_NAME;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
@@ -37,8 +40,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
+
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,6 +55,7 @@ import java.util.Locale;
 import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
+import org.mozilla.geckoview.GeckoSession.PermissionDelegate.MediaSource;
 import org.mozilla.geckoview.SlowScriptResponse;
 
 public final class promptDelegate implements GeckoSession.PromptDelegate {
@@ -57,7 +65,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
     private FilePrompt mFilePrompt;
 
     static final String LOGTAG = "BasicGeckoViewPrompt";
-    public int filePickerRequestCode = 1;
+    public int filePickerRequestCode = 115;
 
     public promptDelegate(final AppCompatActivity activity) {
         mActivity = activity;
@@ -244,11 +252,14 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
 
     private int getViewPadding(final AlertDialog.Builder builder) {
         stopMedia();
-        final TypedArray attr = builder.getContext().obtainStyledAttributes(
-                new int[]{android.R.attr.listPreferredItemPaddingLeft});
-        final int padding = attr.getDimensionPixelSize(0, 1);
-        attr.recycle();
-        return padding;
+        try {
+            final TypedArray attr = builder.getContext().obtainStyledAttributes(
+                    new int[]{android.R.attr.listPreferredItemPaddingLeft});
+            final int padding = attr.getDimensionPixelSize(0, 1);
+            attr.recycle();
+            return padding;
+        }catch (Exception ex){}
+        return 0;
     }
 
     private LinearLayout addStandardLayout(final AlertDialog.Builder builder,
@@ -874,8 +885,9 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         return res;
     }
 
+    @SuppressLint("Range")
     public void onFileCallbackResult(final int resultCode, final Intent data) {
-        stopMedia();
+
         if (mFileResponse == null) {
             return;
         }
@@ -891,24 +903,66 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             return;
         }
 
-        final Uri uri = data.getData();
+
+
+
+
+        Uri mURI = data.getData();
+        String result = null;
+        if (mURI.getScheme().equals("content")) {
+            Cursor cursor = mActivity.getContentResolver().query(mURI, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = mURI.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+
+
+        File myFile = new File(mActivity.getFilesDir(),result);
         final ClipData clip = data.getClipData();
 
-        if (prompt.type == FilePrompt.Type.SINGLE ||
-                (prompt.type == FilePrompt.Type.MULTIPLE && clip == null)) {
-            res.complete(prompt.confirm(mActivity, uri));
-        } else if (prompt.type == FilePrompt.Type.MULTIPLE) {
-            if (clip == null) {
-                Log.w(LOGTAG, "No selected file");
-                res.complete(prompt.dismiss());
-                return;
+        try {
+            FileInputStream in = (FileInputStream) mActivity.getContentResolver().openInputStream(data.getData());
+            FileOutputStream out = new FileOutputStream(myFile);
+            FileChannel inChannel = in.getChannel();
+            FileChannel outChannel = out.getChannel();
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+            in.close();
+            out.close();
+        } catch (Exception e) {}
+
+        final Uri uri = Uri.parse("file:///"+myFile.getAbsolutePath());
+
+        try {
+            if (prompt.type == FilePrompt.Type.SINGLE
+                    || (prompt.type == FilePrompt.Type.MULTIPLE && clip == null)) {
+                res.complete(prompt.confirm(mActivity, uri));
+            } else if (prompt.type == FilePrompt.Type.MULTIPLE) {
+                if (clip == null) {
+                    Log.w(LOGTAG, "No selected file");
+                    res.complete(prompt.dismiss());
+                    return;
+                }
+                final int count = clip.getItemCount();
+                final ArrayList<Uri> uris = new ArrayList<>(count);
+                for (int i = 0; i < count; i++) {
+                    uris.add(clip.getItemAt(i).getUri());
+                }
+                res.complete(prompt.confirm(mActivity, uris.toArray(new Uri[uris.size()])));
             }
-            final int count = clip.getItemCount();
-            final ArrayList<Uri> uris = new ArrayList<>(count);
-            for (int i = 0; i < count; i++) {
-                uris.add(clip.getItemAt(i).getUri());
-            }
-            res.complete(prompt.confirm(mActivity, uris.toArray(new Uri[0])));
+        }catch (Exception ex){
+            int e=0;
+            e=1;
         }
     }
 
@@ -944,29 +998,31 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         dialog.show();
     }
 
-    private Spinner addMediaSpinner(final Context context, final ViewGroup container,
-                                    final GeckoSession.PermissionDelegate.MediaSource[] sources, final String[] sourceNames) {
-        final ArrayAdapter<GeckoSession.PermissionDelegate.MediaSource> adapter = new ArrayAdapter<GeckoSession.PermissionDelegate.MediaSource>(
-                context, android.R.layout.simple_spinner_item) {
-            private View convertView(final int position, final View view) {
-                if (view != null) {
-                    ((TextView) view).setText(sourceNames != null ? sourceNames[position] : "media");
-                }
-                return view;
-            }
+    private Spinner addMediaSpinner(
+            final Context context,
+            final ViewGroup container,
+            final MediaSource[] sources,
+            final String[] sourceNames) {
+        final ArrayAdapter<MediaSource> adapter =
+                new ArrayAdapter<MediaSource>(context, android.R.layout.simple_spinner_item) {
+                    private View convertView(final int position, final View view) {
+                        if (view != null) {
+                            final MediaSource item = getItem(position);
+                            ((TextView) view).setText(sourceNames != null ? sourceNames[position] : item.name);
+                        }
+                        return view;
+                    }
 
-            @Override
-            public View getView(final int position, View view,
-                                final ViewGroup parent) {
-                return convertView(position, super.getView(position, view, parent));
-            }
+                    @Override
+                    public View getView(final int position, View view, final ViewGroup parent) {
+                        return convertView(position, super.getView(position, view, parent));
+                    }
 
-            @Override
-            public View getDropDownView(final int position, final View view,
-                                        @NonNull final ViewGroup parent) {
-                return convertView(position, super.getDropDownView(position, view, parent));
-            }
-        };
+                    @Override
+                    public View getDropDownView(final int position, final View view, final ViewGroup parent) {
+                        return convertView(position, super.getDropDownView(position, view, parent));
+                    }
+                };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter.addAll(sources);
 
@@ -977,18 +1033,21 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         return spinner;
     }
 
-    public void onMediaPrompt(final String title,
-                              final GeckoSession.PermissionDelegate.MediaSource[] video, final GeckoSession.PermissionDelegate.MediaSource[] audio,
-                              final String[] videoNames, final String[] audioNames,
-                              final GeckoSession.PermissionDelegate.MediaCallback callback) {
+    public void onMediaPrompt(
+            final GeckoSession session,
+            final String title,
+            final MediaSource[] video,
+            final MediaSource[] audio,
+            final String[] videoNames,
+            final String[] audioNames,
+            final GeckoSession.PermissionDelegate.MediaCallback callback) {
         final Activity activity = mActivity;
-        stopMedia();
         if (activity == null || (video == null && audio == null)) {
             callback.reject();
             return;
         }
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        final LinearLayout container = addStandardLayout(builder, title, null);
+        final LinearLayout container = addStandardLayout(builder, title, /* msg */ null);
 
         final Spinner videoSpinner;
         if (video != null) {
@@ -1004,32 +1063,44 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             audioSpinner = null;
         }
 
-        builder.setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok,
-                        (dialog, which) -> {
-                            final GeckoSession.PermissionDelegate.MediaSource video1 = (videoSpinner != null)
-                                    ? (GeckoSession.PermissionDelegate.MediaSource) videoSpinner.getSelectedItem() : null;
-                            final GeckoSession.PermissionDelegate.MediaSource audio1 = (audioSpinner != null)
-                                    ? (GeckoSession.PermissionDelegate.MediaSource) audioSpinner.getSelectedItem() : null;
-                            callback.grant(video1, audio1);
+        builder
+                .setNegativeButton(android.R.string.cancel, /* listener */ null)
+                .setPositiveButton(
+                        android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(final DialogInterface dialog, final int which) {
+                                final MediaSource video =
+                                        (videoSpinner != null) ? (MediaSource) videoSpinner.getSelectedItem() : null;
+                                final MediaSource audio =
+                                        (audioSpinner != null) ? (MediaSource) audioSpinner.getSelectedItem() : null;
+                                callback.grant(video, audio);
+                            }
                         });
 
         final AlertDialog dialog = builder.create();
-        dialog.setOnDismissListener(dialog1 -> callback.reject());
+        dialog.setOnDismissListener(
+                new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(final DialogInterface dialog) {
+                        callback.reject();
+                    }
+                });
         dialog.show();
     }
 
-    public void onMediaPrompt(final String title,
-                              final GeckoSession.PermissionDelegate.MediaSource[] video, final GeckoSession.PermissionDelegate.MediaSource[] audio,
-                              final GeckoSession.PermissionDelegate.MediaCallback callback) {
-        stopMedia();
-        onMediaPrompt(title, video, audio, null, null, callback);
+    public void onMediaPrompt(
+            final GeckoSession session,
+            final String title,
+            final MediaSource[] video,
+            final MediaSource[] audio,
+            final GeckoSession.PermissionDelegate.MediaCallback callback) {
+        onMediaPrompt(session, title, video, audio, null, null, callback);
     }
 
     @Override
-    public GeckoResult<PromptResponse> onPopupPrompt(@NonNull final GeckoSession session,
-                                                     final PopupPrompt prompt) {
-        stopMedia();
+    public GeckoResult<PromptResponse> onPopupPrompt(
+            final GeckoSession session, final PopupPrompt prompt) {
         return GeckoResult.fromValue(prompt.confirm(AllowOrDeny.ALLOW));
     }
 }

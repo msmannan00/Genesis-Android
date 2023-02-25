@@ -1,11 +1,13 @@
 package com.hiddenservices.onionservices.pluginManager;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
-import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
+import com.hiddenservices.onionservices.appManager.unproxiedConnectionManager.unproxiedConnectionController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogController;
 import com.hiddenservices.onionservices.appManager.settingManager.privacyManager.settingPrivacyController;
@@ -27,6 +29,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import static com.hiddenservices.onionservices.constants.constants.CONST_BRIDGES;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICKED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_ACTIVITY_CREATED;
@@ -204,6 +208,15 @@ public class pluginController {
     private class messageCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> pData, Object pEventType) {
+
+            if (pEventType.equals(M_GET_BRIDGES)) {
+                Intent myIntent = new Intent(mContextManager.getBridgeController(), unproxiedConnectionController.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("m_url", CONST_BRIDGES);
+                bundle.putBoolean("m_bridges", true);
+                myIntent.putExtras(bundle);
+                mContextManager.getBridgeController().startActivity(myIntent);
+            }
             if (pEventType.equals(M_PANIC_RESET)) {
                 if(activityContextManager.getInstance().getSettingController()!=null){
                     activityContextManager.getInstance().getSettingController().moveTaskToBack(true);

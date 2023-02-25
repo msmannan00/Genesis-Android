@@ -5,6 +5,7 @@ import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.data
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.autofillDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.contentDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.navigationDelegate;
+import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.permissionDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.progressDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.promptDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.historyDelegate;
@@ -42,20 +43,22 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
     private downloadHandler mDownloadHandler;
     private searchHandler mSearchHandler;
 
+    private permissionDelegate mPermissionDelegate;
+
     private boolean mIsRemovableOnBackPressed = false;
 
-    geckoSession(eventObserver.eventListener event, String pSessionID, AppCompatActivity mContext, GeckoView pGeckoView) {
+    geckoSession(eventObserver.eventListener pEvent, String pSessionID, AppCompatActivity pContext, GeckoView pGeckoView) {
 
-        this.mContext = new WeakReference(mContext);
-        this.mEvent = event;
+        this.mContext = new WeakReference(pContext);
+        this.mEvent = pEvent;
         this.mGeckoDataModel = new geckoDataModel();
         this.mGeckoDataModel.mSessionID = pSessionID;
 
         this.mMediaDelegate = new mediaDelegate(this.mContext);
-        this.mSelectionActionDelegate = new selectionDelegate(mContext, true);
+        this.mSelectionActionDelegate = new selectionDelegate(pContext, true);
         this.mMediaSessionDelegate = new mediaSessionDelegate(this.mContext, mGeckoDataModel, mMediaDelegate);
         this.mHistoryDelegate = new historyDelegate(this.mContext, mEvent, mGeckoDataModel, this);
-        this.mPromptDelegate = new promptDelegate(mContext);
+        this.mPromptDelegate = new promptDelegate(this.mContext.get());
         this.mContentDelegate = new contentDelegate(this.mContext, mEvent, mGeckoDataModel, this);
         this.mScrollDelegate = new scrollDelegate(mEvent, mGeckoDataModel);
         this.mAutofillDelegate = new autofillDelegate(pGeckoView);
@@ -63,6 +66,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
         this.mSearchHandler = new searchHandler(mEvent, this);
         this.mNavigationDelegate = new navigationDelegate(this.mContext, mEvent, mGeckoDataModel, this);
         this.mProgressDelegate = new progressDelegate(this.mContext, mEvent, mGeckoDataModel);
+        this.mPermissionDelegate = new permissionDelegate(this.mContext, this);
 
         setSelectionActionDelegate(this.mSelectionActionDelegate);
         setMediaSessionDelegate(this.mMediaSessionDelegate);
@@ -74,6 +78,11 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
         setAutofillDelegate(this.mAutofillDelegate);
         setNavigationDelegate(this.mNavigationDelegate);
         setProgressDelegate(this.mProgressDelegate);
+        setPermissionDelegate(this.mPermissionDelegate);
+    }
+
+    public void initCallback(eventObserver.eventListener pEvent) {
+        this.mEvent = pEvent;
     }
 
     public void initURL(String url) {
@@ -83,7 +92,6 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
         mGeckoDataModel.mCurrentTitle = mGeckoDataModel.mCurrentURL;
         mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle), homeEnums.eGeckoCallback.ON_UPDATE_SUGGESTION);
     }
-
 
     /*Delegate Handler*/
 
@@ -188,6 +196,9 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
     }
 
     /*Properties Getter Setter*/
+    public void resetProgress() {
+        mProgressDelegate.resetProgress();
+    }
     public void setTheme(String pTheme) {
         mGeckoDataModel.mTheme = pTheme;
     }
@@ -218,6 +229,10 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
 
     public int getProgress() {
         return mProgressDelegate.getProgress();
+    }
+
+    public boolean getSSL() {
+        return mProgressDelegate.getSecurtityState();
     }
 
 }
