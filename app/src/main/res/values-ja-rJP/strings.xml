@@ -334,8 +334,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">すべての画像をブロックする</string>
     <string name="SETTING_ADVANCE" translatable="true">事前システム設定</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">復元タブ、データセーバー、開発者ツール</string>
-    <string name="SETTING_PROXY" translatable="true">プロキシのonion条件</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">ネットワークのonion状態を確認してください</string>
+    <string name="SETTING_PROXY" translatable="true">プロキシのorion条件</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">ネットワークのorion状態を確認してください</string>
     <string name="SETTING_REPORT" translatable="true">レポートのウェブサイト</string>
     <string name="SETTING_REPORT_INFO" translatable="true">虐待的なウェブサイトを報告する</string>
     <string name="SETTING_RATEUS" translatable="true">このアプリを評価する</string>
@@ -478,9 +478,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">プロキシの状態</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orbotプロキシの現状</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbotプロキシの条件</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orionプロキシの現状</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orionプロキシの条件</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN接続状態</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">プロキシのBridge条件</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">情報|システム設定の変更</string>

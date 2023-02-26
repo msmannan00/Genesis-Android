@@ -334,8 +334,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Blockiere alle Bilder</string>
     <string name="SETTING_ADVANCE" translatable="true">Erweiterte Systemeinstellung</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">Tabs wiederherstellen, Daten sparen, Entwicklertools</string>
-    <string name="SETTING_PROXY" translatable="true">onion Proxy-Bedingung</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">Überprüfen Sie den onion-Zustand des Netzwerks</string>
+    <string name="SETTING_PROXY" translatable="true">orion Proxy-Bedingung</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">Überprüfen Sie den orion-Zustand des Netzwerks</string>
     <string name="SETTING_REPORT" translatable="true">report website</string>
     <string name="SETTING_REPORT_INFO" translatable="true">missbräuchliche Website melden</string>
     <string name="SETTING_RATEUS" translatable="true">Bewerte diese App</string>
@@ -478,9 +478,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">Proxy-Bedingung</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">aktueller Zustand von orbot Proxy</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot Proxy-Bedingung</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">aktueller Zustand von orion Proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion Proxy-Bedingung</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN Konnektivitätsbedingung</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge Proxy-Bedingung</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info | Systemeinstellung ändern</string>

@@ -335,8 +335,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">tüm resimleri engelle</string>
     <string name="SETTING_ADVANCE" translatable="true">Gelişmiş Sistem Ayarı</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">sekmeleri geri yükle, veri tasarrufu, geliştirici araçları</string>
-    <string name="SETTING_PROXY" translatable="true">onion vekalet koşulu</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">onion ağ durumunu kontrol et</string>
+    <string name="SETTING_PROXY" translatable="true">orion vekalet koşulu</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">orion ağ durumunu kontrol et</string>
     <string name="SETTING_REPORT" translatable="true">web sitesini bildir</string>
     <string name="SETTING_REPORT_INFO" translatable="true">kötüye kullanılan web sitesini bildir</string>
     <string name="SETTING_RATEUS" translatable="true">bu uygulamayı oyla</string>
@@ -479,9 +479,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">vekaletname durumu</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orbot vekilinin mevcut durumu</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot vekalet koşulu</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orion vekilinin mevcut durumu</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion vekalet koşulu</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN bağlantı durumu</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge vekalet koşulu</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">bilgi | Sistem Ayarını değiştir</string>

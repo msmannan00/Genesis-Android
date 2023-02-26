@@ -19,12 +19,12 @@
     <!-- Home Splash Screen -->
     <string name="HOME_DESCRIPTION_TEXT_1">Diamankan oleh Jaringan Tor</string>
     <string name="HOME_DESCRIPTION_TEXT_2">Tanpa Rekam dan Sidik Jari Digital</string>
-    <string name="HOME_DESCRIPTION_TEXT_3">Mesin Pencari Onion bawaan</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Mesin Pencari Orion bawaan</string>
     <string name="HOME_DESCRIPTION_TEXT_4">Perlindungan Pelacakan</string>
     <string name="HOME_DESCRIPTION_TEXT_5">Tidak Ada Cache Lokal yang Tersimpan</string>
     <string name="HOME_DESCRIPTION_TEXT_6">Cookie Aman yang Dapat Dikelola</string>
     <string name="HOME_DESCRIPTION_TEXT_7">Diamankan oleh Jaringan Tor</string>
-    <string name="HOME_DESCRIPTION_TEXT_8">Mesin Pencari Onion bawaan</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Mesin Pencari Orion bawaan</string>
     <string name="HOME_DESCRIPTION_TEXT_9">Tanpa Rekam dan Sidik Jari Digital</string>
     <string name="HOME_CONNECT_NO_TOR">Penjelajahan Biasa</string>
     <string name="HOME_CONNECT_TOR">Penjelajahan Tor</string>
@@ -325,8 +325,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokkeer alle afbeeldingen</string>
     <string name="SETTING_ADVANCE" translatable="true">Geavanceerde Systeeminstelling</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">tabbladen herstellen, gegevensbesparing, ontwikkelaarstools</string>
-    <string name="SETTING_PROXY" translatable="true">onion voorwaarde van volmacht</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">controleer onion conditie van netwerk</string>
+    <string name="SETTING_PROXY" translatable="true">orion voorwaarde van volmacht</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">controleer orion conditie van netwerk</string>
     <string name="SETTING_REPORT" translatable="true">rapport website</string>
     <string name="SETTING_REPORT_INFO" translatable="true">beledigende website melden</string>
     <string name="SETTING_RATEUS" translatable="true">beoordeel deze app</string>
@@ -469,9 +469,9 @@
 
     <!-- Proxy Status -->
     <string name="PROXY_STATUS_HEADER" translatable="true">inschakelen voorwaarde van volmacht</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">huidige toestand van orbot proxy</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot voorwaarde van volmacht</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion Bridges status</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">huidige toestand van orion proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion voorwaarde van volmacht</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion Bridges status</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN voorwaarde van connectiviteit</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge voorwaarde van volmacht</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info, wijzig Systeeminstelling</string>

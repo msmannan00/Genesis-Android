@@ -19,12 +19,12 @@
     <!-- Home Splash Screen -->
     <string name="HOME_DESCRIPTION_TEXT_1">Beveiligd door Tor-netwerk</string>
     <string name="HOME_DESCRIPTION_TEXT_2">Geen opname en digitale vingerafdrukken</string>
-    <string name="HOME_DESCRIPTION_TEXT_3">Ingebouwde Onion-zoekmachine</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Ingebouwde Orion-zoekmachine</string>
     <string name="HOME_DESCRIPTION_TEXT_4">Bescherming tegen volgen</string>
     <string name="HOME_DESCRIPTION_TEXT_5">Geen lokale cache opgeslagen</string>
     <string name="HOME_DESCRIPTION_TEXT_6">Veilige beheerbare cookies</string>
     <string name="HOME_DESCRIPTION_TEXT_7">Beveiligd door Tor-netwerk</string>
-    <string name="HOME_DESCRIPTION_TEXT_8">Ingebouwde Onion-zoekmachine</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Ingebouwde Orion-zoekmachine</string>
     <string name="HOME_DESCRIPTION_TEXT_9">Geen opname en digitale vingerafdrukken</string>
     <string name="HOME_CONNECT_NO_TOR">Normaal browsen</string>
     <string name="HOME_CONNECT_TOR">Tor browsen</string>
@@ -323,7 +323,7 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Blokkeer alle afbeeldingen</string>
     <string name="SETTING_ADVANCE" translatable="true">Geavanceerd</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">Herstel tabbladen, databesparing, ontwikkelaarstools</string>
-    <string name="SETTING_PROXY" translatable="true">Onion Proxy-status</string>
+    <string name="SETTING_PROXY" translatable="true">orion Proxy-status</string>
     <string name="SETTING_PROXY_INFO" translatable="true">Controleer uienetwerk of status</string>
     <string name="SETTING_REPORT" translatable="true">Rapport website</string>
     <string name="SETTING_REPORT_INFO" translatable="true">Beledigende website melden</string>
@@ -470,8 +470,8 @@
 
     <!-- Proxy Status -->
     <string name="PROXY_STATUS_HEADER" translatable="true">Proxystatus</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Huidige status van orbot-proxy</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot-proxystatus</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Huidige status van orion-proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion-proxystatus</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">Ui Bruggen Status</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN-verbindingsstatus</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge-verbindingsstatus</string>

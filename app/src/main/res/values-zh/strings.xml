@@ -332,8 +332,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">封锁所有图片</string>
     <string name="SETTING_ADVANCE" translatable="true">进阶系统设定</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">还原标签，数据保护程序，开发人员工具</string>
-    <string name="SETTING_PROXY" translatable="true">onion代理条件</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">检查onion网络状况</string>
+    <string name="SETTING_PROXY" translatable="true">orion代理条件</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">检查orion网络状况</string>
     <string name="SETTING_REPORT" translatable="true">报告网站</string>
     <string name="SETTING_REPORT_INFO" translatable="true">举报滥用网站</string>
     <string name="SETTING_RATEUS" translatable="true">为这个应用软件评分</string>
@@ -477,8 +477,8 @@
 
     <string name="PROXY_STATUS_HEADER" translatable="true">委托条件</string>
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Gateway 代理的当前状况</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot委托条件</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">Orbot</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion委托条件</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN的连接条件</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge代理条件</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">信息|更改系统设置</string>

@@ -31,6 +31,7 @@ public class orbotLocalConstants
     public static String mInitUpdateBridgeList = "";
     public static boolean mInitUpdateVPN = false;
     public static boolean mAppTriggered = false;
+    public static boolean mSoftNotification = false;
 
     public static int mHTTPPort = 8118;
     public static int mSOCKSPort = -1;

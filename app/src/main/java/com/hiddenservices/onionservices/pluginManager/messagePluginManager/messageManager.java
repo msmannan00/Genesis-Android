@@ -463,6 +463,16 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             mDescription = data_local;
         }
 
+        if(mDescription.equals("")){
+            mDescription = url;
+        }
+        if(mDescriptionShort.equals("")){
+            mDescription = "";
+            mDescriptionShort = mDescription;
+        }
+        if(mDescriptionShort.length()>50){
+            mDescriptionShort = mDescriptionShort.substring(0, 50)+"...";
+        }
 
         initializeDialog(R.layout.popup_download_full, Gravity.CENTER);
 
@@ -477,8 +487,12 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         LinearLayout mPopupDownloadFullImageCopy = mDialog.findViewById(R.id.pPopupDownloadFullImageCopy);
         LinearLayout mPopupDownloadFullImageDownload = mDialog.findViewById(R.id.pPopupDownloadFullImageDownload);
 
+        if(mDescription.startsWith("http")){
+            mPopupDownloadFullDescriptionShort.setText("static url");
+        }else {
+            mPopupDownloadFullDescriptionShort.setText((mDescriptionShort));
+        }
         mPopupDownloadFullDescription.setText((mDescription));
-        mPopupDownloadFullDescriptionShort.setText((mDescriptionShort));
         mEvent.invokeObserver(Arrays.asList((mPopupDownloadFullImage), helperMethod.getDomainName(data_local)), ON_FETCH_FAVICON);
 
         if (mData != null) {
@@ -852,7 +866,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
 
                 case M_POPUP_BLOCKED:
                     /*VERIFIED*/
-                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_generic, 2000, mContext.getString(R.string.TOAST_ALERT_SETTING_PRIVACY_POPUP), mContext.getString(R.string.TOAST_ALERT_SETTING), M_OPEN_PRIVACY);
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 2000, mContext.getString(R.string.TOAST_ALERT_SETTING_PRIVACY_POPUP), mContext.getString(R.string.TOAST_ALERT_SETTING), M_OPEN_PRIVACY);
                     break;
 
                 case M_MAX_TAB_REACHED:

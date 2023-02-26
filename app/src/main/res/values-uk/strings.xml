@@ -472,7 +472,7 @@
     <!-- Proxy Status -->
     <string name="PROXY_STATUS_HEADER" translatable="true">Статус проксі</string>
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Поточний стан проксі-провайдера</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Статус проксі Orbot</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">Статус проксі orion</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">Цибуля Статус мостів</string>
     <string name="PROXY_VPN_STATUS" translatable="true">Стан підключення до VPN</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Статус підключення мосту</string>

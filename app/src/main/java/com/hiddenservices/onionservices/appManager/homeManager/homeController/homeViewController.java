@@ -402,12 +402,16 @@ public class homeViewController {
     }
 
     public void setSecurityColor(){
+        boolean ssl = (boolean)mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_GET_SSL_STATUS);
+        if (mSearchbar.hasFocus()) {
+            ssl_status = true;
+            return;
+        }
         mSearchLock.setColorFilter(null);
         mSearchLock.clearColorFilter();
         mSearchLock.setImageTintList(null);
 
         mSearchLock.setImageDrawable(helperMethod.getDrawableXML(mContext, R.xml.ic_baseline_lock));
-        boolean ssl = (boolean)mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_GET_SSL_STATUS);
         if(ssl || status.sTorBrowsing){
             if(helperMethod.getColorDensity(((ColorDrawable)mTopBar.getBackground()).getColor()) < 0.80){
                 mSearchLock.setColorFilter(ContextCompat.getColor(mContext, R.color.c_white));
@@ -420,7 +424,6 @@ public class homeViewController {
             ssl_status = false;
         }
     }
-
     @SuppressLint("UseCompatLoadingForDrawables")
     public void initSearchBarFocus(boolean pStatus, boolean mIsKeyboardOpened) {
         if (!pStatus) {
@@ -1146,6 +1149,22 @@ public class homeViewController {
     private Handler mSearchUpdateHandler = null;
 
     void onUpdateSearchBar(String url, boolean showProtocol, boolean pClearText, boolean pBypassFocus) {
+
+        if (mSearchbar.isFocused()){
+            if(mProgressBar.getProgress()>0 && mProgressBar.getProgress()<100){
+                if(!mSearchbar.getText().toString().startsWith("http")){
+                    if(url.startsWith("https://")){
+                        url = "https://" + mSearchbar.getText().toString();
+                    }
+                    else{
+                        url = "http://" + mSearchbar.getText().toString();
+                    }
+                }else {
+                    url = mSearchbar.getText().toString();
+                }
+            }
+        }
+
         String mURL = url;
         if (mURL.endsWith("genesisconfigurenewidentity.com/")) {
             return;

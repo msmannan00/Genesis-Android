@@ -33,7 +33,7 @@ class settingNotificationModel {
             if(status.sTorBrowsing){
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
             }else {
-                activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
+                activityContextManager.getInstance().getHomeController().onShowDefaultNotification(true);
             }
         }
     }

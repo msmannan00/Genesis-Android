@@ -263,7 +263,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         status.sSettingIsAppRunning = true;
         initPreFixes();
         initBundle();
-        initTor();
+        if(!status.mThemeApplying){
+            initTor();
+        }
         onMemoryCalculate();
         pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_INIT_ADS);
         mHomeViewController.updateBannerAdvertStatus(true, (boolean) pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
@@ -301,14 +303,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
             new Handler().postDelayed(() ->
             {
-                onShowDefaultNotification();
+                onShowDefaultNotification(true);
             }, 500);
         }else {
             onHideDefaultNotification();
             int notificationStatus = status.sNotificaionStatus;
             if (notificationStatus == 0) {
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
-                activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
+                activityContextManager.getInstance().getHomeController().onShowDefaultNotification(true);
             } else {
                 if(status.mThemeApplying){
                     new Handler().postDelayed(() ->
@@ -512,7 +514,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     mHomeViewController.onUpdateSearchEngineBar(false, 150);
                     mSearchbar.clearFocus();
                     mHomeViewController.onClearSelections(true);
-                    mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
+                    if(mProgressBar.getProgress()<=0 || mProgressBar.getProgress()>=100){
+                        mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
+                    }else {
+                        mHomeViewController.triggerUpdateSearchBar(mPastURL, false, false, true);
+                    }
                 }
                 return false;
             });
@@ -620,7 +626,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void initPreFixes() {
         try {
             if(status.mThemeApplying){
-                onShowDefaultNotification();
+                onShowDefaultNotification(true);
             }else {
                 onHideDefaultNotification();
             }
@@ -918,12 +924,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoClient.onMediaInvoke(enums.MediaController.SKIP_BACKWARD);
     }
 
-    public void onShowDefaultNotification(){
-        showDefaultNotification(this, "Orion Browser");
+    public void onShowDefaultNotification(boolean pSticky){
+        showDefaultNotification(this, "Orion Browser", pSticky);
     }
     public void onHideDefaultNotification(){
-        NotificationManagerCompat.from(this).cancelAll();
-        NotificationManagerCompat.from(this).cancel(1025);
+        if(!status.mThemeApplying){
+            NotificationManagerCompat.from(this).cancelAll();
+            NotificationManagerCompat.from(this).cancel(1125);
+        }
     }
 
     public void resetAndRestart(){
@@ -953,20 +961,25 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     NotificationManager manager = null;
-    public void showDefaultNotification(Context context, String title) {
+    public void showDefaultNotification(Context context, String title, boolean isSticky) {
         if(!status.mThemeApplying && status.sTorBrowsing && status.sNotificaionStatus != 0 || !orbotLocalConstants.mAppStarted || status.sNotificaionStatus == 0){
+            return;
+        }
+        if(status.mThemeApplying){
             return;
         }
 
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+        if(!status.mThemeApplying){
+            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+        }
 
         PendingIntent action;
 
         if (SDK_INT >= Build.VERSION_CODES.M) {
-            action = PendingIntent.getActivity(context, 1025, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
+            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
         }else {
-            action = PendingIntent.getActivity(context, 1025, new Intent(context, homeController.class), 0); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
+            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), 0); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify_001");
@@ -989,31 +1002,33 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         Intent intentActionOpen = new Intent(context,homeController.class);
         intentActionOpen.putExtra("action","Open");
-        PendingIntent pIntentOpen = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1025, "media_play", 0);
+        PendingIntent pIntentOpen = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1125, "media_play", 0);
         builder.addAction(0, "ERASE AND RESET", pIntentOpen);
 
         Intent intentActionClose = new Intent(context,homeController.class);
         intentActionClose.putExtra("action","Exit");
-        PendingIntent pIntentClose = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1025, "media_pause", 1);
+        PendingIntent pIntentClose = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1125, "media_pause", 1);
         builder.addAction(0, "EXIT BROWSER", pIntentClose);
 
         Notification notification = builder.build();
         PendingIntent dummyIntent = null;
 
         if (SDK_INT >= Build.VERSION_CODES.M) {
-            PendingIntent.getActivity(context, 1025, new Intent(), PendingIntent.FLAG_IMMUTABLE);
+            PendingIntent.getActivity(context, 1125, new Intent(), PendingIntent.FLAG_IMMUTABLE);
         }else {
-            PendingIntent.getActivity(context, 1025, new Intent(), 0);
+            PendingIntent.getActivity(context, 1125, new Intent(), 0);
         }
         notification.fullScreenIntent = dummyIntent;
 
-        if (SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-            notification.flags = Notification.FLAG_AUTO_CANCEL|Notification.FLAG_ONGOING_EVENT;
-        }else {
-            notification.flags |= Notification.FLAG_NO_CLEAR;
+        if(isSticky){
+            if (SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                notification.flags = Notification.FLAG_AUTO_CANCEL|Notification.FLAG_ONGOING_EVENT;
+            }else {
+                notification.flags |= Notification.FLAG_NO_CLEAR;
+            }
         }
 
-        int notificationCode = 1025;
+        int notificationCode = 1125;
 
         manager.notify(notificationCode, notification);
     }
@@ -1121,10 +1136,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         orbotLocalConstants.mAppForceExit = true;
         if (!status.mThemeApplying) {
             NotificationManagerCompat.from(this).cancel(1030);
-            NotificationManagerCompat.from(this).cancel(1025);
+            NotificationManagerCompat.from(this).cancel(1125);
         }
-        if(manager!=null){
-            manager.cancel(1025);
+        if(manager!=null && !status.mThemeApplying){
+            manager.cancel(1125);
         }
         if(mGeckoClient.getSession() !=null){
             mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
@@ -1418,12 +1433,18 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                             mHomeViewController.onUpdateSearchEngineBar(false, 150);
                         }
                         mHomeViewController.initSearchBarFocus(false, isKeyboardOpened);
-                        mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, true, false);
+                        if(mProgressBar.getProgress()<=0 || mProgressBar.getProgress()>=100){
+                            mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, false);
+                        }else {
+                            mHomeViewController.triggerUpdateSearchBar(mPastURL, false, false, false);
+                        }
                         helperMethod.hideKeyboard(homeController.this);
                     }
                 }
                 mSearchbar.setSelection(0);
             } else {
+                mPastURL = mSearchbar.getText().toString();
+
                 msearchstatuscopy = true;
                 mSearchBarWasBackButtonPressed = false;
                 if (!isFocusChanging) {
@@ -1451,6 +1472,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mSearchBarLoading = false;
         }, 150);
     };
+    String mPastURL = "";
 
     public void onSearchBarInvoked(View view) {
         String url;
@@ -1947,13 +1969,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (mGeckoClient.getSession() != null && mGeckoClient != null) {
             mGeckoClient.onMediaInvoke(enums.MediaController.PAUSE);
         }
-
+        onShowDefaultNotification(false);
+        orbotLocalConstants.mSoftNotification = true;
     }
 
     @Override
     public void onResume() {
         if(status.sNotificaionStatus == 1){
-            onShowDefaultNotification();
+            onShowDefaultNotification(true);
         }
         orbotLocalConstants.mAppForceExit = false;
 
@@ -2030,6 +2053,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         status.mThemeApplying = false;
 
+        orbotLocalConstants.mSoftNotification = false;
         super.onResume();
     }
 
@@ -2260,7 +2284,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.initHomePage();
         }
         onInvokeProxyLoading();
-        onShowDefaultNotification();
+        onShowDefaultNotification(true);
     }
 
     public void onStartApplication(View view) {
@@ -2269,7 +2293,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         int notificationStatus = status.sNotificaionStatus;
         if (notificationStatus == 0) {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
-            activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
+            activityContextManager.getInstance().getHomeController().onShowDefaultNotification(true);
         } else {
             new Handler().postDelayed(() ->
             {
@@ -3109,6 +3133,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             } else if (e_type.equals(homeEnums.eGeckoCallback.PROGRESS_UPDATE_FORCED)) {
                 //mHomeViewController.onProgressBarUpdate((int) data.get(0), true, isStaticURL());
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR)) {
+                mPastURL = (String) data.get(0);
                 mHomeViewController.onUpdateSearchBar((String) data.get(0), false, false, false);
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_FIRST_PAINT)) {
                 mHomeViewController.onFirstPaint();
@@ -3165,9 +3190,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().onLanguageInvoke(Arrays.asList(homeController.this, status.sSettingLanguage, status.sSettingLanguageRegion, status.mThemeApplying), pluginEnums.eLangManager.M_SET_LANGUAGE);
                 initLocalLanguage();
                 mHomeViewController.onPageFinished();
-                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0), mGeckoClient.getSession().getCurrentURL()), false, true, false);
+                mPastURL = (String) data.get(0);
+                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0), mGeckoClient.getSession().getCurrentURL()), false, false, false);
             } else if (e_type.equals(homeEnums.eGeckoCallback.SEARCH_UPDATE)) {
-                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0), mGeckoClient.getSession().getCurrentURL()), false, true, false);
+                mPastURL = (String) data.get(0);
+                mHomeViewController.onUpdateSearchBar(dataToStr(data.get(0), mGeckoClient.getSession().getCurrentURL()), false, false, false);
             } else if (e_type.equals(homeEnums.eGeckoCallback.DOWNLOAD_FILE_POPUP)) {
                 List<Object> mData = new ArrayList<>();
                 mData.addAll(data);
@@ -3236,7 +3263,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_ORBOT_LOADING);
                 new Handler().postDelayed(() ->
                 {
-                    mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
+                    mPastURL = mGeckoClient.getSession().getCurrentURL();
+                    mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, false);
                 }, 1000);
             }
             else if (e_type.equals(homeEnums.eGeckoCallback.M_DEFAULT_BROWSER)) {

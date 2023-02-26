@@ -97,7 +97,7 @@ public class settingNotificationController extends AppCompatActivity {
             activityContextManager.getInstance().getHomeController().onHideDefaultNotification();
         } else {
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
-            activityContextManager.getInstance().getHomeController().onShowDefaultNotification();
+            activityContextManager.getInstance().getHomeController().onShowDefaultNotification(true);
         }
     }
 

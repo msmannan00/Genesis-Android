@@ -479,7 +479,7 @@
 
     <string name="PROXY_STATUS_HEADER" translatable="true">حالة الوكيل</string>
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">الحالة الحالية للوكيل المداري</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">حالة وكيل Genesis</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">حالة وكيل orion</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">انین</string>
     <string name="PROXY_VPN_STATUS" translatable="true">شرط الاتصال بالسلاح</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">شرط وكيل الجسر</string>

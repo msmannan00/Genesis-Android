@@ -334,8 +334,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokovat všechny obrázky</string>
     <string name="SETTING_ADVANCE" translatable="true">Pokročilé nastavení systému</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">obnovit karty, spořič dat, vývojářské nástroje</string>
-    <string name="SETTING_PROXY" translatable="true">onion podmínka proxy</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">zkontrolujte stav sítě onion</string>
+    <string name="SETTING_PROXY" translatable="true">orion podmínka proxy</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">zkontrolujte stav sítě orion</string>
     <string name="SETTING_REPORT" translatable="true">nahlásit web</string>
     <string name="SETTING_REPORT_INFO" translatable="true">nahlásit nevhodný web</string>
     <string name="SETTING_RATEUS" translatable="true">Ohodnoťte tuto aplikaci</string>
@@ -478,8 +478,8 @@
 
     <string name="PROXY_STATUS_HEADER" translatable="true">podmínka plné moci</string>
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">aktuální stav 11122 proxy</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot podmínka proxy</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion podmínka proxy</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN podmínka připojení</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge podmínka proxy</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">informace | změnit nastavení systému</string>

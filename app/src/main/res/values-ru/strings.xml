@@ -334,8 +334,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">заблокировать все изображения</string>
     <string name="SETTING_ADVANCE" translatable="true">Расширенные настройки системы</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">восстановить вкладки, хранитель данных, инструменты разработчика</string>
-    <string name="SETTING_PROXY" translatable="true">onion состояние прокси</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">проверить onion состояние сети</string>
+    <string name="SETTING_PROXY" translatable="true">orion состояние прокси</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">проверить orion состояние сети</string>
     <string name="SETTING_REPORT" translatable="true">веб-сайт отчета</string>
     <string name="SETTING_REPORT_INFO" translatable="true">сообщить о нарушении веб-сайта</string>
     <string name="SETTING_RATEUS" translatable="true">Оцените это приложение</string>
@@ -478,9 +478,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">состояние доверенности</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">текущее состояние прокси orbot</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot состояние прокси</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">текущее состояние прокси orion</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion состояние прокси</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN состояние подключения</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge состояние прокси</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">информация | изменить настройки системы</string>

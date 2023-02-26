@@ -334,8 +334,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">บล็อกภาพทั้งหมด</string>
     <string name="SETTING_ADVANCE" translatable="true">การตั้งค่าระบบขั้นสูง</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">กู้คืนแท็บโปรแกรมประหยัดข้อมูลเครื่องมือสำหรับนักพัฒนา</string>
-    <string name="SETTING_PROXY" translatable="true">onion เงื่อนไขการมอบฉันทะ</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">ตรวจสอบสภาพเครือข่าย onion</string>
+    <string name="SETTING_PROXY" translatable="true">orion เงื่อนไขการมอบฉันทะ</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">ตรวจสอบสภาพเครือข่าย orion</string>
     <string name="SETTING_REPORT" translatable="true">รายงานเว็บไซต์</string>
     <string name="SETTING_REPORT_INFO" translatable="true">รายงานเว็บไซต์ที่ไม่เหมาะสม</string>
     <string name="SETTING_RATEUS" translatable="true">ให้คะแนนแอปนี้</string>
@@ -478,9 +478,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">เงื่อนไขของพร็อกซี</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">สภาพปัจจุบันของ orbot proxy</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot เงื่อนไขของพร็อกซี</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">สภาพปัจจุบันของ orion proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion เงื่อนไขของพร็อกซี</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN เงื่อนไขการเชื่อมต่อ</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge เงื่อนไขของการมอบฉันทะ</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">ข้อมูล | เปลี่ยนการตั้งค่าระบบ</string>

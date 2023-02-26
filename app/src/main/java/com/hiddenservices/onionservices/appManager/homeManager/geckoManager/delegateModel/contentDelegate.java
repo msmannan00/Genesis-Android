@@ -3,6 +3,8 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.del
 
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
+
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.os.Handler;
 import android.util.Log;
@@ -18,11 +20,18 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
 import org.json.JSONObject;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.WebResponse;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
+import java.util.List;
 
 public class contentDelegate implements GeckoSession.ContentDelegate {
 
@@ -94,16 +103,40 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
     @UiThread
     @Override
     public void onExternalResponse(@NonNull GeckoSession session, @NonNull WebResponse response) {
-        try {
-            if (response.headers.containsKey("Content-Disposition")) {
-                mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
-            } else if (response.headers.containsKey("Content-Type")) {
-                mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
-            }
-        } catch (ActivityNotFoundException e) {
-            mEvent.invokeObserver(Arrays.asList(response, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_HANDLE_EXTERNAL_INTENT);
-            mGeckoSession.stop();
-        }
+        Dexter.withContext(mContext.get())
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.MEDIA_CONTENT_CONTROL,
+                        Manifest.permission.MANAGE_MEDIA,
+                        Manifest.permission.ACCESS_MEDIA_LOCATION,
+                        Manifest.permission.READ_MEDIA_AUDIO,
+                        Manifest.permission.READ_MEDIA_VIDEO,
+                        Manifest.permission.READ_MEDIA_IMAGES,
+                        Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO
+                ).withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                        try {
+                            if (response.headers.containsKey("Content-Disposition")) {
+                                mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
+                            } else if (response.headers.containsKey("Content-Type")) {
+                                mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
+                            }
+                        } catch (ActivityNotFoundException e) {
+                            mEvent.invokeObserver(Arrays.asList(response, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_HANDLE_EXTERNAL_INTENT);
+                            mGeckoSession.stop();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+
+                    }
+                }).check();
     }
 
     @UiThread

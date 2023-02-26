@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.pluginManager;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,12 @@ import com.hiddenservices.onionservices.pluginManager.downloadPluginManager.down
 import com.hiddenservices.onionservices.pluginManager.langPluginManager.langManager;
 import com.hiddenservices.onionservices.pluginManager.messagePluginManager.messageManager;
 import com.hiddenservices.onionservices.pluginManager.orbotPluginManager.orbotManager;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
@@ -225,18 +232,51 @@ public class pluginController {
                     activityContextManager.getInstance().getHomeController().panicExitInvoked();
                     return null;
                 });
-            } else if (pEventType.equals(M_DOWNLOAD_SINGLE)) {
-                if (pData != null) {
-                    if (pData.size() < 3) {
-                        ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
-                    } else {
-                        if (pData.get(2).toString().startsWith("https://data") || pData.get(2).toString().startsWith("http://data")) {
-                            ((homeController) mHomeController.get()).onManualDownload(pData.get(2).toString().replace("https://", "").replace("http://", ""));
-                        } else {
-                            ((homeController) mHomeController.get()).onManualDownloadFileName(pData.get(2).toString(), (String) pData.get(0));
-                        }
-                    }
-                }
+            } else if (pEventType.equals(M_DOWNLOAD_SINGLE) || pEventType.equals(M_DOWNLOAD_FILE) || pEventType.equals(M_DOWNLOAD_FILE_MANUAL)) {
+                Dexter.withContext(mHomeController.get())
+                        .withPermissions(
+                                Manifest.permission.CAMERA,
+                                Manifest.permission.READ_CONTACTS,
+                                Manifest.permission.MEDIA_CONTENT_CONTROL,
+                                Manifest.permission.MANAGE_MEDIA,
+                                Manifest.permission.ACCESS_MEDIA_LOCATION,
+                                Manifest.permission.READ_MEDIA_AUDIO,
+                                Manifest.permission.READ_MEDIA_VIDEO,
+                                Manifest.permission.READ_MEDIA_IMAGES,
+                                Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.RECORD_AUDIO
+                        ).withListener(new MultiplePermissionsListener() {
+                            @Override
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if(pEventType.equals(M_DOWNLOAD_SINGLE)){
+                                    if (pData != null) {
+                                        if (pData.size() < 3) {
+                                            ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
+                                        } else {
+                                            if (pData.get(2).toString().startsWith("https://data") || pData.get(2).toString().startsWith("http://data")) {
+                                                ((homeController) mHomeController.get()).onManualDownload(pData.get(2).toString().replace("https://", "").replace("http://", ""));
+                                            } else {
+                                                ((homeController) mHomeController.get()).onManualDownloadFileName(pData.get(2).toString(), (String) pData.get(0));
+                                            }
+                                        }
+                                    }
+                                }
+                                if(pEventType.equals(M_DOWNLOAD_FILE)){
+                                    ((homeController) mHomeController.get()).onDownloadFile();
+                                }
+                                if(pEventType.equals(M_DOWNLOAD_FILE_MANUAL)){
+                                    ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
+                                }
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                onMessageManagerInvoke(Collections.singletonList(this), M_OPEN_CICADA);
+                            }
+                        }).check();
+
             } else if (pEventType.equals(M_CANCEL_WELCOME)) {
                 status.sSettingIsWelcomeEnabled = false;
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED, false));
@@ -261,10 +301,6 @@ public class pluginController {
                 return status.sBridgeCustomType;
             } else if (pEventType.equals(ON_FETCH_FAVICON)) {
                 activityContextManager.getInstance().getHomeController().onGetFavIcon((ImageView) pData.get(0), (String) pData.get(1));
-            } else if (pEventType.equals(M_DOWNLOAD_FILE)) {
-                ((homeController) mHomeController.get()).onDownloadFile();
-            } else if (pEventType.equals(M_DOWNLOAD_FILE_MANUAL)) {
-                ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
             } else if (pEventType.equals(M_LOAD_NEW_TAB)) {
                 ((homeController) mHomeController.get()).onLoadTabHidden(false, false, true, true);
             } else if (pEventType.equals(M_OPEN_LINK_NEW_TAB)) {

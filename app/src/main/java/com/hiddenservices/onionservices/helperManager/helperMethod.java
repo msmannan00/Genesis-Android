@@ -13,7 +13,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -84,6 +83,8 @@ import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.net.ssl.HttpsURLConnection;
+import org.mozilla.geckoview.ContentBlocking;
+import org.torproject.android.service.wrapper.orbotLocalConstants;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -92,9 +93,6 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_PLAYSTO
 import static com.hiddenservices.onionservices.constants.keys.M_ACTIVITY_NAVIGATION_BUNDLE_KEY;
 import static com.hiddenservices.onionservices.constants.keys.M_RESTART_APP_KEY;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_OPEN_ACTIVITY_FAILED;
-
-import org.mozilla.geckoview.ContentBlocking;
-import org.torproject.android.service.wrapper.orbotLocalConstants;
 
 public class helperMethod {
     /*Helper Methods General*/
@@ -396,7 +394,7 @@ public class helperMethod {
 
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"orionhiddentechnologies@gmail.com"});
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Issue Report");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Issue Title");
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Write Message Here....");
         emailIntent.setSelector(selectorIntent);
         context.startActivity(Intent.createChooser(emailIntent, "Send email..."));

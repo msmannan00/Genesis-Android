@@ -23,12 +23,12 @@
     <!-- Home Splash Screen -->
     <string name="HOME_DESCRIPTION_TEXT_1">Protegido pela Rede Tor</string>
     <string name="HOME_DESCRIPTION_TEXT_2">Sem registro e impressão digital</string>
-    <string name="HOME_DESCRIPTION_TEXT_3">Mecanismo de busca Onion integrado</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Mecanismo de busca Orion integrado</string>
     <string name="HOME_DESCRIPTION_TEXT_4">Proteção de rastreamento</string>
     <string name="HOME_DESCRIPTION_TEXT_5">Nenhum cache local armazenado</string>
     <string name="HOME_DESCRIPTION_TEXT_6">Cookies gerenciáveis ​​seguros</string>
     <string name="HOME_DESCRIPTION_TEXT_7">Protegido pela Rede Tor</string>
-    <string name="HOME_DESCRIPTION_TEXT_8">Mecanismo de busca Onion integrado</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Mecanismo de busca Orion integrado</string>
     <string name="HOME_DESCRIPTION_TEXT_9">Sem registro e impressão digital</string>
     <string name="HOME_CONNECT_NO_TOR">Navegação Normal</string>
     <string name="HOME_CONNECT_TOR">Navegação Tor</string>
@@ -335,8 +335,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">bloquear todas as imagens</string>
     <string name="SETTING_ADVANCE" translatable="true">Configuração avançada do sistema</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">restaurar guias, economia de dados, ferramentas de desenvolvedor</string>
-    <string name="SETTING_PROXY" translatable="true">onion condição de procuração</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">verificar a condição onion da rede</string>
+    <string name="SETTING_PROXY" translatable="true">orion condição de procuração</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">verificar a condição orion da rede</string>
     <string name="SETTING_REPORT" translatable="true">site do relatório</string>
     <string name="SETTING_REPORT_INFO" translatable="true">denunciar site abusivo</string>
     <string name="SETTING_RATEUS" translatable="true">Avalie este aplicativo</string>
@@ -479,9 +479,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">condição de procuração</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">condição atual do proxy orbot</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot condição de procuração</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">condição atual do proxy orion</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion condição de procuração</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN condição de conectividade</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condição de procuração</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">informações | alterar configuração do sistema</string>

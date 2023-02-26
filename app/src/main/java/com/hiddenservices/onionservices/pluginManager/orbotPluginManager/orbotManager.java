@@ -135,7 +135,7 @@ public class orbotManager {
             }
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES)) {
             orbotLocalConstants.mInitUpdateBridge = (boolean)pData.get(0);
-        } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
+        }  else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
             orbotLocalConstants.mInitUpdateBridgeList = (String)pData.get(0);
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN)) {
             orbotLocalConstants.mInitUpdateVPN = (boolean)pData.get(0);

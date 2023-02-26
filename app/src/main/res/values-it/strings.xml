@@ -23,12 +23,12 @@
     <!-- Home Splash Screen -->
     <string name="HOME_DESCRIPTION_TEXT_1">Protetto dalla rete Tor</string>
     <string name="HOME_DESCRIPTION_TEXT_2">Nessun record e impronte digitali</string>
-    <string name="HOME_DESCRIPTION_TEXT_3">Motore di ricerca Onion integrato</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Motore di ricerca Orion integrato</string>
     <string name="HOME_DESCRIPTION_TEXT_4">Protezione da tracciamento</string>
     <string name="HOME_DESCRIPTION_TEXT_5">Nessuna cache locale memorizzata</string>
     <string name="HOME_DESCRIPTION_TEXT_6">Cookie gestibili sicuri</string>
     <string name="HOME_DESCRIPTION_TEXT_7">Protetto dalla rete Tor</string>
-    <string name="HOME_DESCRIPTION_TEXT_8">Motore di ricerca Onion integrato</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Motore di ricerca Orion integrato</string>
     <string name="HOME_DESCRIPTION_TEXT_9">Nessun record e impronte digitali</string>
     <string name="HOME_CONNECT_NO_TOR">Navigazione normale</string>
     <string name="HOME_CONNECT_TOR">Navigazione Tor</string>
@@ -335,8 +335,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blocca tutte le immagini</string>
     <string name="SETTING_ADVANCE" translatable="true">Impostazioni avanzate del sistema</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">ripristinare schede, risparmio dati, strumenti per sviluppatori</string>
-    <string name="SETTING_PROXY" translatable="true">onion condizione di delega</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">controllare onion stato della rete</string>
+    <string name="SETTING_PROXY" translatable="true">orion condizione di delega</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">controllare orion stato della rete</string>
     <string name="SETTING_REPORT" translatable="true">sito web di report</string>
     <string name="SETTING_REPORT_INFO" translatable="true">segnalare un sito web offensivo</string>
     <string name="SETTING_RATEUS" translatable="true">valuta questa applicazione</string>
@@ -479,9 +479,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">condizione di delega</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">condizione attuale del proxy orbot</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot condizione di delega</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">condizione attuale del proxy orion</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion condizione di delega</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN condizione di connettività</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condizione di delega</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info | modificare le impostazioni di sistema</string>

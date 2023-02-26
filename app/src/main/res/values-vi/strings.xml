@@ -332,8 +332,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">chặn tất cả hình ảnh</string>
     <string name="SETTING_ADVANCE" translatable="true">Cài đặt hệ thống nâng cao</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">khôi phục các tab, trình tiết kiệm dữ liệu, công cụ dành cho nhà phát triển</string>
-    <string name="SETTING_PROXY" translatable="true">onion điều kiện của proxy</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">kiểm tra điều kiện mạng onion</string>
+    <string name="SETTING_PROXY" translatable="true">orion điều kiện của proxy</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">kiểm tra điều kiện mạng orion</string>
     <string name="SETTING_REPORT" translatable="true">báo cáo trang web</string>
     <string name="SETTING_REPORT_INFO" translatable="true">báo cáo trang web lạm dụng</string>
     <string name="SETTING_RATEUS" translatable="true">đánh giá ứng dụng này</string>
@@ -476,9 +476,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">điều kiện của proxy</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">tình trạng hiện tại của orbot proxy</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot điều kiện của proxy</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">tình trạng hiện tại của orion proxy</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion điều kiện của proxy</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN điều kiện kết nối</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge điều kiện của proxy</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">thông tin | thay đổi cài đặt hệ thống</string>

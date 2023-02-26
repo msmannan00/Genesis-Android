@@ -42,7 +42,9 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
     }
 
     public void onHideDefaultNotification(){
-        NotificationManagerCompat.from(mContext.get()).cancel(S_NOTIFICATION_ID);
+        if(!status.mThemeApplying){
+            NotificationManagerCompat.from(mContext.get()).cancel(S_NOTIFICATION_ID);
+        }
     }
 
     /*Triggers*/

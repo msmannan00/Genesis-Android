@@ -336,8 +336,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">αποκλεισμός όλων των εικόνων</string>
     <string name="SETTING_ADVANCE" translatable="true">Ρύθμιση συστήματος εκ των προτέρων</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">επαναφορά καρτελών, εξοικονόμηση δεδομένων, εργαλεία προγραμματιστή</string>
-    <string name="SETTING_PROXY" translatable="true">onion συνθήκη διακομιστή μεσολάβησης</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">ελέγξτε την κατάσταση του δικτύου onion</string>
+    <string name="SETTING_PROXY" translatable="true">orion συνθήκη διακομιστή μεσολάβησης</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">ελέγξτε την κατάσταση του δικτύου orion</string>
     <string name="SETTING_REPORT" translatable="true">αναφέρετε τον ιστότοπο</string>
     <string name="SETTING_REPORT_INFO" translatable="true">αναφέρετε καταχρηστικό ιστότοπο</string>
     <string name="SETTING_RATEUS" translatable="true">βαθμολόγησε αυτήν την εφαρμογή</string>
@@ -480,9 +480,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">κατάσταση του πληρεξούσιου</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">τρέχουσα κατάσταση orbot διακομιστή μεσολάβησης</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot συνθήκη διακομιστή μεσολάβησης</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">τρέχουσα κατάσταση orion διακομιστή μεσολάβησης</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion συνθήκη διακομιστή μεσολάβησης</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN κατάσταση σύνδεσης</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge κατάσταση μεσολάβησης</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">πληροφορίες | αλλαγή ρύθμισης συστήματος</string>

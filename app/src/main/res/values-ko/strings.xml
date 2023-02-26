@@ -334,8 +334,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">모든 이미지 차단</string>
     <string name="SETTING_ADVANCE" translatable="true">고급 시스템 설정</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">복원 탭, 데이터 세이버, 개발자 도구</string>
-    <string name="SETTING_PROXY" translatable="true">onion 대리 조건</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">onion 네트워크 상태 확인</string>
+    <string name="SETTING_PROXY" translatable="true">orion 대리 조건</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">orion 네트워크 상태 확인</string>
     <string name="SETTING_REPORT" translatable="true">웹 사이트 신고</string>
     <string name="SETTING_REPORT_INFO" translatable="true">악성 웹 사이트 신고</string>
     <string name="SETTING_RATEUS" translatable="true">이 앱을 평가 해주십시오</string>
@@ -478,9 +478,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">대리 조건</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orbot 프록시의 현재 상태</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot 대리 조건</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orion 프록시의 현재 상태</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion 대리 조건</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN 연결 상태</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge 대리 조건</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">정보 | 시스템 설정 변경</string>

@@ -12,6 +12,9 @@ import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
+
+import org.mozilla.geckoview.AllowOrDeny;
+import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -74,10 +77,15 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
+        if(var2.startsWith("tel:")){
+            intentHandler.actionDial(var2, mContext);
+            return;
+        }
         securityInfo = null;
         mGeckoDataModel.mTheme = null;
         mProgress = 5;
         mEvent.invokeObserver(Arrays.asList(5, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.PROGRESS_UPDATE);
+
         if(var2.startsWith("jar:file")){
             return;
         }
@@ -152,6 +160,9 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
     }
 
     public boolean getSecurtityState(){
+        if(mGeckoDataModel.mCurrentURL.equals("about:blank") || mGeckoDataModel.mCurrentURL.startsWith("resource://android/assets/policy")){
+            return true;
+        }
         if(securityInfo==null){
             return false;
         }else {

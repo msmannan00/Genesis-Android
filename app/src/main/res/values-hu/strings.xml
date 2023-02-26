@@ -335,8 +335,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blokkolja az összes képet</string>
     <string name="SETTING_ADVANCE" translatable="true">A rendszer előzetes beállítása</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">fülek, adatmentő, fejlesztői eszközök helyreállítása</string>
-    <string name="SETTING_PROXY" translatable="true">onion a proxy feltétele</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">ellenőrizze a hálózat onion állapotát</string>
+    <string name="SETTING_PROXY" translatable="true">orion a proxy feltétele</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">ellenőrizze a hálózat orion állapotát</string>
     <string name="SETTING_REPORT" translatable="true">jelentés honlapja</string>
     <string name="SETTING_REPORT_INFO" translatable="true">visszaélésszerű webhely jelentése</string>
     <string name="SETTING_RATEUS" translatable="true">Értékeld ezt az alkalmazást</string>
@@ -479,9 +479,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">a meghatalmazás feltétele</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">a orbot proxy jelenlegi állapota</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">A proxy Orbot feltétele</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">a orion proxy jelenlegi állapota</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">A proxy orion feltétele</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN a kapcsolat feltétele</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge a proxy állapota</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info | a System Setting módosítása</string>

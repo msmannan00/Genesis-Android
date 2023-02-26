@@ -322,8 +322,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">bloqueja totes les imatges</string>
     <string name="SETTING_ADVANCE" translatable="true">Configuració avançada del sistema</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">restaurar pestanyes, estalvi de dades, eines per a desenvolupadors</string>
-    <string name="SETTING_PROXY" translatable="true">onion condició de representació</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">comproveu l\'estat de la xarxa onion</string>
+    <string name="SETTING_PROXY" translatable="true">orion condició de representació</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">comproveu l\'estat de la xarxa orion</string>
     <string name="SETTING_REPORT" translatable="true">lloc web d\'informes</string>
     <string name="SETTING_REPORT_INFO" translatable="true">lloc web d’informes abusius</string>
     <string name="SETTING_RATEUS" translatable="true">valora aquesta app</string>
@@ -480,9 +480,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">condició del representant</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">estat actual del proxy orbot</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot condició del representant</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">estat actual del proxy orion</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion condició del representant</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN condició de connectivitat</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condició de representant</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info, canvieu la configuració del sistema</string>

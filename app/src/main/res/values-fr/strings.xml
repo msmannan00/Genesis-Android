@@ -28,7 +28,7 @@
     <string name="HOME_DESCRIPTION_TEXT_5">Aucun cache local stocké</string>
     <string name="HOME_DESCRIPTION_TEXT_6">Cookies gérables sécurisés</string>
     <string name="HOME_DESCRIPTION_TEXT_7">Sécurisé par Tor Network</string>
-    <string name="HOME_DESCRIPTION_TEXT_8">Moteur de recherche Onion intégré</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Moteur de recherche Orion intégré</string>
     <string name="HOME_DESCRIPTION_TEXT_9">Aucun enregistrement et empreinte numérique</string>
     <string name="HOME_CONNECT_NO_TOR">Navigation normale</string>
     <string name="HOME_CONNECT_TOR">Naviguer sur Tor</string>
@@ -335,8 +335,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">bloquer toutes les images</string>
     <string name="SETTING_ADVANCE" translatable="true">Paramètres système avancés</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">onglets de restauration, économiseur de données, outils de développement</string>
-    <string name="SETTING_PROXY" translatable="true">onion condition de proxy</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">vérifier l\'état onion du réseau</string>
+    <string name="SETTING_PROXY" translatable="true">orion condition de proxy</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">vérifier l\'état orion du réseau</string>
     <string name="SETTING_REPORT" translatable="true">rapport site Web</string>
     <string name="SETTING_REPORT_INFO" translatable="true">signaler un site Web abusif</string>
     <string name="SETTING_RATEUS" translatable="true">évaluer l\'application</string>
@@ -479,9 +479,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">condition du proxy</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">état actuel du proxy orbot</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot condition de procuration</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">état actuel du proxy orion</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion condition de procuration</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN état de la connectivité</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condition de procuration</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info | modifier les paramètres système</string>

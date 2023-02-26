@@ -39,12 +39,12 @@
     <!-- Home Splash Screen -->
     <string name="HOME_DESCRIPTION_TEXT_1">Secured by Tor Network</string>
     <string name="HOME_DESCRIPTION_TEXT_2">No Record and Digital Fingerprinting</string>
-    <string name="HOME_DESCRIPTION_TEXT_3">Builtin Onion Search Engine</string>
+    <string name="HOME_DESCRIPTION_TEXT_3">Builtin Orion Search Engine</string>
     <string name="HOME_DESCRIPTION_TEXT_4">Tracking Protection</string>
     <string name="HOME_DESCRIPTION_TEXT_5">No Local Cache Stored</string>
     <string name="HOME_DESCRIPTION_TEXT_6">Secure Manageable Cookies</string>
     <string name="HOME_DESCRIPTION_TEXT_7">Secured by Tor Network</string>
-    <string name="HOME_DESCRIPTION_TEXT_8">Builtin Onion Search Engine</string>
+    <string name="HOME_DESCRIPTION_TEXT_8">Builtin Orion Search Engine</string>
     <string name="HOME_DESCRIPTION_TEXT_9">No Record and Digital Fingerprinting</string>
     <string name="HOME_CONNECT_NO_TOR">Fast &amp; Secure</string>
     <string name="HOME_CONNECT_TOR">Dark Web - VPN</string>
@@ -362,8 +362,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">Block all images</string>
     <string name="SETTING_ADVANCE" translatable="true">Advanced</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">Restore tabs, data saver, developer tools</string>
-    <string name="SETTING_PROXY" translatable="true">Onion Proxy Status</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">Check onion network or status</string>
+    <string name="SETTING_PROXY" translatable="true">Orion Proxy Status</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">Check orion network or status</string>
     <string name="SETTING_REPORT" translatable="true">Report website</string>
     <string name="SETTING_PRIVACY_POLICY" translatable="true">Privacy Policy</string>
     <string name="SETTING_PRIVACY_POLICY_INFO" translatable="true">Orion browser privacy policy</string>
@@ -524,8 +524,8 @@
     <!-- Proxy Status -->
     <string name="PROXY_STATUS_HEADER" translatable="true">Proxy Status</string>
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Current status of orbot proxy</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot Proxy Status</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">Onion &amp; Bridges Status</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion Proxy Status</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion &amp; Bridges Status</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN connectivity status</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge connectivity status</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>

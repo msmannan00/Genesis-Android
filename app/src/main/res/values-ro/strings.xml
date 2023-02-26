@@ -335,8 +335,8 @@
     <string name="SETTING_ADVANCE_IMAGE_OPTION_3" translatable="true">blocați toate imaginile</string>
     <string name="SETTING_ADVANCE" translatable="true">Setare avansată a sistemului</string>
     <string name="SETTING_ADVANCE_INFO" translatable="true">filele de restaurare, economisirea datelor, instrumentele pentru dezvoltatori</string>
-    <string name="SETTING_PROXY" translatable="true">onion condiția împuternicirii</string>
-    <string name="SETTING_PROXY_INFO" translatable="true">verificați starea rețelei onion</string>
+    <string name="SETTING_PROXY" translatable="true">orion condiția împuternicirii</string>
+    <string name="SETTING_PROXY_INFO" translatable="true">verificați starea rețelei orion</string>
     <string name="SETTING_REPORT" translatable="true">raportați site-ul web</string>
     <string name="SETTING_REPORT_INFO" translatable="true">raportează site-ul abuziv</string>
     <string name="SETTING_RATEUS" translatable="true">evalueaza aceasta aplicatie</string>
@@ -479,9 +479,9 @@
 
 
     <string name="PROXY_STATUS_HEADER" translatable="true">condiția împuternicirii</string>
-    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">starea actuală a proxy-ului orbot</string>
-    <string name="PROXY_SUB_HEADER1" translatable="true">Orbot condiția împuternicirii</string>
-    <string name="PROXY_SUB_HEADER2" translatable="true">onion</string>
+    <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">starea actuală a proxy-ului orion</string>
+    <string name="PROXY_SUB_HEADER1" translatable="true">orion condiția împuternicirii</string>
+    <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
     <string name="PROXY_VPN_STATUS" translatable="true">VPN starea conectivității</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condiția împuternicirii</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info | modificați Setarea sistemului</string>
