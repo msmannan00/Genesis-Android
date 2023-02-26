@@ -1,6 +1,7 @@
 package com.hiddenservices.onionservices.pluginManager;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.permissionHandler;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.appManager.unproxiedConnectionManager.unproxiedConnectionController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogController;
@@ -36,6 +39,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import static com.hiddenservices.onionservices.constants.constants.CONST_BRIDGES;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICKED;
@@ -233,49 +237,28 @@ public class pluginController {
                     return null;
                 });
             } else if (pEventType.equals(M_DOWNLOAD_SINGLE) || pEventType.equals(M_DOWNLOAD_FILE) || pEventType.equals(M_DOWNLOAD_FILE_MANUAL)) {
-                Dexter.withContext(mHomeController.get())
-                        .withPermissions(
-                                Manifest.permission.CAMERA,
-                                Manifest.permission.READ_CONTACTS,
-                                Manifest.permission.MEDIA_CONTENT_CONTROL,
-                                Manifest.permission.MANAGE_MEDIA,
-                                Manifest.permission.ACCESS_MEDIA_LOCATION,
-                                Manifest.permission.READ_MEDIA_AUDIO,
-                                Manifest.permission.READ_MEDIA_VIDEO,
-                                Manifest.permission.READ_MEDIA_IMAGES,
-                                Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.RECORD_AUDIO
-                        ).withListener(new MultiplePermissionsListener() {
-                            @Override
-                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                                if(pEventType.equals(M_DOWNLOAD_SINGLE)){
-                                    if (pData != null) {
-                                        if (pData.size() < 3) {
-                                            ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
-                                        } else {
-                                            if (pData.get(2).toString().startsWith("https://data") || pData.get(2).toString().startsWith("http://data")) {
-                                                ((homeController) mHomeController.get()).onManualDownload(pData.get(2).toString().replace("https://", "").replace("http://", ""));
-                                            } else {
-                                                ((homeController) mHomeController.get()).onManualDownloadFileName(pData.get(2).toString(), (String) pData.get(0));
-                                            }
-                                        }
-                                    }
-                                }
-                                if(pEventType.equals(M_DOWNLOAD_FILE)){
-                                    ((homeController) mHomeController.get()).onDownloadFile();
-                                }
-                                if(pEventType.equals(M_DOWNLOAD_FILE_MANUAL)){
-                                    ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
+                permissionHandler.getInstance().checkPermission((Callable<Void>) () -> {
+                    if(pEventType.equals(M_DOWNLOAD_SINGLE)){
+                        if (pData != null) {
+                            if (pData.size() < 3) {
+                                ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
+                            } else {
+                                if (pData.get(2).toString().startsWith("https://data") || pData.get(2).toString().startsWith("http://data")) {
+                                    ((homeController) mHomeController.get()).onManualDownload(pData.get(2).toString().replace("https://", "").replace("http://", ""));
+                                } else {
+                                    ((homeController) mHomeController.get()).onManualDownloadFileName(pData.get(2).toString(), (String) pData.get(0));
                                 }
                             }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                                onMessageManagerInvoke(Collections.singletonList(this), M_OPEN_CICADA);
-                            }
-                        }).check();
+                        }
+                    }
+                    if(pEventType.equals(M_DOWNLOAD_FILE)){
+                        ((homeController) mHomeController.get()).onDownloadFile();
+                    }
+                    if(pEventType.equals(M_DOWNLOAD_FILE_MANUAL)){
+                        ((homeController) mHomeController.get()).onManualDownload(pData.get(0).toString());
+                    }
+                    return null;
+                });
 
             } else if (pEventType.equals(M_CANCEL_WELCOME)) {
                 status.sSettingIsWelcomeEnabled = false;

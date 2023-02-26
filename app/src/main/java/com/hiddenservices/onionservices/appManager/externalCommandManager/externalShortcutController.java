@@ -17,6 +17,8 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 import static com.hiddenservices.onionservices.constants.constants.CONST_EXTERNAL_SHORTCUT_COMMAND_ERASE;
 import static com.hiddenservices.onionservices.constants.keys.EXTERNAL_SHORTCUT_COMMAND;
 
+import java.util.concurrent.Callable;
+
 public class externalShortcutController extends AppCompatActivity {
 
     /* Initialize */
@@ -42,7 +44,7 @@ public class externalShortcutController extends AppCompatActivity {
                         setContentView(R.layout.popup_data_cleared_shortcut);
                         panicExitInvoked();
                         helperMethod.onDelayHandler(this, 3000, () -> {
-                            finishAndRemoveTask();
+                            externalShortcutController.this.finishAndRemoveTask();
                             android.os.Process.killProcess(android.os.Process.myPid());
                             System.exit(1);
                             return null;

@@ -61,6 +61,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.permissionHandler;
 import com.hiddenservices.onionservices.appManager.unproxiedConnectionManager.unproxiedConnectionController;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings.bookmarkSettingController;
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController;
@@ -263,6 +264,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         status.sSettingIsAppRunning = true;
         initPreFixes();
         initBundle();
+        permissionHandler.getInstance().onInitPermissionHandler(new WeakReference(this));
         if(!status.mThemeApplying){
             initTor();
         }
@@ -2131,31 +2133,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 handler.postDelayed(() -> mGeckoView.clearFocus(), 500);
             }
         } else if (requestCode == 115) {
-            Dexter.withContext(this)
-                    .withPermissions(
-                            Manifest.permission.CAMERA,
-                            Manifest.permission.READ_CONTACTS,
-                            Manifest.permission.MEDIA_CONTENT_CONTROL,
-                            Manifest.permission.MANAGE_MEDIA,
-                            Manifest.permission.ACCESS_MEDIA_LOCATION,
-                            Manifest.permission.READ_MEDIA_AUDIO,
-                            Manifest.permission.READ_MEDIA_VIDEO,
-                            Manifest.permission.READ_MEDIA_IMAGES,
-                            Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.RECORD_AUDIO
-                    ).withListener(new MultiplePermissionsListener() {
-                        @Override
-                        public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                            mGeckoClient.onUploadRequest(resultCode, data);
-                        }
-
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-
-                        }
-                    }).check();
+            permissionHandler.getInstance().checkPermission(new Callable<Void>() {
+                @Override
+                public Void call() throws Exception {
+                    mGeckoClient.onUploadRequest(resultCode, data);
+                    return null;
+                }
+            });
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -2476,6 +2460,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 onNewTab(isKeyboardOpened, true);
             }
         } else if (menuId == R.id.menu29) {
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_TOR_SWITCH);
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_TOR_SWITCH);
 
         } else if (menuId == R.id.menuItem25) {

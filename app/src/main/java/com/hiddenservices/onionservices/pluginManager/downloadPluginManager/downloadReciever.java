@@ -66,7 +66,13 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         this.mContext = new WeakReference(pContext);
         this.mEvent = pEvent;
 
-        this.mFileName = pFileName;
+        if(pFileName.contains("/")){
+            pFileName = pFileName.substring(pFileName.lastIndexOf("/")+1);
+        }
+        if(pFileName.contains("?")){
+            pFileName = pFileName.substring(0, pFileName.lastIndexOf("?"));
+        }
+        this.mFileName = helperMethod.createRandomID().substring(0,5) + pFileName;
         this.mURL = pURL;
         this.mNotificationID = pNotificationID;
         this.mBroadcastReciever = pBroadcastReciever;
@@ -122,12 +128,17 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
     }
 
 
+    boolean mRequestRunning = false;
     @Override
     protected String doInBackground(String... f_url) {
         int mRequestCode = 0;
         OutputStream mOutputStream;
         InputStream mInputStream;
-
+        if(!mRequestRunning){
+            mRequestRunning = true;
+        }else {
+            return "";
+        }
         try {
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 String fURL = f_url[0];
@@ -135,14 +146,10 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 HttpURLConnection conection;
                 Proxy proxy;
                 if (helperMethod.getDomainName(fURL).contains(".onion")) {
-                    if (orbotLocalConstants.mSOCKSPort == -1) {
-                        proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved("localhost", orbotLocalConstants.mSOCKSPort));
-                        conection = (HttpURLConnection) url.openConnection(proxy);
-                    } else {
-                        conection = (HttpURLConnection) url.openConnection();
-                    }
+                    proxy = new Proxy(Proxy.Type.SOCKS, InetSocketAddress.createUnresolved("localhost", orbotLocalConstants.mSOCKSPort));
+                    conection = (HttpURLConnection) url.openConnection(proxy);
                 } else {
-                    if (orbotLocalConstants.mSOCKSPort == -1) {
+                    if (status.sTorBrowsing) {
                         Proxy mProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", orbotLocalConstants.mHTTPPort));
                         URLConnection mURLConnection = new URI(fURL).toURL().openConnection(mProxy);
                         conection = (HttpURLConnection) mURLConnection;
@@ -167,19 +174,31 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 StrongHttpsClient httpclient = new StrongHttpsClient(mContext.get());
 
 
-                if (helperMethod.getDomainName(f_url[0]).contains(".onion")) {
+                if(status.sTorBrowsing){
                     httpclient.useProxy(true, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
-                } else {
-                    httpclient.useProxy(false, "SOCKS", "127.0.0.1", orbotLocalConstants.mSOCKSPort);
+                    HttpGet httpget = new HttpGet(urlEncoded);
+                    HttpResponse response = httpclient.execute(httpget);
+                    mInputStream = response.getEntity().getContent();
+                    mRequestCode = response.getStatusLine().getStatusCode();
+                    mOutputStream = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + mFileName);
+                    float lenghtOfFile = response.getEntity().getContentLength();
+                    readStream(mInputStream, mOutputStream, lenghtOfFile);
+                }else {
+                    HttpURLConnection conection;
+                    String fURL = f_url[0];
+                    URLConnection mURLConnection = new URI(fURL).toURL().openConnection();
+                    conection = (HttpURLConnection) mURLConnection;
+                    conection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0");
+                    conection.setRequestProperty("Accept", "*/*");
+                    conection.connect();
+                    mRequestCode = conection.getResponseCode();
+                    mInputStream = conection.getInputStream();
+                    mOutputStream = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + mFileName);
+                    int lenghtOfFile = conection.getContentLength();
+
+                    readStream(mInputStream, mOutputStream, lenghtOfFile);
                 }
 
-                HttpGet httpget = new HttpGet(urlEncoded);
-                HttpResponse response = httpclient.execute(httpget);
-                mInputStream = response.getEntity().getContent();
-                mRequestCode = response.getStatusLine().getStatusCode();
-                mOutputStream = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + mFileName);
-                float lenghtOfFile = response.getEntity().getContentLength();
-                readStream(mInputStream, mOutputStream, lenghtOfFile);
             }
         } catch (Exception ex) {
             if (mRequestCode != 200 && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -188,6 +207,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
                 onBackgroundException(mRequestCode);
         }
 
+        mRequestRunning = false;
         return null;
     }
 
@@ -215,30 +235,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         mNotificationBuilder.setPriority(Notification.PRIORITY_LOW);
         mNotifyManager.notify(mNotificationID, mNotificationBuilder.build());
 
-        DownloadManager dm = (DownloadManager) mContext.get().getSystemService(Context.DOWNLOAD_SERVICE);
-        String mPath = (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + mFileName).replace("File//", "content://");
-        File mFile = new File(mPath);
-
-        /* Create Dwonload Complete Destination */
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            Uri uri = FileProvider.getUriForFile(mContext.get(), "com.hiddenservices.onionservices.provider", mFile);
-
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(MediaStore.Downloads.TITLE, mFileName);
-            contentValues.put(MediaStore.Downloads.DISPLAY_NAME, mFileName);
-            contentValues.put(MediaStore.Downloads.SIZE, mDownloadByte);
-            contentValues.put(MediaStore.Downloads.MIME_TYPE, helperMethod.getMimeType(uri.toString(), mContext.get()));
-            contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + mFileName + "_" + helperMethod.createRandomID().substring(0, 5));
-            ContentResolver database = mContext.get().getContentResolver();
-            database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
-        } else {
-            Uri uri = FileProvider.getUriForFile(mContext.get(), "com.hiddenservices.onionservices.provider", mFile);
-            String mime = helperMethod.getMimeType(uri.toString(), mContext.get());
-            if (mime != null) {
-                dm.addCompletedDownload(mFileName, mURL, false, mime, mFile.getAbsolutePath(), mFile.length(), false);
-            }
-        }
 
     }
 
@@ -300,6 +296,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             pOutputStream.write(mData, 0, mCurrentReadCount);
         }
 
+        mNotifyManager.cancel(mNotificationID);
         onPostExecute("");
         return true;
     }

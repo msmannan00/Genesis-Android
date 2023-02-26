@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.downloadManager.geckoDownloadManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
+import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.permissionHandler;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
@@ -32,6 +33,7 @@ import org.mozilla.geckoview.WebResponse;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class contentDelegate implements GeckoSession.ContentDelegate {
 
@@ -103,40 +105,19 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
     @UiThread
     @Override
     public void onExternalResponse(@NonNull GeckoSession session, @NonNull WebResponse response) {
-        Dexter.withContext(mContext.get())
-                .withPermissions(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.READ_CONTACTS,
-                        Manifest.permission.MEDIA_CONTENT_CONTROL,
-                        Manifest.permission.MANAGE_MEDIA,
-                        Manifest.permission.ACCESS_MEDIA_LOCATION,
-                        Manifest.permission.READ_MEDIA_AUDIO,
-                        Manifest.permission.READ_MEDIA_VIDEO,
-                        Manifest.permission.READ_MEDIA_IMAGES,
-                        Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.RECORD_AUDIO
-                ).withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        try {
-                            if (response.headers.containsKey("Content-Disposition")) {
-                                mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
-                            } else if (response.headers.containsKey("Content-Type")) {
-                                mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
-                            }
-                        } catch (ActivityNotFoundException e) {
-                            mEvent.invokeObserver(Arrays.asList(response, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_HANDLE_EXTERNAL_INTENT);
-                            mGeckoSession.stop();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-
-                    }
-                }).check();
+        permissionHandler.getInstance().checkPermission((Callable<Void>) () -> {
+            try {
+                if (response.headers.containsKey("Content-Disposition")) {
+                    mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
+                } else if (response.headers.containsKey("Content-Type")) {
+                    mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);
+                }
+            } catch (ActivityNotFoundException e) {
+                mEvent.invokeObserver(Arrays.asList(response, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.ON_HANDLE_EXTERNAL_INTENT);
+                mGeckoSession.stop();
+            }
+            return null;
+        });
     }
 
     @UiThread
