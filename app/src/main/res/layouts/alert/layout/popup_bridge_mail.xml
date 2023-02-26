@@ -65,7 +65,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
             android:background="@xml/ax_ripple_default_round_bottom"
-            android:text="@string/ALERT_BRIDGE_MAIL"
+            android:text="@string/ALERT_CUSTOM_BRIDGE"
             android:textAllCaps="false"
             android:textColor="@color/c_white"
             android:textSize="14sp"

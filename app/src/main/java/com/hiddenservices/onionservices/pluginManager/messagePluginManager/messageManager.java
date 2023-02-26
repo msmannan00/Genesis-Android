@@ -692,7 +692,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             helperMethod.onDelayHandler(mContext, 200, () -> {
                 try {
                     onDismiss();
-                    helperMethod.getBridges(mContext);
+                    mEvent.invokeObserver(null, M_GET_BRIDGES);
                 } catch (Exception ex) {
                     onTrigger(Arrays.asList(mContext, mContext.getString(R.string.ALERT_NOT_SUPPORTED_MESSAGE)), M_NOT_SUPPORTED);
                 }
