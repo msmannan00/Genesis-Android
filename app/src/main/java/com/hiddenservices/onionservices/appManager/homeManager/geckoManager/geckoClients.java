@@ -95,14 +95,17 @@ public class geckoClients {
         }
     }
 
-    public void onSaveCurrentTab(boolean isHardCopy) {
+    public void onSaveCurrentTab(boolean isHardCopy, AppCompatActivity pContext) {
         int mStatus = (Integer) dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_ADD_TAB, Arrays.asList(mSession, isHardCopy));
         if (mStatus == enums.AddTabCallback.TAB_FULL) {
-            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_MAX_TAB_REACHED);
+            pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(pContext), M_MAX_TAB_REACHED);
         }
     }
 
     public void initRestore(geckoView mNestedGeckoView, AppCompatActivity pcontext) {
+        if(mSession==null){
+            return;
+        }
         boolean mState = mSession.onRestoreState();
         if (!mState) {
             mSession.stop();
@@ -302,11 +305,15 @@ public class geckoClients {
     }
 
     public String getTheme() {
-        if (mSessionID.equals(strings.GENERIC_EMPTY_STR)) {
-            return null;
-        } else if (mSession != null && mSession.getTheme() != null) {
-            return mSession.getTheme();
-        } else {
+        try {
+            if (mSessionID.equals(strings.GENERIC_EMPTY_STR)) {
+                return null;
+            } else if (mSession != null && mSession.getTheme() != null) {
+                return mSession.getTheme();
+            } else {
+                return null;
+            }
+        }catch (Exception ex){
             return null;
         }
     }

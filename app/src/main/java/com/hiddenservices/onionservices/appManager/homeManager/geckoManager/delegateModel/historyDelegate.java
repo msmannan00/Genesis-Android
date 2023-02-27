@@ -57,10 +57,12 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
             if(mCurrentIndex != var2.getCurrentIndex() && mHistoryChanged){
                 mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mHistory.get(mHistory.getCurrentIndex()).getTitle(), mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, mGeckoSession), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
             }
-            Object mID = mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mHistory.get(mHistory.getCurrentIndex()).getTitle(), -1, mGeckoDataModel.mTheme, mGeckoSession, false), homeEnums.eGeckoCallback.ON_UPDATE_HISTORY);
-            if (mID != null) {
-                mGeckoDataModel.mCurrentURL_ID = (int) mID;
-            }
+            try {
+                Object mID = mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mHistory.get(mHistory.getCurrentIndex()).getTitle(), -1, mGeckoDataModel.mTheme, mGeckoSession, false), homeEnums.eGeckoCallback.ON_UPDATE_HISTORY);
+                if (mID != null) {
+                    mGeckoDataModel.mCurrentURL_ID = (int) mID;
+                }
+            }catch (Exception ex){}
         }
         mCurrentIndex = var2.getCurrentIndex();
     }

@@ -666,7 +666,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void initializeGeckoView(boolean isForced, boolean pDatabaseSavable) {
         mGeckoClient.initializeSession(mGeckoView, new geckoViewCallback(), this);
-        mGeckoClient.onSaveCurrentTab(pDatabaseSavable);
+        mGeckoClient.onSaveCurrentTab(pDatabaseSavable, this);
         initTabCountForced();
     }
 
@@ -1107,7 +1107,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 if(mSearchbar!=null){
                     mSearchbar.clearFocus();
                     mHomeViewController.onClearSelections(true);
-                    mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
+                    if(mGeckoClient!=null && mGeckoClient.getSession()!=null && mGeckoClient.getSession().getCurrentURL()!=null){
+                        mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
+                    }
                 }
                 break;
 
@@ -1612,7 +1614,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onProgressBarUpdate(5, true, isStaticURL());
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, false));
         mGeckoClient.initializeSession(mGeckoView, new geckoViewCallback(), this);
-        mGeckoClient.onSaveCurrentTab(true);
+        mGeckoClient.onSaveCurrentTab(true, this);
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mGeckoClient.getSession()));
         initTabCountForced();
         mHomeViewController.progressBarReset();
@@ -1748,7 +1750,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mGeckoClient.initializeSession(mGeckoView, new geckoViewCallback(), this);
             mHomeViewController.progressBarReset();
             mHomeViewController.onUpdateSearchBar(url, false, true, false);
-            mGeckoClient.onSaveCurrentTab(true);
+            mGeckoClient.onSaveCurrentTab(true, this);
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mGeckoClient.getSession()));
             mGeckoClient.loadURL(url, mGeckoView, homeController.this);
             initTabCountForced();

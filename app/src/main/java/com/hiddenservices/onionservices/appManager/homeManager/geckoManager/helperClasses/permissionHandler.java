@@ -87,9 +87,7 @@ public class permissionHandler {
              public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
                 try {
                     pMethodParam.call();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                } catch (Exception e) {}
              }
 
              @Override
