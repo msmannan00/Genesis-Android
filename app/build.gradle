@@ -115,7 +115,7 @@ dependencies {
 
     /* Helper Libraries */
 
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation "androidx.media:media:1.6.0"
     implementation 'com.android.volley:volley:1.2.1'
     implementation "net.zetetic:android-database-sqlcipher:4.4.3"
