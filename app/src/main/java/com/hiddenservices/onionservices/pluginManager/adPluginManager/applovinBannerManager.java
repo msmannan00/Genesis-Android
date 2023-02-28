@@ -55,13 +55,15 @@ public class applovinBannerManager implements MaxAdViewAdListener{
                 mBanner.setAlpha(0);
                 mBanner.setVisibility(View.VISIBLE);
                 mBanner.animate().setDuration(250).alpha(1).setStartDelay(500);
-            }else {
+            }else if (mBanner!=null){
                 mBanner.stopAutoRefresh();
                 mBanner.clearAnimation();
                 mBanner.setAlpha(1);
                 mBanner.setVisibility(View.VISIBLE);
                 mBanner.animate().setDuration(250).alpha(0).setStartDelay(0).withEndAction(() -> {
-                    mBanner.setVisibility(View.GONE);
+                    if(mBanner!=null){
+                        mBanner.setVisibility(View.GONE);
+                    }
                 });
             }
         }
