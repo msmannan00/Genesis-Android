@@ -112,7 +112,6 @@ public class homeViewController {
     private ConstraintLayout mInfoPortrait;
     private ConstraintLayout mInfoLandscape;
     private NestedScrollView mNestedScroll;
-    private ProgressBar mProgressBarIndeterminate;
     private FragmentContainerView mTabFragment;
     private LinearLayout mTopBarContainer;
     private ImageView mSearchLock;
@@ -133,7 +132,7 @@ public class homeViewController {
     private boolean mIsTopBarExpanded = true;
     private NestedScrollView.MarginLayoutParams mDefaultMargin = null;
 
-    public void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, View banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, Button connect_no_tor_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, ProgressBar pProgressBarIndeterminate, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled, ImageButton pSupportButton) {
+    public void initialization(eventObserver.eventListener event, AppCompatActivity context, Button mNewTab, ConstraintLayout webviewContainer, TextView loadingText, ProgressBar progressBar, editTextManager searchbar, ConstraintLayout splashScreen, ImageView loading, View banner_ads, ImageButton gateway_splash, LinearLayout top_bar, GeckoView gecko_view, ImageView backsplash, Button connect_button, Button connect_no_tor_button, View pFindBar, EditText pFindText, TextView pFindCount, androidx.constraintlayout.widget.ConstraintLayout pTopLayout, ImageButton pVoiceInput, ImageButton pMenu, androidx.core.widget.NestedScrollView pNestedScroll, ImageView pBlocker, ImageView pBlockerFullSceen, View mSearchEngineBar, TextView pCopyright, RecyclerView pHistListView, com.google.android.material.appbar.AppBarLayout pAppBar, ImageButton pOrbotLogManager, ConstraintLayout pInfoLandscape, ConstraintLayout pInfoPortrait, FragmentContainerView pTabFragment, LinearLayout pTopBarContainer, ImageView pSearchLock, ImageView pTopBarHider, ImageView pNewTabBlocker, CoordinatorLayout mCoordinatorLayout, ImageView pImageDivider, ImageButton pPanicButton, ImageView pGenesisLogo, ImageButton pPanicButtonLandscape, ImageView pTorDisabled, ImageButton pSupportButton) {
         this.mContext = context;
         this.mProgressBar = progressBar;
         this.mSearchbar = searchbar;
@@ -162,7 +161,6 @@ public class homeViewController {
         this.mInfoPortrait = pInfoPortrait;
         this.mInfoLandscape = pInfoLandscape;
         this.mNestedScroll = pNestedScroll;
-        this.mProgressBarIndeterminate = pProgressBarIndeterminate;
         this.mTabFragment = pTabFragment;
         this.mTopBarContainer = pTopBarContainer;
         this.mSearchLock = pSearchLock;
@@ -596,7 +594,6 @@ public class homeViewController {
     }
 
     public void onPostScreenDisable() {
-        mProgressBarIndeterminate.setVisibility(View.GONE);
         mSplashScreen.setClickable(false);
         mSplashScreen.setFocusable(false);
         mSearchbar.setEnabled(true);
@@ -621,8 +618,6 @@ public class homeViewController {
             mLoadingText.animate().setStartDelay(0).setDuration(250).alpha(1);
         }
 
-        mProgressBarIndeterminate.setVisibility(View.VISIBLE);
-        mProgressBarIndeterminate.animate().alpha(1);
         mConnectButton.setEnabled(false);
         mConnectNoTorButton.setEnabled(false);
         mSplashScreen.setEnabled(false);

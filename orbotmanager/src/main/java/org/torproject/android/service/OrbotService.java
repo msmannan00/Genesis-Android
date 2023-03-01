@@ -1156,7 +1156,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                     }
                     orbotLocalConstants.mNetworkState = mConnectivity;
                     if(mConnectivity){
-                        showToolbarNotification(getString(R.string.newnym), NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+                        //showToolbarNotification(getString(R.string.newnym), NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
                     }
                 }
             };

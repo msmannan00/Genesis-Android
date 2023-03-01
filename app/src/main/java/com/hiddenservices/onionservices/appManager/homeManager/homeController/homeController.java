@@ -191,7 +191,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ConstraintLayout mInfoPortrait;
     private ConstraintLayout mInfoLandscape;
     private com.google.android.material.appbar.AppBarLayout mAppBar;
-    private ProgressBar mProgressBarIndeterminate;
     private FragmentContainerView mTabFragment;
     private LinearLayout mTopBarContainer;
     private ImageView mTopBarHider;
@@ -275,12 +274,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(status.mThemeApplying){
             mGeckoClient.initRestore(mGeckoView, homeController.this);
         }
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     public void initTor() {
@@ -593,7 +586,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mFindBar = findViewById(R.id.pFindBar);
         mInfoPortrait = findViewById(R.id.pInfoPortrait);
         mInfoLandscape = findViewById(R.id.pInfoLandscape);
-        mProgressBarIndeterminate = findViewById(R.id.pProgressBarIndeterminate);
         mTabFragment = findViewById(R.id.mTabFragment);
         mTopBarHider = findViewById(R.id.pTopBarHider);
         mNewTabBlocker = findViewById(R.id.pNewTabBlocker);
@@ -612,7 +604,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mGeckoView.setAutofillEnabled(true);
 
         mGeckoClient = new geckoClients();
-        mHomeViewController.initialization(new homeViewCallback(), this, mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mConnectNoTorButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mProgressBarIndeterminate, mTabFragment, mTopBarContainer, mSearchLock, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton, mGenesisLogo, mPanicButtonLandscape, mTorDisabled, mSupportButton);
+        mHomeViewController.initialization(new homeViewCallback(), this, mNewTab, mWebViewContainer, mLoadingText, mProgressBar, mSearchbar, mSplashScreen, mLoadingIcon, mBannerAds, mGatewaySplash, mTopBar, mGeckoView, mBackSplash, mConnectButton, mConnectNoTorButton, mFindBar, mFindText, mFindCount, mTopLayout, mVoiceInput, mMenu, mNestedScroll, mBlocker, mBlockerFullSceen, mSearchEngineBar, mCopyright, mHintListView, mAppBar, mOrbotLogManager, mInfoLandscape, mInfoPortrait, mTabFragment, mTopBarContainer, mSearchLock, mTopBarHider, mNewTabBlocker, mCoordinatorLayout, mImageDivider, mPanicButton, mGenesisLogo, mPanicButtonLandscape, mTorDisabled, mSupportButton);
         mGeckoView.onSetHomeEvent(new nestedGeckoViewCallback());
     }
 
