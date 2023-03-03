@@ -16,7 +16,9 @@ public class historyModel {
     }
 
     private void removeFromMainList(int index) {
-        mModelList.remove(index);
+        try {
+            mModelList.remove(index);
+        }catch (Exception ex){}
     }
 
     public void onManualClear(int index) {

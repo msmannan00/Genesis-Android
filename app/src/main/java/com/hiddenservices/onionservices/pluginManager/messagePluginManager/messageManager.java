@@ -332,56 +332,58 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
     }
 
     private void openSecureConnectionPopup() {
-        if((boolean)mData.get(6) && !status.sTorBrowsing){
-            initializeDialog(R.layout.non_secure_connection_popup, Gravity.TOP);
-        }else {
-            initializeDialog(R.layout.secure_connection_popup, Gravity.TOP);
-        }
-        InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0, 0, 0, -1);
-        mDialog.getWindow().setBackgroundDrawable(inset);
-        mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        try{
+            if((boolean)mData.get(6) && !status.sTorBrowsing){
+                initializeDialog(R.layout.non_secure_connection_popup, Gravity.TOP);
+            }else {
+                initializeDialog(R.layout.secure_connection_popup, Gravity.TOP);
+            }
+            InsetDrawable inset = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), 0, 0, 0, -1);
+            mDialog.getWindow().setBackgroundDrawable(inset);
+            mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
-        ImageView pSecurePopupRootBlocker = mDialog.findViewById(R.id.pSecurePopupRootBlocker);
-        TextView pSecurePopupSubHeader = mDialog.findViewById(R.id.pSecurePopupSubHeader);
-        Button mSecurePopupCertificate = mDialog.findViewById(R.id.pSecurePopupCertificate);
-        Button mSecurePopupPrivacy = mDialog.findViewById(R.id.pSecurePopupPrivacy);
-        SwitchMaterial mSecureJavascriptStatus = mDialog.findViewById(R.id.pSecurePopupJavascriptStatus);
-        SwitchMaterial mSecureTrackingStatus = mDialog.findViewById(R.id.pSecurePopupTrackingStatus);
-        SwitchMaterial mSecureTrackingProtectionStatus = mDialog.findViewById(R.id.pSecurePopupTrackingProtectionStatus);
+            ImageView pSecurePopupRootBlocker = mDialog.findViewById(R.id.pSecurePopupRootBlocker);
+            TextView pSecurePopupSubHeader = mDialog.findViewById(R.id.pSecurePopupSubHeader);
+            Button mSecurePopupCertificate = mDialog.findViewById(R.id.pSecurePopupCertificate);
+            Button mSecurePopupPrivacy = mDialog.findViewById(R.id.pSecurePopupPrivacy);
+            SwitchMaterial mSecureJavascriptStatus = mDialog.findViewById(R.id.pSecurePopupJavascriptStatus);
+            SwitchMaterial mSecureTrackingStatus = mDialog.findViewById(R.id.pSecurePopupTrackingStatus);
+            SwitchMaterial mSecureTrackingProtectionStatus = mDialog.findViewById(R.id.pSecurePopupTrackingProtectionStatus);
 
-        pSecurePopupRootBlocker.animate().setStartDelay(100).setDuration(400).alpha(1);
-        String mURL = helperMethod.getDomainName(mData.get(0).toString().replace("167.86.99.31", "orion.onion").replace(CONST_GENESIS_URL_CACHED, "orion.onion").replace(CONST_GENESIS_URL_CACHED_DARK, "orion.onion"));
-        if(mURL.contains("?")){
-            mURL = mURL.substring(0, mURL.indexOf("?"));
-        }
-        if(status.sTorBrowsing){
-            //pSecurePopupHeader
-            ((TextView)mDialog.findViewById(R.id.pSecurePopupHeader)).setText("Tor://");
-            mURL = mURL.replace("http://","onion://").replace("https://","onion://");
-        }
-        pSecurePopupSubHeader.setText(mURL);
+            pSecurePopupRootBlocker.animate().setStartDelay(100).setDuration(400).alpha(1);
+            String mURL = helperMethod.getDomainName(mData.get(0).toString().replace("167.86.99.31", "orion.onion").replace(CONST_GENESIS_URL_CACHED, "orion.onion").replace(CONST_GENESIS_URL_CACHED_DARK, "orion.onion"));
+            if(mURL.contains("?")){
+                mURL = mURL.substring(0, mURL.indexOf("?"));
+            }
+            if(status.sTorBrowsing){
+                //pSecurePopupHeader
+                ((TextView)mDialog.findViewById(R.id.pSecurePopupHeader)).setText("Tor://");
+                mURL = mURL.replace("http://","onion://").replace("https://","onion://");
+            }
+            pSecurePopupSubHeader.setText(mURL);
 
-        mDialog.setOnDismissListener(this);
-        pSecurePopupRootBlocker.setOnClickListener(this);
-        mSecurePopupCertificate.setOnClickListener(this);
-        mSecurePopupPrivacy.setOnClickListener(this);
+            mDialog.setOnDismissListener(this);
+            pSecurePopupRootBlocker.setOnClickListener(this);
+            mSecurePopupCertificate.setOnClickListener(this);
+            mSecurePopupPrivacy.setOnClickListener(this);
 
 
-        if ((boolean) mData.get(1)) {
-            mSecureJavascriptStatus.setChecked(true);
-        } else {
-            mSecureJavascriptStatus.setChecked(false);
-        }
-        if ((boolean) mData.get(2)) {
-            mSecureTrackingStatus.setChecked(true);
-        } else {
-            mSecureTrackingStatus.setChecked(false);
-        }
-        if ((int) mData.get(3) != ContentBlocking.AntiTracking.NONE) {
-            mSecureTrackingProtectionStatus.setChecked(true);
-        } else {
-            mSecureTrackingProtectionStatus.setChecked(false);
-        }
+            if ((boolean) mData.get(1)) {
+                mSecureJavascriptStatus.setChecked(true);
+            } else {
+                mSecureJavascriptStatus.setChecked(false);
+            }
+            if ((boolean) mData.get(2)) {
+                mSecureTrackingStatus.setChecked(true);
+            } else {
+                mSecureTrackingStatus.setChecked(false);
+            }
+            if ((int) mData.get(3) != ContentBlocking.AntiTracking.NONE) {
+                mSecureTrackingProtectionStatus.setChecked(true);
+            } else {
+                mSecureTrackingProtectionStatus.setChecked(false);
+            }
+        }catch (Exception ex){}
     }
 
     private void downloadFileLongPress() {

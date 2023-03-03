@@ -34,7 +34,6 @@ import java.util.List;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_COPY;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_RESET;
 
 @SuppressLint("NotifyDataSetChanged")
 public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listViewHolder> {
@@ -523,12 +522,13 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
 
                 if(status.sLowMemory != enums.MemoryStatus.LOW_MEMORY && status.sLowMemory != enums.MemoryStatus.CRITICAL_MEMORY){
                     if (model.getDescription().contains("167.86.99.31") || model.getDescription().contains("orion.onion")) {
+                        setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
                         mFaviconLogo.setImageDrawable(itemView.getResources().getDrawable(R.drawable.genesis));
                     } else {
+                        setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
                         mEvent.invokeObserver(Arrays.asList(mFaviconLogo, "https://" + helperMethod.getDomainName(model.getDescription())), historyEnums.eHistoryAdapterCallback.ON_FETCH_FAVICON);
                     }
                 }
-                setItemViewOnClickListener(mRowContainer, mRowMenu, mDescription.getText().toString(), p_position, header, mRowMenu, mLogoImage, model.getID(), model.getDate());
             }
 
             if (mLongSelectedID.size() > 0) {
@@ -545,6 +545,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 mPopupWindow = (PopupWindow) mHistroyAdapterView.onTrigger(historyEnums.eHistoryViewAdapterCommands.M_CLEAR_HIGHLIGHT, Arrays.asList(mRowContainer, mRowMenu, mLogoImage, true, false));
             }
         }
+
     }
 
     public void setFilter(String pFilter) {

@@ -305,7 +305,11 @@ public class OrbotService extends VpnService implements OrbotConstants {
         }
 
         if(orbotLocalConstants.mNotificationStatus != 0){
-            startForeground(NOTIFY_ID, mNotifyBuilder.build());
+            if(orbotLocalConstants.mNotificationStatus != 0){
+                try {
+                    startForeground(NOTIFY_ID, mNotifyBuilder.build());
+                }catch (Exception ex){}
+            }
         }
 
     }

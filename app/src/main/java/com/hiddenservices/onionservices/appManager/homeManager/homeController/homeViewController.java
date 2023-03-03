@@ -1430,11 +1430,14 @@ public class homeViewController {
 
             if (purl[0].length() <= 300) {
                 purl[0] = removeEndingSlash(purl[0]);
-                if(status.sTorBrowsing){
-                    mSearchbar.setText(helperMethod.urlDesigner(showProtocol, purl[0], mContext, mSearchbar.getCurrentTextColor(), status.sTheme, true));
-                }else {
-                    mSearchbar.setText(helperMethod.urlDesigner(showProtocol, purl[0], mContext, mSearchbar.getCurrentTextColor(), status.sTheme, ssl_status || purl[0].contains("orion.onion")));
-                }
+
+                try{
+                    if(status.sTorBrowsing){
+                        mSearchbar.setText(helperMethod.urlDesigner(showProtocol, purl[0], mContext, mSearchbar.getCurrentTextColor(), status.sTheme, true));
+                    }else {
+                        mSearchbar.setText(helperMethod.urlDesigner(showProtocol, purl[0], mContext, mSearchbar.getCurrentTextColor(), status.sTheme, ssl_status || purl[0].contains("orion.onion")));
+                    }
+                }catch (Exception ex){}
                 mSearchbar.selectAll();
 
                 if (isTextSelected) {

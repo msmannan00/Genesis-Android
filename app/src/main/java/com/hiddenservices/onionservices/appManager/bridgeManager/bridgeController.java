@@ -119,9 +119,11 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
     @Override
     public void afterTextChanged(Editable editable) {
-        if (!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length() <= 5) {
-            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
-        }
+        try {
+            if (!status.sBridgeCustomBridge.equals("meek") && !status.sBridgeCustomBridge.equals("obfs4") && status.sBridgeCustomBridge.length() <= 5) {
+                mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
+            }
+        }catch (Exception ex){}
     }
 
     /* VIEW LISTENERS */

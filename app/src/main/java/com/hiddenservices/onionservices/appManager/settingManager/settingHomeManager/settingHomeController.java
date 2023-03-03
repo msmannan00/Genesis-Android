@@ -73,14 +73,16 @@ public class settingHomeController extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
-        if (activityThemeManager.getInstance().onInitTheme(this) && !status.mThemeApplying) {
-            activityContextManager.getInstance().onResetTheme();
-        }
+        try {
+            pluginController.getInstance().onLanguageInvoke(Collections.singletonList(this), pluginEnums.eLangManager.M_ACTIVITY_CREATED);
+            if (activityThemeManager.getInstance().onInitTheme(this) && !status.mThemeApplying) {
+                activityContextManager.getInstance().onResetTheme();
+            }
 
-        helperMethod.updateResources(this, status.mSystemLocale.getDisplayName());
-        activityContextManager.getInstance().getHomeController().updateResources(this, status.mSystemLocale.getDisplayName());
-        pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
+            helperMethod.updateResources(this, status.mSystemLocale.getDisplayName());
+            activityContextManager.getInstance().getHomeController().updateResources(this, status.mSystemLocale.getDisplayName());
+            pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
+        }catch (Exception ex){}
         super.onConfigurationChanged(newConfig);
     }
 
