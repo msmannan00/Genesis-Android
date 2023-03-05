@@ -16,8 +16,8 @@
         }
       ],
       "attributes": [],
-      "versionCode": 398,
-      "versionName": "Build | Dark-Origin 1.0.5.2",
+      "versionCode": 565,
+      "versionName": "Build | Dark-Origin 1.1.0.9",
       "outputFile": "app-orion-x86_64-release.apk"
     },
     {
@@ -29,22 +29,9 @@
         }
       ],
       "attributes": [],
-      "versionCode": 397,
-      "versionName": "Build | Dark-Origin 1.0.5.2",
+      "versionCode": 565,
+      "versionName": "Build | Dark-Origin 1.1.0.9",
       "outputFile": "app-orion-x86-release.apk"
-    },
-    {
-      "type": "ONE_OF_MANY",
-      "filters": [
-        {
-          "filterType": "ABI",
-          "value": "armeabi-v7a"
-        }
-      ],
-      "attributes": [],
-      "versionCode": 395,
-      "versionName": "Build | Dark-Origin 1.0.5.2",
-      "outputFile": "app-orion-armeabi-v7a-release.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -55,9 +42,22 @@
         }
       ],
       "attributes": [],
-      "versionCode": 396,
-      "versionName": "Build | Dark-Origin 1.0.5.2",
+      "versionCode": 565,
+      "versionName": "Build | Dark-Origin 1.1.0.9",
       "outputFile": "app-orion-arm64-v8a-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "armeabi-v7a"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 565,
+      "versionName": "Build | Dark-Origin 1.1.0.9",
+      "outputFile": "app-orion-armeabi-v7a-release.apk"
     }
   ],
   "elementType": "File"

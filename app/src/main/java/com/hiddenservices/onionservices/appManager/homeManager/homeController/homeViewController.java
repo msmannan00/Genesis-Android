@@ -1557,7 +1557,7 @@ public class homeViewController {
     public void onNewTabAnimation(List<Object> data, Object e_type, int pDelay, String pCurrentURL) {
 
         if (mNewTabBlocker.getAlpha() != 0) {
-            return;
+            //return;
         }
 
         if(e_type!=null && e_type.equals(homeEnums.eHomeViewCallback.M_INITIALIZE_TAB_SINGLE) && !status.sOpenURLInNewTab){
@@ -1572,6 +1572,9 @@ public class homeViewController {
 
         mNewTabBlocker.setVisibility(View.VISIBLE);
         ObjectAnimator alpha = ObjectAnimator.ofPropertyValuesHolder(mNewTabBlocker, PropertyValuesHolder.ofFloat("alpha", 0, 1f));
+        if (mNewTabBlocker.getAlpha() != 0) {
+            alpha = ObjectAnimator.ofPropertyValuesHolder(mNewTabBlocker, PropertyValuesHolder.ofFloat("alpha", 1, 1f));
+        }
 
         alpha.setDuration(150);
 
