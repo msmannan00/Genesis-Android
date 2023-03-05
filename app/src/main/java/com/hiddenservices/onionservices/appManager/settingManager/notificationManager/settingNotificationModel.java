@@ -36,6 +36,7 @@ class settingNotificationModel {
                 activityContextManager.getInstance().getHomeController().onShowDefaultNotification(true);
             }
         }
+        activityContextManager.getInstance().getHomeController().onReloadProxy();
     }
 
     public Object onTrigger(settingNotificationEnums.eNotificationModel pCommands, List<Object> pData) {

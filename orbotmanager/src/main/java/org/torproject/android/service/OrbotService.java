@@ -318,7 +318,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
         createNetworkStateReciever();
         IntentFilter mNetworkStateFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(mNetworkStateReceiver , mNetworkStateFilter);
+        try {
+            registerReceiver(mNetworkStateReceiver , mNetworkStateFilter);
+        }catch (Exception ex){}
         if (mCurrentStatus.equals(STATUS_OFF))
             showToolbarNotification(getString(R.string.open_orbot_to_connect_to_tor), NOTIFY_ID, R.drawable.ic_stat_tor_off);
         self = this;
@@ -333,6 +335,20 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
     private void showDeactivatedNotification() {
         //showToolbarNotification(getString(R.string.open_orbot_to_connect_to_tor), NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+    }
+
+    public void onUnRegister() {
+        try {
+            if(mNetworkStateReceiver!=null){
+                unregisterReceiver(mNetworkStateReceiver);
+            }
+            if(mActionBroadcastReceiver!=null){
+                unregisterReceiver(mActionBroadcastReceiver);
+            }
+        }catch (Exception ex){
+            Log.i("sad","asd");
+            ex.printStackTrace();
+        }
     }
 
     @Override

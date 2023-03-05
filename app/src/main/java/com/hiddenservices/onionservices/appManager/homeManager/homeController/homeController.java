@@ -274,6 +274,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if(status.mThemeApplying){
             mGeckoClient.initRestore(mGeckoView, homeController.this);
         }
+        status.mThemeApplying = false;
     }
 
     public void initTor() {
@@ -755,8 +756,8 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onReDrawGeckoview() {
         dataController.getInstance().invokeTab(dataEnums.eTabCommands.CLOSE_TAB, Arrays.asList(mGeckoClient.getSession(), mGeckoClient.getSession()));
         mGeckoClient.initializeSession(mGeckoView, new geckoViewCallback(), this);
+        mGeckoClient.onSaveCurrentTab(true, this);
     }
-
     public void onExternalURLInvoke(String pData) {
         if (status.sSettingIsAppStarted) {
             activityContextManager.getInstance().onGoHome();
@@ -1969,8 +1970,21 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         orbotLocalConstants.mSoftNotification = true;
     }
 
+    public void onReloadProxy(){
+        if(!status.mThemeApplying && status.sSettingIsAppStarted && status.sTorBrowsing && status.sNotificaionStatus == 0){
+            pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
+            new Handler().postDelayed(() ->
+            {
+                pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
+            }, 500);
+        }
+    }
+
     @Override
     public void onResume() {
+
+        onReloadProxy();
+
         if(status.sNotificaionStatus == 1){
             onShowDefaultNotification(true);
         }

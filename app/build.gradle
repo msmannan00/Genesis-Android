@@ -57,11 +57,11 @@ android {
 
     splits {
         abi {
-            enable project.ext.splitEnabled
+            //enable project.ext.splitEnabled
 
-            reset()
+            //reset()
 
-            include project.ext.abi_x86, project.ext.abi_x86_x64, project.ext.abi_arm64, project.ext.abi_armeabi
+            //include project.ext.abi_x86, project.ext.abi_x86_x64, project.ext.abi_arm64, project.ext.abi_armeabi
         }
     }
     bundle {
@@ -127,7 +127,7 @@ dependencies {
 
 /* Automated APK Generation */
 
-android.applicationVariants.all { variant ->
+/*android.applicationVariants.all { variant ->
 
     def buildType = variant.buildType.name
 
@@ -152,7 +152,7 @@ android.applicationVariants.all { variant ->
         }
     }
 }
-
+*/
 
 
 
