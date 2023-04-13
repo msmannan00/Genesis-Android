@@ -120,7 +120,7 @@ public class settingHomeController extends AppCompatActivity {
     }
 
     public void onSupport(View view) {
-        pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_INTERSTITIAL);
+        //pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_INTERSTITIAL);
     }
 
     /*View Callbacks*/

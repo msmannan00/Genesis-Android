@@ -1,7 +1,5 @@
 package com.hiddenservices.onionservices.pluginManager;
 
-import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +8,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.permissionHandler;
-import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.appManager.unproxiedConnectionManager.unproxiedConnectionController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogController;
@@ -22,25 +19,16 @@ import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.hiddenservices.onionservices.pluginManager.adPluginManager.appLovinManager;
-import com.hiddenservices.onionservices.pluginManager.analyticPluginManager.analyticManager;
 import com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadManager;
 import com.hiddenservices.onionservices.pluginManager.langPluginManager.langManager;
 import com.hiddenservices.onionservices.pluginManager.messagePluginManager.messageManager;
 import com.hiddenservices.onionservices.pluginManager.orbotPluginManager.orbotManager;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
-
 import static com.hiddenservices.onionservices.constants.constants.CONST_BRIDGES;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICKED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
@@ -55,8 +43,8 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 public class pluginController {
     /*Plugin Instance*/
 
-    private appLovinManager mAdManager;
-    private analyticManager mAnalyticsManager;
+    //private appLovinManager mAdManager;
+    //private analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
     private activityContextManager mContextManager;
     private langManager mLangManager;
@@ -92,8 +80,8 @@ public class pluginController {
         mHomeController = new WeakReference(activityContextManager.getInstance().getHomeController());
         mContextManager = activityContextManager.getInstance();
 
-        mAdManager = new appLovinManager(new admobCallback(), ((homeController) mHomeController.get()).getBannerAd(), mHomeController.get());
-        mAnalyticsManager = new analyticManager(mHomeController, new analyticCallback());
+        //mAdManager = new appLovinManager(new admobCallback(), ((homeController) mHomeController.get()).getBannerAd(), mHomeController.get());
+        //mAnalyticsManager = new analyticManager(mHomeController, new analyticCallback());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
         mDownloadManager = new downloadManager(mHomeController, new downloadCallback());
@@ -113,45 +101,45 @@ public class pluginController {
     /*------------------------------------------------ CALLBACK LISTENERS------------------------------------------------------------*/
 
     /*Ad Manager*/
-    private class admobCallback implements eventObserver.eventListener {
-        @Override
-        public Object invokeObserver(List<Object> data, Object event_type) {
-            if (event_type.equals(M_ON_AD_LOAD)) {
-                activityContextManager.getInstance().getHomeController().onUpdateBannerAdvert();
-            } else if (event_type.equals(M_ON_AD_CLICKED)) {
-                status.sIsBackgroundAdvertCheck = true;
-                new Handler().postDelayed(() ->
-                {
-                    status.sIsBackgroundAdvertCheck = false;
-                }, 5000);
-            }
-            return null;
-        }
-    }
+//    private class admobCallback implements eventObserver.eventListener {
+//        @Override
+//        public Object invokeObserver(List<Object> data, Object event_type) {
+//            if (event_type.equals(M_ON_AD_LOAD)) {
+//                activityContextManager.getInstance().getHomeController().onUpdateBannerAdvert();
+//            } else if (event_type.equals(M_ON_AD_CLICKED)) {
+//                status.sIsBackgroundAdvertCheck = true;
+//                new Handler().postDelayed(() ->
+//                {
+//                    status.sIsBackgroundAdvertCheck = false;
+//                }, 5000);
+//            }
+//            return null;
+//        }
+//    }
 
-    public Object onAdsInvoke(List<Object> pData, pluginEnums.eAdManager pEventType) {
+    //public Object onAdsInvoke(List<Object> pData, pluginEnums.eAdManager pEventType) {
 
-        if (mAdManager != null) {
-            return mAdManager.onTrigger(pEventType);
-        }
+        //if (mAdManager != null) {
+        //    return mAdManager.onTrigger(pEventType);
+        //}
 
-        return null;
-    }
+        //return null;
+    //}
 
 
     /*Analytics Manager*/
-    private class analyticCallback implements eventObserver.eventListener {
-        @Override
-        public Object invokeObserver(List<Object> data, Object event_type) {
-            return null;
-        }
-    }
+    //private class analyticCallback implements eventObserver.eventListener {
+    //    @Override
+    //    public Object invokeObserver(List<Object> data, Object event_type) {
+          //  return null;
+        //}
+    //}
 
-    public void onAnalyticsInvoke(List<Object> pData, pluginEnums.eAnalyticManager pEventType) {
-        if (mAnalyticsManager != null) {
-            mAnalyticsManager.onTrigger(pData, pEventType);
-        }
-    }
+    //public void onAnalyticsInvoke(List<Object> pData, pluginEnums.eAnalyticManager pEventType) {
+        //if (mAnalyticsManager != null) {
+        //    mAnalyticsManager.onTrigger(pData, pEventType);
+        //}
+    //}
 
     /*Download Manager*/
     private class downloadCallback implements eventObserver.eventListener {

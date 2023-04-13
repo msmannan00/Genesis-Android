@@ -171,7 +171,7 @@
                 android:layout_marginEnd="15dp"
                 android:background="@color/c_home_side" />
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:id="@+id/menu9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -207,7 +207,7 @@
                     android:textColor="@color/c_text_home_menu"
                     android:textSize="15sp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/menu7"

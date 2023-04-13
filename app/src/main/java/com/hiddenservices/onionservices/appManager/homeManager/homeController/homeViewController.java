@@ -1112,8 +1112,8 @@ public class homeViewController {
                 if (mBannerAds.getAlpha() == 0) {
                     mBannerAds.animate().cancel();
                     mBannerAds.setAlpha(0);
-                    mBannerAds.animate().alpha(1);
-                    mBannerAds.setVisibility(View.VISIBLE);
+                    mBannerAds.animate().alpha(0);
+                    mBannerAds.setVisibility(View.GONE);
                 }
                 onSetBannerAdMargin(true, true);
             } else if (mBannerAds.getVisibility() != View.VISIBLE) {
