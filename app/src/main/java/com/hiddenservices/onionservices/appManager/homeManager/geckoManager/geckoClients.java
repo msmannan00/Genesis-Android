@@ -301,7 +301,9 @@ public class geckoClients {
     }
 
     public void onMediaInvoke(enums.MediaController mController){
-        mSession.getMediaSessionDelegate().onTrigger(mController);
+        if(mSession.getMediaSessionDelegate()!=null){
+            mSession.getMediaSessionDelegate().onTrigger(mController);
+        }
     }
 
     public String getTheme() {
@@ -476,7 +478,9 @@ public class geckoClients {
                 mSession.onFullScreenInvoke((boolean)data.get(0));
             }
             if (e_type.equals(homeEnums.eGeckoCallback.ON_DESTROY_MEDIA)) {
-                mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+                if(mSession.getMediaSessionDelegate()!=null){
+                    mSession.getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+                }
             }
             if (e_type.equals(homeEnums.eGeckoCallback.M_CHANGE_HOME_THEME)) {
                 initHomeTheme();

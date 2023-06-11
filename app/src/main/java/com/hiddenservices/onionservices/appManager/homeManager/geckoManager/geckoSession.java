@@ -17,6 +17,8 @@ import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.help
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.searchHandler;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.eventObserver;
+import com.hiddenservices.onionservices.helperManager.helperMethod;
+
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 import java.lang.ref.WeakReference;
@@ -54,9 +56,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
         this.mGeckoDataModel = new geckoDataModel();
         this.mGeckoDataModel.mSessionID = pSessionID;
 
-        this.mMediaDelegate = new mediaDelegate(this.mContext);
         this.mSelectionActionDelegate = new selectionDelegate(pContext, true);
-        this.mMediaSessionDelegate = new mediaSessionDelegate(this.mContext, mGeckoDataModel, mMediaDelegate);
         this.mHistoryDelegate = new historyDelegate(this.mContext, mEvent, mGeckoDataModel, this);
         this.mPromptDelegate = new promptDelegate(this.mContext.get());
         this.mContentDelegate = new contentDelegate(this.mContext, mEvent, mGeckoDataModel, this);
@@ -67,18 +67,25 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
         this.mNavigationDelegate = new navigationDelegate(this.mContext, mEvent, mGeckoDataModel, this);
         this.mProgressDelegate = new progressDelegate(this.mContext, mEvent, mGeckoDataModel);
         this.mPermissionDelegate = new permissionDelegate(this.mContext, this);
+        this.mMediaDelegate = new mediaDelegate(new WeakReference(pContext));
 
+        setMediaDelegate(this.mMediaDelegate);
         setSelectionActionDelegate(this.mSelectionActionDelegate);
-        setMediaSessionDelegate(this.mMediaSessionDelegate);
         setHistoryDelegate(this.mHistoryDelegate);
         setPromptDelegate(this.mPromptDelegate);
         setContentDelegate(this.mContentDelegate);
-        setMediaDelegate(this.mMediaDelegate);
         setScrollDelegate(this.mScrollDelegate);
         setAutofillDelegate(this.mAutofillDelegate);
         setNavigationDelegate(this.mNavigationDelegate);
         setProgressDelegate(this.mProgressDelegate);
         setPermissionDelegate(this.mPermissionDelegate);
+        setMediaSessionDelegate(null);
+    }
+
+    public void onInit(AppCompatActivity pContext){
+        setMediaSessionDelegate(null);
+        this.mMediaSessionDelegate = new mediaSessionDelegate(new WeakReference(pContext), mGeckoDataModel, mMediaDelegate);
+        setMediaSessionDelegate(this.mMediaSessionDelegate);
     }
 
     public void initCallback(eventObserver.eventListener pEvent) {

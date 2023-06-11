@@ -85,7 +85,7 @@
 
     <!-- Alert TOR -->
     <string name="ALERT_TOR_HEADER" translatable="true">Switch Tor</string>
-    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Using this you can switch between normal browsing using duckduckgo or advance secure dark web browsing using Orion search</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Using this you can switch between normal browsing using tory io or advance secure dark web browsing using Orion search</string>
     <string name="ALERT_TOR_TRIGGER" translatable="true">Switch</string>
 
     <!-- Alert Secure -->
@@ -272,7 +272,7 @@
     <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Manage how searches appear</string>
     <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default Engine (Recommended)</string>
     <string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
-    <string name="SETTING_SEARCH_DUCK" translatable="false">DuckDuckGo (Recommended)</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">Torry IO (Recommended)</string>
     <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google by Google inc</string>
     <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing by Microsoft</string>
     <string name="SETTING_SEARCH_BING" translatable="false">Browse articles freely</string>

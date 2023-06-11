@@ -1,6 +1,6 @@
 /* Version */
-project.ext.vname = 'Build | Dark-Origin 1.1.0.11'
-project.ext.vcode = 575
+project.ext.vname = 'Build | Dark-Origin 1.1.0.12'
+project.ext.vcode = 580
 project.ext.buildType = 'release'
 project.ext.jvmTarget = "1.8"
 project.ext.applovin_key = "pCPe4EeU2ZQVwQPeHLgseRqHBX1V5pvo9Piuu4J809dRhadEgukXa1A8po_UeXu5hmPOTaP1v4QPaMKIEOhh50"

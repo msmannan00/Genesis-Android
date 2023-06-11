@@ -224,7 +224,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             if (status.sTorBrowsing) {
                 mCurrentList.add(mSize, new historyRowModel("Orion Search", "orion.onion", -1));
             }else {
-                mCurrentList.add(mSize, new historyRowModel("Duckduckgo", "https://duckduckgo.com", -1));
+                mCurrentList.add(mSize, new historyRowModel("Duckduckgo", "https://looksmart.com", -1));
             }
         }
 
@@ -234,7 +234,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
     private ArrayList<historyRowModel> initSuggestions() {
         mHintListLocalCache = new ArrayList<>();
 
-        mHintListLocalCache.add(new historyRowModel("Duckduckgo", "https://duckduckgo.com", -1));
+        mHintListLocalCache.add(new historyRowModel("Duckduckgo", "https://looksmart.com", -1));
         mHintListLocalCache.add(new historyRowModel("BBC", "https://bbc.com", -1));
         mHintListLocalCache.add(new historyRowModel("Youtube", "https://youtube.com", -1));
         mHintListLocalCache.add(new historyRowModel("Facebook", "https://facebook.com", -1));
@@ -276,6 +276,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
         mHintListLocalCache.add(new historyRowModel("Bestbuy", "https://bestbuy.com", -1));
         mHintListLocalCache.add(new historyRowModel("Urbandictionary", "https://urbandictionary.com", -1));
         mHintListLocalCache.add(new historyRowModel("Mayoclinic", "https://mayoclinic.org", -1));
+        mHintListLocalCache.add(new historyRowModel("Torry", "https://www.torry.io/mobile/orion/", -1));
         mHintListLocalCache.add(new historyRowModel("AOL", "https://aol.com", -1));
         mHintListLocalCache.add(new historyRowModel("Genius", "https://genius.com", -1));
         mHintListLocalCache.add(new historyRowModel("Zillow", "https://zillow.com", -1));

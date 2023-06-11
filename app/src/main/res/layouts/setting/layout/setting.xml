@@ -16,7 +16,6 @@
             android:paddingBottom="50dp"
             android:layout_height="wrap_content">
 
-            <!-- Title Header -->
             <LinearLayout
                 android:id="@+id/pHeaderSupport"
                 android:layout_width="match_parent"
@@ -128,14 +127,6 @@
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="15dp"
-                android:background="@color/c_orbot_setting_divider" />
-
-            <!-- Title Header -->
             <LinearLayout
                 android:id="@+id/pSearchSettingOption2"
                 android:layout_width="match_parent"
@@ -178,6 +169,76 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@color/c_orbot_setting_divider" />
+
+            <LinearLayout
+                android:id="@+id/pSearchSettingOption4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@xml/gx_ripple_gray"
+                android:onClick="onManageSearchEngine"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:tint="@color/c_setting_icon_tint"
+                    android:src="@xml/ic_baseline_search"
+                    android:contentDescription="@string/GENERAL_TODO" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:clickable="false"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:textAlignment="textStart"
+                        android:layout_height="20dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SEARCH"
+                        android:textAllCaps="false"
+                        android:textColor="@color/c_text_v1"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:alpha="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:padding="0dp"
+                        android:text="@string/SETTING_SEARCH_INFO"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="#757575"
+                        android:textSize="13.5sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/GENERAL_TODO"
+                    android:clickable="false"
+                    android:layout_marginEnd="5dp"
+                    android:src="@xml/ic_arrow_right"
+                    app:tint="@color/c_navigation_tint" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1193,77 +1254,6 @@
                         android:textColor="@color/c_text_v6"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
-                </LinearLayout>
-
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:src="@xml/ic_arrow_right"
-                    app:tint="@color/c_navigation_tint" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@xml/gx_ripple_gray"
-                android:clickable="true"
-                android:onClick="cicadaClipboard"
-                android:focusable="true"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="13dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:contentDescription="@string/GENERAL_TODO"
-                    android:padding="10dp"
-                    android:src="@xml/ic_baseline_fingerprint"
-                    app:tint="@color/c_setting_icon_tint" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:clickable="false"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/GENERAL_CICADA"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v1"
-                        android:textSize="15sp"
-                        tools:ignore="RtlSymmetry" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:alpha="1"
-                        android:background="@android:color/transparent"
-                        android:clickable="false"
-                        android:padding="0dp"
-                        android:text="@string/GENERAL_CICADA_KEY"
-                        android:textAlignment="textStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
-                        android:textSize="13.5sp"
-                        tools:ignore="HardcodedText,RtlSymmetry" />
                 </LinearLayout>
 
                 <ImageButton

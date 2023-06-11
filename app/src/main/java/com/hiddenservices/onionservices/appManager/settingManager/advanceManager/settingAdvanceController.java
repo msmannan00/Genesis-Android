@@ -175,6 +175,7 @@ public class settingAdvanceController extends AppCompatActivity {
         mSettingAdvanceModel.onTrigger(settingAdvanceEnums.eAdvanceModel.M_BACKGROUND_MUSIC, Collections.singletonList(!mBackgroundMusic.isChecked()));
         mBackgroundMusic.toggle();
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_BACKGROUND_MUSIC, status.sBackgroundMusic));
+        activityContextManager.getInstance().getHomeController().onReload(null);
     }
 
     public void onGridView(View view) {

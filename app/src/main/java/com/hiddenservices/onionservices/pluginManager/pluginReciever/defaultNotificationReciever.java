@@ -1,6 +1,8 @@
 package com.hiddenservices.onionservices.pluginManager.pluginReciever;
 
 import static com.hiddenservices.onionservices.constants.constants.CONST_NOTIFICATION_COMMAND;
+import static java.lang.System.exit;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +21,12 @@ public class defaultNotificationReciever extends BroadcastReceiver {
         } else if (mCommand == 1) {
             if(activityContextManager.getInstance().getHomeController() == null){
                 onDestroy(context);
+                NotificationManagerCompat.from(context).cancelAll();
+                exit(1);
             }else {
+                NotificationManagerCompat.from(activityContextManager.getInstance().getHomeController()).cancelAll();
                 activityContextManager.getInstance().getHomeController().onCloseApplication();
+                exit(1);
             }
         }
     }
@@ -43,7 +49,7 @@ public class defaultNotificationReciever extends BroadcastReceiver {
             NotificationManagerCompat.from(context).cancel(1025);
 
             android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
+            exit(1);
         }, 100);
     }
 }

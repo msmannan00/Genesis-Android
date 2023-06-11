@@ -49,11 +49,12 @@ public class constants {
     public static final String CONST_GENESIS_HELP_URL_SUB = "167.86.99.31/help";
     public static final String CONST_BACKEND_GENESIS_URL = "http://167.86.99.31/search?q=$s&p_num=1&s_type=all";
     public static final String CONST_BACKEND_GOOGLE_URL = "https://www.google.com/search?q=$s";
-    public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://duckduckgo.com?q=$s&ia=web";
-    public static final String CONST_BACKEND_DUCK_DUCK_GO_STATIC_URL = "http://duckduckgo.com";
+    public static final String CONST_BACKEND_DUCK_DUCK_GO_URL = "https://www.torry.io/mobile/orion/search/?q=$s";
+
+    public static final String CONST_BACKEND_DUCK_DUCK_GO_STATIC_URL = "https://www.torry.io/mobile/orion/";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";
     public static final String CONST_BACKEND_WIKI_URL = "https://en.wikipedia.org/wiki/$s";
-    public static final String CONST_LOG_DUCKDUCK = "https://duckduckgo.com/?q=tor";
+    public static final String CONST_LOG_DUCKDUCK = "https://www.torry.io/mobile/orion/?q=tor";
 
     /*PROXY CONSTANTS*/
 

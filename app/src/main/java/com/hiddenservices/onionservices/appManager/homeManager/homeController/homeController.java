@@ -772,6 +772,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (mGeckoView.getSession() != null && !mGeckoView.getSession().isOpen()) {
             mGeckoView.getSession().open(mGeckoClient.getmRuntime());
         }
+        if (url.contains("torry.io") && !url.contains("torry.io/mobile/orion")) {
+            url = url.replace("torry.io","torry.io/mobile/orion");
+        }
 
         mAppBar.animate().cancel();
         if (mGeckoView.getSession() != null) {
@@ -3169,6 +3172,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_UPDATE_HISTORY)) {
                 return dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_ADD_HISTORY, data);
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_PAGE_LOADED)) {
+                mGeckoClient.getSession().onInit(homeController.this);
                 onInvokePixelGenerator();
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_BOOTSTRAPPED, true));
                 mHomeViewController.onPageFinished();

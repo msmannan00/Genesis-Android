@@ -52,7 +52,7 @@ android {
 
     splits {
         abi {
-            enable project.ext.splitEnabled
+            enable true
 
             reset()
 
@@ -61,7 +61,7 @@ android {
     }
     bundle {
         abi {
-            enableSplit = true
+            enableSplit = false
         }
     }
 
