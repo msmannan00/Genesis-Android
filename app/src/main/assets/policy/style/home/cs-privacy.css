@@ -1,6 +1,6 @@
 /*Privacy Policy Text*/
 .privacy{
-    background: #ffffff ;
+    background: #fff ;
 }
 .privacy__welcome{
     height: 400px;
@@ -49,14 +49,14 @@
     border: 2px solid white;
 }
 .privacy__body{
-    background-image: linear-gradient(to bottom,#ffffff, #ffffff);
+    background-image: linear-gradient(to bottom,#fff, #fff);
     font-size: 18px;
 }
 .privacy__paragraph-container{
     padding-top: 30px;
     padding-left: 2%;
     padding-right: 4%;
-    background-image: linear-gradient(to bottom, #f7f7f7, #f7f7f7, #ffffff);
+    background-image: linear-gradient(to bottom, #f7f7f7, #f7f7f7, #fff);
 }
 .privacy__paragraph-container--top{
     padding-top: 60px;

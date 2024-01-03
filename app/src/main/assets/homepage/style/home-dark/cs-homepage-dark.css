@@ -1,6 +1,6 @@
 a {
    text-decoration:none !important;
-   color: #ffffff !important;
+   color: #fff !important;
 }
 body{
     opacity: 0;
@@ -97,7 +97,7 @@ body{
 	align-self: center;
 	height:42px !important;
 	outline: none;
-	color:#cccccc !important;
+	color:#ccc !important;
 	border-color: #3c3946 !important;
 	width:91% !important;
     max-width: 575px;
@@ -418,7 +418,7 @@ line-style
 	font-weight: bold;
 	text-align: center;
 	font-size: 14px;
-	color: #ffffff;
+	color: #fff;
 	cursor: pointer;
 	width: auto;
 	border-top-right-radius: 8px;

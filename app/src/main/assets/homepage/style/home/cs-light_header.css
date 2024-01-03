@@ -31,12 +31,12 @@
 }
 
 #lh_light_header_identifier {
-    background-color:#ffffff;
+    background-color:#fff;
 }
 
 @media only screen and (max-width: 943px) {
     #lh_light_header_identifier {
-    background-color:#ffffff;
+    background-color:#fff;
     }
 }
 

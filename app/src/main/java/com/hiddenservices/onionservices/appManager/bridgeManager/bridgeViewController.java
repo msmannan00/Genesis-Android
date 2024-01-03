@@ -22,7 +22,7 @@ import com.hiddenservices.onionservices.R;
 import java.util.List;
 
 class bridgeViewController {
-    /*Private Variables*/ 
+    /*Private Variables*/
     private RadioButton mBridgeSettingObfs;
     private RadioButton mBridgeSettingBridgeChina;
     private RadioButton mBridgeSettingCustomPort;
@@ -48,6 +48,7 @@ class bridgeViewController {
     }
 
     protected void onInit(){
+
     }
 
     private void initPostUI() {

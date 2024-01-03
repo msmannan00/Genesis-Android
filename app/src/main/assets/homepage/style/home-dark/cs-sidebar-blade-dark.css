@@ -89,7 +89,7 @@
 .sidebar__navigation a{
     display: block;
     padding: 15px 0;
-    color: #FFFFFF;
+    color: #fff;
 }
 
 .sidebar__navigation li:last-child a{

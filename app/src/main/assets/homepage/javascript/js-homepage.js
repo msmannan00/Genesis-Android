@@ -35,7 +35,7 @@ class homepage {
 
   onLoadStaticWebpage(pData){
   	if(this.mLastLinkID.localeCompare("") != 0){
-		document.getElementById(this.mLastLinkID).style.backgroundColor = "#ffffff";
+		document.getElementById(this.mLastLinkID).style.backgroundColor = "#fff";
   	}
 
 	document.getElementById(pData[0]).style.backgroundColor = "#f2f2f2";

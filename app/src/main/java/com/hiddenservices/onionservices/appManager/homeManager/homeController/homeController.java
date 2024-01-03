@@ -899,9 +899,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         PendingIntent action;
 
         if (SDK_INT >= Build.VERSION_CODES.M) {
-            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
+            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE);
         }else {
-            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), 0); // Flag indicating that if the described PendingIntent already exists, the current one should be canceled before generating a new one.
+            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), 0);
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify_001");
@@ -1736,7 +1736,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             int mTabSize = (int) dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null);
             mGeckoClient.onBackPressed(true, mTabSize, mGeckoView, this);
         }
-        super.onBackPressed();
+        if(false){
+            super.onBackPressed();
+        }
     }
 
     /*Activity States*/
@@ -1847,6 +1849,16 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             {
                 pluginController.getInstance().onOrbotInvoke(Arrays.asList(status.sBridgeCustomBridge, status.sBridgeGatewayManual, status.sBridgeCustomType, status.sBridgeStatus, status.sShowImages, status.sClearOnExit, dataController.getInstance().invokeBridges(dataEnums.eBridgeWebsiteCommands.M_FETCH, null)), pluginEnums.eOrbotManager.M_START_ORBOT);
             }, 500);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                onReload(null);
+            }
         }
     }
 
