@@ -169,8 +169,8 @@ public class settingHomeController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finish();
+        super.onBackPressed();
     }
 
     @Override
@@ -243,12 +243,8 @@ public class settingHomeController extends AppCompatActivity {
     }
 
     public void onReportWebsite(View view) {
-        try {
-            finish();
-            activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_REPORT_URL + URLEncoder.encode(activityContextManager.getInstance().getHomeController().onGetCurrentURL(), "UTF-8")));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        finish();
+        activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_REPORT_URL));
     }
 
     public void onSitemap(View view) {
@@ -267,7 +263,7 @@ public class settingHomeController extends AppCompatActivity {
         if (!status.sTorBrowsing) {
             activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_PRIVACY_POLICY_URL_NON_TOR);
         } else {
-            activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_PRIVACY_POLICY_URL));
+            activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_PRIVACY_POLICY_URL_NON_TOR);
         }
     }
 

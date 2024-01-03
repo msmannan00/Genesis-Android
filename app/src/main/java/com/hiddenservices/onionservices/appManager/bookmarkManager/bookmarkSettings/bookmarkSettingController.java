@@ -148,8 +148,8 @@ public class bookmarkSettingController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         onCloseTrigger(null);
+        super.onBackPressed();
     }
 
     /* UI Redirection */

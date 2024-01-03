@@ -119,7 +119,6 @@ public class settingPrivacyController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
             if (activityContextManager.getInstance().getHomeController() != null) {
@@ -127,6 +126,7 @@ public class settingPrivacyController extends AppCompatActivity {
             }
         }
         finish();
+        super.onBackPressed();
     }
 
     @Override

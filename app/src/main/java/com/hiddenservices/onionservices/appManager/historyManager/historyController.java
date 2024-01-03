@@ -295,7 +295,6 @@ public class historyController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mSearchInput.getVisibility() == View.VISIBLE) {
             onHideSearch(null);
         } else if ((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {
@@ -304,6 +303,7 @@ public class historyController extends AppCompatActivity {
             activityContextManager.getInstance().onRemoveStack(this);
             finish();
         }
+        super.onBackPressed();
     }
 
     /*External XML Listeners*/

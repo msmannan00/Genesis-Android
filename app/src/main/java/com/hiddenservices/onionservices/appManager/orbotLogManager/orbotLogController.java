@@ -361,8 +361,8 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         onCloseTriggered(null);
+        super.onBackPressed();
     }
 
     @Override

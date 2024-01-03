@@ -27,9 +27,6 @@ public class homeModel {
         if (pURL.startsWith("data") || pURL.startsWith("http://data") || pURL.startsWith("https://data")) {
             return pURL;
         }
-        if (pURL.contains("torry.io") && !pURL.contains("torry.io/mobile/orion")) {
-            pURL = pURL.replace("torry.io","torry.io/mobile/orion");
-        }
         if (pURL.equals("about:blank")) {
             return helperMethod.completeURL("167.86.99.31");
         } else if (pURL.equals("about:config")) {
@@ -47,6 +44,7 @@ public class homeModel {
             }
 
             String mURL = pSearchEngine.replace("$s", pURL.replaceAll(" ", "+"));
+            mURL = mURL.replace("167.86.99.31","juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion");
             return mURL;
         }
     }

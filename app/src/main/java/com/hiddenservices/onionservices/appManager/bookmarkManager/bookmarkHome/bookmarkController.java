@@ -271,7 +271,6 @@ public class bookmarkController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mSearchInput.getVisibility() == View.VISIBLE) {
             onHideSearch(null);
         } else if ((Boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {
@@ -280,6 +279,7 @@ public class bookmarkController extends AppCompatActivity {
             activityContextManager.getInstance().onRemoveStack(this);
             finish();
         }
+        super.onBackPressed();
     }
 
     @Override

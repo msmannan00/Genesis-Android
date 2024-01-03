@@ -220,8 +220,8 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finish();
+        super.onBackPressed();
     }
 
 }

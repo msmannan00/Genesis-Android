@@ -110,13 +110,13 @@ public class settingTrackingController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();
         }
         activityContextManager.getInstance().onRemoveStack(this);
         finish();
+        super.onBackPressed();
     }
 
     @Override

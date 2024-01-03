@@ -1710,7 +1710,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mTabFragment.getVisibility() == View.VISIBLE) {
             if (activityContextManager.getInstance().getTabController().isSelectionOpened()) {
                 activityContextManager.getInstance().getTabController().onClearSelection(null);
@@ -1730,17 +1729,14 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             mHomeViewController.onUpdateSearchEngineBar(false, 150);
         } else if (!mGeckoClient.getFullScreenStatus()) {
             mGeckoClient.onExitFullScreen();
-            if (status.sSettingIsAppStarted) {
-                //pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_BANNER);
-            }
             mHomeViewController.onUpdateStatusBarTheme(mGeckoClient.getTheme(), false);
-            //mHomeViewController.updateBannerAdvertStatus(false, (boolean) pluginController.getInstance().onAdsInvoke(null, pluginEnums.eAdManager.M_IS_ADVERT_LOADED));
         } else if (mSearchbar.isFocused() || isKeyboardOpened) {
             mHomeViewController.onClearSelections(true);
         } else if (!mSearchBarWasBackButtonPressed) {
             int mTabSize = (int) dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_TOTAL_TAB, null);
             mGeckoClient.onBackPressed(true, mTabSize, mGeckoView, this);
         }
+        super.onBackPressed();
     }
 
     /*Activity States*/

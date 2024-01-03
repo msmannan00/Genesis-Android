@@ -177,8 +177,8 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finish();
+        super.onBackPressed();
     }
 
     /*External Redirection*/

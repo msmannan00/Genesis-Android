@@ -144,8 +144,8 @@ public class orbotController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         onClose(null);
+        super.onBackPressed();
     }
 
 }

@@ -120,9 +120,9 @@ public class settingSearchController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         activityContextManager.getInstance().onRemoveStack(this);
         finish();
+        super.onBackPressed();
     }
 
     @Override

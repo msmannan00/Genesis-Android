@@ -12,9 +12,8 @@ public class constants {
 
     public static final String CONST_PRIVACY_POLICY_URL_NON_TOR = "resource://android/assets/policy/policy.html";
 
-    public static final String CONST_PRIVACY_POLICY_URL = "http://167.86.99.31/privacy";
-    public static final String CONST_REPORT_URL = "http://167.86.99.31/report?url=";
-    public static final String CONST_SITEMAP = "http://167.86.99.31/sitemap";
+    public static final String CONST_REPORT_URL = "https://http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/legal/";
+    public static final String CONST_SITEMAP = "https://http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/add/";
     public static final String CONST_PACKAGE_NAME = "com.hiddenservices.onionservices";
     public static final String CONST_GENESIS_ONION = "orion.onion";
     public static final String CONST_GENESIS_ONION_V2 = "167.86.99.31";
