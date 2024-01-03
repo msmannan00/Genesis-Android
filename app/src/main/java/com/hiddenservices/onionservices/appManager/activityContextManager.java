@@ -22,10 +22,6 @@ public class activityContextManager {
 
     private static activityContextManager ourInstance = new activityContextManager();
 
-    public static activityContextManager getInstance() {
-        return ourInstance;
-    }
-
     /*Private Contexts*/
     private WeakReference<bridgeController> pBridgeController;
     private WeakReference<historyController> pHistoryController;
@@ -39,6 +35,10 @@ public class activityContextManager {
     private ArrayList<WeakReference<AppCompatActivity>> mStackList;
 
     /*Initialization*/
+
+    public static activityContextManager getInstance() {
+        return ourInstance;
+    }
 
     private activityContextManager() {
         mStackList = new ArrayList<>();
