@@ -1,0 +1,2 @@
+# Genesis-Android
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ac135504c52f401296c392dd327dffc8)](https://app.codacy.com/gh/msmannan00/Genesis-Android?utm_source=github.com&utm_medium=referral&utm_content=msmannan00/Genesis-Android&utm_campaign=Badge_Grade)
