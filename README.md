@@ -3,7 +3,9 @@
 # Orion Browser
 
 ## Overview
-This Android application is a orion browser designed for accessing the hidden web and local webpages securely using onion routing.
+The Orion browser is an innovative Android application designed to provide users with a secure and private browsing experience. Utilizing onion routing technology, it ensures enhanced anonymity by encrypting and routing internet traffic through a network of volunteer-operated servers. This unique feature enables users to access the hidden web, also known as the dark web, where conventional search engines cannot index content.
+
+Additionally, the browser facilitates secure access to local webpages, making it a versatile tool for users seeking privacy not only in accessing hidden content but also in exploring local networks securely. The Orion browser prioritizes secure connection establishment, employing encryption protocols to protect user data and communications. Despite its advanced privacy features, the application maintains a user-friendly interface, allowing seamless navigation through both the hidden and local web. Privacy settings and controls are incorporated, empowering users to customize their anonymity levels and security preferences. Regular updates are promised to address emerging threats and maintain the browser's effectiveness
 
 ## Features
 - Securely access hidden web content
