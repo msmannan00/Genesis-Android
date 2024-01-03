@@ -1,9 +1,9 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/94c252c8ce904c4cbbc4146a463b4d9e)](https://app.codacy.com/gh/msmannan00/Genesis-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-# Secure Browser App
+# Orion Browser
 
 ## Overview
-This Android application is a secure browser designed for accessing the hidden web and local webpages securely using onion routing.
+This Android application is a orion browser designed for accessing the hidden web and local webpages securely using onion routing.
 
 ## Features
 - Securely access hidden web content
