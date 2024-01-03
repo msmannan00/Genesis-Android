@@ -30,7 +30,7 @@
     text-decoration: none;
 	animation-duration: 2s;
 	animation-name: home-header__catagory-hover-animate;
-	border-bottom: 4px solid #ffffff;
+	border-bottom: 4px solid #fff;
 	transition: border-bottom-color 0.25s ease-in-out;
 }
 

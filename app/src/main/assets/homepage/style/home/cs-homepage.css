@@ -1,6 +1,6 @@
 a {
    text-decoration:none !important;
-   color: #ffffff !important;
+   color: #fff !important;
 }
 body{
     opacity: 0;
@@ -88,7 +88,7 @@ body{
 	font-weight: bold;
 }
 .search-content__info-danger-body{
-	color: #ffffff;
+	color: #fff;
 	text-align: left;
 }
 .search-content__button-container{
@@ -98,7 +98,7 @@ body{
 .search-content__button{
 	box-shadow: 0 4px 4px -1.5px #1a1a1a !important;
 	background: #333333 !important;
-	color: #ffffff !important;;
+	color: #fff !important;;
 	border: 0 !important;;
 	font-weight: bold !important;;
 	font-size: 14px !important;;
@@ -164,7 +164,7 @@ body{
 	border-radius: 8px;
 	outline: none;
     border: 1px solid #f0f0f0;
-	box-shadow: 0 3px 3px 0 #cccccc;
+	box-shadow: 0 3px 3px 0 #ccc;
 	width:88.6%;
     max-width: 575px;
 	display:block;
@@ -194,7 +194,7 @@ body{
 	font-weight: bold;
 	text-align: center;
 	font-size: 14px;
-	color: #ffffff;
+	color: #fff;
 	cursor: pointer;
 	width: auto;
 	border-top-right-radius: 8px;
