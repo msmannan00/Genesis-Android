@@ -3,8 +3,6 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.del
 
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_URL;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
-
-import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.os.Handler;
 import android.util.Log;
@@ -21,19 +19,11 @@ import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
 import org.json.JSONObject;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.WebResponse;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.Callable;
 
 public class contentDelegate implements GeckoSession.ContentDelegate {
 
@@ -88,7 +78,7 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
             } else {
                 try {
                     String mTitle = var4.title;
-                    if (mTitle == null || mTitle.length() <= 0) {
+                    if (mTitle == null || mTitle.length() == 0) {
                         mTitle = helperMethod.getDomainName(mGeckoDataModel.mCurrentURL) + "\n" + var4.srcUri;
                     }
                     mEvent.invokeObserver(Arrays.asList(var4.srcUri, mGeckoDataModel.mSessionID, mTitle, mGeckoDataModel.mTheme, mGeckoSession, mContext.get()), homeEnums.eGeckoCallback.ON_LONG_PRESS);
@@ -105,7 +95,7 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
     @UiThread
     @Override
     public void onExternalResponse(@NonNull GeckoSession session, @NonNull WebResponse response) {
-        permissionHandler.getInstance().checkPermission((Callable<Void>) () -> {
+        permissionHandler.getInstance().checkPermission(() -> {
             try {
                 if (response.headers.containsKey("Content-Disposition")) {
                     mDownloadManager.downloadFile(response, mGeckoSession, mContext.get(), mEvent);

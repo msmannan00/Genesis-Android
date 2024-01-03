@@ -3,13 +3,9 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.hel
 import android.content.Intent;
 import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
-import com.hiddenservices.onionservices.helperManager.helperMethod;
-
 import org.mozilla.geckoview.GeckoSession;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
 

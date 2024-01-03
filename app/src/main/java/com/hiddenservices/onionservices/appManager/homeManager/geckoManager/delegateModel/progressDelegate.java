@@ -12,9 +12,6 @@ import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
-
-import org.mozilla.geckoview.AllowOrDeny;
-import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -28,7 +25,6 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
     private geckoDataModel mGeckoDataModel;
     private SecurityInformation securityInfo = null;
     private GeckoSession.SessionState mSessionState;
-    private boolean mIsLoaded = false;
     private int mProgress = 5;
 
     /*Initializations*/

@@ -10,12 +10,10 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.errorHandler;
-import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.intentHandler;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.preferencesHandler;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.constants.constants;
@@ -32,7 +30,6 @@ import org.torproject.android.service.wrapper.orbotLocalConstants;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
-import java.util.List;
 
 public class navigationDelegate implements GeckoSession.NavigationDelegate {
 
@@ -63,12 +60,6 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
     @Override
     public void onCanGoForward(@NonNull GeckoSession session, boolean var2) {
         mCanGoForward = var2;
-    }
-
-    @UiThread
-    public void onLocationChange(@NonNull GeckoSession session, @Nullable String url, final @NonNull List<GeckoSession.PermissionDelegate.ContentPermission> perms) {
-        url = "";
-
     }
 
     private String setGenesisVerificationToken(String pString) {

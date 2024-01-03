@@ -1,12 +1,8 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses;
 
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_OPEN_CICADA;
-
 import android.Manifest;
 import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.DexterBuilder;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -14,7 +10,6 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.lang.ref.WeakReference;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 

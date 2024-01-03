@@ -79,7 +79,7 @@ public class geckoClients {
         return mSessionHidden;
     }
 
-    private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pSessionID){
+    private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener ignoredPEvent, AppCompatActivity pContext, String pSessionID){
         geckoSession mSessionInitializer = new geckoSession(new geckoViewClientCallback(), pSessionID, pContext, pGeckoView);
         mSessionInitializer.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
         mSessionInitializer.getSettings().setFullAccessibilityTree(true);
@@ -429,13 +429,6 @@ public class geckoClients {
     }
 
     public void downloadFile(AppCompatActivity pcontext) {
-        if (helperMethod.checkPermissions(pcontext)) {
-            geckoDownloadManager mDownloadManager = mSession.getContentDelegate().getDownloadManager();
-            mSession.getDownloadHandler().downloadRequestedFile(mDownloadManager);
-        }
-    }
-
-    public void downloadFile(String mURL, AppCompatActivity pcontext) {
         if (helperMethod.checkPermissions(pcontext)) {
             geckoDownloadManager mDownloadManager = mSession.getContentDelegate().getDownloadManager();
             mSession.getDownloadHandler().downloadRequestedFile(mDownloadManager);

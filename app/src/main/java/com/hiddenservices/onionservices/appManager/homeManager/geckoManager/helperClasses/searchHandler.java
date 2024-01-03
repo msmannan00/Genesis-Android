@@ -2,7 +2,6 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.hel
 
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
-import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.eventObserver;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;

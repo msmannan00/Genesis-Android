@@ -17,8 +17,6 @@ import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.help
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.searchHandler;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.eventObserver;
-import com.hiddenservices.onionservices.helperManager.helperMethod;
-
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 import java.lang.ref.WeakReference;

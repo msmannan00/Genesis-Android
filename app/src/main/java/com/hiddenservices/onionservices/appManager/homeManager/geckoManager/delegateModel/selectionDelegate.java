@@ -108,11 +108,6 @@ public class selectionDelegate implements ActionMode.Callback,
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
-    public selectionDelegate(final @NonNull Activity activity) {
-        this(activity, Build.VERSION.SDK_INT >= 23);
-    }
-
-    @SuppressWarnings("checkstyle:javadocmethod")
     public selectionDelegate(final @NonNull Activity activity,
                              final boolean useFloatingToolbar) {
         mActivity = activity;
@@ -132,15 +127,6 @@ public class selectionDelegate implements ActionMode.Callback,
         if (mActionMode != null) {
             mActionMode.invalidate();
         }
-    }
-
-    /**
-     * Get whether text actions from other apps are enabled.
-     *
-     * @return True if external actions are enabled.
-     */
-    public boolean areExternalActionsEnabled() {
-        return mExternalActionsEnabled;
     }
 
     /**

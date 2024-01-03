@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +23,6 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.DatePicker;
@@ -40,7 +38,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,7 +53,6 @@ import org.mozilla.geckoview.AllowOrDeny;
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoSession.PermissionDelegate.MediaSource;
-import org.mozilla.geckoview.SlowScriptResponse;
 
 public final class promptDelegate implements GeckoSession.PromptDelegate {
 
@@ -124,24 +120,6 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
 
         createStandardDialog(builder, prompt, res).show();
         return res;
-    }
-
-    public static String getMimeType(Context context, Uri uri) {
-        String extension;
-
-        //Check uri format to avoid null
-        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
-            //If scheme is a content
-            final MimeTypeMap mime = MimeTypeMap.getSingleton();
-            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
-        } else {
-            //If scheme is a File
-            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
-            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
-
-        }
-
-        return extension;
     }
 
     static boolean mPopupOpened = false;
@@ -910,13 +888,10 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         Uri mURI = data.getData();
         String result = null;
         if (mURI.getScheme().equals("content")) {
-            Cursor cursor = mActivity.getContentResolver().query(mURI, null, null, null, null);
-            try {
+            try (Cursor cursor = mActivity.getContentResolver().query(mURI, null, null, null, null)) {
                 if (cursor != null && cursor.moveToFirst()) {
                     result = cursor.getString(cursor.getColumnIndex(DISPLAY_NAME));
                 }
-            } finally {
-                cursor.close();
             }
         }
         if (result == null) {
@@ -932,7 +907,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         final ClipData clip = data.getClipData();
 
         try {
-            FileInputStream in = (FileInputStream) mActivity.getContentResolver().openInputStream(data.getData());
+            @SuppressLint("Recycle") FileInputStream in = (FileInputStream) mActivity.getContentResolver().openInputStream(data.getData());
             FileOutputStream out = new FileOutputStream(myFile);
             FileChannel inChannel = in.getChannel();
             FileChannel outChannel = out.getChannel();
@@ -958,44 +933,10 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                 for (int i = 0; i < count; i++) {
                     uris.add(clip.getItemAt(i).getUri());
                 }
-                res.complete(prompt.confirm(mActivity, uris.toArray(new Uri[uris.size()])));
+                res.complete(prompt.confirm(mActivity, uris.toArray(new Uri[0])));
             }
         }catch (Exception ex){
-            int e=0;
-            e=1;
         }
-    }
-
-    public void onPermissionPrompt(final String title,
-                                   final GeckoSession.PermissionDelegate.Callback callback) {
-        stopMedia();
-        final Activity activity = mActivity;
-        if (activity == null) {
-            callback.reject();
-            return;
-        }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(title)
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> callback.reject())
-                .setPositiveButton(android.R.string.ok, (dialog, which) -> callback.grant());
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    public void onSlowScriptPrompt(String title, GeckoResult<SlowScriptResponse> reportAction) {
-        stopMedia();
-        final Activity activity = mActivity;
-        if (activity == null) {
-            return;
-        }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(title)
-                .setNegativeButton("Wait", (dialog, which) -> reportAction.complete(SlowScriptResponse.CONTINUE))
-                .setPositiveButton("Stop", (dialog, which) -> reportAction.complete(SlowScriptResponse.STOP));
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     private Spinner addMediaSpinner(
@@ -1019,7 +960,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                     }
 
                     @Override
-                    public View getDropDownView(final int position, final View view, final ViewGroup parent) {
+                    public View getDropDownView(final int position, final View view, @NonNull final ViewGroup parent) {
                         return convertView(position, super.getDropDownView(position, view, parent));
                     }
                 };
@@ -1067,40 +1008,23 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                 .setNegativeButton(android.R.string.cancel, /* listener */ null)
                 .setPositiveButton(
                         android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(final DialogInterface dialog, final int which) {
-                                final MediaSource video =
-                                        (videoSpinner != null) ? (MediaSource) videoSpinner.getSelectedItem() : null;
-                                final MediaSource audio =
-                                        (audioSpinner != null) ? (MediaSource) audioSpinner.getSelectedItem() : null;
-                                callback.grant(video, audio);
-                            }
+                        (dialog, which) -> {
+                            final MediaSource video1 =
+                                    (videoSpinner != null) ? (MediaSource) videoSpinner.getSelectedItem() : null;
+                            final MediaSource audio1 =
+                                    (audioSpinner != null) ? (MediaSource) audioSpinner.getSelectedItem() : null;
+                            callback.grant(video1, audio1);
                         });
 
         final AlertDialog dialog = builder.create();
         dialog.setOnDismissListener(
-                new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(final DialogInterface dialog) {
-                        callback.reject();
-                    }
-                });
+                dialog1 -> callback.reject());
         dialog.show();
-    }
-
-    public void onMediaPrompt(
-            final GeckoSession session,
-            final String title,
-            final MediaSource[] video,
-            final MediaSource[] audio,
-            final GeckoSession.PermissionDelegate.MediaCallback callback) {
-        onMediaPrompt(session, title, video, audio, null, null, callback);
     }
 
     @Override
     public GeckoResult<PromptResponse> onPopupPrompt(
-            final GeckoSession session, final PopupPrompt prompt) {
+            @NonNull final GeckoSession session, final PopupPrompt prompt) {
         return GeckoResult.fromValue(prompt.confirm(AllowOrDeny.ALLOW));
     }
 }

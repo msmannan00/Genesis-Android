@@ -52,7 +52,7 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
     @SuppressLint("InlinedApi")
     public void showNotification(Context context, String title, String url, Bitmap mediaImage, boolean media_status) {
         NotificationManager mNotificationManager = (NotificationManager) mContext.get().getSystemService( NOTIFICATION_SERVICE ) ;
-        if(title.length()<=0 || !status.sBackgroundMusic){
+        if(title.length() == 0 || !status.sBackgroundMusic){
             return;
         }
         RemoteViews contentView;

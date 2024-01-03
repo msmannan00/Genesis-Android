@@ -2,11 +2,11 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.del
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import java.lang.ref.WeakReference;
 import java.util.Locale;
@@ -25,9 +25,8 @@ public class permissionDelegate implements PermissionDelegate {
     }
 
     @Override
-    public void onAndroidPermissionsRequest(final GeckoSession session, final String[] permissions, final Callback callback) {
+    public void onAndroidPermissionsRequest(@NonNull final GeckoSession session, final String[] permissions, @NonNull final Callback callback) {
         if (Build.VERSION.SDK_INT >= 23) {
-            // requestPermissions was introduced in API 23.
             mContext.get().requestPermissions(permissions, androidPermissionRequestCode);
         } else {
             callback.grant();
@@ -64,11 +63,11 @@ public class permissionDelegate implements PermissionDelegate {
 
     @Override
     public void onMediaPermissionRequest(
-            final GeckoSession session,
-            final String uri,
+            @NonNull final GeckoSession session,
+            @NonNull final String uri,
             final MediaSource[] video,
             final MediaSource[] audio,
-            final MediaCallback callback) {
+            @NonNull final MediaCallback callback) {
         // If we don't have device permissions at this point, just automatically reject the request
         // as we will have already have requested device permissions before getting to this point
         // and if we've reached here and we don't have permissions then that means that the user
@@ -85,7 +84,6 @@ public class permissionDelegate implements PermissionDelegate {
             return;
         }
 
-        final String host = Uri.parse(uri).getAuthority();
         final String title;
         if (audio == null) {
             title = "Request Video";
@@ -99,7 +97,7 @@ public class permissionDelegate implements PermissionDelegate {
         String[] audioNames = normalizeMediaName(audio);
 
         final promptDelegate prompt =
-                (promptDelegate) mGeckoSession.getPromptDelegate();
+                mGeckoSession.getPromptDelegate();
         prompt.onMediaPrompt(session, title, video, audio, videoNames, audioNames, callback);
     }
 }

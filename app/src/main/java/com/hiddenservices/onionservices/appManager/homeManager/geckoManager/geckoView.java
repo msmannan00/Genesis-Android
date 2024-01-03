@@ -224,7 +224,4 @@ public class geckoView extends GeckoView {
         mForcedScroll = pScroll;
     }
 
-    public void onstopscroll(boolean pScroll) {
-    }
-
 }

@@ -78,12 +78,4 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
         intentHandler.actionDial(pURL, mContext);
     }
 
-    public boolean isHistoryEmpty(){
-        if(mHistory!=null && mHistory.size()>0){
-            return false;
-        }else {
-            return true;
-        }
-    }
-
 }
