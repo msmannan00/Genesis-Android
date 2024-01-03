@@ -48,6 +48,7 @@ class bridgeViewController {
     }
 
     protected void onInit(){
+        
     }
 
     private void initPostUI() {
