@@ -22,6 +22,9 @@ Follow the steps below to set up the project locally:
 - JDK installed
 - Git installed
 
+### Playstore URL
+https://play.google.com/store/apps/details?id=com.hiddenservices.onionservices&hl=en
+
 ### Clone the Repository
 ```bash
 git clone [https://github.com/your-username/secure-browser.git](https://github.com/msmannan00/Genesis-Android.git)https://github.com/msmannan00/Genesis-Android.git
