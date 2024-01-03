@@ -27,12 +27,13 @@ public class permissionDelegate implements PermissionDelegate {
     @Override
     public void onAndroidPermissionsRequest(@NonNull final GeckoSession session, final String[] permissions, @NonNull final Callback callback) {
         if (Build.VERSION.SDK_INT >= 23) {
+            callback.grant();
             mContext.get().requestPermissions(permissions, androidPermissionRequestCode);
         } else {
+            mGeckoSession.reload();
             callback.grant();
         }
     }
-
 
     private String[] normalizeMediaName(final MediaSource[] sources) {
         if (sources == null) {
@@ -68,10 +69,6 @@ public class permissionDelegate implements PermissionDelegate {
             final MediaSource[] video,
             final MediaSource[] audio,
             @NonNull final MediaCallback callback) {
-        // If we don't have device permissions at this point, just automatically reject the request
-        // as we will have already have requested device permissions before getting to this point
-        // and if we've reached here and we don't have permissions then that means that the user
-        // denied them.
         if ((audio != null
                 && ContextCompat.checkSelfPermission(
                 mContext.get(), Manifest.permission.RECORD_AUDIO)

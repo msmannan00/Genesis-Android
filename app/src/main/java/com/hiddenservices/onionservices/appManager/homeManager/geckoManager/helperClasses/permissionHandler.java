@@ -87,7 +87,6 @@ public class permissionHandler {
 
              @Override
              public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                 // pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_OPEN_CICADA);
              }
         }).check();
     }
