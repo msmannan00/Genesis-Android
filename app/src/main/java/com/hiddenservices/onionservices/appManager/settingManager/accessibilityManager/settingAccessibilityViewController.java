@@ -22,7 +22,6 @@ import java.util.List;
 class settingAccessibilityViewController {
     /*Private Variables*/
 
-    private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
 
     private SwitchMaterial mZoom;
@@ -33,15 +32,16 @@ class settingAccessibilityViewController {
 
     /*Initializations*/
 
-    settingAccessibilityViewController(settingAccessibilityController pContext, eventObserver.eventListener pEvent, SwitchMaterial pZoom, SwitchMaterial pVoiceInput, SeekBar pSeekBar, TextView mSeekBarSample, TextView pScalePercentage) {
-        this.mEvent = pEvent;
+    settingAccessibilityViewController(settingAccessibilityController pContext, eventObserver.eventListener ignoredPEvent, SwitchMaterial pZoom, SwitchMaterial pVoiceInput, SeekBar pSeekBar, TextView mSeekBarSample, TextView pScalePercentage) {
         this.mContext = pContext;
         this.mZoom = pZoom;
         this.mVoiceInput = pVoiceInput;
         this.mSeekBar = pSeekBar;
         this.mSeekBarSample = mSeekBarSample;
         this.mScalePercentage = pScalePercentage;
+    }
 
+    protected void onInit(){
         initViews();
         initPostUI();
     }

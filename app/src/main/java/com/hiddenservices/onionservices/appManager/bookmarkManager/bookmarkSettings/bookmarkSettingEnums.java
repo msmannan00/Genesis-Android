@@ -9,12 +9,6 @@ public class bookmarkSettingEnums {
         M_UPDATE_BOOKMARK, M_VALIDATE_FORM, M_SET_BOOOKMARK_CHANGED_STATUS, M_GET_UPDATE_STATUS, M_DELETE_BOOKMARK
     }
 
-    public enum eBookmarkSettingViewAdapterCommands {
-    }
-
-    public enum eBookmarkSettingModelCallbackCommands {
-    }
-
     public enum eActivityResponseCommands {
         M_OPEN_UPDATE_ALERT, M_OPEN_DELETE_ALERT
     }

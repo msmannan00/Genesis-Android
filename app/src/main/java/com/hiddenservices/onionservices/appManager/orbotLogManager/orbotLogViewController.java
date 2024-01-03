@@ -18,7 +18,6 @@ class orbotLogViewController {
     /*Private Variables*/
 
     private AppCompatActivity mContext;
-    private eventObserver.eventListener mEvent;
 
     private TextView mOrbotLogLoadingText;
     private RecyclerView mOrbotLogRecycleView;
@@ -27,14 +26,15 @@ class orbotLogViewController {
 
     /*Initializations*/
 
-    orbotLogViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, TextView pOrbotLogLoadingText, RecyclerView pOrbotLogRecycleView, NestedScrollView pOrbotLogNestedScroll, FloatingActionButton pOrbotLogFloatingToolbar) {
+    orbotLogViewController(AppCompatActivity pContext, eventObserver.eventListener ignoredPEvent, TextView pOrbotLogLoadingText, RecyclerView pOrbotLogRecycleView, NestedScrollView pOrbotLogNestedScroll, FloatingActionButton pOrbotLogFloatingToolbar) {
         this.mContext = pContext;
-        this.mEvent = pEvent;
         this.mOrbotLogLoadingText = pOrbotLogLoadingText;
         this.mOrbotLogRecycleView = pOrbotLogRecycleView;
         this.mOrbotLogNestedScroll = pOrbotLogNestedScroll;
         this.mOrbotLogFloatingToolbar = pOrbotLogFloatingToolbar;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 

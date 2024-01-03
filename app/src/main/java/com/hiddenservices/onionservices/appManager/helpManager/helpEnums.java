@@ -18,6 +18,4 @@ class helpEnums {
         M_INIT_FILTER
     }
 
-    public enum eHelpViewCallback {
-    }
 }

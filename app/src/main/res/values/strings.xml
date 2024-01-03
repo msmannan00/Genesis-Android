@@ -272,7 +272,7 @@
     <string name="SETTING_SEARCH_HEADER_2_INFO" translatable="true">Manage how searches appear</string>
     <string name="SETTING_SEARCH_DEFAULT" translatable="false">Default Engine (Recommended)</string>
     <string name="SETTING_SEARCH_GENESIS" translatable="false">Orion</string>
-    <string name="SETTING_SEARCH_DUCK" translatable="false">Torry IO (Recommended)</string>
+    <string name="SETTING_SEARCH_DUCK" translatable="false">Duckduckgo (Recommended)</string>
     <string name="SETTING_SEARCH_GOOGLE" translatable="false">Google by Google inc</string>
     <string name="SETTING_SEARCH_AMAZON" translatable="false">Bing by Microsoft</string>
     <string name="SETTING_SEARCH_BING" translatable="false">Browse articles freely</string>

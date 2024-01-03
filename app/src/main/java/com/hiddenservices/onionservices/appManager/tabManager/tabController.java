@@ -198,6 +198,7 @@ public class tabController extends Fragment {
         mNewTab = mRootView.findViewById(R.id.pNewTab);
 
         mtabViewController = new tabViewController(this, mTabs, mRemoveSelection, mMenuButton, mClearSelection, mPopupUndo, mSelectionCount, mBlocker, mRecycleView, mNestedScrollView, mEmptyView, mNewTab);
+        mtabViewController.onInit();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -496,10 +497,6 @@ public class tabController extends Fragment {
     public void openTabMenu(View view) {
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.ON_HIDE_UNDO_DIALOG_INIT, null);
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_SHOW_MENU, Arrays.asList(view, mListModel.getList().size()));
-    }
-
-    public int getSelectionCount() {
-        return (int) mTabAdapter.onTrigger(tabEnums.eTabAdapterCommands.GET_SELECTION_SIZE, null);
     }
 
     public boolean isSelectionOpened() {

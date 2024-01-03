@@ -55,6 +55,7 @@ public class settingHomeController extends AppCompatActivity {
 
     public settingHomeController() {
         mSettingModel = new settingHomeModel(new settingModelCallback());
+        mSettingModel.onInit();
     }
 
     @Override
@@ -110,17 +111,10 @@ public class settingHomeController extends AppCompatActivity {
         mOption16 = findViewById(R.id.pOption16);
 
         mSettingViewController = new settingHomeViewController(this, new settingViewCallback(), mOption15, mOption16);
+        mSettingViewController.onInit();
     }
 
     private void listenersInitializations() {
-    }
-
-    public void cicadaClipboard(View view) {
-        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_OPEN_CICADA);
-    }
-
-    public void onSupport(View view) {
-        //pluginController.getInstance().onAdsInvoke(Collections.singletonList(this), pluginEnums.eAdManager.M_SHOW_INTERSTITIAL);
     }
 
     /*View Callbacks*/
@@ -175,6 +169,7 @@ public class settingHomeController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 

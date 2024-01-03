@@ -40,6 +40,10 @@ class helpModel {
         }
     }
 
+    protected void onInit(){
+
+    }
+
     private void getHelpJSON() {
 
         ArrayList<helpDataModel> mTempModel = (ArrayList<helpDataModel>) dataController.getInstance().invokeHelp(dataEnums.eHelpCommands.M_GET_HELP, null);
@@ -84,7 +88,7 @@ class helpModel {
         return mIsLoaded;
     }
 
-    public Object onTrigger(helpEnums.eHelpModel pCommands, List<Object> pData) {
+    public Object onTrigger(helpEnums.eHelpModel pCommands, List<Object> ignoredPData) {
         if (pCommands.equals(helpEnums.eHelpModel.M_LOAD_HELP_DATA)) {
             getHelpJSON();
         } else if (pCommands.equals(helpEnums.eHelpModel.M_IS_LOADED)) {

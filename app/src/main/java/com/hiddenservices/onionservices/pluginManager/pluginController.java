@@ -2,7 +2,6 @@ package com.hiddenservices.onionservices.pluginManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,10 +27,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Callable;
 import static com.hiddenservices.onionservices.constants.constants.CONST_BRIDGES;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_CLICKED;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eAdManagerCallbacks.M_ON_AD_LOAD;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_ACTIVITY_CREATED;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eLangManager.M_RESUME;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.*;
@@ -43,8 +39,6 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 public class pluginController {
     /*Plugin Instance*/
 
-    //private appLovinManager mAdManager;
-    //private analyticManager mAnalyticsManager;
     private messageManager mMessageManager;
     private activityContextManager mContextManager;
     private langManager mLangManager;
@@ -72,16 +66,9 @@ public class pluginController {
         mIsInitialized = true;
     }
 
-    public void onRemoveInstances() {
-        mHomeController = null;
-    }
-
     private void instanceObjectInitialization() {
         mHomeController = new WeakReference(activityContextManager.getInstance().getHomeController());
         mContextManager = activityContextManager.getInstance();
-
-        //mAdManager = new appLovinManager(new admobCallback(), ((homeController) mHomeController.get()).getBannerAd(), mHomeController.get());
-        //mAnalyticsManager = new analyticManager(mHomeController, new analyticCallback());
         mMessageManager = new messageManager(new messageCallback());
         mOrbotManager = orbotManager.getInstance();
         mDownloadManager = new downloadManager(mHomeController, new downloadCallback());
@@ -98,50 +85,7 @@ public class pluginController {
         orbotManager.getInstance().initialize(context, new orbotCallback(), mNotificationStatus);
     }
 
-    /*------------------------------------------------ CALLBACK LISTENERS------------------------------------------------------------*/
 
-    /*Ad Manager*/
-//    private class admobCallback implements eventObserver.eventListener {
-//        @Override
-//        public Object invokeObserver(List<Object> data, Object event_type) {
-//            if (event_type.equals(M_ON_AD_LOAD)) {
-//                activityContextManager.getInstance().getHomeController().onUpdateBannerAdvert();
-//            } else if (event_type.equals(M_ON_AD_CLICKED)) {
-//                status.sIsBackgroundAdvertCheck = true;
-//                new Handler().postDelayed(() ->
-//                {
-//                    status.sIsBackgroundAdvertCheck = false;
-//                }, 5000);
-//            }
-//            return null;
-//        }
-//    }
-
-    //public Object onAdsInvoke(List<Object> pData, pluginEnums.eAdManager pEventType) {
-
-        //if (mAdManager != null) {
-        //    return mAdManager.onTrigger(pEventType);
-        //}
-
-        //return null;
-    //}
-
-
-    /*Analytics Manager*/
-    //private class analyticCallback implements eventObserver.eventListener {
-    //    @Override
-    //    public Object invokeObserver(List<Object> data, Object event_type) {
-          //  return null;
-        //}
-    //}
-
-    //public void onAnalyticsInvoke(List<Object> pData, pluginEnums.eAnalyticManager pEventType) {
-        //if (mAnalyticsManager != null) {
-        //    mAnalyticsManager.onTrigger(pData, pEventType);
-        //}
-    //}
-
-    /*Download Manager*/
     private class downloadCallback implements eventObserver.eventListener {
         @Override
         public Object invokeObserver(List<Object> pData, Object event_type) {
@@ -225,7 +169,7 @@ public class pluginController {
                     return null;
                 });
             } else if (pEventType.equals(M_DOWNLOAD_SINGLE) || pEventType.equals(M_DOWNLOAD_FILE) || pEventType.equals(M_DOWNLOAD_FILE_MANUAL)) {
-                permissionHandler.getInstance().checkPermission((Callable<Void>) () -> {
+                permissionHandler.getInstance().checkPermission(() -> {
                     if(pEventType.equals(M_DOWNLOAD_SINGLE)){
                         if (pData != null) {
                             if (pData.size() < 3) {

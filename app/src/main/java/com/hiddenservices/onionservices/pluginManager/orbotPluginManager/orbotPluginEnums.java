@@ -6,7 +6,4 @@ public class orbotPluginEnums {
         M_GET_CLEANED_LOGS
     }
 
-    public enum eProxyManager {
-        M_INIT_PROXY, M_INIT_PRIVACY
-    }
 }

@@ -117,8 +117,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import mozilla.components.support.utils.DownloadUtils;
-import xcrash.ICrashCallback;
-import xcrash.XCrash;
 import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 import static com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums.eHomeViewCallback.M_NEW_LINK_ANIMATION;
 import static com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums.eHomeViewCallback.OPEN_NEW_TAB;
@@ -681,38 +679,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onCrashInit(Context mContext){
-        ICrashCallback callback = (logPath, emergency) -> {
-            mGeckoClient.onMediaInvoke(enums.MediaController.DESTROY);
-            pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.mThemeApplying), pluginEnums.eOrbotManager.M_DESTROY);
-            onHideDefaultNotification();
-            finishAndRemoveTask();
-            overridePendingTransition(R.anim.popup_scale_in, R.anim.popup_scale_out);
-            activityContextManager.getInstance().getHomeController().onResetData();
-            mGeckoClient.onClearAll();
-            status.sSettingIsAppStarted = false;
-            orbotLocalConstants.mAppStarted = false;
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
-        };
-
-        XCrash.init(mContext, new XCrash.InitParameters()
-                .setAppVersion("1.2.3-beta456-patch789")
-                .setJavaRethrow(true)
-                .setJavaLogCountMax(10)
-                .setJavaDumpAllThreadsCountMax(10)
-                .setJavaCallback(callback)
-                .setNativeRethrow(true)
-                .setNativeLogCountMax(10)
-                .setNativeDumpAllThreads(true)
-                .setNativeDumpAllThreadsCountMax(10)
-                .setNativeCallback(callback)
-                .setAnrRethrow(true)
-                .setAnrLogCountMax(10)
-                .setAnrCallback(callback)
-                .setPlaceholderCountMax(3)
-                .setPlaceholderSizeKb(512)
-                .setLogFileMaintainDelayMs(1000));
-
     }
 
     /*-------------------------------------------------------Helper Methods-------------------------------------------------------*/
@@ -805,11 +771,13 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         mGeckoView.setPivotX(0);
         mGeckoView.setPivotY(0);
-        //mHomeViewController.onResetTabAnimationInstant();
         if(mGeckoClient.getSession() == null){
             onNewTabInit();
         }
-        mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+
+        if(mGeckoClient.getSession().getMediaSessionDelegate()!=null){
+            mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+        }
         if (!isSessionClosed) {
             dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mTempSession));
         }
@@ -1142,7 +1110,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             manager.cancel(1125);
         }
         if(mGeckoClient.getSession() !=null){
-            mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+            if(mGeckoClient.getSession().getMediaSessionDelegate()!=null){
+                mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+            }
             if(!status.mThemeApplying){
                 onHideDefaultNotification();
             }
@@ -1652,7 +1622,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onNewTab(boolean isKeyboardOpenedTemp, boolean isKeyboardOpened) {
-        mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+        if(mGeckoClient.getSession()!=null && mGeckoClient.getSession().getMediaSessionDelegate()!=null){
+            mGeckoClient.getSession().getMediaSessionDelegate().onTrigger(enums.MediaController.DESTROY);
+        }
         try {
             if(status.sLowMemory == enums.MemoryStatus.STABLE){
                 mRenderedBitmap = mGeckoView.capturePixels();
@@ -2884,12 +2856,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 status.sAppInstalled = true;
                 initWidget();
             } else if (e_type.equals(homeEnums.eHomeViewCallback.M_WELCOME_MESSAGE)) {
-
-                new Handler().postDelayed(() ->
-                {
-                    dataController.getInstance().invokeCrawler(dataEnums.eCrawlerCommands.M_INIT, data);
-                }, 1000);
-
                 if (status.sSettingIsWelcomeEnabled) {
                     final Handler handler = new Handler();
                     Runnable runnable = () -> {
@@ -3275,8 +3241,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_NEW_CIRCUIT);
                 pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_NEW_IDENTITY);
                 mGeckoClient.onReload(mGeckoView, homeController.this, false, true);
-            } else if (e_type.equals(homeEnums.eGeckoCallback.M_INDEX_WEBSITE)) {
-                dataController.getInstance().invokeCrawler(dataEnums.eCrawlerCommands.M_INDEX_URL, data);
             }
             return null;
         }

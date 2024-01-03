@@ -58,8 +58,10 @@ public class settingNotificationController extends AppCompatActivity {
         activityContextManager.getInstance().onStack(this);
         mNotificationManual = findViewById(R.id.pNotificationManual);
         mSettingNotificationViewController = new settingNotificationViewController(this, new settingNotificationViewCallback(), mNotificationManual);
+        mSettingNotificationViewController.onInit();
 
         mSettingNotificationModel = new settingNotificationModel(new settingNotificationModelCallback());
+        mSettingNotificationModel.onInit();
     }
 
     /*View Callbacks*/
@@ -108,6 +110,7 @@ public class settingNotificationController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 

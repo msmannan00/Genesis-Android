@@ -16,7 +16,6 @@ import java.util.List;
 class settingHomeViewController {
     /*Private Variables*/
 
-    private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
 
     private LinearLayout mOption15;
@@ -24,13 +23,14 @@ class settingHomeViewController {
 
     /*Initializations*/
 
-    settingHomeViewController(settingHomeController mContext, eventObserver.eventListener mEvent, LinearLayout pOption15, LinearLayout pOption16) {
-        this.mEvent = mEvent;
+    settingHomeViewController(settingHomeController mContext, eventObserver.eventListener ignoredMEvent, LinearLayout pOption15, LinearLayout pOption16) {
         this.mContext = mContext;
 
         this.mOption15 = pOption15;
         this.mOption16 = pOption16;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 
@@ -55,7 +55,7 @@ class settingHomeViewController {
 
     }
 
-    public Object onTrigger(settingHomeEnums.eHomeViewController pCommands, List<Object> pData) {
+    public Object onTrigger(settingHomeEnums.eHomeViewController pCommands, List<Object> ignoredPData) {
         if (pCommands.equals(settingHomeEnums.eHomeViewController.M_INIT)) {
             initPostUI();
         }

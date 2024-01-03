@@ -13,12 +13,14 @@ import java.util.List;
 class settingTrackingModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
-
     /*Initializations*/
 
-    settingTrackingModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    settingTrackingModel(eventObserver.eventListener ignoredMEvent) {
+
+    }
+
+    protected void onInit(){
+
     }
 
     /*Helper Methods*/

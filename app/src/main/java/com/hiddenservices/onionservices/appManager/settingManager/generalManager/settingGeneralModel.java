@@ -8,12 +8,14 @@ import java.util.List;
 class settingGeneralModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    settingGeneralModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    settingGeneralModel(eventObserver.eventListener ignoredMEvent) {
+
+    }
+
+    protected void onInit(){
     }
 
     /*Helper Methods*/

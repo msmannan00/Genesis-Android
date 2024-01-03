@@ -8,12 +8,14 @@ import java.util.List;
 class settingAccessibilityModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    settingAccessibilityModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    settingAccessibilityModel(eventObserver.eventListener ignoredMEvent) {
+
+    }
+
+    protected void onInit(){
     }
 
     /*Helper Methods*/

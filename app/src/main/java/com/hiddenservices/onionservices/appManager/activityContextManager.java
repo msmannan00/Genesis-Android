@@ -32,7 +32,6 @@ public class activityContextManager {
     private WeakReference<bookmarkController> pBookmarkController;
     private WeakReference<homeController> pHomeController;
     private WeakReference<tabController> pTabController;
-    private WeakReference<android.app.Activity> pCurrentActivity = null;
     private WeakReference<settingHomeController> pSettingController;
     private WeakReference<settingGeneralController> pSettingGeneralController;
     private WeakReference<orbotLogController> pOrbotLogController;
@@ -97,10 +96,6 @@ public class activityContextManager {
         this.pApplicationContext = new WeakReference(pContext);
     }
 
-    public Context getApplicationController() {
-        return pApplicationContext.get();
-    }
-
     public void setHomeController(homeController home_controller) {
         this.pHomeController = new WeakReference(home_controller);
     }
@@ -151,14 +146,6 @@ public class activityContextManager {
     }
 
     public void setCurrentActivity(android.app.Activity pCurrentActivity) {
-        this.pCurrentActivity = new WeakReference(pCurrentActivity);
-    }
-
-    public android.app.Activity getCurrentActivity() {
-        if (pCurrentActivity == null) {
-            return null;
-        }
-        return pCurrentActivity.get();
     }
 
     public void onStack(AppCompatActivity pActivity) {
@@ -187,17 +174,6 @@ public class activityContextManager {
     }
 
     public void onResetTheme() {
-        for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
-            try {
-                if (!mStackList.get(mCounter).get().isFinishing()) {
-                    activityThemeManager.getInstance().onConfigurationChanged(mStackList.get(mCounter).get());
-                }
-            } catch (Exception ignored) {
-            }
-        }
-    }
-
-    public void onResetLanguage() {
         for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
             try {
                 if (!mStackList.get(mCounter).get().isFinishing()) {

@@ -188,7 +188,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
             }
         }
 
-        if (mSelectedList.size() <= 0) {
+        if (mSelectedList.size() == 0) {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
         } else {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_SHOW_SELECTION_MENU);
@@ -234,7 +234,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                 break;
             }
         }
-        if (mSelectedList.size() <= 0) {
+        if (mSelectedList.size() == 0) {
             mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
             onClearAllSelection();
         }
@@ -489,7 +489,9 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                                 v.setEnabled(false);
                                 v.setClickable(false);
                                 v.setFocusable(false);
-                                scaleView(itemView, mModelList.get(this.getLayoutPosition()));
+                                try {
+                                    scaleView(itemView, mModelList.get(this.getLayoutPosition()));
+                                }catch (Exception ex){}
                             } else {
                                 onTriggerURL(mModelList.get(this.getLayoutPosition()));
                             }
@@ -499,7 +501,7 @@ public class tabAdapter extends RecyclerView.Adapter<tabAdapter.listViewHolder> 
                     for (int mCounter = 0; mCounter < mSelectedList.size(); mCounter++) {
                         if (mSelectedList.get(mCounter).equals(mModelList.get(this.getLayoutPosition()).getSession().getSessionID())) {
                             mSelectedList.remove(mCounter);
-                            if (mSelectedList.size() <= 0) {
+                            if (mSelectedList.size() == 0) {
                                 mEvent.invokeObserver(Arrays.asList(true, mSelectedList.size()), tabEnums.eTabAdapterCallback.ON_HIDE_SELECTION);
                                 onClearAllSelection();
                             } else {

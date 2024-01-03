@@ -20,16 +20,16 @@ class settingTrackingViewController {
     /*Private Variables*/
 
     private AppCompatActivity mContext;
-    private eventObserver.eventListener mEvent;
     private ArrayList<RadioButton> mTracking;
 
     /*Initializations*/
 
-    settingTrackingViewController(AppCompatActivity pContext, eventObserver.eventListener pEvent, ArrayList<RadioButton> pTracking) {
-        this.mEvent = pEvent;
+    settingTrackingViewController(AppCompatActivity pContext, eventObserver.eventListener ignoredPEvent, ArrayList<RadioButton> pTracking) {
         this.mTracking = pTracking;
         this.mContext = pContext;
+    }
 
+    protected void onInit(){
         initViews();
         initPostUI();
     }

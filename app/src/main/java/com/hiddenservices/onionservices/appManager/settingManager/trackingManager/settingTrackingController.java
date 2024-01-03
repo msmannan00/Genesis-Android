@@ -65,7 +65,10 @@ public class settingTrackingController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mSettingPrivacyViewController = new settingTrackingViewController(this, new settingTrackingController.settingAccessibilityViewCallback(), mTrackers);
+        mSettingPrivacyViewController.onInit();
+
         mSettingPrivacyModel = new settingTrackingModel(new settingTrackingController.settingAccessibilityModelCallback());
+        mSettingPrivacyModel.onInit();
     }
 
     /*View Callbacks*/
@@ -107,6 +110,7 @@ public class settingTrackingController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
             activityContextManager.getInstance().getHomeController().initRuntimeSettings();

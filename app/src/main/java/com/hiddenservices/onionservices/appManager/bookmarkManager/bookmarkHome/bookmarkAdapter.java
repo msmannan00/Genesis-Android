@@ -9,11 +9,9 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.*;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
@@ -22,16 +20,13 @@ import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
 import com.hiddenservices.onionservices.R;
 import com.hiddenservices.onionservices.pluginManager.pluginController;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_COPY;
-import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_RESET;
 
 @SuppressLint("NotifyDataSetChanged")
 public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listViewHolder> {
@@ -354,11 +349,10 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
     }
 
     private void onClose(int pIndex) {
-        //mEvent.invokeObserver(Collections.singletonList(mRealIndex.get(pIndex)),enums.etype.url_clear);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), bookmarkEnums.eBookmarkAdapterCallback.ON_URL_CLEAR_AT);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), bookmarkEnums.eBookmarkAdapterCallback.IS_EMPTY);
 
-        if (mPassedList.size() <= 0) {
+        if (mPassedList.size() == 0) {
             mCurrentList.clear();
             return;
         }
@@ -442,7 +436,7 @@ public class bookmarkAdapter extends RecyclerView.Adapter<bookmarkAdapter.listVi
                 }
                 mWebLogo.setVisibility(View.VISIBLE);
                 mHeader.setText(model.getHeader());
-                mWebLogo.setText((helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0) + ""));
+                mWebLogo.setText((String.valueOf(helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0))));
                 String header = model.getHeader();
                 mDescription.setText(model.getDescription());
                 if (!model.getDescription().startsWith("http://") && !model.getDescription().startsWith("https://")) {

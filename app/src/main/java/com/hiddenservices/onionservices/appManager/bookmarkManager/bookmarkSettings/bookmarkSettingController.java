@@ -106,8 +106,11 @@ public class bookmarkSettingController extends AppCompatActivity {
         int mBookmarkID = getIntent().getIntExtra(keys.BOOKMARK_SETTING_ID, -1);
 
         mBookmarkSettingViewController = new bookmarkSettingViewController(this, new bookmarkSettingViewCallback(), mBookmarName, mBookmarURL);
+        mBookmarkSettingViewController.onInit();
+
         mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_INITIALIZE, Arrays.asList(mBookmarkName, mBookmarkURL));
         mBookmarkSettingModel = new bookmarkSettingModelController(this, new bookmarkSettingModelCallback(), mBookmarkID, mBookmarkURL);
+        mBookmarkSettingModel.onInit();
     }
 
     private void initCallableResponse(bookmarkSettingEnums.eActivityResponseCommands pResponse) {
@@ -145,6 +148,7 @@ public class bookmarkSettingController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         onCloseTrigger(null);
     }
 

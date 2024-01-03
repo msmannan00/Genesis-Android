@@ -20,17 +20,17 @@ import java.util.List;
 class settingClearViewController {
     /*Private Variables*/
 
-    private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
     private ArrayList<CheckBox> mCheckBoxList;
 
     /*Initializations*/
 
-    settingClearViewController(settingClearController pContext, eventObserver.eventListener pEvent, ArrayList<CheckBox> pCheckBoxList) {
-        this.mEvent = pEvent;
+    settingClearViewController(settingClearController pContext, eventObserver.eventListener ignoredPEvent, ArrayList<CheckBox> pCheckBoxList) {
         this.mContext = pContext;
         this.mCheckBoxList = pCheckBoxList;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 

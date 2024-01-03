@@ -78,7 +78,10 @@ public class settingAccessibilityController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mSettingAccessibilityViewController = new settingAccessibilityViewController(this, new settingAccessibilityController.settingAccessibilityViewCallback(), mZoom, mVoiceInput, mSeekBar, mSeekBarSample, mScalePercentage);
+        mSettingAccessibilityViewController.onInit();
+
         mSettingAccessibilityModel = new settingAccessibilityModel(new settingAccessibilityController.settingAccessibilityModelCallback());
+        mSettingAccessibilityModel.onInit();
     }
 
     private void initializeListeners() {

@@ -32,7 +32,9 @@ class orbotLogModel {
     public orbotLogModel(AppCompatActivity pContext, eventObserver.eventListener pEvent) {
         this.mContext = pContext;
         this.mEvent = pEvent;
+    }
 
+    protected void onInit(){
         initLogHandler();
         this.initList(orbotLocalConstants.mTorLogsHistory);
     }
@@ -60,13 +62,6 @@ class orbotLogModel {
     }
 
     /*Triggers*/
-
-    public void onLoadLogs() {
-        new Thread() {
-            public void run() {
-            }
-        }.start();
-    }
 
     @SuppressLint("StaticFieldLeak")
     class LogHandler extends AsyncTask<Void, Integer, Void> {
@@ -111,7 +106,7 @@ class orbotLogModel {
         }
     }
 
-    public void onTrigger(orbotLogEnums.eOrbotLogViewCommands pCommands, List<Object> pData) {
+    public void onTrigger(orbotLogEnums.eOrbotLogViewCommands ignoredPCommands, List<Object> ignoredPData) {
     }
 
     public Object onTrigger(orbotLogEnums.eOrbotLogModelCommands pCommands) {

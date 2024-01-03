@@ -3,9 +3,7 @@ package com.hiddenservices.onionservices.appManager.languageManager;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
@@ -77,7 +75,10 @@ public class languageController extends AppCompatActivity {
 
     private void initializeAppModel() {
         mLanguageViewController = new languageViewController();
+        mLanguageViewController.onInit();
+
         mLanguageModel = new languageModel();
+        mLanguageModel.onInit();
     }
 
     private void initializeConnections() {
@@ -131,20 +132,11 @@ public class languageController extends AppCompatActivity {
 
     /*Helper Methods*/
 
-    private boolean changeLanguage(String pLanguageCode, String pLanguageRegion) {
-        boolean mDefaultLanguageNotSupported = false;
+    private void changeLanguage(String pLanguageCode, String pLanguageRegion) {
         if (pLanguageCode.equals(CONST_LANGUAGE_DEFAULT_LANG)) {
-            Locale mSystemLocale = Resources.getSystem().getConfiguration().locale;
-            String mSystemLangugage = mSystemLocale.toString();
             status.sSettingLanguage = CONST_LANGUAGE_DEFAULT_LANG;
             status.sSettingLanguageRegion = CONST_LANGUAGE_DEFAULT_LANG;
-            if (!mSystemLangugage.equals("en_GB") && !mSystemLangugage.equals("cs_CZ") && !mSystemLangugage.equals("en_US") && !mSystemLangugage.equals("ur_PK") && !mSystemLangugage.equals("de_DE") && !mSystemLangugage.equals("ca_ES") && !mSystemLangugage.equals("zh_CN") && !mSystemLangugage.equals("ch_CZ") && !mSystemLangugage.equals("nl_NL") && !mSystemLangugage.equals("fr_FR") && !mSystemLangugage.equals("el_GR") && !mSystemLangugage.equals("hu_HU") && !mSystemLangugage.equals("in_ID") && !mSystemLangugage.equals("it_IT") && !mSystemLangugage.equals("ja_JP") && !mSystemLangugage.equals("ko_KR") && !mSystemLangugage.equals("pt_PT") && !mSystemLangugage.equals("ro_RO") && !mSystemLangugage.equals("ru_RU") && !mSystemLangugage.equals("th_TH") && !mSystemLangugage.equals("tr_TR") && !mSystemLangugage.equals("uk_UA") && !mSystemLangugage.equals("vi_VN")) {
-                mDefaultLanguageNotSupported = true;
-            }
         } else {
-            if (status.sSettingLanguage.equals(pLanguageCode)) {
-                return true;
-            }
             status.sSettingLanguage = pLanguageCode;
             status.sSettingLanguageRegion = pLanguageRegion;
         }
@@ -158,10 +150,6 @@ public class languageController extends AppCompatActivity {
             activityContextManager.getInstance().getSettingGeneralController().onLanguageChanged();
         }
 
-        if (mDefaultLanguageNotSupported) {
-            //pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(Resources.getSystem().getConfiguration().locale.getDisplayName(), languageController.this),M_LANGUAGE_SUPPORT_FAILURE);
-        }
-
         status.mThemeApplying = true;
         mThemeApplied = true;
 
@@ -171,8 +159,6 @@ public class languageController extends AppCompatActivity {
 
         overridePendingTransition(R.anim.fade_in_lang, R.anim.fade_out_lang);
         this.finish();
-
-        return true;
     }
 
     /*View Callbacks*/
@@ -198,7 +184,8 @@ public class languageController extends AppCompatActivity {
         @Override
         public Object invokeObserver(List<Object> data, Object e_type) {
             if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_UPDATE_LANGUAGE)) {
-                return changeLanguage((String) data.get(0), (String) data.get(1));
+                changeLanguage((String) data.get(0), (String) data.get(1));
+                return true;
             } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_DISABLE_VIEW_CLICK)) {
                 mLanguageViewController.onTrigger(languageEnums.eLanguagevViewController.M_UPDATE_BLOCKER, Collections.singletonList(false));
             } else if (e_type.equals(languageEnums.eLanguageAdapterCallback.M_ENABLE_VIEW_CLICK)) {

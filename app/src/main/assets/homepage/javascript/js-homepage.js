@@ -53,6 +53,14 @@ class homepage {
 	setTimeout(mHomepageLoader.onLoadReferenceWebsiteContent, 1000, $_GET[GET.pData]);
   }
 
+  onLoadSearchEngine(pData) {
+    var event = window.event || event;
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      const inputValue = pData.value;
+      const url = 'http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/search?q=' + encodeURIComponent(inputValue);
+      window.location.href = url;
+    }
+  }
 }
 
 let mHomepageLoader = new homepage();
@@ -65,15 +73,14 @@ function onTriggerScriptHandler(pCommand,pData) {
 	else if(pCommand == Commands.onClickReferenceWebsite){
 		mHomepageLoader.onLoadStaticWebpage(pData)
 	}
+	else if(pCommand == Commands.onLoadSearchEngine){
+		mHomepageLoader.onLoadSearchEngine(pData)
+	}
 }
 
 /*Default Loaders*/
 $(window).on('load', function() {
 	/* For Local Testing */
-	
-	// var mResponseJson = '[{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://wikileaks.org/static/img/wl-logo.png", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"},{ "mIcon":"https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196", "mHeader":"Experience", "mBody":"Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui"}]';
-	// setTimeout(mHomepageLoader.onLoadReferenceWebsites, 500);
-	// setTimeout(mHomepageLoader.onLoadReferenceWebsiteContent, 1000, mResponseJson);
 	document.getElementById("pBody").classList.toggle('body_fadein');
 
 	setTimeout(function (){

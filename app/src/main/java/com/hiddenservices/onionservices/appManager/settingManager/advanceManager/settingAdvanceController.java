@@ -81,7 +81,10 @@ public class settingAdvanceController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mSettingAdvanceViewController = new settingAdvanceViewController(this, new settingAdvanceViewCallback(), mRestoreTabs, mShowWebFonts,mBackgroundMusic, mToolbarTheme, mImageOption, mTabLayoutOption);
+        mSettingAdvanceViewController.onInit();
+
         mSettingAdvanceModel = new settingAdvanceModel(new settingAdvanceModelCallback());
+        mSettingAdvanceModel.onInit();
     }
 
     public void onOpenInfo(View view) {

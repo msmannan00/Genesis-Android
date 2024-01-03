@@ -79,7 +79,10 @@ public class settingClearController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mSettingClearViewController = new settingClearViewController(this, new settingClearController.settingClearViewCallback(), mCheckBoxList);
+        mSettingClearViewController.onInit();
+
         mSettingClearModel = new settingClearModel(new settingClearController.settingClearModelCallback());
+        mSettingClearModel.onInit();
     }
 
     /*View Callbacks*/

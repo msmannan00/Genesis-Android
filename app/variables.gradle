@@ -33,10 +33,10 @@ project.ext.preDexLibraries = true
 project.ext.splitEnabled = true
 
 /* Application Preferences */
-project.ext.compile_sdk_version = 33
+project.ext.compile_sdk_version = 34
 project.ext.min_sdk_version = 21
-project.ext.target_sdk_version = 33
-project.ext.build_tool_version = '33'
+project.ext.target_sdk_version = 34
+project.ext.build_tool_version = '34'
 project.ext.ndk_version = '24.0.8215888'
 project.ext.application_id = "com.hiddenservices.onionservices"
 project.ext.debugSymbolLevel = 'FULL'
@@ -46,6 +46,7 @@ project.ext.abi_x86 = "x86_64"
 project.ext.abi_x86_x64 = "x86"
 project.ext.abi_arm64 = "arm64-v8a"
 project.ext.abi_armeabi = "armeabi-v7a"
+project.ext.chrome = "chromeOS"
 project.ext.abi_unknown = "Unknown ABI:"
 
 /* Resource Directories */

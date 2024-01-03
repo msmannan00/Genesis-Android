@@ -220,7 +220,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
                 mCurrentList.add(0, new historyRowModel(pQuery, strings.GENERIC_EMPTY_STR, -1));
             }
         }
-        if (mCurrentList.size() <= 0) {
+        if (mCurrentList.size() == 0) {
             if (status.sTorBrowsing) {
                 mCurrentList.add(mSize, new historyRowModel("Orion Search", "orion.onion", -1));
             }else {
@@ -234,6 +234,7 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
     private ArrayList<historyRowModel> initSuggestions() {
         mHintListLocalCache = new ArrayList<>();
 
+        mHintListLocalCache.add(new historyRowModel("Gmail", "https://mail.gmail.com", -1));
         mHintListLocalCache.add(new historyRowModel("Duckduckgo", "https://looksmart.com", -1));
         mHintListLocalCache.add(new historyRowModel("BBC", "https://bbc.com", -1));
         mHintListLocalCache.add(new historyRowModel("Youtube", "https://youtube.com", -1));

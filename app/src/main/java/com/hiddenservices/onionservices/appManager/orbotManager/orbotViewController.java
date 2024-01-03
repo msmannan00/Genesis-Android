@@ -25,7 +25,9 @@ class orbotViewController {
         this.mOrbotSettingBridgeSwitch = pOrbotSettingBridgeSwitch;
         this.mOrbotSettingWarning = pOrbotSettingWarning;
         this.mOrbotSettingVPNSwitch = pOrbotSettingVPNSwitch;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 

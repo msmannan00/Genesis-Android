@@ -59,6 +59,8 @@ public class proxyStatusController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mProxyStatusViewController = new proxyStatusViewController(this, mOrbotStatus, mVpnStatus, mBridgeStatus);
+        mProxyStatusViewController.onInit();
+
         Object mProxy = pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS);
         if (mProxy == null) {
             mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList("loading...", status.sVPNStatus, status.sBridgeStatus));
@@ -66,6 +68,7 @@ public class proxyStatusController extends AppCompatActivity {
             mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(mProxy, status.sVPNStatus, status.sBridgeStatus));
         }
         mProxyStatusModel = new proxyStatusModel(new proxyStatusModelCallback());
+        mProxyStatusModel.onInit();
     }
 
     public void orbotLog(View view) {

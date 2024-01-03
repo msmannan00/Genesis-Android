@@ -21,18 +21,21 @@ import java.util.List;
 class helpViewController {
     /*ViewControllers*/
     private AppCompatActivity mContext;
-    private eventObserver.eventListener mEvent;
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
     private ConstraintLayout mRetryContainer;
     private Button mReloadButton;
 
-    void initialization(eventObserver.eventListener event, AppCompatActivity context, ProgressBar pProgressBar, RecyclerView pRecyclerView, ConstraintLayout pRetryContainer, Button pReloadButton) {
+    void initialization(eventObserver.eventListener ignoredEvent, AppCompatActivity context, ProgressBar pProgressBar, RecyclerView pRecyclerView, ConstraintLayout pRetryContainer, Button pReloadButton) {
         this.mContext = context;
         this.mProgressBar = pProgressBar;
         this.mRecyclerView = pRecyclerView;
         this.mRetryContainer = pRetryContainer;
         this.mReloadButton = pReloadButton;
+    }
+
+    protected void onInit(){
+
     }
 
     private void initPostUI() {
@@ -83,7 +86,7 @@ class helpViewController {
         });
     }
 
-    public void onTrigger(helpEnums.eHelpViewController pCommands, List<Object> pData) {
+    public void onTrigger(helpEnums.eHelpViewController pCommands, List<Object> ignoredPData) {
         if (pCommands.equals(helpEnums.eHelpViewController.M_INIT_VIEWS)) {
             initPostUI();
         } else if (pCommands.equals(helpEnums.eHelpViewController.M_DATA_LOADED)) {

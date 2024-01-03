@@ -22,7 +22,7 @@ public class autofillDelegate implements Autofill.Delegate {
 
     private Rect displayRectForId(@NonNull final GeckoSession session, @NonNull final Autofill.Node node) {
         final Matrix matrix = new Matrix();
-        final RectF rectF = new RectF(node.getDimensions());
+        final RectF rectF = new RectF(node.getScreenRect());
         session.getPageToScreenMatrix(matrix);
         matrix.mapRect(rectF);
 

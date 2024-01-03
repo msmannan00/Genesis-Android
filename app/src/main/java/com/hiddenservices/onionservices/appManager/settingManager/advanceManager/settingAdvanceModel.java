@@ -11,12 +11,14 @@ import java.util.List;
 class settingAdvanceModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    settingAdvanceModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    settingAdvanceModel(eventObserver.eventListener ignoredMEvent) {
+
+    }
+
+    protected void onInit(){
     }
 
     /*Helper Methods*/

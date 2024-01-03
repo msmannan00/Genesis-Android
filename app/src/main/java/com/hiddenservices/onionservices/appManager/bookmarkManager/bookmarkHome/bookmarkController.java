@@ -119,6 +119,7 @@ public class bookmarkController extends AppCompatActivity {
         mTitle = findViewById(R.id.pTitle);
 
         mbookmarkViewController = new bookmarkViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton, this, mMenuButton, mSearchButton, mTitle);
+        mbookmarkViewController.onInit();
     }
 
     public void initializeList() {
@@ -270,6 +271,7 @@ public class bookmarkController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (mSearchInput.getVisibility() == View.VISIBLE) {
             onHideSearch(null);
         } else if ((Boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {

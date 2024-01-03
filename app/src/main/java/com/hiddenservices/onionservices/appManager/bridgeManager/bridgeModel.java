@@ -24,14 +24,15 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 class bridgeModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
 
     /*Initializations*/
 
-    bridgeModel(eventObserver.eventListener mEvent, AppCompatActivity pContext) {
-        this.mEvent = mEvent;
+    bridgeModel(eventObserver.eventListener ignoredMEvent, AppCompatActivity pContext) {
         mContext = pContext;
+    }
+
+    protected void onInit(){
     }
 
     /*Helper Methods*/

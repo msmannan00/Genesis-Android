@@ -45,7 +45,7 @@ import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
 import com.hiddenservices.onionservices.BuildConfig;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
-import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.defaultBrowser;
+import com.hiddenservices.onionservices.appManager.kotlinHelperLibraries.DefaultBrowser;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.keys;
@@ -80,8 +80,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.net.ssl.HttpsURLConnection;
 import org.mozilla.geckoview.ContentBlocking;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
@@ -188,19 +186,6 @@ public class helperMethod {
         }
     }
 
-    public static boolean isAppRunning(final Context context, final String packageName) {
-        final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
-        if (procInfos != null) {
-            for (final ActivityManager.RunningAppProcessInfo processInfo : procInfos) {
-                if (processInfo.processName.equals(packageName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public static void onDelayHandler(AppCompatActivity pActivity, int pTime, Callable<Void> pMethodParam) {
         final Handler handler = new Handler();
         handler.postDelayed(() ->
@@ -283,9 +268,6 @@ public class helperMethod {
             e.printStackTrace();
         }
 
-        if (!pURL.startsWith("www.") && !pURL.startsWith("http://") && !pURL.startsWith("https://")) {
-            pURL = "" + pURL;
-        }
         if (!pURL.startsWith("http://") && !pURL.startsWith("https://")) {
             if (pURL.startsWith("www")) {
                 pURL = "http://" + pURL;
@@ -414,27 +396,6 @@ public class helperMethod {
         context.startActivity(Intent.createChooser(emailIntent, "get transport obfs4"));
     }
 
-    public static boolean getBridges(Context context) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bridges.torproject.org/bridges/?transport=obfs4"));
-        context.startActivity(browserIntent);
-
-        return false;
-
-    }
-
-
-    public static String getMimeType(Context context, Uri uri) {
-        String extension;
-
-        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
-            final MimeTypeMap mime = MimeTypeMap.getSingleton();
-            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
-        } else {
-            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
-        }
-
-        return extension;
-    }
 
     public static void hideKeyboard(AppCompatActivity context) {
         if (context != null) {
@@ -569,60 +530,6 @@ public class helperMethod {
 
     }
 
-    public static String langaugeWithoutTranslation(String pLangauge) {
-        switch (pLangauge) {
-            case "en_US":
-                return "English (United States)";
-            case "de_DE":
-                return "German (Deutsche)";
-            case "ca_ES":
-                return "Catalan (Català)";
-            case "zh_CN":
-                return "Chinese （中文-中国）";
-            case "ch_CZ":
-                return "Czech （čeština）";
-            case "nl_NL":
-                return "Dutch （Netherland）";
-            case "fr_FR":
-                return "French （francaise）";
-            case "el_GR":
-                return "Greek （Ελληνικά）";
-            case "hu_HU":
-                return "Hungarian （Magyar）";
-            case "in_ID":
-                return "Indonesian （bahasa）";
-            case "it_IT":
-                return "Italian （Italiana）";
-            case "ja_JP":
-                return "Japanese （日本人）";
-            case "ko_KR":
-                return "Korean （韓国語）";
-            case "pt_PT":
-                return "Portuguese （Português）";
-            case "ro_RO":
-                return "Romanian （Română）";
-            case "ru_RU":
-                return "Russian （русский）";
-            case "th_TH":
-                return "Thai （ไทย）";
-            case "tr_TR":
-                return "Turkish （Türk）";
-            case "uk_UA":
-                return "Ukrainian （Український）";
-            case "vi_VN":
-                return "Vietnamese （Tiếng Việt）";
-        }
-
-        return "Not Defined";
-    }
-
-    public static Boolean isValidURL(String url) {
-        Pattern p = Pattern.compile("((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)");
-        Matcher m;
-        m = p.matcher(url);
-        return m.matches();
-    }
-
     public static String removeLastSlash(String url) {
         if (url.length() > 2) {
             if (url.charAt(url.length() - 1) == '/') {
@@ -678,12 +585,12 @@ public class helperMethod {
     }
 
     public static void openDefaultBrowser(AppCompatActivity mContext) {
-        defaultBrowser mIconManager = new defaultBrowser();
+        DefaultBrowser mIconManager = new DefaultBrowser();
         mIconManager.openSetDefaultBrowserOption(mContext);
     }
 
     public static boolean isDefaultBrowserSet(AppCompatActivity mContext) {
-        defaultBrowser mIconManager = new defaultBrowser();
+        DefaultBrowser mIconManager = new DefaultBrowser();
         return mIconManager.getabcEnabledValue(mContext);
     }
 
@@ -714,20 +621,11 @@ public class helperMethod {
         }
     }
 
-    public static void restartActivity(Intent pIntent, AppCompatActivity pContext) {
-        pContext.finish();
-        pContext.startActivity(pIntent);
-    }
-
     public static void onMinimizeApp(AppCompatActivity context) {
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(startMain);
-    }
-
-    public static int screenWidth() {
-        return (Resources.getSystem().getDisplayMetrics().widthPixels);
     }
 
     public static void openNotification(AppCompatActivity pContext) {
@@ -765,10 +663,6 @@ public class helperMethod {
             helperMethod.showToastMessage("Playstore Not Found", context);
         }
 
-    }
-
-    public static int dpFromPx(final Context context, final float px) {
-        return (int) (px / context.getResources().getDisplayMetrics().density);
     }
 
     public static int pxFromDp(float dp) {

@@ -73,7 +73,6 @@ public class tabRowModel {
     }
 
     public void decodeByteArraysetmBitmap(Bitmap pBitmap) {
-        mBitmap = null;
         mBitmap = pBitmap;
     }
 

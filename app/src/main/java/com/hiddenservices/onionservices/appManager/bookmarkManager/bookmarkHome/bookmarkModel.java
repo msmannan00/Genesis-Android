@@ -15,14 +15,6 @@ class bookmarkModel {
         mModelList = model;
     }
 
-    private void removeFromList(int index) {
-        mModelList.remove(index);
-    }
-
-    public void onManualClear(int index) {
-        removeFromList(index);
-    }
-
     public void clearList() {
         mModelList.clear();
     }

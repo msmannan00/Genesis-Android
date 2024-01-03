@@ -15,12 +15,14 @@ import java.util.List;
 class orbotModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
-
     /*Initializations*/
 
-    orbotModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    orbotModel(eventObserver.eventListener ignoredMEvent) {
+
+    }
+
+    protected void onInit(){
+
     }
 
     /*Helper Methods*/

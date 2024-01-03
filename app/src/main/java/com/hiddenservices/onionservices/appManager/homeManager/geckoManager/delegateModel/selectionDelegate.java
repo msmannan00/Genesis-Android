@@ -414,11 +414,11 @@ public class selectionDelegate implements ActionMode.Callback,
     public void onGetContentRect(final @Nullable ActionMode mode, final @Nullable View view,
                                  final @NonNull Rect outRect) {
         ThreadUtils.assertOnUiThread();
-        if (mSelection == null || mSelection.clientRect == null) {
+        if (mSelection == null || mSelection.screenRect == null) {
             return;
         }
         mSession.getClientToScreenMatrix(mTempMatrix);
-        mTempMatrix.mapRect(mTempRect, mSelection.clientRect);
+        mTempMatrix.mapRect(mTempRect, mSelection.screenRect);
         mTempRect.roundOut(outRect);
     }
 

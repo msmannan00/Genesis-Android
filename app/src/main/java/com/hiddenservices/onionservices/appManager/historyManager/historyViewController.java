@@ -63,7 +63,9 @@ public class historyViewController {
         this.mMenuButton = pMenuButton;
         this.mSearchButton = pSearchButton;
         this.mTitle = pTitle;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 
@@ -218,10 +220,6 @@ public class historyViewController {
                     mClearButton.setVisibility(View.VISIBLE);
                 }
 
-                @Override
-                public boolean willChangeBounds() {
-                    return true;
-                }
             };
             a.setDuration(250);
             v.startAnimation(a);
@@ -257,10 +255,6 @@ public class historyViewController {
                     }
                 }
 
-                @Override
-                public boolean willChangeBounds() {
-                    return true;
-                }
             };
             a.setDuration(250);
             v.startAnimation(a);

@@ -27,7 +27,6 @@ import static com.hiddenservices.onionservices.pluginManager.orbotPluginManager.
 import static org.torproject.android.service.TorServiceConstants.ACTION_START;
 import static org.torproject.android.service.TorServiceConstants.ACTION_STOP;
 
-// https://github.com/guardianproject/orbot/blob/8fca5f8ecddb4da9565ac3fd8936e4f28acdd352/BUILD.md
 
 public class orbotManager {
 

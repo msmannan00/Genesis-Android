@@ -71,7 +71,10 @@ public class orbotController extends AppCompatActivity {
 
         mOrbotViewController = new orbotViewController(mOrbotSettingBridgeSwitch, mOrbotSettingVPNSwitch, this, mOrbotSettingWarning);
         mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sVPNStatus, status.sBridgeStatus));
+        mOrbotViewController.onInit();
+
         mOrbotModel = new orbotModel(new orbotModelCallback());
+        mOrbotModel.onInit();
     }
 
     /* LISTENERS */
@@ -141,6 +144,7 @@ public class orbotController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         onClose(null);
     }
 

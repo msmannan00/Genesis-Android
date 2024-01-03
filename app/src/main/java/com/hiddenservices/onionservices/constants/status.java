@@ -16,11 +16,9 @@ import java.util.Locale;
 public class status {
     /*App Status*/
 
-    public static boolean sPaidStatus = false;
     public static boolean sDeveloperBuild = false;
     public static int sStoreType = enums.StoreType.GOOGLE_PLAY;
     public static int sLowMemory = enums.MemoryStatus.STABLE;
-    public static boolean sAdLoaded = false;
 
     /*Settings Status*/
     public static Locale mSystemLocale = null;
@@ -51,7 +49,6 @@ public class status {
     public static boolean sSettingIsAppPaused = false;
     public static boolean sSettingIsWelcomeEnabled = true;
     public static boolean sSettingIsAppStarted = false;
-    public static boolean sCrawlerStatusStarted = false;
     public static boolean sSettingIsAppRunning = false;
     public static boolean sSettingIsAppRedirected = false;
     public static boolean sSettingIsAppRestarting = false;
@@ -75,7 +72,6 @@ public class status {
     public static boolean sVPNStatus = false;
     public static boolean sBridgeStatus = false;
     public static boolean sAppInstalled = false;
-    public static boolean sDefaultLanguageSet = false;
 
     public static int sTheme = enums.Theme.THEME_DEFAULT;
     public static int sSettingCookieStatus = ContentBlocking.AntiTracking.DEFAULT;

@@ -10,6 +10,9 @@ class languageModel {
 
     public languageModel() {
         mSupportedLanaguage = new ArrayList<>();
+    }
+
+    protected void onInit(){
         onInitLanguage();
     }
 
@@ -48,7 +51,7 @@ class languageModel {
         return -1;
     }
 
-    public Object onTrigger(languageEnums.eLanguageModel pCommands, List<Object> pData) {
+    public Object onTrigger(languageEnums.eLanguageModel pCommands, List<Object> ignoredPData) {
         if (pCommands.equals(languageEnums.eLanguageModel.M_SUPPORTED_LANGUAGE)) {
             return mSupportedLanaguage;
         } else if (pCommands.equals(languageEnums.eLanguageModel.M_ACTIVE_LANGUAGE)) {

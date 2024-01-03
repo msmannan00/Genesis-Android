@@ -235,7 +235,7 @@
                         android:clickable="false"
                         android:padding="0dp"
                         android:paddingStart="15dp"
-                        android:text="Torry.IO"
+                        android:text="@string/SETTING_SEARCH_DUCK"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textColor="@color/c_text_v1"

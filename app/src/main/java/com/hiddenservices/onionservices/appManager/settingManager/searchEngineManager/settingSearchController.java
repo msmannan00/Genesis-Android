@@ -73,7 +73,10 @@ public class settingSearchController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mSettingSearchViewController = new settingSearchViewController(this, new settingSearchViewCallback(), mSearchEngines, mSearchHistory, mSearchSuggestions, mSearchSettingOption1);
+        mSettingSearchViewController.onInit();
+
         mSettingSearchModel = new settingSearchModel(new settingSearchModelCallback());
+        mSettingSearchModel.onInit();
     }
 
     /*View Callbacks*/
@@ -117,6 +120,7 @@ public class settingSearchController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         activityContextManager.getInstance().onRemoveStack(this);
         finish();
     }

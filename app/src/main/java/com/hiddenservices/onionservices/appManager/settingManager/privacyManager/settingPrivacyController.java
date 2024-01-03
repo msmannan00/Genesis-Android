@@ -74,7 +74,10 @@ public class settingPrivacyController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mClearDataOnExit, mCookie, mPopup);
+        mSettingPrivacyViewController.onInit();
+
         mSettingPrivacyModel = new settingPrivacyModel(new settingPrivacyController.settingAccessibilityModelCallback());
+        mSettingPrivacyModel.onInit();
     }
 
     /*View Callbacks*/
@@ -116,6 +119,7 @@ public class settingPrivacyController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
             if (activityContextManager.getInstance().getHomeController() != null) {

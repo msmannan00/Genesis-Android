@@ -68,7 +68,10 @@ public class settingLogController extends AppCompatActivity {
 
         mSettingLogViewController = new settingLogViewController(this, new settingLogViewCallback(), mSettingLogStatusSwitch);
         mSettingLogViewController.onTrigger(settingLogEnums.eLogViewController.M_INIT_VIEW, Collections.singletonList(status.sLogThemeStyleAdvanced));
+        mSettingLogViewController.onInit();
+
         mSettingLogModel = new settingLogModel(new settingLogModelCallback());
+        mSettingLogModel.onInit();
     }
 
     /*View Callbacks*/

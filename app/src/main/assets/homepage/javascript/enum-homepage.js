@@ -3,7 +3,8 @@
 
 var Commands  = {
     onLoadReferenceWebsites  : "onLoadReferenceWebsites",
-    onClickReferenceWebsite  : "onClickReferenceWebsite"
+    onClickReferenceWebsite  : "onClickReferenceWebsite",
+    onLoadSearchEngine  : "onLoadSearchEngine"
 };
 
 /*Links*/

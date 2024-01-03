@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit
 
 class BrowserIconManager {
 
-    var fetchClient: GeckoViewFetchClient? = null
-    var mIcons: BrowserIcons? = null
+    private var fetchClient: GeckoViewFetchClient? = null
+    private var mIcons: BrowserIcons? = null
 
     fun init(
         mContext: Context,
@@ -30,8 +30,4 @@ class BrowserIconManager {
         return mIcons!!
     }
 
-    fun onLoadIcon(mContext: Context, mRuntime: GeckoRuntime) {
-        val fetchClient = GeckoViewFetchClient(mContext, mRuntime, Pair(1L, TimeUnit.SECONDS))
-        BrowserIcons(mContext, httpClient = fetchClient, generator = DefaultIconGenerator())
-    }
 }

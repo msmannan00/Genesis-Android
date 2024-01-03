@@ -6,8 +6,4 @@ class settingNotificationEnums {
         M_UPDATE_LOCAL_NOTIFICATION
     }
 
-    public enum eNotificationViewController {
-
-    }
-
 }

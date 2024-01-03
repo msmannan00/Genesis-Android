@@ -36,7 +36,6 @@ public class dataController {
     private referenceWebsiteDataModel mReferenceWebsiteDataModel;
     private bridgesDataModel mBridgeWebsiteDataModel;
     private sqlCipherDataModel mSqlCipherDataModel;
-    private crawlerDataModel mCrawlerDataModel;
 
     /*Private Declarations*/
 
@@ -59,7 +58,6 @@ public class dataController {
             mReferenceWebsiteDataModel = new referenceWebsiteDataModel();
             mBridgeWebsiteDataModel = new bridgesDataModel();
             mSqlCipherDataModel = new sqlCipherDataModel();
-            mCrawlerDataModel = new crawlerDataModel(pAppContext);
         }
     }
 
@@ -113,12 +111,6 @@ public class dataController {
             }
             return null;
         }
-    }
-
-    /*Trigger Crawler*/
-
-    public Object invokeCrawler(dataEnums.eCrawlerCommands pCommands, List<Object> pData) {
-        return mCrawlerDataModel.onTrigger(pCommands, pData);
     }
 
     /*Trigger Suggestions*/

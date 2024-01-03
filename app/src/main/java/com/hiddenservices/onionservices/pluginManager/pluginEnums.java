@@ -2,27 +2,9 @@ package com.hiddenservices.onionservices.pluginManager;
 
 public class pluginEnums {
 
-    /*Advert Manager*/
-    public enum eAdManager {
-        M_IS_ADVERT_LOADED, M_LOW_MEMORY_DESTROY, M_HIDE_BANNER, M_SHOW_BANNER, M_SHOW_INTERSTITIAL, M_INIT_ADS
-    }
-
-    public enum eAdManagerCallbacks {
-        M_ON_AD_LOAD, M_ON_AD_CLICKED
-    }
-
-    /*Analytics Manager*/
-    public enum eAnalyticManager {
-        M_LOG_EVENT
-    }
-
     /*Lanuage Manager*/
     public enum eLangManager {
         M_SET_LANGUAGE, M_ACTIVITY_CREATED, M_RESUME, M_SUPPORTED_SYSTEM_LANGUAGE_INFO, M_INIT_LOCALE, M_UPDATE_LOCAL
-    }
-
-    public enum eLangManagerCallbacks {
-
     }
 
     /*Message Manager*/
@@ -37,11 +19,6 @@ public class pluginEnums {
     /*Download Manager*/
     public enum eDownloadManager {
         M_START_DOWNLOAD, M_CANCEL_DOWNLOAD, M_URL_DOWNLOAD_REQUEST, M_WEB_DOWNLOAD_REQUEST, M_BLOB_DOWNLOAD_REQUEST, M_SWIPE, M_DOWNLOAD_FAILURE
-    }
-
-    /*Notification Manager*/
-    public enum eNotificationManager {
-        M_CREATE_NOTIFICATION, M_CLEAR_NOTIFICATION
     }
 
     /*Orbot Manager*/

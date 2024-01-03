@@ -9,12 +9,15 @@ import java.util.List;
 class settingSearchModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
 
     /*Initializations*/
 
-    settingSearchModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    settingSearchModel(eventObserver.eventListener ignoredMEvent) {
+
+    }
+
+    protected void onInit(){
+
     }
 
 

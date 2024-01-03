@@ -44,7 +44,9 @@ class bridgeViewController {
         this.mBridgeSettingBridgeCustom = pBridgeSettingBridgeCustom;
         this.mBridgeSettingCustomBridgeBlocker = pBridgeSettingCustomBridgeBlocker;
         this.mBridgeSettingBridgeSnowflake = pBridgeSettingBridgeSnowflake;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 

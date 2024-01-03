@@ -27,7 +27,6 @@ import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_NON_TR
 class settingPrivacyViewController {
     /*Private Variables*/
 
-    private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
     private SwitchMaterial mJavaScript;
     private SwitchMaterial mDoNotTrack;
@@ -37,15 +36,16 @@ class settingPrivacyViewController {
 
     /*Initializations*/
 
-    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener pEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie, SwitchMaterial pPopup) {
-        this.mEvent = pEvent;
+    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener ignoredPEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie, SwitchMaterial pPopup) {
         this.mContext = pContext;
         this.mJavaScript = pJavaScript;
         this.mClearDataOnExit = pClearDataOnExit;
         this.mCookie = pCookie;
         this.mDoNotTrack = pDoNotTrack;
         this.mPopup = pPopup;
+    }
 
+    protected void onInit(){
         initViews();
         initPostUI();
     }

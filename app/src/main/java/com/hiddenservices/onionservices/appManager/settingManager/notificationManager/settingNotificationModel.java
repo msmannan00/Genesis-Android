@@ -11,14 +11,15 @@ import java.util.List;
 class settingNotificationModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
-
     /*Initializations*/
 
-    settingNotificationModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    settingNotificationModel(eventObserver.eventListener ignoredMEvent) {
+
     }
 
+    protected void onInit(){
+
+    }
 
     /*Helper Methods*/
 

@@ -22,14 +22,13 @@ class bookmarkSettingModelController {
 
     /* Private Variables */
 
-    private AppCompatActivity mContext;
-    private eventObserver.eventListener mEvent;
 
-    public bookmarkSettingModelController(AppCompatActivity pContext, eventObserver.eventListener pEvent, int pBookmarkID, String pBookmarkURL) {
-        this.mContext = pContext;
-        this.mEvent = pEvent;
+    public bookmarkSettingModelController(AppCompatActivity ignoredPContext, eventObserver.eventListener ignoredPEvent, int pBookmarkID, String pBookmarkURL) {
         this.mBookmarkID = pBookmarkID;
         this.mBookmarkURL = pBookmarkURL;
+    }
+
+    protected void onInit(){
     }
 
     /* Helper Methods */

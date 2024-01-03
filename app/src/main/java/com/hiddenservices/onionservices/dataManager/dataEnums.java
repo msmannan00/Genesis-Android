@@ -35,16 +35,8 @@ public class dataEnums {
         M_UPDATE_TAB, M_UPDATE_SESSION_STATE, M_ADD_TAB, M_CLEAR_TAB, M_GET_SUGGESTIONS, CLOSE_TAB, GET_TAB, GET_CURRENT_TAB, GET_RECENT_TAB, GET_LAST_TAB, GET_TOTAL_TAB, CLOSE_ALL_TABS, MOVE_TAB_TO_TOP, M_UPDATE_PIXEL, M_HOME_PAGE, M_CLOSE_TAB_LOW_MEMORY
     }
 
-    public enum eImageCommands {
-        M_REQUEST_IMAGE_URL, M_GET_IMAGE
-    }
-
     public enum eHelpCommands {
         M_GET_HELP, M_SET_HELP
-    }
-
-    public enum eCrawlerCommands {
-        M_INDEX_URL, M_INIT
     }
 
     /* Callbacks */

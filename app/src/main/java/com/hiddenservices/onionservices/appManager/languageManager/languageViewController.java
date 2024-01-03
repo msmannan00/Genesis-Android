@@ -19,16 +19,16 @@ class languageViewController {
     /*Private Variables*/
 
     private AppCompatActivity mContext;
-    private eventObserver.eventListener mEvent;
     private ImageView mBlocker;
 
     /*Initializations*/
 
-    protected void initialization(eventObserver.eventListener pEvent, AppCompatActivity context, ImageView pBlocker) {
+    protected void initialization(eventObserver.eventListener ignoredPEvent, AppCompatActivity context, ImageView pBlocker) {
         this.mContext = context;
         this.mBlocker = pBlocker;
-        this.mEvent = pEvent;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 

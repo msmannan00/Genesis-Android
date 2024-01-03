@@ -1,13 +1,10 @@
 package com.hiddenservices.onionservices.pluginManager.downloadPluginManager;
 
 import android.annotation.SuppressLint;
-import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,9 +13,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.FileProvider;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
@@ -58,7 +53,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
 
     private int mNotificationID;
     private float mDownloadByte;
-    private String mURL;
     private String mFileName;
     private Boolean mIsCanceled = false;
 
@@ -73,7 +67,6 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
             pFileName = pFileName.substring(0, pFileName.lastIndexOf("?"));
         }
         this.mFileName = helperMethod.createRandomID().substring(0,5) + pFileName;
-        this.mURL = pURL;
         this.mNotificationID = pNotificationID;
         this.mBroadcastReciever = pBroadcastReciever;
 
@@ -101,7 +94,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         mNotificationBuilder = new NotificationCompat.Builder(mContext.get());
         mNotificationBuilder.setContentTitle(mFileName)
                 .setContentText("starting...")
-                .setChannelId(mNotificationID + "")
+                .setChannelId(String.valueOf(mNotificationID))
                 .setAutoCancel(false)
                 .setDefaults(0)
                 .setColor(Color.parseColor("#84989f"))
@@ -115,7 +108,7 @@ public class downloadReciever extends AsyncTask<String, Integer, String> {
         /* Notification Channel for Latest Androids */
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(mNotificationID + "", "Social Media Downloader", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(String.valueOf(mNotificationID), "Social Media Downloader", NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription("no sound");
             channel.setSound(null, null);
             channel.enableLights(false);

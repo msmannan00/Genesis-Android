@@ -112,6 +112,7 @@ public class historyController extends AppCompatActivity {
 
         activityContextManager.getInstance().onStack(this);
         mHistoryViewController = new historyViewController(mEmptyListNotification, mSearchInput, mRecycleView, mClearButton, this, mMenuButton, mSearchButton, mTitle);
+        mHistoryViewController.onInit();
     }
 
     public void initializeList() {
@@ -150,9 +151,6 @@ public class historyController extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-            }
         });
 
         mClearButton.requestFocusFromTouch();
@@ -297,6 +295,7 @@ public class historyController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (mSearchInput.getVisibility() == View.VISIBLE) {
             onHideSearch(null);
         } else if ((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {

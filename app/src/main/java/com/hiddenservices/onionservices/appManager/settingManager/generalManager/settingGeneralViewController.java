@@ -48,11 +48,12 @@ class settingGeneralViewController {
         this.mThemeDefault = pThemeDefault;
         this.mHomePageText = pHomePageText;
         this.mOpenURLInNewTab = pOpenURLInNewTab;
+    }
 
+    protected void onInit(){
         initViews();
         initPostUI();
     }
-
 
     private void initPostUI() {
         Window window = mContext.getWindow();

@@ -62,7 +62,9 @@ public class tabViewController {
         this.mBlocker = pBlocker;
         this.mNestedScrollView = pNestedScrollView;
         this.mNewTab = pNewTab;
+    }
 
+    protected void onInit(){
         initUI();
         initPostUI();
         onHoldInteraction();

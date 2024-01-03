@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.pluginManager.messagePluginManager;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,7 +38,6 @@ import org.mozilla.geckoview.ContentBlocking;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static com.hiddenservices.onionservices.constants.constants.*;
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE;
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_INVALID_TYPE_STRING;
@@ -196,7 +196,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         ImageView mCertificateRootBackground = mDialog.findViewById(R.id.pCertificateRootBackground);
         ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
         ImageView mCertificateRootBlocker = mDialog.findViewById(R.id.pCertificateRootBlocker);
-        String message = Html.fromHtml((String) mData.get(0))+"";
+        String message = String.valueOf(Html.fromHtml((String) mData.get(0)));
         TextView mCertificateRootHeader = mDialog.findViewById(R.id.pCertificateRootHeader);
         if(message.equals("Connection Not Secured")){
             mCertificateRootHeader.setTextColor(Color.RED);
@@ -331,6 +331,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void openSecureConnectionPopup() {
         try{
             if((boolean)mData.get(6) && !status.sTorBrowsing){
@@ -443,6 +444,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void popupDownloadFull() {
         String url = mData.get(0).toString();
         String file = mData.get(2).toString();

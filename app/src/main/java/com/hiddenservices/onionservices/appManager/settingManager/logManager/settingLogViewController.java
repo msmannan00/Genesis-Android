@@ -11,18 +11,18 @@ import java.util.List;
 class settingLogViewController {
     /*Private Variables*/
 
-    private eventObserver.eventListener mEvent;
     private AppCompatActivity mContext;
 
     private SwitchMaterial mSettingLogStatusSwitch;
 
     /*Initializations*/
 
-    settingLogViewController(settingLogController pContext, eventObserver.eventListener pEvent, SwitchMaterial pSettingLogStatusSwitch) {
+    settingLogViewController(settingLogController pContext, eventObserver.eventListener ignoredPEvent, SwitchMaterial pSettingLogStatusSwitch) {
         this.mSettingLogStatusSwitch = pSettingLogStatusSwitch;
-        this.mEvent = pEvent;
         this.mContext = pContext;
+    }
 
+    protected void onInit(){
         initPostUI();
     }
 

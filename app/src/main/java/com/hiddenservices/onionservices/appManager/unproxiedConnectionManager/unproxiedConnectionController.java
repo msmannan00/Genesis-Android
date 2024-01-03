@@ -1,39 +1,19 @@
 package com.hiddenservices.onionservices.appManager.unproxiedConnectionManager;
 
 import static android.webkit.WebSettings.LOAD_NO_CACHE;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.hiddenservices.onionservices.R;
-import com.hiddenservices.onionservices.appManager.activityContextManager;
-import com.hiddenservices.onionservices.constants.enums;
-import com.hiddenservices.onionservices.constants.status;
-import com.hiddenservices.onionservices.dataManager.dataController;
-import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
-import com.hiddenservices.onionservices.pluginManager.pluginController;
-import com.hiddenservices.onionservices.pluginManager.pluginEnums;
-
-import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.util.Collections;
 import java.util.List;
-
-import xcrash.ICrashCallback;
-import xcrash.XCrash;
 
 public class unproxiedConnectionController extends AppCompatActivity {
 
@@ -60,6 +40,7 @@ public class unproxiedConnectionController extends AppCompatActivity {
         mProgressBar = findViewById(R.id.mProgressBar);
         mHeader = findViewById(R.id.pHeader);
         mUnproxiedConnectionViewController = new unproxiedConnectionViewController(this, null, mProgressBar, mHeader);
+        mUnproxiedConnectionViewController.onInit();
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -78,28 +59,6 @@ public class unproxiedConnectionController extends AppCompatActivity {
     }
 
     public void onCrashInit(Context mContext){
-        ICrashCallback callback = (logPath, emergency) -> {
-            finish();
-        };
-
-        XCrash.init(mContext, new XCrash.InitParameters()
-                .setAppVersion("1.2.3-beta456-patch789")
-                .setJavaRethrow(true)
-                .setJavaLogCountMax(10)
-                .setJavaDumpAllThreadsCountMax(10)
-                .setJavaCallback(callback)
-                .setNativeRethrow(true)
-                .setNativeLogCountMax(10)
-                .setNativeDumpAllThreads(true)
-                .setNativeDumpAllThreadsCountMax(10)
-                .setNativeCallback(callback)
-                .setAnrRethrow(true)
-                .setAnrLogCountMax(10)
-                .setAnrCallback(callback)
-                .setPlaceholderCountMax(3)
-                .setPlaceholderSizeKb(512)
-                .setLogFileMaintainDelayMs(1000));
-
     }
 
     private void onInitializeController() {

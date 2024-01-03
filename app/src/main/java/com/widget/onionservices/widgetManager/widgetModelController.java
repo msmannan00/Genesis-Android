@@ -4,16 +4,12 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
 import com.widget.onionservices.helperMethod.helperMethod;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static com.hiddenservices.onionservices.constants.constants.CONST_PACKAGE_NAME;
 
 public class widgetModelController {
@@ -30,7 +26,6 @@ public class widgetModelController {
 
     private void initialize(Context context, Intent intent) {
         String action = intent.getAction();
-        Log.i("FUCK5", "adsdsadasdasdas");
         switch (action) {
             case enums.WidgetCommands.OPEN_APPLICATION: {
                 status.sWidgetResponse = enums.WidgetResponse.SEARCHBAR;
@@ -86,7 +81,6 @@ public class widgetModelController {
     }
 
     public Object onTrigger(widgetEnums.eModelViewController pCommands, List<Object> pData) {
-        Log.i("FUCK6", "adsdsadasdasdas");
         if (pCommands.equals(widgetEnums.eModelViewController.M_ON_RECIEVE)) {
             initialize((Context) pData.get(0), (Intent) pData.get(1));
         }

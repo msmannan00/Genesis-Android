@@ -66,7 +66,7 @@ public class widgetController extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         initializeModel(context);
         if (mCurrentWidth != 0) {
-            int size = (int) Math.floor((mCurrentWidth - 30) / 70);
+            int size = (int) (double) ((mCurrentWidth - 30) / 70);
             mWidgetViewController.onTrigger(widgetEnums.eWidgetViewController.M_INIT, Collections.singletonList(size));
             appWidgetManager.updateAppWidget(appWidgetIds, mViews);
         } else {

@@ -6,6 +6,4 @@ public class proxyStatusEnums {
         M_INIT_VIEWS
     }
 
-    public enum eProxyStatusModelCommands {
-    }
 }

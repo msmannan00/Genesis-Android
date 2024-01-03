@@ -12,7 +12,6 @@ public class historyRowModel {
     private String mHeader;
     private String mDescription;
     private Date mDate;
-    private ImageView mLogo;
 
     /*Initializations*/
 
@@ -60,10 +59,6 @@ public class historyRowModel {
 
     public int getID() {
         return mID;
-    }
-
-    public ImageView getLogo() {
-        return mLogo;
     }
 
     public Date getDate() {

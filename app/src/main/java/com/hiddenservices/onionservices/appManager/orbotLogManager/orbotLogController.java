@@ -128,7 +128,10 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
         mOrbotLogFloatingToolbar = findViewById(R.id.pOrbotLogFloatingToolbar);
 
         mOrbotLogViewController = new orbotLogViewController(this, new orbotLogViewCallback(), mOrbotLogLoadingText, mOrbotLogRecycleView, mOrbotLogNestedScroll, mOrbotLogFloatingToolbar);
+        mOrbotLogViewController.onInit();
+
         mOrbotModel = new orbotLogModel(this, new orbotModelCallback());
+        mOrbotModel.onInit();
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -358,6 +361,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         onCloseTriggered(null);
     }
 

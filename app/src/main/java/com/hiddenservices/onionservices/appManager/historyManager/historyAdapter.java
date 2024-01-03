@@ -286,17 +286,6 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         }
     }
 
-    public void onClearAdapter() {
-
-    }
-
-    public void notifyFilter() {
-        if (mFilter.length() > 0) {
-            initializeModelWithDate(true);
-            notifyDataSetChanged();
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     public void onSwipe(View pItemView, String pUrl, View pMenuItem, ImageView pLogoImage, int pId, Date pDate) {
 
@@ -431,7 +420,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), historyEnums.eHistoryAdapterCallback.ON_URL_CLEAR_AT);
         mEvent.invokeObserver(Collections.singletonList(mRealID.get(pIndex)), historyEnums.eHistoryAdapterCallback.IS_EMPTY);
 
-        if (mPassedList.size() <= 0) {
+        if (mPassedList.size() == 0) {
             mCurrentList.clear();
             return;
         }
@@ -516,7 +505,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
                 }
 
                 mWebLogo.setVisibility(View.VISIBLE);
-                String mText = helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0) + "";
+                String mText = String.valueOf(helperMethod.getDomainName(model.getHeader()).toUpperCase().charAt(0));
                 mWebLogo.setText(mText);
                 String header = model.getHeader();
 

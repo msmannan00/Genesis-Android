@@ -8,12 +8,13 @@ import java.util.List;
 class settingLogModel {
     /*Variable Declaration*/
 
-    private eventObserver.eventListener mEvent;
-
     /*Initializations*/
 
-    settingLogModel(eventObserver.eventListener mEvent) {
-        this.mEvent = mEvent;
+    settingLogModel(eventObserver.eventListener ignoredMEvent) {
+
+    }
+
+    protected void onInit(){
     }
 
     private void onUpdateLogView(boolean pLogThemeStyle) {

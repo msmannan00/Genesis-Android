@@ -80,6 +80,7 @@ public class helpController extends AppCompatActivity {
 
     private void initializeViews() {
         mHelpViewController = new helpViewController();
+        mHelpViewController.onInit();
         mProgressBar = findViewById(R.id.pProgressBar);
         mRecycleView = findViewById(R.id.pRecycleView);
         mRetryContainer = findViewById(R.id.pRetryContainer);
