@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 33
+        targetSdkVersion 34
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -47,14 +47,11 @@ dependencies {
     api project(':OrbotLib')
     api project(':tor-android')
 
-    //  api libs.tor_android
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
-    implementation 'androidx.core:core:1.9.0'
+    implementation 'androidx.core:core:1.12.0'
     implementation 'com.gitlab.guardianproject:jsocksandroid:1.0.4'
     implementation 'com.offbynull.portmapper:portmapper:2.0.5'
-    implementation 'androidx.work:work-runtime-ktx:2.8.0-rc01'
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
 
     implementation files('../libs/geoip.jar')
-
-
 }

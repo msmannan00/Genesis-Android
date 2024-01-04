@@ -118,35 +118,35 @@ dependencies {
 }
 
 /* Automated APK Generation */
-
-android.applicationVariants.configureEach { variant ->
-
-    def buildType = variant.buildType.name
-
-    if (buildType == project.ext.buildType) {
-        def baseVersionCode = project.ext.vcode
-
-        variant.outputs.each { output ->
-            def abi = output.getFilter(OutputFile.ABI)
-            def versionCodeOverride = baseVersionCode
-            if (abi == project.ext.abi_x86) {
-                versionCodeOverride = versionCodeOverride + 3
-            } else if (abi == project.ext.abi_x86_x64) {
-                versionCodeOverride = versionCodeOverride + 2
-            } else if (abi == project.ext.abi_arm64) {
-                versionCodeOverride = versionCodeOverride + 1
-            } else if (abi == project.ext.abi_armeabi) {
-                versionCodeOverride = versionCodeOverride + 0
-            } else {
-                throw new RuntimeException(project.ext.abi_unknown + abi)
-            }
-            output.versionCodeOverride = versionCodeOverride
-        }
-    }
-}
-
-
-
+//
+//android.applicationVariants.configureEach { variant ->
+//
+//    def buildType = variant.buildType.name
+//
+//    if (buildType == project.ext.buildType) {
+//        def baseVersionCode = project.ext.vcode
+//
+//        variant.outputs.each { output ->
+//            def abi = output.getFilter(OutputFile.ABI)
+//            def versionCodeOverride = baseVersionCode
+//            if (abi == project.ext.abi_x86) {
+//                versionCodeOverride = versionCodeOverride + 3
+//            } else if (abi == project.ext.abi_x86_x64) {
+//                versionCodeOverride = versionCodeOverride + 2
+//            } else if (abi == project.ext.abi_arm64) {
+//                versionCodeOverride = versionCodeOverride + 1
+//            } else if (abi == project.ext.abi_armeabi) {
+//                versionCodeOverride = versionCodeOverride + 0
+//            } else {
+//                throw new RuntimeException(project.ext.abi_unknown + abi)
+//            }
+//            output.versionCodeOverride = versionCodeOverride
+//        }
+//    }
+//}
+//
+//
+//
 
 
 

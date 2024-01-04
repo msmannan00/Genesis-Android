@@ -862,7 +862,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (SDK_INT >= Build.VERSION_CODES.M) {
             action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE);
         }else {
-            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), 0);
+            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), -1);
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify_001");
@@ -899,7 +899,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (SDK_INT >= Build.VERSION_CODES.M) {
             PendingIntent.getActivity(context, 1125, new Intent(), PendingIntent.FLAG_IMMUTABLE);
         }else {
-            PendingIntent.getActivity(context, 1125, new Intent(), 0);
+            PendingIntent.getActivity(context, 1125, new Intent(), -1);
         }
         notification.fullScreenIntent = dummyIntent;
 

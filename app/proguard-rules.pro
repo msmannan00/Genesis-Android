@@ -8,7 +8,7 @@
 -keepattributes Annotation
 -keepattributes *Annotation*,EnclosingMethod,Signature
 -keepclasseswithmembers class * { public <init>(android.content.Context, android.util.AttributeSet, int); }
-
+-ignorewarnings
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
 
 -dontwarn javax.annotation.**
