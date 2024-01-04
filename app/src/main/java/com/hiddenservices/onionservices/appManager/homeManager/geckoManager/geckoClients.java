@@ -153,7 +153,6 @@ public class geckoClients {
             dataController.getInstance().initializeListData();
             onClearAll();
         }
-        //initializeIcon(context);
     }
 
     public void onReload(geckoView mNestedGeckoView, AppCompatActivity pcontext, boolean isThemeCall, boolean isDelayed) {

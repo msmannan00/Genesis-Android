@@ -46,6 +46,9 @@ class tabDataModel {
                 mTabs.get(counter).getSession().close();
             }
         }
+        for (int counter = 0; counter < pTabMdel.size(); counter++) {
+            pTabMdel.get(counter).getSession().close();
+        }
         mTabs.clear();
         mTabs.addAll(pTabMdel);
     }

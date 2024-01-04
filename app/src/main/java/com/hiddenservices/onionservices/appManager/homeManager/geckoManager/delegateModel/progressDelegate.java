@@ -85,7 +85,9 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
         if(var2.startsWith("jar:file")){
             return;
         }
-        mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID, var2, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, null), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
+        if(!var2.contains("about:blank")){
+            mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID, var2, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, null), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
+        }
 
         //if (mIsLoaded) {
             if (!mGeckoDataModel.mCurrentURL.equals("about:config") && !var2.equals("about:blank") && !var2.startsWith("jar:file")) {
