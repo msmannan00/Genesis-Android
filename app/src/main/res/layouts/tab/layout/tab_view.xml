@@ -40,8 +40,8 @@
 
             <ImageButton
                 android:id="@+id/pNewTab"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="0dp"
                 android:background="@xml/gx_ripple_default_round"
@@ -56,14 +56,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-3dp"
                 android:paddingStart="20dp"
-                android:text="0 Selected"
+                android:text="@string/_0_selected"
                 android:textColor="@color/c_navigation_tint"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="-3dp"
                 android:layout_weight="40"
@@ -238,6 +238,7 @@
         android:clickable="true"
         android:contentDescription="@string/GENERAL_TODO"
         android:focusable="true"
-        android:translationZ="112dp" />
+        android:translationZ="112dp"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

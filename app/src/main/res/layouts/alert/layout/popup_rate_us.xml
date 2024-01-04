@@ -58,15 +58,16 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="10dp"
                     android:background="@xml/ax_round_corner_rate"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="TextSizeCheck">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@drawable/star"
-                        tools:ignore="ImageContrastCheck"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        tools:ignore="ImageContrastCheck" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -96,15 +97,16 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="10dp"
                     android:background="@xml/ax_round_corner_rate"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="TextSizeCheck">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@drawable/smile"
-                        tools:ignore="ImageContrastCheck"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        tools:ignore="ImageContrastCheck" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -121,11 +123,11 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="16dp"
                         android:src="@xml/ic_arrow_right"
                         app:tint="@color/c_navigation_light"
-                        tools:ignore="ImageContrastCheck"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        tools:ignore="ImageContrastCheck" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -134,15 +136,16 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="10dp"
                     android:background="@xml/ax_round_corner_rate"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="TextSizeCheck">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@drawable/confused"
-                        tools:ignore="ImageContrastCheck"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        tools:ignore="ImageContrastCheck" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -159,11 +162,11 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="16dp"
                         android:src="@xml/ic_arrow_right"
                         app:tint="@color/c_navigation_light"
-                        tools:ignore="ImageContrastCheck"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        tools:ignore="ImageContrastCheck" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -172,15 +175,16 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="10dp"
                     android:background="@xml/ax_round_corner_rate"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="TextSizeCheck">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
                         android:src="@drawable/sad"
-                        tools:ignore="ImageContrastCheck"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        tools:ignore="ImageContrastCheck" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -210,14 +214,15 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="15dp"
                     android:background="@xml/ax_round_corner_rate"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="TextSizeCheck">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/GENERAL_TODO"
                         android:padding="10dp"
-                        android:src="@drawable/angry"
-                        android:contentDescription="@string/GENERAL_TODO" />
+                        android:src="@drawable/angry" />
 
                     <TextView
                         android:layout_width="0dp"

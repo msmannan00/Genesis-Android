@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/pPopupURLLongPressHeader"
             android:layout_width="0dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:alpha="0.6"
             android:gravity="start |center_vertical"

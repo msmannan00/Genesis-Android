@@ -1,7 +1,7 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/c_ripple_gray">
     <item>
-        <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <layer-list>
 
             <!-- Bottom 2dp Shadow -->
             <item>

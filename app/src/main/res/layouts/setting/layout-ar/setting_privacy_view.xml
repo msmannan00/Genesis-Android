@@ -61,7 +61,7 @@
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:paddingStart="8dp"
                     android:layout_gravity="center_vertical"
                     android:onClick="onOpenInfo"

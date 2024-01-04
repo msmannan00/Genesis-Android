@@ -589,20 +589,21 @@
 
                 <ImageButton
                     android:id="@+id/pPanicButtonLandscape"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_width="55dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="20dp"
                     android:adjustViewBounds="true"
-                    android:layoutDirection="ltr"
                     android:alpha="0.95"
                     android:background="@xml/hox_rounded_corner_splash_right"
                     android:contentDescription="@string/GENERAL_TODO"
+                    android:layoutDirection="ltr"
                     android:onClick="panicExit"
                     android:padding="7dp"
                     android:scaleType="fitCenter"
                     android:src="@xml/ic_baseline_repair"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
 
                 <ImageButton
                     android:id="@+id/pSupportLandscape"

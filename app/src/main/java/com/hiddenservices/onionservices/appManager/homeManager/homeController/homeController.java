@@ -1174,7 +1174,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
 
         mSearchbar.setMovementMethod(null);
-        registerReceiver(downloadStatus, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        //registerReceiver(downloadStatus, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
         mNewTab.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -2307,10 +2307,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         int menuId = view.getId();
         if (menuId == R.id.menu11) {
             onNewTab(isKeyboardOpened, true);
-        } else if (menuId == R.id.menu10) {
-            if (!onCloseCurrentTab(mGeckoClient.getSession())) {
-                onNewTab(isKeyboardOpened, true);
-            }
         } else if (menuId == R.id.menu29) {
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_TOR_SWITCH);
             pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), pluginEnums.eMessageManager.M_TOR_SWITCH);
@@ -2329,13 +2325,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 mHomeViewController.closeMenu();
                 helperMethod.hideKeyboard(this);
                 helperMethod.openActivity(orbotLogController.class, constants.CONST_LIST_HISTORY, homeController.this, true);
-            } else if (menuId == R.id.menu9) {
-                helperMethod.hideKeyboard(this);
-                //mGeckoClient.onRedrawPixel(homeController.this);
-                mHomeViewController.onShowTabContainer();
-                pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
-                Log.i("I AM FUCKED,", "I AM FUCKED : 1");
-                activityContextManager.getInstance().getTabController().onInit();
             } else if (menuId == R.id.menu8) {
                 helperMethod.hideKeyboard(this);
                 onOpenDownloadFolder(null);

@@ -59,7 +59,7 @@
     <color name="c_secure_alert_border">#7e7e9a</color>
     <color name="c_secure_alert_border_light">#dedede</color>
     <color name="c_secure_alert_background">#99000000</color>
-    <color name="c_secure_alert_button">#9b9bb0</color>
+    <color name="c_secure_alert_button">#4f4f64</color>
     <color name="c_secure_alert_button_pressed">#7e7e9a</color>
 
     /* Orbot Logs */

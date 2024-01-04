@@ -88,7 +88,7 @@
                     android:ellipsize="end"
                     android:text="@string/GENERAL_TODO"
                     android:paddingTop="1dp"
-                    android:textColor="@color/c_text_v3"
+                    android:textColor="@color/c_text_v8"
                     android:textSize="13sp" />
 
             </LinearLayout>

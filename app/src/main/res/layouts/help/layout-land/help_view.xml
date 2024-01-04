@@ -40,12 +40,14 @@
             android:id="@+id/imageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:importantForAccessibility="no"
             android:src="@xml/ic_baseline_wifi_off"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/c_alert_divider" />
+            app:tint="@color/c_alert_divider"
+            tools:ignore="ImageContrastCheck" />
 
         <TextView
             android:id="@+id/pErrorInfo"
@@ -100,7 +102,8 @@
                 android:background="@xml/hox_rounded_corner_suggestion_settings"
                 android:onClick="onReloadData"
                 android:text="@string/HELP_RETRY"
-                android:textColor="@color/c_white" />
+                android:textColor="@color/c_white"
+                tools:ignore="TextContrastCheck" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -108,7 +111,7 @@
     <LinearLayout
         android:id="@+id/pHeaderContainerTop"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:background="@color/c_background"
         android:clickable="true"
         android:elevation="8dp"
@@ -122,15 +125,16 @@
         tools:ignore="RtlSymmetry">
 
         <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="1dp"
             android:background="@xml/gx_ripple_default_round"
             android:contentDescription="@string/GENERAL_TODO"
             android:onClick="onClose"
             android:src="@xml/ic_arrow_back"
-            app:tint="@color/c_navigation_tint" />
+            app:tint="@color/c_navigation_tint"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -150,8 +154,8 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="0dp"
@@ -176,7 +180,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateClickableBoundsCheck">
 
         <LinearLayout
             android:layout_width="match_parent"

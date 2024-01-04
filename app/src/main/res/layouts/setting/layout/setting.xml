@@ -198,10 +198,10 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
                         android:textAlignment="textStart"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -267,10 +267,10 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
                         android:textAlignment="textStart"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -348,9 +348,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -418,9 +418,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -492,9 +492,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -567,9 +567,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -642,9 +642,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -717,9 +717,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -793,9 +793,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -849,7 +849,8 @@
                 android:onClick="onRateApplication"
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp"
+                tools:ignore="TooManyViews">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -869,9 +870,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -894,7 +895,7 @@
                         android:text="@string/SETTING_RATEUS_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -939,9 +940,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -964,7 +965,7 @@
                         android:text="@string/SETTING_SHARE_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -1009,9 +1010,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -1034,7 +1035,7 @@
                         android:text="@string/SETTING_PRIVACY_POLICY_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -1079,9 +1080,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -1104,7 +1105,7 @@
                         android:text="@string/SETTING_REPORT_WEBSITE_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -1149,9 +1150,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -1174,7 +1175,7 @@
                         android:text="@string/SETTING_SITEMAP_INFO"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
@@ -1226,9 +1227,9 @@
                     android:clickable="false"
                     android:orientation="vertical">
 
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"
@@ -1251,7 +1252,7 @@
                         android:text="@string/GENERAL_FIX_DESCRIPTION"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
-                        android:textColor="@color/c_text_v6"
+                        android:textColor="#757575"
                         android:textSize="13.5sp"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>

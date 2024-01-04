@@ -133,7 +133,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
@@ -197,7 +197,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:alpha="1"
                         android:background="@android:color/transparent"
                         android:clickable="false"

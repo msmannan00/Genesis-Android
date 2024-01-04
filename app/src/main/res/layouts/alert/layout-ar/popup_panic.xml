@@ -33,7 +33,7 @@
             android:textSize="13.5sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SmallSp,TextContrastCheck" />
+            tools:ignore="RtlSymmetry,SmallSp,TextContrastCheck" />
 
         <TextView
             android:id="@+id/pPopupPanicInfo"

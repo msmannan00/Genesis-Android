@@ -8,6 +8,6 @@
     </item>
 
     <item android:id="@android:id/background">
-        <shape android:shape="rectangle"></shape>
+        <shape android:shape="rectangle" />
     </item>
 </ripple>

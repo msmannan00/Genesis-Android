@@ -31,7 +31,7 @@
     <TextView
         android:id="@+id/body"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/header"
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@id/image"
@@ -53,13 +53,14 @@
 
 
         <Button
-            android:id = "@+id/reset"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:textColor="@color/text_color_v2"
+            android:id="@+id/reset"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@color/clear_alpha"
-            android:text = "@string/DEFAULT_NOTIFICATION_RESET"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/DEFAULT_NOTIFICATION_RESET"
+            android:textColor="@color/text_color_v2"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
 
         <Button

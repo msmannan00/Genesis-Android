@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="pdnsd_conf" formatted="true">
+	<string name="pdnsd_conf" formatted="true" translatable="false">
 global {
 	perm_cache=0;
 	cache_dir="%3$s";
