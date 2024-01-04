@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel;
 
 
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
@@ -30,7 +29,6 @@ public class scrollDelegate implements GeckoSession.ScrollDelegate {
     /*Scroll Delegate*/
     @UiThread
     public void onScrollChanged(@NonNull GeckoSession session, int scrollX, int scrollY) {
-        Log.i("fucker111 : ", String.valueOf(scrollY));
         mScollOffset = scrollY;
         mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme), homeEnums.eGeckoCallback.M_UPDATE_PIXEL_BACKGROUND);
         if (scrollY <= 3) {

@@ -22,7 +22,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.MovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -600,7 +599,6 @@ public class homeViewController {
     public void initSplashLoading() {
 
         if (mLoadingText.getAlpha() == 0) {
-            Log.i("sadads111", "asdasdasd");
             mLoadingText.animate().setStartDelay(0).setDuration(250).alpha(1);
         }
 
@@ -809,7 +807,6 @@ public class homeViewController {
             if (mTag != null && (boolean) mTag) {
                 mAppBar.setExpanded(true, true);
                 mIsTopBarExpanded = true;
-                Log.i("wwwwww1", "wwwwww");
             }
         }, 0);
     }
@@ -837,7 +834,6 @@ public class homeViewController {
             if (mTag != null && (boolean) mTag) {
                 mIsTopBarExpanded = false;
                 mAppBar.setExpanded(false, true);
-                Log.i("wwwwww2", "wwwwww");
             }
         }, 0);
     }
@@ -1124,7 +1120,6 @@ public class homeViewController {
             mURL = CONST_GENESIS_DOMAIN_URL;
         }
 
-        Log.i("FUCK::5", mURL);
         if (!mSearchbar.hasFocus() || pClearText || pBypassFocus) {
             if (mSearchEngineBar.getVisibility() == View.GONE || pBypassFocus) {
                 handlerLocalUrl = mURL;

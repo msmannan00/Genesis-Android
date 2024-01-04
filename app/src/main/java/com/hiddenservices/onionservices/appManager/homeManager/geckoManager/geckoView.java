@@ -6,9 +6,7 @@ import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.ViewCompat;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeEnums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.eventObserver;
@@ -98,8 +96,6 @@ public class geckoView extends GeckoView {
                     mScrollOffsetRoot = (int) mTemp;
                 }
 
-                Log.i("wow", eventY + " -- " + deltaY);
-
                 if (mSwipeDistance >= 350 || mSwipeDistance <= -350) {
                     mScrollable = true;
                 }
@@ -121,7 +117,6 @@ public class geckoView extends GeckoView {
                     mLastY -= mScrollOffset[1];
                     event.offsetLocation(0, mScrollOffset[1]);
                     mNestedOffsetY += mScrollOffset[1];
-                    Log.i("fuck2", "sadadsasd");
                 }
 
                 break;

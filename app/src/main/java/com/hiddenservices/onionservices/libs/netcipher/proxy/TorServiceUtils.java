@@ -18,8 +18,6 @@ package com.hiddenservices.onionservices.libs.netcipher.proxy;
 
 import android.content.Context;
 import android.util.Log;
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;

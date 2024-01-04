@@ -38,10 +38,8 @@ import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
 import net.freehaven.tor.control.TorControlCommands;
 import net.freehaven.tor.control.TorControlConnection;
-
 import org.torproject.android.service.util.CustomTorResourceInstaller;
 import org.torproject.android.service.util.PowerConnectionReceiver;
 import org.torproject.android.service.util.Prefs;
@@ -52,7 +50,6 @@ import org.torproject.android.service.wrapper.logRowModel;
 import org.torproject.android.service.wrapper.orbotExternalCommands;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 import org.torproject.jni.TorService;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -66,7 +63,6 @@ import java.io.PrintWriter;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
@@ -74,12 +70,10 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import IPtProxy.IPtProxy;
 import androidx.annotation.ChecksSdkIntAtLeast;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
@@ -346,7 +340,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 unregisterReceiver(mActionBroadcastReceiver);
             }
         }catch (Exception ex){
-            Log.i("sad","asd");
             ex.printStackTrace();
         }
     }
@@ -364,7 +357,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 unregisterReceiver(mActionBroadcastReceiver);
             }
         }catch (Exception ex){
-            Log.i("sad","asd");
             ex.printStackTrace();
         }
 
@@ -612,7 +604,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
             enableSnowflakeProxy();
         }
 
-        Log.i("OrbotService", "onCreate end");
     }
 
     protected String getCurrentStatus() {
@@ -1181,9 +1172,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 }
             };
         }catch (Exception ex){
-            Log.i("asd","asd");
         }
-        Log.i("asd","asd");
     }
 
     protected void sendCallbackBandwidth(long lastWritten, long lastRead, long totalWritten, long totalRead) {

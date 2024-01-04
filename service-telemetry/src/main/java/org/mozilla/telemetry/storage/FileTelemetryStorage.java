@@ -6,14 +6,11 @@ package org.mozilla.telemetry.storage;
 
 import androidx.annotation.RestrictTo;
 import androidx.annotation.VisibleForTesting;
-import android.util.Log;
-
 import org.mozilla.telemetry.config.TelemetryConfiguration;
 import org.mozilla.telemetry.ping.TelemetryPing;
 import org.mozilla.telemetry.serialize.TelemetryPingSerializer;
 import org.mozilla.telemetry.util.FileUtils;
 import org.mozilla.telemetry.util.IOUtils;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import mozilla.components.support.base.log.logger.Logger;
 
 /**

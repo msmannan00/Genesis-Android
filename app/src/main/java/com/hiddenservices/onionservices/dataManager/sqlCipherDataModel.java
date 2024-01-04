@@ -2,22 +2,16 @@ package com.hiddenservices.onionservices.dataManager;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.dataManager.models.bookmarkRowModel;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
 import com.hiddenservices.onionservices.dataManager.models.tabRowModel;
 import com.hiddenservices.onionservices.constants.constants;
-
 import net.sqlcipher.database.SQLiteDatabaseHook;
 import net.sqlcipher.database.SQLiteDatabase;
-
 import org.mozilla.geckoview.GeckoSession;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -103,7 +97,6 @@ public class sqlCipherDataModel {
                 sDatabaseInstance.execSQL(query, (String[]) params);
             }
         } catch (Exception ex) {
-            Log.i("Memory Error", "Memory Full");
         }
     }
 
@@ -117,7 +110,6 @@ public class sqlCipherDataModel {
                 sDatabaseInstance.execSQL(query, (String[]) params);
             }
         } catch (Exception ex) {
-            Log.i("Memory Error", "Memory Full");
         }
     }
 

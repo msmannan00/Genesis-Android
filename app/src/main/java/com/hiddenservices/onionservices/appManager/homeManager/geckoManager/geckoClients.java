@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
@@ -193,7 +192,6 @@ public class geckoClients {
         }
 
         url = helperMethod.completeURL(url);
-        Log.i("FERROR : ", "FERROR" + url);
         mSession.initURL(url);
         if (!url.startsWith(CONST_REPORT_URL) && (url.startsWith("resource://android/assets/homepage/") || url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))) {
             try {

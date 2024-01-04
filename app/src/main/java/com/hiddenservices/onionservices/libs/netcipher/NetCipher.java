@@ -21,12 +21,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.hiddenservices.onionservices.libs.netcipher.client.TlsOnlySocketFactory;
 import com.hiddenservices.onionservices.libs.netcipher.proxy.OrbotHelper;
-
 import org.torproject.android.service.wrapper.orbotLocalConstants;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;

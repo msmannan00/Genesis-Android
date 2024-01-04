@@ -1,14 +1,11 @@
 package com.hiddenservices.onionservices.dataManager;
 
 import android.content.Intent;
-import android.util.Log;
-
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.dataManager.models.bookmarkRowModel;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -105,7 +102,6 @@ public class bookmarkDataModel {
             if (mBookmarks.get(mCounter).getID() == pID) {
                 mAvailableBookmark.remove(mBookmarks.get(mCounter).getDescription());
                 mBookmarks.remove(mCounter);
-                Log.i("akldsjjkldsa", "akldsjjkldsa : " + pID);
             }
         }
 

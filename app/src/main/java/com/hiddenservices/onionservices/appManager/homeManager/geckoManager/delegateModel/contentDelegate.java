@@ -5,7 +5,6 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_LONG_PRESS_WITH_LINK;
 import android.content.ActivityNotFoundException;
 import android.os.Handler;
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -84,7 +83,6 @@ public class contentDelegate implements GeckoSession.ContentDelegate {
                     mEvent.invokeObserver(Arrays.asList(var4.srcUri, mGeckoDataModel.mSessionID, mTitle, mGeckoDataModel.mTheme, mGeckoSession, mContext.get()), homeEnums.eGeckoCallback.ON_LONG_PRESS);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Log.i("", "");
                 }
             }
         } else if (var4.linkUri != null) {

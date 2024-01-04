@@ -24,26 +24,19 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.VpnService;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.runjva.sourceforge.jsocks.protocol.ProxyServer;
 import com.runjva.sourceforge.jsocks.server.ServerAuthenticatorNone;
-
 import org.torproject.android.service.OrbotConstants;
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.R;
 import org.torproject.android.service.util.Prefs;
-
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

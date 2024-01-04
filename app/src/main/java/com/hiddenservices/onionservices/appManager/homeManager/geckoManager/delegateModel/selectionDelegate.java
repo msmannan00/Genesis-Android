@@ -14,15 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
-
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.hiddenservices.onionservices.appManager.activityContextManager;
-
 import org.mozilla.gecko.util.ThreadUtils;
 import org.mozilla.geckoview.GeckoSession;
 

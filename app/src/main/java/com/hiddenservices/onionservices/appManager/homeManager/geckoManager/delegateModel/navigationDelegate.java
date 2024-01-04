@@ -7,7 +7,6 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_ERROR_CACHED_DARK;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_URL_CACHED_DARK;
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -179,7 +178,6 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
                         }
                     }
                 } catch (Exception ex) {
-                    Log.i("asd", "asd : " + ex.getMessage());
                 }
 
                 return GeckoResult.fromValue("data:text/html," + handler.createErrorPage(var3.category, var3.code, mContext.get(), var2, mResourceURL));

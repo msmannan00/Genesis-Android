@@ -22,7 +22,6 @@ package com.hiddenservices.onionservices.libs.netcipher.client;
 import android.net.SSLCertificateSocketFactory;
 import android.os.Build;
 import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -35,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import javax.net.ssl.HandshakeCompletedListener;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;

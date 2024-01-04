@@ -17,7 +17,6 @@
 package com.hiddenservices.onionservices.libs.netcipher.client;
 
 import android.util.Log;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -26,7 +25,6 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
 import ch.boye.httpclientandroidlib.HttpHost;
 import ch.boye.httpclientandroidlib.conn.HttpHostConnectException;
 import ch.boye.httpclientandroidlib.conn.OperatedClientConnection;

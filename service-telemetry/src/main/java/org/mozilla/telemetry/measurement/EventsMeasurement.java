@@ -6,14 +6,11 @@ package org.mozilla.telemetry.measurement;
 
 import android.content.SharedPreferences;
 import androidx.annotation.VisibleForTesting;
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.mozilla.telemetry.config.TelemetryConfiguration;
 import org.mozilla.telemetry.event.TelemetryEvent;
 import org.mozilla.telemetry.util.IOUtils;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
