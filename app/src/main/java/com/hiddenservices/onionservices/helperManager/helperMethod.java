@@ -447,14 +447,6 @@ public class helperMethod {
         }
     }
 
-    public static boolean isColorDark(int pColor) {
-        if (ColorUtils.calculateLuminance(pColor) > 0.5) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static double getColorDensity(int pColor) {
         return ColorUtils.calculateLuminance(pColor);
     }
