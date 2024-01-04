@@ -254,10 +254,6 @@ public class homeViewController {
 
     }
 
-    public boolean isOrientationLandscapce(){
-        return isLandscape;
-    }
-
     public void initSearchEngineView() {
         if (!isFullScreen) {
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mSearchEngineBar.getLayoutParams();
@@ -329,7 +325,9 @@ public class homeViewController {
     public void onShowTabContainer() {
         if (mTabFragment.getAlpha() == 0 || mTabFragment.getAlpha() == 1) {
             mTabFragment.animate().cancel();
-            mTabFragment.setAlpha(0);
+            if(mTabFragment.getAlpha()==1){
+                mTabFragment.setAlpha(0.5f);
+            }
             mTabFragment.setVisibility(View.VISIBLE);
             mTabFragment.animate().alpha(1).setStartDelay(100).setDuration(150).withEndAction(() -> mNewTab.setPressed(false));
         }
@@ -1414,7 +1412,6 @@ public class homeViewController {
 
     void onProgressBarUpdate(int value, boolean ignoredMForced, boolean isStaticURL) {
 
-        //mProgressBar.animate().cancel();
         if(mSearchbar.getText().toString().equals("about:blank") || (mSearchbar.getText().toString().equals(CONST_PRIVACY_POLICY_URL_NON_TOR) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE_DARK)) && isStaticURL){
             mProgressBar.setProgress(0);
             return;
@@ -1475,11 +1472,6 @@ public class homeViewController {
     }
 
     public void onNewTabAnimation(List<Object> data, Object e_type, int pDelay, String pCurrentURL) {
-
-        if (mNewTabBlocker.getAlpha() != 0) {
-            //return;
-        }
-
         if(e_type!=null && e_type.equals(homeEnums.eHomeViewCallback.M_INITIALIZE_TAB_SINGLE) && !status.sOpenURLInNewTab){
             pDelay = 2000;
         }
@@ -1560,7 +1552,7 @@ public class homeViewController {
     }
 
     private void disableEnableControls(boolean enable, ViewGroup vg) {
-        vg.setEnabled(enable); // the point that I was missing
+        vg.setEnabled(enable);
         for (int i = 0; i < vg.getChildCount(); i++) {
             View child = vg.getChildAt(i);
             child.setEnabled(enable);
@@ -1704,7 +1696,6 @@ public class homeViewController {
                 }
 
                 mContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                //initTopBarPadding();
 
                 mIsTopBarExpanded = false;
                 mAppBar.setExpanded(true, false);

@@ -2582,6 +2582,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 onInvokePixelGenerator();
             } else if (e_type.equals(homeEnums.eHomeViewCallback.ON_NEW_TAB_ANIMATION)) {
                 postNewTabAnimation((boolean) data.get(0), (boolean) data.get(1));
+                if (mTabFragment.getAlpha() > 0 || mTabFragment.getVisibility() != View.GONE) {
+                    onOpenTabViewBoundary(null);
+                }
             } else if (e_type.equals(homeEnums.eHomeViewCallback.ON_OPEN_TAB_VIEW)) {
                 onOpenTabViewBoundary(null);
             } else if (e_type.equals(homeEnums.eHomeViewCallback.OPEN_DOWNLOAD_FOLDER)) {
