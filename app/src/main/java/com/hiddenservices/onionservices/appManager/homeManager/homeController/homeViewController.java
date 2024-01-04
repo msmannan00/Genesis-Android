@@ -325,9 +325,6 @@ public class homeViewController {
     public void onShowTabContainer() {
         if (mTabFragment.getAlpha() == 0 || mTabFragment.getAlpha() == 1) {
             mTabFragment.animate().cancel();
-            if(mTabFragment.getAlpha()==1){
-                mTabFragment.setAlpha(0.5f);
-            }
             mTabFragment.setVisibility(View.VISIBLE);
             mTabFragment.animate().alpha(1).setStartDelay(100).setDuration(150).withEndAction(() -> mNewTab.setPressed(false));
         }
