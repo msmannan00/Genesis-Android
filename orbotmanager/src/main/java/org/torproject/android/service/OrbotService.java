@@ -382,7 +382,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         if (connectionPathway.equals(Prefs.PATHWAY_SNOWFLAKE) || Prefs.getPrefSmartTrySnowflake()) {
             IPtProxy.stopSnowflake();
         } else if (connectionPathway.equals(Prefs.PATHWAY_CUSTOM) || Prefs.getPrefSmartTryObfs4() != null) {
-            IPtProxy.stopObfs4Proxy();
+            IPtProxy.stopLyrebird();
         }
 
         try {
@@ -440,16 +440,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
         return mFronts.get(service);
     }
 
-
-    private void startSnowflakeClientDomainFronting() {
-        //this is using the current, default Tor snowflake infrastructure
-        var target = getCdnFront("snowflake-target");
-        var front = getCdnFront("snowflake-front");
-        var stunServer = getCdnFront("snowflake-stun");
-
-        IPtProxy.startSnowflake(stunServer, target, front, null,
-                null, true, false, false, 1);
-    }
 
     @SuppressWarnings("ConstantConditions")
     public void enableSnowflakeProxy () { // This is to host a snowflake entrance node / bridge
@@ -564,7 +554,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
             filter.addAction(LOCAL_ACTION_NOTIFICATION_START);
 
             mActionBroadcastReceiver = new ActionBroadcastReceiver();
-            registerReceiver(mActionBroadcastReceiver, filter);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                registerReceiver(mActionBroadcastReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 createNotificationChannel();
@@ -1577,11 +1569,11 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
 
     private void startSnowflakeClientAmpRendezvous() {
-        var stunServers = "stun:stun.l.google.com:19302,stun:stun.antisip.com:3478,stun:stun.bluesip.net:3478,stun:stun.dus.net:3478,stun:stun.epygi.com:3478,stun:stun.sonetel.com:3478,stun:stun.uls.co.za:3478,stun:stun.voipgate.com:3478,stun:stun.voys.nl:3478";
-        var target = "https://snowflake-broker.torproject.net/";
-        var front = "www.google.com";
-        var ampCache ="https://cdn.ampproject.org/";
-        IPtProxy.startSnowflake(stunServers, target, front, ampCache, null, true, false, false, 1);
+        var stunServers = getCdnFront("snowflake-stun");
+        var target = getCdnFront("snowflake-target-direct");//"https://snowflake-broker.torproject.net/";
+        var front = getCdnFront("snowflake-amp-front");//"www.google.com";
+        var ampCache = getCdnFront("snowflake-amp-cache");//"https://cdn.ampproject.org/";
+        IPtProxy.startSnowflake(stunServers, target, front, ampCache, null, null, true, false, false, 1);
     }
 
     private class IncomingIntentRouter implements Runnable {
@@ -1599,7 +1591,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 case ACTION_START:
                     if (Prefs.bridgesEnabled()) {
                         if (useIPtObfsMeekProxy())
-                            IPtProxy.startObfs4Proxy("DEBUG", false, false, null);
+                            IPtProxy.startLyrebird("DEBUG", false, false, null);
                         else if (useIPtSnowflakeProxyDomainFronting())
                             startSnowflakeClientAmpRendezvous();
                         else if (useIPtSnowflakeProxyAMPRendezvous())

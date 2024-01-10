@@ -1034,7 +1034,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             }
         }
 
-        unregisterReceiver(downloadStatus);
+        try {
+            unregisterReceiver(downloadStatus);
+        }catch (Exception ex){}
         if (bound) {
             unbindService(connection);
             bound = false;

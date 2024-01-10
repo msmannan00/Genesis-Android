@@ -38,19 +38,6 @@
       "filters": [
         {
           "filterType": "ABI",
-          "value": "arm64-v8a"
-        }
-      ],
-      "attributes": [],
-      "versionCode": 580,
-      "versionName": "Build | Dark-Origin 2.0.0",
-      "outputFile": "app-orion-arm64-v8a-release.apk"
-    },
-    {
-      "type": "ONE_OF_MANY",
-      "filters": [
-        {
-          "filterType": "ABI",
           "value": "x86_64"
         }
       ],
@@ -58,6 +45,19 @@
       "versionCode": 580,
       "versionName": "Build | Dark-Origin 2.0.0",
       "outputFile": "app-orion-x86_64-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "arm64-v8a"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 580,
+      "versionName": "Build | Dark-Origin 2.0.0",
+      "outputFile": "app-orion-arm64-v8a-release.apk"
     }
   ],
   "elementType": "File"
