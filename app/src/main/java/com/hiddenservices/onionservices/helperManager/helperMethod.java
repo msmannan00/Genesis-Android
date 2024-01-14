@@ -253,7 +253,7 @@ public class helperMethod {
     }
 
     public static String completeURL(String pURL) {
-        if (pURL.equals("about:blank") || pURL.equals("about:config") || pURL.startsWith("resource://") || pURL.startsWith("data")) {
+        if (pURL.contains("167.86.99.31") || pURL.equals("about:blank") || pURL.equals("about:config") || pURL.startsWith("resource://") || pURL.startsWith("data")) {
             return pURL;
         }
         URL weburl;
@@ -513,6 +513,9 @@ public class helperMethod {
     static public String getHost(String link) {
         URL url;
         try {
+            if(link.contains("167.86.99.31") || link.contains("about:blank") || link.startsWith("resource")){
+                return "";
+            }
             url = new URL(link);
             return url.getHost();
         } catch (MalformedURLException e) {

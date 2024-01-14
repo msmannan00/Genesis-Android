@@ -1475,7 +1475,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 break;
 
             case TRIM_MEMORY_UI_HIDDEN:
-                stopTorAsync(true);
+                //stopTorAsync(true);
                 break;
         }
     }
