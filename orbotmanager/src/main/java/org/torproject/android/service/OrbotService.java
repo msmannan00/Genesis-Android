@@ -193,7 +193,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
     }
     boolean mConnectivity = true;
     public void enableNotification(){
-        if(mConnectivity && orbotLocalConstants.mIsTorInitialized){
+        if(mConnectivity){
             orbotLocalConstants.mNotificationStatus = 1;
             showToolbarNotification(0+"kbps ⇣ / " +0+"kbps ⇡", NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
         }
