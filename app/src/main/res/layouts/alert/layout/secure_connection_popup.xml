@@ -35,7 +35,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="15dp"
             android:contentDescription="@string/GENERAL_TODO"
-            android:src="@drawable/mozac_ic_lock"
+            android:src="@drawable/mozac_ic_lock_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ImageContrastCheck"

@@ -60,6 +60,7 @@ import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSetti
 import com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkController;
 import com.hiddenservices.onionservices.appManager.editTextManager;
 import com.hiddenservices.onionservices.appManager.historyManager.historyController;
+import com.hiddenservices.onionservices.appManager.settingManager.notificationManager.settingNotificationController;
 import com.hiddenservices.onionservices.dataManager.models.historyRowModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoView;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.*;
@@ -808,13 +809,20 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onShowDefaultNotification(boolean pSticky){
-        showDefaultNotification(this, "Orion Browser", pSticky);
+        new Handler().postDelayed(() ->
+        {
+            showDefaultNotification(this, "Orion Browser", pSticky);
+        }, 100);
     }
     public void onHideDefaultNotification(){
         if(!status.mThemeApplying){
             NotificationManagerCompat.from(this).cancelAll();
             NotificationManagerCompat.from(this).cancel(1125);
         }
+    }
+
+    public void openNotification(){
+        helperMethod.openActivity(settingNotificationController.class, constants.CONST_LIST_HISTORY, this, true);
     }
 
     public void resetAndRestart(){
@@ -889,9 +897,9 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         builder.addAction(0, "ERASE AND RESET", pIntentOpen);
 
         Intent intentActionClose = new Intent(context,homeController.class);
-        intentActionClose.putExtra("action","Exit");
+        intentActionClose.putExtra("action","Notification");
         PendingIntent pIntentClose = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1125, "media_pause", 1);
-        builder.addAction(0, "EXIT BROWSER", pIntentClose);
+        builder.addAction(0, "NOTIFICATION SETTINGS", pIntentClose);
 
         Notification notification = builder.build();
         PendingIntent dummyIntent = null;

@@ -9,7 +9,11 @@ import android.content.Intent;
 import android.os.Handler;
 import androidx.core.app.NotificationManagerCompat;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
+import com.hiddenservices.onionservices.appManager.settingManager.notificationManager.settingNotificationController;
+import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
+import com.hiddenservices.onionservices.helperManager.helperMethod;
+
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.wrapper.orbotLocalConstants;
 
@@ -19,15 +23,7 @@ public class defaultNotificationReciever extends BroadcastReceiver {
         if (mCommand == 0) {
             activityContextManager.getInstance().getHomeController().resetAndRestart();
         } else if (mCommand == 1) {
-            if(activityContextManager.getInstance().getHomeController() == null){
-                onDestroy(context);
-                NotificationManagerCompat.from(context).cancelAll();
-                exit(1);
-            }else {
-                NotificationManagerCompat.from(activityContextManager.getInstance().getHomeController()).cancelAll();
-                activityContextManager.getInstance().getHomeController().onCloseApplication();
-                exit(1);
-            }
+            activityContextManager.getInstance().getHomeController().openNotification();
         }
     }
 
