@@ -554,9 +554,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
             filter.addAction(LOCAL_ACTION_NOTIFICATION_START);
 
             mActionBroadcastReceiver = new ActionBroadcastReceiver();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                registerReceiver(mActionBroadcastReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
-            }
+            registerReceiver(mActionBroadcastReceiver, filter);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 createNotificationChannel();
@@ -837,7 +835,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 } else {
                     sendSmartStatusToActivity(SMART_STATUS_NO_DIRECT);
                 }
-                stopTorAsync(true);
+                //stopTorAsync(true);
             } else {
                 // tor was connected in the allotted time
                 var obfs4 = Prefs.getPrefSmartTryObfs4();
