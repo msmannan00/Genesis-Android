@@ -87,15 +87,17 @@ public class settingHomeController extends AppCompatActivity {
     public void onInitTheme() {
 
         if (status.mThemeApplying) {
-            if (status.sTheme == enums.Theme.THEME_DARK) {
-                setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else if (status.sTheme == enums.Theme.THEME_LIGHT) {
-                setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            } else {
-                if (!status.sDefaultNightMode) {
+            if (android.os.Build.VERSION.SDK_INT != android.os.Build.VERSION_CODES.O && android.os.Build.VERSION.SDK_INT != android.os.Build.VERSION_CODES.O_MR1) {
+                if (status.sTheme == enums.Theme.THEME_DARK) {
+                    setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else if (status.sTheme == enums.Theme.THEME_LIGHT) {
                     setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 } else {
-                    setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    if (!status.sDefaultNightMode) {
+                        setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    } else {
+                        setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    }
                 }
             }
         }
@@ -147,7 +149,7 @@ public class settingHomeController extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        activityContextManager.getInstance().onCheckPurgeStack();
+        activityContextManager.getInstance().onPurgeStack();
         if (status.mThemeApplying) {
             // activityContextManager.getInstance().onStack(this);
         }

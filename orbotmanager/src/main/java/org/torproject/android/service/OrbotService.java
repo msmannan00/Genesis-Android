@@ -191,6 +191,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         orbotLocalConstants.mNotificationStatus = 1;
         showToolbarNotification("Connected to the Tor network", NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
     }
+
     boolean mConnectivity = true;
     public void enableNotification(){
         if(mConnectivity){

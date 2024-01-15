@@ -749,7 +749,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
         try {
             if(pGeneratePixel){
-                if(status.sLowMemory == enums.MemoryStatus.STABLE){
+                if(mGeckoView.isAttachedToWindow() && mGeckoView.isLaidOut() && status.sLowMemory == enums.MemoryStatus.STABLE){
                     mRenderedBitmap = mGeckoView.capturePixels();
                 }
             }
@@ -2791,8 +2791,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mScrollRunnable = () -> {
 
             try {
-                mPixelGenerating = true;
-                mRenderedBitmap = mGeckoView.capturePixels();
+                if(mGeckoView.isAttachedToWindow() && mGeckoView.isLaidOut() && status.sLowMemory == enums.MemoryStatus.STABLE){
+                    mPixelGenerating = true;
+                    mRenderedBitmap = mGeckoView.capturePixels();
+                }
             } catch (Exception ignored) {
             }
             new Handler().postDelayed(() ->

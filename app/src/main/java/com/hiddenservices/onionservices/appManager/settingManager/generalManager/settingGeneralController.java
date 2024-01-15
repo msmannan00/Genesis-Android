@@ -123,8 +123,11 @@ public class settingGeneralController extends AppCompatActivity {
                 if (mIsThemeChangable) {
                     status.mThemeApplying = true;
 
-
                     activityContextManager.getInstance().getHomeController().onReInitTheme();
+                    if (android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.O || android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.O_MR1) {
+                        activityContextManager.getInstance().onGoHome();
+                        onBackPressed();
+                    }
                     new Handler().postDelayed(() ->
                     {
                         try {
@@ -160,7 +163,7 @@ public class settingGeneralController extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        activityContextManager.getInstance().onCheckPurgeStack();
+        activityContextManager.getInstance().onPurgeStack();
         activityContextManager.getInstance().getHomeController().onKillMedia();
         if (status.mThemeApplying) {
             // activityContextManager.getInstance().onStack(this);

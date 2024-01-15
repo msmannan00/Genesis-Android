@@ -95,7 +95,7 @@ public class settingTrackingController extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        activityContextManager.getInstance().onCheckPurgeStack();
+        activityContextManager.getInstance().onPurgeStack();
         if (mSettingChanged) {
             activityContextManager.getInstance().setCurrentActivity(this);
         }

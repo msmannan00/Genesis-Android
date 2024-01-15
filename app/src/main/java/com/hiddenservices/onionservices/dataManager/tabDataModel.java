@@ -290,7 +290,7 @@ class tabDataModel {
             try {
                 for (int counter = 0; counter < mTabs.size(); counter++) {
                     int finalCounter = counter;
-                    if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID)) {
+                    if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID) && pBitmapManager!=null) {
                         Bitmap mBitmap = pBitmapManager.poll(10000);
 
                         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -299,17 +299,7 @@ class tabDataModel {
                         Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                         Bitmap emptyBitmap = Bitmap.createBitmap(decoded.getWidth(), decoded.getHeight(), decoded.getConfig());
                         if (!decoded.sameAs(emptyBitmap)) {
-
-                            if (pImageView != null) {
-                                //activityContextManager.getInstance().getHomeController().runOnUiThread(() -> {
-                                    //pImageView.setImageBitmap(mBitmap);
-                                //});
-                            }
-
                             mTabs.get(finalCounter).decodeByteArraysetmBitmap(decoded);
-                            //ContentValues mContentValues = new ContentValues();
-                            //mContentValues.put("mThumbnail", out.toByteArray());
-                            //mExternalEvents.invokeObserver(Arrays.asList("tab", mContentValues, "mid = ?", new String[]{mTabs.get(finalCounter).getmId()}), dataEnums.eTabCallbackCommands.M_EXEC_SQL_USING_CONTENT);
                         }
                         break;
                     }

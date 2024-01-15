@@ -197,7 +197,7 @@ public class activityContextManager {
         }
     }
 
-    public void onCheckPurgeStack() {
+    public void onPurgeStack() {
         if(pHomeController==null || pHomeController.get() == null){
             for (int mCounter = 0; mCounter < mStackList.size(); mCounter++) {
                 try {

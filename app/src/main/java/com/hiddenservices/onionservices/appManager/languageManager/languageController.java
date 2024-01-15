@@ -201,7 +201,7 @@ public class languageController extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        activityContextManager.getInstance().onCheckPurgeStack();
+        activityContextManager.getInstance().onPurgeStack();
         if (mLanguageAdapter != null) {
             mLanguageAdapter.notifyDataSetChanged();
         }
