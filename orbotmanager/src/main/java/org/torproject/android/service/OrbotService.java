@@ -4,6 +4,12 @@
 package org.torproject.android.service;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE;
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH;
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK;
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
 import static org.torproject.android.service.TorServiceConstants.CMD_SETTING;
 import static org.torproject.jni.TorService.ACTION_ERROR;
 
@@ -302,11 +308,17 @@ public class OrbotService extends VpnService implements OrbotConstants {
         if(orbotLocalConstants.mNotificationStatus != 0){
             if(orbotLocalConstants.mNotificationStatus != 0){
                 try {
-                    startForeground(NOTIFY_ID, mNotifyBuilder.build());
-                }catch (Exception ex){}
+                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
+                        startForeground(NOTIFY_ID, mNotifyBuilder.build());
+                    } else {
+                        startForeground(NOTIFY_ID, mNotifyBuilder.build(), FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
+                    }
+                }catch (Exception ex){
+                    int e=0;
+                    e=1;
+                }
             }
         }
-
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {

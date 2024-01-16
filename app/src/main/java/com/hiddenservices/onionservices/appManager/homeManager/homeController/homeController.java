@@ -1230,7 +1230,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     return;
                 }
                 pluginController.getInstance().onMessageManagerInvoke(null, M_RESET);
-                if (!mGeckoClient.getSession().getCurrentURL().equals("about:blank")) {
+                if (!mGeckoClient.getSession().getCurrentURL().equals("about:blank") && (mProgressBar.getProgress()<=0 || mProgressBar.getProgress()>=100)) {
                     mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, true, false);
                 }
 
@@ -2924,6 +2924,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 pluginController.getInstance().onMessageManagerInvoke(data, M_LONG_PRESS_WITH_LINK);
             } else if (e_type.equals(homeEnums.eGeckoCallback.ON_LONG_PRESS)) {
                 pluginController.getInstance().onMessageManagerInvoke(data, M_LONG_PRESS_DOWNLOAD);
+            } else if (e_type.equals(M_LONG_PRESS_URL)) {
             } else if (e_type.equals(M_LONG_PRESS_URL)) {
                 pluginController.getInstance().onMessageManagerInvoke(data, M_LONG_PRESS_URL);
             } else if (e_type.equals(homeEnums.eGeckoCallback.OPEN_NEW_TAB)) {

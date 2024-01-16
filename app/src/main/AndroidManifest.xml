@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Permissions -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -13,6 +12,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
 
     <application
         android:allowBackup="true"
@@ -216,7 +216,8 @@
             android:name="org.torproject.android.service.OrbotService"
             android:enabled="true"
             android:exported="false"
-            android:stopWithTask="true" />
+            android:foregroundServiceType="connectedDevice"
+            android:stopWithTask="true"/>
 
         <!-- Reciever & Settings -->
 
@@ -297,21 +298,6 @@
             android:name="com.hiddenservices.onionservices.libs.providers.HSContentProvider"
             android:authorities="org.torproject.android.ui.hiddenservices.providers.genesishiddenservices"
             android:exported="false" />
-
-        <!--<provider
-            android:name="com.hiddenservices.onionservices.libs.providers.OnionServiceContentProvider"
-            android:authorities="org.torproject.android.ui.v3onionservice.genesishiddenservices"
-            android:exported="false" />
-
-        <provider
-            android:name="com.hiddenservices.onionservices.libs.providers.ClientAuthContentProviderGenesis"
-            android:authorities="org.torproject.android.ui.v3onionservice.genesishiddenservices.clientauth"
-            android:exported="false" />
-
-        <provider
-            android:name="com.hiddenservices.onionservices.libs.providers.CookieContentProvider"
-            android:authorities="org.torproject.android.ui.hiddenservices.providers.genesishiddenservices.cookie"
-            android:exported="false" />-->
 
         <provider
             android:name="androidx.core.content.FileProvider"
