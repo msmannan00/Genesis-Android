@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
 
     <application
         android:allowBackup="true"
@@ -216,7 +215,6 @@
             android:name="org.torproject.android.service.OrbotService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="connectedDevice"
             android:stopWithTask="true"/>
 
         <!-- Reciever & Settings -->

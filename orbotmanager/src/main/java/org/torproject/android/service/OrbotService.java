@@ -311,7 +311,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                     if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
                         startForeground(NOTIFY_ID, mNotifyBuilder.build());
                     } else {
-                        startForeground(NOTIFY_ID, mNotifyBuilder.build(), FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
+                        startForeground(NOTIFY_ID, mNotifyBuilder.build());
                     }
                 }catch (Exception ex){
                     int e=0;

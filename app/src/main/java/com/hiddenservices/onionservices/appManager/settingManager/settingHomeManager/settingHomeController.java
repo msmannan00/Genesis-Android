@@ -243,12 +243,12 @@ public class settingHomeController extends AppCompatActivity {
 
     public void onReportWebsite(View view) {
         finish();
-        activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_REPORT_URL));
+        activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_REPORT_URL);
     }
 
     public void onSitemap(View view) {
         finish();
-        activityContextManager.getInstance().getHomeController().onLoadURL(helperMethod.setGenesisVerificationToken(constants.CONST_SITEMAP));
+        activityContextManager.getInstance().getHomeController().onLoadURL(constants.CONST_SITEMAP);
     }
 
     public void onReset(View view) {

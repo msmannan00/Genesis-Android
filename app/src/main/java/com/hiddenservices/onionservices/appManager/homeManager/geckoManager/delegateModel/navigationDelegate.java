@@ -99,12 +99,7 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
             mEvent.invokeObserver(Arrays.asList(mGeckoDataModel.mCurrentURL, mGeckoDataModel.mSessionID, mGeckoDataModel.mCurrentTitle, false), homeEnums.eGeckoCallback.M_LOAD_HOMEPAGE_GENESIS);
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
-        if (!m_url.contains(constants.CONST_GENESIS_GMT_TIME_GET_KEY) && !m_url.startsWith(CONST_GENESIS_URL_CACHED) && !m_url.startsWith(CONST_GENESIS_URL_CACHED_DARK) && var1.uri.startsWith("http://167.86.99.31") && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY) && !var1.uri.contains(constants.CONST_GENESIS_LOCAL_TIME_GET_KEY)) {
-
-            String mVerificationURL = setGenesisVerificationToken(m_url);
-            mGeckoSession.loadUri(mVerificationURL);
-            return GeckoResult.fromValue(AllowOrDeny.DENY);
-        } else if (m_url.startsWith("mailto")) {
+        if (m_url.startsWith("mailto")) {
             mEvent.invokeObserver(Arrays.asList(m_url, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.M_ON_MAIL);
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         } else if (m_url.contains("167.86.99.31/advert__")) {
