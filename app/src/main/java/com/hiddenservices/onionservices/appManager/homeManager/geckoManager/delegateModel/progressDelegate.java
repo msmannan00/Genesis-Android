@@ -73,8 +73,8 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
 
     @Override
     public void onPageStart(@NonNull GeckoSession var1, @NonNull String var2) {
-        if(var2.startsWith("tel:")){
-            intentHandler.actionDial(var2, mContext);
+        if(var2.startsWith("tel:") || var2.startsWith("intent")){
+            intentHandler.actionIntent(var2, mContext);
             return;
         }
         securityInfo = null;
@@ -89,7 +89,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
             mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID, var2, mGeckoDataModel.mCurrentURL_ID, mGeckoDataModel.mTheme, null), homeEnums.eGeckoCallback.ON_UPDATE_SEARCH_BAR);
         }
 
-        //if (mIsLoaded) {
+        if (!var2.startsWith("intent")) {
             if (!mGeckoDataModel.mCurrentURL.equals("about:config") && !var2.equals("about:blank") && !var2.startsWith("jar:file")) {
                 if(helperMethod.getHost(var2).endsWith(".onion")){
                     var2 = var2.replace("www.", "");
@@ -111,7 +111,7 @@ public class progressDelegate implements GeckoSession.ProgressDelegate {
                     mEvent.invokeObserver(Arrays.asList(var2, mGeckoDataModel.mSessionID), homeEnums.eGeckoCallback.SEARCH_UPDATE);
                 }
             }
-        //}
+        }
     }
 
     @UiThread

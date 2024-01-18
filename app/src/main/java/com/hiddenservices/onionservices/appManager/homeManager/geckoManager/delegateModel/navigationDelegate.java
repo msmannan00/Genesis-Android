@@ -86,6 +86,9 @@ public class navigationDelegate implements GeckoSession.NavigationDelegate {
         if(m_url.startsWith("tel:")){
             return GeckoResult.fromValue(AllowOrDeny.DENY);
         }
+        if(m_url.startsWith("intent")){
+            return GeckoResult.fromValue(AllowOrDeny.DENY);
+        }
         if (helperMethod.getHost(m_url).endsWith(".onion")) {
             m_url = m_url.replace("www.", "");
         }

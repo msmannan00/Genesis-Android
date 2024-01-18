@@ -82,7 +82,10 @@ public class permissionHandler {
              public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
                 try {
                     pMethodParam.call();
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    int xe=0;
+                    xe=1;
+                }
              }
 
              @Override

@@ -1,21 +1,45 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.constants.strings;
+import com.hiddenservices.onionservices.helperManager.helperMethod;
+
 import org.mozilla.geckoview.GeckoSession;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class intentHandler {
 
-    public static void actionDial(String pIntentHander, WeakReference<AppCompatActivity> mContext) {
+    public static boolean actionIntent(String pIntentHander, WeakReference<AppCompatActivity> mContext) {
         if(pIntentHander.startsWith("tel:")){
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(pIntentHander));
             mContext.get().startActivity(intent);
+            return false;
         }
+        if(pIntentHander.startsWith("intent:")){
+            try {
+                if(status.sSettingTrackingProtection == 0){
+                    Uri data = Uri.parse(pIntentHander);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, data);
+                    String packageName = data.getQueryParameter("package");
+                    if (packageName != null && !packageName.isEmpty()) {
+                        intent.setPackage(packageName);
+                    }
+                    mContext.get().startActivity(intent);
+                }else {
+                    helperMethod.showToastMessage("Tracking protection blocking request", mContext.get());
+                }
+            } catch (ActivityNotFoundException e) {
+                helperMethod.showToastMessage("Requested application not found on device", mContext.get());
+            }
+        }
+        return true;
     }
 
     public static String getSecurityInfo(GeckoSession.ProgressDelegate.SecurityInformation securityInfo) {

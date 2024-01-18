@@ -16,6 +16,7 @@ import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -1138,7 +1139,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
 
         mSearchbar.setMovementMethod(null);
-        //registerReceiver(downloadStatus, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        registerReceiver(downloadStatus, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
         mNewTab.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {

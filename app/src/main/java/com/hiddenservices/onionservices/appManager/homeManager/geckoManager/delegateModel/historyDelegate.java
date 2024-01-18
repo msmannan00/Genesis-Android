@@ -43,9 +43,6 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
         if(mHistory!=null){
             mHistoryChanged = mHistory.size()!=var2.size() || mHistory.size()!=var2.getCurrentIndex();
         }
-        if(mHistory==null || mHistory.size()!=var2.size()){
-            //mGeckoDataModel.mTheme = null;
-        }
         mHistory = var2;
         if(mHistory !=null){
             try {
@@ -74,8 +71,10 @@ public class historyDelegate implements GeckoSession.HistoryDelegate {
             pURL = pURL.replace("www.", "");
         }
 
-        this.mGeckoDataModel.mCurrentURL = pURL;
-        intentHandler.actionDial(pURL, mContext);
+        boolean status = intentHandler.actionIntent(pURL, mContext);
+        if(status){
+            this.mGeckoDataModel.mCurrentURL = pURL;
+        }
     }
 
 }
