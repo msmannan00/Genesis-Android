@@ -204,6 +204,13 @@
 
         <!-- Services & Settings -->
 
+        <receiver android:name=".DownloadBroadcast"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name="com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadService"
             android:enabled="true"

@@ -205,6 +205,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     private int mResponseRequestCode = 10112;
     private boolean msearchstatuscopy = false;
+    private DownloadBroadcast downloadReceiver;
 
     /*-------------------------------------------------------INITIALIZATION-------------------------------------------------------*/
 
@@ -925,7 +926,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         manager.notify(notificationCode, notification);
     }
 
-    private BroadcastReceiver downloadStatus = new BroadcastReceiver() {
+    public class DownloadBroadcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
@@ -1044,7 +1045,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         }
 
         try {
-            unregisterReceiver(downloadStatus);
+            unregisterReceiver(downloadReceiver);
         }catch (Exception ex){}
         if (bound) {
             unbindService(connection);
@@ -1139,7 +1140,12 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
 
         mSearchbar.setMovementMethod(null);
-        registerReceiver(downloadStatus, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        downloadReceiver = new DownloadBroadcast();
+        if (SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED);
+        }else {
+            registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        }
 
         mNewTab.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
