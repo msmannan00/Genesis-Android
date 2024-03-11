@@ -1,6 +1,6 @@
 /* Version */
 project.ext.vname = 'Build | Dark-Origin 2.0.5'
-project.ext.vcode = 605
+project.ext.vcode = 610
 project.ext.buildType = 'release'
 project.ext.jvmTarget = "1.8"
 
