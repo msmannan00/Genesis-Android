@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -224,7 +223,6 @@
         <service
             android:name="org.torproject.android.service.OrbotService"
             android:enabled="true"
-            android:foregroundServiceType="FOREGROUND_SERVICE"
             android:exported="false"
             android:stopWithTask="true"/>
 
