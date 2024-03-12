@@ -310,9 +310,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
             if (orbotLocalConstants.mNotificationStatus != 0) {
                 try {
                     if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
-                        //startForeground(NOTIFY_ID, mNotifyBuilder.build());
+                        startForeground(NOTIFY_ID, mNotifyBuilder.build());
                     } else {
-                        //startForeground(NOTIFY_ID, mNotifyBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST);
+                        startForeground(NOTIFY_ID, mNotifyBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST);
                     }
                 } catch (Exception ex) {
                     Log.e("OrbotTorService", "Error starting foreground service:", ex);
