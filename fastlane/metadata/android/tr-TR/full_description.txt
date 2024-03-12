@@ -1,0 +1,18 @@
+Orbot başka uygulamaların İnterneti daha güvenli olarak kullanmasını sağlayan özgür bir vekil sunucu uygulamasıdır. Orbot, Tor kullanarak İnternet trafiğinizi şifreler ve dünya üzerindeki pek çok farklı bilgisayardan geçirerek gizler. Tor, kişisel özgürlüğünüze ve bilgilerinize, gizli ticari işlemlerinize ve ilişkilerinize, devlet güvenliğine karşı tehdit oluşturan ve trafik analizi olarak bilinen ağ izlemelerine karşı koruma sağlayan bir özgür yazılım ve açık ağdır.
+
+Orbot, gerçekten özel bir internet bağlantısı oluşturan tek uygulamadır. New York Times'ın yazdığı gibi, “bir iletişim Tor üzerinden gerçekleştiğinde, nereden ve kimden geldiğini asla bilemezsiniz.”
+
+Tor, 2012 Electronic Frontier Foundation (EFF) Pioneer Ödülü'nü kazandı.
+
+★ ALTERNATİF KABUL ETMEYİN: Orbot, Android'de interneti kullanmanın en güvenli yoludur. Bitti. Orbot, VPN'ler ve vekil sunucular gibi sizi doğrudan bağlamak yerine, şifreli trafiğinizi dünyanın dört bir yanındaki bilgisayarlardan birkaç kez sektirir. Bu işlem biraz daha uzun sürer, ancak kullanılabilir en güçlü gizlilik ve kimlik koruması beklemeye değer.
+★ UYGULAMALAR İÇİN GİZLİLİK: Orbot VPN özelliği aracılığıyla herhangi bir uygulama Tor üzerinden yönlendirilebilir.
+★ HERKES İÇİN GİZLİLİK: Tor, gizli olarak bir rakibi araştırmanıza, okuldaki Facebook engellemesini geçmenize veya iş yerinde spor izlemek için bir güvenlik duvarını atlamanıza yardımcı olabilir.
+
+*** Geri Bildirimi Seviyoruz ***
+★ DAHA FAZLA BİLGİ EDİNİN: https://orbot.app adresinde Orbot hakkında daha fazla bilgi edinin ve dahil olun.
+★ HAKKIMIZDA: Guardian Project, daha iyi bir yarın için güvenli mobil uygulamalar ve açık kaynaklı kodlar yazan bir geliştirici grubudur.
+★ AÇIK-KAYNAK: Orbot özgür bir yazılımdır. Kaynak kodumuza bir göz atın veya daha iyi hale getirmek için topluluğa katılın: https://github.com/guardianproject/orbot
+★ BİZE MESAJ GÖNDERİN: En sevdiğiniz özellik eksik mi? Can sıkıcı bir hata mı buldunuz? Duymak isteriz! Bize bir e-posta gönderin: support@guardianproject.info
+
+*** Sorumluluk reddi ***
+Guardian Project, güvenliğinizi ve anonimliğinizi korumak için tasarlanmış uygulamalar yapar. Kullandığımız protokoller, güvenlik teknolojisinde son teknoloji olarak kabul edilmektedir. En son tehditlerle mücadele etmek ve hataları ortadan kaldırmak için yazılımımızı sürekli olarak geliştirmemize rağmen, hiçbir teknoloji %100 kusursuz değildir. Azami güvenlik ve anonimlik için, kullanıcılar kendilerini güvende tutmak üzere en iyi pratikleri uygulamalıdır.  Bu konulara ilişkin iyi bir tanıtım kılavuzunu https://securityinabox.org adresinde bulabilirsiniz.

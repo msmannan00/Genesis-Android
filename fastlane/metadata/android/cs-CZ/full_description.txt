@@ -1,0 +1,23 @@
+Orbot je bezplatná proxy aplikace, která dává možnost jiným aplikacím využívat internet bezpečněji. Orbot používá Tor k šifrování vašeho internetového provozu a potom ho skryje směrováním skrze několik počítačů rozmístěných po celém světě. Tor je bezplatný software a otevřená síť, která vám pomáhá chránit se před síťovým dohledem/monitorováním, které ohrožuje osobní svobodu a soukromí, soukromé obchodní aktivity a vztahy. Chrání před analýzou provozu.
+
+*** SAMSUNG GALAXY UŽIVATELÉ ***
+Na některých zařízeních naslouchá aplikace Samsung na stejném síťovém portu, který potřebuje Orbot. Stáhněte si 'SockStat' z Google Play. Podívejte se na aplikaci naslouchající na portu 9050. Vynuťte její zastavení a vypněte její spouštění. Také můžete zkusit změnit "Tor SOCKS" nastavení Orbota pod sekcí Debug/ladění na port 9051 nebo AUTO. Opravu můžete vidět v tomto videu: https://www.youtube.com/watch?v=yK-nK4F67_g
+*****
+
+Orbot je jediná aplikace, která vytváří skutečně soukromé internetové připojení. Napsaly o tom i New York Times, “jakmile komunikace přijde ze sítě Tor, nemůžete nikdy vědět, od koho je.” Tor vyhrál cenu 2012 Electronic Frontier Foundation (EFF) Pioneer Award.
+
+★ NESOUHLASTE S NÁHRAŽKAMI: Orbot je nejbezpečnější cestou jak používat internet na Androidu. Tečka. Orbot přesměrovává vaše šifrovaná data několikrát skrze počítače po celém světě, místo toho, aby vás připojil přímo jako to dělají běžné VPN a proxy. Tento proces trvá delší dobu, ale nejvyšší dostupné soukromí a ochrana identity stojí za čekání.
+★ SOUKROMÉ WEBOVÉ SURFOVÁNÍ: Použijte zároveň s Orfoxem, což je nejanonymnější způsob přístupu k webovým stránkám, i když jsou běžně blokovány, monitorovány a nebo jde o hidden web. Získejte Orfox: https://play.google.com/store/apps/details?id=info.guardianproject.orfox
+★ SOUKROMÝ CHAT PŘES MESSENGER: Použijte ChatSecure s Orbotem pro chatování bez obav s kýmkoli, kdekoli a zdarma. Získejte ChatSecure: https://goo.gl/O3FfS
+★ SOUKROMÍ PRO APLIKACE: Jakákoli nainstalovaná aplikace podporující proxy, může používat Tor, pokud využijte nastavení uvedená zde: https://goo.gl/2OA1y Použijte Orbot s Twitterem, nebo zkuste soukromé webové vyhledávání s DuckDuckGo: https://goo.gl/lgh1p
+★ SOUKROMÍ PRO KAŽDÉHO: Tor vám může pomoci provádět soukromý průzkum konkurence, obejít blokování Facebooku ve škole, a nebo obejít firewall pro sledování sportu v práci.
+★ SOUKROMÍ SNADNO: Podívejte se na našeho zajímavého a interaktivního průvodce: https://guardianproject.info/howto/browsefreely
+★ JE TO OFICIÁLNÍ: Toto je oficiální Android verze služby pro cibulové směrování/Tor onion routing.
+
+***Milujeme zpětnou vazbu***
+★ O NÁS: Guardian Project je skupina vývojářů, kteří vytváří bezpečné mobilní aplikace a otevřený zdrojový kód pro lepší budoucnost.
+★ OPEN-SOURCE: Orbot je bezplatný software. Podívejte se na náš zdrojový kód nebo se připojte ke komunitě abyste ji vylepšili: https://gitweb.torproject.org/orbot.git
+★ ZAŠLETE NÁM ZPRÁVU: Chybí vám nějaká funkce? Našli jste otravnou chybu? Moc rádi si přečteme vaši zprávu! Pošlete nám e-mail na: support@guardianproject.info
+
+***Zřeknutí se odpovědnosti***
+The Guardian Project vytváří aplikace, které jsou navrženy k ochraně vaší bezpečnosti a anonymity. Protokoly, které používáme, jsou široce považovány za nejmodernější v rámci bezpečnostní technologie. Stále aktualizujeme náš software aby byl chráněn před novými riziky a odstraňujeme chyby, žádná technologie však není 100% spolehlivá. Pro maximální zabezpečení a anonymitu musí uživatelé používat osvědčené postupy, aby byli v bezpečí. Dobrého úvodního průvodce těmito tématy najdete na adrese https://securityinabox.org

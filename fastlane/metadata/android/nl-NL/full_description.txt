@@ -1,0 +1,17 @@
+Orbot is een gratis proxy-app die andere apps in staat stelt veiliger gebruik te maken van het internet. Orbot gebruikt Tor om je internetverkeer te versleutelen en verbergt het vervolgens door het via een reeks computers over de hele wereld te laten stuiteren. Tor is gratis software en een open netwerk dat je helpt je te verdedigen tegen een vorm van netwerkbewaking die een bedreiging vormt voor de persoonlijke vrijheid en privacy, vertrouwelijke zakelijke activiteiten en relaties, en de staatsveiligheid, bekend als verkeersanalyse.
+
+Orbot is de enige app die een echt private internetverbinding creëert. Zoals de New York Times schrijft, "wanneer een communicatie via Tor binnenkomt, kun je nooit weten waar of van wie het afkomstig is."
+
+Tor won in 2012 de Electronic Frontier Foundation (EFF) Pioneer Award.
+
+★ ACCEPTEER GEEN VERVANGERS: Orbot is de veiligste manier om het internet te gebruiken op Android. Punt uit. Orbot kaatst uw versleutelde verkeer meerdere keren door computers over de hele wereld, in plaats van u rechtstreeks te verbinden zoals bij VPN's en proxy's. Dit proces duurt iets langer, maar de sterkste privacy- en identiteitsbescherming die beschikbaar is, is het wachten waard.
+★ PRIVACY VOOR APPS: Elke geïnstalleerde app kan Tor gebruiken via de Orbot VPN-functie, of als het een proxy-functie heeft, met behulp van de instellingen die hier te vinden zijn: https://goo.gl/2OA1y Gebruik Orbot met Twitter, of probeer privé op het web te zoeken met DuckDuckGo: https://goo.gl/lgh1p
+★ PRIVACY VOOR IEDEREEN: Orbot voorkomt dat iemand die uw verbinding in de gaten houdt, weet welke apps u gebruikt of websites u bezoekt. Het enige wat iemand die je netwerkverkeer in de gaten houdt kan zien is dat je Tor gebruikt.
+
+***Wij houden van feedback***
+★ OVER ONS: Guardian Project is een groep ontwikkelaars die veilige mobiele apps en open-source code maken voor een betere toekomst.
+★ OPEN-SOURCE: Orbot is vrije software. Neem een kijkje in onze broncode, of sluit je aan bij de community om het beter te maken: https://github.com/guardianproject/orbot of https://gitweb.torproject.org/orbot.git
+★ MESSAGE ONS: Missen we uw favoriete functie? Een vervelende bug gevonden? We horen graag van u! Stuur ons een email: support@guardianproject.info
+
+***Disclaimer***
+Guardian Project maakt apps die zijn ontworpen om uw veiligheid en anonimiteit te beschermen. De protocollen die we gebruiken worden algemeen beschouwd als het neusje van de zalm op het gebied van beveiligingstechnologie. Hoewel we onze software voortdurend upgraden om de nieuwste bedreigingen te bestrijden en bugs te elimineren, is geen enkele technologie 100% waterdicht. Voor maximale veiligheid en anonimiteit moeten gebruikers gebruik maken van de beste praktijken om zichzelf veilig te houden.  U kunt een goede inleidende gids over deze onderwerpen vinden op https://securityinabox.org

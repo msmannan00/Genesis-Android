@@ -119,47 +119,6 @@
                 android:background="@color/c_orbot_setting_divider" />
 
             <LinearLayout
-                android:id="@+id/pOrbotSettingVPN"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:background="@xml/gx_ripple_blue"
-                android:onClick="onUITriggered"
-                android:orientation="horizontal"
-                android:paddingTop="14dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="14dp"
-                tools:ignore="RtlSymmetry,UsingOnClickInXml">
-
-                <TextView
-                    android:id="@+id/pOrbotSettingVPNHeader"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:text="@string/ORBOT_SETTING_ENABLE_VPN"
-                    android:textColor="@color/c_text_v1"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pOrbotSettingVPNSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:clickable="false"
-                    android:theme="@style/SCBSwitch"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="16dp"
-                android:background="@color/c_orbot_setting_divider" />
-
-            <LinearLayout
                 android:id="@+id/pOrbotSettingBridge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

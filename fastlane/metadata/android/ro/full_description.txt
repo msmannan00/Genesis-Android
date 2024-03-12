@@ -1,0 +1,18 @@
+Orbot este o aplicație proxy gratuită care permite altor aplicații să utilizeze internetul în condiții de mai mare siguranță. Orbot folosește Tor pentru a vă cripta traficul de internet și apoi îl ascunde trecând printr-o serie de calculatoare din întreaga lume. Tor este un software gratuit și o rețea deschisă care vă ajută să vă apărați împotriva unei forme de supraveghere a rețelei care amenință libertatea și intimitatea personală, activitățile și relațiile de afaceri confidențiale și securitatea statului, cunoscută sub numele de analiză a traficului.
+
+Orbot este singura aplicație care creează o conexiune la internet cu adevărat privată. După cum scrie New York Times, "atunci când o comunicare sosește din Tor, nu poți ști niciodată de unde sau de la cine vine". 
+
+Tor a câștigat în 2012 premiul pentru pionieri al Electronic Frontier Foundation (EFF).
+
+★ NU ACCEPTĂ ÎNLOCUITORI: Orbot este cel mai sigur mod de a utiliza internetul pe Android. Punct. Orbot vă face să ricoșeze traficul criptat de mai multe ori prin computere din întreaga lume, în loc să vă conecteze direct, cum fac VPN-urile și proxies. Acest proces durează ceva mai mult, dar cea mai puternică protecție a confidențialității și a identității disponibilă merită așteptarea.
+★ CONFIDENȚIALITATE PENTRU APLICAȚII: Orice aplicație poate fi direcționată prin Tor prin intermediul funcției Orbot VPN
+★ CONFIDENȚIALITATE PENTRU TOATĂ LUMEA: Orbot împiedică pe cineva care vă urmărește conexiunea să știe ce aplicații utilizați sau ce site-uri web vizitați. Tot ceea ce poate vedea cineva care vă monitorizează traficul de rețea este faptul că utilizați Tor.
+
+***Ne place feedback-ul***
+★ AFLAȚI MAI MULTE: Aflați mai multe despre Orbot și implicați-vă la https://orbot.app
+★ DESPRE NOI: Guardian Project este un grup de dezvoltatori care realizează aplicații mobile sigure și coduri open-source pentru un viitor mai bun.
+★ OPEN-SOURCE: Orbot este un software liber. Aruncați o privire la codul nostru sursă sau alăturați-vă comunității pentru a-l face mai bun: https://github.com/guardianproject/orbot
+★ TRIMITEȚI-NE UN MESAJ: Ne lipsește caracteristica ta preferată? Ați găsit un bug enervant? Ne-ar face plăcere să avem vești de la tine! Trimiteți-ne un e-mail: support@guardianproject.info
+
+***Disclaimer***
+Guardian Project creează aplicații care sunt concepute pentru a vă proteja securitatea și anonimatul. Protocoalele pe care le folosim sunt considerate pe scară largă ca fiind la cel mai avansat nivel al tehnologiei de securitate. Deși ne actualizăm în mod constant software-ul pentru a combate cele mai recente amenințări și pentru a elimina bug-urile, nicio tehnologie nu este 100% infailibilă. Pentru o securitate și un anonimat maxime, utilizatorii trebuie să utilizeze cele mai bune practici pentru a se menține în siguranță.  Puteți găsi un bun ghid introductiv pentru aceste subiecte la https://securityinabox.org.

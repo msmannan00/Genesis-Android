@@ -1,0 +1,8 @@
+– Mise à jour importante de l’interface utilisateur
+– Nouveaux assistants pour la configuration et la configuration des ponts
+– Améliorations de fonctions RPV
+– Correctifs pour les plantages de configuration des services onion/cachés
+
+Et beaucoup plus…
+
+Nous remercions : pgerber, syphyr, Khsed4, BjarniRunar, non publié, igortoliveira, goapunk, SpotComms, AkshatAgrawal05, dixidroid, arrase et autres pour les problèmes, archivages et PR

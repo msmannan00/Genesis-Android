@@ -1,0 +1,17 @@
+„Orbot“ yra nemokama įgaliotojo serverio programa, kuri leidžia kitoms programoms saugiau naudotis internetu. „Orbot“ naudoja „Tor“, kad užšifruotų jūsų interneto srautą ir paslėptų jį per kelis kompiuterius visame pasaulyje. „Tor“ yra nemokama programinė įranga ir atviras tinklas, padedantis apsisaugoti nuo tinklo stebėjimo, keliančio grėsmę asmens laisvei ir privatumui, konfidencialiai verslo veiklai ir santykiams bei valstybės saugumui, vadinamo srauto analize.
+
+„Orbot“ yra vienintelė programa, sukurianti tikrai privatų interneto ryšį. Kaip rašo laikraštis „New York Times“, „kai iš „Tor“ atkeliauja pranešimas, niekada negalite sužinoti, iš kur ar kam jis siunčiamas“.
+
+2012 m. „Tor“ pelnė „Electronic Frontier Foundation“ (EFF) pionieriaus apdovanojimą.
+
+★ NEPRIIMKITE JOKIŲ PAKAITALŲ: „Orbot“ yra saugiausias būdas naudotis internetu „Android“ sistemoje. Laikotarpis. „Orbot“ kelis kartus perduoda užšifruotą srautą per kompiuterius visame pasaulyje, užuot jungęsis tiesiogiai, kaip VPN ir įgaliotieji serveriai. Šis procesas užtrunka šiek tiek ilgiau, tačiau verta palaukti, kol bus užtikrinta patikimiausia privatumo ir tapatybės apsauga.
+★ APLINKYBIŲ privatumas: bet kuri įdiegta programa gali naudoti „Tor“ per „Orbot VPN“ funkciją arba, jei ji turi įgaliotojo serverio funkciją, naudodama čia esančius nustatymus: https://goo.gl/2OA1y Naudokite „Orbot“ su „Twitter“ arba išbandykite privačią paiešką internete su „DuckDuckGo“: https://goo.gl/lgh1p.
+★ PRIVATUMAS VISIEMS: „Orbot“ neleidžia kam nors, stebinčiam jūsų ryšį, sužinoti, kokias programėles naudojate ar kokiose svetainėse lankotės. Viskas, ką gali matyti bet kas, stebintis jūsų tinklo srautą, yra tai, kad naudojate „Tor“.
+
+***Mums patinka atsiliepimai***
+★ APIE MUS: „Guardian Project“ yra kūrėjų grupė, kurianti saugias mobiliąsias programėles ir atvirojo kodo kodą geresniam rytojui.
+★ ATVIRAS KODAS: „Orbot“ yra laisva programinė įranga. Peržiūrėkite mūsų pirminį kodą arba prisijunkite prie bendruomenės ir tobulinkite jį: https://github.com/guardianproject/orbot
+★ PARAŠYKITE MUMS: Ar trūksta jūsų mėgstamiausios funkcijos? Radote erzinančią klaidą? Norėtume išgirsti jūsų nuomonę! Siųskite mums el. laišką: support@guardianproject.info
+
+***Atsakomybės apribojimas***
+„Guardian Project“ kuria programėles, skirtas jūsų saugumui ir anonimiškumui apsaugoti. Mūsų naudojami protokolai plačiai laikomi moderniausiomis saugumo technologijomis. Nors nuolat atnaujiname savo programinę įrangą, siekdami kovoti su naujausiomis grėsmėmis ir pašalinti klaidas, jokia technologija nėra 100 % patikima. Siekdami maksimalaus saugumo ir anonimiškumo, naudotojai turi naudoti geriausią praktiką, kad būtų saugūs.  Gerą įvadinį vadovą šiomis temomis galite rasti adresu https://securityinabox.org

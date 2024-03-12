@@ -1,0 +1,22 @@
+Orbot é uma aplicação de proxy livre que permite que outras aplicações usem a Internet de forma mais segura. Orbot usa Tor para encriptar o seu tráfego da Internet e depois oculta-o usando uma série de caminhos alternados por uma série de computadores em todo o mundo. Tor é um software livre de rede aberta que o ajuda a defender-se contra algumas formas de vigilâncias que ameaçam a liberdade e privacidade, atividades comerciais confidenciais e relacionamentos, e a segurança do estado conhecida como análise de tráfego.
+
+*** UTILIZADORES SAMSUNG GALAXY ***
+Em alguns aparelhos, a aplicação da Samsung está a sondar a mesma porta de rede que o Orbot precisa. Transfira 'SockStat' da Google Play. Procure pela a aplicação na porta 9050. Force a paragem e desative a aplicação. Também pode tentar alterar a definição de Orbot "Tor SOCKS" na secção "Depurar" para 9051 ou AUTOMÁTICO.
+
+Orbot é a única aplicação que cria uma ligação da Internet verdadeiramente privada. Como o New York Times descreveu: "Quando uma comunicação chega a partir da rede Tor, nunca pode saber de onde ou de quem veio." Tor ganhou em 2012 o prémio Electronic Frontier Foundation (EFF) Pioneer.
+
+★ NÃO ACEITE NENHUM SUBSTITUTO: Orbot é a forma mais segura de usar a Internet em aparelhos com o sistema operacional Android (Tvs, tablets, celulares e etc ). Anonimato. Orbot permuta seu tráfego criptografado várias vezes entre computadores espalhados geográfica em todo o mundo, em vez de conectá-lo diretamente ao seu destino, assim como fazem as VPNs e proxies. Esse processo demora um pouco mais, mas para ter privacidade e proteção de identidade vale a pena esperar.
+★ NAVEGAÇÃO WEB PRIVADA: Use com Orfiox, a maneira mais anónima para aceder a qualquer ''site'' da Web, mesmo que esteja normalmente bloqueado, monitorizado, ou um serviço oculto na Web. Obter Orfox:  https://play.google.com/store/apps/details?id=info.guardianproject.orfox
+★ CONVERSAÇÃO COM MENSAGENS PRIVADAS: Use ChatSecure com o Orbot para conversar confidencialmente com qualquer pessoa, em qualquer lugar gratuitamente. Obter ChatSecure: https://goo.gl/O3FfS
+★ PRIVACIDADE PARA APLICAÇÕES: qualquer aplicação instalada pode usar o Tor se ele tiver uma funcionaldiade de proxy, usando as configurações encontradas aqui: https://goo.gl/2OA1y Use Orbot com o Twitter, ou tente a pesquisa da Web privada com o DuckDuckGo: https://goo.gl/lgh1p
+★ PRIVACIDADE PARA TODOS: Tor pode ajudá-lo a pesquisar confidencialmente um concorrente, contornar o bloqueio do Facebook na escola, ou contornar uma ''firewall'' para ver desportos no trabalho.
+★ PRIVACIDADE TORNADA FÁCIL: Dê uma vista de olhos na nossa diversão, modo interativo passo a passo: https://guardianproject.info/howto/browsefreely
+★ É OFICIAL: esta é a versão oficial do serviço de encaminhamento do Tor onion para Android.
+
+*** Nós Gostamos de Comentários ***
+★ SOBRE NÓ: Guardian Project é um grupo de programadores que criam aplicações móveis seguras e de código aberto para um futuro melhor.
+★ CÓDIGO ABERTO: Orbot é um software livre. Dê uma olhada no nosso código fonte, ou junte-se à nossa comunidade para torná-la ainda melhor: https://gitweb.torproject.org/orbot.git
+★ ENVIE-NOS UMA MENSAGEM: Nós estamos a falhar a sua funcionalidade favorita? Encontrou um erro chato? Nós gostaríamos muito de ouvir de si! Envie-nos uma mensagem: support@guardianproject.info
+
+*** Limitação de Responsabilidade ***
+O Projeto Guardian cria aplicações que são desenhadas para proteger a sua segurança e anonimato. Os protocolos que nós usamos são amplamente considerados como o estado da arte em tecnologia de segurança. Consulte  https://securityinabox.org

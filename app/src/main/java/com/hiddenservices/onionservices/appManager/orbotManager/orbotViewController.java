@@ -15,16 +15,14 @@ class orbotViewController {
 
     private AppCompatActivity mContext;
     private SwitchMaterial mOrbotSettingBridgeSwitch;
-    private SwitchMaterial mOrbotSettingVPNSwitch;
     private LinearLayout mOrbotSettingWarning;
 
     /*Initializations*/
 
-    orbotViewController(SwitchMaterial pOrbotSettingBridgeSwitch, SwitchMaterial pOrbotSettingVPNSwitch, AppCompatActivity pContext, LinearLayout pOrbotSettingWarning) {
+    orbotViewController(SwitchMaterial pOrbotSettingBridgeSwitch, AppCompatActivity pContext, LinearLayout pOrbotSettingWarning) {
         this.mContext = pContext;
         this.mOrbotSettingBridgeSwitch = pOrbotSettingBridgeSwitch;
         this.mOrbotSettingWarning = pOrbotSettingWarning;
-        this.mOrbotSettingVPNSwitch = pOrbotSettingVPNSwitch;
     }
 
     protected void onInit(){
@@ -39,9 +37,6 @@ class orbotViewController {
         updateBridgeViews(pStatus, true);
     }
 
-    private void updateVPN(boolean pStatus) {
-        mOrbotSettingVPNSwitch.setChecked(pStatus);
-    }
 
     private void updateBridgeViews(boolean pStatus, boolean pIsInvoked) {
         mOrbotSettingBridgeSwitch.setChecked(pStatus);
@@ -67,7 +62,6 @@ class orbotViewController {
 
     private void initViews(boolean pVPNStatus, boolean pGatewayStatus) {
         updateBridgeViews(pGatewayStatus, false);
-        updateVPN(pVPNStatus);
     }
 
     public void onTrigger(orbotEnums.eOrbotViewCommands pCommands, List<Object> pData) {
@@ -77,8 +71,6 @@ class orbotViewController {
             initPostUI();
         } else if (pCommands == orbotEnums.eOrbotViewCommands.M_INIT_UI) {
             initViews((boolean) pData.get(0), (boolean) pData.get(1));
-        } else if (pCommands == orbotEnums.eOrbotViewCommands.M_UPDATE_VPN) {
-            updateVPN((boolean) pData.get(0));
         } else if (pCommands == orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGES) {
             updateBridgeViews((boolean) pData.get(1), (boolean) pData.get(1));
         }

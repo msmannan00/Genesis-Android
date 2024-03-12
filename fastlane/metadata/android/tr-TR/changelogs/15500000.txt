@@ -1,0 +1,10 @@
+***UYARI: TÜM ROOT ÖZELLİKLERİ BU YENİ ORBOT SÜRÜMÜNDEN KALDIRILMIŞTIR.***
+Lütfen root ile şeffaf proxy yerine Orbot "Apps VPN Mode" veya Orfox tarayıcısını kullanın.
+
+* Tor 0.3.1.8 sürümüne güncelleme
+* Güvenilmez ve test edilmemiş olduğu için Root/Transproxy işlevleri
+için destek kaldırıldı
+* VPN şeffaf proxy için GELİŞMİŞ destek ve yeni "Apps" uygulaması
+seçim kullanıcı arayüzü
+* Obfs4proxy lisans bilgisi ekleme sorununu çözme
+* En son Meek köprüsü konumları Tor desteğine güncelleme

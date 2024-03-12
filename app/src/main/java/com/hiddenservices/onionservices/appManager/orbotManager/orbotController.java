@@ -32,7 +32,6 @@ public class orbotController extends AppCompatActivity {
     private com.hiddenservices.onionservices.appManager.orbotManager.orbotViewController mOrbotViewController;
 
     private SwitchMaterial mOrbotSettingBridgeSwitch;
-    private SwitchMaterial mOrbotSettingVPNSwitch;
     private LinearLayout mOrbotSettingWarning;
 
     /* INITIALIZATIONS */
@@ -66,10 +65,9 @@ public class orbotController extends AppCompatActivity {
 
     public void viewsInitializations() {
         mOrbotSettingBridgeSwitch = findViewById(R.id.pOrbotSettingBridgeSwitch);
-        mOrbotSettingVPNSwitch = findViewById(R.id.pOrbotSettingVPNSwitch);
         mOrbotSettingWarning = findViewById(R.id.pOrbotSettingWarning);
 
-        mOrbotViewController = new orbotViewController(mOrbotSettingBridgeSwitch, mOrbotSettingVPNSwitch, this, mOrbotSettingWarning);
+        mOrbotViewController = new orbotViewController(mOrbotSettingBridgeSwitch, this, mOrbotSettingWarning);
         mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sVPNStatus, status.sBridgeStatus));
         mOrbotViewController.onInit();
 
@@ -95,9 +93,6 @@ public class orbotController extends AppCompatActivity {
             mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(status.sBridgeStatus));
         } else if (view.getId() == R.id.pOrbotSettingWarning) {
             helperMethod.openActivity(bridgeController.class, constants.CONST_LIST_HISTORY, orbotController.this, true);
-        } else if (view.getId() == R.id.pOrbotSettingVPN) {
-            mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_VPN_SWITCH, Collections.singletonList(!mOrbotSettingVPNSwitch.isChecked()));
-            mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_VPN, Collections.singletonList(status.sVPNStatus));
         }
     }
 

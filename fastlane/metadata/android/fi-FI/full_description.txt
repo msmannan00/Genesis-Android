@@ -1,0 +1,17 @@
+Orbot on ilmainen välityspalvelinsovellus, joka auttaa muita sovelluksia yhdistämään Internetiin turvallisemmin. Orbot käyttää Tor-verkkoa verkkoliikenteesi salaukseen ja sen jälkeen peittää sen ohjaamalla sen useiden eri tietokoneiden kautta ympäri maailman. Tor on vapaa ohjelmisto ja avoin verkosto, joka auttaa sinua suojautumaan valtioiden turvallisuusviranomaisten harjoittamalta verkkoliikenneanalyysilta ja verkkovalvonnalta, joka uhkaa yksilönvapautta ja yksityisyyttä sekä luottamuksellisia liiketoimia ja ihmissuhteita.
+
+Orbot on ainoa sovellus, joka luo oikeasti yksityisen Internet-yhteyden. Kuten New York Times kirjoittaa, "kun yhteys saapuu Toriin, et voi koskaan tietää mistä ja keneltä se on tullut".
+
+Vuonna 2012 Tor voitti Electronic Frontier -säätiön (EFF) Pioneer-palkinnon.
+
+★ ÄLÄ HYVÄKSY KORVIKKEITA: Orbot on turvallisin keino yhdistää internetiin Androidilla. Piste. Orbot heittelee kryptattua verkkoliikennettäsi useita kertoja tietokoneiden läpi ympäri maailman - sen sijaan, että se yhdistäisi sinut suoraan kuten VPN:t ja välityspalvelimet. Tämä prosessi kestää hieman kauemmin, mutta vahvin yksityisyyden- ja identiteetinsuoja on odottamisen arvoinen.
+★ YKSITYISYYTTÄ SOVELLUKSIIN: Mikä tahansa asennettu sovellus voi käyttää Toria Orbotin VPN-ominaisuuden avulla, tai jos siinä on valmiiksi välityspalvelinominaisuus käyttmällä täältä löytyviä asetuksia: https://goo.gl/2OA1y Käytä Orbotia Twitterin kanssa, tai kokeile verkkohakuja DuckDuckGon avulla: https://goo.gl/lgh1p
+★YKSITYISYYTTÄ KAIKILLE: Orbot estää toisia katsomasta yhteyttäsi tietääkseen mitä sovelluksia tai verkkosivuja käytät. Sinua valvovat ihmiset voivat ainoastaan nähdä, että käytät Toria.
+
+***Me rakastamme palautetta***
+★MEISTÄ: Guardian Project on ryhmä kehittäjiä, joka tekee turvallisia mobiilisovelluksia ja avointa lähdekoodia paremman huomisen vuoksi.
+★AVOIN KOODI: Orbot on vapaa ohjelmisto. Katso lähdekoodiimme tai liity yhteisöömme tehdäksesi siitä vielä paremman:  https://github.com/guardianproject/orbot tai https://gitweb.torproject.org/orbot.git
+★LÄHETÄ MEILLE VIESTI: Puuttuuko meiltä sinulle tärkeä ominaisuus? Löysitkö ärsyttävän bugin? Olisi mahtavaa kuulla sinulta enemmän! Lähetä meille sähköpostia: support@guardianproject.info
+
+***Vastuuvapauslauseke***
+Guardian Project tekee sovelluksia, jotka on luotu suojamaan sinun turvallisuutta ja anonyymiyttä. Käyttämiämme protokollia pidetään yleisesti turvallisuusteknologian kärkenä. Vaikka päivitämme koko ajan ohjelmistoja uusimpia uhkia vastaan ja poistaaksemme bugit, mikään teknologia ei ole 100 % vedenpitävä. Saavuttaakseen parhaan turvallisuuden ja anonyymiyden käyttäjien tulee noudattaa parhaita käytäntöjä pitääkseen itsensä turvassa. Löydät hyvän perehdytyksen näistä aiheista osoitteessa: https://securityinabox.org

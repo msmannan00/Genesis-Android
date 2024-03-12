@@ -1,0 +1,18 @@
+Orbot to darmowa aplikacja proxy, która umożliwia innym aplikacjom bezpieczniejsze korzystanie z internetu. Orbot wykorzystuje Tor do szyfrowania ruchu internetowego, a następnie ukrywa go, odbijając się od szeregu komputerów na całym świecie. Tor jest darmowym oprogramowaniem i otwartą siecią, która pomaga bronić się przed formą nadzoru sieciowego, która zagraża wolności osobistej i prywatności, poufnym działaniom i relacjom biznesowym oraz bezpieczeństwu państwa, znaną jako analiza ruchu.
+
+Orbot jest jedyną aplikacją, która tworzy prawdziwie prywatne połączenie internetowe. Jak pisze New York Times, "kiedy komunikat dociera z Tor, nigdy nie można się dowiedzieć, skąd lub od kogo pochodzi".
+
+Tor zdobył nagrodę Electronic Frontier Foundation (EFF) Pioneer Award 2012.
+
+★ NIE AKCEPTUJEMY ŻADNYCH ZAMIENNIKÓW: Orbot to najbezpieczniejszy sposób korzystania z Internetu na Androidzie. Kropka. Orbot odbija Twój zaszyfrowany ruch kilka razy przez komputery na całym świecie, zamiast łączyć Cię bezpośrednio jak VPN-y i proxy. Proces ten trwa nieco dłużej, ale najsilniejsza ochrona prywatności i tożsamości jest warta czekania.
+★ PRYWATNOŚĆ DLA APLIKACJI: Każdą aplikację można przekierować przez sieć Tor za pomocą funkcji Orbot VPN
+★ PRYWATNOŚĆ DLA KAŻDEGO: Orbot zapobiega sytuacji, w której osoba obserwująca Twoje połączenie wie, z jakich aplikacji korzystasz lub jakie strony internetowe odwiedzasz. Jedyne, co może zobaczyć osoba monitorująca Twój ruch sieciowy, to fakt, że używasz Tor.
+
+***Kochamy opinie***
+★ DOWIEDZ SIĘ WIĘCEJ: Dowiedz się więcej o Orbocie i zaangażuj się na https://orbot.app
+★ O NAS: Guardian Project to grupa deweloperów, którzy tworzą bezpieczne aplikacje mobilne i otwarto źródłowy kod dla lepszego jutra.
+★ OTWARTE ŹRÓDŁO: Orbot jest wolnym oprogramowaniem. Spójrz na nasz kod źródłowy lub dołącz do społeczności, aby go ulepszyć: https://github.com/guardianproject/orbot
+★ NAPISZ DO NAS: Czy brakuje nam Twojej ulubionej funkcji? Znalazłeś irytujący błąd? Chętnie usłyszymy od Ciebie! Wyślij nam e-mail: support@guardianproject.info
+
+***Oświadczenie***
+Guardian Project tworzy aplikacje, które są zaprojektowane tak, aby chronić Twoje bezpieczeństwo i anonimowość. Protokoły, których używamy są powszechnie uważane za najnowocześniejsze w technologii bezpieczeństwa. Chociaż stale uaktualniamy nasze oprogramowanie, aby zwalczać najnowsze zagrożenia i eliminować błędy, żadna technologia nie jest w 100% niezawodna. Aby zapewnić maksymalne bezpieczeństwo i anonimowość, użytkownicy muszą stosować najlepsze praktyki, aby zapewnić sobie bezpieczeństwo. Dobry przewodnik wprowadzający do tych tematów można znaleźć pod adresem https://securityinabox.org

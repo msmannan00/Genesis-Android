@@ -1,0 +1,18 @@
+L'Orbot és una aplicació lliure i gratuïta de servidors intermediaris que permet a altres aplicacions utilitzar l'internet de manera més segura. L'Orbot fa servir el Tor per a xifrar el trànsit d'internet i així l'oculta rebotant-lo per una sèrie d'ordinadors d'arreu del món. El Tor és programari lliure, i una xarxa oberta que us ajuda a defensar-vos contra una manera de vigilància de la xarxa anomenada anàlisi de trànsit, que amenaça la llibertat personal i la privadesa, les activitats i relacions confidencials i la seguretat de l'estat.
+
+L'Orbot és l'única aplicació que crea una connexió realment privada a internet. Com escriuen al New York Times, «quan arriba una comunicació pel Tor, mai no podeu saber d'on o de qui prové».
+
+El Tor va guanyar l'any 2012 el Premi Pioner de l'Electronic Frontier Foundation (EFF).
+
+★ NO ACCEPTEU CAP SUBSTITUT: L'Orbot és la manera més segura de fer servir l'internet a l'Android. Punt. L'Orbot rebota el vostre trànsit xifrat diverses vegades per ordinadors d'arreu del món, en compte de connectar-vos directament, com faria una VPN o un servidor intermediari. Aquest procés triga una mica més, però la privadesa més robusta i la protecció de la identitat que proporciona paga la pena l'espera.
+★ PRIVADESA PER A LES APLICACIONS: Qualsevol aplicació es pot fer passar pel Tor mitjançant la funcionalitat VPN de l'Orbot.
+★ PRIVADESA PER A TOTHOM: L'Orbot evita que qui estigui observant la vostra connexió sàpiga quines aplicacions utilitzeu o quins llocs web visiteu. Tot el que podrà veure qui estigui rastrejant el trànsit de la vostra xarxa és que esteu fent servir el Tor.
+
+***Ens encanten els comentaris***
+★ MÉS INFORMACIÓ: Obteniu més informació sobre l'Orbot i involucreu-vos-hi a https://orbot.app
+★ QUANT A NOSALTRES: El Guardian Project és un grup de desenvolupadors que fan aplicacions mòbils segures i de codi font obert per a millorar el demà.
+★ CODI OBERT: L'Orbot és programari lliure. Doneu una ullada al codi font, o uniu-vos a la comunitat per a millorar-lo: https://github.com/guardianproject/orbot
+★ ENVIEU-NOS MISSATGES: Trobeu a faltar alguna característica? Heu trobat cap error? Ens encantaria que ens ho féreu arribar! Envieu-nos un correu electrònic a: support@guardianproject.info
+
+***Avís legal***
+El Guardian Project fa aplicacions pensades per a protegir la vostra seguretat i anonimat. Els protocols que utilitzem es consideren àmpliament comprovats al món de la seguretat tecnològica. Tot i que estem constantment actualitzant el nostre programari per a combatre les últimes amenaces i eliminar errors, cap tecnologia és 100% segura. Per a una seguretat i anonimat màxims, els usuaris han de fer servir les millors pràctiques per a mantenir-se segurs. Podeu trobar una bona guia d'introducció a aquests temes a https://securityinabox.org

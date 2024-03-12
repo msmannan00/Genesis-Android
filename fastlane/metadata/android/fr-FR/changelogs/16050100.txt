@@ -1,0 +1,4 @@
+– mise à jour de Tor vers la version la plus récente v0.3.4.9
+– correctifs pour la stabilité du RPV
+– testé sur Android 8 et 9
+– traductions améliorées et mises à jour pour plusieurs langues

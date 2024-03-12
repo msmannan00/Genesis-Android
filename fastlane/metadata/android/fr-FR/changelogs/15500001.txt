@@ -1,0 +1,9 @@
+***AVERTISSEMENT : CETTE NOUVELLE VERSION SUPPRIME TOUTES LES FONCTIONS RACINE. ***
+Utiliser le « Mode RPV applis » d’Orbot ou le navigateur Orfox au lieu du relais transparent avec racine.
+
+* Mise à jour vers Tor 0.3.1.8
+* Fin des fonctions Racine/Relais transparent devenues instables et non testées
+* Relais transparent par RPV amélioré et nouvelle IU « Applis » » de sélection
+des applis 
+* Règle le problème d’inclusion d’info de licence Obfs4proxy 
+* Emplacements des ponts Meek les + récents
