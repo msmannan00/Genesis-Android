@@ -1584,7 +1584,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         var target = getCdnFront("snowflake-target-direct");//"https://snowflake-broker.torproject.net/";
         var front = getCdnFront("snowflake-amp-front");//"www.google.com";
         var ampCache = getCdnFront("snowflake-amp-cache");//"https://cdn.ampproject.org/";
-        IPtProxy.startSnowflake(stunServers, target, front, ampCache, null, null, true, false, false, 1);
+        //IPtProxy.startSnowflake(stunServers, target, front, ampCache, null, null, true, false, false, 1);
     }
 
     private class IncomingIntentRouter implements Runnable {
