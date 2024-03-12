@@ -39,7 +39,7 @@
     <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">Törölje az adatait, és nyissa meg a böngészőt</string>
     <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">A böngésző gyorsítótárának törlése</string>
     <string name="SHORTCUT_OPEN" translatable="false">Indítsa újra a genezis böngészőt Indítsa újra a böngészőt</string>
-    <string name="SHORTCUT_OPEN_LONG" translatable="false">Restart Application</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Restart Orion</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">Könyvjelző Szerkesztése</string>

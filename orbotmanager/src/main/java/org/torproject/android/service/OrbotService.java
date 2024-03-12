@@ -10,6 +10,7 @@ import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
+import static android.os.Build.VERSION.SDK_INT;
 import static org.torproject.android.service.TorServiceConstants.CMD_SETTING;
 import static org.torproject.jni.TorService.ACTION_ERROR;
 
@@ -17,6 +18,7 @@ import static java.lang.Thread.sleep;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -567,7 +569,12 @@ public class OrbotService extends VpnService implements OrbotConstants {
             filter.addAction(LOCAL_ACTION_NOTIFICATION_START);
 
             mActionBroadcastReceiver = new ActionBroadcastReceiver();
-            registerReceiver(mActionBroadcastReceiver, filter);
+            if (SDK_INT >= Build.VERSION_CODES.O) {
+                registerReceiver(mActionBroadcastReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED);
+            }else {
+                registerReceiver(mActionBroadcastReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            }
+
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 createNotificationChannel();

@@ -3,6 +3,7 @@ package com.hiddenservices.onionservices.appManager.homeManager.homeController;
 import static android.os.Build.VERSION.SDK_INT;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -15,6 +16,7 @@ import android.content.ClipboardManager;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -32,6 +34,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -186,7 +189,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private ImageButton mPopoupFindCopy;
     private ImageButton mPopoupFindPaste;
     private ImageView mTorDisabled;
-
+    private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
     /*Redirection Objects*/
     private GeckoResult<Bitmap> mRenderedBitmap = null;
     private boolean mPageClosed = false;
@@ -251,6 +254,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         status.sSettingIsAppRunning = true;
         initPreFixes();
         initBundle();
+        requestNotificationPermission();
         permissionHandler.getInstance().onInitPermissionHandler(new WeakReference(this));
         if(!status.mThemeApplying){
             initTor();
@@ -879,7 +883,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         builder.setContentIntent(action)
                 .setSmallIcon(R.drawable.ic_genesis_logo)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentText("Secure tor browsing")
+                .setContentText("Secure browsing")
                 .setOngoing(false)
                 .setColor(getResources().getColor(R.color.c_tab_border))
                 .setContentTitle(title);
@@ -1804,7 +1808,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onClearSelections(isKeyboardOpened);
         mTopBarContainer.getLayoutTransition().setDuration(0);
         mSearchbar.clearFocus();
-        mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
+        //mHomeViewController.onUpdateSearchBar(mGeckoClient.getSession().getCurrentURL(), false, false, true);
 
         if (mGeckoClient.getSession() != null && mGeckoClient != null) {
             mGeckoClient.onMediaInvoke(enums.MediaController.PAUSE);
@@ -1988,6 +1992,39 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             });
         } else {
             super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+    private boolean isNotificationPermissionGranted() {
+        // Check if notification permission is granted
+        return NotificationManagerCompat.from(this).areNotificationsEnabled();
+    }
+
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && status.sNotificaionStatus == 1) {
+            if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Notification Permission");
+                builder.setMessage("Our app needs notification permission to function properly. Would you like to enable it?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, 0));
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
         }
     }
 

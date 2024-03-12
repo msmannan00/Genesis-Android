@@ -39,7 +39,7 @@
     <string name="SHORTCUT_ERASE_AND_OPEN_SHORT_LABEL" translatable="false">اپنا ڈیٹا مٹا دیں اور براؤزر کھولیں</string>
     <string name="SHORTCUT_ERASE_AND_OPEN_LONG_LABEL" translatable="false">برائوزر کیشے مٹا دیں جینیسیس براؤزر کو دوبارہ شروع کریں</string>
     <string name="SHORTCUT_OPEN" translatable="false">اپنے براؤزر کو دوبارہ شروع کریں</string>
-    <string name="SHORTCUT_OPEN_LONG" translatable="false">Restart Application</string>
+    <string name="SHORTCUT_OPEN_LONG" translatable="false">Restart Orion</string>
 
     <!-- Bookmark Setting -->
     <string name="BOOKMARK_SETTING_HEADER" translatable="true">تحرير الإشارة المرجعية</string>
