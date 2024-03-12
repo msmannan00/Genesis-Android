@@ -223,7 +223,7 @@
         <service
             android:name="org.torproject.android.service.OrbotService"
             android:enabled="true"
-            android:exported="false"
+            android:exported="true"
             android:stopWithTask="true"/>
 
         <!-- Reciever & Settings -->

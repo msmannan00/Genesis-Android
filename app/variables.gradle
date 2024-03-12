@@ -34,8 +34,8 @@ project.ext.splitEnabled = true
 /* Application Preferences */
 project.ext.compile_sdk_version = 34
 project.ext.min_sdk_version = 23
-project.ext.target_sdk_version = 34
-project.ext.build_tool_version = '34'
+project.ext.target_sdk_version = 33
+project.ext.build_tool_version = '33'
 project.ext.ndk_version = '24.0.8215888'
 project.ext.application_id = "com.hiddenservices.onionservices"
 project.ext.debugSymbolLevel = 'FULL'

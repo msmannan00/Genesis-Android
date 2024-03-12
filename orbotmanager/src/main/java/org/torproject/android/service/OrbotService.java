@@ -6,10 +6,9 @@ package org.torproject.android.service;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
-import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK;
-import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
+import static android.os.Build.VERSION.SDK_INT;
 import static org.torproject.android.service.TorServiceConstants.CMD_SETTING;
 import static org.torproject.jni.TorService.ACTION_ERROR;
 
@@ -17,6 +16,7 @@ import static java.lang.Thread.sleep;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -253,50 +253,35 @@ public class OrbotService extends VpnService implements OrbotConstants {
     boolean mToolbarUpdating = false;
     @SuppressLint({"NewApi", "RestrictedApi"})
     protected void showToolbarNotification(String notifyMsg, int notifyType, int icon) {
-        if(isDestroyed || !orbotLocalConstants.mStartTriggered){
-            return;
-        }
-
         var intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         var pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         if (mNotifyBuilder == null) {
             mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setSmallIcon(R.mipmap.ic_stat_tor_logo)
-                    .setContentIntent(pendIntent)
-                    .setCategory(Notification.CATEGORY_SERVICE);
+            mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_stat_tor).setContentIntent(pendIntent).setCategory(Notification.CATEGORY_SERVICE);
         }
 
         mNotifyBuilder.setOngoing(true);
 
-        var title = getString(R.string.status_starting_up);
-        if (STATUS_STARTING==null || mCurrentStatus.equals(STATUS_STARTING) || notifyMsg.equals(getString(R.string.status_starting_up)))
+        var title = getString(R.string.status_disabled);
+        if (mCurrentStatus.equals(STATUS_STARTING) || notifyMsg.equals(getString(R.string.status_starting_up)))
             title = getString(R.string.status_starting_up);
         else if (mCurrentStatus.equals(STATUS_ON)) {
             title = getString(R.string.status_activated);
-            if (IPtProxy.isSnowflakeProxyRunning()) {
-                title += " (" + SNOWFLAKE_EMOJI + " " + snowflakeClientsConnected + ")";
-            }
         }
 
         mNotifyBuilder.setContentTitle(title);
 
         mNotifyBuilder.mActions.clear(); // clear out any notification actions, if any
-        if (conn != null && orbotLocalConstants.mIsTorInitialized) {
-
-            if (conn != null && mCurrentStatus.equals(STATUS_ON)) {
-                var pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, new Intent(TorControlCommands.SIGNAL_NEWNYM), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
-                mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
-
-                var pendingIntentNotification = PendingIntent.getBroadcast(this, 0, new Intent(CMD_SETTING), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
-                mNotifyBuilder.addAction(0, "Notification Settings", pendingIntentNotification);
-            }
+        if (conn != null && mCurrentStatus.equals(STATUS_ON)) { // only add new identity action when there is a connection
+            var pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, new Intent(TorControlCommands.SIGNAL_NEWNYM), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
+        } else if (mCurrentStatus.equals(STATUS_OFF)) {
+            var pendingIntentConnect = PendingIntent.getBroadcast(this, 0, new Intent(LOCAL_ACTION_NOTIFICATION_START), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            mNotifyBuilder.addAction(R.drawable.ic_stat_tor, getString(R.string.connect_to_tor), pendingIntentConnect);
         }
 
-        mNotifyBuilder.setContentText(notifyMsg)
-                .setSmallIcon(icon)
-                .setTicker(notifyType != NOTIFY_ID ? notifyMsg : null);
+        mNotifyBuilder.setContentText(notifyMsg).setSmallIcon(icon).setTicker(notifyType != NOTIFY_ID ? notifyMsg : null);
 
         if (!mCurrentStatus.equals(STATUS_ON)) {
             mNotifyBuilder.setSubText(null);
@@ -306,19 +291,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
             mNotifyBuilder.setProgress(0, 0, false); // removes progress bar
         }
 
-        if(orbotLocalConstants.mNotificationStatus != 0){
-            if (orbotLocalConstants.mNotificationStatus != 0) {
-                try {
-                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
-                        startForeground(NOTIFY_ID, mNotifyBuilder.build());
-                    } else {
-                        startForeground(NOTIFY_ID, mNotifyBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST);
-                    }
-                } catch (Exception ex) {
-                    Log.e("OrbotTorService", "Error starting foreground service:", ex);
-                }
-            }
-        }
+        startForeground(NOTIFY_ID, mNotifyBuilder.build());
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -567,7 +540,11 @@ public class OrbotService extends VpnService implements OrbotConstants {
             filter.addAction(LOCAL_ACTION_NOTIFICATION_START);
 
             mActionBroadcastReceiver = new ActionBroadcastReceiver();
-            registerReceiver(mActionBroadcastReceiver, filter);
+            if (SDK_INT >= Build.VERSION_CODES.O) {
+                registerReceiver(mActionBroadcastReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            }else {
+                registerReceiver(mActionBroadcastReceiver, filter);
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 createNotificationChannel();
@@ -1579,12 +1556,35 @@ public class OrbotService extends VpnService implements OrbotConstants {
         return Prefs.getBridgesList().equals("snowfla_ke");
     }
 
+    private void startSnowflakeClientDomainFronting() {
+        //this is using the current, default Tor snowflake infrastructure
+        var target = getCdnFront("snowflake-target");
+        var front = getCdnFront("snowflake-front");
+        var stunServer = getCdnFront("snowflake-stun");
+
+        /*
+        // @param ice Comma-separated list of ICE servers.
+        // @param url URL of signaling broker.
+        // @param fronts Comma-separated list of front domains.
+        // @param ampCache OPTIONAL. URL of AMP cache to use as a proxy for signaling.
+        //	Only needed when you want to do the rendezvous over AMP instead of a domain fronted server.
+        // @param logFile Name of log file. OPTIONAL. Defaults to no log.
+        // @param logToStateDir Resolve the log file relative to Tor's PT state dir.
+        // @param keepLocalAddresses Keep local LAN address ICE candidates.
+        // @param unsafeLogging Prevent logs from being scrubbed.
+        // @param maxPeers Capacity for number of multiplexed WebRTC peers. DEFAULTs to 1 if less than that.
+        // @return Port number where Snowflake will listen on, if no error happens during start up.
+         */
+        IPtProxy.startSnowflake(stunServer, target, front, null, null, true, false, false, 1);
+
+    }
+
     private void startSnowflakeClientAmpRendezvous() {
         var stunServers = getCdnFront("snowflake-stun");
         var target = getCdnFront("snowflake-target-direct");//"https://snowflake-broker.torproject.net/";
         var front = getCdnFront("snowflake-amp-front");//"www.google.com";
         var ampCache = getCdnFront("snowflake-amp-cache");//"https://cdn.ampproject.org/";
-        //IPtProxy.startSnowflake(stunServers, target, front, ampCache, null, null, true, false, false, 1);
+        IPtProxy.startSnowflake(stunServers, target, front, ampCache, null, true, false, false, 1);
     }
 
     private class IncomingIntentRouter implements Runnable {
@@ -1604,9 +1604,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
                         if (useIPtObfsMeekProxy())
                             IPtProxy.startLyrebird("DEBUG", false, false, null);
                         else if (useIPtSnowflakeProxyDomainFronting())
-                            startSnowflakeClientAmpRendezvous();
+                            startSnowflakeClientDomainFronting();
                         else if (useIPtSnowflakeProxyAMPRendezvous())
-                            startSnowflakeClientAmpRendezvous();
+                            startSnowflakeClientDomainFronting();
                     } else if (Prefs.beSnowflakeProxy()) {
                         enableSnowflakeProxy();
                     }

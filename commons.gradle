@@ -3,8 +3,8 @@
     Applies across all modules
  */
 android {
-    compileSdkVersion 34
-    buildToolsVersion '34'
+    compileSdkVersion 33
+    buildToolsVersion '33'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
