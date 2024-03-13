@@ -263,7 +263,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
         mNotifyBuilder.setOngoing(true);
 
-        var title = getString(R.string.status_disabled);
+        var title = getString(R.string.status_starting_up);
         if (mCurrentStatus.equals(STATUS_STARTING) || notifyMsg.equals(getString(R.string.status_starting_up)))
             title = getString(R.string.status_starting_up);
         else if (mCurrentStatus.equals(STATUS_ON)) {
