@@ -236,6 +236,7 @@
                         android:id="@+id/pBridgeSettingOption4"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
+                        android:visibility="gone"
                         android:layout_marginStart="4dp"
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="true"
@@ -299,6 +300,7 @@
                         android:layout_marginStart="4dp"
                         android:onClick="onUITrigger"
                         android:orientation="horizontal"
+                        android:visibility="gone"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry,UsingOnClickInXml">
 
