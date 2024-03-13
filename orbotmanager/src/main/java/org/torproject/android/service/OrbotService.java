@@ -971,7 +971,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
                         e.printStackTrace();
                     }
                 }
-                orbotLocalConstants.mIsTorInitialized = true;
             }
 
             @Override
@@ -1190,6 +1189,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 localIntent.putExtra(LOCAL_EXTRA_BOOTSTRAP_PERCENT, percent);
                 mNotifyBuilder.setProgress(100, Integer.parseInt(percent), false);
                 notificationMessage = notificationMessage.substring(notificationMessage.indexOf(':') + 1).trim();
+                if(Integer.parseInt(percent)>=100){
+                    orbotLocalConstants.mIsTorInitialized = true;
+                }
             }
         }
         showToolbarNotification(notificationMessage, NOTIFY_ID, R.drawable.ic_stat_tor);
