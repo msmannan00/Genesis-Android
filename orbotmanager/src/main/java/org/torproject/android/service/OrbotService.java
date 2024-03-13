@@ -1189,7 +1189,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 localIntent.putExtra(LOCAL_EXTRA_BOOTSTRAP_PERCENT, percent);
                 mNotifyBuilder.setProgress(100, Integer.parseInt(percent), false);
                 notificationMessage = notificationMessage.substring(notificationMessage.indexOf(':') + 1).trim();
-                if(Integer.parseInt(percent)>=100){
+                if(Integer.parseInt(percent)>=50){
                     orbotLocalConstants.mIsTorInitialized = true;
                 }
             }
@@ -1633,18 +1633,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
                     startTor();
                     replyWithStatus(mIntent);
-
-                    if (Prefs.useVpn()) {
-                        if (mVpnManager != null && (!mVpnManager.isStarted())) { // start VPN here
-                            Intent vpnIntent = VpnService.prepare(OrbotService.this);
-                            if (vpnIntent == null) { //then we can run the VPN
-                                mVpnManager.handleIntent(new Builder(), mIntent);
-                            }
-                        }
-
-                        if (mPortSOCKS != -1 && mPortHTTP != -1)
-                            sendCallbackPorts(mPortSOCKS, mPortHTTP, mPortDns, mPortTrans);
-                    }
                     break;
                 case ACTION_STOP:
                     var userIsQuittingOrbot = mIntent.getBooleanExtra(ACTION_STOP_FOREGROUND_TASK, false);
