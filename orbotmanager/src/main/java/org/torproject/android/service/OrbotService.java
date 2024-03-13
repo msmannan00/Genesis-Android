@@ -291,6 +291,10 @@ public class OrbotService extends VpnService implements OrbotConstants {
             mNotifyBuilder.setProgress(0, 0, false); // removes progress bar
         }
 
+
+        if (!mCurrentStatus.equals(STATUS_STARTING)) {
+            mNotifyBuilder.setProgress(0, 0, false);
+        }
         startForeground(NOTIFY_ID, mNotifyBuilder.build());
     }
 
@@ -1174,22 +1178,36 @@ public class OrbotService extends VpnService implements OrbotConstants {
         }else {
             mPrevLogs = logMessage;
         }
-        if(logMessage.contains("Bootstrapped 100%")){
+
+
+        var notificationMessage = logMessage;
+        var localIntent = new Intent(LOCAL_ACTION_LOG).putExtra(LOCAL_EXTRA_LOG, logMessage);
+        if (logMessage.contains(LOG_NOTICE_HEADER)) {
+            notificationMessage = notificationMessage.substring(LOG_NOTICE_HEADER.length());
+            if (notificationMessage.contains(LOG_NOTICE_BOOTSTRAPPED)) {
+                var percent = notificationMessage.substring(LOG_NOTICE_BOOTSTRAPPED.length());
+                percent = percent.substring(0, percent.indexOf('%')).trim();
+                localIntent.putExtra(LOCAL_EXTRA_BOOTSTRAP_PERCENT, percent);
+                mNotifyBuilder.setProgress(100, Integer.parseInt(percent), false);
+                notificationMessage = notificationMessage.substring(notificationMessage.indexOf(':') + 1).trim();
+            }
         }
+        showToolbarNotification(notificationMessage, NOTIFY_ID, R.drawable.ic_stat_tor);
         mHandler.post(() -> {
+            LocalBroadcastManager.getInstance(OrbotService.this).sendBroadcast(localIntent);
+
             Intent intent = new Intent(LOCAL_ACTION_LOG);
             intent.putExtra(LOCAL_EXTRA_LOG, logMessage);
             intent.putExtra(EXTRA_STATUS, mCurrentStatus);
             orbotLocalConstants.mTorLogsHistory.add(new logRowModel(logMessage, localHelperMethod.getCurrentTime()));
 
-            if(!mConnectivity){
+            if (!mConnectivity) {
                 orbotLocalConstants.mTorLogsStatus = "No internet connection";
-            }else {
+            } else {
                 orbotLocalConstants.mTorLogsStatus = logMessage;
             }
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
         });
-
     }
 
     private void sendCallbackPorts(int socksPort, int httpPort, int dnsPort, int transPort) {
