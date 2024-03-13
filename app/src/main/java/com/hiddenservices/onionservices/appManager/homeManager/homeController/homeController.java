@@ -1835,6 +1835,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 onReload(null);
             }
         }
+        else if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, 0));
+            }
+        }
     }
 
     @Override
@@ -2004,26 +2009,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     private void requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && status.sNotificaionStatus == 1) {
             if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Notification Permission");
-                builder.setMessage("Our app needs notification permission to function properly. Would you like to enable it?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
-                        startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton("Don't ask again", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_NOTIFICATION_STATUS, 0));
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 100);
             }
         }
     }
