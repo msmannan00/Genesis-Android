@@ -470,6 +470,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ cảnh báo</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">tùy chỉnh Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">kích hoạt Bridges</string>
+    <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">kích Snow Flakes</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">kích hoạt VPN serivces</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">kích hoạt Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">kích hoạt Gateway</string>

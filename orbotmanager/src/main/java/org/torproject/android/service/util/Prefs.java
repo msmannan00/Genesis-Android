@@ -17,18 +17,21 @@ public class Prefs {
 
     private final static String PREF_BRIDGES_ENABLED = "pref_bridges_enabled";
     private final static String PREF_BRIDGES_LIST = "pref_bridges_list";
+    private final static String PREF_BE_A_SNOWFLAKE_LIMIT_CHARGING = "PREF_BE_A_SNOWFLAKE_LIMIT_CHARGING";
     private final static String PREF_DEFAULT_LOCALE = "pref_default_locale";
-    private final static String PREF_ENABLE_LOGGING = "pref_enable_logging";
     private final static String PREF_EXPANDED_NOTIFICATIONS = "pref_expanded_notifications";
-    private final static String PREF_PERSIST_NOTIFICATIONS = "pref_persistent_notifications";
+    private final static String PREF_DETECT_ROOT = "pref_detect_root";
+    private final static String PREF_ENABLE_LOGGING = "pref_enable_logging";
     private final static String PREF_START_ON_BOOT = "pref_start_boot";
     private final static String PREF_ALLOW_BACKGROUND_STARTS = "pref_allow_background_starts";
+    private static boolean meek_status = false;
     private final static String PREF_OPEN_PROXY_ON_ALL_INTERFACES = "pref_open_proxy_on_all_interfaces";
     private final static String PREF_USE_VPN = "pref_vpn";
     private final static String PREF_EXIT_NODES = "pref_exit_nodes";
     private final static String PREF_BE_A_SNOWFLAKE = "pref_be_a_snowflake";
     private final static String PREF_SHOW_SNOWFLAKE_MSG = "pref_show_snowflake_proxy_msg";
-    private final static String PREF_BE_A_SNOWFLAKE_LIMIT = "pref_be_a_snowflake_limit";
+    private final static String PREF_BE_A_SNOWFLAKE_LIMIT_WIFI = "pref_be_a_snowflake_limit_wifi";
+
     private final static String PREF_SMART_TRY_SNOWFLAKE = "pref_smart_try_snowflake";
     private final static String PREF_SMART_TRY_OBFS4 = "pref_smart_try_obfs";
     private static final String PREF_POWER_USER_MODE = "pref_power_user";
@@ -39,19 +42,40 @@ public class Prefs {
     private final static String PREF_SNOWFLAKES_SERVED_COUNT = "pref_snowflakes_served";
     private final static String PREF_SNOWFLAKES_SERVED_COUNT_WEEKLY = "pref_snowflakes_served_weekly";
 
+    private static final String PREF_CURRENT_VERSION = "pref_current_version";
+
     private static final String PREF_CONNECTION_PATHWAY = "pref_connection_pathway";
     public static final String PATHWAY_SMART = "smart", PATHWAY_DIRECT = "direct",
-            PATHWAY_SNOWFLAKE = "snowflake", PATHWAY_CUSTOM = "custom";
+        PATHWAY_SNOWFLAKE = "snowflake", PATHWAY_SNOWFLAKE_AMP = "snowflake_amp", PATHWAY_CUSTOM = "custom";
 
+    public static final String PREF_SECURE_WINDOW_FLAG = "pref_flag_secure";
 
     private static SharedPreferences prefs;
-    private static boolean meek_status = false;
+
+    public static int getCurrentVersionForUpdate() {
+        return prefs.getInt(PREF_CURRENT_VERSION, 0);
+    }
+
+    public static void setCurrentVersionForUpdate(int version) {
+        putInt(PREF_CURRENT_VERSION, version);
+    }
+
+    private static final String PREF_REINSTALL_GEOIP = "pref_geoip";
+    public static boolean isGeoIpReinstallNeeded() {
+        return prefs.getBoolean(PREF_REINSTALL_GEOIP, true);
+    }
+    public static void setIsGeoIpReinstallNeeded(boolean reinstallNeeded) {
+        putBoolean(PREF_REINSTALL_GEOIP, reinstallNeeded);
+    }
 
     public static void setContext(Context context) {
         if (prefs == null) {
             prefs = getSharedPrefs(context);
         }
+        initPrefs();
+    }
 
+    public static void initPrefs(){
         if(orbotLocalConstants.mBridgesInitStatus){
             putBridgesEnabled(true);
             switch (orbotLocalConstants.mBridges) {
@@ -73,7 +97,13 @@ public class Prefs {
                     putPrefSmartTryObfs4(orbotLocalConstants.mMeek);
                     putString(PREF_CONNECTION_PATHWAY, PATHWAY_CUSTOM);
                     break;
-                case "snowflake":
+                case "snowflake1":
+                    meek_status = false;
+                    setBeSnowflakeProxy(true);
+                    putPrefSmartTrySnowflake(true);
+                    putString(PREF_CONNECTION_PATHWAY, PATHWAY_SNOWFLAKE);
+                    break;
+                case "snowflake2":
                     meek_status = false;
                     setBeSnowflakeProxy(true);
                     putPrefSmartTrySnowflake(true);
@@ -91,14 +121,21 @@ public class Prefs {
                     break;
             }
         }else{
-            putBridgesEnabled(false);
-            meek_status = false;
-            setBridgesList(orbotLocalConstants.mBridgesDefault);
-            setBeSnowflakeProxy(false);
-            putPrefSmartTrySnowflake(false);
-            putBridgesEnabled(false);
-            putPrefSmartTryObfs4(orbotLocalConstants.mBridgesDefault);
-            putString(PREF_CONNECTION_PATHWAY, PATHWAY_SMART);
+            if(orbotLocalConstants.mInitUpdateSnowFlake){
+                meek_status = false;
+                setBeSnowflakeProxy(true);
+                putPrefSmartTrySnowflake(true);
+                putString(PREF_CONNECTION_PATHWAY, PATHWAY_SNOWFLAKE);
+            }else {
+                putBridgesEnabled(false);
+                meek_status = false;
+                setBridgesList(orbotLocalConstants.mBridgesDefault);
+                setBeSnowflakeProxy(false);
+                putPrefSmartTrySnowflake(false);
+                putBridgesEnabled(false);
+                putPrefSmartTryObfs4(orbotLocalConstants.mBridgesDefault);
+                putString(PREF_CONNECTION_PATHWAY, PATHWAY_SMART);
+            }
         }
     }
 
@@ -132,7 +169,6 @@ public class Prefs {
     }
 
     public static boolean bridgesEnabled() {
-        //if phone is in Farsi, enable bridges by default
         boolean bridgesEnabledDefault = Locale.getDefault().getLanguage().equals("fa");
         return prefs.getBoolean(PREF_BRIDGES_ENABLED, bridgesEnabledDefault);
     }
@@ -143,11 +179,8 @@ public class Prefs {
 
     public static String getBridgesList() {
         String defaultBridgeType = "obfs4";
-        if (Locale.getDefault().getLanguage().equals("fa") || meek_status)
-            defaultBridgeType = "meek"; //if Farsi, use meek as the default bridge type
-        if(orbotLocalConstants.mBridges.equals("snowflake")){
-            return orbotLocalConstants.mBridges;
-        }
+        if (Locale.getDefault().getLanguage().equals("fa"))
+            defaultBridgeType = "meek";
         return prefs.getString(PREF_BRIDGES_LIST, defaultBridgeType);
     }
 
@@ -157,6 +190,14 @@ public class Prefs {
 
     public static String getDefaultLocale() {
         return prefs.getString(PREF_DEFAULT_LOCALE, Locale.getDefault().getLanguage());
+    }
+
+    public static void setDefaultLocale(String value) {
+        putString(PREF_DEFAULT_LOCALE, value);
+    }
+
+    public static boolean detectRoot () {
+        return prefs.getBoolean(PREF_DETECT_ROOT,true);
     }
 
     public static boolean beSnowflakeProxy () {
@@ -171,16 +212,20 @@ public class Prefs {
         putBoolean(PREF_BE_A_SNOWFLAKE,beSnowflakeProxy);
     }
 
-    public static boolean limitSnowflakeProxying () {
-        return prefs.getBoolean(PREF_BE_A_SNOWFLAKE_LIMIT,true);
+    public static void setBeSnowflakeProxyLimitWifi (boolean beSnowflakeProxy) {
+        putBoolean(PREF_BE_A_SNOWFLAKE_LIMIT_WIFI,beSnowflakeProxy);
     }
 
-    public static void setDefaultLocale(String value) {
-        putString(PREF_DEFAULT_LOCALE, value);
+    public static void setBeSnowflakeProxyLimitCharging (boolean beSnowflakeProxy) {
+        putBoolean(PREF_BE_A_SNOWFLAKE_LIMIT_CHARGING,beSnowflakeProxy);
     }
 
-    public static boolean showExpandedNotifications() {
-        return prefs.getBoolean(PREF_EXPANDED_NOTIFICATIONS, true);
+    public static boolean limitSnowflakeProxyingWifi () {
+        return prefs.getBoolean(PREF_BE_A_SNOWFLAKE_LIMIT_WIFI,false);
+    }
+
+    public static boolean limitSnowflakeProxyingCharging () {
+        return prefs.getBoolean(PREF_BE_A_SNOWFLAKE_LIMIT_CHARGING,false);
     }
 
     public static boolean useDebugLogging() {
@@ -223,9 +268,7 @@ public class Prefs {
         return context.getSharedPreferences(OrbotConstants.PREF_TOR_SHARED_PREFS, Context.MODE_MULTI_PROCESS);
     }
 
-    public static int getSnowflakesServed () {
-        return prefs.getInt(PREF_SNOWFLAKES_SERVED_COUNT,0);
-    }
+    public static int getSnowflakesServed () { return prefs.getInt(PREF_SNOWFLAKES_SERVED_COUNT,0);}
     public static int getSnowflakesServedWeekly () { return prefs.getInt(PREF_SNOWFLAKES_SERVED_COUNT_WEEKLY,0);}
 
     public static void addSnowflakeServed () {
@@ -255,6 +298,10 @@ public class Prefs {
         return prefs.getBoolean(PREF_SMART_TRY_SNOWFLAKE, false);
     }
 
+    public static boolean showExpandedNotifications() {
+        return prefs.getBoolean(PREF_EXPANDED_NOTIFICATIONS, true);
+    }
+
     public static void putPrefSmartTryObfs4(String bridges) {
         putString(PREF_SMART_TRY_OBFS4, bridges);
     }
@@ -267,8 +314,11 @@ public class Prefs {
         return prefs.getBoolean(PREF_POWER_USER_MODE, false);
     }
 
-    public static boolean onboardPending() {
-        return prefs.getBoolean("connect_first_time", true);
+    public static void setSecureWindow (boolean isFlagSecure) {
+        putBoolean(PREF_SECURE_WINDOW_FLAG, isFlagSecure);
     }
 
+    public static boolean isSecureWindow () {
+        return prefs.getBoolean(PREF_SECURE_WINDOW_FLAG, true);
+    }
 }

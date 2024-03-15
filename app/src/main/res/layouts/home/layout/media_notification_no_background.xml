@@ -5,7 +5,8 @@
     android:id = "@+id/layout"
     android:layout_width = "fill_parent"
     android:layout_height = "100dp"
-    android:padding = "10dp" >
+    android:paddingTop="0dp"
+    >
 
     <ImageView
         android:id = "@+id/logo"
@@ -52,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/body"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -62,6 +63,7 @@
             android:layout_width="60dp"
             android:layout_height="35dp"
             android:layout_marginTop="5dp"
+            android:layout_marginStart="-30dp"
             android:background="@color/clear_alpha"
             android:contentDescription="@string/app_name"
             android:scaleX="1.4"

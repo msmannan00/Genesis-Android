@@ -70,6 +70,7 @@ public class status {
     public static boolean sBridgeGatewayAuto = false;
     public static boolean sBridgeGatewayManual = false;
     public static boolean sVPNStatus = false;
+    public static boolean sSnowFlakesStatus = false;
     public static boolean sBridgeStatus = false;
     public static boolean sAppInstalled = false;
 
@@ -110,6 +111,7 @@ public class status {
         status.sSettingIsAppRated = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED, false));
         status.sVPNStatus = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED, false));
         status.sBridgeStatus = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES, false));
+        status.sSnowFlakesStatus = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SNOWFLAKE_ENABLED, false));
         status.sSettingFontAdjustable = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE, true));
         status.sLandingPageStatus = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.sLandingPageStatus, false));
         status.sSettingEnableZoom = (boolean) dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_GET_BOOL, Arrays.asList(keys.SETTING_ZOOM, true));

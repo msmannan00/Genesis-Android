@@ -470,6 +470,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">warning️警告</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">定制Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">启用Bridges</string>
+    <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">启用Snow Flakes</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">启用VPN服务</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">启用Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">启用 Gateway</string>

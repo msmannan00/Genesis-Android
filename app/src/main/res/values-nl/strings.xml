@@ -464,6 +464,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ Waarschuwing</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Bridges Aanpassen</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridges Inschakelen</string>
+    <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">Snow Flakes Inschakelen</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Schakel VPN-service</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">in Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Inschakelen Gateway Inschakelen</string>

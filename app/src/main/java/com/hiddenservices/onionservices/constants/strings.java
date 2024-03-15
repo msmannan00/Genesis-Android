@@ -18,7 +18,8 @@ public class strings {
     public static final String BRIDGE_CUSTOM_INVALID_TYPE = "➔  Invalid bridge type";
     public static final String BRIDGE_CUSTOM_INVALID_TYPE_STRING = "➔  Invalid bridge string";
     public static final String BRIDGE_CUSTOM_BRIDGE_OBFS4 = "obfs4";
-    public static final String BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES = "snowflake";
+    public static final String BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_1 = "snowflake1";
+    public static final String BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_2 = "snowflake2";
     public static final String BRIDGE_CUSTOM_BRIDGE_MEEK = "meek";
 
     public static final String BRIDGES_DEFAULT = "obfs4 [2a0c:4d80:42:702::1]:27015 C5B7CD6946FF10C5B3E89691A7D3F2C122D2117C cert=TD7PbUO0/0k6xYHMPW3vJxICfkMZNdkRrb63Zhl5j9dW3iRGiCx0A7mPhe5T2EDzQ35+Zw iat-mode=0\n" +

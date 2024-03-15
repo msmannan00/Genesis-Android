@@ -473,6 +473,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ avertisment</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">personalizați Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">activați Bridges</string>
+    <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">activați Snow Flakes</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">activați VPN de servicii</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">activați Bridge Genesis</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">activați Genesis</string>

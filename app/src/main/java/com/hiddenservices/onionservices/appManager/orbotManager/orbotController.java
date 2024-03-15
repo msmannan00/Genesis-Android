@@ -32,6 +32,7 @@ public class orbotController extends AppCompatActivity {
     private com.hiddenservices.onionservices.appManager.orbotManager.orbotViewController mOrbotViewController;
 
     private SwitchMaterial mOrbotSettingBridgeSwitch;
+    private SwitchMaterial mOrbotSnowFlakeBridgeSwitch;
     private LinearLayout mOrbotSettingWarning;
 
     /* INITIALIZATIONS */
@@ -65,10 +66,11 @@ public class orbotController extends AppCompatActivity {
 
     public void viewsInitializations() {
         mOrbotSettingBridgeSwitch = findViewById(R.id.pOrbotSettingBridgeSwitch);
+        mOrbotSnowFlakeBridgeSwitch = findViewById(R.id.pOrbotSettingSnowflakesSwitch);
         mOrbotSettingWarning = findViewById(R.id.pOrbotSettingWarning);
 
-        mOrbotViewController = new orbotViewController(mOrbotSettingBridgeSwitch, this, mOrbotSettingWarning);
-        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sVPNStatus, status.sBridgeStatus));
+        mOrbotViewController = new orbotViewController(mOrbotSettingBridgeSwitch, mOrbotSnowFlakeBridgeSwitch, this, mOrbotSettingWarning);
+        mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_INIT_UI, Arrays.asList(status.sBridgeStatus, status.sSnowFlakesStatus));
         mOrbotViewController.onInit();
 
         mOrbotModel = new orbotModel(new orbotModelCallback());
@@ -91,6 +93,15 @@ public class orbotController extends AppCompatActivity {
         if (view.getId() == R.id.pOrbotSettingBridge) {
             mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH, Collections.singletonList(!mOrbotSettingBridgeSwitch.isChecked()));
             mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(status.sBridgeStatus));
+
+            mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_SNOWFLAKE_SWITCH, Collections.singletonList(false));
+            mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_SNOW_FLAKE_SETTINGS_VIEWS, Collections.singletonList(false));
+        } if (view.getId() == R.id.pOrbotSettingSnowflakes) {
+            mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_SNOWFLAKE_SWITCH, Collections.singletonList(!mOrbotSnowFlakeBridgeSwitch.isChecked()));
+            mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_SNOW_FLAKE_SETTINGS_VIEWS, Collections.singletonList(status.sSnowFlakesStatus));
+
+            mOrbotModel.onTrigger(orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH, Collections.singletonList(false));
+            mOrbotViewController.onTrigger(orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS, Collections.singletonList(false));
         } else if (view.getId() == R.id.pOrbotSettingWarning) {
             helperMethod.openActivity(bridgeController.class, constants.CONST_LIST_HISTORY, orbotController.this, true);
         }

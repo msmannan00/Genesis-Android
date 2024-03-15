@@ -29,13 +29,14 @@ class bridgeViewController {
     private Button mBridgeSettingBridgeRequest;
     private EditText mBridgeSettingBridgeCustom;
     private ImageView mBridgeSettingCustomBridgeBlocker;
-    private RadioButton mBridgeSettingBridgeSnowflake;
+    private RadioButton mBridgeSettingBridgeSnowflake1;
 
+    private RadioButton mBridgeSettingBridgeSnowflake2;
     /*ViewControllers*/
     private AppCompatActivity mContext;
 
     /*Initializations*/
-    void initialization(RadioButton pBridgeSettingBridgeSnowflake, EditText pBridgeSettingBridgeCustom, Button pBridgeSettingBridgeRequest, AppCompatActivity pContext, RadioButton pBridgeSettingObfs, RadioButton pBridgeSettingBridgeChina, RadioButton pBridgeSettingCustomPort, ImageView pBridgeSettingCustomBridgeBlocker) {
+    void initialization(RadioButton pBridgeSettingBridgeSnowflake1, RadioButton pBridgeSettingBridgeSnowflake2, EditText pBridgeSettingBridgeCustom, Button pBridgeSettingBridgeRequest, AppCompatActivity pContext, RadioButton pBridgeSettingObfs, RadioButton pBridgeSettingBridgeChina, RadioButton pBridgeSettingCustomPort, ImageView pBridgeSettingCustomBridgeBlocker) {
         this.mContext = pContext;
         this.mBridgeSettingObfs = pBridgeSettingObfs;
         this.mBridgeSettingBridgeChina = pBridgeSettingBridgeChina;
@@ -43,7 +44,8 @@ class bridgeViewController {
         this.mBridgeSettingBridgeRequest = pBridgeSettingBridgeRequest;
         this.mBridgeSettingBridgeCustom = pBridgeSettingBridgeCustom;
         this.mBridgeSettingCustomBridgeBlocker = pBridgeSettingCustomBridgeBlocker;
-        this.mBridgeSettingBridgeSnowflake = pBridgeSettingBridgeSnowflake;
+        this.mBridgeSettingBridgeSnowflake1 = pBridgeSettingBridgeSnowflake1;
+        this.mBridgeSettingBridgeSnowflake2 = pBridgeSettingBridgeSnowflake2;
         initPostUI();
     }
 
@@ -66,17 +68,20 @@ class bridgeViewController {
 
     private void resetRadioButtons(int p_duration) {
         animateColor(mBridgeSettingObfs, mBridgeSettingObfs.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
-        animateColor(mBridgeSettingBridgeSnowflake, mBridgeSettingBridgeSnowflake.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
+        animateColor(mBridgeSettingBridgeSnowflake1, mBridgeSettingBridgeSnowflake1.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
+        animateColor(mBridgeSettingBridgeSnowflake2, mBridgeSettingBridgeSnowflake2.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
         animateColor(mBridgeSettingCustomPort, mBridgeSettingCustomPort.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
         animateColor(mBridgeSettingBridgeChina, mBridgeSettingBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.holo_dark_gray), "textColor", p_duration);
 
         mBridgeSettingObfs.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
-        mBridgeSettingBridgeSnowflake.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
+        mBridgeSettingBridgeSnowflake1.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
+        mBridgeSettingBridgeSnowflake2.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
         mBridgeSettingCustomPort.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
         mBridgeSettingBridgeChina.setHighlightColor(mContext.getResources().getColor(R.color.holo_dark_gray));
 
         mBridgeSettingObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
-        mBridgeSettingBridgeSnowflake.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
+        mBridgeSettingBridgeSnowflake1.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
+        mBridgeSettingBridgeSnowflake2.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
         mBridgeSettingCustomPort.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
         mBridgeSettingBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.holo_dark_gray)));
 
@@ -91,11 +96,13 @@ class bridgeViewController {
         mBridgeSettingObfs.setChecked(false);
         mBridgeSettingBridgeChina.setChecked(false);
         mBridgeSettingCustomPort.setChecked(false);
-        mBridgeSettingBridgeSnowflake.setChecked(false);
+        mBridgeSettingBridgeSnowflake1.setChecked(false);
+        mBridgeSettingBridgeSnowflake2.setChecked(false);
 
         mBridgeSettingObfs.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
         mBridgeSettingBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
-        mBridgeSettingBridgeSnowflake.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
+        mBridgeSettingBridgeSnowflake1.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
+        mBridgeSettingBridgeSnowflake2.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
 
         animateColor(mBridgeSettingCustomPort, mBridgeSettingCustomPort.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", 200);
         mBridgeSettingCustomPort.setHighlightColor(Color.BLACK);
@@ -103,7 +110,8 @@ class bridgeViewController {
         mBridgeSettingObfs.setChecked(false);
         mBridgeSettingBridgeChina.setChecked(false);
         mBridgeSettingCustomPort.setChecked(true);
-        mBridgeSettingBridgeSnowflake.setChecked(false);
+        mBridgeSettingBridgeSnowflake1.setChecked(false);
+        mBridgeSettingBridgeSnowflake2.setChecked(false);
         mBridgeSettingBridgeCustom.animate().setDuration(200).alpha(1f);
         mBridgeSettingBridgeRequest.animate().setDuration(200).alpha(1f);
         mBridgeSettingCustomBridgeBlocker.setVisibility(View.GONE);
@@ -119,7 +127,8 @@ class bridgeViewController {
                 mBridgeSettingObfs.setChecked(true);
                 mBridgeSettingBridgeChina.setChecked(false);
                 mBridgeSettingCustomPort.setChecked(false);
-                mBridgeSettingBridgeSnowflake.setChecked(false);
+                mBridgeSettingBridgeSnowflake1.setChecked(false);
+                mBridgeSettingBridgeSnowflake2.setChecked(false);
                 mBridgeSettingBridgeCustom.setText(strings.GENERIC_EMPTY_STR);
                 break;
             case strings.BRIDGE_CUSTOM_BRIDGE_MEEK:
@@ -127,17 +136,34 @@ class bridgeViewController {
                 mBridgeSettingBridgeChina.setHighlightColor(Color.BLACK);
                 mBridgeSettingBridgeChina.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
                 mBridgeSettingObfs.setChecked(false);
-                mBridgeSettingBridgeSnowflake.setChecked(false);
+                mBridgeSettingBridgeSnowflake1.setChecked(false);
+                mBridgeSettingBridgeSnowflake2.setChecked(false);
                 mBridgeSettingBridgeChina.setChecked(true);
                 mBridgeSettingCustomPort.setChecked(false);
                 mBridgeSettingBridgeCustom.setText(strings.GENERIC_EMPTY_STR);
                 break;
-            case strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES:
+            case strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_1:
                 animateColor(mBridgeSettingBridgeChina, mBridgeSettingBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
                 mBridgeSettingBridgeChina.setHighlightColor(Color.BLACK);
-                mBridgeSettingBridgeSnowflake.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
                 mBridgeSettingObfs.setChecked(false);
-                mBridgeSettingBridgeSnowflake.setChecked(true);
+                mBridgeSettingBridgeSnowflake1.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+                mBridgeSettingBridgeSnowflake1.setChecked(true);
+                mBridgeSettingBridgeSnowflake2.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
+                mBridgeSettingBridgeSnowflake2.setChecked(false);
+
+                mBridgeSettingBridgeChina.setChecked(false);
+                mBridgeSettingCustomPort.setChecked(false);
+                mBridgeSettingBridgeCustom.setText(strings.GENERIC_EMPTY_STR);
+                break;
+            case strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_2:
+                animateColor(mBridgeSettingBridgeChina, mBridgeSettingBridgeChina.getCurrentTextColor(), mContext.getResources().getColor(R.color.c_text_v1), "textColor", p_duration);
+                mBridgeSettingBridgeChina.setHighlightColor(Color.BLACK);
+                mBridgeSettingObfs.setChecked(false);
+                mBridgeSettingBridgeSnowflake2.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_radio_tint)));
+                mBridgeSettingBridgeSnowflake2.setChecked(true);
+                mBridgeSettingBridgeSnowflake1.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.c_text_v6)));
+                mBridgeSettingBridgeSnowflake1.setChecked(false);
+
                 mBridgeSettingBridgeChina.setChecked(false);
                 mBridgeSettingCustomPort.setChecked(false);
                 mBridgeSettingBridgeCustom.setText(strings.GENERIC_EMPTY_STR);
@@ -158,5 +184,4 @@ class bridgeViewController {
             onEnableCustomBridge();
         }
     }
-
 }

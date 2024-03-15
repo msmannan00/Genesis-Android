@@ -8,7 +8,7 @@ import org.torproject.android.service.OrbotService;
 
 public class PowerConnectionReceiver extends BroadcastReceiver {
 
-    private OrbotService mService;
+    private final OrbotService mService;
 
     public PowerConnectionReceiver(OrbotService service) {
         mService = service;
@@ -17,15 +17,15 @@ public class PowerConnectionReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (intent.getAction().equals(Intent.ACTION_POWER_CONNECTED)) {
-            if (Prefs.beSnowflakeProxy())
-                mService.enableSnowflakeProxy();
+        if (Prefs.limitSnowflakeProxyingCharging()) {
+            if (intent.getAction().equals(Intent.ACTION_POWER_CONNECTED)) {
+                if (Prefs.beSnowflakeProxy()) mService.enableSnowflakeProxy();
 
-        } else {
-            intent.getAction().equals(Intent.ACTION_POWER_DISCONNECTED);
-            mService.disableSnowflakeProxy();
+            } else {
+                intent.getAction().equals(Intent.ACTION_POWER_DISCONNECTED);
+                mService.disableSnowflakeProxy();
+            }
         }
     }
-
 
 }

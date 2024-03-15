@@ -27,6 +27,7 @@ public class orbotLocalConstants
 
     public static boolean mBridgesInitStatus = false;
     public static boolean mInitUpdateBridge = false;
+    public static boolean mInitUpdateSnowFlake = false;
     public static boolean sAdLoaded = false;
     public static String mInitUpdateBridgeList = "";
     public static boolean mInitUpdateVPN = false;

@@ -473,6 +473,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">Warning️ figyelmeztetés</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">testreszabja a Bridges-et</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">engedélyezze a Bridges-et</string>
+    <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">engedélyezze a Snow Flakes</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">lehetővé VPN serivces</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">engedélyezze a Bridge Gateway-at</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">engedélyezze az Gateway-at</string>

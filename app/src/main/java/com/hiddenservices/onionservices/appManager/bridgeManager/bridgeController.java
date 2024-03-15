@@ -12,6 +12,9 @@ import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuProvider;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.helpManager.helpController;
@@ -42,7 +45,8 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
 
     private RadioButton mBridgeSettingObfs;
     private RadioButton mBridgeSettingBridgeChina;
-    private RadioButton mBridgeSettingBridgeSnowflake;
+    private RadioButton mBridgeSettingBridgeSnowflake1;
+    private RadioButton mBridgeSettingBridgeSnowflake2;
     private RadioButton mBridgeSettingBridgeCustom;
     private EditText mBridgeSettingCustomPort;
     private Button mBridgeSettingBridgeRequest;
@@ -82,7 +86,8 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
     public void initializeConnections() {
         mBridgeSettingObfs = findViewById(R.id.pBridgeSettingObfs);
         mBridgeSettingBridgeChina = findViewById(R.id.pBridgeSettingBridgeChina);
-        mBridgeSettingBridgeSnowflake = findViewById(R.id.pBridgeSettingSnowFlakes);
+        mBridgeSettingBridgeSnowflake1 = findViewById(R.id.pBridgeSettingSnowFlakes1);
+        mBridgeSettingBridgeSnowflake2 = findViewById(R.id.pBridgeSettingSnowFlakes2);
         mBridgeSettingCustomPort = findViewById(R.id.pBridgeSettingCustomPort);
         mBridgeSettingBridgeRequest = findViewById(R.id.pBridgeSettingBridgeRequest);
         mBridgeSettingBridgeCustom = findViewById(R.id.pBridgeSettingBridgeCustom);
@@ -91,7 +96,7 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
         mBridgeSettingCustomPort.setOnFocusChangeListener(this);
         mBridgeSettingCustomPort.addTextChangedListener(this);
 
-        mBridgeViewController.initialization(mBridgeSettingBridgeSnowflake, mBridgeSettingCustomPort, mBridgeSettingBridgeRequest, this, mBridgeSettingObfs, mBridgeSettingBridgeChina, mBridgeSettingBridgeCustom, mBridgeSettingCustomBridgeBlocker);
+        mBridgeViewController.initialization(mBridgeSettingBridgeSnowflake1, mBridgeSettingBridgeSnowflake2, mBridgeSettingCustomPort, mBridgeSettingBridgeRequest, this, mBridgeSettingObfs, mBridgeSettingBridgeChina, mBridgeSettingBridgeCustom, mBridgeSettingCustomBridgeBlocker);
         mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 0, status.sBridgeCustomType));
         mBridgeModel = new bridgeModel(new bridgeController.bridgeModelCallback(), this);
         mBridgeModel.onInit();
@@ -149,8 +154,11 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
         } else if (view.getId() == R.id.pSearchSettingOption2) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_MEEK_BRIDGE, null);
             mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 250, status.sBridgeCustomType));
-        } else if (view.getId() == R.id.pBridgeSettingOption4) {
-            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE, null);
+        } else if (view.getId() == R.id.pBridgeSettingOption41) {
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE_1, null);
+            mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 250, status.sBridgeCustomType));
+        } else if (view.getId() == R.id.pBridgeSettingOption42) {
+            mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE_2, null);
             mBridgeViewController.onTrigger(bridgeEnums.eBridgeViewCommands.M_INIT_VIEWS, Arrays.asList(status.sBridgeCustomBridge, 250, status.sBridgeCustomType));
         } else if (view.getId() == R.id.pSearchSettingOption1) {
             mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
@@ -174,6 +182,11 @@ public class bridgeController extends AppCompatActivity implements View.OnFocusC
                 mBridgeModel.onTrigger(bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK, null);
             }
         }
+    }
+
+    @Override
+    public void addMenuProvider(@NonNull MenuProvider provider, @NonNull LifecycleOwner owner, @NonNull Lifecycle.State state) {
+
     }
 
     /* LISTENERS */

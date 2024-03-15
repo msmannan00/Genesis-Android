@@ -70,6 +70,7 @@ public class keys {
     public static final String BRIDGE_CUSTOM_TYPE = "BRIDGE_CUSTOM_TYPE_V1";
     public static final String BRIDGE_ENABLES = "pref_bridges_enabled_V1";
     public static final String BRIDGE_VPN_ENABLED = "pref_vpn_V1";
+    public static final String SNOWFLAKE_ENABLED = "pref_snowflake_V1";
     public static final String BRIDGE_DEFAULT = "BRIDGE_DEFAULT";
 
     /*Bookmark Settings*/

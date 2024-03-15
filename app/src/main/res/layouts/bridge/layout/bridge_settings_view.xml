@@ -233,10 +233,9 @@
                         android:background="@color/c_topbar_divider" />
 
                     <LinearLayout
-                        android:id="@+id/pBridgeSettingOption4"
+                        android:id="@+id/pBridgeSettingOption41"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
                         android:layout_marginStart="4dp"
                         android:background="@xml/gx_ripple_gray"
                         android:clickable="true"
@@ -261,7 +260,7 @@
                                 android:background="@android:color/transparent"
                                 android:clickable="false"
                                 android:padding="0dp"
-                                android:text="@string/BRIDGE_SNOWFLAKES"
+                                android:text="@string/BRIDGE_SNOWFLAKES_FRONTING"
                                 android:textAlignment="textStart"
                                 android:textAllCaps="false"
                                 android:textColor="@color/c_text_v1"
@@ -271,13 +270,64 @@
                         </LinearLayout>
 
                         <RadioButton
-                            android:id="@+id/pBridgeSettingSnowFlakes"
+                            android:id="@+id/pBridgeSettingSnowFlakes1"
                             android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:clickable="false"
                             android:layout_marginEnd="10dp"
                             android:layout_marginStart="50dp"
-                            android:checked="true"
+                            android:checked="false"
+                            android:buttonTint="@color/c_radio_tint"
+                            android:background="@android:color/transparent"
+                            android:src="@xml/ic_arrow_right"
+                            android:contentDescription="@string/GENERAL_TODO" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/pBridgeSettingOption42"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@xml/gx_ripple_gray"
+                        android:clickable="true"
+                        android:paddingStart="0dp"
+                        android:onClick="onUITrigger"
+                        android:orientation="horizontal"
+                        android:focusable="true"
+                        tools:ignore="RtlSymmetry,UsingOnClickInXml">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="55dp"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:alpha="1"
+                                android:paddingStart="15dp"
+                                android:background="@android:color/transparent"
+                                android:clickable="false"
+                                android:padding="0dp"
+                                android:text="@string/BRIDGE_SNOWFLAKES_RENDEZVOUS"
+                                android:textAlignment="textStart"
+                                android:textAllCaps="false"
+                                android:textColor="@color/c_text_v1"
+                                android:textSize="15sp"
+                                tools:ignore="RtlSymmetry" />
+
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/pBridgeSettingSnowFlakes2"
+                            android:layout_width="35dp"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="50dp"
+                            android:checked="false"
                             android:buttonTint="@color/c_radio_tint"
                             android:background="@android:color/transparent"
                             android:src="@xml/ic_arrow_right"
@@ -300,7 +350,6 @@
                         android:layout_marginStart="4dp"
                         android:onClick="onUITrigger"
                         android:orientation="horizontal"
-                        android:visibility="gone"
                         android:focusable="true"
                         tools:ignore="RtlSymmetry,UsingOnClickInXml">
 

@@ -92,6 +92,7 @@ public class orbotManager {
                 public void run(){
                     try {
                         orbotLocalConstants.mIsTorInitialized = false;
+                        orbotLocalConstants.mInitUpdateSnowFlake = status.sSnowFlakesStatus;
                         sleep(4000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -134,7 +135,9 @@ public class orbotManager {
             }
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES)) {
             orbotLocalConstants.mInitUpdateBridge = (boolean)pData.get(0);
-        }  else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
+        } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_SNOWFLAKE)) {
+            orbotLocalConstants.mInitUpdateSnowFlake = (boolean)pData.get(0);
+        }else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
             orbotLocalConstants.mInitUpdateBridgeList = (String)pData.get(0);
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN)) {
             orbotLocalConstants.mInitUpdateVPN = (boolean)pData.get(0);
@@ -147,10 +150,8 @@ public class orbotManager {
                 return OrbotService.getServiceObject().getProxyStatus();
             }
         }
-
         return null;
     }
-
 
     private void onDestroy(boolean pThemeApplying) {
         if (!pThemeApplying) {

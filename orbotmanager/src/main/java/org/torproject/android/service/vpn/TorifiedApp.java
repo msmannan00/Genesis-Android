@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 
 import org.torproject.android.service.OrbotConstants;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,9 +30,6 @@ public class TorifiedApp implements Comparable {
 
     private boolean torified = false;
     private boolean usesInternet = false;
-    private int[] enabledPorts;
-
-
 
     public static ArrayList<TorifiedApp> getApps(Context context, SharedPreferences prefs) {
 
@@ -56,17 +54,12 @@ public class TorifiedApp implements Comparable {
 
         ArrayList<TorifiedApp> apps = new ArrayList<>();
 
-        ApplicationInfo aInfo;
-
-        TorifiedApp app;
-
         while (itAppInfo.hasNext()) {
-            aInfo = itAppInfo.next();
-
-            app = new TorifiedApp();
+            ApplicationInfo aInfo = itAppInfo.next();
+            TorifiedApp app = new TorifiedApp();
             try {
                 PackageInfo pInfo = pMgr.getPackageInfo(aInfo.packageName, PackageManager.GET_PERMISSIONS);
-                if (Arrays.binarySearch(OrbotConstants.BYPASS_VPN_PACKAGES, aInfo.packageName) >= 0) {
+                if (OrbotConstants.BYPASS_VPN_PACKAGES.contains(aInfo.packageName)) {
                     app.setUsesInternet(false);
                 } else if (pInfo != null && pInfo.requestedPermissions != null) {
                     for (String permInfo : pInfo.requestedPermissions) {
@@ -88,8 +81,7 @@ public class TorifiedApp implements Comparable {
             }
 
 
-            if (!app.usesInternet())
-                continue;
+            if (!app.usesInternet()) continue;
             else {
                 apps.add(app);
             }
@@ -106,7 +98,6 @@ public class TorifiedApp implements Comparable {
             } catch (Exception e) {
                 app.setName(aInfo.packageName);
             }
-
 
             //app.setIcon(pMgr.getApplicationIcon(aInfo));
 
@@ -126,7 +117,7 @@ public class TorifiedApp implements Comparable {
                would likely not expect to find them.
              */
             if (o1.isTorified() == o2.isTorified())
-                return o1.getName().compareToIgnoreCase(o2.getName());
+                return Normalizer.normalize(o1.getName(), Normalizer.Form.NFD).compareToIgnoreCase(Normalizer.normalize(o2.getName(), Normalizer.Form.NFD));
             if (o1.isTorified()) return -1;
             return 1;
         });
@@ -146,14 +137,6 @@ public class TorifiedApp implements Comparable {
 
     public void setTorified(boolean torified) {
         this.torified = torified;
-    }
-
-    public int[] getEnabledPorts() {
-        return enabledPorts;
-    }
-
-    public void setEnabledPorts(int[] enabledPorts) {
-        this.enabledPorts = enabledPorts;
     }
 
     public boolean isEnabled() {

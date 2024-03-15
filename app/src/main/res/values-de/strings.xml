@@ -472,6 +472,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">⚠️ Warnung</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Bridges anpassen</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridges aktivieren</string>
+    <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">enable Snow Flakes</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">enable VPN serivces</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Bridge Gateway aktivieren</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Gateway aktivieren</string>

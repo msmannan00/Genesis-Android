@@ -39,12 +39,20 @@ class orbotModel {
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED, status.sVPNStatus));
     }
 
+    public void onSnowFlakeSwitch(boolean pStatus) {
+        status.sSnowFlakesStatus = pStatus;
+        pluginController.getInstance().onOrbotInvoke(Collections.singletonList(status.sSnowFlakesStatus), pluginEnums.eOrbotManager.M_UPDATE_SNOWFLAKE);
+        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SNOWFLAKE_ENABLED, status.sSnowFlakesStatus));
+    }
+
 
     public void onTrigger(orbotEnums.eOrbotModelCommands pCommands, List<Object> pData) {
         if (pCommands == orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH) {
             onBridgeSwitch((boolean) pData.get(0));
         } else if (pCommands == orbotEnums.eOrbotModelCommands.M_VPN_SWITCH) {
             onVPNSwitch((boolean) pData.get(0));
+        } else if (pCommands == orbotEnums.eOrbotModelCommands.M_SNOWFLAKE_SWITCH) {
+            onSnowFlakeSwitch((boolean) pData.get(0));
         }
     }
 

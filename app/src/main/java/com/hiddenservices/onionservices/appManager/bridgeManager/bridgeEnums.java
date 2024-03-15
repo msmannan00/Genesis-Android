@@ -7,7 +7,7 @@ public class bridgeEnums {
     }
 
     public enum eBridgeModelCommands {
-        M_REQUEST_BRIDGE, M_CUSTOM_BRIDGE, M_MEEK_BRIDGE, M_OBFS_CHECK, M_SNOWFLAKES_BRIDGE
+        M_REQUEST_BRIDGE, M_CUSTOM_BRIDGE, M_MEEK_BRIDGE, M_OBFS_CHECK, M_SNOWFLAKES_BRIDGE_1, M_SNOWFLAKES_BRIDGE_2
     }
 
 }

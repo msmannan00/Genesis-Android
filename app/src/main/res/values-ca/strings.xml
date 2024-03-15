@@ -474,6 +474,7 @@
     <string name="ORBOT_SETTING_WARNING" translatable="true">Warning️ avís</string>
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">personalitza Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">activa Bridges</string>
+    <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">activa Snow Flakes</string>
     <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">activeu VPN serveis</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">habilitar Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">habilitar Gateway</string>

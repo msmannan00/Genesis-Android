@@ -17,7 +17,8 @@ import java.util.List;
 
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_BRIDGE_MEEK;
 import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_BRIDGE_OBFS4;
-import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES;
+import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_1;
+import static com.hiddenservices.onionservices.constants.strings.BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_2;
 import static com.hiddenservices.onionservices.constants.strings.GENERIC_EMPTY_STR;
 import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_BRIDGE_MAIL;
 
@@ -74,15 +75,15 @@ class bridgeModel {
         pluginController.getInstance().onOrbotInvoke(Collections.singletonList("obfs4"), pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST);
     }
 
-    public void onSnowChecked() {
-        status.sBridgeCustomBridge = BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES;
+    public void onSnowChecked(String sBridgeCustomBridge, String dataKey) {
+        status.sBridgeCustomBridge = sBridgeCustomBridge;
         status.sBridgeCustomType = GENERIC_EMPTY_STR;
         status.sBridgeGatewayManual = false;
 
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_BRIDGE_1, status.sBridgeCustomBridge));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_STRING, Arrays.asList(keys.BRIDGE_CUSTOM_TYPE, status.sBridgeCustomType));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL, status.sBridgeGatewayManual));
-        pluginController.getInstance().onOrbotInvoke(Collections.singletonList("snowflake"), pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST);
+        pluginController.getInstance().onOrbotInvoke(Collections.singletonList(dataKey), pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST);
     }
 
     public void onTrigger(bridgeEnums.eBridgeModelCommands pCommands, List<Object> pData) {
@@ -94,8 +95,10 @@ class bridgeModel {
             onMeekChecked();
         } else if (pCommands == bridgeEnums.eBridgeModelCommands.M_OBFS_CHECK) {
             onObfsChecked();
-        } else if (pCommands == bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE) {
-            onSnowChecked();
+        } else if (pCommands == bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE_1) {
+            onSnowChecked(BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_1, "snowflake1");
+        } else if (pCommands == bridgeEnums.eBridgeModelCommands.M_SNOWFLAKES_BRIDGE_2) {
+            onSnowChecked(BRIDGE_CUSTOM_BRIDGE_SNOWFLAKES_2, "snowflake2");
         }
     }
 
