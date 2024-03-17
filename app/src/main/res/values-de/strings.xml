@@ -409,7 +409,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot Protokolle</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">neue Registerkarten</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">neue Registerkarte</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Tab schließen</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Öffnen Sie die letzten Registerkarten</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">Sprache</string>

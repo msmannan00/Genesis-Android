@@ -400,7 +400,7 @@
 
     <!-- Popup Menu -->
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot-logboeken</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">Nieuwe tabbladen</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">Nieuw tabblad</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Tabblad Sluiten</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Open Recente Tabbladen</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">Taal</string>

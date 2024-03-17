@@ -409,7 +409,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot журналов</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">новые вкладки</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">новая вкладка</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Закрыть вкладку</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">открыть недавние вкладки</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">язык</string>

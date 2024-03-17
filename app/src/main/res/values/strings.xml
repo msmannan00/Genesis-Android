@@ -398,7 +398,7 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">Clear search history</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">Clear marked bookmarks</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">Clear browsing cache</string>
-    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">Clear suggestions</string>
+    <string name="SETTING_CLEAR_CACHE_OPTIneON_5" translatable="true">Clear suggestions</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">Clear site data</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">Clear session data</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">Clear browsing cookies</string>
@@ -451,7 +451,7 @@
     <!-- Popup Menu -->
     <string name="HOME_MENU__NEW_CIRCUIT" translatable="true">New identity</string>
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orion Logs</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">New tabs</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">New tab</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Close Tab</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Open Recent Tabs</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">Language</string>
@@ -471,7 +471,7 @@
     <string name="HOME_MENU_SHARE" translatable="true">Share</string>
 
     <!-- Tab View -->
-    <string name="TAB_MENU_OPEN_TAB" translatable="true">New tabs</string>
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">New tab</string>
     <string name="TAB_MENU_CLOSE_TAB" translatable="true">Close all tabs</string>
     <string name="TAB_MENU_SETTINGS" translatable="true">Settings</string>
     <string name="TAB_LIST_SELECT" translatable="true">Select tabs</string>

@@ -410,7 +410,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orion Logs</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">novas guias</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">Nova aba</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">aba fechada</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">abrir abas recentes</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">língua</string>

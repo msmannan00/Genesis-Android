@@ -401,7 +401,7 @@
 
     <!-- Popup Menu -->
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Журнали Orbot</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">Нові вкладки</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">Нова вкладка</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Закрити вкладку</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Відкрити останні вкладки</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">Мова</string>

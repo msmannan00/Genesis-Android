@@ -410,7 +410,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot rönk</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">új fülek</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">új böngészőlapok</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">lap bezárása</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">nyissa meg a legutóbbi lapokat</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">nyelv</string>

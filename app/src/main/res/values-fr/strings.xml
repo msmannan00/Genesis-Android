@@ -410,7 +410,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot journaux</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">nouveaux onglets</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">nouvel onglet</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">fermer l\'onglet</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">ouvrir les onglets récents</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">Langue</string>

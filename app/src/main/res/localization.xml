@@ -446,7 +446,7 @@
 
     <!-- Popup Menu -->
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">11111 logs</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">new tabs</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">new tab</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">close tab</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">open recent tabs</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">language</string>
@@ -463,7 +463,7 @@
     <string name="HOME_MENU_SHARE" translatable="true">share</string>
 
     <!-- Tab View -->
-    <string name="TAB_MENU_OPEN_TAB" translatable="true">new tabs</string>
+    <string name="TAB_MENU_OPEN_TAB" translatable="true">new tab</string>
     <string name="TAB_MENU_CLOSE_TAB" translatable="true">close all tabs</string>
     <string name="TAB_MENU_SETTINGS" translatable="true">System Setting</string>
     <string name="TAB_LIST_SELECT" translatable="true">select tabs</string>

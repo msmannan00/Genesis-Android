@@ -410,7 +410,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot busteni</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">file noi</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">filă nouă</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Închideți fila</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">deschideți filele recente</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">limba</string>

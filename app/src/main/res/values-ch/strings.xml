@@ -409,7 +409,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot protokolů</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">nové karty</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">nová karta</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">zavřít kartu</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">otevřít poslední karty</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">Jazyk</string>

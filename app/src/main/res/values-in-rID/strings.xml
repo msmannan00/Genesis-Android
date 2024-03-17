@@ -399,7 +399,7 @@
 
     <!-- Popup Menu -->
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">tabblad sluiten</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">open recente tabbladen</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">nieuwe browsertabbladen</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">taal</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">Systeeminstelling</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">doorzochte weblinks</string>

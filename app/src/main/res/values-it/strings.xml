@@ -410,7 +410,7 @@
 
 
     <string name="HOME_MENU__ORBOT_LOGS" translatable="true">Orbot registri</string>
-    <string name="HOME_MENU__NEW_TABS" translatable="true">nuove schede</string>
+    <string name="HOME_MENU__NEW_TABS" translatable="true">nuova scheda</string>
     <string name="HOME_MENU_CLOSE_TABS" translatable="true">Chiudi scheda</string>
     <string name="HOME_MENU_OPEN_RECENT_TABS" translatable="true">apri le schede recenti</string>
     <string name="HOME_MENU_LANGUAGE" translatable="true">linguaggio</string>
