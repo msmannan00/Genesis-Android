@@ -471,7 +471,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">定制Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">启用Bridges</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">启用Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">启用VPN服务</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">启用Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">启用 Gateway</string>
 
@@ -480,7 +479,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Gateway 代理的当前状况</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion委托条件</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN的连接条件</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake的连接条件</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge代理条件</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">信息|更改系统设置</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">您可以通过重新启动软件并转到代理管理器来更改代理。可以通过单击底部的齿轮图标来打开它</string>

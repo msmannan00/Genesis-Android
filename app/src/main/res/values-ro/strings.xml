@@ -474,7 +474,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">personalizați Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">activați Bridges</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">activați Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">activați VPN de servicii</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">activați Bridge Genesis</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">activați Genesis</string>
 
@@ -483,7 +482,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">starea actuală a proxy-ului orion</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion condiția împuternicirii</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN starea conectivității</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake starea conectivității</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condiția împuternicirii</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info | modificați Setarea sistemului</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">puteți schimba proxy prin repornirea software-ului și accesând managerul proxy. poate fi deschis făcând clic pe o pictogramă roată din partea de jos</string>

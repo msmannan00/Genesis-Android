@@ -466,7 +466,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Налаштування мостів</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Увімкнути мости</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">Увімкнути Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Увімкнути VPN Serivce</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Увімкнути шлюз мостів</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Увімкнути шлюз</string>
 
@@ -475,7 +474,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Поточний стан проксі-провайдера</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">Статус проксі orion</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">Цибуля Статус мостів</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">Стан підключення до VPN</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Стан підключення до Snowflake</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Статус підключення мосту</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">Щоб змінити налаштування проксі, перезапустіть цю програму та перейдіть до менеджера проксі. Його можна відкрити, натиснувши на піктограму GEAR внизу</string>

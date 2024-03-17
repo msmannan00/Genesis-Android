@@ -24,14 +24,14 @@ class proxyStatusViewController {
 
     /*Initializations*/
     private TextView mOrbotStatus;
-    private SwitchMaterial mVpnStatus;
     private SwitchMaterial mBridgeStatus;
+    private SwitchMaterial mSnowflakeStatus;
 
-    proxyStatusViewController(AppCompatActivity pContext, TextView pOrbotStatus, SwitchMaterial pVpnStatus, SwitchMaterial pBridgeStatus) {
+    proxyStatusViewController(AppCompatActivity pContext, TextView pOrbotStatus, SwitchMaterial pBridgeStatus, SwitchMaterial pSnowflakeStatus) {
         this.mContext = pContext;
         this.mOrbotStatus = pOrbotStatus;
-        this.mVpnStatus = pVpnStatus;
         this.mBridgeStatus = pBridgeStatus;
+        this.mSnowflakeStatus = pSnowflakeStatus;
     }
 
     protected void onInit(){
@@ -53,14 +53,14 @@ class proxyStatusViewController {
         }
     }
 
-    private void initViews(String pOrbotStatus, boolean pVPNStatus, boolean pGatewayStatus) {
+    private void initViews(String pOrbotStatus, boolean pGatewayStatus, boolean pSnowflakeStatus) {
         if (!status.sTorBrowsing) {
             mOrbotStatus.setText(strings.DISABLED);
         } else {
             mOrbotStatus.setText(pOrbotStatus);
         }
-        mVpnStatus.setChecked(pVPNStatus);
         mBridgeStatus.setChecked(pGatewayStatus);
+        mSnowflakeStatus.setChecked(pSnowflakeStatus);
     }
 
     public void onTrigger(proxyStatusEnums.eProxyStatusViewCommands pCommands, List<Object> pData) {

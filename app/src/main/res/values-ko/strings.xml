@@ -473,7 +473,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Bridges 사용자 지정</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridges 활성화</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">Snow Flakes 활성화</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">VPN 서비스 활성화</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">활성화 Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Gateway 활성화</string>
 
@@ -482,7 +481,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">orion 프록시의 현재 상태</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion 대리 조건</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN 연결 상태</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake 연결 상태</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge 대리 조건</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">정보 | 시스템 설정 변경</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">소프트웨어를 다시 시작하고 프록시 관리자로 이동하여 프록시를 변경할 수 있습니다. 하단의 기어 아이콘을 클릭하면 열 수 있습니다.</string>

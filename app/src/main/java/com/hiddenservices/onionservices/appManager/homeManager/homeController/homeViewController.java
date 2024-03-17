@@ -1193,6 +1193,7 @@ public class homeViewController {
                 mVoiceInput.setBackground(mGradientDrawable);
                 mSearchLock.setColorFilter(helperMethod.invertedGrayColor(mColor));
                 mSearchLock.setTag(R.id.themed, true);
+                
                 gradientDrawable1.setCornerRadius(helperMethod.pxFromDp(7));
                 gradientDrawable1.setStroke(helperMethod.pxFromDp(2), mColor);
                 gradientDrawable1.setColor(ColorUtils.blendARGB(helperMethod.invertedShadeColor(mColor, 0.90f), Color.BLACK, 0.2f));

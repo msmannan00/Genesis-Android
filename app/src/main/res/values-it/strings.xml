@@ -474,7 +474,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">personalizza Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">abilita Bridges</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">abilita Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">abilita i servizi VPN</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">abilita Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">abilita Gateway</string>
 
@@ -483,7 +482,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">condizione attuale del proxy orion</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion condizione di delega</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN condizione di connettività</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake condizione di connettività</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condizione di delega</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info | modificare le impostazioni di sistema</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">puoi cambiare proxy riavviando il software e andando a proxy manager. può essere aperto facendo clic su un\'icona a forma di ingranaggio in basso</string>

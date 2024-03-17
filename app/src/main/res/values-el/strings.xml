@@ -475,7 +475,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">προσαρμογή Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">ενεργοποίηση Bridges</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">ενεργοποίηση Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">ενεργοποιήστε VPN serivces</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">ενεργοποιήστε το Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">ενεργοποιήστε το Gateway</string>
 
@@ -484,7 +483,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">τρέχουσα κατάσταση orion διακομιστή μεσολάβησης</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion συνθήκη διακομιστή μεσολάβησης</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN κατάσταση σύνδεσης</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake κατάσταση σύνδεσης</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge κατάσταση μεσολάβησης</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">πληροφορίες | αλλαγή ρύθμισης συστήματος</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">μπορείτε να αλλάξετε διακομιστή μεσολάβησης επανεκκίνηση του λογισμικού και μεταβαίνοντας στη διαχείριση διακομιστή μεσολάβησης. μπορεί να ανοίξει κάνοντας κλικ σε ένα εικονίδιο με το γρανάζι στο κάτω μέρος</string>

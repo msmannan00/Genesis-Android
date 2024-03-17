@@ -550,6 +550,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         super.onCreate();
         configLanguage();
         try {
+            self = this;
             //set proper content URIs for current build flavor
             V3_ONION_SERVICES_CONTENT_URI = Uri.parse("content://" + getApplicationContext().getPackageName() + ".ui.v3onionservice/v3");
             V3_CLIENT_AUTH_URI = Uri.parse("content://" + getApplicationContext().getPackageName() + ".ui.v3onionservice.clientauth/v3auth");

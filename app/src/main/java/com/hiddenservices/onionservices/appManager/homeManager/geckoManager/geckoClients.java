@@ -181,6 +181,20 @@ public class geckoClients {
         this.mSessionID = mSession.getSessionID();
     }
 
+    public void initStaticSettings(){
+        mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
+        mSession.getSettings().setFullAccessibilityTree(true);
+        mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
+        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        mRuntime.getSettings().setAboutConfigEnabled(true);
+        mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
+        mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
+        mRuntime.getSettings().setForceUserScalableEnabled(status.sSettingEnableZoom);
+        mRuntime.getSettings().getContentBlocking().setCookieBehavior(status.sSettingCookieStatus);
+        mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
+
+    }
+
     public void loadURL(String url, geckoView mNestedGeckoView, AppCompatActivity pcontext) {
 
         if (url.startsWith("https://orion.onion/privacy")) {
@@ -192,6 +206,7 @@ public class geckoClients {
 
         url = helperMethod.completeURL(url);
         mSession.initURL(url);
+        initStaticSettings();
         if (!url.startsWith(CONST_REPORT_URL) && (url.startsWith("resource://android/assets/homepage/") || url.startsWith("http://167.86.99.31/?pG") || url.startsWith("https://167.86.99.31?pG") || url.endsWith("167.86.99.31") || url.endsWith(constants.CONST_GENESIS_DOMAIN_URL_SLASHED))) {
             try {
                 mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);

@@ -742,7 +742,7 @@
                 android:textAlignment="textStart"
                 android:paddingEnd="10dp"
                 android:background="@xml/hox_rounded_corner_splash_no_ripple"
-                android:drawableStart="@drawable/ic_no_tor"
+                android:drawableStart="@drawable/sheild_logo_bordered_small"
                 android:onClick="onStartApplicationNoTor"
                 android:text="@string/HOME_CONNECT_NO_TOR"
                 app:layout_constraintBottom_toTopOf="@+id/pCopyright"

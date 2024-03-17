@@ -230,12 +230,12 @@
                     android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:paddingEnd="15dp"
-                    android:text="@string/PROXY_VPN_STATUS"
+                    android:text="@string/PROXY_SNOWFLAKE_STATUS"
                     android:textColor="#757575"
                     android:textSize="13.5sp" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/pVpnStatus"
+                    android:id="@+id/pSnowflakeStatus"
                     android:layout_width="50dp"
                     android:clickable="false"
                     android:layout_height="wrap_content"

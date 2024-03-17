@@ -139,8 +139,6 @@ public class orbotManager {
             orbotLocalConstants.mInitUpdateSnowFlake = (boolean)pData.get(0);
         }else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
             orbotLocalConstants.mInitUpdateBridgeList = (String)pData.get(0);
-        } else if (pCommands.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN)) {
-            orbotLocalConstants.mInitUpdateVPN = (boolean)pData.get(0);
         } else if (pCommands.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT)) {
             if (OrbotService.getServiceObject() != null) {
                 OrbotService.getServiceObject().newIdentity();
@@ -169,7 +167,7 @@ public class orbotManager {
     /*External Triggers*/
 
     public Object onTrigger(List<Object> pData, pluginEnums.eOrbotManager pEventType) {
-        if (pEventType.equals(pluginEnums.eOrbotManager.M_GET_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION_NO_BANDWIDTH) || pEventType.equals(pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_VPN) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES) || pEventType.equals(pluginEnums.eOrbotManager.M_SHOW_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
+        if (pEventType.equals(pluginEnums.eOrbotManager.M_GET_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION) || pEventType.equals(pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION_NO_BANDWIDTH) || pEventType.equals(pluginEnums.eOrbotManager.M_IS_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGES) || pEventType.equals(pluginEnums.eOrbotManager.M_SHOW_NOTIFICATION_STATUS) || pEventType.equals(pluginEnums.eOrbotManager.M_ORBOT_RUNNING) || pEventType.equals(pluginEnums.eOrbotManager.M_NEW_CIRCUIT) || pEventType.equals(pluginEnums.eOrbotManager.M_UPDATE_BRIDGE_LIST)) {
             return onTriggerCommands(pData, pEventType);
         } else if (pEventType.equals(pluginEnums.eOrbotManager.M_GET_LOGS)) {
             return getLogs();

@@ -29,8 +29,8 @@ public class proxyStatusController extends AppCompatActivity {
 
     /* INITIALIZATIONS */
     private TextView mOrbotStatus;
-    private SwitchMaterial mVpnStatus;
     private SwitchMaterial mBridgeStatus;
+    private SwitchMaterial mSnowflakeStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +54,18 @@ public class proxyStatusController extends AppCompatActivity {
 
     public void viewsInitializations() {
         mOrbotStatus = findViewById(R.id.pOrbotStatus);
-        mVpnStatus = findViewById(R.id.pVpnStatus);
         mBridgeStatus = findViewById(R.id.pBridgeStatus);
+        mSnowflakeStatus = findViewById(R.id.pSnowflakeStatus);
 
         activityContextManager.getInstance().onStack(this);
-        mProxyStatusViewController = new proxyStatusViewController(this, mOrbotStatus, mVpnStatus, mBridgeStatus);
+        mProxyStatusViewController = new proxyStatusViewController(this, mOrbotStatus, mBridgeStatus, mSnowflakeStatus);
         mProxyStatusViewController.onInit();
 
         Object mProxy = pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS);
         if (mProxy == null) {
-            mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList("loading...", status.sVPNStatus, status.sBridgeStatus));
+            mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList("loading...", status.sBridgeStatus, status.sSnowFlakesStatus));
         } else {
-            mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(mProxy, status.sVPNStatus, status.sBridgeStatus));
+            mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(mProxy, status.sBridgeStatus, status.sSnowFlakesStatus));
         }
         mProxyStatusModel = new proxyStatusModel(new proxyStatusModelCallback());
         mProxyStatusModel.onInit();
@@ -76,7 +76,7 @@ public class proxyStatusController extends AppCompatActivity {
     }
 
     public void refreshOrbotStatus(View view) {
-        mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS), status.sVPNStatus, status.sBridgeStatus));
+        mProxyStatusViewController.onTrigger(proxyStatusEnums.eProxyStatusViewCommands.M_INIT_VIEWS, Arrays.asList(pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_GET_ORBOT_STATUS), status.sBridgeStatus, status.sSnowFlakesStatus));
     }
 
     /* LISTENERS */

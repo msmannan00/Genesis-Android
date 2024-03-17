@@ -472,7 +472,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">برج اپنی مرضی کے مطابق</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">برج کو فعال کریں</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">فعال کریں Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">ویپین سرور فعال کریں</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">برج گیٹوے کو قابل بنائیں</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">گیٹوے کو فعال کریں</string>
 
@@ -481,7 +480,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">آرباٹ پراکسی کی موجودہ حالت</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">جینیسز پراکسی کی حالت </string>
     <string name="PROXY_SUB_HEADER2" translatable="true">انین</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">ویپین رابطے کی شرط</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake کنیکٹیویٹی کی حیثیت</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">برج پراکسی کی شرط</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">معلومات | سسٹم کی سیٹنگ کو تبدیل کریں</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">آپ سافٹ ویئر کو دوبارہ شروع کرکے اور پراکسی منیجر کے پاس جاکر پراکسی تبدیل کرسکتے ہیں۔ نیچے دیئے گئے گیئر آئیکون پر کلک کرکے اسے کھولا جاسکتا ہے</string>

@@ -56,8 +56,8 @@ public class languageController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.language_view);
 
-        initializeAppModel();
         initializeConnections();
+        initializeAppModel();
         initializeAdapter();
         onInitScroll();
     }
@@ -74,9 +74,7 @@ public class languageController extends AppCompatActivity {
     }
 
     private void initializeAppModel() {
-        mLanguageViewController = new languageViewController();
         mLanguageViewController.onInit();
-
         mLanguageModel = new languageModel();
         mLanguageModel.onInit();
     }
@@ -86,6 +84,7 @@ public class languageController extends AppCompatActivity {
         mRecycleView = findViewById(R.id.pRecycleView);
         mBlocker = findViewById(R.id.pSecureRootBlocker);
 
+        mLanguageViewController = new languageViewController();
         mLanguageViewController.initialization(new languageViewCallback(), this, mBlocker);
     }
 

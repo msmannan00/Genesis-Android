@@ -334,11 +334,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     public void initWidget() {
         if (status.sWidgetResponse == enums.WidgetResponse.SEARCHBAR) {
-            if (!status.sSettingIsAppStarted) {
-                if (mSplashScreen.getAlpha() == 1 && mConnectButton.isEnabled()) {
-                    onStartApplication(null);
-                }
-            } else {
+            if (status.sSettingIsAppStarted) {
                 mHomeViewController.initSearchBarFocus(false, isKeyboardOpened);
                 final Handler handler = new Handler();
                 handler.postDelayed(() ->
@@ -350,11 +346,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                 }, 500);
             }
         } else if (status.sWidgetResponse == enums.WidgetResponse.VOICE) {
-            if (!status.sSettingIsAppStarted) {
-                if (mSplashScreen.getAlpha() == 1 && mConnectButton.isEnabled()) {
-                    onStartApplication(null);
-                }
-            } else {
+            if (status.sSettingIsAppStarted) {
                 if (mSearchEngineBar.getVisibility() != View.VISIBLE) {
                     onVoiceClick(null);
                     status.sWidgetResponse = enums.WidgetResponse.NONE;
@@ -661,7 +653,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void initRuntimeSettings() {
-
+        this.onReload(null);
     }
 
     public void onReDrawGeckoview() {
@@ -2494,7 +2486,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_GATEWAY_MANUAL, false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED, true));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.PROXY_IS_APP_RATED, false));
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_VPN_ENABLED, false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.BRIDGE_ENABLES, false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SNOWFLAKE_ENABLED, false));
         dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_FONT_ADJUSTABLE, true));

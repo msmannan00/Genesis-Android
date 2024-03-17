@@ -475,7 +475,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">personalitza Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">activa Bridges</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">activa Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">activeu VPN serveis</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">habilitar Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">habilitar Gateway</string>
 
@@ -484,7 +483,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">estat actual del proxy orion</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion condició del representant</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">orion</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN condició de connectivitat</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake condició de connectivitat</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge condició de representant</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">info, canvieu la configuració del sistema</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">Podeu canviar el servidor intermediari reiniciant el programari i anar al gestor de servidor intermediari. es pot obrir fent clic a una icona d\'engranatge a la part inferior</string>

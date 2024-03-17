@@ -465,7 +465,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Bridges Aanpassen</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Bridges Inschakelen</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">Snow Flakes Inschakelen</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Schakel VPN-service</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">in Bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Inschakelen Gateway Inschakelen</string>
 
@@ -474,7 +473,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Huidige status van orion-proxy</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion-proxystatus</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">Ui Bruggen Status</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN-verbindingsstatus</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake-verbindingsstatus</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge-verbindingsstatus</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">Om de proxy-instellingen te wijzigen, start u deze applicatie opnieuw en navigeert u naar proxybeheer. Het kan worden geopend door op het GEAR-pictogram onderaan</string>

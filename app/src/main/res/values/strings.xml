@@ -47,7 +47,7 @@
     <string name="HOME_DESCRIPTION_TEXT_8">Builtin Orion Search Engine</string>
     <string name="HOME_DESCRIPTION_TEXT_9">No Record and Digital Fingerprinting</string>
     <string name="HOME_CONNECT_NO_TOR">Fast &amp; Secure</string>
-    <string name="HOME_CONNECT_TOR">Dark Web - VPN</string>
+    <string name="HOME_CONNECT_TOR">Tor Powered</string>
 
     <!-- Default Notification -->
     <string name="DEFAULT_NOTIFICATION_RESET" translatable="false">EXIT AND RESET</string>
@@ -85,7 +85,7 @@
 
     <!-- Alert TOR -->
     <string name="ALERT_TOR_HEADER" translatable="true">Switch Tor</string>
-    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Using this you can switch between normal browsing using tory io or advance secure dark web browsing using Orion search</string>
+    <string name="ALERT_TOR_DESCRIPTION" translatable="true">Using this you can switch between normal browsing using tory io or advance secure Tor Powered browsing using Orion search</string>
     <string name="ALERT_TOR_TRIGGER" translatable="true">Switch</string>
 
     <!-- Alert Secure -->
@@ -426,7 +426,7 @@
     <string name="ALERT_WELCOME_MESSAGE_INFO" translatable="true">This application provide you a platform to search and open hidden web urls. Here are few suggestions\n</string>
     <string name="ALERT_WELCOME_MESSAGE_BT_1" translatable="true">Deep Web Online Market</string>
     <string name="ALERT_WELCOME_MESSAGE_BT_2" translatable="true">Leaked Documents and Books</string>
-    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">Dark Web News and Articles</string>
+    <string name="ALERT_WELCOME_MESSAGE_BT_3" translatable="true">Tor Powered News and Articles</string>
     <string name="ALERT_WELCOME_MESSAGE_BT_4" translatable="true">Secret Softwares and Hacking Tools</string>
     <string name="ALERT_WELCOME_MESSAGE_BT_5" translatable="true">Don\'t Show Again</string>
     <string name="ALERT_WELCOME_MESSAGE_BT_6" translatable="true">Finance and Money</string>
@@ -519,7 +519,6 @@
     <string name="ORBOT_SETTING_CUSTOM_BRIDGE" translatable="true">Customize Bridges</string>
     <string name="ORBOT_SETTING_BRIDGE_ENABLE" translatable="true">Enable Bridges</string>
     <string name="ORBOT_SETTING_SNOWFLAKE_ENABLE" translatable="true">Enable Snow Flakes</string>
-    <string name="ORBOT_SETTING_ENABLE_VPN" translatable="true">Enable VPN Serivce</string>
     <string name="ORBOT_SETTING_GATEWAY_INFO" translatable="true">Enable bridge Gateway</string>
     <string name="ORBOT_SETTING_GATEWAY_BUTTON" translatable="true">Enable Gateway</string>
 
@@ -528,7 +527,7 @@
     <string name="ORBOT_PROXY_STATUS_INFO" translatable="true">Current status of orbot proxy</string>
     <string name="PROXY_SUB_HEADER1" translatable="true">orion Proxy Status</string>
     <string name="PROXY_SUB_HEADER2" translatable="true">orion &amp; Bridges Status</string>
-    <string name="PROXY_VPN_STATUS" translatable="true">VPN connectivity status</string>
+    <string name="PROXY_SNOWFLAKE_STATUS" translatable="true">Snowflake connectivity status</string>
     <string name="PROXY_BRIDGE_STATUS" translatable="true">Bridge connectivity status</string>
     <string name="PROXY_SUB_HEADER3" translatable="true">INFO | Change Settings</string>
     <string name="PROXY_CONNECTIVITY_SETTING_INFO" translatable="true">To change proxy settings please restart this application and navigate to proxy manager. It can be opened by pressing on GEAR icon at bottom</string>
