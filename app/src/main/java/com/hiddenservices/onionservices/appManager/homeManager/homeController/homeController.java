@@ -1590,7 +1590,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onOpenLinkNewTabLoaded(String url) {
-        postNewLinkTabAnimationInBackground(url);
+        onOpenLinkNewTab(url);
     }
 
     public void onOpenTabViewBoundary(View view) {
