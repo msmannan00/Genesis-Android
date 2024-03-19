@@ -428,7 +428,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             onLoadTab(model.getSession(), false, true, false, true);
         } else {
             onNewIntent(getIntent());
-            onOpenLinkNewTab(helperMethod.getDomainName(mHomeModel.getSearchEngine()));
+            onOpenLinkNewTab(helperMethod.getDomainName(mHomeModel.getSearchEngine()), true);
         }
         initTabCountForced();
         if (!status.mThemeApplying) {
@@ -664,7 +664,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     public void onExternalURLInvoke(String pData) {
         if (status.sSettingIsAppStarted) {
             activityContextManager.getInstance().onGoHome();
-            onOpenLinkNewTab(pData);
+            onOpenLinkNewTab(pData, false);
         } else {
             status.sExternalWebsite = pData;
         }
@@ -1579,8 +1579,10 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         mHomeViewController.onNewTabAnimation(Arrays.asList(isKeyboardOpenedTemp, isKeyboardOpened), homeEnums.eHomeViewCallback.M_INITIALIZE_TAB_SINGLE, 1000, mGeckoClient.getSession().getCurrentURL());
     }
 
-    public void onOpenLinkNewTab(String url) {
-        mNewTab.setPressed(true);
+    public void onOpenLinkNewTab(String url, boolean pressed) {
+        if(pressed){
+            mNewTab.setPressed(true);
+        }
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             onGetThumbnail(null, false);
@@ -1590,7 +1592,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onOpenLinkNewTabLoaded(String url) {
-        onOpenLinkNewTab(url);
+        onOpenLinkNewTab(url, false);
     }
 
     public void onOpenTabViewBoundary(View view) {
@@ -1901,7 +1903,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
         if (isSuggestionSearchOpened) {
             tabRowModel model = (tabRowModel) dataController.getInstance().invokeTab(dataEnums.eTabCommands.GET_CURRENT_TAB, null);
             if (model == null) {
-                onOpenLinkNewTab(status.sSettingDefaultSearchEngine);
+                onOpenLinkNewTab(status.sSettingDefaultSearchEngine, true);
             }
             isSuggestionChanged = true;
             isFocusChanging = false;
@@ -2674,7 +2676,11 @@ public class homeController extends AppCompatActivity implements ComponentCallba
                     }
                 }
             } else if (e_type.equals(homeEnums.eHomeViewCallback.OPEN_NEW_TAB_INSTANT)) {
-                onLoadURL(dataToStr(data.get(0)));
+                if(status.sRestoreTabs){
+                    onOpenLinkNewTab(dataToStr(data.get(0)), false);
+                }else {
+                    onLoadURL(dataToStr(data.get(0)));
+                }
             } else if (e_type.equals(homeEnums.eHomeViewCallback.M_HOME_PAGE)) {
                 geckoSession mSession = (geckoSession) dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_HOME_PAGE, null);
                 if (mSession != null) {
