@@ -1590,28 +1590,7 @@ public class homeController extends AppCompatActivity implements ComponentCallba
     }
 
     public void onOpenLinkNewTabLoaded(String url) {
-        mNewTab.setPressed(true);
-        final Handler handler = new Handler();
-
-        handler.postDelayed(() -> {
-            mHomeViewController.onNewTabAnimation(Collections.singletonList(helperMethod.getDomainName(mHomeModel.getSearchEngine())), null, 1000, mGeckoClient.getSession().getCurrentURL());
-        }, 150);
-        handler.postDelayed(() -> {
-            onGetThumbnail(null, false);
-            mHomeViewController.expandTopBar(false, mGeckoView.getMaxY());
-            mNewTab.setPressed(false);
-            mHomeViewController.onProgressBarUpdate(5, true, isStaticURL());
-            mGeckoClient.getSession().stop();
-            dataController.getInstance().invokeTab(dataEnums.eTabCommands.M_UPDATE_PIXEL, Arrays.asList(mGeckoClient.getSession().getSessionID(), mRenderedBitmap, null, mGeckoView, false));
-            mGeckoClient.initializeSession(mGeckoView, new geckoViewCallback(), this);
-            mHomeViewController.progressBarReset();
-            mHomeViewController.onUpdateSearchBar(url, false, true, false);
-            mGeckoClient.onSaveCurrentTab(true, this);
-            dataController.getInstance().invokeTab(dataEnums.eTabCommands.MOVE_TAB_TO_TOP, Collections.singletonList(mGeckoClient.getSession()));
-            mGeckoClient.loadURL(url, mGeckoView, homeController.this);
-            initTabCountForced();
-
-        }, 300);
+        postNewLinkTabAnimationInBackground(url);
     }
 
     public void onOpenTabViewBoundary(View view) {

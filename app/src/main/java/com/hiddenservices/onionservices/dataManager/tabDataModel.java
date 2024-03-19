@@ -101,7 +101,7 @@ class tabDataModel {
         if (mTabs.size() > 2) {
             for(int counter=mTabs.size()-1;counter>1;counter--){
                 mTabs.get(counter).resetBitmap();
-                mTabs.get(counter).getSession().stop();
+                mTabs.get(counter).getSession().close();
                 mTabs.get(counter).getSession().setActive(false);
             }
         }

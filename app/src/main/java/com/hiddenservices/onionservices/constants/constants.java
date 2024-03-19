@@ -52,7 +52,7 @@ public class constants {
     public static final String CONST_BACKEND_DUCK_DUCK_GO_STATIC_URL = "https://duckduckgo.com";
     public static final String CONST_BACKEND_BING_URL = "https://bing.com/search?q=$s";
     public static final String CONST_BACKEND_WIKI_URL = "https://en.wikipedia.org/wiki/$s";
-    public static final String CONST_LOG_DUCKDUCK = "https://duckduckgo.com/?q=tor&va=v&t=ha&ia=web";
+    public static final String CONST_LOG_DUCKDUCK = "https://duckduckgo.com/?q=";
 
     /*PROXY CONSTANTS*/
 

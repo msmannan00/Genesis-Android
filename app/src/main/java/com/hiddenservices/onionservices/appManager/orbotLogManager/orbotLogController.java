@@ -11,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuProvider;
 import androidx.core.widget.NestedScrollView;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -294,6 +297,11 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
         finish();
         activityContextManager.getInstance().onRemoveStack(this);
         initializeStartupAnimation();
+    }
+
+    @Override
+    public void addMenuProvider(@NonNull MenuProvider provider, @NonNull LifecycleOwner owner, @NonNull Lifecycle.State state) {
+
     }
 
     /* View Callback */

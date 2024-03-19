@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/pDataCleared"
-    android:translationZ="5dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/c_background_alpha"
+    android:id="@+id/pDataCleared"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@xml/hox_splash_gradient"
+    android:translationZ="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pDataClearedContainer"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="14dp"
         android:background="@xml/ax_background_generic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        tools:layout_editor_absoluteX="10dp">
 
         <TextView
             android:id="@+id/pDataClearedDescription"

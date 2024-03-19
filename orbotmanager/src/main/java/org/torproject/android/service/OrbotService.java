@@ -1138,6 +1138,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                     if(netInfo != null && netInfo.isConnected()) {
                         // WE ARE CONNECTED: DO SOMETHING
                         newConnectivityState = true;
+                        startTor();
                     }
                     else {
                         // WE ARE NOT: DO SOMETHING ELSE
