@@ -534,7 +534,7 @@ public class homeViewController {
     }
 
     public void initStatusBarColor(boolean mInstant) {
-        int mDelay = 1500;
+        int mDelay = 2500;
         if (status.mThemeApplying || mInstant || status.sSettingIsAppStarted) {
             mDelay = 0;
         }
@@ -1793,8 +1793,6 @@ public class homeViewController {
                             e.printStackTrace();
                         }
                     }
-                }
-                if (msg.what == messages.MESSAGE_PROGRESSBAR_VALIDATE) {
                 }
             }
         };

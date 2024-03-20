@@ -2979,7 +2979,6 @@ public class homeController extends AppCompatActivity implements ComponentCallba
             } else if (e_type.equals(homeEnums.eGeckoCallback.M_RATE_COUNT)) {
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_INT, Arrays.asList(keys.SETTING_RATE_COUNT, status.sGlobalURLCount));
             } else if (e_type.equals(homeEnums.eGeckoCallback.M_ORBOT_LOADING)) {
-                pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(homeController.this), M_ORBOT_LOADING);
                 new Handler().postDelayed(() ->
                 {
                     mPastURL = mGeckoClient.getSession().getCurrentURL();
