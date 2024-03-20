@@ -1212,6 +1212,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
 
         var notificationMessage = logMessage;
+        boolean showConnectingLog = true;
         var localIntent = new Intent(LOCAL_ACTION_LOG).putExtra(LOCAL_EXTRA_LOG, logMessage);
         if (logMessage.contains(LOG_NOTICE_HEADER)) {
             notificationMessage = notificationMessage.substring(LOG_NOTICE_HEADER.length());
@@ -1223,10 +1224,13 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 notificationMessage = notificationMessage.substring(notificationMessage.indexOf(':') + 1).trim();
                 if(Integer.parseInt(percent)>=30){
                     orbotLocalConstants.mIsTorInitialized = true;
+                    showConnectingLog = false;
                 }
             }
         }
-        showToolbarNotification(notificationMessage, NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
+        if(showConnectingLog){
+            showToolbarNotification(notificationMessage, NOTIFY_ID, R.drawable.ic_stat_starting_tor_logo);
+        }
         mHandler.post(() -> {
             LocalBroadcastManager.getInstance(OrbotService.this).sendBroadcast(localIntent);
 
