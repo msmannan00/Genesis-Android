@@ -1357,19 +1357,16 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
     private StringBuffer processSettingsImplObfs4(StringBuffer extraLines) {
         Log.d(TAG, "in obfs4 torrc config");
-        if(!orbotLocalConstants.mBridges.equals("meek")){
-            extraLines.append("ClientTransportPlugin obfs3 socks5 127.0.0.1:" + IPtProxy.obfs3Port()).append('\n');
-            extraLines.append("ClientTransportPlugin obfs4 socks5 127.0.0.1:" + IPtProxy.obfs4Port()).append('\n');
-        }else {
-            extraLines.append("ClientTransportPlugin meek_lite socks5 127.0.0.1:" + IPtProxy.meekPort()).append('\n');
-        }
+        extraLines.append("ClientTransportPlugin obfs3 socks5 127.0.0.1:" + IPtProxy.obfs3Port()).append('\n');
+        extraLines.append("ClientTransportPlugin obfs4 socks5 127.0.0.1:" + IPtProxy.obfs4Port()).append('\n');
+        extraLines.append("ClientTransportPlugin meek_lite socks5 127.0.0.1:" + IPtProxy.meekPort()).append('\n');
         var bridgeList = "";
         if (Prefs.getConnectionPathway().equals(Prefs.PATHWAY_CUSTOM)) {
             bridgeList = Prefs.getBridgesList();
         } else bridgeList = Prefs.getPrefSmartTryObfs4();
         var customBridges = parseBridgesFromSettings(bridgeList);
         for (var b : customBridges)
-            if(!orbotLocalConstants.mBridges.equals("meek") || orbotLocalConstants.mBridges.equals("meek") && b.contains("meek")){
+            if(b.contains("meek") || b.contains("obfs")){
                 extraLines.append("Bridge ").append(b).append("\n");
             }
         return extraLines;
