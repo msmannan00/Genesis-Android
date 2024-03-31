@@ -1,10 +1,13 @@
 package com.hiddenservices.onionservices.appManager.settingManager.privacyManager;
 
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_STRICT_POLICY_JAVASCRIPT;
+
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +15,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
 import com.hiddenservices.onionservices.constants.status;
+import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.eventObserver;
 import com.hiddenservices.onionservices.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.hiddenservices.onionservices.pluginManager.pluginController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_ALL;
@@ -24,25 +30,29 @@ import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_NONE;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_NON_TRACKERS;
 
+import org.mozilla.geckoview.ContentBlocking;
+
 class settingPrivacyViewController {
     /*Private Variables*/
 
     private AppCompatActivity mContext;
     private SwitchMaterial mJavaScript;
     private SwitchMaterial mDoNotTrack;
+    private LinearLayout mOption0;
     private SwitchMaterial mClearDataOnExit;
     private ArrayList<RadioButton> mCookie;
     private SwitchMaterial mPopup;
 
     /*Initializations*/
 
-    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener ignoredPEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie, SwitchMaterial pPopup) {
+    settingPrivacyViewController(settingPrivacyController pContext, eventObserver.eventListener ignoredPEvent, SwitchMaterial pJavaScript, SwitchMaterial pDoNotTrack, SwitchMaterial pClearDataOnExit, ArrayList<RadioButton> pCookie, SwitchMaterial pPopup, LinearLayout pOption0) {
         this.mContext = pContext;
         this.mJavaScript = pJavaScript;
         this.mClearDataOnExit = pClearDataOnExit;
         this.mCookie = pCookie;
         this.mDoNotTrack = pDoNotTrack;
         this.mPopup = pPopup;
+        this.mOption0 = pOption0;
     }
 
     protected void onInit(){
@@ -66,6 +76,10 @@ class settingPrivacyViewController {
     }
 
     private void initViews() {
+        if(status.sSettingTrackingProtection == ContentBlocking.AntiTracking.STRICT){
+            mOption0.setAlpha(0.3f);
+        }
+
         if (status.sSettingJavaStatus) {
             this.mJavaScript.setChecked(true);
         } else {

@@ -1,13 +1,5 @@
-# Contents of /data/local/tmp/com.yourcompany.yourapp-geckoview-config.yaml
-
-env:
-  MOZ_LOG: nsHttp:5
-
-
 prefs:
   network.proxy.type: 1
-  # network.proxy.socks:  "127.0.0.1"
-  # network.proxy.socks_port:  9050
   network.proxy.socks_version: 5
   network.proxy.socks_remote_dns: true
   permissions.default.image: 1
@@ -15,13 +7,7 @@ prefs:
   browser.cache.disk.enable: true
   browser.cache.memory.enable: false
   browser.cache.disk.capacity: 1000000000
-  privacy.donottrackheader.enabled: false
-  privacy.donottrackheader.value: 1
-  network.http.sendRefererHeader: 0
-  security.checkloaduri: false
-  security.mixed_content.block_active_content: false
-  security.mixed_content.block_display_content: false
-  media.peerconnection.enabled: false //webrtc disabled
+  media.peerconnection.enabled: false
   browser.cache.disk_cache_ssl: true
   signon.formlessCapture.enabled: true
   signon.storeWhenAutocompleteOff: true
@@ -32,16 +18,9 @@ prefs:
   security.ssl3.dhe_rsa_aes_128_sha: true
   security.ssl3.rsa_des_ede3_sha: true
   security.ssl3.dhe_rsa_aes_256_sha: true
-  browser.safebrowsing.blockedURIs.enabled: false
   media.gmp-provider.enabled: false
-  browser.send_pings.require_same_host: false
-  webgl.disabled: false
+  webgl.disabled: true
   pdfjs.enableWebGL: false
-  browser.safebrowsing.malware.enabled: false
-  security.csp.experimentalEnabled: false
-  network.http.referer.spoofSource: false
-  security.OCSP.require: false
-  security.ssl.require_safe_negotiation: false
   privacy.clearOnShutdown.cache: true
   privacy.clearOnShutdown.downloads: true
   privacy.clearOnShutdown.formdata: true
@@ -50,4 +29,53 @@ prefs:
   privacy.clearOnShutdown.passwords: true
   privacy.clearOnShutdown.sessions: true
   privacy.clearOnShutdown.siteSettings: true
-  privacy.resistFingerprinting: false
+
+  # network.proxy.socks:  "127.0.0.1"
+  # network.proxy.socks_port:  9050
+  # browser.send_pings.require_same_host: true
+  # security.csp.experimentalEnabled: true
+  # network.http.referer.spoofSource: true
+  # security.OCSP.require: true
+  # security.ssl.require_safe_negotiation: true
+  # privacy.resistFingerprinting: true
+  # security.mixed_content.block_active_content: true
+  # security.mixed_content.block_display_content: true
+  # javascript.enabled: false
+  # webgl.min_capability_mode: true
+  # webgl.disable-extensions: true
+  # browser.display.use_document_fonts: 0
+  # media.autoplay.default: 5
+  # layers.acceleration.disabled: true
+  # media.peerconnection.enabled: false
+  # dom.battery.enabled: false
+  # dom.gamepad.enabled: false
+  # media.webspeech.synth.enabled: false
+  # dom.w3c_touch_events.enabled: 0
+  # dom.event.clipboardevents.enabled: false
+  # dom.webnotifications.enabled: false
+  # network.prefetch-next: false
+  # network.dns.disablePrefetch: true
+  # network.http.speculative-parallel-limit: 0
+  # browser.formfill.enable: false
+  # browser.download.folderList: 2
+  # webgl.enable-webgl2: false
+
+  # javascript.enabled: true
+  # webgl.disabled: false
+  # webgl.min_capability_mode: false
+  # webgl.disable-extensions: false
+  # layers.acceleration.disabled: false
+  # media.peerconnection.enabled: true
+  # media.autoplay.default: 0
+  # dom.w3c_touch_events.enabled: 1
+  # dom.event.clipboardevents.enabled: true
+  # dom.webnotifications.enabled: true
+  # network.prefetch-next: true
+  # network.dns.disablePrefetch: false
+  # network.http.speculative-parallel-limit: 6
+  # browser.formfill.enable: true
+  # browser.download.folderList: 1
+  # webgl.enable-webgl2: true
+  # dom.battery.enabled: true
+  # dom.gamepad.enabled: true
+  # media.webspeech.synth.enabled: true

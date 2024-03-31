@@ -83,7 +83,7 @@ public class geckoClients {
         mSessionInitializer.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
         mSessionInitializer.getSettings().setFullAccessibilityTree(true);
         mSessionInitializer.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
-        mSessionInitializer.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        mSessionInitializer.getSettings().setAllowJavascript(status.sSettingJavaStatus && status.sSettingTrackingProtection!=ContentBlocking.AntiTracking.STRICT);
         return mSessionInitializer;
     }
 
@@ -144,11 +144,14 @@ public class geckoClients {
             mRuntime.getSettings().getContentBlocking().setCookieBehavior(getCookiesBehaviour());
             mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.DEFAULT);
 
-            if (status.sSettingTrackingProtection == 1) {
+            if (status.sSettingTrackingProtection == ContentBlocking.AntiTracking.DEFAULT) {
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.DEFAULT);
-            } else if (status.sSettingTrackingProtection == 2) {
+            } else if (status.sSettingTrackingProtection == ContentBlocking.AntiTracking.STRICT) {
                 mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.STRICT);
             }
+
+            mRuntime.getSettings().getContentBlocking().setAntiTracking(ContentBlocking.AntiTracking.NONE);
+            mRuntime.getSettings().getContentBlocking().setSafeBrowsing(ContentBlocking.SafeBrowsing.NONE);
 
             dataController.getInstance().initializeListData();
             onClearAll();
@@ -185,7 +188,7 @@ public class geckoClients {
         mSession.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
         mSession.getSettings().setFullAccessibilityTree(true);
         mSession.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
-        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+        mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus && status.sSettingTrackingProtection!=ContentBlocking.AntiTracking.STRICT);
         mRuntime.getSettings().setAboutConfigEnabled(true);
         mRuntime.getSettings().setAutomaticFontSizeAdjustment(false);
         mRuntime.getSettings().setWebFontsEnabled(status.sShowWebFonts);
@@ -240,7 +243,7 @@ public class geckoClients {
                 ex.printStackTrace();
             }
         } else {
-            mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus);
+            mSession.getSettings().setAllowJavascript(status.sSettingJavaStatus && status.sSettingTrackingProtection!=ContentBlocking.AntiTracking.STRICT);
             mSession.loadUri(url);
         }
         mSession.initURL(url);

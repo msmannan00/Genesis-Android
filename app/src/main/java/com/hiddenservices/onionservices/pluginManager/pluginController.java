@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.helperClasses.permissionHandler;
+import com.hiddenservices.onionservices.appManager.settingManager.trackingManager.settingTrackingController;
 import com.hiddenservices.onionservices.appManager.unproxiedConnectionManager.unproxiedConnectionController;
 import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogController;
@@ -195,7 +196,10 @@ public class pluginController {
             } else if (pEventType.equals(M_CANCEL_WELCOME)) {
                 status.sSettingIsWelcomeEnabled = false;
                 dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_IS_WELCOME_ENABLED, false));
-            } else if (pEventType.equals(M_OPEN_PRIVACY)) {
+            } else if (pEventType.equals(ALERT_STRICT_POLICY_JAVASCRIPT)) {
+                helperMethod.openActivity(settingTrackingController.class, constants.CONST_LIST_HISTORY, mHomeController.get(), true);
+            }
+            else if (pEventType.equals(M_OPEN_PRIVACY)) {
                 helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController.get(), true);
             } else if (pEventType.equals(M_CLEAR_BOOKMARK)) {
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK, pData);

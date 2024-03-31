@@ -793,6 +793,11 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_HISTORY), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_HISTORY);
                     break;
 
+                case M_STRICT_POLICY_JAVASCRIPT:
+                    /*VERIFIED*/
+                    onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_STRICT_POLICY_JAVASCRIPT), mContext.getString(R.string.ALERT_CHANGE), ALERT_STRICT_POLICY_JAVASCRIPT);
+                    break;
+
                 case M_CLEAR_BOOKMARK:
                     /*VERIFIED*/
                     onShowToast(R.layout.popup_toast_generic, R.xml.ax_background_important, 12000, mContext.getString(R.string.ALERT_CLEAR_BOOKMARK_INFO), mContext.getString(R.string.ALERT_CONFIRM), M_CLEAR_BOOKMARK);

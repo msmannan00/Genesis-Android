@@ -149,16 +149,63 @@ public class helperMethod {
             int portIndex = mYAML.indexOf("network.proxy.socks_port");
             int breakIndex = mYAML.indexOf("\n", portIndex);
             mYAML = buf.replace(portIndex, breakIndex, "network.proxy.socks_port:  " + orbotLocalConstants.mSOCKSPort).toString();
-            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
         } else {
             mYAML = mYAML.replace("browser.cache.memory.enable: true", "browser.cache.memory.enable: false");
             if(status.sSettingTrackingProtection == ContentBlocking.AntiTracking.STRICT){
                 mYAML = mYAML.replace("privacy.resistFingerprinting: false", "privacy.resistFingerprinting: true");
             }
-
-            helperMethod.writeToFile(cacheFile.getPath(), mYAML);
         }
-
+        if(status.sSettingTrackingProtection==ContentBlocking.AntiTracking.STRICT){
+            mYAML = mYAML.replace("# browser.send_pings.require_same_host: true", "browser.send_pings.require_same_host: true");
+            mYAML = mYAML.replace("# security.csp.experimentalEnabled: true", "security.csp.experimentalEnabled: true");
+            mYAML = mYAML.replace("# network.http.referer.spoofSource: true", "network.http.referer.spoofSource: true");
+            mYAML = mYAML.replace("# security.OCSP.require: true", "security.OCSP.require: true");
+            mYAML = mYAML.replace("# security.ssl.require_safe_negotiation: true", "security.ssl.require_safe_negotiation: true");
+            mYAML = mYAML.replace("# privacy.resistFingerprinting: true", "privacy.resistFingerprinting: true");
+            mYAML = mYAML.replace("# security.mixed_content.block_active_content: true", "security.mixed_content.block_active_content: true");
+            mYAML = mYAML.replace("# security.mixed_content.block_display_content: true", "security.mixed_content.block_display_content: true");
+            mYAML = mYAML.replace("# javascript.enabled: false", "javascript.enabled: false");
+            mYAML = mYAML.replace("# webgl.min_capability_mode: true", "webgl.min_capability_mode: true");
+            mYAML = mYAML.replace("# webgl.disable-extensions: true", "webgl.disable-extensions: true");
+            mYAML = mYAML.replace("# browser.display.use_document_fonts: 0", "browser.display.use_document_fonts: 0");
+            mYAML = mYAML.replace("# media.autoplay.default: 5", "media.autoplay.default: 5");
+            mYAML = mYAML.replace("# layers.acceleration.disabled: true", "layers.acceleration.disabled: true");
+            mYAML = mYAML.replace("# media.peerconnection.enabled: false", "media.peerconnection.enabled: false");
+            mYAML = mYAML.replace("# dom.battery.enabled: false", "dom.battery.enabled: false");
+            mYAML = mYAML.replace("# dom.gamepad.enabled: false", "dom.gamepad.enabled: false");
+            mYAML = mYAML.replace("# media.webspeech.synth.enabled: false", "media.webspeech.synth.enabled: false");
+            mYAML = mYAML.replace("# dom.w3c_touch_events.enabled: 0", "dom.w3c_touch_events.enabled: 0");
+            mYAML = mYAML.replace("# dom.event.clipboardevents.enabled: false", "dom.event.clipboardevents.enabled: false");
+            mYAML = mYAML.replace("# dom.webnotifications.enabled: false", "dom.webnotifications.enabled: false");
+            mYAML = mYAML.replace("# network.prefetch-next: false", "network.prefetch-next: false");
+            mYAML = mYAML.replace("# network.dns.disablePrefetch: true", "network.dns.disablePrefetch: true");
+            mYAML = mYAML.replace("# network.http.speculative-parallel-limit: 0", "network.http.speculative-parallel-limit: 0");
+            mYAML = mYAML.replace("# browser.formfill.enable: false", "browser.formfill.enable: false");
+            mYAML = mYAML.replace("# browser.download.folderList: 2", "browser.download.folderList: 2");
+            mYAML = mYAML.replace("# webgl.enable-webgl2: false", "webgl.enable-webgl2: false");
+        }
+        if(status.sSettingTrackingProtection==ContentBlocking.AntiTracking.DEFAULT){
+            mYAML = mYAML.replace("# javascript.enabled: true", "javascript.enabled: true");
+            mYAML = mYAML.replace("# webgl.disabled: false", "webgl.disabled: false");
+            mYAML = mYAML.replace("# webgl.min_capability_mode: false", "webgl.min_capability_mode: false");
+            mYAML = mYAML.replace("# webgl.disable-extensions: false", "webgl.disable-extensions: false");
+            mYAML = mYAML.replace("# layers.acceleration.disabled: false", "layers.acceleration.disabled: false");
+            mYAML = mYAML.replace("# media.peerconnection.enabled: true", "media.peerconnection.enabled: true");
+            mYAML = mYAML.replace("# media.autoplay.default: 0", "media.autoplay.default: 0");
+            mYAML = mYAML.replace("# dom.w3c_touch_events.enabled: 1", "dom.w3c_touch_events.enabled: 1");
+            mYAML = mYAML.replace("# dom.event.clipboardevents.enabled: true", "dom.event.clipboardevents.enabled: true");
+            mYAML = mYAML.replace("# dom.webnotifications.enabled: true", "dom.webnotifications.enabled: true");
+            mYAML = mYAML.replace("# network.prefetch-next: true", "network.prefetch-next: true");
+            mYAML = mYAML.replace("# network.dns.disablePrefetch: false", "network.dns.disablePrefetch: false");
+            mYAML = mYAML.replace("# network.http.speculative-parallel-limit: 6", "network.http.speculative-parallel-limit: 6");
+            mYAML = mYAML.replace("# browser.formfill.enable: true", "browser.formfill.enable: true");
+            mYAML = mYAML.replace("# browser.download.folderList: 1", "browser.download.folderList: 1");
+            mYAML = mYAML.replace("# webgl.enable-webgl2: true", "webgl.enable-webgl2: true");
+            mYAML = mYAML.replace("# dom.battery.enabled: true", "dom.battery.enabled: true");
+            mYAML = mYAML.replace("# dom.gamepad.enabled: true", "dom.gamepad.enabled: true");
+            mYAML = mYAML.replace("# media.webspeech.synth.enabled: true", "media.webspeech.synth.enabled: true");
+        }
+        helperMethod.writeToFile(cacheFile.getPath(), mYAML);
         return cacheFile.getAbsolutePath();
     }
 

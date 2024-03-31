@@ -398,7 +398,7 @@
     <string name="SETTING_CLEAR_CACHE_OPTION_2" translatable="true">Clear search history</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_3" translatable="true">Clear marked bookmarks</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_4" translatable="true">Clear browsing cache</string>
-    <string name="SETTING_CLEAR_CACHE_OPTIneON_5" translatable="true">Clear suggestions</string>
+    <string name="SETTING_CLEAR_CACHE_OPTION_5" translatable="true">Clear suggestions</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_6" translatable="true">Clear site data</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_7" translatable="true">Clear session data</string>
     <string name="SETTING_CLEAR_CACHE_OPTION_8" translatable="true">Clear browsing cookies</string>
@@ -407,11 +407,13 @@
     <!-- Alerts -->
     <string name="ALERT_CREATE_BOOKMARK" translatable="true">Bookmark Website</string>
     <string name="ALERT_CLEAR_HISTORY" translatable="true">Remove browser history ?</string>
+    <string name="ALERT_STRICT_POLICY_JAVASCRIPT" translatable="false">STRICT POLICY〡Javascript Disabled</string>
     <string name="ALERT_CLEAR_BOOKMARK" translatable="true">Clear Bookmark and Data</string>
     <string name="ALERT_CLEAR_HISTORY_INFO" translatable="true">Clearing data will remove history, cookies, and other browsing data</string>
     <string name="ALERT_CLEAR_BOOKMARK_INFO" translatable="true">Remove all bookmarks ?</string>
     <string name="ALERT_CLEAR" translatable="true">Clear</string>
     <string name="ALERT_CONFIRM" translatable="false">Confirm</string>
+    <string name="ALERT_CHANGE" translatable="false">Change</string>
     <string name="ALERT_REPORT" translatable="true">Report</string>
     <string name="ALERT_REPORT_URL" translatable="true">Report Website</string>
     <string name="ALERT_REPORT_URL_INFO" translatable="true">If you think this URL is illegal or disturbing, report it to us, so we can take legal action</string>

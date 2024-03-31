@@ -91,11 +91,11 @@ dependencies {
     implementation 'org.apache.commons:commons-text:1.3'
     implementation "androidx.work:work-runtime:2.9.0"
 
-    implementation "org.mozilla.components:browser-engine-gecko:121.0"
-    implementation "org.mozilla.components:browser-icons:121.0"
-    implementation "org.mozilla.components:concept-fetch:121.0"
-    implementation "org.mozilla.components:concept-base:121.0"
-    implementation "org.mozilla.components:support-utils:121.0"
+    implementation "org.mozilla.components:browser-engine-gecko:124.0"
+    implementation "org.mozilla.components:browser-icons:124.0"
+    implementation "org.mozilla.components:concept-fetch:124.0"
+    implementation "org.mozilla.components:concept-base:124.0"
+    implementation "org.mozilla.components:support-utils:124.0"
 
     implementation project(path: ':orbotmanager')
 

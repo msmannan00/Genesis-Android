@@ -1,8 +1,11 @@
 package com.hiddenservices.onionservices.appManager.settingManager.privacyManager;
 
+import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessageManager.M_STRICT_POLICY_JAVASCRIPT;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import com.hiddenservices.onionservices.appManager.settingManager.trackingManage
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.keys;
 import com.hiddenservices.onionservices.constants.status;
+import com.hiddenservices.onionservices.constants.strings;
 import com.hiddenservices.onionservices.dataManager.dataController;
 import com.hiddenservices.onionservices.dataManager.dataEnums;
 import com.hiddenservices.onionservices.eventObserver;
@@ -23,6 +27,8 @@ import com.hiddenservices.onionservices.pluginManager.pluginController;
 import com.hiddenservices.onionservices.pluginManager.pluginEnums;
 import com.hiddenservices.onionservices.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
+import org.mozilla.geckoview.ContentBlocking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +40,8 @@ public class settingPrivacyController extends AppCompatActivity {
     /* PRIVATE VARIABLES */
     private settingPrivacyModel mSettingPrivacyModel;
     private settingPrivacyViewController mSettingPrivacyViewController;
+
+    private LinearLayout mOption0;
     private SwitchMaterial mJavaScript;
     private SwitchMaterial mPopup;
     private SwitchMaterial mDoNotTrack;
@@ -67,13 +75,14 @@ public class settingPrivacyController extends AppCompatActivity {
         mDoNotTrack = findViewById(R.id.pDoNotTrack);
         mClearDataOnExit = findViewById(R.id.pClearDataOnExit);
         mPopup = findViewById(R.id.pPopup);
+        mOption0 = findViewById(R.id.pOption0);
         mCookie.add(findViewById(R.id.pCookieRadioOption1));
         mCookie.add(findViewById(R.id.pCookieRadioOption2));
         mCookie.add(findViewById(R.id.pCookieRadioOption3));
         mCookie.add(findViewById(R.id.pCookieRadioOption4));
 
         activityContextManager.getInstance().onStack(this);
-        mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mClearDataOnExit, mCookie, mPopup);
+        mSettingPrivacyViewController = new settingPrivacyViewController(this, new settingPrivacyController.settingAccessibilityViewCallback(), mJavaScript, mDoNotTrack, mClearDataOnExit, mCookie, mPopup, mOption0);
         mSettingPrivacyViewController.onInit();
 
         mSettingPrivacyModel = new settingPrivacyModel(new settingPrivacyController.settingAccessibilityModelCallback());
@@ -142,10 +151,14 @@ public class settingPrivacyController extends AppCompatActivity {
     }
 
     public void onJavaScript(View view) {
-        mSettingChanged = true;
-        mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_JAVASCRIPT, Collections.singletonList(!status.sSettingJavaStatus));
-        mJavaScript.toggle();
-        dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT, status.sSettingJavaStatus));
+        if(status.sSettingTrackingProtection == ContentBlocking.AntiTracking.STRICT){
+            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, this), M_STRICT_POLICY_JAVASCRIPT);
+        }else {
+            mSettingChanged = true;
+            mSettingPrivacyModel.onTrigger(settingPrivacyEnums.ePrivacyModel.M_SET_JAVASCRIPT, Collections.singletonList(!status.sSettingJavaStatus));
+            mJavaScript.toggle();
+            dataController.getInstance().invokePrefs(dataEnums.ePreferencesCommands.M_SET_BOOL, Arrays.asList(keys.SETTING_JAVA_SCRIPT, status.sSettingJavaStatus));
+        }
     }
 
     public void onPopup(View view) {
