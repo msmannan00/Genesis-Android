@@ -1410,7 +1410,7 @@ public class homeViewController {
 
     void onProgressBarUpdate(int value, boolean ignoredMForced, boolean isStaticURL) {
 
-        if(mSearchbar.getText().toString().equals("about:blank") || (mSearchbar.getText().toString().equals(CONST_PRIVACY_POLICY_URL_NON_TOR) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE_DARK)) && isStaticURL){
+        if(mSearchbar.getText().toString().equals("about:config") || mSearchbar.getText().toString().equals("about:blank") || (mSearchbar.getText().toString().equals(CONST_PRIVACY_POLICY_URL_NON_TOR) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_URL_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_ERROR_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED) || mSearchbar.getText().toString().equals(CONST_GENESIS_BADCERT_CACHED_DARK) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE) || mSearchbar.getText().toString().equals(CONST_GENESIS_HELP_URL_CACHE_DARK)) && isStaticURL){
             mProgressBar.setProgress(0);
             return;
         }
