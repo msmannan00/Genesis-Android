@@ -1,7 +1,10 @@
 package com.hiddenservices.onionservices.dataManager;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.AsyncTask;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.dataManager.models.bookmarkRowModel;
@@ -89,15 +92,22 @@ public class sqlCipherDataModel {
         }
     };
 
-    private void execSQL(String query, Object params) {
-        try {
-            if (params == null) {
-                sDatabaseInstance.execSQL(query);
-            } else {
-                sDatabaseInstance.execSQL(query, (String[]) params);
+    @SuppressLint("StaticFieldLeak")
+    private void execSQL(final String query, final Object params) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    if (params == null) {
+                        sDatabaseInstance.execSQL(query);
+                    } else {
+                        sDatabaseInstance.execSQL(query, (String[]) params);
+                    }
+                } catch (Exception ignored) {
+                }
+                return null;
             }
-        } catch (Exception ex) {
-        }
+        }.execute();
     }
 
     private void execSQL(String query, Object params, boolean pContentValues, String whereClause, String[] whereArgs) {

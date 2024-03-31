@@ -45,7 +45,7 @@ dependencies {
 
     api libs.guardian_jtorctl
     api project(':OrbotLib')
-    api project(':tor-android')
+    api libs.tor_android
 
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
     implementation 'androidx.core:core:1.6.0'

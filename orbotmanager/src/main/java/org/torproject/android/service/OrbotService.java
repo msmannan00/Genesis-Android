@@ -69,6 +69,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.StringTokenizer;
@@ -242,7 +243,10 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
         if (mNotifyBuilder == null) {
             mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_stat_starting_tor_logo).setContentIntent(pendIntent).setCategory(Notification.CATEGORY_SERVICE);
+            mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_stat_starting_tor_logo)
+                    .setContentIntent(pendIntent)
+                    .setCategory(Notification.CATEGORY_SERVICE);
         }
 
         mNotifyBuilder.setOngoing(true);
@@ -256,17 +260,20 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
         mNotifyBuilder.setContentTitle(title);
 
-        mNotifyBuilder.mActions.clear();
+        ArrayList<NotificationCompat.Action> actionsCopy = new ArrayList<>(mNotifyBuilder.mActions);
+        actionsCopy.clear();
         if (conn != null && mCurrentStatus.equals(STATUS_ON)) {
             var pendingIntentNewNym = PendingIntent.getBroadcast(this, 0, new Intent(TorControlCommands.SIGNAL_NEWNYM), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-            mNotifyBuilder.addAction(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym);
+            actionsCopy.add(new NotificationCompat.Action(R.drawable.ic_refresh_white_24dp, getString(R.string.menu_new_identity), pendingIntentNewNym));
 
             var pendingIntentConnect = PendingIntent.getBroadcast(this, 0, new Intent(CMD_SETTING), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-            mNotifyBuilder.addAction(R.drawable.ic_stat_starting_tor_logo, "NOTIFICATION SETTINGS", pendingIntentConnect);
+            actionsCopy.add(new NotificationCompat.Action(R.drawable.ic_stat_starting_tor_logo, "NOTIFICATION SETTINGS", pendingIntentConnect));
         } else if (mCurrentStatus.equals(STATUS_OFF)) {
             var pendingIntentConnect = PendingIntent.getBroadcast(this, 0, new Intent(LOCAL_ACTION_NOTIFICATION_START), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-            mNotifyBuilder.addAction(R.drawable.ic_stat_starting_tor_logo, getString(R.string.connect_to_tor), pendingIntentConnect);
+            actionsCopy.add(new NotificationCompat.Action(R.drawable.ic_stat_starting_tor_logo, getString(R.string.connect_to_tor), pendingIntentConnect));
         }
+
+        mNotifyBuilder.mActions = actionsCopy;
 
         mNotifyBuilder.setContentText(notifyMsg).setSmallIcon(icon).setTicker(notifyType != NOTIFY_ID ? notifyMsg : null);
 
