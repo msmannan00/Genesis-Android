@@ -198,6 +198,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
         if(mConnectivity){
             orbotLocalConstants.mNotificationStatus = 1;
             showToolbarNotification(0+"kbps ⇣ / " +0+"kbps ⇡", NOTIFY_ID, R.mipmap.ic_stat_tor_logo);
+            orbotLocalConstants.mIsTorInitialized = true;
         }
         else {
             showToolbarNotification("orbot is connecting please wait!", NOTIFY_ID, org.torproject.android.service.R.drawable.ic_stat_starting_tor_logo);
@@ -241,6 +242,9 @@ public class OrbotService extends VpnService implements OrbotConstants {
         var intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         var pendIntent = PendingIntent.getActivity(OrbotService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
+        if(notifyMsg.contains("kbps")){
+            orbotLocalConstants.mIsTorInitialized = true;
+        }
         if (mNotifyBuilder == null) {
             mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             mNotifyBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
@@ -1229,7 +1233,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 localIntent.putExtra(LOCAL_EXTRA_BOOTSTRAP_PERCENT, percent);
                 mNotifyBuilder.setProgress(100, Integer.parseInt(percent), false);
                 notificationMessage = notificationMessage.substring(notificationMessage.indexOf(':') + 1).trim();
-                if(Integer.parseInt(percent)>=30){
+                if(Integer.parseInt(percent)>=20){
                     orbotLocalConstants.mIsTorInitialized = true;
                     showConnectingLog = false;
                 }
@@ -1278,7 +1282,6 @@ public class OrbotService extends VpnService implements OrbotConstants {
         } else if (pathway.equals(Prefs.PATHWAY_DIRECT)) {
             extraLines = processSettingsImplDirectPathway(extraLines);
         } else {
-            // snowflake or obfs4
             extraLines.append("UseBridges 1").append('\n');
             if (pathway.startsWith(Prefs.PATHWAY_SNOWFLAKE) || Prefs.getPrefSmartTrySnowflake()) {
                 extraLines = processSettingsImplSnowflake(extraLines);
@@ -1354,15 +1357,21 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
     private StringBuffer processSettingsImplObfs4(StringBuffer extraLines) {
         Log.d(TAG, "in obfs4 torrc config");
-        extraLines.append("ClientTransportPlugin obfs3 socks5 127.0.0.1:" + IPtProxy.obfs3Port()).append('\n');
-        extraLines.append("ClientTransportPlugin obfs4 socks5 127.0.0.1:" + IPtProxy.obfs4Port()).append('\n');
+        if(!orbotLocalConstants.mBridges.equals("meek")){
+            extraLines.append("ClientTransportPlugin obfs3 socks5 127.0.0.1:" + IPtProxy.obfs3Port()).append('\n');
+            extraLines.append("ClientTransportPlugin obfs4 socks5 127.0.0.1:" + IPtProxy.obfs4Port()).append('\n');
+        }else {
+            extraLines.append("ClientTransportPlugin meek_lite socks5 127.0.0.1:" + IPtProxy.meekPort()).append('\n');
+        }
         var bridgeList = "";
         if (Prefs.getConnectionPathway().equals(Prefs.PATHWAY_CUSTOM)) {
             bridgeList = Prefs.getBridgesList();
         } else bridgeList = Prefs.getPrefSmartTryObfs4();
         var customBridges = parseBridgesFromSettings(bridgeList);
         for (var b : customBridges)
-            extraLines.append("Bridge ").append(b).append("\n");
+            if(!orbotLocalConstants.mBridges.equals("meek") || orbotLocalConstants.mBridges.equals("meek") && b.contains("meek")){
+                extraLines.append("Bridge ").append(b).append("\n");
+            }
         return extraLines;
     }
 
