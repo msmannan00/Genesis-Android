@@ -43,8 +43,6 @@ class orbotModel {
     public void onTrigger(orbotEnums.eOrbotModelCommands pCommands, List<Object> pData) {
         if (pCommands == orbotEnums.eOrbotModelCommands.M_BRIDGE_SWITCH) {
             onBridgeSwitch((boolean) pData.get(0));
-        } else if (pCommands == orbotEnums.eOrbotModelCommands.M_SNOWFLAKE_SWITCH) {
-            onSnowFlakeSwitch((boolean) pData.get(0));
         }
     }
 

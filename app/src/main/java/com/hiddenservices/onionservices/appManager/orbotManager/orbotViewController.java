@@ -15,14 +15,12 @@ class orbotViewController {
 
     private AppCompatActivity mContext;
     private SwitchMaterial mOrbotSettingBridgeSwitch;
-    private SwitchMaterial mOrbotSnowFlakeBridgeSwitch;
     private LinearLayout mOrbotSettingWarning;
 
     /*Initializations*/
 
-    orbotViewController(SwitchMaterial pOrbotSettingBridgeSwitch, SwitchMaterial pOrbotSnowFlakeBridgeSwitch, AppCompatActivity pContext, LinearLayout pOrbotSettingWarning) {
+    orbotViewController(SwitchMaterial pOrbotSettingBridgeSwitch, AppCompatActivity pContext, LinearLayout pOrbotSettingWarning) {
         this.mContext = pContext;
-        this.mOrbotSnowFlakeBridgeSwitch = pOrbotSnowFlakeBridgeSwitch;
         this.mOrbotSettingBridgeSwitch = pOrbotSettingBridgeSwitch;
         this.mOrbotSettingWarning = pOrbotSettingWarning;
     }
@@ -33,10 +31,6 @@ class orbotViewController {
 
     private void initPostUI() {
         sharedUIMethod.updateStatusBar(mContext);
-    }
-
-    private void snowFlakeSettingsStatus(boolean pStatus) {
-        mOrbotSnowFlakeBridgeSwitch.setChecked(pStatus);
     }
 
     private void bridgeSettingsStatus(boolean pStatus) {
@@ -67,15 +61,11 @@ class orbotViewController {
 
     private void initViews(boolean pGatewayStatus, boolean pSnowFlakeStatus) {
         updateBridgeViews(pGatewayStatus, false);
-        mOrbotSnowFlakeBridgeSwitch.setChecked(pSnowFlakeStatus);
     }
 
     public void onTrigger(orbotEnums.eOrbotViewCommands pCommands, List<Object> pData) {
         if (pCommands == orbotEnums.eOrbotViewCommands.M_UPDATE_BRIDGE_SETTINGS_VIEWS) {
             bridgeSettingsStatus((boolean) pData.get(0));
-        }
-        if (pCommands == orbotEnums.eOrbotViewCommands.M_SNOW_FLAKE_SETTINGS_VIEWS) {
-            snowFlakeSettingsStatus((boolean) pData.get(0));
         }
         else if (pCommands == orbotEnums.eOrbotViewCommands.M_INIT_POST_UI) {
             initPostUI();
