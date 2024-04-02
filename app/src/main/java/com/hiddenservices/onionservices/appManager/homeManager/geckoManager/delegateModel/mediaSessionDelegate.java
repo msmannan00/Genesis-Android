@@ -68,7 +68,7 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
                 }
             } catch (Throwable ignored) {
             }
-        }).start(), 0);
+        }).start(), 2000);
     }
 
     @Override
