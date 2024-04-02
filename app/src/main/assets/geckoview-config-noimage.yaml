@@ -1,5 +1,3 @@
-# Contents of /data/local/tmp/com.yourcompany.yourapp-geckoview-config.yaml
-
 env:
   MOZ_LOG: nsHttp:5
 

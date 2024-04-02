@@ -147,7 +147,8 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="adjustNothing">
+            android:windowSoftInputMode="adjustNothing"
+            tools:ignore="DiscouragedApi">
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
@@ -204,13 +205,6 @@
 
         <!-- Services & Settings -->
 
-        <receiver android:name=".DownloadBroadcast"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-            </intent-filter>
-        </receiver>
-
         <service
             android:name="com.hiddenservices.onionservices.pluginManager.downloadPluginManager.downloadService"
             android:enabled="true"
@@ -223,7 +217,7 @@
         <service
             android:name="org.torproject.android.service.OrbotService"
             android:enabled="true"
-            android:exported="true"
+            android:exported="false"
             android:stopWithTask="true"/>
 
         <!-- Reciever & Settings -->
@@ -274,15 +268,6 @@
         </receiver>
 
         <!-- Providers & Settings -->
-        <service
-            android:name=".MediaSessionService"
-            android:enabled="true"
-            android:exported="false"
-            android:permission="TODO">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON"/>
-            </intent-filter>
-        </service>
         <receiver android:name="androidx.media.session.MediaButtonReceiver"
             android:exported="true">
             <intent-filter>
