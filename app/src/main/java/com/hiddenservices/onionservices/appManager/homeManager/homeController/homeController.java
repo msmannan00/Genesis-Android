@@ -851,75 +851,75 @@ public class homeController extends AppCompatActivity implements ComponentCallba
 
     NotificationManager manager = null;
     public void showDefaultNotification(Context context, String title, boolean isSticky) {
-        if(!status.mThemeApplying && status.sTorBrowsing && status.sNotificaionStatus != 0 || !orbotLocalConstants.mAppStarted || status.sNotificaionStatus == 0){
-            return;
-        }
-        if(status.mThemeApplying){
-            return;
-        }
-
-        manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(!status.mThemeApplying){
-            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
-        }
-
-        PendingIntent action;
-
-        if (SDK_INT >= Build.VERSION_CODES.M) {
-            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE);
-        }else {
-            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), -1);
-        }
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify_001");
-        builder.setContentIntent(action)
-                .setSmallIcon(R.drawable.ic_genesis_logo)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentText("Secure browsing")
-                .setOngoing(false)
-                .setColor(getResources().getColor(R.color.c_tab_border))
-                .setContentTitle(title);
-
-        if (SDK_INT >= Build.VERSION_CODES.O)
-        {
-            String channelId = "default_home_notification";
-            NotificationChannel channel = new NotificationChannel(channelId, "default_home_notification", NotificationManager.IMPORTANCE_LOW);
-            channel.setSound(null, null);
-            manager.createNotificationChannel(channel);
-            builder.setChannelId(channelId);
-        }
-
-        Intent intentActionOpen = new Intent(context,homeController.class);
-        intentActionOpen.putExtra("action","Open");
-        PendingIntent pIntentOpen = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1125, "media_play", 0);
-        builder.addAction(0, "ERASE AND RESET", pIntentOpen);
-
-        Intent intentActionClose = new Intent(context,homeController.class);
-        intentActionClose.putExtra("action","Notification");
-        PendingIntent pIntentClose = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1125, "media_pause", 1);
-        builder.addAction(0, "NOTIFICATION SETTINGS", pIntentClose);
-
-        Notification notification = builder.build();
-        PendingIntent dummyIntent = null;
-
-        if (SDK_INT >= Build.VERSION_CODES.M) {
-            PendingIntent.getActivity(context, 1125, new Intent(), PendingIntent.FLAG_IMMUTABLE);
-        }else {
-            PendingIntent.getActivity(context, 1125, new Intent(), -1);
-        }
-        notification.fullScreenIntent = dummyIntent;
-
-        if(isSticky){
-            if (SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-                notification.flags = Notification.FLAG_AUTO_CANCEL|Notification.FLAG_ONGOING_EVENT;
-            }else {
-                notification.flags |= Notification.FLAG_NO_CLEAR;
-            }
-        }
-
-        int notificationCode = 1125;
-
-        manager.notify(notificationCode, notification);
+//        if(!status.mThemeApplying && status.sTorBrowsing && status.sNotificaionStatus != 0 || !orbotLocalConstants.mAppStarted || status.sNotificaionStatus == 0){
+//            return;
+//        }
+//        if(status.mThemeApplying){
+//            return;
+//        }
+//
+//        manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//        if(!status.mThemeApplying){
+//            pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
+//        }
+//
+//        PendingIntent action;
+//
+//        if (SDK_INT >= Build.VERSION_CODES.M) {
+//            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE);
+//        }else {
+//            action = PendingIntent.getActivity(context, 1125, new Intent(context, homeController.class), -1);
+//        }
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify_001");
+//        builder.setContentIntent(action)
+//                .setSmallIcon(R.drawable.ic_genesis_logo)
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setContentText("Secure browsing")
+//                .setOngoing(false)
+//                .setColor(getResources().getColor(R.color.c_tab_border))
+//                .setContentTitle(title);
+//
+//        if (SDK_INT >= Build.VERSION_CODES.O)
+//        {
+//            String channelId = "default_home_notification";
+//            NotificationChannel channel = new NotificationChannel(channelId, "default_home_notification", NotificationManager.IMPORTANCE_LOW);
+//            channel.setSound(null, null);
+//            manager.createNotificationChannel(channel);
+//            builder.setChannelId(channelId);
+//        }
+//
+//        Intent intentActionOpen = new Intent(context,homeController.class);
+//        intentActionOpen.putExtra("action","Open");
+//        PendingIntent pIntentOpen = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1125, "media_play", 0);
+//        builder.addAction(0, "ERASE AND RESET", pIntentOpen);
+//
+//        Intent intentActionClose = new Intent(context,homeController.class);
+//        intentActionClose.putExtra("action","Notification");
+//        PendingIntent pIntentClose = helperMethod.onCreateActionIntent(context, defaultNotificationReciever.class, 1125, "media_pause", 1);
+//        builder.addAction(0, "NOTIFICATION SETTINGS", pIntentClose);
+//
+//        Notification notification = builder.build();
+//        PendingIntent dummyIntent = null;
+//
+//        if (SDK_INT >= Build.VERSION_CODES.M) {
+//            PendingIntent.getActivity(context, 1125, new Intent(), PendingIntent.FLAG_IMMUTABLE);
+//        }else {
+//            PendingIntent.getActivity(context, 1125, new Intent(), -1);
+//        }
+//        notification.fullScreenIntent = dummyIntent;
+//
+//        if(isSticky){
+//            if (SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+//                notification.flags = Notification.FLAG_AUTO_CANCEL|Notification.FLAG_ONGOING_EVENT;
+//            }else {
+//                notification.flags |= Notification.FLAG_NO_CLEAR;
+//            }
+//        }
+//
+//        int notificationCode = 1125;
+//
+//        manager.notify(notificationCode, notification);
     }
 
     public class DownloadBroadcast extends BroadcastReceiver {

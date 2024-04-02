@@ -16,7 +16,7 @@ public class mediaNotificationReciever extends BroadcastReceiver {
             activityContextManager.getInstance().getHomeController().onPlayMedia();
         } else if (mCommand == enums.MediaNotificationReciever.PAUSE) {
             activityContextManager.getInstance().getHomeController().onPauseMedia();
-        } else if (mCommand == enums.MediaNotificationReciever.SKIP_FOWWARD) {
+        } else if (mCommand == enums.MediaNotificationReciever.SKIP_FORWARD) {
             activityContextManager.getInstance().getHomeController().onSkipForwardMedia();
         } else if (mCommand == enums.MediaNotificationReciever.SKIP_BACKWARD) {
             activityContextManager.getInstance().getHomeController().onSkipBackwardMedia();

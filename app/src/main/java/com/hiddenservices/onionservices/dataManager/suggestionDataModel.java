@@ -228,6 +228,19 @@ public class suggestionDataModel implements SpellCheckerSession.SpellCheckerSess
             }
         }
 
+        for (int count = 0; count <= mCurrentList.size() - 1; count++) {
+            historyRowModel item = mCurrentList.get(count);
+            if (item.getDescription().matches(".*\\.[a-zA-Z]+/?$")) {
+                mCurrentList.remove(count);
+                if(mCurrentList.size()>1){
+                    mCurrentList.add(1, item);
+                }else {
+                    mCurrentList.add(0, item);
+                }
+                break;
+            }
+        }
+
         return mCurrentList;
     }
 

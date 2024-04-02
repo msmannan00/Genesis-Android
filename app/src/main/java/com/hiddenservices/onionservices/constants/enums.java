@@ -17,7 +17,7 @@ public class enums {
     }
 
     public enum MediaController {
-        DESTROY, PLAY, PAUSE, SKIP_FORWARD, SKIP_BACKWARD, STOP
+        DESTROY, PLAY, PAUSE, SKIP_FORWARD, RESET_MEDIA_IMAGE, SKIP_BACKWARD, STOP
     }
 
     public static class AddTabCallback {
@@ -49,7 +49,7 @@ public class enums {
     public static class MediaNotificationReciever {
         public static final int PLAY = 0;
         public static final int PAUSE = 1;
-        public static final int SKIP_FOWWARD = 2;
+        public static final int SKIP_FORWARD = 2;
         public static final int SKIP_BACKWARD = 3;
     }
 

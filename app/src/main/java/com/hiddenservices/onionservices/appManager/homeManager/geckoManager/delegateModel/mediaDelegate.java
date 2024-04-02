@@ -1,8 +1,5 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel;
 
-
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,12 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.widget.RemoteViews;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import com.hiddenservices.onionservices.R;
+import com.hiddenservices.onionservices.appManager.homeManager.homeController.homeController;
 import com.hiddenservices.onionservices.constants.enums;
 import com.hiddenservices.onionservices.constants.status;
 import com.hiddenservices.onionservices.helperManager.helperMethod;
@@ -30,10 +26,10 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
 
     /*Private Variables*/
 
-    private WeakReference<AppCompatActivity> mContext;
-    private static int S_NOTIFICATION_ID = 1030;
-    private static String S_NOTIFICATION_CHANNEL_ID = "1030";
-    private static String S_NOTIFICATION_CHANNEL_NAME = "MEDIA_NOTIFICATION";
+    private final WeakReference<AppCompatActivity> mContext;
+    private static final int S_NOTIFICATION_ID = 1030;
+    private static final String S_NOTIFICATION_CHANNEL_ID = "1032";
+    private static final String S_NOTIFICATION_CHANNEL_NAME = "MEDIA_NOTIFICATION";
 
     /*Initializations*/
 
@@ -49,91 +45,65 @@ public class mediaDelegate implements GeckoSession.MediaDelegate {
 
     /*Triggers*/
 
-    @SuppressLint("InlinedApi")
+    @SuppressLint({"InlinedApi", "ObsoleteSdkInt"})
     public void showNotification(Context context, String title, String url, Bitmap mediaImage, boolean media_status) {
-        NotificationManager mNotificationManager = (NotificationManager) mContext.get().getSystemService( NOTIFICATION_SERVICE ) ;
-        if(title.length() == 0 || !status.sBackgroundMusic){
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (title.isEmpty() || !status.sBackgroundMusic) {
             return;
         }
-        RemoteViews contentView;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
-            contentView = new RemoteViews(context.getPackageName() , R.layout. media_notification_no_background ) ;
-        }else if (android.os.Build.VERSION. SDK_INT > Build.VERSION_CODES.N_MR1){
-            contentView = new RemoteViews(context.getPackageName() , R.layout. media_notification_layout ) ;
-        }else {
-            contentView = new RemoteViews(context.getPackageName() , R.layout. media_notification_layout_small ) ;
+
+        PendingIntent playPauseIntent;
+        int playPauseIcon;
+        if (!media_status) {
+            playPauseIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_play", enums.MediaNotificationReciever.PLAY);
+            playPauseIcon = R.drawable.ic_baseline_play_arrow;
+        } else {
+            playPauseIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_pause", enums.MediaNotificationReciever.PAUSE);
+            playPauseIcon = R.drawable.ic_baseline_pause;
         }
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S ) {
-            contentView.setInt(R.id.layout,"setBackgroundResource", R.color.c_tab_background);
-        }
-        contentView.setTextViewText(R.id.header, title);
-        contentView.setTextViewText(R.id.body, "☍ " + url);
+        PendingIntent nextIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReciever.SKIP_FORWARD);
+        PendingIntent prevIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReciever.SKIP_BACKWARD);
 
-        try {
-            contentView.setImageViewBitmap(R.id.logo, mediaImage);
-        } catch (Throwable e) {
-            e.printStackTrace();
+        PendingIntent actionIntent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            actionIntent = PendingIntent.getActivity(context, S_NOTIFICATION_ID, new Intent(context, homeController.class), PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            actionIntent = PendingIntent.getActivity(context, S_NOTIFICATION_ID, new Intent(context, homeController.class), PendingIntent.FLAG_UPDATE_CURRENT);
         }
 
-        if (!media_status){
-            PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_play", enums.MediaNotificationReciever.PLAY);
-            contentView.setOnClickPendingIntent(R.id.trigger, pIntent);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
-                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_play_arrow_no_tint);
-            }else {
-                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_play_arrow);
-            }
-        }else {
-            PendingIntent pIntent = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_pause", enums.MediaNotificationReciever.PAUSE);
-            contentView.setOnClickPendingIntent(R.id.trigger, pIntent);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
-                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_pause_no_tint);
-            }else {
-                contentView.setImageViewResource(R.id.trigger, R.drawable.ic_baseline_pause);
-            }
-        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, S_NOTIFICATION_CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(url)
+                .setSmallIcon(R.drawable.ic_baseline_media)
+                .setLargeIcon(mediaImage)
+                .addAction(R.drawable.ic_baseline_skip_previous, "Previous", prevIntent)
+                .addAction(playPauseIcon, "Play/Pause", playPauseIntent)
+                .addAction(R.drawable.ic_baseline_skip_next, "Next", nextIntent)
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle())
+                .setPriority(Notification.PRIORITY_LOW)
+                .setAutoCancel(false)
+                .setOngoing(true)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setContentIntent(actionIntent);  // Set the PendingIntent to open homeController
 
-        PendingIntent pIntentPrev = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_next", enums.MediaNotificationReciever.SKIP_FOWWARD);
-        contentView.setOnClickPendingIntent(R.id.next, pIntentPrev);
-
-        if(android.os.Build.VERSION. SDK_INT > Build.VERSION_CODES.N){
-            PendingIntent pIntentNext = helperMethod.onCreateActionIntent(context, mediaNotificationReciever.class, S_NOTIFICATION_ID, "media_back", enums.MediaNotificationReciever.SKIP_BACKWARD);
-            contentView.setOnClickPendingIntent(R.id.back, pIntentNext);
-        }
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext.get(), S_NOTIFICATION_CHANNEL_ID ) ;
-
-        mBuilder.setPriority(Notification.PRIORITY_LOW);
-        mBuilder.setAutoCancel(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-            mBuilder.setCustomBigContentView(contentView);
-            mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
-        }else {
-            mBuilder.setContent(contentView);
-        }
-
-        mBuilder.setSmallIcon(R.drawable.ic_baseline_media) ;
-        mBuilder.setAutoCancel( true ) ;
-        if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
-            int importance = NotificationManager.IMPORTANCE_LOW ;
-            NotificationChannel notificationChannel = new NotificationChannel( S_NOTIFICATION_CHANNEL_ID , S_NOTIFICATION_CHANNEL_NAME , importance) ;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel notificationChannel = new NotificationChannel(S_NOTIFICATION_CHANNEL_ID, S_NOTIFICATION_CHANNEL_NAME, importance);
             notificationChannel.setSound(null, null);
-            mBuilder.setChannelId(S_NOTIFICATION_CHANNEL_ID) ;
-            assert mNotificationManager != null;
-            mNotificationManager.createNotificationChannel(notificationChannel) ;
+            mBuilder.setChannelId(S_NOTIFICATION_CHANNEL_ID);
+            mNotificationManager.createNotificationChannel(notificationChannel);
         }
+
         Notification notification = mBuilder.build();
 
-        mBuilder.setContentIntent(PendingIntent.getActivity(context, S_NOTIFICATION_ID, new Intent(context, mediaDelegate.class), PendingIntent.FLAG_IMMUTABLE));
-        notification.fullScreenIntent = null;
-
-        if(media_status){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            notification.flags = Notification.FLAG_AUTO_CANCEL | Notification.FLAG_ONGOING_EVENT;
+        } else {
             notification.flags |= Notification.FLAG_NO_CLEAR;
         }
 
-        notification.defaults = 0;
-        mNotificationManager.notify(S_NOTIFICATION_ID , notification) ;
-
+        mNotificationManager.notify(S_NOTIFICATION_ID, notification);
     }
+
 }

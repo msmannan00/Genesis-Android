@@ -3,6 +3,8 @@ package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.del
 import static com.hiddenservices.onionservices.constants.strings.GENERIC_EMPTY_STR;
 
 import android.graphics.Bitmap;
+import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,16 +20,18 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
     /*Private Variables*/
 
     private MediaSession mMediaSession = null;
-    private mediaDelegate mMediaDelegate;
-    private WeakReference<AppCompatActivity> mContext;
-    private geckoDataModel mGeckoDataModel;
+    private final mediaDelegate mMediaDelegate;
+    private final WeakReference<AppCompatActivity> mContext;
+    private final geckoDataModel mGeckoDataModel;
     private boolean mIsRunning = false;
 
     private Bitmap mMediaImage;
     private String mMediaTitle = GENERIC_EMPTY_STR;
 
-    /*Initializations*/
+    // Handler for posting delayed tasks
+    private final Handler mHandler = new Handler();
 
+    /*Initializations*/
     public mediaSessionDelegate(WeakReference<AppCompatActivity> pContext, geckoDataModel pGeckoDataModel, mediaDelegate pMediaDelegate){
         this.mContext = pContext;
         this.mMediaDelegate = pMediaDelegate;
@@ -51,15 +55,20 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
 
     @Override
     public void onMetadata(@NonNull GeckoSession session, @NonNull MediaSession mediaSession, @NonNull MediaSession.Metadata meta) {
-        try {
-            mMediaTitle = meta.title;
-            mMediaImage = meta.artwork.getBitmap(250).poll(2500);
-            mMediaDelegate.showNotification(mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, true);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-
-        MediaSession.Delegate.super.onMetadata(session, mediaSession, meta);
+        mMediaTitle = meta.title;
+        mHandler.removeCallbacksAndMessages(null);
+        mHandler.postDelayed(() -> new Thread(() -> {
+            try {
+                assert meta.artwork != null;
+                Bitmap bitmap = meta.artwork.getBitmap(250).poll(2500);
+                if (bitmap != null) {
+                    mHandler.post(() -> mMediaImage = bitmap);
+                    mMediaDelegate.showNotification(mContext.get(), mMediaTitle, helperMethod.getHost(mGeckoDataModel.mCurrentURL), mMediaImage, true);
+                    MediaSession.Delegate.super.onMetadata(session, mediaSession, meta);
+                }
+            } catch (Throwable ignored) {
+            }
+        }).start(), 0);
     }
 
     @Override
@@ -95,6 +104,10 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
         MediaSession.Delegate.super.onFullscreen(session, mediaSession, enabled, meta);
     }
 
+    public void resetMediaImage() {
+        mMediaImage = null;
+    }
+
     /*Triggers*/
 
     public void onTrigger(enums.MediaController pCommands){
@@ -122,6 +135,9 @@ public class mediaSessionDelegate implements MediaSession.Delegate{
             }
             else if(pCommands.equals(enums.MediaController.SKIP_FORWARD)){
                 mMediaSession.nextTrack();
+            }
+            else if(pCommands.equals(enums.MediaController.RESET_MEDIA_IMAGE)){
+                resetMediaImage();
             }
         }else {
             mMediaDelegate.onHideDefaultNotification();
