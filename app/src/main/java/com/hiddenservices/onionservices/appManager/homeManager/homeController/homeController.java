@@ -136,7 +136,7 @@ import static com.hiddenservices.onionservices.pluginManager.pluginEnums.eMessag
 import static java.lang.Character.isLetter;
 import static org.mozilla.geckoview.ContentBlocking.CookieBehavior.ACCEPT_FIRST_PARTY;
 
-public class homeController extends AppCompatActivity implements ComponentCallbacks2 {
+public class homeController extends AppCompatActivity {
     /*Model Declaration*/
     private homeViewController mHomeViewController;
     private homeModel mHomeModel;
