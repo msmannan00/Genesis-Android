@@ -72,21 +72,15 @@ public class bookmarkAdapterView {
         pLogoImage.animate().setDuration(150).alpha(0).withEndAction(() -> pLogoImage.setVisibility(View.GONE));
     }
 
-    public void onSelectView(View pItemView, View pMenuItem, ImageView pLogoImage, boolean pIsForced, boolean pVibrate) {
+    public void onSelectView(View pItemView, ImageView pLogoImage) {
         pItemView.setPressed(false);
-        int speed = 150;
-        if (pIsForced) {
-            speed = 150;
-        }
-
-
         pLogoImage.setAlpha(0f);
         pLogoImage.setVisibility(View.VISIBLE);
         pLogoImage.animate().cancel();
-        pLogoImage.animate().setDuration(speed).alpha(0.95f);
+        pLogoImage.animate().setDuration(150).alpha(0.95f);
     }
 
-    public void onClearHighlight(View pItemView, View pMenuItem, ImageView pLogoImage, boolean pIsForced) {
+    public void onClearHighlight(View pItemView, ImageView pLogoImage, boolean pIsForced) {
         try {
             if (pLogoImage.getAlpha() > 0) {
                 pItemView.setPressed(false);
@@ -98,8 +92,7 @@ public class bookmarkAdapterView {
                 pLogoImage.animate().cancel();
                 pLogoImage.animate().setDuration(speed).alpha(0).withEndAction(() -> pLogoImage.setVisibility(View.GONE));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -111,10 +104,10 @@ public class bookmarkAdapterView {
             clearLongSelectedURL((ImageButton) pData.get(0), (ImageView) pData.get(1), (View) pData.get(2));
         }
         if (pCommands == bookmarkEnums.eBookmarkViewAdapterCommands.M_SELECT_VIEW) {
-            onSelectView((View) pData.get(0), (View) pData.get(1), (ImageView) pData.get(2), (Boolean) pData.get(3), (Boolean) pData.get(4));
+            onSelectView((View) pData.get(0), (ImageView) pData.get(2));
         }
         if (pCommands == bookmarkEnums.eBookmarkViewAdapterCommands.M_CLEAR_HIGHLIGHT) {
-            onClearHighlight((View) pData.get(0), (View) pData.get(1), (ImageView) pData.get(2), (Boolean) pData.get(3));
+            onClearHighlight((View) pData.get(0), (ImageView) pData.get(2), (Boolean) pData.get(3));
         }
         return null;
     }

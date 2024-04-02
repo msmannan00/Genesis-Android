@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,7 +47,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import static com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU;
+import static com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome.bookmarkEnums.eBookmarkViewCommands.M_VERIFY_SELECTION_MENU;
 import static com.hiddenservices.onionservices.constants.keys.M_ACTIVITY_RESPONSE;
 import static com.hiddenservices.onionservices.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT;
 import static com.hiddenservices.onionservices.constants.responses.BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT;
@@ -89,6 +91,7 @@ public class bookmarkController extends AppCompatActivity {
         initializeList();
         initCustomListeners();
         initSwipe();
+        onBack();
     }
 
     @Override
@@ -139,9 +142,7 @@ public class bookmarkController extends AppCompatActivity {
 
         mSearchInput.setEventHandler(new edittextManagerCallback());
 
-        mClearButton.setOnClickListener(v -> {
-            pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, this), M_CLEAR_BOOKMARK);
-        });
+        mClearButton.setOnClickListener(v -> pluginController.getInstance().onMessageManagerInvoke(Arrays.asList(strings.GENERIC_EMPTY_STR, this), M_CLEAR_BOOKMARK));
 
         mSearchInput.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
@@ -152,9 +153,7 @@ public class bookmarkController extends AppCompatActivity {
         });
 
         mSearchInput.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                // mSearchInput.clearFocus();
-            } else {
+            if(hasFocus) {
                 mbookmarkAdapter.setFilter(mSearchInput.getText().toString());
                 mbookmarkAdapter.invokeFilter(true);
                 mbookmarkAdapter.notifyDataSetChanged();
@@ -199,7 +198,7 @@ public class bookmarkController extends AppCompatActivity {
             }
 
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
+                int position = viewHolder.getBindingAdapterPosition();
                 mbookmarkAdapter.invokeSwipeClose(position);
             }
 
@@ -212,7 +211,7 @@ public class bookmarkController extends AppCompatActivity {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                Canvas mCanvas = (Canvas) mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
+                Canvas mCanvas = (Canvas) mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.ON_GENERATE_SWEEPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
                 super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         };
@@ -269,17 +268,24 @@ public class bookmarkController extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onBackTrigger();
+            }
+        });
+    }
+
+    public void onBackTrigger() {
         if (mSearchInput.getVisibility() == View.VISIBLE) {
             onHideSearch(null);
         } else if ((Boolean) mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {
             onClearMultipleSelection(null);
         } else {
-            activityContextManager.getInstance().onRemoveStack(this);
+            activityContextManager.getInstance().onRemoveStack(bookmarkController.this);
             finish();
         }
-        super.onBackPressed();
     }
 
     @Override
@@ -301,7 +307,7 @@ public class bookmarkController extends AppCompatActivity {
     /* UI Redirection */
 
     public void onClose(View view) {
-        onBackPressed();
+        onBackTrigger();
     }
 
     public void onHideSearch(View view) {
@@ -332,7 +338,7 @@ public class bookmarkController extends AppCompatActivity {
     public void onClearMultipleSelection(View view) {
         mbookmarkAdapter.onTrigger(bookmarkEnums.eBookmarkAdapterCommands.M_CLEAR_LONG_SELECTED_URL, null);
         mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_CLOSE_MENU, null);
-        mbookmarkViewController.onTrigger(M_VERTIFY_SELECTION_MENU, Collections.singletonList(true));
+        mbookmarkViewController.onTrigger(M_VERIFY_SELECTION_MENU, Collections.singletonList(true));
     }
 
     public void onDeleteSelected(View view) {
@@ -342,7 +348,7 @@ public class bookmarkController extends AppCompatActivity {
 
     /*Helper Methods*/
 
-    public void onclearData() {
+    public void unclearData() {
         mbookmarkModel.clearList();
         ((bookmarkAdapter) Objects.requireNonNull(mRecycleView.getAdapter())).invokeFilter(true);
         mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_CLEAR_LIST, null);
@@ -358,7 +364,7 @@ public class bookmarkController extends AppCompatActivity {
         public Object invokeObserver(List<Object> data, Object e_type) {
 
             if (e_type.equals(homeEnums.eEdittextCallbacks.ON_KEYBOARD_CLOSE)) {
-                onBackPressed();
+                onBackTrigger();
             }
             return null;
         }
@@ -384,7 +390,7 @@ public class bookmarkController extends AppCompatActivity {
             } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.IS_EMPTY)) {
                 mbookmarkViewController.onTrigger(bookmarkEnums.eBookmarkViewCommands.M_UPDATE_LIST_IF_EMPTY, Arrays.asList(mbookmarkModel.getList().size(), 300));
             } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.ON_VERIFY_SELECTED_URL_MENU)) {
-                mbookmarkViewController.onTrigger(M_VERTIFY_SELECTION_MENU, data);
+                mbookmarkViewController.onTrigger(M_VERIFY_SELECTION_MENU, data);
             } else if (e_type.equals(bookmarkEnums.eBookmarkAdapterCallback.M_OPEN_BOOKMARK_SETTING)) {
                 Intent intent = new Intent(bookmarkController.this, bookmarkSettingController.class);
                 intent.putExtra(keys.BOOKMARK_SETTING_NAME, (String) data.get(0));

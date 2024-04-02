@@ -203,7 +203,7 @@ public class pluginController {
                 helperMethod.openActivity(settingPrivacyController.class, constants.CONST_LIST_HISTORY, mHomeController.get(), true);
             } else if (pEventType.equals(M_CLEAR_BOOKMARK)) {
                 dataController.getInstance().invokeBookmark(dataEnums.eBookmarkCommands.M_CLEAR_BOOKMARK, pData);
-                mContextManager.getBookmarkController().onclearData();
+                mContextManager.getBookmarkController().unclearData();
             } else if (pEventType.equals(M_CLEAR_HISTORY)) {
                 dataController.getInstance().invokeHistory(dataEnums.eHistoryCommands.M_CLEAR_HISTORY, pData);
                 mContextManager.getHistoryController().onclearData();

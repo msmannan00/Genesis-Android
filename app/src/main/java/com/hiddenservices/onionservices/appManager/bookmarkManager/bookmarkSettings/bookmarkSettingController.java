@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkSettings;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,8 +40,8 @@ public class bookmarkSettingController extends AppCompatActivity {
 
     /* UI Variables */
 
-    private EditText mBookmarName;
-    private TextView mBookmarURL;
+    private EditText mBookmarkName;
+    private TextView mBookmarkURL;
     private ScrollView mScrollView;
 
 
@@ -57,24 +58,25 @@ public class bookmarkSettingController extends AppCompatActivity {
         initializeViews();
         initializeModels();
         initializeLocalEventHandlers();
+        onBack();
     }
 
     private void initializeViews() {
-        mBookmarName = findViewById(R.id.pBookmarkName);
-        mBookmarURL = findViewById(R.id.pBookmarkURL);
+        mBookmarkName = findViewById(R.id.pBookmarkName);
+        mBookmarkURL = findViewById(R.id.pBookmarkURL);
         mScrollView = findViewById(R.id.pScrollView);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void initializeLocalEventHandlers() {
 
-        mBookmarName.addTextChangedListener(new TextWatcher() {
+        mBookmarkName.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 String mBookmarkName = (String) mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_GET_BOOKMARK_NAME);
                 boolean mValidationStatus = (boolean) mBookmarkSettingModel.onTrigger(bookmarkSettingEnums.eBookmarkSettingModelCommands.M_VALIDATE_FORM, Collections.singletonList(mBookmarkName));
 
-                mBookmarkSettingModel.onTrigger(bookmarkSettingEnums.eBookmarkSettingModelCommands.M_SET_BOOOKMARK_CHANGED_STATUS, Collections.singletonList(true));
+                mBookmarkSettingModel.onTrigger(bookmarkSettingEnums.eBookmarkSettingModelCommands.M_SET_BOOKMARK_CHANGED_STATUS, Collections.singletonList(true));
                 mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE, Collections.singletonList(mValidationStatus));
             }
 
@@ -87,7 +89,7 @@ public class bookmarkSettingController extends AppCompatActivity {
             }
         });
 
-        mBookmarName.setOnFocusChangeListener((v, hasFocus) -> {
+        mBookmarkName.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_CLEAR_FORM_FOCUS);
             }
@@ -105,7 +107,7 @@ public class bookmarkSettingController extends AppCompatActivity {
         String mBookmarkURL = getIntent().getStringExtra(keys.BOOKMARK_SETTING_URL);
         int mBookmarkID = getIntent().getIntExtra(keys.BOOKMARK_SETTING_ID, -1);
 
-        mBookmarkSettingViewController = new bookmarkSettingViewController(this, new bookmarkSettingViewCallback(), mBookmarName, mBookmarURL);
+        mBookmarkSettingViewController = new bookmarkSettingViewController(this, new bookmarkSettingViewCallback(), this.mBookmarkName, this.mBookmarkURL);
         mBookmarkSettingViewController.onInit();
 
         mBookmarkSettingViewController.onTrigger(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_INITIALIZE, Arrays.asList(mBookmarkName, mBookmarkURL));
@@ -146,10 +148,13 @@ public class bookmarkSettingController extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        onCloseTrigger(null);
-        super.onBackPressed();
+    public void onBack() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                onCloseTrigger(null);
+            }
+        });
     }
 
     /* UI Redirection */

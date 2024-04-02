@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -208,14 +209,14 @@ public class bookmarkViewController {
         if (isClearButtonVisible) {
             v.animate().alpha(1);
             v.measure(CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.WRAP_CONTENT);
-            final int targtetHeight = v.getMeasuredHeight();
+            final int targetHeight = v.getMeasuredHeight();
             v.getLayoutParams().height = 0;
             Animation a = new Animation() {
                 @Override
                 protected void applyTransformation(float interpolatedTime,
                                                    Transformation t) {
                     v.getLayoutParams().height = interpolatedTime == 1 ? CoordinatorLayout.LayoutParams.WRAP_CONTENT
-                            : (int) (targtetHeight * interpolatedTime);
+                            : (int) (targetHeight * interpolatedTime);
                     v.requestLayout();
                     mClearButton.setVisibility(View.VISIBLE);
                 }
@@ -242,30 +243,36 @@ public class bookmarkViewController {
         if (mClearButton.getVisibility() == View.VISIBLE) {
             final int initialHeight = v.getMeasuredHeight();
             v.animate().alpha(0);
-            Animation a = new Animation() {
-                @Override
-                protected void applyTransformation(float interpolatedTime,
-                                                   Transformation t) {
-                    if (interpolatedTime == 1) {
-                        v.setVisibility(View.GONE);
-                    } else {
-                        v.getLayoutParams().height = initialHeight
-                                - (int) (initialHeight * interpolatedTime);
-                        v.requestLayout();
-                    }
-                }
-
-            };
-            a.setDuration(250);
+            Animation a = getAnimation(v, initialHeight);
             v.startAnimation(a);
         }
+    }
+
+    @NonNull
+    private static Animation getAnimation(View v, int initialHeight) {
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime,
+                                               Transformation t) {
+                if (interpolatedTime == 1) {
+                    v.setVisibility(View.GONE);
+                } else {
+                    v.getLayoutParams().height = initialHeight
+                            - (int) (initialHeight * interpolatedTime);
+                    v.requestLayout();
+                }
+            }
+
+        };
+        a.setDuration(250);
+        return a;
     }
 
     private void onLongPressMenu(View pView) {
         mPopupWindow = helperMethod.onCreateMenu(pView, R.layout.history_bookmark_menu, status.sSettingLanguageRegion);
     }
 
-    private void onDrawSwipableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
+    private void onDrawSweepableBackground(Canvas pCanvas, RecyclerView.ViewHolder pViewHolder, float pDX, int pActionState) {
 
         Bitmap icon;
         if (pActionState == ItemTouchHelper.ANIMATION_TYPE_SWIPE_SUCCESS) {
@@ -303,7 +310,7 @@ public class bookmarkViewController {
             removeFromList((int) pData.get(0));
         } else if (pCommands == bookmarkEnums.eBookmarkViewCommands.M_CLEAR_LIST) {
             clearList();
-        } else if (pCommands == bookmarkEnums.eBookmarkViewCommands.M_VERTIFY_SELECTION_MENU) {
+        } else if (pCommands == bookmarkEnums.eBookmarkViewCommands.M_VERIFY_SELECTION_MENU) {
             onSelectionMenu((boolean) pData.get(0));
         } else if (pCommands == bookmarkEnums.eBookmarkViewCommands.M_HIDE_SEARCH) {
             return onHideSearch();
@@ -311,8 +318,8 @@ public class bookmarkViewController {
             onCloseMenu();
         } else if (pCommands == bookmarkEnums.eBookmarkViewCommands.M_LONG_PRESS_MENU) {
             onLongPressMenu((View) pData.get(0));
-        } else if (pCommands.equals(bookmarkEnums.eBookmarkViewCommands.ON_GENERATE_SWIPABLE_BACKGROUND)) {
-            onDrawSwipableBackground((Canvas) pData.get(0), (RecyclerView.ViewHolder) pData.get(1), (float) pData.get(2), (int) pData.get(3));
+        } else if (pCommands.equals(bookmarkEnums.eBookmarkViewCommands.ON_GENERATE_SWEEPABLE_BACKGROUND)) {
+            onDrawSweepableBackground((Canvas) pData.get(0), (RecyclerView.ViewHolder) pData.get(1), (float) pData.get(2), (int) pData.get(3));
         }
         return null;
     }

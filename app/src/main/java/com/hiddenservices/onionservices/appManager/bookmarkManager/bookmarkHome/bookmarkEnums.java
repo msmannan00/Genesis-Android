@@ -3,7 +3,7 @@ package com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome
 public class bookmarkEnums {
     /*History Manager*/
     public enum eBookmarkViewCommands {
-        M_UPDATE_LIST_IF_EMPTY, M_UPDATE_LIST, M_REMOVE_FROM_LIST, M_CLEAR_LIST, M_VERTIFY_SELECTION_MENU, M_CLOSE_MENU, M_HIDE_SEARCH, M_LONG_PRESS_MENU, ON_GENERATE_SWIPABLE_BACKGROUND
+        M_UPDATE_LIST_IF_EMPTY, M_UPDATE_LIST, M_REMOVE_FROM_LIST, M_CLEAR_LIST, M_VERIFY_SELECTION_MENU, M_CLOSE_MENU, M_HIDE_SEARCH, M_LONG_PRESS_MENU, ON_GENERATE_SWEEPABLE_BACKGROUND
     }
 
     public enum eBookmarkAdapterCommands {

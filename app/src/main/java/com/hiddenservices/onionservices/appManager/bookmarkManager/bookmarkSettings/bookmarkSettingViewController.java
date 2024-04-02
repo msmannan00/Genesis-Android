@@ -19,16 +19,16 @@ class bookmarkSettingViewController {
 
     /* UI Variables */
 
-    private EditText mBookmarName;
-    private TextView mBookmarURL;
+    private EditText mBookmarkName;
+    private TextView mBookmarkURL;
 
     /* Initializations */
 
-    bookmarkSettingViewController(AppCompatActivity pContext, eventObserver.eventListener ignoredPEvent, EditText pBookmarName, TextView pBookmarURL) {
+    bookmarkSettingViewController(AppCompatActivity pContext, eventObserver.eventListener ignoredPEvent, EditText pBookmarkName, TextView pBookmarkURL) {
         this.mContext = pContext;
 
-        this.mBookmarName = pBookmarName;
-        this.mBookmarURL = pBookmarURL;
+        this.mBookmarkName = pBookmarkName;
+        this.mBookmarkURL = pBookmarkURL;
     }
 
     protected void onInit(){
@@ -36,37 +36,37 @@ class bookmarkSettingViewController {
     }
 
     private void initPostUI() {
-        mBookmarName.setLongClickable(false);
-        mBookmarName.setOnLongClickListener(v -> false);
+        mBookmarkName.setLongClickable(false);
+        mBookmarkName.setOnLongClickListener(v -> false);
 
         sharedUIMethod.updateStatusBar(mContext);
     }
 
     private void initializeBookmark(String pBookmarkName, String pBookmarkURL) {
-        mBookmarName.setText(pBookmarkName);
-        mBookmarURL.setText(pBookmarkURL);
+        mBookmarkName.setText(pBookmarkName);
+        mBookmarkURL.setText(pBookmarkURL);
     }
 
     private String getBookmarkName() {
-        return mBookmarName.getText().toString();
+        return mBookmarkName.getText().toString();
     }
 
     private void mBookmarkNameValidationError(bookmarkSettingEnums.eBookmarkSettingViewCommands pCommands, boolean pStatus) {
         if (pCommands.equals(bookmarkSettingEnums.eBookmarkSettingViewCommands.M_BOOKMARK_NAME_VALIDATION_RESPONSE)) {
             if (!pStatus) {
-                mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.gx_generic_input_error));
+                mBookmarkName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.gx_generic_input_error));
             } else {
-                mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
+                mBookmarkName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
             }
         }
     }
 
     private void onClearForm() {
-        mBookmarName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
+        mBookmarkName.setBackground(helperMethod.getDrawableXML(mContext, R.xml.bx_input_field));
     }
 
     private void onClearFormFocus() {
-        mBookmarName.clearFocus();
+        mBookmarkName.clearFocus();
         helperMethod.hideKeyboard(mContext);
     }
 

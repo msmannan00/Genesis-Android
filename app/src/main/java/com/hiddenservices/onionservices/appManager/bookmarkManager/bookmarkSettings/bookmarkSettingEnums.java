@@ -6,7 +6,7 @@ public class bookmarkSettingEnums {
     }
 
     public enum eBookmarkSettingModelCommands {
-        M_UPDATE_BOOKMARK, M_VALIDATE_FORM, M_SET_BOOOKMARK_CHANGED_STATUS, M_GET_UPDATE_STATUS, M_DELETE_BOOKMARK
+        M_UPDATE_BOOKMARK, M_VALIDATE_FORM, M_SET_BOOKMARK_CHANGED_STATUS, M_GET_UPDATE_STATUS, M_DELETE_BOOKMARK
     }
 
     public enum eActivityResponseCommands {

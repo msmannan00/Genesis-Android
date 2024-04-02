@@ -38,11 +38,7 @@ class bookmarkSettingModelController {
     }
 
     private boolean validateForm(String pBookmarkName) {
-        if (pBookmarkName.equals(strings.GENERIC_EMPTY_STR)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !pBookmarkName.equals(strings.GENERIC_EMPTY_STR);
     }
 
     private boolean getBookmarkUpdateStatus() {
@@ -66,7 +62,7 @@ class bookmarkSettingModelController {
         if (bookmarkSettingEnums.eBookmarkSettingModelCommands.M_VALIDATE_FORM.equals(pCommands)) {
             return validateForm((String) pData.get(0));
         }
-        if (bookmarkSettingEnums.eBookmarkSettingModelCommands.M_SET_BOOOKMARK_CHANGED_STATUS.equals(pCommands)) {
+        if (bookmarkSettingEnums.eBookmarkSettingModelCommands.M_SET_BOOKMARK_CHANGED_STATUS.equals(pCommands)) {
             setBookmarkUpdateStatus((boolean) pData.get(0));
         }
         if (bookmarkSettingEnums.eBookmarkSettingModelCommands.M_DELETE_BOOKMARK.equals(pCommands)) {
