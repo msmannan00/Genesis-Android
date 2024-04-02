@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.widget.ImageView;
+
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.downloadManager.geckoDownloadManager;
@@ -54,22 +56,22 @@ public class geckoClients {
 
     /*Local Initialization*/
 
-    public void initializeSession(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext) {
+    public void initializeSession(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, ActivityResultLauncher<Intent> pUploadRequestLauncher) {
         if (pGeckoView.getSession() != null) {
             pGeckoView.releaseSession();
         }
 
         this.mEvent = pEvent;
         mSessionID = helperMethod.createRandomID();
-        mSession = initSettings(pGeckoView, pEvent, pContext, mSessionID);
+        mSession = initSettings(pGeckoView, pEvent, pContext, mSessionID, pUploadRequestLauncher);
         initRuntimeSettings(pContext);
         mSession.open(mRuntime);
         pGeckoView.setSession(mSession);
         onUpdateFont();
     }
 
-    public geckoSession initializeSessionInBackground(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pURL) {
-        geckoSession mSessionHidden = initSettings(pGeckoView, pEvent, pContext, helperMethod.createRandomID());
+    public geckoSession initializeSessionInBackground(GeckoView pGeckoView, eventObserver.eventListener pEvent, AppCompatActivity pContext, String pURL, ActivityResultLauncher<Intent> pUploadRequestLauncher) {
+        geckoSession mSessionHidden = initSettings(pGeckoView, pEvent, pContext, helperMethod.createRandomID(), pUploadRequestLauncher);
         mSessionHidden.open(mRuntime);
         mSessionHidden.loadUri(pURL);
 
@@ -78,8 +80,8 @@ public class geckoClients {
         return mSessionHidden;
     }
 
-    private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener ignoredPEvent, AppCompatActivity pContext, String pSessionID){
-        geckoSession mSessionInitializer = new geckoSession(new geckoViewClientCallback(), pSessionID, pContext, pGeckoView);
+    private geckoSession initSettings(GeckoView pGeckoView, eventObserver.eventListener ignoredPEvent, AppCompatActivity pContext, String pSessionID, ActivityResultLauncher<Intent> pUploadRequestLauncher){
+        geckoSession mSessionInitializer = new geckoSession(new geckoViewClientCallback(), pSessionID, pContext, pGeckoView, pUploadRequestLauncher);
         mSessionInitializer.getSettings().setUseTrackingProtection(status.sStatusDoNotTrack);
         mSessionInitializer.getSettings().setFullAccessibilityTree(true);
         mSessionInitializer.getSettings().setUserAgentMode(USER_AGENT_MODE_MOBILE);
@@ -215,14 +217,14 @@ public class geckoClients {
             try {
                 mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
                 if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(pContext)) {
-                    String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+                    String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH);
                     mSession.getSettings().setAllowJavascript(true);
                     mSession.initURL(mURL);
 
                     mSession.stop();
                     mSession.loadUri(mURL);
                 } else {
-                    String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+                    String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH);
                     mSession.getSettings().setAllowJavascript(true);
                     mSession.loadUri(mURL);
                 }
@@ -252,12 +254,12 @@ public class geckoClients {
         String mURLFinal;
         mSession.initURL(constants.CONST_GENESIS_DOMAIN_URL);
         if (status.sTheme == enums.Theme.THEME_LIGHT || helperMethod.isDayMode(activityContextManager.getInstance().getHomeController())) {
-            String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+            String mURL = constants.CONST_GENESIS_URL_CACHED + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH);
             mSession.getSettings().setAllowJavascript(true);
             mSession.initURL(mURL);
             mURLFinal = mURL;
         } else {
-            String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH, null);
+            String mURL = constants.CONST_GENESIS_URL_CACHED_DARK + "?pData=" + dataController.getInstance().invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands.M_FETCH);
             mSession.getSettings().setAllowJavascript(true);
             mSession.initURL(mURL);
             mURLFinal = mURL;

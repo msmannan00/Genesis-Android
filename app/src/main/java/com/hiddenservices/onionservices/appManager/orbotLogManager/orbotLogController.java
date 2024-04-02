@@ -137,7 +137,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
     @SuppressLint("NotifyDataSetChanged")
     private void initializeLogs() {
         if (status.sLogThemeStyleAdvanced) {
-            orbotLogAdapter adapter = new orbotLogAdapter(((ArrayList) mOrbotModel.onTrigger(M_GET_LIST)), new orbotLogController.orbotAdapterCallback());
+            orbotLogAdapter adapter = new orbotLogAdapter((ArrayList<logRowModel>) mOrbotModel.onTrigger(M_GET_LIST),new orbotLogController.orbotAdapterCallback());
             mOrbotAdapter = adapter;
 
             Objects.requireNonNull(mOrbotLogRecycleView.getItemAnimator()).setAddDuration(350);
@@ -271,7 +271,7 @@ public class orbotLogController extends AppCompatActivity implements ViewTreeObs
     /* View Callback */
 
     public void onUITriggered(View view) {
-        if (view.getId() == R.id.pOrbotLogFloatingToolbar && view != null) {
+        if (view.getId() == R.id.pOrbotLogFloatingToolbar) {
             if (!orbotLogStatus.sUIInteracted) {
                 onScrollDownByFloatingToolabar();
             }

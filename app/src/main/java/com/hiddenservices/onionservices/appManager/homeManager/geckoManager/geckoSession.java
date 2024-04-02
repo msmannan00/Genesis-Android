@@ -1,5 +1,6 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.autofillDelegate;
@@ -24,6 +25,8 @@ import java.util.Arrays;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_MOBILE;
 
+import android.content.Intent;
+
 public class  geckoSession extends GeckoSession implements GeckoSession.ProgressDelegate {
 
     private WeakReference<AppCompatActivity> mContext;
@@ -47,7 +50,7 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
 
     private boolean mIsRemovableOnBackPressed = false;
 
-    geckoSession(eventObserver.eventListener pEvent, String pSessionID, AppCompatActivity pContext, GeckoView pGeckoView) {
+    geckoSession(eventObserver.eventListener pEvent, String pSessionID, AppCompatActivity pContext, GeckoView pGeckoView, ActivityResultLauncher<Intent> pUploadRequestLauncher) {
 
         this.mContext = new WeakReference<>(pContext);
         this.mEvent = pEvent;
@@ -56,11 +59,11 @@ public class  geckoSession extends GeckoSession implements GeckoSession.Progress
 
         this.mSelectionActionDelegate = new selectionDelegate(pContext, true);
         this.mHistoryDelegate = new historyDelegate(this.mContext, mEvent, mGeckoDataModel, this);
-        this.mPromptDelegate = new promptDelegate(this.mContext.get());
+        this.mPromptDelegate = new promptDelegate(this.mContext.get(), pUploadRequestLauncher);
         this.mContentDelegate = new contentDelegate(this.mContext, mEvent, mGeckoDataModel, this);
         this.mScrollDelegate = new scrollDelegate(mEvent, mGeckoDataModel);
         this.mAutofillDelegate = new autofillDelegate(pGeckoView);
-        this.mDownloadHandler = new downloadHandler(this.mContext, mGeckoDataModel, this);
+        this.mDownloadHandler = new downloadHandler(this.mContext, this);
         this.mSearchHandler = new searchHandler(mEvent, this);
         this.mNavigationDelegate = new navigationDelegate(this.mContext, mEvent, mGeckoDataModel, this);
         this.mProgressDelegate = new progressDelegate(this.mContext, mEvent, mGeckoDataModel);

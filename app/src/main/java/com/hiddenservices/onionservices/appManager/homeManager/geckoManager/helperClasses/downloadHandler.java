@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import com.hiddenservices.onionservices.R;
-import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.dataModel.geckoDataModel;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel.promptDelegate;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.downloadManager.geckoDownloadManager;
 import com.hiddenservices.onionservices.appManager.homeManager.geckoManager.geckoSession;
@@ -43,7 +42,7 @@ public class downloadHandler {
 
     /*Initializations*/
 
-    public downloadHandler(WeakReference<AppCompatActivity> pContext, geckoDataModel pGeckoDataModel, geckoSession pGeckoSession) {
+    public downloadHandler(WeakReference<AppCompatActivity> pContext, geckoSession pGeckoSession) {
         this.mContext = pContext;
         this.mGeckoSession = pGeckoSession;
     }

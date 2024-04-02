@@ -42,11 +42,11 @@ public class intentHandler {
     public static String getSecurityInfo(GeckoSession.ProgressDelegate.SecurityInformation securityInfo) {
         if (securityInfo != null && securityInfo.certificate != null) {
 
-            String mAlternativeNames = strings.GENERIC_EMPTY_STR;
+            StringBuilder mAlternativeNames = new StringBuilder(strings.GENERIC_EMPTY_STR);
             try {
-                for (List name : securityInfo.certificate.getSubjectAlternativeNames())
-                    mAlternativeNames = mAlternativeNames + name.get(1) + "<br>";
-
+                for (List<?> name : securityInfo.certificate.getSubjectAlternativeNames()) {
+                    mAlternativeNames.append(name.get(1)).append("<br>");
+                }
             } catch (Exception ignored) {
             }
 

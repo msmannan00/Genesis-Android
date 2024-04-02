@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.orbotLogManager;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import androidx.appcompat.app.AppCompatActivity;
 import com.hiddenservices.onionservices.constants.constants;
 import com.hiddenservices.onionservices.constants.status;
@@ -13,12 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_FLOATING_BUTTON;
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_LOGS;
 import static com.hiddenservices.onionservices.appManager.orbotLogManager.orbotLogEnums.eOrbotLogModelCallbackCommands.M_UPDATE_RECYCLE_VIEW;
-import static java.lang.Thread.sleep;
 import static org.mozilla.gecko.util.ThreadUtils.runOnUiThread;
 
 class orbotLogModel {
@@ -44,6 +42,7 @@ class orbotLogModel {
 
     private void initLogHandler() {
         this.mLogHandler = new LogHandler();
+        this.mLogHandler.startLogging();
         LOG_HANDLER_EXECUTOR.execute((Runnable) mLogHandler);
     }
 
@@ -67,44 +66,52 @@ class orbotLogModel {
     /*Triggers*/
 
     @SuppressLint("StaticFieldLeak")
-    class LogHandler extends AsyncTask<Void, Integer, Void> {
-        protected Void doInBackground(Void... arg0) {
-            try {
-                sleep(1000);
-                mLogCounter = mModelList.size();
-                while (!mContext.isDestroyed()) {
-                    if (status.sLogThemeStyleAdvanced) {
-                        sleep(800);
-                    } else {
-                        sleep(100);
-                    }
+    class LogHandler {
+        private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-                    if (mLogCounter > 0) {
-                        runOnUiThread(() -> {
-                            if (orbotLocalConstants.mTorLogsHistory.size() > mLogCounter) {
-                                mModelList.add(orbotLocalConstants.mTorLogsHistory.get(mLogCounter));
-                                if (!status.sLogThemeStyleAdvanced) {
-                                    mEvent.invokeObserver(Collections.singletonList(mLogCounter), M_UPDATE_LOGS);
-                                } else {
-                                    mEvent.invokeObserver(Collections.singletonList(mModelList.size() - 1), M_UPDATE_RECYCLE_VIEW);
-                                }
+        public void startLogging() {
+            executorService.submit(() -> {
+                try {
+                    Thread.sleep(1000);
+                    mLogCounter = mModelList.size();
+                    while (!mContext.isDestroyed()) {
+                        if (status.sLogThemeStyleAdvanced) {
+                            Thread.sleep(800);
+                        } else {
+                            Thread.sleep(100);
+                        }
 
-                                if (!orbotLogStatus.sUIInteracted) {
-                                    helperMethod.onDelayHandler(150, () -> {
-                                        if (!orbotLogStatus.sUIInteracted) {
-                                            mEvent.invokeObserver(null, M_UPDATE_FLOATING_BUTTON);
-                                        }
-                                        return null;
-                                    });
+                        if (mLogCounter > 0) {
+                            runOnUiThread(() -> {
+                                if (orbotLocalConstants.mTorLogsHistory.size() > mLogCounter) {
+                                    mModelList.add(orbotLocalConstants.mTorLogsHistory.get(mLogCounter));
+                                    if (!status.sLogThemeStyleAdvanced) {
+                                        mEvent.invokeObserver(Collections.singletonList(mLogCounter), M_UPDATE_LOGS);
+                                    } else {
+                                        mEvent.invokeObserver(Collections.singletonList(mModelList.size() - 1), M_UPDATE_RECYCLE_VIEW);
+                                    }
+
+                                    if (!orbotLogStatus.sUIInteracted) {
+                                        helperMethod.onDelayHandler(150, () -> {
+                                            if (!orbotLogStatus.sUIInteracted) {
+                                                mEvent.invokeObserver(null, M_UPDATE_FLOATING_BUTTON);
+                                            }
+                                            return null;
+                                        });
+                                    }
+                                    mLogCounter += 1;
                                 }
-                                mLogCounter += 1;
-                            }
-                        });
+                            });
+                        }
                     }
+                    mLogHandler.stopLogging();
+                } catch (InterruptedException ignored) {
                 }
-            } catch (InterruptedException ignored) {
-            }
-            return null;
+            });
+        }
+
+        public void stopLogging() {
+            executorService.shutdownNow();
         }
     }
 

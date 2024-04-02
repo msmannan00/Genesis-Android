@@ -207,8 +207,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/c_navigation_tint"
-            tools:ignore="RtlSymmetry"
-            tools:targetApi="m" />
+            tools:ignore="RtlSymmetry"/>
 
         <ImageView
             android:id="@+id/pBorder"

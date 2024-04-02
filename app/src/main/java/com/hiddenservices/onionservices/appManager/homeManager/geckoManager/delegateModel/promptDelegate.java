@@ -1,7 +1,6 @@
 package com.hiddenservices.onionservices.appManager.homeManager.geckoManager.delegateModel;
 
 import static android.provider.OpenableColumns.DISPLAY_NAME;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,6 +32,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,11 +58,11 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
     private final AppCompatActivity mActivity;
     private GeckoResult<PromptResponse> mFileResponse;
     private FilePrompt mFilePrompt;
-
+    public ActivityResultLauncher<Intent> mUploadRequestLauncher;
     static final String LOGTAG = "BasicGeckoViewPrompt";
-    public int filePickerRequestCode = 115;
 
-    public promptDelegate(final AppCompatActivity activity) {
+    public promptDelegate(final AppCompatActivity activity, final ActivityResultLauncher<Intent> pUploadRequestLauncher) {
+        mUploadRequestLauncher = pUploadRequestLauncher;
         mActivity = activity;
     }
 
@@ -186,7 +186,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         builder.setNegativeButton("Cancel", listener);
 
         try {
-            if(mActivity!=null && !mActivity.isFinishing())
+            if(!mActivity.isFinishing())
             {
                 createStandardDialog(builder, prompt, res).show();
             }
@@ -553,7 +553,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
             throw new UnsupportedOperationException();
         }
         try {
-            if(mActivity!=null && !mActivity.isFinishing())
+            if(!mActivity.isFinishing())
             {
                 dialog.show();
             }
@@ -799,8 +799,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
     @Override
     public GeckoResult<PromptResponse> onFilePrompt(@NonNull GeckoSession session, @NonNull FilePrompt prompt) {
         stopMedia();
-        final Activity activity = mActivity;
-        if (activity == null) {
+        if (mActivity == null) {
             return GeckoResult.fromValue(prompt.dismiss());
         }
 
@@ -818,7 +817,7 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
         try {
             mFileResponse = res;
             mFilePrompt = prompt;
-            activity.startActivityForResult(intent, filePickerRequestCode);
+            mUploadRequestLauncher.launch(intent);
         } catch (final ActivityNotFoundException e) {
             Log.e(LOGTAG, "Cannot launch activity", e);
             return GeckoResult.fromValue(prompt.dismiss());
@@ -921,11 +920,6 @@ public final class promptDelegate implements GeckoSession.PromptDelegate {
                     || (prompt.type == FilePrompt.Type.MULTIPLE && clip == null)) {
                 res.complete(prompt.confirm(mActivity, uri));
             } else if (prompt.type == FilePrompt.Type.MULTIPLE) {
-                if (clip == null) {
-                    Log.w(LOGTAG, "No selected file");
-                    res.complete(prompt.dismiss());
-                    return;
-                }
                 final int count = clip.getItemCount();
                 final ArrayList<Uri> uris = new ArrayList<>(count);
                 for (int i = 0; i < count; i++) {

@@ -318,7 +318,7 @@ public class historyViewController {
             onCloseMenu();
         } else if (pCommands == historyEnums.eHistoryViewCommands.M_LONG_PRESS_MENU) {
             onLongPressMenu((View) pData.get(0));
-        } else if (pCommands.equals(historyEnums.eHistoryViewCommands.ON_GENERATE_SWAPPABLEBACKGROUND)) {
+        } else if (pCommands.equals(historyEnums.eHistoryViewCommands.ON_GENERATE_SWAPPABLE_BACKGROUND)) {
             onDrawSweepableBackground((Canvas) pData.get(0), (RecyclerView.ViewHolder) pData.get(1), (float) pData.get(2), (int) pData.get(3));
         }
         return null;

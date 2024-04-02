@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.webrtc.ContextUtils.getApplicationContext;
-
 public class downloadManager {
     /* Private Variables */
 
@@ -33,7 +31,8 @@ public class downloadManager {
 
     private void onStartDownload(String pPath, String pFile) {
         int mNotificationID = helperMethod.createUniqueNotificationID();
-        downloadReciever mFileDownloader = (downloadReciever) new downloadReciever(mAppContext.get(), pPath, pFile, mNotificationID, mEvent, downloadNotificationReceiver.class).execute(pPath);
+        downloadReciever mFileDownloader = new downloadReciever(mAppContext.get(), pFile, mNotificationID, mEvent, downloadNotificationReceiver.class);
+        mFileDownloader.execute(pPath);
         mDownloads.put(mNotificationID, mFileDownloader);
     }
 
@@ -43,7 +42,7 @@ public class downloadManager {
             if (mReciever != null) {
                 mDownloads.get(pID).onCancel();
             } else {
-                NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationManager notificationManager = (NotificationManager) mAppContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancelAll();
             }
         }
@@ -56,7 +55,7 @@ public class downloadManager {
     }
 
     private void onDownloadWebRequest(String mURL, String mPath) {
-        mAppContext.get().startService(downloadService.getDownloadService(mAppContext.get(), mURL, mPath));
+        downloadService.enqueueDownload(mAppContext.get(), mURL, mPath);
     }
 
     private String onDownloadBlobFile(String pURL) {

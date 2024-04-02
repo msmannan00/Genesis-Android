@@ -27,13 +27,10 @@ class settingNotificationModel {
 
         status.sNotificationStatus = pStatus ? 1 : 0;
         if (!pStatus) {
-            activityContextManager.getInstance().getHomeController().onHideDefaultNotification();
             pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_DISABLE_NOTIFICATION);
         } else {
             if(status.sTorBrowsing){
                 pluginController.getInstance().onOrbotInvoke(null, pluginEnums.eOrbotManager.M_ENABLE_NOTIFICATION);
-            }else {
-                activityContextManager.getInstance().getHomeController().onShowDefaultNotification(true);
             }
         }
         activityContextManager.getInstance().getHomeController().onReloadProxy();

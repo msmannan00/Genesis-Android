@@ -78,7 +78,7 @@
             android:layout_marginEnd="13dp"
             android:background="@xml/hx_ripple_default_round_bottom"
             android:ellipsize="end"
-            android:gravity="center_vertical | start"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:paddingStart="11dp"
             android:paddingEnd="15dp"

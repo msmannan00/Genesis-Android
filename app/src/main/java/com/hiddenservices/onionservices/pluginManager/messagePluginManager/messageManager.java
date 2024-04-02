@@ -189,7 +189,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         mDialog.getWindow().setBackgroundDrawable(inset);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
-        TextView mCertificateDescription = mDialog.findViewById(R.id.pCertificateDesciption);
+        TextView mCertificateDescription = mDialog.findViewById(R.id.pCertificateDescription);
         ImageView mCertificateRootBackground = mDialog.findViewById(R.id.pCertificateRootBackground);
         ScrollView mCertificateScrollView = mDialog.findViewById(R.id.pCertificateScrollView);
         ImageView mCertificateRootBlocker = mDialog.findViewById(R.id.pCertificateRootBlocker);
@@ -250,8 +250,8 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
     private void switchTorBrowsing() {
         initializeDialog(R.layout.popup_tor_change, Gravity.BOTTOM);
 
-        Button mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pTorSwtichPopupDismiss);
-        Button mBridgeMailPopupNext = mDialog.findViewById(R.id.pTorSwtichPopupNext);
+        Button mBridgeMailPopupDismiss = mDialog.findViewById(R.id.pTorSwitchPopupDismiss);
+        Button mBridgeMailPopupNext = mDialog.findViewById(R.id.pTorSwitchPopupNext);
 
         mBridgeMailPopupDismiss.setOnClickListener(this);
         mBridgeMailPopupNext.setOnClickListener(this);
@@ -314,10 +314,10 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
         if (!mData.isEmpty()) {
             initializeDialog(R.layout.popup_download_url, Gravity.BOTTOM);
 
-            Button mDownloadPopInfoNext = mDialog.findViewById(R.id.pDownloadPopuInfoNext);
-            Button mDownloadPopInfoDismiss = mDialog.findViewById(R.id.pDownloadPopuInfoDismiss);
-            TextView mDownloadPopInfo = mDialog.findViewById(R.id.pDownloadPopuInfo);
-            TextView mDownloadPopInfoLong = mDialog.findViewById(R.id.pDownloadPopuInfoLong);
+            Button mDownloadPopInfoNext = mDialog.findViewById(R.id.pDownloadPopupInfoNext);
+            Button mDownloadPopInfoDismiss = mDialog.findViewById(R.id.pDownloadPopupInfoDismiss);
+            TextView mDownloadPopInfo = mDialog.findViewById(R.id.pDownloadPopupInfo);
+            TextView mDownloadPopInfoLong = mDialog.findViewById(R.id.pDownloadPopupInfoLong);
 
             mDownloadPopInfoDismiss.setOnClickListener(this);
             mDownloadPopInfoNext.setOnClickListener(this);
@@ -512,17 +512,17 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
                 view.getId() == R.id.pBridgeMailPopupDismiss ||
                 view.getId() == R.id.pPopupRateFailureDismiss ||
                 view.getId() == R.id.pPopupPanicDismiss ||
-                view.getId() == R.id.pDownloadPopuInfoDismiss ||
-                view.getId() == R.id.pTorSwtichPopupDismiss ||
+                view.getId() == R.id.pDownloadPopupInfoDismiss ||
+                view.getId() == R.id.pTorSwitchPopupDismiss ||
                 view.getId() == R.id.pPopupURLLongPressDismiss ||
                 view.getId() == R.id.pPopupLongPressDismiss ||
                 view.getId() == R.id.pPopupRateusClose ||
-                view.getId() == R.id.pCertificateDesciption ||
+                view.getId() == R.id.pCertificateDescription ||
                 view.getId() == R.id.pPopupDefaultBrowserDismiss ||
                 view.getId() == R.id.pCertificateRootBackground
         ) {
             onDismiss();
-        } else if (view.getId() == R.id.pDownloadPopuInfoNext) {
+        } else if (view.getId() == R.id.pDownloadPopupInfoNext) {
             onDismiss();
             helperMethod.onDelayHandler(1000, () -> {
                 mEvent.invokeObserver(mData, M_DOWNLOAD_SINGLE);
@@ -533,7 +533,7 @@ public class messageManager implements View.OnClickListener, DialogInterface.OnD
             onDismiss();
             mEvent.invokeObserver(mData, M_PANIC_RESET);
             onClearReference();
-        } else if (view.getId() == R.id.pTorSwtichPopupNext) {
+        } else if (view.getId() == R.id.pTorSwitchPopupNext) {
             onDismiss();
             mEvent.invokeObserver(null, M_TOR_SWITCH_RESTART);
         } else if (view.getId() == R.id.pPopupDefaultBrowserNext) {

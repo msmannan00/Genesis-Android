@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:alpha="0.6"
-            android:gravity="start |center_vertical"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:paddingStart="15dp"
             android:paddingEnd="41dp"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:alpha="0.6"
-            android:gravity="start |center_vertical"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:paddingStart="15.2dp"
             android:paddingEnd="41dp"
@@ -393,7 +393,7 @@
                     tools:ignore="TextContrastCheck" />
 
                 <ImageView
-                    android:id="@+id/pPopupLongPressnNavigation6"
+                    android:id="@+id/pPopupLongPressingNavigation6"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

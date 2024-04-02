@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -107,8 +108,9 @@ public class tabController extends Fragment {
         super.onDestroy();
     }
 
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         activityContextManager.getInstance().setTabController(this);
 
@@ -544,13 +546,14 @@ public class tabController extends Fragment {
                 onNewTabInvoked();
                 mClosedByNewTab = true;
             }
-            mHomeController.onBackPressed();
+
+            mHomeController.getOnBackPressedDispatcher().onBackPressed();
         }
         if (pView.getId() == R.id.pNewTabMenu) {
             onClearTabBackup();
             mListModel.onTrigger(tabEnums.eModelCallback.M_CLEAR_BACKUP_RETAIN_DATABASE, null);
             onNewTabInvoked();
-            mHomeController.onBackPressed();
+            mHomeController.getOnBackPressedDispatcher().onBackPressed();
             mClosedByNewTab = true;
         } else if (pView.getId() == R.id.pPopupRateusClose) {
             mTouchable = false;
@@ -560,7 +563,7 @@ public class tabController extends Fragment {
             onClearSelection();
             onShowUndoDialog();
         } else if (pView.getId() == R.id.pOpenSetting) {
-            activityContextManager.getInstance().getHomeController().onBackPressed();
+            mHomeController.getOnBackPressedDispatcher().onBackPressed();
             new Handler().postDelayed(() -> helperMethod.openActivity(settingAdvanceController.class, constants.CONST_LIST_HISTORY, activityContextManager.getInstance().getHomeController(), true), 250);
         }
         mtabViewController.onTrigger(tabEnums.eTabViewCommands.M_DISMISS_MENU, null);

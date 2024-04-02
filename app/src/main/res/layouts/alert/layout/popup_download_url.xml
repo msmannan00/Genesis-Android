@@ -41,7 +41,7 @@
             android:contentDescription="@string/GENERAL_TODO" />
 
         <TextView
-            android:id="@+id/pDownloadPopuHeader"
+            android:id="@+id/pDownloadPopupHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -51,7 +51,7 @@
             android:singleLine="true"
             android:text="@string/ALERT_DOWNLOAD_SINGLE"
             android:textAlignment="textStart"
-            android:textColor="@color/c_alert_rateus_header_static"
+            android:textColor="@color/c_alert_rate_us_header_static"
             android:textSize="14.5sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/pDownloadPopupIcon"
@@ -59,7 +59,7 @@
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/pDownloadPopuInfo"
+            android:id="@+id/pDownloadPopupInfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -75,11 +75,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/pDownloadPopupIcon"
-            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuHeader"
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopupHeader"
             tools:ignore="SmallSp,TextContrastCheck" />
 
         <TextView
-            android:id="@+id/pDownloadPopuInfoLong"
+            android:id="@+id/pDownloadPopupInfoLong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -95,11 +95,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/pDownloadPopupIcon"
-            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuInfo"
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopupInfo"
             tools:ignore="SmallSp,TextContrastCheck" />
 
         <Button
-            android:id="@+id/pDownloadPopuInfoNext"
+            android:id="@+id/pDownloadPopupInfoNext"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -113,11 +113,11 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuInfoLong"
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopupInfoLong"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <Button
-            android:id="@+id/pDownloadPopuInfoDismiss"
+            android:id="@+id/pDownloadPopupInfoDismiss"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -130,8 +130,8 @@
             android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pDownloadPopuInfoNext"
-            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopuInfoLong"
+            app:layout_constraintEnd_toStartOf="@+id/pDownloadPopupInfoNext"
+            app:layout_constraintTop_toBottomOf="@+id/pDownloadPopupInfoLong"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

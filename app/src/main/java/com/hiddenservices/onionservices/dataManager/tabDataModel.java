@@ -3,7 +3,6 @@ package com.hiddenservices.onionservices.dataManager;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 import com.hiddenservices.onionservices.appManager.activityContextManager;
@@ -22,6 +21,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SuppressLint("CommitPrefEdits")
 class tabDataModel {
@@ -258,11 +259,12 @@ class tabDataModel {
         }
     }
 
-    updatePixelThread mThread = new updatePixelThread();
+    private UpdatePixelThread mThread = new UpdatePixelThread();
+
     public void updatePixels(String pSessionID, GeckoResult<Bitmap> pBitmapManager, ImageView pImageView, boolean pOpenTabView) {
-        if(status.sLowMemory == enums.MemoryStatus.STABLE){
-            mThread.cancel(true);
-            mThread = new updatePixelThread();
+        if (status.sLowMemory == enums.MemoryStatus.STABLE) {
+            mThread.cancel();
+            mThread = new UpdatePixelThread();
             mThread.pBitmapManager = pBitmapManager;
             mThread.pImageView = pImageView;
             mThread.pOpenTabView = pOpenTabView;
@@ -271,51 +273,46 @@ class tabDataModel {
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class updatePixelThread extends AsyncTask<String, String, String> {
+    public class UpdatePixelThread {
 
         public String pSessionID;
         public GeckoResult<Bitmap> pBitmapManager;
         public ImageView pImageView;
         public boolean pOpenTabView;
+        private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-        @Override
-        protected void onPreExecute() {
-        }
+        public void execute() {
+            executorService.submit(() -> {
+                try {
+                    for (int counter = 0; counter < mTabs.size(); counter++) {
+                        if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID) && pBitmapManager != null) {
+                            Bitmap mBitmap = pBitmapManager.poll(10000);
 
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
-                for (int counter = 0; counter < mTabs.size(); counter++) {
-                    if (mTabs.get(counter).getSession().getSessionID().equals(pSessionID) && pBitmapManager!=null) {
-                        Bitmap mBitmap = pBitmapManager.poll(10000);
+                            ByteArrayOutputStream out = new ByteArrayOutputStream();
+                            mBitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
 
-                        ByteArrayOutputStream out = new ByteArrayOutputStream();
-                        mBitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
-
-                        Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-                        Bitmap emptyBitmap = Bitmap.createBitmap(decoded.getWidth(), decoded.getHeight(), decoded.getConfig());
-                        if (!decoded.sameAs(emptyBitmap)) {
-                            mTabs.get(counter).decodeByteArraylistBitmap(decoded);
+                            Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+                            Bitmap emptyBitmap = Bitmap.createBitmap(decoded.getWidth(), decoded.getHeight(), decoded.getConfig());
+                            if (!decoded.sameAs(emptyBitmap)) {
+                                mTabs.get(counter).decodeByteArraylistBitmap(decoded);
+                            }
+                            break;
                         }
-                        break;
                     }
+                } catch (Throwable ignored) {
                 }
-            } catch (Throwable ignored) {
-            }
-            if (pOpenTabView) {
-                activityContextManager.getInstance().getHomeController().onLoadFirstElement();
-            }
-            return "";
+                if (pOpenTabView) {
+                    activityContextManager.getInstance().getHomeController().onLoadFirstElement();
+                }
+                pImageView = null;
+                pBitmapManager = null;
+            });
         }
 
-        @Override
-        protected void onPostExecute(String bitmap) {
-            pImageView = null;
-            pBitmapManager = null;
+        public void cancel() {
+            executorService.shutdownNow();
         }
     }
-
     public ArrayList<ArrayList<String>> getSuggestions(String pQuery) {
         ArrayList<ArrayList<String>> mModel = new ArrayList<>();
         for (int count = 0; count <= mTabs.size() - 1 && mTabs.size() < 500; count++) {

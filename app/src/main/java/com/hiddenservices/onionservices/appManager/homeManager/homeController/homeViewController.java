@@ -16,9 +16,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.method.MovementMethod;
 import android.view.Gravity;
@@ -60,6 +60,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_BADCERT_CACHED;
 import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS_BADCERT_CACHED_DARK;
@@ -73,7 +76,6 @@ import static com.hiddenservices.onionservices.constants.constants.CONST_GENESIS
 import static com.hiddenservices.onionservices.constants.constants.CONST_PRIVACY_POLICY_URL_NON_TOR;
 import static com.hiddenservices.onionservices.constants.status.sSettingLanguage;
 import static org.mozilla.geckoview.GeckoSessionSettings.USER_AGENT_MODE_DESKTOP;
-import static java.lang.Thread.sleep;
 
 public class homeViewController {
     /*ViewControllers*/
@@ -663,43 +665,44 @@ public class homeViewController {
     private LogHandler mLogHandler;
 
     @SuppressLint("StaticFieldLeak")
-    class LogHandler extends AsyncTask<Void, Integer, Void> {
-        protected Void doInBackground(Void... arg0) {
+    class LogHandler {
+        private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-            while (status.sTorBrowsing && (orbotLocalConstants.mSOCKSPort == -1 || !orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)) {
+        public void start() {
+            executor.submit(() -> {
+                while (status.sTorBrowsing && (orbotLocalConstants.mSOCKSPort == -1 || !orbotLocalConstants.mIsTorInitialized || !orbotLocalConstants.mNetworkState)) {
+                    try {
+                        Thread.sleep(1000);
+                        startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
+                    } catch (Exception ignored) {
+                    }
+                }
+
                 try {
-                    sleep(1000);
+                    Thread.sleep(1000);
                     startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
                 } catch (Exception ignored) {
                 }
-            }
 
-            try {
-                sleep(1000);
-                startPostTask(messages.MESSAGE_UPDATE_LOADING_TEXT);
-            } catch (Exception ignored) {
-            }
+                if (!status.sSettingIsAppStarted) {
+                    mContext.runOnUiThread(() -> {
+                        startPostTask(messages.MESSAGE_ON_URL_LOAD);
+                        onDisableSplashScreen();
+                    });
+                } else {
+                    mContext.runOnUiThread(() -> mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.ON_LOAD_TAB_ON_RESUME));
+                }
+                mContext.runOnUiThread(() -> onProgressBarUpdate(5, true, false));
 
-            if (!status.sSettingIsAppStarted) {
-                mContext.runOnUiThread(() -> {
-                    startPostTask(messages.MESSAGE_ON_URL_LOAD);
-                    onDisableSplashScreen();
-                });
-            } else {
-                mContext.runOnUiThread(() -> mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.ON_LOAD_TAB_ON_RESUME));
-            }
-            mContext.runOnUiThread(() -> {
-                mLogHandler.cancel(true);
-                onProgressBarUpdate(5, true, false);
+                orbotLocalConstants.mIsTorInitialized = true;
+                mContext.runOnUiThread(() -> mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.ON_LOAD_ADVERT));
             });
+        }
 
-            orbotLocalConstants.mIsTorInitialized = true;
-            mContext.runOnUiThread(() -> mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.ON_LOAD_ADVERT));
-
-            return null;
+        public void stop() {
+            executor.shutdownNow();
         }
     }
-
     boolean mLogServiceExecuted = false;
 
     void initProxyLoading(Callable<String> logs) {
@@ -708,9 +711,7 @@ public class homeViewController {
         if (mSplashScreen.getVisibility() == View.VISIBLE) {
             if (!mLogServiceExecuted) {
                 mLogServiceExecuted = true;
-                if (this.mLogHandler.getStatus() != AsyncTask.Status.RUNNING) {
-                  this.mLogHandler.execute();
-                }
+                this.mLogHandler.start();
             }
         }
     }
@@ -1104,7 +1105,7 @@ public class homeViewController {
 
                 searchBarUpdateHandler.sendEmptyMessage(100);
                 searchBarUpdateHandler.removeMessages(100);
-                triggerUpdateSearchBar(handlerLocalUrl, showProtocol, pClearText, false);
+                triggerUpdateSearchBar(handlerLocalUrl, showProtocol, false);
                 mSearchbar.setTag(R.id.msearchbarProcessing, false);
             }
         }
@@ -1279,7 +1280,7 @@ public class homeViewController {
     }
 
     @SuppressLint("SetTextI18n")
-    public void triggerUpdateSearchBar(String url, boolean showProtocol, boolean pClearText, boolean pForced) {
+    public void triggerUpdateSearchBar(String url, boolean showProtocol, boolean pForced) {
         int mDelay = getDelay(url, pForced);
         if (url.startsWith(CONST_PRIVACY_POLICY_URL_NON_TOR)) {
             url = "https://orion.onion/privacy";
@@ -1448,7 +1449,7 @@ public class homeViewController {
         progressAnimator.start();
     }
 
-    public void onNewTabAnimation(List<Object> data, Object e_type, int pDelay, String pCurrentURL) {
+    public void onNewTabAnimation(List<Object> data, Object e_type, int pDelay) {
         if(e_type!=null && e_type.equals(homeEnums.eHomeViewCallback.M_INITIALIZE_TAB_SINGLE) && !status.sOpenURLInNewTab){
             pDelay = 2000;
         }
@@ -1722,15 +1723,14 @@ public class homeViewController {
 
     @SuppressLint("HandlerLeak")
     private void createUpdateUiHandler() {
-        mUpdateUIHandler = new Handler() {
+        mUpdateUIHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 if (msg.what == messages.MESSAGE_ON_URL_LOAD) {
                     if (mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_HOME_PAGE) == null) {
                         mEvent.invokeObserver(null, homeEnums.eHomeViewCallback.M_PRELOAD_URL);
                         if (status.sSettingRedirectStatus.equals(strings.GENERIC_EMPTY_STR)) {
-                            new Handler().postDelayed(() ->
-                            {
+                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                                 mProgressBar.setProgress(5);
                                 mProgressBar.setAlpha(1);
                                 mProgressBar.setVisibility(View.VISIBLE);

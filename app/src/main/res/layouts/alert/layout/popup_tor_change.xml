@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pTorSwtichPopupContainer"
+        android:id="@+id/pTorSwitchPopupContainer"
         android:layout_width="wrap_content"
         android:maxWidth="450dp"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/pTorSwtichPopupHeader"
+            android:id="@+id/pTorSwitchPopupHeader"
             android:layoutDirection="ltr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             tools:ignore="SmallSp" />
 
         <TextView
-            android:id="@+id/pTorSwtichPopupDescription"
+            android:id="@+id/pTorSwitchPopupDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="1"
@@ -55,11 +55,11 @@
             android:textSize="13.5sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pTorSwtichPopupHeader"
+            app:layout_constraintTop_toBottomOf="@+id/pTorSwitchPopupHeader"
             tools:ignore="SmallSp" />
 
         <Button
-            android:id="@+id/pTorSwtichPopupNext"
+            android:id="@+id/pTorSwitchPopupNext"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -73,11 +73,11 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pTorSwtichPopupDescription"
+            app:layout_constraintTop_toBottomOf="@+id/pTorSwitchPopupDescription"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <Button
-            android:id="@+id/pTorSwtichPopupDismiss"
+            android:id="@+id/pTorSwitchPopupDismiss"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -90,8 +90,8 @@
             android:textColor="@color/c_white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pTorSwtichPopupNext"
-            app:layout_constraintTop_toBottomOf="@+id/pTorSwtichPopupDescription"
+            app:layout_constraintEnd_toStartOf="@+id/pTorSwitchPopupNext"
+            app:layout_constraintTop_toBottomOf="@+id/pTorSwitchPopupDescription"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

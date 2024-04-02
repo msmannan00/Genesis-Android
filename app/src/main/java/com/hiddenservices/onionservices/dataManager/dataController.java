@@ -121,13 +121,13 @@ public class dataController {
 
     /*Trigger Reference Websites*/
 
-    public Object invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands pCommands, List<Object> pData) {
+    public Object invokeReferenceWebsite(dataEnums.eReferenceWebsiteCommands pCommands) {
         return mReferenceWebsiteDataModel.onTrigger(pCommands, null);
     }
 
     /*Trigger Bridges*/
 
-    public Object invokeBridges(dataEnums.eBridgeWebsiteCommands pCommands, List<Object> pData) {
+    public Object invokeBridges(dataEnums.eBridgeWebsiteCommands pCommands) {
         return mBridgeWebsiteDataModel.onTrigger(pCommands, null);
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="_0_selected">0 Selected</string>
+    <string name="_0_selected" translatable="false">0 Selected</string>
 </resources>

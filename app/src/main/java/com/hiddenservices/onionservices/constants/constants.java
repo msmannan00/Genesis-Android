@@ -6,7 +6,6 @@ public class constants {
     public static final String CONST_PLAYSTORE_URL = "http://play.google.com/store/apps/details?id=com.hiddenservices.onionservices";
     public static final String CONST_AMAZON_URL = "http://www.amazon.com/gp/mas/dl/android?p=com.darkweb.genesissearchengine.production";
     public static final String CONST_SAMSUNG_URL = "http://www.samsungapps.com/appquery/appDetail.as?appId=com.darkweb.genesissearchengine.production";
-    public static final String CONST_HUAWEI_URL = "https://appgallery.cloud.huawei.com/uowap/index.html#/detailApp/C106142211?appId=C106142211";
 
     public static final String CONST_BRIDGES = "https://bridges.torproject.org/bridges/?transport=obfs4";
 
@@ -40,7 +39,6 @@ public class constants {
     public static final String CONST_GENESIS_BADCERT_CACHED_DARK = "error/badcert-dark.html";
     public static final String CONST_GENESIS_DOMAIN_URL_SLASHED = "http://167.86.99.31/";
     public static final String CONST_GENESIS_DOMAIN_URL = "http://167.86.99.31";
-    public static final String CONST_GENESIS_GMT_TIME_GET_KEY = "pSecretToken";
     public static final String CONST_GENESIS_HELP_URL_CACHE = "resource://android/assets/help/help.html";
     public static final String CONST_GENESIS_HELP_URL_CACHE_DARK = "resource://android/assets/help/help-dark.html";
     public static final String CONST_GENESIS_HELP_URL = "https://orion.onion/help";

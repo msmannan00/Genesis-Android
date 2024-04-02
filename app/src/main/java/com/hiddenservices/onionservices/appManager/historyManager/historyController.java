@@ -228,7 +228,7 @@ public class historyController extends AppCompatActivity {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                Canvas mCanvas = (Canvas) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.ON_GENERATE_SWAPPABLEBACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
+                Canvas mCanvas = (Canvas) mHistoryViewController.onTrigger(historyEnums.eHistoryViewCommands.ON_GENERATE_SWAPPABLE_BACKGROUND, Arrays.asList(c, viewHolder, dX, actionState));
                 super.onChildDraw(mCanvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         };
@@ -297,14 +297,7 @@ public class historyController extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (mSearchInput.getVisibility() == View.VISIBLE) {
-                    onHideSearch(null);
-                } else if ((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {
-                    onClearMultipleSelection(null);
-                } else {
-                    activityContextManager.getInstance().onRemoveStack(this);
-                    finish();
-                }
+                onTriggerBackPressed();
             }
         });
     }
@@ -312,7 +305,7 @@ public class historyController extends AppCompatActivity {
     /*External XML Listeners*/
 
     public void onBackPressed(View view) {
-        onBackPressed();
+        onTriggerBackPressed();
     }
 
     public void onHideSearch(View view) {
@@ -371,7 +364,7 @@ public class historyController extends AppCompatActivity {
                     mHistoryModel.setList(model);
                     activityContextManager.getInstance().getHistoryController().runOnUiThread(() -> {
                         if (mPrevSize < mHistoryModel.getList().size()) {
-                            mHistoryAdapter.onLoadMore(mHistoryModel.getList());
+                            mHistoryAdapter.onLoadMore();
                         }
                     });
                     try {
@@ -391,9 +384,21 @@ public class historyController extends AppCompatActivity {
         public Object invokeObserver(List<Object> data, Object e_type) {
 
             if (e_type.equals(homeEnums.eEdittextCallbacks.ON_KEYBOARD_CLOSE)) {
-                onBackPressed();
+                onTriggerBackPressed();
             }
             return null;
+        }
+    }
+
+
+    void onTriggerBackPressed(){
+        if (mSearchInput.getVisibility() == View.VISIBLE) {
+            onHideSearch(null);
+        } else if ((Boolean) mHistoryAdapter.onTrigger(historyEnums.eHistoryAdapterCommands.GET_LONG_SELECTED_STATUS, null)) {
+            onClearMultipleSelection(null);
+        } else {
+            activityContextManager.getInstance().onRemoveStack(this);
+            finish();
         }
     }
 

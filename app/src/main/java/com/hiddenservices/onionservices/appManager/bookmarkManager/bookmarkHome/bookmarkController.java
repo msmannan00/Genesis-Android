@@ -1,6 +1,7 @@
 package com.hiddenservices.onionservices.appManager.bookmarkManager.bookmarkHome;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -18,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,10 +77,6 @@ public class bookmarkController extends AppCompatActivity {
     private Button mClearButton;
     private ImageButton mMenuButton;
     private ImageButton mSearchButton;
-
-    /*Local Variables*/
-
-    private int mResponseRequestCode = 10113;
 
     /*Initializations*/
 
@@ -288,21 +287,20 @@ public class bookmarkController extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == mResponseRequestCode) {
-            if (data != null) {
-                if (data.getExtras().getString(M_ACTIVITY_RESPONSE).equals(BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT)) {
-                    pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_UPDATE_BOOKMARK);
-                } else if (data.getExtras().getString(M_ACTIVITY_RESPONSE).equals(BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT)) {
-                    initializeList();
-                    pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DELETE_BOOKMARK);
+    private final ActivityResultLauncher<Intent> bookmarkResults = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+                    String response = data.getExtras().getString(M_ACTIVITY_RESPONSE);
+                    if (BOOKMARK_SETTING_CONTROLLER_SHOW_SUCCESS_ALERT.equals(response)) {
+                        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_UPDATE_BOOKMARK);
+                    } else if (BOOKMARK_SETTING_CONTROLLER_SHOW_DELETE_ALERT.equals(response)) {
+                        initializeList();
+                        pluginController.getInstance().onMessageManagerInvoke(Collections.singletonList(this), M_DELETE_BOOKMARK);
+                    }
                 }
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
+            });
 
     /* UI Redirection */
 
@@ -396,7 +394,7 @@ public class bookmarkController extends AppCompatActivity {
                 intent.putExtra(keys.BOOKMARK_SETTING_NAME, (String) data.get(0));
                 intent.putExtra(keys.BOOKMARK_SETTING_URL, (String) data.get(1));
                 intent.putExtra(keys.BOOKMARK_SETTING_ID, (int) data.get(2));
-                startActivityForResult(intent, mResponseRequestCode);
+                bookmarkResults.launch(intent);
             }
             return null;
         }

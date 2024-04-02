@@ -72,7 +72,7 @@ public class historyAdapter extends RecyclerView.Adapter<historyAdapter.listView
         initializeModelWithDate(false);
     }
 
-    public void onLoadMore(ArrayList<historyRowModel> pModelList) {
+    public void onLoadMore() {
         initializeModelWithDate(false);
     }
 

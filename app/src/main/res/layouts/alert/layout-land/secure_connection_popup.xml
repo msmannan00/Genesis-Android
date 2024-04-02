@@ -120,7 +120,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/pSecurePopupJavasciptHeader"
+                            android:id="@+id/pSecurePopupJavaScriptHeader"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="0dp"
@@ -132,7 +132,7 @@
                             android:translationZ="2dp" />
 
                         <TextView
-                            android:id="@+id/pSecurePopupJavasciptDescription"
+                            android:id="@+id/pSecurePopupJavaScriptDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:alpha="0.6"

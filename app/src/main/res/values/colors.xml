@@ -47,7 +47,7 @@
     <color name="c_alert_toast_button_text">#ffffff</color>
     <color name="c_alert_rateus_warning">#b3b3b3</color>
     <color name="c_alert_header">#00b3b3</color>
-    <color name="c_alert_rateus_header_static">#00b3b3</color>
+    <color name="c_alert_rate_us_header_static">#00b3b3</color>
     <color name="c_alert_text">#212d45</color>
     <color name="c_alert_text_static">#212d45</color>
     <color name="c_alert_warning">#f65555</color>
